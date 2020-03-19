@@ -111,7 +111,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * Delete the cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
      * @param {DeleteClusterEndpointRequest} req
      * @param {function(string, DeleteClusterEndpointResponse):void} cb
      * @public
@@ -133,7 +133,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 删除集群伸缩组
+     * Delete a cluster scaling group
      * @param {DeleteClusterAsGroupsRequest} req
      * @param {function(string, DeleteClusterAsGroupsResponse):void} cb
      * @public
@@ -155,7 +155,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 查询集群开启端口流程状态(仅支持托管集群外网端口)
+     * Query cluster open port process status (only supports external ports of the managed cluster)
      * @param {DescribeClusterEndpointVipStatusRequest} req
      * @param {function(string, DescribeClusterEndpointVipStatusResponse):void} cb
      * @public
@@ -177,7 +177,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 为已经存在的集群创建伸缩组
+     * Create a scaling group for an existing cluster
      * @param {CreateClusterAsGroupRequest} req
      * @param {function(string, CreateClusterAsGroupResponse):void} cb
      * @public
@@ -232,7 +232,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * Query cluster access port status (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
      * @param {DescribeClusterEndpointStatusRequest} req
      * @param {function(string, DescribeClusterEndpointStatusResponse):void} cb
      * @public
@@ -243,7 +243,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * Create a cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
      * @param {CreateClusterEndpointRequest} req
      * @param {function(string, CreateClusterEndpointResponse):void} cb
      * @public
@@ -298,7 +298,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
+     * Delete the external network access port of the managed cluster (the old way, only the external network port of the managed cluster is supported)
      * @param {DeleteClusterEndpointVipRequest} req
      * @param {function(string, DeleteClusterEndpointVipResponse):void} cb
      * @public
@@ -320,7 +320,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）
+     * Modify the security policy of the external port of the managed cluster (the old way, only the external port of the managed cluster is supported)
      * @param {ModifyClusterEndpointSPRequest} req
      * @param {function(string, ModifyClusterEndpointSPResponse):void} cb
      * @public
@@ -331,7 +331,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 创建托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
+     * Create an external network access port for the managed cluster (the old way, only the external network port for the managed cluster is supported)
      * @param {CreateClusterEndpointVipRequest} req
      * @param {function(string, CreateClusterEndpointVipResponse):void} cb
      * @public

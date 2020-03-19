@@ -3001,7 +3001,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * Subnet数字ID
+         * Subnet Digital ID
          * @type {number || null}
          */
         this.SubnetId = null;

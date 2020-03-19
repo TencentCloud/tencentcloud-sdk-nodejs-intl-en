@@ -3534,6 +3534,12 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.SnapshotSize = null;
 
+        /**
+         * Indicates whether a snapshot should be created for backup when the cloud disk is terminated due to arrears or expiration. `True`: create a snapshot to backup the disk upon termination. `False`: terminate the disk without backup
+         * @type {boolean || null}
+         */
+        this.BackupDisk = null;
+
     }
 
     /**
@@ -3588,6 +3594,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
         this.SnapshotCount = 'SnapshotCount' in params ? params.SnapshotCount : null;
         this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
+        this.BackupDisk = 'BackupDisk' in params ? params.BackupDisk : null;
 
     }
 }

@@ -382,6 +382,76 @@ class ResetInstancesInternetMaxBandwidthResponse extends  AbstractModel {
 }
 
 /**
+ * CreateDisasterRecoverGroup response structure.
+ * @class
+ */
+class CreateDisasterRecoverGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of spread placement group IDs.
+         * @type {string || null}
+         */
+        this.DisasterRecoverGroupId = null;
+
+        /**
+         * Type of the spread placement group. Valid values: <br><li>HOST: physical machine <br><li>SW: switch <br><li>RACK: rack.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Name of the spread placement group. The name must be 1-60 characters long and can contain both Chinese characters and English letters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The maximum number of CVMs in a placement group.
+         * @type {number || null}
+         */
+        this.CvmQuotaTotal = null;
+
+        /**
+         * The current number of CVMs in a placement group.
+         * @type {number || null}
+         */
+        this.CurrentNum = null;
+
+        /**
+         * Creation time of the placement group.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CvmQuotaTotal = 'CvmQuotaTotal' in params ? params.CvmQuotaTotal : null;
+        this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquiryPriceResetInstancesInternetMaxBandwidth response structure.
  * @class
  */
@@ -699,7 +769,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Monitor and Cloud Security. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+         * Specifies whether to enable services Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. But for custom images and images from market place, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
@@ -1289,8 +1359,8 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-Note: This field may return null, indicating that no valid value is found.
+         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-30 characters long and contain at least two of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-30 characters long and contain at least three of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Password = null;
@@ -1540,6 +1610,94 @@ class DescribeInstancesStatusResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information on availability zones.
+ * @class
+ */
+class ZoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Availability zone name. For example, ap-guangzhou-3.
+Names of availability zones throughout the entire network:
+<li> ap-chongqing-1 </li>
+<li> ap-seoul-1 </li>
+<li> ap-chengdu-1 </li>
+<li> ap-chengdu-2 </li>
+<li> ap-hongkong-1 </li>
+<li> ap-hongkong-2 </li>
+<li> ap-shenzhen-fsi-1 </li>
+<li> ap-shenzhen-fsi-2 </li>
+<li> ap-shenzhen-fsi-3 </li>
+<li> ap-guangzhou-1 (sold out)</li>
+<li> ap-guangzhou-2 (sold out)</li>
+<li> ap-guangzhou-3 </li>
+<li> ap-guangzhou-4 </li>
+<li> ap-tokyo-1 </li>
+<li> ap-singapore-1 </li>
+<li> ap-shanghai-fsi-1 </li>
+<li> ap-shanghai-fsi-2 </li>
+<li> ap-shanghai-fsi-3 </li>
+<li> ap-bangkok-1 </li>
+<li> ap-shanghai-1 (sold out) </li>
+<li> ap-shanghai-2 </li>
+<li> ap-shanghai-3 </li>
+<li> ap-shanghai-4 </li>
+<li> ap-mumbai-1 </li>
+<li> ap-mumbai-2 </li>
+<li> eu-moscow-1 </li>
+<li> ap-beijing-1 </li>
+<li> ap-beijing-2 </li>
+<li> ap-beijing-3 </li>
+<li> ap-beijing-4 </li>
+<li> na-siliconvalley-1 </li>
+<li> na-siliconvalley-2 </li>
+<li> eu-frankfurt-1 </li>
+<li> na-toronto-1 </li>
+<li> na-ashburn-1 </li>
+<li> na-ashburn-2 </li>
+<li> ap-nanjing-1 </li>
+<li> ap-nanjing-2 </li>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Availability zone description, such as Guangzhou Zone 3.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * Availability zone ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Availability zone state. Valid values: `AVAILABLE`, available; `UNAVAILABLE`, unavailable.
+         * @type {string || null}
+         */
+        this.ZoneState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
 
     }
 }
@@ -2261,54 +2419,12 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
 }
 
 /**
- * CreateDisasterRecoverGroup response structure.
+ * DescribeZones request structure.
  * @class
  */
-class CreateDisasterRecoverGroupResponse extends  AbstractModel {
+class DescribeZonesRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * List of spread placement group IDs.
-         * @type {string || null}
-         */
-        this.DisasterRecoverGroupId = null;
-
-        /**
-         * Type of the spread placement group. Valid values: <br><li>HOST: physical machine <br><li>SW: switch <br><li>RACK: rack.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Name of the spread placement group. The name must be 1-60 characters long and can contain both Chinese characters and English letters.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * The maximum number of CVMs in a placement group.
-         * @type {number || null}
-         */
-        this.CvmQuotaTotal = null;
-
-        /**
-         * The current number of CVMs in a placement group.
-         * @type {number || null}
-         */
-        this.CurrentNum = null;
-
-        /**
-         * Creation time of the placement group.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -2319,13 +2435,6 @@ class CreateDisasterRecoverGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.CvmQuotaTotal = 'CvmQuotaTotal' in params ? params.CvmQuotaTotal : null;
-        this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2569,24 +2678,12 @@ class DisassociateInstancesKeyPairsRequest extends  AbstractModel {
 }
 
 /**
- * Options related to bidding requests
+ * DescribeImageQuota request structure.
  * @class
  */
-class InstanceMarketOptionsRequest extends  AbstractModel {
+class DescribeImageQuotaRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Options related to bidding
-         * @type {SpotMarketOptions || null}
-         */
-        this.SpotOptions = null;
-
-        /**
-         * Market option type. Currently `spot` is the only supported value.
-         * @type {string || null}
-         */
-        this.MarketType = null;
 
     }
 
@@ -2597,44 +2694,30 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.SpotOptions) {
-            let obj = new SpotMarketOptions();
-            obj.deserialize(params.SpotOptions)
-            this.SpotOptions = obj;
-        }
-        this.MarketType = 'MarketType' in params ? params.MarketType : null;
 
     }
 }
 
 /**
- * ImportKeyPair request structure.
+ * Describes the model family of the instance.
+Format: {'InstanceFamilyName': 'Standard S1', 'InstanceFamily': 'S1'}, {'InstanceFamilyName': 'Network-optimized N1', 'InstanceFamily': 'N1'}, {'InstanceFamilyName': 'High IO I1', 'InstanceFamily': 'I1'}, etc.
  * @class
  */
-class ImportKeyPairRequest extends  AbstractModel {
+class InstanceFamilyConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Key pair name, which can contain numbers, letters, and underscores, with a maximum length of 25 characters.
+         * Full name of the model family.
          * @type {string || null}
          */
-        this.KeyName = null;
+        this.InstanceFamilyName = null;
 
         /**
-         * The ID of the [project](https://cloud.tencent.com/document/product/378/10861) to which the created key pair belongs.<br><br>You can retrieve the project ID in two ways:<br><li>Query the project ID in [Project Management](https://console.cloud.tencent.com/project).<br><li>Call [DescribeProject](https://cloud.tencent.com/document/api/378/4400) and search for `projectId` in the response.
-
-If you want to use the default project, specify 0 for the parameter.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Content of the public key in the key pair in the `OpenSSH RSA` format.
+         * Acronym of the model family.
          * @type {string || null}
          */
-        this.PublicKey = null;
+        this.InstanceFamily = null;
 
     }
 
@@ -2645,9 +2728,8 @@ If you want to use the default project, specify 0 for the parameter.
         if (!params) {
             return;
         }
-        this.KeyName = 'KeyName' in params ? params.KeyName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+        this.InstanceFamilyName = 'InstanceFamilyName' in params ? params.InstanceFamilyName : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
 
     }
 }
@@ -2717,12 +2799,24 @@ class StopInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeImageQuota request structure.
+ * Options related to bidding requests
  * @class
  */
-class DescribeImageQuotaRequest extends  AbstractModel {
+class InstanceMarketOptionsRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Options related to bidding
+         * @type {SpotMarketOptions || null}
+         */
+        this.SpotOptions = null;
+
+        /**
+         * Market option type. Currently `spot` is the only supported value.
+         * @type {string || null}
+         */
+        this.MarketType = null;
 
     }
 
@@ -2733,6 +2827,13 @@ class DescribeImageQuotaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.SpotOptions) {
+            let obj = new SpotMarketOptions();
+            obj.deserialize(params.SpotOptions)
+            this.SpotOptions = obj;
+        }
+        this.MarketType = 'MarketType' in params ? params.MarketType : null;
 
     }
 }
@@ -3023,105 +3124,24 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
 }
 
 /**
- * Details about an image, including its state and attributes.
+ * InquiryPriceRunInstances response structure.
  * @class
  */
-class Image extends  AbstractModel {
+class InquiryPriceRunInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image ID
+         * Price of the instance with the specified configurations.
+         * @type {Price || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ImageId = null;
-
-        /**
-         * Operating system of the image
-         * @type {string || null}
-         */
-        this.OsName = null;
-
-        /**
-         * Image type
-         * @type {string || null}
-         */
-        this.ImageType = null;
-
-        /**
-         * Creation time of the image
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * Image name
-         * @type {string || null}
-         */
-        this.ImageName = null;
-
-        /**
-         * Image description
-         * @type {string || null}
-         */
-        this.ImageDescription = null;
-
-        /**
-         * Image size
-         * @type {number || null}
-         */
-        this.ImageSize = null;
-
-        /**
-         * Image architecture
-         * @type {string || null}
-         */
-        this.Architecture = null;
-
-        /**
-         * Image state
-         * @type {string || null}
-         */
-        this.ImageState = null;
-
-        /**
-         * Source platform of the image
-         * @type {string || null}
-         */
-        this.Platform = null;
-
-        /**
-         * Image creator
-         * @type {string || null}
-         */
-        this.ImageCreator = null;
-
-        /**
-         * Image source
-         * @type {string || null}
-         */
-        this.ImageSource = null;
-
-        /**
-         * Synchronization percentage
-Note: This field may return null, indicating that no valid value is found.
-         * @type {number || null}
-         */
-        this.SyncPercent = null;
-
-        /**
-         * Whether the image supports cloud-init
-Note: This field may return null, indicating that no valid value is found.
-         * @type {boolean || null}
-         */
-        this.IsSupportCloudinit = null;
-
-        /**
-         * Information on the snapshots associated with the image
-Note: This field may return null, indicating that no valid value is found.
-         * @type {Array.<Snapshot> || null}
-         */
-        this.SnapshotSet = null;
+        this.RequestId = null;
 
     }
 
@@ -3132,29 +3152,13 @@ Note: This field may return null, indicating that no valid value is found.
         if (!params) {
             return;
         }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.OsName = 'OsName' in params ? params.OsName : null;
-        this.ImageType = 'ImageType' in params ? params.ImageType : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.ImageName = 'ImageName' in params ? params.ImageName : null;
-        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
-        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
-        this.Architecture = 'Architecture' in params ? params.Architecture : null;
-        this.ImageState = 'ImageState' in params ? params.ImageState : null;
-        this.Platform = 'Platform' in params ? params.Platform : null;
-        this.ImageCreator = 'ImageCreator' in params ? params.ImageCreator : null;
-        this.ImageSource = 'ImageSource' in params ? params.ImageSource : null;
-        this.SyncPercent = 'SyncPercent' in params ? params.SyncPercent : null;
-        this.IsSupportCloudinit = 'IsSupportCloudinit' in params ? params.IsSupportCloudinit : null;
 
-        if (params.SnapshotSet) {
-            this.SnapshotSet = new Array();
-            for (let z in params.SnapshotSet) {
-                let obj = new Snapshot();
-                obj.deserialize(params.SnapshotSet[z]);
-                this.SnapshotSet.push(obj);
-            }
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3217,6 +3221,49 @@ class DescribeDisasterRecoverGroupQuotaResponse extends  AbstractModel {
         this.CvmInHostGroupQuota = 'CvmInHostGroupQuota' in params ? params.CvmInHostGroupQuota : null;
         this.CvmInSwGroupQuota = 'CvmInSwGroupQuota' in params ? params.CvmInSwGroupQuota : null;
         this.CvmInRackGroupQuota = 'CvmInRackGroupQuota' in params ? params.CvmInRackGroupQuota : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceFamilyConfigs response structure.
+ * @class
+ */
+class DescribeInstanceFamilyConfigsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of instance model families
+         * @type {Array.<InstanceFamilyConfig> || null}
+         */
+        this.InstanceFamilyConfigSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceFamilyConfigSet) {
+            this.InstanceFamilyConfigSet = new Array();
+            for (let z in params.InstanceFamilyConfigSet) {
+                let obj = new InstanceFamilyConfig();
+                obj.deserialize(params.InstanceFamilyConfigSet[z]);
+                this.InstanceFamilyConfigSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3412,6 +3459,17 @@ Note: This field may return null, indicating that no valid value is found.
          */
         this.SnapshotId = null;
 
+        /**
+         * Specifies whether the data disk is encrypted. Values: 
+<li>TRUE: encrypted
+<li>FALSE: not encrypted<br>
+Default value: FALSE<br>
+Currently, this parameter is only used in the `RunInstances` API.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
     }
 
     /**
@@ -3426,6 +3484,7 @@ Note: This field may return null, indicating that no valid value is found.
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
 
     }
 }
@@ -3994,6 +4053,25 @@ Valid values: <br><li>KEEP_CHARGING: billing continues after shutdown <br><li>ST
          */
         this.LatestOperationRequestId = null;
 
+        /**
+         * ID of a spread placement group.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DisasterRecoverGroupId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IPv6Addresses = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
     }
 
     /**
@@ -4072,6 +4150,9 @@ Valid values: <br><li>KEEP_CHARGING: billing continues after shutdown <br><li>ST
         this.LatestOperation = 'LatestOperation' in params ? params.LatestOperation : null;
         this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
         this.LatestOperationRequestId = 'LatestOperationRequestId' in params ? params.LatestOperationRequestId : null;
+        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
+        this.IPv6Addresses = 'IPv6Addresses' in params ? params.IPv6Addresses : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
 
     }
 }
@@ -5165,6 +5246,56 @@ class DescribeZoneInstanceConfigInfosRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeZones response structure.
+ * @class
+ */
+class DescribeZonesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of availability zones.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of availability zones.
+         * @type {Array.<ZoneInfo> || null}
+         */
+        this.ZoneSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ZoneSet) {
+            this.ZoneSet = new Array();
+            for (let z in params.ZoneSet) {
+                let obj = new ZoneInfo();
+                obj.deserialize(params.ZoneSet[z]);
+                this.ZoneSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Describes pricing information.
  * @class
  */
@@ -5298,6 +5429,13 @@ Note: This field may return null, indicating that no valid value is found.
          */
         this.Price = null;
 
+        /**
+         * Details of sold out items
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SoldOutReason = null;
+
     }
 
     /**
@@ -5337,6 +5475,7 @@ Note: This field may return null, indicating that no valid value is found.
             obj.deserialize(params.Price)
             this.Price = obj;
         }
+        this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
 
     }
 }
@@ -5379,24 +5518,105 @@ Note: This field may return null, indicating that no valid value is found.
 }
 
 /**
- * InquiryPriceRunInstances response structure.
+ * Details about an image, including its state and attributes.
  * @class
  */
-class InquiryPriceRunInstancesResponse extends  AbstractModel {
+class Image extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Price of the instance with the specified configurations.
-         * @type {Price || null}
-         */
-        this.Price = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Image ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ImageId = null;
+
+        /**
+         * Operating system of the image
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * Image type
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+        /**
+         * Creation time of the image
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Image name
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * Image description
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * Image size
+         * @type {number || null}
+         */
+        this.ImageSize = null;
+
+        /**
+         * Image architecture
+         * @type {string || null}
+         */
+        this.Architecture = null;
+
+        /**
+         * Image state
+         * @type {string || null}
+         */
+        this.ImageState = null;
+
+        /**
+         * Source platform of the image
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Image creator
+         * @type {string || null}
+         */
+        this.ImageCreator = null;
+
+        /**
+         * Image source
+         * @type {string || null}
+         */
+        this.ImageSource = null;
+
+        /**
+         * Synchronization percentage
+Note: This field may return null, indicating that no valid value is found.
+         * @type {number || null}
+         */
+        this.SyncPercent = null;
+
+        /**
+         * Whether the image supports cloud-init
+Note: This field may return null, indicating that no valid value is found.
+         * @type {boolean || null}
+         */
+        this.IsSupportCloudinit = null;
+
+        /**
+         * Information on the snapshots associated with the image
+Note: This field may return null, indicating that no valid value is found.
+         * @type {Array.<Snapshot> || null}
+         */
+        this.SnapshotSet = null;
 
     }
 
@@ -5407,13 +5627,29 @@ class InquiryPriceRunInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
+        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
+        this.Architecture = 'Architecture' in params ? params.Architecture : null;
+        this.ImageState = 'ImageState' in params ? params.ImageState : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ImageCreator = 'ImageCreator' in params ? params.ImageCreator : null;
+        this.ImageSource = 'ImageSource' in params ? params.ImageSource : null;
+        this.SyncPercent = 'SyncPercent' in params ? params.SyncPercent : null;
+        this.IsSupportCloudinit = 'IsSupportCloudinit' in params ? params.IsSupportCloudinit : null;
 
-        if (params.Price) {
-            let obj = new Price();
-            obj.deserialize(params.Price)
-            this.Price = obj;
+        if (params.SnapshotSet) {
+            this.SnapshotSet = new Array();
+            for (let z in params.SnapshotSet) {
+                let obj = new Snapshot();
+                obj.deserialize(params.SnapshotSet[z]);
+                this.SnapshotSet.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6250,6 +6486,50 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * ImportKeyPair request structure.
+ * @class
+ */
+class ImportKeyPairRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key pair name, which can contain numbers, letters, and underscores, with a maximum length of 25 characters.
+         * @type {string || null}
+         */
+        this.KeyName = null;
+
+        /**
+         * The ID of the [project](https://cloud.tencent.com/document/product/378/10861) to which the created key pair belongs.<br><br>You can retrieve the project ID in two ways:<br><li>Query the project ID in [Project Management](https://console.cloud.tencent.com/project).<br><li>Call [DescribeProject](https://cloud.tencent.com/document/api/378/4400) and search for `projectId` in the response.
+
+If you want to use the default project, specify 0 for the parameter.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Content of the public key in the key pair in the `OpenSSH RSA` format.
+         * @type {string || null}
+         */
+        this.PublicKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyName = 'KeyName' in params ? params.KeyName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+
+    }
+}
+
+/**
  * Describes key pair information.
  * @class
  */
@@ -6560,6 +6840,27 @@ class ResizeInstanceDisksRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceFamilyConfigs request structure.
+ * @class
+ */
+class DescribeInstanceFamilyConfigsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * Information on local HDD storage.
  * @class
  */
@@ -6844,6 +7145,7 @@ module.exports = {
     DescribeInstancesOperationLimitRequest: DescribeInstancesOperationLimitRequest,
     TerminateInstancesResponse: TerminateInstancesResponse,
     ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
+    CreateDisasterRecoverGroupResponse: CreateDisasterRecoverGroupResponse,
     InquiryPriceResetInstancesInternetMaxBandwidthResponse: InquiryPriceResetInstancesInternetMaxBandwidthResponse,
     ModifyKeyPairAttributeRequest: ModifyKeyPairAttributeRequest,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
@@ -6864,6 +7166,7 @@ module.exports = {
     AssociateInstancesKeyPairsRequest: AssociateInstancesKeyPairsRequest,
     ImportKeyPairResponse: ImportKeyPairResponse,
     DescribeInstancesStatusResponse: DescribeInstancesStatusResponse,
+    ZoneInfo: ZoneInfo,
     DescribeInstanceTypeConfigsRequest: DescribeInstanceTypeConfigsRequest,
     DescribeKeyPairsResponse: DescribeKeyPairsResponse,
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
@@ -6883,23 +7186,24 @@ module.exports = {
     SyncImagesResponse: SyncImagesResponse,
     DescribeZoneInstanceConfigInfosResponse: DescribeZoneInstanceConfigInfosResponse,
     ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
-    CreateDisasterRecoverGroupResponse: CreateDisasterRecoverGroupResponse,
+    DescribeZonesRequest: DescribeZonesRequest,
     StartInstancesRequest: StartInstancesRequest,
     Tag: Tag,
     Placement: Placement,
     DescribeDisasterRecoverGroupsRequest: DescribeDisasterRecoverGroupsRequest,
     SyncImagesRequest: SyncImagesRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
-    InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
-    ImportKeyPairRequest: ImportKeyPairRequest,
+    DescribeImageQuotaRequest: DescribeImageQuotaRequest,
+    InstanceFamilyConfig: InstanceFamilyConfig,
     CreateImageResponse: CreateImageResponse,
     StopInstancesResponse: StopInstancesResponse,
-    DescribeImageQuotaRequest: DescribeImageQuotaRequest,
+    InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     InquiryPriceResetInstancesInternetMaxBandwidthRequest: InquiryPriceResetInstancesInternetMaxBandwidthRequest,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     InquiryPriceRunInstancesRequest: InquiryPriceRunInstancesRequest,
-    Image: Image,
+    InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
+    DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
@@ -6939,10 +7243,11 @@ module.exports = {
     ChargePrepaid: ChargePrepaid,
     DescribeInternetChargeTypeConfigsResponse: DescribeInternetChargeTypeConfigsResponse,
     DescribeZoneInstanceConfigInfosRequest: DescribeZoneInstanceConfigInfosRequest,
+    DescribeZonesResponse: DescribeZonesResponse,
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     ImageOsList: ImageOsList,
-    InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
+    Image: Image,
     DescribeHostsRequest: DescribeHostsRequest,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,
     InquiryPriceResizeInstanceDisksResponse: InquiryPriceResizeInstanceDisksResponse,
@@ -6964,6 +7269,7 @@ module.exports = {
     ResizeInstanceDisksResponse: ResizeInstanceDisksResponse,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
+    ImportKeyPairRequest: ImportKeyPairRequest,
     KeyPair: KeyPair,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,
@@ -6971,6 +7277,7 @@ module.exports = {
     ModifyDisasterRecoverGroupAttributeResponse: ModifyDisasterRecoverGroupAttributeResponse,
     DescribeInstanceTypeConfigsResponse: DescribeInstanceTypeConfigsResponse,
     ResizeInstanceDisksRequest: ResizeInstanceDisksRequest,
+    DescribeInstanceFamilyConfigsRequest: DescribeInstanceFamilyConfigsRequest,
     StorageBlock: StorageBlock,
     InternetAccessible: InternetAccessible,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,

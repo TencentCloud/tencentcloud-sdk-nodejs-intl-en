@@ -37,7 +37,6 @@ const ServiceTemplate = models.ServiceTemplate;
 const CreateServiceTemplateRequest = models.CreateServiceTemplateRequest;
 const DeleteHaVipResponse = models.DeleteHaVipResponse;
 const VpnConnection = models.VpnConnection;
-const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
 const DescribeCcnsRequest = models.DescribeCcnsRequest;
 const ModifyNatGatewayAttributeResponse = models.ModifyNatGatewayAttributeResponse;
@@ -60,7 +59,7 @@ const ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse = models.Modif
 const DescribeVpcIpv6AddressesResponse = models.DescribeVpcIpv6AddressesResponse;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
 const ModifyServiceTemplateGroupAttributeRequest = models.ModifyServiceTemplateGroupAttributeRequest;
-const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
+const ModifyCcnRegionBandwidthLimitsTypeResponse = models.ModifyCcnRegionBandwidthLimitsTypeResponse;
 const DescribeVpnGatewaysResponse = models.DescribeVpnGatewaysResponse;
 const EnableCcnRoutesResponse = models.EnableCcnRoutesResponse;
 const CcnRegionBandwidthLimit = models.CcnRegionBandwidthLimit;
@@ -80,6 +79,7 @@ const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
 const NatGatewayAddress = models.NatGatewayAddress;
+const ModifyCcnRegionBandwidthLimitsTypeRequest = models.ModifyCcnRegionBandwidthLimitsTypeRequest;
 const RouteTable = models.RouteTable;
 const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
 const DetachClassicLinkVpcRequest = models.DetachClassicLinkVpcRequest;
@@ -96,17 +96,17 @@ const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
 const DescribeHaVipsResponse = models.DescribeHaVipsResponse;
 const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
 const CreateSubnetResponse = models.CreateSubnetResponse;
-const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
+const NetDetect = models.NetDetect;
 const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
 const AssignIpv6SubnetCidrBlockRequest = models.AssignIpv6SubnetCidrBlockRequest;
 const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
 const GatewayFlowMonitorDetail = models.GatewayFlowMonitorDetail;
-const NetDetect = models.NetDetect;
 const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
 const NatGateway = models.NatGateway;
 const CreateVpcResponse = models.CreateVpcResponse;
+const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
 const AssistantCidr = models.AssistantCidr;
 const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
 const NetworkInterface = models.NetworkInterface;
@@ -162,7 +162,7 @@ const DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest = models.Delete
 const NatGatewayDestinationIpPortTranslationNatRule = models.NatGatewayDestinationIpPortTranslationNatRule;
 const DescribeNetDetectStatesResponse = models.DescribeNetDetectStatesResponse;
 const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
-const ResetVpnGatewayInternetMaxBandwidthResponse = models.ResetVpnGatewayInternetMaxBandwidthResponse;
+const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
 const CreateVpnConnectionResponse = models.CreateVpnConnectionResponse;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const AddressTemplateSpecification = models.AddressTemplateSpecification;
@@ -171,6 +171,7 @@ const AssignIpv6AddressesRequest = models.AssignIpv6AddressesRequest;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
 const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
 const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
+const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const CreateServiceTemplateGroupResponse = models.CreateServiceTemplateGroupResponse;
 const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
 const DescribeNatGatewaysResponse = models.DescribeNatGatewaysResponse;
@@ -189,6 +190,7 @@ const SecurityGroup = models.SecurityGroup;
 const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
 const DeleteRouteTableResponse = models.DeleteRouteTableResponse;
 const ResetNatGatewayConnectionRequest = models.ResetNatGatewayConnectionRequest;
+const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
 const NetDetectIpState = models.NetDetectIpState;
 const AccountAttribute = models.AccountAttribute;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
@@ -239,6 +241,7 @@ const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
 const AssignIpv6CidrBlockRequest = models.AssignIpv6CidrBlockRequest;
 const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
 const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
+const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
 const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
 const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
@@ -256,6 +259,7 @@ const CreateNetDetectResponse = models.CreateNetDetectResponse;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const ModifyCcnAttributeResponse = models.ModifyCcnAttributeResponse;
 const DeleteCcnRequest = models.DeleteCcnRequest;
+const ResetVpnGatewayInternetMaxBandwidthResponse = models.ResetVpnGatewayInternetMaxBandwidthResponse;
 const DescribeClassicLinkInstancesRequest = models.DescribeClassicLinkInstancesRequest;
 const CreateServiceTemplateResponse = models.CreateServiceTemplateResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
@@ -281,7 +285,6 @@ const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInterne
 const DescribeVpnConnectionsResponse = models.DescribeVpnConnectionsResponse;
 const ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest = models.ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
-const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
 const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
 const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
@@ -313,7 +316,6 @@ const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddresse
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
-const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
 const CreateNatGatewayResponse = models.CreateNatGatewayResponse;
@@ -326,7 +328,7 @@ const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeR
 const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResponse;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const ModifyNetDetectRequest = models.ModifyNetDetectRequest;
-const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
+const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
 const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
 const DescribeNetDetectStatesRequest = models.DescribeNetDetectStatesRequest;
@@ -484,14 +486,14 @@ Note: When this API is called, all routing policies in the current route table a
     }
 
     /**
-     * This API (ModifyPrivateIpAddressesAttribute) is used to modify the private IP attributes of an ENI.
-     * @param {ModifyPrivateIpAddressesAttributeRequest} req
-     * @param {function(string, ModifyPrivateIpAddressesAttributeResponse):void} cb
+     * This API (ModifyCcnRegionBandwidthlimitsType) is used to modify the bandwidth limits policy of the postpaid Ccn instances.
+     * @param {ModifyCcnRegionBandwidthLimitsTypeRequest} req
+     * @param {function(string, ModifyCcnRegionBandwidthLimitsTypeResponse):void} cb
      * @public
      */
-    ModifyPrivateIpAddressesAttribute(req, cb) {
-        let resp = new ModifyPrivateIpAddressesAttributeResponse();
-        this.request("ModifyPrivateIpAddressesAttribute", req, resp, cb);
+    ModifyCcnRegionBandwidthLimitsType(req, cb) {
+        let resp = new ModifyCcnRegionBandwidthLimitsTypeResponse();
+        this.request("ModifyCcnRegionBandwidthLimitsType", req, resp, cb);
     }
 
     /**
@@ -573,6 +575,17 @@ This API is completed asynchronously. If you need to query the async execution r
     DescribeClassicLinkInstances(req, cb) {
         let resp = new DescribeClassicLinkInstancesResponse();
         this.request("DescribeClassicLinkInstances", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyPrivateIpAddressesAttribute) is used to modify the private IP attributes of an ENI.
+     * @param {ModifyPrivateIpAddressesAttributeRequest} req
+     * @param {function(string, ModifyPrivateIpAddressesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyPrivateIpAddressesAttribute(req, cb) {
+        let resp = new ModifyPrivateIpAddressesAttributeResponse();
+        this.request("ModifyPrivateIpAddressesAttribute", req, resp, cb);
     }
 
     /**

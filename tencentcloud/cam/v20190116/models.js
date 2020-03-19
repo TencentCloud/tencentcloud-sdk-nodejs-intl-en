@@ -25,7 +25,7 @@ class GetUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Sub-user user ID
+         * Sub-user UIN
          * @type {number || null}
          */
         this.Uin = null;
@@ -223,7 +223,7 @@ class CreatePolicyResponse extends  AbstractModel {
         super();
 
         /**
-         * Newly added policy ID
+         * ID of newly added policy
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -293,7 +293,7 @@ class ListAttachedGroupPoliciesRequest extends  AbstractModel {
         super();
 
         /**
-         * User Group ID
+         * User group ID
          * @type {number || null}
          */
         this.TargetGroupId = null;
@@ -989,13 +989,16 @@ class ListPoliciesResponse extends  AbstractModel {
         this.TotalNum = null;
 
         /**
-         * Policy array. Each item in the array has the fields `policyId`, `policyName`, `addTime`, `type`, `description`, and `createMode` 
-`policyId`: Policy ID 
-`policyName`: Policy name
-`addTime`: Time policy created
-`type`: 1 is custom policy; 2 is preset policy 
-`description`: Policy description 
-`createMode`: 1 indicates a policy created based on business permissions, while other values indicate that the policy syntax can be viewed and the policy can be updated using the policy syntax.
+         * Policy array. Each array contains fields including `policyId`, `policyName`, `addTime`, `type`, `description`, and `createMode`. 
+policyId: policy ID 
+policyName: policy name
+addTime: policy creation time
+type: 1: custom policy, 2: preset policy 
+description: policy description 
+createMode: 1 indicates a policy created based on business permissions, while other values indicate that the policy syntax can be viewed and the policy can be updated using the policy syntax
+Attachments: number of associated users
+ServiceType: the product the policy is associated with
+IsAttached: this value should not be null when querying if a marked entity has been associated with a policy. 0 indicates that no policy has been associated, and 1 indicates that a policy has been associated
          * @type {Array.<StrategyInfo> || null}
          */
         this.List = null;
@@ -1071,7 +1074,7 @@ class OffsiteFlag extends  AbstractModel {
         this.NotifyWechat = null;
 
         /**
-         * 
+         * Alert
          * @type {number || null}
          */
         this.Tips = null;
@@ -1221,6 +1224,19 @@ class RoleInfo extends  AbstractModel {
          */
         this.ConsoleLogin = null;
 
+        /**
+         * User role. Valid values: user, system
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RoleType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SessionDuration = null;
+
     }
 
     /**
@@ -1237,6 +1253,8 @@ class RoleInfo extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.RoleType = 'RoleType' in params ? params.RoleType : null;
+        this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
 
     }
 }
@@ -1455,10 +1473,17 @@ Note: This field may return null, indicating that no valid value was found.
         this.IsAttached = null;
 
         /**
-         * 
+         * Queries if the policy has been deactivated
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Deactived = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
 
     }
 
@@ -1479,6 +1504,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
         this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
 
     }
 }
@@ -1593,7 +1619,7 @@ class AddUserRequest extends  AbstractModel {
         this.UseApi = null;
 
         /**
-         * Sub-user’s console login password. If no password rules have been set, the default rules require the password to have at least 8 characters, at least one lowercase letter, one uppercase letter, one number, and one special character. This value is valid only when the sub-user is allowed to log in to the console. If no value is specified, and console login is allowed, the system will automatically generate a password. The automatically generated passwords are 32 characters long and contain letters (both upper and lower cases), numbers, and special characters. 
+         * Sub-user's console login password. If no password rules have been set, the password must have a minimum of 8 characters containing uppercase letters, lowercase letters, digits, and special characters by default. This parameter will be valid only when the sub-user is allowed to log in to the console. If it is not specified and console login is allowed, the system will automatically generate a random 32-character password that contains uppercase letters, lowercase letters, digits, and special characters.
          * @type {string || null}
          */
         this.Password = null;
@@ -2092,7 +2118,7 @@ class UpdateUserRequest extends  AbstractModel {
         this.ConsoleLogin = null;
 
         /**
-         * Sub-user’s console login password. If no password rules have been set, the default rules require the password to have at least 8 characters, at least one lowercase letter, one uppercase letter, one number, and one special character. This value is valid only when the sub-user is allowed to log in to the console. If no value is specified, and console login is allowed, the system will automatically generate a password. The automatically generated passwords are 32 characters long and contain letters (both upper and lower cases), numbers, and special characters.
+         * Sub-user's console login password. If no password rules have been set, the password must have a minimum of 8 characters containing uppercase letters, lowercase letters, digits, and special characters by default. This parameter will be valid only when the sub-user is allowed to log in to the console. If it is not specified and console login is allowed, the system will automatically generate a random 32-character password that contains uppercase letters, lowercase letters, digits, and special characters.
          * @type {string || null}
          */
         this.Password = null;
@@ -2251,10 +2277,17 @@ Note: This field may return null, indicating that no valid value was found.
         this.OperateUinType = null;
 
         /**
-         * 
+         * Queries if the policy has been deactivated
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Deactived = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
 
     }
 
@@ -2275,6 +2308,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
         this.OperateUinType = 'OperateUinType' in params ? params.OperateUinType : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
 
     }
 }
@@ -2983,7 +3017,7 @@ class CreatePolicyRequest extends  AbstractModel {
         this.PolicyName = null;
 
         /**
-         * Policy document
+         * Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
          * @type {string || null}
          */
         this.PolicyDocument = null;
@@ -3374,10 +3408,17 @@ Note: This field may return null, indicating that no valid value was found.
         this.CreateMode = null;
 
         /**
-         * 
+         * Queries if the policy has been deactivated
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Deactived = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
 
     }
 
@@ -3394,6 +3435,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
 
     }
 }
@@ -3627,10 +3669,16 @@ class CreateRoleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * If login is allowed
+         * Whether login is allowed. 1: yes, 0: no
          * @type {number || null}
          */
         this.ConsoleLogin = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SessionDuration = null;
 
     }
 
@@ -3645,6 +3693,7 @@ class CreateRoleRequest extends  AbstractModel {
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
 
     }
 }
@@ -4094,7 +4143,7 @@ class UpdatePolicyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Policy document
+         * Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
          * @type {string || null}
          */
         this.PolicyDocument = null;

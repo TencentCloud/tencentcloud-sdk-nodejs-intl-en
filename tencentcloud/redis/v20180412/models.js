@@ -399,13 +399,13 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the AZ where the instance resides
+         * AZ ID of instance
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * Instance type. 2: Redis 2.8 master-slave edition; 3: Redis 3.2 master-slave edition (CKV master-slave edition); 4: Redis 3.2 cluster edition (CKV cluster edition); 5: Redis 2.8 standalone edition; 6: Redis 4.0 master-slave edition; 7: Redis 4.0 cluster edition
+         * Instance type. 2: Redis 2.8 Master-Slave Edition, 3: Redis 3.2 Master-Slave Edition (CKV Master-Slave Edition), 4: Redis 3.2 Cluster Edition (CKV Cluster Edition), 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Slave Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Slave Edition, 9: Redis 5.0 Cluster Edition,
          * @type {number || null}
          */
         this.TypeId = null;
@@ -471,7 +471,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.SecurityGroupIdList = null;
 
         /**
-         * User-defined port. If this parameter is left blank, 6379 will be used by default
+         * User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024,65535]
          * @type {number || null}
          */
         this.VPort = null;
@@ -737,15 +737,15 @@ class ModifyInstanceRequest extends  AbstractModel {
 
         /**
          * Instance ID
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
-        this.InstanceId = null;
+        this.InstanceIds = null;
 
         /**
-         * New name of an instance
-         * @type {string || null}
+         * New name of instance
+         * @type {Array.<string> || null}
          */
-        this.InstanceName = null;
+        this.InstanceNames = null;
 
         /**
          * Project ID
@@ -754,7 +754,25 @@ class ModifyInstanceRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
+         * Auto-renewal flag. 0: default status (manual renewal), 1: auto-renewal enabled, 2: auto-renewal disabled
+         * @type {Array.<number> || null}
+         */
+        this.AutoRenews = null;
+
+        /**
+         * Disused
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Disused
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Disused
          * @type {number || null}
          */
         this.AutoRenew = null;
@@ -769,9 +787,12 @@ class ModifyInstanceRequest extends  AbstractModel {
             return;
         }
         this.Operation = 'Operation' in params ? params.Operation : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.AutoRenews = 'AutoRenews' in params ? params.AutoRenews : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
 
     }
@@ -786,7 +807,7 @@ class RenewInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * Transaction Id
+         * Transaction ID
          * @type {string || null}
          */
         this.DealId = null;
@@ -877,7 +898,7 @@ class DescribeBackupUrlRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Backup ID, which can be queried through the DescribeInstanceBackups API
+         * Backup ID, which can be queried through the `DescribeInstanceBackups` API
          * @type {string || null}
          */
         this.BackupId = null;
@@ -3981,7 +4002,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.BillingMode = null;
 
         /**
-         * Instance type. 1: legacy Redis cluster edition; 2: Redis 2.8 master-slave edition; 3: CKV master-slave edition; 4: CKV cluster edition; 5: Redis 2.8 standalone edition; 6: Redis 4.0 master-slave edition; 7: Redis 4.0 cluster edition
+         * Instance type. 1: legacy Redis Cluster Edition, 2: Redis 2.8 Master-Slave Edition, 3: CKV Master-Slave Edition, 4: CKV Cluster Edition, 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Slave Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Slave Edition, 9: Redis 5.0 Cluster Edition,
          * @type {number || null}
          */
         this.Type = null;
@@ -3991,6 +4012,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.SearchKeys = null;
+
+        /**
+         * Internal parameter, which can be ignored
+         * @type {Array.<number> || null}
+         */
+        this.TypeList = null;
 
     }
 
@@ -4021,6 +4048,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.SearchKeys = 'SearchKeys' in params ? params.SearchKeys : null;
+        this.TypeList = 'TypeList' in params ? params.TypeList : null;
 
     }
 }
@@ -4638,6 +4666,54 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.NoAuth = null;
 
+        /**
+         * Number of client connections
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ClientLimit = null;
+
+        /**
+         * DTS status (internal parameter, which can be ignored)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DtsStatus = null;
+
+        /**
+         * Upper shard bandwidth limit in MB
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NetLimit = null;
+
+        /**
+         * Password-free instance flag (internal parameter, which can be ignored)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PasswordFree = null;
+
+        /**
+         * Read-only instance flag (internal parameter, which can be ignored)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReadOnly = null;
+
+        /**
+         * Internal parameter, which can be ignored
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vip6 = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RemainBandwidthDuration = null;
+
     }
 
     /**
@@ -4699,6 +4775,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+        this.ClientLimit = 'ClientLimit' in params ? params.ClientLimit : null;
+        this.DtsStatus = 'DtsStatus' in params ? params.DtsStatus : null;
+        this.NetLimit = 'NetLimit' in params ? params.NetLimit : null;
+        this.PasswordFree = 'PasswordFree' in params ? params.PasswordFree : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+        this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
+        this.RemainBandwidthDuration = 'RemainBandwidthDuration' in params ? params.RemainBandwidthDuration : null;
 
     }
 }

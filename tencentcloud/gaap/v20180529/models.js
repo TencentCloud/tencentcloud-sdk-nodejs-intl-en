@@ -2048,21 +2048,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CertificateKey = null;
 
         /**
-         * Creation time. Using the UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (Midnight in UTC/GMT).
+         * Creation time in the format of UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (midnight in UTC/GMT).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Certificate effective time. Using the UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (Midnight in UTC/GMT).
+         * Certificate effective time in the format of UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (midnight in UTC/GMT).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BeginTime = null;
 
         /**
-         * Certificate expiration time. Using the UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (Midnight in UTC/GMT).
+         * Certificate expiration time in the format of UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (midnight in UTC/GMT).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -4691,24 +4691,12 @@ UNKNOWN: unknown status.
 }
 
 /**
- * DescribeGroupAndStatisticsProxy response structure.
+ * DeleteSecurityPolicy response structure.
  * @class
  */
-class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
+class DeleteSecurityPolicyResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Information of connection groups that the statistics can be derived from
-         * @type {Array.<GroupStatisticsInfo> || null}
-         */
-        this.GroupSet = null;
-
-        /**
-         * Connection group quantity
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4725,16 +4713,6 @@ class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.GroupSet) {
-            this.GroupSet = new Array();
-            for (let z in params.GroupSet) {
-                let obj = new GroupStatisticsInfo();
-                obj.deserialize(params.GroupSet[z]);
-                this.GroupSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5284,7 +5262,7 @@ class Certificate extends  AbstractModel {
         this.CertificateName = null;
 
         /**
-         * Certificate type
+         * Certificate type.
          * @type {number || null}
          */
         this.CertificateType = null;
@@ -5297,20 +5275,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CertificateAlias = null;
 
         /**
-         * Certificate creation time. Using the UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (Midnight in UTC/GMT).
+         * Certificate creation time in the format of UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (midnight in UTC/GMT).
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Certificate effective time. Using the UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (Midnight in UTC/GMT).
+         * Certificate effective time in the format of UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (midnight in UTC/GMT).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BeginTime = null;
 
         /**
-         * Certificate expiration time. Using the UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (Midnight in UTC/GMT).
+         * Certificate expiration time in the format of UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (midnight in UTC/GMT).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -6807,7 +6785,7 @@ The default value is 0.
         this.GaapCertificateId = null;
 
         /**
-         * Origin server CA certificate ID, which is obtained from the certificate management page.
+         * CA certificate ID of the origin server, which is obtained from the certificate management page. When authenticating the origin server, enter this parameter or the `RealServerCertificateIds` parameter.
          * @type {string || null}
          */
         this.RealServerCertificateId = null;
@@ -6817,6 +6795,12 @@ The default value is 0.
          * @type {string || null}
          */
         this.RealServerCertificateDomain = null;
+
+        /**
+         * CA certificate IDs of multiple origin servers, which are obtained from the certificate management page. When authenticating the origin servers, enter this parameter or the `RealServerCertificateId` parameter.
+         * @type {Array.<string> || null}
+         */
+        this.PolyRealServerCertificateIds = null;
 
     }
 
@@ -6836,6 +6820,7 @@ The default value is 0.
         this.GaapCertificateId = 'GaapCertificateId' in params ? params.GaapCertificateId : null;
         this.RealServerCertificateId = 'RealServerCertificateId' in params ? params.RealServerCertificateId : null;
         this.RealServerCertificateDomain = 'RealServerCertificateDomain' in params ? params.RealServerCertificateDomain : null;
+        this.PolyRealServerCertificateIds = 'PolyRealServerCertificateIds' in params ? params.PolyRealServerCertificateIds : null;
 
     }
 }
@@ -8032,12 +8017,24 @@ class DescribeProxyDetailResponse extends  AbstractModel {
 }
 
 /**
- * DeleteSecurityPolicy response structure.
+ * DescribeGroupAndStatisticsProxy response structure.
  * @class
  */
-class DeleteSecurityPolicyResponse extends  AbstractModel {
+class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Information of connection groups that the statistics can be derived from
+         * @type {Array.<GroupStatisticsInfo> || null}
+         */
+        this.GroupSet = null;
+
+        /**
+         * Connection group quantity
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8054,6 +8051,16 @@ class DeleteSecurityPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.GroupSet) {
+            this.GroupSet = new Array();
+            for (let z in params.GroupSet) {
+                let obj = new GroupStatisticsInfo();
+                obj.deserialize(params.GroupSet[z]);
+                this.GroupSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8348,14 +8355,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RealServerCertificateDomain = null;
 
         /**
-         * Returns IDs and list of multiple certificates when there are multiple client certificates.
+         * Returns IDs and aliases of multiple certificates when there are multiple client certificates.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CertificateAliasInfo> || null}
          */
         this.PolyClientCertificateAliasInfo = null;
 
         /**
-         * 
+         * Returns IDs and aliases of multiple certificates when there are multiple origin certificates.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CertificateAliasInfo> || null}
          */
         this.PolyRealServerCertificateAliasInfo = null;
@@ -9528,7 +9536,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceId = null;
 
         /**
-         * Creation time. Using the UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (Midnight in UTC/GMT).
+         * Creation time in the format of UNIX timestamp, indicating the number of seconds that have elapsed since January 1, 1970 (midnight in UTC/GMT).
          * @type {number || null}
          */
         this.CreateTime = null;
@@ -10073,7 +10081,7 @@ module.exports = {
     DescribeCertificatesRequest: DescribeCertificatesRequest,
     DescribeProxiesStatusRequest: DescribeProxiesStatusRequest,
     ProxyStatus: ProxyStatus,
-    DescribeGroupAndStatisticsProxyResponse: DescribeGroupAndStatisticsProxyResponse,
+    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
     CreateDomainResponse: CreateDomainResponse,
     ModifyProxiesProjectResponse: ModifyProxiesProjectResponse,
     ModifyDomainRequest: ModifyDomainRequest,
@@ -10143,7 +10151,7 @@ module.exports = {
     CountryAreaMap: CountryAreaMap,
     MetricStatisticsInfo: MetricStatisticsInfo,
     DescribeProxyDetailResponse: DescribeProxyDetailResponse,
-    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
+    DescribeGroupAndStatisticsProxyResponse: DescribeGroupAndStatisticsProxyResponse,
     CreateUDPListenersResponse: CreateUDPListenersResponse,
     ModifyHTTPSListenerAttributeRequest: ModifyHTTPSListenerAttributeRequest,
     DescribeProxyStatisticsRequest: DescribeProxyStatisticsRequest,

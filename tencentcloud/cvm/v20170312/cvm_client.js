@@ -26,6 +26,7 @@ const DeleteDisasterRecoverGroupsRequest = models.DeleteDisasterRecoverGroupsReq
 const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
+const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
 const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
@@ -46,6 +47,7 @@ const RebootInstancesRequest = models.RebootInstancesRequest;
 const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsRequest;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
+const ZoneInfo = models.ZoneInfo;
 const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
@@ -65,23 +67,24 @@ const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperatio
 const SyncImagesResponse = models.SyncImagesResponse;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
-const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
+const DescribeZonesRequest = models.DescribeZonesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const Tag = models.Tag;
 const Placement = models.Placement;
 const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroupsRequest;
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
-const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
-const ImportKeyPairRequest = models.ImportKeyPairRequest;
+const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
+const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
-const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
+const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
-const Image = models.Image;
+const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecoverGroupQuotaResponse;
+const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
@@ -121,10 +124,11 @@ const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeReq
 const ChargePrepaid = models.ChargePrepaid;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
 const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
+const DescribeZonesResponse = models.DescribeZonesResponse;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const ImageOsList = models.ImageOsList;
-const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
+const Image = models.Image;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
 const InquiryPriceResizeInstanceDisksResponse = models.InquiryPriceResizeInstanceDisksResponse;
@@ -146,6 +150,7 @@ const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
+const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
@@ -153,6 +158,7 @@ const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const ModifyDisasterRecoverGroupAttributeResponse = models.ModifyDisasterRecoverGroupAttributeResponse;
 const DescribeInstanceTypeConfigsResponse = models.DescribeInstanceTypeConfigsResponse;
 const ResizeInstanceDisksRequest = models.ResizeInstanceDisksRequest;
+const DescribeInstanceFamilyConfigsRequest = models.DescribeInstanceFamilyConfigsRequest;
 const StorageBlock = models.StorageBlock;
 const InternetAccessible = models.InternetAccessible;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
@@ -301,6 +307,17 @@ class CvmClient extends AbstractClient {
     ModifyInstancesAttribute(req, cb) {
         let resp = new ModifyInstancesAttributeResponse();
         this.request("ModifyInstancesAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query regions.
+     * @param {DescribeRegionsRequest} req
+     * @param {function(string, DescribeRegionsResponse):void} cb
+     * @public
+     */
+    DescribeRegions(req, cb) {
+        let resp = new DescribeRegionsResponse();
+        this.request("DescribeRegions", req, resp, cb);
     }
 
     /**
@@ -568,14 +585,14 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to modify the attributes of [spread placement groups](https://cloud.tencent.com/document/product/213/15486).
-     * @param {ModifyDisasterRecoverGroupAttributeRequest} req
-     * @param {function(string, ModifyDisasterRecoverGroupAttributeResponse):void} cb
+     * This API is used to query availability zones.
+     * @param {DescribeZonesRequest} req
+     * @param {function(string, DescribeZonesResponse):void} cb
      * @public
      */
-    ModifyDisasterRecoverGroupAttribute(req, cb) {
-        let resp = new ModifyDisasterRecoverGroupAttributeResponse();
-        this.request("ModifyDisasterRecoverGroupAttribute", req, resp, cb);
+    DescribeZones(req, cb) {
+        let resp = new DescribeZonesResponse();
+        this.request("DescribeZones", req, resp, cb);
     }
 
     /**
@@ -654,14 +671,28 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to query regions.
-     * @param {DescribeRegionsRequest} req
-     * @param {function(string, DescribeRegionsResponse):void} cb
+     * This API is used to query the VNC URL of an instance.
+
+* It does not support `STOPPED` CVMs.
+* A VNC URL is only valid for 15 sec. If you do not access the URL within 15 seconds, it will become invalid and you will have to query another one.
+* Once you access a VNC URL, it will become invalid and you will have to query another one.
+* If the connection breaks up, you can make up to 30 requests per minute to reestablish the connection.
+* After you get the value of `InstanceVncUrl`, you need to append `InstanceVncUrl=xxxx` to the end of the link <https://img.qcloud.com/qcloud/app/active_vnc/index.html?>.
+  - Parameter `InstanceVncUrl`: the value of `InstanceVncUrl` returned after a successful API call.
+
+    The final URLs are in the following format:
+
+```
+https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
+```
+
+     * @param {DescribeInstanceVncUrlRequest} req
+     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
      * @public
      */
-    DescribeRegions(req, cb) {
-        let resp = new DescribeRegionsResponse();
-        this.request("DescribeRegions", req, resp, cb);
+    DescribeInstanceVncUrl(req, cb) {
+        let resp = new DescribeInstanceVncUrlResponse();
+        this.request("DescribeInstanceVncUrl", req, resp, cb);
     }
 
     /**
@@ -742,28 +773,25 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to query the VNC URL of an instance.
-
-* It does not support `STOPPED` CVMs.
-* A VNC URL is only valid for 15 sec. If you do not access the URL within 15 seconds, it will become invalid and you will have to query another one.
-* Once you access a VNC URL, it will become invalid and you will have to query another one.
-* If the connection breaks up, you can make up to 30 requests per minute to reestablish the connection.
-* After you get the value of `InstanceVncUrl`, you need to append `InstanceVncUrl=xxxx` to the end of the link <https://img.qcloud.com/qcloud/app/active_vnc/index.html?>.
-  - Parameter `InstanceVncUrl`: the value of `InstanceVncUrl` returned after a successful API call.
-
-    The final URLs are in the following format:
-
-```
-https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
-```
-
-     * @param {DescribeInstanceVncUrlRequest} req
-     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
+     * This API is used to modify the attributes of [spread placement groups](https://cloud.tencent.com/document/product/213/15486).
+     * @param {ModifyDisasterRecoverGroupAttributeRequest} req
+     * @param {function(string, ModifyDisasterRecoverGroupAttributeResponse):void} cb
      * @public
      */
-    DescribeInstanceVncUrl(req, cb) {
-        let resp = new DescribeInstanceVncUrlResponse();
-        this.request("DescribeInstanceVncUrl", req, resp, cb);
+    ModifyDisasterRecoverGroupAttribute(req, cb) {
+        let resp = new ModifyDisasterRecoverGroupAttributeResponse();
+        this.request("ModifyDisasterRecoverGroupAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of model families that are available for the current user and in the current region.
+     * @param {DescribeInstanceFamilyConfigsRequest} req
+     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceFamilyConfigs(req, cb) {
+        let resp = new DescribeInstanceFamilyConfigsResponse();
+        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
     }
 
     /**

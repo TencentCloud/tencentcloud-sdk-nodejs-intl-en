@@ -1210,34 +1210,6 @@ class VpnConnection extends  AbstractModel {
 }
 
 /**
- * RejectAttachCcnInstances response structure.
- * @class
- */
-class RejectAttachCcnInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeCcnAttachedInstances request structure.
  * @class
  */
@@ -2389,10 +2361,10 @@ class ModifyServiceTemplateGroupAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ModifyRouteTableAttribute response structure.
+ * ModifyCcnRegionBandwidthLimitsType response structure.
  * @class
  */
-class ModifyRouteTableAttributeResponse extends  AbstractModel {
+class ModifyCcnRegionBandwidthLimitsTypeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3399,6 +3371,27 @@ class NatGatewayAddress extends  AbstractModel {
 }
 
 /**
+ * ModifyCcnRegionBandwidthLimitsType request structure.
+ * @class
+ */
+class ModifyCcnRegionBandwidthLimitsTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * Route table object
  * @class
  */
@@ -4029,18 +4022,103 @@ class CreateSubnetResponse extends  AbstractModel {
 }
 
 /**
- * ModifyVpnConnectionAttribute response structure.
+ * The network detection object.
  * @class
  */
-class ModifyVpnConnectionAttributeResponse extends  AbstractModel {
+class NetDetect extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The ID of a VPC instance, such as `vpc-12345678`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.VpcId = null;
+
+        /**
+         * The name of a VPC instance.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * The ID of a subnet instance, such as subnet-12345678.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * The name of a subnet instance.
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * The ID of a network detection instance, such as netd-12345678.
+         * @type {string || null}
+         */
+        this.NetDetectId = null;
+
+        /**
+         * The name of a network detection instance. The maximum length is 60 characters.
+         * @type {string || null}
+         */
+        this.NetDetectName = null;
+
+        /**
+         * The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+         * @type {Array.<string> || null}
+         */
+        this.DetectDestinationIp = null;
+
+        /**
+         * The array of detection source IPv4 addresses automatically allocated by the system. The length is 2.
+         * @type {Array.<string> || null}
+         */
+        this.DetectSourceIp = null;
+
+        /**
+         * The type of the next hop. Currently supported types are:
+VPN: VPN gateway;
+DIRECTCONNECT: direct connect gateway;
+PEERCONNECTION: peering connection;
+NAT: NAT gateway;
+NORMAL_CVM: normal CVM.
+         * @type {string || null}
+         */
+        this.NextHopType = null;
+
+        /**
+         * The next-hop destination gateway. The value is related to NextHopType.
+If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
+If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.
+If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.
+If NextHopType is set to NAT, the value of this parameter is the NAT gateway ID, such as nat-12345678.
+If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
+         * @type {string || null}
+         */
+        this.NextHopDestination = null;
+
+        /**
+         * The name of the next-hop gateway.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NextHopName = null;
+
+        /**
+         * Network detection description.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NetDetectDescription = null;
+
+        /**
+         * The creation time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
     }
 
@@ -4051,7 +4129,19 @@ class ModifyVpnConnectionAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.NetDetectId = 'NetDetectId' in params ? params.NetDetectId : null;
+        this.NetDetectName = 'NetDetectName' in params ? params.NetDetectName : null;
+        this.DetectDestinationIp = 'DetectDestinationIp' in params ? params.DetectDestinationIp : null;
+        this.DetectSourceIp = 'DetectSourceIp' in params ? params.DetectSourceIp : null;
+        this.NextHopType = 'NextHopType' in params ? params.NextHopType : null;
+        this.NextHopDestination = 'NextHopDestination' in params ? params.NextHopDestination : null;
+        this.NextHopName = 'NextHopName' in params ? params.NextHopName : null;
+        this.NetDetectDescription = 'NetDetectDescription' in params ? params.NetDetectDescription : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -4306,131 +4396,6 @@ class GatewayFlowMonitorDetail extends  AbstractModel {
 }
 
 /**
- * The network detection object.
- * @class
- */
-class NetDetect extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The ID of a VPC instance, such as `vpc-12345678`.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * The name of a VPC instance.
-         * @type {string || null}
-         */
-        this.VpcName = null;
-
-        /**
-         * The ID of a subnet instance, such as subnet-12345678.
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * The name of a subnet instance.
-         * @type {string || null}
-         */
-        this.SubnetName = null;
-
-        /**
-         * The ID of a network detection instance, such as netd-12345678.
-         * @type {string || null}
-         */
-        this.NetDetectId = null;
-
-        /**
-         * The name of a network detection instance. The maximum length is 60 characters.
-         * @type {string || null}
-         */
-        this.NetDetectName = null;
-
-        /**
-         * The array of detection destination IPv4 addresses, which contains at most two IP addresses.
-         * @type {Array.<string> || null}
-         */
-        this.DetectDestinationIp = null;
-
-        /**
-         * The array of detection source IPv4 addresses automatically allocated by the system. The length is 2.
-         * @type {Array.<string> || null}
-         */
-        this.DetectSourceIp = null;
-
-        /**
-         * The type of the next hop. Currently supported types are:
-VPN: VPN gateway;
-DIRECTCONNECT: direct connect gateway;
-PEERCONNECTION: peering connection;
-NAT: NAT gateway;
-NORMAL_CVM: normal CVM.
-         * @type {string || null}
-         */
-        this.NextHopType = null;
-
-        /**
-         * The next-hop destination gateway. The value is related to NextHopType.
-If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
-If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.
-If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.
-If NextHopType is set to NAT, the value of this parameter is the NAT gateway ID, such as nat-12345678.
-If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
-         * @type {string || null}
-         */
-        this.NextHopDestination = null;
-
-        /**
-         * The name of the next-hop gateway.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NextHopName = null;
-
-        /**
-         * Network detection description.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NetDetectDescription = null;
-
-        /**
-         * The creation time.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
-        this.NetDetectId = 'NetDetectId' in params ? params.NetDetectId : null;
-        this.NetDetectName = 'NetDetectName' in params ? params.NetDetectName : null;
-        this.DetectDestinationIp = 'DetectDestinationIp' in params ? params.DetectDestinationIp : null;
-        this.DetectSourceIp = 'DetectSourceIp' in params ? params.DetectSourceIp : null;
-        this.NextHopType = 'NextHopType' in params ? params.NextHopType : null;
-        this.NextHopDestination = 'NextHopDestination' in params ? params.NextHopDestination : null;
-        this.NextHopName = 'NextHopName' in params ? params.NextHopName : null;
-        this.NetDetectDescription = 'NetDetectDescription' in params ? params.NetDetectDescription : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-
-    }
-}
-
-/**
  * ResetVpnConnection response structure.
  * @class
  */
@@ -4608,6 +4573,34 @@ class CreateVpcResponse extends  AbstractModel {
             let obj = new Vpc();
             obj.deserialize(params.Vpc)
             this.Vpc = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRouteTableAttribute response structure.
+ * @class
+ */
+class ModifyRouteTableAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6995,10 +6988,10 @@ class NetworkInterfaceAttachment extends  AbstractModel {
 }
 
 /**
- * ResetVpnGatewayInternetMaxBandwidth response structure.
+ * ModifyVpnConnectionAttribute response structure.
  * @class
  */
-class ResetVpnGatewayInternetMaxBandwidthResponse extends  AbstractModel {
+class ModifyVpnConnectionAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7414,6 +7407,62 @@ class AttachClassicLinkVpcResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVpcAttribute request structure.
+ * @class
+ */
+class ModifyVpcAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security group can be named freely, but cannot exceed 60 characters.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC can be named freely, but the maximum length is 60 characters.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Whether multicast is enabled. `true`: Enabled. `false`: Off.
+         * @type {string || null}
+         */
+        this.EnableMulticast = null;
+
+        /**
+         * DNS address. A maximum of 4 addresses is supported. The first one is master server by default, and the rest are slave servers.
+         * @type {Array.<string> || null}
+         */
+        this.DnsServers = null;
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
+        this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -8120,6 +8169,41 @@ class ResetNatGatewayConnectionRequest extends  AbstractModel {
         }
         this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
         this.MaxConcurrentConnection = 'MaxConcurrentConnection' in params ? params.MaxConcurrentConnection : null;
+
+    }
+}
+
+/**
+ * ModifyRouteTableAttribute request structure.
+ * @class
+ */
+class ModifyRouteTableAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The route table instance ID, such as `rtb-azd4dt1c`.
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+        /**
+         * Route table name.
+         * @type {string || null}
+         */
+        this.RouteTableName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
 
     }
 }
@@ -10172,6 +10256,34 @@ class CreateSecurityGroupResponse extends  AbstractModel {
 }
 
 /**
+ * RejectAttachCcnInstances response structure.
+ * @class
+ */
+class RejectAttachCcnInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteSecurityGroup request structure.
  * @class
  */
@@ -10850,6 +10962,34 @@ class DeleteCcnRequest extends  AbstractModel {
             return;
         }
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
+
+    }
+}
+
+/**
+ * ResetVpnGatewayInternetMaxBandwidth response structure.
+ * @class
+ */
+class ResetVpnGatewayInternetMaxBandwidthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11968,41 +12108,6 @@ class RejectAttachCcnInstancesRequest extends  AbstractModel {
                 this.Instances.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * SecurityPolicyDatabase policy
- * @class
- */
-class SecurityPolicyDatabase extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Local IP range
-         * @type {string || null}
-         */
-        this.LocalCidrBlock = null;
-
-        /**
-         * Opposite IP range
-         * @type {Array.<string> || null}
-         */
-        this.RemoteCidrBlock = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LocalCidrBlock = 'LocalCidrBlock' in params ? params.LocalCidrBlock : null;
-        this.RemoteCidrBlock = 'RemoteCidrBlock' in params ? params.RemoteCidrBlock : null;
 
     }
 }
@@ -13246,62 +13351,6 @@ class AttachNetworkInterfaceRequest extends  AbstractModel {
 }
 
 /**
- * ModifyVpcAttribute request structure.
- * @class
- */
-class ModifyVpcAttributeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Security group can be named freely, but cannot exceed 60 characters.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * VPC can be named freely, but the maximum length is 60 characters.
-         * @type {string || null}
-         */
-        this.VpcName = null;
-
-        /**
-         * Whether multicast is enabled. `true`: Enabled. `false`: Off.
-         * @type {string || null}
-         */
-        this.EnableMulticast = null;
-
-        /**
-         * DNS address. A maximum of 4 addresses is supported. The first one is master server by default, and the rest are slave servers.
-         * @type {Array.<string> || null}
-         */
-        this.DnsServers = null;
-
-        /**
-         * Domain name
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
-        this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
-        this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-
-    }
-}
-
-/**
  * DetachCcnInstances request structure.
  * @class
  */
@@ -13967,24 +14016,24 @@ If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 add
 }
 
 /**
- * ModifyRouteTableAttribute request structure.
+ * SecurityPolicyDatabase policy
  * @class
  */
-class ModifyRouteTableAttributeRequest extends  AbstractModel {
+class SecurityPolicyDatabase extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The route table instance ID, such as `rtb-azd4dt1c`.
+         * Local IP range
          * @type {string || null}
          */
-        this.RouteTableId = null;
+        this.LocalCidrBlock = null;
 
         /**
-         * Route table name.
-         * @type {string || null}
+         * Opposite IP range
+         * @type {Array.<string> || null}
          */
-        this.RouteTableName = null;
+        this.RemoteCidrBlock = null;
 
     }
 
@@ -13995,8 +14044,8 @@ class ModifyRouteTableAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
-        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+        this.LocalCidrBlock = 'LocalCidrBlock' in params ? params.LocalCidrBlock : null;
+        this.RemoteCidrBlock = 'RemoteCidrBlock' in params ? params.RemoteCidrBlock : null;
 
     }
 }
@@ -14297,7 +14346,6 @@ module.exports = {
     CreateServiceTemplateRequest: CreateServiceTemplateRequest,
     DeleteHaVipResponse: DeleteHaVipResponse,
     VpnConnection: VpnConnection,
-    RejectAttachCcnInstancesResponse: RejectAttachCcnInstancesResponse,
     DescribeCcnAttachedInstancesRequest: DescribeCcnAttachedInstancesRequest,
     DescribeCcnsRequest: DescribeCcnsRequest,
     ModifyNatGatewayAttributeResponse: ModifyNatGatewayAttributeResponse,
@@ -14320,7 +14368,7 @@ module.exports = {
     DescribeVpcIpv6AddressesResponse: DescribeVpcIpv6AddressesResponse,
     DescribeAccountAttributesRequest: DescribeAccountAttributesRequest,
     ModifyServiceTemplateGroupAttributeRequest: ModifyServiceTemplateGroupAttributeRequest,
-    ModifyRouteTableAttributeResponse: ModifyRouteTableAttributeResponse,
+    ModifyCcnRegionBandwidthLimitsTypeResponse: ModifyCcnRegionBandwidthLimitsTypeResponse,
     DescribeVpnGatewaysResponse: DescribeVpnGatewaysResponse,
     EnableCcnRoutesResponse: EnableCcnRoutesResponse,
     CcnRegionBandwidthLimit: CcnRegionBandwidthLimit,
@@ -14340,6 +14388,7 @@ module.exports = {
     DeleteNetDetectResponse: DeleteNetDetectResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
     NatGatewayAddress: NatGatewayAddress,
+    ModifyCcnRegionBandwidthLimitsTypeRequest: ModifyCcnRegionBandwidthLimitsTypeRequest,
     RouteTable: RouteTable,
     DeleteNetworkInterfaceRequest: DeleteNetworkInterfaceRequest,
     DetachClassicLinkVpcRequest: DetachClassicLinkVpcRequest,
@@ -14356,17 +14405,17 @@ module.exports = {
     DescribeHaVipsResponse: DescribeHaVipsResponse,
     DeleteRouteTableRequest: DeleteRouteTableRequest,
     CreateSubnetResponse: CreateSubnetResponse,
-    ModifyVpnConnectionAttributeResponse: ModifyVpnConnectionAttributeResponse,
+    NetDetect: NetDetect,
     DescribeSecurityGroupPoliciesResponse: DescribeSecurityGroupPoliciesResponse,
     AssignIpv6SubnetCidrBlockRequest: AssignIpv6SubnetCidrBlockRequest,
     ModifySecurityGroupPoliciesRequest: ModifySecurityGroupPoliciesRequest,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
     AttachClassicLinkVpcRequest: AttachClassicLinkVpcRequest,
     GatewayFlowMonitorDetail: GatewayFlowMonitorDetail,
-    NetDetect: NetDetect,
     ResetVpnConnectionResponse: ResetVpnConnectionResponse,
     NatGateway: NatGateway,
     CreateVpcResponse: CreateVpcResponse,
+    ModifyRouteTableAttributeResponse: ModifyRouteTableAttributeResponse,
     AssistantCidr: AssistantCidr,
     SetCcnRegionBandwidthLimitsResponse: SetCcnRegionBandwidthLimitsResponse,
     NetworkInterface: NetworkInterface,
@@ -14422,7 +14471,7 @@ module.exports = {
     NatGatewayDestinationIpPortTranslationNatRule: NatGatewayDestinationIpPortTranslationNatRule,
     DescribeNetDetectStatesResponse: DescribeNetDetectStatesResponse,
     NetworkInterfaceAttachment: NetworkInterfaceAttachment,
-    ResetVpnGatewayInternetMaxBandwidthResponse: ResetVpnGatewayInternetMaxBandwidthResponse,
+    ModifyVpnConnectionAttributeResponse: ModifyVpnConnectionAttributeResponse,
     CreateVpnConnectionResponse: CreateVpnConnectionResponse,
     DetachNetworkInterfaceRequest: DetachNetworkInterfaceRequest,
     AddressTemplateSpecification: AddressTemplateSpecification,
@@ -14431,6 +14480,7 @@ module.exports = {
     DescribeAddressesResponse: DescribeAddressesResponse,
     SecurityGroupAssociationStatistics: SecurityGroupAssociationStatistics,
     AttachClassicLinkVpcResponse: AttachClassicLinkVpcResponse,
+    ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
     CreateServiceTemplateGroupResponse: CreateServiceTemplateGroupResponse,
     CreateAddressTemplateRequest: CreateAddressTemplateRequest,
     DescribeNatGatewaysResponse: DescribeNatGatewaysResponse,
@@ -14449,6 +14499,7 @@ module.exports = {
     MigratePrivateIpAddressResponse: MigratePrivateIpAddressResponse,
     DeleteRouteTableResponse: DeleteRouteTableResponse,
     ResetNatGatewayConnectionRequest: ResetNatGatewayConnectionRequest,
+    ModifyRouteTableAttributeRequest: ModifyRouteTableAttributeRequest,
     NetDetectIpState: NetDetectIpState,
     AccountAttribute: AccountAttribute,
     DisassociateAddressResponse: DisassociateAddressResponse,
@@ -14499,6 +14550,7 @@ module.exports = {
     AssignIpv6CidrBlockRequest: AssignIpv6CidrBlockRequest,
     CreateSecurityGroupPoliciesResponse: CreateSecurityGroupPoliciesResponse,
     CreateSecurityGroupResponse: CreateSecurityGroupResponse,
+    RejectAttachCcnInstancesResponse: RejectAttachCcnInstancesResponse,
     DeleteSecurityGroupRequest: DeleteSecurityGroupRequest,
     ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
     ReplaceRoutesRequest: ReplaceRoutesRequest,
@@ -14516,6 +14568,7 @@ module.exports = {
     CreateSecurityGroupRequest: CreateSecurityGroupRequest,
     ModifyCcnAttributeResponse: ModifyCcnAttributeResponse,
     DeleteCcnRequest: DeleteCcnRequest,
+    ResetVpnGatewayInternetMaxBandwidthResponse: ResetVpnGatewayInternetMaxBandwidthResponse,
     DescribeClassicLinkInstancesRequest: DescribeClassicLinkInstancesRequest,
     CreateServiceTemplateResponse: CreateServiceTemplateResponse,
     DeleteNetworkInterfaceResponse: DeleteNetworkInterfaceResponse,
@@ -14541,7 +14594,6 @@ module.exports = {
     DescribeVpnConnectionsResponse: DescribeVpnConnectionsResponse,
     ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest: ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest,
     RejectAttachCcnInstancesRequest: RejectAttachCcnInstancesRequest,
-    SecurityPolicyDatabase: SecurityPolicyDatabase,
     DeleteVpnGatewayResponse: DeleteVpnGatewayResponse,
     DescribeAddressTemplatesResponse: DescribeAddressTemplatesResponse,
     DescribeHaVipsRequest: DescribeHaVipsRequest,
@@ -14573,7 +14625,6 @@ module.exports = {
     DisassociateAddressRequest: DisassociateAddressRequest,
     ReplaceRouteTableAssociationRequest: ReplaceRouteTableAssociationRequest,
     AttachNetworkInterfaceRequest: AttachNetworkInterfaceRequest,
-    ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
     CreateSecurityGroupPoliciesRequest: CreateSecurityGroupPoliciesRequest,
     CreateNatGatewayResponse: CreateNatGatewayResponse,
@@ -14586,7 +14637,7 @@ module.exports = {
     CreateAddressTemplateGroupResponse: CreateAddressTemplateGroupResponse,
     CcnAttachedInstance: CcnAttachedInstance,
     ModifyNetDetectRequest: ModifyNetDetectRequest,
-    ModifyRouteTableAttributeRequest: ModifyRouteTableAttributeRequest,
+    SecurityPolicyDatabase: SecurityPolicyDatabase,
     AcceptAttachCcnInstancesResponse: AcceptAttachCcnInstancesResponse,
     DeleteServiceTemplateGroupRequest: DeleteServiceTemplateGroupRequest,
     DescribeNetDetectStatesRequest: DescribeNetDetectStatesRequest,

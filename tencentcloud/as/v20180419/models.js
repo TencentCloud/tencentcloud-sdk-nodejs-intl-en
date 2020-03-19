@@ -1869,7 +1869,7 @@ class AutoScalingGroup extends  AbstractModel {
         this.AutoScalingGroupName = null;
 
         /**
-         * Current status of the auto scaling group. Value range: <br><li>NORMAL: normal <br><li>CVM_ABNORMAL: Exception with the launch configuration <br><li>LB_ABNORMAL: exception with the load balancer <br><li>VPC_ABNORMAL: exception with the VPC <br><li>INSUFFICIENT_BALANCE: insufficient balance <br>
+         * Current status of the auto scaling group. Value range: <br><li>NORMAL: normal <br><li>CVM_ABNORMAL: Exception with the launch configuration <br><li>LB_ABNORMAL: exception with the load balancer <br><li>VPC_ABNORMAL: exception with the VPC <br><li>INSUFFICIENT_BALANCE: insufficient balance <br><li>LB_BACKEND_REGION_NOT_MATCH: the backend region of the CLB instance is not the same as the one of AS service.<br>
          * @type {string || null}
          */
         this.AutoScalingGroupStatus = null;
@@ -2006,6 +2006,12 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.Ipv6AddressCount = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MultiZoneSubnetPolicy = null;
+
     }
 
     /**
@@ -2061,6 +2067,7 @@ class AutoScalingGroup extends  AbstractModel {
             this.ServiceSettings = obj;
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
+        this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
 
     }
 }
@@ -2214,6 +2221,12 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
          */
         this.NotificationTarget = null;
 
+        /**
+         * The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs. 
+         * @type {string || null}
+         */
+        this.LifecycleTransitionType = null;
+
     }
 
     /**
@@ -2235,6 +2248,7 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
             obj.deserialize(params.NotificationTarget)
             this.NotificationTarget = obj;
         }
+        this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
 
     }
 }
@@ -4196,6 +4210,12 @@ class CreateLifecycleHookRequest extends  AbstractModel {
          */
         this.NotificationTarget = null;
 
+        /**
+         * The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs. 
+         * @type {string || null}
+         */
+        this.LifecycleTransitionType = null;
+
     }
 
     /**
@@ -4217,6 +4237,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
             obj.deserialize(params.NotificationTarget)
             this.NotificationTarget = obj;
         }
+        this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
 
     }
 }
@@ -4341,18 +4362,9 @@ class CompleteLifecycleActionResponse extends  AbstractModel {
 }
 
 /**
- * >Key-value pair filters for conditional filtering queries, such as filtering ID, name, status, etc.
-> * If there are multiple `Filter`, the relationship among them is logical `AND`.
-> * If there are multiple `Values` in the same `Filter`, the relationship among the `Values` in the same `Filter` is logical `OR`.
->
-> Take the `Filter` in the API [DescribeInstances](https://cloud.tencent.com/document/api/213/9388) as an example. We can use the following filters to query the instance that resides in the availability zone (`zone`) of Guangzhou Zone 1 ***and*** is billed (`instance-charge-type`) on a prepaid basis ***or*** on a pay-as-you-go basis:
-```
-Filters.0.Name=zone
-&Filters.0.Values.1=ap-guangzhou-1
-&Filters.1.Name=instance-charge-type
-&Filters.1.Values.1=PREPAID
-&Filters.1.Values.2=POSTPAID_BY_HOUR
-```
+ * > Describes key-value pair filters used for conditional queries, such as filtering results by ID, name and state.
+> * If there are multiple `Filter` parameters, the relationship among them will be logical `AND`.
+> * If there are multiple `Values` for the same `Filter`, the relationship among the `Values` for the same `Filter` will be logical `OR`.
  * @class
  */
 class Filter extends  AbstractModel {
@@ -5372,6 +5384,12 @@ class LifecycleHook extends  AbstractModel {
          */
         this.NotificationTarget = null;
 
+        /**
+         * Applicable scenario of the lifecycle hook
+         * @type {string || null}
+         */
+        this.LifecycleTransitionType = null;
+
     }
 
     /**
@@ -5395,6 +5413,7 @@ class LifecycleHook extends  AbstractModel {
             obj.deserialize(params.NotificationTarget)
             this.NotificationTarget = obj;
         }
+        this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
 
     }
 }
@@ -5431,6 +5450,12 @@ class ForwardLoadBalancer extends  AbstractModel {
          */
         this.LocationId = null;
 
+        /**
+         * The region of CLB instance. It defaults to the region of AS service and is in the format of the common parameter `Region`, such as `ap-guangzhou`.
+         * @type {string || null}
+         */
+        this.Region = null;
+
     }
 
     /**
@@ -5452,6 +5477,7 @@ class ForwardLoadBalancer extends  AbstractModel {
             }
         }
         this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }

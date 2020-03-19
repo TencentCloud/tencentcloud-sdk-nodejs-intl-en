@@ -269,6 +269,34 @@ class Authentication extends  AbstractModel {
 }
 
 /**
+ * RetryJobs response structure.
+ * @class
+ */
+class RetryJobsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * TerminateComputeNode request structure.
  * @class
  */
@@ -992,33 +1020,33 @@ class InstanceTypeConfig extends  AbstractModel {
 }
 
 /**
- * Describes login settings of an instance.
+ * Additional data
  * @class
  */
-class LoginSettings extends  AbstractModel {
+class Externals extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+         * Release address
 Note: This field may return null, indicating that no valid value is found.
-         * @type {string || null}
+         * @type {boolean || null}
          */
-        this.Password = null;
+        this.ReleaseAddress = null;
 
         /**
-         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+         * Unsupported network types
 Note: This field may return null, indicating that no valid value is found.
          * @type {Array.<string> || null}
          */
-        this.KeyIds = null;
+        this.UnsupportNetworks = null;
 
         /**
-         * Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
+         * Attributes of local HDD storage
 Note: This field may return null, indicating that no valid value is found.
-         * @type {string || null}
+         * @type {StorageBlock || null}
          */
-        this.KeepImageLogin = null;
+        this.StorageBlockAttr = null;
 
     }
 
@@ -1029,9 +1057,14 @@ Note: This field may return null, indicating that no valid value is found.
         if (!params) {
             return;
         }
-        this.Password = 'Password' in params ? params.Password : null;
-        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
-        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
+        this.ReleaseAddress = 'ReleaseAddress' in params ? params.ReleaseAddress : null;
+        this.UnsupportNetworks = 'UnsupportNetworks' in params ? params.UnsupportNetworks : null;
+
+        if (params.StorageBlockAttr) {
+            let obj = new StorageBlock();
+            obj.deserialize(params.StorageBlockAttr)
+            this.StorageBlockAttr = obj;
+        }
 
     }
 }
@@ -1483,6 +1516,34 @@ class TerminateJobRequest extends  AbstractModel {
 }
 
 /**
+ * DetachInstances response structure.
+ * @class
+ */
+class DetachInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Application information
  * @class
  */
@@ -1574,6 +1635,34 @@ class OutputMappingConfig extends  AbstractModel {
         this.Scene = 'Scene' in params ? params.Scene : null;
         this.WorkerNum = 'WorkerNum' in params ? params.WorkerNum : null;
         this.WorkerPartSize = 'WorkerPartSize' in params ? params.WorkerPartSize : null;
+
+    }
+}
+
+/**
+ * AttachInstances response structure.
+ * @class
+ */
+class AttachInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2945,6 +3034,17 @@ Note: This field may return null, indicating that no valid value is found.
          */
         this.SnapshotId = null;
 
+        /**
+         * Specifies whether the data disk is encrypted. Values: 
+<li>TRUE: encrypted
+<li>FALSE: not encrypted<br>
+Default value: FALSE<br>
+Currently, this parameter is only used in the `RunInstances` API.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
     }
 
     /**
@@ -2959,6 +3059,7 @@ Note: This field may return null, indicating that no valid value is found.
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
 
     }
 }
@@ -3037,6 +3138,12 @@ class NamedComputeEnv extends  AbstractModel {
          */
         this.ActionIfComputeNodeInactive = null;
 
+        /**
+         * When the instances are failed to be created or returned because of exceptions, the related compute node will retry to create instances periodically. This parameter specifies the maximum retry attempts. The max value is 11 and the default value is 7.
+         * @type {number || null}
+         */
+        this.ResourceMaxRetryCount = null;
+
     }
 
     /**
@@ -3096,6 +3203,7 @@ class NamedComputeEnv extends  AbstractModel {
             this.Notifications = obj;
         }
         this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
+        this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
 
     }
 }
@@ -3207,33 +3315,30 @@ class SpotMarketOptions extends  AbstractModel {
 }
 
 /**
- * Additional data
+ * 描述了实例登录相关配置与信息。
  * @class
  */
-class Externals extends  AbstractModel {
+class LoginSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Release address
-Note: This field may return null, indicating that no valid value is found.
-         * @type {boolean || null}
+         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+         * @type {string || null}
          */
-        this.ReleaseAddress = null;
+        this.Password = null;
 
         /**
-         * Unsupported network types
-Note: This field may return null, indicating that no valid value is found.
+         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
          * @type {Array.<string> || null}
          */
-        this.UnsupportNetworks = null;
+        this.KeyIds = null;
 
         /**
-         * Attributes of local HDD storage
-Note: This field may return null, indicating that no valid value is found.
-         * @type {StorageBlock || null}
+         * Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
+         * @type {string || null}
          */
-        this.StorageBlockAttr = null;
+        this.KeepImageLogin = null;
 
     }
 
@@ -3244,13 +3349,90 @@ Note: This field may return null, indicating that no valid value is found.
         if (!params) {
             return;
         }
-        this.ReleaseAddress = 'ReleaseAddress' in params ? params.ReleaseAddress : null;
-        this.UnsupportNetworks = 'UnsupportNetworks' in params ? params.UnsupportNetworks : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
 
-        if (params.StorageBlockAttr) {
-            let obj = new StorageBlock();
-            obj.deserialize(params.StorageBlockAttr)
-            this.StorageBlockAttr = obj;
+    }
+}
+
+/**
+ * DetachInstances request structure.
+ * @class
+ */
+class DetachInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Compute environment ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Describes information on an instance
+ * @class
+ */
+class Instance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Image ID.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Instance login settings.
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
         }
 
     }
@@ -3496,41 +3678,6 @@ class RunSecurityServiceEnabled extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
-
-    }
-}
-
-/**
- * CreateTaskTemplate response structure.
- * @class
- */
-class CreateTaskTemplateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task template ID
-         * @type {string || null}
-         */
-        this.TaskTemplateId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskTemplateId = 'TaskTemplateId' in params ? params.TaskTemplateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4305,6 +4452,13 @@ Note: This field may return null, indicating that no valid value is found.
          */
         this.Price = null;
 
+        /**
+         * Details of sold out items
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SoldOutReason = null;
+
     }
 
     /**
@@ -4344,17 +4498,24 @@ Note: This field may return null, indicating that no valid value is found.
             obj.deserialize(params.Price)
             this.Price = obj;
         }
+        this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
 
     }
 }
 
 /**
- * RetryJobs response structure.
+ * CreateTaskTemplate response structure.
  * @class
  */
-class RetryJobsResponse extends  AbstractModel {
+class CreateTaskTemplateResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Task template ID
+         * @type {string || null}
+         */
+        this.TaskTemplateId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4371,6 +4532,7 @@ class RetryJobsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskTemplateId = 'TaskTemplateId' in params ? params.TaskTemplateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5230,6 +5392,49 @@ class DescribeTaskRequest extends  AbstractModel {
 }
 
 /**
+ * AttachInstances request structure.
+ * @class
+ */
+class AttachInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Compute environment ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * List of instances that added to the compute environment
+         * @type {Array.<Instance> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new Instance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeComputeEnvs request structure.
  * @class
  */
@@ -5887,6 +6092,7 @@ module.exports = {
     SubmitJobRequest: SubmitJobRequest,
     ComputeEnvData: ComputeEnvData,
     Authentication: Authentication,
+    RetryJobsResponse: RetryJobsResponse,
     TerminateComputeNodeRequest: TerminateComputeNodeRequest,
     DescribeTaskLogsRequest: DescribeTaskLogsRequest,
     AgentRunningMode: AgentRunningMode,
@@ -5896,7 +6102,7 @@ module.exports = {
     SystemDisk: SystemDisk,
     Task: Task,
     InstanceTypeConfig: InstanceTypeConfig,
-    LoginSettings: LoginSettings,
+    Externals: Externals,
     TerminateComputeNodesResponse: TerminateComputeNodesResponse,
     DescribeComputeEnvActivitiesResponse: DescribeComputeEnvActivitiesResponse,
     TaskInstanceMetrics: TaskInstanceMetrics,
@@ -5905,8 +6111,10 @@ module.exports = {
     TaskView: TaskView,
     DescribeComputeEnvResponse: DescribeComputeEnvResponse,
     TerminateJobRequest: TerminateJobRequest,
+    DetachInstancesResponse: DetachInstancesResponse,
     Application: Application,
     OutputMappingConfig: OutputMappingConfig,
+    AttachInstancesResponse: AttachInstancesResponse,
     ComputeNodeMetrics: ComputeNodeMetrics,
     TaskMetrics: TaskMetrics,
     TerminateComputeNodesRequest: TerminateComputeNodesRequest,
@@ -5934,13 +6142,14 @@ module.exports = {
     DeleteJobResponse: DeleteJobResponse,
     EventConfig: EventConfig,
     SpotMarketOptions: SpotMarketOptions,
-    Externals: Externals,
+    LoginSettings: LoginSettings,
+    DetachInstancesRequest: DetachInstancesRequest,
+    Instance: Instance,
     OutputMapping: OutputMapping,
     EnhancedService: EnhancedService,
     DescribeJobSubmitInfoResponse: DescribeJobSubmitInfoResponse,
     DescribeComputeEnvCreateInfosResponse: DescribeComputeEnvCreateInfosResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
-    CreateTaskTemplateResponse: CreateTaskTemplateResponse,
     DescribeJobRequest: DescribeJobRequest,
     RedirectInfo: RedirectInfo,
     DescribeInstanceCategoriesResponse: DescribeInstanceCategoriesResponse,
@@ -5958,7 +6167,7 @@ module.exports = {
     ComputeNode: ComputeNode,
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
-    RetryJobsResponse: RetryJobsResponse,
+    CreateTaskTemplateResponse: CreateTaskTemplateResponse,
     StorageBlock: StorageBlock,
     DescribeJobsRequest: DescribeJobsRequest,
     TaskTemplateView: TaskTemplateView,
@@ -5975,6 +6184,7 @@ module.exports = {
     ComputeEnvView: ComputeEnvView,
     DescribeComputeEnvsResponse: DescribeComputeEnvsResponse,
     DescribeTaskRequest: DescribeTaskRequest,
+    AttachInstancesRequest: AttachInstancesRequest,
     DescribeComputeEnvsRequest: DescribeComputeEnvsRequest,
     DescribeCvmZoneInstanceConfigInfosResponse: DescribeCvmZoneInstanceConfigInfosResponse,
     DescribeJobsResponse: DescribeJobsResponse,

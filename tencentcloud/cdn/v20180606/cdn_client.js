@@ -16,54 +16,124 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const PurgePathCacheRequest = models.PurgePathCacheRequest;
 const DescribeCdnDomainLogsResponse = models.DescribeCdnDomainLogsResponse;
 const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
-const CdnData = models.CdnData;
-const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
+const Compression = models.Compression;
 const ResourceData = models.ResourceData;
 const UrlRecord = models.UrlRecord;
-const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
-const PushTask = models.PushTask;
-const TimestampData = models.TimestampData;
-const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
-const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
-const DescribePushTasksRequest = models.DescribePushTasksRequest;
-const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
+const Authentication = models.Authentication;
+const Https = models.Https;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
-const PurgeTask = models.PurgeTask;
-const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
-const CacheOptResult = models.CacheOptResult;
-const ListTopDataResponse = models.ListTopDataResponse;
-const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
-const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
-const EnableCachesResponse = models.EnableCachesResponse;
-const DescribePayTypeRequest = models.DescribePayTypeRequest;
-const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
-const DomainLog = models.DomainLog;
+const DomainFilter = models.DomainFilter;
+const SpecificConfig = models.SpecificConfig;
+const FollowRedirect = models.FollowRedirect;
+const RequestHeader = models.RequestHeader;
+const HttpHeaderPathRule = models.HttpHeaderPathRule;
+const Referer = models.Referer;
+const AdvanceCacheRule = models.AdvanceCacheRule;
+const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
-const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
-const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
 const ListTopDataRequest = models.ListTopDataRequest;
-const DisableCachesResponse = models.DisableCachesResponse;
-const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const DescribeDomainsResponse = models.DescribeDomainsResponse;
+const CompressionRule = models.CompressionRule;
+const Origin = models.Origin;
+const EnableCachesRequest = models.EnableCachesRequest;
+const SimpleCache = models.SimpleCache;
+const TopDetailData = models.TopDetailData;
+const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
+const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
+const BriefDomain = models.BriefDomain;
+const ResponseHeaderCache = models.ResponseHeaderCache;
+const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
+const Ipv6 = models.Ipv6;
+const StatusCodeCache = models.StatusCodeCache;
+const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
+const OverseaConfig = models.OverseaConfig;
+const AddCdnDomainRequest = models.AddCdnDomainRequest;
+const ErrorPage = models.ErrorPage;
+const MaxAgeRule = models.MaxAgeRule;
+const DescribePayTypeRequest = models.DescribePayTypeRequest;
+const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
+const AdvancedCache = models.AdvancedCache;
+const StartCdnDomainRequest = models.StartCdnDomainRequest;
+const MapInfo = models.MapInfo;
+const AuthenticationTypeD = models.AuthenticationTypeD;
+const AuthenticationTypeC = models.AuthenticationTypeC;
+const AuthenticationTypeB = models.AuthenticationTypeB;
+const AuthenticationTypeA = models.AuthenticationTypeA;
 const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
-const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
-const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
-const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
-const CdnIp = models.CdnIp;
+const AddCdnDomainResponse = models.AddCdnDomainResponse;
+const ServerCert = models.ServerCert;
 const DisableCachesRequest = models.DisableCachesRequest;
-const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
-const TopData = models.TopData;
-const EnableCachesRequest = models.EnableCachesRequest;
-const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
-const MapInfo = models.MapInfo;
-const TopDetailData = models.TopDetailData;
+const SimpleCacheRule = models.SimpleCacheRule;
+const DetailDomain = models.DetailDomain;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
 const CdnIpHistory = models.CdnIpHistory;
 const SummarizedData = models.SummarizedData;
+const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const Cache = models.Cache;
+const ForceRedirect = models.ForceRedirect;
+const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
+const RangeOriginPull = models.RangeOriginPull;
+const ViolationUrl = models.ViolationUrl;
+const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
+const MainlandConfig = models.MainlandConfig;
+const DescribePushTasksRequest = models.DescribePushTasksRequest;
+const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
+const RefererRule = models.RefererRule;
+const IpFreqLimit = models.IpFreqLimit;
+const DownstreamCapping = models.DownstreamCapping;
+const CacheOptResult = models.CacheOptResult;
+const StopCdnDomainRequest = models.StopCdnDomainRequest;
+const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
+const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
+const EnableCachesResponse = models.EnableCachesResponse;
+const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
+const StatusCodeCacheRule = models.StatusCodeCacheRule;
+const ClientCert = models.ClientCert;
+const DomainLog = models.DomainLog;
+const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
+const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
+const ResponseHeader = models.ResponseHeader;
+const DisableCachesResponse = models.DisableCachesResponse;
+const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
+const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
+const CacheKey = models.CacheKey;
+const TopData = models.TopData;
+const CappingRule = models.CappingRule;
+const Seo = models.Seo;
+const BandwidthAlert = models.BandwidthAlert;
 const RegionMapRelation = models.RegionMapRelation;
+const PurgePathCacheRequest = models.PurgePathCacheRequest;
+const CdnData = models.CdnData;
+const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
+const OriginPullOptimization = models.OriginPullOptimization;
+const PushTask = models.PushTask;
+const TimestampData = models.TimestampData;
+const StartCdnDomainResponse = models.StartCdnDomainResponse;
+const Sort = models.Sort;
+const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
+const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
+const StopCdnDomainResponse = models.StopCdnDomainResponse;
+const ListTopDataResponse = models.ListTopDataResponse;
+const MaxAge = models.MaxAge;
+const UpdateDomainConfigResponse = models.UpdateDomainConfigResponse;
+const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
+const AwsPrivateAccess = models.AwsPrivateAccess;
+const VideoSeek = models.VideoSeek;
+const Compatibility = models.Compatibility;
+const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
+const IpFilter = models.IpFilter;
+const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const ErrorPageRule = models.ErrorPageRule;
+const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
+const PurgeTask = models.PurgeTask;
+const OriginPullTimeout = models.OriginPullTimeout;
+const DeleteCdnDomainResponse = models.DeleteCdnDomainResponse;
+const CdnIp = models.CdnIp;
+const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
+const DescribeDomainsRequest = models.DescribeDomainsRequest;
 
 
 /**
@@ -77,80 +147,6 @@ class CdnClient extends AbstractClient {
     }
     
     /**
-     * This API (ListTopData) is used to query the following sorting data by using different combinations of the `Metric` and `Filter` input parameters:
-
-+ Sorts access URLs by total traffic and total requests and returns top 1,000 URLs in descending order.
-+ Sorts client districts by total traffic and total requests and returns the list of districts in descending order.
-+ Sorts client ISPs by total traffic and total requests and returns the list of ISPs in descending order.
-+ Sorts domain names by total traffic, peak bandwidth, total requests, average hit rate, and 2XX/3XX/4XX/5XX status codes and returns the list of domain names in descending order.
-+ Sorts domain names by total origin-pull traffic, peak origin-pull bandwidth, total origin-pull requests, average origin-pull failure rate, and 2XX/3XX/4XX/5XX origin-pull status codes and returns the list of domain names in descending order.
-     * @param {ListTopDataRequest} req
-     * @param {function(string, ListTopDataResponse):void} cb
-     * @public
-     */
-    ListTopData(req, cb) {
-        let resp = new ListTopDataResponse();
-        this.request("ListTopData", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeOriginData) is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
-
-+ Origin-pull traffic (in bytes)
-+ Origin-pull bandwidth (in bps)
-+ Number of origin-pull requests
-+ Number of failed origin-pull requests
-+ Origin-pull failure rate (in % with two decimal digits)
-+ Aggregate list of 2xx origin-pull status codes and the details of origin-pull status codes starting with 2 (in entries)
-+ Aggregate list of 3xx origin-pull status codes and the details of origin-pull status codes starting with 3 (in entries)
-+ Aggregate list of 4xx origin-pull status codes and the details of origin-pull status codes starting with 4 (in entries)
-+ Aggregate list of 5xx origin-pull status codes and the details of origin-pull status codes starting with 5 (in entries)
-     * @param {DescribeOriginDataRequest} req
-     * @param {function(string, DescribeOriginDataResponse):void} cb
-     * @public
-     */
-    DescribeOriginData(req, cb) {
-        let resp = new DescribeOriginDataResponse();
-        this.request("DescribeOriginData", req, resp, cb);
-    }
-
-    /**
-     * This API is used to submit multiple directory purge tasks, which are carried out according to the acceleration region of the domain names.
-By default, a maximum of 100 directories can be purged per day for acceleration regions either within or outside Mainland China, and up to 20 tasks can be submitted at a time.
-     * @param {PurgePathCacheRequest} req
-     * @param {function(string, PurgePathCacheResponse):void} cb
-     * @public
-     */
-    PurgePathCache(req, cb) {
-        let resp = new PurgePathCacheResponse();
-        this.request("PurgePathCache", req, resp, cb);
-    }
-
-    /**
-     * This API is used to cache specified URL resources to CDN nodes. You can specify acceleration regions for the prefetch.
-By default, a maximum of 1,000 URLs can be prefetched per day either within or outside Mainland China, and up to 20 tasks can be submitted at a time.
-This API is in beta test and not fully available yet. Please stay tuned.
-     * @param {PushUrlsCacheRequest} req
-     * @param {function(string, PushUrlsCacheResponse):void} cb
-     * @public
-     */
-    PushUrlsCache(req, cb) {
-        let resp = new PushUrlsCacheResponse();
-        this.request("PushUrlsCache", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query CDN IP ownership.
-     * @param {DescribeCdnIpRequest} req
-     * @param {function(string, DescribeCdnIpResponse):void} cb
-     * @public
-     */
-    DescribeCdnIp(req, cb) {
-        let resp = new DescribeCdnIpResponse();
-        this.request("DescribeCdnIp", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeMapInfo) is used to query the IDs of districts or ISPs.
      * @param {DescribeMapInfoRequest} req
      * @param {function(string, DescribeMapInfoResponse):void} cb
@@ -159,6 +155,17 @@ This API is in beta test and not fully available yet. Please stay tuned.
     DescribeMapInfo(req, cb) {
         let resp = new DescribeMapInfoResponse();
         this.request("DescribeMapInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a specified acceleration domain name.
+     * @param {DeleteCdnDomainRequest} req
+     * @param {function(string, DeleteCdnDomainResponse):void} cb
+     * @public
+     */
+    DeleteCdnDomain(req, cb) {
+        let resp = new DeleteCdnDomainResponse();
+        this.request("DeleteCdnDomain", req, resp, cb);
     }
 
     /**
@@ -173,17 +180,6 @@ This API is in beta test and not fully available yet. Please stay tuned.
     }
 
     /**
-     * This API (GetDisableRecords) is used to query the resource blocking history and the current URL status. (This API is during beta test and not fully available now.)
-     * @param {GetDisableRecordsRequest} req
-     * @param {function(string, GetDisableRecordsResponse):void} cb
-     * @public
-     */
-    GetDisableRecords(req, cb) {
-        let resp = new GetDisableRecordsResponse();
-        this.request("GetDisableRecords", req, resp, cb);
-    }
-
-    /**
      * This API (DescribePayType) is used to query billing information of the current account, such as billing mode and billing cycle.
      * @param {DescribePayTypeRequest} req
      * @param {function(string, DescribePayTypeResponse):void} cb
@@ -195,26 +191,25 @@ This API is in beta test and not fully available yet. Please stay tuned.
     }
 
     /**
-     * This API (DisableCaches) is used to block access to a specific URL on CDN. After a URL is blocked, error 403 will be returned for all access requests to it. (This API is during beta test and not fully available now.)
-     * @param {DisableCachesRequest} req
-     * @param {function(string, DisableCachesResponse):void} cb
+     * This API is used to query the complete configuration information of CDN acceleration domain names (inside and outside mainland China).
+     * @param {DescribeDomainsConfigRequest} req
+     * @param {function(string, DescribeDomainsConfigResponse):void} cb
      * @public
      */
-    DisableCaches(req, cb) {
-        let resp = new DisableCachesResponse();
-        this.request("DisableCaches", req, resp, cb);
+    DescribeDomainsConfig(req, cb) {
+        let resp = new DescribeDomainsConfigResponse();
+        this.request("DescribeDomainsConfig", req, resp, cb);
     }
 
     /**
-     * This API is used to submit multiple URL purge tasks, which are carried out according to the current acceleration region of the domain names in the URLs.
-By default, a maximum of 10,000 URLs can be purged per day for acceleration regions either within or outside Mainland China, and up to 1,000 tasks can be submitted at a time.
-     * @param {PurgeUrlsCacheRequest} req
-     * @param {function(string, PurgeUrlsCacheResponse):void} cb
+     * This API is used to add a CDN acceleration domain name.
+     * @param {AddCdnDomainRequest} req
+     * @param {function(string, AddCdnDomainResponse):void} cb
      * @public
      */
-    PurgeUrlsCache(req, cb) {
-        let resp = new PurgeUrlsCacheResponse();
-        this.request("PurgeUrlsCache", req, resp, cb);
+    AddCdnDomain(req, cb) {
+        let resp = new AddCdnDomainResponse();
+        this.request("AddCdnDomain", req, resp, cb);
     }
 
     /**
@@ -252,6 +247,150 @@ By default, a maximum of 10,000 URLs can be purged per day for acceleration regi
     }
 
     /**
+     * This API (DisableCaches) is used to block access to a specific URL on CDN. After a URL is blocked, error 403 will be returned for all access requests to it. (This API is during beta test and not fully available now.)
+     * @param {DisableCachesRequest} req
+     * @param {function(string, DisableCachesResponse):void} cb
+     * @public
+     */
+    DisableCaches(req, cb) {
+        let resp = new DisableCachesResponse();
+        this.request("DisableCaches", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the basic configuration information of CDN acceleration domain names (inside and outside mainland China), including the project ID, service status, service type, creation time, and update time, etc.
+     * @param {DescribeDomainsRequest} req
+     * @param {function(string, DescribeDomainsResponse):void} cb
+     * @public
+     */
+    DescribeDomains(req, cb) {
+        let resp = new DescribeDomainsResponse();
+        this.request("DescribeDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable the acceleration service for a disabled domain name.
+     * @param {StartCdnDomainRequest} req
+     * @param {function(string, StartCdnDomainResponse):void} cb
+     * @public
+     */
+    StartCdnDomain(req, cb) {
+        let resp = new StartCdnDomainResponse();
+        this.request("StartCdnDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to suspend the acceleration service for a domain name.
+Note: after the acceleration service has been suspended, requests to the cache node will return a 404 error. In order to avoid impact to your business, please move the domain name to another service before suspending the acceleration service.
+     * @param {StopCdnDomainRequest} req
+     * @param {function(string, StopCdnDomainResponse):void} cb
+     * @public
+     */
+    StopCdnDomain(req, cb) {
+        let resp = new StopCdnDomainResponse();
+        this.request("StopCdnDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to list data sorted the following ways by using different combinations of the Metric and Filter input parameters:
+
++ It sorts access URLs by total traffic and total requests, and returns the top 1,000 URLs in descending order.
++ It sorts client districts by total traffic and total requests, and returns the list of districts in descending order.
++ It sorts client ISPs by total traffic and total requests, and returns the list of ISPs in descending order.
++ It sorts domain names by total traffic, peak bandwidth, total requests, average hit rate, and 2XX/3XX/4XX/5XX status codes, and returns the list of domain names in descending order.
++ It sorts domain names by total origin-pull traffic, peak origin-pull bandwidth, total origin-pull requests, average origin-pull failure rate, and 2XX/3XX/4XX/5XX origin-pull status codes, and returns the list of domain names in descending order.
+
+Note: only data from the last 90 days will be queried.
+     * @param {ListTopDataRequest} req
+     * @param {function(string, ListTopDataResponse):void} cb
+     * @public
+     */
+    ListTopData(req, cb) {
+        let resp = new ListTopDataResponse();
+        this.request("ListTopData", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeOriginData) is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
+
++ Origin-pull traffic (in bytes)
++ Origin-pull bandwidth (in bps)
++ Number of origin-pull requests
++ Number of failed origin-pull requests
++ Origin-pull failure rate (in % with two decimal digits)
++ Aggregate list of 2xx origin-pull status codes and the details of origin-pull status codes starting with 2 (in entries)
++ Aggregate list of 3xx origin-pull status codes and the details of origin-pull status codes starting with 3 (in entries)
++ Aggregate list of 4xx origin-pull status codes and the details of origin-pull status codes starting with 4 (in entries)
++ Aggregate list of 5xx origin-pull status codes and the details of origin-pull status codes starting with 5 (in entries)
+     * @param {DescribeOriginDataRequest} req
+     * @param {function(string, DescribeOriginDataResponse):void} cb
+     * @public
+     */
+    DescribeOriginData(req, cb) {
+        let resp = new DescribeOriginDataResponse();
+        this.request("DescribeOriginData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query CDN IP ownership.
+     * @param {DescribeCdnIpRequest} req
+     * @param {function(string, DescribeCdnIpResponse):void} cb
+     * @public
+     */
+    DescribeCdnIp(req, cb) {
+        let resp = new DescribeCdnIpResponse();
+        this.request("DescribeCdnIp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to submit multiple directory purge tasks, which are carried out according to the acceleration region of the domain names.
+By default, a maximum of 100 directories can be purged per day for acceleration regions either within or outside Mainland China, and up to 20 tasks can be submitted at a time.
+     * @param {PurgePathCacheRequest} req
+     * @param {function(string, PurgePathCacheResponse):void} cb
+     * @public
+     */
+    PurgePathCache(req, cb) {
+        let resp = new PurgePathCacheResponse();
+        this.request("PurgePathCache", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of domain name URLs containing regulation-violating content scanned and detected by the CDN system, and the current status of the URLs.
+It corresponds to the **Pornography Detection** page on the CDN Console.
+     * @param {DescribeUrlViolationsRequest} req
+     * @param {function(string, DescribeUrlViolationsResponse):void} cb
+     * @public
+     */
+    DescribeUrlViolations(req, cb) {
+        let resp = new DescribeUrlViolationsResponse();
+        this.request("DescribeUrlViolations", req, resp, cb);
+    }
+
+    /**
+     * This API is used to submit multiple URL purge tasks, which are carried out according to the current acceleration region of the domain names in the URLs.
+By default, a maximum of 10,000 URLs can be purged per day for acceleration regions either within or outside Mainland China, and up to 1,000 tasks can be submitted at a time.
+     * @param {PurgeUrlsCacheRequest} req
+     * @param {function(string, PurgeUrlsCacheResponse):void} cb
+     * @public
+     */
+    PurgeUrlsCache(req, cb) {
+        let resp = new PurgeUrlsCacheResponse();
+        this.request("PurgeUrlsCache", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the configuration of CDN acceleration domain names.
+Note: if you need to update complex configuration items, you must pass all the attributes of the entire object. The default value will be used for attributes that are not passed. We recommend calling the querying API to obtain the configuration attributes first. You can then modify and pass the attributes to the API. The certificate and key fields do not need to be passed for HTTPS configuration.
+     * @param {UpdateDomainConfigRequest} req
+     * @param {function(string, UpdateDomainConfigResponse):void} cb
+     * @public
+     */
+    UpdateDomainConfig(req, cb) {
+        let resp = new UpdateDomainConfigResponse();
+        this.request("UpdateDomainConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the download link of an access log. You can use this API for access logs in the last 30 days either within or outside Mainland China.
      * @param {DescribeCdnDomainLogsRequest} req
      * @param {function(string, DescribeCdnDomainLogsResponse):void} cb
@@ -272,6 +411,41 @@ This API is in beta test and not fully available yet. Please stay tuned.
     DescribePushTasks(req, cb) {
         let resp = new DescribePushTasksResponse();
         this.request("DescribePushTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cache specified URL resources to CDN nodes. You can specify acceleration regions for the prefetch.
+By default, a maximum of 1,000 URLs can be prefetched per day either within or outside Mainland China, and up to 20 tasks can be submitted at a time.
+This API is in beta test and not fully available yet. Please stay tuned.
+     * @param {PushUrlsCacheRequest} req
+     * @param {function(string, PushUrlsCacheResponse):void} cb
+     * @public
+     */
+    PushUrlsCache(req, cb) {
+        let resp = new PushUrlsCacheResponse();
+        this.request("PushUrlsCache", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the resource blocking history and the current URL status. (This API is in beta test and not generally available yet.)
+     * @param {GetDisableRecordsRequest} req
+     * @param {function(string, GetDisableRecordsResponse):void} cb
+     * @public
+     */
+    GetDisableRecords(req, cb) {
+        let resp = new GetDisableRecordsResponse();
+        this.request("GetDisableRecords", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the billing mode of an account. At present, the billing mode of accounts on a monthly billing cycle and sub-accounts cannot be modified.
+     * @param {UpdatePayTypeRequest} req
+     * @param {function(string, UpdatePayTypeResponse):void} cb
+     * @public
+     */
+    UpdatePayType(req, cb) {
+        let resp = new UpdatePayTypeResponse();
+        this.request("UpdatePayType", req, resp, cb);
     }
 
     /**

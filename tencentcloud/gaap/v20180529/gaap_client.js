@@ -112,7 +112,7 @@ const CreateSecurityRulesRequest = models.CreateSecurityRulesRequest;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
 const DescribeProxiesStatusRequest = models.DescribeProxiesStatusRequest;
 const ProxyStatus = models.ProxyStatus;
-const DescribeGroupAndStatisticsProxyResponse = models.DescribeGroupAndStatisticsProxyResponse;
+const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
 const CreateDomainResponse = models.CreateDomainResponse;
 const ModifyProxiesProjectResponse = models.ModifyProxiesProjectResponse;
 const ModifyDomainRequest = models.ModifyDomainRequest;
@@ -182,7 +182,7 @@ const ModifyTCPListenerAttributeResponse = models.ModifyTCPListenerAttributeResp
 const CountryAreaMap = models.CountryAreaMap;
 const MetricStatisticsInfo = models.MetricStatisticsInfo;
 const DescribeProxyDetailResponse = models.DescribeProxyDetailResponse;
-const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
+const DescribeGroupAndStatisticsProxyResponse = models.DescribeGroupAndStatisticsProxyResponse;
 const CreateUDPListenersResponse = models.CreateUDPListenersResponse;
 const ModifyHTTPSListenerAttributeRequest = models.ModifyHTTPSListenerAttributeRequest;
 const DescribeProxyStatisticsRequest = models.DescribeProxyStatisticsRequest;
@@ -739,7 +739,7 @@ This API only supports connections of version 3.0.
     }
 
     /**
-     * This API is used to query the custom error response to the current domain name.
+     * This API is used to query the custom error response to a domain name.
      * @param {DescribeDomainErrorPageInfoRequest} req
      * @param {function(string, DescribeDomainErrorPageInfoResponse):void} cb
      * @public

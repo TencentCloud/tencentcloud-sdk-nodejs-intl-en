@@ -22,6 +22,7 @@ const DeleteComputeEnvResponse = models.DeleteComputeEnvResponse;
 const SubmitJobRequest = models.SubmitJobRequest;
 const ComputeEnvData = models.ComputeEnvData;
 const Authentication = models.Authentication;
+const RetryJobsResponse = models.RetryJobsResponse;
 const TerminateComputeNodeRequest = models.TerminateComputeNodeRequest;
 const DescribeTaskLogsRequest = models.DescribeTaskLogsRequest;
 const AgentRunningMode = models.AgentRunningMode;
@@ -31,7 +32,7 @@ const Notification = models.Notification;
 const SystemDisk = models.SystemDisk;
 const Task = models.Task;
 const InstanceTypeConfig = models.InstanceTypeConfig;
-const LoginSettings = models.LoginSettings;
+const Externals = models.Externals;
 const TerminateComputeNodesResponse = models.TerminateComputeNodesResponse;
 const DescribeComputeEnvActivitiesResponse = models.DescribeComputeEnvActivitiesResponse;
 const TaskInstanceMetrics = models.TaskInstanceMetrics;
@@ -40,8 +41,10 @@ const MountDataDisk = models.MountDataDisk;
 const TaskView = models.TaskView;
 const DescribeComputeEnvResponse = models.DescribeComputeEnvResponse;
 const TerminateJobRequest = models.TerminateJobRequest;
+const DetachInstancesResponse = models.DetachInstancesResponse;
 const Application = models.Application;
 const OutputMappingConfig = models.OutputMappingConfig;
+const AttachInstancesResponse = models.AttachInstancesResponse;
 const ComputeNodeMetrics = models.ComputeNodeMetrics;
 const TaskMetrics = models.TaskMetrics;
 const TerminateComputeNodesRequest = models.TerminateComputeNodesRequest;
@@ -69,13 +72,14 @@ const NamedComputeEnv = models.NamedComputeEnv;
 const DeleteJobResponse = models.DeleteJobResponse;
 const EventConfig = models.EventConfig;
 const SpotMarketOptions = models.SpotMarketOptions;
-const Externals = models.Externals;
+const LoginSettings = models.LoginSettings;
+const DetachInstancesRequest = models.DetachInstancesRequest;
+const Instance = models.Instance;
 const OutputMapping = models.OutputMapping;
 const EnhancedService = models.EnhancedService;
 const DescribeJobSubmitInfoResponse = models.DescribeJobSubmitInfoResponse;
 const DescribeComputeEnvCreateInfosResponse = models.DescribeComputeEnvCreateInfosResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
-const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const DescribeJobRequest = models.DescribeJobRequest;
 const RedirectInfo = models.RedirectInfo;
 const DescribeInstanceCategoriesResponse = models.DescribeInstanceCategoriesResponse;
@@ -93,7 +97,7 @@ const Placement = models.Placement;
 const ComputeNode = models.ComputeNode;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
-const RetryJobsResponse = models.RetryJobsResponse;
+const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const StorageBlock = models.StorageBlock;
 const DescribeJobsRequest = models.DescribeJobsRequest;
 const TaskTemplateView = models.TaskTemplateView;
@@ -110,6 +114,7 @@ const InstanceCategoryItem = models.InstanceCategoryItem;
 const ComputeEnvView = models.ComputeEnvView;
 const DescribeComputeEnvsResponse = models.DescribeComputeEnvsResponse;
 const DescribeTaskRequest = models.DescribeTaskRequest;
+const AttachInstancesRequest = models.AttachInstancesRequest;
 const DescribeComputeEnvsRequest = models.DescribeComputeEnvsRequest;
 const DescribeCvmZoneInstanceConfigInfosResponse = models.DescribeCvmZoneInstanceConfigInfosResponse;
 const DescribeJobsResponse = models.DescribeJobsResponse;
@@ -192,6 +197,23 @@ Termination is allowed for nodes in the CREATED, CREATION_FAILED, RUNNING or ABN
     }
 
     /**
+     * This API is used to add existing instances to the compute environment.
+Considerations: <br/>
+1. The instance should not be in the batch compute system.<br/>
+2. The instance status should be “running”.<br/>
+3. It supports dedicated CVMs and pay-as-you-go instances that billed on an hourly basis. Spot instances are not supported.<b/>
+
+For instances added to the compute environment, their UserData will be reset and the operating systems will be reinstalled.
+     * @param {AttachInstancesRequest} req
+     * @param {function(string, AttachInstancesResponse):void} cb
+     * @public
+     */
+    AttachInstances(req, cb) {
+        let resp = new AttachInstancesResponse();
+        this.request("AttachInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a compute environment.
      * @param {CreateComputeEnvRequest} req
      * @param {function(string, CreateComputeEnvResponse):void} cb
@@ -211,6 +233,17 @@ Termination is allowed for nodes in the CREATED, CREATION_FAILED, RUNNING or ABN
     DeleteComputeEnv(req, cb) {
         let resp = new DeleteComputeEnvResponse();
         this.request("DeleteComputeEnv", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove instances that from compute environment. 
+     * @param {DetachInstancesRequest} req
+     * @param {function(string, DetachInstancesResponse):void} cb
+     * @public
+     */
+    DetachInstances(req, cb) {
+        let resp = new DetachInstancesResponse();
+        this.request("DetachInstances", req, resp, cb);
     }
 
     /**

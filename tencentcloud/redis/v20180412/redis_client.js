@@ -608,7 +608,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify instance information (renaming an instance is supported currently).
+     * This API is used to modify instance information.
      * @param {ModifyInstanceRequest} req
      * @param {function(string, ModifyInstanceResponse):void} cb
      * @public

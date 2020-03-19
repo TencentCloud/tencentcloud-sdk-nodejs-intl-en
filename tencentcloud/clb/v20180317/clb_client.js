@@ -17,7 +17,9 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteRewriteRequest = models.DeleteRewriteRequest;
-const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
+const DescribeTargetGroupListResponse = models.DescribeTargetGroupListResponse;
+const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
+const DescribeTargetGroupListRequest = models.DescribeTargetGroupListRequest;
 const BatchDeregisterTargetsResponse = models.BatchDeregisterTargetsResponse;
 const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
 const ExtraInfo = models.ExtraInfo;
@@ -29,6 +31,8 @@ const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesR
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
+const CreateRuleResponse = models.CreateRuleResponse;
+const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const RsWeightRule = models.RsWeightRule;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
@@ -36,20 +40,27 @@ const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadb
 const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const TargetGroupInstance = models.TargetGroupInstance;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
-const CreateRuleResponse = models.CreateRuleResponse;
+const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
+const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
 const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
+const DescribeTargetGroupsResponse = models.DescribeTargetGroupsResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
 const DescribeListenersResponse = models.DescribeListenersResponse;
 const AutoRewriteRequest = models.AutoRewriteRequest;
+const DescribeLoadBalancerListByCertIdResponse = models.DescribeLoadBalancerListByCertIdResponse;
+const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
+const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
-const TargetHealth = models.TargetHealth;
+const Target = models.Target;
+const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
 const RuleHealth = models.RuleHealth;
 const Listener = models.Listener;
@@ -57,34 +68,43 @@ const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributes
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
 const ReplaceCertForLoadBalancersResponse = models.ReplaceCertForLoadBalancersResponse;
 const ModifyListenerRequest = models.ModifyListenerRequest;
-const Target = models.Target;
+const DeregisterTargetGroupInstancesResponse = models.DeregisterTargetGroupInstancesResponse;
 const RegisterTargetsRequest = models.RegisterTargetsRequest;
 const HealthCheck = models.HealthCheck;
+const AssociateTargetGroupsResponse = models.AssociateTargetGroupsResponse;
 const DeleteListenerRequest = models.DeleteListenerRequest;
 const ClassicalHealth = models.ClassicalHealth;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
+const TargetGroupBackend = models.TargetGroupBackend;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
 const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
 const ExclusiveCluster = models.ExclusiveCluster;
-const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
+const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
 const Backend = models.Backend;
 const LBChargePrepaid = models.LBChargePrepaid;
 const ClassicalListener = models.ClassicalListener;
 const CertificateInput = models.CertificateInput;
 const CreateListenerResponse = models.CreateListenerResponse;
+const CreateTargetGroupResponse = models.CreateTargetGroupResponse;
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const RuleOutput = models.RuleOutput;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CreateRuleRequest = models.CreateRuleRequest;
+const ModifyTargetGroupInstancesPortResponse = models.ModifyTargetGroupInstancesPortResponse;
 const RuleTargets = models.RuleTargets;
 const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
+const DeregisterTargetGroupInstancesRequest = models.DeregisterTargetGroupInstancesRequest;
 const ManualRewriteRequest = models.ManualRewriteRequest;
 const ModifyListenerResponse = models.ModifyListenerResponse;
 const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
+const DescribeTargetGroupInstancesResponse = models.DescribeTargetGroupInstancesResponse;
+const CreateTargetGroupRequest = models.CreateTargetGroupRequest;
+const ClusterItem = models.ClusterItem;
 const CreateListenerRequest = models.CreateListenerRequest;
-const RewriteLocationMap = models.RewriteLocationMap;
+const DisassociateTargetGroupsRequest = models.DisassociateTargetGroupsRequest;
+const Filter = models.Filter;
 const ModifyDomainResponse = models.ModifyDomainResponse;
 const RegisterTargetsResponse = models.RegisterTargetsResponse;
 const DeregisterTargetsFromClassicalLBResponse = models.DeregisterTargetsFromClassicalLBResponse;
@@ -93,32 +113,47 @@ const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
 const RewriteTarget = models.RewriteTarget;
+const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const DescribeTargetsResponse = models.DescribeTargetsResponse;
 const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
 const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const BatchTarget = models.BatchTarget;
+const DescribeLoadBalancerListByCertIdRequest = models.DescribeLoadBalancerListByCertIdRequest;
 const TargetRegionInfo = models.TargetRegionInfo;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
+const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const CertificateOutput = models.CertificateOutput;
+const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
+const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
+const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
 const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
 const ListenerBackend = models.ListenerBackend;
+const RuleInput = models.RuleInput;
 const TagInfo = models.TagInfo;
+const SnatIp = models.SnatIp;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
-const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
+const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
 const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
 const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
-const RuleInput = models.RuleInput;
+const RewriteLocationMap = models.RewriteLocationMap;
+const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
 const DeleteListenerResponse = models.DeleteListenerResponse;
 const InternetAccessible = models.InternetAccessible;
+const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
+const TargetHealth = models.TargetHealth;
+const TargetGroupAssociation = models.TargetGroupAssociation;
 const ListenerHealth = models.ListenerHealth;
+const AssociationItem = models.AssociationItem;
+const TargetGroupInfo = models.TargetGroupInfo;
+const RegisterTargetGroupInstancesRequest = models.RegisterTargetGroupInstancesRequest;
 const LoadBalancer = models.LoadBalancer;
 
 
@@ -203,17 +238,15 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (ReplaceCertForLoadBalancers) is used to replace the certificate associated with a CLB instance. A new certificates can be associated with a CLB only after the original certificate is disassociated from it.
-This API supports replacing server certificates and client certificates.
-The new certificate to be used can be specified by passing in the certificate ID. If no certificate ID is specified, relevant information such as certificate content must be passed in to create a new certificate and bind it to the CLB.
-Note: This API can only be called in the Guangzhou region; for other regions, an error will occur due to domain name resolution problems.
-     * @param {ReplaceCertForLoadBalancersRequest} req
-     * @param {function(string, ReplaceCertForLoadBalancersResponse):void} cb
+     * This API is used to register servers to a target group.
+This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+     * @param {RegisterTargetGroupInstancesRequest} req
+     * @param {function(string, RegisterTargetGroupInstancesResponse):void} cb
      * @public
      */
-    ReplaceCertForLoadBalancers(req, cb) {
-        let resp = new ReplaceCertForLoadBalancersResponse();
-        this.request("ReplaceCertForLoadBalancers", req, resp, cb);
+    RegisterTargetGroupInstances(req, cb) {
+        let resp = new RegisterTargetGroupInstancesResponse();
+        this.request("RegisterTargetGroupInstances", req, resp, cb);
     }
 
     /**
@@ -240,6 +273,18 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
+     * This API is used to unbind target groups from a rule.
+This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+     * @param {DisassociateTargetGroupsRequest} req
+     * @param {function(string, DisassociateTargetGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateTargetGroups(req, cb) {
+        let resp = new DisassociateTargetGroupsResponse();
+        this.request("DisassociateTargetGroups", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyDomain) is used to modify a domain name under a layer-7 CLB listener.
 This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
      * @param {ModifyDomainRequest} req
@@ -252,14 +297,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (DescribeClassicalLBTargets) is used to get the real servers bound to a classic CLB.
-     * @param {DescribeClassicalLBTargetsRequest} req
-     * @param {function(string, DescribeClassicalLBTargetsResponse):void} cb
+     * This API is used to delete a target group.
+     * @param {DeleteTargetGroupsRequest} req
+     * @param {function(string, DeleteTargetGroupsResponse):void} cb
      * @public
      */
-    DescribeClassicalLBTargets(req, cb) {
-        let resp = new DescribeClassicalLBTargetsResponse();
-        this.request("DescribeClassicalLBTargets", req, resp, cb);
+    DeleteTargetGroups(req, cb) {
+        let resp = new DeleteTargetGroupsResponse();
+        this.request("DeleteTargetGroups", req, resp, cb);
     }
 
     /**
@@ -334,7 +379,45 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to query the list of CLB instances.
+     * This API (ReplaceCertForLoadBalancers) is used to replace the certificate associated with a CLB instance. A new certificates can be associated with a CLB only after the original certificate is disassociated from it.
+This API supports replacing server certificates and client certificates.
+The new certificate to be used can be specified by passing in the certificate ID. If no certificate ID is specified, relevant information such as certificate content must be passed in to create a new certificate and bind it to the CLB.
+Note: This API can only be called in the Guangzhou region; for other regions, an error will occur due to domain name resolution problems.
+     * @param {ReplaceCertForLoadBalancersRequest} req
+     * @param {function(string, ReplaceCertForLoadBalancersResponse):void} cb
+     * @public
+     */
+    ReplaceCertForLoadBalancers(req, cb) {
+        let resp = new ReplaceCertForLoadBalancersResponse();
+        this.request("ReplaceCertForLoadBalancers", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind target groups to CLB listeners (layer-4 protocol) or forwarding rules (layer-7 protocol).
+This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+     * @param {AssociateTargetGroupsRequest} req
+     * @param {function(string, AssociateTargetGroupsResponse):void} cb
+     * @public
+     */
+    AssociateTargetGroups(req, cb) {
+        let resp = new AssociateTargetGroupsResponse();
+        this.request("AssociateTargetGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a server from a target group.
+This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+     * @param {DeregisterTargetGroupInstancesRequest} req
+     * @param {function(string, DeregisterTargetGroupInstancesResponse):void} cb
+     * @public
+     */
+    DeregisterTargetGroupInstances(req, cb) {
+        let resp = new DeregisterTargetGroupInstancesResponse();
+        this.request("DeregisterTargetGroupInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of CLB instances in a region.
 
      * @param {DescribeLoadBalancersRequest} req
      * @param {function(string, DescribeLoadBalancersResponse):void} cb
@@ -346,7 +429,7 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (DescribeListeners) is used to get the list of listeners by CLB IDs, listener protocol, or port. If no filter is specified, the default number (20) of listeners for the instance will be returned.
+     * This API is used to get the list of listeners by CLB instance ID, listener protocol, or port. If no filter is specified, all listeners under the CLB instance will be returned.
      * @param {DescribeListenersRequest} req
      * @param {function(string, DescribeListenersResponse):void} cb
      * @public
@@ -354,6 +437,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     DescribeListeners(req, cb) {
         let resp = new DescribeListenersResponse();
         this.request("DescribeListeners", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeClassicalLBTargets) is used to get the real servers bound to a classic CLB.
+     * @param {DescribeClassicalLBTargetsRequest} req
+     * @param {function(string, DescribeClassicalLBTargetsResponse):void} cb
+     * @public
+     */
+    DescribeClassicalLBTargets(req, cb) {
+        let resp = new DescribeClassicalLBTargetsResponse();
+        this.request("DescribeClassicalLBTargets", req, resp, cb);
     }
 
     /**
@@ -369,7 +463,7 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to bind CVM instances or ENIs in batches. It supports cross-region binding and only layer-4 (TCP/UDP) protocols.
+     * This API is used to bind CVM instances or ENIs in batches. It supports cross-region binding and layer-4 and layer-7 (TCP, UDP, HTTP, HTTPS) protocols.
      * @param {BatchRegisterTargetsRequest} req
      * @param {function(string, BatchRegisterTargetsResponse):void} cb
      * @public
@@ -415,14 +509,36 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (DeleteRewrite) is used to delete the redirection relationship between the specified forwarding rules.
-     * @param {DeleteRewriteRequest} req
-     * @param {function(string, DeleteRewriteResponse):void} cb
+     * This API (DescribeTargetHealth) is used to query the health check result of a real server of a CLB instance.
+     * @param {DescribeTargetHealthRequest} req
+     * @param {function(string, DescribeTargetHealthResponse):void} cb
      * @public
      */
-    DeleteRewrite(req, cb) {
-        let resp = new DeleteRewriteResponse();
-        this.request("DeleteRewrite", req, resp, cb);
+    DescribeTargetHealth(req, cb) {
+        let resp = new DescribeTargetHealthResponse();
+        this.request("DescribeTargetHealth", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the target group list.
+     * @param {DescribeTargetGroupListRequest} req
+     * @param {function(string, DescribeTargetGroupListResponse):void} cb
+     * @public
+     */
+    DescribeTargetGroupList(req, cb) {
+        let resp = new DescribeTargetGroupListResponse();
+        this.request("DescribeTargetGroupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a target group. (The target group feature is currently in beta test. To try it out, submit a ticket for application.)
+     * @param {CreateTargetGroupRequest} req
+     * @param {function(string, CreateTargetGroupResponse):void} cb
+     * @public
+     */
+    CreateTargetGroup(req, cb) {
+        let resp = new CreateTargetGroupResponse();
+        this.request("CreateTargetGroup", req, resp, cb);
     }
 
     /**
@@ -460,15 +576,36 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (ModifyTargetPort) is used to modify the port of a real server bound to a listener.
-This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
-     * @param {ModifyTargetPortRequest} req
-     * @param {function(string, ModifyTargetPortResponse):void} cb
+     * This API is used to query the target group information.
+     * @param {DescribeTargetGroupsRequest} req
+     * @param {function(string, DescribeTargetGroupsResponse):void} cb
      * @public
      */
-    ModifyTargetPort(req, cb) {
-        let resp = new ModifyTargetPortResponse();
-        this.request("ModifyTargetPort", req, resp, cb);
+    DescribeTargetGroups(req, cb) {
+        let resp = new DescribeTargetGroupsResponse();
+        this.request("DescribeTargetGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to rename a target group or modify its default port attribute.
+     * @param {ModifyTargetGroupAttributeRequest} req
+     * @param {function(string, ModifyTargetGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifyTargetGroupAttribute(req, cb) {
+        let resp = new ModifyTargetGroupAttributeResponse();
+        this.request("ModifyTargetGroupAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of CLB instances associated with a certificate in a region by certificate ID.
+     * @param {DescribeLoadBalancerListByCertIdRequest} req
+     * @param {function(string, DescribeLoadBalancerListByCertIdResponse):void} cb
+     * @public
+     */
+    DescribeLoadBalancerListByCertId(req, cb) {
+        let resp = new DescribeLoadBalancerListByCertIdResponse();
+        this.request("DescribeLoadBalancerListByCertId", req, resp, cb);
     }
 
     /**
@@ -495,6 +632,30 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
+     * This API is used to modify server weights of a target group in batches.
+This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+     * @param {ModifyTargetGroupInstancesWeightRequest} req
+     * @param {function(string, ModifyTargetGroupInstancesWeightResponse):void} cb
+     * @public
+     */
+    ModifyTargetGroupInstancesWeight(req, cb) {
+        let resp = new ModifyTargetGroupInstancesWeightResponse();
+        this.request("ModifyTargetGroupInstancesWeight", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyTargetPort) is used to modify the port of a real server bound to a listener.
+This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+     * @param {ModifyTargetPortRequest} req
+     * @param {function(string, ModifyTargetPortResponse):void} cb
+     * @public
+     */
+    ModifyTargetPort(req, cb) {
+        let resp = new ModifyTargetPortResponse();
+        this.request("ModifyTargetPort", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeClassicalLBByInstanceId) is used to get the list of classic CLB IDs through the real server instance ID.
      * @param {DescribeClassicalLBByInstanceIdRequest} req
      * @param {function(string, DescribeClassicalLBByInstanceIdResponse):void} cb
@@ -506,8 +667,31 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (BatchModifyTargetWeight) is used to batch modify the forwarding weights of real servers bound to a listener. Currently, it only supports HTTP/HTTPS listeners.
-This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+     * This API is used to get the information of servers bound to a target group.
+     * @param {DescribeTargetGroupInstancesRequest} req
+     * @param {function(string, DescribeTargetGroupInstancesResponse):void} cb
+     * @public
+     */
+    DescribeTargetGroupInstances(req, cb) {
+        let resp = new DescribeTargetGroupInstancesResponse();
+        this.request("DescribeTargetGroupInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify server ports of a target group in batches.
+This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+     * @param {ModifyTargetGroupInstancesPortRequest} req
+     * @param {function(string, ModifyTargetGroupInstancesPortResponse):void} cb
+     * @public
+     */
+    ModifyTargetGroupInstancesPort(req, cb) {
+        let resp = new ModifyTargetGroupInstancesPortResponse();
+        this.request("ModifyTargetGroupInstancesPort", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the forwarding weights of real servers bound to a CLB listener in batches. It supports layer-4 and layer-7 CLB listeners but not Classic CLB.
+This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
      * @param {BatchModifyTargetWeightRequest} req
      * @param {function(string, BatchModifyTargetWeightResponse):void} cb
      * @public
@@ -518,14 +702,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (DescribeTargetHealth) is used to query the health check result of a real server of a CLB instance.
-     * @param {DescribeTargetHealthRequest} req
-     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * This API (DeleteRewrite) is used to delete the redirection relationship between the specified forwarding rules.
+     * @param {DeleteRewriteRequest} req
+     * @param {function(string, DeleteRewriteResponse):void} cb
      * @public
      */
-    DescribeTargetHealth(req, cb) {
-        let resp = new DescribeTargetHealthResponse();
-        this.request("DescribeTargetHealth", req, resp, cb);
+    DeleteRewrite(req, cb) {
+        let resp = new DeleteRewriteResponse();
+        this.request("DeleteRewrite", req, resp, cb);
     }
 
     /**

@@ -74,54 +74,30 @@ class DeleteRewriteRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTargetPort request structure.
+ * DescribeTargetGroupList response structure.
  * @class
  */
-class ModifyTargetPortRequest extends  AbstractModel {
+class DescribeTargetGroupListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB instance ID
-         * @type {string || null}
-         */
-        this.LoadBalancerId = null;
-
-        /**
-         * CLB listener ID
-         * @type {string || null}
-         */
-        this.ListenerId = null;
-
-        /**
-         * List of real servers for which to modify the ports
-         * @type {Array.<Target> || null}
-         */
-        this.Targets = null;
-
-        /**
-         * New port of the real server bound to a listener or forwarding rule
+         * Number of displayed results
          * @type {number || null}
          */
-        this.NewPort = null;
+        this.TotalCount = null;
 
         /**
-         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
-         * @type {string || null}
+         * Information set of displayed target groups
+         * @type {Array.<TargetGroupInfo> || null}
          */
-        this.LocationId = null;
+        this.TargetGroupSet = null;
 
         /**
-         * Target rule domain name. This parameter does not take effect if LocationId is specified
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Domain = null;
-
-        /**
-         * Target rule URL. This parameter does not take effect if LocationId is specified
-         * @type {string || null}
-         */
-        this.Url = null;
+        this.RequestId = null;
 
     }
 
@@ -132,21 +108,102 @@ class ModifyTargetPortRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new Target();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
+        if (params.TargetGroupSet) {
+            this.TargetGroupSet = new Array();
+            for (let z in params.TargetGroupSet) {
+                let obj = new TargetGroupInfo();
+                obj.deserialize(params.TargetGroupSet[z]);
+                this.TargetGroupSet.push(obj);
             }
         }
-        this.NewPort = 'NewPort' in params ? params.NewPort : null;
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisassociateTargetGroups response structure.
+ * @class
+ */
+class DisassociateTargetGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTargetGroupList request structure.
+ * @class
+ */
+class DescribeTargetGroupListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID array
+         * @type {Array.<string> || null}
+         */
+        this.TargetGroupIds = null;
+
+        /**
+         * Filter array, which is exclusive of `TargetGroupIds`. Valid values: TargetGroupVpcId, TargetGroupName. Target group ID will be used first.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Starting display offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit of the number of displayed results. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupIds = 'TargetGroupIds' in params ? params.TargetGroupIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -357,7 +414,7 @@ Note: If this name is the same as the name of an existing CLB instance in the sy
         this.VpcId = null;
 
         /**
-         * A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet. This parameter is not supported in other cases.
+         * A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -369,7 +426,7 @@ Note: If this name is the same as the name of an existing CLB instance in the sy
         this.ProjectId = null;
 
         /**
-         * IP version. Value range: IPv4, IPv6. Default value: IPv4. This parameter is applicable only to public network CLB.
+         * IP version. Valid values: IPv4, IPv6, IPv6FullChain. Default value: IPv4. This parameter is applicable only to public network CLB instances.
          * @type {string || null}
          */
         this.AddressIPVersion = null;
@@ -394,10 +451,16 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
         this.ZoneId = null;
 
         /**
-         * CLB network billing method. This parameter is applicable only to public network CLB, and takes effect only for users whose bandwidth is managed in IP and CLB.
+         * CLB network billing mode. This parameter is applicable only to public network CLB instances.
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
+
+        /**
+         * This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+         * @type {string || null}
+         */
+        this.VipIsp = null;
 
         /**
          * Tags a CLB instance when purchasing it
@@ -430,6 +493,7 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
             obj.deserialize(params.InternetAccessible)
             this.InternetAccessible = obj;
         }
+        this.VipIsp = 'VipIsp' in params ? params.VipIsp : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -526,10 +590,22 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         this.TargetRegionInfo = null;
 
         /**
-         * Network billing parameter. Note: The maximum outbound bandwidth can be modified, but the network billing method cannot be modified.
+         * Network billing parameter
          * @type {InternetAccessible || null}
          */
         this.InternetChargeInfo = null;
+
+        /**
+         * Whether the target opens traffic from CLB to the internet. If yes (true), only security groups on CLB will be verified; if no (false), security groups on both CLB and backend instance need to be verified.
+         * @type {boolean || null}
+         */
+        this.LoadBalancerPassToTarget = null;
+
+        /**
+         * Whether to enable SnatPro
+         * @type {boolean || null}
+         */
+        this.SnatPro = null;
 
     }
 
@@ -554,6 +630,8 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
             obj.deserialize(params.InternetChargeInfo)
             this.InternetChargeInfo = obj;
         }
+        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
+        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
 
     }
 }
@@ -722,6 +800,77 @@ class DescribeRewriteRequest extends  AbstractModel {
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.SourceListenerIds = 'SourceListenerIds' in params ? params.SourceListenerIds : null;
         this.SourceLocationIds = 'SourceLocationIds' in params ? params.SourceLocationIds : null;
+
+    }
+}
+
+/**
+ * CreateRule response structure.
+ * @class
+ */
+class CreateRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of unique IDs of created forwarding rules
+         * @type {Array.<string> || null}
+         */
+        this.LocationIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AssociateTargetGroups request structure.
+ * @class
+ */
+class AssociateTargetGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Association array
+         * @type {Array.<TargetGroupAssociation> || null}
+         */
+        this.Associations = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Associations) {
+            this.Associations = new Array();
+            for (let z in params.Associations) {
+                let obj = new TargetGroupAssociation();
+                obj.deserialize(params.Associations[z]);
+                this.Associations.push(obj);
+            }
+        }
 
     }
 }
@@ -1027,6 +1176,55 @@ class DescribeTaskStatusRequest extends  AbstractModel {
 }
 
 /**
+ * Target group instance
+ * @class
+ */
+class TargetGroupInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Private IP of target group instance
+         * @type {string || null}
+         */
+        this.BindIP = null;
+
+        /**
+         * Port of target group instance
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Weight of target group instance
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * New port of target group instance
+         * @type {number || null}
+         */
+        this.NewPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BindIP = 'BindIP' in params ? params.BindIP : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.NewPort = 'NewPort' in params ? params.NewPort : null;
+
+    }
+}
+
+/**
  * DescribeRewrite response structure.
  * @class
  */
@@ -1070,10 +1268,60 @@ class DescribeRewriteResponse extends  AbstractModel {
 }
 
 /**
- * CreateRule response structure.
+ * DescribeTargetGroupInstances request structure.
  * @class
  */
-class CreateRuleResponse extends  AbstractModel {
+class DescribeTargetGroupInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter. Currently, only filtering by `TargetGroupId`, `BindIP`, or `InstanceId` is supported.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Number of displayed results. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Display offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * RegisterTargetGroupInstances response structure.
+ * @class
+ */
+class RegisterTargetGroupInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1255,6 +1503,56 @@ class RegisterTargetsWithClassicalLBResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTargetGroups response structure.
+ * @class
+ */
+class DescribeTargetGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of displayed results
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Information set of displayed target groups
+         * @type {Array.<TargetGroupInfo> || null}
+         */
+        this.TargetGroupSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TargetGroupSet) {
+            this.TargetGroupSet = new Array();
+            for (let z in params.TargetGroupSet) {
+                let obj = new TargetGroupInfo();
+                obj.deserialize(params.TargetGroupSet[z]);
+                this.TargetGroupSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CLB instance health check status
  * @class
  */
@@ -1377,6 +1675,13 @@ class DescribeListenersResponse extends  AbstractModel {
         this.Listeners = null;
 
         /**
+         * Total number of listeners
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1400,6 +1705,7 @@ class DescribeListenersResponse extends  AbstractModel {
                 this.Listeners.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1443,6 +1749,134 @@ class AutoRewriteRequest extends  AbstractModel {
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
+
+    }
+}
+
+/**
+ * DescribeLoadBalancerListByCertId response structure.
+ * @class
+ */
+class DescribeLoadBalancerListByCertIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID and list of CLB instances associated with it
+         * @type {Array.<CertIdRelatedWithLoadBalancers> || null}
+         */
+        this.CertSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CertSet) {
+            this.CertSet = new Array();
+            for (let z in params.CertSet) {
+                let obj = new CertIdRelatedWithLoadBalancers();
+                obj.deserialize(params.CertSet[z]);
+                this.CertSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyTargetGroupInstancesWeight response structure.
+ * @class
+ */
+class ModifyTargetGroupInstancesWeightResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTargetGroups request structure.
+ * @class
+ */
+class DescribeTargetGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID, which is exclusive of `Filters`.
+         * @type {Array.<string> || null}
+         */
+        this.TargetGroupIds = null;
+
+        /**
+         * Limit of the number of displayed results. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Starting display offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter array, which is exclusive of `TargetGroupIds`. Valid values: TargetGroupVpcId, TargetGroupName
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupIds = 'TargetGroupIds' in params ? params.TargetGroupIds : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -1511,42 +1945,47 @@ class DescribeTargetHealthRequest extends  AbstractModel {
 }
 
 /**
- * Describes the health information of a target
+ * Redirect target, i.e., the real server bound to a CLB
  * @class
  */
-class TargetHealth extends  AbstractModel {
+class Target extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Private IP of the target
-         * @type {string || null}
-         */
-        this.IP = null;
-
-        /**
-         * Port bound to the target
+         * Listening port of a real server
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Current health status. true: healthy; false: unhealthy.
-         * @type {boolean || null}
-         */
-        this.HealthStatus = null;
-
-        /**
-         * Instance ID of the target, such as ins-12345678
+         * Real server type. Value range: CVM (Cloud Virtual Machine), ENI (Elastic Network Interface). This parameter does not take effect currently as an input parameter.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.TargetId = null;
+        this.Type = null;
 
         /**
-         * Detailed information of the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+         * Unique ID of a CVM instance, which needs to be passed in when binding a CVM instance and can be obtained from the InstanceId field in the return of the DescribeInstances API.
+Note: Either InstanceId or EniIp must be passed in.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.HealthStatusDetial = null;
+        this.InstanceId = null;
+
+        /**
+         * Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * This parameter must be passed in when you bind an ENI, which represents the IP address of the ENI. The ENI has to be bound to a CVM instance first before it can be bound to a CLB instance. Note: Either InstanceId or EniIp must be passed in. To bind an ENI, you need to submit a ticket for application first.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EniIp = null;
 
     }
 
@@ -1557,11 +1996,55 @@ class TargetHealth extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IP = 'IP' in params ? params.IP : null;
         this.Port = 'Port' in params ? params.Port : null;
-        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
-        this.TargetId = 'TargetId' in params ? params.TargetId : null;
-        this.HealthStatusDetial = 'HealthStatusDetial' in params ? params.HealthStatusDetial : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.EniIp = 'EniIp' in params ? params.EniIp : null;
+
+    }
+}
+
+/**
+ * Certificate ID and list of CLB instances associated with it
+ * @class
+ */
+class CertIdRelatedWithLoadBalancers extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * List of CLB instances associated with certificate
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<LoadBalancer> || null}
+         */
+        this.LoadBalancers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertId = 'CertId' in params ? params.CertId : null;
+
+        if (params.LoadBalancers) {
+            this.LoadBalancers = new Array();
+            for (let z in params.LoadBalancers) {
+                let obj = new LoadBalancer();
+                obj.deserialize(params.LoadBalancers[z]);
+                this.LoadBalancers.push(obj);
+            }
+        }
 
     }
 }
@@ -1832,7 +2315,8 @@ class ModifyLoadBalancerAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * This parameter can be used to query whether CLB billing mode switch is successful.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DealName = null;
@@ -2018,47 +2502,18 @@ They represent weighted round robin and least connections, respectively. Default
 }
 
 /**
- * Redirect target, i.e., the real server bound to a CLB
+ * DeregisterTargetGroupInstances response structure.
  * @class
  */
-class Target extends  AbstractModel {
+class DeregisterTargetGroupInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Listening port of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * Real server type. Value range: CVM (Cloud Virtual Machine), ENI (Elastic Network Interface). This parameter does not take effect currently as an input parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Type = null;
-
-        /**
-         * Unique ID of a CVM instance, which needs to be passed in when binding a CVM instance and can be obtained from the InstanceId field in the return of the DescribeInstances API.
-Note: Either InstanceId or EniIp must be passed in.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
-         * @type {number || null}
-         */
-        this.Weight = null;
-
-        /**
-         * This parameter must be passed in when you bind an ENI, which represents the IP address of the ENI. The ENI has to be bound to a CVM instance first before it can be bound to a CLB instance. Note: Either InstanceId or EniIp must be passed in. To bind an ENI, you need to submit a ticket for application first.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EniIp = null;
+        this.RequestId = null;
 
     }
 
@@ -2069,11 +2524,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-        this.EniIp = 'EniIp' in params ? params.EniIp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2292,6 +2743,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * AssociateTargetGroups response structure.
+ * @class
+ */
+class AssociateTargetGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteListener request structure.
  * @class
  */
@@ -2411,6 +2890,102 @@ class ModifyTargetPortResponse extends  AbstractModel {
 }
 
 /**
+ * Real server bound to a target group
+ * @class
+ */
+class TargetGroupBackend extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * Real server type. Valid values: CVM, ENI (coming soon)
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Unique real server ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Listening port of real server
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Forwarding weight of real server. Value range: [0, 100]. Default value: 10.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Public IP of real server
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.PublicIpAddresses = null;
+
+        /**
+         * Private IP of real server
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+        /**
+         * Real server instance name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Real server binding time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegisteredTime = null;
+
+        /**
+         * Unique ENI ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EniId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
+        this.EniId = 'EniId' in params ? params.EniId : null;
+
+    }
+}
+
+/**
  * DescribeClassicalLBByInstanceId request structure.
  * @class
  */
@@ -2495,12 +3070,33 @@ class ModifyDomainAttributesResponse extends  AbstractModel {
 }
 
 /**
- * 独占集群
+ * Dedicated cluster
  * @class
  */
 class ExclusiveCluster extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Layer-4 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ClusterItem> || null}
+         */
+        this.L4Clusters = null;
+
+        /**
+         * Layer-7 dedicated cluster list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ClusterItem> || null}
+         */
+        this.L7Clusters = null;
+
+        /**
+         * vpcgw cluster
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ClusterItem || null}
+         */
+        this.ClassicalCluster = null;
 
     }
 
@@ -2512,14 +3108,38 @@ class ExclusiveCluster extends  AbstractModel {
             return;
         }
 
+        if (params.L4Clusters) {
+            this.L4Clusters = new Array();
+            for (let z in params.L4Clusters) {
+                let obj = new ClusterItem();
+                obj.deserialize(params.L4Clusters[z]);
+                this.L4Clusters.push(obj);
+            }
+        }
+
+        if (params.L7Clusters) {
+            this.L7Clusters = new Array();
+            for (let z in params.L7Clusters) {
+                let obj = new ClusterItem();
+                obj.deserialize(params.L7Clusters[z]);
+                this.L7Clusters.push(obj);
+            }
+        }
+
+        if (params.ClassicalCluster) {
+            let obj = new ClusterItem();
+            obj.deserialize(params.ClassicalCluster)
+            this.ClassicalCluster = obj;
+        }
+
     }
 }
 
 /**
- * ModifyTargetWeight request structure.
+ * DescribeClassicalLBHealthStatus request structure.
  * @class
  */
-class ModifyTargetWeightRequest extends  AbstractModel {
+class DescribeClassicalLBHealthStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -2535,36 +3155,6 @@ class ModifyTargetWeightRequest extends  AbstractModel {
          */
         this.ListenerId = null;
 
-        /**
-         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
-         * @type {string || null}
-         */
-        this.LocationId = null;
-
-        /**
-         * Target rule domain name. This parameter does not take effect if LocationId is specified
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * Target rule URL. This parameter does not take effect if LocationId is specified
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * List of real servers for which to modify the weight
-         * @type {Array.<Target> || null}
-         */
-        this.Targets = null;
-
-        /**
-         * New forwarding weight of a real server. Value range: 0-100. Default value: 10. If the Targets.Weight parameter is set, this parameter will not take effect.
-         * @type {number || null}
-         */
-        this.Weight = null;
-
     }
 
     /**
@@ -2576,19 +3166,6 @@ class ModifyTargetWeightRequest extends  AbstractModel {
         }
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
-
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new Target();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
-            }
-        }
-        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -3028,6 +3605,41 @@ class CreateListenerResponse extends  AbstractModel {
 }
 
 /**
+ * CreateTargetGroup response structure.
+ * @class
+ */
+class CreateTargetGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID generated after target group creation
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CLB information
  * @class
  */
@@ -3187,13 +3799,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.WafDomainId = null;
 
         /**
-         * 
+         * TRPC callee server route, which is valid when `ForwardType` is `TRPC`.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TrpcCallee = null;
 
         /**
-         * 
+         * TRPC calling service API, which is valid when `ForwardType` is `TRPC`.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TrpcFunc = null;
@@ -3330,6 +3944,34 @@ class CreateRuleRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyTargetGroupInstancesPort response structure.
+ * @class
+ */
+class ModifyTargetGroupInstancesPortResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Information of the real server bound to a forwarding rule under an HTTP/HTTPS listener
  * @class
  */
@@ -3424,6 +4066,49 @@ class BatchDeregisterTargetsRequest extends  AbstractModel {
                 let obj = new BatchTarget();
                 obj.deserialize(params.Targets[z]);
                 this.Targets.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeregisterTargetGroupInstances request structure.
+ * @class
+ */
+class DeregisterTargetGroupInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * Information of server to be unbound
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
             }
         }
 
@@ -3560,6 +4245,164 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeTargetGroupInstances response structure.
+ * @class
+ */
+class DescribeTargetGroupInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of results in current query
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Information of the bound server
+         * @type {Array.<TargetGroupBackend> || null}
+         */
+        this.TargetGroupInstanceSet = null;
+
+        /**
+         * Actual statistics, which are not affected by `Limit`, `Offset`, and `CAM`.
+         * @type {number || null}
+         */
+        this.RealCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TargetGroupInstanceSet) {
+            this.TargetGroupInstanceSet = new Array();
+            for (let z in params.TargetGroupInstanceSet) {
+                let obj = new TargetGroupBackend();
+                obj.deserialize(params.TargetGroupInstanceSet[z]);
+                this.TargetGroupInstanceSet.push(obj);
+            }
+        }
+        this.RealCount = 'RealCount' in params ? params.RealCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTargetGroup request structure.
+ * @class
+ */
+class CreateTargetGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group name (up to 50 characters)
+         * @type {string || null}
+         */
+        this.TargetGroupName = null;
+
+        /**
+         * `vpcid` attribute of a target group. If this parameter is left empty, the default VPC will be used.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Default port of a target group, which can be used for subsequently added servers.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Real server bound to a target group
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Dedicated cluster information
+ * @class
+ */
+class ClusterItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster AZ, such as ap-guangzhou-1
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
  * CreateListener request structure.
  * @class
  */
@@ -3598,7 +4441,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.HealthCheck = null;
 
         /**
-         * Certificate information. This parameter is applicable only to HTTPS/TCP_SSL listeners.
+         * Certificate information. This parameter is applicable only to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled.
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
@@ -3655,24 +4498,18 @@ They represent weighted round robin and least connections, respectively. Default
 }
 
 /**
- * Redirection relationship between forwarding rules
+ * DisassociateTargetGroups request structure.
  * @class
  */
-class RewriteLocationMap extends  AbstractModel {
+class DisassociateTargetGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Source forwarding rule ID
-         * @type {string || null}
+         * Array of rules to be unbound
+         * @type {Array.<TargetGroupAssociation> || null}
          */
-        this.SourceLocationId = null;
-
-        /**
-         * Forwarding rule ID of a redirect target
-         * @type {string || null}
-         */
-        this.TargetLocationId = null;
+        this.Associations = null;
 
     }
 
@@ -3683,8 +4520,50 @@ class RewriteLocationMap extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourceLocationId = 'SourceLocationId' in params ? params.SourceLocationId : null;
-        this.TargetLocationId = 'TargetLocationId' in params ? params.TargetLocationId : null;
+
+        if (params.Associations) {
+            this.Associations = new Array();
+            for (let z in params.Associations) {
+                let obj = new TargetGroupAssociation();
+                obj.deserialize(params.Associations[z]);
+                this.Associations.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Filter
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Filter value array
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -3837,7 +4716,7 @@ OPEN: public network; INTERNAL: private network.
         this.Offset = null;
 
         /**
-         * Number of CLB instances to be returned. Default value: 20.
+         * Number of returned CLB instances. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -4046,6 +4925,84 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyTargetWeight request structure.
+ * @class
+ */
+class ModifyTargetWeightRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB listener ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Target rule domain name. This parameter does not take effect if LocationId is specified
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Target rule URL. This parameter does not take effect if LocationId is specified
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * List of real servers for which to modify the weight
+         * @type {Array.<Target> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * New forwarding weight of a real server. Value range: 0-100. Default value: 10. If the Targets.Weight parameter is set, this parameter will not take effect.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new Target();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
  * DescribeTargets response structure.
  * @class
  */
@@ -4224,6 +5181,34 @@ class BatchTarget extends  AbstractModel {
 }
 
 /**
+ * DescribeLoadBalancerListByCertId request structure.
+ * @class
+ */
+class DescribeLoadBalancerListByCertIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Server or client certificate ID
+         * @type {Array.<string> || null}
+         */
+        this.CertIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertIds = 'CertIds' in params ? params.CertIds : null;
+
+    }
+}
+
+/**
  * Information of the real server bound to a CLB instance, including region and network to which it belongs.
  * @class
  */
@@ -4358,6 +5343,48 @@ class DeleteRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyTargetGroupAttribute request structure.
+ * @class
+ */
+class ModifyTargetGroupAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * New name of target group
+         * @type {string || null}
+         */
+        this.TargetGroupName = null;
+
+        /**
+         * New default port of target group
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -4552,6 +5579,120 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyTargetGroupInstancesWeight request structure.
+ * @class
+ */
+class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * Array of servers for which to modify weight
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteTargetGroups response structure.
+ * @class
+ */
+class DeleteTargetGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyTargetGroupInstancesPort request structure.
+ * @class
+ */
+class ModifyTargetGroupInstancesPortRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * Array of servers for which to modify port
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * BatchRegisterTargets request structure.
  * @class
  */
@@ -4669,6 +5810,122 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * HTTP/HTTPS forwarding rule (input)
+ * @class
+ */
+class RuleInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name of the forwarding rule. Length: 1-80.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Forwarding rule path. Length: 1-200.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Session persistence time in seconds. Value range: 30-3,600. Setting it to 0 indicates that session persistence is disabled.
+         * @type {number || null}
+         */
+        this.SessionExpireTime = null;
+
+        /**
+         * Health check information
+         * @type {HealthCheck || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * Certificate information
+         * @type {CertificateInput || null}
+         */
+        this.Certificate = null;
+
+        /**
+         * Request forwarding method of the rule. Value range: WRR, LEAST_CONN, IP_HASH
+They represent weighted round robin, least connections, and IP hash, respectively. Default value: WRR.
+         * @type {string || null}
+         */
+        this.Scheduler = null;
+
+        /**
+         * Forwarding protocol between the CLB instance and real server. Currently, HTTP/HTTPS/TRPC are supported.
+         * @type {string || null}
+         */
+        this.ForwardType = null;
+
+        /**
+         * Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
+         * @type {boolean || null}
+         */
+        this.DefaultServer = null;
+
+        /**
+         * Whether to enable HTTP/2. Note: HTTP/2 can be enabled only for HTTPS domain names.
+         * @type {boolean || null}
+         */
+        this.Http2 = null;
+
+        /**
+         * Target real server type. NODE: binding a general node; TARGETGROUP: binding a target group.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * TRPC callee server route, which is required when `ForwardType` is `TRPC`.
+         * @type {string || null}
+         */
+        this.TrpcCallee = null;
+
+        /**
+         * TRPC calling service API, which is required when `ForwardType` is `TRPC`.
+         * @type {string || null}
+         */
+        this.TrpcFunc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
+
+        if (params.HealthCheck) {
+            let obj = new HealthCheck();
+            obj.deserialize(params.HealthCheck)
+            this.HealthCheck = obj;
+        }
+
+        if (params.Certificate) {
+            let obj = new CertificateInput();
+            obj.deserialize(params.Certificate)
+            this.Certificate = obj;
+        }
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
+        this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
+        this.Http2 = 'Http2' in params ? params.Http2 : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
+        this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
+
+    }
+}
+
+/**
  * CLB tag information
  * @class
  */
@@ -4699,6 +5956,41 @@ class TagInfo extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * `SnatIp` information structure
+ * @class
+ */
+class SnatIp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique VPC subnet ID, such as `subnet-12345678`.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * IP address, such as 192.168.0.1
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
 
     }
 }
@@ -4748,24 +6040,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeClassicalLBHealthStatus request structure.
+ * ModifyTargetGroupAttribute response structure.
  * @class
  */
-class DescribeClassicalLBHealthStatusRequest extends  AbstractModel {
+class ModifyTargetGroupAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB instance ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * CLB listener ID
-         * @type {string || null}
-         */
-        this.ListenerId = null;
+        this.RequestId = null;
 
     }
 
@@ -4776,8 +6062,7 @@ class DescribeClassicalLBHealthStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4946,85 +6231,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * HTTP/HTTPS forwarding rule (input)
+ * Redirection relationship between forwarding rules
  * @class
  */
-class RuleInput extends  AbstractModel {
+class RewriteLocationMap extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Domain name of the forwarding rule. Length: 1-80.
+         * Source forwarding rule ID
          * @type {string || null}
          */
-        this.Domain = null;
+        this.SourceLocationId = null;
 
         /**
-         * Forwarding rule path. Length: 1-200.
+         * Forwarding rule ID of a redirect target
          * @type {string || null}
          */
-        this.Url = null;
-
-        /**
-         * Session persistence time in seconds. Value range: 30-3,600. Setting it to 0 indicates that session persistence is disabled.
-         * @type {number || null}
-         */
-        this.SessionExpireTime = null;
-
-        /**
-         * Health check information
-         * @type {HealthCheck || null}
-         */
-        this.HealthCheck = null;
-
-        /**
-         * Certificate information
-         * @type {CertificateInput || null}
-         */
-        this.Certificate = null;
-
-        /**
-         * Request forwarding method of the rule. Value range: WRR, LEAST_CONN, IP_HASH
-They represent weighted round robin, least connections, and IP hash, respectively. Default value: WRR.
-         * @type {string || null}
-         */
-        this.Scheduler = null;
-
-        /**
-         * Forwarding protocol between CLB and real server. Currently, HTTP is supported
-         * @type {string || null}
-         */
-        this.ForwardType = null;
-
-        /**
-         * Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
-         * @type {boolean || null}
-         */
-        this.DefaultServer = null;
-
-        /**
-         * Whether to enable Http2. Note: Http2 can be enabled only for HTTPS domain names.
-         * @type {boolean || null}
-         */
-        this.Http2 = null;
-
-        /**
-         * Target real server type. NODE: binding a general node; TARGETGROUP: binding a target group.
-         * @type {string || null}
-         */
-        this.TargetType = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.TrpcCallee = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.TrpcFunc = null;
+        this.TargetLocationId = null;
 
     }
 
@@ -5035,28 +6259,86 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         if (!params) {
             return;
         }
+        this.SourceLocationId = 'SourceLocationId' in params ? params.SourceLocationId : null;
+        this.TargetLocationId = 'TargetLocationId' in params ? params.TargetLocationId : null;
+
+    }
+}
+
+/**
+ * ModifyTargetPort request structure.
+ * @class
+ */
+class ModifyTargetPortRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB listener ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * List of real servers for which to modify the ports
+         * @type {Array.<Target> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * New port of the real server bound to a listener or forwarding rule
+         * @type {number || null}
+         */
+        this.NewPort = null;
+
+        /**
+         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Target rule domain name. This parameter does not take effect if LocationId is specified
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Target rule URL. This parameter does not take effect if LocationId is specified
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new Target();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.NewPort = 'NewPort' in params ? params.NewPort : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
-        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
-
-        if (params.HealthCheck) {
-            let obj = new HealthCheck();
-            obj.deserialize(params.HealthCheck)
-            this.HealthCheck = obj;
-        }
-
-        if (params.Certificate) {
-            let obj = new CertificateInput();
-            obj.deserialize(params.Certificate)
-            this.Certificate = obj;
-        }
-        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
-        this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
-        this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
-        this.Http2 = 'Http2' in params ? params.Http2 : null;
-        this.TargetType = 'TargetType' in params ? params.TargetType : null;
-        this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
-        this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
 
     }
 }
@@ -5140,7 +6422,7 @@ class DeleteListenerResponse extends  AbstractModel {
 }
 
 /**
- * Network billing method based on the maximum outbound bandwidth
+ * Network billing mode based on maximum outbound bandwidth
  * @class
  */
 class InternetAccessible extends  AbstractModel {
@@ -5179,6 +6461,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
         this.BandwidthpkgSubType = 'BandwidthpkgSubType' in params ? params.BandwidthpkgSubType : null;
+
+    }
+}
+
+/**
+ * DeleteTargetGroups request structure.
+ * @class
+ */
+class DeleteTargetGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID array
+         * @type {Array.<string> || null}
+         */
+        this.TargetGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupIds = 'TargetGroupIds' in params ? params.TargetGroupIds : null;
 
     }
 }
@@ -5235,6 +6545,111 @@ class DescribeClassicalLBListenersRequest extends  AbstractModel {
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Describes the health information of a target
+ * @class
+ */
+class TargetHealth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Private IP of the target
+         * @type {string || null}
+         */
+        this.IP = null;
+
+        /**
+         * Port bound to the target
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Current health status. true: healthy; false: unhealthy.
+         * @type {boolean || null}
+         */
+        this.HealthStatus = null;
+
+        /**
+         * Instance ID of the target, such as ins-12345678
+         * @type {string || null}
+         */
+        this.TargetId = null;
+
+        /**
+         * Detailed information of the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+         * @type {string || null}
+         */
+        this.HealthStatusDetial = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
+        this.TargetId = 'TargetId' in params ? params.TargetId : null;
+        this.HealthStatusDetial = 'HealthStatusDetial' in params ? params.HealthStatusDetial : null;
+
+    }
+}
+
+/**
+ * Association between rule and target group
+ * @class
+ */
+class TargetGroupAssociation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * Listener ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * Forwarding rule ID
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
 
     }
 }
@@ -5299,6 +6714,216 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 let obj = new RuleHealth();
                 obj.deserialize(params.Rules[z]);
                 this.Rules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Rule associated with target group
+ * @class
+ */
+class AssociationItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of associated CLB instance
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * ID of associated listener
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * ID of associated forwarding rule
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Protocol type of associated listener, such as HTTP or TCP
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Port of associated listener
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Domain name of associated forwarding rule
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * URL of associated forwarding rule
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * CLB instance name
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * Listener name
+         * @type {string || null}
+         */
+        this.ListenerName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+
+    }
+}
+
+/**
+ * Target group information
+ * @class
+ */
+class TargetGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * `vpcid` of target group
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Target group name
+         * @type {string || null}
+         */
+        this.TargetGroupName = null;
+
+        /**
+         * Default port of target group
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Target group creation time
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Target group modification time
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * Array of associated rules
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AssociationItem> || null}
+         */
+        this.AssociatedRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+
+        if (params.AssociatedRule) {
+            this.AssociatedRule = new Array();
+            for (let z in params.AssociatedRule) {
+                let obj = new AssociationItem();
+                obj.deserialize(params.AssociatedRule[z]);
+                this.AssociatedRule.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * RegisterTargetGroupInstances request structure.
+ * @class
+ */
+class RegisterTargetGroupInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * Server instance array
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
             }
         }
 
@@ -5451,8 +7076,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AnycastZone = null;
 
         /**
-         * IP version. Value range: ipv4, ipv6
-Note: This field may return null, indicating that no valid values can be obtained.
+         * IP version. Valid values: ipv4, ipv6
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AddressIPVersion = null;
@@ -5563,23 +7188,51 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ConfigId = null;
 
         /**
-         * Whether a real server opens the traffic from a CLB instance to the internet by default
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether a real server opens the traffic from a CLB instance to the internet
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.LoadBalancerPassToTarget = null;
 
         /**
-         * 
+         * Private network dedicated cluster
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {ExclusiveCluster || null}
          */
         this.ExclusiveCluster = null;
 
         /**
-         * 
+         * This field is meaningful only when the IP address version is `ipv6`. Valid values: IPv6Nat64, IPv6FullChain
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IPv6Mode = null;
+
+        /**
+         * Whether to enable SnatPro
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.SnatPro = null;
+
+        /**
+         * SnatIp list after SnatPro load balancing is enabled
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SnatIp> || null}
+         */
+        this.SnatIps = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SlaType = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsBlock = null;
 
     }
 
@@ -5675,13 +7328,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.ExclusiveCluster = obj;
         }
         this.IPv6Mode = 'IPv6Mode' in params ? params.IPv6Mode : null;
+        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
+
+        if (params.SnatIps) {
+            this.SnatIps = new Array();
+            for (let z in params.SnatIps) {
+                let obj = new SnatIp();
+                obj.deserialize(params.SnatIps[z]);
+                this.SnatIps.push(obj);
+            }
+        }
+        this.SlaType = 'SlaType' in params ? params.SlaType : null;
+        this.IsBlock = 'IsBlock' in params ? params.IsBlock : null;
 
     }
 }
 
 module.exports = {
     DeleteRewriteRequest: DeleteRewriteRequest,
-    ModifyTargetPortRequest: ModifyTargetPortRequest,
+    DescribeTargetGroupListResponse: DescribeTargetGroupListResponse,
+    DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
+    DescribeTargetGroupListRequest: DescribeTargetGroupListRequest,
     BatchDeregisterTargetsResponse: BatchDeregisterTargetsResponse,
     SetLoadBalancerSecurityGroupsResponse: SetLoadBalancerSecurityGroupsResponse,
     ExtraInfo: ExtraInfo,
@@ -5693,6 +7360,8 @@ module.exports = {
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     DescribeRewriteRequest: DescribeRewriteRequest,
+    CreateRuleResponse: CreateRuleResponse,
+    AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
     ClassicalTarget: ClassicalTarget,
     RsWeightRule: RsWeightRule,
     DeregisterTargetsFromClassicalLBRequest: DeregisterTargetsFromClassicalLBRequest,
@@ -5700,20 +7369,27 @@ module.exports = {
     BasicTargetGroupInfo: BasicTargetGroupInfo,
     ModifyTargetWeightResponse: ModifyTargetWeightResponse,
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    TargetGroupInstance: TargetGroupInstance,
     DescribeRewriteResponse: DescribeRewriteResponse,
-    CreateRuleResponse: CreateRuleResponse,
+    DescribeTargetGroupInstancesRequest: DescribeTargetGroupInstancesRequest,
+    RegisterTargetGroupInstancesResponse: RegisterTargetGroupInstancesResponse,
     ClassicalTargetInfo: ClassicalTargetInfo,
     DescribeTargetsRequest: DescribeTargetsRequest,
     ZoneInfo: ZoneInfo,
     RegisterTargetsWithClassicalLBResponse: RegisterTargetsWithClassicalLBResponse,
+    DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
     ModifyRuleResponse: ModifyRuleResponse,
     DescribeClassicalLBTargetsRequest: DescribeClassicalLBTargetsRequest,
     DescribeListenersResponse: DescribeListenersResponse,
     AutoRewriteRequest: AutoRewriteRequest,
+    DescribeLoadBalancerListByCertIdResponse: DescribeLoadBalancerListByCertIdResponse,
+    ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
+    DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     DescribeTargetHealthRequest: DescribeTargetHealthRequest,
-    TargetHealth: TargetHealth,
+    Target: Target,
+    CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
     RuleHealth: RuleHealth,
     Listener: Listener,
@@ -5721,34 +7397,43 @@ module.exports = {
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
     ReplaceCertForLoadBalancersResponse: ReplaceCertForLoadBalancersResponse,
     ModifyListenerRequest: ModifyListenerRequest,
-    Target: Target,
+    DeregisterTargetGroupInstancesResponse: DeregisterTargetGroupInstancesResponse,
     RegisterTargetsRequest: RegisterTargetsRequest,
     HealthCheck: HealthCheck,
+    AssociateTargetGroupsResponse: AssociateTargetGroupsResponse,
     DeleteListenerRequest: DeleteListenerRequest,
     ClassicalHealth: ClassicalHealth,
     ModifyTargetPortResponse: ModifyTargetPortResponse,
+    TargetGroupBackend: TargetGroupBackend,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
     ManualRewriteResponse: ManualRewriteResponse,
     ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
     ExclusiveCluster: ExclusiveCluster,
-    ModifyTargetWeightRequest: ModifyTargetWeightRequest,
+    DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
     ModifyDomainRequest: ModifyDomainRequest,
     Backend: Backend,
     LBChargePrepaid: LBChargePrepaid,
     ClassicalListener: ClassicalListener,
     CertificateInput: CertificateInput,
     CreateListenerResponse: CreateListenerResponse,
+    CreateTargetGroupResponse: CreateTargetGroupResponse,
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     RuleOutput: RuleOutput,
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
     CreateRuleRequest: CreateRuleRequest,
+    ModifyTargetGroupInstancesPortResponse: ModifyTargetGroupInstancesPortResponse,
     RuleTargets: RuleTargets,
     BatchDeregisterTargetsRequest: BatchDeregisterTargetsRequest,
+    DeregisterTargetGroupInstancesRequest: DeregisterTargetGroupInstancesRequest,
     ManualRewriteRequest: ManualRewriteRequest,
     ModifyListenerResponse: ModifyListenerResponse,
     DescribeTargetHealthResponse: DescribeTargetHealthResponse,
+    DescribeTargetGroupInstancesResponse: DescribeTargetGroupInstancesResponse,
+    CreateTargetGroupRequest: CreateTargetGroupRequest,
+    ClusterItem: ClusterItem,
     CreateListenerRequest: CreateListenerRequest,
-    RewriteLocationMap: RewriteLocationMap,
+    DisassociateTargetGroupsRequest: DisassociateTargetGroupsRequest,
+    Filter: Filter,
     ModifyDomainResponse: ModifyDomainResponse,
     RegisterTargetsResponse: RegisterTargetsResponse,
     DeregisterTargetsFromClassicalLBResponse: DeregisterTargetsFromClassicalLBResponse,
@@ -5757,32 +7442,47 @@ module.exports = {
     AutoRewriteResponse: AutoRewriteResponse,
     DeregisterTargetsResponse: DeregisterTargetsResponse,
     RewriteTarget: RewriteTarget,
+    ModifyTargetWeightRequest: ModifyTargetWeightRequest,
     DescribeTargetsResponse: DescribeTargetsResponse,
     BatchModifyTargetWeightRequest: BatchModifyTargetWeightRequest,
     DeleteRewriteResponse: DeleteRewriteResponse,
     BatchTarget: BatchTarget,
+    DescribeLoadBalancerListByCertIdRequest: DescribeLoadBalancerListByCertIdRequest,
     TargetRegionInfo: TargetRegionInfo,
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DeleteRuleResponse: DeleteRuleResponse,
+    ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
     CertificateOutput: CertificateOutput,
+    ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
+    DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
+    ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
     BatchRegisterTargetsRequest: BatchRegisterTargetsRequest,
     ListenerBackend: ListenerBackend,
+    RuleInput: RuleInput,
     TagInfo: TagInfo,
+    SnatIp: SnatIp,
     DescribeClassicalLBListenersResponse: DescribeClassicalLBListenersResponse,
-    DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
+    ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
     DescribeListenersRequest: DescribeListenersRequest,
     SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
     DescribeClassicalLBTargetsResponse: DescribeClassicalLBTargetsResponse,
-    RuleInput: RuleInput,
+    RewriteLocationMap: RewriteLocationMap,
+    ModifyTargetPortRequest: ModifyTargetPortRequest,
     DescribeLoadBalancersResponse: DescribeLoadBalancersResponse,
     DeleteListenerResponse: DeleteListenerResponse,
     InternetAccessible: InternetAccessible,
+    DeleteTargetGroupsRequest: DeleteTargetGroupsRequest,
     DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
+    TargetHealth: TargetHealth,
+    TargetGroupAssociation: TargetGroupAssociation,
     ListenerHealth: ListenerHealth,
+    AssociationItem: AssociationItem,
+    TargetGroupInfo: TargetGroupInfo,
+    RegisterTargetGroupInstancesRequest: RegisterTargetGroupInstancesRequest,
     LoadBalancer: LoadBalancer,
 
 }

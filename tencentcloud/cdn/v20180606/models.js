@@ -7006,7 +7006,7 @@ global: global acceleration
 }
 
 /**
- * s3源站回源鉴权。
+ * s3 source station back to source authentication.
  * @class
  */
 class AwsPrivateAccess extends  AbstractModel {

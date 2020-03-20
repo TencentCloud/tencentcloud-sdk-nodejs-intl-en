@@ -3448,7 +3448,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.RenewFlag = null;
 
         /**
-         * This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false： Expiration time of cloud disk is later than that of the instance.
+         * This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false: Expiration time of cloud disk is later than that of the instance.
 Note: This field may return null, indicating that no valid value was found.
          * @type {boolean || null}
          */

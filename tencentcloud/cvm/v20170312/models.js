@@ -548,7 +548,7 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * ID(s) of the instance(s) to be associated，such as `ins-lesecurk`. You can specify multiple instances.
+         * ID(s) of the instance(s) to be associated, such as `ins-lesecurk`. You can specify multiple instances.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -6423,7 +6423,7 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * ID(s) of the instance(s) to be disassociated，such as `ins-lesecurk`. You can specify multiple instances.
+         * ID(s) of the instance(s) to be disassociated, such as `ins-lesecurk`. You can specify multiple instances.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;

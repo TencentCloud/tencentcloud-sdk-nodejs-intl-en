@@ -1774,7 +1774,7 @@ class DeleteAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 自定义水印规格参数。
+ * Custom watermark specifications.
  * @class
  */
 class RawWatermarkParameter extends  AbstractModel {
@@ -2605,7 +2605,7 @@ class ModifySampleSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 智能分析结果
+ * Intelligent analysis results
  * @class
  */
 class AiAnalysisResult extends  AbstractModel {
@@ -5651,7 +5651,7 @@ Default value: black.
 }
 
 /**
- * 直播流 AI 识别结果
+ * Live stream AI recognition results
  * @class
  */
 class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
@@ -11027,7 +11027,7 @@ class MediaSnapshotByTimePicInfoItem extends  AbstractModel {
 }
 
 /**
- * AI 视频智能分析输入参数类型
+ * AI video intelligent analysis input parameter types
  * @class
  */
 class AiAnalysisTaskInput extends  AbstractModel {
@@ -13973,7 +13973,7 @@ Default value: 0 px.
 }
 
 /**
- * 自定义转码的的规格参数。
+ * Specifications for custom transcoding.
  * @class
  */
 class RawTranscodeParameter extends  AbstractModel {

@@ -1325,7 +1325,7 @@ class ListKeysResponse extends  AbstractModel {
 }
 
 /**
- * CMK属性信息
+ * CMK attribute information
  * @class
  */
 class KeyMetadata extends  AbstractModel {

@@ -3343,7 +3343,7 @@ class TextWatermarkTemplateInputForUpdate extends  AbstractModel {
 }
 
 /**
- * 内容审核 Ocr 文字鉴恐任务输入参数类型
+ * Content review Ocr text forensics task input parameter types
  * @class
  */
 class AiReviewTerrorismOcrTaskInput extends  AbstractModel {

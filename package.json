@@ -1,6 +1,6 @@
 {
   "name": "tencentcloud-sdk-nodejs-intl-en",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "腾讯云 API NODEJS SDK",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tencentcloud/tencentcloud-sdk-nodejs"
+    "url": "https://github.com/tencentcloud/tencentcloud-sdk-nodejs-intl-en"
   }
 }

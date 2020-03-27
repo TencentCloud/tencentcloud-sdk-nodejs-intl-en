@@ -52,7 +52,7 @@ const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const AudioTransform = models.AudioTransform;
 const ComposeMediaResponse = models.ComposeMediaResponse;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
-const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
+const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
 const ModifySubAppIdInfoRequest = models.ModifySubAppIdInfoRequest;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
@@ -67,7 +67,7 @@ const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
 const AiRecognitionTaskFaceResult = models.AiRecognitionTaskFaceResult;
 const AiRecognitionTaskHeadTailResultInput = models.AiRecognitionTaskHeadTailResultInput;
 const PushUrlCacheResponse = models.PushUrlCacheResponse;
-const HeadTailConfigureInfo = models.HeadTailConfigureInfo;
+const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
 const AiAnalysisTaskHighlightResult = models.AiAnalysisTaskHighlightResult;
 const DeleteAIAnalysisTemplateResponse = models.DeleteAIAnalysisTemplateResponse;
@@ -76,6 +76,7 @@ const AiReviewTerrorismOcrTaskInput = models.AiReviewTerrorismOcrTaskInput;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
 const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
 const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
+const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
 const MediaTransitionItem = models.MediaTransitionItem;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const TagConfigureInfo = models.TagConfigureInfo;
@@ -103,6 +104,7 @@ const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
 const MediaMiniProgramReviewInfoItem = models.MediaMiniProgramReviewInfoItem;
+const TaskStatData = models.TaskStatData;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const ProcessMediaResponse = models.ProcessMediaResponse;
@@ -163,7 +165,7 @@ const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextRe
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
-const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
+const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResultOutput;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const ModifySubAppIdInfoResponse = models.ModifySubAppIdInfoResponse;
@@ -171,6 +173,7 @@ const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const ModifySubAppIdStatusResponse = models.ModifySubAppIdStatusResponse;
 const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
 const MediaAdaptiveDynamicStreamingInfo = models.MediaAdaptiveDynamicStreamingInfo;
+const DescribeStorageDataRequest = models.DescribeStorageDataRequest;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
 const TEHDConfig = models.TEHDConfig;
@@ -204,6 +207,7 @@ const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResu
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const MediaTrackItem = models.MediaTrackItem;
+const DescribeStorageDetailsResponse = models.DescribeStorageDetailsResponse;
 const PullEventsResponse = models.PullEventsResponse;
 const AiRecognitionTaskObjectResultInput = models.AiRecognitionTaskObjectResultInput;
 const OutputVideoStream = models.OutputVideoStream;
@@ -218,8 +222,9 @@ const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const ProcessMediaByUrlResponse = models.ProcessMediaByUrlResponse;
 const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
-const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResultOutput;
+const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const SegmentConfigureInfo = models.SegmentConfigureInfo;
+const TaskStatDataItem = models.TaskStatDataItem;
 const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const ApplyUploadRequest = models.ApplyUploadRequest;
 const CreateSampleSnapshotTemplateResponse = models.CreateSampleSnapshotTemplateResponse;
@@ -243,10 +248,12 @@ const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
 const AiRecognitionTaskObjectResultOutput = models.AiRecognitionTaskObjectResultOutput;
 const AiReviewProhibitedAsrTaskOutput = models.AiReviewProhibitedAsrTaskOutput;
-const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
+const CreateClassResponse = models.CreateClassResponse;
+const DescribeSampleSnapshotTemplatesRequest = models.DescribeSampleSnapshotTemplatesRequest;
 const CoverConfigureInfoForUpdate = models.CoverConfigureInfoForUpdate;
 const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
 const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTemplateInfo;
+const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const WechatPublishTask = models.WechatPublishTask;
 const ClipFileInfo2017 = models.ClipFileInfo2017;
@@ -254,17 +261,19 @@ const StatDataItem = models.StatDataItem;
 const MediaSourceData = models.MediaSourceData;
 const PushUrlCacheRequest = models.PushUrlCacheRequest;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
-const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
+const HeadTailConfigureInfo = models.HeadTailConfigureInfo;
 const EventContent = models.EventContent;
 const HighlightsConfigureInfoForUpdate = models.HighlightsConfigureInfoForUpdate;
 const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;
 const OutputAudioStream = models.OutputAudioStream;
+const SpecificationDataItem = models.SpecificationDataItem;
 const TEHDConfigForUpdate = models.TEHDConfigForUpdate;
 const ComposeMediaTaskOutput = models.ComposeMediaTaskOutput;
 const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
 const AiRecognitionTaskSegmentResult = models.AiRecognitionTaskSegmentResult;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
+const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
 const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextResult;
@@ -293,7 +302,9 @@ const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const MediaKeyFrameDescInfo = models.MediaKeyFrameDescInfo;
 const DeleteImageSpriteTemplateRequest = models.DeleteImageSpriteTemplateRequest;
+const CreateClassRequest = models.CreateClassRequest;
 const CreateProcedureTemplateResponse = models.CreateProcedureTemplateResponse;
+const DescribeMediaProcessUsageDataResponse = models.DescribeMediaProcessUsageDataResponse;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
 const DescribeAudioTrackTemplatesRequest = models.DescribeAudioTrackTemplatesRequest;
@@ -368,7 +379,7 @@ const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResp
 const DeleteAnimatedGraphicsTemplateRequest = models.DeleteAnimatedGraphicsTemplateRequest;
 const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOffsetTemplateRequest;
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
-const DescribeSampleSnapshotTemplatesRequest = models.DescribeSampleSnapshotTemplatesRequest;
+const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
@@ -377,6 +388,7 @@ const AiAnalysisTaskClassificationResult = models.AiAnalysisTaskClassificationRe
 const MediaImageSpriteItem = models.MediaImageSpriteItem;
 const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
 const AiAnalysisTaskCoverInput = models.AiAnalysisTaskCoverInput;
+const DescribeStorageDetailsRequest = models.DescribeStorageDetailsRequest;
 const MediaTrack = models.MediaTrack;
 const MediaOutputInfo = models.MediaOutputInfo;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
@@ -424,7 +436,7 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of subapplications to which the current account has permissions, including primary applications. If the subapplication feature has not been enabled, this API will return 
+     * This API is used to get the list of subapplications to which the current account has permissions, including primary applications. If the subapplication feature has not been enabled, this API will return. 
  `FailedOperation`.
      * @param {DescribeSubAppIdsRequest} req
      * @param {function(string, DescribeSubAppIdsResponse):void} cb
@@ -539,14 +551,14 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
-     * This API is used to get the list of video content recognition templates based on unique template ID. The return result includes all eligible custom and [preset video content recognition templates](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E8.AF.86.E5.88.AB.E6.A8.A1.E6.9D.BF).
-     * @param {DescribeAIRecognitionTemplatesRequest} req
-     * @param {function(string, DescribeAIRecognitionTemplatesResponse):void} cb
+     * This API is used to create a custom time point screencapturing template. Up to 16 templates can be created.
+     * @param {CreateSnapshotByTimeOffsetTemplateRequest} req
+     * @param {function(string, CreateSnapshotByTimeOffsetTemplateResponse):void} cb
      * @public
      */
-    DescribeAIRecognitionTemplates(req, cb) {
-        let resp = new DescribeAIRecognitionTemplatesResponse();
-        this.request("DescribeAIRecognitionTemplates", req, resp, cb);
+    CreateSnapshotByTimeOffsetTemplate(req, cb) {
+        let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
+        this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
     }
 
     /**
@@ -717,14 +729,29 @@ Note: the clipped video shares the same ts segments with the source video, and o
     }
 
     /**
-     * This API is used to modify a custom watermarking template. The watermark type cannot be modified.
-     * @param {ModifyWatermarkTemplateRequest} req
-     * @param {function(string, ModifyWatermarkTemplateResponse):void} cb
+     * This API is used to query the storage capacity usage and number of files.
+     * @param {DescribeStorageDataRequest} req
+     * @param {function(string, DescribeStorageDataResponse):void} cb
      * @public
      */
-    ModifyWatermarkTemplate(req, cb) {
-        let resp = new ModifyWatermarkTemplateResponse();
-        this.request("ModifyWatermarkTemplate", req, resp, cb);
+    DescribeStorageData(req, cb) {
+        let resp = new DescribeStorageDataResponse();
+        this.request("DescribeStorageData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the used VOD storage capacity in bytes within the specified time range.
+   1. Only storage capacity usage data for the last 365 days can be queried.
+   2. The query time range cannot be more than 90 days;
+   3. The query time range at the minute granularity cannot be more than 5 days;
+   4. The query time range at the hour granularity cannot be more than 10 days.
+     * @param {DescribeStorageDetailsRequest} req
+     * @param {function(string, DescribeStorageDetailsResponse):void} cb
+     * @public
+     */
+    DescribeStorageDetails(req, cb) {
+        let resp = new DescribeStorageDetailsResponse();
+        this.request("DescribeStorageDetails", req, resp, cb);
     }
 
     /**
@@ -786,7 +813,7 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to create a custom watermarking template. Up to 1,000 ones can be created.
+     * This API is used to create a custom watermarking template. Up to 1,000 templates can be created.
      * @param {CreateWatermarkTemplateRequest} req
      * @param {function(string, CreateWatermarkTemplateResponse):void} cb
      * @public
@@ -808,7 +835,7 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to publish a VOD video in WeChat Mini Program for playback in the WeChat Mini Program player.
+     * This API is used to publish a VOD video on WeChat Mini Program for playback in the WeChat Mini Program player.
      * @param {WeChatMiniProgramPublishRequest} req
      * @param {function(string, WeChatMiniProgramPublishResponse):void} cb
      * @public
@@ -874,7 +901,7 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to create a custom task flow template. Up to 50 ones can be created.
+     * This API is used to create a custom task flow template. Up to 50 templates can be created.
      * @param {CreateProcedureTemplateRequest} req
      * @param {function(string, CreateProcedureTemplateResponse):void} cb
      * @public
@@ -895,17 +922,6 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     PushUrlCache(req, cb) {
         let resp = new PushUrlCacheResponse();
         this.request("PushUrlCache", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a custom time point screencapturing template. Up to 16 templates can be created.
-     * @param {CreateSnapshotByTimeOffsetTemplateRequest} req
-     * @param {function(string, CreateSnapshotByTimeOffsetTemplateResponse):void} cb
-     * @public
-     */
-    CreateSnapshotByTimeOffsetTemplate(req, cb) {
-        let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
-        this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
     }
 
     /**
@@ -953,6 +969,20 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * * This API is used to categorize media assets for management;
+* It does not affect the categories of existing media assets. If you want to modify the category of a media asset, call the [ModifyMediaInfo](/document/product/266/31762) API.
+* There can be up to 4 levels of categories.
+* One category can have up to 500 subcategories under it.
+     * @param {CreateClassRequest} req
+     * @param {function(string, CreateClassResponse):void} cb
+     * @public
+     */
+    CreateClass(req, cb) {
+        let resp = new CreateClassResponse();
+        this.request("CreateClass", req, resp, cb);
+    }
+
+    /**
      * This API is used to enable/disable a subapplication. After a subapplication is disabled, its corresponding domain name will be blocked and its access to the console will be restricted.
      * @param {ModifySubAppIdStatusRequest} req
      * @param {function(string, ModifySubAppIdStatusResponse):void} cb
@@ -979,7 +1009,7 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to create a custom transcoding template. Up to 100 ones can be created.
+     * This API is used to create a custom transcoding template. Up to 100 templates can be created.
      * @param {CreateTranscodeTemplateRequest} req
      * @param {function(string, CreateTranscodeTemplateResponse):void} cb
      * @public
@@ -987,6 +1017,30 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     CreateTranscodeTemplate(req, cb) {
         let resp = new CreateTranscodeTemplateResponse();
         this.request("CreateTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom watermarking template. The watermark type cannot be modified.
+     * @param {ModifyWatermarkTemplateRequest} req
+     * @param {function(string, ModifyWatermarkTemplateResponse):void} cb
+     * @public
+     */
+    ModifyWatermarkTemplate(req, cb) {
+        let resp = new ModifyWatermarkTemplateResponse();
+        this.request("ModifyWatermarkTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of video processing usage within the specified time range.
+   1. Statistics on video processing for the last 365 days can be queried.
+   2. The query time range cannot be more than 90 days.
+     * @param {DescribeMediaProcessUsageDataRequest} req
+     * @param {function(string, DescribeMediaProcessUsageDataResponse):void} cb
+     * @public
+     */
+    DescribeMediaProcessUsageData(req, cb) {
+        let resp = new DescribeMediaProcessUsageDataResponse();
+        this.request("DescribeMediaProcessUsageData", req, resp, cb);
     }
 
     /**
@@ -1015,7 +1069,7 @@ Note:
 ### Persistent clipping
 In persistent clipping mode, the clipped video is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the source LVB recording video (even if the source video is deleted, the clipped video will not be affected in any way). It can be further processed (transcoded, published on WeChat, etc.).
 
-An example is as follows: for a complete football match, the source LVB recording video may be up to 2 hours in length. You want to store this video for only 2 months for the purpose of cost savings. However, you want to specify a longer retention period for the "highlights" video created by live clipping, and perform additional VOD operations on it such as transcoding and release on WeChat. In this case, you need to choose the persistent clipping mode of live clipping.
+An example is as follows: for a complete football match, the source LVB recording video may be up to 2 hours in length. You want to store this video for only 2 months for the purpose of cost savings. However, you want to specify a longer retention period for the "highlights" video created by live clipping and perform additional VOD operations on it such as transcoding and release on WeChat. In this case, you need to choose the persistent clipping mode of live clipping.
 
 The advantage of persistent clipping is that the clipped video has a lifecycle independent of the source recording video and can be managed independently and stored persistently.
 
@@ -1107,7 +1161,7 @@ There are two ways to create a task flow template:
     }
 
     /**
-     * This API is used to create a custom video content analysis template. Up to 50 ones can be created.
+     * This API is used to create a custom video content analysis template. Up to 50 templates can be created.
      * @param {CreateAIAnalysisTemplateRequest} req
      * @param {function(string, CreateAIAnalysisTemplateResponse):void} cb
      * @public
@@ -1115,6 +1169,17 @@ There are two ways to create a task flow template:
     CreateAIAnalysisTemplate(req, cb) {
         let resp = new CreateAIAnalysisTemplateResponse();
         this.request("CreateAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of video content recognition templates based on unique template ID. The return result includes all eligible custom and [preset video content recognition templates](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E8.AF.86.E5.88.AB.E6.A8.A1.E6.9D.BF).
+     * @param {DescribeAIRecognitionTemplatesRequest} req
+     * @param {function(string, DescribeAIRecognitionTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeAIRecognitionTemplates(req, cb) {
+        let resp = new DescribeAIRecognitionTemplatesResponse();
+        this.request("DescribeAIRecognitionTemplates", req, resp, cb);
     }
 
     /**

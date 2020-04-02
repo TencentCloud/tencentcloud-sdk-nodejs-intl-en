@@ -292,34 +292,6 @@ class TerminateDisksRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDisksChargeType response structure.
- * @class
- */
-class ModifyDisksChargeTypeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeDisks request structure.
  * @class
  */
@@ -588,6 +560,27 @@ class ModifySnapshotsSharePermissionResponse extends  AbstractModel {
 }
 
 /**
+ * GetSnapOverview request structure.
+ * @class
+ */
+class GetSnapOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeSnapshotOperationLogs request structure.
  * @class
  */
@@ -681,63 +674,6 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRenewDisks request structure.
- * @class
- */
-class InquiryPriceRenewDisksRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the cloud disk, which can be queried via the API [DescribeDisks](/document/product/362/16315).
-         * @type {Array.<string> || null}
-         */
-        this.DiskIds = null;
-
-        /**
-         * Relevant parameter settings for the prepaid mode (i.e., monthly subscription). The monthly subscription cloud disk purchase usage period can be specified using this parameter. If this parameter is specified as CurInstanceDeadline, then it will be renewed according to the aligned CVM expiration time. If it is a batch renewal price query, then this parameter will correspond to the Disks parameter, and the element quantity needs to be kept the same.
-         * @type {Array.<DiskChargePrepaid> || null}
-         */
-        this.DiskChargePrepaids = null;
-
-        /**
-         * Specify the new expiration time of the cloud disk, in such format as 2017-12-17 00:00:00. The parameters `NewDeadline` and `DiskChargePrepaids` are two options to specify the inquiry length, and you must specify at least one.
-         * @type {string || null}
-         */
-        this.NewDeadline = null;
-
-        /**
-         * ID of project the cloud disk belongs to. If selected, it can only be used for authentication.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
-
-        if (params.DiskChargePrepaids) {
-            this.DiskChargePrepaids = new Array();
-            for (let z in params.DiskChargePrepaids) {
-                let obj = new DiskChargePrepaid();
-                obj.deserialize(params.DiskChargePrepaids[z]);
-                this.DiskChargePrepaids.push(obj);
-            }
-        }
-        this.NewDeadline = 'NewDeadline' in params ? params.NewDeadline : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-
-    }
-}
-
-/**
  * DescribeSnapshotSharePermission request structure.
  * @class
  */
@@ -766,81 +702,6 @@ class DescribeSnapshotSharePermissionRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRenewDisks response structure.
- * @class
- */
-class InquiryPriceRenewDisksResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Describes the price of renewing the cloud disk.
-         * @type {PrepayPrice || null}
-         */
-        this.DiskPrice = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DiskPrice) {
-            let obj = new PrepayPrice();
-            obj.deserialize(params.DiskPrice)
-            this.DiskPrice = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyDisksRenewFlag request structure.
- * @class
- */
-class ModifyDisksRenewFlagRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * IDs of one or more cloud disks to be operated.
-         * @type {Array.<string> || null}
-         */
-        this.DiskIds = null;
-
-        /**
-         * Cloud disk renewal flag. Value range: <br><li>NOTIFY_AND_AUTO_RENEW: Notify expiry and renew automatically. <br><li>NOTIFY_AND_MANUAL_RENEW: Notify expiry but do not renew automatically. <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify expiry nor renew automatically.
-         * @type {string || null}
-         */
-        this.RenewFlag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
-
-    }
-}
-
-/**
  * ModifyAutoSnapshotPolicyAttribute response structure.
  * @class
  */
@@ -864,46 +725,6 @@ class ModifyAutoSnapshotPolicyAttributeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyDisksChargeType request structure.
- * @class
- */
-class ModifyDisksChargeTypeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The ID(s) of one or multiple cloud disks to be operated. The maximum number of cloud disks per request is 100.
-         * @type {Array.<string> || null}
-         */
-        this.DiskIds = null;
-
-        /**
-         * 
-         * @type {DiskChargePrepaid || null}
-         */
-        this.DiskChargePrepaid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
-
-        if (params.DiskChargePrepaid) {
-            let obj = new DiskChargePrepaid();
-            obj.deserialize(params.DiskChargePrepaid)
-            this.DiskChargePrepaid = obj;
-        }
 
     }
 }
@@ -1412,34 +1233,6 @@ class DescribeSnapshotOperationLogsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDisksRenewFlag response structure.
- * @class
- */
-class ModifyDisksRenewFlagResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeDiskAssociatedAutoSnapshotPolicy response structure.
  * @class
  */
@@ -1490,30 +1283,42 @@ class DescribeDiskAssociatedAutoSnapshotPolicyResponse extends  AbstractModel {
 }
 
 /**
- * InquiryPriceResizeDisk request structure.
+ * GetSnapOverview response structure.
  * @class
  */
-class InquiryPriceResizeDiskRequest extends  AbstractModel {
+class GetSnapOverviewResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the cloud disk, which can be queried via the API [DescribeDisks](/document/product/362/16315).
+         * The total snapshot size of the user
+         * @type {number || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * The total billed snapshot size of the user
+         * @type {number || null}
+         */
+        this.RealTradeSize = null;
+
+        /**
+         * Free tier of snapshot
+         * @type {number || null}
+         */
+        this.FreeQuota = null;
+
+        /**
+         * Total number of snapshots
+         * @type {number || null}
+         */
+        this.TotalNums = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DiskId = null;
-
-        /**
-         * Cloud disk size after scale out (in GB). This cannot be smaller than the current size of the cloud disk. For the value range of the cloud disk sizes, see cloud disk [Product Types](/document/product/362/2353).
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * ID of project the cloud disk belongs to. If selected, it can only be used for authentication.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
+        this.RequestId = null;
 
     }
 
@@ -1524,9 +1329,11 @@ class InquiryPriceResizeDiskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+        this.RealTradeSize = 'RealTradeSize' in params ? params.RealTradeSize : null;
+        this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
+        this.TotalNums = 'TotalNums' in params ? params.TotalNums : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3324,6 +3131,48 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
 }
 
 /**
+ * InquiryPriceResizeDisk request structure.
+ * @class
+ */
+class InquiryPriceResizeDiskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the cloud disk, which can be queried via the API [DescribeDisks](/document/product/362/16315).
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * Cloud disk size after scale out (in GB). This cannot be smaller than the current size of the cloud disk. For the value range of the cloud disk sizes, see cloud disk [Product Types](/document/product/362/2353).
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * ID of project the cloud disk belongs to. If selected, it can only be used for authentication.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * The details of a cloud disk
  * @class
  */
@@ -3448,7 +3297,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.RenewFlag = null;
 
         /**
-         * This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false: Expiration time of cloud disk is later than that of the instance.
+         * This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false:Expiration time of cloud disk is later than that of the instance.
 Note: This field may return null, indicating that no valid value was found.
          * @type {boolean || null}
          */
@@ -3749,20 +3598,16 @@ module.exports = {
     SharePermission: SharePermission,
     ModifyDiskAttributesResponse: ModifyDiskAttributesResponse,
     TerminateDisksRequest: TerminateDisksRequest,
-    ModifyDisksChargeTypeResponse: ModifyDisksChargeTypeResponse,
     DescribeDisksRequest: DescribeDisksRequest,
     DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
     AutoSnapshotPolicy: AutoSnapshotPolicy,
     Policy: Policy,
     ModifySnapshotsSharePermissionResponse: ModifySnapshotsSharePermissionResponse,
+    GetSnapOverviewRequest: GetSnapOverviewRequest,
     DescribeSnapshotOperationLogsRequest: DescribeSnapshotOperationLogsRequest,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
-    InquiryPriceRenewDisksRequest: InquiryPriceRenewDisksRequest,
     DescribeSnapshotSharePermissionRequest: DescribeSnapshotSharePermissionRequest,
-    InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
-    ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
     ModifyAutoSnapshotPolicyAttributeResponse: ModifyAutoSnapshotPolicyAttributeResponse,
-    ModifyDisksChargeTypeRequest: ModifyDisksChargeTypeRequest,
     Price: Price,
     UnbindAutoSnapshotPolicyResponse: UnbindAutoSnapshotPolicyResponse,
     InquiryPriceCreateDisksResponse: InquiryPriceCreateDisksResponse,
@@ -3774,9 +3619,8 @@ module.exports = {
     DeleteAutoSnapshotPoliciesRequest: DeleteAutoSnapshotPoliciesRequest,
     DiskChargePrepaid: DiskChargePrepaid,
     DescribeSnapshotOperationLogsResponse: DescribeSnapshotOperationLogsResponse,
-    ModifyDisksRenewFlagResponse: ModifyDisksRenewFlagResponse,
     DescribeDiskAssociatedAutoSnapshotPolicyResponse: DescribeDiskAssociatedAutoSnapshotPolicyResponse,
-    InquiryPriceResizeDiskRequest: InquiryPriceResizeDiskRequest,
+    GetSnapOverviewResponse: GetSnapOverviewResponse,
     ApplySnapshotResponse: ApplySnapshotResponse,
     DeleteAutoSnapshotPoliciesResponse: DeleteAutoSnapshotPoliciesResponse,
     DescribeDisksResponse: DescribeDisksResponse,
@@ -3813,6 +3657,7 @@ module.exports = {
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     Placement: Placement,
     CreateAutoSnapshotPolicyRequest: CreateAutoSnapshotPolicyRequest,
+    InquiryPriceResizeDiskRequest: InquiryPriceResizeDiskRequest,
     Disk: Disk,
     ModifyAutoSnapshotPolicyAttributeRequest: ModifyAutoSnapshotPolicyAttributeRequest,
     Tag: Tag,

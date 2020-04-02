@@ -4709,7 +4709,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Vip6 = null;
 
         /**
-         * 
+         * Internal parameter, which can be ignored
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RemainBandwidthDuration = null;

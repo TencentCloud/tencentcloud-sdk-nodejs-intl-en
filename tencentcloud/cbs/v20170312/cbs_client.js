@@ -24,20 +24,16 @@ const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePerm
 const SharePermission = models.SharePermission;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
-const ModifyDisksChargeTypeResponse = models.ModifyDisksChargeTypeResponse;
 const DescribeDisksRequest = models.DescribeDisksRequest;
 const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
 const Policy = models.Policy;
 const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
-const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
 const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
-const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
-const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
-const ModifyDisksChargeTypeRequest = models.ModifyDisksChargeTypeRequest;
 const Price = models.Price;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
@@ -49,9 +45,8 @@ const DescribeDiskConfigQuotaRequest = models.DescribeDiskConfigQuotaRequest;
 const DeleteAutoSnapshotPoliciesRequest = models.DeleteAutoSnapshotPoliciesRequest;
 const DiskChargePrepaid = models.DiskChargePrepaid;
 const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
-const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
 const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
-const InquiryPriceResizeDiskRequest = models.InquiryPriceResizeDiskRequest;
+const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const ApplySnapshotResponse = models.ApplySnapshotResponse;
 const DeleteAutoSnapshotPoliciesResponse = models.DeleteAutoSnapshotPoliciesResponse;
 const DescribeDisksResponse = models.DescribeDisksResponse;
@@ -88,6 +83,7 @@ const ResizeDiskResponse = models.ResizeDiskResponse;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const Placement = models.Placement;
 const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
+const InquiryPriceResizeDiskRequest = models.InquiryPriceResizeDiskRequest;
 const Disk = models.Disk;
 const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
 const Tag = models.Tag;
@@ -155,17 +151,6 @@ class CbsClient extends AbstractClient {
     AttachDisks(req, cb) {
         let resp = new AttachDisksResponse();
         this.request("AttachDisks", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyDisksRenewFlag) is used to modify the renewal flag of the cloud disk, which supports batch modification.
-     * @param {ModifyDisksRenewFlagRequest} req
-     * @param {function(string, ModifyDisksRenewFlagResponse):void} cb
-     * @public
-     */
-    ModifyDisksRenewFlag(req, cb) {
-        let resp = new ModifyDisksRenewFlagResponse();
-        this.request("ModifyDisksRenewFlag", req, resp, cb);
     }
 
     /**
@@ -356,24 +341,6 @@ This can be filtered according to the cloud disk ID. The format of cloud disk ID
     }
 
     /**
-     * API domain name: cbs.tencentcloudapi.com.
-
-This API is used to change the billing mode of cloud disks.
-
-You can only use this API to change the billing method from `POSTPAID_BY_HOUR` to `PREPAID`.
-This API does not support non-elastic cloud disks. Please use `modifyinstanceschargetype` API to convert CVM instances and the bound non-elastic cloud disks. 
-Default API request frequency limit: 10 times/second.
-
-     * @param {ModifyDisksChargeTypeRequest} req
-     * @param {function(string, ModifyDisksChargeTypeResponse):void} cb
-     * @public
-     */
-    ModifyDisksChargeType(req, cb) {
-        let resp = new ModifyDisksChargeTypeResponse();
-        this.request("ModifyDisksChargeType", req, resp, cb);
-    }
-
-    /**
      * This API is used to return cloud disks.
 
 * You can use this API to return cloud disks you no longer need.
@@ -474,6 +441,17 @@ After snapshots are shared, the accounts they are shared to can use the snapshot
     }
 
     /**
+     * This API is used to get snapshot overview information.
+     * @param {GetSnapOverviewRequest} req
+     * @param {function(string, GetSnapOverviewResponse):void} cb
+     * @public
+     */
+    GetSnapOverview(req, cb) {
+        let resp = new GetSnapOverviewResponse();
+        this.request("GetSnapOverview", req, resp, cb);
+    }
+
+    /**
      * This API (ResizeDisk) is used to expand the capacity of the cloud disk.
 
 * Only elastic cloud disks can be expanded. The cloud disk type can be queried in the Portable field in the output parameters through the API [DescribeDisks](/document/product/362/16315). For the cloud disk created along with the CVM, the capacity can only be expanded via the API [ResizeInstanceDisks](/document/product/213/15731).
@@ -499,20 +477,6 @@ After snapshots are shared, the accounts they are shared to can use the snapshot
     DetachDisks(req, cb) {
         let resp = new DetachDisksResponse();
         this.request("DetachDisks", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the price of renewing one or more cloud disks.
-
-* You can query the price for renewing cloud disks together with their bound instances. To do so, you need to specify `CurInstanceDeadline` in the [DiskChargePrepaid](/document/product/362/15669#DiskChargePrepaid) parameter, In this case, the API will query the price for renewing the cloud disk to the expiration time of the bound instance.
-* You can specify different renewal lengths for multiple cloud disks in a single request. In such cases, the price returned will be the total price of renewing multiple cloud disks.
-     * @param {InquiryPriceRenewDisksRequest} req
-     * @param {function(string, InquiryPriceRenewDisksResponse):void} cb
-     * @public
-     */
-    InquiryPriceRenewDisks(req, cb) {
-        let resp = new InquiryPriceRenewDisksResponse();
-        this.request("InquiryPriceRenewDisks", req, resp, cb);
     }
 
 

@@ -296,12 +296,24 @@ class EnhancedService extends  AbstractModel {
 }
 
 /**
- * List of tag descriptions. By specifying this parameter, you can bind tags to corresponding resource instances at the same time. Currently, only tags are bound to cloud host instances.
+ * k8s tags, generally exist as an array
  * @class
  */
-class TagSpecification extends  AbstractModel {
+class Label extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -312,6 +324,8 @@ class TagSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -325,15 +339,15 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-Note: This field may return null, indicating that no valid value is found.
+         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-30 characters long and contain at least two of the following types: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-30 characters long and contain at least three of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
-Note: This field may return null, indicating that no valid value is found.
+         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://cloud.tencent.com/document/api/213/15699) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
@@ -362,12 +376,18 @@ Note: This field may return null, indicating that no valid value is found.
 }
 
 /**
- * k8s tags, generally exist as an array
+ * DeleteClusterRoute response structure.
  * @class
  */
-class Label extends  AbstractModel {
+class DeleteClusterRouteResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -378,6 +398,7 @@ class Label extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -686,41 +707,6 @@ class DescribeClusterRouteTablesRequest extends  AbstractModel {
 }
 
 /**
- * CreateClusterInstances response structure.
- * @class
- */
-class CreateClusterInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIdSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateClusterRouteTable response structure.
  * @class
  */
@@ -768,6 +754,12 @@ class ExistedInstancesForNode extends  AbstractModel {
          */
         this.ExistedInstancesPara = null;
 
+        /**
+         * Advanced node setting, which overrides the InstanceAdvancedSettings item set at the cluster level (currently valid for the ExtraArgs node custom parameter only)
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettingsOverride = null;
+
     }
 
     /**
@@ -783,6 +775,12 @@ class ExistedInstancesForNode extends  AbstractModel {
             let obj = new ExistedInstancesPara();
             obj.deserialize(params.ExistedInstancesPara)
             this.ExistedInstancesPara = obj;
+        }
+
+        if (params.InstanceAdvancedSettingsOverride) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettingsOverride)
+            this.InstanceAdvancedSettingsOverride = obj;
         }
 
     }
@@ -1064,7 +1062,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.ExistedInstancesForNode = null;
 
         /**
-         * 
+         * CVM type and the corresponding data disk mounting configuration information.
          * @type {Array.<InstanceDataDiskMountSetting> || null}
          */
         this.InstanceDataDiskMountSettings = null;
@@ -1486,6 +1484,49 @@ class RouteTableInfo extends  AbstractModel {
 }
 
 /**
+ * List of tag descriptions. By specifying this parameter, you can bind tags to corresponding resource instances at the same time. Currently, only tags are bound to cloud host instances.
+ * @class
+ */
+class TagSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteClusterEndpointVip response structure.
  * @class
  */
@@ -1601,6 +1642,24 @@ class ClusterCIDRSettings extends  AbstractModel {
          */
         this.MaxClusterServiceNum = null;
 
+        /**
+         * The CIDR block used to assign cluster service IP addresses. It must conflict with neither the VPC CIDR block nor with CIDR blocks of other clusters in the same VPC instance. The IP range must be within the private network IP range, such as 10.1.0.0/14, 192.168.0.1/18, and 172.16.0.0/16.
+         * @type {string || null}
+         */
+        this.ServiceCIDR = null;
+
+        /**
+         * Subnet ID of the ENI in VPC-CNI network mode
+         * @type {Array.<string> || null}
+         */
+        this.EniSubnetIds = null;
+
+        /**
+         * Repossession time of ENI IP addresses in VPC-CNI network mode, whose range is [300,15768000)
+         * @type {number || null}
+         */
+        this.ClaimExpiredSeconds = null;
+
     }
 
     /**
@@ -1614,6 +1673,9 @@ class ClusterCIDRSettings extends  AbstractModel {
         this.IgnoreClusterCIDRConflict = 'IgnoreClusterCIDRConflict' in params ? params.IgnoreClusterCIDRConflict : null;
         this.MaxNodePodNum = 'MaxNodePodNum' in params ? params.MaxNodePodNum : null;
         this.MaxClusterServiceNum = 'MaxClusterServiceNum' in params ? params.MaxClusterServiceNum : null;
+        this.ServiceCIDR = 'ServiceCIDR' in params ? params.ServiceCIDR : null;
+        this.EniSubnetIds = 'EniSubnetIds' in params ? params.EniSubnetIds : null;
+        this.ClaimExpiredSeconds = 'ClaimExpiredSeconds' in params ? params.ClaimExpiredSeconds : null;
 
     }
 }
@@ -1662,6 +1724,12 @@ class InstanceAdvancedSettings extends  AbstractModel {
          */
         this.DataDisks = null;
 
+        /**
+         * Information about node custom parameters
+         * @type {InstanceExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
     }
 
     /**
@@ -1692,6 +1760,12 @@ class InstanceAdvancedSettings extends  AbstractModel {
                 obj.deserialize(params.DataDisks[z]);
                 this.DataDisks.push(obj);
             }
+        }
+
+        if (params.ExtraArgs) {
+            let obj = new InstanceExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
         }
 
     }
@@ -1830,6 +1904,12 @@ class RunInstancesForNode extends  AbstractModel {
          */
         this.RunInstancesPara = null;
 
+        /**
+         * An advanced node setting. This parameter overrides the InstanceAdvancedSettings item set at the cluster level and corresponds to RunInstancesPara in a one-to-one sequential manner (currently valid for the ExtraArgs node custom parameter only).
+         * @type {Array.<InstanceAdvancedSettings> || null}
+         */
+        this.InstanceAdvancedSettingsOverrides = null;
+
     }
 
     /**
@@ -1841,6 +1921,15 @@ class RunInstancesForNode extends  AbstractModel {
         }
         this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
         this.RunInstancesPara = 'RunInstancesPara' in params ? params.RunInstancesPara : null;
+
+        if (params.InstanceAdvancedSettingsOverrides) {
+            this.InstanceAdvancedSettingsOverrides = new Array();
+            for (let z in params.InstanceAdvancedSettingsOverrides) {
+                let obj = new InstanceAdvancedSettings();
+                obj.deserialize(params.InstanceAdvancedSettingsOverrides[z]);
+                this.InstanceAdvancedSettingsOverrides.push(obj);
+            }
+        }
 
     }
 }
@@ -2171,6 +2260,35 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Node custom parameter
+ * @class
+ */
+class InstanceExtraArgs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Kubelet custom parameter
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Kubelet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Kubelet = 'Kubelet' in params ? params.Kubelet : null;
+
+    }
+}
+
+/**
  * ModifyClusterEndpointSP request structure.
  * @class
  */
@@ -2285,18 +2403,33 @@ class RouteInfo extends  AbstractModel {
 }
 
 /**
- * Describes information related to the Cloud Monitor service.
+ * Cluster master custom parameter
  * @class
  */
-class RunMonitorServiceEnabled extends  AbstractModel {
+class ClusterExtraArgs extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable [Cloud Monitor](/document/product/248). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
-         * @type {boolean || null}
+         * kube-apiserver custom parameter
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
          */
-        this.Enabled = null;
+        this.KubeAPIServer = null;
+
+        /**
+         * kube-controller-manager custom parameter
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KubeControllerManager = null;
+
+        /**
+         * kube-scheduler custom parameter
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KubeScheduler = null;
 
     }
 
@@ -2307,7 +2440,9 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.KubeAPIServer = 'KubeAPIServer' in params ? params.KubeAPIServer : null;
+        this.KubeControllerManager = 'KubeControllerManager' in params ? params.KubeControllerManager : null;
+        this.KubeScheduler = 'KubeScheduler' in params ? params.KubeScheduler : null;
 
     }
 }
@@ -2336,6 +2471,34 @@ class CreateClusterEndpointResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Describes information related to the Cloud Monitor service.
+ * @class
+ */
+class RunMonitorServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable [Cloud Monitor](/document/product/248). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -2393,6 +2556,24 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.NodeNameType = null;
 
+        /**
+         * Cluster custom parameter
+         * @type {ClusterExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+        /**
+         * Cluster network type, which can be GR (Global Router) or VPC-CNI. The default value is GR.
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * Whether a cluster in VPC-CNI mode uses dynamic IP addresses. The default value is FALSE, which indicates that static IP addresses are used.
+         * @type {boolean || null}
+         */
+        this.IsNonStaticIpMode = null;
+
     }
 
     /**
@@ -2406,6 +2587,14 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.AsEnabled = 'AsEnabled' in params ? params.AsEnabled : null;
         this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
         this.NodeNameType = 'NodeNameType' in params ? params.NodeNameType : null;
+
+        if (params.ExtraArgs) {
+            let obj = new ClusterExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
 
     }
 }
@@ -2477,6 +2666,26 @@ class Instance extends  AbstractModel {
          */
         this.InstanceState = null;
 
+        /**
+         * Whether the instance is drained
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.DrainStatus = null;
+
+        /**
+         * Node settings
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
     }
 
     /**
@@ -2490,17 +2699,43 @@ class Instance extends  AbstractModel {
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
         this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
         this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.DrainStatus = 'DrainStatus' in params ? params.DrainStatus : null;
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
 
 /**
- * CVM instance data disk mount configuration
+ * Mounting configuration of the CVM instance data disk
  * @class
  */
 class InstanceDataDiskMountSetting extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * CVM instance type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Data disk mounting information
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * Availability zone where the CVM instance is located
+         * @type {string || null}
+         */
+        this.Zone = null;
 
     }
 
@@ -2511,6 +2746,17 @@ class InstanceDataDiskMountSetting extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -2674,6 +2920,40 @@ class Cluster extends  AbstractModel {
          */
         this.Property = null;
 
+        /**
+         * Number of master nodes currently in the cluster
+         * @type {number || null}
+         */
+        this.ClusterMaterNodeNum = null;
+
+        /**
+         * ID of the image used by the cluster
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * OsCustomizeType
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
+        /**
+         * Runtime environment of the cluster. Values can be `docker` or `containerd`.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.ContainerRuntime = null;
+
+        /**
+         * Creation time
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
     }
 
     /**
@@ -2708,6 +2988,11 @@ class Cluster extends  AbstractModel {
         }
         this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
         this.Property = 'Property' in params ? params.Property : null;
+        this.ClusterMaterNodeNum = 'ClusterMaterNodeNum' in params ? params.ClusterMaterNodeNum : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+        this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -2889,18 +3174,42 @@ class ClusterNetworkSettings extends  AbstractModel {
 }
 
 /**
- * DeleteClusterRoute response structure.
+ * Described the configuration and information of k8s node data disk.
  * @class
  */
-class DeleteClusterRouteResponse extends  AbstractModel {
+class DataDisk extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DiskType = null;
+
+        /**
+         * File system (ext3/ext4/xfs)
+         * @type {string || null}
+         */
+        this.FileSystem = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Whether to automatically format and mount the disk
+         * @type {boolean || null}
+         */
+        this.AutoFormatAndMount = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MountTarget = null;
 
     }
 
@@ -2911,7 +3220,11 @@ class DeleteClusterRouteResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.AutoFormatAndMount = 'AutoFormatAndMount' in params ? params.AutoFormatAndMount : null;
+        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
 
     }
 }
@@ -3022,12 +3335,24 @@ class DeleteClusterRouteTableResponse extends  AbstractModel {
 }
 
 /**
- * Described the configuration and information of k8s node data disk.
+ * CreateClusterInstances response structure.
  * @class
  */
-class DataDisk extends  AbstractModel {
+class CreateClusterInstancesResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Instance ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3038,6 +3363,8 @@ class DataDisk extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3051,9 +3378,9 @@ module.exports = {
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     EnhancedService: EnhancedService,
-    TagSpecification: TagSpecification,
-    LoginSettings: LoginSettings,
     Label: Label,
+    LoginSettings: LoginSettings,
+    DeleteClusterRouteResponse: DeleteClusterRouteResponse,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
     DescribeClusterEndpointVipStatusResponse: DescribeClusterEndpointVipStatusResponse,
@@ -3061,7 +3388,6 @@ module.exports = {
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
-    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     ExistedInstancesForNode: ExistedInstancesForNode,
     CreateClusterResponse: CreateClusterResponse,
@@ -3079,6 +3405,7 @@ module.exports = {
     RouteTableConflict: RouteTableConflict,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     RouteTableInfo: RouteTableInfo,
+    TagSpecification: TagSpecification,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
@@ -3092,11 +3419,13 @@ module.exports = {
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     ExistedInstance: ExistedInstance,
+    InstanceExtraArgs: InstanceExtraArgs,
     ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
     RouteInfo: RouteInfo,
-    RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    ClusterExtraArgs: ClusterExtraArgs,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
+    RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     Filter: Filter,
@@ -3109,10 +3438,10 @@ module.exports = {
     DescribeClustersResponse: DescribeClustersResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ClusterNetworkSettings: ClusterNetworkSettings,
-    DeleteClusterRouteResponse: DeleteClusterRouteResponse,
+    DataDisk: DataDisk,
     DeleteClusterResponse: DeleteClusterResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
-    DataDisk: DataDisk,
+    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
 
 }

@@ -784,7 +784,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     }
 
     /**
-     * This API is used to query the list of model families that are available for the current user and in the current region.
+     * This API is used to query a list of model families available to the current user in the current region.
      * @param {DescribeInstanceFamilyConfigsRequest} req
      * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
      * @public

@@ -3740,7 +3740,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.OriginPullTimeout = null;
 
         /**
-         * 
+         * S3 bucket origin access authentication configuration
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {AwsPrivateAccess || null}
          */
         this.AwsPrivateAccess = null;
@@ -6827,7 +6828,7 @@ global: global acceleration
         this.OriginPullTimeout = null;
 
         /**
-         * 
+         * Origin access authentication for S3 bucket
          * @type {AwsPrivateAccess || null}
          */
         this.AwsPrivateAccess = null;
@@ -7006,12 +7007,32 @@ global: global acceleration
 }
 
 /**
- * s3 source station back to source authentication.
+ * Origin access authentication for S3 bucket.
  * @class
  */
 class AwsPrivateAccess extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Switch, which can be set to on or off.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Access ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * Key.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
 
     }
 
@@ -7022,6 +7043,9 @@ class AwsPrivateAccess extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
 
     }
 }

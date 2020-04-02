@@ -96,6 +96,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.DBVersion = null;
 
+        /**
+         * Auto-renewal flag. 0: normal renewal, 1: auto-renewal. Default value: 1.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -117,6 +123,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -1718,6 +1725,18 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.PayMode = null;
 
+        /**
+         * Unique string-type ID of instance VPC in the format of `vpc-xxx`. If an empty string ("") is passed in, filtering will be made by basic network.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Unique string-type ID of instance subnet in the format of `subnet-xxx`. If an empty string ("") is passed in, filtering will be made by basic network.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -1733,6 +1752,8 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -3051,6 +3072,18 @@ class DBInstance extends  AbstractModel {
          */
         this.Pid = null;
 
+        /**
+         * Unique string-type ID of instance VPC in the format of `vpc-xxx`, which is an empty string if the basic network is used
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Unique string-type ID of instance subnet in the format of `subnet-xxx`, which is an empty string if the basic network is used
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
     }
 
     /**
@@ -3090,6 +3123,8 @@ class DBInstance extends  AbstractModel {
         this.Version = 'Version' in params ? params.Version : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
 
     }
 }
@@ -4782,6 +4817,12 @@ class CreateDBInstancesResponse extends  AbstractModel {
         this.DealName = null;
 
         /**
+         * Order name array
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4797,6 +4838,7 @@ class CreateDBInstancesResponse extends  AbstractModel {
             return;
         }
         this.DealName = 'DealName' in params ? params.DealName : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

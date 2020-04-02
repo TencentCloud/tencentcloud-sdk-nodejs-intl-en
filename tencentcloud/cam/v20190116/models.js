@@ -114,6 +114,12 @@ class DeleteUserRequest extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * Whether to forcibly delete the sub-user. The default input parameter is `0`. `0`: do not delete the user if the user has undeleted API keys; `1`: first delete the API keys then delete the user if the user has undeleted API keys. To delete API keys, you need to have cam:DeleteApiKey permission, which enables you to delete both enabled and disabled API keys. If you do not have this permission, you will not be able to delete API keys and the user.
+         * @type {number || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -124,6 +130,7 @@ class DeleteUserRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -1232,10 +1239,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.RoleType = null;
 
         /**
-         * 
+         * Valid period
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SessionDuration = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DeletionTaskId = null;
 
     }
 
@@ -1255,6 +1269,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
         this.RoleType = 'RoleType' in params ? params.RoleType : null;
         this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
+        this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
 
     }
 }
@@ -1480,10 +1495,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Deactived = null;
 
         /**
-         * 
+         * List of deprecated products
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DeactivedDetail = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.IsServiceLinkedPolicy = null;
 
     }
 
@@ -1505,6 +1527,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+        this.IsServiceLinkedPolicy = 'IsServiceLinkedPolicy' in params ? params.IsServiceLinkedPolicy : null;
 
     }
 }
@@ -2284,7 +2307,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Deactived = null;
 
         /**
-         * 
+         * List of deprecated products
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DeactivedDetail = null;
@@ -3408,17 +3432,25 @@ Note: This field may return null, indicating that no valid value was found.
         this.CreateMode = null;
 
         /**
-         * Queries if the policy has been deactivated
+         * Whether the product has been deprecated (0: no; 1: yes)
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Deactived = null;
 
         /**
-         * 
+         * List of deprecated products
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DeactivedDetail = null;
+
+        /**
+         * Policy description
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -3436,6 +3468,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -3675,7 +3708,7 @@ class CreateRoleRequest extends  AbstractModel {
         this.ConsoleLogin = null;
 
         /**
-         * 
+         * The maximum validity period of the temporary key for creating a role (range: 0-43200)
          * @type {number || null}
          */
         this.SessionDuration = null;

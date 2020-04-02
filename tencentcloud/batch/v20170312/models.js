@@ -723,7 +723,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * The system disk type. For more information about the limits on system disk types, see [Instance Types](/document/product/213/2177). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><br>Default value: CLOUD_BASIC.
+         * System disk type. For more information on system disk types and their limits, refer to [Storage Overview](https://cloud.tencent.com/document/product/213/4952). Valid values: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -2999,19 +2999,19 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * The data disk size in GB. The minimum increment is 10 GB. Different types of data disks have different value ranges. For details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/213/11518). The default value is 0, indicating that no data disk is purchased. For more information, see the CVM documentation.
+         * Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [Storage Overview](https://cloud.tencent.com/document/product/213/4952). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * The data disk type. For more information about the limits on different data disk types, see [Instance Specifications](/document/product/213/2177). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+         * The type of the data disk. For more information regarding data disk types and limits, refer to [Storage Overview](https://cloud.tencent.com/document/product/213/4952). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for `ResizeInstanceDisk`.
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * Data disk ID. Data disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
+         * Data disk ID. Data disks of the type `LOCAL_BASIC` or `LOCAL_SSD` do not have IDs and do not support this parameter.
          * @type {string || null}
          */
         this.DiskId = null;
@@ -3035,12 +3035,12 @@ Note: This field may return null, indicating that no valid value is found.
         this.SnapshotId = null;
 
         /**
-         * Specifies whether the data disk is encrypted. Values: 
+         * Specifies whether the data disk is encrypted. Valid values: 
 <li>TRUE: encrypted
 <li>FALSE: not encrypted<br>
 Default value: FALSE<br>
-Currently, this parameter is only used in the `RunInstances` API.
-Note: this field may return null, indicating that no valid values can be obtained.
+This parameter is only used with `RunInstances`.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {boolean || null}
          */
         this.Encrypt = null;
@@ -4021,17 +4021,16 @@ class Dependence extends  AbstractModel {
 }
 
 /**
- * > Describes key-value pair filters used for conditional queries, such as filtering results by ID, name and state.
-> * If there are multiple `Filter` parameters, the relationship among them will be logical `AND`.
-> * If there are multiple `Values` for the same `Filter`, the relationship among the `Values` for the same `Filter` will be logical `OR`.
+ * > Key-value pair filters used for conditional queries, such as filtering results by ID, name, and state.
+> * If there are multiple `Filter` parameters, they are evaluated using the logical `AND` operator.
+> * If a `Filter` contains multiple `Values`, they are evaluated using the logical `OR` operator.
 >
-> Take the [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API as an example. You can use the following filters to query the instances whose availability zone (`zone`) is Guangzhou Zone 1 ***and*** billing method (`instance-charge-type`) is prepaid ***or*** pay-as-you-go:
+> Take [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) as an example. You can use the following filters to query the instances in availability zone (`zone`) Guangzhou Zone 1 ***and*** whose billing plan (`instance-charge-type`) is pay-as-you-go:
 ```
 Filters.0.Name=zone
 &Filters.0.Values.0=ap-guangzhou-1
 &Filters.1.Name=instance-charge-type
-&Filters.1.Values.0=PREPAID
-&Filters.1.Values.1=POSTPAID_BY_HOUR
+&Filters.1.Values.0=POSTPAID_BY_HOUR
 ```
  * @class
  */
@@ -4187,7 +4186,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * ID of the [Availability Zone](/document/product/213/9452#zone) where the instance resides. To obtain the availability zone IDs, you can call [DescribeZones](/document/api/213/9455) and look for the `Zone` fields in the response.
+         * The ID of [availability zone](https://cloud.tencent.com/document/product/213/15753#ZoneInfo) where the instance locates. It can obtained in the `Zone` field returned by [DescribeZones](https://cloud.tencent.com/document/213/15707) API.
          * @type {string || null}
          */
         this.Zone = null;
@@ -4210,6 +4209,12 @@ class Placement extends  AbstractModel {
          */
         this.HostIps = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HostId = null;
+
     }
 
     /**
@@ -4223,6 +4228,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.HostIds = 'HostIds' in params ? params.HostIds : null;
         this.HostIps = 'HostIps' in params ? params.HostIps : null;
+        this.HostId = 'HostId' in params ? params.HostId : null;
 
     }
 }
@@ -4327,32 +4333,74 @@ class ItemPrice extends  AbstractModel {
         super();
 
         /**
-         * Subsequent unit price (in RMB).
-Note: This field may return null, indicating that no valid value is found.
+         * The original unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
-         * Subsequent billing unit. Valid values: <br><li>HOUR: bill by hour. Scenarios using this billing unit include: pay as you go for instances on an hourly basis (`POSTPAID_BY_HOUR`), and pay as you go for bandwidth on an hourly basis (`BANDWIDTH_POSTPAID_BY_HOUR`). <br><li>GB: bill by traffic in GB. Scenarios using this billing unit include: pay as you go for traffic on an hourly basis (`TRAFFIC_POSTPAID_BY_HOUR`).
-Note: This field may return null, indicating that no valid value is found.
+         * Billing unit for pay-as-you-go mode. Valid values: <br><li>HOUR: billed on an hourly basis. It's used for hourly postpaid instances (`POSTPAID_BY_HOUR`). <br><li>GB: bill by traffic in GB. It's used for postpaid products that are billed by the hourly traffic (`TRAFFIC_POSTPAID_BY_HOUR`).
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.ChargeUnit = null;
 
         /**
-         * Original price of a prepaid instance (in RMB).
-Note: This field may return null, indicating that no valid value is found.
+         * The original price of a pay-in-advance instance, in USD.
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Discount price of a prepaid instance (in RMB).
-Note: This field may return null, indicating that no valid value is found.
+         * Discount price of a prepaid instance, in USD.
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {number || null}
          */
         this.DiscountPrice = null;
+
+        /**
+         * Percentage of the original price. For example, if you enter "20", the discounted price will be 20% of the original price.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Original unit price for the usage between 96 to 360 hours in USD. It's applicable to pay-as-you-go mode.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceSecondStep = null;
+
+        /**
+         * Discounted unit price for the usage between 96 to 360 hours in USD. It's applicable to pay-as-you-go mode.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscountSecondStep = null;
+
+        /**
+         * Original unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceThirdStep = null;
+
+        /**
+         * Discounted unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscountThirdStep = null;
 
     }
 
@@ -4367,6 +4415,12 @@ Note: This field may return null, indicating that no valid value is found.
         this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.UnitPriceSecondStep = 'UnitPriceSecondStep' in params ? params.UnitPriceSecondStep : null;
+        this.UnitPriceDiscountSecondStep = 'UnitPriceDiscountSecondStep' in params ? params.UnitPriceDiscountSecondStep : null;
+        this.UnitPriceThirdStep = 'UnitPriceThirdStep' in params ? params.UnitPriceThirdStep : null;
+        this.UnitPriceDiscountThirdStep = 'UnitPriceDiscountThirdStep' in params ? params.UnitPriceDiscountThirdStep : null;
 
     }
 }
@@ -4392,7 +4446,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * Instance billing method. Valid values: <br><li>`PREPAID`: prepaid, i.e., monthly subscription <br><li>`POSTPAID_BY_HOUR`: pay-as-you-go <br><li>`CDHPAID`: you are only billed for the [CDH](https://cloud.tencent.com/document/product/416) instances, not the CVMs running on the CDHs. <br><li>`SPOTPAID`: you are billed based on your bid.
+         * Instance billing plan. Valid values: <br><li>POSTPAID_BY_HOUR: pay after use. You are billed for your traffic by the hour.<br><li>`CDHPAID`: [`CDH`](https://cloud.tencent.com/document/product/416) billing plan. Applicable to `CDH` only, not the instances on the host.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -4453,8 +4507,8 @@ Note: This field may return null, indicating that no valid value is found.
         this.Price = null;
 
         /**
-         * Details of sold out items
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Details of out-of-stock items
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.SoldOutReason = null;
@@ -5921,7 +5975,7 @@ class InternetAccessible extends  AbstractModel {
         super();
 
         /**
-         * Network billing method. Valid values: <br><li>BANDWIDTH_PREPAID: prepaid; billed by bandwidth <br><li>TRAFFIC_POSTPAID_BY_HOUR: pay-as-you-go; billed by traffic on an hourly basis <br><li>BANDWIDTH_POSTPAID_BY_HOUR: pay-as-you-go; billed by bandwidth on an hourly basis <br><li>BANDWIDTH_PACKAGE: for bandwidth package users <br>Default value: same as the instance billing method for non-bandwidth package users.
+         * Network connection billing plan. Valid value: <br><li>TRAFFIC_POSTPAID_BY_HOUR: pay after use. You are billed for your traffic, by the hour.
          * @type {string || null}
          */
         this.InternetChargeType = null;

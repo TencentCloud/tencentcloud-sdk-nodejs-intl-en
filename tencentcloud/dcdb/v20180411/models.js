@@ -391,6 +391,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ShardSlaveZones = null;
 
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -423,6 +429,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Paymode = 'Paymode' in params ? params.Paymode : null;
         this.ShardMasterZone = 'ShardMasterZone' in params ? params.ShardMasterZone : null;
         this.ShardSlaveZones = 'ShardSlaveZones' in params ? params.ShardSlaveZones : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -1143,6 +1150,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Constraint = null;
 
+        /**
+         * Whether a value has been set. false: no, true: yes
+         * @type {boolean || null}
+         */
+        this.HaveSetValue = null;
+
     }
 
     /**
@@ -1162,6 +1175,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Constraint)
             this.Constraint = obj;
         }
+        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
 
     }
 }
@@ -1210,7 +1224,7 @@ class CreateAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * Instance Id, which is passed through from the input parameters.
+         * Instance ID, which is passed through from the input parameters.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1344,7 +1358,7 @@ class InitDCDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of IDs of instances to be initialized. The ID is in the format of dcdbt-ow728lmc and can be obtained through the `DescribeDCDBInstances` API.
+         * List of IDs of instances to be initialized. The ID is in the format of `dcdbt-ow728lmc` and can be obtained through the `DescribeDCDBInstances` API.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1869,7 +1883,7 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Type name. For example, if `Type` = table, it indicates a specific table name; if both `DbName` and `Type` are specific names, `Object` indicates a specific object name and cannot be `\*` or empty
+         * Type name. For example, if `Type` is table, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
          * @type {string || null}
          */
         this.Object = null;
@@ -1962,6 +1976,12 @@ class ShardInfo extends  AbstractModel {
          */
         this.Pid = null;
 
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -1980,6 +2000,7 @@ class ShardInfo extends  AbstractModel {
         this.ShardId = 'ShardId' in params ? params.ShardId : null;
         this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -2547,7 +2568,7 @@ Field permission. Valid values: INSERT; REFERENCES; SELECT; UPDATE
         this.Type = null;
 
         /**
-         * Type name. For example, if `Type` = table, it indicates a specific table name; if both `DbName` and `Type` are specific names, `Object` indicates a specific object name and cannot be `\*` or empty
+         * Type name. For example, if `Type` is table, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
          * @type {string || null}
          */
         this.Object = null;
@@ -2594,7 +2615,7 @@ class DescribeDCDBShardsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * List of shard IDs.
+         * Shard ID list.
          * @type {Array.<string> || null}
          */
         this.ShardInstanceIds = null;
@@ -2971,7 +2992,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * APPID
+         * AppID
          * @type {number || null}
          */
         this.AppId = null;
@@ -3097,7 +3118,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.IsTmp = null;
 
         /**
-         * Exclusive cluster ID. If this parameter is left empty, the instance is a non-dedicated cluster instance
+         * Dedicated cluster ID. If this parameter is empty, the instance is a non-dedicated cluster instance
          * @type {string || null}
          */
         this.ExclusterId = null;
@@ -3115,7 +3136,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.UniqueSubnetId = null;
 
         /**
-         * Numeric ID of an instance (this field is obsolete and should not be depended on)
+         * Numeric ID of instance (this field is obsolete and should not be depended on)
          * @type {number || null}
          */
         this.Id = null;
@@ -3187,6 +3208,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.IsAuditSupported = null;
 
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -3242,6 +3269,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Locker = 'Locker' in params ? params.Locker : null;
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
         this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }

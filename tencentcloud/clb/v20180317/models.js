@@ -5775,6 +5775,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Targets = null;
 
+        /**
+         * Ending port in port range if port range is supported; 0 if port range is not supported
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EndPort = null;
+
     }
 
     /**
@@ -5805,6 +5812,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Targets.push(obj);
             }
         }
+        this.EndPort = 'EndPort' in params ? params.EndPort : null;
 
     }
 }
@@ -7223,16 +7231,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SnatIps = null;
 
         /**
-         * 
+         * Performance guarantee specification
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SlaType = null;
 
         /**
-         * 
+         * Whether VIP is blocked
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsBlock = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IsBlockTime = null;
 
     }
 
@@ -7340,6 +7356,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.SlaType = 'SlaType' in params ? params.SlaType : null;
         this.IsBlock = 'IsBlock' in params ? params.IsBlock : null;
+        this.IsBlockTime = 'IsBlockTime' in params ? params.IsBlockTime : null;
 
     }
 }

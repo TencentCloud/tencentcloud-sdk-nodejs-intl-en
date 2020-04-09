@@ -662,6 +662,13 @@ class TagResource extends  AbstractModel {
          */
         this.TagValueMd5 = null;
 
+        /**
+         * Resource type
+Note: this field may return null, indicating that no valid values found.
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
     }
 
     /**
@@ -676,6 +683,7 @@ class TagResource extends  AbstractModel {
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.TagKeyMd5 = 'TagKeyMd5' in params ? params.TagKeyMd5 : null;
         this.TagValueMd5 = 'TagValueMd5' in params ? params.TagValueMd5 : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
 
     }
 }

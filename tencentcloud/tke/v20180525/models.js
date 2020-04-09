@@ -296,6 +296,75 @@ class EnhancedService extends  AbstractModel {
 }
 
 /**
+ * Region information
+ * @class
+ */
+class RegionInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Region ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region status
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Status of region-related features (return all attributes in JSON format)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FeatureGates = null;
+
+        /**
+         * Region abbreviation
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Whitelisted location
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FeatureGates = 'FeatureGates' in params ? params.FeatureGates : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * k8s tags, generally exist as an array
  * @class
  */
@@ -1182,6 +1251,58 @@ class DeleteClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterAttribute response structure.
+ * @class
+ */
+class ModifyClusterAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project of the Cluster
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Cluster name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster description
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterDesc = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusterInstances request structure.
  * @class
  */
@@ -1280,6 +1401,49 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * List of tag descriptions. By specifying this parameter, you can bind tags to corresponding resource instances at the same time. Currently, only tags are bound to cloud host instances.
+ * @class
+ */
+class TagSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1484,24 +1648,12 @@ class RouteTableInfo extends  AbstractModel {
 }
 
 /**
- * List of tag descriptions. By specifying this parameter, you can bind tags to corresponding resource instances at the same time. Currently, only tags are bound to cloud host instances.
+ * DescribeImages request structure.
  * @class
  */
-class TagSpecification extends  AbstractModel {
+class DescribeImagesRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.ResourceType = null;
-
-        /**
-         * 
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
 
     }
 
@@ -1511,16 +1663,6 @@ class TagSpecification extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
         }
 
     }
@@ -2289,6 +2431,111 @@ Note: this field may return null, indicating that no valid value is obtained.
 }
 
 /**
+ * Image details
+ * @class
+ */
+class ImageInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image alias
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Operating system name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * Image ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Container image tag, **DOCKER_CUSTOMIZE** (container customized tag), **GENERAL** (general tag, default value)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+
+    }
+}
+
+/**
+ * DescribeRegions response structure.
+ * @class
+ */
+class DescribeRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of regions
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * ## Region List
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RegionInstance> || null}
+         */
+        this.RegionInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RegionInstanceSet) {
+            this.RegionInstanceSet = new Array();
+            for (let z in params.RegionInstanceSet) {
+                let obj = new RegionInstance();
+                obj.deserialize(params.RegionInstanceSet[z]);
+                this.RegionInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyClusterEndpointSP request structure.
  * @class
  */
@@ -2600,7 +2847,17 @@ class ClusterAdvancedSettings extends  AbstractModel {
 }
 
 /**
- * Filter
+ * > Key-value pair filters used for conditional queries, such as filtering results by ID, name, and state.
+> * If there are multiple `Filter` parameters, they are evaluated using the logical `AND` operator.
+> * If a `Filter` contains multiple `Values`, they are evaluated using the logical `OR` operator.
+>
+> Take [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) as an example. You can use the following filters to query the instances in availability zone (`zone`) Guangzhou Zone 1 ***and*** whose billing plan (`instance-charge-type`) is pay-as-you-go:
+```
+Filters.0.Name=zone
+&Filters.0.Values.0=ap-guangzhou-1
+&Filters.1.Name=instance-charge-type
+&Filters.1.Values.0=POSTPAID_BY_HOUR
+```
  * @class
  */
 class Filter extends  AbstractModel {
@@ -2608,13 +2865,13 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * Attribute name. If more than one Filter exists, the logical relationship between these Filters is AND.
+         * Filters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Attribute value. If there are multiple Values for one Filter, the logical relationship between the Values under the same Filter is OR.
+         * Filter values.
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -2630,6 +2887,34 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * Describes information related to the Cloud Security service.
+ * @class
+ */
+class RunSecurityServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -2766,6 +3051,27 @@ class InstanceDataDiskMountSetting extends  AbstractModel {
  * @class
  */
 class DeleteClusterEndpointVipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeRegions request structure.
+ * @class
+ */
+class DescribeRegionsRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3076,18 +3382,36 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
- * Describes information related to the Cloud Security service.
+ * ModifyClusterAttribute request structure.
  * @class
  */
-class RunSecurityServiceEnabled extends  AbstractModel {
+class ModifyClusterAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
-         * @type {boolean || null}
+         * Cluster ID
+         * @type {string || null}
          */
-        this.Enabled = null;
+        this.ClusterId = null;
+
+        /**
+         * Project of the Cluster
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster description
+         * @type {string || null}
+         */
+        this.ClusterDesc = null;
 
     }
 
@@ -3098,7 +3422,10 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
 
     }
 }
@@ -3169,6 +3496,58 @@ class ClusterNetworkSettings extends  AbstractModel {
         this.Ipvs = 'Ipvs' in params ? params.Ipvs : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Cni = 'Cni' in params ? params.Cni : null;
+
+    }
+}
+
+/**
+ * DescribeImages response structure.
+ * @class
+ */
+class DescribeImagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of images
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Image information list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ImageInstance> || null}
+         */
+        this.ImageInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ImageInstanceSet) {
+            this.ImageInstanceSet = new Array();
+            for (let z in params.ImageInstanceSet) {
+                let obj = new ImageInstance();
+                obj.deserialize(params.ImageInstanceSet[z]);
+                this.ImageInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3378,6 +3757,7 @@ module.exports = {
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     EnhancedService: EnhancedService,
+    RegionInstance: RegionInstance,
     Label: Label,
     LoginSettings: LoginSettings,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
@@ -3397,15 +3777,17 @@ module.exports = {
     ClusterBasicSettings: ClusterBasicSettings,
     CreateClusterRequest: CreateClusterRequest,
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
+    ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
+    TagSpecification: TagSpecification,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
     RouteTableConflict: RouteTableConflict,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     RouteTableInfo: RouteTableInfo,
-    TagSpecification: TagSpecification,
+    DescribeImagesRequest: DescribeImagesRequest,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
@@ -3420,6 +3802,8 @@ module.exports = {
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     ExistedInstance: ExistedInstance,
     InstanceExtraArgs: InstanceExtraArgs,
+    ImageInstance: ImageInstance,
+    DescribeRegionsResponse: DescribeRegionsResponse,
     ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
     RouteInfo: RouteInfo,
@@ -3429,15 +3813,18 @@ module.exports = {
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     Filter: Filter,
+    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     Instance: Instance,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
+    DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersRequest: DescribeClustersRequest,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
     DescribeClustersResponse: DescribeClustersResponse,
-    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    ModifyClusterAttributeRequest: ModifyClusterAttributeRequest,
     ClusterNetworkSettings: ClusterNetworkSettings,
+    DescribeImagesResponse: DescribeImagesResponse,
     DataDisk: DataDisk,
     DeleteClusterResponse: DeleteClusterResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,

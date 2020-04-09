@@ -688,10 +688,22 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.SessionExpireTime = null;
 
         /**
-         * Forwarding protocol between CLB instance and real server. Value range: HTTP, HTTPS. Default value: HTTP
+         * Forwarding protocol between CLB instance and real server. Default value: HTTP. Valid values: HTTP, HTTPS, TRPC.
          * @type {string || null}
          */
         this.ForwardType = null;
+
+        /**
+         * TRPC callee server route, which is required when `ForwardType` is `TRPC`.
+         * @type {string || null}
+         */
+        this.TrpcCallee = null;
+
+        /**
+         * TRPC calling service API, which is required when `ForwardType` is `TRPC`.
+         * @type {string || null}
+         */
+        this.TrpcFunc = null;
 
     }
 
@@ -715,6 +727,8 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
         this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
+        this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
+        this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
 
     }
 }
@@ -4770,6 +4784,13 @@ Basic network does not support queries by VpcId.
          */
         this.MasterZone = null;
 
+        /**
+         * Each request can have up to 10 `Filters` and 100 `Filter.Values`. Detailed filter conditions:
+<li> internet-charge-type - Type: String - Required: No - Filter by CLB network billing mode, including `TRAFFIC_POSTPAID_BY_HOUR`</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -4797,6 +4818,15 @@ Basic network does not support queries by VpcId.
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
         this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -7245,7 +7275,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IsBlock = null;
 
         /**
-         * 
+         * Time blocked or unblocked
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IsBlockTime = null;

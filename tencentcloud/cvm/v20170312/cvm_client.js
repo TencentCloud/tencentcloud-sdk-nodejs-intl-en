@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ChargePrepaid = models.ChargePrepaid;
 const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
 const DescribeImageQuotaResponse = models.DescribeImageQuotaResponse;
@@ -75,7 +76,7 @@ const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroup
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
-const InstanceFamilyConfig = models.InstanceFamilyConfig;
+const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
@@ -87,6 +88,7 @@ const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecover
 const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
+const DescribeReservedInstancesResponse = models.DescribeReservedInstancesResponse;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
 const DataDisk = models.DataDisk;
@@ -105,6 +107,7 @@ const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ActionTimer = models.ActionTimer;
 const TagSpecification = models.TagSpecification;
 const ResetInstancesInternetMaxBandwidthRequest = models.ResetInstancesInternetMaxBandwidthRequest;
+const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const ImportImageRequest = models.ImportImageRequest;
 const SpotMarketOptions = models.SpotMarketOptions;
@@ -121,7 +124,7 @@ const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
 const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeRequest;
-const ChargePrepaid = models.ChargePrepaid;
+const DescribeReservedInstancesRequest = models.DescribeReservedInstancesRequest;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
 const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
@@ -134,6 +137,7 @@ const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
 const InquiryPriceResizeInstanceDisksResponse = models.InquiryPriceResizeInstanceDisksResponse;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const SharePermission = models.SharePermission;
+const ReservedInstances = models.ReservedInstances;
 const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
@@ -150,7 +154,6 @@ const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
-const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
@@ -582,6 +585,17 @@ If you currently use a password to log in, you will no longer be able to do so a
     ResizeInstanceDisks(req, cb) {
         let resp = new ResizeInstanceDisksResponse();
         this.request("ResizeInstanceDisks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to list reserved instances the user has purchased.
+     * @param {DescribeReservedInstancesRequest} req
+     * @param {function(string, DescribeReservedInstancesResponse):void} cb
+     * @public
+     */
+    DescribeReservedInstances(req, cb) {
+        let resp = new DescribeReservedInstancesResponse();
+        this.request("DescribeReservedInstances", req, resp, cb);
     }
 
     /**

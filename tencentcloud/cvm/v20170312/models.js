@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Parameters related to the prepaid billing method, including the subscription period, the auto renewal logic, etc.
+ * @class
+ */
+class ChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_AUTO_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * Describes local disk specifications.
  * @class
  */
@@ -2713,25 +2748,32 @@ class DescribeImageQuotaRequest extends  AbstractModel {
 }
 
 /**
- * Describes the model family of the instance.
-Examples: {'InstanceFamilyName': 'Standard S1', 'InstanceFamily': 'S1'}, {'InstanceFamilyName': 'Network-optimized N1', 'InstanceFamily': 'N1'}, {'InstanceFamilyName': 'High IO I1', 'InstanceFamily': 'I1'}, etc.
+ * ImportKeyPair request structure.
  * @class
  */
-class InstanceFamilyConfig extends  AbstractModel {
+class ImportKeyPairRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Full name of the model family.
+         * Key pair name, which can contain numbers, letters, and underscores, with a maximum length of 25 characters.
          * @type {string || null}
          */
-        this.InstanceFamilyName = null;
+        this.KeyName = null;
 
         /**
-         * Acronym of the model family.
+         * The ID of the [project](https://cloud.tencent.com/document/product/378/10861) to which the created key pair belongs.<br><br>You can retrieve the project ID in two ways:<br><li>Query the project ID in [Project Management](https://console.cloud.tencent.com/project).<br><li>Call [DescribeProject](https://cloud.tencent.com/document/api/378/4400) and search for `projectId` in the response.
+
+If you want to use the default project, specify 0 for the parameter.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Content of the public key in the key pair in the `OpenSSH RSA` format.
          * @type {string || null}
          */
-        this.InstanceFamily = null;
+        this.PublicKey = null;
 
     }
 
@@ -2742,8 +2784,9 @@ class InstanceFamilyConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceFamilyName = 'InstanceFamilyName' in params ? params.InstanceFamilyName : null;
-        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.KeyName = 'KeyName' in params ? params.KeyName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
 
     }
 }
@@ -3342,6 +3385,56 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+    }
+}
+
+/**
+ * DescribeReservedInstances response structure.
+ * @class
+ */
+class DescribeReservedInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of eligible reserved instances.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of eligible reserved instances.
+         * @type {Array.<ReservedInstances> || null}
+         */
+        this.ReservedInstancesSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReservedInstancesSet) {
+            this.ReservedInstancesSet = new Array();
+            for (let z in params.ReservedInstancesSet) {
+                let obj = new ReservedInstances();
+                obj.deserialize(params.ReservedInstancesSet[z]);
+                this.ReservedInstancesSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4512,6 +4605,42 @@ class ResetInstancesInternetMaxBandwidthRequest extends  AbstractModel {
 }
 
 /**
+ * Describes the model family of the instance.
+Examples: {'InstanceFamilyName': 'Standard S1', 'InstanceFamily': 'S1'}, {'InstanceFamilyName': 'Network-optimized N1', 'InstanceFamily': 'N1'}, {'InstanceFamilyName': 'High IO I1', 'InstanceFamily': 'I1'}, etc.
+ * @class
+ */
+class InstanceFamilyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full name of the model family.
+         * @type {string || null}
+         */
+        this.InstanceFamilyName = null;
+
+        /**
+         * Acronym of the model family.
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceFamilyName = 'InstanceFamilyName' in params ? params.InstanceFamilyName : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+
+    }
+}
+
+/**
  * AssociateSecurityGroups response structure.
  * @class
  */
@@ -5140,24 +5269,50 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
 }
 
 /**
- * Parameters related to the prepaid billing method, including the subscription period, the auto renewal logic, etc.
+ * DescribeReservedInstances request structure.
  * @class
  */
-class ChargePrepaid extends  AbstractModel {
+class DescribeReservedInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
-         * @type {number || null}
+         * Dry run. The default is false.
+         * @type {boolean || null}
          */
-        this.Period = null;
+        this.DryRun = null;
 
         /**
-         * Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_AUTO_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
-         * @type {string || null}
+         * Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+         * @type {number || null}
          */
-        this.RenewFlag = null;
+        this.Offset = null;
+
+        /**
+         * Number of returned results. The default value is 20. The maximum is 100. For more information on `Limit`, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">Filters by the **<strong>availability zones</strong>** in which reserved instances can be purchased. For example, "ap-guangzhou-1".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/6091">list of availability zones</a></p>
+<li><strong>duration</strong></li>
+<p style="padding-left: 30px;">Filters by reserved instance **<strong>validity</strong>** (in seconds). For example, 31536000.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years)</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">Filters by **<strong>specifications of reserved instances</strong>**. For example, "S3.MEDIUM4".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/11518">list of reserved instance specifiations</a></p>
+<li><strong>offering-type</strong></li>
+<p style="padding-left: 30px;">Filters by **<strong>payment method</strong>**. For example, "All Upfront".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: All Upfront</p>
+<li><strong>product-description</strong></li>
+<p style="padding-left: 30px;">Filters by the **<strong>operating system</strong>** of the reserved instance. For example, "linux".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
+<li><strong>reserved-instances-id</strong></li>
+<p style="padding-left: 30px;">Filters by **<strong>reserved instance ID</strong>. Reserved instance IDs take the form "650c138f-ae7e-4750-952a-96841d6e9fc1".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+<li><strong>state</strong></li>
+<p style="padding-left: 30px;">Filters by **<strong>reserved instance status</strong>. For example, "active".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required</p><p style="padding-left: 30px;">Valid values: "active" (created) | "pending" (waiting to be created) | "retired" (expired)</p>
+Each request can have up to 10 `Filters` and 5 `Filters.Values`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -5168,8 +5323,18 @@ class ChargePrepaid extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5919,6 +6084,111 @@ class SharePermission extends  AbstractModel {
 }
 
 /**
+ * Describes the information of the reserved instances the user has purchased
+ * @class
+ */
+class ReservedInstances extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the purchased reserved instance, taking the form 650c138f-ae7e-4750-952a-96841d6e9fc1.
+         * @type {string || null}
+         */
+        this.ReservedInstancesId = null;
+
+        /**
+         * The type of the reserved instance. For example, S3.MEDIUM4.
+Returned value: <a href="https://cloud.tencent.com/document/product/213/11518">list of reserved instance types</a>
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Availability zones in which the reserved instance can be purchased. For example, "ap-guangzhou-1".
+Returned values: <a href="https://cloud.tencent.com/document/product/213/6091">list of availability zones</a>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Start time of the reserved instance billing, taking the form of 2019-10-23 00:00:00.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the reserved instance, taking the form of 2019-10-23 00:00:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The **validity** of the reserved instance in seconds, which is the purchased usage period. For example, 31536000.
+Measurement unit: second.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * The number of reserved instances that have been purchased. For example, 10.
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * The operating system of the reserved instance. For example, "linux".
+Returned value: linux.
+         * @type {string || null}
+         */
+        this.ProductDescription = null;
+
+        /**
+         * The status of the reserved instance. For example, "active".
+Returned value: "active" (created) | "pending" (waiting to be created) | "retired" (expired).
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * The currency in which the reserved instance is billed. The ISO 4217 standard currency codes are used. For example, USD.
+Returned value: USD.
+         * @type {string || null}
+         */
+        this.CurrencyCode = null;
+
+        /**
+         * The payment method of the reserved instance. For example, "All Upfront".
+Returned value: All Upfront.
+         * @type {string || null}
+         */
+        this.OfferingType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReservedInstancesId = 'ReservedInstancesId' in params ? params.ReservedInstancesId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CurrencyCode = 'CurrencyCode' in params ? params.CurrencyCode : null;
+        this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
+
+    }
+}
+
+/**
  * DeleteImages response structure.
  * @class
  */
@@ -6550,50 +6820,6 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ImportKeyPair request structure.
- * @class
- */
-class ImportKeyPairRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Key pair name, which can contain numbers, letters, and underscores, with a maximum length of 25 characters.
-         * @type {string || null}
-         */
-        this.KeyName = null;
-
-        /**
-         * The ID of the [project](https://cloud.tencent.com/document/product/378/10861) to which the created key pair belongs.<br><br>You can retrieve the project ID in two ways:<br><li>Query the project ID in [Project Management](https://console.cloud.tencent.com/project).<br><li>Call [DescribeProject](https://cloud.tencent.com/document/api/378/4400) and search for `projectId` in the response.
-
-If you want to use the default project, specify 0 for the parameter.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Content of the public key in the key pair in the `OpenSSH RSA` format.
-         * @type {string || null}
-         */
-        this.PublicKey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.KeyName = 'KeyName' in params ? params.KeyName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
-
-    }
-}
-
-/**
  * Describes key pair information.
  * @class
  */
@@ -7199,6 +7425,7 @@ class Price extends  AbstractModel {
 }
 
 module.exports = {
+    ChargePrepaid: ChargePrepaid,
     LocalDiskType: LocalDiskType,
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
     DescribeImageQuotaResponse: DescribeImageQuotaResponse,
@@ -7258,7 +7485,7 @@ module.exports = {
     SyncImagesRequest: SyncImagesRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DescribeImageQuotaRequest: DescribeImageQuotaRequest,
-    InstanceFamilyConfig: InstanceFamilyConfig,
+    ImportKeyPairRequest: ImportKeyPairRequest,
     CreateImageResponse: CreateImageResponse,
     StopInstancesResponse: StopInstancesResponse,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
@@ -7270,6 +7497,7 @@ module.exports = {
     DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
+    DescribeReservedInstancesResponse: DescribeReservedInstancesResponse,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
     ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
     DataDisk: DataDisk,
@@ -7288,6 +7516,7 @@ module.exports = {
     ActionTimer: ActionTimer,
     TagSpecification: TagSpecification,
     ResetInstancesInternetMaxBandwidthRequest: ResetInstancesInternetMaxBandwidthRequest,
+    InstanceFamilyConfig: InstanceFamilyConfig,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     ImportImageRequest: ImportImageRequest,
     SpotMarketOptions: SpotMarketOptions,
@@ -7304,7 +7533,7 @@ module.exports = {
     DescribeDisasterRecoverGroupQuotaRequest: DescribeDisasterRecoverGroupQuotaRequest,
     StartInstancesResponse: StartInstancesResponse,
     ModifyInstancesVpcAttributeRequest: ModifyInstancesVpcAttributeRequest,
-    ChargePrepaid: ChargePrepaid,
+    DescribeReservedInstancesRequest: DescribeReservedInstancesRequest,
     DescribeInternetChargeTypeConfigsResponse: DescribeInternetChargeTypeConfigsResponse,
     DescribeZoneInstanceConfigInfosRequest: DescribeZoneInstanceConfigInfosRequest,
     DescribeZonesResponse: DescribeZonesResponse,
@@ -7317,6 +7546,7 @@ module.exports = {
     InquiryPriceResizeInstanceDisksResponse: InquiryPriceResizeInstanceDisksResponse,
     TerminateInstancesRequest: TerminateInstancesRequest,
     SharePermission: SharePermission,
+    ReservedInstances: ReservedInstances,
     DeleteImagesResponse: DeleteImagesResponse,
     ImportImageResponse: ImportImageResponse,
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
@@ -7333,7 +7563,6 @@ module.exports = {
     ResizeInstanceDisksResponse: ResizeInstanceDisksResponse,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
-    ImportKeyPairRequest: ImportKeyPairRequest,
     KeyPair: KeyPair,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,

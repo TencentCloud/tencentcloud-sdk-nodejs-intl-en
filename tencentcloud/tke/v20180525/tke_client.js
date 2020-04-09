@@ -24,6 +24,7 @@ const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DescribeClusterEndpointVipStatusRequest = models.DescribeClusterEndpointVipStatusRequest;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const EnhancedService = models.EnhancedService;
+const RegionInstance = models.RegionInstance;
 const Label = models.Label;
 const LoginSettings = models.LoginSettings;
 const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
@@ -43,15 +44,17 @@ const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
 const ClusterBasicSettings = models.ClusterBasicSettings;
 const CreateClusterRequest = models.CreateClusterRequest;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
+const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
+const TagSpecification = models.TagSpecification;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const RouteTableConflict = models.RouteTableConflict;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const RouteTableInfo = models.RouteTableInfo;
-const TagSpecification = models.TagSpecification;
+const DescribeImagesRequest = models.DescribeImagesRequest;
 const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
@@ -66,6 +69,8 @@ const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const ExistedInstance = models.ExistedInstance;
 const InstanceExtraArgs = models.InstanceExtraArgs;
+const ImageInstance = models.ImageInstance;
+const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
 const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
 const RouteInfo = models.RouteInfo;
@@ -75,15 +80,18 @@ const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const Filter = models.Filter;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const Instance = models.Instance;
 const InstanceDataDiskMountSetting = models.InstanceDataDiskMountSetting;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
+const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
 const DescribeClustersResponse = models.DescribeClustersResponse;
-const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const ModifyClusterAttributeRequest = models.ModifyClusterAttributeRequest;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
+const DescribeImagesResponse = models.DescribeImagesResponse;
 const DataDisk = models.DataDisk;
 const DeleteClusterResponse = models.DeleteClusterResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
@@ -113,6 +121,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get image information.
+     * @param {DescribeImagesRequest} req
+     * @param {function(string, DescribeImagesResponse):void} cb
+     * @public
+     */
+    DescribeImages(req, cb) {
+        let resp = new DescribeImagesResponse();
+        this.request("DescribeImages", req, resp, cb);
+    }
+
+    /**
      * Delete the cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
      * @param {DeleteClusterEndpointRequest} req
      * @param {function(string, DeleteClusterEndpointResponse):void} cb
@@ -132,6 +151,17 @@ class TkeClient extends AbstractClient {
     DeleteCluster(req, cb) {
         let resp = new DeleteClusterResponse();
         this.request("DeleteCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify cluster attributes.
+     * @param {ModifyClusterAttributeRequest} req
+     * @param {function(string, ModifyClusterAttributeResponse):void} cb
+     * @public
+     */
+    ModifyClusterAttribute(req, cb) {
+        let resp = new ModifyClusterAttributeResponse();
+        this.request("ModifyClusterAttribute", req, resp, cb);
     }
 
     /**
@@ -253,6 +283,17 @@ class TkeClient extends AbstractClient {
     CreateClusterEndpoint(req, cb) {
         let resp = new CreateClusterEndpointResponse();
         this.request("CreateClusterEndpoint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain all regions supported by TKE.
+     * @param {DescribeRegionsRequest} req
+     * @param {function(string, DescribeRegionsResponse):void} cb
+     * @public
+     */
+    DescribeRegions(req, cb) {
+        let resp = new DescribeRegionsResponse();
+        this.request("DescribeRegions", req, resp, cb);
     }
 
     /**

@@ -35,6 +35,7 @@ module.exports = {
     tke: require("./tke"),
     trtc: require("./trtc"),
     vod: require("./vod"),
-    vpc: require("./vpc")
+    vpc: require("./vpc"),
+    yunjing: require("./yunjing")
 };
 

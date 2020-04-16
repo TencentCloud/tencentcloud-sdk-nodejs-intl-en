@@ -79,7 +79,6 @@ const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
-const UpdatePolicyResponse = models.UpdatePolicyResponse;
 const CreateGroupRequest = models.CreateGroupRequest;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
@@ -111,7 +110,6 @@ const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const ListUsersRequest = models.ListUsersRequest;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
-const UpdatePolicyRequest = models.UpdatePolicyRequest;
 const GroupMemberInfo = models.GroupMemberInfo;
 const CreateGroupResponse = models.CreateGroupResponse;
 
@@ -413,14 +411,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API (UpdatePolicy) is used to update a policy.
-     * @param {UpdatePolicyRequest} req
-     * @param {function(string, UpdatePolicyResponse):void} cb
+     * This API (UpdateRoleDescription) is used to modify the description of a role.
+     * @param {UpdateRoleDescriptionRequest} req
+     * @param {function(string, UpdateRoleDescriptionResponse):void} cb
      * @public
      */
-    UpdatePolicy(req, cb) {
-        let resp = new UpdatePolicyResponse();
-        this.request("UpdatePolicy", req, resp, cb);
+    UpdateRoleDescription(req, cb) {
+        let resp = new UpdateRoleDescriptionResponse();
+        this.request("UpdateRoleDescription", req, resp, cb);
     }
 
     /**
@@ -443,17 +441,6 @@ class CamClient extends AbstractClient {
     GetRole(req, cb) {
         let resp = new GetRoleResponse();
         this.request("GetRole", req, resp, cb);
-    }
-
-    /**
-     * This API (UpdateRoleDescription) is used to modify the description of a role.
-     * @param {UpdateRoleDescriptionRequest} req
-     * @param {function(string, UpdateRoleDescriptionResponse):void} cb
-     * @public
-     */
-    UpdateRoleDescription(req, cb) {
-        let resp = new UpdateRoleDescriptionResponse();
-        this.request("UpdateRoleDescription", req, resp, cb);
     }
 
     /**

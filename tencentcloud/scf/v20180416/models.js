@@ -267,10 +267,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.LayerName = null;
 
         /**
-         * Current status of a layer. Valid values:
-publishing
-available
-unavailable
+         * The status of the layer version. Values can be: 
+`Active`: normal
+`Publishing`: publishing
+`PublishFailed`: failed to publish
+`Deleted`: deleted
          * @type {string || null}
          */
         this.Status = null;
@@ -609,6 +610,20 @@ Note: This field may return null, indicating that no valid values is found.
          */
         this.Description = null;
 
+        /**
+         * The creation time
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * Update time
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ModTime = null;
+
     }
 
     /**
@@ -620,6 +635,8 @@ Note: This field may return null, indicating that no valid values is found.
         }
         this.Version = 'Version' in params ? params.Version : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
 
     }
 }
@@ -1083,7 +1100,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.L5Enable = null;
 
         /**
-         * List of layer versions with which a function will be associated. Layers will be overwritten sequentially in the order in the list.
+         * List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
          * @type {Array.<LayerVersionSimple> || null}
          */
         this.Layers = null;
@@ -1095,7 +1112,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.DeadLetterConfig = null;
 
         /**
-         * 
+         * Whether to enable Ons access. TRUE: enable; FALSE: not enable
          * @type {string || null}
          */
         this.OnsEnable = null;
@@ -2156,7 +2173,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PublicNetConfig = null;
 
         /**
-         * 
+         * Whether Ons is enabled
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.OnsEnable = null;
@@ -2910,7 +2928,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Parameter corresponding to the trigger. For a timer trigger, it should be a Linux cron expression; for a COS trigger, it should be a JSON string ({"event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}), where `event` is the triggered COS event, `Prefix` in the `filter` is the corresponding file prefix filter, and `Suffix` is the corresponding suffix filter, and the `filter` can be left blank if not needed; for other triggers, please see the description of the specific trigger.
+         * For parameters of triggers, see [Trigger Description](https://cloud.tencent.com/document/product/583/39901)
          * @type {string || null}
          */
         this.TriggerDesc = null;

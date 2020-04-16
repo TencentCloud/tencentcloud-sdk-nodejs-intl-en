@@ -27,7 +27,9 @@ const RoVipInfo = models.RoVipInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const RoWeightValue = models.RoWeightValue;
+const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
+const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
 const Parameter = models.Parameter;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
@@ -36,6 +38,7 @@ const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const CreateAccountsResponse = models.CreateAccountsResponse;
 const RegionSellConf = models.RegionSellConf;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
+const SqlFileInfo = models.SqlFileInfo;
 const CreateDeployGroupResponse = models.CreateDeployGroupResponse;
 const DescribeTablesResponse = models.DescribeTablesResponse;
 const SellConfig = models.SellConfig;
@@ -66,15 +69,19 @@ const DescribeDataBackupOverviewResponse = models.DescribeDataBackupOverviewResp
 const ParameterDetail = models.ParameterDetail;
 const BackupSummaryItem = models.BackupSummaryItem;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
+const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
-const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
+const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const BinlogInfo = models.BinlogInfo;
 const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
+const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const DescribeDeployGroupListRequest = models.DescribeDeployGroupListRequest;
 const RollbackInstancesInfo = models.RollbackInstancesInfo;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
@@ -90,8 +97,9 @@ const DeleteBackupResponse = models.DeleteBackupResponse;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
-const CommonTimeWindow = models.CommonTimeWindow;
-const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
+const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
+const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
+const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
@@ -141,11 +149,13 @@ const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
+const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
+const ErrlogItem = models.ErrlogItem;
 const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const TagsInfoOfInstance = models.TagsInfoOfInstance;
-const InstanceInfo = models.InstanceInfo;
+const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
 const CreateBackupResponse = models.CreateBackupResponse;
 const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
@@ -156,6 +166,7 @@ const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsRespon
 const DescribeDeployGroupListResponse = models.DescribeDeployGroupListResponse;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
+const InstanceInfo = models.InstanceInfo;
 const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
 const DatabasePrivilege = models.DatabasePrivilege;
 const RoGroupAttr = models.RoGroupAttr;
@@ -165,9 +176,11 @@ const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const InstanceRebootTime = models.InstanceRebootTime;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
+const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
 const ZoneSellConf = models.ZoneSellConf;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
 const SlaveConfig = models.SlaveConfig;
@@ -180,6 +193,7 @@ const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
 const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
+const CommonTimeWindow = models.CommonTimeWindow;
 const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const RollbackTables = models.RollbackTables;
@@ -189,7 +203,9 @@ const DeviceMemInfo = models.DeviceMemInfo;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const DeleteDeployGroupsRequest = models.DeleteDeployGroupsRequest;
+const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
@@ -216,10 +232,13 @@ const RollbackDBName = models.RollbackDBName;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
-const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
+const SlowLogItem = models.SlowLogItem;
 const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
+const UploadInfo = models.UploadInfo;
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
 const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
+const ReleaseResult = models.ReleaseResult;
+const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
@@ -273,6 +292,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to upgrade or downgrade a TencentDB instance, which can be a master instance, disaster recovery instance, or read-only instance.
+     * @param {UpgradeDBInstanceRequest} req
+     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstance(req, cb) {
+        let resp = new UpgradeDBInstanceResponse();
+        this.request("UpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeTimeWindow) is used to query the maintenance time window of a TencentDB instance.
      * @param {DescribeTimeWindowRequest} req
      * @param {function(string, DescribeTimeWindowResponse):void} cb
@@ -292,6 +322,17 @@ class CdbClient extends AbstractClient {
     DescribeProjectSecurityGroups(req, cb) {
         let resp = new DescribeProjectSecurityGroupsResponse();
         this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to deisolate an isolated TencentDB instance.
+     * @param {ReleaseIsolatedDBInstancesRequest} req
+     * @param {function(string, ReleaseIsolatedDBInstancesResponse):void} cb
+     * @public
+     */
+    ReleaseIsolatedDBInstances(req, cb) {
+        let resp = new ReleaseIsolatedDBInstancesResponse();
+        this.request("ReleaseIsolatedDBInstances", req, resp, cb);
     }
 
     /**
@@ -330,7 +371,7 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (DeleteBackup) is used to delete a TencentDB instance backup.
+     * This API is used to delete a database backup. It can only delete manually initiated backups.
      * @param {DeleteBackupRequest} req
      * @param {function(string, DeleteBackupResponse):void} cb
      * @public
@@ -349,6 +390,17 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     ModifyTimeWindow(req, cb) {
         let resp = new ModifyTimeWindowResponse();
         this.request("ModifyTimeWindow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to search for slow logs of an instance by criteria. You can only view slow logs within a month.
+     * @param {DescribeSlowLogDataRequest} req
+     * @param {function(string, DescribeSlowLogDataResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogData(req, cb) {
+        let resp = new DescribeSlowLogDataResponse();
+        this.request("DescribeSlowLogData", req, resp, cb);
     }
 
     /**
@@ -514,6 +566,25 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     CreateParamTemplate(req, cb) {
         let resp = new CreateParamTemplateResponse();
         this.request("CreateParamTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a pay-as-you-go TencentDB instance (which can be a master, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, and quantity.
+
+This is an async API. You can also use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance details. If the `Status` value of an instance is 1 and `TaskStatus` is 0, the instance has been successfully delivered.
+
+1. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported instance specifications first and then use the [DescribeDBPrice](https://cloud.tencent.com/document/api/236/18566) API to query the prices of the supported instances;
+2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months;
+3. MySQL v5.5, v5.6, and v5.7 are supported;
+4. Master instances, read-only instances, and disaster recovery instances can be created;
+5. If `Port`, `ParamList`, or `Password` is set in the input parameters, the instance will be initialized.
+     * @param {CreateDBInstanceHourRequest} req
+     * @param {function(string, CreateDBInstanceHourResponse):void} cb
+     * @public
+     */
+    CreateDBInstanceHour(req, cb) {
+        let resp = new CreateDBInstanceHourResponse();
+        this.request("CreateDBInstanceHour", req, resp, cb);
     }
 
     /**
@@ -754,6 +825,17 @@ Note:
     }
 
     /**
+     * This API (ModifyAccountPassword) is used to modify the password of a TencentDB instance account.
+     * @param {ModifyAccountPasswordRequest} req
+     * @param {function(string, ModifyAccountPasswordResponse):void} cb
+     * @public
+     */
+    ModifyAccountPassword(req, cb) {
+        let resp = new ModifyAccountPasswordResponse();
+        this.request("ModifyAccountPassword", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the permissions of a TencentDB instance account.
 
 Note that when modifying account permissions, you need to pass in the full permission information of the account. You can [query the account permission information
@@ -891,6 +973,17 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
+     * This API is used to query the list of user-imported SQL files.
+     * @param {DescribeUploadedFilesRequest} req
+     * @param {function(string, DescribeUploadedFilesResponse):void} cb
+     * @public
+     */
+    DescribeUploadedFiles(req, cb) {
+        let resp = new DescribeUploadedFilesResponse();
+        this.request("DescribeUploadedFiles", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the log backup overview of a user in the current region.
      * @param {DescribeBinlogBackupOverviewRequest} req
      * @param {function(string, DescribeBinlogBackupOverviewResponse):void} cb
@@ -935,14 +1028,14 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
-     * This API (ModifyAccountPassword) is used to modify the password of a TencentDB instance account.
-     * @param {ModifyAccountPasswordRequest} req
-     * @param {function(string, ModifyAccountPasswordResponse):void} cb
+     * This API is used to query the details of instance error logs by search criteria. You can only query error logs within a month.
+     * @param {DescribeErrorLogDataRequest} req
+     * @param {function(string, DescribeErrorLogDataResponse):void} cb
      * @public
      */
-    ModifyAccountPassword(req, cb) {
-        let resp = new ModifyAccountPasswordResponse();
-        this.request("ModifyAccountPassword", req, resp, cb);
+    DescribeErrorLogData(req, cb) {
+        let resp = new DescribeErrorLogDataResponse();
+        this.request("DescribeErrorLogData", req, resp, cb);
     }
 
     /**
@@ -991,6 +1084,17 @@ Note that once an instance is deactivated, its resources and data will not be re
     DescribeInstanceParams(req, cb) {
         let resp = new DescribeInstanceParamsResponse();
         this.request("DescribeInstanceParams", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of all RO groups of a TencentDB instance.
+     * @param {DescribeRoGroupsRequest} req
+     * @param {function(string, DescribeRoGroupsResponse):void} cb
+     * @public
+     */
+    DescribeRoGroups(req, cb) {
+        let resp = new DescribeRoGroupsResponse();
+        this.request("DescribeRoGroups", req, resp, cb);
     }
 
     /**

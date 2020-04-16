@@ -240,7 +240,7 @@ class ResumeLiveStreamRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * Your acceleration domain name.
+         * Your push domain name.
          * @type {string || null}
          */
         this.DomainName = null;
@@ -1393,7 +1393,9 @@ class DomainInfo extends  AbstractModel {
         this.RentExpireTime = null;
 
         /**
-         * 
+         * 0: LVB,
+1: LVB on WeChat Mini Program.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsMiniProgramLive = null;
@@ -1674,7 +1676,7 @@ class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * Push domain name.
+         * Playback domain name.
 For transcoding at the domain name level, domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
          * @type {string || null}
          */
@@ -2664,7 +2666,7 @@ class CreateLiveRecordResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID, which uniquely identifies the recording task globally.
+         * Task ID, which uniquely identifies a recording task globally.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -4561,7 +4563,7 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
          * @type {string || null}
          */
         this.AppName = null;
@@ -4581,7 +4583,7 @@ In scheduled recording mode, this field must be set; in real-time video recordin
 
         /**
          * Recording end time, which is China standard time and should be URL-encoded (RFC3986). For example, the encoding of 2017-01-01 10:30:01 is 2017-01-01+10%3a30%3a01.
-In scheduled recording mode, this field must be set; in real-time video recording mode, this field is optional. If the recording is set to real-time video recording mode through the Highlight parameter, the end time set should not be more than 30 minutes after the current time. If the set end time is more than 30 minutes after the current time, earlier than the current time or left blank, the actual end time will be 30 minutes after the current time.
+In scheduled recording mode, this field must be set; in real-time video recording mode, this field is optional. If the recording is set to real-time video recording mode through the `Highlight` parameter, the set end time should not be more than 30 minutes after the current time. If the set end time is more than 30 minutes after the current time, earlier than the current time, or left empty, the actual end time will be 30 minutes after the current time.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4612,7 +4614,7 @@ In both scheduled and real-time video recording modes, this parameter is valid a
         this.Highlight = null;
 
         /**
-         * Mark for enabling A+B=C mixed stream recording.
+         * Flag for enabling A+B=C mixed stream recording.
 0: A+B=C mixed stream recording is not enabled **(default)**.
 1: A+B=C mixed stream recording is enabled.
 In both scheduled and real-time video recording modes, this parameter is valid.
@@ -4622,10 +4624,10 @@ In both scheduled and real-time video recording modes, this parameter is valid.
 
         /**
          * Recording stream parameter. The following parameters are supported currently:
-record_interval: Recording interval in seconds. Value range: 1,800–7,200
-storage_time: Recording file duration in seconds
-eg. record_interval=3600&storage_time=2592000
-Note: The parameter needs url encode.
+record_interval: recording interval in seconds. Value range: 1800-7200.
+storage_time: recording file storage duration in seconds.
+Example: record_interval=3600&storage_time=2592000.
+Note: the parameter needs to be URL-encoded.
 In both scheduled and real-time video recording modes, this parameter is valid.
          * @type {string || null}
          */

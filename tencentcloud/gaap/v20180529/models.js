@@ -229,7 +229,7 @@ class DescribeListenerStatisticsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Statistical metric name list. It supports: ["InBandwidth", "OutBandwidth", "Concurrent", "InPackets", "OutPackets"]
+         * Statistical metric name list. It supports:["InBandwidth", "OutBandwidth", "Concurrent", "InPackets", "OutPackets"]
          * @type {Array.<string> || null}
          */
         this.MetricNames = null;
@@ -237,8 +237,8 @@ class DescribeListenerStatisticsRequest extends  AbstractModel {
         /**
          * Monitoring granularity. It currently supports: 300, 3,600, and 86,400. Unit: seconds.
 Time range: ≤ 1 day, supported minimum granularity: 300 seconds;
-Time range: ≤ 7 days, supported minimum granularity: 3,600 seconds;
-Time range: > 7 days, supported minimum granularity: 86,400 seconds;
+Time range：≤ 7 days, supported minimum granularity:3,600 seconds;
+Time range: ＞7 days, supported minimum granularity:86,400 seconds;
          * @type {number || null}
          */
         this.Granularity = null;
@@ -559,6 +559,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Body = null;
 
+        /**
+         * Rule status. 0: success
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -584,6 +591,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.Body = 'Body' in params ? params.Body : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -9678,6 +9686,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SupportSecurity = null;
 
+        /**
+         * Billing mode. 0: bill by bandwidth; 1: bill by traffic
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
     }
 
     /**
@@ -9727,6 +9742,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.SupportSecurity = 'SupportSecurity' in params ? params.SupportSecurity : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }

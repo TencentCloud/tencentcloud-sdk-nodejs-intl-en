@@ -359,6 +359,12 @@ class ListGroupsForUserRequest extends  AbstractModel {
          */
         this.Page = null;
 
+        /**
+         * Sub-account UIN
+         * @type {number || null}
+         */
+        this.SubUin = null;
+
     }
 
     /**
@@ -371,6 +377,7 @@ class ListGroupsForUserRequest extends  AbstractModel {
         this.Uid = 'Uid' in params ? params.Uid : null;
         this.Rp = 'Rp' in params ? params.Rp : null;
         this.Page = 'Page' in params ? params.Page : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
 
     }
 }
@@ -1232,7 +1239,7 @@ class RoleInfo extends  AbstractModel {
         this.ConsoleLogin = null;
 
         /**
-         * User role. Valid values: user, system
+         * User role. Valid values: `user`, `system`, `service_linked`
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1246,7 +1253,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SessionDuration = null;
 
         /**
-         * 
+         * Task identifier for deleting a service-linked role 
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DeletionTaskId = null;
@@ -1389,7 +1397,7 @@ class DetachRolePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * Policy ID
+         * Policy ID. Either `PolicyId` or `PolicyName` must be entered
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -1406,6 +1414,12 @@ class DetachRolePolicyRequest extends  AbstractModel {
          */
         this.DetachRoleName = null;
 
+        /**
+         * Policy name. Either `PolicyId` or `PolicyName` must be entered
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
     }
 
     /**
@@ -1418,6 +1432,7 @@ class DetachRolePolicyRequest extends  AbstractModel {
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.DetachRoleId = 'DetachRoleId' in params ? params.DetachRoleId : null;
         this.DetachRoleName = 'DetachRoleName' in params ? params.DetachRoleName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
 
     }
 }
@@ -1502,7 +1517,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DeactivedDetail = null;
 
         /**
-         * 
+         * The deletion task identifier used to check the deletion status of the service-linked role
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsServiceLinkedPolicy = null;
@@ -2346,7 +2362,7 @@ class AttachRolePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * Policy ID
+         * Policy ID. Either `PolicyId` or `PolicyName` must be entered
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -2363,6 +2379,12 @@ class AttachRolePolicyRequest extends  AbstractModel {
          */
         this.AttachRoleName = null;
 
+        /**
+         * Policy name. Either `PolicyId` or `PolicyName` must be entered
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
     }
 
     /**
@@ -2375,6 +2397,7 @@ class AttachRolePolicyRequest extends  AbstractModel {
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.AttachRoleId = 'AttachRoleId' in params ? params.AttachRoleId : null;
         this.AttachRoleName = 'AttachRoleName' in params ? params.AttachRoleName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
 
     }
 }
@@ -2525,7 +2548,7 @@ class SetFlagRequest extends  AbstractModel {
         this.OffsiteFlag = null;
 
         /**
-         * If MFA requires top-up
+         * Whether or not to reset MFA
          * @type {number || null}
          */
         this.NeedResetMfa = null;
@@ -2786,34 +2809,6 @@ class UpdateUserResponse extends  AbstractModel {
  * @class
  */
 class AddUserToGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UpdatePolicy response structure.
- * @class
- */
-class UpdatePolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4150,55 +4145,6 @@ class ListAttachedUserPoliciesRequest extends  AbstractModel {
 }
 
 /**
- * UpdatePolicy request structure.
- * @class
- */
-class UpdatePolicyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Policy ID
-         * @type {number || null}
-         */
-        this.PolicyId = null;
-
-        /**
-         * Policy name
-         * @type {string || null}
-         */
-        this.PolicyName = null;
-
-        /**
-         * Policy description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
-         * @type {string || null}
-         */
-        this.PolicyDocument = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
-
-    }
-}
-
-/**
  * User Group user information
  * @class
  */
@@ -4395,7 +4341,6 @@ module.exports = {
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
-    UpdatePolicyResponse: UpdatePolicyResponse,
     CreateGroupRequest: CreateGroupRequest,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
@@ -4427,7 +4372,6 @@ module.exports = {
     ListUsersRequest: ListUsersRequest,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
-    UpdatePolicyRequest: UpdatePolicyRequest,
     GroupMemberInfo: GroupMemberInfo,
     CreateGroupResponse: CreateGroupResponse,
 

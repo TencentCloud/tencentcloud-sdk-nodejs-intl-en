@@ -42,7 +42,6 @@ const ListGroupsForUserResponse = models.ListGroupsForUserResponse;
 const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
 const ListPoliciesResponse = models.ListPoliciesResponse;
-const OffsiteFlag = models.OffsiteFlag;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
 const RoleInfo = models.RoleInfo;
@@ -54,8 +53,8 @@ const StrategyInfo = models.StrategyInfo;
 const DeletePolicyRequest = models.DeletePolicyRequest;
 const GroupInfo = models.GroupInfo;
 const AddUserRequest = models.AddUserRequest;
-const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
+const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
 const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
 const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
 const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
@@ -67,11 +66,11 @@ const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
 const UpdateUserRequest = models.UpdateUserRequest;
 const CreateSAMLProviderRequest = models.CreateSAMLProviderRequest;
 const AttachPolicyInfo = models.AttachPolicyInfo;
+const UpdateRoleConsoleLoginResponse = models.UpdateRoleConsoleLoginResponse;
 const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
-const SetFlagRequest = models.SetFlagRequest;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
 const GetGroupResponse = models.GetGroupResponse;
@@ -79,6 +78,7 @@ const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
+const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
@@ -87,7 +87,6 @@ const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
 const CreatePolicyRequest = models.CreatePolicyRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
 const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
-const SetFlagResponse = models.SetFlagResponse;
 const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
 const GetPolicyRequest = models.GetPolicyRequest;
@@ -109,6 +108,7 @@ const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const ListUsersRequest = models.ListUsersRequest;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const GroupMemberInfo = models.GroupMemberInfo;
 const CreateGroupResponse = models.CreateGroupResponse;
@@ -124,6 +124,17 @@ class CamClient extends AbstractClient {
         super("cam.tencentcloudapi.com", "2019-01-16", credential, region, profile);
     }
     
+    /**
+     * This API is used to modify a role’s login permissions.
+     * @param {UpdateRoleConsoleLoginRequest} req
+     * @param {function(string, UpdateRoleConsoleLoginResponse):void} cb
+     * @public
+     */
+    UpdateRoleConsoleLogin(req, cb) {
+        let resp = new UpdateRoleConsoleLoginResponse();
+        this.request("UpdateRoleConsoleLogin", req, resp, cb);
+    }
+
     /**
      * This API is used to add sub-users.
      * @param {AddUserRequest} req
@@ -279,14 +290,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set account verification for login and sensitive operation protection.
-     * @param {SetFlagRequest} req
-     * @param {function(string, SetFlagResponse):void} cb
+     * This API is used to update SAML identity provider information.
+     * @param {UpdateSAMLProviderRequest} req
+     * @param {function(string, UpdateSAMLProviderResponse):void} cb
      * @public
      */
-    SetFlag(req, cb) {
-        let resp = new SetFlagResponse();
-        this.request("SetFlag", req, resp, cb);
+    UpdateSAMLProvider(req, cb) {
+        let resp = new UpdateSAMLProviderResponse();
+        this.request("UpdateSAMLProvider", req, resp, cb);
     }
 
     /**
@@ -422,17 +433,6 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update SAML identity provider information.
-     * @param {UpdateSAMLProviderRequest} req
-     * @param {function(string, UpdateSAMLProviderResponse):void} cb
-     * @public
-     */
-    UpdateSAMLProvider(req, cb) {
-        let resp = new UpdateSAMLProviderResponse();
-        this.request("UpdateSAMLProvider", req, resp, cb);
-    }
-
-    /**
      * This API (GetRole) is used to get the details of a specified role.
      * @param {GetRoleRequest} req
      * @param {function(string, GetRoleResponse):void} cb
@@ -463,6 +463,17 @@ class CamClient extends AbstractClient {
     DeleteUser(req, cb) {
         let resp = new DeleteUserResponse();
         this.request("DeleteUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the collaborator list.
+     * @param {ListCollaboratorsRequest} req
+     * @param {function(string, ListCollaboratorsResponse):void} cb
+     * @public
+     */
+    ListCollaborators(req, cb) {
+        let resp = new ListCollaboratorsResponse();
+        this.request("ListCollaborators", req, resp, cb);
     }
 
     /**

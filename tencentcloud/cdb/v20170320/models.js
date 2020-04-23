@@ -390,7 +390,7 @@ class DescribeDatabasesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Regular expression for matching database names, which complies with the rules at MySQL's official website
+         * Regular expression for matching database names.
          * @type {string || null}
          */
         this.DatabaseRegexp = null;
@@ -522,6 +522,12 @@ class DescribeAccountsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Regular expression for matching account names, which complies with the rules at MySQL official website.
+         * @type {string || null}
+         */
+        this.AccountRegexp = null;
+
     }
 
     /**
@@ -534,6 +540,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AccountRegexp = 'AccountRegexp' in params ? params.AccountRegexp : null;
 
     }
 }
@@ -3524,7 +3531,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * 
+         * Instance type. Valid values: HA (High-Availability Edition), BASIC (Basic Edition). If this parameter is not specified, High-Availability Edition will be used by default.
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -4125,7 +4132,8 @@ class ModifyDBInstanceVipVportResponse extends  AbstractModel {
         super();
 
         /**
-         * Async task ID.
+         * Async task ID. (This returned field has been disused)
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -7478,7 +7486,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MasterInfo = null;
 
         /**
-         * Instance type. Value range: HA (high availability edition), BASIC (basic edition)
+         * Instance type. Value range: HA (High-Availability Edition), FE (Finance Edition), BASIC (Basic Edition)
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -9549,7 +9557,7 @@ class DescribeSlowLogDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Client Host list.
+         * Client `Host` list.
          * @type {Array.<string> || null}
          */
         this.UserHosts = null;
@@ -9728,6 +9736,12 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
          */
         this.UniqSubnetId = null;
 
+        /**
+         * Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0–168 hours. Default value: 24 hours.
+         * @type {number || null}
+         */
+        this.ReleaseDuration = null;
+
     }
 
     /**
@@ -9742,6 +9756,7 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
         this.DstPort = 'DstPort' in params ? params.DstPort : null;
         this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
         this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ReleaseDuration = 'ReleaseDuration' in params ? params.ReleaseDuration : null;
 
     }
 }

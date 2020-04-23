@@ -637,6 +637,34 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
 }
 
 /**
+ * SetLoadBalancerClsLog response structure.
+ * @class
+ */
+class SetLoadBalancerClsLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyRule request structure.
  * @class
  */
@@ -3826,6 +3854,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.TrpcFunc = null;
 
+        /**
+         * QUIC status
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.QuicStatus = null;
+
     }
 
     /**
@@ -3875,6 +3910,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.WafDomainId = 'WafDomainId' in params ? params.WafDomainId : null;
         this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
         this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
+        this.QuicStatus = 'QuicStatus' in params ? params.QuicStatus : null;
 
     }
 }
@@ -5378,6 +5414,48 @@ class DeleteRuleResponse extends  AbstractModel {
 }
 
 /**
+ * SetLoadBalancerClsLog request structure.
+ * @class
+ */
+class SetLoadBalancerClsLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLS logset ID
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * CLS log topic ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+
+    }
+}
+
+/**
  * ModifyTargetGroupAttribute request structure.
  * @class
  */
@@ -5928,6 +6006,12 @@ They represent weighted round robin, least connections, and IP hash, respectivel
          */
         this.TrpcFunc = null;
 
+        /**
+         * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names
+         * @type {boolean || null}
+         */
+        this.Quic = null;
+
     }
 
     /**
@@ -5959,6 +6043,7 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
         this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
         this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
+        this.Quic = 'Quic' in params ? params.Quic : null;
 
     }
 }
@@ -7405,6 +7490,7 @@ module.exports = {
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
     DeleteRuleRequest: DeleteRuleRequest,
     ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
+    SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     DescribeRewriteRequest: DescribeRewriteRequest,
@@ -7500,6 +7586,7 @@ module.exports = {
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DeleteRuleResponse: DeleteRuleResponse,
+    SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
     ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,

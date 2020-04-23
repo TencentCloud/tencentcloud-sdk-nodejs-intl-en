@@ -21,6 +21,7 @@ module.exports = {
     gme: require("./gme"),
     kms: require("./kms"),
     live: require("./live"),
+    mariadb: require("./mariadb"),
     mongodb: require("./mongodb"),
     monitor: require("./monitor"),
     mps: require("./mps"),

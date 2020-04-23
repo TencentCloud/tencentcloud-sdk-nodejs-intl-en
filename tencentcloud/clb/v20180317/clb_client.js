@@ -28,6 +28,7 @@ const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadba
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
+const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
@@ -123,6 +124,7 @@ const TargetRegionInfo = models.TargetRegionInfo;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
+const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
@@ -259,6 +261,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     CreateRule(req, cb) {
         let resp = new CreateRuleResponse();
         this.request("CreateRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add, delete, and update the CLS topic of a CLB instance.
+     * @param {SetLoadBalancerClsLogRequest} req
+     * @param {function(string, SetLoadBalancerClsLogResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerClsLog(req, cb) {
+        let resp = new SetLoadBalancerClsLogResponse();
+        this.request("SetLoadBalancerClsLog", req, resp, cb);
     }
 
     /**

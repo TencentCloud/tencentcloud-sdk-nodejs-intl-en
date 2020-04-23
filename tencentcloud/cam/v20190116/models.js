@@ -1056,62 +1056,6 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Remote login settings
- * @class
- */
-class OffsiteFlag extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Verification identifier
-         * @type {number || null}
-         */
-        this.VerifyFlag = null;
-
-        /**
-         * Phone notification
-         * @type {number || null}
-         */
-        this.NotifyPhone = null;
-
-        /**
-         * Email notification
-         * @type {number || null}
-         */
-        this.NotifyEmail = null;
-
-        /**
-         * WeChat notification
-         * @type {number || null}
-         */
-        this.NotifyWechat = null;
-
-        /**
-         * Alert
-         * @type {number || null}
-         */
-        this.Tips = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VerifyFlag = 'VerifyFlag' in params ? params.VerifyFlag : null;
-        this.NotifyPhone = 'NotifyPhone' in params ? params.NotifyPhone : null;
-        this.NotifyEmail = 'NotifyEmail' in params ? params.NotifyEmail : null;
-        this.NotifyWechat = 'NotifyWechat' in params ? params.NotifyWechat : null;
-        this.Tips = 'Tips' in params ? params.Tips : null;
-
-    }
-}
-
-/**
  * Information on the association between a sub-user and a User Group
  * @class
  */
@@ -1710,62 +1654,6 @@ class AddUserRequest extends  AbstractModel {
 }
 
 /**
- * Login and sensitive operation flag
- * @class
- */
-class LoginActionFlag extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Mobile phone
-         * @type {number || null}
-         */
-        this.Phone = null;
-
-        /**
-         * Hard token
-         * @type {number || null}
-         */
-        this.Token = null;
-
-        /**
-         * Soft token
-         * @type {number || null}
-         */
-        this.Stoken = null;
-
-        /**
-         * WeChat
-         * @type {number || null}
-         */
-        this.Wechat = null;
-
-        /**
-         * Custom
-         * @type {number || null}
-         */
-        this.Custom = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Phone = 'Phone' in params ? params.Phone : null;
-        this.Token = 'Token' in params ? params.Token : null;
-        this.Stoken = 'Stoken' in params ? params.Stoken : null;
-        this.Wechat = 'Wechat' in params ? params.Wechat : null;
-        this.Custom = 'Custom' in params ? params.Custom : null;
-
-    }
-}
-
-/**
  * DeleteRole request structure.
  * @class
  */
@@ -1794,6 +1682,48 @@ class DeleteRoleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
+ * UpdateRoleConsoleLogin request structure.
+ * @class
+ */
+class UpdateRoleConsoleLoginRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether login is allowed. 1: yes, 0: no
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * Role ID
+         * @type {number || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * Role name
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
         this.RoleId = 'RoleId' in params ? params.RoleId : null;
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
@@ -2354,6 +2284,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * UpdateRoleConsoleLogin response structure.
+ * @class
+ */
+class UpdateRoleConsoleLoginResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AttachRolePolicy request structure.
  * @class
  */
@@ -2511,77 +2469,6 @@ class ListAttachedGroupPoliciesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SetFlag request structure.
- * @class
- */
-class SetFlagRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Set user UIN
-         * @type {number || null}
-         */
-        this.OpUin = null;
-
-        /**
-         * Login settings
-         * @type {LoginActionFlag || null}
-         */
-        this.LoginFlag = null;
-
-        /**
-         * Sensitive operation settings
-         * @type {LoginActionFlag || null}
-         */
-        this.ActionFlag = null;
-
-        /**
-         * Remote login settings
-         * @type {OffsiteFlag || null}
-         */
-        this.OffsiteFlag = null;
-
-        /**
-         * Whether or not to reset MFA
-         * @type {number || null}
-         */
-        this.NeedResetMfa = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OpUin = 'OpUin' in params ? params.OpUin : null;
-
-        if (params.LoginFlag) {
-            let obj = new LoginActionFlag();
-            obj.deserialize(params.LoginFlag)
-            this.LoginFlag = obj;
-        }
-
-        if (params.ActionFlag) {
-            let obj = new LoginActionFlag();
-            obj.deserialize(params.ActionFlag)
-            this.ActionFlag = obj;
-        }
-
-        if (params.OffsiteFlag) {
-            let obj = new OffsiteFlag();
-            obj.deserialize(params.OffsiteFlag)
-            this.OffsiteFlag = obj;
-        }
-        this.NeedResetMfa = 'NeedResetMfa' in params ? params.NeedResetMfa : null;
 
     }
 }
@@ -2828,6 +2715,41 @@ class AddUserToGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListCollaborators request structure.
+ * @class
+ */
+class ListCollaboratorsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of entries per page. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination start value. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3136,34 +3058,6 @@ class AttachGroupPolicyRequest extends  AbstractModel {
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
-
-    }
-}
-
-/**
- * SetFlag response structure.
- * @class
- */
-class SetFlagResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3777,6 +3671,20 @@ Note: This field may return null, indicating that no valid value was found.
         this.PolicyDocument = null;
 
         /**
+         * Remarks
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PresetAlias = null;
+
+        /**
+         * Whether it is a service-linked policy
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsServiceLinkedRolePolicy = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3797,6 +3705,8 @@ Note: This field may return null, indicating that no valid value was found.
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.PresetAlias = 'PresetAlias' in params ? params.PresetAlias : null;
+        this.IsServiceLinkedRolePolicy = 'IsServiceLinkedRolePolicy' in params ? params.IsServiceLinkedRolePolicy : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4103,6 +4013,56 @@ class AttachUserPolicyResponse extends  AbstractModel {
 }
 
 /**
+ * ListCollaborators response structure.
+ * @class
+ */
+class ListCollaboratorsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * Collaborator information
+         * @type {Array.<SubAccountInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SubAccountInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListAttachedUserPolicies request structure.
  * @class
  */
@@ -4304,7 +4264,6 @@ module.exports = {
     ListUsersForGroupRequest: ListUsersForGroupRequest,
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
     ListPoliciesResponse: ListPoliciesResponse,
-    OffsiteFlag: OffsiteFlag,
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
     RoleInfo: RoleInfo,
@@ -4316,8 +4275,8 @@ module.exports = {
     DeletePolicyRequest: DeletePolicyRequest,
     GroupInfo: GroupInfo,
     AddUserRequest: AddUserRequest,
-    LoginActionFlag: LoginActionFlag,
     DeleteRoleRequest: DeleteRoleRequest,
+    UpdateRoleConsoleLoginRequest: UpdateRoleConsoleLoginRequest,
     GetCustomMFATokenInfoResponse: GetCustomMFATokenInfoResponse,
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
@@ -4329,11 +4288,11 @@ module.exports = {
     UpdateUserRequest: UpdateUserRequest,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
     AttachPolicyInfo: AttachPolicyInfo,
+    UpdateRoleConsoleLoginResponse: UpdateRoleConsoleLoginResponse,
     AttachRolePolicyRequest: AttachRolePolicyRequest,
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
     ListAttachedGroupPoliciesResponse: ListAttachedGroupPoliciesResponse,
-    SetFlagRequest: SetFlagRequest,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
     GetGroupResponse: GetGroupResponse,
@@ -4341,6 +4300,7 @@ module.exports = {
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
+    ListCollaboratorsRequest: ListCollaboratorsRequest,
     CreateGroupRequest: CreateGroupRequest,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
@@ -4349,7 +4309,6 @@ module.exports = {
     CreatePolicyRequest: CreatePolicyRequest,
     UpdateGroupRequest: UpdateGroupRequest,
     AttachGroupPolicyRequest: AttachGroupPolicyRequest,
-    SetFlagResponse: SetFlagResponse,
     CreateRoleResponse: CreateRoleResponse,
     GetSAMLProviderResponse: GetSAMLProviderResponse,
     GetPolicyRequest: GetPolicyRequest,
@@ -4371,6 +4330,7 @@ module.exports = {
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     ListUsersRequest: ListUsersRequest,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    ListCollaboratorsResponse: ListCollaboratorsResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     GroupMemberInfo: GroupMemberInfo,
     CreateGroupResponse: CreateGroupResponse,

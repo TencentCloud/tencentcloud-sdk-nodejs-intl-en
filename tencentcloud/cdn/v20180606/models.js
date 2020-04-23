@@ -280,6 +280,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * UpdatePayType request structure.
+ * @class
+ */
+class UpdatePayTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Billing region, which can be mainland or overseas.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Billing mode, which can be flux or bandwidth.
+         * @type {string || null}
+         */
+        this.PayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Area = 'Area' in params ? params.Area : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+
+    }
+}
+
+/**
  * Timestamp hotlink protection configuration
  * @class
  */
@@ -471,6 +506,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Spdy = 'Spdy' in params ? params.Spdy : null;
         this.SslStatus = 'SslStatus' in params ? params.SslStatus : null;
+
+    }
+}
+
+/**
+ * CreateClsLogTopic response structure.
+ * @class
+ */
+class CreateClsLogTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1093,6 +1156,48 @@ If `Metric` is `Url`, `Path`, `District`, or `Isp` and `Filter` is `flux` or `re
 }
 
 /**
+ * ListClsTopicDomains request structure.
+ * @class
+ */
+class ListClsTopicDomainsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
  * DescribeDomains response structure.
  * @class
  */
@@ -1435,24 +1540,30 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Data structure of sorted data
+ * DeleteClsLogTopic request structure.
  * @class
  */
-class TopDetailData extends  AbstractModel {
+class DeleteClsLogTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Datatype name
+         * Log topic ID
          * @type {string || null}
          */
-        this.Name = null;
+        this.TopicId = null;
 
         /**
-         * Data value
-         * @type {number || null}
+         * Logset ID
+         * @type {string || null}
          */
-        this.Value = null;
+        this.LogsetId = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
 
     }
 
@@ -1463,8 +1574,9 @@ class TopDetailData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -1493,6 +1605,56 @@ class UpdatePayTypeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CLS topic information
+ * @class
+ */
+class TopicInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Whether to enable publishing
+         * @type {number || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * Creation time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -1688,20 +1850,30 @@ global: locked globally
 }
 
 /**
- * Origin server header cache configuration. This is enabled by default and caches all the header information.
+ * DisableClsLogTopic request structure.
  * @class
  */
-class ResponseHeaderCache extends  AbstractModel {
+class DisableClsLogTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Origin server header cache switch
-on: enabled
-off: disabled
+         * Logset ID
          * @type {string || null}
          */
-        this.Switch = null;
+        this.LogsetId = null;
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
 
     }
 
@@ -1712,7 +1884,95 @@ off: disabled
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
+ * ListClsTopicDomains response structure.
+ * @class
+ */
+class ListClsTopicDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Developer ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Channel
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Domain name region configuration, which may contain deleted domain names. If this is to be used in `ManageClsTopicDomains` API, you need to exclude deleted domain names by using the `ListCdnDomains` API.
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
+
+        /**
+         * Log topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Last modified time of log topic
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
+            }
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1864,6 +2124,90 @@ class DescribeIpVisitResponse extends  AbstractModel {
                 let obj = new ResourceData();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableClsLogTopic response structure.
+ * @class
+ */
+class EnableClsLogTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListClsLogTopics response structure.
+ * @class
+ */
+class ListClsLogTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset information
+         * @type {LogSetInfo || null}
+         */
+        this.Logset = null;
+
+        /**
+         * Log topic information list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TopicInfo> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Logset) {
+            let obj = new LogSetInfo();
+            obj.deserialize(params.Logset)
+            this.Logset = obj;
+        }
+
+        if (params.Topics) {
+            this.Topics = new Array();
+            for (let z in params.Topics) {
+                let obj = new TopicInfo();
+                obj.deserialize(params.Topics[z]);
+                this.Topics.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -2575,6 +2919,41 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
 }
 
 /**
+ * Data structure of sorted data
+ * @class
+ */
+class TopDetailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Datatype name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Data value
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * Status code redirect configuration. This is disabled by default. (This feature is in beta and not generally available yet.)
  * @class
  */
@@ -2698,6 +3077,34 @@ Default value: `mainland`.
             return;
         }
         this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
+ * DescribeCertDomains request structure.
+ * @class
+ */
+class DescribeCertDomainsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded string of certificate in PEM format
+         * @type {string || null}
+         */
+        this.Cert = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cert = 'Cert' in params ? params.Cert : null;
 
     }
 }
@@ -2885,6 +3292,50 @@ class MapInfo extends  AbstractModel {
         }
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DescribeCertDomains response structure.
+ * @class
+ */
+class DescribeCertDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of domain names connected to CDN
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * List of CDN domain names with certificates configured
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.CertifiedDomains = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.CertifiedDomains = 'CertifiedDomains' in params ? params.CertifiedDomains : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3278,6 +3729,41 @@ class AddCdnDomainResponse extends  AbstractModel {
 }
 
 /**
+ * Domain name region configuration
+ * @class
+ */
+class DomainAreaConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Region list, where the element can be `mainland/overseas`
+         * @type {Array.<string> || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
  * HTTPS acceleration server certificate configuration:
 + Supports deployment with certificates that are being hosted by the SSL Certificate Services
 + Supports uploading certificates of PEM format for deployment
@@ -3441,6 +3927,34 @@ Unit: second. The maximum value is 365 days.
         this.CacheType = 'CacheType' in params ? params.CacheType : null;
         this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
         this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+
+    }
+}
+
+/**
+ * DisableClsLogTopic response structure.
+ * @class
+ */
+class DisableClsLogTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3992,6 +4506,52 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Custom response header configuration. This is disabled by default.
+ * @class
+ */
+class ResponseHeader extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom response header switch
+on: enabled
+off: disabled
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Custom response header rules
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<HttpHeaderPathRule> || null}
+         */
+        this.HeaderRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.HeaderRules) {
+            this.HeaderRules = new Array();
+            for (let z in params.HeaderRules) {
+                let obj = new HttpHeaderPathRule();
+                obj.deserialize(params.HeaderRules[z]);
+                this.HeaderRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CDN node activation and deactivation history
  * @class
  */
@@ -4069,24 +4629,36 @@ avg: average value
 }
 
 /**
- * UpdatePayType request structure.
+ * ManageClsTopicDomains request structure.
  * @class
  */
-class UpdatePayTypeRequest extends  AbstractModel {
+class ManageClsTopicDomainsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Billing region, which can be mainland or overseas.
+         * Logset ID
          * @type {string || null}
          */
-        this.Area = null;
+        this.LogsetId = null;
 
         /**
-         * Billing mode, which can be flux or bandwidth.
+         * Log topic ID
          * @type {string || null}
          */
-        this.PayType = null;
+        this.TopicId = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * Domain name region configuration. Note: if this field is empty, it means to unbind all domain names from the corresponding topic
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
 
     }
 
@@ -4097,8 +4669,18 @@ class UpdatePayTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Area = 'Area' in params ? params.Area : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
+            }
+        }
 
     }
 }
@@ -4396,6 +4978,46 @@ complain: appeal in process
         this.UrlStatus = 'UrlStatus' in params ? params.UrlStatus : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * SearchClsLog response structure.
+ * @class
+ */
+class SearchClsLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query result
+         * @type {ClsSearchLogs || null}
+         */
+        this.Logs = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Logs) {
+            let obj = new ClsSearchLogs();
+            obj.deserialize(params.Logs)
+            this.Logs = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5015,27 +5637,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Single link downstream speed limit configuration. This is disabled by default.
+ * CreateClsLogTopic request structure.
  * @class
  */
-class DownstreamCapping extends  AbstractModel {
+class CreateClsLogTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Downstream speed configuration switch
-on: enabled
-off: disabled
+         * Log topic name
          * @type {string || null}
          */
-        this.Switch = null;
+        this.TopicName = null;
 
         /**
-         * Downstream speed limiting rules
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CappingRule> || null}
+         * Logset ID
+         * @type {string || null}
          */
-        this.CappingRules = null;
+        this.LogsetId = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * Domain name region information
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
 
     }
 
@@ -5046,14 +5677,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
-        if (params.CappingRules) {
-            this.CappingRules = new Array();
-            for (let z in params.CappingRules) {
-                let obj = new CappingRule();
-                obj.deserialize(params.CappingRules[z]);
-                this.CappingRules.push(obj);
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
             }
         }
 
@@ -5584,27 +6217,18 @@ class PurgeUrlsCacheResponse extends  AbstractModel {
 }
 
 /**
- * Custom response header configuration. This is disabled by default.
+ * DeleteClsLogTopic response structure.
  * @class
  */
-class ResponseHeader extends  AbstractModel {
+class DeleteClsLogTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Custom response header switch
-on: enabled
-off: disabled
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * Custom response header rules
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<HttpHeaderPathRule> || null}
-         */
-        this.HeaderRules = null;
+        this.RequestId = null;
 
     }
 
@@ -5615,16 +6239,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.HeaderRules) {
-            this.HeaderRules = new Array();
-            for (let z in params.HeaderRules) {
-                let obj = new HttpHeaderPathRule();
-                obj.deserialize(params.HeaderRules[z]);
-                this.HeaderRules.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5768,6 +6383,48 @@ day: 1 day
 }
 
 /**
+ * EnableClsLogTopic request structure.
+ * @class
+ */
+class EnableClsLogTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
  * Cache key configuration (filter parameter configuration)
  * @class
  */
@@ -5793,6 +6450,52 @@ off: disable full-path cache (i.e., enable parameter filter)
             return;
         }
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
+
+    }
+}
+
+/**
+ * Single link downstream speed limit configuration. This is disabled by default.
+ * @class
+ */
+class DownstreamCapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Downstream speed configuration switch
+on: enabled
+off: disabled
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Downstream speed limiting rules
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CappingRule> || null}
+         */
+        this.CappingRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.CappingRules) {
+            this.CappingRules = new Array();
+            for (let z in params.CappingRules) {
+                let obj = new CappingRule();
+                obj.deserialize(params.CappingRules[z]);
+                this.CappingRules.push(obj);
+            }
+        }
 
     }
 }
@@ -5895,6 +6598,34 @@ For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 }
 
 /**
+ * ListClsLogTopics request structure.
+ * @class
+ */
+class ListClsLogTopicsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
  * SEO configuration. This is disabled by default.
  * @class
  */
@@ -5977,6 +6708,69 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BpsThreshold = 'BpsThreshold' in params ? params.BpsThreshold : null;
         this.CounterMeasure = 'CounterMeasure' in params ? params.CounterMeasure : null;
         this.LastTriggerTime = 'LastTriggerTime' in params ? params.LastTriggerTime : null;
+
+    }
+}
+
+/**
+ * CLS log search object
+ * @class
+ */
+class ClsLogObject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Log time
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Log content
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Capture path
+         * @type {string || null}
+         */
+        this.Filename = null;
+
+        /**
+         * Log source device
+         * @type {string || null}
+         */
+        this.Source = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Filename = 'Filename' in params ? params.Filename : null;
+        this.Source = 'Source' in params ? params.Source : null;
 
     }
 }
@@ -6328,6 +7122,36 @@ class StartCdnDomainResponse extends  AbstractModel {
 }
 
 /**
+ * Origin server header cache configuration. This is enabled by default and caches all the header information.
+ * @class
+ */
+class ResponseHeaderCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Origin server header cache switch
+on: enabled
+off: disabled
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Sorting conditions for query results.
  * @class
  */
@@ -6634,6 +7458,168 @@ class UpdateDomainConfigResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Logset information
+ * @class
+ */
+class LogSetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Developer ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Channel
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Logset name
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+        /**
+         * Whether it is the default logset
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * Log retention period in days
+         * @type {number || null}
+         */
+        this.LogsetSavePeriod = null;
+
+        /**
+         * Creation date
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.LogsetSavePeriod = 'LogsetSavePeriod' in params ? params.LogsetSavePeriod : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * SearchClsLog request structure.
+ * @class
+ */
+class SearchClsLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of logset to be queried
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * List of IDs of log topics to be queried, separated by commas
+         * @type {string || null}
+         */
+        this.TopicIds = null;
+
+        /**
+         * Start time of log to be queried in the format of `YYYY-mm-dd HH:MM:SS`
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of log to be queried in the format of `YYYY-mm-dd HH:MM:SS`
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Number of logs to be returned at a time. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * Content to be queried. For more information, please visit https://cloud.tencent.com/document/product/614/16982
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * This field is used when loading more results. Pass through the last `context` value returned to get more log content. Up to 10,000 logs can be obtained through the cursor. Please narrow down the time range as much as possible.
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * Sorting by log time. Valid values: asc (ascending), desc (descending). Default value: desc
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicIds = 'TopicIds' in params ? params.TopicIds : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -7051,6 +8037,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ManageClsTopicDomains response structure.
+ * @class
+ */
+class ManageClsTopicDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Video dragging configuration. This is disabled by default.
  * @class
  */
@@ -7105,6 +8119,56 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Code = 'Code' in params ? params.Code : null;
+
+    }
+}
+
+/**
+ * CLS log search result
+ * @class
+ */
+class ClsSearchLogs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cursor for more search results
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * Whether all search results have been returned
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * Log content information
+         * @type {Array.<ClsLogObject> || null}
+         */
+        this.Results = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new ClsLogObject();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
 
     }
 }
@@ -7774,8 +8838,10 @@ module.exports = {
     Compression: Compression,
     ResourceData: ResourceData,
     UrlRecord: UrlRecord,
+    UpdatePayTypeRequest: UpdatePayTypeRequest,
     Authentication: Authentication,
     Https: Https,
+    CreateClsLogTopicResponse: CreateClsLogTopicResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
     SpecificConfig: SpecificConfig,
@@ -7787,29 +8853,37 @@ module.exports = {
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
     ListTopDataRequest: ListTopDataRequest,
+    ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
     CompressionRule: CompressionRule,
     Origin: Origin,
     EnableCachesRequest: EnableCachesRequest,
     SimpleCache: SimpleCache,
-    TopDetailData: TopDetailData,
+    DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
+    TopicInfo: TopicInfo,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     BriefDomain: BriefDomain,
-    ResponseHeaderCache: ResponseHeaderCache,
+    DisableClsLogTopicRequest: DisableClsLogTopicRequest,
+    ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
     DescribeCdnIpRequest: DescribeCdnIpRequest,
     Ipv6: Ipv6,
     StatusCodeCache: StatusCodeCache,
     DescribeIpVisitResponse: DescribeIpVisitResponse,
+    EnableClsLogTopicResponse: EnableClsLogTopicResponse,
+    ListClsLogTopicsResponse: ListClsLogTopicsResponse,
     OverseaConfig: OverseaConfig,
     AddCdnDomainRequest: AddCdnDomainRequest,
+    TopDetailData: TopDetailData,
     ErrorPage: ErrorPage,
     MaxAgeRule: MaxAgeRule,
     DescribePayTypeRequest: DescribePayTypeRequest,
+    DescribeCertDomainsRequest: DescribeCertDomainsRequest,
     DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     AdvancedCache: AdvancedCache,
     StartCdnDomainRequest: StartCdnDomainRequest,
     MapInfo: MapInfo,
+    DescribeCertDomainsResponse: DescribeCertDomainsResponse,
     AuthenticationTypeD: AuthenticationTypeD,
     AuthenticationTypeC: AuthenticationTypeC,
     AuthenticationTypeB: AuthenticationTypeB,
@@ -7817,26 +8891,30 @@ module.exports = {
     DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,
     AddCdnDomainResponse: AddCdnDomainResponse,
+    DomainAreaConfig: DomainAreaConfig,
     ServerCert: ServerCert,
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
+    DisableClsLogTopicResponse: DisableClsLogTopicResponse,
     DetailDomain: DetailDomain,
     GetDisableRecordsResponse: GetDisableRecordsResponse,
+    ResponseHeader: ResponseHeader,
     CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
-    UpdatePayTypeRequest: UpdatePayTypeRequest,
+    ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
     RangeOriginPull: RangeOriginPull,
     ViolationUrl: ViolationUrl,
+    SearchClsLogResponse: SearchClsLogResponse,
     PushUrlsCacheRequest: PushUrlsCacheRequest,
     MainlandConfig: MainlandConfig,
     DescribePushTasksRequest: DescribePushTasksRequest,
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,
     IpFreqLimit: IpFreqLimit,
-    DownstreamCapping: DownstreamCapping,
+    CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CacheOptResult: CacheOptResult,
     StopCdnDomainRequest: StopCdnDomainRequest,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
@@ -7848,15 +8926,19 @@ module.exports = {
     DomainLog: DomainLog,
     GetDisableRecordsRequest: GetDisableRecordsRequest,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
-    ResponseHeader: ResponseHeader,
+    DeleteClsLogTopicResponse: DeleteClsLogTopicResponse,
     DisableCachesResponse: DisableCachesResponse,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
+    EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     CacheKey: CacheKey,
+    DownstreamCapping: DownstreamCapping,
     TopData: TopData,
     CappingRule: CappingRule,
+    ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
     BandwidthAlert: BandwidthAlert,
+    ClsLogObject: ClsLogObject,
     RegionMapRelation: RegionMapRelation,
     PurgePathCacheRequest: PurgePathCacheRequest,
     CdnData: CdnData,
@@ -7865,6 +8947,7 @@ module.exports = {
     PushTask: PushTask,
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,
+    ResponseHeaderCache: ResponseHeaderCache,
     Sort: Sort,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     PushUrlsCacheResponse: PushUrlsCacheResponse,
@@ -7872,10 +8955,14 @@ module.exports = {
     ListTopDataResponse: ListTopDataResponse,
     MaxAge: MaxAge,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
+    LogSetInfo: LogSetInfo,
+    SearchClsLogRequest: SearchClsLogRequest,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,
     AwsPrivateAccess: AwsPrivateAccess,
+    ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
+    ClsSearchLogs: ClsSearchLogs,
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,

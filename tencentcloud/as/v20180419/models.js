@@ -2524,7 +2524,7 @@ class CreateNotificationConfigurationRequest extends  AbstractModel {
         this.NotificationTypes = null;
 
         /**
-         * Array of String | Notification group ID, which is the set of user group IDs and can be queried through the [DescribeUserGroup API](https://cloud.tencent.com/document/api/378/4404).
+         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://cloud.tencent.com/document/product/598/34589) API.
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
@@ -2622,7 +2622,7 @@ class ModifyNotificationConfigurationRequest extends  AbstractModel {
         this.NotificationTypes = null;
 
         /**
-         * Array of String | Notification group ID, which is the set of user group IDs and can be queried through the [DescribeUserGroup API](https://cloud.tencent.com/document/api/378/4404).
+         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://cloud.tencent.com/document/product/598/34589) API.
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
@@ -2772,7 +2772,7 @@ class ModifyScalingPolicyRequest extends  AbstractModel {
         this.MetricAlarm = null;
 
         /**
-         * Array of String | Notification group ID, which is the set of user group IDs and can be queried through the [DescribeUserGroup API](https://cloud.tencent.com/document/api/378/4404).
+         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://cloud.tencent.com/document/product/598/34589) API.
 If you want to clear the user group, you need to pass in the specific string "NULL" to the list.
          * @type {Array.<string> || null}
          */
@@ -4946,7 +4946,7 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.Cooldown = null;
 
         /**
-         * Array of String | Notification group ID, which is the set of user group IDs and can be queried through the [DescribeUserGroup API](https://cloud.tencent.com/document/api/378/4404).
+         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://cloud.tencent.com/document/product/598/34589) API.
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
@@ -5132,6 +5132,62 @@ class DeleteAutoScalingGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Result information of the lifecycle hook action
+ * @class
+ */
+class LifecycleActionResultInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the lifecycle hook
+         * @type {string || null}
+         */
+        this.LifecycleHookId = null;
+
+        /**
+         * ID of the instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether the notification is sent to CMQ successfully
+         * @type {string || null}
+         */
+        this.NotificationResult = null;
+
+        /**
+         * Result of the lifecyle hook action. Values: CONTINUE, ABANDON
+         * @type {string || null}
+         */
+        this.LifecycleActionResult = null;
+
+        /**
+         * Cause of the result
+         * @type {string || null}
+         */
+        this.ResultReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LifecycleHookId = 'LifecycleHookId' in params ? params.LifecycleHookId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NotificationResult = 'NotificationResult' in params ? params.NotificationResult : null;
+        this.LifecycleActionResult = 'LifecycleActionResult' in params ? params.LifecycleActionResult : null;
+        this.ResultReason = 'ResultReason' in params ? params.ResultReason : null;
 
     }
 }
@@ -5752,6 +5808,12 @@ class Activity extends  AbstractModel {
          */
         this.StatusMessageSimplified = null;
 
+        /**
+         * Result of the lifecycle hook action in the scaling activity
+         * @type {Array.<LifecycleActionResultInfo> || null}
+         */
+        this.LifecycleActionResultSet = null;
+
     }
 
     /**
@@ -5781,6 +5843,15 @@ class Activity extends  AbstractModel {
             }
         }
         this.StatusMessageSimplified = 'StatusMessageSimplified' in params ? params.StatusMessageSimplified : null;
+
+        if (params.LifecycleActionResultSet) {
+            this.LifecycleActionResultSet = new Array();
+            for (let z in params.LifecycleActionResultSet) {
+                let obj = new LifecycleActionResultInfo();
+                obj.deserialize(params.LifecycleActionResultSet[z]);
+                this.LifecycleActionResultSet.push(obj);
+            }
+        }
 
     }
 }
@@ -6224,6 +6295,7 @@ module.exports = {
     DescribeLaunchConfigurationsRequest: DescribeLaunchConfigurationsRequest,
     NotificationTarget: NotificationTarget,
     DeleteAutoScalingGroupResponse: DeleteAutoScalingGroupResponse,
+    LifecycleActionResultInfo: LifecycleActionResultInfo,
     AutoScalingGroupAbstract: AutoScalingGroupAbstract,
     EnableAutoScalingGroupRequest: EnableAutoScalingGroupRequest,
     MetricAlarm: MetricAlarm,

@@ -30,7 +30,7 @@ const DescribeLiveCallbackTemplateResponse = models.DescribeLiveCallbackTemplate
 const DeleteLiveSnapshotTemplateRequest = models.DeleteLiveSnapshotTemplateRequest;
 const PushAuthKeyInfo = models.PushAuthKeyInfo;
 const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
-const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
+const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
 const ModifyLivePlayAuthKeyRequest = models.ModifyLivePlayAuthKeyRequest;
 const DescribeLiveDelayInfoListRequest = models.DescribeLiveDelayInfoListRequest;
@@ -47,6 +47,7 @@ const DomainInfo = models.DomainInfo;
 const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesRequest;
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const PublishTime = models.PublishTime;
+const CommonMixOutputParams = models.CommonMixOutputParams;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
 const DescribeLiveDomainRequest = models.DescribeLiveDomainRequest;
 const DescribeLiveStreamPublishedListRequest = models.DescribeLiveStreamPublishedListRequest;
@@ -60,6 +61,7 @@ const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
+const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
@@ -77,8 +79,10 @@ const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
+const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
 const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
+const CommonMixInputParam = models.CommonMixInputParam;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
 const DescribeLiveCertRequest = models.DescribeLiveCertRequest;
@@ -93,8 +97,9 @@ const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
 const DropLiveStreamRequest = models.DropLiveStreamRequest;
+const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
-const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
+const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplateResponse;
 const DescribeLiveTranscodeRulesResponse = models.DescribeLiveTranscodeRulesResponse;
 const AddLiveDomainRequest = models.AddLiveDomainRequest;
@@ -102,7 +107,7 @@ const StreamName = models.StreamName;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
 const DescribeLiveCertResponse = models.DescribeLiveCertResponse;
 const AddLiveDomainResponse = models.AddLiveDomainResponse;
-const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
+const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
@@ -112,7 +117,7 @@ const DescribeLiveForbidStreamListRequest = models.DescribeLiveForbidStreamListR
 const BindLiveDomainCertRequest = models.BindLiveDomainCertRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
-const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
+const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
 const DescribeLiveDomainsRequest = models.DescribeLiveDomainsRequest;
 const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
@@ -120,6 +125,7 @@ const DeleteLiveSnapshotRuleResponse = models.DeleteLiveSnapshotRuleResponse;
 const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
 const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
+const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
 const CertInfo = models.CertInfo;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
 const DescribeLiveDelayInfoListResponse = models.DescribeLiveDelayInfoListResponse;
@@ -128,6 +134,7 @@ const DescribeLiveCallbackRulesRequest = models.DescribeLiveCallbackRulesRequest
 const DescribeLiveTranscodeTemplateResponse = models.DescribeLiveTranscodeTemplateResponse;
 const CreateLiveSnapshotTemplateResponse = models.CreateLiveSnapshotTemplateResponse;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
+const CommonMixControlParams = models.CommonMixControlParams;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
@@ -160,8 +167,9 @@ const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListR
 const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
 const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
 const DeleteLiveCertResponse = models.DeleteLiveCertResponse;
+const CreateCommonMixStreamResponse = models.CreateCommonMixStreamResponse;
 const CreateLiveCallbackTemplateResponse = models.CreateLiveCallbackTemplateResponse;
-const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
+const DescribeLivePushAuthKeyRequest = models.DescribeLivePushAuthKeyRequest;
 const DescribeLiveCallbackTemplateRequest = models.DescribeLiveCallbackTemplateRequest;
 const ModifyLiveSnapshotTemplateRequest = models.ModifyLiveSnapshotTemplateRequest;
 const CreateLiveRecordRuleResponse = models.CreateLiveRecordRuleResponse;
@@ -180,7 +188,8 @@ const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesRespon
 const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
 const DeleteLiveDomainResponse = models.DeleteLiveDomainResponse;
-const DescribeLivePushAuthKeyRequest = models.DescribeLivePushAuthKeyRequest;
+const CommonMixCropParams = models.CommonMixCropParams;
+const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
 const DeleteLiveCertRequest = models.DeleteLiveCertRequest;
 const SnapshotTemplateInfo = models.SnapshotTemplateInfo;
 const DeleteLiveRecordRuleResponse = models.DeleteLiveRecordRuleResponse;
@@ -253,6 +262,17 @@ class LiveClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the playback authentication key.
+     * @param {ModifyLivePlayAuthKeyRequest} req
+     * @param {function(string, ModifyLivePlayAuthKeyResponse):void} cb
+     * @public
+     */
+    ModifyLivePlayAuthKey(req, cb) {
+        let resp = new ModifyLivePlayAuthKeyResponse();
+        this.request("ModifyLivePlayAuthKey", req, resp, cb);
+    }
+
+    /**
      * - Prerequisites
   1. Recording files are stored on the VOD platform, so if you need to use the recording feature, you must first activate the VOD service.
   2. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) will be charged according to the VOD billing mode. For more information, please see the [corresponding document](https://cloud.tencent.com/document/product/266/2838).
@@ -289,15 +309,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * After a callback template is created and a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](/document/product/267/32638) API and bind the template ID to the domain name/path.
-<br>Callback protocol-related document: [Event Message Notification](/document/product/267/32744).
-     * @param {CreateLiveCallbackTemplateRequest} req
-     * @param {function(string, CreateLiveCallbackTemplateResponse):void} cb
+     * After a watermark is added and a watermark ID is successfully returned, you need to call the [CreateLiveWatermarkRule](/document/product/267/32629) API and bind the watermark ID to the stream.
+     * @param {AddLiveWatermarkRequest} req
+     * @param {function(string, AddLiveWatermarkResponse):void} cb
      * @public
      */
-    CreateLiveCallbackTemplate(req, cb) {
-        let resp = new CreateLiveCallbackTemplateResponse();
-        this.request("CreateLiveCallbackTemplate", req, resp, cb);
+    AddLiveWatermark(req, cb) {
+        let resp = new AddLiveWatermarkResponse();
+        this.request("AddLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -358,7 +377,7 @@ Note: This API can filter by IsFilter and return the push history.
     }
 
     /**
-     * This API is used to get the list of forbidden streams.
+     * This API is used to get the forbidden stream list.
      * @param {DescribeLiveForbidStreamListRequest} req
      * @param {function(string, DescribeLiveForbidStreamListResponse):void} cb
      * @public
@@ -369,14 +388,15 @@ Note: This API can filter by IsFilter and return the push history.
     }
 
     /**
-     * This API is used to modify the playback authentication key.
-     * @param {ModifyLivePlayAuthKeyRequest} req
-     * @param {function(string, ModifyLivePlayAuthKeyResponse):void} cb
+     * This API is used to create a general stream mix. It can be used basically in the same way as the legacy `mix_streamv2.cancel_mix_stream` API.
+Note: currently, up to 16 streams can be mixed.
+     * @param {CreateCommonMixStreamRequest} req
+     * @param {function(string, CreateCommonMixStreamResponse):void} cb
      * @public
      */
-    ModifyLivePlayAuthKey(req, cb) {
-        let resp = new ModifyLivePlayAuthKeyResponse();
-        this.request("ModifyLivePlayAuthKey", req, resp, cb);
+    CreateCommonMixStream(req, cb) {
+        let resp = new CreateCommonMixStreamResponse();
+        this.request("CreateCommonMixStream", req, resp, cb);
     }
 
     /**
@@ -416,8 +436,9 @@ Currently, this API only supports stream granularity, and the feature supporting
     }
 
     /**
-     * To create a screencapturing rule, you need to first call the [CreateLiveSnapshotTemplate](/document/product/267/32624) API to create a screencapturing template and bind the returned template ID to the stream.
-<br>Screencapturing-related document: [LVB Screencapturing](/document/product/267/32737).
+     * This API is used to create a screencapturing rule. You need to first call the [CreateLiveSnapshotTemplate](/document/product/267/32624) API to create a screencapturing template to bind the returned template ID to the stream.
+<br>Screencapturing document: [LVB Screencapturing](/document/product/267/32737).
+Note: only one screencapturing template can be associated with one domain name.
      * @param {CreateLiveSnapshotRuleRequest} req
      * @param {function(string, CreateLiveSnapshotRuleResponse):void} cb
      * @public
@@ -650,7 +671,7 @@ Note: you need to call the `CreateLiveCert` API first to add a certificate. Afte
     }
 
     /**
-     * This API is used to get the list of recording templates.
+     * This API is used to get the recording template list.
      * @param {DescribeLiveRecordTemplatesRequest} req
      * @param {function(string, DescribeLiveRecordTemplatesResponse):void} cb
      * @public
@@ -773,14 +794,15 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
-     * After a watermark is added and a watermark ID is successfully returned, you need to call the [CreateLiveWatermarkRule](/document/product/267/32629) API and bind the watermark ID to the stream.
-     * @param {AddLiveWatermarkRequest} req
-     * @param {function(string, AddLiveWatermarkResponse):void} cb
+     * This API is used to create a callback template. After a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](/document/product/267/32638) API to bind the template ID to the domain name/path.
+<br>Callback protocol document: [Event Message Notification](/document/product/267/32744).
+     * @param {CreateLiveCallbackTemplateRequest} req
+     * @param {function(string, CreateLiveCallbackTemplateResponse):void} cb
      * @public
      */
-    AddLiveWatermark(req, cb) {
-        let resp = new AddLiveWatermarkResponse();
-        this.request("AddLiveWatermark", req, resp, cb);
+    CreateLiveCallbackTemplate(req, cb) {
+        let resp = new CreateLiveCallbackTemplateResponse();
+        this.request("CreateLiveCallbackTemplate", req, resp, cb);
     }
 
     /**
@@ -814,6 +836,17 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     EnableLiveDomain(req, cb) {
         let resp = new EnableLiveDomainResponse();
         this.request("EnableLiveDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel a stream mix. It can be used basically in the same way as `mix_streamv2.cancel_mix_stream`.
+     * @param {CancelCommonMixStreamRequest} req
+     * @param {function(string, CancelCommonMixStreamResponse):void} cb
+     * @public
+     */
+    CancelCommonMixStream(req, cb) {
+        let resp = new CancelCommonMixStreamResponse();
+        this.request("CancelCommonMixStream", req, resp, cb);
     }
 
     /**
@@ -906,7 +939,7 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
-     * This API is used to return the list of live streams.
+     * This API is used to return the live stream list.
      * @param {DescribeLiveStreamOnlineListRequest} req
      * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
      * @public
@@ -962,7 +995,7 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
-     * This API is used to get the list of transcoding templates.
+     * This API is used to get the transcoding template list.
      * @param {DescribeLiveTranscodeTemplatesRequest} req
      * @param {function(string, DescribeLiveTranscodeTemplatesResponse):void} cb
      * @public

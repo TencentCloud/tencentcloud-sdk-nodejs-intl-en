@@ -16,30 +16,41 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const InstanceLog = models.InstanceLog;
+const LocalDiskInfo = models.LocalDiskInfo;
+const TaskDetail = models.TaskDetail;
 const NodeInfo = models.NodeInfo;
-const RestartInstanceResponse = models.RestartInstanceResponse;
-const DictInfo = models.DictInfo;
+const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
+const OperationDetail = models.OperationDetail;
 const EsPublicAcl = models.EsPublicAcl;
+const DictInfo = models.DictInfo;
+const RestartInstanceResponse = models.RestartInstanceResponse;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const EsAcl = models.EsAcl;
+const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
+const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
 const CosBackup = models.CosBackup;
 const TagInfo = models.TagInfo;
-const UpdateInstanceRequest = models.UpdateInstanceRequest;
+const KeyValue = models.KeyValue;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const InstanceInfo = models.InstanceInfo;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
 const RestartInstanceRequest = models.RestartInstanceRequest;
 const ZoneDetail = models.ZoneDetail;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const UpdateInstanceRequest = models.UpdateInstanceRequest;
 const EsDictionaryInfo = models.EsDictionaryInfo;
+const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
-const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
+const EsAcl = models.EsAcl;
 const MasterNodeInfo = models.MasterNodeInfo;
 const DeleteInstanceRequest = models.DeleteInstanceRequest;
+const SubTaskDetail = models.SubTaskDetail;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const Operation = models.Operation;
 
 
 /**
@@ -53,14 +64,14 @@ class EsClient extends AbstractClient {
     }
     
     /**
-     * This API is used to upgrade ES cluster version
-     * @param {UpgradeInstanceRequest} req
-     * @param {function(string, UpgradeInstanceResponse):void} cb
+     * This API is used to query the operation history of an instance by specified criteria.
+     * @param {DescribeInstanceOperationsRequest} req
+     * @param {function(string, DescribeInstanceOperationsResponse):void} cb
      * @public
      */
-    UpgradeInstance(req, cb) {
-        let resp = new UpgradeInstanceResponse();
-        this.request("UpgradeInstance", req, resp, cb);
+    DescribeInstanceOperations(req, cb) {
+        let resp = new DescribeInstanceOperationsResponse();
+        this.request("DescribeInstanceOperations", req, resp, cb);
     }
 
     /**
@@ -83,6 +94,17 @@ class EsClient extends AbstractClient {
     CreateInstance(req, cb) {
         let resp = new CreateInstanceResponse();
         this.request("CreateInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade ES cluster version
+     * @param {UpgradeInstanceRequest} req
+     * @param {function(string, UpgradeInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeInstance(req, cb) {
+        let resp = new UpgradeInstanceResponse();
+        this.request("UpgradeInstance", req, resp, cb);
     }
 
     /**
@@ -134,6 +156,17 @@ Only one of the parameters or parameter combinations above can be passed in at a
     RestartInstance(req, cb) {
         let resp = new RestartInstanceResponse();
         this.request("RestartInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the eligible ES cluster logs in the current region.
+     * @param {DescribeInstanceLogsRequest} req
+     * @param {function(string, DescribeInstanceLogsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceLogs(req, cb) {
+        let resp = new DescribeInstanceLogsResponse();
+        this.request("DescribeInstanceLogs", req, resp, cb);
     }
 
 

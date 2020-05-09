@@ -24,6 +24,7 @@ const UrlRecord = models.UrlRecord;
 const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
 const Authentication = models.Authentication;
 const Https = models.Https;
+const ReportData = models.ReportData;
 const CreateClsLogTopicResponse = models.CreateClsLogTopicResponse;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
 const DomainFilter = models.DomainFilter;
@@ -47,6 +48,7 @@ const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
 const TopicInfo = models.TopicInfo;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
 const BriefDomain = models.BriefDomain;
+const DescribeReportDataResponse = models.DescribeReportDataResponse;
 const DisableClsLogTopicRequest = models.DisableClsLogTopicRequest;
 const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
 const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
@@ -93,6 +95,7 @@ const ViolationUrl = models.ViolationUrl;
 const SearchClsLogResponse = models.SearchClsLogResponse;
 const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
 const MainlandConfig = models.MainlandConfig;
+const DescribeReportDataRequest = models.DescribeReportDataRequest;
 const DescribePushTasksRequest = models.DescribePushTasksRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
@@ -131,6 +134,7 @@ const PushTask = models.PushTask;
 const TimestampData = models.TimestampData;
 const StartCdnDomainResponse = models.StartCdnDomainResponse;
 const ResponseHeaderCache = models.ResponseHeaderCache;
+const SecurityConfig = models.SecurityConfig;
 const Sort = models.Sort;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
@@ -558,6 +562,17 @@ This API is in beta test and not fully available yet. Please stay tuned.
     EnableClsLogTopic(req, cb) {
         let resp = new EnableClsLogTopicResponse();
         this.request("EnableClsLogTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the daily/weekly/monthly report data at domain name/project levels.
+     * @param {DescribeReportDataRequest} req
+     * @param {function(string, DescribeReportDataResponse):void} cb
+     * @public
+     */
+    DescribeReportData(req, cb) {
+        let resp = new DescribeReportDataResponse();
+        this.request("DescribeReportData", req, resp, cb);
     }
 
     /**

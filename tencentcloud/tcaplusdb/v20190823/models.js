@@ -1517,6 +1517,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SortRule = null;
 
+        /**
+         * Distributed index information of table
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbClusterInfoStruct = null;
+
     }
 
     /**
@@ -1565,6 +1572,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ApiAccessId = 'ApiAccessId' in params ? params.ApiAccessId : null;
         this.SortFieldNum = 'SortFieldNum' in params ? params.SortFieldNum : null;
         this.SortRule = 'SortRule' in params ? params.SortRule : null;
+        this.DbClusterInfoStruct = 'DbClusterInfoStruct' in params ? params.DbClusterInfoStruct : null;
 
     }
 }

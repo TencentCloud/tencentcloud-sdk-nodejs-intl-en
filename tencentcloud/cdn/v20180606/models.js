@@ -511,6 +511,69 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CDN report data
+ * @class
+ */
+class ReportData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID/domain name ID.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Project name/domain name.
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Total traffic/max bandwidth in bytes and bps, respectively.
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * Percentage of individual resource out of all resources.
+         * @type {number || null}
+         */
+        this.Percentage = null;
+
+        /**
+         * Total billable traffic/max billable bandwidth in bytes and bps, respectively.
+         * @type {number || null}
+         */
+        this.BillingValue = null;
+
+        /**
+         * Percentage of billable amount out of total amount.
+         * @type {number || null}
+         */
+        this.BillingPercentage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Percentage = 'Percentage' in params ? params.Percentage : null;
+        this.BillingValue = 'BillingValue' in params ? params.BillingValue : null;
+        this.BillingPercentage = 'BillingPercentage' in params ? params.BillingPercentage : null;
+
+    }
+}
+
+/**
  * CreateClsLogTopic response structure.
  * @class
  */
@@ -1845,6 +1908,64 @@ global: locked globally
         this.Disable = 'Disable' in params ? params.Disable : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Readonly = 'Readonly' in params ? params.Readonly : null;
+
+    }
+}
+
+/**
+ * DescribeReportData response structure.
+ * @class
+ */
+class DescribeReportDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name-level data details.
+         * @type {Array.<ReportData> || null}
+         */
+        this.DomainReport = null;
+
+        /**
+         * Project-level data details
+         * @type {Array.<ReportData> || null}
+         */
+        this.ProjectReport = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainReport) {
+            this.DomainReport = new Array();
+            for (let z in params.DomainReport) {
+                let obj = new ReportData();
+                obj.deserialize(params.DomainReport[z]);
+                this.DomainReport.push(obj);
+            }
+        }
+
+        if (params.ProjectReport) {
+            this.ProjectReport = new Array();
+            for (let z in params.ProjectReport) {
+                let obj = new ReportData();
+                obj.deserialize(params.ProjectReport[z]);
+                this.ProjectReport.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4260,6 +4381,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.AwsPrivateAccess = null;
 
+        /**
+         * SCDN configuration
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {SecurityConfig || null}
+         */
+        this.SecurityConfig = null;
+
+        /**
+         * 
+         * @type {ImageOptimization || null}
+         */
+        this.ImageOptimization = null;
+
+        /**
+         * 
+         * @type {UserAgentFilter || null}
+         */
+        this.UserAgentFilter = null;
+
     }
 
     /**
@@ -4448,6 +4588,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new AwsPrivateAccess();
             obj.deserialize(params.AwsPrivateAccess)
             this.AwsPrivateAccess = obj;
+        }
+
+        if (params.SecurityConfig) {
+            let obj = new SecurityConfig();
+            obj.deserialize(params.SecurityConfig)
+            this.SecurityConfig = obj;
+        }
+
+        if (params.ImageOptimization) {
+            let obj = new ImageOptimization();
+            obj.deserialize(params.ImageOptimization)
+            this.ImageOptimization = obj;
+        }
+
+        if (params.UserAgentFilter) {
+            let obj = new UserAgentFilter();
+            obj.deserialize(params.UserAgentFilter)
+            this.UserAgentFilter = obj;
         }
 
     }
@@ -5399,6 +5557,81 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.VideoSeek)
             this.VideoSeek = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeReportData request structure.
+ * @class
+ */
+class DescribeReportDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Report type
+daily: daily report
+weekly: weekly report
+monthly: monthly report
+         * @type {string || null}
+         */
+        this.ReportType = null;
+
+        /**
+         * Domain name acceleration region
+mainland: in Mainland China
+overseas: outside Mainland China
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of data entries. Default value: 1000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filters by project ID
+         * @type {number || null}
+         */
+        this.Project = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ReportType = 'ReportType' in params ? params.ReportType : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Project = 'Project' in params ? params.Project : null;
 
     }
 }
@@ -7152,6 +7385,34 @@ off: disabled
 }
 
 /**
+ * SCDN configuration
+ * @class
+ */
+class SecurityConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on|off
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Sorting conditions for query results.
  * @class
  */
@@ -8841,6 +9102,7 @@ module.exports = {
     UpdatePayTypeRequest: UpdatePayTypeRequest,
     Authentication: Authentication,
     Https: Https,
+    ReportData: ReportData,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
@@ -8864,6 +9126,7 @@ module.exports = {
     TopicInfo: TopicInfo,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     BriefDomain: BriefDomain,
+    DescribeReportDataResponse: DescribeReportDataResponse,
     DisableClsLogTopicRequest: DisableClsLogTopicRequest,
     ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
     DescribeCdnIpRequest: DescribeCdnIpRequest,
@@ -8910,6 +9173,7 @@ module.exports = {
     SearchClsLogResponse: SearchClsLogResponse,
     PushUrlsCacheRequest: PushUrlsCacheRequest,
     MainlandConfig: MainlandConfig,
+    DescribeReportDataRequest: DescribeReportDataRequest,
     DescribePushTasksRequest: DescribePushTasksRequest,
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,
@@ -8948,6 +9212,7 @@ module.exports = {
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,
     ResponseHeaderCache: ResponseHeaderCache,
+    SecurityConfig: SecurityConfig,
     Sort: Sort,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     PushUrlsCacheResponse: PushUrlsCacheResponse,

@@ -16,17 +16,80 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const GetMonitorDataRequest = models.GetMonitorDataRequest;
+const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual;
+const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
+const DescribePolicyConditionListRequest = models.DescribePolicyConditionListRequest;
+const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
+const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
+const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
+const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
 const Instance = models.Instance;
+const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
+const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
+const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric;
+const CreatePolicyGroupRequest = models.CreatePolicyGroupRequest;
+const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
+const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
+const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
+const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
+const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
+const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
+const DescribeBasicAlarmListRequest = models.DescribeBasicAlarmListRequest;
+const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
+const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
+const DimensionsDesc = models.DimensionsDesc;
+const DescribePolicyGroupListGroup = models.DescribePolicyGroupListGroup;
+const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
+const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const PeriodsSt = models.PeriodsSt;
-const Dimension = models.Dimension;
-const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
+const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
+const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
+const MetricObjectMeaning = models.MetricObjectMeaning;
+const MetricDatum = models.MetricDatum;
+const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest;
+const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
+const DescribeBindingPolicyObjectListInstanceGroup = models.DescribeBindingPolicyObjectListInstanceGroup;
+const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse;
+const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
+const DescribePolicyConditionListConfigManualCalcType = models.DescribePolicyConditionListConfigManualCalcType;
+const PutMonitorDataResponse = models.PutMonitorDataResponse;
+const ReceiverInfo = models.ReceiverInfo;
+const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
+const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
+const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
+const DescribeBasicAlarmListResponse = models.DescribeBasicAlarmListResponse;
+const DescribeBindingPolicyObjectListDimension = models.DescribeBindingPolicyObjectListDimension;
+const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition;
 const GetMonitorDataResponse = models.GetMonitorDataResponse;
 const MetricSet = models.MetricSet;
-const DataPoint = models.DataPoint;
-const MetricObjectMeaning = models.MetricObjectMeaning;
-const DimensionsDesc = models.DimensionsDesc;
+const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse;
+const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
+const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjectListRequest;
+const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
+const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const InstanceGroup = models.InstanceGroup;
+const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
+const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
+const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
+const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
+const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
+const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
+const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
+const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
+const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
+const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
+const Dimension = models.Dimension;
+const DataPoint = models.DataPoint;
+const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
+const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyConditionListConfigManualStatType;
+const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
+const DescribePolicyConditionListConfigManualCalcValue = models.DescribePolicyConditionListConfigManualCalcValue;
+const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
+const DescribePolicyGroupListGroupInstanceGroup = models.DescribePolicyGroupListGroupInstanceGroup;
+const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse;
 
 
 /**
@@ -40,6 +103,94 @@ class MonitorClient extends AbstractClient {
     }
     
     /**
+     * This API is used to get the list of product events by page.
+     * @param {DescribeProductEventListRequest} req
+     * @param {function(string, DescribeProductEventListResponse):void} cb
+     * @public
+     */
+    DescribeProductEventList(req, cb) {
+        let resp = new DescribeProductEventListResponse();
+        this.request("DescribeProductEventList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the platform event list.
+     * @param {DescribeAccidentEventListRequest} req
+     * @param {function(string, DescribeAccidentEventListResponse):void} cb
+     * @public
+     */
+    DescribeAccidentEventList(req, cb) {
+        let resp = new DescribeAccidentEventListResponse();
+        this.request("DescribeAccidentEventList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an object that is bound to a policy.
+     * @param {UnBindingPolicyObjectRequest} req
+     * @param {function(string, UnBindingPolicyObjectResponse):void} cb
+     * @public
+     */
+    UnBindingPolicyObject(req, cb) {
+        let resp = new UnBindingPolicyObjectResponse();
+        this.request("UnBindingPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind an alarm policy to a specific object.
+     * @param {BindingPolicyObjectRequest} req
+     * @param {function(string, BindingPolicyObjectResponse):void} cb
+     * @public
+     */
+    BindingPolicyObject(req, cb) {
+        let resp = new BindingPolicyObjectResponse();
+        this.request("BindingPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify alarm recipients.
+     * @param {ModifyAlarmReceiversRequest} req
+     * @param {function(string, ModifyAlarmReceiversResponse):void} cb
+     * @public
+     */
+    ModifyAlarmReceivers(req, cb) {
+        let resp = new ModifyAlarmReceiversResponse();
+        this.request("ModifyAlarmReceivers", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the bound object list.
+     * @param {DescribeBindingPolicyObjectListRequest} req
+     * @param {function(string, DescribeBindingPolicyObjectListResponse):void} cb
+     * @public
+     */
+    DescribeBindingPolicyObjectList(req, cb) {
+        let resp = new DescribeBindingPolicyObjectListResponse();
+        this.request("DescribeBindingPolicyObjectList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to send a custom alarm message.
+     * @param {SendCustomAlarmMsgRequest} req
+     * @param {function(string, SendCustomAlarmMsgResponse):void} cb
+     * @public
+     */
+    SendCustomAlarmMsg(req, cb) {
+        let resp = new SendCustomAlarmMsgResponse();
+        this.request("SendCustomAlarmMsg", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an alarm policy group.
+     * @param {DeletePolicyGroupRequest} req
+     * @param {function(string, DeletePolicyGroupResponse):void} cb
+     * @public
+     */
+    DeletePolicyGroup(req, cb) {
+        let resp = new DeletePolicyGroupResponse();
+        this.request("DeletePolicyGroup", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the details of basic metrics.
      * @param {DescribeBaseMetricsRequest} req
      * @param {function(string, DescribeBaseMetricsResponse):void} cb
@@ -48,6 +199,39 @@ class MonitorClient extends AbstractClient {
     DescribeBaseMetrics(req, cb) {
         let resp = new DescribeBaseMetricsResponse();
         this.request("DescribeBaseMetrics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get details of a basic policy group.
+     * @param {DescribePolicyGroupInfoRequest} req
+     * @param {function(string, DescribePolicyGroupInfoResponse):void} cb
+     * @public
+     */
+    DescribePolicyGroupInfo(req, cb) {
+        let resp = new DescribePolicyGroupInfoResponse();
+        this.request("DescribePolicyGroupInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of basic policy alarm groups.
+     * @param {DescribePolicyGroupListRequest} req
+     * @param {function(string, DescribePolicyGroupListResponse):void} cb
+     * @public
+     */
+    DescribePolicyGroupList(req, cb) {
+        let resp = new DescribePolicyGroupListResponse();
+        this.request("DescribePolicyGroupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the basic alarm list.
+     * @param {DescribeBasicAlarmListRequest} req
+     * @param {function(string, DescribeBasicAlarmListResponse):void} cb
+     * @public
+     */
+    DescribeBasicAlarmList(req, cb) {
+        let resp = new DescribeBasicAlarmListResponse();
+        this.request("DescribeBasicAlarmList", req, resp, cb);
     }
 
     /**
@@ -61,6 +245,56 @@ If you need to call a lot of metrics and objects, there may be cases where the c
     GetMonitorData(req, cb) {
         let resp = new GetMonitorDataResponse();
         this.request("GetMonitorData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to customize monitoring data to be reported. The default API request rate limit is 50 requests/sec.
+The default upper limit on metrics of a single tenant is 100.
+A maximum of 30 metric/value pairs can be reported at a time. When an error is returned for a request, no metrics/values in the request will be saved.
+
+The reporting timestamp is the timestamp when you want to save the data. It is recommended that you construct a timestamp at integer minutes.
+The time range of a timestamp is from 300 seconds before the current time to the current time.
+The data of the same IP metric/value pair must be reported by minute in chronological order.
+     * @param {PutMonitorDataRequest} req
+     * @param {function(string, PutMonitorDataResponse):void} cb
+     * @public
+     */
+    PutMonitorData(req, cb) {
+        let resp = new PutMonitorDataResponse();
+        this.request("PutMonitorData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add a policy group.
+     * @param {CreatePolicyGroupRequest} req
+     * @param {function(string, CreatePolicyGroupResponse):void} cb
+     * @public
+     */
+    CreatePolicyGroup(req, cb) {
+        let resp = new CreatePolicyGroupResponse();
+        this.request("CreatePolicyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete all bound objects.
+     * @param {UnBindingAllPolicyObjectRequest} req
+     * @param {function(string, UnBindingAllPolicyObjectResponse):void} cb
+     * @public
+     */
+    UnBindingAllPolicyObject(req, cb) {
+        let resp = new UnBindingAllPolicyObjectResponse();
+        this.request("UnBindingAllPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get basic alarm policy conditions.
+     * @param {DescribePolicyConditionListRequest} req
+     * @param {function(string, DescribePolicyConditionListResponse):void} cb
+     * @public
+     */
+    DescribePolicyConditionList(req, cb) {
+        let resp = new DescribePolicyConditionListResponse();
+        this.request("DescribePolicyConditionList", req, resp, cb);
     }
 
 

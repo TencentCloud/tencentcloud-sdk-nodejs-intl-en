@@ -101,6 +101,34 @@ class AlgorithmInfo extends  AbstractModel {
 }
 
 /**
+ * EnableWhiteBoxKeys response structure.
+ * @class
+ */
+class EnableWhiteBoxKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateAlias request structure.
  * @class
  */
@@ -122,12 +150,18 @@ class UpdateAliasRequest extends  AbstractModel {
 }
 
 /**
- * ReEncrypt request structure.
+ * DisableWhiteBoxKey request structure.
  * @class
  */
-class ReEncryptRequest extends  AbstractModel {
+class DisableWhiteBoxKeyRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Globally unique white-box key ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
 
     }
 
@@ -138,6 +172,105 @@ class ReEncryptRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * White-box key information
+ * @class
+ */
+class WhiteboxKeyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Globally unique white-box key ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * Unique alias that makes a key more recognizable and understandable. This parameter should be 1 to 60 letters, digits, `-`, and `_`; it must begin with a letter or digit and cannot be left empty.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Creator
+         * @type {number || null}
+         */
+        this.CreatorUin = null;
+
+        /**
+         * Key description information
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Key creation time in Unix timestamp
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * White-box key status. Valid values: Enabled, Disabled
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creator
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * Key algorithm type
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * Base64-encoded white-box encryption key
+         * @type {string || null}
+         */
+        this.EncryptKey = null;
+
+        /**
+         * Base64-encoded white-box decryption key
+         * @type {string || null}
+         */
+        this.DecryptKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.EncryptKey = 'EncryptKey' in params ? params.EncryptKey : null;
+        this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -187,6 +320,34 @@ class GenerateDataKeyRequest extends  AbstractModel {
         this.KeySpec = 'KeySpec' in params ? params.KeySpec : null;
         this.NumberOfBytes = 'NumberOfBytes' in params ? params.NumberOfBytes : null;
         this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+
+    }
+}
+
+/**
+ * EnableWhiteBoxKey request structure.
+ * @class
+ */
+class EnableWhiteBoxKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Globally unique white-box key ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -283,6 +444,48 @@ class AsymmetricRsaDecryptRequest extends  AbstractModel {
 }
 
 /**
+ * CreateWhiteBoxKey request structure.
+ * @class
+ */
+class CreateWhiteBoxKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique alias that makes a key more recognizable and understandable. This parameter should be 1 to 60 letters, digits, `-`, and `_`; it must begin with a letter or digit and cannot be left empty.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * All algorithm types for creating keys. Valid values: AES_256, SM4
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * Key description of up to 1024 bytes
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * EnableKeyRotation request structure.
  * @class
  */
@@ -325,6 +528,49 @@ class EnableKeyRotationResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxKeyDetails response structure.
+ * @class
+ */
+class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * White-box key information list
+         * @type {Array.<WhiteboxKeyInfo> || null}
+         */
+        this.KeyInfos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.KeyInfos) {
+            this.KeyInfos = new Array();
+            for (let z in params.KeyInfos) {
+                let obj = new WhiteboxKeyInfo();
+                obj.deserialize(params.KeyInfos[z]);
+                this.KeyInfos.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -381,6 +627,41 @@ class CreateKeyRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateKeyDescription request structure.
+ * @class
+ */
+class UpdateKeyDescriptionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * ID of the CMK for which to modify the description
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
  * EnableKeys response structure.
  * @class
  */
@@ -409,6 +690,83 @@ class EnableKeysResponse extends  AbstractModel {
 }
 
 /**
+ * ListKeys response structure.
+ * @class
+ */
+class ListKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableWhiteBoxKey response structure.
+ * @class
+ */
+class DisableWhiteBoxKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Encrypt request structure.
+ * @class
+ */
+class EncryptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DisableKey response structure.
  * @class
  */
@@ -432,6 +790,34 @@ class DisableKeyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxKey request structure.
+ * @class
+ */
+class DescribeWhiteBoxKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Globally unique white-box key ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -474,6 +860,34 @@ class GetParametersForImportRequest extends  AbstractModel {
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.WrappingAlgorithm = 'WrappingAlgorithm' in params ? params.WrappingAlgorithm : null;
         this.WrappingKeySpec = 'WrappingKeySpec' in params ? params.WrappingKeySpec : null;
+
+    }
+}
+
+/**
+ * DisableWhiteBoxKeys response structure.
+ * @class
+ */
+class DisableWhiteBoxKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -563,6 +977,27 @@ class ReEncryptResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeWhiteBoxServiceStatus request structure.
+ * @class
+ */
+class DescribeWhiteBoxServiceStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeKey request structure.
  * @class
  */
@@ -612,6 +1047,48 @@ class CancelKeyDeletionRequest extends  AbstractModel {
 }
 
 /**
+ * EncryptByWhiteBox request structure.
+ * @class
+ */
+class EncryptByWhiteBoxRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Globally unique white-box key ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * Base64-encoded text to be encrypted. The size of the original text cannot exceed 4 KB.
+         * @type {string || null}
+         */
+        this.PlainText = null;
+
+        /**
+         * Base64-encoded initialization vector of 16 bytes, which will be used by the encryption algorithm. If this parameter is not passed in, the backend service will generate a random one. You should save this value as a parameter for decryption.
+         * @type {string || null}
+         */
+        this.InitializationVector = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.PlainText = 'PlainText' in params ? params.PlainText : null;
+        this.InitializationVector = 'InitializationVector' in params ? params.InitializationVector : null;
+
+    }
+}
+
+/**
  * GenerateRandom request structure.
  * @class
  */
@@ -635,6 +1112,127 @@ class GenerateRandomRequest extends  AbstractModel {
             return;
         }
         this.NumberOfBytes = 'NumberOfBytes' in params ? params.NumberOfBytes : null;
+
+    }
+}
+
+/**
+ * CMK attribute information
+ * @class
+ */
+class KeyMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport.
+         * @type {string || null}
+         */
+        this.KeyState = null;
+
+        /**
+         * CMK purpose. Valid values: ENCRYPT_DECRYPT, ASYMMETRIC_DECRYPT_RSA_2048, ASYMMETRIC_DECRYPT_SM2
+         * @type {string || null}
+         */
+        this.KeyUsage = null;
+
+        /**
+         * CMK type. 2: FIPS-compliant; 4: SM-CRYPTO
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CreatorUin = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.KeyRotationEnabled = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.NextRotateTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DeletionDate = null;
+
+        /**
+         * CMK key material type. TENCENT_KMS: created by KMS; EXTERNAL: imported by user.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Origin = null;
+
+        /**
+         * It’s valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ValidTo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.KeyState = 'KeyState' in params ? params.KeyState : null;
+        this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
+        this.KeyRotationEnabled = 'KeyRotationEnabled' in params ? params.KeyRotationEnabled : null;
+        this.Owner = 'Owner' in params ? params.Owner : null;
+        this.NextRotateTime = 'NextRotateTime' in params ? params.NextRotateTime : null;
+        this.DeletionDate = 'DeletionDate' in params ? params.DeletionDate : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
+        this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
 
     }
 }
@@ -754,33 +1352,18 @@ class EnableKeyResponse extends  AbstractModel {
 }
 
 /**
- * ScheduleKeyDeletion request structure.
+ * GenerateRandom response structure.
  * @class
  */
-class ScheduleKeyDeletionRequest extends  AbstractModel {
+class GenerateRandomResponse extends  AbstractModel {
     constructor(){
         super();
 
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
- * DisableKeys response structure.
- * @class
- */
-class DisableKeysResponse extends  AbstractModel {
-    constructor(){
-        super();
+        /**
+         * Base64-encoded plaintext of the randomly generated number. You need to Base64-decode it to get the plaintext.
+         * @type {string || null}
+         */
+        this.Plaintext = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -797,6 +1380,42 @@ class DisableKeysResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxDecryptKey response structure.
+ * @class
+ */
+class DescribeWhiteBoxDecryptKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded white-box decryption key
+         * @type {string || null}
+         */
+        this.DecryptKey = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -852,6 +1471,27 @@ class ImportKeyMaterialRequest extends  AbstractModel {
 }
 
 /**
+ * EnableKey request structure.
+ * @class
+ */
+class EnableKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * GetKeyRotationStatus response structure.
  * @class
  */
@@ -874,48 +1514,6 @@ class GetKeyRotationStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * AsymmetricRsaDecrypt response structure.
- * @class
- */
-class AsymmetricRsaDecryptResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique CMK ID
-         * @type {string || null}
-         */
-        this.KeyId = null;
-
-        /**
-         * Base64-encoded plaintext after decryption
-         * @type {string || null}
-         */
-        this.Plaintext = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -950,10 +1548,10 @@ class ImportKeyMaterialResponse extends  AbstractModel {
 }
 
 /**
- * Encrypt request structure.
+ * DisableKey request structure.
  * @class
  */
-class EncryptRequest extends  AbstractModel {
+class DisableKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -966,6 +1564,102 @@ class EncryptRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxKey response structure.
+ * @class
+ */
+class DescribeWhiteBoxKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * White-box key information
+         * @type {WhiteboxKeyInfo || null}
+         */
+        this.KeyInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.KeyInfo) {
+            let obj = new WhiteboxKeyInfo();
+            obj.deserialize(params.KeyInfo)
+            this.KeyInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetKeyRotationStatus request structure.
+ * @class
+ */
+class GetKeyRotationStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxServiceStatus response structure.
+ * @class
+ */
+class DescribeWhiteBoxServiceStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the user's white-box key service is available
+         * @type {boolean || null}
+         */
+        this.ServiceEnabled = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1034,12 +1728,18 @@ class DecryptResponse extends  AbstractModel {
 }
 
 /**
- * EnableKey request structure.
+ * DeleteWhiteBoxKey response structure.
  * @class
  */
-class EnableKeyRequest extends  AbstractModel {
+class DeleteWhiteBoxKeyResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1050,17 +1750,31 @@ class EnableKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * GetKeyRotationStatus request structure.
+ * DescribeKey response structure.
  * @class
  */
-class GetKeyRotationStatusRequest extends  AbstractModel {
+class DescribeKeyResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Key attribute information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {KeyMetadata || null}
+         */
+        this.KeyMetadata = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1071,6 +1785,83 @@ class GetKeyRotationStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.KeyMetadata) {
+            let obj = new KeyMetadata();
+            obj.deserialize(params.KeyMetadata)
+            this.KeyMetadata = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableWhiteBoxKeys request structure.
+ * @class
+ */
+class EnableWhiteBoxKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of globally unique white-box key IDs. Note: you should make sure that all provided `KeyId` values are in valid format, unique, and actually exist. Up to 50 ones are allowed.
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+    }
+}
+
+/**
+ * EncryptByWhiteBox response structure.
+ * @class
+ */
+class EncryptByWhiteBoxResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded initialization vector, which will be used by the encryption algorithm. If this parameter is passed in by the caller, it will be returned as-is; otherwise, the backend service will generate a random one and return it.
+         * @type {string || null}
+         */
+        this.InitializationVector = null;
+
+        /**
+         * Base64-encoded ciphertext after encryption
+         * @type {string || null}
+         */
+        this.CipherText = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InitializationVector = 'InitializationVector' in params ? params.InitializationVector : null;
+        this.CipherText = 'CipherText' in params ? params.CipherText : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1141,6 +1932,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.KeyMetadatas[z]);
                 this.KeyMetadatas.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableWhiteBoxKey response structure.
+ * @class
+ */
+class EnableWhiteBoxKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1297,12 +2116,52 @@ class ListKeysRequest extends  AbstractModel {
 }
 
 /**
- * ListKeys response structure.
+ * DescribeWhiteBoxDecryptKey request structure.
  * @class
  */
-class ListKeysResponse extends  AbstractModel {
+class DescribeWhiteBoxDecryptKeyRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Globally unique white-box key ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * Encrypt response structure.
+ * @class
+ */
+class EncryptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded encrypted ciphertext
+         * @type {string || null}
+         */
+        this.CiphertextBlob = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.KeyId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1319,128 +2178,9 @@ class ListKeysResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CMK attribute information
- * @class
- */
-class KeyMetadata extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.KeyId = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.Alias = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport.
-         * @type {string || null}
-         */
-        this.KeyState = null;
-
-        /**
-         * CMK purpose. Valid values: ENCRYPT_DECRYPT, ASYMMETRIC_DECRYPT_RSA_2048, ASYMMETRIC_DECRYPT_SM2
-         * @type {string || null}
-         */
-        this.KeyUsage = null;
-
-        /**
-         * CMK type. 2: FIPS-compliant; 4: SM-CRYPTO
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.CreatorUin = null;
-
-        /**
-         * 
-         * @type {boolean || null}
-         */
-        this.KeyRotationEnabled = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.Owner = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.NextRotateTime = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.DeletionDate = null;
-
-        /**
-         * CMK key material type. TENCENT_KMS: created by KMS; EXTERNAL: imported by user.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Origin = null;
-
-        /**
-         * It’s valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ValidTo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
+        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.KeyState = 'KeyState' in params ? params.KeyState : null;
-        this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
-        this.KeyRotationEnabled = 'KeyRotationEnabled' in params ? params.KeyRotationEnabled : null;
-        this.Owner = 'Owner' in params ? params.Owner : null;
-        this.NextRotateTime = 'NextRotateTime' in params ? params.NextRotateTime : null;
-        this.DeletionDate = 'DeletionDate' in params ? params.DeletionDate : null;
-        this.Origin = 'Origin' in params ? params.Origin : null;
-        this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1537,6 +2277,34 @@ class ListAlgorithmsRequest extends  AbstractModel {
 }
 
 /**
+ * DisableKeys response structure.
+ * @class
+ */
+class DisableKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateAlias response structure.
  * @class
  */
@@ -1560,6 +2328,34 @@ class UpdateAliasResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableWhiteBoxKeys request structure.
+ * @class
+ */
+class DisableWhiteBoxKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of globally unique white-box key IDs. Note: you should make sure that all provided `KeyId` values are in valid format, unique, and actually exist. Up to 50 ones are allowed.
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
 
     }
 }
@@ -1761,24 +2557,18 @@ class ListKeyDetailRequest extends  AbstractModel {
 }
 
 /**
- * UpdateKeyDescription request structure.
+ * DescribeWhiteBoxKeyDetails request structure.
  * @class
  */
-class UpdateKeyDescriptionRequest extends  AbstractModel {
+class DescribeWhiteBoxKeyDetailsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
-         * @type {string || null}
+         * Filter: key status. 0: disabled, 1: enabled
+         * @type {number || null}
          */
-        this.Description = null;
-
-        /**
-         * ID of the CMK for which to modify the description
-         * @type {string || null}
-         */
-        this.KeyId = null;
+        this.KeyStatus = null;
 
     }
 
@@ -1789,29 +2579,7 @@ class UpdateKeyDescriptionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Description = 'Description' in params ? params.Description : null;
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-
-    }
-}
-
-/**
- * DisableKey request structure.
- * @class
- */
-class DisableKeyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
+        this.KeyStatus = 'KeyStatus' in params ? params.KeyStatus : null;
 
     }
 }
@@ -1838,60 +2606,12 @@ class EnableKeysRequest extends  AbstractModel {
 }
 
 /**
- * GenerateRandom response structure.
+ * ScheduleKeyDeletion request structure.
  * @class
  */
-class GenerateRandomResponse extends  AbstractModel {
+class ScheduleKeyDeletionRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Base64-encoded plaintext of the randomly generated number. You need to Base64-decode it to get the plaintext.
-         * @type {string || null}
-         */
-        this.Plaintext = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeKey response structure.
- * @class
- */
-class DescribeKeyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Key attribute information
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {KeyMetadata || null}
-         */
-        this.KeyMetadata = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -1903,32 +2623,31 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
 
-        if (params.KeyMetadata) {
-            let obj = new KeyMetadata();
-            obj.deserialize(params.KeyMetadata)
-            this.KeyMetadata = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
     }
 }
 
 /**
- * Encrypt response structure.
+ * CreateWhiteBoxKey response structure.
  * @class
  */
-class EncryptResponse extends  AbstractModel {
+class CreateWhiteBoxKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Base64-encoded encrypted ciphertext
+         * Base64-encoded encryption key
          * @type {string || null}
          */
-        this.CiphertextBlob = null;
+        this.EncryptKey = null;
 
         /**
-         * 
+         * Base64-encoded decryption key
+         * @type {string || null}
+         */
+        this.DecryptKey = null;
+
+        /**
+         * Globally unique white-box key ID
          * @type {string || null}
          */
         this.KeyId = null;
@@ -1948,9 +2667,80 @@ class EncryptResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
+        this.EncryptKey = 'EncryptKey' in params ? params.EncryptKey : null;
+        this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AsymmetricRsaDecrypt response structure.
+ * @class
+ */
+class AsymmetricRsaDecryptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique CMK ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * Base64-encoded plaintext after decryption
+         * @type {string || null}
+         */
+        this.Plaintext = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteWhiteBoxKey request structure.
+ * @class
+ */
+class DeleteWhiteBoxKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Globally unique white-box key ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -1979,6 +2769,27 @@ class DescribeKeysRequest extends  AbstractModel {
             return;
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+    }
+}
+
+/**
+ * ReEncrypt request structure.
+ * @class
+ */
+class ReEncryptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -2057,60 +2868,83 @@ module.exports = {
     UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,
     DisableKeysRequest: DisableKeysRequest,
     AlgorithmInfo: AlgorithmInfo,
+    EnableWhiteBoxKeysResponse: EnableWhiteBoxKeysResponse,
     UpdateAliasRequest: UpdateAliasRequest,
-    ReEncryptRequest: ReEncryptRequest,
+    DisableWhiteBoxKeyRequest: DisableWhiteBoxKeyRequest,
+    WhiteboxKeyInfo: WhiteboxKeyInfo,
     GenerateDataKeyRequest: GenerateDataKeyRequest,
+    EnableWhiteBoxKeyRequest: EnableWhiteBoxKeyRequest,
     GenerateDataKeyResponse: GenerateDataKeyResponse,
     AsymmetricRsaDecryptRequest: AsymmetricRsaDecryptRequest,
+    CreateWhiteBoxKeyRequest: CreateWhiteBoxKeyRequest,
     EnableKeyRotationRequest: EnableKeyRotationRequest,
     EnableKeyRotationResponse: EnableKeyRotationResponse,
+    DescribeWhiteBoxKeyDetailsResponse: DescribeWhiteBoxKeyDetailsResponse,
     CreateKeyRequest: CreateKeyRequest,
+    UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
     EnableKeysResponse: EnableKeysResponse,
+    ListKeysResponse: ListKeysResponse,
+    DisableWhiteBoxKeyResponse: DisableWhiteBoxKeyResponse,
+    EncryptRequest: EncryptRequest,
     DisableKeyResponse: DisableKeyResponse,
+    DescribeWhiteBoxKeyRequest: DescribeWhiteBoxKeyRequest,
     GetParametersForImportRequest: GetParametersForImportRequest,
+    DisableWhiteBoxKeysResponse: DisableWhiteBoxKeysResponse,
     DeleteImportedKeyMaterialResponse: DeleteImportedKeyMaterialResponse,
     CreateKeyResponse: CreateKeyResponse,
     ReEncryptResponse: ReEncryptResponse,
+    DescribeWhiteBoxServiceStatusRequest: DescribeWhiteBoxServiceStatusRequest,
     DescribeKeyRequest: DescribeKeyRequest,
     CancelKeyDeletionRequest: CancelKeyDeletionRequest,
+    EncryptByWhiteBoxRequest: EncryptByWhiteBoxRequest,
     GenerateRandomRequest: GenerateRandomRequest,
+    KeyMetadata: KeyMetadata,
     DeleteImportedKeyMaterialRequest: DeleteImportedKeyMaterialRequest,
     ListAlgorithmsResponse: ListAlgorithmsResponse,
     EnableKeyResponse: EnableKeyResponse,
-    ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,
-    DisableKeysResponse: DisableKeysResponse,
+    GenerateRandomResponse: GenerateRandomResponse,
+    DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
     ImportKeyMaterialRequest: ImportKeyMaterialRequest,
+    EnableKeyRequest: EnableKeyRequest,
     GetKeyRotationStatusResponse: GetKeyRotationStatusResponse,
-    AsymmetricRsaDecryptResponse: AsymmetricRsaDecryptResponse,
     ImportKeyMaterialResponse: ImportKeyMaterialResponse,
-    EncryptRequest: EncryptRequest,
+    DisableKeyRequest: DisableKeyRequest,
+    DescribeWhiteBoxKeyResponse: DescribeWhiteBoxKeyResponse,
+    GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
+    DescribeWhiteBoxServiceStatusResponse: DescribeWhiteBoxServiceStatusResponse,
     AsymmetricSm2DecryptRequest: AsymmetricSm2DecryptRequest,
     DecryptResponse: DecryptResponse,
-    EnableKeyRequest: EnableKeyRequest,
-    GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
+    DeleteWhiteBoxKeyResponse: DeleteWhiteBoxKeyResponse,
+    DescribeKeyResponse: DescribeKeyResponse,
+    EnableWhiteBoxKeysRequest: EnableWhiteBoxKeysRequest,
+    EncryptByWhiteBoxResponse: EncryptByWhiteBoxResponse,
     GetServiceStatusResponse: GetServiceStatusResponse,
     DescribeKeysResponse: DescribeKeysResponse,
+    EnableWhiteBoxKeyResponse: EnableWhiteBoxKeyResponse,
     GetPublicKeyResponse: GetPublicKeyResponse,
     ListKeyDetailResponse: ListKeyDetailResponse,
     CancelKeyDeletionResponse: CancelKeyDeletionResponse,
     ListKeysRequest: ListKeysRequest,
-    ListKeysResponse: ListKeysResponse,
-    KeyMetadata: KeyMetadata,
+    DescribeWhiteBoxDecryptKeyRequest: DescribeWhiteBoxDecryptKeyRequest,
+    EncryptResponse: EncryptResponse,
     AsymmetricSm2DecryptResponse: AsymmetricSm2DecryptResponse,
     DisableKeyRotationResponse: DisableKeyRotationResponse,
     ListAlgorithmsRequest: ListAlgorithmsRequest,
+    DisableKeysResponse: DisableKeysResponse,
     UpdateAliasResponse: UpdateAliasResponse,
+    DisableWhiteBoxKeysRequest: DisableWhiteBoxKeysRequest,
     ScheduleKeyDeletionResponse: ScheduleKeyDeletionResponse,
     GetParametersForImportResponse: GetParametersForImportResponse,
     DecryptRequest: DecryptRequest,
     ListKeyDetailRequest: ListKeyDetailRequest,
-    UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
-    DisableKeyRequest: DisableKeyRequest,
+    DescribeWhiteBoxKeyDetailsRequest: DescribeWhiteBoxKeyDetailsRequest,
     EnableKeysRequest: EnableKeysRequest,
-    GenerateRandomResponse: GenerateRandomResponse,
-    DescribeKeyResponse: DescribeKeyResponse,
-    EncryptResponse: EncryptResponse,
+    ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,
+    CreateWhiteBoxKeyResponse: CreateWhiteBoxKeyResponse,
+    AsymmetricRsaDecryptResponse: AsymmetricRsaDecryptResponse,
+    DeleteWhiteBoxKeyRequest: DeleteWhiteBoxKeyRequest,
     DescribeKeysRequest: DescribeKeysRequest,
+    ReEncryptRequest: ReEncryptRequest,
     GetPublicKeyRequest: GetPublicKeyRequest,
     GetServiceStatusRequest: GetServiceStatusRequest,
     DisableKeyRotationRequest: DisableKeyRotationRequest,

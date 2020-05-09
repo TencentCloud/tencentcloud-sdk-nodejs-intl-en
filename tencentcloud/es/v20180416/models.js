@@ -17,6 +17,154 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ES cluster log details
+ * @class
+ */
+class InstanceLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log time
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Log level
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Cluster node IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Log content
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * Local disk information of node
+ * @class
+ */
+class LocalDiskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Local disk type <li>LOCAL_SATA: big data </li><li>NVME_SSD: high IO</li>
+         * @type {string || null}
+         */
+        this.LocalDiskType = null;
+
+        /**
+         * Size of a single local disk
+         * @type {number || null}
+         */
+        this.LocalDiskSize = null;
+
+        /**
+         * Number of local disks
+         * @type {number || null}
+         */
+        this.LocalDiskCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalDiskType = 'LocalDiskType' in params ? params.LocalDiskType : null;
+        this.LocalDiskSize = 'LocalDiskSize' in params ? params.LocalDiskSize : null;
+        this.LocalDiskCount = 'LocalDiskCount' in params ? params.LocalDiskCount : null;
+
+    }
+}
+
+/**
+ * Information of workflow task in instance operation history
+ * @class
+ */
+class TaskDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Task progress
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Task completion time
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * Subtask
+         * @type {Array.<SubTaskDetail> || null}
+         */
+        this.SubTasks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+        if (params.SubTasks) {
+            this.SubTasks = new Array();
+            for (let z in params.SubTasks) {
+                let obj = new SubTaskDetail();
+                obj.deserialize(params.SubTasks[z]);
+                this.SubTasks.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Specification information of a node type in the cluster (such as hot data node, warm data node, or dedicated master node), including node type, number of nodes, node specification, disk type, and disk size. If `Type` is not specified, it will be a hot data node by default; if the node is a master node, then the `DiskType` and `DiskSize` parameters will be ignored (as a master node has no data disks)
  * @class
  */
@@ -57,6 +205,19 @@ Default value: hotData
          */
         this.DiskSize = null;
 
+        /**
+         * Local disk information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {LocalDiskInfo || null}
+         */
+        this.LocalDiskInfo = null;
+
+        /**
+         * Number of node disks
+         * @type {number || null}
+         */
+        this.DiskCount = null;
+
     }
 
     /**
@@ -72,22 +233,53 @@ Default value: hotData
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
 
+        if (params.LocalDiskInfo) {
+            let obj = new LocalDiskInfo();
+            obj.deserialize(params.LocalDiskInfo)
+            this.LocalDiskInfo = obj;
+        }
+        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
+
     }
 }
 
 /**
- * RestartInstance response structure.
+ * DescribeInstanceOperations request structure.
  * @class
  */
-class RestartInstanceResponse extends  AbstractModel {
+class DescribeInstanceOperationsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Cluster instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Start time, such as "2019-03-07 16:30:39"
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, such as "2019-03-30 20:18:03"
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Pagination start value
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -98,7 +290,97 @@ class RestartInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Operation details
+ * @class
+ */
+class OperationDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original instance configuration information
+         * @type {Array.<KeyValue> || null}
+         */
+        this.OldInfo = null;
+
+        /**
+         * Updated instance configuration information
+         * @type {Array.<KeyValue> || null}
+         */
+        this.NewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OldInfo) {
+            this.OldInfo = new Array();
+            for (let z in params.OldInfo) {
+                let obj = new KeyValue();
+                obj.deserialize(params.OldInfo[z]);
+                this.OldInfo.push(obj);
+            }
+        }
+
+        if (params.NewInfo) {
+            this.NewInfo = new Array();
+            for (let z in params.NewInfo) {
+                let obj = new KeyValue();
+                obj.deserialize(params.NewInfo[z]);
+                this.NewInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Public network ACL information of ES
+ * @class
+ */
+class EsPublicAcl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access blacklist
+         * @type {Array.<string> || null}
+         */
+        this.BlackIpList = null;
+
+        /**
+         * Access whitelist
+         * @type {Array.<string> || null}
+         */
+        this.WhiteIpList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
+        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
 
     }
 }
@@ -146,24 +428,18 @@ class DictInfo extends  AbstractModel {
 }
 
 /**
- * Public network ACL information of ES
+ * RestartInstance response structure.
  * @class
  */
-class EsPublicAcl extends  AbstractModel {
+class RestartInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Access blacklist
-         * @type {Array.<string> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.BlackIpList = null;
-
-        /**
-         * Access whitelist
-         * @type {Array.<string> || null}
-         */
-        this.WhiteIpList = null;
+        this.RequestId = null;
 
     }
 
@@ -174,8 +450,7 @@ class EsPublicAcl extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
-        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -216,24 +491,66 @@ class CreateInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ES cluster configuration item
+ * DescribeInstanceLogs request structure.
  * @class
  */
-class EsAcl extends  AbstractModel {
+class DescribeInstanceLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Kibana access blacklist
-         * @type {Array.<string> || null}
+         * Cluster instance ID
+         * @type {string || null}
          */
-        this.BlackIpList = null;
+        this.InstanceId = null;
 
         /**
-         * Kibana access whitelist
-         * @type {Array.<string> || null}
+         * Log type. Default value: 1
+<li>1: master log</li>
+<li>2: search slow log</li>
+<li>3: index slow log</li>
+<li>4: GC log</li>
+         * @type {number || null}
          */
-        this.WhiteIpList = null;
+        this.LogType = null;
+
+        /**
+         * Search keyword, which supports LUCENE syntax, such as `level:WARN`, `ip:1.1.1.1`, and `message:test-index`
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+        /**
+         * Log start time in the format of YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Log end time in the format of YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Pagination start value. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page. Default value: 100. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Time sorting order. Default value: 0
+<li>0: descending</li>
+<li>1: ascending</li>
+         * @type {number || null}
+         */
+        this.OrderByType = null;
 
     }
 
@@ -244,8 +561,77 @@ class EsAcl extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
-        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * UpgradeLicense request structure.
+ * @class
+ */
+class UpgradeLicenseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * Whether to automatically use vouchers <li>0: No </li><li>1: Yes </li>Default value: 0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * List of voucher IDs (only one voucher can be specified at a time currently)
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
+
+        /**
+         * Whether to force restart <li>true: yes </li><li>false: no </li>Default value: false
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -321,126 +707,24 @@ class TagInfo extends  AbstractModel {
 }
 
 /**
- * UpdateInstance request structure.
+ * `OperationDetail` uses an array of this structure to describe the old and new configuration information
  * @class
  */
-class UpdateInstanceRequest extends  AbstractModel {
+class KeyValue extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Key
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Key = null;
 
         /**
-         * Instance name, which can contain 1 to 50 English letters, Chinese characters, digits, dashes (-), or underscores (_)
+         * Value
          * @type {string || null}
          */
-        this.InstanceName = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Number of nodes (2–50)
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
-         * Configuration item (JSON string). Only the following items are supported currently: <li>action.destructive_requires_name</li><li>indices.fielddata.cache.size</li><li>indices.query.bool.max_clause_count</li>
-         * @type {string || null}
-         */
-        this.EsConfig = null;
-
-        /**
-         * Password of the default user “elastic“, which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Access control list
-         * @type {EsAcl || null}
-         */
-        this.EsAcl = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Disk size in GB
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
-         * @type {string || null}
-         */
-        this.NodeType = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Number of dedicated master nodes (only 3 and 5 are supported)
-         * @type {number || null}
-         */
-        this.MasterNodeNum = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
-         * @type {string || null}
-         */
-        this.MasterNodeType = null;
-
-        /**
-         * This parameter has been disused. Please use `NodeInfoList`
-Dedicated master node disk size in GB. This is 50 GB by default and currently cannot be customized
-         * @type {number || null}
-         */
-        this.MasterNodeDiskSize = null;
-
-        /**
-         * Whether to force restart during configuration update <li>true: Yes </li><li>false: No </li>This needs to be set only for EsConfig. Default value: false
-         * @type {boolean || null}
-         */
-        this.ForceRestart = null;
-
-        /**
-         * Auto-backup to COS
-         * @type {CosBackup || null}
-         */
-        this.CosBackup = null;
-
-        /**
-         * Node information list. You can pass in only the nodes to be updated and their corresponding specification information. Supported operations include: <li>modifying the number of nodes in the same type </li><li>modifying the specification and disk size of nodes in the same type </li><li>adding a node type (you must also specify the node type, quantity, specification, disk, etc.) </li>The above operations can only be performed one at a time, and the disk type cannot be modified
-         * @type {Array.<NodeInfo> || null}
-         */
-        this.NodeInfoList = null;
-
-        /**
-         * Public network access status
-         * @type {string || null}
-         */
-        this.PublicAccess = null;
-
-        /**
-         * Public network ACL
-         * @type {EsPublicAcl || null}
-         */
-        this.EsPublicAcl = null;
-
-        /**
-         * Public network access status of Kibana
-         * @type {string || null}
-         */
-        this.KibanaPublicAccess = null;
-
-        /**
-         * Private network access status of Kibana
-         * @type {string || null}
-         */
-        this.KibanaPrivateAccess = null;
+        this.Value = null;
 
     }
 
@@ -451,47 +735,8 @@ Dedicated master node disk size in GB. This is 50 GB by default and currently ca
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
-        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
-        this.Password = 'Password' in params ? params.Password : null;
-
-        if (params.EsAcl) {
-            let obj = new EsAcl();
-            obj.deserialize(params.EsAcl)
-            this.EsAcl = obj;
-        }
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.NodeType = 'NodeType' in params ? params.NodeType : null;
-        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
-        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
-        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
-        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
-
-        if (params.CosBackup) {
-            let obj = new CosBackup();
-            obj.deserialize(params.CosBackup)
-            this.CosBackup = obj;
-        }
-
-        if (params.NodeInfoList) {
-            this.NodeInfoList = new Array();
-            for (let z in params.NodeInfoList) {
-                let obj = new NodeInfo();
-                obj.deserialize(params.NodeInfoList[z]);
-                this.NodeInfoList.push(obj);
-            }
-        }
-        this.PublicAccess = 'PublicAccess' in params ? params.PublicAccess : null;
-
-        if (params.EsPublicAcl) {
-            let obj = new EsPublicAcl();
-            obj.deserialize(params.EsPublicAcl)
-            this.EsPublicAcl = obj;
-        }
-        this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
-        this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1267,6 +1512,56 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceLogs response structure.
+ * @class
+ */
+class DescribeInstanceLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of returned logs
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Log details list
+         * @type {Array.<InstanceLog> || null}
+         */
+        this.InstanceLogList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceLogList) {
+            this.InstanceLogList = new Array();
+            for (let z in params.InstanceLogList) {
+                let obj = new InstanceLog();
+                obj.deserialize(params.InstanceLogList[z]);
+                this.InstanceLogList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RestartInstance request structure.
  * @class
  */
@@ -1429,6 +1724,189 @@ class DescribeInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateInstance request structure.
+ * @class
+ */
+class UpdateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name, which can contain 1 to 50 English letters, Chinese characters, digits, dashes (-), or underscores (_)
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * This parameter has been disused. Please use `NodeInfoList`
+Number of nodes (2–50)
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * Configuration item (JSON string). Only the following items are supported currently: <li>action.destructive_requires_name</li><li>indices.fielddata.cache.size</li><li>indices.query.bool.max_clause_count</li>
+         * @type {string || null}
+         */
+        this.EsConfig = null;
+
+        /**
+         * Password of the default user “elastic“, which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Access control list
+         * @type {EsAcl || null}
+         */
+        this.EsAcl = null;
+
+        /**
+         * This parameter has been disused. Please use `NodeInfoList`
+Disk size in GB
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * This parameter has been disused. Please use `NodeInfoList`
+Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * This parameter has been disused. Please use `NodeInfoList`
+Number of dedicated master nodes (only 3 and 5 are supported)
+         * @type {number || null}
+         */
+        this.MasterNodeNum = null;
+
+        /**
+         * This parameter has been disused. Please use `NodeInfoList`
+Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+         * @type {string || null}
+         */
+        this.MasterNodeType = null;
+
+        /**
+         * This parameter has been disused. Please use `NodeInfoList`
+Dedicated master node disk size in GB. This is 50 GB by default and currently cannot be customized
+         * @type {number || null}
+         */
+        this.MasterNodeDiskSize = null;
+
+        /**
+         * Whether to force restart during configuration update <li>true: Yes </li><li>false: No </li>This needs to be set only for EsConfig. Default value: false
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+        /**
+         * Auto-backup to COS
+         * @type {CosBackup || null}
+         */
+        this.CosBackup = null;
+
+        /**
+         * Node information list. You can pass in only the nodes to be updated and their corresponding specification information. Supported operations include: <li>modifying the number of nodes in the same type </li><li>modifying the specification and disk size of nodes in the same type </li><li>adding a node type (you must also specify the node type, quantity, specification, disk, etc.) </li>The above operations can only be performed one at a time, and the disk type cannot be modified
+         * @type {Array.<NodeInfo> || null}
+         */
+        this.NodeInfoList = null;
+
+        /**
+         * Public network access status
+         * @type {string || null}
+         */
+        this.PublicAccess = null;
+
+        /**
+         * Public network ACL
+         * @type {EsPublicAcl || null}
+         */
+        this.EsPublicAcl = null;
+
+        /**
+         * Public network access status of Kibana
+         * @type {string || null}
+         */
+        this.KibanaPublicAccess = null;
+
+        /**
+         * Private network access status of Kibana
+         * @type {string || null}
+         */
+        this.KibanaPrivateAccess = null;
+
+        /**
+         * Enables or disables user authentication for ES Basic Edition v6.8 and above
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+        if (params.EsAcl) {
+            let obj = new EsAcl();
+            obj.deserialize(params.EsAcl)
+            this.EsAcl = obj;
+        }
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
+        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
+        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+
+        if (params.CosBackup) {
+            let obj = new CosBackup();
+            obj.deserialize(params.CosBackup)
+            this.CosBackup = obj;
+        }
+
+        if (params.NodeInfoList) {
+            this.NodeInfoList = new Array();
+            for (let z in params.NodeInfoList) {
+                let obj = new NodeInfo();
+                obj.deserialize(params.NodeInfoList[z]);
+                this.NodeInfoList.push(obj);
+            }
+        }
+        this.PublicAccess = 'PublicAccess' in params ? params.PublicAccess : null;
+
+        if (params.EsPublicAcl) {
+            let obj = new EsPublicAcl();
+            obj.deserialize(params.EsPublicAcl)
+            this.EsPublicAcl = obj;
+        }
+        this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
+        this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+
+    }
+}
+
+/**
  * ES IK dictionary information
  * @class
  */
@@ -1480,6 +1958,56 @@ class EsDictionaryInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceOperations response structure.
+ * @class
+ */
+class DescribeInstanceOperationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of operation records
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Operation history
+         * @type {Array.<Operation> || null}
+         */
+        this.Operations = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Operations) {
+            this.Operations = new Array();
+            for (let z in params.Operations) {
+                let obj = new Operation();
+                obj.deserialize(params.Operations[z]);
+                this.Operations.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradeLicense response structure.
  * @class
  */
@@ -1508,48 +2036,24 @@ class UpgradeLicenseResponse extends  AbstractModel {
 }
 
 /**
- * UpgradeLicense request structure.
+ * ES cluster configuration item
  * @class
  */
-class UpgradeLicenseRequest extends  AbstractModel {
+class EsAcl extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
-         * @type {string || null}
-         */
-        this.LicenseType = null;
-
-        /**
-         * Whether to automatically use vouchers <li>0: No </li><li>1: Yes </li>Default value: 0
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * List of voucher IDs (only one voucher can be specified at a time currently)
+         * Kibana access blacklist
          * @type {Array.<string> || null}
          */
-        this.VoucherIds = null;
+        this.BlackIpList = null;
 
         /**
-         * Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
-         * @type {number || null}
+         * Kibana access whitelist
+         * @type {Array.<string> || null}
          */
-        this.BasicSecurityType = null;
-
-        /**
-         * Whether to force restart <li>true: yes </li><li>false: no </li>Default value: false
-         * @type {boolean || null}
-         */
-        this.ForceRestart = null;
+        this.WhiteIpList = null;
 
     }
 
@@ -1560,12 +2064,8 @@ class UpgradeLicenseRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
-        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
+        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
 
     }
 }
@@ -1669,6 +2169,83 @@ class DeleteInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Information of subtask in workflow task in the instance operation history (such as each check item in a upgrade check task)
+ * @class
+ */
+class SubTaskDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subtask name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Subtask result
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * Subtask error message
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * Subtask type
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Subtask status. 0: processing, 1: succeeded, -1: failed
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Name of the index for which the check for upgrade failed
+         * @type {Array.<string> || null}
+         */
+        this.FailedIndices = null;
+
+        /**
+         * Subtask end time
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * Subtask level. 1: warning, 2: failed
+         * @type {number || null}
+         */
+        this.Level = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FailedIndices = 'FailedIndices' in params ? params.FailedIndices : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.Level = 'Level' in params ? params.Level : null;
+
+    }
+}
+
+/**
  * UpgradeInstance response structure.
  * @class
  */
@@ -1739,7 +2316,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Target ES version
+         * Target ES version. Valid values: 6.4.3, 6.8.2, 7.5.1
          * @type {string || null}
          */
         this.EsVersion = null;
@@ -1780,30 +2357,124 @@ class UpgradeInstanceRequest extends  AbstractModel {
     }
 }
 
+/**
+ * ES cluster operation details
+ * @class
+ */
+class Operation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique operation ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Operation start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Operation type
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Operation details
+         * @type {OperationDetail || null}
+         */
+        this.Detail = null;
+
+        /**
+         * Operation result
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * Workflow task information
+         * @type {Array.<TaskDetail> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * Operation progress
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Detail) {
+            let obj = new OperationDetail();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new TaskDetail();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+    }
+}
+
 module.exports = {
+    InstanceLog: InstanceLog,
+    LocalDiskInfo: LocalDiskInfo,
+    TaskDetail: TaskDetail,
     NodeInfo: NodeInfo,
-    RestartInstanceResponse: RestartInstanceResponse,
-    DictInfo: DictInfo,
+    DescribeInstanceOperationsRequest: DescribeInstanceOperationsRequest,
+    OperationDetail: OperationDetail,
     EsPublicAcl: EsPublicAcl,
+    DictInfo: DictInfo,
+    RestartInstanceResponse: RestartInstanceResponse,
     CreateInstanceResponse: CreateInstanceResponse,
-    EsAcl: EsAcl,
+    DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
+    UpgradeLicenseRequest: UpgradeLicenseRequest,
     CosBackup: CosBackup,
     TagInfo: TagInfo,
-    UpdateInstanceRequest: UpdateInstanceRequest,
+    KeyValue: KeyValue,
     CreateInstanceRequest: CreateInstanceRequest,
     InstanceInfo: InstanceInfo,
     DeleteInstanceResponse: DeleteInstanceResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
+    DescribeInstanceLogsResponse: DescribeInstanceLogsResponse,
     RestartInstanceRequest: RestartInstanceRequest,
     ZoneDetail: ZoneDetail,
     DescribeInstancesRequest: DescribeInstancesRequest,
+    UpdateInstanceRequest: UpdateInstanceRequest,
     EsDictionaryInfo: EsDictionaryInfo,
+    DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
-    UpgradeLicenseRequest: UpgradeLicenseRequest,
+    EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,
     DeleteInstanceRequest: DeleteInstanceRequest,
+    SubTaskDetail: SubTaskDetail,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpdateInstanceResponse: UpdateInstanceResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    Operation: Operation,
 
 }

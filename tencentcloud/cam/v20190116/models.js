@@ -2755,6 +2755,34 @@ class ListCollaboratorsRequest extends  AbstractModel {
 }
 
 /**
+ * UpdatePolicy response structure.
+ * @class
+ */
+class UpdatePolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateGroup request structure.
  * @class
  */
@@ -4105,6 +4133,55 @@ class ListAttachedUserPoliciesRequest extends  AbstractModel {
 }
 
 /**
+ * UpdatePolicy request structure.
+ * @class
+ */
+class UpdatePolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Policy name
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * Policy description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
+         * @type {string || null}
+         */
+        this.PolicyDocument = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+
+    }
+}
+
+/**
  * User Group user information
  * @class
  */
@@ -4301,6 +4378,7 @@ module.exports = {
     UpdateUserResponse: UpdateUserResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
     ListCollaboratorsRequest: ListCollaboratorsRequest,
+    UpdatePolicyResponse: UpdatePolicyResponse,
     CreateGroupRequest: CreateGroupRequest,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
@@ -4332,6 +4410,7 @@ module.exports = {
     AttachUserPolicyResponse: AttachUserPolicyResponse,
     ListCollaboratorsResponse: ListCollaboratorsResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
+    UpdatePolicyRequest: UpdatePolicyRequest,
     GroupMemberInfo: GroupMemberInfo,
     CreateGroupResponse: CreateGroupResponse,
 

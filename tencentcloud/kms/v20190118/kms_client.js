@@ -19,60 +19,83 @@ const AbstractClient = require('../../common/abstract_client')
 const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
 const DisableKeysRequest = models.DisableKeysRequest;
 const AlgorithmInfo = models.AlgorithmInfo;
+const EnableWhiteBoxKeysResponse = models.EnableWhiteBoxKeysResponse;
 const UpdateAliasRequest = models.UpdateAliasRequest;
-const ReEncryptRequest = models.ReEncryptRequest;
+const DisableWhiteBoxKeyRequest = models.DisableWhiteBoxKeyRequest;
+const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
 const GenerateDataKeyRequest = models.GenerateDataKeyRequest;
+const EnableWhiteBoxKeyRequest = models.EnableWhiteBoxKeyRequest;
 const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
 const AsymmetricRsaDecryptRequest = models.AsymmetricRsaDecryptRequest;
+const CreateWhiteBoxKeyRequest = models.CreateWhiteBoxKeyRequest;
 const EnableKeyRotationRequest = models.EnableKeyRotationRequest;
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
+const DescribeWhiteBoxKeyDetailsResponse = models.DescribeWhiteBoxKeyDetailsResponse;
 const CreateKeyRequest = models.CreateKeyRequest;
+const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const EnableKeysResponse = models.EnableKeysResponse;
+const ListKeysResponse = models.ListKeysResponse;
+const DisableWhiteBoxKeyResponse = models.DisableWhiteBoxKeyResponse;
+const EncryptRequest = models.EncryptRequest;
 const DisableKeyResponse = models.DisableKeyResponse;
+const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
 const GetParametersForImportRequest = models.GetParametersForImportRequest;
+const DisableWhiteBoxKeysResponse = models.DisableWhiteBoxKeysResponse;
 const DeleteImportedKeyMaterialResponse = models.DeleteImportedKeyMaterialResponse;
 const CreateKeyResponse = models.CreateKeyResponse;
 const ReEncryptResponse = models.ReEncryptResponse;
+const DescribeWhiteBoxServiceStatusRequest = models.DescribeWhiteBoxServiceStatusRequest;
 const DescribeKeyRequest = models.DescribeKeyRequest;
 const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
+const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
 const GenerateRandomRequest = models.GenerateRandomRequest;
+const KeyMetadata = models.KeyMetadata;
 const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
 const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
 const EnableKeyResponse = models.EnableKeyResponse;
-const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
-const DisableKeysResponse = models.DisableKeysResponse;
+const GenerateRandomResponse = models.GenerateRandomResponse;
+const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
+const EnableKeyRequest = models.EnableKeyRequest;
 const GetKeyRotationStatusResponse = models.GetKeyRotationStatusResponse;
-const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
 const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
-const EncryptRequest = models.EncryptRequest;
+const DisableKeyRequest = models.DisableKeyRequest;
+const DescribeWhiteBoxKeyResponse = models.DescribeWhiteBoxKeyResponse;
+const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
+const DescribeWhiteBoxServiceStatusResponse = models.DescribeWhiteBoxServiceStatusResponse;
 const AsymmetricSm2DecryptRequest = models.AsymmetricSm2DecryptRequest;
 const DecryptResponse = models.DecryptResponse;
-const EnableKeyRequest = models.EnableKeyRequest;
-const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
+const DeleteWhiteBoxKeyResponse = models.DeleteWhiteBoxKeyResponse;
+const DescribeKeyResponse = models.DescribeKeyResponse;
+const EnableWhiteBoxKeysRequest = models.EnableWhiteBoxKeysRequest;
+const EncryptByWhiteBoxResponse = models.EncryptByWhiteBoxResponse;
 const GetServiceStatusResponse = models.GetServiceStatusResponse;
 const DescribeKeysResponse = models.DescribeKeysResponse;
+const EnableWhiteBoxKeyResponse = models.EnableWhiteBoxKeyResponse;
 const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const ListKeyDetailResponse = models.ListKeyDetailResponse;
 const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
 const ListKeysRequest = models.ListKeysRequest;
-const ListKeysResponse = models.ListKeysResponse;
-const KeyMetadata = models.KeyMetadata;
+const DescribeWhiteBoxDecryptKeyRequest = models.DescribeWhiteBoxDecryptKeyRequest;
+const EncryptResponse = models.EncryptResponse;
 const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
 const DisableKeyRotationResponse = models.DisableKeyRotationResponse;
 const ListAlgorithmsRequest = models.ListAlgorithmsRequest;
+const DisableKeysResponse = models.DisableKeysResponse;
 const UpdateAliasResponse = models.UpdateAliasResponse;
+const DisableWhiteBoxKeysRequest = models.DisableWhiteBoxKeysRequest;
 const ScheduleKeyDeletionResponse = models.ScheduleKeyDeletionResponse;
 const GetParametersForImportResponse = models.GetParametersForImportResponse;
 const DecryptRequest = models.DecryptRequest;
 const ListKeyDetailRequest = models.ListKeyDetailRequest;
-const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
-const DisableKeyRequest = models.DisableKeyRequest;
+const DescribeWhiteBoxKeyDetailsRequest = models.DescribeWhiteBoxKeyDetailsRequest;
 const EnableKeysRequest = models.EnableKeysRequest;
-const GenerateRandomResponse = models.GenerateRandomResponse;
-const DescribeKeyResponse = models.DescribeKeyResponse;
-const EncryptResponse = models.EncryptResponse;
+const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
+const CreateWhiteBoxKeyResponse = models.CreateWhiteBoxKeyResponse;
+const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
+const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
 const DescribeKeysRequest = models.DescribeKeysRequest;
+const ReEncryptRequest = models.ReEncryptRequest;
 const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
@@ -100,14 +123,14 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete the imported key material. It is only valid for EXTERNAL CMKs. Specifically, it puts a CMK into `PendingImport` status instead of deleting the CMK, so that the CMK can be used again after key material is reimported. To delete the CMK completely, please call the `ScheduleKeyDeletion` API.
-     * @param {DeleteImportedKeyMaterialRequest} req
-     * @param {function(string, DeleteImportedKeyMaterialResponse):void} cb
+     * This API is used to decrypt the ciphertext and obtain the plaintext data.
+     * @param {DecryptRequest} req
+     * @param {function(string, DecryptResponse):void} cb
      * @public
      */
-    DeleteImportedKeyMaterial(req, cb) {
-        let resp = new DeleteImportedKeyMaterialResponse();
-        this.request("DeleteImportedKeyMaterial", req, resp, cb);
+    Decrypt(req, cb) {
+        let resp = new DecryptResponse();
+        this.request("Decrypt", req, resp, cb);
     }
 
     /**
@@ -119,6 +142,17 @@ class KmsClient extends AbstractClient {
     UpdateAlias(req, cb) {
         let resp = new UpdateAliasResponse();
         this.request("UpdateAlias", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a white-box key. Note: only disabled white-box keys can be deleted.
+     * @param {DeleteWhiteBoxKeyRequest} req
+     * @param {function(string, DeleteWhiteBoxKeyResponse):void} cb
+     * @public
+     */
+    DeleteWhiteBoxKey(req, cb) {
+        let resp = new DeleteWhiteBoxKeyResponse();
+        this.request("DeleteWhiteBoxKey", req, resp, cb);
     }
 
     /**
@@ -200,6 +234,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
+     * This API is used to get the white-box key list.
+     * @param {DescribeWhiteBoxKeyDetailsRequest} req
+     * @param {function(string, DescribeWhiteBoxKeyDetailsResponse):void} cb
+     * @public
+     */
+    DescribeWhiteBoxKeyDetails(req, cb) {
+        let resp = new DescribeWhiteBoxKeyDetailsResponse();
+        this.request("DescribeWhiteBoxKeyDetails", req, resp, cb);
+    }
+
+    /**
      * Used to query whether the user has activated the KMS service.
      * @param {GetServiceStatusRequest} req
      * @param {function(string, GetServiceStatusResponse):void} cb
@@ -208,6 +253,28 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     GetServiceStatus(req, cb) {
         let resp = new GetServiceStatusResponse();
         this.request("GetServiceStatus", req, resp, cb);
+    }
+
+    /**
+     * Re-encrypt the ciphertext using the specified CMK.
+     * @param {ReEncryptRequest} req
+     * @param {function(string, ReEncryptResponse):void} cb
+     * @public
+     */
+    ReEncrypt(req, cb) {
+        let resp = new ReEncryptResponse();
+        this.request("ReEncrypt", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable white-box keys in batches.
+     * @param {EnableWhiteBoxKeysRequest} req
+     * @param {function(string, EnableWhiteBoxKeysResponse):void} cb
+     * @public
+     */
+    EnableWhiteBoxKeys(req, cb) {
+        let resp = new EnableWhiteBoxKeysResponse();
+        this.request("EnableWhiteBoxKeys", req, resp, cb);
     }
 
     /**
@@ -266,14 +333,25 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
-     * Re-encrypt the ciphertext using the specified CMK.
-     * @param {ReEncryptRequest} req
-     * @param {function(string, ReEncryptResponse):void} cb
+     * This API is used to display white-box key information.
+     * @param {DescribeWhiteBoxKeyRequest} req
+     * @param {function(string, DescribeWhiteBoxKeyResponse):void} cb
      * @public
      */
-    ReEncrypt(req, cb) {
-        let resp = new ReEncryptResponse();
-        this.request("ReEncrypt", req, resp, cb);
+    DescribeWhiteBoxKey(req, cb) {
+        let resp = new DescribeWhiteBoxKeyResponse();
+        this.request("DescribeWhiteBoxKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to encrypt data with a white-box key.
+     * @param {EncryptByWhiteBoxRequest} req
+     * @param {function(string, EncryptByWhiteBoxResponse):void} cb
+     * @public
+     */
+    EncryptByWhiteBox(req, cb) {
+        let resp = new EncryptByWhiteBoxResponse();
+        this.request("EncryptByWhiteBox", req, resp, cb);
     }
 
     /**
@@ -285,6 +363,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     GetParametersForImport(req, cb) {
         let resp = new GetParametersForImportResponse();
         this.request("GetParametersForImport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable white-box keys in batches.
+     * @param {DisableWhiteBoxKeysRequest} req
+     * @param {function(string, DisableWhiteBoxKeysResponse):void} cb
+     * @public
+     */
+    DisableWhiteBoxKeys(req, cb) {
+        let resp = new DisableWhiteBoxKeysResponse();
+        this.request("DisableWhiteBoxKeys", req, resp, cb);
     }
 
     /**
@@ -307,6 +396,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     DisableKeyRotation(req, cb) {
         let resp = new DisableKeyRotationResponse();
         this.request("DisableKeyRotation", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable a white-box key.
+     * @param {DisableWhiteBoxKeyRequest} req
+     * @param {function(string, DisableWhiteBoxKeyResponse):void} cb
+     * @public
+     */
+    DisableWhiteBoxKey(req, cb) {
+        let resp = new DisableWhiteBoxKeyResponse();
+        this.request("DisableWhiteBoxKey", req, resp, cb);
     }
 
     /**
@@ -354,6 +454,28 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
+     * This API is used to create a white-box key. Up to 50 ones can be created.
+     * @param {CreateWhiteBoxKeyRequest} req
+     * @param {function(string, CreateWhiteBoxKeyResponse):void} cb
+     * @public
+     */
+    CreateWhiteBoxKey(req, cb) {
+        let resp = new CreateWhiteBoxKeyResponse();
+        this.request("CreateWhiteBoxKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable a white-box key.
+     * @param {EnableWhiteBoxKeyRequest} req
+     * @param {function(string, EnableWhiteBoxKeyResponse):void} cb
+     * @public
+     */
+    EnableWhiteBoxKey(req, cb) {
+        let resp = new EnableWhiteBoxKeyResponse();
+        this.request("EnableWhiteBoxKey", req, resp, cb);
+    }
+
+    /**
      * Enable a specified CMK.
      * @param {EnableKeyRequest} req
      * @param {function(string, EnableKeyResponse):void} cb
@@ -365,14 +487,14 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
-     * This API is used to decrypt the ciphertext and obtain the plaintext data.
-     * @param {DecryptRequest} req
-     * @param {function(string, DecryptResponse):void} cb
+     * This API is used to delete the imported key material. It is only valid for EXTERNAL CMKs. Specifically, it puts a CMK into `PendingImport` status instead of deleting the CMK, so that the CMK can be used again after key material is reimported. To delete the CMK completely, please call the `ScheduleKeyDeletion` API.
+     * @param {DeleteImportedKeyMaterialRequest} req
+     * @param {function(string, DeleteImportedKeyMaterialResponse):void} cb
      * @public
      */
-    Decrypt(req, cb) {
-        let resp = new DecryptResponse();
-        this.request("Decrypt", req, resp, cb);
+    DeleteImportedKeyMaterial(req, cb) {
+        let resp = new DeleteImportedKeyMaterialResponse();
+        this.request("DeleteImportedKeyMaterial", req, resp, cb);
     }
 
     /**
@@ -384,6 +506,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     DescribeKeys(req, cb) {
         let resp = new DescribeKeysResponse();
         this.request("DescribeKeys", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the white-box key service status.
+     * @param {DescribeWhiteBoxServiceStatusRequest} req
+     * @param {function(string, DescribeWhiteBoxServiceStatusResponse):void} cb
+     * @public
+     */
+    DescribeWhiteBoxServiceStatus(req, cb) {
+        let resp = new DescribeWhiteBoxServiceStatusResponse();
+        this.request("DescribeWhiteBoxServiceStatus", req, resp, cb);
     }
 
     /**
@@ -406,6 +539,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     DisableKeys(req, cb) {
         let resp = new DisableKeysResponse();
         this.request("DisableKeys", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a white-box decryption key.
+     * @param {DescribeWhiteBoxDecryptKeyRequest} req
+     * @param {function(string, DescribeWhiteBoxDecryptKeyResponse):void} cb
+     * @public
+     */
+    DescribeWhiteBoxDecryptKey(req, cb) {
+        let resp = new DescribeWhiteBoxDecryptKeyResponse();
+        this.request("DescribeWhiteBoxDecryptKey", req, resp, cb);
     }
 
 

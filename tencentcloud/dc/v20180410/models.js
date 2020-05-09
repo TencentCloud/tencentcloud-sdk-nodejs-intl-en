@@ -432,6 +432,12 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
          */
         this.Bandwidth = null;
 
+        /**
+         * Tencent-side standby IP address
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
     }
 
     /**
@@ -461,6 +467,7 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
         this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
 
     }
 }
@@ -728,6 +735,12 @@ Default value: Non-zero.
          */
         this.CustomerAddress = null;
 
+        /**
+         * TencentBackupAddress, i.e., Tencent-side standby IP address
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
     }
 
     /**
@@ -764,6 +777,7 @@ Default value: Non-zero.
         this.Vlan = 'Vlan' in params ? params.Vlan : null;
         this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
 
     }
 }
@@ -1030,7 +1044,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Dedicated tunnel information list.
+ * Dedicated tunnel information list
  * @class
  */
 class DirectConnectTunnel extends  AbstractModel {
@@ -1038,7 +1052,7 @@ class DirectConnectTunnel extends  AbstractModel {
         super();
 
         /**
-         * Dedicated tunnel ID.
+         * Dedicated tunnel ID
          * @type {string || null}
          */
         this.DirectConnectTunnelId = null;
@@ -1050,16 +1064,16 @@ class DirectConnectTunnel extends  AbstractModel {
         this.DirectConnectId = null;
 
         /**
-         * Dedicated tunnel status.
-AVAILABLE: Ready or connected.
-PENDING: Applying.
-ALLOCATING: Configuring.
-ALLOCATED: Configured.
-ALTERING: Modifying.
-DELETING: Deleting.
-DELETED: Deleted.
-COMFIRMING: To be accepted.
-REJECTED: Rejected.
+         * Dedicated tunnel status
+AVAILABLE: ready or connected
+PENDING: applying
+ALLOCATING: configuring
+ALLOCATED: configured
+ALTERING: modifying
+DELETING: deleting
+DELETED: deleted
+CONFIRMING: to be accepted
+REJECTED: rejected
          * @type {string || null}
          */
         this.State = null;
@@ -1071,7 +1085,7 @@ REJECTED: Rejected.
         this.DirectConnectOwnerAccount = null;
 
         /**
-         * Dedicated tunnel owner, i.e., developer account ID.
+         * Dedicated tunnel owner, i.e., developer account ID
          * @type {string || null}
          */
         this.OwnerAccount = null;
@@ -1120,7 +1134,7 @@ REJECTED: Rejected.
         this.RouteFilterPrefixes = null;
 
         /**
-         * VLAN of a dedicated tunnel.
+         * Dedicated tunnel `Vlan`
          * @type {number || null}
          */
         this.Vlan = null;
@@ -1138,25 +1152,25 @@ REJECTED: Rejected.
         this.CustomerAddress = null;
 
         /**
-         * Dedicated tunnel name.
+         * Dedicated tunnel name
          * @type {string || null}
          */
         this.DirectConnectTunnelName = null;
 
         /**
-         * Creation time of a dedicated tunnel.
+         * Dedicated tunnel creation time
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * Bandwidth value of a dedicated tunnel.
+         * Dedicated tunnel bandwidth value
          * @type {number || null}
          */
         this.Bandwidth = null;
 
         /**
-         * Tag value of a dedicated tunnel.
+         * Dedicated tunnel tag value
          * @type {Array.<Tag> || null}
          */
         this.TagSet = null;
@@ -1197,7 +1211,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BfdEnable = null;
 
         /**
-         * Access point type of a dedicated tunnel.
+         * Dedicated tunnel access point type
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1216,6 +1230,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.VpcName = null;
+
+        /**
+         * TencentBackupAddress, i.e., Tencent-side standby IP address
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
 
     }
 
@@ -1274,6 +1295,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
         this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
 
     }
 }

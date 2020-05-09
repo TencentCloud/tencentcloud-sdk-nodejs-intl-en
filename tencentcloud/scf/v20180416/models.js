@@ -705,6 +705,13 @@ Note: This field may return null, indicating that no valid values is found.
         this.Versions = null;
 
         /**
+         * Total number of function versions
+Note: This field may return null, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -729,6 +736,7 @@ Note: This field may return null, indicating that no valid values is found.
                 this.Versions.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -994,6 +1002,12 @@ class InvokeRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * Traffic routing config in json format, e.g., {"k":"v"}. Please note that both "k" and "v" must be strings. Up to 1024 bytes allowed.
+         * @type {string || null}
+         */
+        this.RoutingKey = null;
+
     }
 
     /**
@@ -1009,6 +1023,7 @@ class InvokeRequest extends  AbstractModel {
         this.ClientContext = 'ClientContext' in params ? params.ClientContext : null;
         this.LogType = 'LogType' in params ? params.LogType : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
 
     }
 }
@@ -1213,16 +1228,40 @@ class ListVersionByFunctionRequest extends  AbstractModel {
         super();
 
         /**
-         * Function ID
+         * Function Name
          * @type {string || null}
          */
         this.FunctionName = null;
 
         /**
-         * Namespace
+         * The namespace where the function locates
          * @type {string || null}
          */
         this.Namespace = null;
+
+        /**
+         * Data offset. The default value is `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Return data length. The default value is `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * It specifies whether to return the results in ascending or descending order. The value is `ASC` or `DESC`.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * It specifies the sorting order of the results according to a specified field, such as `AddTime`, `ModTime`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
 
     }
 
@@ -1235,6 +1274,10 @@ class ListVersionByFunctionRequest extends  AbstractModel {
         }
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
     }
 }

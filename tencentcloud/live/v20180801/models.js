@@ -296,7 +296,7 @@ class DeleteLiveTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Transcoding template information
+ * Transcoding template information.
  * @class
  */
 class TemplateInfo extends  AbstractModel {
@@ -311,57 +311,56 @@ h264/h265.
         this.Vcodec = null;
 
         /**
-         * Video bitrate in Kbps. Value range: 100–8,000
+         * Video bitrate. Value range: 100–8000 Kbps.
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * Audio encoding format: AAC/MP3
-aac/mp3.
+         * Audio codec. Valid values: aac, mp3.
          * @type {string || null}
          */
         this.Acodec = null;
 
         /**
-         * Audio bitrate. Value range: 0–500
+         * Audio bitrate. Value range: 0–500 Kbps.
          * @type {number || null}
          */
         this.AudioBitrate = null;
 
         /**
-         * Width. Value range: 0–3,000
+         * Width. Value range: 0–3000.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Height. Value range: 0–3,000
+         * Height. Value range: 0–3000.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Frame rate. Value range: 0–200
+         * Frame rate. Value range: 0–200 FPS.
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Keyframe interval in seconds. Value range: 1–50
+         * Keyframe interval. Value range: 1–50s.
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * Rotation angle. Valid values: 0, 90, 180, 270
+         * Rotation angle. Valid values: 0, 90, 180, 270.
          * @type {number || null}
          */
         this.Rotate = null;
 
         /**
-         * Encoding quality:
-baseline/main/high.
+         * Encoding quality. Valid values:
+baseline, main, high.
          * @type {string || null}
          */
         this.Profile = null;
@@ -403,25 +402,25 @@ baseline/main/high.
         this.TemplateId = null;
 
         /**
-         * Template name
+         * Template name.
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
-         * Template description
+         * Template description.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Whether it is a TESHD template. 0: no; 1: yes. Default value: 0.
+         * Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
          * @type {number || null}
          */
         this.AiTransCode = null;
 
         /**
-         * VideoBitrate minus TESHD bitrate. Value range: 0.1–0.5.
+         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -580,6 +579,8 @@ class DeleteLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
+1. Get from the returned value of the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
+2. You can query the list of created screencapturing templates through the [DescribeLiveSnapshotTemplates](/document/product/267/32619) API.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -599,7 +600,7 @@ class DeleteLiveSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Push authentication key information
+ * Push authentication key information.
  * @class
  */
 class PushAuthKeyInfo extends  AbstractModel {
@@ -625,7 +626,7 @@ class PushAuthKeyInfo extends  AbstractModel {
         this.MasterAuthKey = null;
 
         /**
-         * Backup authentication key.
+         * Standby authentication key.
          * @type {string || null}
          */
         this.BackupAuthKey = null;
@@ -683,18 +684,18 @@ class DeleteLiveRecordTemplateRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLivePlayAuthKey request structure.
+ * DeleteLiveCallbackTemplate response structure.
  * @class
  */
-class DescribeLivePlayAuthKeyRequest extends  AbstractModel {
+class DeleteLiveCallbackTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Domain name.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DomainName = null;
+        this.RequestId = null;
 
     }
 
@@ -705,7 +706,7 @@ class DescribeLivePlayAuthKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -983,7 +984,7 @@ class RecordTemplateInfo extends  AbstractModel {
         this.HlsParam = null;
 
         /**
-         * Mp4 recording parameter.
+         * MP4 recording parameter.
          * @type {RecordParam || null}
          */
         this.Mp4Param = null;
@@ -1002,13 +1003,13 @@ class RecordTemplateInfo extends  AbstractModel {
         this.IsDelayLive = null;
 
         /**
-         * Custom HLS recording parameter.
+         * Custom HLS recording parameter
          * @type {HlsSpecialParam || null}
          */
         this.HlsSpecialParam = null;
 
         /**
-         * Mp3 recording parameter.
+         * MP3 recording parameter.
          * @type {RecordParam || null}
          */
         this.Mp3Param = null;
@@ -1298,6 +1299,7 @@ class DescribeLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
+Template ID returned by the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1325,76 +1327,85 @@ class DomainInfo extends  AbstractModel {
         super();
 
         /**
-         * LVB domain name
+         * LVB domain name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Domain name type. 0: push, 1: playback
+         * Domain name type:
+0: push.
+1: playback.
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Domain name status. 0: disabled, 1: enabled.
+         * Domain name status:
+0: deactivated.
+1: activated.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Whether there is a CNAME record pointing to a fixed rule. 0: no, 1: yes.
+         * Whether there is a CNAME record pointing to a fixed rule domain name:
+0: no.
+1: yes.
          * @type {number || null}
          */
         this.BCName = null;
 
         /**
-         * Domain name corresponding to the CNAME record
+         * Domain name corresponding to CNAME record.
          * @type {string || null}
          */
         this.TargetDomain = null;
 
         /**
          * Playback region. This parameter is valid only if `Type` is 1.
-1: Mainland China, 2: global, 3: outside Mainland China.
+1: in Mainland China.
+2: global.
+3: outside Mainland China.
          * @type {number || null}
          */
         this.PlayType = null;
 
         /**
-         * 0: LVB,
+         * Whether it is LCB:
+0: LVB.
 1: LCB.
          * @type {number || null}
          */
         this.IsDelayLive = null;
 
         /**
-         * Information of currently used CNAME record
+         * Information of currently used CNAME record.
          * @type {string || null}
          */
         this.CurrentCName = null;
 
         /**
-         * Whether it is a leased domain name
+         * Disused parameter, which can be ignored.
          * @type {number || null}
          */
         this.RentTag = null;
 
         /**
-         * Expiration time of leased domain name
+         * Disused parameter, which can be ignored.
          * @type {string || null}
          */
         this.RentExpireTime = null;
 
         /**
-         * 0: LVB,
-1: LVB on WeChat Mini Program.
+         * 0: LVB.
+1: LVB on Mini Program.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -1489,7 +1500,7 @@ class DeleteLiveSnapshotRuleRequest extends  AbstractModel {
 }
 
 /**
- * Push time
+ * Push time.
  * @class
  */
 class PublishTime extends  AbstractModel {
@@ -1497,8 +1508,8 @@ class PublishTime extends  AbstractModel {
         super();
 
         /**
-         * Push time
-In UTC format, for example: 2018-06-29T19:00:00Z.
+         * Push time.
+In UTC format, such as 2018-06-29T19:00:00Z.
          * @type {string || null}
          */
         this.PublishTime = null;
@@ -1513,6 +1524,100 @@ In UTC format, for example: 2018-06-29T19:00:00Z.
             return;
         }
         this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+
+    }
+}
+
+/**
+ * General stream mix output parameter.
+ * @class
+ */
+class CommonMixOutputParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Output stream name.
+         * @type {string || null}
+         */
+        this.OutputStreamName = null;
+
+        /**
+         * Output stream type. Valid values: [0,1].
+If this parameter is left empty, 0 will be used by default.
+If the output stream is a stream in the input stream list, enter 0.
+If you want the stream mix result to be a new stream, enter 1.
+If this value is 1, `output_stream_id` cannot appear in `input_stram_list`, and there cannot be a stream with the same ID on the LVB backend.
+         * @type {number || null}
+         */
+        this.OutputStreamType = null;
+
+        /**
+         * Output stream bitrate. Value range: [1,50000].
+If this parameter is left empty, the system will automatically determine.
+         * @type {number || null}
+         */
+        this.OutputStreamBitRate = null;
+
+        /**
+         * Output stream GOP size. Value range: [1,10].
+If this parameter is left empty, the system will automatically determine.
+         * @type {number || null}
+         */
+        this.OutputStreamGop = null;
+
+        /**
+         * Output stream frame rate. Value range: [1,60].
+If this parameter is left empty, the system will automatically determine.
+         * @type {number || null}
+         */
+        this.OutputStreamFrameRate = null;
+
+        /**
+         * Output stream audio bitrate. Value range: [1,500]
+If this parameter is left empty, the system will automatically determine.
+         * @type {number || null}
+         */
+        this.OutputAudioBitRate = null;
+
+        /**
+         * Output stream audio sample rate. Valid values: [96000, 88200, 64000, 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000].
+If this parameter is left empty, the system will automatically determine.
+         * @type {number || null}
+         */
+        this.OutputAudioSampleRate = null;
+
+        /**
+         * Output stream audio sound channel. Valid values: [1,2].
+If this parameter is left empty, the system will automatically determine.
+         * @type {number || null}
+         */
+        this.OutputAudioChannels = null;
+
+        /**
+         * SEI information in output stream. If there are no special needs, leave it empty.
+         * @type {string || null}
+         */
+        this.MixSei = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OutputStreamName = 'OutputStreamName' in params ? params.OutputStreamName : null;
+        this.OutputStreamType = 'OutputStreamType' in params ? params.OutputStreamType : null;
+        this.OutputStreamBitRate = 'OutputStreamBitRate' in params ? params.OutputStreamBitRate : null;
+        this.OutputStreamGop = 'OutputStreamGop' in params ? params.OutputStreamGop : null;
+        this.OutputStreamFrameRate = 'OutputStreamFrameRate' in params ? params.OutputStreamFrameRate : null;
+        this.OutputAudioBitRate = 'OutputAudioBitRate' in params ? params.OutputAudioBitRate : null;
+        this.OutputAudioSampleRate = 'OutputAudioSampleRate' in params ? params.OutputAudioSampleRate : null;
+        this.OutputAudioChannels = 'OutputAudioChannels' in params ? params.OutputAudioChannels : null;
+        this.MixSei = 'MixSei' in params ? params.MixSei : null;
 
     }
 }
@@ -1620,7 +1725,7 @@ This supports querying data in the past 60 days.
         this.StartTime = null;
 
         /**
-         * Push path, which is the same as the AppName in push and playback addresses and is "live" by default. Fuzzy match is not supported.
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. Fuzzy match is not supported.
          * @type {string || null}
          */
         this.AppName = null;
@@ -2046,25 +2151,25 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         this.WatermarkName = null;
 
         /**
-         * Display position: X-axis offset.
+         * Display position: X-axis offset. Default value: 0.
          * @type {number || null}
          */
         this.XPosition = null;
 
         /**
-         * Display position: Y-axis offset.
+         * Display position: Y-axis offset. Default value: 0.
          * @type {number || null}
          */
         this.YPosition = null;
 
         /**
-         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
          * @type {number || null}
          */
         this.Height = null;
@@ -2084,6 +2189,34 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         this.YPosition = 'YPosition' in params ? params.YPosition : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
+ * ModifyLiveTranscodeTemplate response structure.
+ * @class
+ */
+class ModifyLiveTranscodeTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2216,7 +2349,7 @@ class AddDelayLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
          * @type {string || null}
          */
         this.AppName = null;
@@ -2404,7 +2537,7 @@ Note: This parameter takes effect when StreamName is used.
 }
 
 /**
- * Callback template information
+ * Callback template information.
  * @class
  */
 class CallBackTemplateInfo extends  AbstractModel {
@@ -2436,7 +2569,7 @@ class CallBackTemplateInfo extends  AbstractModel {
         this.StreamBeginNotifyUrl = null;
 
         /**
-         * Stream ending callback URL.
+         * Interruption callback URL.
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
@@ -2693,7 +2826,7 @@ class CreateLiveRecordResponse extends  AbstractModel {
 }
 
 /**
- * Rule information
+ * Rule information.
  * @class
  */
 class RuleInfo extends  AbstractModel {
@@ -2847,6 +2980,34 @@ class ModifyLivePlayDomainResponse extends  AbstractModel {
 }
 
 /**
+ * CancelCommonMixStream response structure.
+ * @class
+ */
+class CancelCommonMixStreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ForbidLiveDomain response structure.
  * @class
  */
@@ -2913,6 +3074,58 @@ class DescribeLiveCertsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * General stream mix input parameter.
+ * @class
+ */
+class CommonMixInputParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input stream name of up to 80 bytes, which is a string containing letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.InputStreamName = null;
+
+        /**
+         * Input stream layout parameter.
+         * @type {CommonMixLayoutParams || null}
+         */
+        this.LayoutParams = null;
+
+        /**
+         * Input stream crop parameter.
+         * @type {CommonMixCropParams || null}
+         */
+        this.CropParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputStreamName = 'InputStreamName' in params ? params.InputStreamName : null;
+
+        if (params.LayoutParams) {
+            let obj = new CommonMixLayoutParams();
+            obj.deserialize(params.LayoutParams)
+            this.LayoutParams = obj;
+        }
+
+        if (params.CropParams) {
+            let obj = new CommonMixCropParams();
+            obj.deserialize(params.CropParams)
+            this.CropParams = obj;
+        }
 
     }
 }
@@ -3095,8 +3308,9 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Template name, which is a non-empty string.
+         * Template name.
 Maximum length: 255 bytes.
+Only letters, digits, underscores, and hyphens can be contained.
          * @type {string || null}
          */
         this.TemplateName = null;
@@ -3104,47 +3318,49 @@ Maximum length: 255 bytes.
         /**
          * Description.
 Maximum length: 1,024 bytes.
+Only letters, digits, underscores, and hyphens can be contained.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
          * Stream starting callback URL,
-Protocol-related document: [Event Message Notification](/document/product/267/32744).
+Protocol document: [Event Message Notification](/document/product/267/32744).
          * @type {string || null}
          */
         this.StreamBeginNotifyUrl = null;
 
         /**
-         * Stream ending callback URL,
-Protocol-related document: [Event Message Notification](/document/product/267/32744).
+         * Interruption callback URL,
+Protocol document: [Event Message Notification](/document/product/267/32744).
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
 
         /**
          * Recording callback URL,
-Protocol-related document: [Event Message Notification](/document/product/267/32744).
+Protocol document: [Event Message Notification](/document/product/267/32744).
          * @type {string || null}
          */
         this.RecordNotifyUrl = null;
 
         /**
          * Screencapturing callback URL,
-Protocol-related document: [Event Message Notification](/document/product/267/32744).
+Protocol document: [Event Message Notification](/document/product/267/32744).
          * @type {string || null}
          */
         this.SnapshotNotifyUrl = null;
 
         /**
          * Porn detection callback URL,
-Protocol-related document: [Event Message Notification](/document/product/267/32741).
+Protocol document: [Event Message Notification](/document/product/267/32741).
          * @type {string || null}
          */
         this.PornCensorshipNotifyUrl = null;
 
         /**
-         * Callback key, which is shared by callback URLs. For more information on authentication callback, please see the callback format document
+         * Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
+[Event Message Notification](/document/product/267/32744).
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -3251,7 +3467,7 @@ class DeleteLiveWatermarkRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * Push path.
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
          * @type {string || null}
          */
         this.AppName = null;
@@ -3306,16 +3522,14 @@ class StreamEventInfo extends  AbstractModel {
 
         /**
          * Push start time.
-In UTC format.
-Example: 2019-01-07T12:00:00Z.
+In UTC format, such as 2019-01-07T12:00:00Z.
          * @type {string || null}
          */
         this.StreamStartTime = null;
 
         /**
          * Push end time.
-In UTC format.
-Example: 2019-01-07T15:00:00Z.
+In UTC format, such as 2019-01-07T15:00:00Z.
          * @type {string || null}
          */
         this.StreamEndTime = null;
@@ -3500,6 +3714,86 @@ class DropLiveStreamRequest extends  AbstractModel {
 }
 
 /**
+ * CreateCommonMixStream request structure.
+ * @class
+ */
+class CreateCommonMixStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of stream mix session (from applying for stream mix to canceling stream mix).
+         * @type {string || null}
+         */
+        this.MixStreamSessionId = null;
+
+        /**
+         * Input stream list for stream mix.
+         * @type {Array.<CommonMixInputParam> || null}
+         */
+        this.InputStreamList = null;
+
+        /**
+         * Output stream parameter for stream mix.
+         * @type {CommonMixOutputParams || null}
+         */
+        this.OutputParams = null;
+
+        /**
+         * Input template ID. If this parameter is set, the output will be generated according to the default template layout, and there is no need to enter the custom position parameters.
+If this parameter is left empty, 0 will be used by default.
+For two input sources, 10, 20, 30, 40, and 50 are supported.
+For three input sources, 310, 390, and 391 are supported.
+For four input sources, 410 is supported.
+For five input sources, 510 and 590 are supported.
+For six input sources, 610 is supported.
+         * @type {number || null}
+         */
+        this.MixStreamTemplateId = null;
+
+        /**
+         * Special control parameter for stream mix. If there are no special needs, leave it empty.
+         * @type {CommonMixControlParams || null}
+         */
+        this.ControlParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MixStreamSessionId = 'MixStreamSessionId' in params ? params.MixStreamSessionId : null;
+
+        if (params.InputStreamList) {
+            this.InputStreamList = new Array();
+            for (let z in params.InputStreamList) {
+                let obj = new CommonMixInputParam();
+                obj.deserialize(params.InputStreamList[z]);
+                this.InputStreamList.push(obj);
+            }
+        }
+
+        if (params.OutputParams) {
+            let obj = new CommonMixOutputParams();
+            obj.deserialize(params.OutputParams)
+            this.OutputParams = obj;
+        }
+        this.MixStreamTemplateId = 'MixStreamTemplateId' in params ? params.MixStreamTemplateId : null;
+
+        if (params.ControlParams) {
+            let obj = new CommonMixControlParams();
+            obj.deserialize(params.ControlParams)
+            this.ControlParams = obj;
+        }
+
+    }
+}
+
+/**
  * CreateLiveCert response structure.
  * @class
  */
@@ -3535,18 +3829,94 @@ class CreateLiveCertResponse extends  AbstractModel {
 }
 
 /**
- * ModifyLiveCert response structure.
+ * General stream mix layout parameter.
  * @class
  */
-class ModifyLiveCertResponse extends  AbstractModel {
+class CommonMixLayoutParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Input layer. Value range: [1,16].
+1) For `image_layer` of background stream (i.e., main host video image or canvas), enter 1.
+2) For audio stream mix, this parameter is also required.
+         * @type {number || null}
+         */
+        this.ImageLayer = null;
+
+        /**
+         * Input type. Value range: [0,5].
+If this parameter is left empty, 0 will be used by default.
+0: the input stream is audio/video.
+2: the input stream is image.
+3: the input stream is canvas. 
+4: the input stream is audio.
+5: the input stream is pure video.
+         * @type {number || null}
+         */
+        this.InputType = null;
+
+        /**
+         * Output width of input video image. Value range:
+Pixel: [0,3000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, the input stream width will be used by default.
+If percentage is used, the expected output is (percentage * background width).
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * Output height of input video image. Value range:
+Pixel: [0,3000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, the input stream height will be used by default.
+If percentage is used, the expected output is (percentage * background height).
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * X-axis offset of input in output video image. Value range:
+Pixel: [0,3000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, 0 will be used by default.
+Horizontal offset from the top-left corner of main host background video image. 
+If percentage is used, the expected output is (percentage * background width).
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * Y-axis offset of input in output video image. Value range:
+Pixel: [0,3000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, 0 will be used by default.
+Vertical offset from the top-left corner of main host background video image. 
+If percentage is used, the expected output is (percentage * background width)
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+        /**
+         * When `InputType` is 3 (canvas), this value indicates the canvas color.
+Commonly used colors include:
+Red: 0xcc0033.
+Yellow: 0xcc9900.
+Green: 0xcccc33.
+Blue: 0x99CCFF.
+Black: 0x000000.
+White: 0xFFFFFF.
+Gray: 0x999999
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Color = null;
+
+        /**
+         * When `InputType` is 2 (image), this value is the watermark ID.
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
 
     }
 
@@ -3557,7 +3927,14 @@ class ModifyLiveCertResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ImageLayer = 'ImageLayer' in params ? params.ImageLayer : null;
+        this.InputType = 'InputType' in params ? params.InputType : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.Color = 'Color' in params ? params.Color : null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
 
     }
 }
@@ -3686,6 +4063,15 @@ Default value: 0.
          */
         this.IsDelayLive = null;
 
+        /**
+         * Whether it is LVB on Mini Program.
+0: LVB.
+1: LVB on Mini Program.
+Default value: 0.
+         * @type {number || null}
+         */
+        this.IsMiniProgramLive = null;
+
     }
 
     /**
@@ -3699,12 +4085,13 @@ Default value: 0.
         this.DomainType = 'DomainType' in params ? params.DomainType : null;
         this.PlayType = 'PlayType' in params ? params.PlayType : null;
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
+        this.IsMiniProgramLive = 'IsMiniProgramLive' in params ? params.IsMiniProgramLive : null;
 
     }
 }
 
 /**
- * List of stream names
+ * Stream name list.
  * @class
  */
 class StreamName extends  AbstractModel {
@@ -3731,16 +4118,14 @@ class StreamName extends  AbstractModel {
 
         /**
          * Push start time.
-In UTC format.
-Example: 2019-01-07T12:00:00Z.
+In UTC format, such as 2019-01-07T12:00:00Z.
          * @type {string || null}
          */
         this.StreamStartTime = null;
 
         /**
          * Push end time.
-In UTC format.
-Example: 2019-01-07T15:00:00Z.
+In UTC format, such as 2019-01-07T15:00:00Z.
          * @type {string || null}
          */
         this.StreamEndTime = null;
@@ -3881,18 +4266,18 @@ class AddLiveDomainResponse extends  AbstractModel {
 }
 
 /**
- * DeleteLiveCallbackTemplate response structure.
+ * DescribeLivePlayAuthKey request structure.
  * @class
  */
-class DeleteLiveCallbackTemplateResponse extends  AbstractModel {
+class DescribeLivePlayAuthKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Domain name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DomainName = null;
 
     }
 
@@ -3903,7 +4288,7 @@ class DeleteLiveCallbackTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -4098,8 +4483,7 @@ class DescribeLiveWatermarksResponse extends  AbstractModel {
 }
 
 /**
- * Watermark information
-
+ * Watermark information.
  * @class
  */
 class WatermarkInfo extends  AbstractModel {
@@ -4149,13 +4533,13 @@ class WatermarkInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Watermark width
+         * Watermark width.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Watermark height
+         * Watermark height.
          * @type {number || null}
          */
         this.Height = null;
@@ -4332,10 +4716,10 @@ class DeleteLiveWatermarkRuleResponse extends  AbstractModel {
 }
 
 /**
- * ModifyLiveTranscodeTemplate response structure.
+ * ModifyLiveCert response structure.
  * @class
  */
-class ModifyLiveTranscodeTemplateResponse extends  AbstractModel {
+class ModifyLiveCertResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4369,6 +4753,7 @@ class DeleteLiveWatermarkRequest extends  AbstractModel {
 
         /**
          * Watermark ID.
+Get the watermark ID in the returned value of the [AddLiveWatermark](/document/product/267/30154) API call.
          * @type {number || null}
          */
         this.WatermarkId = null;
@@ -4460,6 +4845,7 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
 
         /**
          * Watermark ID.
+Get the watermark ID in the returned value of the [AddLiveWatermark](/document/product/267/30154) API call.
          * @type {number || null}
          */
         this.WatermarkId = null;
@@ -4471,13 +4857,13 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
         this.PictureUrl = null;
 
         /**
-         * Display position: X-axis offset.
+         * Display position: X-axis offset. Default value: 0.
          * @type {number || null}
          */
         this.XPosition = null;
 
         /**
-         * Display position: Y-axis offset.
+         * Display position: Y-axis offset. Default value: 0.
          * @type {number || null}
          */
         this.YPosition = null;
@@ -4489,13 +4875,13 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
         this.WatermarkName = null;
 
         /**
-         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions.
+         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
          * @type {number || null}
          */
         this.Height = null;
@@ -4728,7 +5114,35 @@ class DescribeLiveSnapshotTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Certificate information
+ * CancelCommonMixStream request structure.
+ * @class
+ */
+class CancelCommonMixStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of stream mix session (from applying for stream mix to canceling stream mix).
+         * @type {string || null}
+         */
+        this.MixStreamSessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MixStreamSessionId = 'MixStreamSessionId' in params ? params.MixStreamSessionId : null;
+
+    }
+}
+
+/**
+ * Certificate information.
  * @class
  */
 class CertInfo extends  AbstractModel {
@@ -4766,8 +5180,8 @@ class CertInfo extends  AbstractModel {
         this.HttpsCrt = null;
 
         /**
-         * Certificate type.
-0: Tencent Cloud-hosted certificate
+         * Certificate type:
+0: Tencent Cloud-hosted certificate.
 1: user-added certificate.
          * @type {number || null}
          */
@@ -4887,6 +5301,8 @@ class DeleteLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
+1. Get the template ID in the returned value of the [CreateLiveTranscodeTemplate](/document/product/267/32646) API call.
+2. You can query the list of created templates through the [DescribeLiveTranscodeTemplates](/document/product/267/32641) API.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -5065,6 +5481,35 @@ class ModifyLiveCertRequest extends  AbstractModel {
 }
 
 /**
+ * General stream mix control parameter
+ * @class
+ */
+class CommonMixControlParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: [0,1].
+If 1 is entered, when the layer resolution in the parameter is different from the actual video resolution, the video will be automatically cropped according to the resolution set by the layer.
+         * @type {number || null}
+         */
+        this.UseMixCropCenter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UseMixCropCenter = 'UseMixCropCenter' in params ? params.UseMixCropCenter : null;
+
+    }
+}
+
+/**
  * UnBindLiveDomainCert response structure.
  * @class
  */
@@ -5177,7 +5622,7 @@ class CreateLiveRecordTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Recording template parameter
+ * Recording template parameter.
  * @class
  */
 class RecordParam extends  AbstractModel {
@@ -5186,23 +5631,23 @@ class RecordParam extends  AbstractModel {
 
         /**
          * Recording interval.
-In seconds. Default value: 1,800.
-Value range: 300–7,200.
-This parameter is not valid for HLS, and a file is generated from push start to push end when HLS is recorded.
+In seconds. Default value: 1800.
+Value range: 300–7200.
+This parameter is not valid for HLS, and a file will be generated from push start to interruption during HLS recording.
          * @type {number || null}
          */
         this.RecordInterval = null;
 
         /**
-         * Recording storage duration.
-In seconds. Value range: 0–93,312,000.
-0 represents permanent storage.
+         * Recording storage period.
+In seconds. Value range: 0–93312000.
+0: permanent storage.
          * @type {number || null}
          */
         this.StorageTime = null;
 
         /**
-         * Whether to enable recording in the current format. 0: no; 1: yes. Default value: 0.
+         * Whether to enable recording in the current format. Default value: 0. 0: no, 1: yes.
          * @type {number || null}
          */
         this.Enable = null;
@@ -5212,6 +5657,12 @@ In seconds. Value range: 0–93,312,000.
          * @type {number || null}
          */
         this.VodSubAppId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VodFileName = null;
 
     }
 
@@ -5226,6 +5677,7 @@ In seconds. Value range: 0–93,312,000.
         this.StorageTime = 'StorageTime' in params ? params.StorageTime : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.VodSubAppId = 'VodSubAppId' in params ? params.VodSubAppId : null;
+        this.VodFileName = 'VodFileName' in params ? params.VodFileName : null;
 
     }
 }
@@ -5269,7 +5721,7 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         this.HlsParam = null;
 
         /**
-         * Mp4 recording parameter, which is set when Mp4 recording is enabled.
+         * MP4 recording parameter, which is set when MP4 recording is enabled.
          * @type {RecordParam || null}
          */
         this.Mp4Param = null;
@@ -5287,7 +5739,7 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         this.HlsSpecialParam = null;
 
         /**
-         * Mp3 recording parameter, which is set when Mp3 recording is enabled.
+         * MP3 recording parameter, which is set when MP3 recording is enabled.
          * @type {RecordParam || null}
          */
         this.Mp3Param = null;
@@ -5359,7 +5811,8 @@ class DeleteLiveRecordRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * Task ID, which uniquely identifies the recording task globally.
+         * Task ID, which uniquely identifies a recording task globally.
+Get the `TaskId` from the returned value of the [CreateLiveRecord](/document/product/267/30148) API.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -5784,7 +6237,7 @@ class DeleteLiveCallbackRuleRequest extends  AbstractModel {
 }
 
 /**
- * Playback authentication key information
+ * Playback authentication key information.
  * @class
  */
 class PlayAuthKeyInfo extends  AbstractModel {
@@ -5798,7 +6251,9 @@ class PlayAuthKeyInfo extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * Whether to enable. 0: disabled; 1: enabled.
+         * Whether to enable:
+0: disable.
+1: enable.
          * @type {number || null}
          */
         this.Enable = null;
@@ -5816,7 +6271,7 @@ class PlayAuthKeyInfo extends  AbstractModel {
         this.AuthDelta = null;
 
         /**
-         * Authentication BackKey.
+         * Authentication `BackKey`.
          * @type {string || null}
          */
         this.AuthBackKey = null;
@@ -5868,7 +6323,8 @@ aac/mp3.
         this.Acodec = null;
 
         /**
-         * Audio bitrate. Value range: 0–500. Default value: 0.
+         * Audio bitrate. Default value: 0.
+Value range: 0–500.
          * @type {number || null}
          */
         this.AudioBitrate = null;
@@ -5880,13 +6336,14 @@ aac/mp3.
         this.Description = null;
 
         /**
-         * Video bitrate. Value range: 100–8,000
+         * Video bitrate. Value range: 100–8000 Kbps.
+Note: the bitrate value must be a multiple of 100.
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * Width. Value range: 0–3,000
+         * Width. Value range: 0-3000.
          * @type {number || null}
          */
         this.Width = null;
@@ -5904,25 +6361,26 @@ aac/mp3.
         this.NeedAudio = null;
 
         /**
-         * Height. Value range: 0–3,000
+         * Height. Value range: 0-3000.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Frame rate. Value range: 0–200
+         * Frame rate. Value range: 0–200.
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Keyframe interval in seconds. Value range: 0–50
+         * Keyframe interval in seconds. Value range: 0–50.
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * Rotation angle. Valid values: 0, 90, 180, 270
+         * Rotation angle.
+0, 90, 180, 270.
          * @type {number || null}
          */
         this.Rotate = null;
@@ -5953,7 +6411,7 @@ baseline/main/high.
         this.FpsToOrig = null;
 
         /**
-         * VideoBitrate minus TESHD bitrate. Value range: 0.1–0.5.
+         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -6347,14 +6805,15 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Template name, which is a non-empty string.
+         * Template name.
 Maximum length: 255 bytes.
+Only letters, digits, underscores, and hyphens can be contained.
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
-         * COS `AppId`.
+         * COS application ID.
          * @type {number || null}
          */
         this.CosAppId = null;
@@ -6374,6 +6833,7 @@ Maximum length: 255 bytes.
         /**
          * Description.
 Maximum length: 1,024 bytes.
+Only letters, digits, underscores, and hyphens can be contained.
          * @type {string || null}
          */
         this.Description = null;
@@ -6403,6 +6863,18 @@ Value range: 5–600s.
          */
         this.PornFlag = null;
 
+        /**
+         * COS bucket folder prefix.
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * COS filename.
+         * @type {string || null}
+         */
+        this.CosFileName = null;
+
     }
 
     /**
@@ -6421,6 +6893,8 @@ Value range: 5–600s.
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.PornFlag = 'PornFlag' in params ? params.PornFlag : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
     }
 }
@@ -6493,6 +6967,8 @@ class DeleteLiveCallbackTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
+1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](/document/product/267/32637) API call.
+2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](/document/product/267/32632) API.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -6544,7 +7020,7 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
         this.StreamBeginNotifyUrl = null;
 
         /**
-         * Stream ending callback URL.
+         * Interruption callback URL.
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
@@ -6568,7 +7044,8 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
         this.PornCensorshipNotifyUrl = null;
 
         /**
-         * Callback key, which is shared by callback URLs. For more information on authentication callback, please see the callback format document.
+         * Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
+[Event Message Notification](/document/product/267/32744).
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -6600,6 +7077,34 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
  * @class
  */
 class DeleteLiveCertResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateCommonMixStream response structure.
+ * @class
+ */
+class CreateCommonMixStreamResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -6659,67 +7164,18 @@ class CreateLiveCallbackTemplateResponse extends  AbstractModel {
 }
 
 /**
- * CreateLiveRecordTemplate request structure.
+ * DescribeLivePushAuthKey request structure.
  * @class
  */
-class CreateLiveRecordTemplateRequest extends  AbstractModel {
+class DescribeLivePushAuthKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template name, which is a non-empty string.
+         * Push domain name.
          * @type {string || null}
          */
-        this.TemplateName = null;
-
-        /**
-         * Message description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * FLV recording parameter, which is set when FLV recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.FlvParam = null;
-
-        /**
-         * HLS recording parameter, which is set when HLS recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.HlsParam = null;
-
-        /**
-         * Mp4 recording parameter, which is set when Mp4 recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.Mp4Param = null;
-
-        /**
-         * AAC recording parameter, which is set when AAC recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.AacParam = null;
-
-        /**
-         * 0: LVB,
-1: LCB.
-         * @type {number || null}
-         */
-        this.IsDelayLive = null;
-
-        /**
-         * HLS-specific recording parameter.
-         * @type {HlsSpecialParam || null}
-         */
-        this.HlsSpecialParam = null;
-
-        /**
-         * Mp3 recording parameter, which is set when Mp3 recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.Mp3Param = null;
+        this.DomainName = null;
 
     }
 
@@ -6730,45 +7186,7 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-        if (params.FlvParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.FlvParam)
-            this.FlvParam = obj;
-        }
-
-        if (params.HlsParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.HlsParam)
-            this.HlsParam = obj;
-        }
-
-        if (params.Mp4Param) {
-            let obj = new RecordParam();
-            obj.deserialize(params.Mp4Param)
-            this.Mp4Param = obj;
-        }
-
-        if (params.AacParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.AacParam)
-            this.AacParam = obj;
-        }
-        this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
-
-        if (params.HlsSpecialParam) {
-            let obj = new HlsSpecialParam();
-            obj.deserialize(params.HlsSpecialParam)
-            this.HlsSpecialParam = obj;
-        }
-
-        if (params.Mp3Param) {
-            let obj = new RecordParam();
-            obj.deserialize(params.Mp3Param)
-            this.Mp3Param = obj;
-        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -6783,6 +7201,8 @@ class DescribeLiveCallbackTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
+1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](/document/product/267/32637) API call.
+2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](/document/product/267/32632) API.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -6849,13 +7269,15 @@ Value range: 5–600s.
         this.Height = null;
 
         /**
-         * Whether to enable porn detection. 0: no, 1: yes.
+         * Whether to enable porn detection. Default value: 0.
+0: do not enable.
+1: enable.
          * @type {number || null}
          */
         this.PornFlag = null;
 
         /**
-         * COS `AppId`.
+         * COS application ID.
          * @type {number || null}
          */
         this.CosAppId = null;
@@ -6871,6 +7293,18 @@ Value range: 5–600s.
          * @type {string || null}
          */
         this.CosRegion = null;
+
+        /**
+         * COS bucket folder prefix.
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * COS filename.
+         * @type {string || null}
+         */
+        this.CosFileName = null;
 
     }
 
@@ -6891,6 +7325,8 @@ Value range: 5–600s.
         this.CosAppId = 'CosAppId' in params ? params.CosAppId : null;
         this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
         this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
     }
 }
@@ -6933,6 +7369,7 @@ class DescribeLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
+Note: get the template ID in the returned value of the [CreateLiveTranscodeTemplate](/document/product/267/32646) API call.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -7120,7 +7557,9 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Whether it is an LCB template
+         * Whether it is an LCB template. Default value: 0.
+0: LVB.
+1: LCB.
          * @type {number || null}
          */
         this.IsDelayLive = null;
@@ -7236,7 +7675,7 @@ class CreateLiveSnapshotRuleResponse extends  AbstractModel {
 }
 
 /**
- * Information of the delayed playback
+ * Delayed playback information.
  * @class
  */
 class DelayInfo extends  AbstractModel {
@@ -7250,7 +7689,8 @@ class DelayInfo extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+         * Push path, which is the same as the 
+ `AppName` in push and playback addresses and is `live` by default.
          * @type {string || null}
          */
         this.AppName = null;
@@ -7268,25 +7708,25 @@ class DelayInfo extends  AbstractModel {
         this.DelayInterval = null;
 
         /**
-         * Creation time in UTC format.
-Note: Beijing time is 8 hours ahead of UTC.
-Example: 2019-06-18T12:00:00Z (20:00:00, June 18, 2019, Beijing time).
+         * Creation time in UTC time.
+Note: the difference between UTC time and Beijing time is 8 hours.
+Example: 2019-06-18T12:00:00Z (i.e., June 18, 2019 20:00:00 Beijing time).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Expiration time in UTC format.
-Note: Beijing time is 8 hours ahead of UTC.
-Example: 2019-06-18T12:00:00Z (20:00:00, June 18, 2019, Beijing time).
+         * Expiration time in UTC time.
+Note: the difference between UTC time and Beijing time is 8 hours.
+Example: 2019-06-18T12:00:00Z (i.e., June 18, 2019 20:00:00 Beijing time).
          * @type {string || null}
          */
         this.ExpireTime = null;
 
         /**
-         * Current status,
--1: Expired,
-1: Effective.
+         * Current status:
+-1: expired.
+1: in effect.
          * @type {number || null}
          */
         this.Status = null;
@@ -7524,18 +7964,36 @@ class DeleteLiveDomainResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLivePushAuthKey request structure.
+ * General stream mix input crop parameter.
  * @class
  */
-class DescribeLivePushAuthKeyRequest extends  AbstractModel {
+class CommonMixCropParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Push domain name.
-         * @type {string || null}
+         * Crop width. Value range: [0,3000].
+         * @type {number || null}
          */
-        this.DomainName = null;
+        this.CropWidth = null;
+
+        /**
+         * Crop height. Value range: [0,3000].
+         * @type {number || null}
+         */
+        this.CropHeight = null;
+
+        /**
+         * Starting crop X coordinate. Value range: [0,3000].
+         * @type {number || null}
+         */
+        this.CropStartLocationX = null;
+
+        /**
+         * Starting crop Y coordinate. Value range: [0,3000].
+         * @type {number || null}
+         */
+        this.CropStartLocationY = null;
 
     }
 
@@ -7546,7 +8004,126 @@ class DescribeLivePushAuthKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.CropWidth = 'CropWidth' in params ? params.CropWidth : null;
+        this.CropHeight = 'CropHeight' in params ? params.CropHeight : null;
+        this.CropStartLocationX = 'CropStartLocationX' in params ? params.CropStartLocationX : null;
+        this.CropStartLocationY = 'CropStartLocationY' in params ? params.CropStartLocationY : null;
+
+    }
+}
+
+/**
+ * CreateLiveRecordTemplate request structure.
+ * @class
+ */
+class CreateLiveRecordTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template name. Only letters, digits, underscores, and hyphens can be contained.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Message description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * FLV recording parameter, which is set when FLV recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.FlvParam = null;
+
+        /**
+         * HLS recording parameter, which is set when HLS recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.HlsParam = null;
+
+        /**
+         * Mp4 recording parameter, which is set when Mp4 recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.Mp4Param = null;
+
+        /**
+         * AAC recording parameter, which is set when AAC recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.AacParam = null;
+
+        /**
+         * LVB type. Default value: 0.
+0: LVB.
+1: LCB.
+         * @type {number || null}
+         */
+        this.IsDelayLive = null;
+
+        /**
+         * HLS-specific recording parameter.
+         * @type {HlsSpecialParam || null}
+         */
+        this.HlsSpecialParam = null;
+
+        /**
+         * Mp3 recording parameter, which is set when Mp3 recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.Mp3Param = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.FlvParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.FlvParam)
+            this.FlvParam = obj;
+        }
+
+        if (params.HlsParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.HlsParam)
+            this.HlsParam = obj;
+        }
+
+        if (params.Mp4Param) {
+            let obj = new RecordParam();
+            obj.deserialize(params.Mp4Param)
+            this.Mp4Param = obj;
+        }
+
+        if (params.AacParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.AacParam)
+            this.AacParam = obj;
+        }
+        this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
+
+        if (params.HlsSpecialParam) {
+            let obj = new HlsSpecialParam();
+            obj.deserialize(params.HlsSpecialParam)
+            this.HlsSpecialParam = obj;
+        }
+
+        if (params.Mp3Param) {
+            let obj = new RecordParam();
+            obj.deserialize(params.Mp3Param)
+            this.Mp3Param = obj;
+        }
 
     }
 }
@@ -7580,7 +8157,7 @@ class DeleteLiveCertRequest extends  AbstractModel {
 }
 
 /**
- * Screencapturing template information
+ * Screencapturing template information.
  * @class
  */
 class SnapshotTemplateInfo extends  AbstractModel {
@@ -7600,19 +8177,21 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.TemplateName = null;
 
         /**
-         * Screencapturing interval in seconds. Value range: 5–300s.
+         * Screencapturing interval. Value range: 5–300s.
          * @type {number || null}
          */
         this.SnapshotInterval = null;
 
         /**
-         * Screenshot width. Value range: 0–3000. 0: original width and fit to the original aspect ratio
+         * Screenshot width. Value range: 0–3000. 
+0: original width and fit to the original ratio.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Screenshot height. Value range: 0–2,000. 0: original height and fit to the original aspect ratio
+         * Screenshot height. Value range: 0–2000.
+0: original height and fit to the original ratio.
          * @type {number || null}
          */
         this.Height = null;
@@ -7624,7 +8203,7 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.PornFlag = null;
 
         /**
-         * COS `AppId`.
+         * COS application ID.
          * @type {number || null}
          */
         this.CosAppId = null;
@@ -7642,10 +8221,24 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.CosRegion = null;
 
         /**
-         * Template description
+         * Template description.
          * @type {string || null}
          */
         this.Description = null;
+
+        /**
+         * COS bucket folder prefix.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * COS filename.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CosFileName = null;
 
     }
 
@@ -7666,6 +8259,8 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
         this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
     }
 }
@@ -7713,7 +8308,7 @@ module.exports = {
     DeleteLiveSnapshotTemplateRequest: DeleteLiveSnapshotTemplateRequest,
     PushAuthKeyInfo: PushAuthKeyInfo,
     DeleteLiveRecordTemplateRequest: DeleteLiveRecordTemplateRequest,
-    DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
+    DeleteLiveCallbackTemplateResponse: DeleteLiveCallbackTemplateResponse,
     DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
     ModifyLivePlayAuthKeyRequest: ModifyLivePlayAuthKeyRequest,
     DescribeLiveDelayInfoListRequest: DescribeLiveDelayInfoListRequest,
@@ -7730,6 +8325,7 @@ module.exports = {
     DescribeLiveTranscodeRulesRequest: DescribeLiveTranscodeRulesRequest,
     DeleteLiveSnapshotRuleRequest: DeleteLiveSnapshotRuleRequest,
     PublishTime: PublishTime,
+    CommonMixOutputParams: CommonMixOutputParams,
     DescribeLiveSnapshotRulesResponse: DescribeLiveSnapshotRulesResponse,
     DescribeLiveDomainRequest: DescribeLiveDomainRequest,
     DescribeLiveStreamPublishedListRequest: DescribeLiveStreamPublishedListRequest,
@@ -7743,6 +8339,7 @@ module.exports = {
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
+    ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
@@ -7760,8 +8357,10 @@ module.exports = {
     UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
     CreateLiveTranscodeTemplateResponse: CreateLiveTranscodeTemplateResponse,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
+    CancelCommonMixStreamResponse: CancelCommonMixStreamResponse,
     ForbidLiveDomainResponse: ForbidLiveDomainResponse,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
+    CommonMixInputParam: CommonMixInputParam,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
     DescribeLiveRecordTemplatesResponse: DescribeLiveRecordTemplatesResponse,
     DescribeLiveCertRequest: DescribeLiveCertRequest,
@@ -7776,8 +8375,9 @@ module.exports = {
     CreateLiveTranscodeRuleRequest: CreateLiveTranscodeRuleRequest,
     DescribeLiveWatermarkRulesRequest: DescribeLiveWatermarkRulesRequest,
     DropLiveStreamRequest: DropLiveStreamRequest,
+    CreateCommonMixStreamRequest: CreateCommonMixStreamRequest,
     CreateLiveCertResponse: CreateLiveCertResponse,
-    ModifyLiveCertResponse: ModifyLiveCertResponse,
+    CommonMixLayoutParams: CommonMixLayoutParams,
     DescribeLiveSnapshotTemplateResponse: DescribeLiveSnapshotTemplateResponse,
     DescribeLiveTranscodeRulesResponse: DescribeLiveTranscodeRulesResponse,
     AddLiveDomainRequest: AddLiveDomainRequest,
@@ -7785,7 +8385,7 @@ module.exports = {
     DescribeLiveCertsRequest: DescribeLiveCertsRequest,
     DescribeLiveCertResponse: DescribeLiveCertResponse,
     AddLiveDomainResponse: AddLiveDomainResponse,
-    DeleteLiveCallbackTemplateResponse: DeleteLiveCallbackTemplateResponse,
+    DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
@@ -7795,7 +8395,7 @@ module.exports = {
     BindLiveDomainCertRequest: BindLiveDomainCertRequest,
     CreateLiveCallbackRuleRequest: CreateLiveCallbackRuleRequest,
     DeleteLiveWatermarkRuleResponse: DeleteLiveWatermarkRuleResponse,
-    ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
+    ModifyLiveCertResponse: ModifyLiveCertResponse,
     DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
     DescribeLiveDomainsRequest: DescribeLiveDomainsRequest,
     UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
@@ -7803,6 +8403,7 @@ module.exports = {
     CreateLiveRecordRequest: CreateLiveRecordRequest,
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
     DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,
+    CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
     CertInfo: CertInfo,
     ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
     DescribeLiveDelayInfoListResponse: DescribeLiveDelayInfoListResponse,
@@ -7811,6 +8412,7 @@ module.exports = {
     DescribeLiveTranscodeTemplateResponse: DescribeLiveTranscodeTemplateResponse,
     CreateLiveSnapshotTemplateResponse: CreateLiveSnapshotTemplateResponse,
     ModifyLiveCertRequest: ModifyLiveCertRequest,
+    CommonMixControlParams: CommonMixControlParams,
     UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,
     ForbidLiveDomainRequest: ForbidLiveDomainRequest,
     DescribeLiveRecordRulesRequest: DescribeLiveRecordRulesRequest,
@@ -7843,8 +8445,9 @@ module.exports = {
     DeleteLiveCallbackTemplateRequest: DeleteLiveCallbackTemplateRequest,
     ModifyLiveCallbackTemplateRequest: ModifyLiveCallbackTemplateRequest,
     DeleteLiveCertResponse: DeleteLiveCertResponse,
+    CreateCommonMixStreamResponse: CreateCommonMixStreamResponse,
     CreateLiveCallbackTemplateResponse: CreateLiveCallbackTemplateResponse,
-    CreateLiveRecordTemplateRequest: CreateLiveRecordTemplateRequest,
+    DescribeLivePushAuthKeyRequest: DescribeLivePushAuthKeyRequest,
     DescribeLiveCallbackTemplateRequest: DescribeLiveCallbackTemplateRequest,
     ModifyLiveSnapshotTemplateRequest: ModifyLiveSnapshotTemplateRequest,
     CreateLiveRecordRuleResponse: CreateLiveRecordRuleResponse,
@@ -7863,7 +8466,8 @@ module.exports = {
     ForbidStreamInfo: ForbidStreamInfo,
     ResumeDelayLiveStreamResponse: ResumeDelayLiveStreamResponse,
     DeleteLiveDomainResponse: DeleteLiveDomainResponse,
-    DescribeLivePushAuthKeyRequest: DescribeLivePushAuthKeyRequest,
+    CommonMixCropParams: CommonMixCropParams,
+    CreateLiveRecordTemplateRequest: CreateLiveRecordTemplateRequest,
     DeleteLiveCertRequest: DeleteLiveCertRequest,
     SnapshotTemplateInfo: SnapshotTemplateInfo,
     DeleteLiveRecordRuleResponse: DeleteLiveRecordRuleResponse,

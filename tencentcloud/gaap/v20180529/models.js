@@ -1822,6 +1822,12 @@ For more information, please see How to Ensure Idempotence.
          */
         this.ProxyId = null;
 
+        /**
+         * Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
     }
 
     /**
@@ -1836,6 +1842,7 @@ For more information, please see How to Ensure Idempotence.
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }
@@ -2750,13 +2757,13 @@ class RuleInfo extends  AbstractModel {
         this.Scheduler = null;
 
         /**
-         * Health check identifier: 1 (enable), 0 (disable).
+         * Whether health check is enabled. 1: enabled, 0: disabled
          * @type {number || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Origin server status. 0: running; 1: creating; 2: terminating; 3: binding or unbinding; 4: updating configuration
+         * Rule status. 0: running, 1: creating, 2: terminating, 3: binding/unbinding origin server, 4: updating configuration
          * @type {number || null}
          */
         this.RuleStatus = null;
@@ -2774,7 +2781,9 @@ class RuleInfo extends  AbstractModel {
         this.RealServerSet = null;
 
         /**
-         * Origin server binding status. 0: normal; 1: origin server IP exception; 2: origin server domain name resolution exception.
+         * Origin server service status. 0: exceptional, 1: normal
+If health check is not enabled, this status will always be normal.
+As long as one origin server is exceptional, this status will be exceptional. Please view `RealServerSet` for the status of specific origin servers.
          * @type {number || null}
          */
         this.BindStatus = null;
@@ -2839,7 +2848,7 @@ class RealServerStatus extends  AbstractModel {
         this.RealServerId = null;
 
         /**
-         * 0: not bound; 1: bound to rules or listeners.
+         * 0: not bound, 1: bound to rule or listener.
          * @type {number || null}
          */
         this.BindStatus = null;
@@ -3873,7 +3882,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Protocol = null;
 
         /**
-         * Listener status:
+         * Listener status. Valid values:
 0: running;
 1: creating;
 2: terminating;
@@ -3884,10 +3893,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ListenerStatus = null;
 
         /**
-         * Origin server access policy of listeners:
+         * Origin server access policy of listener. Valid values:
 rr: round robin;
 wrr: weighted round robin;
-lc: least connections.
+lc: least connection.
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -3905,16 +3914,16 @@ lc: least connections.
         this.DelayLoop = null;
 
         /**
-         * Whether to enable the listener health check:
-0: disable;
-1: enable.
+         * Whether health check is enabled for listener. Valid values:
+0: disabled;
+1: enabled
          * @type {number || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Status of the origin server bound to listeners:
-0: exception;
+         * Status of origin server bound to listener. Valid values:
+0: exceptional;
 1: normal.
          * @type {number || null}
          */
@@ -4249,12 +4258,12 @@ class HTTPSListener extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * Listener status:
+         * Listener status. Valid values:
 0: running;
 1: creating;
 2: terminating;
 3: adjusting origin server;
-4: modifying configuration.
+4: adjusting configuration.
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -4668,14 +4677,14 @@ class ProxyStatus extends  AbstractModel {
 
         /**
          * Connection status.
-Where:
+Valid values:
 RUNNING: running;
 CREATING: creating;
 DESTROYING: terminating;
 OPENING: enabling;
 CLOSING: disabling;
 CLOSED: disabled;
-ADJUSTING: adjusting configuration
+ADJUSTING: adjusting configuration;
 ISOLATING: isolating;
 ISOLATED: isolated;
 UNKNOWN: unknown status.
@@ -5166,11 +5175,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Connection group status.
-Where:
+Valid values:
 0: running;
 1: creating;
 4: terminating;
-11: connection migrating.
+11: migrating connection;
          * @type {string || null}
          */
         this.Status = null;
@@ -5636,6 +5645,12 @@ The connection is to be replicated if this parameter is set.
          */
         this.ClonedProxyId = null;
 
+        /**
+         * Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
     }
 
     /**
@@ -5663,6 +5678,7 @@ The connection is to be replicated if this parameter is set.
             }
         }
         this.ClonedProxyId = 'ClonedProxyId' in params ? params.ClonedProxyId : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }
@@ -6009,12 +6025,12 @@ class HTTPListener extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * Listener status:
+         * Listener status. Valid values:
 0: running;
 1: creating;
 2: terminating;
 3: adjusting origin server;
-4: modifying configuration.
+4: adjusting configuration.
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -6069,7 +6085,7 @@ class ProxyGroupDetail extends  AbstractModel {
 0: running normally;
 1: creating;
 4: terminating;
-11. Migrating.
+11: migrating;
          * @type {number || null}
          */
         this.Status = null;
@@ -6842,19 +6858,20 @@ class InquiryPriceCreateProxyResponse extends  AbstractModel {
         super();
 
         /**
-         * Basic cost of connection (unit: CNY/day).
+         * Basic price of connection in USD/day.
          * @type {number || null}
          */
         this.ProxyDailyPrice = null;
 
         /**
-         * Connection bandwidth price gradient.
+         * Tiered price of connection bandwidth.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BandwidthPriceGradient> || null}
          */
         this.BandwidthUnitPrice = null;
 
         /**
-         * Discounted basic cost of connection (unit: CNY/day).
+         * Discounted basic price of connection in USD/day.
          * @type {number || null}
          */
         this.DiscountProxyDailyPrice = null;
@@ -6864,6 +6881,20 @@ class InquiryPriceCreateProxyResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.Currency = null;
+
+        /**
+         * Connection traffic price in USD/GB.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowUnitPrice = null;
+
+        /**
+         * Discounted connection traffic price in USD/GB.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiscountFlowUnitPrice = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6892,6 +6923,8 @@ class InquiryPriceCreateProxyResponse extends  AbstractModel {
         }
         this.DiscountProxyDailyPrice = 'DiscountProxyDailyPrice' in params ? params.DiscountProxyDailyPrice : null;
         this.Currency = 'Currency' in params ? params.Currency : null;
+        this.FlowUnitPrice = 'FlowUnitPrice' in params ? params.FlowUnitPrice : null;
+        this.DiscountFlowUnitPrice = 'DiscountFlowUnitPrice' in params ? params.DiscountFlowUnitPrice : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7525,7 +7558,11 @@ class BindRealServer extends  AbstractModel {
         this.RealServerWeight = null;
 
         /**
-         * 
+         * Origin server health check status. Valid values:
+0: normal;
+1: exceptional.
+If health check is not enabled, this status will always be normal.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RealServerStatus = null;
@@ -9357,6 +9394,12 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
          */
         this.Concurrent = null;
 
+        /**
+         * Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
     }
 
     /**
@@ -9372,6 +9415,7 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.Concurrency = 'Concurrency' in params ? params.Concurrency : null;
         this.RealServerRegion = 'RealServerRegion' in params ? params.RealServerRegion : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }
@@ -9462,7 +9506,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Protocol = null;
 
         /**
-         * Listener status:
+         * Listener status. Valid values:
 0: running;
 1: creating;
 2: terminating;
@@ -9479,7 +9523,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Scheduler = null;
 
         /**
-         * Origin server binding status of listeners. 0: normal; 1: IP exception; 2: domain name resolution exception.
+         * Status of origin server bound to listener. 0: normal, 1: exceptional IP, 2: exceptional domain name resolution
          * @type {number || null}
          */
         this.BindStatus = null;
@@ -9586,16 +9630,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Concurrent = null;
 
         /**
-         * Connection status:
+         * Connection status. Valid values:
 RUNNING: running;
 CREATING: creating;
 DESTROYING: terminating;
 OPENING: enabling;
 CLOSING: disabling;
 CLOSED: disabled;
-ADJUSTING: adjusting configuration
-ISOLATING: isolating (it’s triggered when the account is in arrears);
-ISOLATED: isolated (it’s triggered when the account is in arrears);
+ADJUSTING: adjusting configuration;
+ISOLATING: isolating;
+ISOLATED: isolated;
+CLONING: copying;
 UNKNOWN: unknown status.
          * @type {string || null}
          */

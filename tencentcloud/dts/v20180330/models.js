@@ -137,13 +137,13 @@ class MigrateDetailInfo extends  AbstractModel {
         this.StepNow = null;
 
         /**
-         * Overall progress, such as:
+         * Overall progress, such as "10"
          * @type {string || null}
          */
         this.Progress = null;
 
         /**
-         * Progress of the current step, such as:
+         * Progress of current step, such as "1"
          * @type {string || null}
          */
         this.CurrentStepProgress = null;
@@ -1038,6 +1038,18 @@ class DstInfo extends  AbstractModel {
          */
         this.ReadOnly = null;
 
+        /**
+         * Target database account
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Target database password
+         * @type {string || null}
+         */
+        this.Password = null;
+
     }
 
     /**
@@ -1052,6 +1064,8 @@ class DstInfo extends  AbstractModel {
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.Port = 'Port' in params ? params.Port : null;
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }

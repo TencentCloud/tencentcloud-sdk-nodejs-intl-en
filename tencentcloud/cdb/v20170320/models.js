@@ -688,6 +688,71 @@ class StopDBImportJobResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceInfo response structure.
+ * @class
+ */
+class DescribeDBInstanceInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Whether encryption is enabled. YES: enabled, NO: not enabled.
+         * @type {string || null}
+         */
+        this.Encryption = null;
+
+        /**
+         * Encryption key ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * Key region.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KeyRegion = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Encryption = 'Encryption' in params ? params.Encryption : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeErrorLogData request structure.
  * @class
  */
@@ -3309,6 +3374,57 @@ class ImportRecord extends  AbstractModel {
 }
 
 /**
+ * DescribeRollbackTaskDetail response structure.
+ * @class
+ */
+class DescribeRollbackTaskDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Rollback task details.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RollbackTask> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new RollbackTask();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateParamTemplate request structure.
  * @class
  */
@@ -3655,6 +3771,7 @@ class RollbackInstancesInfo extends  AbstractModel {
 
         /**
          * TencentDB instance ID
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3673,12 +3790,14 @@ class RollbackInstancesInfo extends  AbstractModel {
 
         /**
          * Information of the databases to be rolled back, which means rollback at the database level
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RollbackDBName> || null}
          */
         this.Databases = null;
 
         /**
          * Information of the tables to be rolled back, which means rollback at the table level
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RollbackTables> || null}
          */
         this.Tables = null;
@@ -4247,12 +4366,14 @@ class RollbackTableName extends  AbstractModel {
 
         /**
          * Original table name before rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TableName = null;
 
         /**
          * New table name after rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NewTableName = null;
@@ -5121,6 +5242,78 @@ class DescribeBinlogBackupOverviewRequest extends  AbstractModel {
 }
 
 /**
+ * Rollback task details
+ * @class
+ */
+class RollbackTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task execution information.
+         * @type {string || null}
+         */
+        this.Info = null;
+
+        /**
+         * Task execution result. Valid values: INITIAL: initializing, RUNNING: running, SUCCESS: succeeded, FAILED: failed, KILLED: terminated, REMOVED: deleted, PAUSED: paused.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Task execution progress. Value range: [0,100].
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Task start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Task end time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Rollback task details.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RollbackInstancesInfo> || null}
+         */
+        this.Detail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Info = 'Info' in params ? params.Info : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new RollbackInstancesInfo();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeBackups response structure.
  * @class
  */
@@ -5494,6 +5687,55 @@ class DescribeBackupConfigResponse extends  AbstractModel {
             this.BackupTimeWindow = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRollbackTaskDetail request structure.
+ * @class
+ */
+class DescribeRollbackTaskDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which is the same as the instance ID displayed in the TencentDB Console. You can use the [DescribeDBInstances API](https://cloud.tencent.com/document/api/236/15872) to query the ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Async task ID.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * Pagination parameter, i.e., the number of entries to be returned for a single request. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -9273,12 +9515,14 @@ class RollbackTables extends  AbstractModel {
 
         /**
          * Database name
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Database = null;
 
         /**
          * Table details
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RollbackTableName> || null}
          */
         this.Table = null;
@@ -10346,6 +10590,34 @@ class RestartDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceInfo request structure.
+ * @class
+ */
+class DescribeDBInstanceInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParams response structure.
  * @class
  */
@@ -10709,12 +10981,14 @@ class RollbackDBName extends  AbstractModel {
 
         /**
          * Original database name before rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DatabaseName = null;
 
         /**
          * New database name after rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NewDatabaseName = null;
@@ -11586,6 +11860,7 @@ module.exports = {
     RoWeightValue: RoWeightValue,
     DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
     StopDBImportJobResponse: StopDBImportJobResponse,
+    DescribeDBInstanceInfoResponse: DescribeDBInstanceInfoResponse,
     DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
     Parameter: Parameter,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
@@ -11637,6 +11912,7 @@ module.exports = {
     DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
     AddTimeWindowRequest: AddTimeWindowRequest,
     ImportRecord: ImportRecord,
+    DescribeRollbackTaskDetailResponse: DescribeRollbackTaskDetailResponse,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     DescribeDeployGroupListRequest: DescribeDeployGroupListRequest,
@@ -11672,6 +11948,7 @@ module.exports = {
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
     DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
+    RollbackTask: RollbackTask,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
@@ -11680,6 +11957,7 @@ module.exports = {
     BackupItem: BackupItem,
     DatabaseName: DatabaseName,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
+    DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     DescribeBackupTablesResponse: DescribeBackupTablesResponse,
@@ -11777,6 +12055,7 @@ module.exports = {
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     ParamRecord: ParamRecord,
     RestartDBInstancesRequest: RestartDBInstancesRequest,
+    DescribeDBInstanceInfoRequest: DescribeDBInstanceInfoRequest,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     DescribeDBZoneConfigResponse: DescribeDBZoneConfigResponse,
     CreateDeployGroupRequest: CreateDeployGroupRequest,

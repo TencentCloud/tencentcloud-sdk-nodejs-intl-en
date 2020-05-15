@@ -619,7 +619,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the big key size distribution of an instance
+     * This API is used to query the distribution of instance access duration.
      * @param {DescribeInstanceMonitorTookDistRequest} req
      * @param {function(string, DescribeInstanceMonitorTookDistResponse):void} cb
      * @public

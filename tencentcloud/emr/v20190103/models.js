@@ -385,6 +385,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Tags = null;
 
+        /**
+         * Number of disks
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiskNum = null;
+
+        /**
+         * Number of local disks
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LocalDiskNum = null;
+
     }
 
     /**
@@ -421,6 +435,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Tags.push(obj);
             }
         }
+        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
+        this.LocalDiskNum = 'LocalDiskNum' in params ? params.LocalDiskNum : null;
 
     }
 }
@@ -509,6 +525,8 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
 
         /**
          * Purchase duration of instance, which needs to be used together with `TimeUnit`.
+<li>When `TimeUnit` is `s`, this parameter can only be filled with 3600, indicating a pay-as-you-go instance.</li>
+<li>When `TimeUnit` is `m`, the number entered in this parameter indicates the purchase duration of the monthly-subscription instance; for example, 1 means one month</li>
          * @type {number || null}
          */
         this.TimeSpan = null;
@@ -541,7 +559,11 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         this.SupportHA = null;
 
         /**
-         * List of deployed components.
+         * List of deployed components. Different required components need to be selected for different EMR product IDs (i.e., `ProductId`; for specific meanings, please see the `ProductId` field in the input parameter):
+<li>When `ProductId` is 1, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+<li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+<li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
+<li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
          * @type {Array.<string> || null}
          */
         this.Software = null;
@@ -1202,7 +1224,11 @@ class CreateInstanceRequest extends  AbstractModel {
         this.VPCSettings = null;
 
         /**
-         * List of deployed components. Different `ProductIds` correspond to components on different versions. For example, when `ProductId` is 4, this parameter can be `Software.0=hadoop-2.8.4&Software.1=zookeeper-3.4.9`; when `ProductId` is 2, this parameter can be `Software.0=hadoop-2.7.3&Software.1=zookeeper-3.4.9`.
+         * List of deployed components. Different required components need to be selected for different EMR product IDs (i.e., `ProductId`; for specific meanings, please see the `ProductId` field in the input parameter):
+<li>When `ProductId` is 1, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+<li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+<li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
+<li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
          * @type {Array.<string> || null}
          */
         this.Software = null;
@@ -1244,7 +1270,8 @@ class CreateInstanceRequest extends  AbstractModel {
 
         /**
          * Purchase duration of instance, which needs to be used together with `TimeUnit`.
-<li>When `PayMode` is 0, `TimeSpan` can only be 3,600.</li>
+<li>When `TimeUnit` is `s`, this parameter can only be filled with 3600, indicating a pay-as-you-go instance.</li>
+<li>When `TimeUnit` is `m`, the number entered in this parameter indicates the purchase duration of the monthly-subscription instance; for example, 1 means one month</li>
          * @type {number || null}
          */
         this.TimeSpan = null;
@@ -1629,7 +1656,7 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * Location information of the cluster instance
+ * Location information of cluster instance
  * @class
  */
 class Placement extends  AbstractModel {
@@ -1637,7 +1664,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * ID of the project to which the instance belongs. You can call the `DescribeProject` API and see the `projectId` field in the response to get the value of this parameter. If it is left empty, the default project will be used.
+         * ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the return value of the `DescribeProject` API. If 0 is entered, the default project will be used.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -2119,10 +2146,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.HiveMetaDb = null;
 
         /**
-         * 
+         * Cluster type: EMR, CLICKHOUSE, DRUID
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceClass = null;
+
+        /**
+         * Alias serialization of all nodes in cluster
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AliasInfo = null;
+
+        /**
+         * Cluster version ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProductId = null;
 
     }
 
@@ -2173,6 +2215,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.HiveMetaDb = 'HiveMetaDb' in params ? params.HiveMetaDb : null;
         this.ServiceClass = 'ServiceClass' in params ? params.ServiceClass : null;
+        this.AliasInfo = 'AliasInfo' in params ? params.AliasInfo : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
     }
 }
@@ -2768,7 +2812,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Tags = null;
 
         /**
-         * 
+         * Whether it is an automatically scalable node. 0: general node, 1: automatically scalable node.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AutoFlag = null;

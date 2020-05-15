@@ -29,6 +29,7 @@ const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const RoWeightValue = models.RoWeightValue;
 const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
+const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
 const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
 const Parameter = models.Parameter;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
@@ -80,6 +81,7 @@ const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
+const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const DescribeDeployGroupListRequest = models.DescribeDeployGroupListRequest;
@@ -115,6 +117,7 @@ const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsR
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
 const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
+const RollbackTask = models.RollbackTask;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
@@ -123,6 +126,7 @@ const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const BackupItem = models.BackupItem;
 const DatabaseName = models.DatabaseName;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
+const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
@@ -220,6 +224,7 @@ const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewReque
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const ParamRecord = models.ParamRecord;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
+const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
 const CreateDeployGroupRequest = models.CreateDeployGroupRequest;
@@ -270,39 +275,6 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * This API (DescribeAccountPrivileges) is used to query the information of TencentDB account permissions.
-     * @param {DescribeAccountPrivilegesRequest} req
-     * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
-     * @public
-     */
-    DescribeAccountPrivileges(req, cb) {
-        let resp = new DescribeAccountPrivilegesResponse();
-        this.request("DescribeAccountPrivileges", req, resp, cb);
-    }
-
-    /**
-     * This API (DeleteAccounts) is used to delete TencentDB accounts.
-     * @param {DeleteAccountsRequest} req
-     * @param {function(string, DeleteAccountsResponse):void} cb
-     * @public
-     */
-    DeleteAccounts(req, cb) {
-        let resp = new DeleteAccountsResponse();
-        this.request("DeleteAccounts", req, resp, cb);
-    }
-
-    /**
-     * This API is used to upgrade or downgrade a TencentDB instance, which can be a master instance, disaster recovery instance, or read-only instance.
-     * @param {UpgradeDBInstanceRequest} req
-     * @param {function(string, UpgradeDBInstanceResponse):void} cb
-     * @public
-     */
-    UpgradeDBInstance(req, cb) {
-        let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeTimeWindow) is used to query the maintenance time window of a TencentDB instance.
      * @param {DescribeTimeWindowRequest} req
      * @param {function(string, DescribeTimeWindowResponse):void} cb
@@ -311,118 +283,6 @@ class CdbClient extends AbstractClient {
     DescribeTimeWindow(req, cb) {
         let resp = new DescribeTimeWindowResponse();
         this.request("DescribeTimeWindow", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeProjectSecurityGroups) is used to query the security group details of a project.
-     * @param {DescribeProjectSecurityGroupsRequest} req
-     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DescribeProjectSecurityGroups(req, cb) {
-        let resp = new DescribeProjectSecurityGroupsResponse();
-        this.request("DescribeProjectSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to deisolate an isolated TencentDB instance.
-     * @param {ReleaseIsolatedDBInstancesRequest} req
-     * @param {function(string, ReleaseIsolatedDBInstancesResponse):void} cb
-     * @public
-     */
-    ReleaseIsolatedDBInstances(req, cb) {
-        let resp = new ReleaseIsolatedDBInstancesResponse();
-        this.request("ReleaseIsolatedDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateDBImportJob) is used to create a data import task for a TencentDB instance.
-
-Note that the files for a data import task must be uploaded to Tencent Cloud in advance. You need to do so in the console.
-     * @param {CreateDBImportJobRequest} req
-     * @param {function(string, CreateDBImportJobResponse):void} cb
-     * @public
-     */
-    CreateDBImportJob(req, cb) {
-        let resp = new CreateDBImportJobResponse();
-        this.request("CreateDBImportJob", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeRollbackRangeTime) is used to query the time range available for instance rollback.
-     * @param {DescribeRollbackRangeTimeRequest} req
-     * @param {function(string, DescribeRollbackRangeTimeResponse):void} cb
-     * @public
-     */
-    DescribeRollbackRangeTime(req, cb) {
-        let resp = new DescribeRollbackRangeTimeResponse();
-        this.request("DescribeRollbackRangeTime", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeParamTemplates) is used to query the list of parameter templates
-     * @param {DescribeParamTemplatesRequest} req
-     * @param {function(string, DescribeParamTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeParamTemplates(req, cb) {
-        let resp = new DescribeParamTemplatesResponse();
-        this.request("DescribeParamTemplates", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a database backup. It can only delete manually initiated backups.
-     * @param {DeleteBackupRequest} req
-     * @param {function(string, DeleteBackupResponse):void} cb
-     * @public
-     */
-    DeleteBackup(req, cb) {
-        let resp = new DeleteBackupResponse();
-        this.request("DeleteBackup", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyTimeWindow) is used to update the maintenance time window of a TencentDB instance.
-     * @param {ModifyTimeWindowRequest} req
-     * @param {function(string, ModifyTimeWindowResponse):void} cb
-     * @public
-     */
-    ModifyTimeWindow(req, cb) {
-        let resp = new ModifyTimeWindowResponse();
-        this.request("ModifyTimeWindow", req, resp, cb);
-    }
-
-    /**
-     * This API is used to search for slow logs of an instance by criteria. You can only view slow logs within a month.
-     * @param {DescribeSlowLogDataRequest} req
-     * @param {function(string, DescribeSlowLogDataResponse):void} cb
-     * @public
-     */
-    DescribeSlowLogData(req, cb) {
-        let resp = new DescribeSlowLogDataResponse();
-        this.request("DescribeSlowLogData", req, resp, cb);
-    }
-
-    /**
-     * This API (OpenDBInstanceGTID) is used to enable GTID for a TencentDB instance. Only instances on or above version 5.6 are supported.
-     * @param {OpenDBInstanceGTIDRequest} req
-     * @param {function(string, OpenDBInstanceGTIDResponse):void} cb
-     * @public
-     */
-    OpenDBInstanceGTID(req, cb) {
-        let resp = new OpenDBInstanceGTIDResponse();
-        this.request("OpenDBInstanceGTID", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyAccountDescription) is used to modify the remarks of a TencentDB instance account.
-     * @param {ModifyAccountDescriptionRequest} req
-     * @param {function(string, ModifyAccountDescriptionResponse):void} cb
-     * @public
-     */
-    ModifyAccountDescription(req, cb) {
-        let resp = new ModifyAccountDescriptionResponse();
-        this.request("ModifyAccountDescription", req, resp, cb);
     }
 
     /**
@@ -459,25 +319,227 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (ModifyBackupConfig) is used to modify the database backup configuration.
-     * @param {ModifyBackupConfigRequest} req
-     * @param {function(string, ModifyBackupConfigResponse):void} cb
+     * This API (DescribeAccounts) is used to query information of all TencentDB accounts.
+     * @param {DescribeAccountsRequest} req
+     * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
      */
-    ModifyBackupConfig(req, cb) {
-        let resp = new ModifyBackupConfigResponse();
-        this.request("ModifyBackupConfig", req, resp, cb);
+    DescribeAccounts(req, cb) {
+        let resp = new DescribeAccountsResponse();
+        this.request("DescribeAccounts", req, resp, cb);
     }
 
     /**
-     * This API (ModifyInstanceParam) is used to modify instance parameters.
-     * @param {ModifyInstanceParamRequest} req
-     * @param {function(string, ModifyInstanceParamResponse):void} cb
+     * This API (ModifyInstanceTag) is used to add, modify, or delete an instance tag.
+     * @param {ModifyInstanceTagRequest} req
+     * @param {function(string, ModifyInstanceTagResponse):void} cb
      * @public
      */
-    ModifyInstanceParam(req, cb) {
-        let resp = new ModifyInstanceParamResponse();
-        this.request("ModifyInstanceParam", req, resp, cb);
+    ModifyInstanceTag(req, cb) {
+        let resp = new ModifyInstanceTagResponse();
+        this.request("ModifyInstanceTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the backup overview of a user. It will return the user's current total number of backups, total capacity used by backups, capacity in the free tier, and paid capacity (all capacity values are in bytes).
+     * @param {DescribeBackupOverviewRequest} req
+     * @param {function(string, DescribeBackupOverviewResponse):void} cb
+     * @public
+     */
+    DescribeBackupOverview(req, cb) {
+        let resp = new DescribeBackupOverviewResponse();
+        this.request("DescribeBackupOverview", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyDBInstanceName) is used to rename a TencentDB instance.
+     * @param {ModifyDBInstanceNameRequest} req
+     * @param {function(string, ModifyDBInstanceNameResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceName(req, cb) {
+        let resp = new ModifyDBInstanceNameResponse();
+        this.request("ModifyDBInstanceName", req, resp, cb);
+    }
+
+    /**
+     * This API (OfflineIsolatedInstances) is used to deactivate isolated TencentDB instances immediately. The instances must be in isolated status, i.e., their `Status` value is 5 in the return of the [instance list querying API](https://cloud.tencent.com/document/api/236/15872).
+
+This is an asynchronous API. There may be a delay in repossessing some resources. You can query the details by using the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) and specifying the InstanceId and the `Status` value as [5, 6, 7]. If the returned instance is empty, then all its resources have been released.
+
+Note that once an instance is deactivated, its resources and data will not be recoverable. Please do so with caution.
+     * @param {OfflineIsolatedInstancesRequest} req
+     * @param {function(string, OfflineIsolatedInstancesResponse):void} cb
+     * @public
+     */
+    OfflineIsolatedInstances(req, cb) {
+        let resp = new OfflineIsolatedInstancesResponse();
+        this.request("OfflineIsolatedInstances", req, resp, cb);
+    }
+
+    /**
+     * This API (OpenDBInstanceGTID) is used to enable GTID for a TencentDB instance. Only instances on or above version 5.6 are supported.
+     * @param {OpenDBInstanceGTIDRequest} req
+     * @param {function(string, OpenDBInstanceGTIDResponse):void} cb
+     * @public
+     */
+    OpenDBInstanceGTID(req, cb) {
+        let resp = new OpenDBInstanceGTIDResponse();
+        this.request("OpenDBInstanceGTID", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a TencentDB instance rollback task.
+     * @param {DescribeRollbackTaskDetailRequest} req
+     * @param {function(string, DescribeRollbackTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeRollbackTaskDetail(req, cb) {
+        let resp = new DescribeRollbackTaskDetailResponse();
+        this.request("DescribeRollbackTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyDBInstanceSecurityGroups) is used to modify the security groups bound to a TencentDB instance.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeTasks) is used to query the list of tasks for a TencentDB instance.
+     * @param {DescribeTasksRequest} req
+     * @param {function(string, DescribeTasksResponse):void} cb
+     * @public
+     */
+    DescribeTasks(req, cb) {
+        let resp = new DescribeTasksResponse();
+        this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeBackupConfig) is used to query the configuration information of a TencentDB instance backup.
+     * @param {DescribeBackupConfigRequest} req
+     * @param {function(string, DescribeBackupConfigResponse):void} cb
+     * @public
+     */
+    DescribeBackupConfig(req, cb) {
+        let resp = new DescribeBackupConfigResponse();
+        this.request("DescribeBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * This API (CloseWanService) is used to disable public network access for TencentDB instance, which will make public IP addresses inaccessible.
+     * @param {CloseWanServiceRequest} req
+     * @param {function(string, CloseWanServiceResponse):void} cb
+     * @public
+     */
+    CloseWanService(req, cb) {
+        let resp = new CloseWanServiceResponse();
+        this.request("CloseWanService", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDefaultParams) is used to query the list of default configurable parameters.
+     * @param {DescribeDefaultParamsRequest} req
+     * @param {function(string, DescribeDefaultParamsResponse):void} cb
+     * @public
+     */
+    DescribeDefaultParams(req, cb) {
+        let resp = new DescribeDefaultParamsResponse();
+        this.request("DescribeDefaultParams", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeTagsOfInstanceIds) is used to query the tag information of a TencentDB instance.
+     * @param {DescribeTagsOfInstanceIdsRequest} req
+     * @param {function(string, DescribeTagsOfInstanceIdsResponse):void} cb
+     * @public
+     */
+    DescribeTagsOfInstanceIds(req, cb) {
+        let resp = new DescribeTagsOfInstanceIdsResponse();
+        this.request("DescribeTagsOfInstanceIds", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDatabases) is used to query the information of databases of a TencentDB instance.
+     * @param {DescribeDatabasesRequest} req
+     * @param {function(string, DescribeDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeDatabases(req, cb) {
+        let resp = new DescribeDatabasesResponse();
+        this.request("DescribeDatabases", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of instance error logs by search criteria. You can only query error logs within a month.
+     * @param {DescribeErrorLogDataRequest} req
+     * @param {function(string, DescribeErrorLogDataResponse):void} cb
+     * @public
+     */
+    DescribeErrorLogData(req, cb) {
+        let resp = new DescribeErrorLogDataResponse();
+        this.request("DescribeErrorLogData", req, resp, cb);
+    }
+
+    /**
+     * This API (DisassociateSecurityGroups) is used to unbind security groups from instances in batches.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeTables) is used to query the database tables of a TencentDB instance.
+     * @param {DescribeTablesRequest} req
+     * @param {function(string, DescribeTablesResponse):void} cb
+     * @public
+     */
+    DescribeTables(req, cb) {
+        let resp = new DescribeTablesResponse();
+        this.request("DescribeTables", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeAccountPrivileges) is used to query the information of TencentDB account permissions.
+     * @param {DescribeAccountPrivilegesRequest} req
+     * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeAccountPrivileges(req, cb) {
+        let resp = new DescribeAccountPrivilegesResponse();
+        this.request("DescribeAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to deisolate an isolated TencentDB instance.
+     * @param {ReleaseIsolatedDBInstancesRequest} req
+     * @param {function(string, ReleaseIsolatedDBInstancesResponse):void} cb
+     * @public
+     */
+    ReleaseIsolatedDBInstances(req, cb) {
+        let resp = new ReleaseIsolatedDBInstancesResponse();
+        this.request("ReleaseIsolatedDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyTimeWindow) is used to update the maintenance time window of a TencentDB instance.
+     * @param {ModifyTimeWindowRequest} req
+     * @param {function(string, ModifyTimeWindowResponse):void} cb
+     * @public
+     */
+    ModifyTimeWindow(req, cb) {
+        let resp = new ModifyTimeWindowResponse();
+        this.request("ModifyTimeWindow", req, resp, cb);
     }
 
     /**
@@ -492,25 +554,14 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (ModifyDBInstanceProject) is used to modify the project to which a TencentDB instance belongs.
-     * @param {ModifyDBInstanceProjectRequest} req
-     * @param {function(string, ModifyDBInstanceProjectResponse):void} cb
+     * This API (SwitchForUpgrade) is used to switch to a new instance. You can initiate this process when the master instance being upgraded is pending switch.
+     * @param {SwitchForUpgradeRequest} req
+     * @param {function(string, SwitchForUpgradeResponse):void} cb
      * @public
      */
-    ModifyDBInstanceProject(req, cb) {
-        let resp = new ModifyDBInstanceProjectResponse();
-        this.request("ModifyDBInstanceProject", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyInstanceTag) is used to add, modify, or delete an instance tag.
-     * @param {ModifyInstanceTagRequest} req
-     * @param {function(string, ModifyInstanceTagResponse):void} cb
-     * @public
-     */
-    ModifyInstanceTag(req, cb) {
-        let resp = new ModifyInstanceTagResponse();
-        this.request("ModifyInstanceTag", req, resp, cb);
+    SwitchForUpgrade(req, cb) {
+        let resp = new SwitchForUpgradeResponse();
+        this.request("SwitchForUpgrade", req, resp, cb);
     }
 
     /**
@@ -533,28 +584,6 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     DescribeBackups(req, cb) {
         let resp = new DescribeBackupsResponse();
         this.request("DescribeBackups", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeAsyncRequestInfo) is used to query the async task execution result of a TencentDB instance.
-     * @param {DescribeAsyncRequestInfoRequest} req
-     * @param {function(string, DescribeAsyncRequestInfoResponse):void} cb
-     * @public
-     */
-    DescribeAsyncRequestInfo(req, cb) {
-        let resp = new DescribeAsyncRequestInfoResponse();
-        this.request("DescribeAsyncRequestInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of placement groups of a user. You can specify the placement group ID or name.
-     * @param {DescribeDeployGroupListRequest} req
-     * @param {function(string, DescribeDeployGroupListResponse):void} cb
-     * @public
-     */
-    DescribeDeployGroupList(req, cb) {
-        let resp = new DescribeDeployGroupListResponse();
-        this.request("DescribeDeployGroupList", req, resp, cb);
     }
 
     /**
@@ -599,28 +628,6 @@ This is an async API. You can also use the [DescribeDBInstances](https://cloud.t
     }
 
     /**
-     * This API (ModifyDBInstanceName) is used to rename a TencentDB instance.
-     * @param {ModifyDBInstanceNameRequest} req
-     * @param {function(string, ModifyDBInstanceNameResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceName(req, cb) {
-        let resp = new ModifyDBInstanceNameResponse();
-        this.request("ModifyDBInstanceName", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDBZoneConfig) is used to query the specifications of TencentDB instances purchasable in a region.
-     * @param {DescribeDBZoneConfigRequest} req
-     * @param {function(string, DescribeDBZoneConfigResponse):void} cb
-     * @public
-     */
-    DescribeDBZoneConfig(req, cb) {
-        let resp = new DescribeDBZoneConfigResponse();
-        this.request("DescribeDBZoneConfig", req, resp, cb);
-    }
-
-    /**
      * This API (CreateBackup) is used to create a TencentDB instance backup.
      * @param {CreateBackupRequest} req
      * @param {function(string, CreateBackupResponse):void} cb
@@ -654,28 +661,6 @@ This is an async API. You can also use the [DescribeDBInstances](https://cloud.t
     }
 
     /**
-     * This API is used to modify the auto-renewal flag of a TencentDB instance.
-     * @param {ModifyAutoRenewFlagRequest} req
-     * @param {function(string, ModifyAutoRenewFlagResponse):void} cb
-     * @public
-     */
-    ModifyAutoRenewFlag(req, cb) {
-        let resp = new ModifyAutoRenewFlagResponse();
-        this.request("ModifyAutoRenewFlag", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDBInstanceRebootTime) is used to query the estimated time needed for a TencentDB instance to restart.
-     * @param {DescribeDBInstanceRebootTimeRequest} req
-     * @param {function(string, DescribeDBInstanceRebootTimeResponse):void} cb
-     * @public
-     */
-    DescribeDBInstanceRebootTime(req, cb) {
-        let resp = new DescribeDBInstanceRebootTimeResponse();
-        this.request("DescribeDBInstanceRebootTime", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the backup tables of the specified database. It has been disused.
 After the legacy version becomes capable of full backup, if you want to download logical backup files by table, you need to use this API.
 The new API (CreateBackup) can specify the table to be backed up when a logical backup file is created, which can be downloaded directly.
@@ -689,84 +674,14 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
-     * This API (RestartDBInstances) is used to restart TencentDB instances.
-
-Note:
-1. This API only supports restarting master instances.
-2. The instance status must be normal, and no other async tasks are in progress.
-     * @param {RestartDBInstancesRequest} req
-     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * This API (DescribeProjectSecurityGroups) is used to query the security group details of a project.
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
      * @public
      */
-    RestartDBInstances(req, cb) {
-        let resp = new RestartDBInstancesResponse();
-        this.request("RestartDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDBInstances) is used to query the list of TencentDB instances (which can be master, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, access address, and instance status.
-     * @param {DescribeDBInstancesRequest} req
-     * @param {function(string, DescribeDBInstancesResponse):void} cb
-     * @public
-     */
-    DescribeDBInstances(req, cb) {
-        let resp = new DescribeDBInstancesResponse();
-        this.request("DescribeDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to update the information of a TencentDB RO group, such as configuring an instance removal policy in case of excessive delay and setting read weights of RO instances.
-     * @param {ModifyRoGroupInfoRequest} req
-     * @param {function(string, ModifyRoGroupInfoResponse):void} cb
-     * @public
-     */
-    ModifyRoGroupInfo(req, cb) {
-        let resp = new ModifyRoGroupInfoResponse();
-        this.request("ModifyRoGroupInfo", req, resp, cb);
-    }
-
-    /**
-     * This API (StopDBImportJob) is used to stop a data import task.
-     * @param {StopDBImportJobRequest} req
-     * @param {function(string, StopDBImportJobResponse):void} cb
-     * @public
-     */
-    StopDBImportJob(req, cb) {
-        let resp = new StopDBImportJobResponse();
-        this.request("StopDBImportJob", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDBInstanceCharset) is used to query the character set and its name of a TencentDB instance.
-     * @param {DescribeDBInstanceCharsetRequest} req
-     * @param {function(string, DescribeDBInstanceCharsetResponse):void} cb
-     * @public
-     */
-    DescribeDBInstanceCharset(req, cb) {
-        let resp = new DescribeDBInstanceCharsetResponse();
-        this.request("DescribeDBInstanceCharset", req, resp, cb);
-    }
-
-    /**
-     * This API (StartBatchRollback) is used to roll back the tables of a TencentDB instance in batches.
-     * @param {StartBatchRollbackRequest} req
-     * @param {function(string, StartBatchRollbackResponse):void} cb
-     * @public
-     */
-    StartBatchRollback(req, cb) {
-        let resp = new StartBatchRollbackResponse();
-        this.request("StartBatchRollback", req, resp, cb);
-    }
-
-    /**
-     * This API (AssociateSecurityGroups) is used to bind security groups to instances in batches.
-     * @param {AssociateSecurityGroupsRequest} req
-     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
-     * @public
-     */
-    AssociateSecurityGroups(req, cb) {
-        let resp = new AssociateSecurityGroupsResponse();
-        this.request("AssociateSecurityGroups", req, resp, cb);
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -781,39 +696,6 @@ Note:
     }
 
     /**
-     * This API is used to modify the name or description of a placement group.
-     * @param {ModifyNameOrDescByDpIdRequest} req
-     * @param {function(string, ModifyNameOrDescByDpIdResponse):void} cb
-     * @public
-     */
-    ModifyNameOrDescByDpId(req, cb) {
-        let resp = new ModifyNameOrDescByDpIdResponse();
-        this.request("ModifyNameOrDescByDpId", req, resp, cb);
-    }
-
-    /**
-     * This API (InitDBInstances) is used to initialize instances, including their password, default character set, and instance port number.
-     * @param {InitDBInstancesRequest} req
-     * @param {function(string, InitDBInstancesResponse):void} cb
-     * @public
-     */
-    InitDBInstances(req, cb) {
-        let resp = new InitDBInstancesResponse();
-        this.request("InitDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDeviceMonitorInfo) is used to query the monitoring information of a TencentDB physical machine on the day. Currently, it only supports instances with 488 GB memory and 6 TB disk.
-     * @param {DescribeDeviceMonitorInfoRequest} req
-     * @param {function(string, DescribeDeviceMonitorInfoResponse):void} cb
-     * @public
-     */
-    DescribeDeviceMonitorInfo(req, cb) {
-        let resp = new DescribeDeviceMonitorInfoResponse();
-        this.request("DescribeDeviceMonitorInfo", req, resp, cb);
-    }
-
-    /**
      * This API (ModifyParamTemplate) is used to modify a parameter template.
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
@@ -822,257 +704,6 @@ Note:
     ModifyParamTemplate(req, cb) {
         let resp = new ModifyParamTemplateResponse();
         this.request("ModifyParamTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyAccountPassword) is used to modify the password of a TencentDB instance account.
-     * @param {ModifyAccountPasswordRequest} req
-     * @param {function(string, ModifyAccountPasswordResponse):void} cb
-     * @public
-     */
-    ModifyAccountPassword(req, cb) {
-        let resp = new ModifyAccountPasswordResponse();
-        this.request("ModifyAccountPassword", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the permissions of a TencentDB instance account.
-
-Note that when modifying account permissions, you need to pass in the full permission information of the account. You can [query the account permission information
-](https://cloud.tencent.com/document/api/236/17500) first before modifying permissions.
-     * @param {ModifyAccountPrivilegesRequest} req
-     * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
-     * @public
-     */
-    ModifyAccountPrivileges(req, cb) {
-        let resp = new ModifyAccountPrivilegesResponse();
-        this.request("ModifyAccountPrivileges", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyDBInstanceSecurityGroups) is used to modify the security groups bound to a TencentDB instance.
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDBImportRecords) is used to query the records of import tasks in a TencentDB instance.
-     * @param {DescribeDBImportRecordsRequest} req
-     * @param {function(string, DescribeDBImportRecordsResponse):void} cb
-     * @public
-     */
-    DescribeDBImportRecords(req, cb) {
-        let resp = new DescribeDBImportRecordsResponse();
-        this.request("DescribeDBImportRecords", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDBSwitchRecords) is used to query the instance switch records.
-     * @param {DescribeDBSwitchRecordsRequest} req
-     * @param {function(string, DescribeDBSwitchRecordsResponse):void} cb
-     * @public
-     */
-    DescribeDBSwitchRecords(req, cb) {
-        let resp = new DescribeDBSwitchRecordsResponse();
-        this.request("DescribeDBSwitchRecords", req, resp, cb);
-    }
-
-    /**
-     * This API (SwitchForUpgrade) is used to switch to a new instance. You can initiate this process when the master instance being upgraded is pending switch.
-     * @param {SwitchForUpgradeRequest} req
-     * @param {function(string, SwitchForUpgradeResponse):void} cb
-     * @public
-     */
-    SwitchForUpgrade(req, cb) {
-        let resp = new SwitchForUpgradeResponse();
-        this.request("SwitchForUpgrade", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeTasks) is used to query the list of tasks for a TencentDB instance.
-     * @param {DescribeTasksRequest} req
-     * @param {function(string, DescribeTasksResponse):void} cb
-     * @public
-     */
-    DescribeTasks(req, cb) {
-        let resp = new DescribeTasksResponse();
-        this.request("DescribeTasks", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeBackupConfig) is used to query the configuration information of a TencentDB instance backup.
-     * @param {DescribeBackupConfigRequest} req
-     * @param {function(string, DescribeBackupConfigResponse):void} cb
-     * @public
-     */
-    DescribeBackupConfig(req, cb) {
-        let resp = new DescribeBackupConfigResponse();
-        this.request("DescribeBackupConfig", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeAccounts) is used to query information of all TencentDB accounts.
-     * @param {DescribeAccountsRequest} req
-     * @param {function(string, DescribeAccountsResponse):void} cb
-     * @public
-     */
-    DescribeAccounts(req, cb) {
-        let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
-    }
-
-    /**
-     * This API (CloseWanService) is used to disable public network access for TencentDB instance, which will make public IP addresses inaccessible.
-     * @param {CloseWanServiceRequest} req
-     * @param {function(string, CloseWanServiceResponse):void} cb
-     * @public
-     */
-    CloseWanService(req, cb) {
-        let resp = new CloseWanServiceResponse();
-        this.request("CloseWanService", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDefaultParams) is used to query the list of default configurable parameters.
-     * @param {DescribeDefaultParamsRequest} req
-     * @param {function(string, DescribeDefaultParamsResponse):void} cb
-     * @public
-     */
-    DescribeDefaultParams(req, cb) {
-        let resp = new DescribeDefaultParamsResponse();
-        this.request("DescribeDefaultParams", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeTagsOfInstanceIds) is used to query the tag information of a TencentDB instance.
-     * @param {DescribeTagsOfInstanceIdsRequest} req
-     * @param {function(string, DescribeTagsOfInstanceIdsResponse):void} cb
-     * @public
-     */
-    DescribeTagsOfInstanceIds(req, cb) {
-        let resp = new DescribeTagsOfInstanceIdsResponse();
-        this.request("DescribeTagsOfInstanceIds", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the databases contained in a backup file. It has been disused.
-After the legacy version becomes capable of full backup, if you want to download logical backup files by table, you need to use this API.
-The new API (CreateBackup) can specify the table to be backed up when a logical backup file is created, which can be downloaded directly.
-     * @param {DescribeBackupDatabasesRequest} req
-     * @param {function(string, DescribeBackupDatabasesResponse):void} cb
-     * @public
-     */
-    DescribeBackupDatabases(req, cb) {
-        let resp = new DescribeBackupDatabasesResponse();
-        this.request("DescribeBackupDatabases", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of user-imported SQL files.
-     * @param {DescribeUploadedFilesRequest} req
-     * @param {function(string, DescribeUploadedFilesResponse):void} cb
-     * @public
-     */
-    DescribeUploadedFiles(req, cb) {
-        let resp = new DescribeUploadedFilesResponse();
-        this.request("DescribeUploadedFiles", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the log backup overview of a user in the current region.
-     * @param {DescribeBinlogBackupOverviewRequest} req
-     * @param {function(string, DescribeBinlogBackupOverviewResponse):void} cb
-     * @public
-     */
-    DescribeBinlogBackupOverview(req, cb) {
-        let resp = new DescribeBinlogBackupOverviewResponse();
-        this.request("DescribeBinlogBackupOverview", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of binlog files of a TencentDB instance.
-     * @param {DescribeBinlogsRequest} req
-     * @param {function(string, DescribeBinlogsResponse):void} cb
-     * @public
-     */
-    DescribeBinlogs(req, cb) {
-        let resp = new DescribeBinlogsResponse();
-        this.request("DescribeBinlogs", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDatabases) is used to query the information of databases of a TencentDB instance.
-     * @param {DescribeDatabasesRequest} req
-     * @param {function(string, DescribeDatabasesResponse):void} cb
-     * @public
-     */
-    DescribeDatabases(req, cb) {
-        let resp = new DescribeDatabasesResponse();
-        this.request("DescribeDatabases", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateAccounts) is used to create TencentDB accounts. The new account names, domain names, and passwords need to be specified, and account remarks can also be added.
-     * @param {CreateAccountsRequest} req
-     * @param {function(string, CreateAccountsResponse):void} cb
-     * @public
-     */
-    CreateAccounts(req, cb) {
-        let resp = new CreateAccountsResponse();
-        this.request("CreateAccounts", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the details of instance error logs by search criteria. You can only query error logs within a month.
-     * @param {DescribeErrorLogDataRequest} req
-     * @param {function(string, DescribeErrorLogDataResponse):void} cb
-     * @public
-     */
-    DescribeErrorLogData(req, cb) {
-        let resp = new DescribeErrorLogDataResponse();
-        this.request("DescribeErrorLogData", req, resp, cb);
-    }
-
-    /**
-     * This API (OfflineIsolatedInstances) is used to deactivate isolated TencentDB instances immediately. The instances must be in isolated status, i.e., their `Status` value is 5 in the return of the [instance list querying API](https://cloud.tencent.com/document/api/236/15872).
-
-This is an asynchronous API. There may be a delay in repossessing some resources. You can query the details by using the [instance list querying API](https://cloud.tencent.com/document/api/236/15872) and specifying the InstanceId and the `Status` value as [5, 6, 7]. If the returned instance is empty, then all its resources have been released.
-
-Note that once an instance is deactivated, its resources and data will not be recoverable. Please do so with caution.
-     * @param {OfflineIsolatedInstancesRequest} req
-     * @param {function(string, OfflineIsolatedInstancesResponse):void} cb
-     * @public
-     */
-    OfflineIsolatedInstances(req, cb) {
-        let resp = new OfflineIsolatedInstancesResponse();
-        this.request("OfflineIsolatedInstances", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDBSecurityGroups) is used to query the security group details of an instance.
-     * @param {DescribeDBSecurityGroupsRequest} req
-     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DescribeDBSecurityGroups(req, cb) {
-        let resp = new DescribeDBSecurityGroupsResponse();
-        this.request("DescribeDBSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeSupportedPrivileges) is used to query the information of TencentDB account permissions, including global permissions, database permissions, table permissions, and column permissions.
-     * @param {DescribeSupportedPrivilegesRequest} req
-     * @param {function(string, DescribeSupportedPrivilegesResponse):void} cb
-     * @public
-     */
-    DescribeSupportedPrivileges(req, cb) {
-        let resp = new DescribeSupportedPrivilegesResponse();
-        this.request("DescribeSupportedPrivileges", req, resp, cb);
     }
 
     /**
@@ -1087,38 +718,36 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to query the information of all RO groups of a TencentDB instance.
-     * @param {DescribeRoGroupsRequest} req
-     * @param {function(string, DescribeRoGroupsResponse):void} cb
+     * This API is used to query the list of placement groups of a user. You can specify the placement group ID or name.
+     * @param {DescribeDeployGroupListRequest} req
+     * @param {function(string, DescribeDeployGroupListResponse):void} cb
      * @public
      */
-    DescribeRoGroups(req, cb) {
-        let resp = new DescribeRoGroupsResponse();
-        this.request("DescribeRoGroups", req, resp, cb);
+    DescribeDeployGroupList(req, cb) {
+        let resp = new DescribeDeployGroupListResponse();
+        this.request("DescribeDeployGroupList", req, resp, cb);
     }
 
     /**
-     * This API (DescribeInstanceParamRecords) is used to query the parameter modification records of an instance.
-     * @param {DescribeInstanceParamRecordsRequest} req
-     * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
+     * This API (StopDBImportJob) is used to stop a data import task.
+     * @param {StopDBImportJobRequest} req
+     * @param {function(string, StopDBImportJobResponse):void} cb
      * @public
      */
-    DescribeInstanceParamRecords(req, cb) {
-        let resp = new DescribeInstanceParamRecordsResponse();
-        this.request("DescribeInstanceParamRecords", req, resp, cb);
+    StopDBImportJob(req, cb) {
+        let resp = new StopDBImportJobResponse();
+        this.request("StopDBImportJob", req, resp, cb);
     }
 
     /**
-     * This API (OpenWanService) is used to enable public network access for an instance.
-
-Note that before enabling public network access, you need to first [initialize the instance](https://cloud.tencent.com/document/api/236/15873).
-     * @param {OpenWanServiceRequest} req
-     * @param {function(string, OpenWanServiceResponse):void} cb
+     * This API (CreateAccounts) is used to create TencentDB accounts. The new account names, domain names, and passwords need to be specified, and account remarks can also be added.
+     * @param {CreateAccountsRequest} req
+     * @param {function(string, CreateAccountsResponse):void} cb
      * @public
      */
-    OpenWanService(req, cb) {
-        let resp = new OpenWanServiceResponse();
-        this.request("OpenWanService", req, resp, cb);
+    CreateAccounts(req, cb) {
+        let resp = new CreateAccountsResponse();
+        this.request("CreateAccounts", req, resp, cb);
     }
 
     /**
@@ -1130,6 +759,17 @@ Note that before enabling public network access, you need to first [initialize t
     UpgradeDBInstanceEngineVersion(req, cb) {
         let resp = new UpgradeDBInstanceEngineVersionResponse();
         this.request("UpgradeDBInstanceEngineVersion", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeInstanceParamRecords) is used to query the parameter modification records of an instance.
+     * @param {DescribeInstanceParamRecordsRequest} req
+     * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceParamRecords(req, cb) {
+        let resp = new DescribeInstanceParamRecordsResponse();
+        this.request("DescribeInstanceParamRecords", req, resp, cb);
     }
 
     /**
@@ -1155,14 +795,423 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API (DisassociateSecurityGroups) is used to unbind security groups from instances in batches.
-     * @param {DisassociateSecurityGroupsRequest} req
-     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * This API is used to query the log backup overview of a user in the current region.
+     * @param {DescribeBinlogBackupOverviewRequest} req
+     * @param {function(string, DescribeBinlogBackupOverviewResponse):void} cb
      * @public
      */
-    DisassociateSecurityGroups(req, cb) {
-        let resp = new DisassociateSecurityGroupsResponse();
-        this.request("DisassociateSecurityGroups", req, resp, cb);
+    DescribeBinlogBackupOverview(req, cb) {
+        let resp = new DescribeBinlogBackupOverviewResponse();
+        this.request("DescribeBinlogBackupOverview", req, resp, cb);
+    }
+
+    /**
+     * This API (DeleteAccounts) is used to delete TencentDB accounts.
+     * @param {DeleteAccountsRequest} req
+     * @param {function(string, DeleteAccountsResponse):void} cb
+     * @public
+     */
+    DeleteAccounts(req, cb) {
+        let resp = new DeleteAccountsResponse();
+        this.request("DeleteAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the basic information of an instance (instance ID, instance name, and whether encryption is enabled).
+     * @param {DescribeDBInstanceInfoRequest} req
+     * @param {function(string, DescribeDBInstanceInfoResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceInfo(req, cb) {
+        let resp = new DescribeDBInstanceInfoResponse();
+        this.request("DescribeDBInstanceInfo", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeRollbackRangeTime) is used to query the time range available for instance rollback.
+     * @param {DescribeRollbackRangeTimeRequest} req
+     * @param {function(string, DescribeRollbackRangeTimeResponse):void} cb
+     * @public
+     */
+    DescribeRollbackRangeTime(req, cb) {
+        let resp = new DescribeRollbackRangeTimeResponse();
+        this.request("DescribeRollbackRangeTime", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeParamTemplates) is used to query the list of parameter templates
+     * @param {DescribeParamTemplatesRequest} req
+     * @param {function(string, DescribeParamTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeParamTemplates(req, cb) {
+        let resp = new DescribeParamTemplatesResponse();
+        this.request("DescribeParamTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a database backup. It can only delete manually initiated backups.
+     * @param {DeleteBackupRequest} req
+     * @param {function(string, DeleteBackupResponse):void} cb
+     * @public
+     */
+    DeleteBackup(req, cb) {
+        let resp = new DeleteBackupResponse();
+        this.request("DeleteBackup", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyInstanceParam) is used to modify instance parameters.
+     * @param {ModifyInstanceParamRequest} req
+     * @param {function(string, ModifyInstanceParamResponse):void} cb
+     * @public
+     */
+    ModifyInstanceParam(req, cb) {
+        let resp = new ModifyInstanceParamResponse();
+        this.request("ModifyInstanceParam", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeAsyncRequestInfo) is used to query the async task execution result of a TencentDB instance.
+     * @param {DescribeAsyncRequestInfoRequest} req
+     * @param {function(string, DescribeAsyncRequestInfoResponse):void} cb
+     * @public
+     */
+    DescribeAsyncRequestInfo(req, cb) {
+        let resp = new DescribeAsyncRequestInfoResponse();
+        this.request("DescribeAsyncRequestInfo", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDBZoneConfig) is used to query the specifications of TencentDB instances purchasable in a region.
+     * @param {DescribeDBZoneConfigRequest} req
+     * @param {function(string, DescribeDBZoneConfigResponse):void} cb
+     * @public
+     */
+    DescribeDBZoneConfig(req, cb) {
+        let resp = new DescribeDBZoneConfigResponse();
+        this.request("DescribeDBZoneConfig", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDBInstanceRebootTime) is used to query the estimated time needed for a TencentDB instance to restart.
+     * @param {DescribeDBInstanceRebootTimeRequest} req
+     * @param {function(string, DescribeDBInstanceRebootTimeResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceRebootTime(req, cb) {
+        let resp = new DescribeDBInstanceRebootTimeResponse();
+        this.request("DescribeDBInstanceRebootTime", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDBInstances) is used to query the list of TencentDB instances (which can be master, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, access address, and instance status.
+     * @param {DescribeDBInstancesRequest} req
+     * @param {function(string, DescribeDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDBInstances(req, cb) {
+        let resp = new DescribeDBInstancesResponse();
+        this.request("DescribeDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the information of a TencentDB RO group, such as configuring an instance removal policy in case of excessive delay and setting read weights of RO instances.
+     * @param {ModifyRoGroupInfoRequest} req
+     * @param {function(string, ModifyRoGroupInfoResponse):void} cb
+     * @public
+     */
+    ModifyRoGroupInfo(req, cb) {
+        let resp = new ModifyRoGroupInfoResponse();
+        this.request("ModifyRoGroupInfo", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDBInstanceCharset) is used to query the character set and its name of a TencentDB instance.
+     * @param {DescribeDBInstanceCharsetRequest} req
+     * @param {function(string, DescribeDBInstanceCharsetResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceCharset(req, cb) {
+        let resp = new DescribeDBInstanceCharsetResponse();
+        this.request("DescribeDBInstanceCharset", req, resp, cb);
+    }
+
+    /**
+     * This API (AssociateSecurityGroups) is used to bind security groups to instances in batches.
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API (InitDBInstances) is used to initialize instances, including their password, default character set, and instance port number.
+     * @param {InitDBInstancesRequest} req
+     * @param {function(string, InitDBInstancesResponse):void} cb
+     * @public
+     */
+    InitDBInstances(req, cb) {
+        let resp = new InitDBInstancesResponse();
+        this.request("InitDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the permissions of a TencentDB instance account.
+
+Note that when modifying account permissions, you need to pass in the full permission information of the account. You can [query the account permission information
+](https://cloud.tencent.com/document/api/236/17500) first before modifying permissions.
+     * @param {ModifyAccountPrivilegesRequest} req
+     * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    ModifyAccountPrivileges(req, cb) {
+        let resp = new ModifyAccountPrivilegesResponse();
+        this.request("ModifyAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDBImportRecords) is used to query the records of import tasks in a TencentDB instance.
+     * @param {DescribeDBImportRecordsRequest} req
+     * @param {function(string, DescribeDBImportRecordsResponse):void} cb
+     * @public
+     */
+    DescribeDBImportRecords(req, cb) {
+        let resp = new DescribeDBImportRecordsResponse();
+        this.request("DescribeDBImportRecords", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDBSwitchRecords) is used to query the instance switch records.
+     * @param {DescribeDBSwitchRecordsRequest} req
+     * @param {function(string, DescribeDBSwitchRecordsResponse):void} cb
+     * @public
+     */
+    DescribeDBSwitchRecords(req, cb) {
+        let resp = new DescribeDBSwitchRecordsResponse();
+        this.request("DescribeDBSwitchRecords", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateDBImportJob) is used to create a data import task for a TencentDB instance.
+
+Note that the files for a data import task must be uploaded to Tencent Cloud in advance. You need to do so in the console.
+     * @param {CreateDBImportJobRequest} req
+     * @param {function(string, CreateDBImportJobResponse):void} cb
+     * @public
+     */
+    CreateDBImportJob(req, cb) {
+        let resp = new CreateDBImportJobResponse();
+        this.request("CreateDBImportJob", req, resp, cb);
+    }
+
+    /**
+     * This API (RestartDBInstances) is used to restart TencentDB instances.
+
+Note:
+1. This API only supports restarting master instances.
+2. The instance status must be normal, and no other async tasks are in progress.
+     * @param {RestartDBInstancesRequest} req
+     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * @public
+     */
+    RestartDBInstances(req, cb) {
+        let resp = new RestartDBInstancesResponse();
+        this.request("RestartDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyAccountPassword) is used to modify the password of a TencentDB instance account.
+     * @param {ModifyAccountPasswordRequest} req
+     * @param {function(string, ModifyAccountPasswordResponse):void} cb
+     * @public
+     */
+    ModifyAccountPassword(req, cb) {
+        let resp = new ModifyAccountPasswordResponse();
+        this.request("ModifyAccountPassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of user-imported SQL files.
+     * @param {DescribeUploadedFilesRequest} req
+     * @param {function(string, DescribeUploadedFilesResponse):void} cb
+     * @public
+     */
+    DescribeUploadedFiles(req, cb) {
+        let resp = new DescribeUploadedFilesResponse();
+        this.request("DescribeUploadedFiles", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyAccountDescription) is used to modify the remarks of a TencentDB instance account.
+     * @param {ModifyAccountDescriptionRequest} req
+     * @param {function(string, ModifyAccountDescriptionResponse):void} cb
+     * @public
+     */
+    ModifyAccountDescription(req, cb) {
+        let resp = new ModifyAccountDescriptionResponse();
+        this.request("ModifyAccountDescription", req, resp, cb);
+    }
+
+    /**
+     * This API is used to search for slow logs of an instance by criteria. You can only view slow logs within a month.
+     * @param {DescribeSlowLogDataRequest} req
+     * @param {function(string, DescribeSlowLogDataResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogData(req, cb) {
+        let resp = new DescribeSlowLogDataResponse();
+        this.request("DescribeSlowLogData", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyBackupConfig) is used to modify the database backup configuration.
+     * @param {ModifyBackupConfigRequest} req
+     * @param {function(string, ModifyBackupConfigResponse):void} cb
+     * @public
+     */
+    ModifyBackupConfig(req, cb) {
+        let resp = new ModifyBackupConfigResponse();
+        this.request("ModifyBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyDBInstanceProject) is used to modify the project to which a TencentDB instance belongs.
+     * @param {ModifyDBInstanceProjectRequest} req
+     * @param {function(string, ModifyDBInstanceProjectResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceProject(req, cb) {
+        let resp = new ModifyDBInstanceProjectResponse();
+        this.request("ModifyDBInstanceProject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the databases contained in a backup file. It has been disused.
+After the legacy version becomes capable of full backup, if you want to download logical backup files by table, you need to use this API.
+The new API (CreateBackup) can specify the table to be backed up when a logical backup file is created, which can be downloaded directly.
+     * @param {DescribeBackupDatabasesRequest} req
+     * @param {function(string, DescribeBackupDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeBackupDatabases(req, cb) {
+        let resp = new DescribeBackupDatabasesResponse();
+        this.request("DescribeBackupDatabases", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the auto-renewal flag of a TencentDB instance.
+     * @param {ModifyAutoRenewFlagRequest} req
+     * @param {function(string, ModifyAutoRenewFlagResponse):void} cb
+     * @public
+     */
+    ModifyAutoRenewFlag(req, cb) {
+        let resp = new ModifyAutoRenewFlagResponse();
+        this.request("ModifyAutoRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * This API (StartBatchRollback) is used to roll back the tables of a TencentDB instance in batches.
+     * @param {StartBatchRollbackRequest} req
+     * @param {function(string, StartBatchRollbackResponse):void} cb
+     * @public
+     */
+    StartBatchRollback(req, cb) {
+        let resp = new StartBatchRollbackResponse();
+        this.request("StartBatchRollback", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDeviceMonitorInfo) is used to query the monitoring information of a TencentDB physical machine on the day. Currently, it only supports instances with 488 GB memory and 6 TB disk.
+     * @param {DescribeDeviceMonitorInfoRequest} req
+     * @param {function(string, DescribeDeviceMonitorInfoResponse):void} cb
+     * @public
+     */
+    DescribeDeviceMonitorInfo(req, cb) {
+        let resp = new DescribeDeviceMonitorInfoResponse();
+        this.request("DescribeDeviceMonitorInfo", req, resp, cb);
+    }
+
+    /**
+     * This API (OpenWanService) is used to enable public network access for an instance.
+
+Note that before enabling public network access, you need to first [initialize the instance](https://cloud.tencent.com/document/api/236/15873).
+     * @param {OpenWanServiceRequest} req
+     * @param {function(string, OpenWanServiceResponse):void} cb
+     * @public
+     */
+    OpenWanService(req, cb) {
+        let resp = new OpenWanServiceResponse();
+        this.request("OpenWanService", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeSupportedPrivileges) is used to query the information of TencentDB account permissions, including global permissions, database permissions, table permissions, and column permissions.
+     * @param {DescribeSupportedPrivilegesRequest} req
+     * @param {function(string, DescribeSupportedPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeSupportedPrivileges(req, cb) {
+        let resp = new DescribeSupportedPrivilegesResponse();
+        this.request("DescribeSupportedPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of binlog files of a TencentDB instance.
+     * @param {DescribeBinlogsRequest} req
+     * @param {function(string, DescribeBinlogsResponse):void} cb
+     * @public
+     */
+    DescribeBinlogs(req, cb) {
+        let resp = new DescribeBinlogsResponse();
+        this.request("DescribeBinlogs", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDBSecurityGroups) is used to query the security group details of an instance.
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of all RO groups of a TencentDB instance.
+     * @param {DescribeRoGroupsRequest} req
+     * @param {function(string, DescribeRoGroupsResponse):void} cb
+     * @public
+     */
+    DescribeRoGroups(req, cb) {
+        let resp = new DescribeRoGroupsResponse();
+        this.request("DescribeRoGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the name or description of a placement group.
+     * @param {ModifyNameOrDescByDpIdRequest} req
+     * @param {function(string, ModifyNameOrDescByDpIdResponse):void} cb
+     * @public
+     */
+    ModifyNameOrDescByDpId(req, cb) {
+        let resp = new ModifyNameOrDescByDpIdResponse();
+        this.request("ModifyNameOrDescByDpId", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade or downgrade a TencentDB instance, which can be a master instance, disaster recovery instance, or read-only instance.
+     * @param {UpgradeDBInstanceRequest} req
+     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstance(req, cb) {
+        let resp = new UpgradeDBInstanceResponse();
+        this.request("UpgradeDBInstance", req, resp, cb);
     }
 
     /**
@@ -1174,28 +1223,6 @@ Note that before enabling public network access, you need to first [initialize t
     CreateDeployGroup(req, cb) {
         let resp = new CreateDeployGroupResponse();
         this.request("CreateDeployGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the backup overview of a user. It will return the user's current total number of backups, total capacity used by backups, capacity in the free tier, and paid capacity (all capacity values are in bytes).
-     * @param {DescribeBackupOverviewRequest} req
-     * @param {function(string, DescribeBackupOverviewResponse):void} cb
-     * @public
-     */
-    DescribeBackupOverview(req, cb) {
-        let resp = new DescribeBackupOverviewResponse();
-        this.request("DescribeBackupOverview", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeTables) is used to query the database tables of a TencentDB instance.
-     * @param {DescribeTablesRequest} req
-     * @param {function(string, DescribeTablesResponse):void} cb
-     * @public
-     */
-    DescribeTables(req, cb) {
-        let resp = new DescribeTablesResponse();
-        this.request("DescribeTables", req, resp, cb);
     }
 
     /**

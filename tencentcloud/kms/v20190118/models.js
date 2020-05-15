@@ -246,7 +246,7 @@ class WhiteboxKeyInfo extends  AbstractModel {
         this.DecryptKey = null;
 
         /**
-         * 
+         * Resource ID in the format of `creatorUin/$creatorUin/$keyId`.
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -367,13 +367,13 @@ class GenerateDataKeyResponse extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * 
+         * Plaintext of the generated data key. The plaintext is Base64-encoded and can be used locally after having it Base64-decoded.
          * @type {string || null}
          */
         this.Plaintext = null;
 
         /**
-         * Base64-encoded ciphertext that is encrypted by `DataKey`. You should keep the ciphertext private.
+         * Ciphertext of the data key, which should be kept by yourself. KMS does not host user data keys. You can call the `Decrypt` API to get the plaintext of the data key from `CiphertextBlob`.
          * @type {string || null}
          */
         this.CiphertextBlob = null;
@@ -1210,6 +1210,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ValidTo = null;
 
+        /**
+         * Resource ID in the format of `creatorUin/$creatorUin/$keyId`.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
     }
 
     /**
@@ -1233,6 +1239,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DeletionDate = 'DeletionDate' in params ? params.DeletionDate : null;
         this.Origin = 'Origin' in params ? params.Origin : null;
         this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }

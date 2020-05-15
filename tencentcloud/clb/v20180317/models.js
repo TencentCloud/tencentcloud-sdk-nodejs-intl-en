@@ -7366,6 +7366,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.IsBlockTime = null;
 
+        /**
+         * Whether the IP type is the local BGP
+Note: this field may return null, indicating that no valid values can be obtained
+         * @type {boolean || null}
+         */
+        this.LocalBgp = null;
+
     }
 
     /**
@@ -7473,6 +7480,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SlaType = 'SlaType' in params ? params.SlaType : null;
         this.IsBlock = 'IsBlock' in params ? params.IsBlock : null;
         this.IsBlockTime = 'IsBlockTime' in params ? params.IsBlockTime : null;
+        this.LocalBgp = 'LocalBgp' in params ? params.LocalBgp : null;
 
     }
 }

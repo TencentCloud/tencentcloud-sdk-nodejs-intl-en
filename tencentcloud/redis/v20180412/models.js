@@ -2307,6 +2307,12 @@ class DelayDistribution extends  AbstractModel {
          */
         this.Size = null;
 
+        /**
+         * Modification time
+         * @type {number || null}
+         */
+        this.Updatetime = null;
+
     }
 
     /**
@@ -2318,6 +2324,7 @@ class DelayDistribution extends  AbstractModel {
         }
         this.Ladder = 'Ladder' in params ? params.Ladder : null;
         this.Size = 'Size' in params ? params.Size : null;
+        this.Updatetime = 'Updatetime' in params ? params.Updatetime : null;
 
     }
 }
@@ -2471,7 +2478,7 @@ class DescribeInstanceMonitorTookDistRequest extends  AbstractModel {
         this.Date = null;
 
         /**
-         * Request type. 1: string type; 2: all types
+         * Time span. 1: real time; 2: last 30 minutes; 3: last 6 hours; 4: last 24 hours
          * @type {number || null}
          */
         this.SpanType = null;

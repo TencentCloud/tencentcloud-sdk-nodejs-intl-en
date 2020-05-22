@@ -67,7 +67,7 @@ Note: if this parameter is a non-empty string, the rule will take effect only fo
 }
 
 /**
- * Bandwidth and traffic information
+ * Bandwidth and traffic information.
  * @class
  */
 class BillDataInfo extends  AbstractModel {
@@ -75,7 +75,7 @@ class BillDataInfo extends  AbstractModel {
         super();
 
         /**
-         * Time point in the format of yyyy-mm-dd HH:MM:SS.
+         * Time point in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.Time = null;
@@ -93,7 +93,7 @@ class BillDataInfo extends  AbstractModel {
         this.Flux = null;
 
         /**
-         * 
+         * Time point of peak value in the format of `yyyy-mm-dd HH:MM:SS`. As raw data is at a 5-minute granularity, if data at a 1-hour or 1-day granularity is queried, the time point of peak bandwidth value at the corresponding granularity will be returned.
          * @type {string || null}
          */
         this.PeakTime = null;
@@ -986,7 +986,7 @@ class PushQualityData extends  AbstractModel {
         super();
 
         /**
-         * Data time in the format of %Y-%m-%d %H:%M:%S.%ms and accurate down to the millisecond level.
+         * Data time in the format of `%Y-%m-%d %H:%M:%S.%ms` and accurate down to the millisecond level.
          * @type {string || null}
          */
         this.Time = null;
@@ -1010,7 +1010,7 @@ class PushQualityData extends  AbstractModel {
         this.ClientIp = null;
 
         /**
-         * Push start time in the format of %Y-%m-%d %H:%M:%S.%ms and accurate down to the millisecond level.
+         * Push start time in the format of `%Y-%m-%d %H:%M:%S.%ms` and accurate down to the millisecond level.
          * @type {string || null}
          */
         this.BeginPushTime = null;
@@ -1022,13 +1022,13 @@ class PushQualityData extends  AbstractModel {
         this.Resolution = null;
 
         /**
-         * Video encoding format.
+         * Video codec.
          * @type {string || null}
          */
         this.VCodec = null;
 
         /**
-         * Audio encoding format.
+         * Audio codec.
          * @type {string || null}
          */
         this.ACodec = null;
@@ -1081,6 +1081,24 @@ class PushQualityData extends  AbstractModel {
          */
         this.AudioTs = null;
 
+        /**
+         * Video bitrate in `metadata` in Kbps.
+         * @type {number || null}
+         */
+        this.MetaVideoRate = null;
+
+        /**
+         * Audio bitrate in `metadata` in Kbps.
+         * @type {number || null}
+         */
+        this.MetaAudioRate = null;
+
+        /**
+         * Frame rate in `metadata`.
+         * @type {number || null}
+         */
+        this.MateFps = null;
+
     }
 
     /**
@@ -1106,6 +1124,9 @@ class PushQualityData extends  AbstractModel {
         this.LocalTs = 'LocalTs' in params ? params.LocalTs : null;
         this.VideoTs = 'VideoTs' in params ? params.VideoTs : null;
         this.AudioTs = 'AudioTs' in params ? params.AudioTs : null;
+        this.MetaVideoRate = 'MetaVideoRate' in params ? params.MetaVideoRate : null;
+        this.MetaAudioRate = 'MetaAudioRate' in params ? params.MetaAudioRate : null;
+        this.MateFps = 'MateFps' in params ? params.MateFps : null;
 
     }
 }
@@ -1246,7 +1267,7 @@ class DomainCertInfo extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * Certificate status
+         * Certificate status.
          * @type {number || null}
          */
         this.Status = null;
@@ -1419,6 +1440,41 @@ class DeleteLiveTranscodeRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Number of concurrent recording channels
+ * @class
+ */
+class ConcurrentRecordStreamNum extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time point.
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Number of channels.
+         * @type {number || null}
+         */
+        this.Num = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Num = 'Num' in params ? params.Num : null;
 
     }
 }
@@ -1836,41 +1892,48 @@ class DescribeBillBandwidthAndFluxListRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time point in the format of yyyy-mm-dd HH:MM:SS.
+         * Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days.
+         * End time point in the format of `yyyy-mm-dd HH:MM:SS`. The difference between the start time and end time cannot be greater than 31 days.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * LVB playback domain name. If it is left blank, the full data will be queried.
+         * LVB playback domain name. If this parameter is left empty, full data will be queried.
          * @type {Array.<string> || null}
          */
         this.PlayDomains = null;
 
         /**
-         * Value range:
-Mainland: Query data for Mainland China,
-Oversea: Query data for regions outside Mainland China.
-Default: Query data for all regions.
+         * Valid values:
+Mainland: query data for Mainland China,
+Oversea: query data for regions outside Mainland China,
+Default: query data for all regions.
+Note: LEB only supports querying data for all regions.
          * @type {string || null}
          */
         this.MainlandOrOversea = null;
 
         /**
-         * Data granularity. Supported granularity:
-5: 5-minute granularity (the query interval should be within 1 day),
-60: 1-hour granularity (the query interval should be within one month),
-1440: 1-day granularity (the query interval should be within one month).
+         * Data granularity. Valid values:
+5: 5-minute granularity (the query time span should be within 1 day),
+60: 1-hour granularity (the query time span should be within one month),
+1440: 1-day granularity (the query time span should be within one month).
 Default value: 5.
          * @type {number || null}
          */
         this.Granularity = null;
+
+        /**
+         * Service name. Valid values: LVB, LEB. Default value: LVB.
+         * @type {string || null}
+         */
+        this.ServiceName = null;
 
     }
 
@@ -1886,6 +1949,7 @@ Default value: 5.
         this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
         this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
         this.Granularity = 'Granularity' in params ? params.Granularity : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
 
     }
 }
@@ -2437,54 +2501,51 @@ class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
 
         /**
          * Start time (Beijing time).
-In the format of yyyy-mm-dd HH:MM:SS.
+In the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
          * End time (Beijing time).
-In the format of yyyy-mm-dd HH:MM:SS.
-Note: EndTime and StartTime only support querying data on the past day.
+In the format of `yyyy-mm-dd HH:MM:SS`.
+Note: `EndTime` and `StartTime` only support querying data for the last day.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Statistics type. Value range: "Province", "Isp".
+         * Statistics type. Valid values: Province, Isp, CountryOrArea.
          * @type {string || null}
          */
         this.StatType = null;
 
         /**
-         * If it is blank by default, the full data will be queried.
+         * If this parameter is left empty, full data will be queried.
          * @type {Array.<string> || null}
          */
         this.PlayDomains = null;
 
         /**
-         * Page number.
-Value range: [1,1000],
-Default value: 1.
+         * Page number. Value range: [1,1000]. Default value: 1.
          * @type {number || null}
          */
         this.PageNum = null;
 
         /**
-         * Number of entries per page. Value range: [1,1000],
-Default value: 20.
+         * Number of entries per page. Value range: [1,1000]. Default value: 20.
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * 
+         * Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
          * @type {string || null}
          */
         this.MainlandOrOversea = null;
 
         /**
-         * 
+         * Language used in the output field. Valid values: Chinese (default), English. Currently, country/region, district, and ISP parameters support multiple languages.
          * @type {string || null}
          */
         this.OutLanguage = null;
@@ -2511,48 +2572,24 @@ Default value: 20.
 }
 
 /**
- * AddLiveWatermark request structure.
+ * DescribeConcurrentRecordStreamNum response structure.
  * @class
  */
-class AddLiveWatermarkRequest extends  AbstractModel {
+class DescribeConcurrentRecordStreamNumResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark image URL.
+         * Statistics list.
+         * @type {Array.<ConcurrentRecordStreamNum> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PictureUrl = null;
-
-        /**
-         * Watermark name.
-         * @type {string || null}
-         */
-        this.WatermarkName = null;
-
-        /**
-         * Display position: X-axis offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.XPosition = null;
-
-        /**
-         * Display position: Y-axis offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.YPosition = null;
-
-        /**
-         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
-         * @type {number || null}
-         */
-        this.Height = null;
+        this.RequestId = null;
 
     }
 
@@ -2563,12 +2600,16 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
-        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new ConcurrentRecordStreamNum();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3449,18 +3490,48 @@ class CancelCommonMixStreamResponse extends  AbstractModel {
 }
 
 /**
- * ForbidLiveDomain response structure.
+ * AddLiveWatermark request structure.
  * @class
  */
-class ForbidLiveDomainResponse extends  AbstractModel {
+class AddLiveWatermarkRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Watermark image URL.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PictureUrl = null;
+
+        /**
+         * Watermark name.
+         * @type {string || null}
+         */
+        this.WatermarkName = null;
+
+        /**
+         * Display position: X-axis offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Display position: Y-axis offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
+         * @type {number || null}
+         */
+        this.Height = null;
 
     }
 
@@ -3471,7 +3542,12 @@ class ForbidLiveDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -4389,38 +4465,38 @@ class DescribeGroupProIspPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time point in the format of yyyy-mm-dd HH:MM:SS.
+         * Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time point in the format of yyyy-mm-dd HH:MM:SS
-The time interval is (0, 3 hours]. Data for the past month can be queried.
+         * End time point in the format of `yyyy-mm-dd HH:MM:SS`
+The time span is (0,3 hours]. Data for the last month can be queried.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Playback domain name. If it is blank by default, the full data will be queried.
+         * Playback domain name. If this parameter is left empty, full data will be queried.
          * @type {Array.<string> || null}
          */
         this.PlayDomains = null;
 
         /**
-         * List of districts. If it is blank by default, data of all districts will be returned.
+         * District list. If this parameter is left empty, data for all districts will be returned.
          * @type {Array.<string> || null}
          */
         this.ProvinceNames = null;
 
         /**
-         * List of ISPs. If it is blank by default, data of all ISPs will be returned.
+         * ISP list. If this parameter is left empty, data of all ISPs will be returned.
          * @type {Array.<string> || null}
          */
         this.IspNames = null;
 
         /**
-         * Within or outside Mainland China. Value range: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If it is blank, data for all regions will be queried.
+         * Within or outside Mainland China. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
          * @type {string || null}
          */
         this.MainlandOrOversea = null;
@@ -4453,8 +4529,8 @@ class DescribeStreamDayPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Date,
-In the format of YYYY-mm-dd.
+         * Date in the format of `YYYY-mm-dd`.
+Data is available at 3 AM the next day. You are recommended to query the latest data after this time point.
          * @type {string || null}
          */
         this.DayTime = null;
@@ -4466,7 +4542,7 @@ In the format of YYYY-mm-dd.
         this.PlayDomain = null;
 
         /**
-         * Page number. Value range: [1,10]. Default value: 1.
+         * Page number. Value range: [1,1000]. Default value: 1.
          * @type {number || null}
          */
         this.PageNum = null;
@@ -4934,13 +5010,13 @@ class DescribeStreamPushInfoListRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * Start time point in the format of yyyy-mm-dd HH:MM:SS.
+         * Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time point in the format of yyyy-mm-dd HH:MM:SS. The maximum time interval is 6 hours. Data in the past 6 days can be queried.
+         * End time point in the format of `yyyy-mm-dd HH:MM:SS`. The maximum time span is 6 hours. Data for the last 6 days can be queried.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4952,7 +5028,7 @@ class DescribeStreamPushInfoListRequest extends  AbstractModel {
         this.PushDomain = null;
 
         /**
-         * Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
          * @type {string || null}
          */
         this.AppName = null;
@@ -5300,7 +5376,7 @@ class BindLiveDomainCertRequest extends  AbstractModel {
 }
 
 /**
- * Queries District/ISP playback information.
+ * Queries playback information by district/ISP.
  * @class
  */
 class ProIspPlaySumInfo extends  AbstractModel {
@@ -5308,7 +5384,7 @@ class ProIspPlaySumInfo extends  AbstractModel {
         super();
 
         /**
-         * District/ISP.
+         * District/ISP/country/region.
          * @type {string || null}
          */
         this.Name = null;
@@ -5326,7 +5402,7 @@ class ProIspPlaySumInfo extends  AbstractModel {
         this.TotalRequest = null;
 
         /**
-         * Average download traffic in MB.
+         * Average download traffic in MB/s.
          * @type {number || null}
          */
         this.AvgFluxPerSecond = null;
@@ -6145,6 +6221,65 @@ class CreateLiveSnapshotTemplateResponse extends  AbstractModel {
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConcurrentRecordStreamNum request structure.
+ * @class
+ */
+class DescribeConcurrentRecordStreamNumRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Live streaming type. SlowLive: LCB.
+NormalLive: LVB.
+         * @type {string || null}
+         */
+        this.LiveType = null;
+
+        /**
+         * Start time in the format of `yyyy-mm-dd HH:MM:SS`.
+Data for the last 180 days can be queried.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in the format of `yyyy-mm-dd HH:MM:SS`.
+The maximum time span supported is 31 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+        /**
+         * Playback domain name list. If this parameter is left empty, full data will be queried.
+         * @type {Array.<string> || null}
+         */
+        this.PushDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LiveType = 'LiveType' in params ? params.LiveType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
 
     }
 }
@@ -7236,6 +7371,34 @@ class EnableLiveDomainRequest extends  AbstractModel {
 }
 
 /**
+ * ForbidLiveDomain response structure.
+ * @class
+ */
+class ForbidLiveDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveSnapshotRules request structure.
  * @class
  */
@@ -7537,19 +7700,19 @@ class DescribeBillBandwidthAndFluxListResponse extends  AbstractModel {
         super();
 
         /**
-         * Time point of peak bandwidth value in the format of yyyy-mm-dd HH:MM:SS.
+         * Time point of peak bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.PeakBandwidthTime = null;
 
         /**
-         * Bandwidth in Mbps.
+         * Peak bandwidth in Mbps.
          * @type {number || null}
          */
         this.PeakBandwidth = null;
 
         /**
-         * Time point of the 95th percentile bandwidth value in the format of yyyy-mm-dd HH:MM:SS.
+         * Time point of 95th percentile bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.P95PeakBandwidthTime = null;
@@ -8047,7 +8210,7 @@ class CdnPlayStatData extends  AbstractModel {
         super();
 
         /**
-         * Time point in the format of yyyy-mm-dd HH:MM:SS.
+         * Time point in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.Time = null;
@@ -8382,7 +8545,7 @@ class DescribeLiveDomainResponse extends  AbstractModel {
 }
 
 /**
- * Stream-level playback information
+ * Playback information at the stream level.
  * @class
  */
 class PlayDataInfoByStream extends  AbstractModel {
@@ -9098,7 +9261,7 @@ class DescribeProIspPlaySumInfoListResponse extends  AbstractModel {
         this.TotalPage = null;
 
         /**
-         * List of aggregated playback data by ISP or district.
+         * Aggregated data list by district, ISP, or country/region.
          * @type {Array.<ProIspPlaySumInfo> || null}
          */
         this.DataInfoList = null;
@@ -9337,6 +9500,7 @@ module.exports = {
     DomainCertInfo: DomainCertInfo,
     RecordTemplateInfo: RecordTemplateInfo,
     DeleteLiveTranscodeRuleResponse: DeleteLiveTranscodeRuleResponse,
+    ConcurrentRecordStreamNum: ConcurrentRecordStreamNum,
     ModifyLiveSnapshotTemplateResponse: ModifyLiveSnapshotTemplateResponse,
     ModifyLivePushAuthKeyRequest: ModifyLivePushAuthKeyRequest,
     DeleteLiveSnapshotTemplateResponse: DeleteLiveSnapshotTemplateResponse,
@@ -9360,7 +9524,7 @@ module.exports = {
     ModifyLiveDomainCertRequest: ModifyLiveDomainCertRequest,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     DescribeProIspPlaySumInfoListRequest: DescribeProIspPlaySumInfoListRequest,
-    AddLiveWatermarkRequest: AddLiveWatermarkRequest,
+    DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
     ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
@@ -9381,7 +9545,7 @@ module.exports = {
     CreateLiveTranscodeTemplateResponse: CreateLiveTranscodeTemplateResponse,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
     CancelCommonMixStreamResponse: CancelCommonMixStreamResponse,
-    ForbidLiveDomainResponse: ForbidLiveDomainResponse,
+    AddLiveWatermarkRequest: AddLiveWatermarkRequest,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     CommonMixInputParam: CommonMixInputParam,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
@@ -9440,6 +9604,7 @@ module.exports = {
     DescribeLiveCallbackRulesRequest: DescribeLiveCallbackRulesRequest,
     DescribeLiveTranscodeTemplateResponse: DescribeLiveTranscodeTemplateResponse,
     CreateLiveSnapshotTemplateResponse: CreateLiveSnapshotTemplateResponse,
+    DescribeConcurrentRecordStreamNumRequest: DescribeConcurrentRecordStreamNumRequest,
     ModifyLiveCertRequest: ModifyLiveCertRequest,
     CommonMixControlParams: CommonMixControlParams,
     UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,
@@ -9460,6 +9625,7 @@ module.exports = {
     ModifyLiveTranscodeTemplateRequest: ModifyLiveTranscodeTemplateRequest,
     ModifyLiveDomainCertResponse: ModifyLiveDomainCertResponse,
     EnableLiveDomainRequest: EnableLiveDomainRequest,
+    ForbidLiveDomainResponse: ForbidLiveDomainResponse,
     DescribeLiveSnapshotRulesRequest: DescribeLiveSnapshotRulesRequest,
     CreateLiveTranscodeRuleResponse: CreateLiveTranscodeRuleResponse,
     CreateLiveCallbackRuleResponse: CreateLiveCallbackRuleResponse,

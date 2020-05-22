@@ -1567,7 +1567,7 @@ class DescribeBasicAlarmListRequest extends  AbstractModel {
         this.InstanceGroupIds = null;
 
         /**
-         * 
+         * Filtering by metric names
          * @type {Array.<string> || null}
          */
         this.MetricNames = null;
@@ -2773,7 +2773,7 @@ class ReceiverInfo extends  AbstractModel {
         this.ReceiverType = null;
 
         /**
-         * Id
+         * ReceiverId
          * @type {number || null}
          */
         this.Id = null;

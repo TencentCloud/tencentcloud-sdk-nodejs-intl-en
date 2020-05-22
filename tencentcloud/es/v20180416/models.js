@@ -1851,6 +1851,12 @@ Dedicated master node disk size in GB. This is 50 GB by default and currently ca
          */
         this.BasicSecurityType = null;
 
+        /**
+         * Kibana private port
+         * @type {number || null}
+         */
+        this.KibanaPrivatePort = null;
+
     }
 
     /**
@@ -1902,6 +1908,7 @@ Dedicated master node disk size in GB. This is 50 GB by default and currently ca
         this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.KibanaPrivatePort = 'KibanaPrivatePort' in params ? params.KibanaPrivatePort : null;
 
     }
 }

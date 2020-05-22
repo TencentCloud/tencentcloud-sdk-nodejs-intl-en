@@ -24,6 +24,7 @@ const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DescribeClusterEndpointVipStatusRequest = models.DescribeClusterEndpointVipStatusRequest;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const EnhancedService = models.EnhancedService;
+const ResourceDeleteOption = models.ResourceDeleteOption;
 const RegionInstance = models.RegionInstance;
 const Label = models.Label;
 const LoginSettings = models.LoginSettings;

@@ -36,6 +36,12 @@ class DeleteClusterRequest extends  AbstractModel {
          */
         this.InstanceDeleteMode = null;
 
+        /**
+         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It only supports CBS now. The default policy is to retain CBS disks.
+         * @type {Array.<ResourceDeleteOption> || null}
+         */
+        this.ResourceDeleteOptions = null;
+
     }
 
     /**
@@ -47,6 +53,15 @@ class DeleteClusterRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
+
+        if (params.ResourceDeleteOptions) {
+            this.ResourceDeleteOptions = new Array();
+            for (let z in params.ResourceDeleteOptions) {
+                let obj = new ResourceDeleteOption();
+                obj.deserialize(params.ResourceDeleteOptions[z]);
+                this.ResourceDeleteOptions.push(obj);
+            }
+        }
 
     }
 }
@@ -291,6 +306,41 @@ class EnhancedService extends  AbstractModel {
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
         }
+
+    }
+}
+
+/**
+ * The policy to deal with resources in the cluster when the cluster is deleted.
+ * @class
+ */
+class ResourceDeleteOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource type, for example `CBS`
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It can be `terminate` or `retain`.
+         * @type {string || null}
+         */
+        this.DeleteMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.DeleteMode = 'DeleteMode' in params ? params.DeleteMode : null;
 
     }
 }
@@ -657,6 +707,19 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
         this.SecurityPolicy = null;
 
         /**
+         * Cluster Kubeconfig file
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Kubeconfig = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.JnsGwEndpoint = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -678,6 +741,8 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.PgwEndpoint = 'PgwEndpoint' in params ? params.PgwEndpoint : null;
         this.SecurityPolicy = 'SecurityPolicy' in params ? params.SecurityPolicy : null;
+        this.Kubeconfig = 'Kubeconfig' in params ? params.Kubeconfig : null;
+        this.JnsGwEndpoint = 'JnsGwEndpoint' in params ? params.JnsGwEndpoint : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2971,6 +3036,25 @@ Note: this field may return null, indicating that no valid value is obtained.
          */
         this.CreatedTime = null;
 
+        /**
+         * Node private IP
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LanIP = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
     }
 
     /**
@@ -2992,6 +3076,9 @@ Note: this field may return null, indicating that no valid value is obtained.
             this.InstanceAdvancedSettings = obj;
         }
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.LanIP = 'LanIP' in params ? params.LanIP : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
 
     }
 }
@@ -3757,6 +3844,7 @@ module.exports = {
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     EnhancedService: EnhancedService,
+    ResourceDeleteOption: ResourceDeleteOption,
     RegionInstance: RegionInstance,
     Label: Label,
     LoginSettings: LoginSettings,

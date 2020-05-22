@@ -41,6 +41,7 @@ const DescribeLiveDelayInfoListRequest = models.DescribeLiveDelayInfoListRequest
 const DomainCertInfo = models.DomainCertInfo;
 const RecordTemplateInfo = models.RecordTemplateInfo;
 const DeleteLiveTranscodeRuleResponse = models.DeleteLiveTranscodeRuleResponse;
+const ConcurrentRecordStreamNum = models.ConcurrentRecordStreamNum;
 const ModifyLiveSnapshotTemplateResponse = models.ModifyLiveSnapshotTemplateResponse;
 const ModifyLivePushAuthKeyRequest = models.ModifyLivePushAuthKeyRequest;
 const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
@@ -64,7 +65,7 @@ const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateReque
 const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
-const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
+const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
@@ -85,7 +86,7 @@ const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
-const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
+const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
@@ -144,6 +145,7 @@ const DeleteLiveTranscodeTemplateRequest = models.DeleteLiveTranscodeTemplateReq
 const DescribeLiveCallbackRulesRequest = models.DescribeLiveCallbackRulesRequest;
 const DescribeLiveTranscodeTemplateResponse = models.DescribeLiveTranscodeTemplateResponse;
 const CreateLiveSnapshotTemplateResponse = models.CreateLiveSnapshotTemplateResponse;
+const DescribeConcurrentRecordStreamNumRequest = models.DescribeConcurrentRecordStreamNumRequest;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const CommonMixControlParams = models.CommonMixControlParams;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
@@ -164,6 +166,7 @@ const PlayAuthKeyInfo = models.PlayAuthKeyInfo;
 const ModifyLiveTranscodeTemplateRequest = models.ModifyLiveTranscodeTemplateRequest;
 const ModifyLiveDomainCertResponse = models.ModifyLiveDomainCertResponse;
 const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
+const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
@@ -278,14 +281,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the playback authentication key.
-     * @param {ModifyLivePlayAuthKeyRequest} req
-     * @param {function(string, ModifyLivePlayAuthKeyResponse):void} cb
+     * This API is used to query the number of concurrent recording channels, which is applicable to LCB and LVB.
+     * @param {DescribeConcurrentRecordStreamNumRequest} req
+     * @param {function(string, DescribeConcurrentRecordStreamNumResponse):void} cb
      * @public
      */
-    ModifyLivePlayAuthKey(req, cb) {
-        let resp = new ModifyLivePlayAuthKeyResponse();
-        this.request("ModifyLivePlayAuthKey", req, resp, cb);
+    DescribeConcurrentRecordStreamNum(req, cb) {
+        let resp = new DescribeConcurrentRecordStreamNumResponse();
+        this.request("DescribeConcurrentRecordStreamNum", req, resp, cb);
     }
 
     /**
@@ -565,14 +568,14 @@ Note: only one screencapturing template can be associated with one domain name.
     }
 
     /**
-     * This API is used to resume the push of a specific stream.
-     * @param {ResumeLiveStreamRequest} req
-     * @param {function(string, ResumeLiveStreamResponse):void} cb
+     * This API is used to modify the playback authentication key.
+     * @param {ModifyLivePlayAuthKeyRequest} req
+     * @param {function(string, ModifyLivePlayAuthKeyResponse):void} cb
      * @public
      */
-    ResumeLiveStream(req, cb) {
-        let resp = new ResumeLiveStreamResponse();
-        this.request("ResumeLiveStream", req, resp, cb);
+    ModifyLivePlayAuthKey(req, cb) {
+        let resp = new ModifyLivePlayAuthKeyResponse();
+        this.request("ModifyLivePlayAuthKey", req, resp, cb);
     }
 
     /**
@@ -598,7 +601,7 @@ Note: only one screencapturing template can be associated with one domain name.
     }
 
     /**
-     * This API is used to query the average traffic per second, total traffic, and number of total requests by ISP and district in a certain period of time.
+     * This API is used to query the average traffic per second, total traffic, and number of total requests by country/region, district, and ISP in a certain period of time.
      * @param {DescribeProIspPlaySumInfoListRequest} req
      * @param {function(string, DescribeProIspPlaySumInfoListResponse):void} cb
      * @public
@@ -609,7 +612,7 @@ Note: only one screencapturing template can be associated with one domain name.
     }
 
     /**
-     * This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and encoding format of audio and video files.
+     * This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and codec of audio and video files.
      * @param {DescribeStreamPushInfoListRequest} req
      * @param {function(string, DescribeStreamPushInfoListResponse):void} cb
      * @public
@@ -1008,6 +1011,17 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     DescribeLiveStreamOnlineList(req, cb) {
         let resp = new DescribeLiveStreamOnlineListResponse();
         this.request("DescribeLiveStreamOnlineList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to resume the push of a specific stream.
+     * @param {ResumeLiveStreamRequest} req
+     * @param {function(string, ResumeLiveStreamResponse):void} cb
+     * @public
+     */
+    ResumeLiveStream(req, cb) {
+        let resp = new ResumeLiveStreamResponse();
+        this.request("ResumeLiveStream", req, resp, cb);
     }
 
     /**

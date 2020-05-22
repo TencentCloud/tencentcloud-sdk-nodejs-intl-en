@@ -545,6 +545,12 @@ class DeleteRuleRequest extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * A listener must be configured with a default domain name. If you need to delete the default domain name, you can specify another one as the new default domain name.
+         * @type {string || null}
+         */
+        this.NewDefaultServerDomain = null;
+
     }
 
     /**
@@ -559,6 +565,7 @@ class DeleteRuleRequest extends  AbstractModel {
         this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.NewDefaultServerDomain = 'NewDefaultServerDomain' in params ? params.NewDefaultServerDomain : null;
 
     }
 }
@@ -1768,13 +1775,13 @@ class AutoRewriteRequest extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * HTTPS:443 listener ID
+         * `HTTPS:443` listener ID
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * Domain name to be redirected under an HTTPS:443 listener
+         * The domain name to be redirected under the listener `HTTPS:443`. If it is left empty, all domain names under the listener `HTTPS:443` will be configured with redirects.
          * @type {Array.<string> || null}
          */
         this.Domains = null;
@@ -5547,6 +5554,12 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
          */
         this.DefaultServer = null;
 
+        /**
+         * A listener must be configured with a default domain name. If you need to disable the default domain name, you must specify another one as the new default domain name.
+         * @type {string || null}
+         */
+        this.NewDefaultServerDomain = null;
+
     }
 
     /**
@@ -5568,6 +5581,7 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         }
         this.Http2 = 'Http2' in params ? params.Http2 : null;
         this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
+        this.NewDefaultServerDomain = 'NewDefaultServerDomain' in params ? params.NewDefaultServerDomain : null;
 
     }
 }

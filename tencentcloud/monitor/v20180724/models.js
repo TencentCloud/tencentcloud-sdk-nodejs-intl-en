@@ -306,7 +306,7 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Event alarm condition input when a policy is created.
+ * Event alarm condition passed in when a policy is created.
  * @class
  */
 class CreatePolicyGroupEventCondition extends  AbstractModel {
@@ -326,13 +326,13 @@ class CreatePolicyGroupEventCondition extends  AbstractModel {
         this.AlarmNotifyType = null;
 
         /**
-         * Alarm sending period in seconds. The value <0 indicates that no alarm will be triggered. The value 0 indicates that an alarm will be triggered only once. The value >0 indicates that an alarm will be triggered at the interval of triggerTime.
+         * Alarm sending period in seconds. The value <0 indicates that no alarm will be triggered. The value 0 indicates that an alarm is triggered only once. The value >0 indicates that an alarm is triggered at the interval of triggerTime.
          * @type {number || null}
          */
         this.AlarmNotifyPeriod = null;
 
         /**
-         * If a metric is created based on a template, the RuleId of the metric in the template must be input.
+         * If a metric is created based on a template, the RuleId of the metric in the template must be passed in.
          * @type {number || null}
          */
         this.RuleId = null;
@@ -363,7 +363,7 @@ class DescribeProductEventListRequest extends  AbstractModel {
         super();
 
         /**
-         * API module name. It is fixed to monitor.
+         * API component name. It is fixed to monitor.
          * @type {string || null}
          */
         this.Module = null;
@@ -399,7 +399,7 @@ class DescribeProductEventListRequest extends  AbstractModel {
         this.RegionList = null;
 
         /**
-         * Filter by event type. Valid values: ["status_change","abnormal"], which indicate events whose statuses have changed and exceptional events respectively.
+         * Filter by event type. Valid values: ["status_change","abnormal"], which indicate events whose statuses have changed and events with exceptions respectively.
          * @type {Array.<string> || null}
          */
         this.Type = null;
@@ -429,7 +429,7 @@ class DescribeProductEventListRequest extends  AbstractModel {
         this.TimeOrder = null;
 
         /**
-         * Start time, which is the timestamp one day ago by default.
+         * Start time, which is the timestamp one day prior by default.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -540,14 +540,14 @@ Note: This field may return null, indicating that no valid value was found.
         this.EventId = null;
 
         /**
-         * Chinese event name.
+         * Event name in Chinese.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.EventCName = null;
 
         /**
-         * English event name.
+         * Event name in English.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
@@ -561,14 +561,14 @@ Note: This field may return null, indicating that no valid value was found.
         this.EventName = null;
 
         /**
-         * Chinese product name.
+         * Product name in Chinese.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.ProductCName = null;
 
         /**
-         * English product name.
+         * Product name in English.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
@@ -854,7 +854,7 @@ class CreatePolicyGroupRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Name of the view to which the policy group belongs. If the policy group is created based on a template, this parameter may not be set.
+         * Name of the view to which the policy group belongs. If the policy group is created based on a template, this parameter is optional.
          * @type {string || null}
          */
         this.ViewName = null;
@@ -884,13 +884,13 @@ class CreatePolicyGroupRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Insertion time in the format of Unix timestamp. If you do not set this parameter, the background processing time is used.
+         * Insertion time in the format of Unix timestamp. If this parameter is not configured, the backend processing time is used.
          * @type {number || null}
          */
         this.InsertTime = null;
 
         /**
-         * Alarm threshold rule in the policy group.
+         * Alarm threshold rules in the policy group.
          * @type {Array.<CreatePolicyGroupCondition> || null}
          */
         this.Conditions = null;
@@ -902,13 +902,13 @@ class CreatePolicyGroupRequest extends  AbstractModel {
         this.EventConditions = null;
 
         /**
-         * Whether to invoke at the background. Only when the value is 1, the rules in the background pull policy template are filled into the Conditions and EventConditions fields.
+         * Whether it is a backend call. If the value is 1, rules from the policy template will be used to fill in the `Conditions` and `EventConditions` fields.
          * @type {number || null}
          */
         this.BackEndCall = null;
 
         /**
-         * The “AND” and “OR” rules for alarm metrics. The value 0 indicates “OR”, which means that an alarm will be reported when any rule is met. The value 1 indicates “AND”, which means that an alarm will be reported only when all rules are met.
+         * The “AND” and “OR” rules for alarm metrics. The value 0 indicates “OR”, which means that an alarm will be triggered when any rule is met. The value 1 indicates “AND”, which means that an alarm will be triggered only when all rules are met.
          * @type {number || null}
          */
         this.IsUnionRule = null;
@@ -955,7 +955,7 @@ class CreatePolicyGroupRequest extends  AbstractModel {
 }
 
 /**
- * Alarm threshold condition input when a policy is created.
+ * Alarm threshold condition passed in when a policy is created.
  * @class
  */
 class CreatePolicyGroupCondition extends  AbstractModel {
@@ -981,19 +981,19 @@ class CreatePolicyGroupCondition extends  AbstractModel {
         this.AlarmNotifyPeriod = null;
 
         /**
-         * Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to. This parameter may not be set if a default comparative type is set for a metric.
+         * Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to. This parameter is optional if a default comparative type is configured for the metric.
          * @type {number || null}
          */
         this.CalcType = null;
 
         /**
-         * Comparative value. This parameter may not be set if a metric has no requirement.
+         * Comparative value. This parameter is optional if the metric has no requirement.
          * @type {number || null}
          */
         this.CalcValue = null;
 
         /**
-         * Data statistics period in seconds. This parameter may not be set if a metric has a default value.
+         * Data aggregation period in seconds. This parameter is optional if the metric has a default value.
          * @type {number || null}
          */
         this.CalcPeriod = null;
@@ -1005,7 +1005,7 @@ class CreatePolicyGroupCondition extends  AbstractModel {
         this.ContinuePeriod = null;
 
         /**
-         * If a metric is created based on a template, the RuleId of the metric in the template must be input.
+         * If a metric is created based on a template, the RuleId of the metric in the template must be passed in.
          * @type {number || null}
          */
         this.RuleId = null;
@@ -1032,7 +1032,7 @@ class CreatePolicyGroupCondition extends  AbstractModel {
 }
 
 /**
- * Alarm recipient information in the output of policy query
+ * Alarm recipient information output by the policy query
  * @class
  */
 class DescribePolicyGroupInfoReceiverInfo extends  AbstractModel {
@@ -1040,7 +1040,7 @@ class DescribePolicyGroupInfoReceiverInfo extends  AbstractModel {
         super();
 
         /**
-         * List of alarm receiver group IDs.
+         * List of alarm recipient group IDs.
          * @type {Array.<number> || null}
          */
         this.ReceiverGroupList = null;
@@ -1070,13 +1070,13 @@ class DescribePolicyGroupInfoReceiverInfo extends  AbstractModel {
         this.ReceiverType = null;
 
         /**
-         * Alarm notification type. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
+         * Alarm notification method. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
          * @type {Array.<string> || null}
          */
         this.NotifyWay = null;
 
         /**
-         * Uid of the alarm call receiver.
+         * Uid of the alarm call recipient.
 Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<number> || null}
          */
@@ -1089,13 +1089,13 @@ Note: This field may return null, indicating that no valid value was found.
         this.RoundNumber = null;
 
         /**
-         * Round interval of alarm calls in seconds.
+         * Intervals of alarm call rounds in seconds.
          * @type {number || null}
          */
         this.RoundInterval = null;
 
         /**
-         * Person interval of alarm calls in seconds.
+         * Alarm call intervals for individuals in seconds.
          * @type {number || null}
          */
         this.PersonInterval = null;
@@ -1107,13 +1107,13 @@ Note: This field may return null, indicating that no valid value was found.
         this.NeedSendNotice = null;
 
         /**
-         * Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is reported) and RECOVER (indicating that a notice is sent when the alarm is cleared).
+         * Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is triggered) and RECOVER (indicating that a notice is sent when the alarm is recovered).
          * @type {Array.<string> || null}
          */
         this.SendFor = null;
 
         /**
-         * Notification method when an alarm is cleared. Valid value: SMS.
+         * Notification method when an alarm is recovered. Valid value: SMS.
          * @type {Array.<string> || null}
          */
         this.RecoverNotify = null;
@@ -1167,7 +1167,7 @@ class BindingPolicyObjectRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * Required. It is fixed to monitor.
+         * Required. The value is fixed to monitor.
          * @type {string || null}
          */
         this.Module = null;
@@ -1247,36 +1247,60 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * PutMonitorData request structure.
+ * ModifyPolicyGroup request structure.
  * @class
  */
-class PutMonitorDataRequest extends  AbstractModel {
+class ModifyPolicyGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * A group of metrics and data.
-         * @type {Array.<MetricDatum> || null}
-         */
-        this.Metrics = null;
-
-        /**
-         * IP address that is automatically specified when monitoring data is reported.
+         * The value is fixed to monitor.
          * @type {string || null}
          */
-        this.AnnounceIp = null;
+        this.Module = null;
 
         /**
-         * Timestamp that is automatically specified when monitoring data is reported.
+         * Policy group ID.
          * @type {number || null}
          */
-        this.AnnounceTimestamp = null;
+        this.GroupId = null;
 
         /**
-         * IP address or product instance ID that is automatically specified when monitoring data is reported.
+         * Alarm type.
          * @type {string || null}
          */
-        this.AnnounceInstance = null;
+        this.ViewName = null;
+
+        /**
+         * Policy group name.
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * The “AND” and “OR” rules for metric alarms. The value 1 indicates “AND”, which means that an alarm will be triggered only when all rules are met. The value 0 indicates “OR”, which means that an alarm will be triggered when any rule is met.
+         * @type {number || null}
+         */
+        this.IsUnionRule = null;
+
+        /**
+         * Metric alarm condition rules. No filling indicates that all existing metric alarm condition rules will be deleted.
+         * @type {Array.<ModifyPolicyGroupCondition> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * Event alarm conditions. No filling indicates that all existing event alarm conditions will be deleted.
+         * @type {Array.<ModifyPolicyGroupEventCondition> || null}
+         */
+        this.EventConditions = null;
+
+        /**
+         * Template-based policy group ID.
+         * @type {number || null}
+         */
+        this.ConditionTempGroupId = null;
 
     }
 
@@ -1287,18 +1311,30 @@ class PutMonitorDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.IsUnionRule = 'IsUnionRule' in params ? params.IsUnionRule : null;
 
-        if (params.Metrics) {
-            this.Metrics = new Array();
-            for (let z in params.Metrics) {
-                let obj = new MetricDatum();
-                obj.deserialize(params.Metrics[z]);
-                this.Metrics.push(obj);
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new ModifyPolicyGroupCondition();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
             }
         }
-        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
-        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
-        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+
+        if (params.EventConditions) {
+            this.EventConditions = new Array();
+            for (let z in params.EventConditions) {
+                let obj = new ModifyPolicyGroupEventCondition();
+                obj.deserialize(params.EventConditions[z]);
+                this.EventConditions.push(obj);
+            }
+        }
+        this.ConditionTempGroupId = 'ConditionTempGroupId' in params ? params.ConditionTempGroupId : null;
 
     }
 }
@@ -1319,7 +1355,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.Default = null;
 
         /**
-         * Optional period in seconds.
+         * Custom periods in seconds.
 Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<number> || null}
          */
@@ -1374,7 +1410,7 @@ class DescribePolicyConditionListEventMetric extends  AbstractModel {
         this.NeedRecovered = null;
 
         /**
-         * Event type, which is a reserved field. At present, it is fixed to 2.
+         * Event type, which is a reserved field. Currently, it is fixed to 2.
          * @type {number || null}
          */
         this.Type = null;
@@ -1501,13 +1537,13 @@ class DescribeBasicAlarmListRequest extends  AbstractModel {
         super();
 
         /**
-         * API module name. The value for the current API is monitor.
+         * API component name. The value for the current API is monitor.
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * Start time, which is the timestamp one day ago by default.
+         * Start time, which is the timestamp one day prior by default.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -1744,13 +1780,13 @@ class DescribePolicyGroupListGroup extends  AbstractModel {
         this.ViewName = null;
 
         /**
-         * Uin that is last edited.
+         * Uin that was last edited.
          * @type {string || null}
          */
         this.LastEditUin = null;
 
         /**
-         * Last update time.
+         * Last modified time.
          * @type {number || null}
          */
         this.UpdateTime = null;
@@ -1780,7 +1816,7 @@ class DescribePolicyGroupListGroup extends  AbstractModel {
         this.IsDefault = null;
 
         /**
-         * Whether the policy can be set as the default policy.
+         * Whether the policy can be configured as the default policy.
          * @type {boolean || null}
          */
         this.CanSetDefault = null;
@@ -1839,7 +1875,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.InstanceGroup = null;
 
         /**
-         * The “AND” or “OR” rule. The value 0 indicates the “OR” rule (indicating that an alarm will be reported if any rule reaches the threshold condition). The value 1 indicates the “AND” rule (indicating that an alarm will be reported when all rules reach the threshold conditions).
+         * The “AND” or “OR” rule. The value 0 indicates the “OR” rule (indicating that an alarm will be triggered if any rule meets the threshold condition). The value 1 indicates the “AND” rule (indicating that an alarm will be triggered when all rules meet the threshold conditions).
 Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
@@ -2231,13 +2267,13 @@ class DescribeAccidentEventListRequest extends  AbstractModel {
         super();
 
         /**
-         * API module name. The value for the current API is monitor.
+         * API component name. The value for the current API is monitor.
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * Start time, which is the timestamp one day earlier by default.
+         * Start time, which is the timestamp one day prior by default.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -2267,7 +2303,7 @@ class DescribeAccidentEventListRequest extends  AbstractModel {
         this.UpdateTimeOrder = null;
 
         /**
-         * Sorting rule by OccurTime. Valid values: asc or desc. Sorting by UpdateTimeOrder takes a higher priority.
+         * Sorting rule by OccurTime. Valid values: asc or desc. Sorting by UpdateTimeOrder takes priority.
          * @type {string || null}
          */
         this.OccurTimeOrder = null;
@@ -2279,7 +2315,7 @@ class DescribeAccidentEventListRequest extends  AbstractModel {
         this.AccidentType = null;
 
         /**
-         * Filter by event. The value 1 indicates CVM storage issues. The value 2 indicates CVM network connection issues. The value 3 indicates that the CVM runs exceptionally. The value 202 indicates that an ISP network jitter occurs.
+         * Filter by event. The value 1 indicates CVM storage issues. The value 2 indicates CVM network connection issues. The value 3 indicates that the CVM has an exception. The value 202 indicates that an ISP network jitter occurs.
          * @type {Array.<number> || null}
          */
         this.AccidentEvent = null;
@@ -2350,7 +2386,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.UnConfigAlarmAmount = null;
 
         /**
-         * Number of exceptional events.
+         * Number of events with exceptions.
 Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
@@ -2486,7 +2522,7 @@ class DeletePolicyGroupRequest extends  AbstractModel {
 }
 
 /**
- * User callback information in the output of policy query
+ * User callback information output by the policy query
  * @class
  */
 class DescribePolicyGroupInfoCallback extends  AbstractModel {
@@ -2614,7 +2650,7 @@ class DescribePolicyConditionListResponse extends  AbstractModel {
         super();
 
         /**
-         * List of Alarm policy conditions.
+         * List of alarm policy conditions.
          * @type {Array.<DescribePolicyConditionListCondition> || null}
          */
         this.Conditions = null;
@@ -2713,6 +2749,41 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * ModifyPolicyGroup response structure.
+ * @class
+ */
+class ModifyPolicyGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy group ID.
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PutMonitorData response structure.
  * @class
  */
@@ -2761,7 +2832,7 @@ class ReceiverInfo extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Alarm notification type. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
+         * Alarm notification method. Valid values: "SMS", "SITE", "EMAIL", "CALL", and "WECHAT".
          * @type {Array.<string> || null}
          */
         this.NotifyWay = null;
@@ -2779,13 +2850,13 @@ class ReceiverInfo extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Call alarm notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is reported) and RECOVER (indicating that a notice is sent when the alarm is cleared).
+         * Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is triggered) and RECOVER (indicating that a notice is sent when the alarm is recovered).
          * @type {Array.<string> || null}
          */
         this.SendFor = null;
 
         /**
-         * Uid of the alarm call receiver.
+         * Uid of the alarm call recipient.
          * @type {Array.<number> || null}
          */
         this.UidList = null;
@@ -2797,19 +2868,19 @@ class ReceiverInfo extends  AbstractModel {
         this.RoundNumber = null;
 
         /**
-         * Person interval of alarm calls in seconds.
+         * Alarm call intervals for individuals in seconds.
          * @type {number || null}
          */
         this.PersonInterval = null;
 
         /**
-         * Round interval of alarm calls in seconds.
+         * Intervals of alarm call rounds in seconds.
          * @type {number || null}
          */
         this.RoundInterval = null;
 
         /**
-         * Notification method when an alarm is cleared. Valid value: SMS.
+         * Notification method when an alarm is recovered. Valid value: SMS.
          * @type {Array.<string> || null}
          */
         this.RecoverNotify = null;
@@ -2887,7 +2958,7 @@ class ModifyAlarmReceiversRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * New recipient information. If this parameter is not set, all recipients will be deleted.
+         * New recipient information. If this parameter is not configured, all recipients will be deleted.
          * @type {Array.<ReceiverInfo> || null}
          */
         this.ReceiverInfos = null;
@@ -3002,13 +3073,13 @@ class DescribePolicyGroupInfoResponse extends  AbstractModel {
         this.LastEditUin = null;
 
         /**
-         * Last update time.
+         * Last edited time.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Regions that support this policy.
+         * Regions supported by this policy.
          * @type {Array.<string> || null}
          */
         this.Region = null;
@@ -3055,7 +3126,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.ConditionsTemp = null;
 
         /**
-         * Whether the policy can be set as the default policy.
+         * Whether the policy can be configured as the default policy.
          * @type {boolean || null}
          */
         this.CanSetDefault = null;
@@ -3240,7 +3311,7 @@ class DescribeBindingPolicyObjectListDimension extends  AbstractModel {
 }
 
 /**
- * Alarm threshold conditions in the output of policy query
+ * Alarm threshold conditions output by the policy query
  * @class
  */
 class DescribePolicyGroupInfoCondition extends  AbstractModel {
@@ -3254,7 +3325,7 @@ class DescribePolicyGroupInfoCondition extends  AbstractModel {
         this.MetricShowName = null;
 
         /**
-         * Data statistics period in seconds.
+         * Data aggregation period in seconds.
          * @type {number || null}
          */
         this.Period = null;
@@ -3530,7 +3601,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.NoShieldedSum = null;
 
         /**
-         * Bound instance group information. You do not need to set this parameter if no instance group is bound.
+         * Bound instance group information. This parameter is not configured if no instance group is bound.
 Note: This field may return null, indicating that no valid value was found.
          * @type {DescribeBindingPolicyObjectListInstanceGroup || null}
          */
@@ -3574,7 +3645,7 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Template-based policy group information in the output of policy query
+ * Template-based policy group information output by the policy query
  * @class
  */
 class DescribePolicyGroupInfoConditionTpl extends  AbstractModel {
@@ -3753,24 +3824,36 @@ class CreatePolicyGroupResponse extends  AbstractModel {
 }
 
 /**
- * UnBindingAllPolicyObject request structure.
+ * PutMonitorData request structure.
  * @class
  */
-class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+class PutMonitorDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The value is fixed to monitor.
-         * @type {string || null}
+         * A group of metrics and data.
+         * @type {Array.<MetricDatum> || null}
          */
-        this.Module = null;
+        this.Metrics = null;
 
         /**
-         * Policy group ID.
+         * IP address that is automatically specified when monitoring data is reported.
+         * @type {string || null}
+         */
+        this.AnnounceIp = null;
+
+        /**
+         * Timestamp that is automatically specified when monitoring data is reported.
          * @type {number || null}
          */
-        this.GroupId = null;
+        this.AnnounceTimestamp = null;
+
+        /**
+         * IP address or product instance ID that is automatically specified when monitoring data is reported.
+         * @type {string || null}
+         */
+        this.AnnounceInstance = null;
 
     }
 
@@ -3781,8 +3864,18 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new MetricDatum();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
+        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
+        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
 
     }
 }
@@ -3825,7 +3918,7 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Event alarm conditions in the output of policy query
+ * Event alarm conditions output by the policy query
  * @class
  */
 class DescribePolicyGroupInfoEventCondition extends  AbstractModel {
@@ -3967,7 +4060,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.Default = null;
 
         /**
-         * Number of optional periods.
+         * Number of custom periods.
 Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<number> || null}
          */
@@ -4045,30 +4138,60 @@ class DescribeBindingPolicyObjectListInstance extends  AbstractModel {
 }
 
 /**
- * SendCustomAlarmMsg request structure.
+ * Modification of the metric threshold condition passed in by the alarm policy group.
  * @class
  */
-class SendCustomAlarmMsgRequest extends  AbstractModel {
+class ModifyPolicyGroupCondition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API module name. The value for the current API is monitor.
-         * @type {string || null}
+         * Metric ID.
+         * @type {number || null}
          */
-        this.Module = null;
+        this.MetricId = null;
 
         /**
-         * Message policy ID, which is configured on the custom message page of Cloud Monitor.
-         * @type {string || null}
+         * Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to.
+         * @type {number || null}
          */
-        this.PolicyId = null;
+        this.CalcType = null;
 
         /**
-         * Custom message content that a user wants to send.
+         * Threshold.
          * @type {string || null}
          */
-        this.Msg = null;
+        this.CalcValue = null;
+
+        /**
+         * Data period of the detected metric.
+         * @type {number || null}
+         */
+        this.CalcPeriod = null;
+
+        /**
+         * Number of consecutive periods.
+         * @type {number || null}
+         */
+        this.ContinuePeriod = null;
+
+        /**
+         * Alarm sending and convergence type. The value 0 indicates that alarms are sent consecutively. The value 1 indicates that alarms are sent exponentially.
+         * @type {number || null}
+         */
+        this.AlarmNotifyType = null;
+
+        /**
+         * Alarm sending period in seconds. If the value is less than 0, no alarm will be triggered. If the value is 0, an alarm will be triggered only once. If the value is greater than 0, an alarm will be triggered at the interval of triggerTime.
+         * @type {number || null}
+         */
+        this.AlarmNotifyPeriod = null;
+
+        /**
+         * Rule ID. No filling means new addition while filling in ruleId means to modify existing rules.
+         * @type {number || null}
+         */
+        this.RuleId = null;
 
     }
 
@@ -4079,9 +4202,63 @@ class SendCustomAlarmMsgRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.MetricId = 'MetricId' in params ? params.MetricId : null;
+        this.CalcType = 'CalcType' in params ? params.CalcType : null;
+        this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
+        this.CalcPeriod = 'CalcPeriod' in params ? params.CalcPeriod : null;
+        this.ContinuePeriod = 'ContinuePeriod' in params ? params.ContinuePeriod : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * Modification of the event alarm condition passed in by the alarm policy group.
+ * @class
+ */
+class ModifyPolicyGroupEventCondition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event ID.
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * Alarm sending and convergence type. The value 0 indicates that alarms are sent consecutively. The value 1 indicates that alarms are sent exponentially.
+         * @type {number || null}
+         */
+        this.AlarmNotifyType = null;
+
+        /**
+         * Alarm sending period in seconds. If the value is less than 0, no alarm will be triggered. If the value is 0, an alarm will be triggered only once. If the value is greater than 0, an alarm will be triggered at the interval of triggerTime.
+         * @type {number || null}
+         */
+        this.AlarmNotifyPeriod = null;
+
+        /**
+         * Rule ID. No filling means new addition while filling in ruleId means to modify existing rules.
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -4102,7 +4279,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.Default = null;
 
         /**
-         * Optional duration in seconds.
+         * Custom durations in seconds.
 Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<number> || null}
          */
@@ -4536,7 +4713,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.P10 = null;
 
         /**
-         * Data aggregation method in a period of 1 second.
+         * Data aggregation method in a period of 1 minute.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
@@ -4599,6 +4776,83 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * UnBindingAllPolicyObject request structure.
+ * @class
+ */
+class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value is fixed to monitor.
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * Policy group ID.
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * SendCustomAlarmMsg request structure.
+ * @class
+ */
+class SendCustomAlarmMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API component name. The value for the current API is monitor.
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * Message policy ID, which is configured on the custom message page of Cloud Monitor.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Custom message content that a user wants to send.
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+
+    }
+}
+
+/**
  * Dimensions of events returned by the DescribeProductEventList API
  * @class
  */
@@ -4607,14 +4861,14 @@ class DescribeProductEventListEventsDimensions extends  AbstractModel {
         super();
 
         /**
-         * English dimension name.
+         * Dimension name in English.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Chinese dimension name.
+         * Dimension name in Chinese.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
@@ -4732,7 +4986,7 @@ class ModifyAlarmReceiversResponse extends  AbstractModel {
 }
 
 /**
- * Instance group that is bound to a policy group returned by the DescribePolicyGroupList API
+ * Instance group that is bound to a policy group of the DescribePolicyGroupList API
  * @class
  */
 class DescribePolicyGroupListGroupInstanceGroup extends  AbstractModel {
@@ -4752,7 +5006,7 @@ class DescribePolicyGroupListGroupInstanceGroup extends  AbstractModel {
         this.ViewName = null;
 
         /**
-         * Uin that is last edited.
+         * Uin that was last edited.
          * @type {string || null}
          */
         this.LastEditUin = null;
@@ -4846,7 +5100,7 @@ module.exports = {
     DescribePolicyGroupInfoReceiverInfo: DescribePolicyGroupInfoReceiverInfo,
     BindingPolicyObjectRequest: BindingPolicyObjectRequest,
     DescribeProductEventListEventsGroupInfo: DescribeProductEventListEventsGroupInfo,
-    PutMonitorDataRequest: PutMonitorDataRequest,
+    ModifyPolicyGroupRequest: ModifyPolicyGroupRequest,
     DescribePolicyConditionListConfigManualPeriod: DescribePolicyConditionListConfigManualPeriod,
     DescribePolicyConditionListEventMetric: DescribePolicyConditionListEventMetric,
     DescribePolicyConditionListCondition: DescribePolicyConditionListCondition,
@@ -4868,6 +5122,7 @@ module.exports = {
     DescribePolicyConditionListResponse: DescribePolicyConditionListResponse,
     UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
     DescribePolicyConditionListConfigManualCalcType: DescribePolicyConditionListConfigManualCalcType,
+    ModifyPolicyGroupResponse: ModifyPolicyGroupResponse,
     PutMonitorDataResponse: PutMonitorDataResponse,
     ReceiverInfo: ReceiverInfo,
     ModifyAlarmReceiversRequest: ModifyAlarmReceiversRequest,
@@ -4882,14 +5137,15 @@ module.exports = {
     DescribePolicyGroupInfoConditionTpl: DescribePolicyGroupInfoConditionTpl,
     DescribeBindingPolicyObjectListRequest: DescribeBindingPolicyObjectListRequest,
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
-    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
+    PutMonitorDataRequest: PutMonitorDataRequest,
     InstanceGroup: InstanceGroup,
     DescribePolicyGroupInfoEventCondition: DescribePolicyGroupInfoEventCondition,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
     SendCustomAlarmMsgResponse: SendCustomAlarmMsgResponse,
     DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
-    SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
+    ModifyPolicyGroupCondition: ModifyPolicyGroupCondition,
+    ModifyPolicyGroupEventCondition: ModifyPolicyGroupEventCondition,
     DescribePolicyConditionListConfigManualContinueTime: DescribePolicyConditionListConfigManualContinueTime,
     DescribePolicyGroupListRequest: DescribePolicyGroupListRequest,
     DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,
@@ -4899,6 +5155,8 @@ module.exports = {
     DataPoint: DataPoint,
     UnBindingAllPolicyObjectResponse: UnBindingAllPolicyObjectResponse,
     DescribePolicyConditionListConfigManualStatType: DescribePolicyConditionListConfigManualStatType,
+    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
+    SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
     DescribeProductEventListEventsDimensions: DescribeProductEventListEventsDimensions,
     DescribePolicyConditionListConfigManualCalcValue: DescribePolicyConditionListConfigManualCalcValue,
     ModifyAlarmReceiversResponse: ModifyAlarmReceiversResponse,

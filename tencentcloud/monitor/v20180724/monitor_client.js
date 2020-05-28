@@ -32,7 +32,7 @@ const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
 const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
 const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
-const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const ModifyPolicyGroupRequest = models.ModifyPolicyGroupRequest;
 const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
 const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
 const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
@@ -54,6 +54,7 @@ const DescribeBindingPolicyObjectListInstanceGroup = models.DescribeBindingPolic
 const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse;
 const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
 const DescribePolicyConditionListConfigManualCalcType = models.DescribePolicyConditionListConfigManualCalcType;
+const ModifyPolicyGroupResponse = models.ModifyPolicyGroupResponse;
 const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const ReceiverInfo = models.ReceiverInfo;
 const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
@@ -68,14 +69,15 @@ const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObje
 const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
 const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjectListRequest;
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
-const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
 const InstanceGroup = models.InstanceGroup;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
 const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
 const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
-const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
+const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
+const ModifyPolicyGroupEventCondition = models.ModifyPolicyGroupEventCondition;
 const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
 const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
 const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
@@ -85,6 +87,8 @@ const Dimension = models.Dimension;
 const DataPoint = models.DataPoint;
 const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
 const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyConditionListConfigManualStatType;
+const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
 const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
 const DescribePolicyConditionListConfigManualCalcValue = models.DescribePolicyConditionListConfigManualCalcValue;
 const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
@@ -169,7 +173,7 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * This API is used to send a custom alarm message.
+     * This API is used to send a custom alarm notification.
      * @param {SendCustomAlarmMsgRequest} req
      * @param {function(string, SendCustomAlarmMsgResponse):void} cb
      * @public
@@ -248,20 +252,14 @@ If you need to call a lot of metrics and objects, there may be cases where the c
     }
 
     /**
-     * This API is used to customize monitoring data to be reported. The default API request rate limit is 50 requests/sec.
-The default upper limit on metrics of a single tenant is 100.
-A maximum of 30 metric/value pairs can be reported at a time. When an error is returned for a request, no metrics/values in the request will be saved.
-
-The reporting timestamp is the timestamp when you want to save the data. It is recommended that you construct a timestamp at integer minutes.
-The time range of a timestamp is from 300 seconds before the current time to the current time.
-The data of the same IP metric/value pair must be reported by minute in chronological order.
-     * @param {PutMonitorDataRequest} req
-     * @param {function(string, PutMonitorDataResponse):void} cb
+     * This API is used to update policy group.
+     * @param {ModifyPolicyGroupRequest} req
+     * @param {function(string, ModifyPolicyGroupResponse):void} cb
      * @public
      */
-    PutMonitorData(req, cb) {
-        let resp = new PutMonitorDataResponse();
-        this.request("PutMonitorData", req, resp, cb);
+    ModifyPolicyGroup(req, cb) {
+        let resp = new ModifyPolicyGroupResponse();
+        this.request("ModifyPolicyGroup", req, resp, cb);
     }
 
     /**
@@ -284,6 +282,23 @@ The data of the same IP metric/value pair must be reported by minute in chronolo
     UnBindingAllPolicyObject(req, cb) {
         let resp = new UnBindingAllPolicyObjectResponse();
         this.request("UnBindingAllPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * The default API request rate limit is 50 requests/sec.
+The default upper limit on metrics of a single tenant is 100.
+A maximum of 30 metric/value pairs can be reported at a time. When an error is returned for a request, no metrics/values in the request will be saved.
+
+The reporting timestamp is the timestamp when you want to save the data. We recommend that you construct a timestamp at integer minutes.
+The time range of a timestamp is from 300 seconds before the current time to the current time.
+The data of the same IP metric/value pair must be reported by minute in chronological order.
+     * @param {PutMonitorDataRequest} req
+     * @param {function(string, PutMonitorDataResponse):void} cb
+     * @public
+     */
+    PutMonitorData(req, cb) {
+        let resp = new PutMonitorDataResponse();
+        this.request("PutMonitorData", req, resp, cb);
     }
 
     /**

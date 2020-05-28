@@ -93,7 +93,7 @@ class DescribeCdnDomainLogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Offset for paged queries. Default value: 0 (the first page)
+         * Offset for paginated queries. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -114,6 +114,13 @@ Default value: `mainland`.
          */
         this.Area = null;
 
+        /**
+         * The type of log to be downloaded.
+access: access logs
+         * @type {string || null}
+         */
+        this.LogType = null;
+
     }
 
     /**
@@ -129,6 +136,7 @@ Default value: `mainland`.
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
 
     }
 }
@@ -398,6 +406,66 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * `ImageOptimization` configuration
+ * @class
+ */
+class ImageOptimization extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `WebpAdapter` configuration
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {WebpAdapter || null}
+         */
+        this.WebpAdapter = null;
+
+        /**
+         * `TpgAdapter` configuration
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {TpgAdapter || null}
+         */
+        this.TpgAdapter = null;
+
+        /**
+         * `GuetzliAdapter` configuration
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {GuetzliAdapter || null}
+         */
+        this.GuetzliAdapter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WebpAdapter) {
+            let obj = new WebpAdapter();
+            obj.deserialize(params.WebpAdapter)
+            this.WebpAdapter = obj;
+        }
+
+        if (params.TpgAdapter) {
+            let obj = new TpgAdapter();
+            obj.deserialize(params.TpgAdapter)
+            this.TpgAdapter = obj;
+        }
+
+        if (params.GuetzliAdapter) {
+            let obj = new GuetzliAdapter();
+            obj.deserialize(params.GuetzliAdapter)
+            this.GuetzliAdapter = obj;
+        }
+
+    }
+}
+
+/**
  * Domain name HTTPS acceleration configuration. This is disabled by default.
  * @class
  */
@@ -479,6 +547,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SslStatus = null;
 
+        /**
+         * TLS version list. Valid values:
+TLSv1.0, TLSv1.1, TLSv1.2
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.TlsVersion = null;
+
+        /**
+         * 
+         * @type {Hsts || null}
+         */
+        this.Hsts = null;
+
     }
 
     /**
@@ -506,6 +588,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Spdy = 'Spdy' in params ? params.Spdy : null;
         this.SslStatus = 'SslStatus' in params ? params.SslStatus : null;
+        this.TlsVersion = 'TlsVersion' in params ? params.TlsVersion : null;
+
+        if (params.Hsts) {
+            let obj = new Hsts();
+            obj.deserialize(params.Hsts)
+            this.Hsts = obj;
+        }
 
     }
 }
@@ -582,6 +671,13 @@ class CreateClsLogTopicResponse extends  AbstractModel {
         super();
 
         /**
+         * Topic ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -596,6 +692,7 @@ class CreateClsLogTopicResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -934,6 +1031,51 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * `UserAgent` blacklist/whitelist configuration
+ * @class
+ */
+class UserAgentFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch. Valid values: on, off
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * UA blacklist/whitelist effect rule list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<UserAgentFilterRule> || null}
+         */
+        this.FilterRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new UserAgentFilterRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Advanced cache configuration rules
  * @class
  */
@@ -1122,13 +1264,13 @@ EndTime must be greater than or equal to StartTime
         this.EndTime = null;
 
         /**
-         * Objects to be sorted. Valid values:
-`url`: sorts access URLs with query string parameters included. Supported filters are `flux` and `request`.
-`path`: sorts access URLs with query string parameters excluded. Supported filters are `flux` and `request`. You need to be whitelisted before using this feature.
-`district`: sorts provinces or countries/regions. Supported filters are `flux` and `request`.
-`isp`: sorts ISPs. Supported filters are `flux` and `request`.
-`host`: sorts domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, `2XX`, `3XX`, `4XX`, `5XX` and `statusCode`.
-`originHost`: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, `origin_2XX`, `origin_3XX`, `oringin_4XX`, `origin_5XX` and `OriginStatusCode`
+         * Object representing the sort criteria. The following objects are supported:
+url: sorts by access URL (including the query string). Supported filters are `flux` and `request`
+path: sorts by access URL (excluding the query string). Supported filters are `flux` and `request` (whitelist-based feature)
+district: sorts by district. Supported filters are `flux` and `request`
+isp: sorts by ISP. Supported filters are `flux` and `request`
+host: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, 2XX, 3XX, 4XX, 5XX, and `statusCode`
+originHost: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, `origin_2XX`, `origin_3XX`, `origin_4XX`, `origin_5XX`, and `OriginStatusCode`
          * @type {string || null}
          */
         this.Metric = null;
@@ -1167,8 +1309,8 @@ Please note that if domain names are specified, this parameter will be ignored.
         this.Project = null;
 
         /**
-         * Default value: `false`, indicating that results for all domain names are returned together when you query multiple domain names.
-If `Metric` is `Url`, `Path`, `District`, or `Isp` and `Filter` is `flux` or `request`, you can set this parameter to `true`, indicating that results for each domain name are returned.
+         * Default is `false` for multi–domain name queries, which returns sorted results of all domain names. 
+If `Metric` is `url`, `path`, `district`, or `isp` and `Filter` is `flux` or `request`, it can be set to `true` to return the sorted results of each domain.
          * @type {boolean || null}
          */
         this.Detail = null;
@@ -1188,9 +1330,9 @@ If `Metric` is `Url`, `Path`, `District`, or `Isp` and `Filter` is `flux` or `re
         this.Area = null;
 
         /**
-         * Specifies a region type for the query. If it is left blank, data on the service region will be queried. This parameter is only valid when `Area` is `overseas` and `Metric` is `District` or `Host`.
-`server`: specifies to query data on the service region where Tencent Cloud CDN nodes are located;
-`client`: specifies to query data on the client region where the request devices are located; if `Metric` is `Host`, supported filters are `flux`, `request`, and `bandwidth`.
+         * The region type can be specified only when you query CDN data outside Mainland China and `Metric` is `district` or `host`; if you leave it empty, data of the service region will be queried (only applicable when `Area` is `overseas` and `Metric` is `district` or `host`)
+server: specifies to query data of service region (where a CDN node is located)
+client: specifies to query data of the client region (where a user request device is located). If `Metric` is `host`, `Filter` can only be `flux`, `request`, or `bandwidth`
          * @type {string || null}
          */
         this.AreaType = null;
@@ -1372,6 +1514,35 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MinLength = 'MinLength' in params ? params.MinLength : null;
         this.MaxLength = 'MaxLength' in params ? params.MaxLength : null;
         this.Algorithms = 'Algorithms' in params ? params.Algorithms : null;
+
+    }
+}
+
+/**
+ * Image optimization - `GuetzliAdapter` configuration
+ * @class
+ */
+class GuetzliAdapter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch. Valid values: on, off
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -3040,6 +3211,63 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
 }
 
 /**
+ * `UserAgent` blacklist/whitelist rule configuration
+ * @class
+ */
+class UserAgentFilterRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Effective access path type
+all: all access paths are effective
+file: effective by file extension
+directory: effective by directory
+path: effective by full access path
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Effective access paths
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * `UserAgent` list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.UserAgents = null;
+
+        /**
+         * Blacklist or whitelist. Valid values: blacklist, whitelist
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.UserAgents = 'UserAgents' in params ? params.UserAgents : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+
+    }
+}
+
+/**
  * Data structure of sorted data
  * @class
  */
@@ -3349,6 +3577,35 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.IgnoreCacheControl = 'IgnoreCacheControl' in params ? params.IgnoreCacheControl : null;
         this.IgnoreSetCookie = 'IgnoreSetCookie' in params ? params.IgnoreSetCookie : null;
+
+    }
+}
+
+/**
+ * Image optimization - `WebpAdapter` configuration
+ * @class
+ */
+class WebpAdapter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch. Valid values: on, off
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -4081,6 +4338,79 @@ class DisableClsLogTopicResponse extends  AbstractModel {
 }
 
 /**
+ * `HSTS` configuration.
+ * @class
+ */
+class Hsts extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable. Valid values: on, off.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * `MaxAge` value.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxAge = null;
+
+        /**
+         * Whether to include subdomain names. Valid values: on, off.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IncludeSubDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.MaxAge = 'MaxAge' in params ? params.MaxAge : null;
+        this.IncludeSubDomains = 'IncludeSubDomains' in params ? params.IncludeSubDomains : null;
+
+    }
+}
+
+/**
+ * Image optimization - `TpgAdapter` configuration
+ * @class
+ */
+class TpgAdapter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch. Valid values: on, off
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Complete acceleration domain configuration information
  * @class
  */
@@ -4389,13 +4719,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SecurityConfig = null;
 
         /**
-         * 
+         * `ImageOptimization` configuration
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {ImageOptimization || null}
          */
         this.ImageOptimization = null;
 
         /**
-         * 
+         * `UA` blacklist/whitelist Configuration
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {UserAgentFilter || null}
          */
         this.UserAgentFilter = null;
@@ -5670,7 +6002,7 @@ You must specify either a task ID or a starting time.
         this.Keyword = null;
 
         /**
-         * Offset for paged queries. Default value: 0 (the first page)
+         * Offset for paginated queries. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -5729,7 +6061,7 @@ class DescribeUrlViolationsRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset for paginated queries. Default value: 0 (the first page).
+         * Offset for paginated queries. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -6384,7 +6716,7 @@ enable: The URL is enabled (unblocked) and can be normally accessed
         this.Status = null;
 
         /**
-         * Offset for paged queries. Default value: 0 (the first page)
+         * Offset for paginated queries. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -6673,6 +7005,13 @@ off: disable full-path cache (i.e., enable parameter filter)
          */
         this.FullUrlCache = null;
 
+        /**
+         * Whether the cache ignores letter case
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CaseSensitive = null;
+
     }
 
     /**
@@ -6683,6 +7022,7 @@ off: disable full-path cache (i.e., enable parameter filter)
             return;
         }
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
+        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
 
     }
 }
@@ -7485,7 +7825,7 @@ You must specify either a task ID or a starting time for your query.
         this.TaskId = null;
 
         /**
-         * Offset for paged queries. Default value: 0 (the first page)
+         * Offset for paginated queries. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -9052,7 +9392,7 @@ class DescribeDomainsRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset for paginated queries. Default value: 0 (the first page).
+         * Offset for paginated queries. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -9101,6 +9441,7 @@ module.exports = {
     UrlRecord: UrlRecord,
     UpdatePayTypeRequest: UpdatePayTypeRequest,
     Authentication: Authentication,
+    ImageOptimization: ImageOptimization,
     Https: Https,
     ReportData: ReportData,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
@@ -9111,6 +9452,7 @@ module.exports = {
     RequestHeader: RequestHeader,
     HttpHeaderPathRule: HttpHeaderPathRule,
     Referer: Referer,
+    UserAgentFilter: UserAgentFilter,
     AdvanceCacheRule: AdvanceCacheRule,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
@@ -9118,6 +9460,7 @@ module.exports = {
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
     CompressionRule: CompressionRule,
+    GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
     EnableCachesRequest: EnableCachesRequest,
     SimpleCache: SimpleCache,
@@ -9137,6 +9480,7 @@ module.exports = {
     ListClsLogTopicsResponse: ListClsLogTopicsResponse,
     OverseaConfig: OverseaConfig,
     AddCdnDomainRequest: AddCdnDomainRequest,
+    UserAgentFilterRule: UserAgentFilterRule,
     TopDetailData: TopDetailData,
     ErrorPage: ErrorPage,
     MaxAgeRule: MaxAgeRule,
@@ -9144,6 +9488,7 @@ module.exports = {
     DescribeCertDomainsRequest: DescribeCertDomainsRequest,
     DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     AdvancedCache: AdvancedCache,
+    WebpAdapter: WebpAdapter,
     StartCdnDomainRequest: StartCdnDomainRequest,
     MapInfo: MapInfo,
     DescribeCertDomainsResponse: DescribeCertDomainsResponse,
@@ -9159,6 +9504,8 @@ module.exports = {
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
+    Hsts: Hsts,
+    TpgAdapter: TpgAdapter,
     DetailDomain: DetailDomain,
     GetDisableRecordsResponse: GetDisableRecordsResponse,
     ResponseHeader: ResponseHeader,

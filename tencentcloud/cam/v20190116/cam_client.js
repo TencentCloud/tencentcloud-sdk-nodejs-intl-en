@@ -16,37 +16,46 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const GetUserResponse = models.GetUserResponse;
+const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const SetMfaFlagResponse = models.SetMfaFlagResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
 const CreatePolicyResponse = models.CreatePolicyResponse;
 const GetRoleRequest = models.GetRoleRequest;
+const CreateServiceLinkedRoleRequest = models.CreateServiceLinkedRoleRequest;
 const ListAttachedGroupPoliciesRequest = models.ListAttachedGroupPoliciesRequest;
 const ListGroupsForUserRequest = models.ListGroupsForUserRequest;
 const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
+const GetServiceLinkedRoleDeletionStatusResponse = models.GetServiceLinkedRoleDeletionStatusResponse;
 const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse;
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
 const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const ListGroupsResponse = models.ListGroupsResponse;
+const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const DeleteRoleResponse = models.DeleteRoleResponse;
+const PolicyVersionItem = models.PolicyVersionItem;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
 const ListGroupsRequest = models.ListGroupsRequest;
+const DeletePolicyVersionResponse = models.DeletePolicyVersionResponse;
 const UpdateSAMLProviderRequest = models.UpdateSAMLProviderRequest;
 const UpdateAssumeRolePolicyRequest = models.UpdateAssumeRolePolicyRequest;
 const ListGroupsForUserResponse = models.ListGroupsForUserResponse;
 const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
+const CreatePolicyVersionResponse = models.CreatePolicyVersionResponse;
 const ListPoliciesResponse = models.ListPoliciesResponse;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
+const SetDefaultPolicyVersionRequest = models.SetDefaultPolicyVersionRequest;
 const RoleInfo = models.RoleInfo;
+const CreatePolicyVersionRequest = models.CreatePolicyVersionRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
-const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const GetUserResponse = models.GetUserResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
 const DetachRolePolicyRequest = models.DetachRolePolicyRequest;
 const StrategyInfo = models.StrategyInfo;
@@ -60,6 +69,7 @@ const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
 const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
 const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse;
 const GetUserRequest = models.GetUserRequest;
+const LoginActionMfaFlag = models.LoginActionMfaFlag;
 const SubAccountInfo = models.SubAccountInfo;
 const SAMLProviderInfo = models.SAMLProviderInfo;
 const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
@@ -71,44 +81,55 @@ const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
+const GetPolicyVersionRequest = models.GetPolicyVersionRequest;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
 const GetGroupResponse = models.GetGroupResponse;
 const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
-const AddUserToGroupResponse = models.AddUserToGroupResponse;
+const CreateServiceLinkedRoleResponse = models.CreateServiceLinkedRoleResponse;
+const ListUsersRequest = models.ListUsersRequest;
 const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
 const UpdatePolicyResponse = models.UpdatePolicyResponse;
 const CreateGroupRequest = models.CreateGroupRequest;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
 const ListPoliciesRequest = models.ListPoliciesRequest;
+const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDeletionStatusRequest;
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
 const CreatePolicyRequest = models.CreatePolicyRequest;
+const DeletePolicyVersionRequest = models.DeletePolicyVersionRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
-const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
+const GetPolicyVersionResponse = models.GetPolicyVersionResponse;
 const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
+const ListPolicyVersionsResponse = models.ListPolicyVersionsResponse;
 const GetPolicyRequest = models.GetPolicyRequest;
 const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
 const DetachRolePolicyResponse = models.DetachRolePolicyResponse;
 const AttachedPolicyOfRole = models.AttachedPolicyOfRole;
 const ListSAMLProvidersResponse = models.ListSAMLProvidersResponse;
+const SetDefaultPolicyVersionResponse = models.SetDefaultPolicyVersionResponse;
 const ListAttachedRolePoliciesRequest = models.ListAttachedRolePoliciesRequest;
 const GetSAMLProviderRequest = models.GetSAMLProviderRequest;
 const DetachUserPolicyResponse = models.DetachUserPolicyResponse;
 const GetRoleResponse = models.GetRoleResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
+const DeleteServiceLinkedRoleResponse = models.DeleteServiceLinkedRoleResponse;
 const GetPolicyResponse = models.GetPolicyResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
+const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
+const DeleteServiceLinkedRoleRequest = models.DeleteServiceLinkedRoleRequest;
 const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
 const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
+const PolicyVersionDetail = models.PolicyVersionDetail;
 const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
-const ListUsersRequest = models.ListUsersRequest;
+const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const UpdatePolicyRequest = models.UpdatePolicyRequest;
@@ -127,6 +148,17 @@ class CamClient extends AbstractClient {
     }
     
     /**
+     * This API is used to set account verification for login and sensitive operations for sub-users.
+     * @param {SetMfaFlagRequest} req
+     * @param {function(string, SetMfaFlagResponse):void} cb
+     * @public
+     */
+    SetMfaFlag(req, cb) {
+        let resp = new SetMfaFlagResponse();
+        this.request("SetMfaFlag", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a role’s login permissions.
      * @param {UpdateRoleConsoleLoginRequest} req
      * @param {function(string, UpdateRoleConsoleLoginResponse):void} cb
@@ -138,6 +170,28 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create a user group.
+     * @param {CreateGroupRequest} req
+     * @param {function(string, CreateGroupResponse):void} cb
+     * @public
+     */
+    CreateGroup(req, cb) {
+        let resp = new CreateGroupResponse();
+        this.request("CreateGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a service-linked role.
+     * @param {DeleteServiceLinkedRoleRequest} req
+     * @param {function(string, DeleteServiceLinkedRoleResponse):void} cb
+     * @public
+     */
+    DeleteServiceLinkedRole(req, cb) {
+        let resp = new DeleteServiceLinkedRoleResponse();
+        this.request("DeleteServiceLinkedRole", req, resp, cb);
+    }
+
+    /**
      * This API is used to add sub-users.
      * @param {AddUserRequest} req
      * @param {function(string, AddUserResponse):void} cb
@@ -146,6 +200,17 @@ class CamClient extends AbstractClient {
     AddUser(req, cb) {
         let resp = new AddUserResponse();
         this.request("AddUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a service-linked role.
+     * @param {CreateServiceLinkedRoleRequest} req
+     * @param {function(string, CreateServiceLinkedRoleResponse):void} cb
+     * @public
+     */
+    CreateServiceLinkedRole(req, cb) {
+        let resp = new CreateServiceLinkedRoleResponse();
+        this.request("CreateServiceLinkedRole", req, resp, cb);
     }
 
     /**
@@ -215,14 +280,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a user group.
-     * @param {CreateGroupRequest} req
-     * @param {function(string, CreateGroupResponse):void} cb
+     * This API is used to delete a policy version of a policy.
+     * @param {DeletePolicyVersionRequest} req
+     * @param {function(string, DeletePolicyVersionResponse):void} cb
      * @public
      */
-    CreateGroup(req, cb) {
-        let resp = new CreateGroupResponse();
-        this.request("CreateGroup", req, resp, cb);
+    DeletePolicyVersion(req, cb) {
+        let resp = new DeletePolicyVersionResponse();
+        this.request("DeletePolicyVersion", req, resp, cb);
     }
 
     /**
@@ -369,6 +434,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get the status of the service-linked role deletion based on the `TaskId`
+     * @param {GetServiceLinkedRoleDeletionStatusRequest} req
+     * @param {function(string, GetServiceLinkedRoleDeletionStatusResponse):void} cb
+     * @public
+     */
+    GetServiceLinkedRoleDeletionStatus(req, cb) {
+        let resp = new GetServiceLinkedRoleDeletionStatusResponse();
+        this.request("GetServiceLinkedRoleDeletionStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to verify a custom multi-factor Token.
      * @param {ConsumeCustomMFATokenRequest} req
      * @param {function(string, ConsumeCustomMFATokenResponse):void} cb
@@ -388,6 +464,28 @@ class CamClient extends AbstractClient {
     GetGroup(req, cb) {
         let resp = new GetGroupResponse();
         this.request("GetGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query policy version details.
+     * @param {GetPolicyVersionRequest} req
+     * @param {function(string, GetPolicyVersionResponse):void} cb
+     * @public
+     */
+    GetPolicyVersion(req, cb) {
+        let resp = new GetPolicyVersionResponse();
+        this.request("GetPolicyVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the operative policy version.
+     * @param {SetDefaultPolicyVersionRequest} req
+     * @param {function(string, SetDefaultPolicyVersionResponse):void} cb
+     * @public
+     */
+    SetDefaultPolicyVersion(req, cb) {
+        let resp = new SetDefaultPolicyVersionResponse();
+        this.request("SetDefaultPolicyVersion", req, resp, cb);
     }
 
     /**
@@ -424,7 +522,8 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API (UpdatePolicy) is used to update a policy.
+     * This API is used to update a policy.
+This API will update the default version of an existing policy instead of creating a new one. If no policy exists, a default version will be created.
      * @param {UpdatePolicyRequest} req
      * @param {function(string, UpdatePolicyResponse):void} cb
      * @public
@@ -432,6 +531,17 @@ class CamClient extends AbstractClient {
     UpdatePolicy(req, cb) {
         let resp = new UpdatePolicyResponse();
         this.request("UpdatePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of policy versions.
+     * @param {ListPolicyVersionsRequest} req
+     * @param {function(string, ListPolicyVersionsResponse):void} cb
+     * @public
+     */
+    ListPolicyVersions(req, cb) {
+        let resp = new ListPolicyVersionsResponse();
+        this.request("ListPolicyVersions", req, resp, cb);
     }
 
     /**
@@ -479,6 +589,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to add a policy version. After creating a policy version, you can easily change the policy by changing the policy version.
+     * @param {CreatePolicyVersionRequest} req
+     * @param {function(string, CreatePolicyVersionResponse):void} cb
+     * @public
+     */
+    CreatePolicyVersion(req, cb) {
+        let resp = new CreatePolicyVersionResponse();
+        this.request("CreatePolicyVersion", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the collaborator list.
      * @param {ListCollaboratorsRequest} req
      * @param {function(string, ListCollaboratorsResponse):void} cb
@@ -512,7 +633,7 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API (ListPolicies) is used to query the list of policies.
+     * This API is used to query the policy list.
      * @param {ListPoliciesRequest} req
      * @param {function(string, ListPoliciesResponse):void} cb
      * @public

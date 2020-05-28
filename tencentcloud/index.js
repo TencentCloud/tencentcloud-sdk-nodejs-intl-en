@@ -16,6 +16,7 @@ module.exports = {
     dc: require("./dc"),
     dcdb: require("./dcdb"),
     dts: require("./dts"),
+    ecdn: require("./ecdn"),
     emr: require("./emr"),
     es: require("./es"),
     gaap: require("./gaap"),

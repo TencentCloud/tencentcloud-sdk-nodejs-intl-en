@@ -17,60 +17,24 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * GetUser response structure.
+ * ListAttachedRolePolicies response structure.
  * @class
  */
-class GetUserResponse extends  AbstractModel {
+class ListAttachedRolePoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sub-user UIN
+         * List of policies associated with the role
+         * @type {Array.<AttachedPolicyOfRole> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number of policies associated with the role
          * @type {number || null}
          */
-        this.Uin = null;
-
-        /**
-         * Sub-user username
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Sub-user UID
-         * @type {number || null}
-         */
-        this.Uid = null;
-
-        /**
-         * Sub-user remarks
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * If sub-user can log in to the Console
-         * @type {number || null}
-         */
-        this.ConsoleLogin = null;
-
-        /**
-         * Mobile number
-         * @type {string || null}
-         */
-        this.PhoneNum = null;
-
-        /**
-         * Country/Area code
-         * @type {string || null}
-         */
-        this.CountryCode = null;
-
-        /**
-         * Email
-         * @type {string || null}
-         */
-        this.Email = null;
+        this.TotalNum = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -87,14 +51,44 @@ class GetUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Uid = 'Uid' in params ? params.Uid : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
-        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
-        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
-        this.Email = 'Email' in params ? params.Email : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AttachedPolicyOfRole();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetMfaFlag response structure.
+ * @class
+ */
+class SetMfaFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -292,6 +286,48 @@ class GetRoleRequest extends  AbstractModel {
 }
 
 /**
+ * CreateServiceLinkedRole request structure.
+ * @class
+ */
+class CreateServiceLinkedRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Authorized service, i.e., Tencent Cloud service entity with this role attached.
+         * @type {Array.<string> || null}
+         */
+        this.QCSServiceName = null;
+
+        /**
+         * Custom suffix. A string you provide, which is combined with the service-provided prefix to form the complete role name.
+         * @type {string || null}
+         */
+        this.CustomSuffix = null;
+
+        /**
+         * Role description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QCSServiceName = 'QCSServiceName' in params ? params.QCSServiceName : null;
+        this.CustomSuffix = 'CustomSuffix' in params ? params.CustomSuffix : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * ListAttachedGroupPolicies request structure.
  * @class
  */
@@ -405,6 +441,64 @@ class AttachRolePolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetServiceLinkedRoleDeletionStatus response structure.
+ * @class
+ */
+class GetServiceLinkedRoleDeletionStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status: NOT_STARTED, IN_PROGRESS, SUCCEEDED, FAILED
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Reasons why the deletion failed.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Service type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * Service name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -595,6 +689,34 @@ class ListGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * ListPolicyVersions request structure.
+ * @class
+ */
+class ListPolicyVersionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+    }
+}
+
+/**
  * GetCustomMFATokenInfo request structure.
  * @class
  */
@@ -714,6 +836,51 @@ class DeleteRoleResponse extends  AbstractModel {
 }
 
 /**
+ * Policy version list element structure
+ * @class
+ */
+class PolicyVersionItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy version ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * Policy version creation time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateDate = null;
+
+        /**
+         * Whether it is the operative version. 0: no, 1: yes
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsDefaultVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
+        this.IsDefaultVersion = 'IsDefaultVersion' in params ? params.IsDefaultVersion : null;
+
+    }
+}
+
+/**
  * ListSAMLProviders request structure.
  * @class
  */
@@ -772,6 +939,34 @@ class ListGroupsRequest extends  AbstractModel {
         this.Page = 'Page' in params ? params.Page : null;
         this.Rp = 'Rp' in params ? params.Rp : null;
         this.Keyword = 'Keyword' in params ? params.Keyword : null;
+
+    }
+}
+
+/**
+ * DeletePolicyVersion response structure.
+ * @class
+ */
+class DeletePolicyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -989,6 +1184,42 @@ class RemoveUserFromGroupRequest extends  AbstractModel {
 }
 
 /**
+ * CreatePolicyVersion response structure.
+ * @class
+ */
+class CreatePolicyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy version ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListPolicies response structure.
  * @class
  */
@@ -1133,6 +1364,41 @@ class UpdateRoleDescriptionRequest extends  AbstractModel {
 }
 
 /**
+ * SetDefaultPolicyVersion request structure.
+ * @class
+ */
+class SetDefaultPolicyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Policy version ID
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
  * Role details
  * @class
  */
@@ -1227,6 +1493,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreatePolicyVersion request structure.
+ * @class
+ */
+class CreatePolicyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * The policy document to use as the content for the new version
+         * @type {string || null}
+         */
+        this.PolicyDocument = null;
+
+        /**
+         * Specifies whether to set this version as the default version
+         * @type {boolean || null}
+         */
+        this.SetAsDefault = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.SetAsDefault = 'SetAsDefault' in params ? params.SetAsDefault : null;
+
+    }
+}
+
+/**
  * DeleteGroup request structure.
  * @class
  */
@@ -1255,24 +1563,60 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
- * ListAttachedRolePolicies response structure.
+ * GetUser response structure.
  * @class
  */
-class ListAttachedRolePoliciesResponse extends  AbstractModel {
+class GetUserResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of policies associated with the role
-         * @type {Array.<AttachedPolicyOfRole> || null}
-         */
-        this.List = null;
-
-        /**
-         * Total number of policies associated with the role
+         * Sub-user UIN
          * @type {number || null}
          */
-        this.TotalNum = null;
+        this.Uin = null;
+
+        /**
+         * Sub-user username
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Sub-user UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * Sub-user remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * If sub-user can log in to the Console
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * Mobile number
+         * @type {string || null}
+         */
+        this.PhoneNum = null;
+
+        /**
+         * Country/Area code
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * Email
+         * @type {string || null}
+         */
+        this.Email = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1289,16 +1633,14 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new AttachedPolicyOfRole();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.Email = 'Email' in params ? params.Email : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1907,6 +2249,48 @@ class GetUserRequest extends  AbstractModel {
 }
 
 /**
+ * Login and sensitive operation flag
+ * @class
+ */
+class LoginActionMfaFlag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Mobile phone
+         * @type {number || null}
+         */
+        this.Phone = null;
+
+        /**
+         * Soft token
+         * @type {number || null}
+         */
+        this.Stoken = null;
+
+        /**
+         * WeChat
+         * @type {number || null}
+         */
+        this.Wechat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.Stoken = 'Stoken' in params ? params.Stoken : null;
+        this.Wechat = 'Wechat' in params ? params.Wechat : null;
+
+    }
+}
+
+/**
  * Sub-user information
  * @class
  */
@@ -2474,6 +2858,41 @@ class ListAttachedGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * GetPolicyVersion request structure.
+ * @class
+ */
+class GetPolicyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Policy version ID
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
  * DeletePolicy response structure.
  * @class
  */
@@ -2692,12 +3111,18 @@ class UpdateUserResponse extends  AbstractModel {
 }
 
 /**
- * AddUserToGroup response structure.
+ * CreateServiceLinkedRole response structure.
  * @class
  */
-class AddUserToGroupResponse extends  AbstractModel {
+class CreateServiceLinkedRoleResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Role ID
+         * @type {string || null}
+         */
+        this.RoleId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2714,7 +3139,29 @@ class AddUserToGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListUsers request structure.
+ * @class
+ */
+class ListUsersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -2763,6 +3210,13 @@ class UpdatePolicyResponse extends  AbstractModel {
         super();
 
         /**
+         * Policy ID
+Note: This field may return null, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2777,6 +3231,7 @@ class UpdatePolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2944,6 +3399,34 @@ class ListPoliciesRequest extends  AbstractModel {
 }
 
 /**
+ * GetServiceLinkedRoleDeletionStatus request structure.
+ * @class
+ */
+class GetServiceLinkedRoleDeletionStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deletion task ID
+         * @type {string || null}
+         */
+        this.DeletionTaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
+
+    }
+}
+
+/**
  * DetachGroupPolicy response structure.
  * @class
  */
@@ -3014,6 +3497,41 @@ class CreatePolicyRequest extends  AbstractModel {
 }
 
 /**
+ * DeletePolicyVersion request structure.
+ * @class
+ */
+class DeletePolicyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Policy version ID
+         * @type {Array.<number> || null}
+         */
+        this.VersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
  * UpdateGroup request structure.
  * @class
  */
@@ -3056,24 +3574,25 @@ class UpdateGroupRequest extends  AbstractModel {
 }
 
 /**
- * AttachGroupPolicy request structure.
+ * GetPolicyVersion response structure.
  * @class
  */
-class AttachGroupPolicyRequest extends  AbstractModel {
+class GetPolicyVersionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID
-         * @type {number || null}
+         * Policy version details
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {PolicyVersionDetail || null}
          */
-        this.PolicyId = null;
+        this.PolicyVersion = null;
 
         /**
-         * User Group ID
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.AttachGroupId = null;
+        this.RequestId = null;
 
     }
 
@@ -3084,8 +3603,13 @@ class AttachGroupPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
+
+        if (params.PolicyVersion) {
+            let obj = new PolicyVersionDetail();
+            obj.deserialize(params.PolicyVersion)
+            this.PolicyVersion = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3184,6 +3708,50 @@ class GetSAMLProviderResponse extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.SAMLMetadata = 'SAMLMetadata' in params ? params.SAMLMetadata : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListPolicyVersions response structure.
+ * @class
+ */
+class ListPolicyVersionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy version list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PolicyVersionItem> || null}
+         */
+        this.Versions = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Versions) {
+            this.Versions = new Array();
+            for (let z in params.Versions) {
+                let obj = new PolicyVersionItem();
+                obj.deserialize(params.Versions[z]);
+                this.Versions.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3441,6 +4009,34 @@ class ListSAMLProvidersResponse extends  AbstractModel {
 }
 
 /**
+ * SetDefaultPolicyVersion response structure.
+ * @class
+ */
+class SetDefaultPolicyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListAttachedRolePolicies request structure.
  * @class
  */
@@ -3649,6 +4245,41 @@ class CreateRoleRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteServiceLinkedRole response structure.
+ * @class
+ */
+class DeleteServiceLinkedRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deletion task identifier, which can be used to check the status of a service-linked role deletion.
+         * @type {string || null}
+         */
+        this.DeletionTaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetPolicy response structure.
  * @class
  */
@@ -3769,6 +4400,69 @@ class DeleteGroupResponse extends  AbstractModel {
 }
 
 /**
+ * AttachGroupPolicy request structure.
+ * @class
+ */
+class AttachGroupPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * User Group ID
+         * @type {number || null}
+         */
+        this.AttachGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
+
+    }
+}
+
+/**
+ * DeleteServiceLinkedRole request structure.
+ * @class
+ */
+class DeleteServiceLinkedRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the service-linked role to be deleted.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
  * The entity associated with the policy
  * @class
  */
@@ -3865,6 +4559,59 @@ class ListUsersForGroupResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Policy version details
+ * @class
+ */
+class PolicyVersionDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy version ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * Policy version creation time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateDate = null;
+
+        /**
+         * Whether it is the operative version. 0: no, 1: yes
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsDefaultVersion = null;
+
+        /**
+         * Policy syntax text
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Document = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
+        this.IsDefaultVersion = 'IsDefaultVersion' in params ? params.IsDefaultVersion : null;
+        this.Document = 'Document' in params ? params.Document : null;
 
     }
 }
@@ -3992,12 +4739,18 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * ListUsers request structure.
+ * AddUserToGroup response structure.
  * @class
  */
-class ListUsersRequest extends  AbstractModel {
+class AddUserToGroupResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4008,6 +4761,7 @@ class ListUsersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4036,6 +4790,58 @@ class AttachUserPolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetMfaFlag request structure.
+ * @class
+ */
+class SetMfaFlagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sets user UIN
+         * @type {number || null}
+         */
+        this.OpUin = null;
+
+        /**
+         * Sets login protection
+         * @type {LoginActionMfaFlag || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * Sets operation protection
+         * @type {LoginActionMfaFlag || null}
+         */
+        this.ActionFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OpUin = 'OpUin' in params ? params.OpUin : null;
+
+        if (params.LoginFlag) {
+            let obj = new LoginActionMfaFlag();
+            obj.deserialize(params.LoginFlag)
+            this.LoginFlag = obj;
+        }
+
+        if (params.ActionFlag) {
+            let obj = new LoginActionMfaFlag();
+            obj.deserialize(params.ActionFlag)
+            this.ActionFlag = obj;
+        }
 
     }
 }
@@ -4147,7 +4953,7 @@ class UpdatePolicyRequest extends  AbstractModel {
         this.PolicyId = null;
 
         /**
-         * Policy name
+         * Policy Name
          * @type {string || null}
          */
         this.PolicyName = null;
@@ -4159,10 +4965,16 @@ class UpdatePolicyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
+         * Policy documentation, for example: `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the service that is authorized to use the role. For more information about this parameter, see **RoleInfo** under **Output Parameters** in the [GetRole](https://cloud.tencent.com/document/product/598/36221).
          * @type {string || null}
          */
         this.PolicyDocument = null;
+
+        /**
+         * Preset policy remark
+         * @type {string || null}
+         */
+        this.Alias = null;
 
     }
 
@@ -4177,6 +4989,7 @@ class UpdatePolicyRequest extends  AbstractModel {
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
@@ -4315,37 +5128,46 @@ class CreateGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
-    GetUserResponse: GetUserResponse,
+    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
     DetachGroupPolicyRequest: DetachGroupPolicyRequest,
     DescribeRoleListResponse: DescribeRoleListResponse,
     CreatePolicyResponse: CreatePolicyResponse,
     GetRoleRequest: GetRoleRequest,
+    CreateServiceLinkedRoleRequest: CreateServiceLinkedRoleRequest,
     ListAttachedGroupPoliciesRequest: ListAttachedGroupPoliciesRequest,
     ListGroupsForUserRequest: ListGroupsForUserRequest,
     AttachRolePolicyResponse: AttachRolePolicyResponse,
+    GetServiceLinkedRoleDeletionStatusResponse: GetServiceLinkedRoleDeletionStatusResponse,
     AttachGroupPolicyResponse: AttachGroupPolicyResponse,
     ListUsersResponse: ListUsersResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
     ListGroupsResponse: ListGroupsResponse,
+    ListPolicyVersionsRequest: ListPolicyVersionsRequest,
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
+    PolicyVersionItem: PolicyVersionItem,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
     ListGroupsRequest: ListGroupsRequest,
+    DeletePolicyVersionResponse: DeletePolicyVersionResponse,
     UpdateSAMLProviderRequest: UpdateSAMLProviderRequest,
     UpdateAssumeRolePolicyRequest: UpdateAssumeRolePolicyRequest,
     ListGroupsForUserResponse: ListGroupsForUserResponse,
     ListUsersForGroupRequest: ListUsersForGroupRequest,
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
+    CreatePolicyVersionResponse: CreatePolicyVersionResponse,
     ListPoliciesResponse: ListPoliciesResponse,
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
+    SetDefaultPolicyVersionRequest: SetDefaultPolicyVersionRequest,
     RoleInfo: RoleInfo,
+    CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     DeleteGroupRequest: DeleteGroupRequest,
-    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    GetUserResponse: GetUserResponse,
     DeleteUserResponse: DeleteUserResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
     StrategyInfo: StrategyInfo,
@@ -4359,6 +5181,7 @@ module.exports = {
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
     CreateSAMLProviderResponse: CreateSAMLProviderResponse,
     GetUserRequest: GetUserRequest,
+    LoginActionMfaFlag: LoginActionMfaFlag,
     SubAccountInfo: SubAccountInfo,
     SAMLProviderInfo: SAMLProviderInfo,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
@@ -4370,44 +5193,55 @@ module.exports = {
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
     ListAttachedGroupPoliciesResponse: ListAttachedGroupPoliciesResponse,
+    GetPolicyVersionRequest: GetPolicyVersionRequest,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
     GetGroupResponse: GetGroupResponse,
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
-    AddUserToGroupResponse: AddUserToGroupResponse,
+    CreateServiceLinkedRoleResponse: CreateServiceLinkedRoleResponse,
+    ListUsersRequest: ListUsersRequest,
     ListCollaboratorsRequest: ListCollaboratorsRequest,
     UpdatePolicyResponse: UpdatePolicyResponse,
     CreateGroupRequest: CreateGroupRequest,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
     ListPoliciesRequest: ListPoliciesRequest,
+    GetServiceLinkedRoleDeletionStatusRequest: GetServiceLinkedRoleDeletionStatusRequest,
     DetachGroupPolicyResponse: DetachGroupPolicyResponse,
     CreatePolicyRequest: CreatePolicyRequest,
+    DeletePolicyVersionRequest: DeletePolicyVersionRequest,
     UpdateGroupRequest: UpdateGroupRequest,
-    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
+    GetPolicyVersionResponse: GetPolicyVersionResponse,
     CreateRoleResponse: CreateRoleResponse,
     GetSAMLProviderResponse: GetSAMLProviderResponse,
+    ListPolicyVersionsResponse: ListPolicyVersionsResponse,
     GetPolicyRequest: GetPolicyRequest,
     AddUserToGroupRequest: AddUserToGroupRequest,
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,
     DetachRolePolicyResponse: DetachRolePolicyResponse,
     AttachedPolicyOfRole: AttachedPolicyOfRole,
     ListSAMLProvidersResponse: ListSAMLProvidersResponse,
+    SetDefaultPolicyVersionResponse: SetDefaultPolicyVersionResponse,
     ListAttachedRolePoliciesRequest: ListAttachedRolePoliciesRequest,
     GetSAMLProviderRequest: GetSAMLProviderRequest,
     DetachUserPolicyResponse: DetachUserPolicyResponse,
     GetRoleResponse: GetRoleResponse,
     CreateRoleRequest: CreateRoleRequest,
+    DeleteServiceLinkedRoleResponse: DeleteServiceLinkedRoleResponse,
     GetPolicyResponse: GetPolicyResponse,
     DeleteGroupResponse: DeleteGroupResponse,
+    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
+    DeleteServiceLinkedRoleRequest: DeleteServiceLinkedRoleRequest,
     AttachEntityOfPolicy: AttachEntityOfPolicy,
     ListUsersForGroupResponse: ListUsersForGroupResponse,
+    PolicyVersionDetail: PolicyVersionDetail,
     AddUserResponse: AddUserResponse,
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
-    ListUsersRequest: ListUsersRequest,
+    AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     UpdatePolicyRequest: UpdatePolicyRequest,

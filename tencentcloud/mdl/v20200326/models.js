@@ -17,6 +17,57 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Input statistics.
+ * @class
+ */
+class InputStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input statistics of pipeline 0.
+         * @type {Array.<PipelineInputStatistics> || null}
+         */
+        this.Pipeline0 = null;
+
+        /**
+         * Input statistics of pipeline 1.
+         * @type {Array.<PipelineInputStatistics> || null}
+         */
+        this.Pipeline1 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Pipeline0) {
+            this.Pipeline0 = new Array();
+            for (let z in params.Pipeline0) {
+                let obj = new PipelineInputStatistics();
+                obj.deserialize(params.Pipeline0[z]);
+                this.Pipeline0.push(obj);
+            }
+        }
+
+        if (params.Pipeline1) {
+            this.Pipeline1 = new Array();
+            for (let z in params.Pipeline1) {
+                let obj = new PipelineInputStatistics();
+                obj.deserialize(params.Pipeline1[z]);
+                this.Pipeline1.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyMediaLiveInput request structure.
  * @class
  */
@@ -91,6 +142,42 @@ For more information on the custom creation method, please visit https://cloud.t
         }
         this.State = 'State' in params ? params.State : null;
         this.ContentId = 'ContentId' in params ? params.ContentId : null;
+
+    }
+}
+
+/**
+ * Channel output statistics.
+ * @class
+ */
+class PipelineOutputStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Timestamp.
+In seconds, indicating data time.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Output bandwidth in bps.
+         * @type {number || null}
+         */
+        this.NetworkOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.NetworkOut = 'NetworkOut' in params ? params.NetworkOut : null;
 
     }
 }
@@ -246,24 +333,30 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeMediaLiveChannel response structure.
+ * DASH configuration information.
  * @class
  */
-class DescribeMediaLiveChannelResponse extends  AbstractModel {
+class DashRemuxSettingsInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel information.
-         * @type {ChannelInfo || null}
+         * Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
+         * @type {number || null}
          */
-        this.Info = null;
+        this.SegmentDuration = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Number of segments. Value range: [1,30]. Default value: 5.
+         * @type {number || null}
+         */
+        this.SegmentNumber = null;
+
+        /**
+         * Whether to enable multi-period. Valid values: CLOSE/OPEN. Default value: CLOSE.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PeriodTriggers = null;
 
     }
 
@@ -274,13 +367,9 @@ class DescribeMediaLiveChannelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Info) {
-            let obj = new ChannelInfo();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
+        this.SegmentNumber = 'SegmentNumber' in params ? params.SegmentNumber : null;
+        this.PeriodTriggers = 'PeriodTriggers' in params ? params.PeriodTriggers : null;
 
     }
 }
@@ -419,6 +508,34 @@ class DeleteMediaLiveInputSecurityGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteMediaLiveInput request structure.
+ * @class
+ */
+class DeleteMediaLiveInputRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media input ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * ModifyMediaLiveInputSecurityGroup request structure.
  * @class
  */
@@ -456,6 +573,58 @@ class ModifyMediaLiveInputSecurityGroupRequest extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Whitelist = 'Whitelist' in params ? params.Whitelist : null;
+
+    }
+}
+
+/**
+ * Channel output statistics.
+ * @class
+ */
+class OutputsStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Output information of pipeline 0.
+         * @type {Array.<PipelineOutputStatistics> || null}
+         */
+        this.Pipeline0 = null;
+
+        /**
+         * Output information of pipeline 1.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PipelineOutputStatistics> || null}
+         */
+        this.Pipeline1 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Pipeline0) {
+            this.Pipeline0 = new Array();
+            for (let z in params.Pipeline0) {
+                let obj = new PipelineOutputStatistics();
+                obj.deserialize(params.Pipeline0[z]);
+                this.Pipeline0.push(obj);
+            }
+        }
+
+        if (params.Pipeline1) {
+            this.Pipeline1 = new Array();
+            for (let z in params.Pipeline1) {
+                let obj = new PipelineOutputStatistics();
+                obj.deserialize(params.Pipeline1[z]);
+                this.Pipeline1.push(obj);
+            }
+        }
 
     }
 }
@@ -512,6 +681,49 @@ class ModifyMediaLiveInputResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Pipeline input video statistics.
+ * @class
+ */
+class VideoPipelineInputStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video FPS.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * Video bitrate in bps.
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * Video `Pid`, which is available only if the input is `rtp/udp`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
 
     }
 }
@@ -625,6 +837,105 @@ class DescribeMediaLiveInputsRequest extends  AbstractModel {
 }
 
 /**
+ * Pipeline input statistics.
+ * @class
+ */
+class PipelineInputStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data timestamp in seconds.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Input bandwidth in bps.
+         * @type {number || null}
+         */
+        this.NetworkIn = null;
+
+        /**
+         * Video information array.
+For `rtp/udp` input, the quantity is the number of `Pid` of the input video.
+For other inputs, the quantity is 1.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<VideoPipelineInputStatistics> || null}
+         */
+        this.Video = null;
+
+        /**
+         * Audio information array.
+For `rtp/udp` input, the quantity is the number of `Pid` of the input audio.
+For other inputs, the quantity is 1.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AudioPipelineInputStatistics> || null}
+         */
+        this.Audio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.NetworkIn = 'NetworkIn' in params ? params.NetworkIn : null;
+
+        if (params.Video) {
+            this.Video = new Array();
+            for (let z in params.Video) {
+                let obj = new VideoPipelineInputStatistics();
+                obj.deserialize(params.Video[z]);
+                this.Video.push(obj);
+            }
+        }
+
+        if (params.Audio) {
+            this.Audio = new Array();
+            for (let z in params.Audio) {
+                let obj = new AudioPipelineInputStatistics();
+                obj.deserialize(params.Audio[z]);
+                this.Audio.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeMediaLiveInput request structure.
+ * @class
+ */
+class DescribeMediaLiveInputRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media input ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * Audio `Pid` selection.
  * @class
  */
@@ -709,18 +1020,31 @@ class StartMediaLiveChannelResponse extends  AbstractModel {
 }
 
 /**
- * DeleteMediaLiveInput request structure.
+ * Pipeline input audio statistics.
  * @class
  */
-class DeleteMediaLiveInputRequest extends  AbstractModel {
+class AudioPipelineInputStatistics extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Media input ID.
-         * @type {string || null}
+         * Audio FPS.
+         * @type {number || null}
          */
-        this.Id = null;
+        this.Fps = null;
+
+        /**
+         * Audio bitrate in bps.
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * Audio `Pid`, which is available only if the input is `rtp/udp`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Pid = null;
 
     }
 
@@ -731,7 +1055,9 @@ class DeleteMediaLiveInputRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
 
     }
 }
@@ -974,30 +1300,24 @@ class DescribeMediaLiveInputSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * DASH configuration information.
+ * DescribeMediaLiveChannel response structure.
  * @class
  */
-class DashRemuxSettingsInfo extends  AbstractModel {
+class DescribeMediaLiveChannelResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
-         * @type {number || null}
+         * Channel information.
+         * @type {ChannelInfo || null}
          */
-        this.SegmentDuration = null;
+        this.Info = null;
 
         /**
-         * Number of segments. Value range: [1,30]. Default value: 5.
-         * @type {number || null}
-         */
-        this.SegmentNumber = null;
-
-        /**
-         * Whether to enable multi-period. Valid values: CLOSE/OPEN. Default value: CLOSE.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PeriodTriggers = null;
+        this.RequestId = null;
 
     }
 
@@ -1008,26 +1328,36 @@ class DashRemuxSettingsInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
-        this.SegmentNumber = 'SegmentNumber' in params ? params.SegmentNumber : null;
-        this.PeriodTriggers = 'PeriodTriggers' in params ? params.PeriodTriggers : null;
+
+        if (params.Info) {
+            let obj = new ChannelInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeMediaLiveInput request structure.
+ * Channel alarm information.
  * @class
  */
-class DescribeMediaLiveInputRequest extends  AbstractModel {
+class ChannelAlertInfos extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Media input ID.
-         * @type {string || null}
+         * Alarm details of pipeline 0 under this channel.
+         * @type {Array.<ChannelPipelineAlerts> || null}
          */
-        this.Id = null;
+        this.Pipeline0 = null;
+
+        /**
+         * Alarm details of pipeline 1 under this channel.
+         * @type {Array.<ChannelPipelineAlerts> || null}
+         */
+        this.Pipeline1 = null;
 
     }
 
@@ -1038,7 +1368,24 @@ class DescribeMediaLiveInputRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Pipeline0) {
+            this.Pipeline0 = new Array();
+            for (let z in params.Pipeline0) {
+                let obj = new ChannelPipelineAlerts();
+                obj.deserialize(params.Pipeline0[z]);
+                this.Pipeline0.push(obj);
+            }
+        }
+
+        if (params.Pipeline1) {
+            this.Pipeline1 = new Array();
+            for (let z in params.Pipeline1) {
+                let obj = new ChannelPipelineAlerts();
+                obj.deserialize(params.Pipeline1[z]);
+                this.Pipeline1.push(obj);
+            }
+        }
 
     }
 }
@@ -1176,18 +1523,38 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyMediaLiveInputSecurityGroup response structure.
+ * Channel alarm details.
  * @class
  */
-class ModifyMediaLiveInputSecurityGroupResponse extends  AbstractModel {
+class ChannelPipelineAlerts extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Alarm start time in UTC time.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SetTime = null;
+
+        /**
+         * Alarm end time in UTC time.
+This time is available only after the alarm ends.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClearTime = null;
+
+        /**
+         * Alarm type.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Alarm details.
+         * @type {string || null}
+         */
+        this.Message = null;
 
     }
 
@@ -1198,7 +1565,10 @@ class ModifyMediaLiveInputSecurityGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SetTime = 'SetTime' in params ? params.SetTime : null;
+        this.ClearTime = 'ClearTime' in params ? params.ClearTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -1513,6 +1883,50 @@ class DescribeMediaLiveInputResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeMediaLiveChannelInputStatistics request structure.
+ * @class
+ */
+class DescribeMediaLiveChannelInputStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * Statistics start time, which is one hour ago by default. Maximum value: the last 7 days.
+UTC time, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Statistics end time, which is one hour after `StartTime` by default.
+UTC time, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * Input settings information.
  * @class
  */
@@ -1623,6 +2037,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeMediaLiveChannelAlerts request structure.
+ * @class
+ */
+class DescribeMediaLiveChannelAlertsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+
+    }
+}
+
+/**
  * CreateMediaLiveInputSecurityGroup response structure.
  * @class
  */
@@ -1702,6 +2144,49 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeMediaLiveChannelOutputStatistics response structure.
+ * @class
+ */
+class DescribeMediaLiveChannelOutputStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel output information.
+         * @type {Array.<ChannelOutputsStatistics> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new ChannelOutputsStatistics();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMediaLiveInputSecurityGroup request structure.
  * @class
  */
@@ -1725,6 +2210,46 @@ class DescribeMediaLiveInputSecurityGroupRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * DescribeMediaLiveChannelAlerts response structure.
+ * @class
+ */
+class DescribeMediaLiveChannelAlertsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm information of two pipelines under this channel.
+         * @type {ChannelAlertInfos || null}
+         */
+        this.Infos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            let obj = new ChannelAlertInfos();
+            obj.deserialize(params.Infos)
+            this.Infos = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1769,6 +2294,46 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Channel output statistics.
+ * @class
+ */
+class ChannelInputStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input ID.
+         * @type {string || null}
+         */
+        this.InputId = null;
+
+        /**
+         * Input statistics.
+         * @type {InputStatistics || null}
+         */
+        this.Statistics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputId = 'InputId' in params ? params.InputId : null;
+
+        if (params.Statistics) {
+            let obj = new InputStatistics();
+            obj.deserialize(params.Statistics)
+            this.Statistics = obj;
+        }
 
     }
 }
@@ -1971,6 +2536,93 @@ Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
 }
 
 /**
+ * DescribeMediaLiveChannelOutputStatistics request structure.
+ * @class
+ */
+class DescribeMediaLiveChannelOutputStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * Statistics start time, which is one hour ago by default. Maximum value: the last 7 days.
+UTC time, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Statistics end time, which is one hour after `StartTime` by default.
+UTC time, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * DescribeMediaLiveChannelInputStatistics response structure.
+ * @class
+ */
+class DescribeMediaLiveChannelInputStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel input statistics array.
+         * @type {Array.<ChannelInputStatistics> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new ChannelInputStatistics();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Audio selector.
  * @class
  */
@@ -2034,6 +2686,74 @@ class StopMediaLiveChannelRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * ModifyMediaLiveInputSecurityGroup response structure.
+ * @class
+ */
+class ModifyMediaLiveInputSecurityGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Channel output information.
+ * @class
+ */
+class ChannelOutputsStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Output group name.
+         * @type {string || null}
+         */
+        this.OutputGroupName = null;
+
+        /**
+         * Output group statistics.
+         * @type {OutputsStatistics || null}
+         */
+        this.Statistics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OutputGroupName = 'OutputGroupName' in params ? params.OutputGroupName : null;
+
+        if (params.Statistics) {
+            let obj = new OutputsStatistics();
+            obj.deserialize(params.Statistics)
+            this.Statistics = obj;
+        }
 
     }
 }
@@ -2155,34 +2875,41 @@ class DescribeMediaLiveChannelsRequest extends  AbstractModel {
 }
 
 module.exports = {
+    InputStatistics: InputStatistics,
     ModifyMediaLiveInputRequest: ModifyMediaLiveInputRequest,
     DrmSettingsInfo: DrmSettingsInfo,
+    PipelineOutputStatistics: PipelineOutputStatistics,
     AttachedInputInfo: AttachedInputInfo,
     OutputGroupsInfo: OutputGroupsInfo,
-    DescribeMediaLiveChannelResponse: DescribeMediaLiveChannelResponse,
+    DashRemuxSettingsInfo: DashRemuxSettingsInfo,
     StartMediaLiveChannelRequest: StartMediaLiveChannelRequest,
     VideoTemplateInfo: VideoTemplateInfo,
     DeleteMediaLiveInputSecurityGroupResponse: DeleteMediaLiveInputSecurityGroupResponse,
+    DeleteMediaLiveInputRequest: DeleteMediaLiveInputRequest,
     ModifyMediaLiveInputSecurityGroupRequest: ModifyMediaLiveInputSecurityGroupRequest,
+    OutputsStatistics: OutputsStatistics,
     DeleteMediaLiveInputResponse: DeleteMediaLiveInputResponse,
     ModifyMediaLiveInputResponse: ModifyMediaLiveInputResponse,
+    VideoPipelineInputStatistics: VideoPipelineInputStatistics,
     CreateMediaLiveInputRequest: CreateMediaLiveInputRequest,
     Scte35SettingsInfo: Scte35SettingsInfo,
     DescribeMediaLiveInputsRequest: DescribeMediaLiveInputsRequest,
+    PipelineInputStatistics: PipelineInputStatistics,
+    DescribeMediaLiveInputRequest: DescribeMediaLiveInputRequest,
     AudioPidSelectionInfo: AudioPidSelectionInfo,
     DescribeMediaLiveChannelRequest: DescribeMediaLiveChannelRequest,
     StartMediaLiveChannelResponse: StartMediaLiveChannelResponse,
-    DeleteMediaLiveInputRequest: DeleteMediaLiveInputRequest,
+    AudioPipelineInputStatistics: AudioPipelineInputStatistics,
     DescribeMediaLiveInputSecurityGroupsResponse: DescribeMediaLiveInputSecurityGroupsResponse,
     InputSecurityGroupInfo: InputSecurityGroupInfo,
     StopMediaLiveChannelResponse: StopMediaLiveChannelResponse,
     CreateMediaLiveChannelRequest: CreateMediaLiveChannelRequest,
     DescribeMediaLiveInputSecurityGroupsRequest: DescribeMediaLiveInputSecurityGroupsRequest,
-    DashRemuxSettingsInfo: DashRemuxSettingsInfo,
-    DescribeMediaLiveInputRequest: DescribeMediaLiveInputRequest,
+    DescribeMediaLiveChannelResponse: DescribeMediaLiveChannelResponse,
+    ChannelAlertInfos: ChannelAlertInfos,
     DeleteMediaLiveChannelResponse: DeleteMediaLiveChannelResponse,
     ChannelInfo: ChannelInfo,
-    ModifyMediaLiveInputSecurityGroupResponse: ModifyMediaLiveInputSecurityGroupResponse,
+    ChannelPipelineAlerts: ChannelPipelineAlerts,
     InputInfo: InputInfo,
     DescribeMediaLiveInputSecurityGroupResponse: DescribeMediaLiveInputSecurityGroupResponse,
     DeleteMediaLiveChannelRequest: DeleteMediaLiveChannelRequest,
@@ -2190,19 +2917,28 @@ module.exports = {
     DestinationInfo: DestinationInfo,
     CreateMediaLiveChannelResponse: CreateMediaLiveChannelResponse,
     DescribeMediaLiveInputResponse: DescribeMediaLiveInputResponse,
+    DescribeMediaLiveChannelInputStatisticsRequest: DescribeMediaLiveChannelInputStatisticsRequest,
     InputSettingInfo: InputSettingInfo,
     OutputInfo: OutputInfo,
+    DescribeMediaLiveChannelAlertsRequest: DescribeMediaLiveChannelAlertsRequest,
     CreateMediaLiveInputSecurityGroupResponse: CreateMediaLiveInputSecurityGroupResponse,
     DescribeMediaLiveInputsResponse: DescribeMediaLiveInputsResponse,
+    DescribeMediaLiveChannelOutputStatisticsResponse: DescribeMediaLiveChannelOutputStatisticsResponse,
     DescribeMediaLiveInputSecurityGroupRequest: DescribeMediaLiveInputSecurityGroupRequest,
+    DescribeMediaLiveChannelAlertsResponse: DescribeMediaLiveChannelAlertsResponse,
     DescribeMediaLiveChannelsResponse: DescribeMediaLiveChannelsResponse,
+    ChannelInputStatistics: ChannelInputStatistics,
     HlsRemuxSettingsInfo: HlsRemuxSettingsInfo,
     ModifyMediaLiveChannelResponse: ModifyMediaLiveChannelResponse,
     CreateMediaLiveInputSecurityGroupRequest: CreateMediaLiveInputSecurityGroupRequest,
     DeleteMediaLiveInputSecurityGroupRequest: DeleteMediaLiveInputSecurityGroupRequest,
     AudioTemplateInfo: AudioTemplateInfo,
+    DescribeMediaLiveChannelOutputStatisticsRequest: DescribeMediaLiveChannelOutputStatisticsRequest,
+    DescribeMediaLiveChannelInputStatisticsResponse: DescribeMediaLiveChannelInputStatisticsResponse,
     AudioSelectorInfo: AudioSelectorInfo,
     StopMediaLiveChannelRequest: StopMediaLiveChannelRequest,
+    ModifyMediaLiveInputSecurityGroupResponse: ModifyMediaLiveInputSecurityGroupResponse,
+    ChannelOutputsStatistics: ChannelOutputsStatistics,
     ModifyMediaLiveChannelRequest: ModifyMediaLiveChannelRequest,
     DescribeMediaLiveChannelsRequest: DescribeMediaLiveChannelsRequest,
 

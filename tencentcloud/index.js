@@ -13,6 +13,7 @@ module.exports = {
     cmq: require("./cmq"),
     common: require("./common"),
     cvm: require("./cvm"),
+    dayu: require("./dayu"),
     dc: require("./dc"),
     dcdb: require("./dcdb"),
     dts: require("./dts"),

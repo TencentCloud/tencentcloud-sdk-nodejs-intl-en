@@ -2934,6 +2934,12 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
         super();
 
         /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2948,6 +2954,7 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

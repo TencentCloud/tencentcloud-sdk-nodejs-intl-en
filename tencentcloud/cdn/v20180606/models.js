@@ -7764,6 +7764,7 @@ class Sort extends  AbstractModel {
          * Fields that can be sorted. Currently supports:
 `createTime`: domain name creation time.
 `certExpireTime`: certificate expiration time.
+Default value: createTime.
          * @type {string || null}
          */
         this.Key = null;

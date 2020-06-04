@@ -702,6 +702,7 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
 
         /**
          * Cluster’s access policy group
+Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.SecurityPolicy = null;
@@ -714,7 +715,8 @@ Note: This field may return null, indicating that no valid value was found.
         this.Kubeconfig = null;
 
         /**
-         * 
+         * Access address of the cluster JnsGw
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.JnsGwEndpoint = null;
@@ -1451,6 +1453,27 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
         super();
 
         /**
+         * IDs of deleted instances
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.SuccInstanceIds = null;
+
+        /**
+         * IDs of instances failed to be deleted
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * IDs of instances that cannot be found
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.NotFoundInstanceIds = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1465,6 +1488,9 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SuccInstanceIds = 'SuccInstanceIds' in params ? params.SuccInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.NotFoundInstanceIds = 'NotFoundInstanceIds' in params ? params.NotFoundInstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1897,18 +1923,21 @@ class InstanceAdvancedSettings extends  AbstractModel {
 
         /**
          * Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.MountTarget = null;
 
         /**
          * Specified value of dockerd --graph. Default value: /var/lib/docker
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.DockerGraphPath = null;
 
         /**
          * Base64-encoded user script, which will be executed after the K8s component starts running. You need to ensure the reentrant and retry logic of the script. The script and its log files can be viewed at the node path: /data/ccs_userscript/. If you want to initialize nodes before adding them to the scheduling list, you can use this parameter together with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to enable the node for scheduling.
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.UserScript = null;
@@ -1920,19 +1949,22 @@ class InstanceAdvancedSettings extends  AbstractModel {
         this.Unschedulable = null;
 
         /**
-         * 
+         * Node label array
+Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<Label> || null}
          */
         this.Labels = null;
 
         /**
-         * 
+         * Data disk information
+Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
          * Information about node custom parameters
+Note: This field may return null, indicating that no valid value was found.
          * @type {InstanceExtraArgs || null}
          */
         this.ExtraArgs = null;
@@ -2403,16 +2435,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CreatedTime = null;
 
         /**
-         * Instance’s billing mode. Value range:
-PREPAID: Prepaid (Monthly Subscription)
-POSTPAID_BY_HOUR: Postpaid (Pay-as-you-go)
-CDHPAID: CDH-paid. Only CDH is charged and instances on the CDH do not incur fees.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
          * Instance’s number of CPU cores. Unit: cores.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
@@ -2440,6 +2462,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.InstanceType = null;
 
+        /**
+         * Auto scaling group ID
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
+        /**
+         * Instance billing method. Valid values: POSTPAID_BY_HOUR (pay-as-you-go hourly); CDHPAID (billed based on CDH, i.e., only CDH is billed but not the instances on CDH)
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
     }
 
     /**
@@ -2457,11 +2493,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
         this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
         this.CPU = 'CPU' in params ? params.CPU : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.OsName = 'OsName' in params ? params.OsName : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
     }
 }
@@ -2886,6 +2923,12 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.IsNonStaticIpMode = null;
 
+        /**
+         * Indicates whether to enable deletion protection
+         * @type {boolean || null}
+         */
+        this.DeletionProtection = null;
+
     }
 
     /**
@@ -2907,6 +2950,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         }
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
+        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
 
     }
 }
@@ -3044,13 +3088,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.LanIP = null;
 
         /**
-         * 
+         * Resource pool ID
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NodePoolId = null;
 
         /**
-         * 
+         * ID of the auto-scaling group
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.AutoscalingGroupId = null;
@@ -3648,31 +3694,36 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Disk type
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
          * File system (ext3/ext4/xfs)
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.FileSystem = null;
 
         /**
-         * 
+         * Disk size (G)
+Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Whether to automatically format and mount the disk
+         * Whether the disk is auto-formatted and mounted
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {boolean || null}
          */
         this.AutoFormatAndMount = null;
 
         /**
-         * 
+         * Mounting directory
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.MountTarget = null;
@@ -3733,18 +3784,21 @@ class AddExistedInstancesResponse extends  AbstractModel {
 
         /**
          * IDs of failed nodes
+Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.FailedInstanceIds = null;
 
         /**
          * IDs of successful nodes
+Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.SuccInstanceIds = null;
 
         /**
          * IDs of (successful or failed) nodes that timed out
+Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.TimeoutInstanceIds = null;

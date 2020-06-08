@@ -1,4 +1,5 @@
 module.exports = {
+    apigateway: require("./apigateway"),
     as: require("./as"),
     batch: require("./batch"),
     billing: require("./billing"),
@@ -36,6 +37,7 @@ module.exports = {
     scf: require("./scf"),
     sms: require("./sms"),
     sqlserver: require("./sqlserver"),
+    ssl: require("./ssl"),
     sts: require("./sts"),
     tag: require("./tag"),
     tcaplusdb: require("./tcaplusdb"),

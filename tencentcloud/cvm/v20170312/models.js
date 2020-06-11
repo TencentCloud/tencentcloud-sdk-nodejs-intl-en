@@ -179,13 +179,13 @@ class ModifyInstancesProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
+         * Instance IDs. To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. You can operate up to 100 instances in each request.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Project ID. You can create a project by calling [AddProject](https://cloud.tencent.com/doc/api/403/4398). When calling [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) to query instances, the project IDs can be used to filter the results.
+         * Project ID. You can create a project by using the [AddProject](https://cloud.tencent.com/doc/api/403/4398) API and obtain its ID from the response parameter `projectId` of the [`DescribeProject`](https://cloud.tencent.com/document/product/378/4400) API. Subsequently, the project ID can be used to filter results when you query instances by calling the [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -305,7 +305,7 @@ class DeleteDisasterRecoverGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * List of spread placement group IDs, which can be obtained by calling the [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810) API.
+         * ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810) API. You can operate up to 100 spread placement groups in each request.
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -333,7 +333,7 @@ class DescribeInstancesOperationLimitRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s). To obtain the instance IDs, you can call [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The instance ID format is `ins-xxxxxxxx`. For more information on the format of this parameter, see the `id.N` section of [API Introduction](https://cloud.tencent.com/document/api/213/15688)). The maximum number of instance IDs in each request is 100.
+         * Query by instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API. For example, instance ID: ins-xxxxxxxx. (For the specific format, refer to section `ids.N` of the API [Introduction](https://cloud.tencent.com/document/api/213/15688).) You can query up to 100 instances in each request.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -583,7 +583,7 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * ID(s) of the instance(s) to be associated，such as `ins-lesecurk`. You can specify multiple instances.
+         * ID of the instance bound in the format of ins-lesecurk. You can specify up to 100 instances in each request.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -612,7 +612,7 @@ class ResetInstancesTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 1.
+         * Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API. The maximum number of instances for each request is 1.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -624,7 +624,7 @@ class ResetInstancesTypeRequest extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * Whether to force shut down a running instances. It is recommended to manually shut down a running instance before resetting the user password. Valid values: <br><li>TRUE: force shut down an instance after a normal shutdown fails. <br><li>FALSE: do not force shut down an instance after a normal shutdown fails. <br><br>Default value: FALSE. <br><br>A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be shut down normally.
+         * Forced shutdown of a running instances. We recommend you firstly try to shut down a running instance manually. Valid values: <br><li>TRUE: forced shutdown of an instance after a normal shutdown fails.<br><li>FALSE: no forced shutdown of an instance after a normal shutdown fails.<br><br>Default value: FALSE.<br><br>A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force a CVM to shut off if the normal shutdown fails.
          * @type {boolean || null}
          */
         this.ForceStop = null;
@@ -786,7 +786,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * Instance name to be displayed. <br><li>If this parameter is not specified, "Unnamed" will be displayed by default. </li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`. </li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and the instance name body is `server_`, the instance names will be `server_1` and `server_2`.
+         * Instance name to be displayed.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and name them as `server_`, the instance names will be displayed as `server_1` and `server_2`.</li><li>The instance name contains up to 60 characters (including pattern strings).
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -1170,14 +1170,14 @@ class ResetInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * [Image](/document/product/213/4940) ID in the format of `img-xxx`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information; for IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://cloud.tencent.com/document/api/213/15715) and look for `ImageId` in the response.</li>
-<br>The current image will be used by default.
+         * Specified effective [image](https://cloud.tencent.com/document/product/213/4940) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways:<br/><li>for IDs of `public images`, `custom images`, and `shared images`, log in to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE); for IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list).</li><li>Call the API [DescribeImages](https://cloud.tencent.com/document/api/213/15715) and look for `ImageId` in the response.</li>
+<br>Default value: current image.
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * Configuration of the system disk of the instance. For instances with a cloud disk as the system disk, you can expand the system disk by using this parameter to specify the new capacity after reinstallation. If the parameter is not specified, the system disk capacity remains unchanged by default. You can only expand the capacity of the system disk; reducing its capacity is not supported. When reinstalling the system, you can only modify the capacity of the system disk, not the type.
+         * System disk configurations in the instance. For instances with a cloud disk as the system disk, you can expand the capacity of the system disk to the specified value after re-installation by using this parameter. If the parameter is not specified, lower system disk capacity will be automatically expanded to the image size, and extra disk costs are generated. You can only expand but cannot reduce the system disk capacity. By re-installing the system, you only modify the system disk capacity, but not the type.
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
@@ -1195,7 +1195,7 @@ class ResetInstanceRequest extends  AbstractModel {
         this.EnhancedService = null;
 
         /**
-         * You can use this parameter to specify a new HostName for the instance when reinstalling the system.
+         * Host name of the CVM, editable during the system reinstallation. <br><li>Periods (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name.<br><li>For Windows instances, the host name must consist of 2-15 characters , including uppercase and lowercase letters, numbers, or hyphens (-). It cannot contain periods (.) or contain only numbers.<br><li>For other instances, such as Linux instances, the host name must consist of 2-60 characters, including multiple periods (.), and allows uppercase and lowercase letters, numbers, or hyphens (-) between any two periods (.).
          * @type {string || null}
          */
         this.HostName = null;
@@ -1331,7 +1331,7 @@ class AllocateHostsRequest extends  AbstractModel {
         this.HostChargePrepaid = null;
 
         /**
-         * The billing method of an instance. Currently only `PREPAID` is supported.
+         * Instance billing model, only monthly or yearly subscription supported. Default value: `PREPAID'.
          * @type {string || null}
          */
         this.HostChargeType = null;
@@ -1343,7 +1343,7 @@ class AllocateHostsRequest extends  AbstractModel {
         this.HostType = null;
 
         /**
-         * The quantity of CDH instances you want to purchase.
+         * Quantity of CDH instances purchased. Default value: 1.
          * @type {number || null}
          */
         this.HostCount = null;
@@ -1488,6 +1488,55 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * PurchaseReservedInstancesOffering request structure.
+ * @class
+ */
+class PurchaseReservedInstancesOfferingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of the Reserved Instance you are purchasing.
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * The ID of the Reserved Instance.
+         * @type {string || null}
+         */
+        this.ReservedInstancesOfferingId = null;
+
+        /**
+         * Dry run
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+    }
+}
+
+/**
  * RebootInstances request structure.
  * @class
  */
@@ -1496,7 +1545,7 @@ class RebootInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
+         * Instance IDs. To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. You can operate up to 100 instances in each request.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1621,7 +1670,7 @@ class DescribeInstancesStatusResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of [instance states](https://cloud.tencent.com/document/api/213/15728).
+         * [Instance status](https://cloud.tencent.com/document/api/213/15728) list.
          * @type {Array.<InstanceStatus> || null}
          */
         this.InstanceStatusSet = null;
@@ -1753,9 +1802,10 @@ class DescribeInstanceTypeConfigsRequest extends  AbstractModel {
         super();
 
         /**
-         * Filters.
-<li> `zone` - String - Optional - Filter results by [availability zone](https://cloud.tencent.com/document/product/213/15753#ZoneInfo).</li>
-<li> `instance-family` - String - Optional - Filter results by instance model family, such as `S1`, `I1`, and `M1`.</li>
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">Filter results by **<strong>availability zones</strong>**. For example, availability zone: ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/6091">list of availability zones</a></p>
+<li><strong>instance-family</strong></li>
+<p style="padding-left: 30px;">Filter results by **<strong>instance models</strong>**. For example, instance models: S1, I1 and M1.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Required: no</p>
 Each request can have up to 10 `Filters` and 1 `Filters.Values`.
          * @type {Array.<Filter> || null}
          */
@@ -1848,15 +1898,15 @@ class ResetInstancesPasswordRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Login password of the instance(s). The password requirements vary among different operating systems:
-For a Linux instance, the password must be 8 to 30 characters in length; password with more than 12 characters is recommended. It cannot begin with "/", and must contain at least one character from three of the following categories: <br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/:
-For a Windows CVM, the password must be 12 to 30 characters in length. It cannot begin with "/" or contain your username. It must contain at least one character from three of the following categories: <br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/:<br><li>If the specified instances include both `Linux` and `Windows` instances, you will need to follow the password requirements for `Windows` instances.
+         * Login password of the instance. The rule of password complexity varies with operating systems:
+For a Linux instance, the password must be 8 to 30 characters in length; password with more than 12 characters is recommended. It cannot begin with "/", and must contain at least three types of the following:<br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/
+For a Windows CVM, the password must be 12 to 30 characters in length. It cannot begin with "/" or contain your username. It must contain at least three types of the following:<br><li>Lowercase letters: [a-z]<br><li>Uppercase letters: [A-Z]<br><li>Numbers: 0-9<br><li>Special characters: ()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<li>If the specified instances include both `Linux` and `Windows` instances, you need to follow the password requirements for `Windows` instances.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Operating system username of the instance for which you want to reset the password. The length of the username cannot exceed 64 characters.
+         * Username of the instance operating system for which the password needs to be reset. This parameter is limited to 64 characters.
          * @type {string || null}
          */
         this.UserName = null;
@@ -2609,7 +2659,7 @@ class DescribeDisasterRecoverGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * List of spread placement group IDs.
+         * ID list of spread placement groups. You can operate up to 100 spread placement groups in each request.
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -3046,7 +3096,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * Instance name to be displayed. <br><li>If this parameter is not specified, "Unnamed" will be displayed by default. </li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`. </li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and the instance name body is `server_`, the instance names will be `server_1` and `server_2`.
+         * Instance name to be displayed.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and name them as `server_`, the instance names will be displayed as `server_1` and `server_2`.</li><li>The instance name contains up to 60 characters (including pattern strings).
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -3181,24 +3231,105 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRunInstances response structure.
+ * Details about an image, including its state and attributes.
  * @class
  */
-class InquiryPriceRunInstancesResponse extends  AbstractModel {
+class Image extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Price of the instance with the specified configurations.
-         * @type {Price || null}
-         */
-        this.Price = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Image ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ImageId = null;
+
+        /**
+         * Operating system of the image
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * Image type
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+        /**
+         * Creation time of the image
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Image name
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * Image description
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * Image size
+         * @type {number || null}
+         */
+        this.ImageSize = null;
+
+        /**
+         * Image architecture
+         * @type {string || null}
+         */
+        this.Architecture = null;
+
+        /**
+         * Image state
+         * @type {string || null}
+         */
+        this.ImageState = null;
+
+        /**
+         * Source platform of the image
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Image creator
+         * @type {string || null}
+         */
+        this.ImageCreator = null;
+
+        /**
+         * Image source
+         * @type {string || null}
+         */
+        this.ImageSource = null;
+
+        /**
+         * Synchronization percentage
+Note: This field may return null, indicating that no valid value is found.
+         * @type {number || null}
+         */
+        this.SyncPercent = null;
+
+        /**
+         * Whether the image supports cloud-init
+Note: This field may return null, indicating that no valid value is found.
+         * @type {boolean || null}
+         */
+        this.IsSupportCloudinit = null;
+
+        /**
+         * Information on the snapshots associated with the image
+Note: This field may return null, indicating that no valid value is found.
+         * @type {Array.<Snapshot> || null}
+         */
+        this.SnapshotSet = null;
 
     }
 
@@ -3209,13 +3340,29 @@ class InquiryPriceRunInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
+        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
+        this.Architecture = 'Architecture' in params ? params.Architecture : null;
+        this.ImageState = 'ImageState' in params ? params.ImageState : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.ImageCreator = 'ImageCreator' in params ? params.ImageCreator : null;
+        this.ImageSource = 'ImageSource' in params ? params.ImageSource : null;
+        this.SyncPercent = 'SyncPercent' in params ? params.SyncPercent : null;
+        this.IsSupportCloudinit = 'IsSupportCloudinit' in params ? params.IsSupportCloudinit : null;
 
-        if (params.Price) {
-            let obj = new Price();
-            obj.deserialize(params.Price)
-            this.Price = obj;
+        if (params.SnapshotSet) {
+            this.SnapshotSet = new Array();
+            for (let z in params.SnapshotSet) {
+                let obj = new Snapshot();
+                obj.deserialize(params.SnapshotSet[z]);
+                this.SnapshotSet.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3871,8 +4018,8 @@ Note: This field may return null, indicating that no valid value is found.
         this.ReleaseAddress = null;
 
         /**
-         * Unsupported network types
-Note: This field may return null, indicating that no valid value is found.
+         * Not supported network. Value: <br><li>BASIC: classic network<br><li>VPC1.0: VPC1.0
+Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.UnsupportNetworks = null;
@@ -3920,7 +4067,7 @@ class CreateImageRequest extends  AbstractModel {
         this.ImageName = null;
 
         /**
-         * The ID of the instance used to create an image
+         * Instance ID used to create an image.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3944,19 +4091,19 @@ class CreateImageRequest extends  AbstractModel {
         this.Sysprep = null;
 
         /**
-         * The ID of the data disk used to create an image
+         * Specified data disk ID included in the full image created from the instance.
          * @type {Array.<string> || null}
          */
         this.DataDiskIds = null;
 
         /**
-         * The ID of the snapshot used to create an image. A system disk snapshot must be included.
+         * Specified snapshot ID used to create an image. A system disk snapshot must be included. It cannot be passed together with `InstanceId`.
          * @type {Array.<string> || null}
          */
         this.SnapshotIds = null;
 
         /**
-         * Verifies the validity of the request without affecting the resources involved.
+         * Success status of this request, without affecting the resources involved
          * @type {boolean || null}
          */
         this.DryRun = null;
@@ -4321,13 +4468,13 @@ class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) and look for `InstanceId` in the response. The maximum number of instances in each request is 1.
+         * Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API. The maximum number of instances in each request is 1.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Instance model. Different resource specifications are specified for different models. For specific values, see the instance resource specification table. You can also obtain the latest specification list by calling the API for querying the list of instance resource specifications.
+         * Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types] (https://cloud.tencent.com/document/product/213/11518) or in the latest specifications via the [DescribeInstanceTypeConfigs] (https://cloud.tencent.com/document/product/213/15749) API.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -4378,6 +4525,93 @@ class DescribeInstanceVncUrlResponse extends  AbstractModel {
         }
         this.InstanceVncUrl = 'InstanceVncUrl' in params ? params.InstanceVncUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReservedInstancesOfferings request structure.
+ * @class
+ */
+class DescribeReservedInstancesOfferingsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dry run. Default value: false.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://cloud.tencent.com/document/api/213/15688).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://cloud.tencent.com/document/api/213/15688).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The maximum duration as a filter, 
+in seconds.
+Default value: 94608000.
+         * @type {number || null}
+         */
+        this.MaxDuration = null;
+
+        /**
+         * The minimum duration as a filter, 
+in seconds.
+Default value: 2592000.
+         * @type {number || null}
+         */
+        this.MinDuration = null;
+
+        /**
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">Filters by the **<strong>availability zones</strong>** in which the Reserved Instances can be purchased, such as ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/6091">Availability Zones</a></p>
+<li><strong>duration</strong></li>
+<p style="padding-left: 30px;">Filters by the **<strong>duration</strong>** of the Reserved Instance, in seconds. For example, 31536000.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years)</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">Filters by **<strong>type of the Reserved Instance</strong>**, such as S3.MEDIUM4..</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/11518">Instance Types</a></p>
+<li><strong>offering-type</strong></li>
+<p style="padding-left: 30px;">Filters by **<strong>payment term</strong>**, such as All Upfront.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: All Upfront</p>
+<li><strong>product-description</strong></li>
+<p style="padding-left: 30px;">Filters by the **<strong>platform description </strong>** (operating system) of the Reserved Instance, such as linux.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
+<li><strong>reserved-instances-offering-id</strong></li>
+<p style="padding-left: 30px;">Filters by **<strong>Reserved Instance ID</strong>, in the form of 650c138f-ae7e-4750-952a-96841d6e9fc1.</p><p style="padding-left: 30px;">Type: StringString</p><p style="padding-left: 30px;">Required: no</p>
+Each request can have up to 10 `Filters` and 5 `Filter.Values`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.MaxDuration = 'MaxDuration' in params ? params.MaxDuration : null;
+        this.MinDuration = 'MinDuration' in params ? params.MinDuration : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5513,8 +5747,8 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.DiscountPrice = null;
 
         /**
-         * Percentage of the original price. For example, if you enter "20", the discounted price will be 20% of the original price.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Discount = null;
@@ -5747,105 +5981,24 @@ Note: This field may return null, indicating that no valid value is found.
 }
 
 /**
- * Details about an image, including its state and attributes.
+ * InquiryPriceRunInstances response structure.
  * @class
  */
-class Image extends  AbstractModel {
+class InquiryPriceRunInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image ID
+         * Price of the instance with the specified configurations.
+         * @type {Price || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ImageId = null;
-
-        /**
-         * Operating system of the image
-         * @type {string || null}
-         */
-        this.OsName = null;
-
-        /**
-         * Image type
-         * @type {string || null}
-         */
-        this.ImageType = null;
-
-        /**
-         * Creation time of the image
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * Image name
-         * @type {string || null}
-         */
-        this.ImageName = null;
-
-        /**
-         * Image description
-         * @type {string || null}
-         */
-        this.ImageDescription = null;
-
-        /**
-         * Image size
-         * @type {number || null}
-         */
-        this.ImageSize = null;
-
-        /**
-         * Image architecture
-         * @type {string || null}
-         */
-        this.Architecture = null;
-
-        /**
-         * Image state
-         * @type {string || null}
-         */
-        this.ImageState = null;
-
-        /**
-         * Source platform of the image
-         * @type {string || null}
-         */
-        this.Platform = null;
-
-        /**
-         * Image creator
-         * @type {string || null}
-         */
-        this.ImageCreator = null;
-
-        /**
-         * Image source
-         * @type {string || null}
-         */
-        this.ImageSource = null;
-
-        /**
-         * Synchronization percentage
-Note: This field may return null, indicating that no valid value is found.
-         * @type {number || null}
-         */
-        this.SyncPercent = null;
-
-        /**
-         * Whether the image supports cloud-init
-Note: This field may return null, indicating that no valid value is found.
-         * @type {boolean || null}
-         */
-        this.IsSupportCloudinit = null;
-
-        /**
-         * Information on the snapshots associated with the image
-Note: This field may return null, indicating that no valid value is found.
-         * @type {Array.<Snapshot> || null}
-         */
-        this.SnapshotSet = null;
+        this.RequestId = null;
 
     }
 
@@ -5856,29 +6009,13 @@ Note: This field may return null, indicating that no valid value is found.
         if (!params) {
             return;
         }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.OsName = 'OsName' in params ? params.OsName : null;
-        this.ImageType = 'ImageType' in params ? params.ImageType : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.ImageName = 'ImageName' in params ? params.ImageName : null;
-        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
-        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
-        this.Architecture = 'Architecture' in params ? params.Architecture : null;
-        this.ImageState = 'ImageState' in params ? params.ImageState : null;
-        this.Platform = 'Platform' in params ? params.Platform : null;
-        this.ImageCreator = 'ImageCreator' in params ? params.ImageCreator : null;
-        this.ImageSource = 'ImageSource' in params ? params.ImageSource : null;
-        this.SyncPercent = 'SyncPercent' in params ? params.SyncPercent : null;
-        this.IsSupportCloudinit = 'IsSupportCloudinit' in params ? params.IsSupportCloudinit : null;
 
-        if (params.SnapshotSet) {
-            this.SnapshotSet = new Array();
-            for (let z in params.SnapshotSet) {
-                let obj = new Snapshot();
-                obj.deserialize(params.SnapshotSet[z]);
-                this.SnapshotSet.push(obj);
-            }
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5892,12 +6029,17 @@ class DescribeHostsRequest extends  AbstractModel {
         super();
 
         /**
-         * Filters.
-<li> `zone` - String - Optional - Filter results by availability zone.</li>
-<li> `project-id` - Integer - Optional - Filter results by project ID. You can call `DescribeProject` or log in to the console to view the list of existing projects. You can also create a new project by calling `AddProject`.</li>
-<li> `host-id` - String - Optional - Filter results by CDH ID. CDH IDs are in the format of `host-11112222`.</li>
-<li> `host-name` - String - Optional - Filter results by CDH instance name.</li>
-<li> `host-state` - String - Optional - Filter results by CDH instance state. (PENDING: creating | LAUNCH_FAILURE: creation failed | RUNNING: running | EXPIRED: expired)</li>
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">Filter results by **<strong>availability zones</strong>**. For example, availability zone: ap-guangzhou-1;</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://cloud.tencent.com/document/product/213/6091">list of availability zones</a></p>
+<li><strong>project-id</strong></li>
+<p style="padding-left: 30px;">Filter results by **<strong>project ID</strong>**. You can query the existing project list through the [DescribeProject](https://cloud.tencent.com/document/api/378/4400) API or [CVM console](https://console.cloud.tencent.com/cvm/index), or create a project by calling the [AddProject](https://cloud.tencent.com/document/api/378/4398) API. For example, project ID: 1002189;</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Required: no</p>
+<li><strong>host-id</strong></li>
+<p style="padding-left: 30px;">Filter results by **<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>**. For example, [CDH](https://cloud.tencent.com/document/product/416) ID: host-xxxxxxxx;</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+<li><strong>state</strong></li>
+<p style="padding-left: 30px;">Filter results by **<strong>CDH instance name</strong>**. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+<li><strong>state</strong></li>
+<p style="padding-left: 30px;">Filter results by **<strong>CDH instance status </strong>**. (PENDING: creating | LAUNCH_FAILURE: creation failed | RUNNING: running | EXPIRED: expired)</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+Each request can have up to 10 `Filters` and 5 `Filters.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5947,7 +6089,7 @@ class DescribeInstancesStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s) in the format of `ins-xxxxxxxx`. For more information on the format of this parameter, see the `id.N` section of [API Introduction](https://cloud.tencent.com/document/api/213/15688). The maximum number of instances in each request is 100.
+         * Query by instance ID(s). For example, instance ID: `ins-xxxxxxxx`. For the specific format, refer to section `Ids.N` of the API [Introduction](https://cloud.tencent.com/document/api/213/15688). You can query up to 100 instances in each request.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -6426,7 +6568,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s) in the format of `ins-xxxxxxxx`. For more information on the format of this parameter, see the `id.N` section of [API Introduction](https://cloud.tencent.com/document/api/213/15688). The maximum number of instances in each request is 100. You cannot specify `InstanceIds` and `Filters` at the same time.
+         * Query by instance ID(s). For example, instance ID: `ins-xxxxxxxx`. For the specific format, refer to section `Ids.N` of the API [Introduction](https://cloud.tencent.com/document/api/213/15688). You can query up to 100 instances in each request. However, `InstanceIds` and `Filters` cannot be specified at the same time.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -6803,6 +6945,12 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
          */
         this.RenewFlag = null;
 
+        /**
+         * Project ID. You can create a project by using the [AddProject](https://cloud.tencent.com/doc/api/403/4398) API and obtain its ID from the response parameter `projectId` of the [`DescribeProject`](https://cloud.tencent.com/document/product/378/4400) API. Subsequently, the project ID can be used to filter results when you query instances by calling the [DescribeHosts](https://cloud.tencent.com/document/api/213/16474) API.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
     }
 
     /**
@@ -6815,6 +6963,7 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
         this.HostIds = 'HostIds' in params ? params.HostIds : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -6892,6 +7041,56 @@ class KeyPair extends  AbstractModel {
         this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
         this.AssociatedInstanceIds = 'AssociatedInstanceIds' in params ? params.AssociatedInstanceIds : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+    }
+}
+
+/**
+ * DescribeReservedInstancesOfferings response structure.
+ * @class
+ */
+class DescribeReservedInstancesOfferingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of Reserved Instances that meet the condition.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The list of Reserved Instances that meet the condition.
+         * @type {Array.<ReservedInstancesOffering> || null}
+         */
+        this.ReservedInstancesOfferingsSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReservedInstancesOfferingsSet) {
+            this.ReservedInstancesOfferingsSet = new Array();
+            for (let z in params.ReservedInstancesOfferingsSet) {
+                let obj = new ReservedInstancesOffering();
+                obj.deserialize(params.ReservedInstancesOfferingsSet[z]);
+                this.ReservedInstancesOfferingsSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7151,6 +7350,41 @@ class DescribeInstanceFamilyConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * PurchaseReservedInstancesOffering response structure.
+ * @class
+ */
+class PurchaseReservedInstancesOfferingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ReservedInstanceId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReservedInstanceId = 'ReservedInstanceId' in params ? params.ReservedInstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Information on local HDD storage.
  * @class
  */
@@ -7240,6 +7474,99 @@ class InternetAccessible extends  AbstractModel {
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
         this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+
+    }
+}
+
+/**
+ * The information of the Reserved Instance offering.
+ * @class
+ */
+class ReservedInstancesOffering extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The availability zones in which the Reserved Instance can be purchased, such as ap-guangzhou-1.
+Valid value: <a href="https://cloud.tencent.com/document/product/213/6091">Availability Zones</a>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * The currency of the Reserved Instance you are purchasing. It's specified using ISO 4217 standard currency.
+Valid value: USD.
+         * @type {string || null}
+         */
+        this.CurrencyCode = null;
+
+        /**
+         * The **duration** of the Reserved Instance in seconds, which is the purchased usage period. For example, 31536000.
+Unit: second
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * The purchase price of the Reserved Instance, such as 4000.0.
+Unit: this field uses the currency code specified in `currencyCode`, and only supports “USD” at this time.
+         * @type {number || null}
+         */
+        this.FixedPrice = null;
+
+        /**
+         * The instance type on which the Reserved Instance can be used, such as S3.MEDIUM4.
+Valid value: <a href="https://cloud.tencent.com/product/cvm/instances">Instance Types</a>
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * The payment term of the Reserved Instance, such as All Upfront.
+Valid value: All Upfront.
+         * @type {string || null}
+         */
+        this.OfferingType = null;
+
+        /**
+         * The ID of the Reserved Instance offering, such as 650c138f-ae7e-4750-952a-96841d6e9fc1.
+         * @type {string || null}
+         */
+        this.ReservedInstancesOfferingId = null;
+
+        /**
+         * The platform description (operating system) of the Reserved Instance, such as linux.
+Valid value: linux.
+         * @type {string || null}
+         */
+        this.ProductDescription = null;
+
+        /**
+         * The hourly usage price of the Reserved Instance, such as 0.0.
+Currently, the only supported payment is “All Upfront”, so the default value of `UsagePrice` is 0 USD/hr.
+Unit: USD/hr. This field uses the currency code specified in `currencyCode`, and only supports “USD” at this time.
+         * @type {number || null}
+         */
+        this.UsagePrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CurrencyCode = 'CurrencyCode' in params ? params.CurrencyCode : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.FixedPrice = 'FixedPrice' in params ? params.FixedPrice : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
+        this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
+        this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
+        this.UsagePrice = 'UsagePrice' in params ? params.UsagePrice : null;
 
     }
 }
@@ -7453,6 +7780,7 @@ module.exports = {
     AllocateHostsRequest: AllocateHostsRequest,
     LoginSettings: LoginSettings,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    PurchaseReservedInstancesOfferingRequest: PurchaseReservedInstancesOfferingRequest,
     RebootInstancesRequest: RebootInstancesRequest,
     AssociateInstancesKeyPairsRequest: AssociateInstancesKeyPairsRequest,
     ImportKeyPairResponse: ImportKeyPairResponse,
@@ -7492,7 +7820,7 @@ module.exports = {
     InquiryPriceResetInstancesInternetMaxBandwidthRequest: InquiryPriceResetInstancesInternetMaxBandwidthRequest,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     InquiryPriceRunInstancesRequest: InquiryPriceRunInstancesRequest,
-    InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
+    Image: Image,
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
     DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
@@ -7511,6 +7839,7 @@ module.exports = {
     EnhancedService: EnhancedService,
     InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
+    DescribeReservedInstancesOfferingsRequest: DescribeReservedInstancesOfferingsRequest,
     DescribeDisasterRecoverGroupsResponse: DescribeDisasterRecoverGroupsResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ActionTimer: ActionTimer,
@@ -7540,7 +7869,7 @@ module.exports = {
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     ImageOsList: ImageOsList,
-    Image: Image,
+    InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
     DescribeHostsRequest: DescribeHostsRequest,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,
     InquiryPriceResizeInstanceDisksResponse: InquiryPriceResizeInstanceDisksResponse,
@@ -7564,6 +7893,7 @@ module.exports = {
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
     KeyPair: KeyPair,
+    DescribeReservedInstancesOfferingsResponse: DescribeReservedInstancesOfferingsResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,
     VirtualPrivateCloud: VirtualPrivateCloud,
@@ -7571,8 +7901,10 @@ module.exports = {
     DescribeInstanceTypeConfigsResponse: DescribeInstanceTypeConfigsResponse,
     ResizeInstanceDisksRequest: ResizeInstanceDisksRequest,
     DescribeInstanceFamilyConfigsRequest: DescribeInstanceFamilyConfigsRequest,
+    PurchaseReservedInstancesOfferingResponse: PurchaseReservedInstancesOfferingResponse,
     StorageBlock: StorageBlock,
     InternetAccessible: InternetAccessible,
+    ReservedInstancesOffering: ReservedInstancesOffering,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     Snapshot: Snapshot,
     ModifyInstancesProjectResponse: ModifyInstancesProjectResponse,

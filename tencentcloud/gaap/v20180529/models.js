@@ -4258,12 +4258,12 @@ class HTTPSListener extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * Listener status. Valid values:
+         * Listener status:
 0: running;
 1: creating;
 2: terminating;
 3: adjusting origin server;
-4: adjusting configuration.
+4: modifying configuration.
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -5175,11 +5175,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Connection group status.
-Valid values:
+Where:
 0: running;
 1: creating;
 4: terminating;
-11: migrating connection;
+11: connection migrating.
          * @type {string || null}
          */
         this.Status = null;
@@ -6025,12 +6025,12 @@ class HTTPListener extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * Listener status. Valid values:
+         * Listener status:
 0: running;
 1: creating;
 2: terminating;
 3: adjusting origin server;
-4: adjusting configuration.
+4: modifying configuration.
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -9630,17 +9630,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Concurrent = null;
 
         /**
-         * Connection status. Valid values:
+         * Connection status:
 RUNNING: running;
 CREATING: creating;
 DESTROYING: terminating;
 OPENING: enabling;
 CLOSING: disabling;
 CLOSED: disabled;
-ADJUSTING: adjusting configuration;
-ISOLATING: isolating;
-ISOLATED: isolated;
-CLONING: copying;
+ADJUSTING: adjusting configuration
+ISOLATING: isolating (it’s triggered when the account is in arrears);
+ISOLATED: isolated (it’s triggered when the account is in arrears);
 UNKNOWN: unknown status.
          * @type {string || null}
          */

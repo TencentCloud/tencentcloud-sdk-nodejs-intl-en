@@ -50,6 +50,7 @@ const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
 const TagSpecification = models.TagSpecification;
+const Tag = models.Tag;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const RouteTableConflict = models.RouteTableConflict;

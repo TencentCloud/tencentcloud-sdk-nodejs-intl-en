@@ -15,6 +15,7 @@ module.exports = {
     common: require("./common"),
     cvm: require("./cvm"),
     dayu: require("./dayu"),
+    dbbrain: require("./dbbrain"),
     dc: require("./dc"),
     dcdb: require("./dcdb"),
     dts: require("./dts"),

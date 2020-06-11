@@ -75,6 +75,12 @@ class CreateClusterEndpointVipResponse extends  AbstractModel {
         super();
 
         /**
+         * Request job’s FlowId
+         * @type {number || null}
+         */
+        this.RequestFlowId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -89,6 +95,7 @@ class CreateClusterEndpointVipResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestFlowId = 'RequestFlowId' in params ? params.RequestFlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -231,6 +238,12 @@ class DescribeClusterEndpointVipStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
     }
 
     /**
@@ -240,6 +253,7 @@ class DescribeClusterEndpointVipStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -252,6 +266,24 @@ class CreateClusterEndpointRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The ID of the subnet where the cluster’s port is located (only needs to be entered when the non-public network access is enabled, and must be within the subnet of the cluster’s VPC). 
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
+         * @type {boolean || null}
+         */
+        this.IsExtranet = null;
+
     }
 
     /**
@@ -261,6 +293,9 @@ class CreateClusterEndpointRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
 
     }
 }
@@ -615,6 +650,18 @@ class DescribeClusterEndpointStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
+         * @type {boolean || null}
+         */
+        this.IsExtranet = null;
+
     }
 
     /**
@@ -624,6 +671,8 @@ class DescribeClusterEndpointStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
 
     }
 }
@@ -635,6 +684,18 @@ class DescribeClusterEndpointStatusRequest extends  AbstractModel {
 class DescribeClusterEndpointVipStatusResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Port operation status (Creating = in the process of creation; CreateFailed = creation has failed; Created = creation completed; Deleting = in the process of deletion; DeletedFailed = deletion has failed; Deleted = deletion completed; NotFound = operation not found)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Reason for operation failure
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -651,6 +712,8 @@ class DescribeClusterEndpointVipStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -808,6 +871,36 @@ class CreateClusterAsGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://cloud.tencent.com/document/api/377/20440) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
+         * @type {string || null}
+         */
+        this.AutoScalingGroupPara = null;
+
+        /**
+         * The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://cloud.tencent.com/document/api/377/20447) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it’s set through the **UserScript**.
+         * @type {string || null}
+         */
+        this.LaunchConfigurePara = null;
+
+        /**
+         * Advanced configuration information of the node
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * Node label array
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
     }
 
     /**
@@ -816,6 +909,24 @@ class CreateClusterAsGroupRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AutoScalingGroupPara = 'AutoScalingGroupPara' in params ? params.AutoScalingGroupPara : null;
+        this.LaunchConfigurePara = 'LaunchConfigurePara' in params ? params.LaunchConfigurePara : null;
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
         }
 
     }
@@ -1425,6 +1536,18 @@ class CreateClusterAsGroupResponse extends  AbstractModel {
         super();
 
         /**
+         * Launch configuration ID
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * Scaling group ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1439,6 +1562,8 @@ class CreateClusterAsGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1454,21 +1579,18 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
 
         /**
          * IDs of deleted instances
-Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.SuccInstanceIds = null;
 
         /**
          * IDs of instances failed to be deleted
-Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.FailedInstanceIds = null;
 
         /**
          * IDs of instances that cannot be found
-Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.NotFoundInstanceIds = null;
@@ -1535,6 +1657,41 @@ class TagSpecification extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * The type of resource the label is bound to. Type currently supported is **cluster**.
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -2181,6 +2338,18 @@ class CreateClusterEndpointVipRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Security policy opens single IP or CIDR to the Internet (for example: “192.168.1.0/24”, with “reject all” as the default).
+         * @type {Array.<string> || null}
+         */
+        this.SecurityPolicies = null;
+
     }
 
     /**
@@ -2190,6 +2359,8 @@ class CreateClusterEndpointVipRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SecurityPolicies = 'SecurityPolicies' in params ? params.SecurityPolicies : null;
 
     }
 }
@@ -2280,6 +2451,24 @@ class DeleteClusterAsGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * The cluster ID, obtained through the [DescribeClusters](https://cloud.tencent.com/document/api/457/31862) API.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster scaling group ID list
+         * @type {Array.<string> || null}
+         */
+        this.AutoScalingGroupIds = null;
+
+        /**
+         * Whether to keep nodes in the scaling group. Default to **false** (not keep)
+         * @type {boolean || null}
+         */
+        this.KeepInstance = null;
+
     }
 
     /**
@@ -2289,6 +2478,9 @@ class DeleteClusterAsGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AutoScalingGroupIds = 'AutoScalingGroupIds' in params ? params.AutoScalingGroupIds : null;
+        this.KeepInstance = 'KeepInstance' in params ? params.KeepInstance : null;
 
     }
 }
@@ -2645,6 +2837,18 @@ class ModifyClusterEndpointSPRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Security policy opens single IP or CIDR block to the Internet (for example: “192.168.1.0/24”, with “reject all” as the default).
+         * @type {Array.<string> || null}
+         */
+        this.SecurityPolicies = null;
+
     }
 
     /**
@@ -2654,6 +2858,8 @@ class ModifyClusterEndpointSPRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SecurityPolicies = 'SecurityPolicies' in params ? params.SecurityPolicies : null;
 
     }
 }
@@ -2860,6 +3066,18 @@ class DeleteClusterEndpointRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
+         * @type {boolean || null}
+         */
+        this.IsExtranet = null;
+
     }
 
     /**
@@ -2869,6 +3087,8 @@ class DeleteClusterEndpointRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
 
     }
 }
@@ -3187,6 +3407,12 @@ class DeleteClusterEndpointVipRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
     }
 
     /**
@@ -3196,6 +3422,7 @@ class DeleteClusterEndpointVipRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -3445,6 +3672,12 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
         super();
 
         /**
+         * Queries cluster access port status (Created = successfully enabled; Creating = in the process of being enabled; NotFound = not enabled).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3459,6 +3692,7 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3924,6 +4158,7 @@ module.exports = {
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
     TagSpecification: TagSpecification,
+    Tag: Tag,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
     RouteTableConflict: RouteTableConflict,

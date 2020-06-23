@@ -28,6 +28,7 @@ const CreateSyncJobResponse = models.CreateSyncJobResponse;
 const DescribeMigrateCheckJobRequest = models.DescribeMigrateCheckJobRequest;
 const IsolateSubscribeResponse = models.IsolateSubscribeResponse;
 const ModifySubscribeObjectsResponse = models.ModifySubscribeObjectsResponse;
+const SwitchDrToMasterRequest = models.SwitchDrToMasterRequest;
 const StartSyncJobRequest = models.StartSyncJobRequest;
 const CreateMigrateJobRequest = models.CreateMigrateJobRequest;
 const SubscribeInfo = models.SubscribeInfo;
@@ -62,6 +63,7 @@ const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse
 const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
 const ResetSubscribeRequest = models.ResetSubscribeRequest;
 const ModifySubscribeConsumeTimeRequest = models.ModifySubscribeConsumeTimeRequest;
+const SwitchDrToMasterResponse = models.SwitchDrToMasterResponse;
 const ModifyMigrateJobResponse = models.ModifyMigrateJobResponse;
 const CreateSyncJobRequest = models.CreateSyncJobRequest;
 const DescribeSyncJobsRequest = models.DescribeSyncJobsRequest;
@@ -205,6 +207,17 @@ If the check fails, the reason can be queried. Please modify the migration confi
     DescribeAsyncRequestInfo(req, cb) {
         let resp = new DescribeAsyncRequestInfoResponse();
         this.request("DescribeAsyncRequestInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to promote a disaster recovery instance to a master instance, which will stop sync from the original master instance and end the master/slave relationship.
+     * @param {SwitchDrToMasterRequest} req
+     * @param {function(string, SwitchDrToMasterResponse):void} cb
+     * @public
+     */
+    SwitchDrToMaster(req, cb) {
+        let resp = new SwitchDrToMasterResponse();
+        this.request("SwitchDrToMaster", req, resp, cb);
     }
 
     /**

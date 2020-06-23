@@ -37,7 +37,7 @@ const CloneAccountRequest = models.CloneAccountRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const TableColumn = models.TableColumn;
 const ParamModifyResult = models.ParamModifyResult;
-const ParamDesc = models.ParamDesc;
+const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
@@ -56,6 +56,7 @@ const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const ShardInfo = models.ShardInfo;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const Project = models.Project;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
@@ -68,7 +69,9 @@ const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const DatabaseView = models.DatabaseView;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
+const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DBParamValue = models.DBParamValue;
 const ParamConstraint = models.ParamConstraint;
@@ -268,6 +271,17 @@ Note: accounts with the same username but different hosts are different accounts
     ModifyDBSyncMode(req, cb) {
         let resp = new ModifyDBSyncModeResponse();
         this.request("ModifyDBSyncMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the project list.
+     * @param {DescribeProjectsRequest} req
+     * @param {function(string, DescribeProjectsResponse):void} cb
+     * @public
+     */
+    DescribeProjects(req, cb) {
+        let resp = new DescribeProjectsResponse();
+        this.request("DescribeProjects", req, resp, cb);
     }
 
     /**

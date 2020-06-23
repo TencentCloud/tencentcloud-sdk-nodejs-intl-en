@@ -547,20 +547,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SslStatus = null;
 
-        /**
-         * TLS version list. Valid values:
-TLSv1.0, TLSv1.1, TLSv1.2
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.TlsVersion = null;
-
-        /**
-         * 
-         * @type {Hsts || null}
-         */
-        this.Hsts = null;
-
     }
 
     /**
@@ -588,13 +574,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Spdy = 'Spdy' in params ? params.Spdy : null;
         this.SslStatus = 'SslStatus' in params ? params.SslStatus : null;
-        this.TlsVersion = 'TlsVersion' in params ? params.TlsVersion : null;
-
-        if (params.Hsts) {
-            let obj = new Hsts();
-            obj.deserialize(params.Hsts)
-            this.Hsts = obj;
-        }
 
     }
 }
@@ -4338,50 +4317,6 @@ class DisableClsLogTopicResponse extends  AbstractModel {
 }
 
 /**
- * `HSTS` configuration.
- * @class
- */
-class Hsts extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable. Valid values: on, off.
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * `MaxAge` value.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxAge = null;
-
-        /**
-         * Whether to include subdomain names. Valid values: on, off.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.IncludeSubDomains = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.MaxAge = 'MaxAge' in params ? params.MaxAge : null;
-        this.IncludeSubDomains = 'IncludeSubDomains' in params ? params.IncludeSubDomains : null;
-
-    }
-}
-
-/**
  * Image optimization - `TpgAdapter` configuration
  * @class
  */
@@ -7005,13 +6940,6 @@ off: disable full-path cache (i.e., enable parameter filter)
          */
         this.FullUrlCache = null;
 
-        /**
-         * Whether the cache ignores letter case
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CaseSensitive = null;
-
     }
 
     /**
@@ -7022,7 +6950,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
-        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
 
     }
 }
@@ -9505,7 +9432,6 @@ module.exports = {
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
-    Hsts: Hsts,
     TpgAdapter: TpgAdapter,
     DetailDomain: DetailDomain,
     GetDisableRecordsResponse: GetDisableRecordsResponse,

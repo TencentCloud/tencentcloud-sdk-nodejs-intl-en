@@ -3143,12 +3143,6 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.IsNonStaticIpMode = null;
 
-        /**
-         * Indicates whether to enable deletion protection
-         * @type {boolean || null}
-         */
-        this.DeletionProtection = null;
-
     }
 
     /**
@@ -3170,7 +3164,6 @@ class ClusterAdvancedSettings extends  AbstractModel {
         }
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
-        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
 
     }
 }
@@ -3600,8 +3593,8 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.ImageId = null;
 
         /**
-         * OsCustomizeType
-Note: this field may return null, indicating that no valid value is obtained.
+         * Container image tag
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.OsCustomizeType = null;
@@ -3619,6 +3612,13 @@ Note: this field may return null, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.CreatedTime = null;
+
+        /**
+         * Whether Deletion Protection is enabled
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {boolean || null}
+         */
+        this.DeletionProtection = null;
 
     }
 
@@ -3659,6 +3659,7 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
         this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
 
     }
 }

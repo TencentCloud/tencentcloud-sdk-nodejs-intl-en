@@ -7484,6 +7484,104 @@ class ModifyL4KeepTimeRequest extends  AbstractModel {
 }
 
 /**
+ * Scheduling domain name information
+ * @class
+ */
+class SchedulingDomain extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scheduling domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * List of BGP IPs
+         * @type {Array.<string> || null}
+         */
+        this.BGPIpList = null;
+
+        /**
+         * List of CTCC IPs
+         * @type {Array.<string> || null}
+         */
+        this.CTCCIpList = null;
+
+        /**
+         * List of CUCC IPs
+         * @type {Array.<string> || null}
+         */
+        this.CUCCIpList = null;
+
+        /**
+         * List of CMCC IPs
+         * @type {Array.<string> || null}
+         */
+        this.CMCCIpList = null;
+
+        /**
+         * List of IPs outside Mainland China
+         * @type {Array.<string> || null}
+         */
+        this.OverseaIpList = null;
+
+        /**
+         * Scheduling method. It only supports `priority` now.
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * The creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TTL = null;
+
+        /**
+         * Status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.BGPIpList = 'BGPIpList' in params ? params.BGPIpList : null;
+        this.CTCCIpList = 'CTCCIpList' in params ? params.CTCCIpList : null;
+        this.CUCCIpList = 'CUCCIpList' in params ? params.CUCCIpList : null;
+        this.CMCCIpList = 'CMCCIpList' in params ? params.CMCCIpList : null;
+        this.OverseaIpList = 'OverseaIpList' in params ? params.OverseaIpList : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TTL = 'TTL' in params ? params.TTL : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * ModifyCCHostProtection request structure.
  * @class
  */
@@ -8113,6 +8211,46 @@ Required if `Protocol` is `https`;
         this.BasicIpInstance = 'BasicIpInstance' in params ? params.BasicIpInstance : null;
         this.BasicIspCode = 'BasicIspCode' in params ? params.BasicIspCode : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
+ * ModifyDDoSDefendStatus response structure.
+ * @class
+ */
+class ModifyDDoSDefendStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Success code
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11187,24 +11325,30 @@ class DescribeRuleSetsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDDoSDefendStatus response structure.
+ * DescribeSchedulingDomainList request structure.
  * @class
  */
-class ModifyDDoSDefendStatusResponse extends  AbstractModel {
+class DescribeSchedulingDomainListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Success code
-         * @type {SuccessCode || null}
+         * Number of items in a page. Returned results are not paged if you enter “0”.
+         * @type {number || null}
          */
-        this.Success = null;
+        this.Limit = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Starting offset of the page. Value: (number of pages - 1) * items per page
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * (Optional) Filter by specific domain name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Domain = null;
 
     }
 
@@ -11215,13 +11359,9 @@ class ModifyDDoSDefendStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Success) {
-            let obj = new SuccessCode();
-            obj.deserialize(params.Success)
-            this.Success = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -11439,6 +11579,56 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SPortEnd = 'SPortEnd' in params ? params.SPortEnd : null;
         this.Action = 'Action' in params ? params.Action : null;
         this.Kind = 'Kind' in params ? params.Kind : null;
+
+    }
+}
+
+/**
+ * DescribeSchedulingDomainList response structure.
+ * @class
+ */
+class DescribeSchedulingDomainListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of scheduling domain names
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of scheduling domain names
+         * @type {Array.<SchedulingDomain> || null}
+         */
+        this.DomainList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.DomainList) {
+            this.DomainList = new Array();
+            for (let z in params.DomainList) {
+                let obj = new SchedulingDomain();
+                obj.deserialize(params.DomainList[z]);
+                this.DomainList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13178,6 +13368,7 @@ module.exports = {
     ModifyCCPolicySwitchRequest: ModifyCCPolicySwitchRequest,
     ModifyCCFrequencyRulesResponse: ModifyCCFrequencyRulesResponse,
     ModifyL4KeepTimeRequest: ModifyL4KeepTimeRequest,
+    SchedulingDomain: SchedulingDomain,
     ModifyCCHostProtectionRequest: ModifyCCHostProtectionRequest,
     DescribeIpBlockListRequest: DescribeIpBlockListRequest,
     DescribeDDoSNetCountResponse: DescribeDDoSNetCountResponse,
@@ -13188,6 +13379,7 @@ module.exports = {
     ModifyDDoSAIStatusRequest: ModifyDDoSAIStatusRequest,
     DescribeResourceListResponse: DescribeResourceListResponse,
     ModifyCCThresholdRequest: ModifyCCThresholdRequest,
+    ModifyDDoSDefendStatusResponse: ModifyDDoSDefendStatusResponse,
     CreateBasicDDoSAlarmThresholdRequest: CreateBasicDDoSAlarmThresholdRequest,
     CCRuleConfig: CCRuleConfig,
     DescribeDDoSEvInfoResponse: DescribeDDoSEvInfoResponse,
@@ -13243,11 +13435,12 @@ module.exports = {
     L7HealthConfig: L7HealthConfig,
     DescribeDDoSNetEvInfoResponse: DescribeDDoSNetEvInfoResponse,
     DescribeRuleSetsRequest: DescribeRuleSetsRequest,
-    ModifyDDoSDefendStatusResponse: ModifyDDoSDefendStatusResponse,
+    DescribeSchedulingDomainListRequest: DescribeSchedulingDomainListRequest,
     DescribleL7RulesResponse: DescribleL7RulesResponse,
     CreateCCFrequencyRulesResponse: CreateCCFrequencyRulesResponse,
     DescribeIpBlockListResponse: DescribeIpBlockListResponse,
     DDoSPolicyPortLimit: DDoSPolicyPortLimit,
+    DescribeSchedulingDomainListResponse: DescribeSchedulingDomainListResponse,
     DescribeDDoSNetTrendResponse: DescribeDDoSNetTrendResponse,
     DescribeUnBlockStatisResponse: DescribeUnBlockStatisResponse,
     DescribleL7RulesRequest: DescribleL7RulesRequest,

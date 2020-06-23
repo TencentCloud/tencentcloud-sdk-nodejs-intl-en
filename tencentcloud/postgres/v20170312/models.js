@@ -17,6 +17,132 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * CreateDBInstances request structure.
+ * @class
+ */
+class CreateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * @type {string || null}
+         */
+        this.SpecCode = null;
+
+        /**
+         * PostgreSQL kernel version. Currently, only two versions are supported: 9.3.5 and 9.5.4.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Instance capacity size in GB.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Number of instances purchased at a time. Value range: 1–100.
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Instance billing type.
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Whether to automatically use vouchers. 1: yes, 0: no. Default value: no.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list (only one voucher can be specified currently).
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC subnet ID.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Renewal flag. 0: normal renewal (default), 1: auto-renewal.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * RestartDBInstance request structure.
  * @class
  */
@@ -446,6 +572,70 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstances request structure.
+ * @class
+ */
+class DescribeDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter. Valid values: db-instance-id, db-instance-name
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Number of entries returned per page. Default value: 10.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number, starting from 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
  * Error log details
  * @class
  */
@@ -756,6 +946,98 @@ class RestartDBInstanceResponse extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstances response structure.
+ * @class
+ */
+class DescribeDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of instances found.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance details set.
+         * @type {Array.<DBInstance> || null}
+         */
+        this.DBInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DBInstanceSet) {
+            this.DBInstanceSet = new Array();
+            for (let z in params.DBInstanceSet) {
+                let obj = new DBInstance();
+                obj.deserialize(params.DBInstanceSet[z]);
+                this.DBInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeDBInstance response structure.
+ * @class
+ */
+class UpgradeDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Transaction name.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1100,6 +1382,34 @@ class DescribeProductConfigRequest extends  AbstractModel {
 }
 
 /**
+ * CloseDBExtranetAccess request structure.
+ * @class
+ */
+class CloseDBExtranetAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of postgres-6r233v55
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
  * InitDBInstances response structure.
  * @class
  */
@@ -1284,6 +1594,43 @@ class SpecItemInfo extends  AbstractModel {
         this.Qps = 'Qps' in params ? params.Qps : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * Key-value pair filter for conditional filtering queries, such as filter ID and name
+* If more than one filter exists, the logical relationship between these filters is `AND`.
+* If multiple values exist in one filter, the logical relationship between these values is `OR`.
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * One or more filter values.
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -2300,6 +2647,69 @@ class NormalQueryItem extends  AbstractModel {
 }
 
 /**
+ * UpgradeDBInstance request structure.
+ * @class
+ */
+class UpgradeDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance memory size in GB after upgrade
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance disk size in GB after upgrade
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Instance ID in the format of postgres-lnp6j617
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Whether to automatically use vouchers. 1: yes, 0: no. Default value: no
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list (only one voucher can be specified currently)
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+
+    }
+}
+
+/**
  * DescribeDBXlogs response structure.
  * @class
  */
@@ -2495,18 +2905,36 @@ class ModifyAccountRemarkRequest extends  AbstractModel {
 }
 
 /**
- * CloseDBExtranetAccess request structure.
+ * CreateDBInstances response structure.
  * @class
  */
-class CloseDBExtranetAccessRequest extends  AbstractModel {
+class CreateDBInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of postgres-6r233v55
+         * Order number list. Each instance corresponds to an order number.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * 
          * @type {string || null}
          */
-        this.DBInstanceId = null;
+        this.BillId = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DBInstanceIdSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2517,7 +2945,10 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2579,6 +3010,7 @@ class Xlog extends  AbstractModel {
 }
 
 module.exports = {
+    CreateDBInstancesRequest: CreateDBInstancesRequest,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
     DescribeDBXlogsRequest: DescribeDBXlogsRequest,
@@ -2588,6 +3020,7 @@ module.exports = {
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
+    DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     ErrLogDetail: ErrLogDetail,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
@@ -2596,14 +3029,18 @@ module.exports = {
     RegionInfo: RegionInfo,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
+    DescribeDBInstancesResponse: DescribeDBInstancesResponse,
+    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeProductConfigRequest: DescribeProductConfigRequest,
+    CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     InitDBInstancesResponse: InitDBInstancesResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     SpecItemInfo: SpecItemInfo,
+    Filter: Filter,
     PgDeal: PgDeal,
     DescribeRegionsResponse: DescribeRegionsResponse,
     ZoneInfo: ZoneInfo,
@@ -2623,12 +3060,13 @@ module.exports = {
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     NormalQueryItem: NormalQueryItem,
+    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
     DescribeDBInstanceAttributeRequest: DescribeDBInstanceAttributeRequest,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
-    CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
+    CreateDBInstancesResponse: CreateDBInstancesResponse,
     Xlog: Xlog,
 
 }

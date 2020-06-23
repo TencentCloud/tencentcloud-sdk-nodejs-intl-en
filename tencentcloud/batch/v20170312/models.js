@@ -1035,8 +1035,8 @@ Note: This field may return null, indicating that no valid value is found.
         this.ReleaseAddress = null;
 
         /**
-         * Unsupported network types
-Note: This field may return null, indicating that no valid value is found.
+         * Not supported network. Value: <br><li>BASIC: classic network<br><li>VPC1.0: VPC1.0
+Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.UnsupportNetworks = null;
@@ -4361,8 +4361,8 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.DiscountPrice = null;
 
         /**
-         * Percentage of the original price. For example, if you enter "20", the discounted price will be 20% of the original price.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Discount = null;

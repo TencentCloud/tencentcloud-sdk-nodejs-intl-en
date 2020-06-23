@@ -18,21 +18,28 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
+const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const ClientConnection = models.ClientConnection;
 const BackupInfo = models.BackupInfo;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const SpecificationInfo = models.SpecificationInfo;
-const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
+const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
+const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
 const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
+const SlowLogPattern = models.SlowLogPattern;
 const AssignProjectResponse = models.AssignProjectResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
+const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const ShardInfo = models.ShardInfo;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
@@ -44,7 +51,7 @@ const DBInstanceInfo = models.DBInstanceInfo;
 const BackupFile = models.BackupFile;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const InstanceDetail = models.InstanceDetail;
-const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
+const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const SpecItem = models.SpecItem;
 
@@ -60,6 +67,17 @@ class MongodbClient extends AbstractClient {
     }
     
     /**
+     * This API is used to get the slow log statistics of a database instance.
+     * @param {DescribeSlowLogPatternsRequest} req
+     * @param {function(string, DescribeSlowLogPatternsResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogPatterns(req, cb) {
+        let resp = new DescribeSlowLogPatternsResponse();
+        this.request("DescribeSlowLogPatterns", req, resp, cb);
+    }
+
+    /**
      * This API is used to specify the project to which a TencentDB instance belongs.
 
      * @param {AssignProjectRequest} req
@@ -69,6 +87,17 @@ class MongodbClient extends AbstractClient {
     AssignProject(req, cb) {
         let resp = new AssignProjectResponse();
         this.request("AssignProject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the slow log information of a TencentDB instance. Only slow logs for the last 7 days can be queried.
+     * @param {DescribeSlowLogsRequest} req
+     * @param {function(string, DescribeSlowLogsResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogs(req, cb) {
+        let resp = new DescribeSlowLogsResponse();
+        this.request("DescribeSlowLogs", req, resp, cb);
     }
 
     /**
@@ -124,6 +153,17 @@ class MongodbClient extends AbstractClient {
     RenameInstance(req, cb) {
         let resp = new RenameInstanceResponse();
         this.request("RenameInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to run the `FlushRouterConfig` command on all mongos instances.
+     * @param {FlushInstanceRouterConfigRequest} req
+     * @param {function(string, FlushInstanceRouterConfigResponse):void} cb
+     * @public
+     */
+    FlushInstanceRouterConfig(req, cb) {
+        let resp = new FlushInstanceRouterConfigResponse();
+        this.request("FlushInstanceRouterConfig", req, resp, cb);
     }
 
     /**

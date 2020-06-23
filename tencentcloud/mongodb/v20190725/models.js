@@ -73,6 +73,34 @@ class IsolateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * FlushInstanceRouterConfig request structure.
+ * @class
+ */
+class FlushInstanceRouterConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeBackupAccess response structure.
  * @class
  */
@@ -122,6 +150,56 @@ class DescribeBackupAccessResponse extends  AbstractModel {
                 let obj = new BackupFile();
                 obj.deserialize(params.Files[z]);
                 this.Files.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogPatterns response structure.
+ * @class
+ */
+class DescribeSlowLogPatternsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of slow logs
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Slow log statistics
+         * @type {Array.<SlowLogPattern> || null}
+         */
+        this.SlowLogPatterns = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+
+        if (params.SlowLogPatterns) {
+            this.SlowLogPatterns = new Array();
+            for (let z in params.SlowLogPatterns) {
+                let obj = new SlowLogPattern();
+                obj.deserialize(params.SlowLogPatterns[z]);
+                this.SlowLogPatterns.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -287,6 +365,48 @@ class AssignProjectRequest extends  AbstractModel {
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogs response structure.
+ * @class
+ */
+class DescribeSlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of slow logs
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Slow log details
+         * @type {Array.<string> || null}
+         */
+        this.SlowLogs = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.SlowLogs = 'SlowLogs' in params ? params.SlowLogs : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -577,36 +697,48 @@ class SpecificationInfo extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSpec request structure.
+ * DescribeSlowLogs request structure.
  * @class
  */
-class ModifyDBInstanceSpecRequest extends  AbstractModel {
+class DescribeSlowLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+         * Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Memory size after instance configuration change in GB. Memory and disk must be upgraded or degraded simultaneously
-         * @type {number || null}
+         * Start time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-01 10:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+         * @type {string || null}
          */
-        this.Memory = null;
+        this.StartTime = null;
 
         /**
-         * Disk size after instance configuration change in GB. Memory and disk must be upgraded or degraded simultaneously. For degradation, the new disk capacity must be greater than 1.2 times the used disk capacity
-         * @type {number || null}
+         * End time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-02 12:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+         * @type {string || null}
          */
-        this.Volume = null;
+        this.EndTime = null;
 
         /**
-         * Oplog size after instance configuration change in GB, which ranges from 10% to 90% of the disk capacity and is 10% of the disk capacity by default
+         * Threshold of slow log execution time in milliseconds. Minimum value: 100. Slow logs whose execution time exceeds the threshold will be returned.
          * @type {number || null}
          */
-        this.OplogSize = null;
+        this.SlowMS = null;
+
+        /**
+         * Offset. Minimum value: 0. Maximum value: 10000. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -618,9 +750,102 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogPatterns request structure.
+ * @class
+ */
+class DescribeSlowLogPatternsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-01 10:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-02 12:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Threshold of slow log execution time in milliseconds. Minimum value: 100. Slow logs whose execution time exceeds the threshold will be returned.
+         * @type {number || null}
+         */
+        this.SlowMS = null;
+
+        /**
+         * Offset. Minimum value: 0. Maximum value: 10000. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * FlushInstanceRouterConfig response structure.
+ * @class
+ */
+class FlushInstanceRouterConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -782,6 +1007,55 @@ class OfflineIsolatedDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Slow log statistics of MongoDB database
+ * @class
+ */
+class SlowLogPattern extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Slow log pattern
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * Maximum execution time
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * Average execution time
+         * @type {number || null}
+         */
+        this.AverageTime = null;
+
+        /**
+         * Number of slow logs in this pattern
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.AverageTime = 'AverageTime' in params ? params.AverageTime : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
  * AssignProject response structure.
  * @class
  */
@@ -868,6 +1142,41 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceSpec response structure.
+ * @class
+ */
+class ModifyDBInstanceSpecResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1613,24 +1922,36 @@ class InstanceDetail extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSpec response structure.
+ * ModifyDBInstanceSpec request structure.
  * @class
  */
-class ModifyDBInstanceSpecResponse extends  AbstractModel {
+class ModifyDBInstanceSpecRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Order ID
+         * Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
          * @type {string || null}
          */
-        this.DealId = null;
+        this.InstanceId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Memory size after instance configuration change in GB. Memory and disk must be upgraded or degraded simultaneously
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Memory = null;
+
+        /**
+         * Disk size after instance configuration change in GB. Memory and disk must be upgraded or degraded simultaneously. For degradation, the new disk capacity must be greater than 1.2 times the used disk capacity
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * Oplog size after instance configuration change in GB, which ranges from 10% to 90% of the disk capacity and is 10% of the disk capacity by default
+         * @type {number || null}
+         */
+        this.OplogSize = null;
 
     }
 
@@ -1641,8 +1962,10 @@ class ModifyDBInstanceSpecResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = 'DealId' in params ? params.DealId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
 
     }
 }
@@ -1860,21 +2183,28 @@ class SpecItem extends  AbstractModel {
 module.exports = {
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
+    FlushInstanceRouterConfigRequest: FlushInstanceRouterConfigRequest,
     DescribeBackupAccessResponse: DescribeBackupAccessResponse,
+    DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     AssignProjectRequest: AssignProjectRequest,
+    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     ClientConnection: ClientConnection,
     BackupInfo: BackupInfo,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     SpecificationInfo: SpecificationInfo,
-    ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
+    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
+    DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
+    FlushInstanceRouterConfigResponse: FlushInstanceRouterConfigResponse,
     DescribeSpecInfoResponse: DescribeSpecInfoResponse,
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
+    SlowLogPattern: SlowLogPattern,
     AssignProjectResponse: AssignProjectResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
+    ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
     ShardInfo: ShardInfo,
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
@@ -1886,7 +2216,7 @@ module.exports = {
     BackupFile: BackupFile,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     InstanceDetail: InstanceDetail,
-    ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
+    ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     SpecItem: SpecItem,
 

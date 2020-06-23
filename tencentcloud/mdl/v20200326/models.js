@@ -110,43 +110,6 @@ class ModifyMediaLiveInputRequest extends  AbstractModel {
 }
 
 /**
- * DRM configuration information, which takes effect only for HLS and DASH.
- * @class
- */
-class DrmSettingsInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable DRM encryption. Valid value: CLOSE/OPEN. Default value: CLOSE.
-Currently, this is supported only for HLS/DASH/HLS_ARCHIVE/DASH_ARCHIVE.
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * `ContentId` of DRM encryption, which will be automatically created if this parameter is left empty.
-For more information on the custom creation method, please visit https://cloud.tencent.com/document/product/1000/40960
-         * @type {string || null}
-         */
-        this.ContentId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.State = 'State' in params ? params.State : null;
-        this.ContentId = 'ContentId' in params ? params.ContentId : null;
-
-    }
-}
-
-/**
  * Channel output statistics.
  * @class
  */
@@ -227,59 +190,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Channel output group information.
+ * DescribeMediaLiveChannel response structure.
  * @class
  */
-class OutputGroupsInfo extends  AbstractModel {
+class DescribeMediaLiveChannelResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel output group name, which can contain 1–32 letters, digits, and underscores and must be unique at the channel level.
+         * Channel information.
+         * @type {ChannelInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Output protocol type.
-Valid values: HLS/DASH/RTP/RTMP/HLS_ARCHIVE/DASH_ARCHIVE.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Output information.
-Quantity limit: [1,1] for RTMP/RTP; [1,10] for HLS/DASH.
-         * @type {Array.<OutputInfo> || null}
-         */
-        this.Outputs = null;
-
-        /**
-         * Relay destination address. Quantity limit: [1,2].
-         * @type {Array.<DestinationInfo> || null}
-         */
-        this.Destinations = null;
-
-        /**
-         * HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {HlsRemuxSettingsInfo || null}
-         */
-        this.HlsRemuxSettings = null;
-
-        /**
-         * DASH protocol configuration information, which takes effect only for DASH/DSAH_ARCHIVE.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {DashRemuxSettingsInfo || null}
-         */
-        this.DashRemuxSettings = null;
-
-        /**
-         * DRM configuration information.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {DrmSettingsInfo || null}
-         */
-        this.DrmSettings = null;
+        this.RequestId = null;
 
     }
 
@@ -290,114 +218,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.Outputs) {
-            this.Outputs = new Array();
-            for (let z in params.Outputs) {
-                let obj = new OutputInfo();
-                obj.deserialize(params.Outputs[z]);
-                this.Outputs.push(obj);
-            }
+        if (params.Info) {
+            let obj = new ChannelInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
         }
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new DestinationInfo();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-
-        if (params.HlsRemuxSettings) {
-            let obj = new HlsRemuxSettingsInfo();
-            obj.deserialize(params.HlsRemuxSettings)
-            this.HlsRemuxSettings = obj;
-        }
-
-        if (params.DashRemuxSettings) {
-            let obj = new DashRemuxSettingsInfo();
-            obj.deserialize(params.DashRemuxSettings)
-            this.DashRemuxSettings = obj;
-        }
-
-        if (params.DrmSettings) {
-            let obj = new DrmSettingsInfo();
-            obj.deserialize(params.DrmSettings)
-            this.DrmSettings = obj;
-        }
-
-    }
-}
-
-/**
- * DASH configuration information.
- * @class
- */
-class DashRemuxSettingsInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
-         * @type {number || null}
-         */
-        this.SegmentDuration = null;
-
-        /**
-         * Number of segments. Value range: [1,30]. Default value: 5.
-         * @type {number || null}
-         */
-        this.SegmentNumber = null;
-
-        /**
-         * Whether to enable multi-period. Valid values: CLOSE/OPEN. Default value: CLOSE.
-         * @type {string || null}
-         */
-        this.PeriodTriggers = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
-        this.SegmentNumber = 'SegmentNumber' in params ? params.SegmentNumber : null;
-        this.PeriodTriggers = 'PeriodTriggers' in params ? params.PeriodTriggers : null;
-
-    }
-}
-
-/**
- * StartMediaLiveChannel request structure.
- * @class
- */
-class StartMediaLiveChannelRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Channel ID.
-         * @type {string || null}
-         */
-        this.Id = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -593,7 +420,6 @@ class OutputsStatistics extends  AbstractModel {
 
         /**
          * Output information of pipeline 1.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<PipelineOutputStatistics> || null}
          */
         this.Pipeline1 = null;
@@ -707,7 +533,6 @@ class VideoPipelineInputStatistics extends  AbstractModel {
 
         /**
          * Video `Pid`, which is available only if the input is `rtp/udp`.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Pid = null;
@@ -788,18 +613,18 @@ Only one security group can be associated.
 }
 
 /**
- * SCTE-35 configuration information.
+ * StartMediaLiveChannel request structure.
  * @class
  */
-class Scte35SettingsInfo extends  AbstractModel {
+class StartMediaLiveChannelRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
+         * Channel ID.
          * @type {string || null}
          */
-        this.Behavior = null;
+        this.Id = null;
 
     }
 
@@ -810,7 +635,7 @@ class Scte35SettingsInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Behavior = 'Behavior' in params ? params.Behavior : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -860,7 +685,6 @@ class PipelineInputStatistics extends  AbstractModel {
          * Video information array.
 For `rtp/udp` input, the quantity is the number of `Pid` of the input video.
 For other inputs, the quantity is 1.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VideoPipelineInputStatistics> || null}
          */
         this.Video = null;
@@ -869,7 +693,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * Audio information array.
 For `rtp/udp` input, the quantity is the number of `Pid` of the input audio.
 For other inputs, the quantity is 1.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AudioPipelineInputStatistics> || null}
          */
         this.Audio = null;
@@ -1041,7 +864,6 @@ class AudioPipelineInputStatistics extends  AbstractModel {
 
         /**
          * Audio `Pid`, which is available only if the input is `rtp/udp`.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Pid = null;
@@ -1300,46 +1122,6 @@ class DescribeMediaLiveInputSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeMediaLiveChannel response structure.
- * @class
- */
-class DescribeMediaLiveChannelResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Channel information.
-         * @type {ChannelInfo || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new ChannelInfo();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Channel alarm information.
  * @class
  */
@@ -1539,7 +1321,6 @@ class ChannelPipelineAlerts extends  AbstractModel {
         /**
          * Alarm end time in UTC time.
 This time is available only after the alarm ends.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ClearTime = null;
@@ -1756,58 +1537,6 @@ class CreateMediaLiveInputResponse extends  AbstractModel {
 }
 
 /**
- * Relay destination address.
- * @class
- */
-class DestinationInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Relay destination address. Length limit: [1,512].
-         * @type {string || null}
-         */
-        this.OutputUrl = null;
-
-        /**
-         * Authentication key. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AuthKey = null;
-
-        /**
-         * Authentication username. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Username = null;
-
-        /**
-         * Authentication password. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Password = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OutputUrl = 'OutputUrl' in params ? params.OutputUrl : null;
-        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
-        this.Username = 'Username' in params ? params.Username : null;
-        this.Password = 'Password' in params ? params.Password : null;
-
-    }
-}
-
-/**
  * CreateMediaLiveChannel response structure.
  * @class
  */
@@ -1910,6 +1639,12 @@ UTC time, such as `2020-01-01T12:00:00Z`.
          */
         this.EndTime = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Period = null;
+
     }
 
     /**
@@ -1922,6 +1657,7 @@ UTC time, such as `2020-01-01T12:00:00Z`.
         this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -1975,63 +1711,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
         this.SourceUrl = 'SourceUrl' in params ? params.SourceUrl : null;
         this.InputAddress = 'InputAddress' in params ? params.InputAddress : null;
-
-    }
-}
-
-/**
- * Output information.
- * @class
- */
-class OutputInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Output name.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Audio transcoding template name array.
-Quantity limit: [0,1] for RTMP; [0,20] for others.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.AudioTemplateNames = null;
-
-        /**
-         * Video transcoding template name array. Quantity limit: [0,1].
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.VideoTemplateNames = null;
-
-        /**
-         * SCTE-35 information configuration.
-         * @type {Scte35SettingsInfo || null}
-         */
-        this.Scte35Settings = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.AudioTemplateNames = 'AudioTemplateNames' in params ? params.AudioTemplateNames : null;
-        this.VideoTemplateNames = 'VideoTemplateNames' in params ? params.VideoTemplateNames : null;
-
-        if (params.Scte35Settings) {
-            let obj = new Scte35SettingsInfo();
-            obj.deserialize(params.Scte35Settings)
-            this.Scte35Settings = obj;
-        }
 
     }
 }
@@ -2339,55 +2018,6 @@ class ChannelInputStatistics extends  AbstractModel {
 }
 
 /**
- * HLS protocol configuration.
- * @class
- */
-class HlsRemuxSettingsInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
-         * @type {number || null}
-         */
-        this.SegmentDuration = null;
-
-        /**
-         * Number of segments. Value range: [1,30]. Default value: 5.
-         * @type {number || null}
-         */
-        this.SegmentNumber = null;
-
-        /**
-         * Whether to enable PDT insertion. Valid values: CLOSE/OPEN. Default value: CLOSE.
-         * @type {string || null}
-         */
-        this.PdtInsertion = null;
-
-        /**
-         * PDT duration in seconds. Value range: (0,3000]. Default value: 600.
-         * @type {number || null}
-         */
-        this.PdtDuration = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
-        this.SegmentNumber = 'SegmentNumber' in params ? params.SegmentNumber : null;
-        this.PdtInsertion = 'PdtInsertion' in params ? params.PdtInsertion : null;
-        this.PdtDuration = 'PdtDuration' in params ? params.PdtDuration : null;
-
-    }
-}
-
-/**
  * ModifyMediaLiveChannel response structure.
  * @class
  */
@@ -2563,6 +2193,12 @@ UTC time, such as `2020-01-01T12:00:00Z`.
          */
         this.EndTime = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Period = null;
+
     }
 
     /**
@@ -2575,6 +2211,7 @@ UTC time, such as `2020-01-01T12:00:00Z`.
         this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -2877,12 +2514,9 @@ class DescribeMediaLiveChannelsRequest extends  AbstractModel {
 module.exports = {
     InputStatistics: InputStatistics,
     ModifyMediaLiveInputRequest: ModifyMediaLiveInputRequest,
-    DrmSettingsInfo: DrmSettingsInfo,
     PipelineOutputStatistics: PipelineOutputStatistics,
     AttachedInputInfo: AttachedInputInfo,
-    OutputGroupsInfo: OutputGroupsInfo,
-    DashRemuxSettingsInfo: DashRemuxSettingsInfo,
-    StartMediaLiveChannelRequest: StartMediaLiveChannelRequest,
+    DescribeMediaLiveChannelResponse: DescribeMediaLiveChannelResponse,
     VideoTemplateInfo: VideoTemplateInfo,
     DeleteMediaLiveInputSecurityGroupResponse: DeleteMediaLiveInputSecurityGroupResponse,
     DeleteMediaLiveInputRequest: DeleteMediaLiveInputRequest,
@@ -2892,7 +2526,7 @@ module.exports = {
     ModifyMediaLiveInputResponse: ModifyMediaLiveInputResponse,
     VideoPipelineInputStatistics: VideoPipelineInputStatistics,
     CreateMediaLiveInputRequest: CreateMediaLiveInputRequest,
-    Scte35SettingsInfo: Scte35SettingsInfo,
+    StartMediaLiveChannelRequest: StartMediaLiveChannelRequest,
     DescribeMediaLiveInputsRequest: DescribeMediaLiveInputsRequest,
     PipelineInputStatistics: PipelineInputStatistics,
     DescribeMediaLiveInputRequest: DescribeMediaLiveInputRequest,
@@ -2905,7 +2539,6 @@ module.exports = {
     StopMediaLiveChannelResponse: StopMediaLiveChannelResponse,
     CreateMediaLiveChannelRequest: CreateMediaLiveChannelRequest,
     DescribeMediaLiveInputSecurityGroupsRequest: DescribeMediaLiveInputSecurityGroupsRequest,
-    DescribeMediaLiveChannelResponse: DescribeMediaLiveChannelResponse,
     ChannelAlertInfos: ChannelAlertInfos,
     DeleteMediaLiveChannelResponse: DeleteMediaLiveChannelResponse,
     ChannelInfo: ChannelInfo,
@@ -2914,12 +2547,10 @@ module.exports = {
     DescribeMediaLiveInputSecurityGroupResponse: DescribeMediaLiveInputSecurityGroupResponse,
     DeleteMediaLiveChannelRequest: DeleteMediaLiveChannelRequest,
     CreateMediaLiveInputResponse: CreateMediaLiveInputResponse,
-    DestinationInfo: DestinationInfo,
     CreateMediaLiveChannelResponse: CreateMediaLiveChannelResponse,
     DescribeMediaLiveInputResponse: DescribeMediaLiveInputResponse,
     DescribeMediaLiveChannelInputStatisticsRequest: DescribeMediaLiveChannelInputStatisticsRequest,
     InputSettingInfo: InputSettingInfo,
-    OutputInfo: OutputInfo,
     DescribeMediaLiveChannelAlertsRequest: DescribeMediaLiveChannelAlertsRequest,
     CreateMediaLiveInputSecurityGroupResponse: CreateMediaLiveInputSecurityGroupResponse,
     DescribeMediaLiveInputsResponse: DescribeMediaLiveInputsResponse,
@@ -2928,7 +2559,6 @@ module.exports = {
     DescribeMediaLiveChannelAlertsResponse: DescribeMediaLiveChannelAlertsResponse,
     DescribeMediaLiveChannelsResponse: DescribeMediaLiveChannelsResponse,
     ChannelInputStatistics: ChannelInputStatistics,
-    HlsRemuxSettingsInfo: HlsRemuxSettingsInfo,
     ModifyMediaLiveChannelResponse: ModifyMediaLiveChannelResponse,
     CreateMediaLiveInputSecurityGroupRequest: CreateMediaLiveInputSecurityGroupRequest,
     DeleteMediaLiveInputSecurityGroupRequest: DeleteMediaLiveInputSecurityGroupRequest,

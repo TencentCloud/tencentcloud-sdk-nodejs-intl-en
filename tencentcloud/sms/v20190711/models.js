@@ -914,9 +914,9 @@ class DescribeSignListStatus extends  AbstractModel {
         this.SignId = null;
 
         /**
-         * Whether it is Global SMS:
+         * Whether it is Global SMS. Valid values:
 0: Mainland China SMS.
-1: Global SMS.
+1: Global SMS
          * @type {number || null}
          */
         this.International = null;
@@ -1358,9 +1358,9 @@ class DescribeTemplateListStatus extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * Whether it is Global SMS:
+         * Whether it is Global SMS. Valid values:
 0: Mainland China SMS.
-1: Global SMS.
+1: Global SMS
          * @type {number || null}
          */
         this.International = null;

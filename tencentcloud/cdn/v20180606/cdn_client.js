@@ -86,7 +86,6 @@ const ServerCert = models.ServerCert;
 const DisableCachesRequest = models.DisableCachesRequest;
 const SimpleCacheRule = models.SimpleCacheRule;
 const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
-const Hsts = models.Hsts;
 const TpgAdapter = models.TpgAdapter;
 const DetailDomain = models.DetailDomain;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;

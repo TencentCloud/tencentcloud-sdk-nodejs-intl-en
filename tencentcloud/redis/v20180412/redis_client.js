@@ -23,6 +23,7 @@ const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
 const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const TaskInfoDetail = models.TaskInfoDetail;
+const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
@@ -117,6 +118,7 @@ const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
 const DisableReplicaReadonlyRequest = models.DisableReplicaReadonlyRequest;
 const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
+const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const StartupInstanceRequest = models.StartupInstanceRequest;
 const HotKeyInfo = models.HotKeyInfo;
@@ -627,6 +629,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorTookDist(req, cb) {
         let resp = new DescribeInstanceMonitorTookDistResponse();
         this.request("DescribeInstanceMonitorTookDist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to swap the VIPs of instances for instance disaster recovery switch in scenarios where cross-AZ disaster recovery is supported through DTS. After the VIPs of the source and target instances are swapped, the target instance can be written into and the DTS sync task between them will be disconnected.
+     * @param {SwitchInstanceVipRequest} req
+     * @param {function(string, SwitchInstanceVipResponse):void} cb
+     * @public
+     */
+    SwitchInstanceVip(req, cb) {
+        let resp = new SwitchInstanceVipResponse();
+        this.request("SwitchInstanceVip", req, resp, cb);
     }
 
 

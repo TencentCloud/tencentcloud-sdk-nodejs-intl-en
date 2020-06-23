@@ -391,6 +391,62 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * SwitchInstanceVip request structure.
+ * @class
+ */
+class SwitchInstanceVipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Source instance ID
+         * @type {string || null}
+         */
+        this.SrcInstanceId = null;
+
+        /**
+         * Target instance ID
+         * @type {string || null}
+         */
+        this.DstInstanceId = null;
+
+        /**
+         * The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than TimeDelay, the VIP will not be switched. It is recommended to set an acceptable value based on the actual business conditions.
+         * @type {number || null}
+         */
+        this.TimeDelay = null;
+
+        /**
+         * Whether to force the switch when DTS is disconnected. 1: yes; 0: no
+         * @type {number || null}
+         */
+        this.ForceSwitch = null;
+
+        /**
+         * now: switch now; syncComplete: switch after sync is completed
+         * @type {string || null}
+         */
+        this.SwitchTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcInstanceId = 'SrcInstanceId' in params ? params.SrcInstanceId : null;
+        this.DstInstanceId = 'DstInstanceId' in params ? params.DstInstanceId : null;
+        this.TimeDelay = 'TimeDelay' in params ? params.TimeDelay : null;
+        this.ForceSwitch = 'ForceSwitch' in params ? params.ForceSwitch : null;
+        this.SwitchTime = 'SwitchTime' in params ? params.SwitchTime : null;
+
+    }
+}
+
+/**
  * CreateInstances request structure.
  * @class
  */
@@ -5282,6 +5338,41 @@ class DescribeProductInfoRequest extends  AbstractModel {
 }
 
 /**
+ * SwitchInstanceVip response structure.
+ * @class
+ */
+class SwitchInstanceVipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParams response structure.
  * @class
  */
@@ -6075,6 +6166,7 @@ module.exports = {
     ModifyAutoBackupConfigResponse: ModifyAutoBackupConfigResponse,
     RestoreInstanceRequest: RestoreInstanceRequest,
     TaskInfoDetail: TaskInfoDetail,
+    SwitchInstanceVipRequest: SwitchInstanceVipRequest,
     CreateInstancesRequest: CreateInstancesRequest,
     ModifyNetworkConfigResponse: ModifyNetworkConfigResponse,
     CommandTake: CommandTake,
@@ -6169,6 +6261,7 @@ module.exports = {
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
     DisableReplicaReadonlyRequest: DisableReplicaReadonlyRequest,
     DescribeProductInfoRequest: DescribeProductInfoRequest,
+    SwitchInstanceVipResponse: SwitchInstanceVipResponse,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     StartupInstanceRequest: StartupInstanceRequest,
     HotKeyInfo: HotKeyInfo,

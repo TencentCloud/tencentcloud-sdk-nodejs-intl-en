@@ -60,13 +60,13 @@ class UpdateApiKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the key to be updated.
+         * ID of the key to be changed.
          * @type {string || null}
          */
         this.AccessKeyId = null;
 
         /**
-         * Key to be updated, which is required when a custom key is updated. It can contain 10 to 50 letters, digits, and underscores.
+         * Key to be updated, which is required when a custom key is updated. It can contain 10–50 letters, digits, and underscores.
          * @type {string || null}
          */
         this.AccessKeySecret = null;
@@ -95,7 +95,7 @@ class ServiceReleaseVersion extends  AbstractModel {
         super();
 
         /**
-         * Total number of release versions.
+         * Total number of published versions.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -255,7 +255,7 @@ class UnReleaseServiceRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Name of the environment to be deactivated. Valid values: test (testing environment), prepub (pre-publish environment), release (release environment).
+         * Name of the environment to be deactivated. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
          * @type {string || null}
          */
         this.EnvironmentName = null;
@@ -297,31 +297,31 @@ class ModifySubDomainRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Custom domain name for which the path mapping is to be modified.
+         * Custom domain name whose path mapping is to be modified.
          * @type {string || null}
          */
         this.SubDomain = null;
 
         /**
-         * Whether to change to the default path mapping. true: use the default path mapping. false: use the custom path mapping.
+         * Whether to change to the default path mapping. true: use the default path mapping; false: use the custom path mapping.
          * @type {boolean || null}
          */
         this.IsDefaultMapping = null;
 
         /**
-         * Certificate ID, which is required when the HTTPS protocol is included.
+         * Certificate ID, which is required if the HTTPS protocol is included.
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * Modified custom domain name protocol type. Valid values: http, https, http&https.
+         * Custom domain name protocol type after modification. Valid values: http, https, http&https.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Modified path mapping list.
+         * Path mapping list after modification.
          * @type {Array.<PathMapping> || null}
          */
         this.PathMappingSet = null;
@@ -456,7 +456,7 @@ class ServiceEnvironmentStrategy extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Release version ID.
+         * Published version number.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -593,7 +593,7 @@ class TsfLoadBalanceConfResp extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable load balancing.
+         * Whether load balancing is enabled.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -607,7 +607,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Method = null;
 
         /**
-         * Whether to enable session persistence.
+         * Whether session persistence is enabled.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -831,7 +831,7 @@ class HealthCheckConf extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable health check.
+         * Whether health check is enabled.
          * @type {boolean || null}
          */
         this.IsHealthCheck = null;
@@ -921,7 +921,7 @@ class DeleteIPStrategyRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of the service of the IP policy to be deleted.
+         * Unique service ID of the IP policy to be deleted.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -1020,7 +1020,7 @@ class DescribeApiEnvironmentStrategyRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of the service of API.
+         * Unique service ID of API.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -1038,7 +1038,7 @@ class DescribeApiEnvironmentStrategyRequest extends  AbstractModel {
         this.ApiId = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -1112,7 +1112,7 @@ class ServiceConfig extends  AbstractModel {
         super();
 
         /**
-         * Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+         * Backend type, which takes effect when VPC is enabled. Currently, only `clb` is supported.
          * @type {string || null}
          */
         this.Product = null;
@@ -1124,19 +1124,19 @@ class ServiceConfig extends  AbstractModel {
         this.UniqVpcId = null;
 
         /**
-         * API backend service URL. This parameter is required when `ServiceType` is `HTTP`.
+         * API backend service URL, which is required if `ServiceType` is `HTTP`.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * API backend service path, such as `/path`. If `ServiceType` is `HTTP`, this parameter will be required. The frontend and backend paths can be different.
+         * API backend service path, such as `/path`, which is required if `ServiceType` is `HTTP`. The frontend and backend paths can be different.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * API backend service request method, such as `GET`. If `ServiceType` is `HTTP`, this parameter will be required. The frontend and backend methods can be different
+         * API backend service request method, such as `GET`, which is required if `ServiceType` is `HTTP`. The frontend and backend methods can be different
          * @type {string || null}
          */
         this.Method = null;
@@ -1175,7 +1175,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TotalCount = null;
 
         /**
-         * List of environments bound to service
+         * List of environments bound to service.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Environment> || null}
          */
@@ -1238,7 +1238,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ServiceDesc = null;
 
         /**
-         * Protocols supported by service. Valid values: http, https, http&https.
+         * Protocol supported by service. Valid values: http, https, http&https.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -1262,25 +1262,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ExclusiveSetName = null;
 
         /**
-         * Network type list. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+         * Network type list. INNER: private network access; OUTER: public network access.
          * @type {Array.<string> || null}
          */
         this.NetTypes = null;
 
         /**
-         * Private network access subdomain name.
+         * Subdomain name for private network access.
          * @type {string || null}
          */
         this.InternalSubDomain = null;
 
         /**
-         * Public network access subdomain name.
+         * Subdomain name for public network access.
          * @type {string || null}
          */
         this.OuterSubDomain = null;
 
         /**
-         * Port number for HTTP access over private network.
+         * Service port number for HTTP access over private network.
          * @type {number || null}
          */
         this.InnerHttpPort = null;
@@ -1410,7 +1410,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TotalCount = null;
 
         /**
-         * Environment status of the services bound to usage plan.
+         * Environment status of services bound to usage plan.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<UsagePlanEnvironment> || null}
          */
@@ -1616,7 +1616,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Constant parameters
+ * Constant parameter
  * @class
  */
 class ConstantParameter extends  AbstractModel {
@@ -1624,25 +1624,25 @@ class ConstantParameter extends  AbstractModel {
         super();
 
         /**
-         * Constant parameter name. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * Constant parameter name, which is used only if `ServiceType` is `HTTP`.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Constant parameter description. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * Constant parameter description, which is used only if `ServiceType` is `HTTP`.
          * @type {string || null}
          */
         this.Desc = null;
 
         /**
-         * Constant parameter location. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * Constant parameter position, which is used only if `ServiceType` is `HTTP`.
          * @type {string || null}
          */
         this.Position = null;
 
         /**
-         * Constant parameter default value. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * Default value of constant parameter, which is used only if `ServiceType` is `HTTP`.
          * @type {string || null}
          */
         this.DefaultValue = null;
@@ -1708,49 +1708,49 @@ class ServiceParameter extends  AbstractModel {
         super();
 
         /**
-         * API backend service parameter name. This parameter takes effect only when `ServiceType` is `HTTP`. Frontend and backend parameter names can be different.
+         * API backend service parameter name, which is used only if `ServiceType` is `HTTP`. The frontend and backend parameter names can be different.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * API backend service parameter position, such as `head`. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * Position of API backend service parameter, such as `head`, which is used only if `ServiceType` is `HTTP`. The positions of frontend and backend parameters can be different.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Position = null;
 
         /**
-         * Position of the API frontend parameter corresponding to backend service parameter, such as `head`. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * Position of the API frontend parameter corresponding to the backend service parameter, such as `head`, which is used only if `ServiceType` is `HTTP`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RelevantRequestParameterPosition = null;
 
         /**
-         * Name of the API frontend parameter corresponding to backend service parameter. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * Name of the API frontend parameter corresponding to the backend service parameter, which is used only if `ServiceType` is `HTTP`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RelevantRequestParameterName = null;
 
         /**
-         * API backend service parameter default value. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * Default value of API backend service parameter, which is used only if `ServiceType` is `HTTP`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DefaultValue = null;
 
         /**
-         * API backend service parameter remarks. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * API backend service parameter remarks, which is used only if `ServiceType` is `HTTP`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RelevantRequestParameterDesc = null;
 
         /**
-         * API backend service parameter type. This parameter takes effect only when `ServiceType` is `HTTP`.
+         * API backend service parameter type, which is used only if `ServiceType` is `HTTP`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1960,7 +1960,7 @@ class DeleteServiceSubDomainMappingRequest extends  AbstractModel {
         this.SubDomain = null;
 
         /**
-         * Name of the environment whose mapping is to be deleted. Valid values: test (testing environment), prepub (pre-publish environment), release (release environment).
+         * Name of the environment whose mapping is to be deleted. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
          * @type {string || null}
          */
         this.Environment = null;
@@ -2268,6 +2268,69 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Request parameter
+ * @class
+ */
+class ReqParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API frontend parameter name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * API frontend parameter position, such as `head`. Valid values: head, query, path.
+         * @type {string || null}
+         */
+        this.Position = null;
+
+        /**
+         * API frontend parameter type, such as `String` and `int`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Default value of API frontend parameter.
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Whether the API frontend parameter is required. True: yes; False: no.
+         * @type {boolean || null}
+         */
+        this.Required = null;
+
+        /**
+         * API frontend parameter remarks.
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Position = 'Position' in params ? params.Position : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.Required = 'Required' in params ? params.Required : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
  * Frontend path configuration
  * @class
  */
@@ -2423,7 +2486,7 @@ class DescribeServiceReleaseVersionRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2465,7 +2528,7 @@ class DescribeUsagePlanSecretIdsRequest extends  AbstractModel {
         this.UsagePlanId = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2507,7 +2570,7 @@ class DescribeLogSearchResponse extends  AbstractModel {
         this.ConText = null;
 
         /**
-         * The returned result contains zero or multiple logs, which are in the following format:
+         * The returned result contains any number of logs, which are in the following format:
 '[$app_id][$env_name][$service_id][$http_host][$api_id][$uri][$scheme][rsp_st:$status][ups_st:$upstream_status]'
 '[cip:$remote_addr][uip:$upstream_addr][vip:$server_addr][rsp_len:$bytes_sent][req_len:$request_length]'
 '[req_t:$request_time][ups_rsp_t:$upstream_response_time][ups_conn_t:$upstream_connect_time][ups_head_t:$upstream_header_time]’
@@ -2522,25 +2585,25 @@ api_id: API ID.
 uri: request path.
 scheme: HTTP/HTTPS protocol.
 rsp_st: request response status code.
-ups_st: backend business server response status code (if the request is passed through to the backend, this variable will not be empty. If the request is blocked in API Gateway, this variable will be `-`).
+ups_st: backend business server response status code (if the request is passed through to the backend, this variable will not be empty. If the request is blocked in API Gateway, this variable will be displayed as `-`).
 cip: client IP.
 uip: backend business service (upstream) IP.
 vip: VIP requested to be accessed.
 rsp_len: response length.
 req_len: request length.
 req_t: total request response time.
-ups_rsp_t: total backend response time (time between connection establishment by API Gateway and backend response reception).
-ups_conn_t: time when the backend business server is successfully connected.
-ups_head_t: time when the backend response head arrives.
+ups_rsp_t: total backend response time (time between connection establishment by API Gateway and backend response receipt).
+ups_conn_t: time when the backend business server is successfully connected to.
+ups_head_t: time when the backend response header arrives.
 err_msg: error message.
-tcp_rtt: client TCP connection information. RTT (Round Trip Time) consists of three parts: link propagation delay, end system processing delay, queuing and processing delay in router cache.
+tcp_rtt: client TCP connection information. RTT (Round Trip Time) consists of three parts: link propagation delay, end system processing delay, and queuing delay in router cache.
 req_id: request ID.
          * @type {Array.<string> || null}
          */
         this.LogSet = null;
 
         /**
-         * Number of logs returned for a search (`TotalCount <= Limit`)
+         * Number of logs returned for one search (`TotalCount <= Limit`)
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -2569,7 +2632,7 @@ req_id: request ID.
 }
 
 /**
- * Error code input parameters
+ * Error code input parameter
  * @class
  */
 class ResponseErrorCodeReq extends  AbstractModel {
@@ -2589,7 +2652,7 @@ class ResponseErrorCodeReq extends  AbstractModel {
         this.Msg = null;
 
         /**
-         * Remarks of the custom response configuration error code.
+         * Custom response configuration error code remarks.
          * @type {string || null}
          */
         this.Desc = null;
@@ -2657,13 +2720,13 @@ class CreateServiceRequest extends  AbstractModel {
         this.ExclusiveSetName = null;
 
         /**
-         * Network type list, which is used to specify the supported network types. `INNER` indicates access over private network, and `OUTER` indicates access over public network. The default value is `OUTER`.
+         * Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
          * @type {Array.<string> || null}
          */
         this.NetTypes = null;
 
         /**
-         * IP version number. Valid values: IPv4 (default value), IPv6
+         * IP version number. Valid values: IPv4, IPv6. Default value: IPv4.
          * @type {string || null}
          */
         this.IpVersion = null;
@@ -2782,7 +2845,7 @@ class ServiceReleaseHistory extends  AbstractModel {
         super();
 
         /**
-         * Total number of release versions.
+         * Total number of published versions.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2981,13 +3044,13 @@ class UpdateServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of the service to be switch to.
+         * Unique ID of the service to be switch.
          * @type {string || null}
          */
         this.ServiceId = null;
 
         /**
-         * Name of the environment to be switched to. Valid values: test (testing environment), prepub (pre-publish environment), release (release environment).
+         * Name of the environment to be switched to. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
          * @type {string || null}
          */
         this.EnvironmentName = null;
@@ -3022,7 +3085,7 @@ class UpdateServiceRequest extends  AbstractModel {
 }
 
 /**
- * Service publishing returned result
+ * Returned result of service publishing
  * @class
  */
 class ReleaseService extends  AbstractModel {
@@ -3037,7 +3100,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ReleaseDesc = null;
 
         /**
-         * Release version ID.
+         * Published version ID.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -3243,6 +3306,69 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Custom service domain name list
+ * @class
+ */
+class DomainSetList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Domain name resolution status. True: success; Flase: failure.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Certificate ID.
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * Whether the default path mapping is used.
+         * @type {boolean || null}
+         */
+        this.IsDefaultMapping = null;
+
+        /**
+         * Custom domain name protocol type.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Network type. Valid values: INNER, OUTER.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.IsDefaultMapping = 'IsDefaultMapping' in params ? params.IsDefaultMapping : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+
+    }
+}
+
+/**
  * DescribeApiKey response structure.
  * @class
  */
@@ -3320,7 +3446,7 @@ class ModifyApiRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of API's service.
+         * Unique service ID of API.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -3356,19 +3482,19 @@ class ModifyApiRequest extends  AbstractModel {
         this.ApiDesc = null;
 
         /**
-         * API type. Valid values: NORMAL (default value), TSF.
+         * API type. Valid values: NORMAL, TSF. Default value: NORMAL.
          * @type {string || null}
          */
         this.ApiType = null;
 
         /**
-         * API authentication type. Valid values: SECRET, NONE (default), OAUTH.
+         * API authentication type. Valid values: SECRET, NONE, OAUTH. Default value: NONE.
          * @type {string || null}
          */
         this.AuthType = null;
 
         /**
-         * Whether signature authentication is required. `True` indicates yes while `False` indicates no. This parameter is to be disused.
+         * Whether signature authentication is required. True: yes; False: no. This parameter is to be disused.
          * @type {boolean || null}
          */
         this.AuthRequired = null;
@@ -3386,31 +3512,31 @@ class ModifyApiRequest extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * Whether to enable CORS. `True` indicates yes while `False` indicates no.
+         * Whether to enable CORS. True: yes; False: no.
          * @type {boolean || null}
          */
         this.EnableCORS = null;
 
         /**
-         * Constant parameters.
+         * Constant parameter.
          * @type {Array.<ConstantParameter> || null}
          */
         this.ConstantParameters = null;
 
         /**
-         * Frontend request parameters.
+         * Frontend request parameter.
          * @type {Array.<ReqParameter> || null}
          */
         this.RequestParameters = null;
 
         /**
-         * This field takes effect when `AuthType` is `OAUTH`. NORMAL: business API. OAUTH: authorization API.
+         * This field is valid if `AuthType` is `OAUTH`. NORMAL: business API; OAUTH: authorization API.
          * @type {string || null}
          */
         this.ApiBusinessType = null;
 
         /**
-         * Returned information of API backend mocking. This parameter is required when `ServiceType` is `Mock`.
+         * Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
          * @type {string || null}
          */
         this.ServiceMockReturnMessage = null;
@@ -3422,13 +3548,13 @@ class ModifyApiRequest extends  AbstractModel {
         this.MicroServices = null;
 
         /**
-         * Microservice load balancing configuration.
+         * Load balancing configuration of microservice.
          * @type {TsfLoadBalanceConfResp || null}
          */
         this.ServiceTsfLoadBalanceConf = null;
 
         /**
-         * Microservice health check configuration.
+         * Health check configuration of microservice.
          * @type {HealthCheckConf || null}
          */
         this.ServiceTsfHealthCheckConf = null;
@@ -3446,85 +3572,85 @@ class ModifyApiRequest extends  AbstractModel {
         this.TargetServicesHealthCheckConf = null;
 
         /**
-         * SCF function name. This parameter takes effect when the backend type is `SCF`.
+         * SCF function name, which takes effect if the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceScfFunctionName = null;
 
         /**
-         * SCF WebSocket registration function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket registration function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionName = null;
 
         /**
-         * SCF WebSocket cleanup function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionName = null;
 
         /**
-         * SCF WebSocket transfer function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketTransportFunctionName = null;
 
         /**
-         * SCF function namespace. This parameter takes effect when the backend type is `SCF`.
+         * SCF function namespace, which takes effect if the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceScfFunctionNamespace = null;
 
         /**
-         * SCF function version. This parameter takes effect when the backend type is `SCF`.
+         * SCF function version, which takes effect if the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceScfFunctionQualifier = null;
 
         /**
-         * SCF WebSocket registration function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionNamespace = null;
 
         /**
-         * SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionQualifier = null;
 
         /**
-         * SCF WebSocket transfer function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketTransportFunctionNamespace = null;
 
         /**
-         * SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketTransportFunctionQualifier = null;
 
         /**
-         * SCF WebSocket cleanup function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionNamespace = null;
 
         /**
-         * SCF WebSocket cleanup function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionQualifier = null;
 
         /**
-         * Whether to enable response integration. This parameter takes effect when the backend type is `SCF`.
+         * Whether to enable response integration, which takes effect if the backend type is `SCF`.
          * @type {boolean || null}
          */
         this.ServiceScfIsIntegratedResponse = null;
 
         /**
-         * Billing after debugging starts (reserved for marketplace).
+         * Billing after debugging starts (reserved field for marketplace).
          * @type {boolean || null}
          */
         this.IsDebugAfterCharge = null;
@@ -3536,7 +3662,7 @@ class ModifyApiRequest extends  AbstractModel {
         this.TagSpecifications = null;
 
         /**
-         * Whether to delete the custom response configuration error codes. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
+         * Whether to delete the error codes for custom response configuration. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
          * @type {boolean || null}
          */
         this.IsDeleteResponseErrorCodes = null;
@@ -3548,13 +3674,13 @@ class ModifyApiRequest extends  AbstractModel {
         this.ResponseType = null;
 
         /**
-         * Successful response sample of custom response configuration.
+         * Sample response for successful custom response configuration.
          * @type {string || null}
          */
         this.ResponseSuccessExample = null;
 
         /**
-         * Response failure sample of custom response configuration.
+         * Sample response for failed custom response configuration.
          * @type {string || null}
          */
         this.ResponseFailExample = null;
@@ -3566,19 +3692,19 @@ class ModifyApiRequest extends  AbstractModel {
         this.ServiceConfig = null;
 
         /**
-         * Unique ID of associated authorization API. This parameter takes effect only when `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
+         * Unique ID of associated authorization API, which takes effect only if `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
          * @type {string || null}
          */
         this.AuthRelationApiId = null;
 
         /**
-         * API backend service parameters.
+         * API backend service parameter.
          * @type {Array.<ServiceParameter> || null}
          */
         this.ServiceParameters = null;
 
         /**
-         * OAuth configuration. This parameter takes effect when `AuthType` is `OAUTH`.
+         * OAuth configuration, which takes effect if `AuthType` is `OAUTH`.
          * @type {OauthConfig || null}
          */
         this.OauthConfig = null;
@@ -3737,13 +3863,13 @@ class ModifyUsagePlanRequest extends  AbstractModel {
         this.UsagePlanId = null;
 
         /**
-         * Modified custom usage plan name.
+         * Custom usage plan name after modification.
          * @type {string || null}
          */
         this.UsagePlanName = null;
 
         /**
-         * Modified custom usage plan description.
+         * Custom usage plan description after modification.
          * @type {string || null}
          */
         this.UsagePlanDesc = null;
@@ -3828,25 +3954,25 @@ class ModifyServiceRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Modified service name.
+         * Service name after modification.
          * @type {string || null}
          */
         this.ServiceName = null;
 
         /**
-         * Modified service description.
+         * Service description after modification.
          * @type {string || null}
          */
         this.ServiceDesc = null;
 
         /**
-         * Modified service frontend request type, such as `http`, `https`, and `http&https`.
+         * Service frontend request type after modification, such as `http`, `https`, and `http&https`.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Network type list, which is used to specify the supported network types. `INNER` indicates access over private network, and `OUTER` indicates access over public network. The default value is `OUTER`.
+         * Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
          * @type {Array.<string> || null}
          */
         this.NetTypes = null;
@@ -3948,7 +4074,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Protocol = null;
 
         /**
-         * Whether to enable debugging on purchase.
+         * Whether to enable debugging after purchase.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -4041,7 +4167,7 @@ class CreateApiRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of API's service.
+         * Unique service ID of API.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -4101,25 +4227,25 @@ class CreateApiRequest extends  AbstractModel {
         this.EnableCORS = null;
 
         /**
-         * Constant parameters.
+         * Constant parameter.
          * @type {Array.<ConstantParameter> || null}
          */
         this.ConstantParameters = null;
 
         /**
-         * Frontend request parameters.
+         * Frontend request parameter.
          * @type {Array.<RequestParameter> || null}
          */
         this.RequestParameters = null;
 
         /**
-         * This field takes effect when `AuthType` is `OAUTH`. NORMAL: business API. OAUTH: authorization API.
+         * This field is valid if `AuthType` is `OAUTH`. NORMAL: business API; OAUTH: authorization API.
          * @type {string || null}
          */
         this.ApiBusinessType = null;
 
         /**
-         * Returned information of API backend mocking. This parameter is required when `ServiceType` is `Mock`.
+         * Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
          * @type {string || null}
          */
         this.ServiceMockReturnMessage = null;
@@ -4131,13 +4257,13 @@ class CreateApiRequest extends  AbstractModel {
         this.MicroServices = null;
 
         /**
-         * Microservice load balancing configuration.
+         * Load balancing configuration of microservice.
          * @type {TsfLoadBalanceConfResp || null}
          */
         this.ServiceTsfLoadBalanceConf = null;
 
         /**
-         * Microservice health check configuration.
+         * Health check configuration of microservice.
          * @type {HealthCheckConf || null}
          */
         this.ServiceTsfHealthCheckConf = null;
@@ -4161,91 +4287,91 @@ class CreateApiRequest extends  AbstractModel {
         this.TargetServicesHealthCheckConf = null;
 
         /**
-         * SCF function name. This parameter takes effect when the backend type is `SCF`.
+         * SCF function name, which takes effect if the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceScfFunctionName = null;
 
         /**
-         * SCF WebSocket registration function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket registration function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionName = null;
 
         /**
-         * SCF WebSocket cleanup function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionName = null;
 
         /**
-         * SCF WebSocket transfer function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketTransportFunctionName = null;
 
         /**
-         * SCF function namespace. This parameter takes effect when the backend type is `SCF`.
+         * SCF function namespace, which takes effect if the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceScfFunctionNamespace = null;
 
         /**
-         * SCF function version. This parameter takes effect when the backend type is `SCF`.
+         * SCF function version, which takes effect if the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceScfFunctionQualifier = null;
 
         /**
-         * SCF WebSocket registration function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionNamespace = null;
 
         /**
-         * SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionQualifier = null;
 
         /**
-         * SCF WebSocket transfer function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketTransportFunctionNamespace = null;
 
         /**
-         * SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketTransportFunctionQualifier = null;
 
         /**
-         * SCF WebSocket cleanup function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionNamespace = null;
 
         /**
-         * SCF WebSocket cleanup function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionQualifier = null;
 
         /**
-         * Whether to enable response integration. This parameter takes effect when the backend type is `SCF`.
+         * Whether to enable response integration, which takes effect if the backend type is `SCF`.
          * @type {boolean || null}
          */
         this.ServiceScfIsIntegratedResponse = null;
 
         /**
-         * Billing after debugging starts (reserved for marketplace).
+         * Billing after debugging starts (reserved field for marketplace).
          * @type {boolean || null}
          */
         this.IsDebugAfterCharge = null;
 
         /**
-         * Whether to delete the custom response configuration error codes. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
+         * Whether to delete the error codes for custom response configuration. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
          * @type {boolean || null}
          */
         this.IsDeleteResponseErrorCodes = null;
@@ -4257,13 +4383,13 @@ class CreateApiRequest extends  AbstractModel {
         this.ResponseType = null;
 
         /**
-         * Successful response sample of custom response configuration.
+         * Sample response for successful custom response configuration.
          * @type {string || null}
          */
         this.ResponseSuccessExample = null;
 
         /**
-         * Response failure sample of custom response configuration.
+         * Sample response for failed custom response configuration.
          * @type {string || null}
          */
         this.ResponseFailExample = null;
@@ -4275,19 +4401,19 @@ class CreateApiRequest extends  AbstractModel {
         this.ServiceConfig = null;
 
         /**
-         * Unique ID of associated authorization API. This parameter takes effect only when `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
+         * Unique ID of associated authorization API, which takes effect only if `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
          * @type {string || null}
          */
         this.AuthRelationApiId = null;
 
         /**
-         * API backend service parameters.
+         * API backend service parameter.
          * @type {Array.<ServiceParameter> || null}
          */
         this.ServiceParameters = null;
 
         /**
-         * OAuth configuration. This parameter takes effect when `AuthType` is `OAUTH`.
+         * OAuth configuration, which takes effect if `AuthType` is `OAUTH`.
          * @type {OauthConfig || null}
          */
         this.OauthConfig = null;
@@ -4461,7 +4587,7 @@ class DescribeServiceEnvironmentStrategyRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -4503,7 +4629,7 @@ class ReleaseServiceRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Name of the environment to be published. Valid values: test (testing environment), prepub (pre-publish environment), release (release environment).
+         * Name of the environment to be published. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
          * @type {string || null}
          */
         this.EnvironmentName = null;
@@ -4635,7 +4761,7 @@ class Environment extends  AbstractModel {
         this.Url = null;
 
         /**
-         * Release status. 1: released. 0: not released.
+         * Release status. 1: published. 0: not published.
          * @type {number || null}
          */
         this.Status = null;
@@ -4824,7 +4950,7 @@ class ModifyApiIncrementRequest extends  AbstractModel {
         this.BusinessType = null;
 
         /**
-         * Public key value to be modified of OAuth API
+         * Public key value to be modified by OAuth API
          * @type {string || null}
          */
         this.PublicKey = null;
@@ -4868,7 +4994,7 @@ class GenerateApiDocumentRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Environment of the service for which the SDK is to be created.
+         * Environment of the service for which to create an SDK.
          * @type {string || null}
          */
         this.GenEnvironment = null;
@@ -4941,7 +5067,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * List of policies bound to environment.
+ * List of policies bound to environment
  * @class
  */
 class ServiceEnvironmentStrategyStatus extends  AbstractModel {
@@ -4949,7 +5075,7 @@ class ServiceEnvironmentStrategyStatus extends  AbstractModel {
         super();
 
         /**
-         * Throttling policy number.
+         * Number of throttling policies.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -5030,7 +5156,7 @@ class UpdateApiKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * Changed key details.
+         * Key details after change.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {ApiKey || null}
          */
@@ -5071,7 +5197,7 @@ class UnBindEnvironmentRequest extends  AbstractModel {
         super();
 
         /**
-         * Binding type. Valid values: API, SERVICE (default value).
+         * Binding type. Valid values: API, SERVICE. Default value: SERVICE.
          * @type {string || null}
          */
         this.BindType = null;
@@ -5095,7 +5221,7 @@ class UnBindEnvironmentRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Unique API ID array. This parameter will be required when `BindType` is `API`.
+         * Unique API ID array, which is required if `BindType` is `API`.
          * @type {Array.<string> || null}
          */
         this.ApiIds = null;
@@ -5195,7 +5321,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Returned parameters for API creation
+ * Return of API creation
  * @class
  */
 class CreateApiRsp extends  AbstractModel {
@@ -5248,6 +5374,43 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Information of environment bound to usage plan
+ * @class
+ */
+class UsagePlanBindEnvironment extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnvironmentName = null;
+
+        /**
+         * Unique service ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+
+    }
+}
+
+/**
  * DeleteApi request structure.
  * @class
  */
@@ -5256,7 +5419,7 @@ class DeleteApiRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of API's service.
+         * Unique service ID of API.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -5332,7 +5495,7 @@ class DescribeServiceEnvironmentListRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -5368,7 +5531,7 @@ class ServiceSubDomainMappings extends  AbstractModel {
         super();
 
         /**
-         * Whether to use the default path mapping. true: use the default path mapping. false: use the custom path mapping (`PathMappingSet` is required).
+         * Whether the default path mapping is used. true: use the default path mapping; false: use the custom path mapping (`PathMappingSet` is required in this case).
          * @type {boolean || null}
          */
         this.IsDefaultMapping = null;
@@ -5474,7 +5637,7 @@ class DomainSets extends  AbstractModel {
 }
 
 /**
- * >Key-value pair filters for conditional filtering queries, such as filter ID, name, and status
+ * >Key-value pair filter for conditional filtering queries, such as filtering ID, name, status, etc.
 > * If there are multiple `Filter`, the relationship among them is logical `AND`.
 > * If there are multiple `Values` in the same `Filter`, the relationship among them is logical `OR`.
 >
@@ -5607,7 +5770,7 @@ class DescribeServiceUsagePlanRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -5678,7 +5841,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Method = null;
 
         /**
-         * Name of the bound environment.
+         * Name of bound environment.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -5699,7 +5862,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MaxRequestNum = null;
 
         /**
-         * Maximum requests per second.
+         * Maximum number of requests per second.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -5760,7 +5923,7 @@ class ModifyIPStrategyRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of the service of the policy to be modified.
+         * Unique service ID of the policy to be modified.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -5894,7 +6057,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Details of the usage plans bound to API or service
+ * Details of usage plans bound to API or service
  * @class
  */
 class ApiUsagePlan extends  AbstractModel {
@@ -6035,7 +6198,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * API documentation download
+ * API document download
  * @class
  */
 class DocumentSDK extends  AbstractModel {
@@ -6043,13 +6206,13 @@ class DocumentSDK extends  AbstractModel {
         super();
 
         /**
-         * Download link of generated file. Generated documents are stored in COS.
+         * Download link of generated file. Generated documents will be stored in COS.
          * @type {string || null}
          */
         this.DocumentURL = null;
 
         /**
-         * Download link of generated SDK file. Generated SDKs are stored in COS.
+         * Download link of generated SDK file. Generated SDK files will be stored in COS.
          * @type {string || null}
          */
         this.SdkURL = null;
@@ -6126,7 +6289,7 @@ class DescribeServiceSubDomainsRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -6162,7 +6325,7 @@ class GenerateApiDocumentResponse extends  AbstractModel {
         super();
 
         /**
-         * API documentation and SDK link.
+         * API document and SDK link.
          * @type {DocumentSDK || null}
          */
         this.Result = null;
@@ -6243,7 +6406,7 @@ class DescribeServiceSubDomainsResponse extends  AbstractModel {
         super();
 
         /**
-         * Custom service domain names.
+         * Custom service domain name query.
          * @type {DomainSets || null}
          */
         this.Result = null;
@@ -6295,19 +6458,19 @@ class BindSubDomainRequest extends  AbstractModel {
         this.SubDomain = null;
 
         /**
-         * Protocols supported by service. Valid values: http, https, http&https.
+         * Protocol supported by service. Valid values: http, https, http&https.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Network type. Valid values: INNER, OUTER.
+         * Network type. Valid values: OUTER, INNER.
          * @type {string || null}
          */
         this.NetType = null;
 
         /**
-         * Whether to use the default path mapping. The default value is `true`. If the value is `false`, the custom path mapping will be used and `PathMappingSet` is required.
+         * Whether the default path mapping is used. The default value is `true`. If the value is `false`, the custom path mapping will be used and `PathMappingSet` will be required in this case.
          * @type {boolean || null}
          */
         this.IsDefaultMapping = null;
@@ -6319,13 +6482,13 @@ class BindSubDomainRequest extends  AbstractModel {
         this.NetSubDomain = null;
 
         /**
-         * Unique ID of the certificate of the custom domain name to be bound. The certificate can be uploaded only when `Protocol` is `https` or `http&https`.
+         * Unique certificate ID of the custom domain name to be bound. The certificate can be uploaded if `Protocol` is `https` or `http&https`.
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * Custom domain name path mapping. It can contain up to 3 `Environment` parameters which can be set to only `test`, `prepub`, or `release`.
+         * Custom domain name path mapping. It can contain up to 3 `Environment` values which can be set to only `test`, `prepub`, and `release`, respectively.
          * @type {Array.<PathMapping> || null}
          */
         this.PathMappingSet = null;
@@ -6409,7 +6572,7 @@ class BindIPStrategyRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of the service of the IP policy to be bound.
+         * Unique service ID of the IP policy to be bound.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -6421,7 +6584,7 @@ class BindIPStrategyRequest extends  AbstractModel {
         this.StrategyId = null;
 
         /**
-         * Environment to be bound to IP policy
+         * Environment to be bound to IP policy.
          * @type {string || null}
          */
         this.EnvironmentName = null;
@@ -6514,7 +6677,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Msg = null;
 
         /**
-         * Remarks of the custom response configuration error code.
+         * Custom response configuration error code remarks.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6842,7 +7005,7 @@ class BindEnvironmentRequest extends  AbstractModel {
         this.UsagePlanIds = null;
 
         /**
-         * Binding type. Valid values: API, SERVICE (default value).
+         * Binding type. Valid values: API, SERVICE. Default value: SERVICE.
          * @type {string || null}
          */
         this.BindType = null;
@@ -6860,7 +7023,7 @@ class BindEnvironmentRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Unique API ID array. This parameter will be required when `bindType` is `API`.
+         * Unique API ID array, which is required if `bindType` is `API`.
          * @type {Array.<string> || null}
          */
         this.ApiIds = null;
@@ -6898,13 +7061,13 @@ class DescribeUsagePlanEnvironmentsRequest extends  AbstractModel {
         this.UsagePlanId = null;
 
         /**
-         * Binding type. Valid values: API, SERVICE (default value).
+         * Binding type. Valid values: API, SERVICE. Default value: SERVICE.
          * @type {string || null}
          */
         this.BindType = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -7035,7 +7198,7 @@ class RequestParameter extends  AbstractModel {
         this.Desc = null;
 
         /**
-         * Parameter location
+         * Parameter position
          * @type {string || null}
          */
         this.Position = null;
@@ -7053,7 +7216,7 @@ class RequestParameter extends  AbstractModel {
         this.DefaultValue = null;
 
         /**
-         * Required
+         * Whether it is required
          * @type {boolean || null}
          */
         this.Required = null;
@@ -7098,7 +7261,7 @@ class DescribeServiceEnvironmentReleaseHistoryRequest extends  AbstractModel {
         this.EnvironmentName = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -7159,7 +7322,7 @@ class CreateServiceResponse extends  AbstractModel {
         this.OuterSubDomain = null;
 
         /**
-         * Default domain name of VPC private network
+         * Default private network domain name of VPC
          * @type {string || null}
          */
         this.InnerSubDomain = null;
@@ -7171,7 +7334,7 @@ class CreateServiceResponse extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * Network type list. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
+         * Network type list. INNER: private network access; OUTER: public network access.
          * @type {Array.<string> || null}
          */
         this.NetTypes = null;
@@ -7274,7 +7437,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UniqVpcId = null;
 
         /**
-         * API type. Valid values (general API), TSF (microservice API).
+         * API type. Valid values: NORMAL (general API), TSF (microservice API).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -7288,7 +7451,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Protocol = null;
 
         /**
-         * Whether to enable debugging on purchase (reserved for the marketplace)
+         * Whether to enable debugging after purchase (reserved field for the marketplace)
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -7302,21 +7465,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AuthType = null;
 
         /**
-         * OAuth API type. This parameter takes effect when `AuthType` is `OAUTH`. Valid values: NORMAL (business API), OAUTH (authorization API).
+         * OAuth API type, which is valid if `AuthType` is `OAUTH`. Valid values: NORMAL (business API), OAUTH (authorization API).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApiBusinessType = null;
 
         /**
-         * Unique ID of associated authorization API. This parameter takes effect only when `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
+         * Unique ID of associated authorization API, which takes effect only if `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AuthRelationApiId = null;
 
         /**
-         * OAuth configuration information. This parameter takes effect when `AuthType` is `OAUTH`.
+         * OAuth configuration information, which takes effect if `AuthType` is `OAUTH`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {OauthConfig || null}
          */
@@ -7420,7 +7583,7 @@ class DescribeLogSearchRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * Number of logs returned at a time. Up to 100 logs can be returned at a time
+         * Number of logs to be returned at a time. Maximum value: 100
          * @type {number || null}
          */
         this.Limit = null;
@@ -7432,16 +7595,22 @@ class DescribeLogSearchRequest extends  AbstractModel {
         this.ConText = null;
 
         /**
-         * Log sorting by time in ascending order (asc) or descending order (desc). The default value is `desc`
+         * Sorting by time. Valid values: asc (ascending), desc (descending). Default value: desc
          * @type {string || null}
          */
         this.Sort = null;
 
         /**
-         * Fuzzy search of logs by keyword
+         * Fuzzy search for log by keyword
          * @type {string || null}
          */
         this.Query = null;
+
+        /**
+         * 
+         * @type {Array.<LogQuery> || null}
+         */
+        this.LogQuerys = null;
 
     }
 
@@ -7468,6 +7637,148 @@ class DescribeLogSearchRequest extends  AbstractModel {
         this.ConText = 'ConText' in params ? params.ConText : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.Query = 'Query' in params ? params.Query : null;
+
+        if (params.LogQuerys) {
+            this.LogQuerys = new Array();
+            for (let z in params.LogQuerys) {
+                let obj = new LogQuery();
+                obj.deserialize(params.LogQuerys[z]);
+                this.LogQuerys.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Usage plan details (as modification made on a complex type by `yunapi` will be directly synced to the production environment and you cannot query which APIs reference the complex type, you need to create a complex type different from the previous `UsagePlan`)
+ * @class
+ */
+class UsagePlanInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique usage plan ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanId = null;
+
+        /**
+         * Usage plan name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanName = null;
+
+        /**
+         * Usage plan description.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanDesc = null;
+
+        /**
+         * Number of initialization calls.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InitQuota = null;
+
+        /**
+         * Limit of requests per second.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRequestNumPreSec = null;
+
+        /**
+         * Maximum number of calls.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRequestNum = null;
+
+        /**
+         * Whether to hide.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsHide = null;
+
+        /**
+         * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+        /**
+         * Number of bound keys.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BindSecretIdTotalCount = null;
+
+        /**
+         * Details of bound keys.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.BindSecretIds = null;
+
+        /**
+         * Number of bound environments.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BindEnvironmentTotalCount = null;
+
+        /**
+         * Details of bound environments.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<UsagePlanBindEnvironment> || null}
+         */
+        this.BindEnvironments = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsagePlanId = 'UsagePlanId' in params ? params.UsagePlanId : null;
+        this.UsagePlanName = 'UsagePlanName' in params ? params.UsagePlanName : null;
+        this.UsagePlanDesc = 'UsagePlanDesc' in params ? params.UsagePlanDesc : null;
+        this.InitQuota = 'InitQuota' in params ? params.InitQuota : null;
+        this.MaxRequestNumPreSec = 'MaxRequestNumPreSec' in params ? params.MaxRequestNumPreSec : null;
+        this.MaxRequestNum = 'MaxRequestNum' in params ? params.MaxRequestNum : null;
+        this.IsHide = 'IsHide' in params ? params.IsHide : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.BindSecretIdTotalCount = 'BindSecretIdTotalCount' in params ? params.BindSecretIdTotalCount : null;
+        this.BindSecretIds = 'BindSecretIds' in params ? params.BindSecretIds : null;
+        this.BindEnvironmentTotalCount = 'BindEnvironmentTotalCount' in params ? params.BindEnvironmentTotalCount : null;
+
+        if (params.BindEnvironments) {
+            this.BindEnvironments = new Array();
+            for (let z in params.BindEnvironments) {
+                let obj = new UsagePlanBindEnvironment();
+                obj.deserialize(params.BindEnvironments[z]);
+                this.BindEnvironments.push(obj);
+            }
+        }
 
     }
 }
@@ -7528,7 +7839,7 @@ class DescribeApiUsagePlanRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -7599,7 +7910,7 @@ class DescribeApiRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of API's service.
+         * Unique service ID of API.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -7634,21 +7945,21 @@ class ApiInfo extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of API's service.
+         * Unique service ID of API.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceId = null;
 
         /**
-         * Name of API's service.
+         * Service name of API.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceName = null;
 
         /**
-         * Description of API's service.
+         * Service description of API.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -7732,7 +8043,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.OauthConfig = null;
 
         /**
-         * Whether to enable debugging on purchase (reserved for the marketplace).
+         * Whether to enable debugging after purchase (reserved field for the marketplace).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -7753,14 +8064,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ResponseType = null;
 
         /**
-         * Successful response sample of custom response configuration.
+         * Sample response for successful custom response configuration.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ResponseSuccessExample = null;
 
         /**
-         * Response failure sample of custom response configuration.
+         * Sample response for failed custom response configuration.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -7774,7 +8085,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ResponseErrorCodes = null;
 
         /**
-         * Frontend request parameters.
+         * Frontend request parameter.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ReqParameter> || null}
          */
@@ -7802,119 +8113,119 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ServiceConfig = null;
 
         /**
-         * API backend service parameters.
+         * API backend service parameter.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ServiceParameter> || null}
          */
         this.ServiceParameters = null;
 
         /**
-         * Constant parameters.
+         * Constant parameter.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ConstantParameter> || null}
          */
         this.ConstantParameters = null;
 
         /**
-         * Returned information of API backend mocking. This parameter is required when `ServiceType` is `Mock`.
+         * Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceMockReturnMessage = null;
 
         /**
-         * SCF function name. This parameter takes effect when the backend type is `SCF`.
+         * SCF function name, which takes effect if the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceScfFunctionName = null;
 
         /**
-         * SCF function namespace. This parameter takes effect when the backend type is `SCF`.
+         * SCF function namespace, which takes effect if the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceScfFunctionNamespace = null;
 
         /**
-         * SCF function version. This parameter takes effect when the backend type is `SCF`.
+         * SCF function version, which takes effect if the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceScfFunctionQualifier = null;
 
         /**
-         * Whether to enable integrated response.
+         * Whether integrated response is enabled.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.ServiceScfIsIntegratedResponse = null;
 
         /**
-         * SCF WebSocket registration function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`
+         * SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionName = null;
 
         /**
-         * SCF WebSocket registration function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionNamespace = null;
 
         /**
-         * SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceWebsocketRegisterFunctionQualifier = null;
 
         /**
-         * SCF WebSocket cleanup function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionName = null;
 
         /**
-         * SCF WebSocket cleanup function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionNamespace = null;
 
         /**
-         * SCF WebSocket cleanup function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket cleanup function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceWebsocketCleanupFunctionQualifier = null;
 
         /**
-         * WebSocket pushback address.
+         * WebSocket callback address.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InternalDomain = null;
 
         /**
-         * SCF WebSocket transfer function. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceWebsocketTransportFunctionName = null;
 
         /**
-         * SCF WebSocket transfer function namespace. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServiceWebsocketTransportFunctionNamespace = null;
 
         /**
-         * SCF WebSocket transfer function version. This parameter takes effect when the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+         * SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -7928,21 +8239,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MicroServices = null;
 
         /**
-         * Microservice detailed information.
+         * Microservice details.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.MicroServicesInfo = null;
 
         /**
-         * Microservice load balancing configuration.
+         * Load balancing configuration of microservice.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {TsfLoadBalanceConfResp || null}
          */
         this.ServiceTsfLoadBalanceConf = null;
 
         /**
-         * Microservice health check configuration.
+         * Health check configuration of microservice.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {HealthCheckConf || null}
          */
@@ -8179,13 +8490,13 @@ class CreateApiKeyRequest extends  AbstractModel {
         this.AccessKeyType = null;
 
         /**
-         * Custom key ID, which is required when `AccessKeyType` is `manual`. It can contain 5 to 50 letters, digits, and underscores.
+         * Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5–50 letters, digits, and underscores.
          * @type {string || null}
          */
         this.AccessKeyId = null;
 
         /**
-         * Custom key, which is required when `AccessKeyType` is `manual`. It can contain 10 to 50 letters, digits, and underscores.
+         * Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10–50 letters, digits, and underscores.
          * @type {string || null}
          */
         this.AccessKeySecret = null;
@@ -8285,6 +8596,7 @@ module.exports = {
     ModifyApiEnvironmentStrategyRequest: ModifyApiEnvironmentStrategyRequest,
     ModifyUsagePlanResponse: ModifyUsagePlanResponse,
     CreateUsagePlanResponse: CreateUsagePlanResponse,
+    ReqParameter: ReqParameter,
     RequestConfig: RequestConfig,
     DeleteApiKeyResponse: DeleteApiKeyResponse,
     UsagePlan: UsagePlan,
@@ -8307,6 +8619,7 @@ module.exports = {
     UsagePlanBindSecret: UsagePlanBindSecret,
     DeleteApiKeyRequest: DeleteApiKeyRequest,
     ModifyApiEnvironmentStrategyResponse: ModifyApiEnvironmentStrategyResponse,
+    DomainSetList: DomainSetList,
     DescribeApiKeyResponse: DescribeApiKeyResponse,
     ModifyApiIncrementResponse: ModifyApiIncrementResponse,
     ModifyApiRequest: ModifyApiRequest,
@@ -8333,6 +8646,7 @@ module.exports = {
     DescribeApiResponse: DescribeApiResponse,
     BindSecretIdsResponse: BindSecretIdsResponse,
     CreateApiRsp: CreateApiRsp,
+    UsagePlanBindEnvironment: UsagePlanBindEnvironment,
     DeleteApiRequest: DeleteApiRequest,
     DescribeServiceSubDomainMappingsRequest: DescribeServiceSubDomainMappingsRequest,
     DescribeServiceEnvironmentListRequest: DescribeServiceEnvironmentListRequest,
@@ -8374,6 +8688,7 @@ module.exports = {
     CreateServiceResponse: CreateServiceResponse,
     DesApisStatus: DesApisStatus,
     DescribeLogSearchRequest: DescribeLogSearchRequest,
+    UsagePlanInfo: UsagePlanInfo,
     DescribeServiceUsagePlanResponse: DescribeServiceUsagePlanResponse,
     DescribeApiUsagePlanRequest: DescribeApiUsagePlanRequest,
     UnBindSubDomainRequest: UnBindSubDomainRequest,

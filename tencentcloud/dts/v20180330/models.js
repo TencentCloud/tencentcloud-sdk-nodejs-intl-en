@@ -489,6 +489,46 @@ class ModifySubscribeObjectsResponse extends  AbstractModel {
 }
 
 /**
+ * SwitchDrToMaster request structure.
+ * @class
+ */
+class SwitchDrToMasterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Disaster recovery instance information
+         * @type {SyncInstanceInfo || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * Database type (such as MySQL)
+         * @type {string || null}
+         */
+        this.DatabaseType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DstInfo) {
+            let obj = new SyncInstanceInfo();
+            obj.deserialize(params.DstInfo)
+            this.DstInfo = obj;
+        }
+        this.DatabaseType = 'DatabaseType' in params ? params.DatabaseType : null;
+
+    }
+}
+
+/**
  * StartSyncJob request structure.
  * @class
  */
@@ -2537,6 +2577,41 @@ class ModifySubscribeConsumeTimeRequest extends  AbstractModel {
 }
 
 /**
+ * SwitchDrToMaster response structure.
+ * @class
+ */
+class SwitchDrToMasterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backend async task request ID
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyMigrateJob response structure.
  * @class
  */
@@ -3908,6 +3983,7 @@ module.exports = {
     DescribeMigrateCheckJobRequest: DescribeMigrateCheckJobRequest,
     IsolateSubscribeResponse: IsolateSubscribeResponse,
     ModifySubscribeObjectsResponse: ModifySubscribeObjectsResponse,
+    SwitchDrToMasterRequest: SwitchDrToMasterRequest,
     StartSyncJobRequest: StartSyncJobRequest,
     CreateMigrateJobRequest: CreateMigrateJobRequest,
     SubscribeInfo: SubscribeInfo,
@@ -3942,6 +4018,7 @@ module.exports = {
     CompleteMigrateJobRequest: CompleteMigrateJobRequest,
     ResetSubscribeRequest: ResetSubscribeRequest,
     ModifySubscribeConsumeTimeRequest: ModifySubscribeConsumeTimeRequest,
+    SwitchDrToMasterResponse: SwitchDrToMasterResponse,
     ModifyMigrateJobResponse: ModifyMigrateJobResponse,
     CreateSyncJobRequest: CreateSyncJobRequest,
     DescribeSyncJobsRequest: DescribeSyncJobsRequest,

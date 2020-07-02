@@ -31,6 +31,7 @@ const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesR
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
+const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
 const CreateRuleResponse = models.CreateRuleResponse;
 const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
@@ -51,6 +52,8 @@ const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
 const DescribeTargetGroupsResponse = models.DescribeTargetGroupsResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
+const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
+const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
 const DescribeListenersResponse = models.DescribeListenersResponse;
@@ -61,12 +64,14 @@ const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
 const Target = models.Target;
+const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
 const RuleHealth = models.RuleHealth;
 const Listener = models.Listener;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
+const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
 const ReplaceCertForLoadBalancersResponse = models.ReplaceCertForLoadBalancersResponse;
 const ModifyListenerRequest = models.ModifyListenerRequest;
 const DeregisterTargetGroupInstancesResponse = models.DeregisterTargetGroupInstancesResponse;
@@ -79,7 +84,8 @@ const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const TargetGroupBackend = models.TargetGroupBackend;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
-const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
+const ModifyBlockIPListRequest = models.ModifyBlockIPListRequest;
+const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
 const ExclusiveCluster = models.ExclusiveCluster;
 const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
@@ -89,6 +95,7 @@ const ClassicalListener = models.ClassicalListener;
 const CertificateInput = models.CertificateInput;
 const CreateListenerResponse = models.CreateListenerResponse;
 const CreateTargetGroupResponse = models.CreateTargetGroupResponse;
+const CreateLoadBalancerSnatIpsResponse = models.CreateLoadBalancerSnatIpsResponse;
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const RuleOutput = models.RuleOutput;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
@@ -128,7 +135,8 @@ const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
-const CertificateOutput = models.CertificateOutput;
+const InternetAccessible = models.InternetAccessible;
+const CreateLoadBalancerSnatIpsRequest = models.CreateLoadBalancerSnatIpsRequest;
 const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
 const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
 const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
@@ -137,17 +145,22 @@ const ListenerBackend = models.ListenerBackend;
 const RuleInput = models.RuleInput;
 const TagInfo = models.TagInfo;
 const SnatIp = models.SnatIp;
+const DescribeBlockIPTaskResponse = models.DescribeBlockIPTaskResponse;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
 const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
+const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
+const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
 const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
 const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
 const RewriteLocationMap = models.RewriteLocationMap;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
 const DeleteListenerResponse = models.DeleteListenerResponse;
-const InternetAccessible = models.InternetAccessible;
+const DeleteLoadBalancerSnatIpsResponse = models.DeleteLoadBalancerSnatIpsResponse;
+const CertificateOutput = models.CertificateOutput;
 const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
 const TargetHealth = models.TargetHealth;
@@ -182,16 +195,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (SetLoadBalancerSecurityGroups) is used to bind/unbind security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups bound to a CLB instance. This API uses `set` semantics.
-During a binding operation, the input parameters need to be all security groups to be bound to the CLB instance (including those already bound ones and new ones).
-During an unbinding operation, the input parameters need to be all the security groups still bound to the CLB instance after the unbinding operation. To unbind all security groups, you can leave this parameter empty or pass in an empty array. Note: Private network CLB do not support binding security groups.
-     * @param {SetLoadBalancerSecurityGroupsRequest} req
-     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * This API is used to query the list of CLB instances associated with a certificate in a region by certificate ID.
+     * @param {DescribeLoadBalancerListByCertIdRequest} req
+     * @param {function(string, DescribeLoadBalancerListByCertIdResponse):void} cb
      * @public
      */
-    SetLoadBalancerSecurityGroups(req, cb) {
-        let resp = new SetLoadBalancerSecurityGroupsResponse();
-        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
+    DescribeLoadBalancerListByCertId(req, cb) {
+        let resp = new DescribeLoadBalancerListByCertIdResponse();
+        this.request("DescribeLoadBalancerListByCertId", req, resp, cb);
     }
 
     /**
@@ -203,6 +214,17 @@ During an unbinding operation, the input parameters need to be all the security 
     DescribeClassicalLBListeners(req, cb) {
         let resp = new DescribeClassicalLBListenersResponse();
         this.request("DescribeClassicalLBListeners", req, resp, cb);
+    }
+
+    /**
+     * 对于SnatPro的负载均衡，这个接口用于删除SnatIp
+     * @param {DeleteLoadBalancerSnatIpsRequest} req
+     * @param {function(string, DeleteLoadBalancerSnatIpsResponse):void} cb
+     * @public
+     */
+    DeleteLoadBalancerSnatIps(req, cb) {
+        let resp = new DeleteLoadBalancerSnatIpsResponse();
+        this.request("DeleteLoadBalancerSnatIps", req, resp, cb);
     }
 
     /**
@@ -298,15 +320,28 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API (ModifyDomain) is used to modify a domain name under a layer-7 CLB listener.
-This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
-     * @param {ModifyDomainRequest} req
-     * @param {function(string, ModifyDomainResponse):void} cb
+     * 该接口支持删除负载均衡的多个监听器。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * @param {DeleteLoadBalancerListenersRequest} req
+     * @param {function(string, DeleteLoadBalancerListenersResponse):void} cb
      * @public
      */
-    ModifyDomain(req, cb) {
-        let resp = new ModifyDomainResponse();
-        this.request("ModifyDomain", req, resp, cb);
+    DeleteLoadBalancerListeners(req, cb) {
+        let resp = new DeleteLoadBalancerListenersResponse();
+        this.request("DeleteLoadBalancerListeners", req, resp, cb);
+    }
+
+    /**
+     * This API (SetLoadBalancerSecurityGroups) is used to bind/unbind security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups bound to a CLB instance. This API uses `set` semantics.
+During a binding operation, the input parameters need to be all security groups to be bound to the CLB instance (including those already bound ones and new ones).
+During an unbinding operation, the input parameters need to be all the security groups still bound to the CLB instance after the unbinding operation. To unbind all security groups, you can leave this parameter empty or pass in an empty array. Note: Private network CLB do not support binding security groups.
+     * @param {SetLoadBalancerSecurityGroupsRequest} req
+     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerSecurityGroups(req, cb) {
+        let resp = new SetLoadBalancerSecurityGroupsResponse();
+        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -333,14 +368,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (DescribeClassicalLBHealthStatus) is used to get the real server health status of a classic CLB
-     * @param {DescribeClassicalLBHealthStatusRequest} req
-     * @param {function(string, DescribeClassicalLBHealthStatusResponse):void} cb
+     * 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启
+     * @param {CreateLoadBalancerSnatIpsRequest} req
+     * @param {function(string, CreateLoadBalancerSnatIpsResponse):void} cb
      * @public
      */
-    DescribeClassicalLBHealthStatus(req, cb) {
-        let resp = new DescribeClassicalLBHealthStatusResponse();
-        this.request("DescribeClassicalLBHealthStatus", req, resp, cb);
+    CreateLoadBalancerSnatIps(req, cb) {
+        let resp = new CreateLoadBalancerSnatIpsResponse();
+        this.request("CreateLoadBalancerSnatIps", req, resp, cb);
     }
 
     /**
@@ -442,6 +477,17 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
+     * 查询一个负载均衡所封禁的IP列表（黑名单）。（接口灰度中，如需使用请提工单）
+     * @param {DescribeBlockIPListRequest} req
+     * @param {function(string, DescribeBlockIPListResponse):void} cb
+     * @public
+     */
+    DescribeBlockIPList(req, cb) {
+        let resp = new DescribeBlockIPListResponse();
+        this.request("DescribeBlockIPList", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of listeners by CLB instance ID, listener protocol, or port. If no filter is specified, all listeners under the CLB instance will be returned.
      * @param {DescribeListenersRequest} req
      * @param {function(string, DescribeListenersResponse):void} cb
@@ -484,6 +530,18 @@ This is an async API. After it is returned successfully, you can call the Descri
     BatchRegisterTargets(req, cb) {
         let resp = new BatchRegisterTargetsResponse();
         this.request("BatchRegisterTargets", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyTargetPort) is used to modify the port of a real server bound to a listener.
+This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+     * @param {ModifyTargetPortRequest} req
+     * @param {function(string, ModifyTargetPortResponse):void} cb
+     * @public
+     */
+    ModifyTargetPort(req, cb) {
+        let resp = new ModifyTargetPortResponse();
+        this.request("ModifyTargetPort", req, resp, cb);
     }
 
     /**
@@ -544,6 +602,18 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
+     * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
+（接口灰度中，如需使用请提工单）
+     * @param {ModifyBlockIPListRequest} req
+     * @param {function(string, ModifyBlockIPListResponse):void} cb
+     * @public
+     */
+    ModifyBlockIPList(req, cb) {
+        let resp = new ModifyBlockIPListResponse();
+        this.request("ModifyBlockIPList", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a target group. This feature is in beta test, if you want to try it out, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20LB&step=1).
      * @param {CreateTargetGroupRequest} req
      * @param {function(string, CreateTargetGroupResponse):void} cb
@@ -563,6 +633,18 @@ This is an async API. After it is returned successfully, you can call the Descri
     DescribeTargets(req, cb) {
         let resp = new DescribeTargetsResponse();
         this.request("DescribeTargets", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyDomain) is used to modify a domain name under a layer-7 CLB listener.
+This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+     * @param {ModifyDomainRequest} req
+     * @param {function(string, ModifyDomainResponse):void} cb
+     * @public
+     */
+    ModifyDomain(req, cb) {
+        let resp = new ModifyDomainResponse();
+        this.request("ModifyDomain", req, resp, cb);
     }
 
     /**
@@ -611,14 +693,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to query the list of CLB instances associated with a certificate in a region by certificate ID.
-     * @param {DescribeLoadBalancerListByCertIdRequest} req
-     * @param {function(string, DescribeLoadBalancerListByCertIdResponse):void} cb
+     * This API (DescribeClassicalLBHealthStatus) is used to get the real server health status of a classic CLB
+     * @param {DescribeClassicalLBHealthStatusRequest} req
+     * @param {function(string, DescribeClassicalLBHealthStatusResponse):void} cb
      * @public
      */
-    DescribeLoadBalancerListByCertId(req, cb) {
-        let resp = new DescribeLoadBalancerListByCertIdResponse();
-        this.request("DescribeLoadBalancerListByCertId", req, resp, cb);
+    DescribeClassicalLBHealthStatus(req, cb) {
+        let resp = new DescribeClassicalLBHealthStatusResponse();
+        this.request("DescribeClassicalLBHealthStatus", req, resp, cb);
     }
 
     /**
@@ -657,15 +739,14 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API (ModifyTargetPort) is used to modify the port of a real server bound to a listener.
-This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
-     * @param {ModifyTargetPortRequest} req
-     * @param {function(string, ModifyTargetPortResponse):void} cb
+     * 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
+     * @param {DescribeBlockIPTaskRequest} req
+     * @param {function(string, DescribeBlockIPTaskResponse):void} cb
      * @public
      */
-    ModifyTargetPort(req, cb) {
-        let resp = new ModifyTargetPortResponse();
-        this.request("ModifyTargetPort", req, resp, cb);
+    DescribeBlockIPTask(req, cb) {
+        let resp = new DescribeBlockIPTaskResponse();
+        this.request("DescribeBlockIPTask", req, resp, cb);
     }
 
     /**

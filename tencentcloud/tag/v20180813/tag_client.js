@@ -26,6 +26,7 @@ const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
 const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
+const DescribeResourceTagsResponse = models.DescribeResourceTagsResponse;
 const DescribeResourceTagsByResourceIdsRequest = models.DescribeResourceTagsByResourceIdsRequest;
 const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByResourceIdsResponse;
 const TagResource = models.TagResource;
@@ -35,6 +36,7 @@ const CreateTagRequest = models.CreateTagRequest;
 const DescribeResourceTagsByTagKeysResponse = models.DescribeResourceTagsByTagKeysResponse;
 const TagFilter = models.TagFilter;
 const Tag = models.Tag;
+const DescribeResourceTagsRequest = models.DescribeResourceTagsRequest;
 const CreateTagResponse = models.CreateTagResponse;
 const DeleteTagResponse = models.DeleteTagResponse;
 const ResourceIdTag = models.ResourceIdTag;
@@ -101,6 +103,17 @@ class TagClient extends AbstractClient {
     DescribeResourceTagsByResourceIds(req, cb) {
         let resp = new DescribeResourceTagsByResourceIdsResponse();
         this.request("DescribeResourceTagsByResourceIds", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the tags associated with a resource.
+     * @param {DescribeResourceTagsRequest} req
+     * @param {function(string, DescribeResourceTagsResponse):void} cb
+     * @public
+     */
+    DescribeResourceTags(req, cb) {
+        let resp = new DescribeResourceTagsResponse();
+        this.request("DescribeResourceTags", req, resp, cb);
     }
 
     /**

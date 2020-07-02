@@ -18,23 +18,31 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
+const SetAutoRenewFlagRequest = models.SetAutoRenewFlagRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
+const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeDBXlogsRequest = models.DescribeDBXlogsRequest;
+const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
 const AccountInfo = models.AccountInfo;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
+const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const ErrLogDetail = models.ErrLogDetail;
-const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
+const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
+const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const SpecInfo = models.SpecInfo;
 const RegionInfo = models.RegionInfo;
+const SlowlogDetail = models.SlowlogDetail;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
+const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DBInstance = models.DBInstance;
@@ -46,30 +54,34 @@ const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const SpecItemInfo = models.SpecItemInfo;
+const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const Filter = models.Filter;
+const RenewInstanceRequest = models.RenewInstanceRequest;
 const PgDeal = models.PgDeal;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const ZoneInfo = models.ZoneInfo;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
 const DBBackup = models.DBBackup;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
-const SlowlogDetail = models.SlowlogDetail;
+const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
 const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
-const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
+const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const NormalQueryItem = models.NormalQueryItem;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
+const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
@@ -95,6 +107,17 @@ class PostgresClient extends AbstractClient {
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
         this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate the instance corresponding to a specified `DBInstanceId`.
+     * @param {DestroyDBInstanceRequest} req
+     * @param {function(string, DestroyDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyDBInstance(req, cb) {
+        let resp = new DestroyDBInstanceResponse();
+        this.request("DestroyDBInstance", req, resp, cb);
     }
 
     /**
@@ -131,14 +154,25 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the details of one instance.
-     * @param {DescribeDBInstanceAttributeRequest} req
-     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
+     * This API is used to restart an instance.
+     * @param {RestartDBInstanceRequest} req
+     * @param {function(string, RestartDBInstanceResponse):void} cb
      * @public
      */
-    DescribeDBInstanceAttribute(req, cb) {
-        let resp = new DescribeDBInstanceAttributeResponse();
-        this.request("DescribeDBInstanceAttribute", req, resp, cb);
+    RestartDBInstance(req, cb) {
+        let resp = new RestartDBInstanceResponse();
+        this.request("RestartDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the purchase price of one or multiple instances.
+     * @param {InquiryPriceCreateDBInstancesRequest} req
+     * @param {function(string, InquiryPriceCreateDBInstancesResponse):void} cb
+     * @public
+     */
+    InquiryPriceCreateDBInstances(req, cb) {
+        let resp = new InquiryPriceCreateDBInstancesResponse();
+        this.request("InquiryPriceCreateDBInstances", req, resp, cb);
     }
 
     /**
@@ -186,14 +220,25 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restart an instance.
-     * @param {RestartDBInstanceRequest} req
-     * @param {function(string, RestartDBInstanceResponse):void} cb
+     * This API is used to set auto-renewal.
+     * @param {SetAutoRenewFlagRequest} req
+     * @param {function(string, SetAutoRenewFlagResponse):void} cb
      * @public
      */
-    RestartDBInstance(req, cb) {
-        let resp = new RestartDBInstanceResponse();
-        this.request("RestartDBInstance", req, resp, cb);
+    SetAutoRenewFlag(req, cb) {
+        let resp = new SetAutoRenewFlagResponse();
+        this.request("SetAutoRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of one instance.
+     * @param {DescribeDBInstanceAttributeRequest} req
+     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceAttribute(req, cb) {
+        let resp = new DescribeDBInstanceAttributeResponse();
+        this.request("DescribeDBInstanceAttribute", req, resp, cb);
     }
 
     /**
@@ -216,6 +261,17 @@ class PostgresClient extends AbstractClient {
     CreateDBInstances(req, cb) {
         let resp = new CreateDBInstancesResponse();
         this.request("CreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to renew an instance.
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
+     * @public
+     */
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
     }
 
     /**
@@ -274,6 +330,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the renewal price of an instance.
+     * @param {InquiryPriceRenewDBInstanceRequest} req
+     * @param {function(string, InquiryPriceRenewDBInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewDBInstance(req, cb) {
+        let resp = new InquiryPriceRenewDBInstanceResponse();
+        this.request("InquiryPriceRenewDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to disable the public network link to an instance.
      * @param {CloseDBExtranetAccessRequest} req
      * @param {function(string, CloseDBExtranetAccessResponse):void} cb
@@ -293,6 +360,17 @@ class PostgresClient extends AbstractClient {
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pull the list of databases.
+     * @param {DescribeDatabasesRequest} req
+     * @param {function(string, DescribeDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeDatabases(req, cb) {
+        let resp = new DescribeDatabasesResponse();
+        this.request("DescribeDatabases", req, resp, cb);
     }
 
     /**

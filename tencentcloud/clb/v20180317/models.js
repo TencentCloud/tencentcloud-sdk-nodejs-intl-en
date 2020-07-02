@@ -812,6 +812,63 @@ class DescribeClassicalLBByInstanceIdResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBlockIPList response structure.
+ * @class
+ */
+class DescribeBlockIPListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的IP的数量
+         * @type {number || null}
+         */
+        this.BlockedIPCount = null;
+
+        /**
+         * 获取用户真实IP的字段
+         * @type {string || null}
+         */
+        this.ClientIPField = null;
+
+        /**
+         * 加入了12360黑名单的IP列表
+         * @type {Array.<BlockedIP> || null}
+         */
+        this.BlockedIPList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BlockedIPCount = 'BlockedIPCount' in params ? params.BlockedIPCount : null;
+        this.ClientIPField = 'ClientIPField' in params ? params.ClientIPField : null;
+
+        if (params.BlockedIPList) {
+            this.BlockedIPList = new Array();
+            for (let z in params.BlockedIPList) {
+                let obj = new BlockedIP();
+                obj.deserialize(params.BlockedIPList[z]);
+                this.BlockedIPList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRewrite request structure.
  * @class
  */
@@ -1654,6 +1711,83 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DeleteLoadBalancerListeners request structure.
+ * @class
+ */
+class DeleteLoadBalancerListenersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 指定删除的监听器ID数组，若不填则删除负载均衡的所有监听器
+         * @type {Array.<string> || null}
+         */
+        this.ListenerIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+
+    }
+}
+
+/**
+ * 加入了12306黑名单的IP
+ * @class
+ */
+class BlockedIP extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 黑名单IP
+         * @type {string || null}
+         */
+        this.IP = null;
+
+        /**
+         * 加入黑名单的时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 过期时间
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IP = 'IP' in params ? params.IP : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
  * ModifyRule response structure.
  * @class
  */
@@ -2055,6 +2189,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeBlockIPList request structure.
+ * @class
+ */
+class DescribeBlockIPListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID。
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 数据偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回IP的最大个数，默认为 100000。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Certificate ID and list of CLB instances associated with it
  * @class
  */
@@ -2430,6 +2606,34 @@ class RegisterTargetsWithClassicalLBRequest extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyDomainAttributes response structure.
+ * @class
+ */
+class ModifyDomainAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3091,12 +3295,87 @@ class ManualRewriteResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDomainAttributes response structure.
+ * ModifyBlockIPList request structure.
  * @class
  */
-class ModifyDomainAttributesResponse extends  AbstractModel {
+class ModifyBlockIPListRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 负载均衡实例ID
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
+         * 操作类型，可取：
+<li> add_customized_field（首次设置header，开启黑名单功能）</li>
+<li> set_customized_field（修改header）</li>
+<li> del_customized_field（删除header）</li>
+<li> add_blocked（添加黑名单）</li>
+<li> del_blocked（删除黑名单）</li>
+<li> flush_blocked（清空黑名单）</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 客户端真实IP存放的header字段名
+         * @type {string || null}
+         */
+        this.ClientIPField = null;
+
+        /**
+         * 封禁IP列表，单次操作数组最大长度支持200000
+         * @type {Array.<string> || null}
+         */
+        this.BlockIPList = null;
+
+        /**
+         * 过期时间，单位秒，默认值3600
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 添加IP的策略，可取：fifo（如果黑名单容量已满，新加入黑名单的IP采用先进先出策略）
+         * @type {string || null}
+         */
+        this.AddStrategy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ClientIPField = 'ClientIPField' in params ? params.ClientIPField : null;
+        this.BlockIPList = 'BlockIPList' in params ? params.BlockIPList : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AddStrategy = 'AddStrategy' in params ? params.AddStrategy : null;
+
+    }
+}
+
+/**
+ * ModifyBlockIPList response structure.
+ * @class
+ */
+class ModifyBlockIPListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的ID
+         * @type {string || null}
+         */
+        this.JodId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3113,6 +3392,7 @@ class ModifyDomainAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.JodId = 'JodId' in params ? params.JodId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3683,6 +3963,34 @@ class CreateTargetGroupResponse extends  AbstractModel {
             return;
         }
         this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateLoadBalancerSnatIps response structure.
+ * @class
+ */
+class CreateLoadBalancerSnatIpsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5658,31 +5966,32 @@ class DeregisterTargetsRequest extends  AbstractModel {
 }
 
 /**
- * Certificate information
+ * Network billing mode based on maximum outbound bandwidth
  * @class
  */
-class CertificateOutput extends  AbstractModel {
+class InternetAccessible extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication)
+         * TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;
+BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified)
          * @type {string || null}
          */
-        this.SSLMode = null;
+        this.InternetChargeType = null;
 
         /**
-         * Server certificate ID.
-         * @type {string || null}
+         * Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+         * @type {number || null}
          */
-        this.CertId = null;
+        this.InternetMaxBandwidthOut = null;
 
         /**
-         * Client certificate ID.
+         * Bandwidth package type, such as SINGLEISP
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.CertCaId = null;
+        this.BandwidthpkgSubType = null;
 
     }
 
@@ -5693,9 +6002,52 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
-        this.CertId = 'CertId' in params ? params.CertId : null;
-        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.BandwidthpkgSubType = 'BandwidthpkgSubType' in params ? params.BandwidthpkgSubType : null;
+
+    }
+}
+
+/**
+ * CreateLoadBalancerSnatIps request structure.
+ * @class
+ */
+class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡唯一性Id，如lb-12345678
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 添加SnatIp信息，可指定Ip申请，或者指定子网自动申请
+         * @type {Array.<SnatIp> || null}
+         */
+        this.SnatIps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+        if (params.SnatIps) {
+            this.SnatIps = new Array();
+            for (let z in params.SnatIps) {
+                let obj = new SnatIp();
+                obj.deserialize(params.SnatIps[z]);
+                this.SnatIps.push(obj);
+            }
+        }
 
     }
 }
@@ -6133,6 +6485,41 @@ class SnatIp extends  AbstractModel {
 }
 
 /**
+ * DescribeBlockIPTask response structure.
+ * @class
+ */
+class DescribeBlockIPTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 1 running，2 fail，6 succ
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClassicalLBListeners response structure.
  * @class
  */
@@ -6205,6 +6592,34 @@ class ModifyTargetGroupAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBlockIPTask request structure.
+ * @class
+ */
+class DescribeBlockIPTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ModifyBlockIPList 接口返回的异步任务的ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * CreateLoadBalancer response structure.
  * @class
  */
@@ -6234,6 +6649,34 @@ class CreateLoadBalancerResponse extends  AbstractModel {
             return;
         }
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteLoadBalancerListeners response structure.
+ * @class
+ */
+class DeleteLoadBalancerListenersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6284,6 +6727,41 @@ class DescribeListenersRequest extends  AbstractModel {
         this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * DeleteLoadBalancerSnatIps request structure.
+ * @class
+ */
+class DeleteLoadBalancerSnatIpsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡唯一Id，如lb-12345678
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 删除SnatIp地址数组
+         * @type {Array.<string> || null}
+         */
+        this.Ips = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.Ips = 'Ips' in params ? params.Ips : null;
 
     }
 }
@@ -6559,32 +7037,18 @@ class DeleteListenerResponse extends  AbstractModel {
 }
 
 /**
- * Network billing mode based on maximum outbound bandwidth
+ * DeleteLoadBalancerSnatIps response structure.
  * @class
  */
-class InternetAccessible extends  AbstractModel {
+class DeleteLoadBalancerSnatIpsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;
-BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified)
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InternetChargeType = null;
-
-        /**
-         * Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
-         * @type {number || null}
-         */
-        this.InternetMaxBandwidthOut = null;
-
-        /**
-         * Bandwidth package type, such as SINGLEISP
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.BandwidthpkgSubType = null;
+        this.RequestId = null;
 
     }
 
@@ -6595,9 +7059,50 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
-        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
-        this.BandwidthpkgSubType = 'BandwidthpkgSubType' in params ? params.BandwidthpkgSubType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Certificate information
+ * @class
+ */
+class CertificateOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication)
+         * @type {string || null}
+         */
+        this.SSLMode = null;
+
+        /**
+         * Server certificate ID.
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * Client certificate ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CertCaId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
 
     }
 }
@@ -7515,6 +8020,7 @@ module.exports = {
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
+    DescribeBlockIPListResponse: DescribeBlockIPListResponse,
     DescribeRewriteRequest: DescribeRewriteRequest,
     CreateRuleResponse: CreateRuleResponse,
     AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
@@ -7535,6 +8041,8 @@ module.exports = {
     RegisterTargetsWithClassicalLBResponse: RegisterTargetsWithClassicalLBResponse,
     DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
+    DeleteLoadBalancerListenersRequest: DeleteLoadBalancerListenersRequest,
+    BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
     DescribeClassicalLBTargetsRequest: DescribeClassicalLBTargetsRequest,
     DescribeListenersResponse: DescribeListenersResponse,
@@ -7545,12 +8053,14 @@ module.exports = {
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     DescribeTargetHealthRequest: DescribeTargetHealthRequest,
     Target: Target,
+    DescribeBlockIPListRequest: DescribeBlockIPListRequest,
     CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
     RuleHealth: RuleHealth,
     Listener: Listener,
     ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
+    ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
     ReplaceCertForLoadBalancersResponse: ReplaceCertForLoadBalancersResponse,
     ModifyListenerRequest: ModifyListenerRequest,
     DeregisterTargetGroupInstancesResponse: DeregisterTargetGroupInstancesResponse,
@@ -7563,7 +8073,8 @@ module.exports = {
     TargetGroupBackend: TargetGroupBackend,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
     ManualRewriteResponse: ManualRewriteResponse,
-    ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
+    ModifyBlockIPListRequest: ModifyBlockIPListRequest,
+    ModifyBlockIPListResponse: ModifyBlockIPListResponse,
     ExclusiveCluster: ExclusiveCluster,
     DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
     ModifyDomainRequest: ModifyDomainRequest,
@@ -7573,6 +8084,7 @@ module.exports = {
     CertificateInput: CertificateInput,
     CreateListenerResponse: CreateListenerResponse,
     CreateTargetGroupResponse: CreateTargetGroupResponse,
+    CreateLoadBalancerSnatIpsResponse: CreateLoadBalancerSnatIpsResponse,
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     RuleOutput: RuleOutput,
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
@@ -7612,7 +8124,8 @@ module.exports = {
     ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
-    CertificateOutput: CertificateOutput,
+    InternetAccessible: InternetAccessible,
+    CreateLoadBalancerSnatIpsRequest: CreateLoadBalancerSnatIpsRequest,
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
     DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
     ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
@@ -7621,17 +8134,22 @@ module.exports = {
     RuleInput: RuleInput,
     TagInfo: TagInfo,
     SnatIp: SnatIp,
+    DescribeBlockIPTaskResponse: DescribeBlockIPTaskResponse,
     DescribeClassicalLBListenersResponse: DescribeClassicalLBListenersResponse,
     ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
+    DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
+    DeleteLoadBalancerListenersResponse: DeleteLoadBalancerListenersResponse,
     DescribeListenersRequest: DescribeListenersRequest,
+    DeleteLoadBalancerSnatIpsRequest: DeleteLoadBalancerSnatIpsRequest,
     SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
     DescribeClassicalLBTargetsResponse: DescribeClassicalLBTargetsResponse,
     RewriteLocationMap: RewriteLocationMap,
     ModifyTargetPortRequest: ModifyTargetPortRequest,
     DescribeLoadBalancersResponse: DescribeLoadBalancersResponse,
     DeleteListenerResponse: DeleteListenerResponse,
-    InternetAccessible: InternetAccessible,
+    DeleteLoadBalancerSnatIpsResponse: DeleteLoadBalancerSnatIpsResponse,
+    CertificateOutput: CertificateOutput,
     DeleteTargetGroupsRequest: DeleteTargetGroupsRequest,
     DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
     TargetHealth: TargetHealth,

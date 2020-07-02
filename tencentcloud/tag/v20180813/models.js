@@ -519,6 +519,71 @@ class DescribeTagKeysRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeResourceTags response structure.
+ * @class
+ */
+class DescribeResourceTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of results
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Data offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Resource tag
+         * @type {Array.<TagResource> || null}
+         */
+        this.Rows = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Rows) {
+            this.Rows = new Array();
+            for (let z in params.Rows) {
+                let obj = new TagResource();
+                obj.deserialize(params.Rows[z]);
+                this.Rows.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeResourceTagsByResourceIds request structure.
  * @class
  */
@@ -986,6 +1051,83 @@ class Tag extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * DescribeResourceTags request structure.
+ * @class
+ */
+class DescribeResourceTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creator `uin`
+         * @type {number || null}
+         */
+        this.CreateUin = null;
+
+        /**
+         * Resource region.
+         * @type {string || null}
+         */
+        this.ResourceRegion = null;
+
+        /**
+         * Service type.
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * Resource prefix
+         * @type {string || null}
+         */
+        this.ResourcePrefix = null;
+
+        /**
+         * Unique resource ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Data offset. Default value: 0. It must be an integer multiple of the `Limit` parameter
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page. Default value: 15
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Whether it is a COS resource ID
+         * @type {number || null}
+         */
+        this.CosResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.ResourcePrefix = 'ResourcePrefix' in params ? params.ResourcePrefix : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.CosResourceId = 'CosResourceId' in params ? params.CosResourceId : null;
 
     }
 }
@@ -1523,6 +1665,7 @@ module.exports = {
     ModifyResourceTagsRequest: ModifyResourceTagsRequest,
     DescribeResourcesByTagsResponse: DescribeResourcesByTagsResponse,
     DescribeTagKeysRequest: DescribeTagKeysRequest,
+    DescribeResourceTagsResponse: DescribeResourceTagsResponse,
     DescribeResourceTagsByResourceIdsRequest: DescribeResourceTagsByResourceIdsRequest,
     DescribeResourceTagsByResourceIdsResponse: DescribeResourceTagsByResourceIdsResponse,
     TagResource: TagResource,
@@ -1532,6 +1675,7 @@ module.exports = {
     DescribeResourceTagsByTagKeysResponse: DescribeResourceTagsByTagKeysResponse,
     TagFilter: TagFilter,
     Tag: Tag,
+    DescribeResourceTagsRequest: DescribeResourceTagsRequest,
     CreateTagResponse: CreateTagResponse,
     DeleteTagResponse: DeleteTagResponse,
     ResourceIdTag: ResourceIdTag,

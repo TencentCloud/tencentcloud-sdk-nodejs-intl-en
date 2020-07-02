@@ -3311,7 +3311,7 @@ class DescribeBindingPolicyObjectListDimension extends  AbstractModel {
 }
 
 /**
- * Alarm threshold conditions output by the policy query
+ * Alarm threshold conditions output by the policy query.
  * @class
  */
 class DescribePolicyGroupInfoCondition extends  AbstractModel {
@@ -3355,31 +3355,34 @@ class DescribePolicyGroupInfoCondition extends  AbstractModel {
         this.AlarmNotifyType = null;
 
         /**
-         * Alarm sending period in seconds. The value <0 indicates that no alarm will be triggered. The value 0 indicates that an alarm is triggered only once. The value >0 indicates that an alarm is triggered at the interval of triggerTime.
+         * Alarm sending period in seconds. If the value is less than 0, no alarm will be triggered. If the value is 0, an alarm will be triggered only once. If the value is greater than 0, an alarm will be triggered at the interval of `triggerTime`.
          * @type {number || null}
          */
         this.AlarmNotifyPeriod = null;
 
         /**
          * Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to. The value 7 indicates day-on-day increase. The value 8 indicates day-on-day decrease. The value 9 indicates week-on-week increase. The value 10 indicates week-on-week decrease. The value 11 indicates periodical increase. The value 12 indicates periodical decrease.
-Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
         this.CalcType = null;
 
         /**
          * Threshold.
-Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.CalcValue = null;
 
         /**
          * Duration at which an alarm will be triggered in seconds.
-Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
         this.ContinueTime = null;
+
+        /**
+         * Alarm metric name.
+         * @type {string || null}
+         */
+        this.MetricName = null;
 
     }
 
@@ -3400,6 +3403,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.CalcType = 'CalcType' in params ? params.CalcType : null;
         this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
         this.ContinueTime = 'ContinueTime' in params ? params.ContinueTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }

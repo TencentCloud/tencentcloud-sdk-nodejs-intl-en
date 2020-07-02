@@ -67,6 +67,34 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * ListAccessKeys request structure.
+ * @class
+ */
+class ListAccessKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `UIN` of the specified user. If this parameter is left empty, access keys of the current user will be listed by default
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+
+    }
+}
+
+/**
  * SetMfaFlag response structure.
  * @class
  */
@@ -2949,6 +2977,48 @@ class ConsumeCustomMFATokenRequest extends  AbstractModel {
 }
 
 /**
+ * Access key list
+ * @class
+ */
+class AccessKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access key ID
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * Key status. Valid values: Active (activated), Inactive (not activated)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
  * GetGroup response structure.
  * @class
  */
@@ -4897,6 +4967,50 @@ class ListCollaboratorsResponse extends  AbstractModel {
 }
 
 /**
+ * ListAccessKeys response structure.
+ * @class
+ */
+class ListAccessKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access key list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AccessKey> || null}
+         */
+        this.AccessKeys = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AccessKeys) {
+            this.AccessKeys = new Array();
+            for (let z in params.AccessKeys) {
+                let obj = new AccessKey();
+                obj.deserialize(params.AccessKeys[z]);
+                this.AccessKeys.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListAttachedUserPolicies request structure.
  * @class
  */
@@ -5129,6 +5243,7 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
     DetachGroupPolicyRequest: DetachGroupPolicyRequest,
@@ -5196,6 +5311,7 @@ module.exports = {
     GetPolicyVersionRequest: GetPolicyVersionRequest,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
+    AccessKey: AccessKey,
     GetGroupResponse: GetGroupResponse,
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
@@ -5243,6 +5359,7 @@ module.exports = {
     AttachUserPolicyResponse: AttachUserPolicyResponse,
     SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,
+    ListAccessKeysResponse: ListAccessKeysResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     UpdatePolicyRequest: UpdatePolicyRequest,
     GroupMemberInfo: GroupMemberInfo,

@@ -1026,6 +1026,43 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * Returned object for route information
+ * @class
+ */
+class RouteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Route information list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Route> || null}
+         */
+        this.Routers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Routers) {
+            this.Routers = new Array();
+            for (let z in params.Routers) {
+                let obj = new Route();
+                obj.deserialize(params.Routers[z]);
+                this.Routers.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeGroup response structure.
  * @class
  */
@@ -1899,6 +1936,34 @@ class DeleteAclResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRoute request structure.
+ * @class
+ */
+class DescribeRouteRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3975,6 +4040,46 @@ class CreateTopicResp extends  AbstractModel {
 }
 
 /**
+ * DescribeRoute response structure.
+ * @class
+ */
+class DescribeRouteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result set of route information
+         * @type {RouteResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new RouteResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTopicDetail request structure.
  * @class
  */
@@ -4171,6 +4276,83 @@ class CreateTopicIpWhiteListRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.IpWhiteList = 'IpWhiteList' in params ? params.IpWhiteList : null;
+
+    }
+}
+
+/**
+ * Route entity object
+ * @class
+ */
+class Route extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance connection method
+0: PLAINTEXT (plaintext method, which does not carry user information and is supported for legacy versions and Community Edition)
+1: SASL_PLAINTEXT (plaintext method, which authenticates the login through SASL before data start and is supported only for Community Edition)
+2: SSL (SSL-encrypted communication, which does not carry user information and is supported for legacy versions and Community Edition)
+3: SASL_SSL (SSL-encrypted communication, which authenticates the login through SASL before data start and is supported only for Community Edition)
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * Route ID
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+        /**
+         * VIP network type (1: public network TGW; 2: classic network; 3: VPC; 4: Tencent Cloud-supported environment (generally used for internal instances); 5: SSL public network access; 6: BM VPC)
+         * @type {number || null}
+         */
+        this.VipType = null;
+
+        /**
+         * Virtual IP list
+         * @type {Array.<VipEntity> || null}
+         */
+        this.VipList = null;
+
+        /**
+         * Domain name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Domain name port
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DomainPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.VipType = 'VipType' in params ? params.VipType : null;
+
+        if (params.VipList) {
+            this.VipList = new Array();
+            for (let z in params.VipList) {
+                let obj = new VipEntity();
+                obj.deserialize(params.VipList[z]);
+                this.VipList.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
 
     }
 }
@@ -4834,6 +5016,7 @@ module.exports = {
     Tag: Tag,
     GroupResponse: GroupResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
+    RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
     OperateResponseData: OperateResponseData,
@@ -4852,6 +5035,7 @@ module.exports = {
     CreateAclResponse: CreateAclResponse,
     CreateTopicRequest: CreateTopicRequest,
     DeleteAclResponse: DeleteAclResponse,
+    DescribeRouteRequest: DescribeRouteRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
@@ -4892,10 +5076,12 @@ module.exports = {
     DescribeGroup: DescribeGroup,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
+    DescribeRouteResponse: DescribeRouteResponse,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
     ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
+    Route: Route,
     Acl: Acl,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,

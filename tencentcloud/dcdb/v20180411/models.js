@@ -2142,6 +2142,12 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Whether IPv6 is used. Default value: 0
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
     }
 
     /**
@@ -2152,6 +2158,7 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
 
     }
 }
@@ -3119,6 +3126,12 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Whether IPv6 is used. Default value: 0
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
     }
 
     /**
@@ -3129,6 +3142,7 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
 
     }
 }

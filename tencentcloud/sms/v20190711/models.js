@@ -1865,6 +1865,12 @@ class SendStatus extends  AbstractModel {
          */
         this.Message = null;
 
+        /**
+         * Country code or region code, such as CN and US. If the country code or region code is not obtained, the returned value will be 'DEF' by default. For more information on the supported list, see price overview for non-Mainland China regions.
+         * @type {string || null}
+         */
+        this.IsoCode = null;
+
     }
 
     /**
@@ -1880,6 +1886,7 @@ class SendStatus extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.Code = 'Code' in params ? params.Code : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.IsoCode = 'IsoCode' in params ? params.IsoCode : null;
 
     }
 }

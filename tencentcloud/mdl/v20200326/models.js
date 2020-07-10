@@ -93,6 +93,15 @@ class ModifyMediaLiveInputRequest extends  AbstractModel {
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * Input settings information.
+One or two sets of settings need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
+This parameter can be left empty for RTP_PUSH and UDP_PUSH.
+Note: if it is left empty or the array is empty, the original `InputSettings` value will be used.
+         * @type {Array.<InputSettingInfo> || null}
+         */
+        this.InputSettings = null;
+
     }
 
     /**
@@ -105,6 +114,76 @@ class ModifyMediaLiveInputRequest extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.InputSettings) {
+            this.InputSettings = new Array();
+            for (let z in params.InputSettings) {
+                let obj = new InputSettingInfo();
+                obj.deserialize(params.InputSettings[z]);
+                this.InputSettings.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Drm配置信息，目前只对HLS和DASH有效。
+ * @class
+ */
+class DrmSettingsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * When `Scheme` is set to TencentDRM, this parameter should be set to the `ContentId` of DRM encryption, and if this parameter is left empty, a `ContentId` will be automatically created. For more information, please see [here](https://cloud.tencent.com/document/product/1000/40960).
+When `Scheme` is set to CustomDRMKeys, this parameter is required and should be specified by the user.
+         * @type {string || null}
+         */
+        this.ContentId = null;
+
+        /**
+         * Valid values: TencentDRM, CustomDRMKeys. If this parameter is left empty, TencentDRM will be used by default.
+TencentDRM refers to Tencent digital rights management (DRM) encryption. For more information, please see [here](https://cloud.tencent.com/solution/drm).
+CustomDRMKeys refers to an encryption key customized by the user.
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * The key customized by the content user, which is required when `Scheme` is set to CustomDRMKeys.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DrmKey> || null}
+         */
+        this.Keys = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.State = 'State' in params ? params.State : null;
+        this.ContentId = 'ContentId' in params ? params.ContentId : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+
+        if (params.Keys) {
+            this.Keys = new Array();
+            for (let z in params.Keys) {
+                let obj = new DrmKey();
+                obj.deserialize(params.Keys[z]);
+                this.Keys.push(obj);
+            }
+        }
 
     }
 }
@@ -190,24 +269,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeMediaLiveChannel response structure.
+ * 频道输出组信息。
  * @class
  */
-class DescribeMediaLiveChannelResponse extends  AbstractModel {
+class OutputGroupsInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel information.
-         * @type {ChannelInfo || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * Output protocol type.
+Valid values: HLS, DASH, HLS_ARCHIVE, HLS_MEDIA_PACKAGE, DASH_MEDIA_PACKAGE.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {Array.<OutputInfo> || null}
+         */
+        this.Outputs = null;
+
+        /**
+         * 
+         * @type {Array.<DestinationInfo> || null}
+         */
+        this.Destinations = null;
+
+        /**
+         * 
+         * @type {HlsRemuxSettingsInfo || null}
+         */
+        this.HlsRemuxSettings = null;
+
+        /**
+         * 
+         * @type {DashRemuxSettingsInfo || null}
+         */
+        this.DashRemuxSettings = null;
+
+        /**
+         * 
+         * @type {DrmSettingsInfo || null}
+         */
+        this.DrmSettings = null;
+
+        /**
+         * Configuration information of media packaging, which is required when `Type` is set to MediaPackage.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {MediaPackageSettingsInfo || null}
+         */
+        this.MediaPackageSettings = null;
 
     }
 
@@ -218,13 +335,148 @@ class DescribeMediaLiveChannelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.Info) {
-            let obj = new ChannelInfo();
-            obj.deserialize(params.Info)
-            this.Info = obj;
+        if (params.Outputs) {
+            this.Outputs = new Array();
+            for (let z in params.Outputs) {
+                let obj = new OutputInfo();
+                obj.deserialize(params.Outputs[z]);
+                this.Outputs.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new DestinationInfo();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+
+        if (params.HlsRemuxSettings) {
+            let obj = new HlsRemuxSettingsInfo();
+            obj.deserialize(params.HlsRemuxSettings)
+            this.HlsRemuxSettings = obj;
+        }
+
+        if (params.DashRemuxSettings) {
+            let obj = new DashRemuxSettingsInfo();
+            obj.deserialize(params.DashRemuxSettings)
+            this.DashRemuxSettings = obj;
+        }
+
+        if (params.DrmSettings) {
+            let obj = new DrmSettingsInfo();
+            obj.deserialize(params.DrmSettings)
+            this.DrmSettings = obj;
+        }
+
+        if (params.MediaPackageSettings) {
+            let obj = new MediaPackageSettingsInfo();
+            obj.deserialize(params.MediaPackageSettings)
+            this.MediaPackageSettings = obj;
+        }
+
+    }
+}
+
+/**
+ * DASH configuration information.
+ * @class
+ */
+class DashRemuxSettingsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
+         * @type {number || null}
+         */
+        this.SegmentDuration = null;
+
+        /**
+         * Number of segments. Value range: [1,30]. Default value: 5.
+         * @type {number || null}
+         */
+        this.SegmentNumber = null;
+
+        /**
+         * Whether to enable multi-period. Valid values: CLOSE/OPEN. Default value: CLOSE.
+         * @type {string || null}
+         */
+        this.PeriodTriggers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
+        this.SegmentNumber = 'SegmentNumber' in params ? params.SegmentNumber : null;
+        this.PeriodTriggers = 'PeriodTriggers' in params ? params.PeriodTriggers : null;
+
+    }
+}
+
+/**
+ * Configuration information related to associating with the media packaging service.
+ * @class
+ */
+class MediaPackageSettingsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media packaging ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * StartMediaLiveChannel request structure.
+ * @class
+ */
+class StartMediaLiveChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -582,7 +834,7 @@ Only one security group can be associated.
         this.SecurityGroupIds = null;
 
         /**
-         * Input settings information, two sets of which need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
+         * Input settings information, one or two sets of which need to be configured for RTMP_PUSH/RTMP_PULL/HLS_PULL/MP4_PULL.
          * @type {Array.<InputSettingInfo> || null}
          */
         this.InputSettings = null;
@@ -613,18 +865,18 @@ Only one security group can be associated.
 }
 
 /**
- * StartMediaLiveChannel request structure.
+ * SCTE-35 configuration information.
  * @class
  */
-class StartMediaLiveChannelRequest extends  AbstractModel {
+class Scte35SettingsInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID.
+         * Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
          * @type {string || null}
          */
-        this.Id = null;
+        this.Behavior = null;
 
     }
 
@@ -635,7 +887,7 @@ class StartMediaLiveChannelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.Behavior = 'Behavior' in params ? params.Behavior : null;
 
     }
 }
@@ -838,6 +1090,64 @@ class StartMediaLiveChannelResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Custom DRM key.
+ * @class
+ */
+class DrmKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DRM key, which is a 32-bit hexadecimal string.
+Note: uppercase letters in the string will be automatically converted to lowercase ones.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Required for Widevine encryption. Valid values: SD, HD, UHD1, UHD2, AUDIO, ALL.
+ALL refers to all tracks. If this parameter is set to ALL, no other tracks can be added.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Track = null;
+
+        /**
+         * Required for Widevine encryption. It is a 32-bit hexadecimal string.
+Note: uppercase letters in the string will be automatically converted to lowercase ones.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * Required when FairPlay uses the AES encryption method. It is a 32-bit hexadecimal string.
+For more information about this parameter, please see: 
+https://tools.ietf.org/html/rfc3826
+Note: uppercase letters in the string will be automatically converted to lowercase ones.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Iv = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Track = 'Track' in params ? params.Track : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Iv = 'Iv' in params ? params.Iv : null;
 
     }
 }
@@ -1117,6 +1427,46 @@ class DescribeMediaLiveInputSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeMediaLiveChannel response structure.
+ * @class
+ */
+class DescribeMediaLiveChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel information.
+         * @type {ChannelInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new ChannelInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1537,6 +1887,58 @@ class CreateMediaLiveInputResponse extends  AbstractModel {
 }
 
 /**
+ * Relay destination address.
+ * @class
+ */
+class DestinationInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Relay destination address. Length limit: [1,512].
+         * @type {string || null}
+         */
+        this.OutputUrl = null;
+
+        /**
+         * Authentication key. Length limit: [1,128].
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AuthKey = null;
+
+        /**
+         * Authentication username. Length limit: [1,128].
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * Authentication password. Length limit: [1,128].
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OutputUrl = 'OutputUrl' in params ? params.OutputUrl : null;
+        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
  * CreateMediaLiveChannel response structure.
  * @class
  */
@@ -1640,7 +2042,7 @@ UTC time, such as `2020-01-01T12:00:00Z`.
         this.EndTime = null;
 
         /**
-         * 
+         * Data interval. Valid values: 5s, 1min, 5min, 15min. Default value: 1min.
          * @type {string || null}
          */
         this.Period = null;
@@ -1711,6 +2113,63 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
         this.SourceUrl = 'SourceUrl' in params ? params.SourceUrl : null;
         this.InputAddress = 'InputAddress' in params ? params.InputAddress : null;
+
+    }
+}
+
+/**
+ * Output information.
+ * @class
+ */
+class OutputInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Output name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Audio transcoding template name array.
+Quantity limit: [0,1] for RTMP; [0,20] for others.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AudioTemplateNames = null;
+
+        /**
+         * Video transcoding template name array. Quantity limit: [0,1].
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.VideoTemplateNames = null;
+
+        /**
+         * SCTE-35 information configuration.
+         * @type {Scte35SettingsInfo || null}
+         */
+        this.Scte35Settings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.AudioTemplateNames = 'AudioTemplateNames' in params ? params.AudioTemplateNames : null;
+        this.VideoTemplateNames = 'VideoTemplateNames' in params ? params.VideoTemplateNames : null;
+
+        if (params.Scte35Settings) {
+            let obj = new Scte35SettingsInfo();
+            obj.deserialize(params.Scte35Settings)
+            this.Scte35Settings = obj;
+        }
 
     }
 }
@@ -2018,6 +2477,55 @@ class ChannelInputStatistics extends  AbstractModel {
 }
 
 /**
+ * HLS protocol configuration.
+ * @class
+ */
+class HlsRemuxSettingsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
+         * @type {number || null}
+         */
+        this.SegmentDuration = null;
+
+        /**
+         * Number of segments. Value range: [1,30]. Default value: 5.
+         * @type {number || null}
+         */
+        this.SegmentNumber = null;
+
+        /**
+         * Whether to enable PDT insertion. Valid values: CLOSE/OPEN. Default value: CLOSE.
+         * @type {string || null}
+         */
+        this.PdtInsertion = null;
+
+        /**
+         * PDT duration in seconds. Value range: (0,3000]. Default value: 600.
+         * @type {number || null}
+         */
+        this.PdtDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
+        this.SegmentNumber = 'SegmentNumber' in params ? params.SegmentNumber : null;
+        this.PdtInsertion = 'PdtInsertion' in params ? params.PdtInsertion : null;
+        this.PdtDuration = 'PdtDuration' in params ? params.PdtDuration : null;
+
+    }
+}
+
+/**
  * ModifyMediaLiveChannel response structure.
  * @class
  */
@@ -2194,7 +2702,7 @@ UTC time, such as `2020-01-01T12:00:00Z`.
         this.EndTime = null;
 
         /**
-         * 
+         * Data interval. Valid values: 5s, 1min, 5min, 15min. Default value: 1min.
          * @type {string || null}
          */
         this.Period = null;
@@ -2514,9 +3022,13 @@ class DescribeMediaLiveChannelsRequest extends  AbstractModel {
 module.exports = {
     InputStatistics: InputStatistics,
     ModifyMediaLiveInputRequest: ModifyMediaLiveInputRequest,
+    DrmSettingsInfo: DrmSettingsInfo,
     PipelineOutputStatistics: PipelineOutputStatistics,
     AttachedInputInfo: AttachedInputInfo,
-    DescribeMediaLiveChannelResponse: DescribeMediaLiveChannelResponse,
+    OutputGroupsInfo: OutputGroupsInfo,
+    DashRemuxSettingsInfo: DashRemuxSettingsInfo,
+    MediaPackageSettingsInfo: MediaPackageSettingsInfo,
+    StartMediaLiveChannelRequest: StartMediaLiveChannelRequest,
     VideoTemplateInfo: VideoTemplateInfo,
     DeleteMediaLiveInputSecurityGroupResponse: DeleteMediaLiveInputSecurityGroupResponse,
     DeleteMediaLiveInputRequest: DeleteMediaLiveInputRequest,
@@ -2526,19 +3038,21 @@ module.exports = {
     ModifyMediaLiveInputResponse: ModifyMediaLiveInputResponse,
     VideoPipelineInputStatistics: VideoPipelineInputStatistics,
     CreateMediaLiveInputRequest: CreateMediaLiveInputRequest,
-    StartMediaLiveChannelRequest: StartMediaLiveChannelRequest,
+    Scte35SettingsInfo: Scte35SettingsInfo,
     DescribeMediaLiveInputsRequest: DescribeMediaLiveInputsRequest,
     PipelineInputStatistics: PipelineInputStatistics,
     DescribeMediaLiveInputRequest: DescribeMediaLiveInputRequest,
     AudioPidSelectionInfo: AudioPidSelectionInfo,
     DescribeMediaLiveChannelRequest: DescribeMediaLiveChannelRequest,
     StartMediaLiveChannelResponse: StartMediaLiveChannelResponse,
+    DrmKey: DrmKey,
     AudioPipelineInputStatistics: AudioPipelineInputStatistics,
     DescribeMediaLiveInputSecurityGroupsResponse: DescribeMediaLiveInputSecurityGroupsResponse,
     InputSecurityGroupInfo: InputSecurityGroupInfo,
     StopMediaLiveChannelResponse: StopMediaLiveChannelResponse,
     CreateMediaLiveChannelRequest: CreateMediaLiveChannelRequest,
     DescribeMediaLiveInputSecurityGroupsRequest: DescribeMediaLiveInputSecurityGroupsRequest,
+    DescribeMediaLiveChannelResponse: DescribeMediaLiveChannelResponse,
     ChannelAlertInfos: ChannelAlertInfos,
     DeleteMediaLiveChannelResponse: DeleteMediaLiveChannelResponse,
     ChannelInfo: ChannelInfo,
@@ -2547,10 +3061,12 @@ module.exports = {
     DescribeMediaLiveInputSecurityGroupResponse: DescribeMediaLiveInputSecurityGroupResponse,
     DeleteMediaLiveChannelRequest: DeleteMediaLiveChannelRequest,
     CreateMediaLiveInputResponse: CreateMediaLiveInputResponse,
+    DestinationInfo: DestinationInfo,
     CreateMediaLiveChannelResponse: CreateMediaLiveChannelResponse,
     DescribeMediaLiveInputResponse: DescribeMediaLiveInputResponse,
     DescribeMediaLiveChannelInputStatisticsRequest: DescribeMediaLiveChannelInputStatisticsRequest,
     InputSettingInfo: InputSettingInfo,
+    OutputInfo: OutputInfo,
     DescribeMediaLiveChannelAlertsRequest: DescribeMediaLiveChannelAlertsRequest,
     CreateMediaLiveInputSecurityGroupResponse: CreateMediaLiveInputSecurityGroupResponse,
     DescribeMediaLiveInputsResponse: DescribeMediaLiveInputsResponse,
@@ -2559,6 +3075,7 @@ module.exports = {
     DescribeMediaLiveChannelAlertsResponse: DescribeMediaLiveChannelAlertsResponse,
     DescribeMediaLiveChannelsResponse: DescribeMediaLiveChannelsResponse,
     ChannelInputStatistics: ChannelInputStatistics,
+    HlsRemuxSettingsInfo: HlsRemuxSettingsInfo,
     ModifyMediaLiveChannelResponse: ModifyMediaLiveChannelResponse,
     CreateMediaLiveInputSecurityGroupRequest: CreateMediaLiveInputSecurityGroupRequest,
     DeleteMediaLiveInputSecurityGroupRequest: DeleteMediaLiveInputSecurityGroupRequest,

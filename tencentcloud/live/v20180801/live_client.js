@@ -20,6 +20,7 @@ const CreateLiveSnapshotRuleRequest = models.CreateLiveSnapshotRuleRequest;
 const BillDataInfo = models.BillDataInfo;
 const EnableLiveDomainResponse = models.EnableLiveDomainResponse;
 const CreateLiveCertRequest = models.CreateLiveCertRequest;
+const StopRecordTaskResponse = models.StopRecordTaskResponse;
 const DescribeLiveCallbackTemplatesRequest = models.DescribeLiveCallbackTemplatesRequest;
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
@@ -27,11 +28,13 @@ const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateRe
 const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
 const TemplateInfo = models.TemplateInfo;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
+const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
 const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
 const DescribeLiveCallbackTemplateResponse = models.DescribeLiveCallbackTemplateResponse;
 const DeleteLiveSnapshotTemplateRequest = models.DeleteLiveSnapshotTemplateRequest;
 const DescribeGroupProIspPlayInfoListResponse = models.DescribeGroupProIspPlayInfoListResponse;
 const PushAuthKeyInfo = models.PushAuthKeyInfo;
+const DomainInfoList = models.DomainInfoList;
 const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
@@ -42,18 +45,22 @@ const DomainCertInfo = models.DomainCertInfo;
 const RecordTemplateInfo = models.RecordTemplateInfo;
 const DeleteLiveTranscodeRuleResponse = models.DeleteLiveTranscodeRuleResponse;
 const ConcurrentRecordStreamNum = models.ConcurrentRecordStreamNum;
+const DescribeStreamPlayInfoListResponse = models.DescribeStreamPlayInfoListResponse;
+const DescribeScreenShotSheetNumListResponse = models.DescribeScreenShotSheetNumListResponse;
 const ModifyLiveSnapshotTemplateResponse = models.ModifyLiveSnapshotTemplateResponse;
 const ModifyLivePushAuthKeyRequest = models.ModifyLivePushAuthKeyRequest;
-const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
+const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
 const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
 const DescribeLivePlayAuthKeyResponse = models.DescribeLivePlayAuthKeyResponse;
 const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateRequest;
 const DomainInfo = models.DomainInfo;
 const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesRequest;
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
+const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeDetailInfoListRequest;
 const DescribeBillBandwidthAndFluxListRequest = models.DescribeBillBandwidthAndFluxListRequest;
 const CommonMixOutputParams = models.CommonMixOutputParams;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
+const DescribeLiveTranscodeDetailInfoResponse = models.DescribeLiveTranscodeDetailInfoResponse;
 const DescribeLiveDomainRequest = models.DescribeLiveDomainRequest;
 const DescribeLiveStreamPublishedListRequest = models.DescribeLiveStreamPublishedListRequest;
 const DeleteLiveTranscodeRuleRequest = models.DeleteLiveTranscodeRuleRequest;
@@ -65,6 +72,7 @@ const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateReque
 const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
+const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
 const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
@@ -75,87 +83,116 @@ const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
 const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
 const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
 const CallBackTemplateInfo = models.CallBackTemplateInfo;
+const DescribePlayErrorCodeSumInfoListResponse = models.DescribePlayErrorCodeSumInfoListResponse;
 const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
 const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
+const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
 const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
+const TimeValue = models.TimeValue;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
+const PlayDataInfoByStream = models.PlayDataInfoByStream;
+const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
+const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
-const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
+const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
 const DescribeLiveCertRequest = models.DescribeLiveCertRequest;
-const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
+const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplatesResponse;
 const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
 const CreateLiveCallbackTemplateRequest = models.CreateLiveCallbackTemplateRequest;
+const DescribeTopClientIpSumInfoListResponse = models.DescribeTopClientIpSumInfoListResponse;
 const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
+const StopLiveRecordRequest = models.StopLiveRecordRequest;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
 const StreamEventInfo = models.StreamEventInfo;
+const DeleteRecordTaskResponse = models.DeleteRecordTaskResponse;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
 const DropLiveStreamRequest = models.DropLiveStreamRequest;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
+const PushDataInfo = models.PushDataInfo;
 const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeGroupProIspPlayInfoListRequest = models.DescribeGroupProIspPlayInfoListRequest;
 const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoListRequest;
+const TranscodeDetailInfo = models.TranscodeDetailInfo;
 const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplateResponse;
 const DescribeLiveTranscodeRulesResponse = models.DescribeLiveTranscodeRulesResponse;
 const AddLiveDomainRequest = models.AddLiveDomainRequest;
 const StreamName = models.StreamName;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
-const DescribeLiveCertResponse = models.DescribeLiveCertResponse;
+const CdnPlayStatData = models.CdnPlayStatData;
 const AddLiveDomainResponse = models.AddLiveDomainResponse;
+const DescribeHttpStatusInfoListRequest = models.DescribeHttpStatusInfoListRequest;
+const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInfoListRequest;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListRequest;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
+const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
 const DescribeStreamPushInfoListResponse = models.DescribeStreamPushInfoListResponse;
+const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoListRequest;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
 const WatermarkInfo = models.WatermarkInfo;
 const DescribeLiveForbidStreamListRequest = models.DescribeLiveForbidStreamListRequest;
+const DescribeLiveDomainPlayInfoListRequest = models.DescribeLiveDomainPlayInfoListRequest;
 const BindLiveDomainCertRequest = models.BindLiveDomainCertRequest;
-const ProIspPlaySumInfo = models.ProIspPlaySumInfo;
+const DescribeTopClientIpSumInfoListRequest = models.DescribeTopClientIpSumInfoListRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
 const PublishTime = models.PublishTime;
 const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
+const MonitorStreamPlayInfo = models.MonitorStreamPlayInfo;
+const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
+const ProIspPlayCodeDataInfo = models.ProIspPlayCodeDataInfo;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
 const DescribeLiveDomainsRequest = models.DescribeLiveDomainsRequest;
-const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
+const ProIspPlaySumInfo = models.ProIspPlaySumInfo;
+const SnapshotTemplateInfo = models.SnapshotTemplateInfo;
 const DeleteLiveSnapshotRuleResponse = models.DeleteLiveSnapshotRuleResponse;
 const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
 const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
 const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
+const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const CertInfo = models.CertInfo;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
 const DescribeLiveDelayInfoListResponse = models.DescribeLiveDelayInfoListResponse;
 const DeleteLiveTranscodeTemplateRequest = models.DeleteLiveTranscodeTemplateRequest;
 const DescribeLiveCallbackRulesRequest = models.DescribeLiveCallbackRulesRequest;
+const ClientIpPlaySumInfo = models.ClientIpPlaySumInfo;
 const DescribeLiveTranscodeTemplateResponse = models.DescribeLiveTranscodeTemplateResponse;
 const CreateLiveSnapshotTemplateResponse = models.CreateLiveSnapshotTemplateResponse;
 const DescribeConcurrentRecordStreamNumRequest = models.DescribeConcurrentRecordStreamNumRequest;
+const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const CommonMixControlParams = models.CommonMixControlParams;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
+const DescribePlayErrorCodeDetailInfoListResponse = models.DescribePlayErrorCodeDetailInfoListResponse;
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const RecordParam = models.RecordParam;
-const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
+const DomainDetailInfo = models.DomainDetailInfo;
+const HttpStatusInfo = models.HttpStatusInfo;
 const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
-const StopLiveRecordRequest = models.StopLiveRecordRequest;
+const DescribeLiveStreamPushInfoListResponse = models.DescribeLiveStreamPushInfoListResponse;
+const StopRecordTaskRequest = models.StopRecordTaskRequest;
+const HttpStatusData = models.HttpStatusData;
+const HttpCodeInfo = models.HttpCodeInfo;
+const DescribeStreamPlayInfoListRequest = models.DescribeStreamPlayInfoListRequest;
 const CreateLiveTranscodeTemplateRequest = models.CreateLiveTranscodeTemplateRequest;
 const DescribeLiveStreamPublishedListResponse = models.DescribeLiveStreamPublishedListResponse;
 const DeleteLiveDomainRequest = models.DeleteLiveDomainRequest;
@@ -166,42 +203,51 @@ const PlayAuthKeyInfo = models.PlayAuthKeyInfo;
 const ModifyLiveTranscodeTemplateRequest = models.ModifyLiveTranscodeTemplateRequest;
 const ModifyLiveDomainCertResponse = models.ModifyLiveDomainCertResponse;
 const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
+const DescribeAllStreamPlayInfoListResponse = models.DescribeAllStreamPlayInfoListResponse;
 const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
+const CreateRecordTaskRequest = models.CreateRecordTaskRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
 const DescribeLiveRecordTemplateResponse = models.DescribeLiveRecordTemplateResponse;
+const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
 const BindLiveDomainCertResponse = models.BindLiveDomainCertResponse;
 const CallBackRuleInfo = models.CallBackRuleInfo;
+const PlaySumStatInfo = models.PlaySumStatInfo;
 const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTemplatesRequest;
 const HlsSpecialParam = models.HlsSpecialParam;
 const DescribeLiveRecordRulesResponse = models.DescribeLiveRecordRulesResponse;
 const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
+const DescribeLiveDomainPlayInfoListResponse = models.DescribeLiveDomainPlayInfoListResponse;
+const HttpCodeValue = models.HttpCodeValue;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
-const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
+const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
 const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
 const DeleteLiveCertResponse = models.DeleteLiveCertResponse;
 const CreateCommonMixStreamResponse = models.CreateCommonMixStreamResponse;
 const CreateLiveCallbackTemplateResponse = models.CreateLiveCallbackTemplateResponse;
 const DescribeLivePushAuthKeyRequest = models.DescribeLivePushAuthKeyRequest;
+const PlayStatInfo = models.PlayStatInfo;
 const DescribeLiveCallbackTemplateRequest = models.DescribeLiveCallbackTemplateRequest;
 const ModifyLiveSnapshotTemplateRequest = models.ModifyLiveSnapshotTemplateRequest;
-const CdnPlayStatData = models.CdnPlayStatData;
+const DescribeLiveCertResponse = models.DescribeLiveCertResponse;
 const CreateLiveRecordRuleResponse = models.CreateLiveRecordRuleResponse;
 const DescribeLiveTranscodeTemplateRequest = models.DescribeLiveTranscodeTemplateRequest;
 const ModifyLiveCallbackTemplateResponse = models.ModifyLiveCallbackTemplateResponse;
-const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplatesResponse;
+const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
 const DescribeLivePushAuthKeyResponse = models.DescribeLivePushAuthKeyResponse;
 const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
 const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
+const DescribeAllStreamPlayInfoListRequest = models.DescribeAllStreamPlayInfoListRequest;
 const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
-const PlayDataInfoByStream = models.PlayDataInfoByStream;
+const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
+const CreateRecordTaskResponse = models.CreateRecordTaskResponse;
 const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
 const GroupProIspDataInfo = models.GroupProIspDataInfo;
@@ -210,7 +256,7 @@ const CommonMixCropParams = models.CommonMixCropParams;
 const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
 const DescribeProIspPlaySumInfoListResponse = models.DescribeProIspPlaySumInfoListResponse;
 const DeleteLiveCertRequest = models.DeleteLiveCertRequest;
-const SnapshotTemplateInfo = models.SnapshotTemplateInfo;
+const DescribeHttpStatusInfoListResponse = models.DescribeHttpStatusInfoListResponse;
 const DeleteLiveRecordRuleResponse = models.DeleteLiveRecordRuleResponse;
 
 
@@ -225,59 +271,25 @@ class LiveClient extends AbstractClient {
     }
     
     /**
-     * This API is used to get the callback template list.
-     * @param {DescribeLiveCallbackTemplatesRequest} req
-     * @param {function(string, DescribeLiveCallbackTemplatesResponse):void} cb
+     * This API is used to disconnect the push connection, which can be resumed.
+     * @param {DropLiveStreamRequest} req
+     * @param {function(string, DropLiveStreamResponse):void} cb
      * @public
      */
-    DescribeLiveCallbackTemplates(req, cb) {
-        let resp = new DescribeLiveCallbackTemplatesResponse();
-        this.request("DescribeLiveCallbackTemplates", req, resp, cb);
+    DropLiveStream(req, cb) {
+        let resp = new DropLiveStreamResponse();
+        this.request("DropLiveStream", req, resp, cb);
     }
 
     /**
-     * This API is used to query the data of billable LVB bandwidth and traffic.
-     * @param {DescribeBillBandwidthAndFluxListRequest} req
-     * @param {function(string, DescribeBillBandwidthAndFluxListResponse):void} cb
+     * This API is used to query the watermark list.
+     * @param {DescribeLiveWatermarksRequest} req
+     * @param {function(string, DescribeLiveWatermarksResponse):void} cb
      * @public
      */
-    DescribeBillBandwidthAndFluxList(req, cb) {
-        let resp = new DescribeBillBandwidthAndFluxListResponse();
-        this.request("DescribeBillBandwidthAndFluxList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disable an LVB domain name.
-     * @param {ForbidLiveDomainRequest} req
-     * @param {function(string, ForbidLiveDomainResponse):void} cb
-     * @public
-     */
-    ForbidLiveDomain(req, cb) {
-        let resp = new ForbidLiveDomainResponse();
-        this.request("ForbidLiveDomain", req, resp, cb);
-    }
-
-    /**
-     * To create a transcoding rule, you need to first call the [CreateLiveTranscodeTemplate](/document/product/267/32646) API to create a transcoding template and bind the returned template ID to the stream.
-<br>Transcoding-related document: [LVB Remuxing and Transcoding](/document/product/267/32736).
-     * @param {CreateLiveTranscodeRuleRequest} req
-     * @param {function(string, CreateLiveTranscodeRuleResponse):void} cb
-     * @public
-     */
-    CreateLiveTranscodeRule(req, cb) {
-        let resp = new CreateLiveTranscodeRuleResponse();
-        this.request("CreateLiveTranscodeRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the screencapturing template list.
-     * @param {DescribeLiveSnapshotTemplatesRequest} req
-     * @param {function(string, DescribeLiveSnapshotTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeLiveSnapshotTemplates(req, cb) {
-        let resp = new DescribeLiveSnapshotTemplatesResponse();
-        this.request("DescribeLiveSnapshotTemplates", req, resp, cb);
+    DescribeLiveWatermarks(req, cb) {
+        let resp = new DescribeLiveWatermarksResponse();
+        this.request("DescribeLiveWatermarks", req, resp, cb);
     }
 
     /**
@@ -328,25 +340,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * After a watermark is added and a watermark ID is successfully returned, you need to call the [CreateLiveWatermarkRule](/document/product/267/32629) API and bind the watermark ID to the stream.
-     * @param {AddLiveWatermarkRequest} req
-     * @param {function(string, AddLiveWatermarkResponse):void} cb
+     * This API is used to modify the screencapturing template configuration.
+     * @param {ModifyLiveSnapshotTemplateRequest} req
+     * @param {function(string, ModifyLiveSnapshotTemplateResponse):void} cb
      * @public
      */
-    AddLiveWatermark(req, cb) {
-        let resp = new AddLiveWatermarkResponse();
-        this.request("AddLiveWatermark", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a watermark.
-     * @param {DeleteLiveWatermarkRequest} req
-     * @param {function(string, DeleteLiveWatermarkResponse):void} cb
-     * @public
-     */
-    DeleteLiveWatermark(req, cb) {
-        let resp = new DeleteLiveWatermarkResponse();
-        this.request("DeleteLiveWatermark", req, resp, cb);
+    ModifyLiveSnapshotTemplate(req, cb) {
+        let resp = new ModifyLiveSnapshotTemplateResponse();
+        this.request("ModifyLiveSnapshotTemplate", req, resp, cb);
     }
 
     /**
@@ -372,28 +373,6 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the LVB push authentication key.
-     * @param {ModifyLivePushAuthKeyRequest} req
-     * @param {function(string, ModifyLivePushAuthKeyResponse):void} cb
-     * @public
-     */
-    ModifyLivePushAuthKey(req, cb) {
-        let resp = new ModifyLivePushAuthKeyResponse();
-        this.request("ModifyLivePushAuthKey", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disconnect the push connection, which can be resumed.
-     * @param {DropLiveStreamRequest} req
-     * @param {function(string, DropLiveStreamResponse):void} cb
-     * @public
-     */
-    DropLiveStream(req, cb) {
-        let resp = new DropLiveStreamResponse();
-        this.request("DropLiveStream", req, resp, cb);
-    }
-
-    /**
      * This API is used to query streaming events.<br>
 
 Note: This API can filter by IsFilter and return the push history.
@@ -404,17 +383,6 @@ Note: This API can filter by IsFilter and return the push history.
     DescribeLiveStreamEventList(req, cb) {
         let resp = new DescribeLiveStreamEventListResponse();
         this.request("DescribeLiveStreamEventList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the forbidden stream list.
-     * @param {DescribeLiveForbidStreamListRequest} req
-     * @param {function(string, DescribeLiveForbidStreamListResponse):void} cb
-     * @public
-     */
-    DescribeLiveForbidStreamList(req, cb) {
-        let resp = new DescribeLiveForbidStreamListResponse();
-        this.request("DescribeLiveForbidStreamList", req, resp, cb);
     }
 
     /**
@@ -430,25 +398,236 @@ Note: currently, up to 16 streams can be mixed.
     }
 
     /**
-     * Note: The `DeleteLiveRecord` API is only used to delete the record of recording tasks but not stop recording or deleting an ongoing recording task. If you need to stop a recording task, please use the [StopLiveRecord](/document/product/267/30146) API.
-     * @param {DeleteLiveRecordRequest} req
-     * @param {function(string, DeleteLiveRecordResponse):void} cb
+     * This API is used to query the number of each playback HTTP status code at a 5-minute granularity in a certain period of time.
+Note: Data can be queried one hour after it is generated. For example, data between 10:00 and 10:59 cannot be queried until 12:00.
+     * @param {DescribeHttpStatusInfoListRequest} req
+     * @param {function(string, DescribeHttpStatusInfoListResponse):void} cb
      * @public
      */
-    DeleteLiveRecord(req, cb) {
-        let resp = new DeleteLiveRecordResponse();
-        this.request("DeleteLiveRecord", req, resp, cb);
+    DescribeHttpStatusInfoList(req, cb) {
+        let resp = new DescribeHttpStatusInfoListResponse();
+        this.request("DescribeHttpStatusInfoList", req, resp, cb);
     }
 
     /**
-     * This API is used to modify a certificate.
-     * @param {ModifyLiveCertRequest} req
-     * @param {function(string, ModifyLiveCertResponse):void} cb
+     * This API is used to query the downstream playback data of an ISP in a district, including bandwidth, traffic, number of requests, and number of concurrent connections.
+     * @param {DescribeProvinceIspPlayInfoListRequest} req
+     * @param {function(string, DescribeProvinceIspPlayInfoListResponse):void} cb
      * @public
      */
-    ModifyLiveCert(req, cb) {
-        let resp = new ModifyLiveCertResponse();
-        this.request("ModifyLiveCert", req, resp, cb);
+    DescribeProvinceIspPlayInfoList(req, cb) {
+        let resp = new DescribeProvinceIspPlayInfoListResponse();
+        this.request("DescribeProvinceIspPlayInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a playback domain name.
+     * @param {ModifyLivePlayDomainRequest} req
+     * @param {function(string, ModifyLivePlayDomainResponse):void} cb
+     * @public
+     */
+    ModifyLivePlayDomain(req, cb) {
+        let resp = new ModifyLivePlayDomainResponse();
+        this.request("ModifyLivePlayDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and codec of audio and video files.
+     * @param {DescribeStreamPushInfoListRequest} req
+     * @param {function(string, DescribeStreamPushInfoListResponse):void} cb
+     * @public
+     */
+    DescribeStreamPushInfoList(req, cb) {
+        let resp = new DescribeStreamPushInfoListResponse();
+        this.request("DescribeStreamPushInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the screencapturing rule list.
+     * @param {DescribeLiveSnapshotRulesRequest} req
+     * @param {function(string, DescribeLiveSnapshotRulesResponse):void} cb
+     * @public
+     */
+    DescribeLiveSnapshotRules(req, cb) {
+        let resp = new DescribeLiveSnapshotRulesResponse();
+        this.request("DescribeLiveSnapshotRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a transcoding template.
+     * @param {DeleteLiveTranscodeTemplateRequest} req
+     * @param {function(string, DeleteLiveTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    DeleteLiveTranscodeTemplate(req, cb) {
+        let resp = new DeleteLiveTranscodeTemplateResponse();
+        this.request("DeleteLiveTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of the top n client IPs in a certain period of time (top 1,000 is supported currently).
+     * @param {DescribeTopClientIpSumInfoListRequest} req
+     * @param {function(string, DescribeTopClientIpSumInfoListResponse):void} cb
+     * @public
+     */
+    DescribeTopClientIpSumInfoList(req, cb) {
+        let resp = new DescribeTopClientIpSumInfoListResponse();
+        this.request("DescribeTopClientIpSumInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the recording template list.
+     * @param {DescribeLiveRecordTemplatesRequest} req
+     * @param {function(string, DescribeLiveRecordTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeLiveRecordTemplates(req, cb) {
+        let resp = new DescribeLiveRecordTemplatesResponse();
+        this.request("DescribeLiveRecordTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the domain name and certificate binding information.
+     * @param {ModifyLiveDomainCertRequest} req
+     * @param {function(string, ModifyLiveDomainCertResponse):void} cb
+     * @public
+     */
+    ModifyLiveDomainCert(req, cb) {
+        let resp = new ModifyLiveDomainCertResponse();
+        this.request("ModifyLiveDomainCert", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of the top n domain names and stream IDs in a certain period of time (top 1,000 is supported currently).
+     * @param {DescribeVisitTopSumInfoListRequest} req
+     * @param {function(string, DescribeVisitTopSumInfoListResponse):void} cb
+     * @public
+     */
+    DescribeVisitTopSumInfoList(req, cb) {
+        let resp = new DescribeVisitTopSumInfoListResponse();
+        this.request("DescribeVisitTopSumInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the domain name certificate information.
+     * @param {DescribeLiveDomainCertRequest} req
+     * @param {function(string, DescribeLiveDomainCertResponse):void} cb
+     * @public
+     */
+    DescribeLiveDomainCert(req, cb) {
+        let resp = new DescribeLiveDomainCertResponse();
+        this.request("DescribeLiveDomainCert", req, resp, cb);
+    }
+
+    /**
+     * After a watermark is added and a watermark ID is successfully returned, you need to call the [CreateLiveWatermarkRule](/document/product/267/32629) API and bind the watermark ID to the stream.
+     * @param {AddLiveWatermarkRequest} req
+     * @param {function(string, AddLiveWatermarkResponse):void} cb
+     * @public
+     */
+    AddLiveWatermark(req, cb) {
+        let resp = new AddLiveWatermarkResponse();
+        this.request("AddLiveWatermark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a watermarking rule.
+     * @param {DeleteLiveWatermarkRuleRequest} req
+     * @param {function(string, DeleteLiveWatermarkRuleResponse):void} cb
+     * @public
+     */
+    DeleteLiveWatermarkRule(req, cb) {
+        let resp = new DeleteLiveWatermarkRuleResponse();
+        this.request("DeleteLiveWatermarkRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a callback rule.
+     * @param {DeleteLiveCallbackRuleRequest} req
+     * @param {function(string, DeleteLiveCallbackRuleResponse):void} cb
+     * @public
+     */
+    DeleteLiveCallbackRule(req, cb) {
+        let resp = new DeleteLiveCallbackRuleResponse();
+        this.request("DeleteLiveCallbackRule", req, resp, cb);
+    }
+
+    /**
+     * After a screencapturing template is created and a template ID is successfully returned, you need to call the [CreateLiveSnapshotRule](/document/product/267/32625) API and bind the template ID to the stream.
+<br>Screencapturing-related document: [LVB Screencapturing](/document/product/267/32737).
+     * @param {CreateLiveSnapshotTemplateRequest} req
+     * @param {function(string, CreateLiveSnapshotTemplateResponse):void} cb
+     * @public
+     */
+    CreateLiveSnapshotTemplate(req, cb) {
+        let resp = new CreateLiveSnapshotTemplateResponse();
+        this.request("CreateLiveSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return the live stream list.
+     * @param {DescribeLiveStreamOnlineListRequest} req
+     * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
+     * @public
+     */
+    DescribeLiveStreamOnlineList(req, cb) {
+        let resp = new DescribeLiveStreamOnlineListResponse();
+        this.request("DescribeLiveStreamOnlineList", req, resp, cb);
+    }
+
+    /**
+     * This API deletes a callback template.
+     * @param {DeleteLiveCallbackTemplateRequest} req
+     * @param {function(string, DeleteLiveCallbackTemplateResponse):void} cb
+     * @public
+     */
+    DeleteLiveCallbackTemplate(req, cb) {
+        let resp = new DeleteLiveCallbackTemplateResponse();
+        this.request("DeleteLiveCallbackTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the LVB push authentication key.
+     * @param {DescribeLivePushAuthKeyRequest} req
+     * @param {function(string, DescribeLivePushAuthKeyResponse):void} cb
+     * @public
+     */
+    DescribeLivePushAuthKey(req, cb) {
+        let resp = new DescribeLivePushAuthKeyResponse();
+        this.request("DescribeLivePushAuthKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a single recording template.
+     * @param {DescribeLiveRecordTemplateRequest} req
+     * @param {function(string, DescribeLiveRecordTemplateResponse):void} cb
+     * @public
+     */
+    DescribeLiveRecordTemplate(req, cb) {
+        let resp = new DescribeLiveRecordTemplateResponse();
+        this.request("DescribeLiveRecordTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a watermark.
+     * @param {DeleteLiveWatermarkRequest} req
+     * @param {function(string, DeleteLiveWatermarkResponse):void} cb
+     * @public
+     */
+    DeleteLiveWatermark(req, cb) {
+        let resp = new DeleteLiveWatermarkResponse();
+        this.request("DeleteLiveWatermark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of downstream playback error codes.
+     * @param {DescribePlayErrorCodeSumInfoListRequest} req
+     * @param {function(string, DescribePlayErrorCodeSumInfoListResponse):void} cb
+     * @public
+     */
+    DescribePlayErrorCodeSumInfoList(req, cb) {
+        let resp = new DescribePlayErrorCodeSumInfoListResponse();
+        this.request("DescribePlayErrorCodeSumInfoList", req, resp, cb);
     }
 
     /**
@@ -477,38 +656,14 @@ Currently, this API only supports stream granularity, and the feature supporting
     }
 
     /**
-     * This API is used to create a screencapturing rule. You need to first call the [CreateLiveSnapshotTemplate](/document/product/267/32624) API to create a screencapturing template to bind the returned template ID to the stream.
-<br>Screencapturing document: [LVB Screencapturing](/document/product/267/32737).
-Note: only one screencapturing template can be associated with one domain name.
-     * @param {CreateLiveSnapshotRuleRequest} req
-     * @param {function(string, CreateLiveSnapshotRuleResponse):void} cb
+     * This API is used to modify the LVB push authentication key.
+     * @param {ModifyLivePushAuthKeyRequest} req
+     * @param {function(string, ModifyLivePushAuthKeyResponse):void} cb
      * @public
      */
-    CreateLiveSnapshotRule(req, cb) {
-        let resp = new CreateLiveSnapshotRuleResponse();
-        this.request("CreateLiveSnapshotRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the screencapturing template configuration.
-     * @param {ModifyLiveSnapshotTemplateRequest} req
-     * @param {function(string, ModifyLiveSnapshotTemplateResponse):void} cb
-     * @public
-     */
-    ModifyLiveSnapshotTemplate(req, cb) {
-        let resp = new ModifyLiveSnapshotTemplateResponse();
-        this.request("ModifyLiveSnapshotTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the screencapturing rule list.
-     * @param {DescribeLiveSnapshotRulesRequest} req
-     * @param {function(string, DescribeLiveSnapshotRulesResponse):void} cb
-     * @public
-     */
-    DescribeLiveSnapshotRules(req, cb) {
-        let resp = new DescribeLiveSnapshotRulesResponse();
-        this.request("DescribeLiveSnapshotRules", req, resp, cb);
+    ModifyLivePushAuthKey(req, cb) {
+        let resp = new ModifyLivePushAuthKeyResponse();
+        this.request("ModifyLivePushAuthKey", req, resp, cb);
     }
 
     /**
@@ -546,58 +701,114 @@ Note: only one screencapturing template can be associated with one domain name.
     }
 
     /**
-     * This API is used to query the watermark list.
-     * @param {DescribeLiveWatermarksRequest} req
-     * @param {function(string, DescribeLiveWatermarksResponse):void} cb
+     * This API is used to get the forbidden stream list.
+     * @param {DescribeLiveForbidStreamListRequest} req
+     * @param {function(string, DescribeLiveForbidStreamListResponse):void} cb
      * @public
      */
-    DescribeLiveWatermarks(req, cb) {
-        let resp = new DescribeLiveWatermarksResponse();
-        this.request("DescribeLiveWatermarks", req, resp, cb);
+    DescribeLiveForbidStreamList(req, cb) {
+        let resp = new DescribeLiveForbidStreamListResponse();
+        this.request("DescribeLiveForbidStreamList", req, resp, cb);
     }
 
     /**
-     * This API is used to modify a playback domain name.
-     * @param {ModifyLivePlayDomainRequest} req
-     * @param {function(string, ModifyLivePlayDomainResponse):void} cb
+     * This API is used to get certificate information.
+     * @param {DescribeLiveCertRequest} req
+     * @param {function(string, DescribeLiveCertResponse):void} cb
      * @public
      */
-    ModifyLivePlayDomain(req, cb) {
-        let resp = new ModifyLivePlayDomainResponse();
-        this.request("ModifyLivePlayDomain", req, resp, cb);
+    DescribeLiveCert(req, cb) {
+        let resp = new DescribeLiveCertResponse();
+        this.request("DescribeLiveCert", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the playback authentication key.
-     * @param {ModifyLivePlayAuthKeyRequest} req
-     * @param {function(string, ModifyLivePlayAuthKeyResponse):void} cb
+     * This API is used to modify a certificate.
+     * @param {ModifyLiveCertRequest} req
+     * @param {function(string, ModifyLiveCertResponse):void} cb
      * @public
      */
-    ModifyLivePlayAuthKey(req, cb) {
-        let resp = new ModifyLivePlayAuthKeyResponse();
-        this.request("ModifyLivePlayAuthKey", req, resp, cb);
+    ModifyLiveCert(req, cb) {
+        let resp = new ModifyLiveCertResponse();
+        this.request("ModifyLiveCert", req, resp, cb);
     }
 
     /**
-     * This API is used to get the list of recording rules.
-     * @param {DescribeLiveRecordRulesRequest} req
-     * @param {function(string, DescribeLiveRecordRulesResponse):void} cb
+     * This API is used to query domain names by domain name status and type.
+     * @param {DescribeLiveDomainsRequest} req
+     * @param {function(string, DescribeLiveDomainsResponse):void} cb
      * @public
      */
-    DescribeLiveRecordRules(req, cb) {
-        let resp = new DescribeLiveRecordRulesResponse();
-        this.request("DescribeLiveRecordRules", req, resp, cb);
+    DescribeLiveDomains(req, cb) {
+        let resp = new DescribeLiveDomainsResponse();
+        this.request("DescribeLiveDomains", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a transcoding template.
-     * @param {DeleteLiveTranscodeTemplateRequest} req
-     * @param {function(string, DeleteLiveTranscodeTemplateResponse):void} cb
+     * This API is used to delete a certificate corresponding to the domain name.
+     * @param {DeleteLiveCertRequest} req
+     * @param {function(string, DeleteLiveCertResponse):void} cb
      * @public
      */
-    DeleteLiveTranscodeTemplate(req, cb) {
-        let resp = new DeleteLiveTranscodeTemplateResponse();
-        this.request("DeleteLiveTranscodeTemplate", req, resp, cb);
+    DeleteLiveCert(req, cb) {
+        let resp = new DeleteLiveCertResponse();
+        this.request("DeleteLiveCert", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a callback template. After a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](/document/product/267/32638) API to bind the template ID to the domain name/path.
+<br>Callback protocol document: [Event Message Notification](/document/product/267/32744).
+     * @param {CreateLiveCallbackTemplateRequest} req
+     * @param {function(string, CreateLiveCallbackTemplateResponse):void} cb
+     * @public
+     */
+    CreateLiveCallbackTemplate(req, cb) {
+        let resp = new CreateLiveCallbackTemplateResponse();
+        this.request("CreateLiveCallbackTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to resume the push of a specific stream.
+     * @param {ResumeLiveStreamRequest} req
+     * @param {function(string, ResumeLiveStreamResponse):void} cb
+     * @public
+     */
+    ResumeLiveStream(req, cb) {
+        let resp = new ResumeLiveStreamResponse();
+        this.request("ResumeLiveStream", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a single callback template.
+     * @param {DescribeLiveCallbackTemplateRequest} req
+     * @param {function(string, DescribeLiveCallbackTemplateResponse):void} cb
+     * @public
+     */
+    DescribeLiveCallbackTemplate(req, cb) {
+        let resp = new DescribeLiveCallbackTemplateResponse();
+        this.request("DescribeLiveCallbackTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an added LVB domain name.
+     * @param {DeleteLiveDomainRequest} req
+     * @param {function(string, DeleteLiveDomainResponse):void} cb
+     * @public
+     */
+    DeleteLiveDomain(req, cb) {
+        let resp = new DeleteLiveDomainResponse();
+        this.request("DeleteLiveDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a callback template.
+     * @param {ModifyLiveCallbackTemplateRequest} req
+     * @param {function(string, ModifyLiveCallbackTemplateResponse):void} cb
+     * @public
+     */
+    ModifyLiveCallbackTemplate(req, cb) {
+        let resp = new ModifyLiveCallbackTemplateResponse();
+        this.request("ModifyLiveCallbackTemplate", req, resp, cb);
     }
 
     /**
@@ -612,36 +823,103 @@ Note: only one screencapturing template can be associated with one domain name.
     }
 
     /**
-     * This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and codec of audio and video files.
-     * @param {DescribeStreamPushInfoListRequest} req
-     * @param {function(string, DescribeStreamPushInfoListResponse):void} cb
+     * This API is used to query the playback data and supports querying the playback details by stream name and aggregated data by playback domain name.
+Note: To query by AppName, you need to submit a ticket for application.
+     * @param {DescribeStreamPlayInfoListRequest} req
+     * @param {function(string, DescribeStreamPlayInfoListResponse):void} cb
      * @public
      */
-    DescribeStreamPushInfoList(req, cb) {
-        let resp = new DescribeStreamPushInfoListResponse();
-        this.request("DescribeStreamPushInfoList", req, resp, cb);
+    DescribeStreamPlayInfoList(req, cb) {
+        let resp = new DescribeStreamPlayInfoListResponse();
+        this.request("DescribeStreamPlayInfoList", req, resp, cb);
     }
 
     /**
-     * This API is used to query the playback authentication key.
-     * @param {DescribeLivePlayAuthKeyRequest} req
-     * @param {function(string, DescribeLivePlayAuthKeyResponse):void} cb
+     * This API is used to add a certificate.
+     * @param {CreateLiveCertRequest} req
+     * @param {function(string, CreateLiveCertResponse):void} cb
      * @public
      */
-    DescribeLivePlayAuthKey(req, cb) {
-        let resp = new DescribeLivePlayAuthKeyResponse();
-        this.request("DescribeLivePlayAuthKey", req, resp, cb);
+    CreateLiveCert(req, cb) {
+        let resp = new CreateLiveCertResponse();
+        this.request("CreateLiveCert", req, resp, cb);
     }
 
     /**
-     * This API is used to get the list of delayed playbacks.
-     * @param {DescribeLiveDelayInfoListRequest} req
-     * @param {function(string, DescribeLiveDelayInfoListResponse):void} cb
+     * This API is used to get the list of transcoding rules.
+     * @param {DescribeLiveTranscodeRulesRequest} req
+     * @param {function(string, DescribeLiveTranscodeRulesResponse):void} cb
      * @public
      */
-    DescribeLiveDelayInfoList(req, cb) {
-        let resp = new DescribeLiveDelayInfoListResponse();
-        this.request("DescribeLiveDelayInfoList", req, resp, cb);
+    DescribeLiveTranscodeRules(req, cb) {
+        let resp = new DescribeLiveTranscodeRulesResponse();
+        this.request("DescribeLiveTranscodeRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a single screencapturing template.
+     * @param {DescribeLiveSnapshotTemplateRequest} req
+     * @param {function(string, DescribeLiveSnapshotTemplateResponse):void} cb
+     * @public
+     */
+    DescribeLiveSnapshotTemplate(req, cb) {
+        let resp = new DescribeLiveSnapshotTemplateResponse();
+        this.request("DescribeLiveSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the callback template list.
+     * @param {DescribeLiveCallbackTemplatesRequest} req
+     * @param {function(string, DescribeLiveCallbackTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeLiveCallbackTemplates(req, cb) {
+        let resp = new DescribeLiveCallbackTemplatesResponse();
+        this.request("DescribeLiveCallbackTemplates", req, resp, cb);
+    }
+
+    /**
+     * 提前结束录制，并中止运行中的录制任务。任务被成功中止后将不再启动。
+     * @param {StopRecordTaskRequest} req
+     * @param {function(string, StopRecordTaskResponse):void} cb
+     * @public
+     */
+    StopRecordTask(req, cb) {
+        let resp = new StopRecordTaskResponse();
+        this.request("StopRecordTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the screencapturing template list.
+     * @param {DescribeLiveSnapshotTemplatesRequest} req
+     * @param {function(string, DescribeLiveSnapshotTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeLiveSnapshotTemplates(req, cb) {
+        let resp = new DescribeLiveSnapshotTemplatesResponse();
+        this.request("DescribeLiveSnapshotTemplates", req, resp, cb);
+    }
+
+    /**
+     * Note: Recording files are stored on the VOD platform. To use the recording feature, you need to activate a VOD account and ensure that it is available. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) will be charged according to the VOD billing method. For more information, please see the corresponding document.
+     * @param {StopLiveRecordRequest} req
+     * @param {function(string, StopLiveRecordResponse):void} cb
+     * @public
+     */
+    StopLiveRecord(req, cb) {
+        let resp = new StopLiveRecordResponse();
+        this.request("StopLiveRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the playback authentication key.
+     * @param {ModifyLivePlayAuthKeyRequest} req
+     * @param {function(string, ModifyLivePlayAuthKeyResponse):void} cb
+     * @public
+     */
+    ModifyLivePlayAuthKey(req, cb) {
+        let resp = new ModifyLivePlayAuthKeyResponse();
+        this.request("ModifyLivePlayAuthKey", req, resp, cb);
     }
 
     /**
@@ -653,6 +931,73 @@ Note: only one screencapturing template can be associated with one domain name.
     DescribeLiveTranscodeTemplate(req, cb) {
         let resp = new DescribeLiveTranscodeTemplateResponse();
         this.request("DescribeLiveTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * 接口用来查询直播增值业务--截图的张数
+     * @param {DescribeScreenShotSheetNumListRequest} req
+     * @param {function(string, DescribeScreenShotSheetNumListResponse):void} cb
+     * @public
+     */
+    DescribeScreenShotSheetNumList(req, cb) {
+        let resp = new DescribeScreenShotSheetNumListResponse();
+        this.request("DescribeScreenShotSheetNumList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a domain name certificate.
+     * @param {UnBindLiveDomainCertRequest} req
+     * @param {function(string, UnBindLiveDomainCertResponse):void} cb
+     * @public
+     */
+    UnBindLiveDomainCert(req, cb) {
+        let resp = new UnBindLiveDomainCertResponse();
+        this.request("UnBindLiveDomainCert", req, resp, cb);
+    }
+
+    /**
+     * 删除录制任务配置。删除操作不影响正在运行当中的任务，仅对删除之后新的推流有效。
+     * @param {DeleteRecordTaskRequest} req
+     * @param {function(string, DeleteRecordTaskResponse):void} cb
+     * @public
+     */
+    DeleteRecordTask(req, cb) {
+        let resp = new DeleteRecordTaskResponse();
+        this.request("DeleteRecordTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the transcoding details on a day.
+Note: Only the detailed data for one of the past 30 days can be queried currently.
+     * @param {DescribeLiveTranscodeDetailInfoRequest} req
+     * @param {function(string, DescribeLiveTranscodeDetailInfoResponse):void} cb
+     * @public
+     */
+    DescribeLiveTranscodeDetailInfo(req, cb) {
+        let resp = new DescribeLiveTranscodeDetailInfoResponse();
+        this.request("DescribeLiveTranscodeDetailInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of recording rules.
+     * @param {DescribeLiveRecordRulesRequest} req
+     * @param {function(string, DescribeLiveRecordRulesResponse):void} cb
+     * @public
+     */
+    DescribeLiveRecordRules(req, cb) {
+        let resp = new DescribeLiveRecordRulesResponse();
+        this.request("DescribeLiveRecordRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of delayed playbacks.
+     * @param {DescribeLiveDelayInfoListRequest} req
+     * @param {function(string, DescribeLiveDelayInfoListResponse):void} cb
+     * @public
+     */
+    DescribeLiveDelayInfoList(req, cb) {
+        let resp = new DescribeLiveDelayInfoListResponse();
+        this.request("DescribeLiveDelayInfoList", req, resp, cb);
     }
 
     /**
@@ -690,17 +1035,6 @@ Note: only one screencapturing template can be associated with one domain name.
     }
 
     /**
-     * This API is used to delete a recording template.
-     * @param {DeleteLiveRecordTemplateRequest} req
-     * @param {function(string, DeleteLiveRecordTemplateResponse):void} cb
-     * @public
-     */
-    DeleteLiveRecordTemplate(req, cb) {
-        let resp = new DeleteLiveRecordTemplateResponse();
-        this.request("DeleteLiveRecordTemplate", req, resp, cb);
-    }
-
-    /**
      * This API is used to bind a domain name certificate.
 Note: you need to call the `CreateLiveCert` API first to add a certificate. After getting the certificate ID, call this API for binding.
      * @param {BindLiveDomainCertRequest} req
@@ -724,25 +1058,16 @@ Note: you need to call the `CreateLiveCert` API first to add a certificate. Afte
     }
 
     /**
-     * Note: Recording files are stored on the VOD platform. To use the recording feature, you need to activate a VOD account and ensure that it is available. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) will be charged according to the VOD billing method. For more information, please see the corresponding document.
-     * @param {StopLiveRecordRequest} req
-     * @param {function(string, StopLiveRecordResponse):void} cb
-     * @public
-     */
-    StopLiveRecord(req, cb) {
-        let resp = new StopLiveRecordResponse();
-        this.request("StopLiveRecord", req, resp, cb);
-    }
+     * This API is used to query the information of downstream playback error codes, i.e., the occurrences of each HTTP error code (4xx and 5xx) at a 1-minute granularity in a certain period of time.
 
-    /**
-     * This API is used to get the recording template list.
-     * @param {DescribeLiveRecordTemplatesRequest} req
-     * @param {function(string, DescribeLiveRecordTemplatesResponse):void} cb
+
+     * @param {DescribePlayErrorCodeDetailInfoListRequest} req
+     * @param {function(string, DescribePlayErrorCodeDetailInfoListResponse):void} cb
      * @public
      */
-    DescribeLiveRecordTemplates(req, cb) {
-        let resp = new DescribeLiveRecordTemplatesResponse();
-        this.request("DescribeLiveRecordTemplates", req, resp, cb);
+    DescribePlayErrorCodeDetailInfoList(req, cb) {
+        let resp = new DescribePlayErrorCodeDetailInfoListResponse();
+        this.request("DescribePlayErrorCodeDetailInfoList", req, resp, cb);
     }
 
     /**
@@ -755,184 +1080,6 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     DescribeLiveStreamPublishedList(req, cb) {
         let resp = new DescribeLiveStreamPublishedListResponse();
         this.request("DescribeLiveStreamPublishedList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to return the stream status such as active, inactive, or forbidden.
-     * @param {DescribeLiveStreamStateRequest} req
-     * @param {function(string, DescribeLiveStreamStateResponse):void} cb
-     * @public
-     */
-    DescribeLiveStreamState(req, cb) {
-        let resp = new DescribeLiveStreamStateResponse();
-        this.request("DescribeLiveStreamState", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the domain name and certificate binding information.
-     * @param {ModifyLiveDomainCertRequest} req
-     * @param {function(string, ModifyLiveDomainCertResponse):void} cb
-     * @public
-     */
-    ModifyLiveDomainCert(req, cb) {
-        let resp = new ModifyLiveDomainCertResponse();
-        this.request("ModifyLiveDomainCert", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a callback rule.
-     * @param {DeleteLiveCallbackRuleRequest} req
-     * @param {function(string, DeleteLiveCallbackRuleResponse):void} cb
-     * @public
-     */
-    DeleteLiveCallbackRule(req, cb) {
-        let resp = new DeleteLiveCallbackRuleResponse();
-        this.request("DeleteLiveCallbackRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to resume a delayed playback.
-     * @param {ResumeDelayLiveStreamRequest} req
-     * @param {function(string, ResumeDelayLiveStreamResponse):void} cb
-     * @public
-     */
-    ResumeDelayLiveStream(req, cb) {
-        let resp = new ResumeDelayLiveStreamResponse();
-        this.request("ResumeDelayLiveStream", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query domain names by domain name status and type.
-     * @param {DescribeLiveDomainsRequest} req
-     * @param {function(string, DescribeLiveDomainsResponse):void} cb
-     * @public
-     */
-    DescribeLiveDomains(req, cb) {
-        let resp = new DescribeLiveDomainsResponse();
-        this.request("DescribeLiveDomains", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the domain name certificate information.
-     * @param {DescribeLiveDomainCertRequest} req
-     * @param {function(string, DescribeLiveDomainCertResponse):void} cb
-     * @public
-     */
-    DescribeLiveDomainCert(req, cb) {
-        let resp = new DescribeLiveDomainCertResponse();
-        this.request("DescribeLiveDomainCert", req, resp, cb);
-    }
-
-    /**
-     * After a transcoding template is created and a template ID is successfully returned, you need to call the [CreateLiveTranscodeRule](/document/product/267/32647) API and bind the returned template ID to the stream.
-<br>Transcoding-related document: [LVB Remuxing and Transcoding](/document/product/267/32736).
-     * @param {CreateLiveTranscodeTemplateRequest} req
-     * @param {function(string, CreateLiveTranscodeTemplateResponse):void} cb
-     * @public
-     */
-    CreateLiveTranscodeTemplate(req, cb) {
-        let resp = new CreateLiveTranscodeTemplateResponse();
-        this.request("CreateLiveTranscodeTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a certificate corresponding to the domain name.
-     * @param {DeleteLiveCertRequest} req
-     * @param {function(string, DeleteLiveCertResponse):void} cb
-     * @public
-     */
-    DeleteLiveCert(req, cb) {
-        let resp = new DeleteLiveCertResponse();
-        this.request("DeleteLiveCert", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the certificate information list.
-     * @param {DescribeLiveCertsRequest} req
-     * @param {function(string, DescribeLiveCertsResponse):void} cb
-     * @public
-     */
-    DescribeLiveCerts(req, cb) {
-        let resp = new DescribeLiveCertsResponse();
-        this.request("DescribeLiveCerts", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a callback template. After a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](/document/product/267/32638) API to bind the template ID to the domain name/path.
-<br>Callback protocol document: [Event Message Notification](/document/product/267/32744).
-     * @param {CreateLiveCallbackTemplateRequest} req
-     * @param {function(string, CreateLiveCallbackTemplateResponse):void} cb
-     * @public
-     */
-    CreateLiveCallbackTemplate(req, cb) {
-        let resp = new CreateLiveCallbackTemplateResponse();
-        this.request("CreateLiveCallbackTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to unbind a domain name certificate.
-     * @param {UnBindLiveDomainCertRequest} req
-     * @param {function(string, UnBindLiveDomainCertResponse):void} cb
-     * @public
-     */
-    UnBindLiveDomainCert(req, cb) {
-        let resp = new UnBindLiveDomainCertResponse();
-        this.request("UnBindLiveDomainCert", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the watermarking rule list.
-     * @param {DescribeLiveWatermarkRulesRequest} req
-     * @param {function(string, DescribeLiveWatermarkRulesResponse):void} cb
-     * @public
-     */
-    DescribeLiveWatermarkRules(req, cb) {
-        let resp = new DescribeLiveWatermarkRulesResponse();
-        this.request("DescribeLiveWatermarkRules", req, resp, cb);
-    }
-
-    /**
-     * This API is used to enable a disabled LVB domain name.
-     * @param {EnableLiveDomainRequest} req
-     * @param {function(string, EnableLiveDomainResponse):void} cb
-     * @public
-     */
-    EnableLiveDomain(req, cb) {
-        let resp = new EnableLiveDomainResponse();
-        this.request("EnableLiveDomain", req, resp, cb);
-    }
-
-    /**
-     * This API is used to cancel a stream mix. It can be used basically in the same way as `mix_streamv2.cancel_mix_stream`.
-     * @param {CancelCommonMixStreamRequest} req
-     * @param {function(string, CancelCommonMixStreamResponse):void} cb
-     * @public
-     */
-    CancelCommonMixStream(req, cb) {
-        let resp = new CancelCommonMixStreamResponse();
-        this.request("CancelCommonMixStream", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a watermarking rule.
-     * @param {DeleteLiveWatermarkRuleRequest} req
-     * @param {function(string, DeleteLiveWatermarkRuleResponse):void} cb
-     * @public
-     */
-    DeleteLiveWatermarkRule(req, cb) {
-        let resp = new DeleteLiveWatermarkRuleResponse();
-        this.request("DeleteLiveWatermarkRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get a single screencapturing template.
-     * @param {DescribeLiveSnapshotTemplateRequest} req
-     * @param {function(string, DescribeLiveSnapshotTemplateResponse):void} cb
-     * @public
-     */
-    DescribeLiveSnapshotTemplate(req, cb) {
-        let resp = new DescribeLiveSnapshotTemplateResponse();
-        this.request("DescribeLiveSnapshotTemplate", req, resp, cb);
     }
 
     /**
@@ -958,103 +1105,14 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
-     * This API is used to get certificate information.
-     * @param {DescribeLiveCertRequest} req
-     * @param {function(string, DescribeLiveCertResponse):void} cb
+     * This API is used to query the real-time downstream playback data at the domain name level.
+     * @param {DescribeLiveDomainPlayInfoListRequest} req
+     * @param {function(string, DescribeLiveDomainPlayInfoListResponse):void} cb
      * @public
      */
-    DescribeLiveCert(req, cb) {
-        let resp = new DescribeLiveCertResponse();
-        this.request("DescribeLiveCert", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get a single callback template.
-     * @param {DescribeLiveCallbackTemplateRequest} req
-     * @param {function(string, DescribeLiveCallbackTemplateResponse):void} cb
-     * @public
-     */
-    DescribeLiveCallbackTemplate(req, cb) {
-        let resp = new DescribeLiveCallbackTemplateResponse();
-        this.request("DescribeLiveCallbackTemplate", req, resp, cb);
-    }
-
-    /**
-     * After a screencapturing template is created and a template ID is successfully returned, you need to call the [CreateLiveSnapshotRule](/document/product/267/32625) API and bind the template ID to the stream.
-<br>Screencapturing-related document: [LVB Screencapturing](/document/product/267/32737).
-     * @param {CreateLiveSnapshotTemplateRequest} req
-     * @param {function(string, CreateLiveSnapshotTemplateResponse):void} cb
-     * @public
-     */
-    CreateLiveSnapshotTemplate(req, cb) {
-        let resp = new CreateLiveSnapshotTemplateResponse();
-        this.request("CreateLiveSnapshotTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an added LVB domain name.
-     * @param {DeleteLiveDomainRequest} req
-     * @param {function(string, DeleteLiveDomainResponse):void} cb
-     * @public
-     */
-    DeleteLiveDomain(req, cb) {
-        let resp = new DeleteLiveDomainResponse();
-        this.request("DeleteLiveDomain", req, resp, cb);
-    }
-
-    /**
-     * This API is used to return the live stream list.
-     * @param {DescribeLiveStreamOnlineListRequest} req
-     * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
-     * @public
-     */
-    DescribeLiveStreamOnlineList(req, cb) {
-        let resp = new DescribeLiveStreamOnlineListResponse();
-        this.request("DescribeLiveStreamOnlineList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to resume the push of a specific stream.
-     * @param {ResumeLiveStreamRequest} req
-     * @param {function(string, ResumeLiveStreamResponse):void} cb
-     * @public
-     */
-    ResumeLiveStream(req, cb) {
-        let resp = new ResumeLiveStreamResponse();
-        this.request("ResumeLiveStream", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a callback template.
-     * @param {ModifyLiveCallbackTemplateRequest} req
-     * @param {function(string, ModifyLiveCallbackTemplateResponse):void} cb
-     * @public
-     */
-    ModifyLiveCallbackTemplate(req, cb) {
-        let resp = new ModifyLiveCallbackTemplateResponse();
-        this.request("ModifyLiveCallbackTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API deletes a callback template.
-     * @param {DeleteLiveCallbackTemplateRequest} req
-     * @param {function(string, DeleteLiveCallbackTemplateResponse):void} cb
-     * @public
-     */
-    DeleteLiveCallbackTemplate(req, cb) {
-        let resp = new DeleteLiveCallbackTemplateResponse();
-        this.request("DeleteLiveCallbackTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the downstream playback data by district and ISP.
-     * @param {DescribeGroupProIspPlayInfoListRequest} req
-     * @param {function(string, DescribeGroupProIspPlayInfoListResponse):void} cb
-     * @public
-     */
-    DescribeGroupProIspPlayInfoList(req, cb) {
-        let resp = new DescribeGroupProIspPlayInfoListResponse();
-        this.request("DescribeGroupProIspPlayInfoList", req, resp, cb);
+    DescribeLiveDomainPlayInfoList(req, cb) {
+        let resp = new DescribeLiveDomainPlayInfoListResponse();
+        this.request("DescribeLiveDomainPlayInfoList", req, resp, cb);
     }
 
     /**
@@ -1092,39 +1150,6 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
-     * This API is used to add a certificate.
-     * @param {CreateLiveCertRequest} req
-     * @param {function(string, CreateLiveCertResponse):void} cb
-     * @public
-     */
-    CreateLiveCert(req, cb) {
-        let resp = new CreateLiveCertResponse();
-        this.request("CreateLiveCert", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the LVB push authentication key.
-     * @param {DescribeLivePushAuthKeyRequest} req
-     * @param {function(string, DescribeLivePushAuthKeyResponse):void} cb
-     * @public
-     */
-    DescribeLivePushAuthKey(req, cb) {
-        let resp = new DescribeLivePushAuthKeyResponse();
-        this.request("DescribeLivePushAuthKey", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of transcoding rules.
-     * @param {DescribeLiveTranscodeRulesRequest} req
-     * @param {function(string, DescribeLiveTranscodeRulesResponse):void} cb
-     * @public
-     */
-    DescribeLiveTranscodeRules(req, cb) {
-        let resp = new DescribeLiveTranscodeRulesResponse();
-        this.request("DescribeLiveTranscodeRules", req, resp, cb);
-    }
-
-    /**
      * After a recording template is created and a template ID is successfully returned, you need to call the [CreateLiveRecordRule](/document/product/267/32615) API and bind the template ID to the stream.
 <br>Recording-related document: [LVB Recording](/document/product/267/32739).
      * @param {CreateLiveRecordTemplateRequest} req
@@ -1137,14 +1162,213 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
-     * This API is used to get a single recording template.
-     * @param {DescribeLiveRecordTemplateRequest} req
-     * @param {function(string, DescribeLiveRecordTemplateResponse):void} cb
+     * This API is used to query the data of billable LVB bandwidth and traffic.
+     * @param {DescribeBillBandwidthAndFluxListRequest} req
+     * @param {function(string, DescribeBillBandwidthAndFluxListResponse):void} cb
      * @public
      */
-    DescribeLiveRecordTemplate(req, cb) {
-        let resp = new DescribeLiveRecordTemplateResponse();
-        this.request("DescribeLiveRecordTemplate", req, resp, cb);
+    DescribeBillBandwidthAndFluxList(req, cb) {
+        let resp = new DescribeBillBandwidthAndFluxListResponse();
+        this.request("DescribeBillBandwidthAndFluxList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable an LVB domain name.
+     * @param {ForbidLiveDomainRequest} req
+     * @param {function(string, ForbidLiveDomainResponse):void} cb
+     * @public
+     */
+    ForbidLiveDomain(req, cb) {
+        let resp = new ForbidLiveDomainResponse();
+        this.request("ForbidLiveDomain", req, resp, cb);
+    }
+
+    /**
+     * To create a transcoding rule, you need to first call the [CreateLiveTranscodeTemplate](/document/product/267/32646) API to create a transcoding template and bind the returned template ID to the stream.
+<br>Transcoding-related document: [LVB Remuxing and Transcoding](/document/product/267/32736).
+     * @param {CreateLiveTranscodeRuleRequest} req
+     * @param {function(string, CreateLiveTranscodeRuleResponse):void} cb
+     * @public
+     */
+    CreateLiveTranscodeRule(req, cb) {
+        let resp = new CreateLiveTranscodeRuleResponse();
+        this.request("CreateLiveTranscodeRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the watermarking rule list.
+     * @param {DescribeLiveWatermarkRulesRequest} req
+     * @param {function(string, DescribeLiveWatermarkRulesResponse):void} cb
+     * @public
+     */
+    DescribeLiveWatermarkRules(req, cb) {
+        let resp = new DescribeLiveWatermarkRulesResponse();
+        this.request("DescribeLiveWatermarkRules", req, resp, cb);
+    }
+
+    /**
+     * Note: The `DeleteLiveRecord` API is only used to delete the record of recording tasks but not stop recording or deleting an ongoing recording task. If you need to stop a recording task, please use the [StopLiveRecord](/document/product/267/30146) API.
+     * @param {DeleteLiveRecordRequest} req
+     * @param {function(string, DeleteLiveRecordResponse):void} cb
+     * @public
+     */
+    DeleteLiveRecord(req, cb) {
+        let resp = new DeleteLiveRecordResponse();
+        this.request("DeleteLiveRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a screencapturing rule. You need to first call the [CreateLiveSnapshotTemplate](/document/product/267/32624) API to create a screencapturing template to bind the returned template ID to the stream.
+<br>Screencapturing document: [LVB Screencapturing](/document/product/267/32737).
+Note: only one screencapturing template can be associated with one domain name.
+     * @param {CreateLiveSnapshotRuleRequest} req
+     * @param {function(string, CreateLiveSnapshotRuleResponse):void} cb
+     * @public
+     */
+    CreateLiveSnapshotRule(req, cb) {
+        let resp = new CreateLiveSnapshotRuleResponse();
+        this.request("CreateLiveSnapshotRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the downstream playback data by district and ISP.
+     * @param {DescribeGroupProIspPlayInfoListRequest} req
+     * @param {function(string, DescribeGroupProIspPlayInfoListResponse):void} cb
+     * @public
+     */
+    DescribeGroupProIspPlayInfoList(req, cb) {
+        let resp = new DescribeGroupProIspPlayInfoListResponse();
+        this.request("DescribeGroupProIspPlayInfoList", req, resp, cb);
+    }
+
+    /**
+     * 输入某个时间点（1分钟维度），查询该时间点所有流的下行信息。
+     * @param {DescribeAllStreamPlayInfoListRequest} req
+     * @param {function(string, DescribeAllStreamPlayInfoListResponse):void} cb
+     * @public
+     */
+    DescribeAllStreamPlayInfoList(req, cb) {
+        let resp = new DescribeAllStreamPlayInfoListResponse();
+        this.request("DescribeAllStreamPlayInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the playback authentication key.
+     * @param {DescribeLivePlayAuthKeyRequest} req
+     * @param {function(string, DescribeLivePlayAuthKeyResponse):void} cb
+     * @public
+     */
+    DescribeLivePlayAuthKey(req, cb) {
+        let resp = new DescribeLivePlayAuthKeyResponse();
+        this.request("DescribeLivePlayAuthKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return the stream status such as active, inactive, or forbidden.
+     * @param {DescribeLiveStreamStateRequest} req
+     * @param {function(string, DescribeLiveStreamStateResponse):void} cb
+     * @public
+     */
+    DescribeLiveStreamState(req, cb) {
+        let resp = new DescribeLiveStreamStateResponse();
+        this.request("DescribeLiveStreamState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a recording template.
+     * @param {DeleteLiveRecordTemplateRequest} req
+     * @param {function(string, DeleteLiveRecordTemplateResponse):void} cb
+     * @public
+     */
+    DeleteLiveRecordTemplate(req, cb) {
+        let resp = new DeleteLiveRecordTemplateResponse();
+        this.request("DeleteLiveRecordTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to resume a delayed playback.
+     * @param {ResumeDelayLiveStreamRequest} req
+     * @param {function(string, ResumeDelayLiveStreamResponse):void} cb
+     * @public
+     */
+    ResumeDelayLiveStream(req, cb) {
+        let resp = new ResumeDelayLiveStreamResponse();
+        this.request("ResumeDelayLiveStream", req, resp, cb);
+    }
+
+    /**
+     * 创建一个在指定时间启动、结束的录制任务，并使用指定录制模板ID对应的配置进行录制。
+- 使用前提
+1. 录制文件存放于点播平台，所以用户如需使用录制功能，需首先自行开通点播服务。
+2. 录制文件存放后相关费用（含存储以及下行播放流量）按照点播平台计费方式收取，具体请参考 对应文档。
+- 注意事项
+1. 断流会结束当前录制并生成录制文件。在结束时间到达之前任务仍然有效，期间只要正常推流都会正常录制，与是否多次推、断流无关。
+2. 使用上避免创建时间段相互重叠的录制任务。若同一条流当前存在多个时段重叠的任务，为避免重复录制系统将启动最多3个录制任务。
+3. 创建的录制任务记录在平台侧只保留3个月。
+4. 当前录制任务管理API（CreateRecordTask/StopRecordTask/DeleteRecordTask）与旧API（CreateLiveRecord/StopLiveRecord/DeleteLiveRecord）不兼容，两套接口不能混用。
+     * @param {CreateRecordTaskRequest} req
+     * @param {function(string, CreateRecordTaskResponse):void} cb
+     * @public
+     */
+    CreateRecordTask(req, cb) {
+        let resp = new CreateRecordTaskResponse();
+        this.request("CreateRecordTask", req, resp, cb);
+    }
+
+    /**
+     * After a transcoding template is created and a template ID is successfully returned, you need to call the [CreateLiveTranscodeRule](/document/product/267/32647) API and bind the returned template ID to the stream.
+<br>Transcoding-related document: [LVB Remuxing and Transcoding](/document/product/267/32736).
+     * @param {CreateLiveTranscodeTemplateRequest} req
+     * @param {function(string, CreateLiveTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    CreateLiveTranscodeTemplate(req, cb) {
+        let resp = new CreateLiveTranscodeTemplateResponse();
+        this.request("CreateLiveTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the certificate information list.
+     * @param {DescribeLiveCertsRequest} req
+     * @param {function(string, DescribeLiveCertsResponse):void} cb
+     * @public
+     */
+    DescribeLiveCerts(req, cb) {
+        let resp = new DescribeLiveCertsResponse();
+        this.request("DescribeLiveCerts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable a disabled LVB domain name.
+     * @param {EnableLiveDomainRequest} req
+     * @param {function(string, EnableLiveDomainResponse):void} cb
+     * @public
+     */
+    EnableLiveDomain(req, cb) {
+        let resp = new EnableLiveDomainResponse();
+        this.request("EnableLiveDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel a stream mix. It can be used basically in the same way as `mix_streamv2.cancel_mix_stream`.
+     * @param {CancelCommonMixStreamRequest} req
+     * @param {function(string, CancelCommonMixStreamResponse):void} cb
+     * @public
+     */
+    CancelCommonMixStream(req, cb) {
+        let resp = new CancelCommonMixStreamResponse();
+        this.request("CancelCommonMixStream", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the push information of all real-time streams, including client IP, server IP, frame rate, bitrate, domain name, and push start time.
+     * @param {DescribeLiveStreamPushInfoListRequest} req
+     * @param {function(string, DescribeLiveStreamPushInfoListResponse):void} cb
+     * @public
+     */
+    DescribeLiveStreamPushInfoList(req, cb) {
+        let resp = new DescribeLiveStreamPushInfoListResponse();
+        this.request("DescribeLiveStreamPushInfoList", req, resp, cb);
     }
 
     /**

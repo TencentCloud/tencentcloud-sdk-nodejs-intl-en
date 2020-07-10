@@ -17,49 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeInstanceMonitorTopNCmd response structure.
- * @class
- */
-class DescribeInstanceMonitorTopNCmdResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Access command information
-         * @type {Array.<SourceCommand> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new SourceCommand();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyInstanceParams response structure.
  * @class
  */
@@ -165,30 +122,24 @@ class RedisBackupSet extends  AbstractModel {
 }
 
 /**
- * ModfiyInstancePassword request structure.
+ * DescribeInstanceMonitorTopNCmd response structure.
  * @class
  */
-class ModfiyInstancePasswordRequest extends  AbstractModel {
+class DescribeInstanceMonitorTopNCmdResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Access command information
+         * @type {Array.<SourceCommand> || null}
          */
-        this.InstanceId = null;
+        this.Data = null;
 
         /**
-         * Old password of an instance
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.OldPassword = null;
-
-        /**
-         * New password of an instance
-         * @type {string || null}
-         */
-        this.Password = null;
+        this.RequestId = null;
 
     }
 
@@ -199,9 +150,16 @@ class ModfiyInstancePasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.OldPassword = 'OldPassword' in params ? params.OldPassword : null;
-        this.Password = 'Password' in params ? params.Password : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SourceCommand();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -399,31 +357,31 @@ class SwitchInstanceVipRequest extends  AbstractModel {
         super();
 
         /**
-         * Source instance ID
+         * Source instance ID.
          * @type {string || null}
          */
         this.SrcInstanceId = null;
 
         /**
-         * Target instance ID
+         * Target instance ID.
          * @type {string || null}
          */
         this.DstInstanceId = null;
 
         /**
-         * The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than TimeDelay, the VIP will not be switched. It is recommended to set an acceptable value based on the actual business conditions.
+         * The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than `TimeDelay`, the VIP will not be switched. We recommend setting an acceptable value based on the actual business conditions.
          * @type {number || null}
          */
         this.TimeDelay = null;
 
         /**
-         * Whether to force the switch when DTS is disconnected. 1: yes; 0: no
+         * Whether to force the switch when DTS is disconnected. Valid values: 1 (yes), 0 (no).
          * @type {number || null}
          */
         this.ForceSwitch = null;
 
         /**
-         * now: switch now; syncComplete: switch after sync is completed
+         * Valid values: now (switch now), syncComplete (switch after sync is completed).
          * @type {string || null}
          */
         this.SwitchTime = null;
@@ -461,7 +419,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Instance type. 2: Redis 2.8 Master-Slave Edition, 3: Redis 3.2 Master-Slave Edition (CKV Master-Slave Edition), 4: Redis 3.2 Cluster Edition (CKV Cluster Edition), 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Slave Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Slave Edition, 9: Redis 5.0 Cluster Edition,
+         * Instance type. Valid values: 2 (Redis 2.8 memory edition in standard architecture), 3 (Redis 3.2 memory edition in standard architecture), 4 (CKV 3.2 memory edition in standard architecture), 6 (Redis 4.0 memory edition in standard architecture), 7 (Redis 4.0 memory edition in cluster architecture), 8 (Redis 5.0 memory edition in standard architecture), 9 (Redis 5.0 memory edition in cluster architecture).
          * @type {number || null}
          */
         this.TypeId = null;
@@ -491,7 +449,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.BillingMode = null;
 
         /**
-         * Instance password. Rules: 1. It can contain 8-16 characters; 2. It must contain at least two of the following three types of characters: letters, digits, and special characters !@^*(). (When creating a password-free instance, you can leave this field along and it will be ignored.)
+         * Instance password. It can contain 8-30 characters and must contain at least two of the following types of characters: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/). It cannot stat with the symbol (/).
          * @type {string || null}
          */
         this.Password = null;
@@ -533,31 +491,31 @@ class CreateInstancesRequest extends  AbstractModel {
         this.VPort = null;
 
         /**
-         * Number of instance shards. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, Redis 2.8 standalone edition, and Redis 4.0 master-slave edition
+         * Number of shards in an instance. This parameter is required for cluster edition instances. Valid values: 3, 5, 8, 12, 16, 24, 32, 64, 96, 128.
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Number of instance replicas. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, and Redis 2.8 standalone edition
+         * Number of replicas in an instance. Redis 2.8 standard edition and CKV standard edition support 1 replica. Standard/cluster edition 4.0 and 5.0 support 1-5 replicas.
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
 
         /**
-         * Whether to support read-only replicas. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, and Redis 2.8 standalone edition |
+         * Whether to support read-only replicas. Neither Redis 2.8 standard edition nor CKV standard edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed on slave nodes. To enable read-only replicas, we recommend you create 2 or more replicas.
          * @type {boolean || null}
          */
         this.ReplicasReadonly = null;
 
         /**
-         * Instance name
+         * Instance name. It contains only letters, digits, underscores, and dashes with a length of up to 60 characters.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Whether to support the password-free feature. Value range: true (password-free instance); false (password-enabled instance). Default value: false
+         * Whether to support the password-free feature. Valid values: true (password-free instance), false (password-enabled instance). Default value: false. Only instances in a VPC support the password-free access.
          * @type {boolean || null}
          */
         this.NoAuth = null;
@@ -723,6 +681,125 @@ class DescribeInstanceMonitorBigKeyResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Security group inbound rule
+ * @class
+ */
+class Inbound extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy. Valid values: ACCEPT, DROP.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * All the addresses that the address group ID represents.
+         * @type {string || null}
+         */
+        this.AddressModule = null;
+
+        /**
+         * Source IP or IP address range, such as 192.168.0.0/16.
+         * @type {string || null}
+         */
+        this.CidrIp = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * Network protocol, such as UDP and TCP, etc.
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+        /**
+         * Port.
+         * @type {string || null}
+         */
+        this.PortRange = null;
+
+        /**
+         * All the protocols and ports that the service group ID represents.
+         * @type {string || null}
+         */
+        this.ServiceModule = null;
+
+        /**
+         * All the addresses that the security group ID represents.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * AssociateSecurityGroups request structure.
+ * @class
+ */
+class AssociateSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * ID of the security group to be associated in the format of sg-efil73jd.
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * ID(s) of the instance(s) to be associated in the format of ins-lesecurk. You can specify multiple instances.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -932,6 +1009,49 @@ class DescribeSlowLogResponse extends  AbstractModel {
                 let obj = new InstanceSlowlogDetail();
                 obj.deserialize(params.InstanceSlowlogDetail[z]);
                 this.InstanceSlowlogDetail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDBSecurityGroups response structure.
+ * @class
+ */
+class DescribeDBSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security group rules.
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1748,66 +1868,24 @@ class DestroyPrepaidInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Descriptions of integer parameters of the instance
+ * ManualBackupInstance response structure.
  * @class
  */
-class InstanceIntegerParam extends  AbstractModel {
+class ManualBackupInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
-         * @type {string || null}
-         */
-        this.ParamName = null;
-
-        /**
-         * Parameter type: Integer
-         * @type {string || null}
-         */
-        this.ValueType = null;
-
-        /**
-         * Whether restart is required after a modification is made. Value range: true, false
-         * @type {string || null}
-         */
-        this.NeedRestart = null;
-
-        /**
-         * Default value of the parameter
-         * @type {string || null}
-         */
-        this.DefaultValue = null;
-
-        /**
-         * Current value of a parameter
-         * @type {string || null}
-         */
-        this.CurrentValue = null;
-
-        /**
-         * Parameter description
-         * @type {string || null}
-         */
-        this.Tips = null;
-
-        /**
-         * Minimum value of a parameter
-         * @type {string || null}
-         */
-        this.Min = null;
-
-        /**
-         * Maximum value of a parameter
-         * @type {string || null}
-         */
-        this.Max = null;
-
-        /**
-         * Parameter status. 1: modifying; 2: modified
+         * Task ID
          * @type {number || null}
          */
-        this.Status = null;
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1818,15 +1896,8 @@ class InstanceIntegerParam extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.ValueType = 'ValueType' in params ? params.ValueType : null;
-        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
-        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
-        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
-        this.Tips = 'Tips' in params ? params.Tips : null;
-        this.Min = 'Min' in params ? params.Min : null;
-        this.Max = 'Max' in params ? params.Max : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1862,6 +1933,108 @@ class InstanceTagInfo extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceDTSInfo response structure.
+ * @class
+ */
+class DescribeInstanceDTSInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DTS task ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * DTS task name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * Task status. Valid values: 1 (Creating), 3 (Checking), 4 (CheckPass), 5 (CheckNotPass), 7 (Running), 8 (ReadyComplete), 9 (Success), 10 (Failed), 11 (Stopping), 12 (Completing)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Status description
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Synchronization latency in bytes
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Disconnection time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CutDownTime = null;
+
+        /**
+         * Source instance information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {DescribeInstanceDTSInstanceInfo || null}
+         */
+        this.SrcInfo = null;
+
+        /**
+         * Target instance information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {DescribeInstanceDTSInstanceInfo || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.CutDownTime = 'CutDownTime' in params ? params.CutDownTime : null;
+
+        if (params.SrcInfo) {
+            let obj = new DescribeInstanceDTSInstanceInfo();
+            obj.deserialize(params.SrcInfo)
+            this.SrcInfo = obj;
+        }
+
+        if (params.DstInfo) {
+            let obj = new DescribeInstanceDTSInstanceInfo();
+            obj.deserialize(params.DstInfo)
+            this.DstInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2077,6 +2250,34 @@ class SourceInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceSecurityGroups response structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceMonitorHotKey request structure.
  * @class
  */
@@ -2107,6 +2308,34 @@ class DescribeInstanceMonitorHotKeyRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SpanType = 'SpanType' in params ? params.SpanType : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceDTSInfo request structure.
+ * @class
+ */
+class DescribeInstanceDTSInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2267,6 +2496,41 @@ class DescribeBackupUrlResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBSecurityGroups request structure.
+ * @class
+ */
+class DescribeDBSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB Console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * ResetPassword request structure.
  * @class
  */
@@ -2386,6 +2650,56 @@ class DelayDistribution extends  AbstractModel {
 }
 
 /**
+ * DescribeProjectSecurityGroups response structure.
+ * @class
+ */
+class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security group rules.
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * Total number of the security groups meeting the condition.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceMonitorTookDist response structure.
  * @class
  */
@@ -2479,24 +2793,66 @@ class DescribeInstanceBackupsResponse extends  AbstractModel {
 }
 
 /**
- * ManualBackupInstance response structure.
+ * Descriptions of integer parameters of the instance
  * @class
  */
-class ManualBackupInstanceResponse extends  AbstractModel {
+class InstanceIntegerParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Parameter name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ParamName = null;
+
+        /**
+         * Parameter type: Integer
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+        /**
+         * Whether restart is required after a modification is made. Value range: true, false
+         * @type {string || null}
+         */
+        this.NeedRestart = null;
+
+        /**
+         * Default value of the parameter
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Current value of a parameter
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Tips = null;
+
+        /**
+         * Minimum value of a parameter
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * Maximum value of a parameter
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * Parameter status. 1: modifying; 2: modified
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -2507,8 +2863,15 @@ class ManualBackupInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2711,42 +3074,30 @@ class DescribeInstanceMonitorBigKeySizeDistRequest extends  AbstractModel {
 }
 
 /**
- * History of instance parameter modifications
+ * DescribeInstanceAccount request structure.
  * @class
  */
-class InstanceParamHistory extends  AbstractModel {
+class DescribeInstanceAccountRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * Instance ID
          * @type {string || null}
          */
-        this.ParamName = null;
+        this.InstanceId = null;
 
         /**
-         * Value before modification
-         * @type {string || null}
-         */
-        this.PreValue = null;
-
-        /**
-         * Value after modification
-         * @type {string || null}
-         */
-        this.NewValue = null;
-
-        /**
-         * Status. 1: modifying parameter configuration; 2: parameter configuration modified successfully; 3: failed to modify parameter configuration
+         * Number of entries per page
          * @type {number || null}
          */
-        this.Status = null;
+        this.Limit = null;
 
         /**
-         * Modification time
-         * @type {string || null}
+         * Page offset
+         * @type {number || null}
          */
-        this.ModifyTime = null;
+        this.Offset = null;
 
     }
 
@@ -2757,11 +3108,9 @@ class InstanceParamHistory extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.PreValue = 'PreValue' in params ? params.PreValue : null;
-        this.NewValue = 'NewValue' in params ? params.NewValue : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3117,30 +3466,42 @@ class DescribeInstanceSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceAccount request structure.
+ * History of instance parameter modifications
  * @class
  */
-class DescribeInstanceAccountRequest extends  AbstractModel {
+class InstanceParamHistory extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Parameter name
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ParamName = null;
 
         /**
-         * Number of entries per page
-         * @type {number || null}
+         * Value before modification
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.PreValue = null;
 
         /**
-         * Page offset
+         * Value after modification
+         * @type {string || null}
+         */
+        this.NewValue = null;
+
+        /**
+         * Status. 1: modifying parameter configuration; 2: parameter configuration modified successfully; 3: failed to modify parameter configuration
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Status = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
 
     }
 
@@ -3151,9 +3512,11 @@ class DescribeInstanceAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.PreValue = 'PreValue' in params ? params.PreValue : null;
+        this.NewValue = 'NewValue' in params ? params.NewValue : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -3271,6 +3634,48 @@ class InstanceClusterShard extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceSecurityGroups request structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * The ID list of the security groups to be modified, which is an array of one or more security group IDs.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB Console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceShards request structure.
  * @class
  */
@@ -3301,6 +3706,83 @@ class DescribeInstanceShardsRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.FilterSlave = 'FilterSlave' in params ? params.FilterSlave : null;
+
+    }
+}
+
+/**
+ * Security group outbound rule
+ * @class
+ */
+class Outbound extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy. Valid values: ACCEPT, DROP.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * All the addresses that the address group ID represents.
+         * @type {string || null}
+         */
+        this.AddressModule = null;
+
+        /**
+         * Source IP or IP address range, such as 192.168.0.0/16.
+         * @type {string || null}
+         */
+        this.CidrIp = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * Network protocol, such as UDP and TCP, etc.
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+        /**
+         * Port.
+         * @type {string || null}
+         */
+        this.PortRange = null;
+
+        /**
+         * All the protocols and ports that the service group ID represents.
+         * @type {string || null}
+         */
+        this.ServiceModule = null;
+
+        /**
+         * All the addresses that the security group ID represents.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -3355,6 +3837,62 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeProjectSecurityGroups request structure.
+ * @class
+ */
+class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of security groups to be pulled.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Search criteria. You can enter a security group ID or name.
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+
+    }
+}
+
+/**
  * DescribeInstanceMonitorBigKeySizeDist response structure.
  * @class
  */
@@ -3398,6 +3936,92 @@ class DescribeInstanceMonitorBigKeySizeDistResponse extends  AbstractModel {
 }
 
 /**
+ * Security group rules
+ * @class
+ */
+class SecurityGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creation time in the format of yyyy-mm-dd hh:mm:ss.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Security group ID.
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Security group name.
+         * @type {string || null}
+         */
+        this.SecurityGroupName = null;
+
+        /**
+         * Security group remarks.
+         * @type {string || null}
+         */
+        this.SecurityGroupRemark = null;
+
+        /**
+         * Outbound rule.
+         * @type {Array.<Outbound> || null}
+         */
+        this.Outbound = null;
+
+        /**
+         * Inbound rule.
+         * @type {Array.<Inbound> || null}
+         */
+        this.Inbound = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
+
+        if (params.Outbound) {
+            this.Outbound = new Array();
+            for (let z in params.Outbound) {
+                let obj = new Outbound();
+                obj.deserialize(params.Outbound[z]);
+                this.Outbound.push(obj);
+            }
+        }
+
+        if (params.Inbound) {
+            this.Inbound = new Array();
+            for (let z in params.Inbound) {
+                let obj = new Inbound();
+                obj.deserialize(params.Inbound[z]);
+                this.Inbound.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateInstanceAccount request structure.
  * @class
  */
@@ -3430,7 +4054,7 @@ class CreateInstanceAccountRequest extends  AbstractModel {
         this.ReadonlyPolicy = null;
 
         /**
-         * Read/write policy. Enter `r` for read-only, `w` for write-only, or `rw` for read/write
+         * Read/write policy. Valid values: r (read-only), rw (read/write).
          * @type {string || null}
          */
         this.Privilege = null;
@@ -3766,6 +4390,119 @@ class StartupInstanceResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Details of instances in a DTS task
+ * @class
+ */
+class DescribeInstanceDTSInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Instance ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Repository ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SetId = null;
+
+        /**
+         * Availability zone ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Instance type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Instance name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance access address
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Status
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SetId = 'SetId' in params ? params.SetId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * AssociateSecurityGroups response structure.
+ * @class
+ */
+class AssociateSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4147,6 +4884,48 @@ class SourceCommand extends  AbstractModel {
         }
         this.Cmd = 'Cmd' in params ? params.Cmd : null;
         this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * ModfiyInstancePassword request structure.
+ * @class
+ */
+class ModfiyInstancePasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Old password of an instance
+         * @type {string || null}
+         */
+        this.OldPassword = null;
+
+        /**
+         * New password of an instance
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OldPassword = 'OldPassword' in params ? params.OldPassword : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -5468,6 +6247,48 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
 }
 
 /**
+ * DisassociateSecurityGroups request structure.
+ * @class
+ */
+class DisassociateSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Security group ID.
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Instance ID list, which is an array of one or more instance IDs.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * StartupInstance request structure.
  * @class
  */
@@ -6068,6 +6889,34 @@ class InstanceParam extends  AbstractModel {
 }
 
 /**
+ * DisassociateSecurityGroups response structure.
+ * @class
+ */
+class DisassociateSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ClearInstance response structure.
  * @class
  */
@@ -6159,10 +7008,9 @@ class InstanceSlowlogDetail extends  AbstractModel {
 }
 
 module.exports = {
-    DescribeInstanceMonitorTopNCmdResponse: DescribeInstanceMonitorTopNCmdResponse,
     ModifyInstanceParamsResponse: ModifyInstanceParamsResponse,
     RedisBackupSet: RedisBackupSet,
-    ModfiyInstancePasswordRequest: ModfiyInstancePasswordRequest,
+    DescribeInstanceMonitorTopNCmdResponse: DescribeInstanceMonitorTopNCmdResponse,
     ModifyAutoBackupConfigResponse: ModifyAutoBackupConfigResponse,
     RestoreInstanceRequest: RestoreInstanceRequest,
     TaskInfoDetail: TaskInfoDetail,
@@ -6171,10 +7019,13 @@ module.exports = {
     ModifyNetworkConfigResponse: ModifyNetworkConfigResponse,
     CommandTake: CommandTake,
     DescribeInstanceMonitorBigKeyResponse: DescribeInstanceMonitorBigKeyResponse,
+    Inbound: Inbound,
+    AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeTaskListResponse: DescribeTaskListResponse,
     ModifyInstanceRequest: ModifyInstanceRequest,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
+    DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     DestroyPostpaidInstanceRequest: DestroyPostpaidInstanceRequest,
@@ -6193,27 +7044,32 @@ module.exports = {
     RestoreInstanceResponse: RestoreInstanceResponse,
     DescribeInstanceShardsResponse: DescribeInstanceShardsResponse,
     DestroyPrepaidInstanceRequest: DestroyPrepaidInstanceRequest,
-    InstanceIntegerParam: InstanceIntegerParam,
+    ManualBackupInstanceResponse: ManualBackupInstanceResponse,
     InstanceTagInfo: InstanceTagInfo,
+    DescribeInstanceDTSInfoResponse: DescribeInstanceDTSInfoResponse,
     DestroyPostpaidInstanceResponse: DestroyPostpaidInstanceResponse,
     ModifyInstanceResponse: ModifyInstanceResponse,
     TradeDealDetail: TradeDealDetail,
     SourceInfo: SourceInfo,
+    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
+    DescribeInstanceDTSInfoRequest: DescribeInstanceDTSInfoRequest,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     ModifyInstanceAccountRequest: ModifyInstanceAccountRequest,
     DescribeBackupUrlResponse: DescribeBackupUrlResponse,
+    DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     ResetPasswordRequest: ResetPasswordRequest,
     ModifyInstanceAccountResponse: ModifyInstanceAccountResponse,
     DelayDistribution: DelayDistribution,
+    DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DescribeInstanceMonitorTookDistResponse: DescribeInstanceMonitorTookDistResponse,
     DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
-    ManualBackupInstanceResponse: ManualBackupInstanceResponse,
+    InstanceIntegerParam: InstanceIntegerParam,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
     InstanceTextParam: InstanceTextParam,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
-    InstanceParamHistory: InstanceParamHistory,
+    DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     DescribeTaskListRequest: DescribeTaskListRequest,
     DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
@@ -6222,12 +7078,16 @@ module.exports = {
     DescribeInstanceMonitorTopNCmdRequest: DescribeInstanceMonitorTopNCmdRequest,
     ModifyNetworkConfigRequest: ModifyNetworkConfigRequest,
     DescribeInstanceSecurityGroupRequest: DescribeInstanceSecurityGroupRequest,
-    DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
+    InstanceParamHistory: InstanceParamHistory,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     InstanceClusterShard: InstanceClusterShard,
+    ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeInstanceShardsRequest: DescribeInstanceShardsRequest,
+    Outbound: Outbound,
     DescribeAutoBackupConfigResponse: DescribeAutoBackupConfigResponse,
+    DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     DescribeInstanceMonitorBigKeySizeDistResponse: DescribeInstanceMonitorBigKeySizeDistResponse,
+    SecurityGroup: SecurityGroup,
     CreateInstanceAccountRequest: CreateInstanceAccountRequest,
     EnableReplicaReadonlyResponse: EnableReplicaReadonlyResponse,
     InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
@@ -6235,12 +7095,15 @@ module.exports = {
     ProductConf: ProductConf,
     InstanceNode: InstanceNode,
     StartupInstanceResponse: StartupInstanceResponse,
+    DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
+    AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DescribeTaskInfoResponse: DescribeTaskInfoResponse,
     DescribeInstanceMonitorBigKeyTypeDistResponse: DescribeInstanceMonitorBigKeyTypeDistResponse,
     CleanUpInstanceRequest: CleanUpInstanceRequest,
     DescribeInstanceDealDetailResponse: DescribeInstanceDealDetailResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     SourceCommand: SourceCommand,
+    ModfiyInstancePasswordRequest: ModfiyInstancePasswordRequest,
     DescribeSlowLogRequest: DescribeSlowLogRequest,
     DescribeAutoBackupConfigRequest: DescribeAutoBackupConfigRequest,
     DescribeInstanceMonitorSIPResponse: DescribeInstanceMonitorSIPResponse,
@@ -6263,6 +7126,7 @@ module.exports = {
     DescribeProductInfoRequest: DescribeProductInfoRequest,
     SwitchInstanceVipResponse: SwitchInstanceVipResponse,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
+    DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     StartupInstanceRequest: StartupInstanceRequest,
     HotKeyInfo: HotKeyInfo,
     CreateInstanceAccountResponse: CreateInstanceAccountResponse,
@@ -6276,6 +7140,7 @@ module.exports = {
     DescribeProjectSecurityGroupResponse: DescribeProjectSecurityGroupResponse,
     DescribeInstanceMonitorHotKeyResponse: DescribeInstanceMonitorHotKeyResponse,
     InstanceParam: InstanceParam,
+    DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     ClearInstanceResponse: ClearInstanceResponse,
     InstanceSlowlogDetail: InstanceSlowlogDetail,
 

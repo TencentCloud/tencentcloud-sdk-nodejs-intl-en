@@ -87,6 +87,147 @@ class UpdateApiKeyRequest extends  AbstractModel {
 }
 
 /**
+ * Service list display
+ * @class
+ */
+class Service extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Port for HTTPS access over private network.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InnerHttpsPort = null;
+
+        /**
+         * Custom service description.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceDesc = null;
+
+        /**
+         * Service frontend request type, such as `http`, `https`, and `http&https`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+        /**
+         * Network types supported by service.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.NetTypes = null;
+
+        /**
+         * Dedicated cluster name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExclusiveSetName = null;
+
+        /**
+         * Unique service ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * IP version.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IpVersion = null;
+
+        /**
+         * List of published environments, such as test, prepub, and release.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AvailableEnvironments = null;
+
+        /**
+         * Custom service name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * Public domain name assigned by the system for this service.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OuterSubDomain = null;
+
+        /**
+         * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Port for HTTP access over private network.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InnerHttpPort = null;
+
+        /**
+         * Private domain name automatically assigned by the system for this service.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InnerSubDomain = null;
+
+        /**
+         * Billing status of service.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TradeIsolateStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InnerHttpsPort = 'InnerHttpsPort' in params ? params.InnerHttpsPort : null;
+        this.ServiceDesc = 'ServiceDesc' in params ? params.ServiceDesc : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.NetTypes = 'NetTypes' in params ? params.NetTypes : null;
+        this.ExclusiveSetName = 'ExclusiveSetName' in params ? params.ExclusiveSetName : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
+        this.AvailableEnvironments = 'AvailableEnvironments' in params ? params.AvailableEnvironments : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.OuterSubDomain = 'OuterSubDomain' in params ? params.OuterSubDomain : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.InnerHttpPort = 'InnerHttpPort' in params ? params.InnerHttpPort : null;
+        this.InnerSubDomain = 'InnerSubDomain' in params ? params.InnerSubDomain : null;
+        this.TradeIsolateStatus = 'TradeIsolateStatus' in params ? params.TradeIsolateStatus : null;
+
+    }
+}
+
+/**
  * Service release version
  * @class
  */
@@ -214,6 +355,42 @@ class DeleteUsagePlanResponse extends  AbstractModel {
 
         /**
          * Whether deletion succeeded.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableApiKey response structure.
+ * @class
+ */
+class DisableApiKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the key is successfully disabled.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -788,24 +965,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * UnBindSecretIds request structure.
+ * DescribeUsagePlansStatus response structure.
  * @class
  */
-class UnBindSecretIdsRequest extends  AbstractModel {
+class DescribeUsagePlansStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of the usage plan to be unbound.
-         * @type {string || null}
+         * Usage plan list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {UsagePlansStatus || null}
          */
-        this.UsagePlanId = null;
+        this.Result = null;
 
         /**
-         * Array of IDs of the keys to be unbound.
-         * @type {Array.<string> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.AccessKeyIds = null;
+        this.RequestId = null;
 
     }
 
@@ -816,8 +994,13 @@ class UnBindSecretIdsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UsagePlanId = 'UsagePlanId' in params ? params.UsagePlanId : null;
-        this.AccessKeyIds = 'AccessKeyIds' in params ? params.AccessKeyIds : null;
+
+        if (params.Result) {
+            let obj = new UsagePlansStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -948,6 +1131,49 @@ class DeleteIPStrategyRequest extends  AbstractModel {
 }
 
 /**
+ * Custom service domain name information
+ * @class
+ */
+class DomainSets extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of custom domain names under service
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Custom service domain name list.
+         * @type {Array.<DomainSetList> || null}
+         */
+        this.DomainSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DomainSet) {
+            this.DomainSet = new Array();
+            for (let z in params.DomainSet) {
+                let obj = new DomainSetList();
+                obj.deserialize(params.DomainSet[z]);
+                this.DomainSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteUsagePlan request structure.
  * @class
  */
@@ -976,25 +1202,18 @@ class DeleteUsagePlanRequest extends  AbstractModel {
 }
 
 /**
- * DisableApiKey response structure.
+ * DeleteService request structure.
  * @class
  */
-class DisableApiKeyResponse extends  AbstractModel {
+class DeleteServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether the key is successfully disabled.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Unique ID of the service to be deleted.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ServiceId = null;
 
     }
 
@@ -1005,8 +1224,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
 
     }
 }
@@ -1395,7 +1613,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Usage plan binding details
+ * List of environments bound to usage plan.
  * @class
  */
 class UsagePlanEnvironmentStatus extends  AbstractModel {
@@ -1540,7 +1758,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * API tag
+ * Information of tag bound to API.
  * @class
  */
 class Tag extends  AbstractModel {
@@ -1665,6 +1883,51 @@ class ConstantParameter extends  AbstractModel {
 }
 
 /**
+ * Usage plan list
+ * @class
+ */
+class UsagePlansStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible usage plans.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Usage plan list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<UsagePlanStatusInfo> || null}
+         */
+        this.UsagePlanStatusSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.UsagePlanStatusSet) {
+            this.UsagePlanStatusSet = new Array();
+            for (let z in params.UsagePlanStatusSet) {
+                let obj = new UsagePlanStatusInfo();
+                obj.deserialize(params.UsagePlanStatusSet[z]);
+                this.UsagePlanStatusSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifySubDomain response structure.
  * @class
  */
@@ -1695,6 +1958,48 @@ class ModifySubDomainResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Search criterion input parameter
+ * @class
+ */
+class LogQuery extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Search field
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Operator
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Search value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1940,6 +2245,63 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeApisStatus request structure.
+ * @class
+ */
+class DescribeApisStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique service ID of API.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * API filter. Valid values: ApiId, ApiName, ApiPath, ApiType, AuthRelationApiId, AuthType, ApiBuniessType, NotUsagePlanId, Environment, Tags (whose values are the list of `$tag_key:tag_value`), TagKeys (whose values are the list of tag keys).
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteServiceSubDomainMapping request structure.
  * @class
  */
@@ -1977,6 +2339,47 @@ class DeleteServiceSubDomainMappingRequest extends  AbstractModel {
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
         this.Environment = 'Environment' in params ? params.Environment : null;
+
+    }
+}
+
+/**
+ * DescribeIPStrategy response structure.
+ * @class
+ */
+class DescribeIPStrategyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP policy details.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {IPStrategy || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new IPStrategy();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2059,25 +2462,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * UnBindEnvironment response structure.
+ * DescribeIPStrategyApisStatus request structure.
  * @class
  */
-class UnBindEnvironmentResponse extends  AbstractModel {
+class DescribeIPStrategyApisStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether unbinding succeeded.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Unique service ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ServiceId = null;
+
+        /**
+         * Unique policy ID.
+         * @type {string || null}
+         */
+        this.StrategyId = null;
+
+        /**
+         * Policy environment.
+         * @type {string || null}
+         */
+        this.EnvironmentName = null;
+
+        /**
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter. Valid values: ApiPath, ApiName, KeyWord (fuzzy search by `Path` and `Name`).
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -2088,8 +2514,76 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * UnBindEnvironment request structure.
+ * @class
+ */
+class UnBindEnvironmentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Binding type. Valid values: API, SERVICE. Default value: SERVICE.
+         * @type {string || null}
+         */
+        this.BindType = null;
+
+        /**
+         * List of unique IDs of the usage plans to be bound.
+         * @type {Array.<string> || null}
+         */
+        this.UsagePlanIds = null;
+
+        /**
+         * Service environment to be unbound.
+         * @type {string || null}
+         */
+        this.Environment = null;
+
+        /**
+         * Unique ID of the service to be unbound.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Unique API ID array, which is required if `BindType` is `API`.
+         * @type {Array.<string> || null}
+         */
+        this.ApiIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BindType = 'BindType' in params ? params.BindType : null;
+        this.UsagePlanIds = 'UsagePlanIds' in params ? params.UsagePlanIds : null;
+        this.Environment = 'Environment' in params ? params.Environment : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ApiIds = 'ApiIds' in params ? params.ApiIds : null;
 
     }
 }
@@ -2326,6 +2820,56 @@ class ReqParameter extends  AbstractModel {
         this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
         this.Required = 'Required' in params ? params.Required : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * DescribeServicesStatus request structure.
+ * @class
+ */
+class DescribeServicesStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter. Valid values: ServiceId, ServiceName, NotUsagePlanId, Environment, IpVersion.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -2765,6 +3309,49 @@ class CreateServiceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeIPStrategysStatus request structure.
+ * @class
+ */
+class DescribeIPStrategysStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique service ID.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Filter. Valid values: StrategyName.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DemoteServiceUsagePlan response structure.
  * @class
  */
@@ -3197,6 +3784,42 @@ class BindSecretIdsRequest extends  AbstractModel {
 }
 
 /**
+ * UnBindEnvironment response structure.
+ * @class
+ */
+class UnBindEnvironmentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether unbinding succeeded.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Key bound to usage plan
  * @class
  */
@@ -3320,7 +3943,7 @@ class DomainSetList extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * Domain name resolution status. True: success; Flase: failure.
+         * Domain name resolution status. True: success; False: failure.
          * @type {number || null}
          */
         this.Status = null;
@@ -3364,6 +3987,51 @@ class DomainSetList extends  AbstractModel {
         this.IsDefaultMapping = 'IsDefaultMapping' in params ? params.IsDefaultMapping : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.NetType = 'NetType' in params ? params.NetType : null;
+
+    }
+}
+
+/**
+ * Policy list
+ * @class
+ */
+class IPStrategysStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of policies.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Policy list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<IPStrategy> || null}
+         */
+        this.StrategySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.StrategySet) {
+            this.StrategySet = new Array();
+            for (let z in params.StrategySet) {
+                let obj = new IPStrategy();
+                obj.deserialize(params.StrategySet[z]);
+                this.StrategySet.push(obj);
+            }
+        }
 
     }
 }
@@ -4741,7 +5409,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Environment
+ * Information of service release environment.
  * @class
  */
 class Environment extends  AbstractModel {
@@ -5067,26 +5735,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * List of policies bound to environment
+ * DescribeIPStrategyApisStatus response structure.
  * @class
  */
-class ServiceEnvironmentStrategyStatus extends  AbstractModel {
+class DescribeIPStrategyApisStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of throttling policies.
+         * List of APIs bound to environment.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * @type {IPStrategyApiStatus || null}
          */
-        this.TotalCount = null;
+        this.Result = null;
 
         /**
-         * Throttling policy list.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ServiceEnvironmentStrategy> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.EnvironmentList = null;
+        this.RequestId = null;
 
     }
 
@@ -5097,16 +5764,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.EnvironmentList) {
-            this.EnvironmentList = new Array();
-            for (let z in params.EnvironmentList) {
-                let obj = new ServiceEnvironmentStrategy();
-                obj.deserialize(params.EnvironmentList[z]);
-                this.EnvironmentList.push(obj);
-            }
+        if (params.Result) {
+            let obj = new IPStrategyApiStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5189,42 +5853,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * UnBindEnvironment request structure.
+ * DescribeApisStatus response structure.
  * @class
  */
-class UnBindEnvironmentRequest extends  AbstractModel {
+class DescribeApisStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Binding type. Valid values: API, SERVICE. Default value: SERVICE.
+         * List of API details.
+         * @type {ApisStatus || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.BindType = null;
-
-        /**
-         * List of unique IDs of the usage plans to be bound.
-         * @type {Array.<string> || null}
-         */
-        this.UsagePlanIds = null;
-
-        /**
-         * Service environment to be unbound.
-         * @type {string || null}
-         */
-        this.Environment = null;
-
-        /**
-         * Unique ID of the service to be unbound.
-         * @type {string || null}
-         */
-        this.ServiceId = null;
-
-        /**
-         * Unique API ID array, which is required if `BindType` is `API`.
-         * @type {Array.<string> || null}
-         */
-        this.ApiIds = null;
+        this.RequestId = null;
 
     }
 
@@ -5235,11 +5881,63 @@ class UnBindEnvironmentRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BindType = 'BindType' in params ? params.BindType : null;
-        this.UsagePlanIds = 'UsagePlanIds' in params ? params.UsagePlanIds : null;
-        this.Environment = 'Environment' in params ? params.Environment : null;
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
-        this.ApiIds = 'ApiIds' in params ? params.ApiIds : null;
+
+        if (params.Result) {
+            let obj = new ApisStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeApiKeysStatus request structure.
+ * @class
+ */
+class DescribeApiKeysStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter. Valid values: AccessKeyId, AccessKeySecret, SecretName, NotUsagePlanId, Status, KeyWord (match with `name` or `path`).
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5594,24 +6292,25 @@ class DescribeApiKeyRequest extends  AbstractModel {
 }
 
 /**
- * Custom service domain name information
+ * DescribeUsagePlan response structure.
  * @class
  */
-class DomainSets extends  AbstractModel {
+class DescribeUsagePlanResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of custom domain names under service
-         * @type {number || null}
+         * Usage plan details.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {UsagePlanInfo || null}
          */
-        this.TotalCount = null;
+        this.Result = null;
 
         /**
-         * Custom service domain name list.
-         * @type {Array.<DomainSetList> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.DomainSet = null;
+        this.RequestId = null;
 
     }
 
@@ -5622,16 +6321,13 @@ class DomainSets extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.DomainSet) {
-            this.DomainSet = new Array();
-            for (let z in params.DomainSet) {
-                let obj = new DomainSetList();
-                obj.deserialize(params.DomainSet[z]);
-                this.DomainSet.push(obj);
-            }
+        if (params.Result) {
+            let obj = new UsagePlanInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5798,7 +6494,57 @@ class DescribeServiceUsagePlanRequest extends  AbstractModel {
 }
 
 /**
- * Usage plan binding details
+ * DescribeUsagePlansStatus request structure.
+ * @class
+ */
+class DescribeUsagePlansStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Usage plan filter. Valid values: UsagePlanId, UsagePlanName, NotServiceId, NotApiId, Environment.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Details of environments bound to usage plan.
  * @class
  */
 class UsagePlanEnvironment extends  AbstractModel {
@@ -5952,6 +6698,41 @@ class ModifyIPStrategyRequest extends  AbstractModel {
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
         this.StrategyData = 'StrategyData' in params ? params.StrategyData : null;
+
+    }
+}
+
+/**
+ * UnBindSecretIds request structure.
+ * @class
+ */
+class UnBindSecretIdsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the usage plan to be unbound.
+         * @type {string || null}
+         */
+        this.UsagePlanId = null;
+
+        /**
+         * Array of IDs of the keys to be unbound.
+         * @type {Array.<string> || null}
+         */
+        this.AccessKeyIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsagePlanId = 'UsagePlanId' in params ? params.UsagePlanId : null;
+        this.AccessKeyIds = 'AccessKeyIds' in params ? params.AccessKeyIds : null;
 
     }
 }
@@ -6193,6 +6974,76 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
         this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+
+    }
+}
+
+/**
+ * List of APIs bound to policy
+ * @class
+ */
+class IPStrategyApi extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique API ID.
+         * @type {string || null}
+         */
+        this.ApiId = null;
+
+        /**
+         * Custom API name.
+         * @type {string || null}
+         */
+        this.ApiName = null;
+
+        /**
+         * API type. Valid values: NORMAL (general API), TSF (microservice API).
+         * @type {string || null}
+         */
+        this.ApiType = null;
+
+        /**
+         * API path, such as `/path`.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * API request method, such as `GET`.
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * Unique ID of another policy bound to API.
+         * @type {string || null}
+         */
+        this.OtherIPStrategyId = null;
+
+        /**
+         * Environment bound to API.
+         * @type {string || null}
+         */
+        this.OtherEnvironmentName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ApiName = 'ApiName' in params ? params.ApiName : null;
+        this.ApiType = 'ApiType' in params ? params.ApiType : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.OtherIPStrategyId = 'OtherIPStrategyId' in params ? params.OtherIPStrategyId : null;
+        this.OtherEnvironmentName = 'OtherEnvironmentName' in params ? params.OtherEnvironmentName : null;
 
     }
 }
@@ -6523,6 +7374,51 @@ class BindSubDomainRequest extends  AbstractModel {
 }
 
 /**
+ * Details of API bound to IP policy
+ * @class
+ */
+class IPStrategyApiStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of APIs bound to environment.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Details of APIs bound to environment.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<IPStrategyApi> || null}
+         */
+        this.ApiIdStatusSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ApiIdStatusSet) {
+            this.ApiIdStatusSet = new Array();
+            for (let z in params.ApiIdStatusSet) {
+                let obj = new IPStrategyApi();
+                obj.deserialize(params.ApiIdStatusSet[z]);
+                this.ApiIdStatusSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateIPStrategy response structure.
  * @class
  */
@@ -6655,7 +7551,7 @@ class MicroServiceReq extends  AbstractModel {
 }
 
 /**
- * ErrorCodes
+ * Custom error code
  * @class
  */
 class ErrorCodes extends  AbstractModel {
@@ -6716,6 +7612,51 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * List of policies bound to environment
+ * @class
+ */
+class ServiceEnvironmentStrategyStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of throttling policies.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Throttling policy list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ServiceEnvironmentStrategy> || null}
+         */
+        this.EnvironmentList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.EnvironmentList) {
+            this.EnvironmentList = new Array();
+            for (let z in params.EnvironmentList) {
+                let obj = new ServiceEnvironmentStrategy();
+                obj.deserialize(params.EnvironmentList[z]);
+                this.EnvironmentList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeApiEnvironmentStrategy response structure.
  * @class
  */
@@ -6757,7 +7698,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * MicroService
+ * Information of microservice bound to API.
  * @class
  */
 class MicroService extends  AbstractModel {
@@ -6950,47 +7891,6 @@ class ApiKey extends  AbstractModel {
 }
 
 /**
- * DescribeUsagePlan response structure.
- * @class
- */
-class DescribeUsagePlanResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Usage plan details.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {UsagePlanInfo || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            let obj = new UsagePlanInfo();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * BindEnvironment request structure.
  * @class
  */
@@ -7042,6 +7942,77 @@ class BindEnvironmentRequest extends  AbstractModel {
         this.Environment = 'Environment' in params ? params.Environment : null;
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.ApiIds = 'ApiIds' in params ? params.ApiIds : null;
+
+    }
+}
+
+/**
+ * DescribeIPStrategy request structure.
+ * @class
+ */
+class DescribeIPStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique service ID.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Unique IP policy ID.
+         * @type {string || null}
+         */
+        this.StrategyId = null;
+
+        /**
+         * Environment associated with policy.
+         * @type {string || null}
+         */
+        this.EnvironmentName = null;
+
+        /**
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter, which is a reserved field. Filtering is not supported currently.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -7241,6 +8212,139 @@ class RequestParameter extends  AbstractModel {
 }
 
 /**
+ * Usage plan details.
+ * @class
+ */
+class UsagePlanInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique usage plan ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanId = null;
+
+        /**
+         * Usage plan name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanName = null;
+
+        /**
+         * Usage plan description.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanDesc = null;
+
+        /**
+         * Number of initialization calls.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InitQuota = null;
+
+        /**
+         * Limit of requests per second.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRequestNumPreSec = null;
+
+        /**
+         * Maximum number of calls.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRequestNum = null;
+
+        /**
+         * Whether to hide.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsHide = null;
+
+        /**
+         * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+        /**
+         * Number of bound keys.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BindSecretIdTotalCount = null;
+
+        /**
+         * Details of bound keys.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.BindSecretIds = null;
+
+        /**
+         * Number of bound environments.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BindEnvironmentTotalCount = null;
+
+        /**
+         * Details of bound environments.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<UsagePlanBindEnvironment> || null}
+         */
+        this.BindEnvironments = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsagePlanId = 'UsagePlanId' in params ? params.UsagePlanId : null;
+        this.UsagePlanName = 'UsagePlanName' in params ? params.UsagePlanName : null;
+        this.UsagePlanDesc = 'UsagePlanDesc' in params ? params.UsagePlanDesc : null;
+        this.InitQuota = 'InitQuota' in params ? params.InitQuota : null;
+        this.MaxRequestNumPreSec = 'MaxRequestNumPreSec' in params ? params.MaxRequestNumPreSec : null;
+        this.MaxRequestNum = 'MaxRequestNum' in params ? params.MaxRequestNum : null;
+        this.IsHide = 'IsHide' in params ? params.IsHide : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.BindSecretIdTotalCount = 'BindSecretIdTotalCount' in params ? params.BindSecretIdTotalCount : null;
+        this.BindSecretIds = 'BindSecretIds' in params ? params.BindSecretIds : null;
+        this.BindEnvironmentTotalCount = 'BindEnvironmentTotalCount' in params ? params.BindEnvironmentTotalCount : null;
+
+        if (params.BindEnvironments) {
+            this.BindEnvironments = new Array();
+            for (let z in params.BindEnvironments) {
+                let obj = new UsagePlanBindEnvironment();
+                obj.deserialize(params.BindEnvironments[z]);
+                this.BindEnvironments.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeServiceEnvironmentReleaseHistory request structure.
  * @class
  */
@@ -7285,6 +8389,83 @@ class DescribeServiceEnvironmentReleaseHistoryRequest extends  AbstractModel {
         this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * Usage plan list display.
+ * @class
+ */
+class UsagePlanStatusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique usage plan ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanId = null;
+
+        /**
+         * Custom usage plan name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanName = null;
+
+        /**
+         * Custom usage plan description.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsagePlanDesc = null;
+
+        /**
+         * Maximum number of requests per second.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRequestNumPreSec = null;
+
+        /**
+         * Total number of requests allowed. `-1` indicates no limit.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRequestNum = null;
+
+        /**
+         * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsagePlanId = 'UsagePlanId' in params ? params.UsagePlanId : null;
+        this.UsagePlanName = 'UsagePlanName' in params ? params.UsagePlanName : null;
+        this.UsagePlanDesc = 'UsagePlanDesc' in params ? params.UsagePlanDesc : null;
+        this.MaxRequestNumPreSec = 'MaxRequestNumPreSec' in params ? params.MaxRequestNumPreSec : null;
+        this.MaxRequestNum = 'MaxRequestNum' in params ? params.MaxRequestNum : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
 
     }
 }
@@ -7551,6 +8732,92 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeApiKeysStatus response structure.
+ * @class
+ */
+class DescribeApiKeysStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ApiKeysStatus || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ApiKeysStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Service list display
+ * @class
+ */
+class ServicesStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of services in list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Service list details.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Service> || null}
+         */
+        this.ServiceSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ServiceSet) {
+            this.ServiceSet = new Array();
+            for (let z in params.ServiceSet) {
+                let obj = new Service();
+                obj.deserialize(params.ServiceSet[z]);
+                this.ServiceSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeLogSearch request structure.
  * @class
  */
@@ -7577,7 +8844,7 @@ class DescribeLogSearchRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * Exact search by `apiid` or `reqid`
+         * Reserved field
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -7601,13 +8868,23 @@ class DescribeLogSearchRequest extends  AbstractModel {
         this.Sort = null;
 
         /**
-         * Fuzzy search for log by keyword
+         * Reserved field
          * @type {string || null}
          */
         this.Query = null;
 
         /**
-         * 
+         * Search criterion. Valid values:
+req_id: "="
+api_id: "="
+cip: "="
+uip: ":"
+err_msg: ":"
+rsp_st: "=", "!=", ":", ">", "<"
+req_t: ">=", "<="
+
+Note:
+":" indicates included, and "!=" indicates not equal to. For the meanings of fields, please see the `LogSet` description of the output parameter
          * @type {Array.<LogQuery> || null}
          */
         this.LogQuerys = null;
@@ -7651,103 +8928,24 @@ class DescribeLogSearchRequest extends  AbstractModel {
 }
 
 /**
- * Usage plan details (as modification made on a complex type by `yunapi` will be directly synced to the production environment and you cannot query which APIs reference the complex type, you need to create a complex type different from the previous `UsagePlan`)
+ * API list status description
  * @class
  */
-class UsagePlanInfo extends  AbstractModel {
+class ApisStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique usage plan ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UsagePlanId = null;
-
-        /**
-         * Usage plan name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UsagePlanName = null;
-
-        /**
-         * Usage plan description.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UsagePlanDesc = null;
-
-        /**
-         * Number of initialization calls.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Number of eligible APIs.
          * @type {number || null}
          */
-        this.InitQuota = null;
+        this.TotalCount = null;
 
         /**
-         * Limit of requests per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * API list.
+         * @type {Array.<DesApisStatus> || null}
          */
-        this.MaxRequestNumPreSec = null;
-
-        /**
-         * Maximum number of calls.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxRequestNum = null;
-
-        /**
-         * Whether to hide.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsHide = null;
-
-        /**
-         * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ModifiedTime = null;
-
-        /**
-         * Number of bound keys.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.BindSecretIdTotalCount = null;
-
-        /**
-         * Details of bound keys.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.BindSecretIds = null;
-
-        /**
-         * Number of bound environments.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.BindEnvironmentTotalCount = null;
-
-        /**
-         * Details of bound environments.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<UsagePlanBindEnvironment> || null}
-         */
-        this.BindEnvironments = null;
+        this.ApiIdStatusSet = null;
 
     }
 
@@ -7758,25 +8956,59 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.UsagePlanId = 'UsagePlanId' in params ? params.UsagePlanId : null;
-        this.UsagePlanName = 'UsagePlanName' in params ? params.UsagePlanName : null;
-        this.UsagePlanDesc = 'UsagePlanDesc' in params ? params.UsagePlanDesc : null;
-        this.InitQuota = 'InitQuota' in params ? params.InitQuota : null;
-        this.MaxRequestNumPreSec = 'MaxRequestNumPreSec' in params ? params.MaxRequestNumPreSec : null;
-        this.MaxRequestNum = 'MaxRequestNum' in params ? params.MaxRequestNum : null;
-        this.IsHide = 'IsHide' in params ? params.IsHide : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
-        this.BindSecretIdTotalCount = 'BindSecretIdTotalCount' in params ? params.BindSecretIdTotalCount : null;
-        this.BindSecretIds = 'BindSecretIds' in params ? params.BindSecretIds : null;
-        this.BindEnvironmentTotalCount = 'BindEnvironmentTotalCount' in params ? params.BindEnvironmentTotalCount : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.BindEnvironments) {
-            this.BindEnvironments = new Array();
-            for (let z in params.BindEnvironments) {
-                let obj = new UsagePlanBindEnvironment();
-                obj.deserialize(params.BindEnvironments[z]);
-                this.BindEnvironments.push(obj);
+        if (params.ApiIdStatusSet) {
+            this.ApiIdStatusSet = new Array();
+            for (let z in params.ApiIdStatusSet) {
+                let obj = new DesApisStatus();
+                obj.deserialize(params.ApiIdStatusSet[z]);
+                this.ApiIdStatusSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Key list
+ * @class
+ */
+class ApiKeysStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible API keys.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * API key list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ApiKey> || null}
+         */
+        this.ApiKeySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ApiKeySet) {
+            this.ApiKeySet = new Array();
+            for (let z in params.ApiKeySet) {
+                let obj = new ApiKey();
+                obj.deserialize(params.ApiKeySet[z]);
+                this.ApiKeySet.push(obj);
             }
         }
 
@@ -7932,6 +9164,47 @@ class DescribeApiRequest extends  AbstractModel {
         }
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.ApiId = 'ApiId' in params ? params.ApiId : null;
+
+    }
+}
+
+/**
+ * DescribeIPStrategysStatus response structure.
+ * @class
+ */
+class DescribeIPStrategysStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of eligible policies.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {IPStrategysStatus || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new IPStrategysStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8470,6 +9743,47 @@ class EnableApiKeyRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeServicesStatus response structure.
+ * @class
+ */
+class DescribeServicesStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service list query result.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ServicesStatus || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ServicesStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateApiKey request structure.
  * @class
  */
@@ -8518,41 +9832,15 @@ class CreateApiKeyRequest extends  AbstractModel {
     }
 }
 
-/**
- * DeleteService request structure.
- * @class
- */
-class DeleteServiceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID of the service to be deleted.
-         * @type {string || null}
-         */
-        this.ServiceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
-
-    }
-}
-
 module.exports = {
     UnBindSubDomainResponse: UnBindSubDomainResponse,
     UpdateApiKeyRequest: UpdateApiKeyRequest,
+    Service: Service,
     ServiceReleaseVersion: ServiceReleaseVersion,
     ApiUsagePlanSet: ApiUsagePlanSet,
     DescribeUsagePlanRequest: DescribeUsagePlanRequest,
     DeleteUsagePlanResponse: DeleteUsagePlanResponse,
+    DisableApiKeyResponse: DisableApiKeyResponse,
     UnReleaseServiceRequest: UnReleaseServiceRequest,
     ModifySubDomainRequest: ModifySubDomainRequest,
     DescribeServiceEnvironmentListResponse: DescribeServiceEnvironmentListResponse,
@@ -8563,12 +9851,13 @@ module.exports = {
     TsfLoadBalanceConfResp: TsfLoadBalanceConfResp,
     CreateIPStrategyRequest: CreateIPStrategyRequest,
     IPStrategy: IPStrategy,
-    UnBindSecretIdsRequest: UnBindSecretIdsRequest,
+    DescribeUsagePlansStatusResponse: DescribeUsagePlansStatusResponse,
     HealthCheckConf: HealthCheckConf,
     DescribeApiUsagePlanResponse: DescribeApiUsagePlanResponse,
     DeleteIPStrategyRequest: DeleteIPStrategyRequest,
+    DomainSets: DomainSets,
     DeleteUsagePlanRequest: DeleteUsagePlanRequest,
-    DisableApiKeyResponse: DisableApiKeyResponse,
+    DeleteServiceRequest: DeleteServiceRequest,
     DescribeApiEnvironmentStrategyRequest: DescribeApiEnvironmentStrategyRequest,
     UpdateServiceResponse: UpdateServiceResponse,
     ServiceConfig: ServiceConfig,
@@ -8581,22 +9870,28 @@ module.exports = {
     Tag: Tag,
     DescribeServiceEnvironmentStrategyResponse: DescribeServiceEnvironmentStrategyResponse,
     ConstantParameter: ConstantParameter,
+    UsagePlansStatus: UsagePlansStatus,
     ModifySubDomainResponse: ModifySubDomainResponse,
+    LogQuery: LogQuery,
     ServiceParameter: ServiceParameter,
     ModifyServiceResponse: ModifyServiceResponse,
     DisableApiKeyRequest: DisableApiKeyRequest,
     PathMapping: PathMapping,
     UnBindIPStrategyResponse: UnBindIPStrategyResponse,
     BindIPStrategyResponse: BindIPStrategyResponse,
+    DescribeApisStatusRequest: DescribeApisStatusRequest,
     DeleteServiceSubDomainMappingRequest: DeleteServiceSubDomainMappingRequest,
+    DescribeIPStrategyResponse: DescribeIPStrategyResponse,
     DeleteApiResponse: DeleteApiResponse,
     CreateApiResponse: CreateApiResponse,
-    UnBindEnvironmentResponse: UnBindEnvironmentResponse,
+    DescribeIPStrategyApisStatusRequest: DescribeIPStrategyApisStatusRequest,
+    UnBindEnvironmentRequest: UnBindEnvironmentRequest,
     OauthConfig: OauthConfig,
     ModifyApiEnvironmentStrategyRequest: ModifyApiEnvironmentStrategyRequest,
     ModifyUsagePlanResponse: ModifyUsagePlanResponse,
     CreateUsagePlanResponse: CreateUsagePlanResponse,
     ReqParameter: ReqParameter,
+    DescribeServicesStatusRequest: DescribeServicesStatusRequest,
     RequestConfig: RequestConfig,
     DeleteApiKeyResponse: DeleteApiKeyResponse,
     UsagePlan: UsagePlan,
@@ -8605,6 +9900,7 @@ module.exports = {
     DescribeLogSearchResponse: DescribeLogSearchResponse,
     ResponseErrorCodeReq: ResponseErrorCodeReq,
     CreateServiceRequest: CreateServiceRequest,
+    DescribeIPStrategysStatusRequest: DescribeIPStrategysStatusRequest,
     DemoteServiceUsagePlanResponse: DemoteServiceUsagePlanResponse,
     EnableApiKeyResponse: EnableApiKeyResponse,
     ServiceReleaseHistory: ServiceReleaseHistory,
@@ -8616,10 +9912,12 @@ module.exports = {
     ReleaseService: ReleaseService,
     DescribeServiceSubDomainMappingsResponse: DescribeServiceSubDomainMappingsResponse,
     BindSecretIdsRequest: BindSecretIdsRequest,
+    UnBindEnvironmentResponse: UnBindEnvironmentResponse,
     UsagePlanBindSecret: UsagePlanBindSecret,
     DeleteApiKeyRequest: DeleteApiKeyRequest,
     ModifyApiEnvironmentStrategyResponse: ModifyApiEnvironmentStrategyResponse,
     DomainSetList: DomainSetList,
+    IPStrategysStatus: IPStrategysStatus,
     DescribeApiKeyResponse: DescribeApiKeyResponse,
     ModifyApiIncrementResponse: ModifyApiIncrementResponse,
     ModifyApiRequest: ModifyApiRequest,
@@ -8639,10 +9937,11 @@ module.exports = {
     ModifyApiIncrementRequest: ModifyApiIncrementRequest,
     GenerateApiDocumentRequest: GenerateApiDocumentRequest,
     ServiceUsagePlanSet: ServiceUsagePlanSet,
-    ServiceEnvironmentStrategyStatus: ServiceEnvironmentStrategyStatus,
+    DescribeIPStrategyApisStatusResponse: DescribeIPStrategyApisStatusResponse,
     ModifyServiceEnvironmentStrategyResponse: ModifyServiceEnvironmentStrategyResponse,
     UpdateApiKeyResponse: UpdateApiKeyResponse,
-    UnBindEnvironmentRequest: UnBindEnvironmentRequest,
+    DescribeApisStatusResponse: DescribeApisStatusResponse,
+    DescribeApiKeysStatusRequest: DescribeApiKeysStatusRequest,
     DescribeApiResponse: DescribeApiResponse,
     BindSecretIdsResponse: BindSecretIdsResponse,
     CreateApiRsp: CreateApiRsp,
@@ -8652,16 +9951,19 @@ module.exports = {
     DescribeServiceEnvironmentListRequest: DescribeServiceEnvironmentListRequest,
     ServiceSubDomainMappings: ServiceSubDomainMappings,
     DescribeApiKeyRequest: DescribeApiKeyRequest,
-    DomainSets: DomainSets,
+    DescribeUsagePlanResponse: DescribeUsagePlanResponse,
     Filter: Filter,
     UsagePlanBindSecretStatus: UsagePlanBindSecretStatus,
     DeleteServiceSubDomainMappingResponse: DeleteServiceSubDomainMappingResponse,
     DescribeServiceUsagePlanRequest: DescribeServiceUsagePlanRequest,
+    DescribeUsagePlansStatusRequest: DescribeUsagePlansStatusRequest,
     UsagePlanEnvironment: UsagePlanEnvironment,
     ModifyIPStrategyRequest: ModifyIPStrategyRequest,
+    UnBindSecretIdsRequest: UnBindSecretIdsRequest,
     ApiEnvironmentStrategy: ApiEnvironmentStrategy,
     UnBindSecretIdsResponse: UnBindSecretIdsResponse,
     ApiUsagePlan: ApiUsagePlan,
+    IPStrategyApi: IPStrategyApi,
     DocumentSDK: DocumentSDK,
     ModifyServiceEnvironmentStrategyRequest: ModifyServiceEnvironmentStrategyRequest,
     DescribeServiceSubDomainsRequest: DescribeServiceSubDomainsRequest,
@@ -8669,34 +9971,42 @@ module.exports = {
     DescribeUsagePlanEnvironmentsResponse: DescribeUsagePlanEnvironmentsResponse,
     DescribeServiceSubDomainsResponse: DescribeServiceSubDomainsResponse,
     BindSubDomainRequest: BindSubDomainRequest,
+    IPStrategyApiStatus: IPStrategyApiStatus,
     CreateIPStrategyResponse: CreateIPStrategyResponse,
     BindIPStrategyRequest: BindIPStrategyRequest,
     MicroServiceReq: MicroServiceReq,
     ErrorCodes: ErrorCodes,
+    ServiceEnvironmentStrategyStatus: ServiceEnvironmentStrategyStatus,
     DescribeApiEnvironmentStrategyResponse: DescribeApiEnvironmentStrategyResponse,
     MicroService: MicroService,
     ApiEnvironmentStrategyStataus: ApiEnvironmentStrategyStataus,
     DeleteIPStrategyResponse: DeleteIPStrategyResponse,
     ApiKey: ApiKey,
-    DescribeUsagePlanResponse: DescribeUsagePlanResponse,
     BindEnvironmentRequest: BindEnvironmentRequest,
+    DescribeIPStrategyRequest: DescribeIPStrategyRequest,
     DescribeUsagePlanEnvironmentsRequest: DescribeUsagePlanEnvironmentsRequest,
     CreateApiKeyResponse: CreateApiKeyResponse,
     DescribeServiceReleaseVersionResponse: DescribeServiceReleaseVersionResponse,
     RequestParameter: RequestParameter,
+    UsagePlanInfo: UsagePlanInfo,
     DescribeServiceEnvironmentReleaseHistoryRequest: DescribeServiceEnvironmentReleaseHistoryRequest,
+    UsagePlanStatusInfo: UsagePlanStatusInfo,
     CreateServiceResponse: CreateServiceResponse,
     DesApisStatus: DesApisStatus,
+    DescribeApiKeysStatusResponse: DescribeApiKeysStatusResponse,
+    ServicesStatus: ServicesStatus,
     DescribeLogSearchRequest: DescribeLogSearchRequest,
-    UsagePlanInfo: UsagePlanInfo,
+    ApisStatus: ApisStatus,
+    ApiKeysStatus: ApiKeysStatus,
     DescribeServiceUsagePlanResponse: DescribeServiceUsagePlanResponse,
     DescribeApiUsagePlanRequest: DescribeApiUsagePlanRequest,
     UnBindSubDomainRequest: UnBindSubDomainRequest,
     DescribeApiRequest: DescribeApiRequest,
+    DescribeIPStrategysStatusResponse: DescribeIPStrategysStatusResponse,
     ApiInfo: ApiInfo,
     EnvironmentStrategy: EnvironmentStrategy,
     EnableApiKeyRequest: EnableApiKeyRequest,
+    DescribeServicesStatusResponse: DescribeServicesStatusResponse,
     CreateApiKeyRequest: CreateApiKeyRequest,
-    DeleteServiceRequest: DeleteServiceRequest,
 
 }

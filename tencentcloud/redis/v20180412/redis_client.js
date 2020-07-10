@@ -16,10 +16,9 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
 const RedisBackupSet = models.RedisBackupSet;
-const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
+const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
 const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const TaskInfoDetail = models.TaskInfoDetail;
@@ -28,10 +27,13 @@ const CreateInstancesRequest = models.CreateInstancesRequest;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
+const Inbound = models.Inbound;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeTaskListResponse = models.DescribeTaskListResponse;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
@@ -50,27 +52,32 @@ const DescribeProjectSecurityGroupRequest = models.DescribeProjectSecurityGroupR
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
 const DestroyPrepaidInstanceRequest = models.DestroyPrepaidInstanceRequest;
-const InstanceIntegerParam = models.InstanceIntegerParam;
+const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
+const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const TradeDealDetail = models.TradeDealDetail;
 const SourceInfo = models.SourceInfo;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
+const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
 const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
 const DelayDistribution = models.DelayDistribution;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTookDistResponse;
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
-const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
+const InstanceIntegerParam = models.InstanceIntegerParam;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
-const InstanceParamHistory = models.InstanceParamHistory;
+const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
@@ -79,12 +86,16 @@ const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const DescribeInstanceMonitorTopNCmdRequest = models.DescribeInstanceMonitorTopNCmdRequest;
 const ModifyNetworkConfigRequest = models.ModifyNetworkConfigRequest;
 const DescribeInstanceSecurityGroupRequest = models.DescribeInstanceSecurityGroupRequest;
-const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
+const InstanceParamHistory = models.InstanceParamHistory;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const InstanceClusterShard = models.InstanceClusterShard;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeInstanceShardsRequest = models.DescribeInstanceShardsRequest;
+const Outbound = models.Outbound;
 const DescribeAutoBackupConfigResponse = models.DescribeAutoBackupConfigResponse;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMonitorBigKeySizeDistResponse;
+const SecurityGroup = models.SecurityGroup;
 const CreateInstanceAccountRequest = models.CreateInstanceAccountRequest;
 const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
 const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
@@ -92,12 +103,15 @@ const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGro
 const ProductConf = models.ProductConf;
 const InstanceNode = models.InstanceNode;
 const StartupInstanceResponse = models.StartupInstanceResponse;
+const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
 const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
 const DescribeInstanceDealDetailResponse = models.DescribeInstanceDealDetailResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const SourceCommand = models.SourceCommand;
+const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
 const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
 const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
 const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
@@ -120,6 +134,7 @@ const DisableReplicaReadonlyRequest = models.DisableReplicaReadonlyRequest;
 const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
 const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const StartupInstanceRequest = models.StartupInstanceRequest;
 const HotKeyInfo = models.HotKeyInfo;
 const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
@@ -133,6 +148,7 @@ const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeProjectSecurityGroupResponse = models.DescribeProjectSecurityGroupResponse;
 const DescribeInstanceMonitorHotKeyResponse = models.DescribeInstanceMonitorHotKeyResponse;
 const InstanceParam = models.InstanceParam;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const ClearInstanceResponse = models.ClearInstanceResponse;
 const InstanceSlowlogDetail = models.InstanceSlowlogDetail;
 
@@ -225,6 +241,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get the backup configuration.
+     * @param {DescribeAutoBackupConfigRequest} req
+     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
+     * @public
+     */
+    DescribeAutoBackupConfig(req, cb) {
+        let resp = new DescribeAutoBackupConfigResponse();
+        this.request("DescribeAutoBackupConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the instance CPU time.
      * @param {DescribeInstanceMonitorTopNCmdTookRequest} req
      * @param {function(string, DescribeInstanceMonitorTopNCmdTookResponse):void} cb
@@ -280,6 +307,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to reset a password.
+     * @param {ResetPasswordRequest} req
+     * @param {function(string, ResetPasswordResponse):void} cb
+     * @public
+     */
+    ResetPassword(req, cb) {
+        let resp = new ResetPasswordResponse();
+        this.request("ResetPassword", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify instance parameters.
      * @param {ModifyInstanceParamsRequest} req
      * @param {function(string, ModifyInstanceParamsResponse):void} cb
@@ -313,14 +351,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the backup configuration.
-     * @param {DescribeAutoBackupConfigRequest} req
-     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
+     * This API is used to query the DTS task details of an instance.
+     * @param {DescribeInstanceDTSInfoRequest} req
+     * @param {function(string, DescribeInstanceDTSInfoResponse):void} cb
      * @public
      */
-    DescribeAutoBackupConfig(req, cb) {
-        let resp = new DescribeAutoBackupConfigResponse();
-        this.request("DescribeAutoBackupConfig", req, resp, cb);
+    DescribeInstanceDTSInfo(req, cb) {
+        let resp = new DescribeInstanceDTSInfoResponse();
+        this.request("DescribeInstanceDTSInfo", req, resp, cb);
     }
 
     /**
@@ -412,14 +450,36 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to reset a password.
-     * @param {ResetPasswordRequest} req
-     * @param {function(string, ResetPasswordResponse):void} cb
+     * This API is used to query the security group details of a project.
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
      * @public
      */
-    ResetPassword(req, cb) {
-        let resp = new ResetPasswordResponse();
-        this.request("ResetPassword", req, resp, cb);
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to associate security groups with specified instances.
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the security groups associated with an instance.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -434,14 +494,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of instance parameters.
-     * @param {DescribeInstanceParamsRequest} req
-     * @param {function(string, DescribeInstanceParamsResponse):void} cb
+     * This API is used to query the big key of an instance.
+     * @param {DescribeInstanceMonitorBigKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
      * @public
      */
-    DescribeInstanceParams(req, cb) {
-        let resp = new DescribeInstanceParamsResponse();
-        this.request("DescribeInstanceParams", req, resp, cb);
+    DescribeInstanceMonitorBigKey(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeyResponse();
+        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
     }
 
     /**
@@ -522,14 +582,25 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the big key of an instance.
-     * @param {DescribeInstanceMonitorBigKeyRequest} req
-     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
+     * This API is used to query the security group details of an instance.
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
      * @public
      */
-    DescribeInstanceMonitorBigKey(req, cb) {
-        let resp = new DescribeInstanceMonitorBigKeyResponse();
-        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of instance parameters.
+     * @param {DescribeInstanceParamsRequest} req
+     * @param {function(string, DescribeInstanceParamsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceParams(req, cb) {
+        let resp = new DescribeInstanceParamsResponse();
+        this.request("DescribeInstanceParams", req, resp, cb);
     }
 
     /**
@@ -596,6 +667,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceBackups(req, cb) {
         let resp = new DescribeInstanceBackupsResponse();
         this.request("DescribeInstanceBackups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unassociate security groups from instances in batches.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
     }
 
     /**

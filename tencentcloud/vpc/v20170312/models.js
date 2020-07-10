@@ -1047,61 +1047,61 @@ class FlowLog extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID
+         * The VPC ID or the unified ID. We recommend you use the unified ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * The unique ID of the flow log
+         * The unique ID of the flow log.
          * @type {string || null}
          */
         this.FlowLogId = null;
 
         /**
-         * The name of the flow log instance
+         * The name of the flow log instance.
          * @type {string || null}
          */
         this.FlowLogName = null;
 
         /**
-         * The type of resource to which the flow log belongs. VPC|SUBNET|NETWORKINTERFACE
+         * The type of resource to which the flow log belongs. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * The unique ID of the resource
+         * The unique ID of the resource.
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * The collection type of the flow log. ACCEPT|REJECT|ALL
+         * The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
          * @type {string || null}
          */
         this.TrafficType = null;
 
         /**
-         * The storage ID of the flow log
+         * The storage ID of the flow log.
          * @type {string || null}
          */
         this.CloudLogId = null;
 
         /**
-         * Flow log storage ID status
+         * The storage ID status of the flow log.
          * @type {string || null}
          */
         this.CloudLogState = null;
 
         /**
-         * Flow log description
+         * The flow log description.
          * @type {string || null}
          */
         this.FlowLogDescription = null;
 
         /**
-         * Flow log creation time
+         * The creation time of the flow log.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -1321,19 +1321,19 @@ class ModifyDirectConnectGatewayAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique `ID` of the Direct Connect gateway, such as `dcg-9o233uri`.
+         * The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
          * @type {string || null}
          */
         this.DirectConnectGatewayId = null;
 
         /**
-         * Direct connect gateway can be named freely, but the maximum length is 60 characters.
+         * The direct connect gateway name. You can enter any name within 60 characters.
          * @type {string || null}
          */
         this.DirectConnectGatewayName = null;
 
         /**
-         * CCN route learning type. Available values: `BGP` (Automatic learning), `STATIC` (Static, that is, user-configured). Modifying `CcnRouteType` is only possible if the Direct Connect is CCN-type and the BGP function is enabled.
+         * The CCN route-learning type. Valid values: `BGP` (Automatic learning), `STATIC` (Static, that is, user-configured). You can only modify `CcnRouteType` for a CCN direct connect gateway with BGP enabled.
          * @type {string || null}
          */
         this.CcnRouteType = null;
@@ -1363,31 +1363,31 @@ class AddBandwidthPackageResourcesRequest extends  AbstractModel {
         super();
 
         /**
-         * ResourceId, such as 'eip-xxxx', 'lb-xxxx'
+         * The unique ID of the source, such as 'eip-xxxx' and 'lb-xxxx'. EIP and LB resources are currently supported.
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
 
         /**
-         * The unique ID of the bandwidth package, such as 'bwp-xxxx'
+         * The unique ID of the bandwidth package, such as 'bwp-xxxx'.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
 
         /**
-         * The bandwidth package type, including 'BGP', 'SINGLEISP', 'ANYCAST'
+         * The type of the bandwidth package. Valid value: 'BGP'. Internal resources will be represented by 'BGP IP'.
          * @type {string || null}
          */
         this.NetworkType = null;
 
         /**
-         * The resource type, including 'Address', 'LoadBalance'
+         * The resource type, including 'Address' and 'LoadBalance'.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * 
+         * The protocol type of the bandwidth package. Valid values: 'ipv4' and 'ipv6'.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -1740,76 +1740,84 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID
+         * The VPC ID or the unified ID. We recommend you use the unified ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * The unique ID of the flow log
+         * The unique ID of the flow log.
          * @type {string || null}
          */
         this.FlowLogId = null;
 
         /**
-         * The name of the flow log instance
+         * The name of the flow log instance.
          * @type {string || null}
          */
         this.FlowLogName = null;
 
         /**
-         * The type of resource to which the flow log belongs. VPC|SUBNET|NETWORKINTERFACE
+         * The type of resource to which the flow log belongs. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * The unique ID of the resource
+         * The unique ID of the resource.
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * The collection type of the flow log. ACCEPT|REJECT|ALL
+         * The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
          * @type {string || null}
          */
         this.TrafficType = null;
 
         /**
-         * The storage ID of the flow log
+         * The storage ID of the flow log.
          * @type {string || null}
          */
         this.CloudLogId = null;
 
         /**
-         * Flow log storage ID status
+         * The storage ID status of the flow log.
          * @type {string || null}
          */
         this.CloudLogState = null;
 
         /**
-         * Order by field. Supported fields: flowLogName, createTime. The default value is createTime.
+         * Order by field. Valid values: 'flowLogName' and 'createTime'. Default value: 'createTime'.
          * @type {string || null}
          */
         this.OrderField = null;
 
         /**
-         * Ascending (asc) and descending (desc). The default value is desc.
+         * In ascending (asc) or descending (desc) order. Default value: 'desc'.
          * @type {string || null}
          */
         this.OrderDirection = null;
 
         /**
-         * Offset. The default value is 0.
+         * The offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The number of rows per page. The default value is 10.
+         * The number of rows per page. Default vaue: 10.
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * Filter condition. `FlowLogIds` and `Filters` cannot be specified at the same time.
+<li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+<li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
+         * @type {Filter || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -1833,6 +1841,12 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
+        if (params.Filters) {
+            let obj = new Filter();
+            obj.deserialize(params.Filters)
+            this.Filters = obj;
+        }
+
     }
 }
 
@@ -1851,13 +1865,13 @@ class AssociateNatGatewayAddressRequest extends  AbstractModel {
         this.NatGatewayId = null;
 
         /**
-         * The number of EIPs that needs to be applied for. The system will create N number of EIPs according to your requirements. Either AddressCount or PublicAddresses must be passed in.
+         * The number of EIPs you want to apply for. The system will create the same number of EIPs as you require. Either `AddressCount` or `PublicAddresses` must be passed in.
          * @type {number || null}
          */
         this.AddressCount = null;
 
         /**
-         * The EIP array bound to the NAT gateway. Either AddressCount or PublicAddresses must be passed in.
+         * The EIP array bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
@@ -1894,15 +1908,15 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
         super();
 
         /**
-         * The name of the Direct Connect gateway
+         * The name of the direct connect gateway.
          * @type {string || null}
          */
         this.DirectConnectGatewayName = null;
 
         /**
-         * The type of the associated network. Available values are:
-<li>VPC - VPC</li>
-<li>CCN - CCN</li>
+         * The type of the associated network. Valid values:
+<li>VPC</li>
+<li>CCN</li>
          * @type {string || null}
          */
         this.NetworkType = null;
@@ -1915,9 +1929,9 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
         this.NetworkInstanceId = null;
 
         /**
-         * The type of the gateway. Available values are:
+         * The type of the gateway. Valid values:
 <li>NORMAL - (Default) Standard type. Note: CCN only supports the standard type</li>
-<li>NAT - NAT-type</li>NAT-type supports network address switch configuration. After the type is confirmed, it cannot be modified. A VPC can create one NAT-type Direct Connect gateway and one non-NAT-type Direct Connect gateway
+<li>NAT - NAT type</li>NAT gateway supports network address translation. The specified type cannot be modified. A VPC can create one NAT direct connect gateway and one non-NAT direct connect gateway
          * @type {string || null}
          */
         this.GatewayType = null;
@@ -1948,16 +1962,22 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique ID of the bandwidth package
+         * The unique ID of the bandwidth package.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
 
         /**
-         * The name of the bandwidth package
+         * The name of the bandwidth package.
          * @type {string || null}
          */
         this.BandwidthPackageName = null;
+
+        /**
+         * The billing mode of the bandwidth package.
+         * @type {string || null}
+         */
+        this.ChargeType = null;
 
     }
 
@@ -1970,6 +1990,7 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
         }
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.BandwidthPackageName = 'BandwidthPackageName' in params ? params.BandwidthPackageName : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
 
     }
 }
@@ -2076,25 +2097,25 @@ class ModifyFlowLogAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID
+         * The VPC ID or the unified ID. We recommend you use the unified ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * The unique ID of the flow log
+         * The unique ID of the flow log.
          * @type {string || null}
          */
         this.FlowLogId = null;
 
         /**
-         * The name of the flow log instance
+         * The name of the flow log instance.
          * @type {string || null}
          */
         this.FlowLogName = null;
 
         /**
-         * The description of the flow log instance
+         * The description of the flow log instance.
          * @type {string || null}
          */
         this.FlowLogDescription = null;
@@ -2686,13 +2707,13 @@ class DescribeBandwidthPackagesResponse extends  AbstractModel {
         super();
 
         /**
-         * The number of bandwidth packages meeting the condition
+         * The number of eligible bandwidth packages.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * The description of the bandwidth packages
+         * The description of the bandwidth packages.
          * @type {Array.<BandwidthPackage> || null}
          */
         this.BandwidthPackageSet = null;
@@ -2736,26 +2757,26 @@ class DescribeDirectConnectGatewaysRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique `ID` of the Direct Connect gateway, such as `dcg-9o233uri`.
+         * The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
          * @type {Array.<string> || null}
          */
         this.DirectConnectGatewayIds = null;
 
         /**
-         * Filter condition. `DirectConnectGatewayIds` and `Filters` cannot be specified at the same time.
-<li>direct-connect-gateway-id - String - The unique `ID` of the Direct Connect gateway, such as `dcg-9o233uri`.</li>
-<li>direct-connect-gateway-name - String - The name of the Direct Connect gateway. The default is fuzzy query.</li>
-<li>direct-connect-gateway-ip - String - The `IP` of the Direct Connect gateway.</li>
-<li>gateway-type - String - The gateway type. Available values: `NORMAL` (Normal-type), `NAT` (NAT-type).</li>
-<li>network-type- String - The network type. Available values: `VPC` (VPC-type), `CCN` (CCN-type).</li>
-<li>ccn-id - String - The `ID` of the CCN where the Direct Connect gateway is located.</li>
-<li>vpc-id - String - The `ID` of the VPC where the Direct Connect gateway is located.</li>
+         * Filter condition. `DirectConnectGatewayIds` and `Filters` cannot be specified at the same time..
+<li>direct-connect-gateway-id - String - The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.</li>
+<li>direct-connect-gateway-name - String - The name of the direct connect gateway. The default is fuzzy query.</li>
+<li>direct-connect-gateway-ip - String - The `IP` of the direct connect gateway.</li>
+<li>gateway-type - String - The gateway type. Valid values: `NORMAL` (Standard type), `NAT` (NAT type).</li>
+<li>network-type- String - The network type. Valid values: `VPC` (VPC type), `CCN` (CCN type).</li>
+<li>ccn-id - String - The `ID` of the CCN where the direct connect gateway resides.</li>
+<li>vpc-id - String - The `ID` of the VPC where the direct connect gateway resides.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Offset.
+         * The offset.
          * @type {number || null}
          */
         this.Offset = null;
@@ -2999,13 +3020,13 @@ class DeleteFlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID
+         * The VPC ID or the unified ID. We recommend you use the unified ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * The unique ID of the flow log
+         * The unique ID of the flow log.
          * @type {string || null}
          */
         this.FlowLogId = null;
@@ -3529,13 +3550,13 @@ class DescribeFlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID
+         * The VPC ID or the unified ID. We recommend you use the unified ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * The unique ID of the flow log
+         * The unique ID of the flow log.
          * @type {string || null}
          */
         this.FlowLogId = null;
@@ -3930,13 +3951,13 @@ class DescribeDirectConnectGatewaysResponse extends  AbstractModel {
         super();
 
         /**
-         * The number of objects meeting the condition.
+         * The number of eligible objects.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * The object array of the Direct Connect gateway.
+         * The object array of the direct connect gateway.
          * @type {Array.<DirectConnectGateway> || null}
          */
         this.DirectConnectGatewaySet = null;
@@ -4771,7 +4792,7 @@ class DescribeFlowLogResponse extends  AbstractModel {
         super();
 
         /**
-         * Flow log information
+         * The flow log information.
          * @type {Array.<FlowLog> || null}
          */
         this.FlowLog = null;
@@ -4849,32 +4870,32 @@ class DescribeBandwidthPackagesRequest extends  AbstractModel {
         super();
 
         /**
-         * The bandwidth package ID. Batch operation is supported.
+         * The unique ID list of bandwidth packages.
          * @type {Array.<string> || null}
          */
         this.BandwidthPackageIds = null;
 
         /**
-         * The upper limit for `Filters` in each request is 10. `BandwidthPackageIds` and `Filters` cannot be specified at the same time. The specific filtering conditions are as follows:
+         * Each request can have up to 10 `Filters`. `BandwidthPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
 <li> bandwidth-package_id - String - Required: No - (Filter condition) Filter by the unique ID of the bandwidth package.</li>
 <li> bandwidth-package-name - String - Required: No - (Filter condition) Filter by the bandwidth package name. Fuzzy filtering is not supported.</li>
 <li> network-type - String - Required: No - (Filter condition) Filter by the bandwidth package type. Types include 'BGP', 'SINGLEISP', and 'ANYCAST'.</li>
-<li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing type. Billing types include 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'</li>
-<li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Resource types include 'Address' and 'LoadBalance'</li>
-<li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as 'eip-xxxx', 'lb-xxxx'</li>
+<li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing mode. Billing modes include 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'.</li>
+<li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Resource types include 'Address' and 'LoadBalance'.</li>
+<li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as 'eip-xxxx' and 'lb-xxxx'.</li>
 <li> resource.address-ip - String - Required: No - (Filter condition) Filter by the bandwidth package resource IP.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Queries bandwidth package offset
+         * Queries the bandwidth package offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Queries the limit on the number of bandwidth packages
+         * Queries the limit on the number of bandwidth packages.
          * @type {number || null}
          */
         this.Limit = null;
@@ -6512,21 +6533,23 @@ class DescribeSecurityGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeGatewayFlowQos response structure.
+ * GetCcnRegionBandwidthLimits response structure.
  * @class
  */
-class DescribeGatewayFlowQosResponse extends  AbstractModel {
+class GetCcnRegionBandwidthLimitsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of instance details.
-         * @type {Array.<GatewayQos> || null}
+         * The CCN outbound bandwidths in each region.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {Array.<CcnBandwidthInfo> || null}
          */
-        this.GatewayQosSet = null;
+        this.CcnBandwidthSet = null;
 
         /**
-         * Number of eligible instances.
+         * The number of eligible objects.
+Note: this field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -6547,12 +6570,12 @@ class DescribeGatewayFlowQosResponse extends  AbstractModel {
             return;
         }
 
-        if (params.GatewayQosSet) {
-            this.GatewayQosSet = new Array();
-            for (let z in params.GatewayQosSet) {
-                let obj = new GatewayQos();
-                obj.deserialize(params.GatewayQosSet[z]);
-                this.GatewayQosSet.push(obj);
+        if (params.CcnBandwidthSet) {
+            this.CcnBandwidthSet = new Array();
+            for (let z in params.CcnBandwidthSet) {
+                let obj = new CcnBandwidthInfo();
+                obj.deserialize(params.CcnBandwidthSet[z]);
+                this.CcnBandwidthSet.push(obj);
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
@@ -6954,7 +6977,7 @@ class CreateFlowLogResponse extends  AbstractModel {
         super();
 
         /**
-         * The information of the created flow log
+         * The information of the flow log created.
          * @type {Array.<FlowLog> || null}
          */
         this.FlowLog = null;
@@ -8605,43 +8628,43 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         super();
 
         /**
-         * The bandwidth package type, including 'BGP', 'SINGLEISP', 'ANYCAST'
+         * The bandwidth package type. Valid values: 'BGP', 'SINGLEISP', and 'ANYCAST'.
          * @type {string || null}
          */
         this.NetworkType = null;
 
         /**
-         * The bandwidth package billing type, including 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'
+         * The bandwidth package billing mode. Valid values: 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'.
          * @type {string || null}
          */
         this.ChargeType = null;
 
         /**
-         * The name of the bandwidth package
+         * The name of the bandwidth package.
          * @type {string || null}
          */
         this.BandwidthPackageName = null;
 
         /**
-         * The number of bandwidth packages (non-upward accounts can only enter 1)
+         * The number of bandwidth packages (enter 1 for bill-by-CVM accounts).
          * @type {number || null}
          */
         this.BandwidthPackageCount = null;
 
         /**
-         * The size limit of the bandwidth package. Unit: Mbps. -1 indicates there is no limit.
+         * The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit.
          * @type {number || null}
          */
         this.InternetMaxBandwidth = null;
 
         /**
-         * 
+         * The list of tags to be bound.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * 
+         * The protocol type of the bandwidth package. Valid values: 'ipv4' and 'ipv6'. Default value: 'ipv4'.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -9697,7 +9720,7 @@ class ResetVpnGatewayInternetMaxBandwidthRequest extends  AbstractModel {
 }
 
 /**
- * Direct Connect gateway object.
+ * The direct connect gateway object.
  * @class
  */
 class DirectConnectGateway extends  AbstractModel {
@@ -9705,19 +9728,19 @@ class DirectConnectGateway extends  AbstractModel {
         super();
 
         /**
-         * Direct Connect `ID`.
+         * The direct connect gateway `ID`.
          * @type {string || null}
          */
         this.DirectConnectGatewayId = null;
 
         /**
-         * Direct Connect gateway name.
+         * The direct connect gateway name.
          * @type {string || null}
          */
         this.DirectConnectGatewayName = null;
 
         /**
-         * The `ID` of the `VPC` instance associated with the Direct Connect gateway.
+         * The `ID` of the `VPC` instance associated with the direct connect gateway.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -9732,35 +9755,35 @@ class DirectConnectGateway extends  AbstractModel {
 
         /**
          * The `ID` of the associated network instance:
-<li>When the NetworkType is `VPC`, this value is the VPC instance `ID`</li>
-<li>When the NetworkType is `CCN`, this value is the CCN instance `ID`</li>
+<li>When the `NetworkType` is `VPC`, this value is the VPC instance `ID`</li>
+<li>When the `NetworkType` is `CCN`, this value is the CCN instance `ID`</li>
          * @type {string || null}
          */
         this.NetworkInstanceId = null;
 
         /**
-         * Gateway type:
+         * The gateway type:
 <li>NORMAL - Standard type. Note: CCN only supports the standard type</li>
-<li>NAT - NAT type</li>
-NAT type supports network address switch configuration. After the type is confirmed, it cannot be modified. A VPC can create one NAT-type Direct Connect gateway and one non-NAT-type Direct Connect gateway
+<li>NAT type</li>
+The NAT type supports network address translation. The specified type cannot be modified. A VPC can create one NAT direct connect gateway and one non-NAT direct connect gateway
          * @type {string || null}
          */
         this.GatewayType = null;
 
         /**
-         * Creation Time.
+         * The creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Direct Connect gateway IP.
+         * The direct connect gateway IP.
          * @type {string || null}
          */
         this.DirectConnectGatewayIp = null;
 
         /**
-         * The `ID` of the `CCN` instance associated with the Direct Connect gateway.
+         * The `ID` of the `CCN` instance associated with the direct connect gateway.
          * @type {string || null}
          */
         this.CcnId = null;
@@ -9774,13 +9797,13 @@ NAT type supports network address switch configuration. After the type is confir
         this.CcnRouteType = null;
 
         /**
-         * Whether BGP is enabled.
+         * Whether the BGP is enabled.
          * @type {boolean || null}
          */
         this.EnableBGP = null;
 
         /**
-         * 
+         * Whether the `community` attribute of the BGP is enabled.
          * @type {boolean || null}
          */
         this.EnableBGPCommunity = null;
@@ -10039,6 +10062,34 @@ class DescribeClassicLinkInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteDirectConnectGateway request structure.
+ * @class
+ */
+class DeleteDirectConnectGatewayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+
+    }
+}
+
+/**
  * DescribeVpnGatewayCcnRoutes response structure.
  * @class
  */
@@ -10160,18 +10211,50 @@ class MigrateNetworkInterfaceResponse extends  AbstractModel {
 }
 
 /**
- * DeleteDirectConnectGateway request structure.
+ * GetCcnRegionBandwidthLimits request structure.
  * @class
  */
-class DeleteDirectConnectGatewayRequest extends  AbstractModel {
+class GetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique `ID` of the Direct Connect gateway, such as `dcg-9o233uri`.
+         * The CCN instance ID, such as `ccn-f49l6u0z`.
          * @type {string || null}
          */
-        this.DirectConnectGatewayId = null;
+        this.CcnId = null;
+
+        /**
+         * The filter condition.
+<li>sregion - String - (Filter condition) Filter by the source region, such as 'ap-guangzhou'.</li>
+<li>dregion - String - (Filter condition) Filter by the destination region, such as 'ap-shanghai-bm'.</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The sorting condition. Valid values: 'BandwidthLimit' and 'ExpireTime'.
+         * @type {string || null}
+         */
+        this.SortedBy = null;
+
+        /**
+         * The offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The returned quantity.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * In ascending or descending order. Valid values: 'ASC' and 'DESC'.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
 
     }
 
@@ -10182,7 +10265,20 @@ class DeleteDirectConnectGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
     }
 }
@@ -10522,13 +10618,13 @@ class DescribeFlowLogsResponse extends  AbstractModel {
         super();
 
         /**
-         * The flow log instance set
+         * The instance set of flow logs.
          * @type {Array.<FlowLog> || null}
          */
         this.FlowLog = null;
 
         /**
-         * The total number of flow logs
+         * The total number of flow logs.
          * @type {number || null}
          */
         this.TotalNum = null;
@@ -11034,7 +11130,7 @@ class DeleteBandwidthPackageRequest extends  AbstractModel {
         super();
 
         /**
-         * The bwpID of the bandwidth package to be deleted
+         * The unique ID of the bandwidth package to be deleted.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -11358,6 +11454,106 @@ class DescribeCcnRoutesRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreateAndAttachNetworkInterface request structure.
+ * @class
+ */
+class CreateAndAttachNetworkInterfaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the VPC instance. You can obtain the parameter value from the `VpcId` field in the returned result of the `DescribeVpcs` API.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The name of the ENI. The maximum length is 60 bytes.
+         * @type {string || null}
+         */
+        this.NetworkInterfaceName = null;
+
+        /**
+         * The subnet instance ID of the ENI, such as 'subnet-0ap8nwca'.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * The CVM instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The information of the specified private IPs. You can specify a maximum of 10 IPs each time.
+         * @type {Array.<PrivateIpAddressSpecification> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+        /**
+         * The number of private IP addresses you can apply for. The total number of private IP addresses cannot exceed the quota.
+         * @type {number || null}
+         */
+        this.SecondaryPrivateIpAddressCount = null;
+
+        /**
+         * The security group to be bound with, such as ['sg-1dd51d'].
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * The ENI description. You can enter any information within 60 characters.
+         * @type {string || null}
+         */
+        this.NetworkInterfaceDescription = null;
+
+        /**
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.PrivateIpAddresses) {
+            this.PrivateIpAddresses = new Array();
+            for (let z in params.PrivateIpAddresses) {
+                let obj = new PrivateIpAddressSpecification();
+                obj.deserialize(params.PrivateIpAddresses[z]);
+                this.PrivateIpAddresses.push(obj);
+            }
+        }
+        this.SecondaryPrivateIpAddressCount = 'SecondaryPrivateIpAddressCount' in params ? params.SecondaryPrivateIpAddressCount : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.NetworkInterfaceDescription = 'NetworkInterfaceDescription' in params ? params.NetworkInterfaceDescription : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -13005,37 +13201,37 @@ class CreateFlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID
+         * The VPC ID or the unified ID. We recommend you use the unified ID.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * The name of the flow log instance
+         * The name of the flow log instance.
          * @type {string || null}
          */
         this.FlowLogName = null;
 
         /**
-         * The type of resources to which the flow log belongs. VPC|SUBNET|NETWORKINTERFACE
+         * The type of resources to which the flow log belongs. Valid values: 'VPC', 'SUBNET' and 'NETWORKINTERFACE'.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * The unique ID of the resource
+         * The unique ID of the resource.
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * The collection type of the flow log. ACCEPT|REJECT|ALL
+         * The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
          * @type {string || null}
          */
         this.TrafficType = null;
 
         /**
-         * The storage ID of the flow log
+         * The storage ID of the flow log.
          * @type {string || null}
          */
         this.CloudLogId = null;
@@ -14141,6 +14337,46 @@ class UnassignIpv6AddressesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateAndAttachNetworkInterface response structure.
+ * @class
+ */
+class CreateAndAttachNetworkInterfaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ENI instance.
+         * @type {NetworkInterface || null}
+         */
+        this.NetworkInterface = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NetworkInterface) {
+            let obj = new NetworkInterface();
+            obj.deserialize(params.NetworkInterface)
+            this.NetworkInterface = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyCcnAttribute request structure.
  * @class
  */
@@ -14211,30 +14447,24 @@ class DeleteSecurityGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
- * Conflict resource.
+ * ModifyNetworkAclAttribute request structure.
  * @class
  */
-class ConflictSource extends  AbstractModel {
+class ModifyNetworkAclAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Conflict resource ID
+         * Network ACL instance ID. Example: acl-12345678.
          * @type {string || null}
          */
-        this.ConflictSourceId = null;
+        this.NetworkAclId = null;
 
         /**
-         * Conflict resource
+         * Name of the network ACL. The maximum length is 60 bytes.
          * @type {string || null}
          */
-        this.SourceItem = null;
-
-        /**
-         * Conflict resource items
-         * @type {Array.<ConflictItem> || null}
-         */
-        this.ConflictItemSet = null;
+        this.NetworkAclName = null;
 
     }
 
@@ -14245,17 +14475,8 @@ class ConflictSource extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConflictSourceId = 'ConflictSourceId' in params ? params.ConflictSourceId : null;
-        this.SourceItem = 'SourceItem' in params ? params.SourceItem : null;
-
-        if (params.ConflictItemSet) {
-            this.ConflictItemSet = new Array();
-            for (let z in params.ConflictItemSet) {
-                let obj = new ConflictItem();
-                obj.deserialize(params.ConflictItemSet[z]);
-                this.ConflictItemSet.push(obj);
-            }
-        }
+        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
+        this.NetworkAclName = 'NetworkAclName' in params ? params.NetworkAclName : null;
 
     }
 }
@@ -14693,7 +14914,7 @@ class EnableGatewayFlowMonitorResponse extends  AbstractModel {
 }
 
 /**
- * The structure of information on bandwidth package
+ * The structure of information of the bandwidth package.
  * @class
  */
 class Resource extends  AbstractModel {
@@ -14707,13 +14928,13 @@ class Resource extends  AbstractModel {
         this.ResourceType = null;
 
         /**
-         * The bandwidth package ResourceId, such as `eip-xxxx`, `lb-xxxx`
+         * The bandwidth package ID, such as 'eip-xxxx' and 'lb-xxxx'.
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * Bandwidth package resource IP
+         * The bandwidth package resource IP.
          * @type {string || null}
          */
         this.AddressIp = null;
@@ -14826,7 +15047,7 @@ class AllocateAddressesResponse extends  AbstractModel {
 }
 
 /**
- * Structure of information on the bandwidth package
+ * The structure of information of the bandwidth package.
  * @class
  */
 class BandwidthPackage extends  AbstractModel {
@@ -14834,25 +15055,25 @@ class BandwidthPackage extends  AbstractModel {
         super();
 
         /**
-         * The unique ID of the bandwidth package
+         * The unique ID of the bandwidth package.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
 
         /**
-         * The bandwidth package type, including 'BGP', 'SINGLEISP', 'ANYCAST'
+         * The bandwidth package type. Valid values: 'BGP', 'SINGLEISP', and 'ANYCAST'
          * @type {string || null}
          */
         this.NetworkType = null;
 
         /**
-         * The bandwidth package billing type, including 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'
+         * The bandwidth package billing mode. Valid values: 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'
          * @type {string || null}
          */
         this.ChargeType = null;
 
         /**
-         * The name of the bandwidth package
+         * The name of the bandwidth package.
          * @type {string || null}
          */
         this.BandwidthPackageName = null;
@@ -14864,19 +15085,19 @@ class BandwidthPackage extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * The status of the bandwidth package, including 'CREATING', 'CREATED', 'DELETING', and 'DELETED'.
+         * The status of the bandwidth package. Valid values: 'CREATING', 'CREATED', 'DELETING', and 'DELETED'.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The resource information of the bandwidth package
+         * The resource information of the bandwidth package.
          * @type {Array.<Resource> || null}
          */
         this.ResourceSet = null;
 
         /**
-         * The size limit of the bandwidth package. Unit: Mbps. -1 indicates there is no limit.
+         * The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit.
          * @type {number || null}
          */
         this.Bandwidth = null;
@@ -15153,7 +15374,7 @@ class DescribeBandwidthPackageQuotaResponse extends  AbstractModel {
         super();
 
         /**
-         * The data structure of the bandwidth package quota
+         * The quota of the bandwidth package.
          * @type {Array.<Quota> || null}
          */
         this.QuotaSet = null;
@@ -15252,7 +15473,7 @@ class CreateDirectConnectGatewayResponse extends  AbstractModel {
         super();
 
         /**
-         * Direct Connect gateway object.
+         * The object of the direct connect gateway.
          * @type {DirectConnectGateway || null}
          */
         this.DirectConnectGateway = null;
@@ -16138,19 +16359,19 @@ class RemoveBandwidthPackageResourcesRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique ID of the bandwidth package, such as 'bwp-xxxx'
+         * The unique ID of the bandwidth package, such as 'bwp-xxxx'.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
 
         /**
-         * The resource type, including `Address`, `LoadBalance`
+         * The resource type. Valid values: 'Address' and 'LoadBalance'.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * ResourceId, such as 'eip-xxxx', 'lb-xxxx'
+         * The resource IP, such as 'eip-xxxx' and 'lb-xxxx'.
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
@@ -16753,13 +16974,13 @@ class CreateBandwidthPackageResponse extends  AbstractModel {
         super();
 
         /**
-         * The ID of the bandwidth package
+         * The unique ID of the bandwidth package.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
 
         /**
-         * The IDs of the bandwidth package (valid when the applied number is greater than 1)
+         * The unique ID list of the bandwidth package (effective only when you apply for more than 1 bandwidth packages).
          * @type {Array.<string> || null}
          */
         this.BandwidthPackageIds = null;
@@ -17009,6 +17230,80 @@ class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
         }
         this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
         this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
+
+    }
+}
+
+/**
+ * The information of the cross-region bandwidth limit for CCN instances.
+ * @class
+ */
+class CcnBandwidthInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The CCN ID that the bandwidth belongs to.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * The creation time of the instance.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * The expiration time of the instance.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * The unique ID of the bandwidth instance.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.RegionFlowControlId = null;
+
+        /**
+         * The billing flag.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * The information of bandwidth regions and bandwidth caps.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {CcnRegionBandwidthLimit || null}
+         */
+        this.CcnRegionBandwidthLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.RegionFlowControlId = 'RegionFlowControlId' in params ? params.RegionFlowControlId : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+        if (params.CcnRegionBandwidthLimit) {
+            let obj = new CcnRegionBandwidthLimit();
+            obj.deserialize(params.CcnRegionBandwidthLimit)
+            this.CcnRegionBandwidthLimit = obj;
+        }
 
     }
 }
@@ -17684,7 +17979,7 @@ class Subnet extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * The number of available `IP`s.
+         * The number of available `IPv4`.
          * @type {number || null}
          */
         this.AvailableIpAddressCount = null;
@@ -17708,7 +18003,7 @@ class Subnet extends  AbstractModel {
         this.IsRemoteVpcSnat = null;
 
         /**
-         * Total number of subnet `IP` addresses.
+         * The total number of `IPv4` in the subnet.
          * @type {number || null}
          */
         this.TotalIpAddressCount = null;
@@ -17976,6 +18271,56 @@ class DisassociateAddressResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeGatewayFlowQos response structure.
+ * @class
+ */
+class DescribeGatewayFlowQosResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of instance details.
+         * @type {Array.<GatewayQos> || null}
+         */
+        this.GatewayQosSet = null;
+
+        /**
+         * Number of eligible instances.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GatewayQosSet) {
+            this.GatewayQosSet = new Array();
+            for (let z in params.GatewayQosSet) {
+                let obj = new GatewayQos();
+                obj.deserialize(params.GatewayQosSet[z]);
+                this.GatewayQosSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -19395,24 +19740,30 @@ class DescribeAddressTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyNetworkAclAttribute request structure.
+ * Conflict resource.
  * @class
  */
-class ModifyNetworkAclAttributeRequest extends  AbstractModel {
+class ConflictSource extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Network ACL instance ID. Example: acl-12345678.
+         * Conflict resource ID
          * @type {string || null}
          */
-        this.NetworkAclId = null;
+        this.ConflictSourceId = null;
 
         /**
-         * Name of the network ACL. The maximum length is 60 bytes.
+         * Conflict resource
          * @type {string || null}
          */
-        this.NetworkAclName = null;
+        this.SourceItem = null;
+
+        /**
+         * Conflict resource items
+         * @type {Array.<ConflictItem> || null}
+         */
+        this.ConflictItemSet = null;
 
     }
 
@@ -19423,8 +19774,17 @@ class ModifyNetworkAclAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
-        this.NetworkAclName = 'NetworkAclName' in params ? params.NetworkAclName : null;
+        this.ConflictSourceId = 'ConflictSourceId' in params ? params.ConflictSourceId : null;
+        this.SourceItem = 'SourceItem' in params ? params.SourceItem : null;
+
+        if (params.ConflictItemSet) {
+            this.ConflictItemSet = new Array();
+            for (let z in params.ConflictItemSet) {
+                let obj = new ConflictItem();
+                obj.deserialize(params.ConflictItemSet[z]);
+                this.ConflictItemSet.push(obj);
+            }
+        }
 
     }
 }
@@ -20030,6 +20390,18 @@ Users can only add and operate USER-type routes.
          */
         this.RouteTableId = null;
 
+        /**
+         * Destination IPv6 IP range, which cannot be included in VPC IP range, such as 2402:4e00:1000:810b::/64.
+         * @type {string || null}
+         */
+        this.DestinationIpv6CidrBlock = null;
+
+        /**
+         * Unique routing policy ID.
+         * @type {string || null}
+         */
+        this.RouteItemId = null;
+
     }
 
     /**
@@ -20047,6 +20419,8 @@ Users can only add and operate USER-type routes.
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.RouteType = 'RouteType' in params ? params.RouteType : null;
         this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.DestinationIpv6CidrBlock = 'DestinationIpv6CidrBlock' in params ? params.DestinationIpv6CidrBlock : null;
+        this.RouteItemId = 'RouteItemId' in params ? params.RouteItemId : null;
 
     }
 }
@@ -20394,7 +20768,7 @@ module.exports = {
     DescribeCcnsResponse: DescribeCcnsResponse,
     CreateSubnetResponse: CreateSubnetResponse,
     DescribeSecurityGroupPoliciesResponse: DescribeSecurityGroupPoliciesResponse,
-    DescribeGatewayFlowQosResponse: DescribeGatewayFlowQosResponse,
+    GetCcnRegionBandwidthLimitsResponse: GetCcnRegionBandwidthLimitsResponse,
     ModifySecurityGroupPoliciesRequest: ModifySecurityGroupPoliciesRequest,
     ReplaceRoutesRequest: ReplaceRoutesRequest,
     CreateCustomerGatewayResponse: CreateCustomerGatewayResponse,
@@ -20466,10 +20840,11 @@ module.exports = {
     DescribeVpnGatewayCcnRoutesRequest: DescribeVpnGatewayCcnRoutesRequest,
     CreateServiceTemplateGroupRequest: CreateServiceTemplateGroupRequest,
     DescribeClassicLinkInstancesResponse: DescribeClassicLinkInstancesResponse,
+    DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
     DescribeVpnGatewayCcnRoutesResponse: DescribeVpnGatewayCcnRoutesResponse,
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
     MigrateNetworkInterfaceResponse: MigrateNetworkInterfaceResponse,
-    DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
+    GetCcnRegionBandwidthLimitsRequest: GetCcnRegionBandwidthLimitsRequest,
     CcnAttachedInstance: CcnAttachedInstance,
     SecurityPolicyDatabase: SecurityPolicyDatabase,
     Ipv6Address: Ipv6Address,
@@ -20491,6 +20866,7 @@ module.exports = {
     SetCcnRegionBandwidthLimitsResponse: SetCcnRegionBandwidthLimitsResponse,
     DescribeAccountAttributesRequest: DescribeAccountAttributesRequest,
     DescribeCcnRoutesRequest: DescribeCcnRoutesRequest,
+    CreateAndAttachNetworkInterfaceRequest: CreateAndAttachNetworkInterfaceRequest,
     HaVipAssociateAddressIpResponse: HaVipAssociateAddressIpResponse,
     DeleteNetDetectResponse: DeleteNetDetectResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
@@ -20561,9 +20937,10 @@ module.exports = {
     DeleteNetDetectRequest: DeleteNetDetectRequest,
     IPSECOptionsSpecification: IPSECOptionsSpecification,
     UnassignIpv6AddressesRequest: UnassignIpv6AddressesRequest,
+    CreateAndAttachNetworkInterfaceResponse: CreateAndAttachNetworkInterfaceResponse,
     ModifyCcnAttributeRequest: ModifyCcnAttributeRequest,
     DeleteSecurityGroupPoliciesResponse: DeleteSecurityGroupPoliciesResponse,
-    ConflictSource: ConflictSource,
+    ModifyNetworkAclAttributeRequest: ModifyNetworkAclAttributeRequest,
     DeleteVpnGatewayResponse: DeleteVpnGatewayResponse,
     DescribeHaVipsRequest: DescribeHaVipsRequest,
     UnassignPrivateIpAddressesResponse: UnassignPrivateIpAddressesResponse,
@@ -20626,6 +21003,7 @@ module.exports = {
     EnableGatewayFlowMonitorRequest: EnableGatewayFlowMonitorRequest,
     ModifyPrivateIpAddressesAttributeResponse: ModifyPrivateIpAddressesAttributeResponse,
     DeleteDirectConnectGatewayCcnRoutesRequest: DeleteDirectConnectGatewayCcnRoutesRequest,
+    CcnBandwidthInfo: CcnBandwidthInfo,
     DeleteSecurityGroupResponse: DeleteSecurityGroupResponse,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
     DescribeVpcPrivateIpAddressesRequest: DescribeVpcPrivateIpAddressesRequest,
@@ -20648,6 +21026,7 @@ module.exports = {
     SecurityGroup: SecurityGroup,
     DisableGatewayFlowMonitorResponse: DisableGatewayFlowMonitorResponse,
     DisassociateAddressResponse: DisassociateAddressResponse,
+    DescribeGatewayFlowQosResponse: DescribeGatewayFlowQosResponse,
     DeleteRoutesRequest: DeleteRoutesRequest,
     AssociateAddressRequest: AssociateAddressRequest,
     CcnRegionBandwidthLimit: CcnRegionBandwidthLimit,
@@ -20682,7 +21061,7 @@ module.exports = {
     CreateAssistantCidrResponse: CreateAssistantCidrResponse,
     CustomerGatewayVendor: CustomerGatewayVendor,
     DescribeAddressTemplatesRequest: DescribeAddressTemplatesRequest,
-    ModifyNetworkAclAttributeRequest: ModifyNetworkAclAttributeRequest,
+    ConflictSource: ConflictSource,
     DescribeVpnConnectionsResponse: DescribeVpnConnectionsResponse,
     DeleteCustomerGatewayRequest: DeleteCustomerGatewayRequest,
     DescribeAddressTemplatesResponse: DescribeAddressTemplatesResponse,

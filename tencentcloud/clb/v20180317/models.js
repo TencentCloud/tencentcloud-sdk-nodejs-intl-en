@@ -820,19 +820,19 @@ class DescribeBlockIPListResponse extends  AbstractModel {
         super();
 
         /**
-         * 返回的IP的数量
+         * Number of returned IPs
          * @type {number || null}
          */
         this.BlockedIPCount = null;
 
         /**
-         * 获取用户真实IP的字段
+         * Field for getting real client IP
          * @type {string || null}
          */
         this.ClientIPField = null;
 
         /**
-         * 加入了12360黑名单的IP列表
+         * List of IPs added to blacklist 12360
          * @type {Array.<BlockedIP> || null}
          */
         this.BlockedIPList = null;
@@ -1719,13 +1719,13 @@ class DeleteLoadBalancerListenersRequest extends  AbstractModel {
         super();
 
         /**
-         * 负载均衡实例 ID
+         * CLB instance ID
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * 指定删除的监听器ID数组，若不填则删除负载均衡的所有监听器
+         * Array of IDs of the listeners to be deleted. If this parameter is left empty, all listeners of the CLB instance will be deleted.
          * @type {Array.<string> || null}
          */
         this.ListenerIds = null;
@@ -1746,7 +1746,7 @@ class DeleteLoadBalancerListenersRequest extends  AbstractModel {
 }
 
 /**
- * 加入了12306黑名单的IP
+ * IP added to blacklist 12306
  * @class
  */
 class BlockedIP extends  AbstractModel {
@@ -1754,19 +1754,19 @@ class BlockedIP extends  AbstractModel {
         super();
 
         /**
-         * 黑名单IP
+         * Blacklisted IP
          * @type {string || null}
          */
         this.IP = null;
 
         /**
-         * 加入黑名单的时间
+         * Blacklisted time
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 过期时间
+         * Expiration time
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -2197,19 +2197,19 @@ class DescribeBlockIPListRequest extends  AbstractModel {
         super();
 
         /**
-         * 负载均衡实例 ID。
+         * CLB instance ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * 数据偏移量，默认为 0。
+         * Data offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 返回IP的最大个数，默认为 100000。
+         * Maximum number of IPs to be returned. Default value: 100,000.
          * @type {number || null}
          */
         this.Limit = null;
@@ -3303,43 +3303,43 @@ class ModifyBlockIPListRequest extends  AbstractModel {
         super();
 
         /**
-         * 负载均衡实例ID
+         * CLB instance ID
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
 
         /**
-         * 操作类型，可取：
-<li> add_customized_field（首次设置header，开启黑名单功能）</li>
-<li> set_customized_field（修改header）</li>
-<li> del_customized_field（删除header）</li>
-<li> add_blocked（添加黑名单）</li>
-<li> del_blocked（删除黑名单）</li>
-<li> flush_blocked（清空黑名单）</li>
+         * Operation type. Valid values:
+<li> add_customized_field (sets header initially to enable the blacklist feature)</li>
+<li> set_customized_field (modifies header)</li>
+<li> del_customized_field (deletes header)</li>
+<li> add_blocked (adds IPs to blacklist)</li>
+<li> del_blocked (deletes IPs from blacklist)</li>
+<li> flush_blocked (clears blacklist)</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 客户端真实IP存放的header字段名
+         * Header field that stores real client IPs
          * @type {string || null}
          */
         this.ClientIPField = null;
 
         /**
-         * 封禁IP列表，单次操作数组最大长度支持200000
+         * List of blocked IPs. The array can contain up to 200,000 entries in one operation.
          * @type {Array.<string> || null}
          */
         this.BlockIPList = null;
 
         /**
-         * 过期时间，单位秒，默认值3600
+         * Expiration time in seconds. Default value: 3600
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * 添加IP的策略，可取：fifo（如果黑名单容量已满，新加入黑名单的IP采用先进先出策略）
+         * IP adding policy. Valid value: fifo (if a blacklist is full, new IPs added to the blacklist will adopt the first-in first-out policy)
          * @type {string || null}
          */
         this.AddStrategy = null;
@@ -3372,7 +3372,7 @@ class ModifyBlockIPListResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的ID
+         * Async task ID
          * @type {string || null}
          */
         this.JodId = null;
@@ -4830,6 +4830,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.SniSwitch = null;
 
+        /**
+         * Target real server type. `NODE`: binding a general node; `TARGETGROUP`: binding a target group.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
     }
 
     /**
@@ -4858,6 +4864,7 @@ They represent weighted round robin and least connections, respectively. Default
         this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
 
     }
 }
@@ -6018,13 +6025,13 @@ class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
         super();
 
         /**
-         * 负载均衡唯一性Id，如lb-12345678
+         * Unique CLB instance ID, such as lb-12345678
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * 添加SnatIp信息，可指定Ip申请，或者指定子网自动申请
+         * Information of the SNAT IP to be added. You can apply for a specified IP or apply for an automatically assigned IP by specifying a subnet.
          * @type {Array.<SnatIp> || null}
          */
         this.SnatIps = null;
@@ -6493,7 +6500,7 @@ class DescribeBlockIPTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * 1 running，2 fail，6 succ
+         * 1: running; 2: failed; 6: succeeded
          * @type {number || null}
          */
         this.Status = null;
@@ -6600,7 +6607,7 @@ class DescribeBlockIPTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * ModifyBlockIPList 接口返回的异步任务的ID。
+         * Async task ID returned by the `ModifyBlockIPList` API
          * @type {string || null}
          */
         this.TaskId = null;
@@ -6740,13 +6747,13 @@ class DeleteLoadBalancerSnatIpsRequest extends  AbstractModel {
         super();
 
         /**
-         * 负载均衡唯一Id，如lb-12345678
+         * Unique CLB instance ID, such as lb-12345678
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * 删除SnatIp地址数组
+         * Array of the SNAT IP addresses to be deleted
          * @type {Array.<string> || null}
          */
         this.Ips = null;

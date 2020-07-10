@@ -152,7 +152,7 @@ const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttri
 const DescribeCcnsResponse = models.DescribeCcnsResponse;
 const CreateSubnetResponse = models.CreateSubnetResponse;
 const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
-const DescribeGatewayFlowQosResponse = models.DescribeGatewayFlowQosResponse;
+const GetCcnRegionBandwidthLimitsResponse = models.GetCcnRegionBandwidthLimitsResponse;
 const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
 const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
@@ -224,10 +224,11 @@ const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeRespon
 const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
 const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
 const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
+const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
 const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
-const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
+const GetCcnRegionBandwidthLimitsRequest = models.GetCcnRegionBandwidthLimitsRequest;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
 const Ipv6Address = models.Ipv6Address;
@@ -249,6 +250,7 @@ const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse
 const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
 const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
+const CreateAndAttachNetworkInterfaceRequest = models.CreateAndAttachNetworkInterfaceRequest;
 const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
@@ -319,9 +321,10 @@ const CreateNatGatewayRequest = models.CreateNatGatewayRequest;
 const DeleteNetDetectRequest = models.DeleteNetDetectRequest;
 const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
 const UnassignIpv6AddressesRequest = models.UnassignIpv6AddressesRequest;
+const CreateAndAttachNetworkInterfaceResponse = models.CreateAndAttachNetworkInterfaceResponse;
 const ModifyCcnAttributeRequest = models.ModifyCcnAttributeRequest;
 const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
-const ConflictSource = models.ConflictSource;
+const ModifyNetworkAclAttributeRequest = models.ModifyNetworkAclAttributeRequest;
 const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
 const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
@@ -384,6 +387,7 @@ const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResp
 const EnableGatewayFlowMonitorRequest = models.EnableGatewayFlowMonitorRequest;
 const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
 const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
+const CcnBandwidthInfo = models.CcnBandwidthInfo;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
@@ -406,6 +410,7 @@ const DescribeCcnRoutesResponse = models.DescribeCcnRoutesResponse;
 const SecurityGroup = models.SecurityGroup;
 const DisableGatewayFlowMonitorResponse = models.DisableGatewayFlowMonitorResponse;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
+const DescribeGatewayFlowQosResponse = models.DescribeGatewayFlowQosResponse;
 const DeleteRoutesRequest = models.DeleteRoutesRequest;
 const AssociateAddressRequest = models.AssociateAddressRequest;
 const CcnRegionBandwidthLimit = models.CcnRegionBandwidthLimit;
@@ -440,7 +445,7 @@ const InquiryPriceCreateVpnGatewayRequest = models.InquiryPriceCreateVpnGatewayR
 const CreateAssistantCidrResponse = models.CreateAssistantCidrResponse;
 const CustomerGatewayVendor = models.CustomerGatewayVendor;
 const DescribeAddressTemplatesRequest = models.DescribeAddressTemplatesRequest;
-const ModifyNetworkAclAttributeRequest = models.ModifyNetworkAclAttributeRequest;
+const ConflictSource = models.ConflictSource;
 const DescribeVpnConnectionsResponse = models.DescribeVpnConnectionsResponse;
 const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
@@ -507,7 +512,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API (CreateFlowLog) is used to create flow logs.
+     * This API is used to create a flow log.
      * @param {CreateFlowLogRequest} req
      * @param {function(string, CreateFlowLogResponse):void} cb
      * @public
@@ -574,7 +579,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API is used to support the creation of [Device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+     * This API is used to create [device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
      * @param {CreateBandwidthPackageRequest} req
      * @param {function(string, CreateBandwidthPackageResponse):void} cb
      * @public
@@ -585,7 +590,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API (DeleteFlowLog) is used to delete flow logs.
+     * This API is used to delete a flow log.
      * @param {DeleteFlowLogRequest} req
      * @param {function(string, DeleteFlowLogResponse):void} cb
      * @public
@@ -644,7 +649,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API (ModifyFlowLogAttribute) is used to modify flow log attributes.
+     * This API is used to modify the attributes of a flow log.
      * @param {ModifyFlowLogAttributeRequest} req
      * @param {function(string, ModifyFlowLogAttributeResponse):void} cb
      * @public
@@ -839,7 +844,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API (AssociateNatGatewayAddress) is used to bind a NAT gateway to an Elastic IP (EIP).
+     * This API is used to bind a NAT Gateway to an Elastic IP (EIP).
      * @param {AssociateNatGatewayAddressRequest} req
      * @param {function(string, AssociateNatGatewayAddressResponse):void} cb
      * @public
@@ -872,7 +877,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API is used to delete bandwidth package resources. This includes [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
+     * This API is used to delete a bandwidth package resource, including [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
      * @param {RemoveBandwidthPackageResourcesRequest} req
      * @param {function(string, RemoveBandwidthPackageResourcesResponse):void} cb
      * @public
@@ -905,6 +910,22 @@ After unbinding the network instance, the corresponding routing policy will also
     AssignPrivateIpAddresses(req, cb) {
         let resp = new AssignPrivateIpAddressesResponse();
         this.request("AssignPrivateIpAddresses", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an ENI and bind it to a CVM.
+* You can specify private IP addresses and a primary IP when creating an ENI. The specified private IP must be idle and in the same subnet as the ENI.
+* When creating an ENI, you can specify the number of private IP addresses that you want to apply for. The system will randomly generate private IP addresses.
+* An ENI can only be bound to a limited number of IP addresses. For more information about resource limits, see <a href="/document/product/576/18527">ENI Use Limits</a>.
+* You can bind an existing security group when creating an ENI.
+* You can bind a tag when creating an ENI. The tag list in the response indicates the tags that have been successfully added.
+     * @param {CreateAndAttachNetworkInterfaceRequest} req
+     * @param {function(string, CreateAndAttachNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    CreateAndAttachNetworkInterface(req, cb) {
+        let resp = new CreateAndAttachNetworkInterfaceResponse();
+        this.request("CreateAndAttachNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -1124,14 +1145,15 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API (CreateNatGateway) is used to create a NAT gateway.
-     * @param {CreateNatGatewayRequest} req
-     * @param {function(string, CreateNatGatewayResponse):void} cb
+     * This API (DeleteSecurityGroupPolicies) is used to delete security group policies (SecurityGroupPolicy).
+* SecurityGroupPolicySet.Version is used to specify the version of the security group you are operating. If the specified Version number differs from the latest version of the current security group, a failure will be returned. If Version is not specified, the policy of the specified PolicyIndex will be deleted directly.
+     * @param {DeleteSecurityGroupPoliciesRequest} req
+     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
      * @public
      */
-    CreateNatGateway(req, cb) {
-        let resp = new CreateNatGatewayResponse();
-        this.request("CreateNatGateway", req, resp, cb);
+    DeleteSecurityGroupPolicies(req, cb) {
+        let resp = new DeleteSecurityGroupPoliciesResponse();
+        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -1149,7 +1171,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API is used to add bandwidth package resources. This includes [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
+     * This API is used to add a bandwidth package resource including [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
      * @param {AddBandwidthPackageResourcesRequest} req
      * @param {function(string, AddBandwidthPackageResourcesResponse):void} cb
      * @public
@@ -1311,7 +1333,7 @@ Before deleting a subnet, you need to remove all resources in the subnet, includ
     }
 
     /**
-     * This API (DescribeFlowLogs) is used to query and obtain the flow log set.
+     * This API is used to query and obtain the flow log set.
      * @param {DescribeFlowLogsRequest} req
      * @param {function(string, DescribeFlowLogsResponse):void} cb
      * @public
@@ -1322,10 +1344,10 @@ Before deleting a subnet, you need to remove all resources in the subnet, includ
     }
 
     /**
-     * This API (DeleteDirectConnectGateway) is used to delete Direct Connect gateways.
-<li>For a NAT gateway, NAT and ACL rules will be cleaned upon the deletion of a Direct Connect gateway.
-<li>After the deletion of a Direct Connect gateway, the routing policy associated with the gateway in the route table will also be deleted.
-This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to query the `QueryTask` API.
+     * This API is used to delete a direct connect gateway.
+<li>For a NAT gateway, NAT and ACL rules will be cleared upon the deletion of a direct connect gateway.
+<li>After the deletion of a direct connect gateway, the routing policy associated with the gateway in the route table will also be deleted.
+This API is completed asynchronously. If you need to query the async job execution results, please use the `RequestId` returned by this API to poll the `QueryTask` API.
      * @param {DeleteDirectConnectGatewayRequest} req
      * @param {function(string, DeleteDirectConnectGatewayResponse):void} cb
      * @public
@@ -1363,7 +1385,7 @@ This API is completed asynchronously. If you need to query the async job executi
     }
 
     /**
-     * This API is used to support the deletion of shared bandwidth packages, including [Device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85).
+     * This API is used to delete bandwidth packages, including [device bandwidth packages](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85) and [IP bandwidth packages](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85).
      * @param {DeleteBandwidthPackageRequest} req
      * @param {function(string, DeleteBandwidthPackageResponse):void} cb
      * @public
@@ -1501,7 +1523,7 @@ This API is completed asynchronously. If you need to query the async job executi
     }
 
     /**
-     * This API (DescribeFlowLog) is used to query flow log instance information.
+     * This API is used to query flow log instance information.
      * @param {DescribeFlowLogRequest} req
      * @param {function(string, DescribeFlowLogResponse):void} cb
      * @public
@@ -1684,15 +1706,25 @@ You can also use the Force parameter to forcibly return a default VPC.
     }
 
     /**
-     * This API (DeleteSecurityGroupPolicies) is used to delete security group policies (SecurityGroupPolicy).
-* SecurityGroupPolicySet.Version is used to specify the version of the security group you are operating. If the specified Version number differs from the latest version of the current security group, a failure will be returned. If Version is not specified, the policy of the specified PolicyIndex will be deleted directly.
-     * @param {DeleteSecurityGroupPoliciesRequest} req
-     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
+     * This API is used to query the CCN bandwidth limits across regions. The monthly-subscribed CCN only supports the cross-region bandwidth limit, while the pay-as-you-go CCN supports both the cross-region and region egress bandwidth limit. Note: currently, this feature is in beta test. To use it, please [contact sales](https://intl.cloud.tencent.com/contact-sales).
+     * @param {GetCcnRegionBandwidthLimitsRequest} req
+     * @param {function(string, GetCcnRegionBandwidthLimitsResponse):void} cb
      * @public
      */
-    DeleteSecurityGroupPolicies(req, cb) {
-        let resp = new DeleteSecurityGroupPoliciesResponse();
-        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
+    GetCcnRegionBandwidthLimits(req, cb) {
+        let resp = new GetCcnRegionBandwidthLimitsResponse();
+        this.request("GetCcnRegionBandwidthLimits", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateNatGateway) is used to create a NAT gateway.
+     * @param {CreateNatGatewayRequest} req
+     * @param {function(string, CreateNatGatewayResponse):void} cb
+     * @public
+     */
+    CreateNatGateway(req, cb) {
+        let resp = new CreateNatGatewayResponse();
+        this.request("CreateNatGateway", req, resp, cb);
     }
 
     /**
@@ -1773,7 +1805,7 @@ You can also use the Force parameter to forcibly return a default VPC.
     }
 
     /**
-     * This API (ModifyDirectConnectGatewayAttribute) is used to modify the Direct Connect gateway attributes.
+     * This API is used to modify the attributes of a direct connect gateway.
 
      * @param {ModifyDirectConnectGatewayAttributeRequest} req
      * @param {function(string, ModifyDirectConnectGatewayAttributeResponse):void} cb
@@ -1965,7 +1997,7 @@ This API is used to query only the information of IP addresses that are already 
     }
 
     /**
-     * This API (DescribeDirectConnectGateways) is used to query Direct Connect gateways.
+     * This API is used to query direct connect gateways.
      * @param {DescribeDirectConnectGatewaysRequest} req
      * @param {function(string, DescribeDirectConnectGatewaysResponse):void} cb
      * @public
@@ -2097,7 +2129,7 @@ This API is completed asynchronously. If you need to query the async job executi
     }
 
     /**
-     * This API is used to modify bandwidth package attributes, including the bandwidth package name, and so on.
+     * This API is used to modify the attributes of a bandwidth package, including the bandwidth package name, and so on.
      * @param {ModifyBandwidthPackageAttributeRequest} req
      * @param {function(string, ModifyBandwidthPackageAttributeResponse):void} cb
      * @public
@@ -2244,7 +2276,7 @@ Each account can only create a limited number of CCN instances. For more informa
     }
 
     /**
-     * This API (CreateDirectConnectGateway) is used to create a Direct Connect gateway.
+     * This API is used to create a direct connect gateway.
      * @param {CreateDirectConnectGatewayRequest} req
      * @param {function(string, CreateDirectConnectGatewayResponse):void} cb
      * @public
@@ -2404,7 +2436,7 @@ This API is used to verify whether there will be conflict with an existing route
     }
 
     /**
-     * This API is used to query the account’s maximum number of bandwidth packages and their usage in the current region.
+     * This API is used to query the maximum and used number of bandwidth packages under the account in the current region.
      * @param {DescribeBandwidthPackageQuotaRequest} req
      * @param {function(string, DescribeBandwidthPackageQuotaResponse):void} cb
      * @public

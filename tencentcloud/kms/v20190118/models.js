@@ -1648,13 +1648,13 @@ class OverwriteWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
         super();
 
         /**
-         * 白盒密钥ID
+         * White-box key ID
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * 设备指纹列表，如果列表为空，则表示删除该密钥对应的所有指纹信息。列表最大长度不超过200。
+         * Device fingerprint list. If the list is empty, it means to delete all fingerprint information corresponding to the key. There can be up to 200 entries in the list.
          * @type {Array.<DeviceFingerprint> || null}
          */
         this.DeviceFingerprints = null;
@@ -2243,7 +2243,7 @@ class AsymmetricSm2DecryptResponse extends  AbstractModel {
 }
 
 /**
- * 设备指纹
+ * Device fingerprint
  * @class
  */
 class DeviceFingerprint extends  AbstractModel {
@@ -2251,13 +2251,14 @@ class DeviceFingerprint extends  AbstractModel {
         super();
 
         /**
-         * 指纹信息，由设备指纹采集工具采集获得，格式满足正则表达式：^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
+         * Fingerprint information collected by device fingerprint collector. Its format must satisfy the following regular expression: ^[0-9a-f]{8}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{14}[\-][0-9a-f]{16}$
          * @type {string || null}
          */
         this.Identity = null;
 
         /**
-         * 描述信息，如：IP，设备名称等，最大1024字节
+         * Description, such as IP and device name. Length limit: 1,024 bytes
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Description = null;
@@ -2981,7 +2982,7 @@ class DescribeWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
         super();
 
         /**
-         * 白盒密钥ID
+         * White-box key ID
          * @type {string || null}
          */
         this.KeyId = null;
@@ -3254,7 +3255,7 @@ class DescribeWhiteBoxDeviceFingerprintsResponse extends  AbstractModel {
         super();
 
         /**
-         * 设备指纹列表
+         * Device fingerprint list
          * @type {Array.<DeviceFingerprint> || null}
          */
         this.DeviceFingerprints = null;

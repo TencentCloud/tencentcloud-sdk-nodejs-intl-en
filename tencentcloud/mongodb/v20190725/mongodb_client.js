@@ -17,43 +17,57 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
+const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
-const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
+const DBInstancePrice = models.DBInstancePrice;
 const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
 const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
+const SlowLogPattern = models.SlowLogPattern;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const ClientConnection = models.ClientConnection;
+const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
 const BackupInfo = models.BackupInfo;
+const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const SpecificationInfo = models.SpecificationInfo;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
 const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
+const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
+const SpecItem = models.SpecItem;
 const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
+const InquirePriceRenewDBInstancesResponse = models.InquirePriceRenewDBInstancesResponse;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
-const SlowLogPattern = models.SlowLogPattern;
+const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
+const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
+const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const AssignProjectResponse = models.AssignProjectResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
+const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const ShardInfo = models.ShardInfo;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
+const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
+const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DBInstanceInfo = models.DBInstanceInfo;
 const BackupFile = models.BackupFile;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
-const SpecItem = models.SpecItem;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
+const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
 
 
 /**
@@ -75,6 +89,17 @@ class MongodbClient extends AbstractClient {
     DescribeSlowLogPatterns(req, cb) {
         let resp = new DescribeSlowLogPatternsResponse();
         this.request("DescribeSlowLogPatterns", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query price of instance specification adjustment.
+     * @param {InquirePriceModifyDBInstanceSpecRequest} req
+     * @param {function(string, InquirePriceModifyDBInstanceSpecResponse):void} cb
+     * @public
+     */
+    InquirePriceModifyDBInstanceSpec(req, cb) {
+        let resp = new InquirePriceModifyDBInstanceSpecResponse();
+        this.request("InquirePriceModifyDBInstanceSpec", req, resp, cb);
     }
 
     /**
@@ -101,6 +126,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get details of purchase, renewal, and specification adjustment orders of a MongoDB instance.
+     * @param {DescribeDBInstanceDealRequest} req
+     * @param {function(string, DescribeDBInstanceDealResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceDeal(req, cb) {
+        let resp = new DescribeDBInstanceDealResponse();
+        this.request("DescribeDBInstanceDeal", req, resp, cb);
+    }
+
+    /**
      * This API is used to adjust the specification configuration of a TencentDB for MongoDB. The purchasable specifications supported by the API can be obtained through the DescribeSpecInfo API.
      * @param {ModifyDBInstanceSpecRequest} req
      * @param {function(string, ModifyDBInstanceSpecResponse):void} cb
@@ -120,6 +156,17 @@ class MongodbClient extends AbstractClient {
     OfflineIsolatedDBInstance(req, cb) {
         let resp = new OfflineIsolatedDBInstanceResponse();
         this.request("OfflineIsolatedDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a monthly subscription TencentDB for MongoDB instance. The purchasable specifications supported by this API can be obtained through the `DescribeSpecInfo` API.
+     * @param {CreateDBInstanceRequest} req
+     * @param {function(string, CreateDBInstanceResponse):void} cb
+     * @public
+     */
+    CreateDBInstance(req, cb) {
+        let resp = new CreateDBInstanceResponse();
+        this.request("CreateDBInstance", req, resp, cb);
     }
 
     /**
@@ -167,6 +214,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to renew a monthly subscription TencentDB instance. Only monthly subscription instances are supported, while pay-as-you-go instances do not need to be renewed.
+     * @param {RenewDBInstancesRequest} req
+     * @param {function(string, RenewDBInstancesResponse):void} cb
+     * @public
+     */
+    RenewDBInstances(req, cb) {
+        let resp = new RenewDBInstancesResponse();
+        this.request("RenewDBInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the purchasable instance specifications.
      * @param {DescribeSpecInfoRequest} req
      * @param {function(string, DescribeSpecInfoResponse):void} cb
@@ -186,6 +244,28 @@ class MongodbClient extends AbstractClient {
     DescribeDBBackups(req, cb) {
         let resp = new DescribeDBBackupsResponse();
         this.request("DescribeDBBackups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query price of instance creation. The `region` parameter must be passed in this API, otherwise verification will fail. This API allows queries only for purchasable instance specifications.
+     * @param {InquirePriceCreateDBInstancesRequest} req
+     * @param {function(string, InquirePriceCreateDBInstancesResponse):void} cb
+     * @public
+     */
+    InquirePriceCreateDBInstances(req, cb) {
+        let resp = new InquirePriceCreateDBInstancesResponse();
+        this.request("InquirePriceCreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the renewal price of a monthly subscription instance.
+     * @param {InquirePriceRenewDBInstancesRequest} req
+     * @param {function(string, InquirePriceRenewDBInstancesResponse):void} cb
+     * @public
+     */
+    InquirePriceRenewDBInstances(req, cb) {
+        let resp = new InquirePriceRenewDBInstancesResponse();
+        this.request("InquirePriceRenewDBInstances", req, resp, cb);
     }
 
     /**

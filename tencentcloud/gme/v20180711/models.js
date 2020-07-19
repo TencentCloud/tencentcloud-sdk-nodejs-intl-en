@@ -340,24 +340,26 @@ class RealTimeSpeechStatisticsItem extends  AbstractModel {
 }
 
 /**
- * ModifyAppStatus API output parameters
+ * Tag list
  * @class
  */
-class ModifyAppStatusResponse extends  AbstractModel {
+class Tag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * GME application ID
-         * @type {number || null}
-         */
-        this.BizId = null;
-
-        /**
-         * Application status. Valid values: open, close
+         * Tag key
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Status = null;
+        this.TagKey = null;
+
+        /**
+         * Tag value
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
 
     }
 
@@ -368,8 +370,8 @@ class ModifyAppStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1115,26 +1117,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Tag list
+ * ModifyAppStatus API output parameters
  * @class
  */
-class Tag extends  AbstractModel {
+class ModifyAppStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * GME application ID
+         * @type {number || null}
          */
-        this.TagKey = null;
+        this.BizId = null;
 
         /**
-         * Tag value
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Application status. Valid values: open, close
          * @type {string || null}
          */
-        this.TagValue = null;
+        this.Status = null;
 
     }
 
@@ -1145,8 +1145,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1253,7 +1253,7 @@ module.exports = {
     VoiceMessageStatisticsItem: VoiceMessageStatisticsItem,
     DescribeScanResultListRequest: DescribeScanResultListRequest,
     RealTimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem,
-    ModifyAppStatusResponse: ModifyAppStatusResponse,
+    Tag: Tag,
     VoiceMessageConf: VoiceMessageConf,
     DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
     Task: Task,
@@ -1266,7 +1266,7 @@ module.exports = {
     CreateAppResponse: CreateAppResponse,
     DescribeAppStatisticsRequest: DescribeAppStatisticsRequest,
     ScanPiece: ScanPiece,
-    Tag: Tag,
+    ModifyAppStatusResponse: ModifyAppStatusResponse,
     VoiceFilterConf: VoiceFilterConf,
     ScanVoiceRequest: ScanVoiceRequest,
 

@@ -2798,32 +2798,24 @@ class DescribeImageQuotaRequest extends  AbstractModel {
 }
 
 /**
- * ImportKeyPair request structure.
+ * DescribeInstanceFamilyConfigs response structure.
  * @class
  */
-class ImportKeyPairRequest extends  AbstractModel {
+class DescribeInstanceFamilyConfigsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Key pair name, which can contain numbers, letters, and underscores, with a maximum length of 25 characters.
-         * @type {string || null}
+         * List of instance model families
+         * @type {Array.<InstanceFamilyConfig> || null}
          */
-        this.KeyName = null;
+        this.InstanceFamilyConfigSet = null;
 
         /**
-         * The ID of the [project](https://cloud.tencent.com/document/product/378/10861) to which the created key pair belongs.<br><br>You can retrieve the project ID in two ways:<br><li>Query the project ID in [Project Management](https://console.cloud.tencent.com/project).<br><li>Call [DescribeProject](https://cloud.tencent.com/document/api/378/4400) and search for `projectId` in the response.
-
-If you want to use the default project, specify 0 for the parameter.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Content of the public key in the key pair in the `OpenSSH RSA` format.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PublicKey = null;
+        this.RequestId = null;
 
     }
 
@@ -2834,9 +2826,16 @@ If you want to use the default project, specify 0 for the parameter.
         if (!params) {
             return;
         }
-        this.KeyName = 'KeyName' in params ? params.KeyName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+
+        if (params.InstanceFamilyConfigSet) {
+            this.InstanceFamilyConfigSet = new Array();
+            for (let z in params.InstanceFamilyConfigSet) {
+                let obj = new InstanceFamilyConfig();
+                obj.deserialize(params.InstanceFamilyConfigSet[z]);
+                this.InstanceFamilyConfigSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3425,49 +3424,6 @@ class DescribeDisasterRecoverGroupQuotaResponse extends  AbstractModel {
         this.CvmInHostGroupQuota = 'CvmInHostGroupQuota' in params ? params.CvmInHostGroupQuota : null;
         this.CvmInSwGroupQuota = 'CvmInSwGroupQuota' in params ? params.CvmInSwGroupQuota : null;
         this.CvmInRackGroupQuota = 'CvmInRackGroupQuota' in params ? params.CvmInRackGroupQuota : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeInstanceFamilyConfigs response structure.
- * @class
- */
-class DescribeInstanceFamilyConfigsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of instance model families
-         * @type {Array.<InstanceFamilyConfig> || null}
-         */
-        this.InstanceFamilyConfigSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.InstanceFamilyConfigSet) {
-            this.InstanceFamilyConfigSet = new Array();
-            for (let z in params.InstanceFamilyConfigSet) {
-                let obj = new InstanceFamilyConfig();
-                obj.deserialize(params.InstanceFamilyConfigSet[z]);
-                this.InstanceFamilyConfigSet.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6969,6 +6925,50 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * ImportKeyPair request structure.
+ * @class
+ */
+class ImportKeyPairRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key pair name, which can contain numbers, letters, and underscores, with a maximum length of 25 characters.
+         * @type {string || null}
+         */
+        this.KeyName = null;
+
+        /**
+         * The ID of the [project](https://cloud.tencent.com/document/product/378/10861) to which the created key pair belongs.<br><br>You can retrieve the project ID in two ways:<br><li>Query the project ID in [Project Management](https://console.cloud.tencent.com/project).<br><li>Call [DescribeProject](https://cloud.tencent.com/document/api/378/4400) and search for `projectId` in the response.
+
+If you want to use the default project, specify 0 for the parameter.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Content of the public key in the key pair in the `OpenSSH RSA` format.
+         * @type {string || null}
+         */
+        this.PublicKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyName = 'KeyName' in params ? params.KeyName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+
+    }
+}
+
+/**
  * Describes key pair information.
  * @class
  */
@@ -7813,7 +7813,7 @@ module.exports = {
     SyncImagesRequest: SyncImagesRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DescribeImageQuotaRequest: DescribeImageQuotaRequest,
-    ImportKeyPairRequest: ImportKeyPairRequest,
+    DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     CreateImageResponse: CreateImageResponse,
     StopInstancesResponse: StopInstancesResponse,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
@@ -7822,7 +7822,6 @@ module.exports = {
     InquiryPriceRunInstancesRequest: InquiryPriceRunInstancesRequest,
     Image: Image,
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
-    DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
     DescribeReservedInstancesResponse: DescribeReservedInstancesResponse,
@@ -7892,6 +7891,7 @@ module.exports = {
     ResizeInstanceDisksResponse: ResizeInstanceDisksResponse,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
+    ImportKeyPairRequest: ImportKeyPairRequest,
     KeyPair: KeyPair,
     DescribeReservedInstancesOfferingsResponse: DescribeReservedInstancesOfferingsResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,

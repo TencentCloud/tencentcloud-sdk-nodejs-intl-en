@@ -1294,30 +1294,12 @@ class UpdateCfsFileSystemSizeLimitResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCfsFileSystems request structure.
+ * DescribeAvailableZoneInfo request structure.
  * @class
  */
-class DescribeCfsFileSystemsRequest extends  AbstractModel {
+class DescribeAvailableZoneInfoRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * File system ID
-         * @type {string || null}
-         */
-        this.FileSystemId = null;
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
 
     }
 
@@ -1328,9 +1310,6 @@ class DescribeCfsFileSystemsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -2089,12 +2068,30 @@ class UpdateCfsFileSystemSizeLimitRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAvailableZoneInfo request structure.
+ * DescribeCfsFileSystems request structure.
  * @class
  */
-class DescribeAvailableZoneInfoRequest extends  AbstractModel {
+class DescribeCfsFileSystemsRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * File system ID
+         * @type {string || null}
+         */
+        this.FileSystemId = null;
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
 
     }
 
@@ -2105,6 +2102,9 @@ class DescribeAvailableZoneInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -2270,7 +2270,7 @@ module.exports = {
     CreateCfsPGroupRequest: CreateCfsPGroupRequest,
     DeleteCfsPGroupResponse: DeleteCfsPGroupResponse,
     UpdateCfsFileSystemSizeLimitResponse: UpdateCfsFileSystemSizeLimitResponse,
-    DescribeCfsFileSystemsRequest: DescribeCfsFileSystemsRequest,
+    DescribeAvailableZoneInfoRequest: DescribeAvailableZoneInfoRequest,
     AvailableRegion: AvailableRegion,
     CreateCfsFileSystemRequest: CreateCfsFileSystemRequest,
     DescribeMountTargetsRequest: DescribeMountTargetsRequest,
@@ -2288,7 +2288,7 @@ module.exports = {
     DeleteCfsPGroupRequest: DeleteCfsPGroupRequest,
     AvailableType: AvailableType,
     UpdateCfsFileSystemSizeLimitRequest: UpdateCfsFileSystemSizeLimitRequest,
-    DescribeAvailableZoneInfoRequest: DescribeAvailableZoneInfoRequest,
+    DescribeCfsFileSystemsRequest: DescribeCfsFileSystemsRequest,
     UpdateCfsPGroupResponse: UpdateCfsPGroupResponse,
     DescribeCfsRulesResponse: DescribeCfsRulesResponse,
     UpdateCfsFileSystemPGroupResponse: UpdateCfsFileSystemPGroupResponse,

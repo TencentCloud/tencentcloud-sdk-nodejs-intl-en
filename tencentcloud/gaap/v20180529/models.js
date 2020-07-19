@@ -4708,12 +4708,24 @@ UNKNOWN: unknown status.
 }
 
 /**
- * DeleteSecurityPolicy response structure.
+ * DescribeGroupAndStatisticsProxy response structure.
  * @class
  */
-class DeleteSecurityPolicyResponse extends  AbstractModel {
+class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Information of connection groups that the statistics can be derived from
+         * @type {Array.<GroupStatisticsInfo> || null}
+         */
+        this.GroupSet = null;
+
+        /**
+         * Connection group quantity
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4730,6 +4742,16 @@ class DeleteSecurityPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.GroupSet) {
+            this.GroupSet = new Array();
+            for (let z in params.GroupSet) {
+                let obj = new GroupStatisticsInfo();
+                obj.deserialize(params.GroupSet[z]);
+                this.GroupSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8062,24 +8084,12 @@ class DescribeProxyDetailResponse extends  AbstractModel {
 }
 
 /**
- * DescribeGroupAndStatisticsProxy response structure.
+ * DeleteSecurityPolicy response structure.
  * @class
  */
-class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
+class DeleteSecurityPolicyResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Information of connection groups that the statistics can be derived from
-         * @type {Array.<GroupStatisticsInfo> || null}
-         */
-        this.GroupSet = null;
-
-        /**
-         * Connection group quantity
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8096,16 +8106,6 @@ class DescribeGroupAndStatisticsProxyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.GroupSet) {
-            this.GroupSet = new Array();
-            for (let z in params.GroupSet) {
-                let obj = new GroupStatisticsInfo();
-                obj.deserialize(params.GroupSet[z]);
-                this.GroupSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10141,7 +10141,7 @@ module.exports = {
     DescribeCertificatesRequest: DescribeCertificatesRequest,
     DescribeProxiesStatusRequest: DescribeProxiesStatusRequest,
     ProxyStatus: ProxyStatus,
-    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
+    DescribeGroupAndStatisticsProxyResponse: DescribeGroupAndStatisticsProxyResponse,
     CreateDomainResponse: CreateDomainResponse,
     ModifyProxiesProjectResponse: ModifyProxiesProjectResponse,
     ModifyDomainRequest: ModifyDomainRequest,
@@ -10211,7 +10211,7 @@ module.exports = {
     CountryAreaMap: CountryAreaMap,
     MetricStatisticsInfo: MetricStatisticsInfo,
     DescribeProxyDetailResponse: DescribeProxyDetailResponse,
-    DescribeGroupAndStatisticsProxyResponse: DescribeGroupAndStatisticsProxyResponse,
+    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
     CreateUDPListenersResponse: CreateUDPListenersResponse,
     ModifyHTTPSListenerAttributeRequest: ModifyHTTPSListenerAttributeRequest,
     DescribeProxyStatisticsRequest: DescribeProxyStatisticsRequest,

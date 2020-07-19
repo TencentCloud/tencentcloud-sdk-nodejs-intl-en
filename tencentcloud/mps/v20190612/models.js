@@ -2461,6 +2461,83 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Input parameter type of a sampled screencapturing task.
+ * @class
+ */
+class SampleSnapshotTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sampled screencapturing template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * List of up to 10 image or text watermarks.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<WatermarkInput> || null}
+         */
+        this.WatermarkSet = null;
+
+        /**
+         * Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+         * @type {string || null}
+         */
+        this.OutputObjectPath = null;
+
+        /**
+         * Rule of the `{number}` variable in the sampled screenshot output path.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {NumberFormat || null}
+         */
+        this.ObjectNumberFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.WatermarkSet) {
+            this.WatermarkSet = new Array();
+            for (let z in params.WatermarkSet) {
+                let obj = new WatermarkInput();
+                obj.deserialize(params.WatermarkSet[z]);
+                this.WatermarkSet.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+
+        if (params.ObjectNumberFormat) {
+            let obj = new NumberFormat();
+            obj.deserialize(params.ObjectNumberFormat)
+            this.ObjectNumberFormat = obj;
+        }
+
+    }
+}
+
+/**
  * ModifySnapshotByTimeOffsetTemplate request structure.
  * @class
  */
@@ -2621,44 +2698,6 @@ class AiAnalysisResult extends  AbstractModel {
         if (!params) {
             return;
         }
-
-    }
-}
-
-/**
- * Text keyword recognition control parameter.
- * @class
- */
-class OcrWordsConfigureInfoForUpdate extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Switch of a text keyword recognition task. Valid values:
-<li>ON: Enables a text keyword recognition task;</li>
-<li>OFF: Disables a text keyword recognition task.</li>
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
-There can be up to 10 tags, each with a length limit of 16 characters.
-         * @type {Array.<string> || null}
-         */
-        this.LabelSet = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
 
     }
 }
@@ -14350,45 +14389,27 @@ class ProcessMediaResponse extends  AbstractModel {
 }
 
 /**
- * Input parameter type of a sampled screencapturing task.
+ * Text keyword recognition control parameter.
  * @class
  */
-class SampleSnapshotTaskInput extends  AbstractModel {
+class OcrWordsConfigureInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sampled screencapturing template ID.
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * List of up to 10 image or text watermarks.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<WatermarkInput> || null}
-         */
-        this.WatermarkSet = null;
-
-        /**
-         * Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {TaskOutputStorage || null}
-         */
-        this.OutputStorage = null;
-
-        /**
-         * Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+         * Switch of a text keyword recognition task. Valid values:
+<li>ON: Enables a text keyword recognition task;</li>
+<li>OFF: Disables a text keyword recognition task.</li>
          * @type {string || null}
          */
-        this.OutputObjectPath = null;
+        this.Switch = null;
 
         /**
-         * Rule of the `{number}` variable in the sampled screenshot output path.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {NumberFormat || null}
+         * Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty, all results will be returned.
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
          */
-        this.ObjectNumberFormat = null;
+        this.LabelSet = null;
 
     }
 
@@ -14399,29 +14420,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-
-        if (params.WatermarkSet) {
-            this.WatermarkSet = new Array();
-            for (let z in params.WatermarkSet) {
-                let obj = new WatermarkInput();
-                obj.deserialize(params.WatermarkSet[z]);
-                this.WatermarkSet.push(obj);
-            }
-        }
-
-        if (params.OutputStorage) {
-            let obj = new TaskOutputStorage();
-            obj.deserialize(params.OutputStorage)
-            this.OutputStorage = obj;
-        }
-        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
-
-        if (params.ObjectNumberFormat) {
-            let obj = new NumberFormat();
-            obj.deserialize(params.ObjectNumberFormat)
-            this.ObjectNumberFormat = obj;
-        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
 
     }
 }
@@ -15137,10 +15137,10 @@ module.exports = {
     PornImgReviewTemplateInfo: PornImgReviewTemplateInfo,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
+    SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
     AiAnalysisResult: AiAnalysisResult,
-    OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
@@ -15350,7 +15350,7 @@ module.exports = {
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     TextWatermarkTemplateInput: TextWatermarkTemplateInput,
     ProcessMediaResponse: ProcessMediaResponse,
-    SampleSnapshotTaskInput: SampleSnapshotTaskInput,
+    OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
     MediaProcessTaskInput: MediaProcessTaskInput,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,

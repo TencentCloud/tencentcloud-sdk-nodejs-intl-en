@@ -489,6 +489,41 @@ class DescribeProductEventListRequest extends  AbstractModel {
 }
 
 /**
+ * UnBindingAllPolicyObject request structure.
+ * @class
+ */
+class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value is fixed to monitor.
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * Policy group ID.
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
  * Array of instance dimension combinations
  * @class
  */
@@ -2685,34 +2720,6 @@ class DescribePolicyConditionListResponse extends  AbstractModel {
 }
 
 /**
- * UnBindingPolicyObject response structure.
- * @class
- */
-class UnBindingPolicyObjectResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribePolicyConditionList.ConfigManual.CalcType
  * @class
  */
@@ -3404,6 +3411,34 @@ class DescribePolicyGroupInfoCondition extends  AbstractModel {
         this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
         this.ContinueTime = 'ContinueTime' in params ? params.ContinueTime : null;
         this.MetricName = 'MetricName' in params ? params.MetricName : null;
+
+    }
+}
+
+/**
+ * UnBindingPolicyObject response structure.
+ * @class
+ */
+class UnBindingPolicyObjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4780,41 +4815,6 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * UnBindingAllPolicyObject request structure.
- * @class
- */
-class UnBindingAllPolicyObjectRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The value is fixed to monitor.
-         * @type {string || null}
-         */
-        this.Module = null;
-
-        /**
-         * Policy group ID.
-         * @type {number || null}
-         */
-        this.GroupId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-    }
-}
-
-/**
  * SendCustomAlarmMsg request structure.
  * @class
  */
@@ -5095,6 +5095,7 @@ module.exports = {
     DescribeAccidentEventListAlarms: DescribeAccidentEventListAlarms,
     CreatePolicyGroupEventCondition: CreatePolicyGroupEventCondition,
     DescribeProductEventListRequest: DescribeProductEventListRequest,
+    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
     Instance: Instance,
     DescribeProductEventListEvents: DescribeProductEventListEvents,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
@@ -5124,7 +5125,6 @@ module.exports = {
     DescribePolicyGroupInfoCallback: DescribePolicyGroupInfoCallback,
     DescribeBindingPolicyObjectListInstanceGroup: DescribeBindingPolicyObjectListInstanceGroup,
     DescribePolicyConditionListResponse: DescribePolicyConditionListResponse,
-    UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
     DescribePolicyConditionListConfigManualCalcType: DescribePolicyConditionListConfigManualCalcType,
     ModifyPolicyGroupResponse: ModifyPolicyGroupResponse,
     PutMonitorDataResponse: PutMonitorDataResponse,
@@ -5135,6 +5135,7 @@ module.exports = {
     DescribeBasicAlarmListResponse: DescribeBasicAlarmListResponse,
     DescribeBindingPolicyObjectListDimension: DescribeBindingPolicyObjectListDimension,
     DescribePolicyGroupInfoCondition: DescribePolicyGroupInfoCondition,
+    UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
     GetMonitorDataResponse: GetMonitorDataResponse,
     MetricSet: MetricSet,
     DescribeBindingPolicyObjectListResponse: DescribeBindingPolicyObjectListResponse,
@@ -5159,7 +5160,6 @@ module.exports = {
     DataPoint: DataPoint,
     UnBindingAllPolicyObjectResponse: UnBindingAllPolicyObjectResponse,
     DescribePolicyConditionListConfigManualStatType: DescribePolicyConditionListConfigManualStatType,
-    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
     SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
     DescribeProductEventListEventsDimensions: DescribeProductEventListEventsDimensions,
     DescribePolicyConditionListConfigManualCalcValue: DescribePolicyConditionListConfigManualCalcValue,

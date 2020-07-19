@@ -530,6 +530,49 @@ Note: This field may return null, indicating that no valid value is found.
 }
 
 /**
+ * List of tag descriptions. By specifying this parameter, you can bind tags to corresponding resource instances at the same time. Currently, only tags are bound to cloud host instances.
+ * @class
+ */
+class TagSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteClusterRoute response structure.
  * @class
  */
@@ -1619,49 +1662,6 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
- * List of tag descriptions. By specifying this parameter, you can bind tags to corresponding resource instances at the same time. Currently, only tags are bound to cloud host instances.
- * @class
- */
-class TagSpecification extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.ResourceType = null;
-
-        /**
-         * 
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * The type of resource the label is bound to. Type currently supported is **cluster**.
  * @class
  */
@@ -1769,6 +1769,34 @@ class DeleteClusterEndpointResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Describes information related to the Cloud Security service.
+ * @class
+ */
+class RunSecurityServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -3214,34 +3242,6 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * Describes information related to the Cloud Security service.
- * @class
- */
-class RunSecurityServiceEnabled extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
-         * @type {boolean || null}
-         */
-        this.Enabled = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
-
-    }
-}
-
-/**
  * Cluster’s instance information
  * @class
  */
@@ -4137,6 +4137,7 @@ module.exports = {
     RegionInstance: RegionInstance,
     Label: Label,
     LoginSettings: LoginSettings,
+    TagSpecification: TagSpecification,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
@@ -4158,10 +4159,10 @@ module.exports = {
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
-    TagSpecification: TagSpecification,
     Tag: Tag,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
+    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     RouteTableConflict: RouteTableConflict,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     RouteTableInfo: RouteTableInfo,
@@ -4191,7 +4192,6 @@ module.exports = {
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     Filter: Filter,
-    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     Instance: Instance,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,

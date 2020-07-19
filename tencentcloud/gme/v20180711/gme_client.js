@@ -23,7 +23,7 @@ const DescribeScanResultListResponse = models.DescribeScanResultListResponse;
 const VoiceMessageStatisticsItem = models.VoiceMessageStatisticsItem;
 const DescribeScanResultListRequest = models.DescribeScanResultListRequest;
 const RealTimeSpeechStatisticsItem = models.RealTimeSpeechStatisticsItem;
-const ModifyAppStatusResponse = models.ModifyAppStatusResponse;
+const Tag = models.Tag;
 const VoiceMessageConf = models.VoiceMessageConf;
 const DescribeAppStatisticsResponse = models.DescribeAppStatisticsResponse;
 const Task = models.Task;
@@ -36,7 +36,7 @@ const ScanVoiceResult = models.ScanVoiceResult;
 const CreateAppResponse = models.CreateAppResponse;
 const DescribeAppStatisticsRequest = models.DescribeAppStatisticsRequest;
 const ScanPiece = models.ScanPiece;
-const Tag = models.Tag;
+const ModifyAppStatusResponse = models.ModifyAppStatusResponse;
 const VoiceFilterConf = models.VoiceFilterConf;
 const ScanVoiceRequest = models.ScanVoiceRequest;
 

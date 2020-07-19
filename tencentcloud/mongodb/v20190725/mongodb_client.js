@@ -126,6 +126,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the renewal price of a monthly subscription instance.
+     * @param {InquirePriceRenewDBInstancesRequest} req
+     * @param {function(string, InquirePriceRenewDBInstancesResponse):void} cb
+     * @public
+     */
+    InquirePriceRenewDBInstances(req, cb) {
+        let resp = new InquirePriceRenewDBInstancesResponse();
+        this.request("InquirePriceRenewDBInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to get details of purchase, renewal, and specification adjustment orders of a MongoDB instance.
      * @param {DescribeDBInstanceDealRequest} req
      * @param {function(string, DescribeDBInstanceDealResponse):void} cb
@@ -255,17 +266,6 @@ class MongodbClient extends AbstractClient {
     InquirePriceCreateDBInstances(req, cb) {
         let resp = new InquirePriceCreateDBInstancesResponse();
         this.request("InquirePriceCreateDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the renewal price of a monthly subscription instance.
-     * @param {InquirePriceRenewDBInstancesRequest} req
-     * @param {function(string, InquirePriceRenewDBInstancesResponse):void} cb
-     * @public
-     */
-    InquirePriceRenewDBInstances(req, cb) {
-        let resp = new InquirePriceRenewDBInstancesResponse();
-        this.request("InquirePriceRenewDBInstances", req, resp, cb);
     }
 
     /**

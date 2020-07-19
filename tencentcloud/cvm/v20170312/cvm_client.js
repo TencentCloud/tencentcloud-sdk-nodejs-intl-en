@@ -77,7 +77,7 @@ const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroup
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
-const ImportKeyPairRequest = models.ImportKeyPairRequest;
+const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
@@ -86,7 +86,6 @@ const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
 const Image = models.Image;
 const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecoverGroupQuotaResponse;
-const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
 const DescribeReservedInstancesResponse = models.DescribeReservedInstancesResponse;
@@ -156,6 +155,7 @@ const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
+const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstancesOfferingsResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
@@ -684,29 +684,14 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to query the Virtual Network Console (VNC) URL of an instance for its login to the VNC.
-
-* It does not support `STOPPED` CVMs.
-* A VNC URL is only valid for 15 seconds. If you do not access the URL within 15 seconds, it will become invalid and you have to query a URL again.
-* Once the VNC URL is accessed, it will become invalid and you have to query a URL again if needed.
-* If the connection is interrupted, you can make up to 30 reconnection attempts per minute.
-* After getting the value `InstanceVncUrl`, you need to append `InstanceVncUrl=xxxx` to the end of the link <https://img.qcloud.com/qcloud/app/active_vnc/index.html?>.
-
-  - `InstanceVncUrl`: its value will be returned after the API is successfully called.
-
-    The final URL is in the following format:
-
-```
-https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
-```
-
-     * @param {DescribeInstanceVncUrlRequest} req
-     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
+     * This API is used to query a list of model families available to the current user in the current region.
+     * @param {DescribeInstanceFamilyConfigsRequest} req
+     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
      * @public
      */
-    DescribeInstanceVncUrl(req, cb) {
-        let resp = new DescribeInstanceVncUrlResponse();
-        this.request("DescribeInstanceVncUrl", req, resp, cb);
+    DescribeInstanceFamilyConfigs(req, cb) {
+        let resp = new DescribeInstanceFamilyConfigsResponse();
+        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
     }
 
     /**
@@ -816,14 +801,29 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     }
 
     /**
-     * This API is used to query a list of model families available to the current user in the current region.
-     * @param {DescribeInstanceFamilyConfigsRequest} req
-     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
+     * This API is used to query the Virtual Network Console (VNC) URL of an instance for its login to the VNC.
+
+* It does not support `STOPPED` CVMs.
+* A VNC URL is only valid for 15 seconds. If you do not access the URL within 15 seconds, it will become invalid and you have to query a URL again.
+* Once the VNC URL is accessed, it will become invalid and you have to query a URL again if needed.
+* If the connection is interrupted, you can make up to 30 reconnection attempts per minute.
+* After getting the value `InstanceVncUrl`, you need to append `InstanceVncUrl=xxxx` to the end of the link <https://img.qcloud.com/qcloud/app/active_vnc/index.html?>.
+
+  - `InstanceVncUrl`: its value will be returned after the API is successfully called.
+
+    The final URL is in the following format:
+
+```
+https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
+```
+
+     * @param {DescribeInstanceVncUrlRequest} req
+     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
      * @public
      */
-    DescribeInstanceFamilyConfigs(req, cb) {
-        let resp = new DescribeInstanceFamilyConfigsResponse();
-        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
+    DescribeInstanceVncUrl(req, cb) {
+        let resp = new DescribeInstanceVncUrlResponse();
+        this.request("DescribeInstanceVncUrl", req, resp, cb);
     }
 
     /**

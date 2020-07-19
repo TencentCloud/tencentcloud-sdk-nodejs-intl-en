@@ -2813,49 +2813,6 @@ class DescribeDirectConnectGatewaysRequest extends  AbstractModel {
 }
 
 /**
- * DescribeVpcPrivateIpAddresses response structure.
- * @class
- */
-class DescribeVpcPrivateIpAddressesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The list of private `IP` address information.
-         * @type {Array.<VpcPrivateIpAddress> || null}
-         */
-        this.VpcPrivateIpAddressSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.VpcPrivateIpAddressSet) {
-            this.VpcPrivateIpAddressSet = new Array();
-            for (let z in params.VpcPrivateIpAddressSet) {
-                let obj = new VpcPrivateIpAddress();
-                obj.deserialize(params.VpcPrivateIpAddressSet[z]);
-                this.VpcPrivateIpAddressSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeVpcs request structure.
  * @class
  */
@@ -4827,18 +4784,12 @@ class DescribeFlowLogResponse extends  AbstractModel {
 }
 
 /**
- * DownloadCustomerGatewayConfiguration response structure.
+ * HaVipAssociateAddressIp response structure.
  * @class
  */
-class DownloadCustomerGatewayConfigurationResponse extends  AbstractModel {
+class HaVipAssociateAddressIpResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Configuration information in XML format.
-         * @type {string || null}
-         */
-        this.CustomerGatewayConfiguration = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4855,7 +4806,6 @@ class DownloadCustomerGatewayConfigurationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayConfiguration = 'CustomerGatewayConfiguration' in params ? params.CustomerGatewayConfiguration : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6969,18 +6919,18 @@ Note: This field may return null, indicating no valid value.
 }
 
 /**
- * CreateFlowLog response structure.
+ * DescribeVpcPrivateIpAddresses response structure.
  * @class
  */
-class CreateFlowLogResponse extends  AbstractModel {
+class DescribeVpcPrivateIpAddressesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The information of the flow log created.
-         * @type {Array.<FlowLog> || null}
+         * The list of private `IP` address information.
+         * @type {Array.<VpcPrivateIpAddress> || null}
          */
-        this.FlowLog = null;
+        this.VpcPrivateIpAddressSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6998,12 +6948,12 @@ class CreateFlowLogResponse extends  AbstractModel {
             return;
         }
 
-        if (params.FlowLog) {
-            this.FlowLog = new Array();
-            for (let z in params.FlowLog) {
-                let obj = new FlowLog();
-                obj.deserialize(params.FlowLog[z]);
-                this.FlowLog.push(obj);
+        if (params.VpcPrivateIpAddressSet) {
+            this.VpcPrivateIpAddressSet = new Array();
+            for (let z in params.VpcPrivateIpAddressSet) {
+                let obj = new VpcPrivateIpAddress();
+                obj.deserialize(params.VpcPrivateIpAddressSet[z]);
+                this.VpcPrivateIpAddressSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -10183,12 +10133,18 @@ class DetachCcnInstancesRequest extends  AbstractModel {
 }
 
 /**
- * MigrateNetworkInterface response structure.
+ * CreateFlowLog response structure.
  * @class
  */
-class MigrateNetworkInterfaceResponse extends  AbstractModel {
+class CreateFlowLogResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The information of the flow log created.
+         * @type {Array.<FlowLog> || null}
+         */
+        this.FlowLog = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -10204,6 +10160,15 @@ class MigrateNetworkInterfaceResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.FlowLog) {
+            this.FlowLog = new Array();
+            for (let z in params.FlowLog) {
+                let obj = new FlowLog();
+                obj.deserialize(params.FlowLog[z]);
+                this.FlowLog.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -11559,12 +11524,18 @@ class CreateAndAttachNetworkInterfaceRequest extends  AbstractModel {
 }
 
 /**
- * HaVipAssociateAddressIp response structure.
+ * DownloadCustomerGatewayConfiguration response structure.
  * @class
  */
-class HaVipAssociateAddressIpResponse extends  AbstractModel {
+class DownloadCustomerGatewayConfigurationResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Configuration information in XML format.
+         * @type {string || null}
+         */
+        this.CustomerGatewayConfiguration = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11581,6 +11552,7 @@ class HaVipAssociateAddressIpResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CustomerGatewayConfiguration = 'CustomerGatewayConfiguration' in params ? params.CustomerGatewayConfiguration : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -18700,6 +18672,34 @@ class DetachClassicLinkVpcResponse extends  AbstractModel {
 }
 
 /**
+ * MigrateNetworkInterface response structure.
+ * @class
+ */
+class MigrateNetworkInterfaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UnassignPrivateIpAddresses request structure.
  * @class
  */
@@ -20689,7 +20689,6 @@ module.exports = {
     ModifyFlowLogAttributeResponse: ModifyFlowLogAttributeResponse,
     DescribeBandwidthPackagesResponse: DescribeBandwidthPackagesResponse,
     DescribeDirectConnectGatewaysRequest: DescribeDirectConnectGatewaysRequest,
-    DescribeVpcPrivateIpAddressesResponse: DescribeVpcPrivateIpAddressesResponse,
     DescribeVpcsRequest: DescribeVpcsRequest,
     AcceptAttachCcnInstancesRequest: AcceptAttachCcnInstancesRequest,
     DescribeGatewayFlowMonitorDetailResponse: DescribeGatewayFlowMonitorDetailResponse,
@@ -20735,7 +20734,7 @@ module.exports = {
     DescribeVpcResourceDashboardResponse: DescribeVpcResourceDashboardResponse,
     DescribeNetDetectStatesRequest: DescribeNetDetectStatesRequest,
     DescribeFlowLogResponse: DescribeFlowLogResponse,
-    DownloadCustomerGatewayConfigurationResponse: DownloadCustomerGatewayConfigurationResponse,
+    HaVipAssociateAddressIpResponse: HaVipAssociateAddressIpResponse,
     DescribeBandwidthPackagesRequest: DescribeBandwidthPackagesRequest,
     DeleteDirectConnectGatewayCcnRoutesResponse: DeleteDirectConnectGatewayCcnRoutesResponse,
     DescribeAssistantCidrResponse: DescribeAssistantCidrResponse,
@@ -20779,7 +20778,7 @@ module.exports = {
     CreateCcnResponse: CreateCcnResponse,
     EnableCcnRoutesRequest: EnableCcnRoutesRequest,
     Tag: Tag,
-    CreateFlowLogResponse: CreateFlowLogResponse,
+    DescribeVpcPrivateIpAddressesResponse: DescribeVpcPrivateIpAddressesResponse,
     DefaultVpcSubnet: DefaultVpcSubnet,
     CreateSubnetsResponse: CreateSubnetsResponse,
     DescribeGatewayFlowMonitorDetailRequest: DescribeGatewayFlowMonitorDetailRequest,
@@ -20843,7 +20842,7 @@ module.exports = {
     DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
     DescribeVpnGatewayCcnRoutesResponse: DescribeVpnGatewayCcnRoutesResponse,
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
-    MigrateNetworkInterfaceResponse: MigrateNetworkInterfaceResponse,
+    CreateFlowLogResponse: CreateFlowLogResponse,
     GetCcnRegionBandwidthLimitsRequest: GetCcnRegionBandwidthLimitsRequest,
     CcnAttachedInstance: CcnAttachedInstance,
     SecurityPolicyDatabase: SecurityPolicyDatabase,
@@ -20867,7 +20866,7 @@ module.exports = {
     DescribeAccountAttributesRequest: DescribeAccountAttributesRequest,
     DescribeCcnRoutesRequest: DescribeCcnRoutesRequest,
     CreateAndAttachNetworkInterfaceRequest: CreateAndAttachNetworkInterfaceRequest,
-    HaVipAssociateAddressIpResponse: HaVipAssociateAddressIpResponse,
+    DownloadCustomerGatewayConfigurationResponse: DownloadCustomerGatewayConfigurationResponse,
     DeleteNetDetectResponse: DeleteNetDetectResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
     NatGatewayAddress: NatGatewayAddress,
@@ -21036,6 +21035,7 @@ module.exports = {
     ModifyHaVipAttributeRequest: ModifyHaVipAttributeRequest,
     ModifyAddressTemplateGroupAttributeResponse: ModifyAddressTemplateGroupAttributeResponse,
     DetachClassicLinkVpcResponse: DetachClassicLinkVpcResponse,
+    MigrateNetworkInterfaceResponse: MigrateNetworkInterfaceResponse,
     UnassignPrivateIpAddressesRequest: UnassignPrivateIpAddressesRequest,
     Filter: Filter,
     ModifyNetDetectResponse: ModifyNetDetectResponse,

@@ -115,7 +115,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 
+         * Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no)
          * @type {number || null}
          */
         this.NeedSupportIpv6 = null;
@@ -1413,7 +1413,7 @@ class DBInstance extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * SubnetId
+         * Subnet ID
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -1431,7 +1431,7 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * Instance status
+         * Instance status. Valid values: applying, init (to be initialized), initing (initializing), running, limited run, isolated, recycling, recycled, job running, offline, migrating, expanding, readonly, restarting
          * @type {string || null}
          */
         this.DBInstanceStatus = null;
@@ -1532,6 +1532,24 @@ class DBInstance extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * Whether the instance supports IPv6 address access. Valid values: 1 (yes), 0 (no)
+         * @type {number || null}
+         */
+        this.SupportIpv6 = null;
+
     }
 
     /**
@@ -1573,6 +1591,9 @@ class DBInstance extends  AbstractModel {
             }
         }
         this.Type = 'Type' in params ? params.Type : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.SupportIpv6 = 'SupportIpv6' in params ? params.SupportIpv6 : null;
 
     }
 }
@@ -1732,6 +1753,12 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
          */
         this.DBInstanceId = null;
 
+        /**
+         * Whether to disable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+         * @type {number || null}
+         */
+        this.IsIpv6 = null;
+
     }
 
     /**
@@ -1742,6 +1769,7 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
 
     }
 }
@@ -2201,6 +2229,12 @@ class ZoneInfo extends  AbstractModel {
          */
         this.ZoneState = null;
 
+        /**
+         * Whether the availability zone supports IPv6 address access
+         * @type {number || null}
+         */
+        this.ZoneSupportIpv6 = null;
+
     }
 
     /**
@@ -2214,6 +2248,7 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
+        this.ZoneSupportIpv6 = 'ZoneSupportIpv6' in params ? params.ZoneSupportIpv6 : null;
 
     }
 }
@@ -2479,7 +2514,7 @@ class DBBackup extends  AbstractModel {
 }
 
 /**
- * Instance network connection information
+ * Instance network connection information.
  * @class
  */
 class DBInstanceNetInfo extends  AbstractModel {
@@ -2493,7 +2528,7 @@ class DBInstanceNetInfo extends  AbstractModel {
         this.Address = null;
 
         /**
-         * Ip
+         * IP address
          * @type {string || null}
          */
         this.Ip = null;
@@ -2505,7 +2540,7 @@ class DBInstanceNetInfo extends  AbstractModel {
         this.Port = null;
 
         /**
-         * Network type. 1: inner (private network address), 2: public (public network address)
+         * Network type. Valid values: inner (private address of classic network), private (private address of VPC), public (public address of classic network/VPC)
          * @type {string || null}
          */
         this.NetType = null;
@@ -2791,6 +2826,12 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
          */
         this.DBInstanceId = null;
 
+        /**
+         * Whether to enable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+         * @type {number || null}
+         */
+        this.IsIpv6 = null;
+
     }
 
     /**
@@ -2801,6 +2842,7 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
 
     }
 }

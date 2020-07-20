@@ -16,26 +16,35 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const Filter = models.Filter;
-const CreateDirectConnectTunnelResponse = models.CreateDirectConnectTunnelResponse;
-const DescribeDirectConnectsRequest = models.DescribeDirectConnectsRequest;
-const Tag = models.Tag;
-const DeleteDirectConnectTunnelRequest = models.DeleteDirectConnectTunnelRequest;
-const DeleteDirectConnectTunnelResponse = models.DeleteDirectConnectTunnelResponse;
-const DescribeDirectConnectTunnelsRequest = models.DescribeDirectConnectTunnelsRequest;
 const BgpPeer = models.BgpPeer;
-const DescribeDirectConnectTunnelsResponse = models.DescribeDirectConnectTunnelsResponse;
-const ModifyDirectConnectTunnelAttributeRequest = models.ModifyDirectConnectTunnelAttributeRequest;
-const RouteFilterPrefix = models.RouteFilterPrefix;
-const DescribeDirectConnectsResponse = models.DescribeDirectConnectsResponse;
 const RejectDirectConnectTunnelRequest = models.RejectDirectConnectTunnelRequest;
-const AcceptDirectConnectTunnelRequest = models.AcceptDirectConnectTunnelRequest;
-const ModifyDirectConnectTunnelAttributeResponse = models.ModifyDirectConnectTunnelAttributeResponse;
-const CreateDirectConnectTunnelRequest = models.CreateDirectConnectTunnelRequest;
-const RejectDirectConnectTunnelResponse = models.RejectDirectConnectTunnelResponse;
+const ModifyDirectConnectAttributeRequest = models.ModifyDirectConnectAttributeRequest;
+const DeleteDirectConnectTunnelRequest = models.DeleteDirectConnectTunnelRequest;
+const CreateDirectConnectResponse = models.CreateDirectConnectResponse;
 const DirectConnect = models.DirectConnect;
-const DirectConnectTunnel = models.DirectConnectTunnel;
+const DescribeAccessPointsResponse = models.DescribeAccessPointsResponse;
 const AcceptDirectConnectTunnelResponse = models.AcceptDirectConnectTunnelResponse;
+const DescribeDirectConnectTunnelsRequest = models.DescribeDirectConnectTunnelsRequest;
+const ModifyDirectConnectTunnelAttributeResponse = models.ModifyDirectConnectTunnelAttributeResponse;
+const RouteFilterPrefix = models.RouteFilterPrefix;
+const AcceptDirectConnectTunnelRequest = models.AcceptDirectConnectTunnelRequest;
+const CreateDirectConnectTunnelRequest = models.CreateDirectConnectTunnelRequest;
+const DeleteDirectConnectResponse = models.DeleteDirectConnectResponse;
+const DescribeDirectConnectsResponse = models.DescribeDirectConnectsResponse;
+const DescribeAccessPointsRequest = models.DescribeAccessPointsRequest;
+const DescribeDirectConnectsRequest = models.DescribeDirectConnectsRequest;
+const ModifyDirectConnectTunnelAttributeRequest = models.ModifyDirectConnectTunnelAttributeRequest;
+const Filter = models.Filter;
+const CreateDirectConnectRequest = models.CreateDirectConnectRequest;
+const ModifyDirectConnectAttributeResponse = models.ModifyDirectConnectAttributeResponse;
+const RejectDirectConnectTunnelResponse = models.RejectDirectConnectTunnelResponse;
+const CreateDirectConnectTunnelResponse = models.CreateDirectConnectTunnelResponse;
+const DeleteDirectConnectTunnelResponse = models.DeleteDirectConnectTunnelResponse;
+const AccessPoint = models.AccessPoint;
+const DeleteDirectConnectRequest = models.DeleteDirectConnectRequest;
+const DescribeDirectConnectTunnelsResponse = models.DescribeDirectConnectTunnelsResponse;
+const Tag = models.Tag;
+const DirectConnectTunnel = models.DirectConnectTunnel;
 
 
 /**
@@ -49,6 +58,17 @@ class DcClient extends AbstractClient {
     }
     
     /**
+     * This API is used to modify connection attributes.
+     * @param {ModifyDirectConnectAttributeRequest} req
+     * @param {function(string, ModifyDirectConnectAttributeResponse):void} cb
+     * @public
+     */
+    ModifyDirectConnectAttribute(req, cb) {
+        let resp = new ModifyDirectConnectAttributeResponse();
+        this.request("ModifyDirectConnectAttribute", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a dedicated tunnel.
      * @param {CreateDirectConnectTunnelRequest} req
      * @param {function(string, CreateDirectConnectTunnelResponse):void} cb
@@ -60,14 +80,15 @@ class DcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to reject an application for a dedicated tunnel.
-     * @param {RejectDirectConnectTunnelRequest} req
-     * @param {function(string, RejectDirectConnectTunnelResponse):void} cb
+     * This API is used to delete a connection.
+Only connected connections can be deleted.
+     * @param {DeleteDirectConnectRequest} req
+     * @param {function(string, DeleteDirectConnectResponse):void} cb
      * @public
      */
-    RejectDirectConnectTunnel(req, cb) {
-        let resp = new RejectDirectConnectTunnelResponse();
-        this.request("RejectDirectConnectTunnel", req, resp, cb);
+    DeleteDirectConnect(req, cb) {
+        let resp = new DeleteDirectConnectResponse();
+        this.request("DeleteDirectConnect", req, resp, cb);
     }
 
     /**
@@ -93,6 +114,18 @@ class DcClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query connection access points.
+
+     * @param {DescribeAccessPointsRequest} req
+     * @param {function(string, DescribeAccessPointsResponse):void} cb
+     * @public
+     */
+    DescribeAccessPoints(req, cb) {
+        let resp = new DescribeAccessPointsResponse();
+        this.request("DescribeAccessPoints", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of dedicated tunnels.
      * @param {DescribeDirectConnectTunnelsRequest} req
      * @param {function(string, DescribeDirectConnectTunnelsResponse):void} cb
@@ -101,6 +134,31 @@ class DcClient extends AbstractClient {
     DescribeDirectConnectTunnels(req, cb) {
         let resp = new DescribeDirectConnectTunnelsResponse();
         this.request("DescribeDirectConnectTunnels", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply for a connection.
+When calling this API, please note that:
+You need to complete identity verification for your account; otherwise, you cannot apply for a connection;
+If there is any connection in arrears under your account, you cannot apply for more connections.
+     * @param {CreateDirectConnectRequest} req
+     * @param {function(string, CreateDirectConnectResponse):void} cb
+     * @public
+     */
+    CreateDirectConnect(req, cb) {
+        let resp = new CreateDirectConnectResponse();
+        this.request("CreateDirectConnect", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reject an application for a dedicated tunnel.
+     * @param {RejectDirectConnectTunnelRequest} req
+     * @param {function(string, RejectDirectConnectTunnelResponse):void} cb
+     * @public
+     */
+    RejectDirectConnectTunnel(req, cb) {
+        let resp = new RejectDirectConnectTunnelResponse();
+        this.request("RejectDirectConnectTunnel", req, resp, cb);
     }
 
     /**

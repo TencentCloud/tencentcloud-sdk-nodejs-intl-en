@@ -912,6 +912,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * StopAutoScalingInstances response structure.
+ * @class
+ */
+class StopAutoScalingInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scaling activity ID.
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeScalingPolicies request structure.
  * @class
  */
@@ -996,6 +1031,69 @@ class ModifyScheduledActionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAutoScalingGroupFromInstance request structure.
+ * @class
+ */
+class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scaling group name. It must be unique under your account. The name can only contain Chinese characters, English letters, numbers, underscore, hyphen “-” and periods. It cannot exceed 55 bytes.
+         * @type {string || null}
+         */
+        this.AutoScalingGroupName = null;
+
+        /**
+         * The instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The maximum number of instances. Value range: 0-2000.
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * The minimum number of instances. Value range: 0-2000.
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * The desired capacity. Its value must be greater than the minimum and smaller than the maximum.
+         * @type {number || null}
+         */
+        this.DesiredCapacity = null;
+
+        /**
+         * Whether to inherit the instance tag. Default value: False
+         * @type {boolean || null}
+         */
+        this.InheritInstanceTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.InheritInstanceTag = 'InheritInstanceTag' in params ? params.InheritInstanceTag : null;
 
     }
 }
@@ -1086,6 +1184,41 @@ class SetInstancesProtectionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartAutoScalingInstances response structure.
+ * @class
+ */
+class StartAutoScalingInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scaling activity ID.
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3058,7 +3191,7 @@ If an availability zone or subnet in Zones/SubnetIds does not exist, a verificat
         this.ZonesCheckPolicy = null;
 
         /**
-         * List of tag descriptions. This parameter is used to bind a tag to an auto scaling group as well as the corresponding resource instances.
+         * List of tag descriptions. This parameter is used to bind a tag to a scaling group as well as corresponding resource instances. Each scaling group can have up to 30 tags.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -3074,6 +3207,12 @@ If an availability zone or subnet in Zones/SubnetIds does not exist, a verificat
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MultiZoneSubnetPolicy = null;
 
     }
 
@@ -3123,6 +3262,7 @@ If an availability zone or subnet in Zones/SubnetIds does not exist, a verificat
             this.ServiceSettings = obj;
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
+        this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
 
     }
 }
@@ -3596,6 +3736,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Password = 'Password' in params ? params.Password : null;
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
         this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
+
+    }
+}
+
+/**
+ * CreateAutoScalingGroupFromInstance response structure.
+ * @class
+ */
+class CreateAutoScalingGroupFromInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scaling group ID.
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5637,6 +5812,41 @@ class RemoveInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * StartAutoScalingInstances request structure.
+ * @class
+ */
+class StartAutoScalingInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scaling group ID.
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * The list of the CVM instances you want to launch.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * AttachInstances request structure.
  * @class
  */
@@ -5885,6 +6095,51 @@ class ModifyDesiredCapacityResponse extends  AbstractModel {
 }
 
 /**
+ * StopAutoScalingInstances request structure.
+ * @class
+ */
+class StopAutoScalingInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scaling group ID.
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * The list of the CVM instances you want to shut down.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Whether the shutdown instances will be charged. Valid values:  
+KEEP_CHARGING: keep charging after shutdown.  
+STOP_CHARGING: stop charging after shutdown.
+Default value: KEEP_CHARGING.
+         * @type {string || null}
+         */
+        this.StoppedMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.StoppedMode = 'StoppedMode' in params ? params.StoppedMode : null;
+
+    }
+}
+
+/**
  * This describes the information related to the Cloud Monitor service.
  * @class
  */
@@ -6009,6 +6264,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.PublicIpAssigned = null;
 
+        /**
+         * Bandwidth package ID. You can obtain the parameter value from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) API.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.BandwidthPackageId = null;
+
     }
 
     /**
@@ -6021,6 +6283,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
         this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
     }
 }
@@ -6186,6 +6449,12 @@ class ExecuteScalingPolicyRequest extends  AbstractModel {
          */
         this.HonorCooldown = null;
 
+        /**
+         * Trigger source that executes a scaling policy. Valid values: API and CLOUD_MONITOR. Default value: API. The value `CLOUD_MONITOR` is specific to the Cloud Monitor service.
+         * @type {string || null}
+         */
+        this.TriggerSource = null;
+
     }
 
     /**
@@ -6197,6 +6466,7 @@ class ExecuteScalingPolicyRequest extends  AbstractModel {
         }
         this.AutoScalingPolicyId = 'AutoScalingPolicyId' in params ? params.AutoScalingPolicyId : null;
         this.HonorCooldown = 'HonorCooldown' in params ? params.HonorCooldown : null;
+        this.TriggerSource = 'TriggerSource' in params ? params.TriggerSource : null;
 
     }
 }
@@ -6218,11 +6488,14 @@ module.exports = {
     CreatePaiInstanceRequest: CreatePaiInstanceRequest,
     SystemDisk: SystemDisk,
     SpotMarketOptions: SpotMarketOptions,
+    StopAutoScalingInstancesResponse: StopAutoScalingInstancesResponse,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
+    CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
     ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,
     ModifyLaunchConfigurationAttributesResponse: ModifyLaunchConfigurationAttributesResponse,
     SetInstancesProtectionResponse: SetInstancesProtectionResponse,
+    StartAutoScalingInstancesResponse: StartAutoScalingInstancesResponse,
     CompleteLifecycleActionRequest: CompleteLifecycleActionRequest,
     CreateScalingPolicyResponse: CreateScalingPolicyResponse,
     CreateNotificationConfigurationResponse: CreateNotificationConfigurationResponse,
@@ -6268,6 +6541,7 @@ module.exports = {
     PreviewPaiDomainNameRequest: PreviewPaiDomainNameRequest,
     DeleteScalingPolicyRequest: DeleteScalingPolicyRequest,
     LoginSettings: LoginSettings,
+    CreateAutoScalingGroupFromInstanceResponse: CreateAutoScalingGroupFromInstanceResponse,
     DetachInstancesRequest: DetachInstancesRequest,
     Instance: Instance,
     CreateScheduledActionRequest: CreateScheduledActionRequest,
@@ -6305,10 +6579,12 @@ module.exports = {
     PreviewPaiDomainNameResponse: PreviewPaiDomainNameResponse,
     DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
     RemoveInstancesRequest: RemoveInstancesRequest,
+    StartAutoScalingInstancesRequest: StartAutoScalingInstancesRequest,
     AttachInstancesRequest: AttachInstancesRequest,
     DescribeScalingPoliciesResponse: DescribeScalingPoliciesResponse,
     Activity: Activity,
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,
+    StopAutoScalingInstancesRequest: StopAutoScalingInstancesRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
     ActivtyRelatedInstance: ActivtyRelatedInstance,

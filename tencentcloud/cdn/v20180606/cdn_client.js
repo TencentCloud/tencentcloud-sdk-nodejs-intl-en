@@ -19,9 +19,11 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeCdnDomainLogsResponse = models.DescribeCdnDomainLogsResponse;
 const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
 const Compression = models.Compression;
+const Revalidate = models.Revalidate;
 const ResourceData = models.ResourceData;
 const UrlRecord = models.UrlRecord;
-const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const DescribePushQuotaResponse = models.DescribePushQuotaResponse;
+const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
 const Authentication = models.Authentication;
 const ImageOptimization = models.ImageOptimization;
 const Https = models.Https;
@@ -32,25 +34,33 @@ const DomainFilter = models.DomainFilter;
 const SpecificConfig = models.SpecificConfig;
 const FollowRedirect = models.FollowRedirect;
 const RequestHeader = models.RequestHeader;
-const HttpHeaderPathRule = models.HttpHeaderPathRule;
+const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
 const UserAgentFilter = models.UserAgentFilter;
 const AdvanceCacheRule = models.AdvanceCacheRule;
+const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
 const ListTopDataRequest = models.ListTopDataRequest;
 const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
+const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CompressionRule = models.CompressionRule;
 const GuetzliAdapter = models.GuetzliAdapter;
 const Origin = models.Origin;
+const TopData = models.TopData;
 const EnableCachesRequest = models.EnableCachesRequest;
+const Quota = models.Quota;
+const HeaderKey = models.HeaderKey;
+const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
 const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
 const TopicInfo = models.TopicInfo;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
 const BriefDomain = models.BriefDomain;
+const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const TpgAdapter = models.TpgAdapter;
 const DescribeReportDataResponse = models.DescribeReportDataResponse;
 const DisableClsLogTopicRequest = models.DisableClsLogTopicRequest;
 const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
@@ -80,13 +90,17 @@ const AuthenticationTypeB = models.AuthenticationTypeB;
 const AuthenticationTypeA = models.AuthenticationTypeA;
 const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
+const IpStatus = models.IpStatus;
 const AddCdnDomainResponse = models.AddCdnDomainResponse;
-const DomainAreaConfig = models.DomainAreaConfig;
+const DownstreamCapping = models.DownstreamCapping;
 const ServerCert = models.ServerCert;
+const AccessControlRule = models.AccessControlRule;
+const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const DisableCachesRequest = models.DisableCachesRequest;
 const SimpleCacheRule = models.SimpleCacheRule;
 const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
-const TpgAdapter = models.TpgAdapter;
+const Hsts = models.Hsts;
+const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
 const DetailDomain = models.DetailDomain;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
 const ResponseHeader = models.ResponseHeader;
@@ -106,7 +120,7 @@ const DescribePushTasksRequest = models.DescribePushTasksRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
 const IpFreqLimit = models.IpFreqLimit;
-const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
+const DomainAreaConfig = models.DomainAreaConfig;
 const CacheOptResult = models.CacheOptResult;
 const StopCdnDomainRequest = models.StopCdnDomainRequest;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
@@ -119,13 +133,15 @@ const DomainLog = models.DomainLog;
 const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
 const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
 const DeleteClsLogTopicResponse = models.DeleteClsLogTopicResponse;
+const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const DisableCachesResponse = models.DisableCachesResponse;
+const SchemeKey = models.SchemeKey;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
 const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
+const AccessControl = models.AccessControl;
 const CacheKey = models.CacheKey;
-const DownstreamCapping = models.DownstreamCapping;
-const TopData = models.TopData;
+const CookieKey = models.CookieKey;
 const CappingRule = models.CappingRule;
 const ListClsLogTopicsRequest = models.ListClsLogTopicsRequest;
 const Seo = models.Seo;
@@ -139,16 +155,19 @@ const OriginPullOptimization = models.OriginPullOptimization;
 const PushTask = models.PushTask;
 const TimestampData = models.TimestampData;
 const StartCdnDomainResponse = models.StartCdnDomainResponse;
+const DescribePushQuotaRequest = models.DescribePushQuotaRequest;
 const ResponseHeaderCache = models.ResponseHeaderCache;
-const SecurityConfig = models.SecurityConfig;
+const ResourceBillingData = models.ResourceBillingData;
 const Sort = models.Sort;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
 const StopCdnDomainResponse = models.StopCdnDomainResponse;
+const QueryStringKey = models.QueryStringKey;
 const ListTopDataResponse = models.ListTopDataResponse;
 const MaxAge = models.MaxAge;
 const UpdateDomainConfigResponse = models.UpdateDomainConfigResponse;
 const LogSetInfo = models.LogSetInfo;
+const SecurityConfig = models.SecurityConfig;
 const SearchClsLogRequest = models.SearchClsLogRequest;
 const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
 const AwsPrivateAccess = models.AwsPrivateAccess;
@@ -166,6 +185,7 @@ const OriginPullTimeout = models.OriginPullTimeout;
 const DeleteCdnDomainResponse = models.DeleteCdnDomainResponse;
 const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
+const CacheTagKey = models.CacheTagKey;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
 
 
@@ -179,6 +199,17 @@ class CdnClient extends AbstractClient {
         super("cdn.tencentcloudapi.com", "2018-06-06", credential, region, profile);
     }
     
+    /**
+     * This API is used to query the status of the edge servers and intermediate nodes on the domain name acceleration platform. Note: edge servers are not generally available. This API can only be used by whitelisted accounts.
+     * @param {DescribeIpStatusRequest} req
+     * @param {function(string, DescribeIpStatusResponse):void} cb
+     * @public
+     */
+    DescribeIpStatus(req, cb) {
+        let resp = new DescribeIpStatusResponse();
+        this.request("DescribeIpStatus", req, resp, cb);
+    }
+
     /**
      * This API (DescribeMapInfo) is used to query the IDs of districts or ISPs.
      * @param {DescribeMapInfoRequest} req
@@ -333,6 +364,17 @@ Note: after the acceleration service has been suspended, requests to the cache n
     StopCdnDomain(req, cb) {
         let resp = new StopCdnDomainResponse();
         this.request("StopCdnDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the purge usage quota and daily available usage for an account.
+     * @param {DescribePurgeQuotaRequest} req
+     * @param {function(string, DescribePurgeQuotaResponse):void} cb
+     * @public
+     */
+    DescribePurgeQuota(req, cb) {
+        let resp = new DescribePurgeQuotaResponse();
+        this.request("DescribePurgeQuota", req, resp, cb);
     }
 
     /**
@@ -557,6 +599,28 @@ This API is in beta test and not fully available yet. Please stay tuned.
     DeleteClsLogTopic(req, cb) {
         let resp = new DeleteClsLogTopicResponse();
         this.request("DeleteClsLogTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query billing data details.
+     * @param {DescribeBillingDataRequest} req
+     * @param {function(string, DescribeBillingDataResponse):void} cb
+     * @public
+     */
+    DescribeBillingData(req, cb) {
+        let resp = new DescribeBillingDataResponse();
+        this.request("DescribeBillingData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the prefetch quota and daily available usage.
+     * @param {DescribePushQuotaRequest} req
+     * @param {function(string, DescribePushQuotaResponse):void} cb
+     * @public
+     */
+    DescribePushQuota(req, cb) {
+        let resp = new DescribePushQuotaResponse();
+        this.request("DescribePushQuota", req, resp, cb);
     }
 
     /**

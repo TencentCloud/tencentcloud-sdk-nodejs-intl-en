@@ -32,11 +32,14 @@ const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsRespon
 const CreatePaiInstanceRequest = models.CreatePaiInstanceRequest;
 const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
+const StopAutoScalingInstancesResponse = models.StopAutoScalingInstancesResponse;
 const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
 const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
+const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
 const ExecuteScalingPolicyResponse = models.ExecuteScalingPolicyResponse;
 const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
 const SetInstancesProtectionResponse = models.SetInstancesProtectionResponse;
+const StartAutoScalingInstancesResponse = models.StartAutoScalingInstancesResponse;
 const CompleteLifecycleActionRequest = models.CompleteLifecycleActionRequest;
 const CreateScalingPolicyResponse = models.CreateScalingPolicyResponse;
 const CreateNotificationConfigurationResponse = models.CreateNotificationConfigurationResponse;
@@ -82,6 +85,7 @@ const DataDisk = models.DataDisk;
 const PreviewPaiDomainNameRequest = models.PreviewPaiDomainNameRequest;
 const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
 const LoginSettings = models.LoginSettings;
+const CreateAutoScalingGroupFromInstanceResponse = models.CreateAutoScalingGroupFromInstanceResponse;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
 const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
@@ -119,10 +123,12 @@ const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const PreviewPaiDomainNameResponse = models.PreviewPaiDomainNameResponse;
 const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
+const StartAutoScalingInstancesRequest = models.StartAutoScalingInstancesRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
 const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
+const StopAutoScalingInstancesRequest = models.StopAutoScalingInstancesRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
@@ -215,6 +221,19 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     DeleteAutoScalingGroup(req, cb) {
         let resp = new DeleteAutoScalingGroupResponse();
         this.request("DeleteAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to launch CVM instances in the scaling group.
+* After the instance is launched and in the `IN_SERVICE` status, the desired capacity increases, but the desired capacity cannot exceed the maximum value.
+* This API supports batch operation. Up to 100 instances can be launched in each request.
+     * @param {StartAutoScalingInstancesRequest} req
+     * @param {function(string, StartAutoScalingInstancesResponse):void} cb
+     * @public
+     */
+    StartAutoScalingInstances(req, cb) {
+        let resp = new StartAutoScalingInstancesResponse();
+        this.request("StartAutoScalingInstances", req, resp, cb);
     }
 
     /**
@@ -384,6 +403,21 @@ When an instance has scale-in protection enabled, it will not be removed when sc
     }
 
     /**
+     * This API is used to shut down CVM instances in the scaling group.
+* Use the `SOFT_FIRST` shutdown, which means the CVM will be forcibly shut down if the soft shutdown fails.
+* Shutting down instances in the `IN_SERVICE` status will reduce the desired capacity, but the desired capacity cannot be less than the minimum value.
+* To use the `STOP_CHARGING` shutdown, the instances you want to shut down must satisfy the conditions of [no charges when shut down](https://cloud.tencent.com/document/product/213/19918).
+* This API supports batch operation. Up to 100 instances can be shut down in each request.
+     * @param {StopAutoScalingInstancesRequest} req
+     * @param {function(string, StopAutoScalingInstancesResponse):void} cb
+     * @public
+     */
+    StopAutoScalingInstances(req, cb) {
+        let resp = new StopAutoScalingInstancesResponse();
+        this.request("StopAutoScalingInstances", req, resp, cb);
+    }
+
+    /**
      * This API (CreateLaunchConfiguration) is used to create a launch configuration.
 
 * A few fields of a launch configuration can be modified through `ModifyLaunchConfigurationAttributes`. To use a new launch configuration, it is recommended to create it from scratch.
@@ -433,6 +467,19 @@ When an instance has scale-in protection enabled, it will not be removed when sc
     DescribeAutoScalingInstances(req, cb) {
         let resp = new DescribeAutoScalingInstancesResponse();
         this.request("DescribeAutoScalingInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create launch configurations and scaling groups from an instance.
+
+Note: the pay-as-you-go instance in the scaling group that is created from a monthly-subscribed instance can be expanded.
+     * @param {CreateAutoScalingGroupFromInstanceRequest} req
+     * @param {function(string, CreateAutoScalingGroupFromInstanceResponse):void} cb
+     * @public
+     */
+    CreateAutoScalingGroupFromInstance(req, cb) {
+        let resp = new CreateAutoScalingGroupFromInstanceResponse();
+        this.request("CreateAutoScalingGroupFromInstance", req, resp, cb);
     }
 
     /**

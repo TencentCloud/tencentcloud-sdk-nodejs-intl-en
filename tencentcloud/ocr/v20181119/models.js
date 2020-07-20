@@ -439,8 +439,9 @@ class MLIDCardOCRResponse extends  AbstractModel {
 
         /**
          * Alarm code
--9103 Alarm for photographed document
--9102 Alarm for photocopied document
+-9103	Alarm for photographed document
+-9102	Alarm for photocopied document
+-9106       Alarm for covered card
          * @type {Array.<number> || null}
          */
         this.Warn = null;
@@ -466,6 +467,18 @@ class MLIDCardOCRResponse extends  AbstractModel {
         this.AdvancedInfo = null;
 
         /**
+         * Certificate types
+MyKad: Malaysian Identity Card
+MyPR: Malaysia Permanent Resident Identity Card
+MyTentera: Malaysian Armed Forces Identity Card
+MyKAS: Malaysian Temporary Resident Identity Card
+POLIS: Royal Malaysia Police Identity Card
+IKAD: Malaysia Temporary Employment Visit Pass
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -487,6 +500,7 @@ class MLIDCardOCRResponse extends  AbstractModel {
         this.Warn = 'Warn' in params ? params.Warn : null;
         this.Image = 'Image' in params ? params.Image : null;
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.Type = 'Type' in params ? params.Type : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

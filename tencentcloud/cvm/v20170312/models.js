@@ -3680,6 +3680,15 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.Encrypt = null;
 
+        /**
+         * ID of the custom CMK in the format of “UUID” or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+
+Currently, this parameter is only used in the `RunInstances` API.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
+
     }
 
     /**
@@ -3695,6 +3704,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
 
     }
 }
@@ -5855,6 +5865,48 @@ Note: this field may return null, indicating that no valid value is obtained.
          */
         this.SoldOutReason = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InstanceBandwidth = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InstancePps = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.StorageBlockAmount = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CpuType = null;
+
+        /**
+         * Number of GPUs of the instance.
+         * @type {number || null}
+         */
+        this.Gpu = null;
+
+        /**
+         * Number of FPGAs of the instance.
+         * @type {number || null}
+         */
+        this.Fpga = null;
+
+        /**
+         * Descriptive information of the instance.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
     }
 
     /**
@@ -5895,6 +5947,13 @@ Note: this field may return null, indicating that no valid value is obtained.
             this.Price = obj;
         }
         this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
+        this.InstanceBandwidth = 'InstanceBandwidth' in params ? params.InstanceBandwidth : null;
+        this.InstancePps = 'InstancePps' in params ? params.InstancePps : null;
+        this.StorageBlockAmount = 'StorageBlockAmount' in params ? params.StorageBlockAmount : null;
+        this.CpuType = 'CpuType' in params ? params.CpuType : null;
+        this.Gpu = 'Gpu' in params ? params.Gpu : null;
+        this.Fpga = 'Fpga' in params ? params.Fpga : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }

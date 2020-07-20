@@ -16,89 +16,99 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteClusterRequest = models.DeleteClusterRequest;
-const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
-const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
-const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
-const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DescribeClusterEndpointVipStatusRequest = models.DescribeClusterEndpointVipStatusRequest;
-const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
-const EnhancedService = models.EnhancedService;
-const ResourceDeleteOption = models.ResourceDeleteOption;
-const RegionInstance = models.RegionInstance;
-const Label = models.Label;
-const LoginSettings = models.LoginSettings;
-const TagSpecification = models.TagSpecification;
-const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
-const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
-const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
-const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
 const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
-const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
-const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
-const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
-const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
-const ExistedInstancesForNode = models.ExistedInstancesForNode;
-const CreateClusterResponse = models.CreateClusterResponse;
-const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
-const DeleteClusterRouteTableRequest = models.DeleteClusterRouteTableRequest;
-const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
-const ClusterBasicSettings = models.ClusterBasicSettings;
-const CreateClusterRequest = models.CreateClusterRequest;
-const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
-const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
-const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
-const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
+const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
-const Tag = models.Tag;
-const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
+const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
+const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
+const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
+const DeleteClusterResponse = models.DeleteClusterResponse;
+const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
-const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
-const RouteTableConflict = models.RouteTableConflict;
-const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
-const RouteTableInfo = models.RouteTableInfo;
-const DescribeImagesRequest = models.DescribeImagesRequest;
-const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
-const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
-const ClusterCIDRSettings = models.ClusterCIDRSettings;
-const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
-const ModifyClusterEndpointSPResponse = models.ModifyClusterEndpointSPResponse;
-const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
-const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
+const RouteInfo = models.RouteInfo;
+const DeleteClusterRequest = models.DeleteClusterRequest;
 const RunInstancesForNode = models.RunInstancesForNode;
-const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
-const ExistedInstancesPara = models.ExistedInstancesPara;
 const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
-const ExistedInstance = models.ExistedInstance;
-const InstanceExtraArgs = models.InstanceExtraArgs;
-const ImageInstance = models.ImageInstance;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
-const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
-const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
-const RouteInfo = models.RouteInfo;
-const ClusterExtraArgs = models.ClusterExtraArgs;
-const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
-const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
-const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
-const Filter = models.Filter;
+const RouteTableInfo = models.RouteTableInfo;
+const ClusterAsGroup = models.ClusterAsGroup;
 const Instance = models.Instance;
-const InstanceDataDiskMountSetting = models.InstanceDataDiskMountSetting;
-const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
-const DescribeRegionsRequest = models.DescribeRegionsRequest;
-const DescribeClustersRequest = models.DescribeClustersRequest;
-const Cluster = models.Cluster;
-const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
-const DescribeClustersResponse = models.DescribeClustersResponse;
-const ModifyClusterAttributeRequest = models.ModifyClusterAttributeRequest;
+const Tag = models.Tag;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const DescribeImagesResponse = models.DescribeImagesResponse;
+const AutoScalingGroupRange = models.AutoScalingGroupRange;
+const ModifyClusterAttributeRequest = models.ModifyClusterAttributeRequest;
+const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
+const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
+const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
+const DescribeClustersRequest = models.DescribeClustersRequest;
+const RegionInstance = models.RegionInstance;
+const Label = models.Label;
+const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
+const ClusterBasicSettings = models.ClusterBasicSettings;
+const RouteTableConflict = models.RouteTableConflict;
+const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
+const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
+const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
+const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
+const ClusterCIDRSettings = models.ClusterCIDRSettings;
+const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
+const ExistedInstance = models.ExistedInstance;
+const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
+const TagSpecification = models.TagSpecification;
+const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const DescribeClustersResponse = models.DescribeClustersResponse;
+const ClusterExtraArgs = models.ClusterExtraArgs;
 const DataDisk = models.DataDisk;
-const DeleteClusterResponse = models.DeleteClusterResponse;
+const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
+const ResourceDeleteOption = models.ResourceDeleteOption;
+const LoginSettings = models.LoginSettings;
+const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
+const EnhancedService = models.EnhancedService;
+const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
+const CreateClusterResponse = models.CreateClusterResponse;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const DeleteClusterRouteTableRequest = models.DeleteClusterRouteTableRequest;
+const CreateClusterRequest = models.CreateClusterRequest;
+const InstanceExtraArgs = models.InstanceExtraArgs;
+const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
+const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
+const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
+const Filter = models.Filter;
+const ImageInstance = models.ImageInstance;
+const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
+const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
+const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
+const Cluster = models.Cluster;
+const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
+const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionRequest;
+const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
+const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
+const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
+const ClusterAsGroupOption = models.ClusterAsGroupOption;
 const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
+const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
+const ExistedInstancesForNode = models.ExistedInstancesForNode;
+const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
+const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
+const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
+const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
+const DescribeClusterAsGroupsRequest = models.DescribeClusterAsGroupsRequest;
+const DescribeImagesRequest = models.DescribeImagesRequest;
+const ModifyClusterEndpointSPResponse = models.ModifyClusterEndpointSPResponse;
+const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
+const ExistedInstancesPara = models.ExistedInstancesPara;
+const DescribeClusterAsGroupOptionResponse = models.DescribeClusterAsGroupOptionResponse;
+const ClusterAsGroupAttribute = models.ClusterAsGroupAttribute;
+const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const ModifyClusterAsGroupAttributeRequest = models.ModifyClusterAsGroupAttributeRequest;
+const InstanceDataDiskMountSetting = models.InstanceDataDiskMountSetting;
+const DescribeClusterAsGroupsResponse = models.DescribeClusterAsGroupsResponse;
 
 
 /**
@@ -131,6 +141,17 @@ class TkeClient extends AbstractClient {
     DescribeImages(req, cb) {
         let resp = new DescribeImagesResponse();
         this.request("DescribeImages", req, resp, cb);
+    }
+
+    /**
+     * Modify cluster scaling group attributes
+     * @param {ModifyClusterAsGroupAttributeRequest} req
+     * @param {function(string, ModifyClusterAsGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifyClusterAsGroupAttribute(req, cb) {
+        let resp = new ModifyClusterAsGroupAttributeResponse();
+        this.request("ModifyClusterAsGroupAttribute", req, resp, cb);
     }
 
     /**
@@ -277,6 +298,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * Cluster-associated scaling group list
+     * @param {DescribeClusterAsGroupsRequest} req
+     * @param {function(string, DescribeClusterAsGroupsResponse):void} cb
+     * @public
+     */
+    DescribeClusterAsGroups(req, cb) {
+        let resp = new DescribeClusterAsGroupsResponse();
+        this.request("DescribeClusterAsGroups", req, resp, cb);
+    }
+
+    /**
      * Create a cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
      * @param {CreateClusterEndpointRequest} req
      * @param {function(string, CreateClusterEndpointResponse):void} cb
@@ -285,6 +317,17 @@ class TkeClient extends AbstractClient {
     CreateClusterEndpoint(req, cb) {
         let resp = new CreateClusterEndpointResponse();
         this.request("CreateClusterEndpoint", req, resp, cb);
+    }
+
+    /**
+     * Cluster auto scaling configuration
+     * @param {DescribeClusterAsGroupOptionRequest} req
+     * @param {function(string, DescribeClusterAsGroupOptionResponse):void} cb
+     * @public
+     */
+    DescribeClusterAsGroupOption(req, cb) {
+        let resp = new DescribeClusterAsGroupOptionResponse();
+        this.request("DescribeClusterAsGroupOption", req, resp, cb);
     }
 
     /**

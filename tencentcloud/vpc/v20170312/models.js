@@ -1065,7 +1065,7 @@ class FlowLog extends  AbstractModel {
         this.FlowLogName = null;
 
         /**
-         * The type of resource to which the flow log belongs. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
+         * The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -1077,7 +1077,7 @@ class FlowLog extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
+         * Type of flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
          * @type {string || null}
          */
         this.TrafficType = null;
@@ -1321,7 +1321,7 @@ class ModifyDirectConnectGatewayAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
+         * The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
          * @type {string || null}
          */
         this.DirectConnectGatewayId = null;
@@ -1375,19 +1375,19 @@ class AddBandwidthPackageResourcesRequest extends  AbstractModel {
         this.BandwidthPackageId = null;
 
         /**
-         * The type of the bandwidth package. Valid value: 'BGP'. Internal resources will be represented by 'BGP IP'.
+         * The network type of the bandwidth package. Valid value: `BGP`, indicating that the internal resource is a BGP IP.
          * @type {string || null}
          */
         this.NetworkType = null;
 
         /**
-         * The resource type, including 'Address' and 'LoadBalance'.
+         * The resource type, including `Address` and `LoadBalance`.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * The protocol type of the bandwidth package. Valid values: 'ipv4' and 'ipv6'.
+         * The protocol type of the bandwidth package. Valid values: `ipv4` and `ipv6`.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -1758,7 +1758,7 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         this.FlowLogName = null;
 
         /**
-         * The type of resource to which the flow log belongs. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
+         * The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -1770,7 +1770,7 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
+         * Type of flow logs to be collected. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
          * @type {string || null}
          */
         this.TrafficType = null;
@@ -1794,7 +1794,7 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         this.OrderField = null;
 
         /**
-         * In ascending (asc) or descending (desc) order. Default value: 'desc'.
+         * In ascending (`asc`) or descending (`desc`) order. Default value: 'desc'.
          * @type {string || null}
          */
         this.OrderDirection = null;
@@ -1806,7 +1806,7 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * The number of rows per page. Default vaue: 10.
+         * The number of rows per page. Default value: 10.
          * @type {number || null}
          */
         this.Limit = null;
@@ -1871,13 +1871,13 @@ class AssociateNatGatewayAddressRequest extends  AbstractModel {
         this.AddressCount = null;
 
         /**
-         * The EIP array bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
+         * Array of the EIPs bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
 
         /**
-         * The EIP zone. This is passed in when EIP is automatically assigned.
+         * The availability zone of the EIP, which is passed in when the EIP is automatically assigned.
          * @type {string || null}
          */
         this.Zone = null;
@@ -2103,19 +2103,19 @@ class ModifyFlowLogAttributeRequest extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * The unique ID of the flow log.
+         * The unique ID of the flow log collector.
          * @type {string || null}
          */
         this.FlowLogId = null;
 
         /**
-         * The name of the flow log instance.
+         * The name of the flow log collector.
          * @type {string || null}
          */
         this.FlowLogName = null;
 
         /**
-         * The description of the flow log instance.
+         * The description of the flow log collector.
          * @type {string || null}
          */
         this.FlowLogDescription = null;
@@ -2713,7 +2713,7 @@ class DescribeBandwidthPackagesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * The description of the bandwidth packages.
+         * Detail information of the bandwidth package.
          * @type {Array.<BandwidthPackage> || null}
          */
         this.BandwidthPackageSet = null;
@@ -2757,20 +2757,20 @@ class DescribeDirectConnectGatewaysRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
+         * The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
          * @type {Array.<string> || null}
          */
         this.DirectConnectGatewayIds = null;
 
         /**
-         * Filter condition. `DirectConnectGatewayIds` and `Filters` cannot be specified at the same time..
-<li>direct-connect-gateway-id - String - The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.</li>
+         * Filter condition. `DirectConnectGatewayIds` and `Filters` cannot be specified at the same time.
+<li>direct-connect-gateway-id - String - The unique ID of the direct connect gateway, such as `dcg-9o233uri`.</li>
 <li>direct-connect-gateway-name - String - The name of the direct connect gateway. The default is fuzzy query.</li>
-<li>direct-connect-gateway-ip - String - The `IP` of the direct connect gateway.</li>
+<li>direct-connect-gateway-ip - String - The IP of the direct connect gateway.</li>
 <li>gateway-type - String - The gateway type. Valid values: `NORMAL` (Standard type), `NAT` (NAT type).</li>
 <li>network-type- String - The network type. Valid values: `VPC` (VPC type), `CCN` (CCN type).</li>
-<li>ccn-id - String - The `ID` of the CCN where the direct connect gateway resides.</li>
-<li>vpc-id - String - The `ID` of the VPC where the direct connect gateway resides.</li>
+<li>ccn-id - String - The ID of the CCN where the direct connect gateway resides.</li>
+<li>vpc-id - String - The ID of the VPC where the direct connect gateway resides.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2782,7 +2782,7 @@ class DescribeDirectConnectGatewaysRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * The returned quantity.
+         * Max number of results returned
          * @type {number || null}
          */
         this.Limit = null;
@@ -4839,13 +4839,13 @@ class DescribeBandwidthPackagesRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * Queries the bandwidth package offset.
+         * Offset of the query results
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Queries the limit on the number of bandwidth packages.
+         * Max number of the bandwidth packages to be returned.
          * @type {number || null}
          */
         this.Limit = null;
@@ -6491,7 +6491,7 @@ class GetCcnRegionBandwidthLimitsResponse extends  AbstractModel {
         super();
 
         /**
-         * The CCN outbound bandwidths in each region.
+         * The outbound bandwidth limits of regions in a CCN instance.
 Note: this field may return null, indicating that no valid value was found.
          * @type {Array.<CcnBandwidthInfo> || null}
          */
@@ -9191,7 +9191,7 @@ ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
         this.GatewayId = null;
 
         /**
-         * Bandwidth limit value. Valid values: >0, limited to a specified Mbps; 0, completely limited; -1, no bandwidth limit.
+         * Bandwidth limit value in Mbps. Valid values: >0: set the limit to the specified value. 0: block all traffic. -1: no bandwidth limit.
          * @type {number || null}
          */
         this.Bandwidth = null;
@@ -9678,7 +9678,7 @@ class DirectConnectGateway extends  AbstractModel {
         super();
 
         /**
-         * The direct connect gateway `ID`.
+         * The direct connect gateway ID.
          * @type {string || null}
          */
         this.DirectConnectGatewayId = null;
@@ -9690,7 +9690,7 @@ class DirectConnectGateway extends  AbstractModel {
         this.DirectConnectGatewayName = null;
 
         /**
-         * The `ID` of the `VPC` instance associated with the direct connect gateway.
+         * The ID of the VPC instance associated with the direct connect gateway.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -9704,9 +9704,9 @@ class DirectConnectGateway extends  AbstractModel {
         this.NetworkType = null;
 
         /**
-         * The `ID` of the associated network instance:
-<li>When the `NetworkType` is `VPC`, this value is the VPC instance `ID`</li>
-<li>When the `NetworkType` is `CCN`, this value is the CCN instance `ID`</li>
+         * The ID of the associated network instance:
+<li>When the `NetworkType` is `VPC`, this value is the VPC instance ID</li>
+<li>When the `NetworkType` is `CCN`, this value is the CCN instance ID</li>
          * @type {string || null}
          */
         this.NetworkInstanceId = null;
@@ -9733,7 +9733,7 @@ The NAT type supports network address translation. The specified type cannot be 
         this.DirectConnectGatewayIp = null;
 
         /**
-         * The `ID` of the `CCN` instance associated with the direct connect gateway.
+         * The ID of the CCN instance associated with the direct connect gateway.
          * @type {string || null}
          */
         this.CcnId = null;
@@ -10198,7 +10198,7 @@ class GetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * The sorting condition. Valid values: 'BandwidthLimit' and 'ExpireTime'.
+         * The sorting condition. Valid values: `BandwidthLimit` and `ExpireTime`.
          * @type {string || null}
          */
         this.SortedBy = null;
@@ -13197,7 +13197,7 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * The collection type of the flow log. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
+         * Type of the flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
          * @type {string || null}
          */
         this.TrafficType = null;
@@ -14894,13 +14894,13 @@ class Resource extends  AbstractModel {
         super();
 
         /**
-         * The bandwidth package resource type, including 'Address', and 'LoadBalance'
+         * The bandwidth package resource type, including `Address`, and `LoadBalance`
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * The bandwidth package ID, such as 'eip-xxxx' and 'lb-xxxx'.
+         * The bandwidth package ID, such as `eip-xxxx` and `lb-xxxx`.
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -16331,19 +16331,19 @@ class RemoveBandwidthPackageResourcesRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique ID of the bandwidth package, such as 'bwp-xxxx'.
+         * The unique ID of the bandwidth package, such as `bwp-xxxx`.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
 
         /**
-         * The resource type. Valid values: 'Address' and 'LoadBalance'.
+         * The resource type. Valid values: `Address` and `LoadBalance`.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * The resource IP, such as 'eip-xxxx' and 'lb-xxxx'.
+         * The resource IP, such as `eip-xxxx` and `lb-xxxx`.
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
@@ -17207,7 +17207,7 @@ class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
 }
 
 /**
- * The information of the cross-region bandwidth limit for CCN instances.
+ * 
  * @class
  */
 class CcnBandwidthInfo extends  AbstractModel {
@@ -17215,46 +17215,10 @@ class CcnBandwidthInfo extends  AbstractModel {
         super();
 
         /**
-         * The CCN ID that the bandwidth belongs to.
-Note: this field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.CcnId = null;
-
-        /**
-         * The creation time of the instance.
-Note: this field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * The expiration time of the instance.
-Note: this field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.ExpiredTime = null;
-
-        /**
-         * The unique ID of the bandwidth instance.
-Note: this field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.RegionFlowControlId = null;
-
-        /**
-         * The billing flag.
-Note: this field may return null, indicating that no valid value was found.
+         * 
          * @type {string || null}
          */
         this.RenewFlag = null;
-
-        /**
-         * The information of bandwidth regions and bandwidth caps.
-Note: this field may return null, indicating that no valid value was found.
-         * @type {CcnRegionBandwidthLimit || null}
-         */
-        this.CcnRegionBandwidthLimit = null;
 
     }
 
@@ -17265,17 +17229,7 @@ Note: this field may return null, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.CcnId = 'CcnId' in params ? params.CcnId : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
-        this.RegionFlowControlId = 'RegionFlowControlId' in params ? params.RegionFlowControlId : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
-
-        if (params.CcnRegionBandwidthLimit) {
-            let obj = new CcnRegionBandwidthLimit();
-            obj.deserialize(params.CcnRegionBandwidthLimit)
-            this.CcnRegionBandwidthLimit = obj;
-        }
 
     }
 }
@@ -17951,7 +17905,7 @@ class Subnet extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * The number of available `IPv4`.
+         * The number of available IPv4 addresses
          * @type {number || null}
          */
         this.AvailableIpAddressCount = null;
@@ -17975,7 +17929,7 @@ class Subnet extends  AbstractModel {
         this.IsRemoteVpcSnat = null;
 
         /**
-         * The total number of `IPv4` in the subnet.
+         * The total number of IPv4 addresses in the subnet.
          * @type {number || null}
          */
         this.TotalIpAddressCount = null;

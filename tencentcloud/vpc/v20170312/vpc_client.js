@@ -512,7 +512,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API is used to create a flow log.
+     * This API is used to create a flow log collector.
      * @param {CreateFlowLogRequest} req
      * @param {function(string, CreateFlowLogResponse):void} cb
      * @public
@@ -590,7 +590,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API is used to delete a flow log.
+     * This API is used to delete a flow log collector.
      * @param {DeleteFlowLogRequest} req
      * @param {function(string, DeleteFlowLogResponse):void} cb
      * @public
@@ -844,7 +844,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API is used to bind a NAT Gateway to an Elastic IP (EIP).
+     * This API is used to bind an EIP to NAT Gateway.
      * @param {AssociateNatGatewayAddressRequest} req
      * @param {function(string, AssociateNatGatewayAddressResponse):void} cb
      * @public
@@ -1171,7 +1171,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API is used to add a bandwidth package resource including [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
+     * This API is used to add resources to a bandwidth package, including [Elastic IP](https://cloud.tencent.com/document/product/213/1941), [Cloud Load Balancer](https://cloud.tencent.com/document/product/214/517), and so on.
      * @param {AddBandwidthPackageResourcesRequest} req
      * @param {function(string, AddBandwidthPackageResourcesResponse):void} cb
      * @public
@@ -1523,7 +1523,7 @@ This API is completed asynchronously. If you need to query the async job executi
     }
 
     /**
-     * This API is used to query flow log instance information.
+     * This API is used to query the information of a flow log collector.
      * @param {DescribeFlowLogRequest} req
      * @param {function(string, DescribeFlowLogResponse):void} cb
      * @public
@@ -1559,15 +1559,15 @@ After the deletion of a NAT gateway, the system will automatically delete the ro
     /**
      * This API is used to reset the egress and ingress policies (SecurityGroupPolicy) of a security group.
 
-</ul>
-<li>This API deletes all the existing egress and ingress policies, and then adds `Egress` and `Ingress policies`. It does not support custom indexes `PolicyIndex`.</li>
+<ul>
+<li>This API deletes all the existing egress and ingress policies, and then adds Egress and Ingress policies. It does not support custom indexes `PolicyIndex`.</li>
 <li>For parameters of SecurityGroupPolicySet,<ul>
 	<li>If `SecurityGroupPolicySet.Version` is set to 0, all policies will be cleared, and `Egress` and `Ingress` will be ignored.</li>
 	<li>If `SecurityGroupPolicySet.Version` is not set to 0, add `Egress` and `Ingress` policies:<ul>
 		<li>`Protocol`: allows TCP, UDP, ICMP, ICMPV6, GRE, or ALL.</li>
 		<li>`CidrBlock`: a CIDR block in the correct format. In a classic network, if a `CidrBlock` contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
 		<li>`Ipv6CidrBlock`: an IPv6 CIDR block in the correct format. In a classic network, if an `Ipv6CidrBlock` contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
-		<li>`SecurityGroupId`: ID of the security group. It can be in the same project as the security group to be modified, including the ID of the security group itself, to represent private IPs of all CVMs under the security group. If this field is used, the policy will change without manual modification according to the CVM associated with the policy ID while being used to match network messages.</li>
+		<li>`SecurityGroupId`: ID of the security group. It can be the ID of security group to be modified, or the ID of other security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don’t need to change it manually.</li>
 		<li>`Port`: a single port number such as 80, or a port range in the format of “8000-8010”. You may use this field only if the `Protocol` field takes the value `TCP` or `UDP`.</li>
 		<li>`Action`: only allows ACCEPT or DROP.</li>
 		<li>`CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are mutually exclusive. `Protocol` + `Port` and `ServiceTemplate` are mutually exclusive.</li>
@@ -1706,7 +1706,7 @@ You can also use the Force parameter to forcibly return a default VPC.
     }
 
     /**
-     * This API is used to query the CCN bandwidth limits across regions. The monthly-subscribed CCN only supports the cross-region bandwidth limit, while the pay-as-you-go CCN supports both the cross-region and region egress bandwidth limit. Note: currently, this feature is in beta test. To use it, please [contact sales](https://intl.cloud.tencent.com/contact-sales).
+     * This API is used to query the bandwidth caps of a CCN instance. Monthly-subscribed CCNs only support Inter-region Bandwidth Cap, while the pay-as-you-go CCNs support both the Inter-region Bandwidth Cap and Region Outbound Bandwidth Cap. 
      * @param {GetCcnRegionBandwidthLimitsRequest} req
      * @param {function(string, GetCcnRegionBandwidthLimitsResponse):void} cb
      * @public
@@ -2607,16 +2607,16 @@ If the subnet IP range still has occupied IPs that are not yet repossessed, the 
      * This API is used to create security group policies (SecurityGroupPolicy).
 
 For parameters of SecurityGroupPolicySet,
-</ul>
+<ul>
 <li>`Version`: the version number of a security group policy, which automatically increases by one each time you update the security policy, to prevent expiration of the updated routing policies. If it is left empty, any conflicts will be ignored.</li>
 <li>When creating the `Egress` and `Ingress` polices,<ul>
 <li>`Protocol`: allows TCP, UDP, ICMP, ICMPV6, GRE, or ALL.</li>
-<li>*`CidrBlock`: a CIDR block in the correct format. In a classic network, if a `CidrBlock` contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+<li>`CidrBlock`: a CIDR block in the correct format. In a classic network, if a `CidrBlock` contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
 <li>`Ipv6CidrBlock`: an IPv6 CIDR block in the correct format. In a classic network, if an `Ipv6CidrBlock` contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
-<li>`SecurityGroupId`: ID of the security group. It can be in the same project as the security group to be modified, including the ID of the security group itself, to represent private IPs of all CVMs under the security group. If this field is used, the policy will change without manual modification according to the CVM associated with the group ID while being used to match network messages.</li>
+<li>`SecurityGroupId`: ID of the security group. It can be the ID of security group to be modified, or the ID of other security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don’t need to change it manually.</li>
 <li>`Port`: a single port number such as 80, or a port range in the format of “8000-8010”. You may use this field only if the `Protocol` field takes the value `TCP` or `UDP`. Otherwise `Protocol` and `Port` are mutually exclusive.</li>
 <li>`Action`: only allows `ACCEPT` or `DROP`.</li>
-<li>`CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are mutually exclusive. `Protocol` + `Port`and `ServiceTemplate` are mutually exclusive.</li>
+<li>`CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are mutually exclusive. `Protocol` + `Port` and `ServiceTemplate` are mutually exclusive.</li>
 <li>You can only create policies in one direction in each request. To specify the `PolicyIndex` parameter, use the same index number in policies.</li>
 </ul></li></ul>
      * @param {CreateSecurityGroupPoliciesRequest} req

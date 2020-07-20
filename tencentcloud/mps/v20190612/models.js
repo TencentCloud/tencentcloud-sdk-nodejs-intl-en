@@ -17,78 +17,30 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * ProcessMedia request structure.
+ * List of frame-specific tag segments
  * @class
  */
-class ProcessMediaRequest extends  AbstractModel {
+class MediaAiAnalysisFrameTagSegmentItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Input information of a file for video processing.
-         * @type {MediaInputInfo || null}
-         */
-        this.InputInfo = null;
-
-        /**
-         * Target bucket of a video processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
-         * @type {TaskOutputStorage || null}
-         */
-        this.OutputStorage = null;
-
-        /**
-         * Target directory of a video processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be outputted to the same directory as that in `InputInfo`.
-         * @type {string || null}
-         */
-        this.OutputDir = null;
-
-        /**
-         * Parameter of a video processing task.
-         * @type {MediaProcessTaskInput || null}
-         */
-        this.MediaProcessTask = null;
-
-        /**
-         * Type parameter of a video content audit task.
-         * @type {AiContentReviewTaskInput || null}
-         */
-        this.AiContentReviewTask = null;
-
-        /**
-         * 
-         * @type {AiAnalysisTaskInput || null}
-         */
-        this.AiAnalysisTask = null;
-
-        /**
-         * Type parameter of a video content recognition task.
-         * @type {AiRecognitionTaskInput || null}
-         */
-        this.AiRecognitionTask = null;
-
-        /**
-         * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
-         * @type {TaskNotifyConfig || null}
-         */
-        this.TaskNotifyConfig = null;
-
-        /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+         * Start time offset of frame-specific tag.
          * @type {number || null}
          */
-        this.TasksPriority = null;
+        this.StartTimeOffset = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
-         * @type {string || null}
+         * End time offset of frame-specific tag.
+         * @type {number || null}
          */
-        this.SessionId = null;
+        this.EndTimeOffset = null;
 
         /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-         * @type {string || null}
+         * List of tags in time period.
+         * @type {Array.<MediaAiAnalysisFrameTagItem> || null}
          */
-        this.SessionContext = null;
+        this.TagSet = null;
 
     }
 
@@ -99,52 +51,17 @@ class ProcessMediaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
-        if (params.InputInfo) {
-            let obj = new MediaInputInfo();
-            obj.deserialize(params.InputInfo)
-            this.InputInfo = obj;
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new MediaAiAnalysisFrameTagItem();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
         }
-
-        if (params.OutputStorage) {
-            let obj = new TaskOutputStorage();
-            obj.deserialize(params.OutputStorage)
-            this.OutputStorage = obj;
-        }
-        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
-
-        if (params.MediaProcessTask) {
-            let obj = new MediaProcessTaskInput();
-            obj.deserialize(params.MediaProcessTask)
-            this.MediaProcessTask = obj;
-        }
-
-        if (params.AiContentReviewTask) {
-            let obj = new AiContentReviewTaskInput();
-            obj.deserialize(params.AiContentReviewTask)
-            this.AiContentReviewTask = obj;
-        }
-
-        if (params.AiAnalysisTask) {
-            let obj = new AiAnalysisTaskInput();
-            obj.deserialize(params.AiAnalysisTask)
-            this.AiAnalysisTask = obj;
-        }
-
-        if (params.AiRecognitionTask) {
-            let obj = new AiRecognitionTaskInput();
-            obj.deserialize(params.AiRecognitionTask)
-            this.AiRecognitionTask = obj;
-        }
-
-        if (params.TaskNotifyConfig) {
-            let obj = new TaskNotifyConfig();
-            obj.deserialize(params.TaskNotifyConfig)
-            this.TaskNotifyConfig = obj;
-        }
-        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -442,15 +359,15 @@ class CreateWordSamplesRequest extends  AbstractModel {
 }
 
 /**
- * DeleteWatermarkTemplate request structure.
+ * Input type of intelligent frame-specific tagging task
  * @class
  */
-class DeleteWatermarkTemplateRequest extends  AbstractModel {
+class AiAnalysisTaskFrameTagInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a watermarking template.
+         * Intelligent frame-specific video tagging template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -465,6 +382,99 @@ class DeleteWatermarkTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * DescribeImageSpriteTemplates request structure.
+ * @class
+ */
+class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID filter of image sprite generating templates. Array length limit: 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Paging offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Template type filter. Valid values:
+<li>Preset: Preset template;</li>
+<li>Custom: Custom template.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -716,18 +726,24 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
 }
 
 /**
- * ParseNotification request structure.
+ * Result information of intelligent tagging
  * @class
  */
-class ParseNotificationRequest extends  AbstractModel {
+class MediaAiAnalysisTagItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event notification obtained from CMQ.
+         * Tag name.
          * @type {string || null}
          */
-        this.Content = null;
+        this.Tag = null;
+
+        /**
+         * Confidence of tag between 0 and 100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
 
     }
 
@@ -738,7 +754,8 @@ class ParseNotificationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Content = 'Content' in params ? params.Content : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -1036,6 +1053,119 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * AI-based live stream recognition result
+ * @class
+ */
+class LiveStreamAiRecognitionResultItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Result type. Valid values:
+<li>FaceRecognition: face recognition,</li>
+<li>AsrWordsRecognition: speech keyword recognition,</li>
+<li>OcrWordsRecognition: text keyword recognition,</li>
+<li>AsrFullTextRecognition: full speech recognition,</li>
+<li>OcrFullTextRecognition: full text recognition.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Face recognition result, which is valid when `Type` is
+`FaceRecognition`.
+         * @type {Array.<LiveStreamFaceRecognitionResult> || null}
+         */
+        this.FaceRecognitionResultSet = null;
+
+        /**
+         * Speech keyword recognition result, which is valid when `Type` is
+`AsrWordsRecognition`.
+         * @type {Array.<LiveStreamAsrWordsRecognitionResult> || null}
+         */
+        this.AsrWordsRecognitionResultSet = null;
+
+        /**
+         * Text keyword recognition result, which is valid when `Type` is
+`OcrWordsRecognition`.
+         * @type {Array.<LiveStreamOcrWordsRecognitionResult> || null}
+         */
+        this.OcrWordsRecognitionResultSet = null;
+
+        /**
+         * Full speech recognition result, which is valid when `Type` is
+`AsrFullTextRecognition`.
+         * @type {Array.<LiveStreamAsrFullTextRecognitionResult> || null}
+         */
+        this.AsrFullTextRecognitionResultSet = null;
+
+        /**
+         * Full text recognition result, which is valid when `Type` is
+`OcrFullTextRecognition`.
+         * @type {Array.<LiveStreamOcrFullTextRecognitionResult> || null}
+         */
+        this.OcrFullTextRecognitionResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.FaceRecognitionResultSet) {
+            this.FaceRecognitionResultSet = new Array();
+            for (let z in params.FaceRecognitionResultSet) {
+                let obj = new LiveStreamFaceRecognitionResult();
+                obj.deserialize(params.FaceRecognitionResultSet[z]);
+                this.FaceRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.AsrWordsRecognitionResultSet) {
+            this.AsrWordsRecognitionResultSet = new Array();
+            for (let z in params.AsrWordsRecognitionResultSet) {
+                let obj = new LiveStreamAsrWordsRecognitionResult();
+                obj.deserialize(params.AsrWordsRecognitionResultSet[z]);
+                this.AsrWordsRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.OcrWordsRecognitionResultSet) {
+            this.OcrWordsRecognitionResultSet = new Array();
+            for (let z in params.OcrWordsRecognitionResultSet) {
+                let obj = new LiveStreamOcrWordsRecognitionResult();
+                obj.deserialize(params.OcrWordsRecognitionResultSet[z]);
+                this.OcrWordsRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.AsrFullTextRecognitionResultSet) {
+            this.AsrFullTextRecognitionResultSet = new Array();
+            for (let z in params.AsrFullTextRecognitionResultSet) {
+                let obj = new LiveStreamAsrFullTextRecognitionResult();
+                obj.deserialize(params.AsrFullTextRecognitionResultSet[z]);
+                this.AsrFullTextRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.OcrFullTextRecognitionResultSet) {
+            this.OcrFullTextRecognitionResultSet = new Array();
+            for (let z in params.OcrFullTextRecognitionResultSet) {
+                let obj = new LiveStreamOcrFullTextRecognitionResult();
+                obj.deserialize(params.OcrFullTextRecognitionResultSet[z]);
+                this.OcrFullTextRecognitionResultSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * AI-based sample management - face data operation.
  * @class
  */
@@ -1081,15 +1211,15 @@ Note: The image must be a relatively clear full-face photo of a figure in at lea
 }
 
 /**
- * DeleteImageSpriteTemplate request structure.
+ * Input type of intelligent categorization task
  * @class
  */
-class DeleteImageSpriteTemplateRequest extends  AbstractModel {
+class AiAnalysisTaskClassificationInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of an image sprite generating template.
+         * Intelligent video categorization template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -1109,40 +1239,66 @@ class DeleteImageSpriteTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Input parameter of an SVG watermarking template
+ * AI-based intelligent analysis template details
  * @class
  */
-class SvgWatermarkInput extends  AbstractModel {
+class AIAnalysisTemplateItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark width, which supports six formats of px, %, W%, H%, S%, and L%:
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered
- and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;</li>
-<li>If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;</li>
-<li>If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;</li>
-<li>If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;</li>
-<li>If the string ends in %, the meaning is the same as `W%`.</li>
-Default value: 10W%.
-         * @type {string || null}
+         * Unique ID of intelligent analysis template.
+         * @type {number || null}
          */
-        this.Width = null;
+        this.Definition = null;
 
         /**
-         * Watermark height, which supports six formats of px, %, W%, H%, S%, and L%:
-<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered
- and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;</li>
-<li>If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;</li>
-<li>If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;</li>
-<li>If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;</li>
-<li>If the string ends in %, the meaning is the same as `H%`.</li>
-Default value: 0 px.
+         * Intelligent analysis template name.
          * @type {string || null}
          */
-        this.Height = null;
+        this.Name = null;
+
+        /**
+         * Intelligent analysis template description.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Control parameter of intelligent categorization task.
+         * @type {ClassificationConfigureInfo || null}
+         */
+        this.ClassificationConfigure = null;
+
+        /**
+         * Control parameter of intelligent tagging task.
+         * @type {TagConfigureInfo || null}
+         */
+        this.TagConfigure = null;
+
+        /**
+         * Control parameter of intelligent cover generating task.
+         * @type {CoverConfigureInfo || null}
+         */
+        this.CoverConfigure = null;
+
+        /**
+         * Control parameter of intelligent frame-specific tagging task.
+         * @type {FrameTagConfigureInfo || null}
+         */
+        this.FrameTagConfigure = null;
+
+        /**
+         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/862/37710#52).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/862/37710#52).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -1153,8 +1309,35 @@ Default value: 0 px.
         if (!params) {
             return;
         }
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.ClassificationConfigure) {
+            let obj = new ClassificationConfigureInfo();
+            obj.deserialize(params.ClassificationConfigure)
+            this.ClassificationConfigure = obj;
+        }
+
+        if (params.TagConfigure) {
+            let obj = new TagConfigureInfo();
+            obj.deserialize(params.TagConfigure)
+            this.TagConfigure = obj;
+        }
+
+        if (params.CoverConfigure) {
+            let obj = new CoverConfigureInfo();
+            obj.deserialize(params.CoverConfigure)
+            this.CoverConfigure = obj;
+        }
+
+        if (params.FrameTagConfigure) {
+            let obj = new FrameTagConfigureInfo();
+            obj.deserialize(params.FrameTagConfigure)
+            this.FrameTagConfigure = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -1637,38 +1820,36 @@ class PornAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * DescribeImageSpriteTemplates request structure.
+ * Input parameter of image watermark template
  * @class
  */
-class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
+class RawImageWatermarkInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID filter of image sprite generating templates. Array length limit: 100.
-         * @type {Array.<number> || null}
+         * Input content of watermark image. JPEG and PNG images are supported.
+         * @type {MediaInputInfo || null}
          */
-        this.Definitions = null;
+        this.ImageContent = null;
 
         /**
-         * Paging offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Template type filter. Valid values:
-<li>Preset: Preset template;</li>
-<li>Custom: Custom template.</li>
+         * Watermark width. % and px formats are supported:
+<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+Default value: 10%.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Width = null;
+
+        /**
+         * Watermark height. % and px formats are supported:
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.</li>
+Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         * @type {string || null}
+         */
+        this.Height = null;
 
     }
 
@@ -1679,19 +1860,23 @@ class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.ImageContent) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.ImageContent)
+            this.ImageContent = obj;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
 
 /**
- * DeleteWorkflow response structure.
+ * DeleteAIAnalysisTemplate response structure.
  * @class
  */
-class DeleteWorkflowResponse extends  AbstractModel {
+class DeleteAIAnalysisTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1711,6 +1896,113 @@ class DeleteWorkflowResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Details of an adaptive bitrate streaming template
+ * @class
+ */
+class AdaptiveDynamicStreamingTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of an adaptive bitrate streaming template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Template type. Valid values:
+<li>Preset: preset template;</li>
+<li>Custom: custom template.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Name of an adaptive bitrate streaming template.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description of an adaptive bitrate streaming template.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Adaptive bitrate streaming format. Valid values:
+<li>HLS;</li>
+<li>MPEG-DASH.</li>
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Parameter information of input streams for transcoding to adaptive bitrate streaming. Up to 10 streams can be input.
+         * @type {Array.<AdaptiveStreamTemplate> || null}
+         */
+        this.StreamInfos = null;
+
+        /**
+         * Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.DisableHigherVideoBitrate = null;
+
+        /**
+         * Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.DisableHigherVideoResolution = null;
+
+        /**
+         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Format = 'Format' in params ? params.Format : null;
+
+        if (params.StreamInfos) {
+            this.StreamInfos = new Array();
+            for (let z in params.StreamInfos) {
+                let obj = new AdaptiveStreamTemplate();
+                obj.deserialize(params.StreamInfos[z]);
+                this.StreamInfos.push(obj);
+            }
+        }
+        this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
+        this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -1774,12 +2066,54 @@ class DeleteAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Custom watermark specifications.
+ * ModifyContentReviewTemplate request structure.
  * @class
  */
-class RawWatermarkParameter extends  AbstractModel {
+class ModifyContentReviewTemplateRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Unique ID of a content audit template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Name of a content audit template. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description of a content audit template. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Porn information detection control parameter.
+         * @type {PornConfigureInfoForUpdate || null}
+         */
+        this.PornConfigure = null;
+
+        /**
+         * Terrorism information detection control parameter.
+         * @type {TerrorismConfigureInfoForUpdate || null}
+         */
+        this.TerrorismConfigure = null;
+
+        /**
+         * Politically sensitive information detection control parameter.
+         * @type {PoliticalConfigureInfoForUpdate || null}
+         */
+        this.PoliticalConfigure = null;
+
+        /**
+         * Custom content audit control parameter.
+         * @type {UserDefineConfigureInfoForUpdate || null}
+         */
+        this.UserDefineConfigure = null;
 
     }
 
@@ -1789,6 +2123,33 @@ class RawWatermarkParameter extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.PornConfigure) {
+            let obj = new PornConfigureInfoForUpdate();
+            obj.deserialize(params.PornConfigure)
+            this.PornConfigure = obj;
+        }
+
+        if (params.TerrorismConfigure) {
+            let obj = new TerrorismConfigureInfoForUpdate();
+            obj.deserialize(params.TerrorismConfigure)
+            this.TerrorismConfigure = obj;
+        }
+
+        if (params.PoliticalConfigure) {
+            let obj = new PoliticalConfigureInfoForUpdate();
+            obj.deserialize(params.PoliticalConfigure)
+            this.PoliticalConfigure = obj;
+        }
+
+        if (params.UserDefineConfigure) {
+            let obj = new UserDefineConfigureInfoForUpdate();
+            obj.deserialize(params.UserDefineConfigure)
+            this.UserDefineConfigure = obj;
         }
 
     }
@@ -1880,6 +2241,62 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
             obj.deserialize(params.OutputStorage)
             this.OutputStorage = obj;
         }
+
+    }
+}
+
+/**
+ * DeleteImageSpriteTemplate response structure.
+ * @class
+ */
+class DeleteImageSpriteTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAdaptiveDynamicStreamingTemplate request structure.
+ * @class
+ */
+class DeleteAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of an adaptive bitrate streaming template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -1979,11 +2396,15 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Filter tag for politically sensitive information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>violation_photo: Violating photo;</li>
-<li>politician: Politically sensitive figure;</li>
-<li>entertainment: Entertainment celebrity;</li>
-<li>sport: Sports celebrity.</li>
+         * Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+<li>violation_photo: violating photo;</li>
+<li>politician: sensitive figure;</li>
+<li>entertainment: entertainment celebrity;</li>
+<li>sport: sports figure;</li>
+<li>entrepreneur: business figure;</li>
+<li>scholar: educator;</li>
+<li>celebrity: public-known figure;</li>
+<li>military: military figure.</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -2047,6 +2468,34 @@ class CreateAIRecognitionTemplateResponse extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ManageTask response structure.
+ * @class
+ */
+class ManageTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2332,21 +2781,21 @@ class PornImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Politically sensitive information
+ * ASR-detected porn information in text
  * @class
  */
-class AiReviewPoliticalTaskOutput extends  AbstractModel {
+class AiReviewPornAsrTaskOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Score of the detected politically sensitive information in video from 0 to 100.
+         * Score of the ASR-detected porn information in text from 0 to 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for the detected politically sensitive information. Valid values:
+         * Suggestion for the ASR-detected porn information in text. Valid values:
 <li>pass.</li>
 <li>review.</li>
 <li>block.</li>
@@ -2355,16 +2804,8 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Tag of the detected politically sensitive information in video. Valid values:
-<li>politician: Politically sensitive figure.</li>
-<li>violation_photo: Violating photo.</li>
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * List of video segments that contain the detected politically sensitive information.
-         * @type {Array.<MediaContentReviewPoliticalSegmentItem> || null}
+         * List of video segments that contain the ASR-detected porn information in text.
+         * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
@@ -2379,12 +2820,11 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
         }
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
 
         if (params.SegmentSet) {
             this.SegmentSet = new Array();
             for (let z in params.SegmentSet) {
-                let obj = new MediaContentReviewPoliticalSegmentItem();
+                let obj = new MediaContentReviewAsrTextSegmentItem();
                 obj.deserialize(params.SegmentSet[z]);
                 this.SegmentSet.push(obj);
             }
@@ -2461,45 +2901,155 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Input parameter type of a sampled screencapturing task.
+ * Input parameter of an SVG watermarking template
  * @class
  */
-class SampleSnapshotTaskInput extends  AbstractModel {
+class SvgWatermarkInputForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sampled screencapturing template ID.
+         * Watermark width, which supports six formats of px, %, W%, H%, S%, and L%:
+<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered
+ and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;</li>
+<li>If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;</li>
+<li>If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;</li>
+<li>If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;</li>
+<li>If the string ends in %, the meaning is the same as `W%`.</li>
+Default value: 10W%.
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height, which supports six formats of px, %, W%, H%, S%, and L%:
+<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered
+ and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;</li>
+<li>If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;</li>
+<li>If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;</li>
+<li>If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;</li>
+<li>If the string ends in %, the meaning is the same as `H%`.
+Default value: 0 px.
+         * @type {string || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
+ * Input rule. If an uploaded video hits the rule, the workflow will be triggered.
+ * @class
+ */
+class WorkflowTrigger extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Trigger type. Only `CosFileUpload` is supported currently.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * This parameter is required and valid when `Type` is `CosFileUpload`, indicating the COS trigger rule.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CosFileUploadTrigger || null}
+         */
+        this.CosFileUploadTrigger = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.CosFileUploadTrigger) {
+            let obj = new CosFileUploadTrigger();
+            obj.deserialize(params.CosFileUploadTrigger)
+            this.CosFileUploadTrigger = obj;
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ProhibitedConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {ProhibitedAsrReviewTemplateInfo || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * 
+         * @type {ProhibitedOcrReviewTemplateInfo || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new ProhibitedAsrReviewTemplateInfo();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new ProhibitedOcrReviewTemplateInfo();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteAIAnalysisTemplate request structure.
+ * @class
+ */
+class DeleteAIAnalysisTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of video content analysis template.
          * @type {number || null}
          */
         this.Definition = null;
-
-        /**
-         * List of up to 10 image or text watermarks.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<WatermarkInput> || null}
-         */
-        this.WatermarkSet = null;
-
-        /**
-         * Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {TaskOutputStorage || null}
-         */
-        this.OutputStorage = null;
-
-        /**
-         * Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
-         * @type {string || null}
-         */
-        this.OutputObjectPath = null;
-
-        /**
-         * Rule of the `{number}` variable in the sampled screenshot output path.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {NumberFormat || null}
-         */
-        this.ObjectNumberFormat = null;
 
     }
 
@@ -2512,12 +3062,75 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
 
-        if (params.WatermarkSet) {
-            this.WatermarkSet = new Array();
-            for (let z in params.WatermarkSet) {
-                let obj = new WatermarkInput();
-                obj.deserialize(params.WatermarkSet[z]);
-                this.WatermarkSet.push(obj);
+    }
+}
+
+/**
+ * EditMedia request structure.
+ * @class
+ */
+class EditMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of input video file.
+         * @type {Array.<EditMediaFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * Target storage of video processing output file.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * Target path of video processing output file.
+         * @type {string || null}
+         */
+        this.OutputObjectPath = null;
+
+        /**
+         * Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
+         * @type {TaskNotifyConfig || null}
+         */
+        this.TaskNotifyConfig = null;
+
+        /**
+         * Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new EditMediaFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
             }
         }
 
@@ -2528,11 +3141,146 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
 
-        if (params.ObjectNumberFormat) {
-            let obj = new NumberFormat();
-            obj.deserialize(params.ObjectNumberFormat)
-            this.ObjectNumberFormat = obj;
+        if (params.TaskNotifyConfig) {
+            let obj = new TaskNotifyConfig();
+            obj.deserialize(params.TaskNotifyConfig)
+            this.TaskNotifyConfig = obj;
         }
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
+ * Details of a sampled screencapturing template
+ * @class
+ */
+class SampleSnapshotTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of a sampled screencapturing template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Template type. Valid values:
+<li>Preset: Preset template;</li>
+<li>Custom: Custom template.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Name of a sampled screencapturing template.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Template description.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Resolution adaption. Valid values:
+<li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * Image format.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Sampled screencapturing type.
+         * @type {string || null}
+         */
+        this.SampleType = null;
+
+        /**
+         * Sampling interval.
+         * @type {number || null}
+         */
+        this.SampleInterval = null;
+
+        /**
+         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+<li>white: Fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+<li>gauss: Fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+Default value: black.
+         * @type {string || null}
+         */
+        this.FillType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.SampleType = 'SampleType' in params ? params.SampleType : null;
+        this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -2689,6 +3437,36 @@ class AiAnalysisResult extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {AiAnalysisTaskClassificationResult || null}
+         */
+        this.ClassificationTask = null;
+
+        /**
+         * 
+         * @type {AiAnalysisTaskCoverResult || null}
+         */
+        this.CoverTask = null;
+
+        /**
+         * 
+         * @type {AiAnalysisTaskTagResult || null}
+         */
+        this.TagTask = null;
+
+        /**
+         * 
+         * @type {AiAnalysisTaskFrameTagResult || null}
+         */
+        this.FrameTagTask = null;
+
     }
 
     /**
@@ -2698,6 +3476,67 @@ class AiAnalysisResult extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.ClassificationTask) {
+            let obj = new AiAnalysisTaskClassificationResult();
+            obj.deserialize(params.ClassificationTask)
+            this.ClassificationTask = obj;
+        }
+
+        if (params.CoverTask) {
+            let obj = new AiAnalysisTaskCoverResult();
+            obj.deserialize(params.CoverTask)
+            this.CoverTask = obj;
+        }
+
+        if (params.TagTask) {
+            let obj = new AiAnalysisTaskTagResult();
+            obj.deserialize(params.TagTask)
+            this.TagTask = obj;
+        }
+
+        if (params.FrameTagTask) {
+            let obj = new AiAnalysisTaskFrameTagResult();
+            obj.deserialize(params.FrameTagTask)
+            this.FrameTagTask = obj;
+        }
+
+    }
+}
+
+/**
+ * ManageTask request structure.
+ * @class
+ */
+class ManageTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Operation type. Valid values:
+<li>Abort: terminates task.</li>
+         * @type {string || null}
+         */
+        this.OperationType = null;
+
+        /**
+         * Video processing task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -2914,33 +3753,30 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
 }
 
 /**
- * ASR-detected porn information in text
+ * DescribeAIAnalysisTemplates request structure.
  * @class
  */
-class AiReviewPornAsrTaskOutput extends  AbstractModel {
+class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Score of the ASR-detected porn information in text from 0 to 100.
+         * Unique ID filter of video content analysis templates. Array length limit: 10.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Pagination offset. Default value: 0.
          * @type {number || null}
          */
-        this.Confidence = null;
+        this.Offset = null;
 
         /**
-         * Suggestion for the ASR-detected porn information in text. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
-         * @type {string || null}
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
          */
-        this.Suggestion = null;
-
-        /**
-         * List of video segments that contain the ASR-detected porn information in text.
-         * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
-         */
-        this.SegmentSet = null;
+        this.Limit = null;
 
     }
 
@@ -2951,17 +3787,9 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-
-        if (params.SegmentSet) {
-            this.SegmentSet = new Array();
-            for (let z in params.SegmentSet) {
-                let obj = new MediaContentReviewAsrTextSegmentItem();
-                obj.deserialize(params.SegmentSet[z]);
-                this.SegmentSet.push(obj);
-            }
-        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3007,36 +3835,30 @@ class MediaInputInfo extends  AbstractModel {
 }
 
 /**
- * Event notification configuration of a task.
+ * Information of the time point screenshots in a VOD file
  * @class
  */
-class LiveStreamTaskNotifyConfig extends  AbstractModel {
+class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
-         * @type {string || null}
+         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * @type {number || null}
          */
-        this.CmqModel = null;
+        this.Definition = null;
 
         /**
-         * CMQ region, such as `sh` and `bj`.
-         * @type {string || null}
+         * Information set of screenshots of the same specification. Each element represents a screenshot.
+         * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
          */
-        this.CmqRegion = null;
+        this.PicInfoSet = null;
 
         /**
-         * This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
-         * @type {string || null}
+         * Location of a time point screenshot file.
+         * @type {TaskOutputStorage || null}
          */
-        this.QueueName = null;
-
-        /**
-         * This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
-         * @type {string || null}
-         */
-        this.TopicName = null;
+        this.Storage = null;
 
     }
 
@@ -3047,10 +3869,64 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CmqModel = 'CmqModel' in params ? params.CmqModel : null;
-        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.PicInfoSet) {
+            this.PicInfoSet = new Array();
+            for (let z in params.PicInfoSet) {
+                let obj = new MediaSnapshotByTimePicInfoItem();
+                obj.deserialize(params.PicInfoSet[z]);
+                this.PicInfoSet.push(obj);
+            }
+        }
+
+        if (params.Storage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeContentReviewTemplates request structure.
+ * @class
+ */
+class DescribeContentReviewTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID filter of content audit templates. Array length limit: 50.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Paging offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 50.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3391,6 +4267,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Control parameter of a full text recognition task
+ * @class
+ */
+class OcrFullTextConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of a full text recognition task. Valid values:
+<li>ON: Enables an intelligent full text recognition task;</li>
+<li>OFF: Disables an intelligent full text recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Details of a time point screencapturing template.
  * @class
  */
@@ -3580,6 +4486,56 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
 }
 
 /**
+ * DescribeAdaptiveDynamicStreamingTemplates response structure.
+ * @class
+ */
+class DescribeAdaptiveDynamicStreamingTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of adaptive bitrate streaming template details.
+         * @type {Array.<AdaptiveDynamicStreamingTemplate> || null}
+         */
+        this.AdaptiveDynamicStreamingTemplateSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AdaptiveDynamicStreamingTemplateSet) {
+            this.AdaptiveDynamicStreamingTemplateSet = new Array();
+            for (let z in params.AdaptiveDynamicStreamingTemplateSet) {
+                let obj = new AdaptiveDynamicStreamingTemplate();
+                obj.deserialize(params.AdaptiveDynamicStreamingTemplateSet[z]);
+                this.AdaptiveDynamicStreamingTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTasks request structure.
  * @class
  */
@@ -3687,34 +4643,6 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * DeleteSampleSnapshotTemplate response structure.
- * @class
- */
-class DeleteSampleSnapshotTemplateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateTranscodeTemplate response structure.
  * @class
  */
@@ -3745,6 +4673,34 @@ class CreateTranscodeTemplateResponse extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Input type of intelligent tagging task
+ * @class
+ */
+class AiAnalysisTaskTagInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Intelligent video tagging template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -4120,32 +5076,48 @@ class AiSampleWord extends  AbstractModel {
 }
 
 /**
- * Control parameter of a politically sensitive information detection in text task
+ * CreateAIAnalysisTemplate request structure.
  * @class
  */
-class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
+class CreateAIAnalysisTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of a politically sensitive information detection in text task. Valid values:
-<li>ON: Enables a politically sensitive information detection in text task;</li>
-<li>OFF: Disables a politically sensitive information detection in text task.</li>
+         * Video content analysis template name. Length limit: 64 characters.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Name = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
-         * @type {number || null}
+         * Video content analysis template description. Length limit: 256 characters.
+         * @type {string || null}
          */
-        this.BlockConfidence = null;
+        this.Comment = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
-         * @type {number || null}
+         * Control parameter of intelligent categorization task.
+         * @type {ClassificationConfigureInfo || null}
          */
-        this.ReviewConfidence = null;
+        this.ClassificationConfigure = null;
+
+        /**
+         * Control parameter of intelligent tagging task.
+         * @type {TagConfigureInfo || null}
+         */
+        this.TagConfigure = null;
+
+        /**
+         * Control parameter of intelligent cover generating task.
+         * @type {CoverConfigureInfo || null}
+         */
+        this.CoverConfigure = null;
+
+        /**
+         * Control parameter of intelligent frame-specific tagging task.
+         * @type {FrameTagConfigureInfo || null}
+         */
+        this.FrameTagConfigure = null;
 
     }
 
@@ -4156,9 +5128,143 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.ClassificationConfigure) {
+            let obj = new ClassificationConfigureInfo();
+            obj.deserialize(params.ClassificationConfigure)
+            this.ClassificationConfigure = obj;
+        }
+
+        if (params.TagConfigure) {
+            let obj = new TagConfigureInfo();
+            obj.deserialize(params.TagConfigure)
+            this.TagConfigure = obj;
+        }
+
+        if (params.CoverConfigure) {
+            let obj = new CoverConfigureInfo();
+            obj.deserialize(params.CoverConfigure)
+            this.CoverConfigure = obj;
+        }
+
+        if (params.FrameTagConfigure) {
+            let obj = new FrameTagConfigureInfo();
+            obj.deserialize(params.FrameTagConfigure)
+            this.FrameTagConfigure = obj;
+        }
+
+    }
+}
+
+/**
+ * Type of a video processing task
+ * @class
+ */
+class MediaProcessTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of transcoding tasks.
+         * @type {Array.<TranscodeTaskInput> || null}
+         */
+        this.TranscodeTaskSet = null;
+
+        /**
+         * List of animated image generating tasks.
+         * @type {Array.<AnimatedGraphicTaskInput> || null}
+         */
+        this.AnimatedGraphicTaskSet = null;
+
+        /**
+         * List of time point screencapturing tasks.
+         * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
+         */
+        this.SnapshotByTimeOffsetTaskSet = null;
+
+        /**
+         * List of sampled screencapturing tasks.
+         * @type {Array.<SampleSnapshotTaskInput> || null}
+         */
+        this.SampleSnapshotTaskSet = null;
+
+        /**
+         * List of image sprite generating tasks.
+         * @type {Array.<ImageSpriteTaskInput> || null}
+         */
+        this.ImageSpriteTaskSet = null;
+
+        /**
+         * List of adaptive bitrate streaming tasks.
+         * @type {Array.<AdaptiveDynamicStreamingTaskInput> || null}
+         */
+        this.AdaptiveDynamicStreamingTaskSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TranscodeTaskSet) {
+            this.TranscodeTaskSet = new Array();
+            for (let z in params.TranscodeTaskSet) {
+                let obj = new TranscodeTaskInput();
+                obj.deserialize(params.TranscodeTaskSet[z]);
+                this.TranscodeTaskSet.push(obj);
+            }
+        }
+
+        if (params.AnimatedGraphicTaskSet) {
+            this.AnimatedGraphicTaskSet = new Array();
+            for (let z in params.AnimatedGraphicTaskSet) {
+                let obj = new AnimatedGraphicTaskInput();
+                obj.deserialize(params.AnimatedGraphicTaskSet[z]);
+                this.AnimatedGraphicTaskSet.push(obj);
+            }
+        }
+
+        if (params.SnapshotByTimeOffsetTaskSet) {
+            this.SnapshotByTimeOffsetTaskSet = new Array();
+            for (let z in params.SnapshotByTimeOffsetTaskSet) {
+                let obj = new SnapshotByTimeOffsetTaskInput();
+                obj.deserialize(params.SnapshotByTimeOffsetTaskSet[z]);
+                this.SnapshotByTimeOffsetTaskSet.push(obj);
+            }
+        }
+
+        if (params.SampleSnapshotTaskSet) {
+            this.SampleSnapshotTaskSet = new Array();
+            for (let z in params.SampleSnapshotTaskSet) {
+                let obj = new SampleSnapshotTaskInput();
+                obj.deserialize(params.SampleSnapshotTaskSet[z]);
+                this.SampleSnapshotTaskSet.push(obj);
+            }
+        }
+
+        if (params.ImageSpriteTaskSet) {
+            this.ImageSpriteTaskSet = new Array();
+            for (let z in params.ImageSpriteTaskSet) {
+                let obj = new ImageSpriteTaskInput();
+                obj.deserialize(params.ImageSpriteTaskSet[z]);
+                this.ImageSpriteTaskSet.push(obj);
+            }
+        }
+
+        if (params.AdaptiveDynamicStreamingTaskSet) {
+            this.AdaptiveDynamicStreamingTaskSet = new Array();
+            for (let z in params.AdaptiveDynamicStreamingTaskSet) {
+                let obj = new AdaptiveDynamicStreamingTaskInput();
+                obj.deserialize(params.AdaptiveDynamicStreamingTaskSet[z]);
+                this.AdaptiveDynamicStreamingTaskSet.push(obj);
+            }
+        }
 
     }
 }
@@ -4692,45 +5798,57 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Suspected segment identified during ASR-based text audit during content audit
+ * CreateAdaptiveDynamicStreamingTemplate request structure.
  * @class
  */
-class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
+class CreateAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
-         * @type {number || null}
-         */
-        this.StartTimeOffset = null;
-
-        /**
-         * End time offset of a suspected segment in seconds.
-         * @type {number || null}
-         */
-        this.EndTimeOffset = null;
-
-        /**
-         * Confidence of a suspected segment.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Suggestion for suspected segment audit. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * Adaptive bitrate streaming format. Valid values:
+<li>HLS,</li>
+<li>MPEG-DASH.</li>
          * @type {string || null}
          */
-        this.Suggestion = null;
+        this.Format = null;
 
         /**
-         * List of suspected keywords.
-         * @type {Array.<string> || null}
+         * Parameter information of output substreams for transcoding to adaptive bitrate streaming. Up to 10 substreams can be output.
+Note: the frame rate of each substream must be consistent; otherwise, the frame rate of the first substream is used as the output frame rate.
+         * @type {Array.<AdaptiveStreamTemplate> || null}
          */
-        this.KeywordSet = null;
+        this.StreamInfos = null;
+
+        /**
+         * Template name. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.DisableHigherVideoBitrate = null;
+
+        /**
+         * Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.DisableHigherVideoResolution = null;
+
+        /**
+         * Template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
 
     }
 
@@ -4741,35 +5859,39 @@ class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+        this.Format = 'Format' in params ? params.Format : null;
+
+        if (params.StreamInfos) {
+            this.StreamInfos = new Array();
+            for (let z in params.StreamInfos) {
+                let obj = new AdaptiveStreamTemplate();
+                obj.deserialize(params.StreamInfos[z]);
+                this.StreamInfos.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
+        this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
 
 /**
- * Input rule. If an uploaded video hits the rule, the workflow will be triggered.
+ * Control parameter of intelligent tagging task
  * @class
  */
-class WorkflowTrigger extends  AbstractModel {
+class TagConfigureInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Trigger type. Only `CosFileUpload` is supported currently.
+         * Switch of intelligent tagging task. Valid values:
+<li>ON: enables intelligent tagging task;</li>
+<li>OFF: disables intelligent tagging task.</li>
          * @type {string || null}
          */
-        this.Type = null;
-
-        /**
-         * This parameter is required and valid when `Type` is `CosFileUpload`, indicating the COS trigger rule.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {CosFileUploadTrigger || null}
-         */
-        this.CosFileUploadTrigger = null;
+        this.Switch = null;
 
     }
 
@@ -4780,13 +5902,57 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
-        if (params.CosFileUploadTrigger) {
-            let obj = new CosFileUploadTrigger();
-            obj.deserialize(params.CosFileUploadTrigger)
-            this.CosFileUploadTrigger = obj;
+    }
+}
+
+/**
+ * DescribeTranscodeTemplates response structure.
+ * @class
+ */
+class DescribeTranscodeTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of transcoding template details.
+         * @type {Array.<TranscodeTemplate> || null}
+         */
+        this.TranscodeTemplateSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TranscodeTemplateSet) {
+            this.TranscodeTemplateSet = new Array();
+            for (let z in params.TranscodeTemplateSet) {
+                let obj = new TranscodeTemplate();
+                obj.deserialize(params.TranscodeTemplateSet[z]);
+                this.TranscodeTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4920,6 +6086,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PoliticalConfigure = null;
 
         /**
+         * Control parameter of prohibited information detection. Prohibited information includes:
+<li>Abusive;</li>
+<li>Drug-related.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ProhibitedConfigureInfo || null}
+         */
+        this.ProhibitedConfigure = null;
+
+        /**
          * Custom content audit control parameter.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {UserDefineConfigureInfo || null}
@@ -4967,6 +6142,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new PoliticalConfigureInfo();
             obj.deserialize(params.PoliticalConfigure)
             this.PoliticalConfigure = obj;
+        }
+
+        if (params.ProhibitedConfigure) {
+            let obj = new ProhibitedConfigureInfo();
+            obj.deserialize(params.ProhibitedConfigure)
+            this.ProhibitedConfigure = obj;
         }
 
         if (params.UserDefineConfigure) {
@@ -5137,6 +6318,42 @@ class DeleteWordSamplesRequest extends  AbstractModel {
 }
 
 /**
+ * Live stream AI recognition results
+ * @class
+ */
+class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<LiveStreamAiRecognitionResultItem> || null}
+         */
+        this.ResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultSet) {
+            this.ResultSet = new Array();
+            for (let z in params.ResultSet) {
+                let obj = new LiveStreamAiRecognitionResultItem();
+                obj.deserialize(params.ResultSet[z]);
+                this.ResultSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteContentReviewTemplate request structure.
  * @class
  */
@@ -5264,54 +6481,54 @@ Multiple elements can be selected, and the relationship between them is "or", i.
 }
 
 /**
- * ModifyContentReviewTemplate request structure.
+ * ModifyAIAnalysisTemplate request structure.
  * @class
  */
-class ModifyContentReviewTemplateRequest extends  AbstractModel {
+class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a content audit template.
+         * Unique ID of video content analysis template.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Name of a content audit template. Length limit: 64 characters.
+         * Video content analysis template name. Length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of a content audit template. Length limit: 256 characters.
+         * Video content analysis template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Porn information detection control parameter.
-         * @type {PornConfigureInfoForUpdate || null}
+         * Control parameter of intelligent categorization task.
+         * @type {ClassificationConfigureInfoForUpdate || null}
          */
-        this.PornConfigure = null;
+        this.ClassificationConfigure = null;
 
         /**
-         * Terrorism information detection control parameter.
-         * @type {TerrorismConfigureInfoForUpdate || null}
+         * Control parameter of intelligent tagging task.
+         * @type {TagConfigureInfoForUpdate || null}
          */
-        this.TerrorismConfigure = null;
+        this.TagConfigure = null;
 
         /**
-         * Politically sensitive information detection control parameter.
-         * @type {PoliticalConfigureInfoForUpdate || null}
+         * Control parameter of intelligent cover generating task.
+         * @type {CoverConfigureInfoForUpdate || null}
          */
-        this.PoliticalConfigure = null;
+        this.CoverConfigure = null;
 
         /**
-         * Custom content audit control parameter.
-         * @type {UserDefineConfigureInfoForUpdate || null}
+         * Control parameter of intelligent frame-specific tagging task.
+         * @type {FrameTagConfigureInfoForUpdate || null}
          */
-        this.UserDefineConfigure = null;
+        this.FrameTagConfigure = null;
 
     }
 
@@ -5326,29 +6543,82 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
-        if (params.PornConfigure) {
-            let obj = new PornConfigureInfoForUpdate();
-            obj.deserialize(params.PornConfigure)
-            this.PornConfigure = obj;
+        if (params.ClassificationConfigure) {
+            let obj = new ClassificationConfigureInfoForUpdate();
+            obj.deserialize(params.ClassificationConfigure)
+            this.ClassificationConfigure = obj;
         }
 
-        if (params.TerrorismConfigure) {
-            let obj = new TerrorismConfigureInfoForUpdate();
-            obj.deserialize(params.TerrorismConfigure)
-            this.TerrorismConfigure = obj;
+        if (params.TagConfigure) {
+            let obj = new TagConfigureInfoForUpdate();
+            obj.deserialize(params.TagConfigure)
+            this.TagConfigure = obj;
         }
 
-        if (params.PoliticalConfigure) {
-            let obj = new PoliticalConfigureInfoForUpdate();
-            obj.deserialize(params.PoliticalConfigure)
-            this.PoliticalConfigure = obj;
+        if (params.CoverConfigure) {
+            let obj = new CoverConfigureInfoForUpdate();
+            obj.deserialize(params.CoverConfigure)
+            this.CoverConfigure = obj;
         }
 
-        if (params.UserDefineConfigure) {
-            let obj = new UserDefineConfigureInfoForUpdate();
-            obj.deserialize(params.UserDefineConfigure)
-            this.UserDefineConfigure = obj;
+        if (params.FrameTagConfigure) {
+            let obj = new FrameTagConfigureInfoForUpdate();
+            obj.deserialize(params.FrameTagConfigure)
+            this.FrameTagConfigure = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeWatermarkTemplates request structure.
+ * @class
+ */
+class DescribeWatermarkTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID filter of watermarking templates. Array length limit: 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Watermark type filter. Valid values:
+<li>image: Image watermark;</li>
+<li>text: Text watermark.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Paging offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries
+<li>Default value: 10;</li>
+<li>Maximum value: 100.</li>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5467,40 +6737,30 @@ class PornConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * DescribeWatermarkTemplates request structure.
+ * Full text recognition segment.
  * @class
  */
-class DescribeWatermarkTemplatesRequest extends  AbstractModel {
+class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID filter of watermarking templates. Array length limit: 100.
+         * Confidence of a recognition segment. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
          * @type {Array.<number> || null}
          */
-        this.Definitions = null;
+        this.AreaCoordSet = null;
 
         /**
-         * Watermark type filter. Valid values:
-<li>image: Image watermark;</li>
-<li>text: Text watermark.</li>
+         * Recognized text.
          * @type {string || null}
          */
-        this.Type = null;
-
-        /**
-         * Paging offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries
-<li>Default value: 10;</li>
-<li>Maximum value: 100.</li>
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.Text = null;
 
     }
 
@@ -5511,10 +6771,9 @@ class DescribeWatermarkTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -5548,40 +6807,76 @@ class AiContentReviewTaskInput extends  AbstractModel {
 }
 
 /**
- * Input parameter of an SVG watermarking template
+ * Information of a video processing task
  * @class
  */
-class SvgWatermarkInputForUpdate extends  AbstractModel {
+class WorkflowTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark width, which supports six formats of px, %, W%, H%, S%, and L%:
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered
- and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;</li>
-<li>If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;</li>
-<li>If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;</li>
-<li>If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;</li>
-<li>If the string ends in %, the meaning is the same as `W%`.</li>
-Default value: 10W%.
+         * Video processing task ID.
          * @type {string || null}
          */
-        this.Width = null;
+        this.TaskId = null;
 
         /**
-         * Watermark height, which supports six formats of px, %, W%, H%, S%, and L%:
-<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered
- and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;</li>
-<li>If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;</li>
-<li>If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;</li>
-<li>If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;</li>
-<li>If the string ends in %, the meaning is the same as `H%`.
-Default value: 0 px.
+         * Task flow status. Valid values:
+<li>PROCESSING: Processing;</li>
+<li>FINISH: Completed.</li>
          * @type {string || null}
          */
-        this.Height = null;
+        this.Status = null;
+
+        /**
+         * Disused. Please use `ErrCode` of each specific task.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Disused. Please use `Message` of each specific task.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Information of a target file of video processing.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * Metadata of a source video.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * Execution status and result of a video processing task.
+         * @type {Array.<MediaProcessTaskResult> || null}
+         */
+        this.MediaProcessResultSet = null;
+
+        /**
+         * Execution status and result of a video content audit task.
+         * @type {Array.<AiContentReviewResult> || null}
+         */
+        this.AiContentReviewResultSet = null;
+
+        /**
+         * 
+         * @type {Array.<AiAnalysisResult> || null}
+         */
+        this.AiAnalysisResultSet = null;
+
+        /**
+         * Execution status and result of a video content recognition task.
+         * @type {Array.<AiRecognitionResult> || null}
+         */
+        this.AiRecognitionResultSet = null;
 
     }
 
@@ -5592,82 +6887,75 @@ Default value: 0 px.
         if (!params) {
             return;
         }
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+
+        if (params.MediaProcessResultSet) {
+            this.MediaProcessResultSet = new Array();
+            for (let z in params.MediaProcessResultSet) {
+                let obj = new MediaProcessTaskResult();
+                obj.deserialize(params.MediaProcessResultSet[z]);
+                this.MediaProcessResultSet.push(obj);
+            }
+        }
+
+        if (params.AiContentReviewResultSet) {
+            this.AiContentReviewResultSet = new Array();
+            for (let z in params.AiContentReviewResultSet) {
+                let obj = new AiContentReviewResult();
+                obj.deserialize(params.AiContentReviewResultSet[z]);
+                this.AiContentReviewResultSet.push(obj);
+            }
+        }
+
+        if (params.AiAnalysisResultSet) {
+            this.AiAnalysisResultSet = new Array();
+            for (let z in params.AiAnalysisResultSet) {
+                let obj = new AiAnalysisResult();
+                obj.deserialize(params.AiAnalysisResultSet[z]);
+                this.AiAnalysisResultSet.push(obj);
+            }
+        }
+
+        if (params.AiRecognitionResultSet) {
+            this.AiRecognitionResultSet = new Array();
+            for (let z in params.AiRecognitionResultSet) {
+                let obj = new AiRecognitionResult();
+                obj.deserialize(params.AiRecognitionResultSet[z]);
+                this.AiRecognitionResultSet.push(obj);
+            }
+        }
 
     }
 }
 
 /**
- * Video stream configuration parameter
+ * DeleteImageSpriteTemplate request structure.
  * @class
  */
-class VideoTemplateInfo extends  AbstractModel {
+class DeleteImageSpriteTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video stream codec. Valid values:
-<li>libx264: H.264</li>
-<li>libx265: H.265</li>
-Currently, a resolution within 640*480p must be specified for H.265.
-         * @type {string || null}
-         */
-        this.Codec = null;
-
-        /**
-         * Video frame rate in Hz. Value range: [0, 60].
-If the value is 0, the frame rate will be the same as that of the source video.
+         * Unique ID of an image sprite generating template.
          * @type {number || null}
          */
-        this.Fps = null;
-
-        /**
-         * Bitrate of a video stream in Kbps. Value range: 0 and [128, 35,000].
-If the value is 0, the bitrate of the video will be the same as that of the source video.
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * Resolution adaption. Valid values:
-<li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
-Default value: open.
-         * @type {string || null}
-         */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-Default value: black.
-         * @type {string || null}
-         */
-        this.FillType = null;
+        this.Definition = null;
 
     }
 
@@ -5678,24 +6966,30 @@ Default value: black.
         if (!params) {
             return;
         }
-        this.Codec = 'Codec' in params ? params.Codec : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
 
 /**
- * Live stream AI recognition results
+ * CreateAdaptiveDynamicStreamingTemplate response structure.
  * @class
  */
-class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
+class CreateAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Unique ID of an adaptive bitrate streaming template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5706,6 +7000,43 @@ class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information of a COS output object generated from video processing.
+ * @class
+ */
+class CosOutputStorage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the target bucket of a video processing output file, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the parameter of the upper folder will be inherited.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * Region of the target bucket of a video processing output file, such as `ap-chongqing`. If this parameter is left empty, the parameter of the upper folder will be inherited.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -5761,30 +7092,18 @@ class DescribeSampleSnapshotTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTranscodeTemplates response structure.
+ * Result information of intelligent categorization
  * @class
  */
-class DescribeTranscodeTemplatesResponse extends  AbstractModel {
+class AiAnalysisTaskClassificationOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible entries.
-         * @type {number || null}
+         * List of intelligently generated video categories.
+         * @type {Array.<MediaAiAnalysisClassificationItem> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * List of transcoding template details.
-         * @type {Array.<TranscodeTemplate> || null}
-         */
-        this.TranscodeTemplateSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ClassificationSet = null;
 
     }
 
@@ -5795,17 +7114,66 @@ class DescribeTranscodeTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.TranscodeTemplateSet) {
-            this.TranscodeTemplateSet = new Array();
-            for (let z in params.TranscodeTemplateSet) {
-                let obj = new TranscodeTemplate();
-                obj.deserialize(params.TranscodeTemplateSet[z]);
-                this.TranscodeTemplateSet.push(obj);
+        if (params.ClassificationSet) {
+            this.ClassificationSet = new Array();
+            for (let z in params.ClassificationSet) {
+                let obj = new MediaAiAnalysisClassificationItem();
+                obj.deserialize(params.ClassificationSet[z]);
+                this.ClassificationSet.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Input parameter of an SVG watermarking template
+ * @class
+ */
+class SvgWatermarkInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark width, which supports six formats of px, %, W%, H%, S%, and L%:
+<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered
+ and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;</li>
+<li>If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;</li>
+<li>If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;</li>
+<li>If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;</li>
+<li>If the string ends in %, the meaning is the same as `W%`.</li>
+Default value: 10W%.
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height, which supports six formats of px, %, W%, H%, S%, and L%:
+<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered
+ and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;</li>
+<li>If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;</li>
+<li>If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;</li>
+<li>If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;</li>
+<li>If the string ends in %, the meaning is the same as `H%`.</li>
+Default value: 0 px.
+         * @type {string || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -5995,30 +7363,24 @@ Default value: black.
 }
 
 /**
- * Full text recognition segment.
+ * Result information of intelligent cover generating
  * @class
  */
-class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
+class AiAnalysisTaskCoverOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Confidence of a recognition segment. Value range: 0–100.
-         * @type {number || null}
+         * List of intelligently generated covers.
+         * @type {Array.<MediaAiAnalysisCoverItem> || null}
          */
-        this.Confidence = null;
+        this.CoverSet = null;
 
         /**
-         * Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-         * @type {Array.<number> || null}
+         * Storage location of intelligently generated cover.
+         * @type {TaskOutputStorage || null}
          */
-        this.AreaCoordSet = null;
-
-        /**
-         * Recognized text.
-         * @type {string || null}
-         */
-        this.Text = null;
+        this.OutputStorage = null;
 
     }
 
@@ -6029,26 +7391,40 @@ class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
-        this.Text = 'Text' in params ? params.Text : null;
+
+        if (params.CoverSet) {
+            this.CoverSet = new Array();
+            for (let z in params.CoverSet) {
+                let obj = new MediaAiAnalysisCoverItem();
+                obj.deserialize(params.CoverSet[z]);
+                this.CoverSet.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
 
     }
 }
 
 /**
- * DeleteSampleSnapshotTemplate request structure.
+ * Control parameter of intelligent categorization task
  * @class
  */
-class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
+class ClassificationConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a sampled screencapturing template.
-         * @type {number || null}
+         * Switch of intelligent categorization task. Valid values:
+<li>ON: enables intelligent categorization task;</li>
+<li>OFF: disables intelligent categorization task.</li>
+         * @type {string || null}
          */
-        this.Definition = null;
+        this.Switch = null;
 
     }
 
@@ -6059,7 +7435,7 @@ class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -6125,6 +7501,80 @@ class LiveStreamAiReviewVoicePornResult extends  AbstractModel {
 }
 
 /**
+ * Suspected porn/terrorism segment identified during content audit
+ * @class
+ */
+class MediaContentReviewSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Score of a suspected porn segment.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Tag of porn information detection result of a suspected segment.
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * Suggestion for porn information detection of a suspected segment. Valid values:
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * URL of a suspected image (which will not be permanently stored
+ and will be deleted after `PicUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+    }
+}
+
+/**
  * ModifyWordSample response structure.
  * @class
  */
@@ -6148,47 +7598,6 @@ class ModifyWordSampleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Information of a video processing output object.
- * @class
- */
-class TaskOutputStorage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Storage location type of a video processing output object. Only COS is supported currently.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * This parameter is valid and required when `Type` is COS, indicating the location of an output COS object after video processing.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {CosOutputStorage || null}
-         */
-        this.CosOutputStorage = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.CosOutputStorage) {
-            let obj = new CosOutputStorage();
-            obj.deserialize(params.CosOutputStorage)
-            this.CosOutputStorage = obj;
-        }
 
     }
 }
@@ -6549,6 +7958,47 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
+ * Information of a video processing output object.
+ * @class
+ */
+class TaskOutputStorage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage location type of a video processing output object. Only COS is supported currently.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * This parameter is valid and required when `Type` is COS, indicating the location of an output COS object after video processing.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CosOutputStorage || null}
+         */
+        this.CosOutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.CosOutputStorage) {
+            let obj = new CosOutputStorage();
+            obj.deserialize(params.CosOutputStorage)
+            this.CosOutputStorage = obj;
+        }
+
+    }
+}
+
+/**
  * DeletePersonSample request structure.
  * @class
  */
@@ -6645,6 +8095,58 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Control parameter of a custom text audit task
+ * @class
+ */
+class UserDefineOcrTextReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of a custom text audit task. Valid values:
+<li>ON: Enables a custom text audit task;</li>
+<li>OFF: Disables a custom text audit task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
  * Speech recognition segment.
  * @class
  */
@@ -6682,6 +8184,56 @@ class AiRecognitionTaskAsrWordsSegmentItem extends  AbstractModel {
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * DescribeImageSpriteTemplates response structure.
+ * @class
+ */
+class DescribeImageSpriteTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of image sprite generating template details.
+         * @type {Array.<ImageSpriteTemplate> || null}
+         */
+        this.ImageSpriteTemplateSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ImageSpriteTemplateSet) {
+            this.ImageSpriteTemplateSet = new Array();
+            for (let z in params.ImageSpriteTemplateSet) {
+                let obj = new ImageSpriteTemplate();
+                obj.deserialize(params.ImageSpriteTemplateSet[z]);
+                this.ImageSpriteTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6778,6 +8330,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ASR-based full live stream recognition
+ * @class
+ */
+class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recognized text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Start PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * End PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * Confidence of recognized segment. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -7062,30 +8663,18 @@ class DisableWorkflowRequest extends  AbstractModel {
 }
 
 /**
- * Information of the time point screenshots in a VOD file
+ * Result information of intelligent frame-specific tagging
  * @class
  */
-class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
+class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
-         * @type {number || null}
+         * List of frame-specific video tags.
+         * @type {Array.<MediaAiAnalysisFrameTagSegmentItem> || null}
          */
-        this.Definition = null;
-
-        /**
-         * Information set of screenshots of the same specification. Each element represents a screenshot.
-         * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
-         */
-        this.PicInfoSet = null;
-
-        /**
-         * Location of a time point screenshot file.
-         * @type {TaskOutputStorage || null}
-         */
-        this.Storage = null;
+        this.SegmentSet = null;
 
     }
 
@@ -7096,21 +8685,14 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
 
-        if (params.PicInfoSet) {
-            this.PicInfoSet = new Array();
-            for (let z in params.PicInfoSet) {
-                let obj = new MediaSnapshotByTimePicInfoItem();
-                obj.deserialize(params.PicInfoSet[z]);
-                this.PicInfoSet.push(obj);
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new MediaAiAnalysisFrameTagSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
             }
-        }
-
-        if (params.Storage) {
-            let obj = new TaskOutputStorage();
-            obj.deserialize(params.Storage)
-            this.Storage = obj;
         }
 
     }
@@ -7192,9 +8774,8 @@ When the outer `Container` parameter is `m4a`, the valid values include:
 <li>libmp3lame;</li>
 <li>ac3.</li>
 When the outer `Container` parameter is `mp4` or `flv`, the valid values include:
-<li>libfdk_aac: More suitable for mp4;</li>
-<li>libmp3lame: More suitable for flv;</li>
-<li>mp2.</li>
+<li>libfdk_aac: more suitable for mp4;</li>
+<li>libmp3lame: more suitable for flv.</li>
 When the outer `Container` parameter is `hls`, the valid values include:
 <li>libfdk_aac;</li>
 <li>libmp3lame.</li>
@@ -7400,18 +8981,20 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
 }
 
 /**
- * ModifyAIRecognitionTemplate response structure.
+ * Control parameter of intelligent cover generating task
  * @class
  */
-class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
+class CoverConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Switch of intelligent cover generating task. Valid values:
+<li>ON: enables intelligent cover generating task;</li>
+<li>OFF: disables intelligent cover generating task.</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Switch = null;
 
     }
 
@@ -7422,7 +9005,7 @@ class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -7498,24 +9081,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeWatermarkTemplates response structure.
+ * DeleteAdaptiveDynamicStreamingTemplate response structure.
  * @class
  */
-class DescribeWatermarkTemplatesResponse extends  AbstractModel {
+class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Number of eligible entries.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of watermarking template details.
-         * @type {Array.<WatermarkTemplate> || null}
-         */
-        this.WatermarkTemplateSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7532,17 +9103,63 @@ class DescribeWatermarkTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.WatermarkTemplateSet) {
-            this.WatermarkTemplateSet = new Array();
-            for (let z in params.WatermarkTemplateSet) {
-                let obj = new WatermarkTemplate();
-                obj.deserialize(params.WatermarkTemplateSet[z]);
-                this.WatermarkTemplateSet.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Event notification configuration of a task.
+ * @class
+ */
+class TaskNotifyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+         * @type {string || null}
+         */
+        this.CmqModel = null;
+
+        /**
+         * CMQ region, such as `sh` and `bj`.
+         * @type {string || null}
+         */
+        this.CmqRegion = null;
+
+        /**
+         * This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+         * @type {string || null}
+         */
+        this.NotifyMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CmqModel = 'CmqModel' in params ? params.CmqModel : null;
+        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.NotifyMode = 'NotifyMode' in params ? params.NotifyMode : null;
 
     }
 }
@@ -7752,43 +9369,36 @@ class AiReviewPornAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * Face recognition result.
+ * Face recognition result segment
  * @class
  */
-class AiRecognitionTaskFaceResult extends  AbstractModel {
+class AiRecognitionTaskFaceSegmentItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error code. 0: success; other values: failure.
+         * Start time offset of a recognition segment in seconds.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.StartTimeOffset = null;
 
         /**
-         * Error message.
-         * @type {string || null}
+         * End time offset of a recognition segment in seconds.
+         * @type {number || null}
          */
-        this.Message = null;
+        this.EndTimeOffset = null;
 
         /**
-         * Input information of a face recognition task.
-         * @type {AiRecognitionTaskFaceResultInput || null}
+         * Confidence of a recognition segment. Value range: 0–100.
+         * @type {number || null}
          */
-        this.Input = null;
+        this.Confidence = null;
 
         /**
-         * Output information of a face recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {AiRecognitionTaskFaceResultOutput || null}
+         * Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * @type {Array.<number> || null}
          */
-        this.Output = null;
+        this.AreaCoordSet = null;
 
     }
 
@@ -7799,21 +9409,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new AiRecognitionTaskFaceResultInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new AiRecognitionTaskFaceResultOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
 
     }
 }
@@ -7899,6 +9498,36 @@ Default value: 0.
 }
 
 /**
+ * Control parameter of intelligent frame-specific tagging task
+ * @class
+ */
+class FrameTagConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of intelligent frame-specific tagging task. Valid values:
+<li>ON: enables intelligent frame-specific tagging task;</li>
+<li>OFF: disables intelligent frame-specific tagging task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * DescribeAnimatedGraphicsTemplates request structure.
  * @class
  */
@@ -7950,89 +9579,42 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Metadata of a VOD media file
+ * Result type of intelligent tagging task
  * @class
  */
-class MediaMetaData extends  AbstractModel {
+class AiAnalysisTaskTagResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Size of an uploaded media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * Container, such as m4a and mp4.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
-        this.Container = null;
+        this.Status = null;
 
         /**
-         * Sum of the average bitrate of a video stream and that of an audio stream in bps.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Error code. 0: success; other values: failure.
          * @type {number || null}
          */
-        this.Bitrate = null;
+        this.ErrCode = null;
 
         /**
-         * Maximum value of the height of a video stream in px.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Error message.
+         * @type {string || null}
          */
-        this.Height = null;
+        this.Message = null;
 
         /**
-         * Maximum value of the width of a video stream in px.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Input of intelligent tagging task.
+         * @type {AiAnalysisTaskTagInput || null}
          */
-        this.Width = null;
+        this.Input = null;
 
         /**
-         * Video duration in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Output of intelligent tagging task.
+         * @type {AiAnalysisTaskTagOutput || null}
          */
-        this.Duration = null;
-
-        /**
-         * Selected angle during video recording in degrees.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Rotate = null;
-
-        /**
-         * Video stream information.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaVideoStreamItem> || null}
-         */
-        this.VideoStreamSet = null;
-
-        /**
-         * Audio stream information.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaAudioStreamItem> || null}
-         */
-        this.AudioStreamSet = null;
-
-        /**
-         * Video duration in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VideoDuration = null;
-
-        /**
-         * Audio duration in seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AudioDuration = null;
+        this.Output = null;
 
     }
 
@@ -8043,33 +9625,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Container = 'Container' in params ? params.Container : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.Rotate = 'Rotate' in params ? params.Rotate : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
-        if (params.VideoStreamSet) {
-            this.VideoStreamSet = new Array();
-            for (let z in params.VideoStreamSet) {
-                let obj = new MediaVideoStreamItem();
-                obj.deserialize(params.VideoStreamSet[z]);
-                this.VideoStreamSet.push(obj);
-            }
+        if (params.Input) {
+            let obj = new AiAnalysisTaskTagInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
         }
 
-        if (params.AudioStreamSet) {
-            this.AudioStreamSet = new Array();
-            for (let z in params.AudioStreamSet) {
-                let obj = new MediaAudioStreamItem();
-                obj.deserialize(params.AudioStreamSet[z]);
-                this.AudioStreamSet.push(obj);
-            }
+        if (params.Output) {
+            let obj = new AiAnalysisTaskTagOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
         }
-        this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
-        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
 
     }
 }
@@ -8114,6 +9684,34 @@ class PornOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * ModifyAIAnalysisTemplate response structure.
+ * @class
+ */
+class ModifyAIAnalysisTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8337,18 +9935,33 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * ModifyImageSpriteTemplate response structure.
+ * Control parameter of a custom audit task
  * @class
  */
-class ModifyImageSpriteTemplateResponse extends  AbstractModel {
+class UserDefineConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Control parameter of custom figure audit.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {UserDefineFaceReviewTemplateInfo || null}
          */
-        this.RequestId = null;
+        this.FaceReviewInfo = null;
+
+        /**
+         * Control parameter of custom speech audit.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {UserDefineAsrTextReviewTemplateInfo || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * Control parameter of custom text audit.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {UserDefineOcrTextReviewTemplateInfo || null}
+         */
+        this.OcrReviewInfo = null;
 
     }
 
@@ -8359,7 +9972,109 @@ class ModifyImageSpriteTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.FaceReviewInfo) {
+            let obj = new UserDefineFaceReviewTemplateInfo();
+            obj.deserialize(params.FaceReviewInfo)
+            this.FaceReviewInfo = obj;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new UserDefineAsrTextReviewTemplateInfo();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new UserDefineOcrTextReviewTemplateInfo();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * Rule of the `{number}` variable in the output file name.
+ * @class
+ */
+class NumberFormat extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start value of the `{number}` variable. Default value: 0.
+         * @type {number || null}
+         */
+        this.InitialValue = null;
+
+        /**
+         * Increment of the `{number}` variable. Default value: 1.
+         * @type {number || null}
+         */
+        this.Increment = null;
+
+        /**
+         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+         * @type {number || null}
+         */
+        this.MinLength = null;
+
+        /**
+         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         * @type {string || null}
+         */
+        this.PlaceHolder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InitialValue = 'InitialValue' in params ? params.InitialValue : null;
+        this.Increment = 'Increment' in params ? params.Increment : null;
+        this.MinLength = 'MinLength' in params ? params.MinLength : null;
+        this.PlaceHolder = 'PlaceHolder' in params ? params.PlaceHolder : null;
+
+    }
+}
+
+/**
+ * Result information of intelligent tagging
+ * @class
+ */
+class AiAnalysisTaskTagOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of intelligently generated video tags.
+         * @type {Array.<MediaAiAnalysisTagItem> || null}
+         */
+        this.TagSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new MediaAiAnalysisTagItem();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -8583,6 +10298,182 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.VideoStreamSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyAdaptiveDynamicStreamingTemplate request structure.
+ * @class
+ */
+class ModifyAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of an adaptive bitrate streaming template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Template name. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Adaptive bitrate streaming format. Valid values:
+<li>HLS,</li>
+<li>MPEG-DASH.</li>
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.DisableHigherVideoBitrate = null;
+
+        /**
+         * Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.DisableHigherVideoResolution = null;
+
+        /**
+         * Parameter information of input streams for transcoding to adaptive bitrate streaming. Up to 10 streams can be input.
+Note: the frame rate of each stream must be consistent; otherwise, the frame rate of the first stream is used as the output frame rate.
+         * @type {Array.<AdaptiveStreamTemplate> || null}
+         */
+        this.StreamInfos = null;
+
+        /**
+         * Template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
+        this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
+
+        if (params.StreamInfos) {
+            this.StreamInfos = new Array();
+            for (let z in params.StreamInfos) {
+                let obj = new AdaptiveStreamTemplate();
+                obj.deserialize(params.StreamInfos[z]);
+                this.StreamInfos.push(obj);
+            }
+        }
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
+ * Video stream configuration parameter
+ * @class
+ */
+class VideoTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video stream codec. Valid values:
+<li>libx264: H.264</li>
+<li>libx265: H.265</li>
+Currently, a resolution within 640*480p must be specified for H.265.
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * Video frame rate in Hz. Value range: [0, 60].
+If the value is 0, the frame rate will be the same as that of the source video.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * Bitrate of a video stream in Kbps. Value range: 0 and [128, 35,000].
+If the value is 0, the bitrate of the video will be the same as that of the source video.
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * Resolution adaption. Valid values:
+<li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+Default value: black.
+         * @type {string || null}
+         */
+        this.FillType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -8865,58 +10756,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Suspected porn/terrorism segment identified during content audit
+ * DescribeMediaMetaData response structure.
  * @class
  */
-class MediaContentReviewSegmentItem extends  AbstractModel {
+class DescribeMediaMetaDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
-         * @type {number || null}
+         * Media metadata.
+         * @type {MediaMetaData || null}
          */
-        this.StartTimeOffset = null;
+        this.MetaData = null;
 
         /**
-         * End time offset of a suspected segment in seconds.
-         * @type {number || null}
-         */
-        this.EndTimeOffset = null;
-
-        /**
-         * Score of a suspected porn segment.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Tag of porn information detection result of a suspected segment.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Label = null;
-
-        /**
-         * Suggestion for porn information detection of a suspected segment. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * URL of a suspected image (which will not be permanently stored
- and will be deleted after `PicUrlExpireTime`).
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.PicUrlExpireTime = null;
+        this.RequestId = null;
 
     }
 
@@ -8927,13 +10784,13 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8967,30 +10824,18 @@ class AiRecognitionTaskOcrWordsResultInput extends  AbstractModel {
 }
 
 /**
- * DescribeContentReviewTemplates request structure.
+ * DeleteWorkflow response structure.
  * @class
  */
-class DescribeContentReviewTemplatesRequest extends  AbstractModel {
+class DeleteWorkflowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID filter of content audit templates. Array length limit: 50.
-         * @type {Array.<number> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Definitions = null;
-
-        /**
-         * Paging offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries. Default value: 10. Maximum value: 50.
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -9001,9 +10846,168 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Details of a watermarking template
+ * @class
+ */
+class WatermarkTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of a watermarking template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Watermark type. Valid values:
+<li>image: Image watermark;</li>
+<li>text: Text watermark.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Name of a watermarking template.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Template description.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Horizontal position of the origin of the watermark image relative to the origin of the video.
+<li>If the string ends in %, the `Left` edge of the watermark will be at the position of the specified percentage of the video width; for example, `10%` means that the `Left` edge is at 10% of the video width;</li>
+<li>If the string ends in px, the `Left` edge of the watermark will be at the position of the specified px of the video width; for example, `100px` means that the `Left` edge is at the position of 100 px.</li>
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * Vertical position of the origin of the watermark image relative to the origin of the video.
+<li>If the string ends in %, the `Top` edge of the watermark will beat the position of the specified percentage of the video height; for example, `10%` means that the `Top` edge is at 10% of the video height;</li>
+<li>If the string ends in px, the `Top` edge of the watermark will be at the position of the specified px of the video height; for example, `100px` means that the `Top` edge is at the position of 100 px.</li>
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * Image watermarking template. This field is valid only when `Type` is `image`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ImageWatermarkTemplate || null}
+         */
+        this.ImageTemplate = null;
+
+        /**
+         * Text watermarking template. This field is valid only when `Type` is `text`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TextWatermarkTemplateInput || null}
+         */
+        this.TextTemplate = null;
+
+        /**
+         * SVG watermarking template. This field is valid when `Type` is `svg`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SvgWatermarkInput || null}
+         */
+        this.SvgTemplate = null;
+
+        /**
+         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Origin position. Valid values:
+<li>topLeft: The origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text;</li>
+<li>topRight: The origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text;</li>
+<li>bottomLeft: The origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text;</li>
+<li>bottomRight: The origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.</li>
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+
+        if (params.ImageTemplate) {
+            let obj = new ImageWatermarkTemplate();
+            obj.deserialize(params.ImageTemplate)
+            this.ImageTemplate = obj;
+        }
+
+        if (params.TextTemplate) {
+            let obj = new TextWatermarkTemplateInput();
+            obj.deserialize(params.TextTemplate)
+            this.TextTemplate = obj;
+        }
+
+        if (params.SvgTemplate) {
+            let obj = new SvgWatermarkInput();
+            obj.deserialize(params.SvgTemplate)
+            this.SvgTemplate = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+
+    }
+}
+
+/**
+ * ModifyImageSpriteTemplate response structure.
+ * @class
+ */
+class ModifyImageSpriteTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9056,6 +11060,56 @@ There can be up to 10 tags, each with a length limit of 16 characters.
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * DescribeAIAnalysisTemplates response structure.
+ * @class
+ */
+class DescribeAIAnalysisTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of video content analysis template details.
+         * @type {Array.<AIAnalysisTemplateItem> || null}
+         */
+        this.AIAnalysisTemplateSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AIAnalysisTemplateSet) {
+            this.AIAnalysisTemplateSet = new Array();
+            for (let z in params.AIAnalysisTemplateSet) {
+                let obj = new AIAnalysisTemplateItem();
+                obj.deserialize(params.AIAnalysisTemplateSet[z]);
+                this.AIAnalysisTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9125,6 +11179,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * DeleteSampleSnapshotTemplate response structure.
+ * @class
+ */
+class DeleteSampleSnapshotTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9344,6 +11426,77 @@ class AiReviewPornTaskInput extends  AbstractModel {
 }
 
 /**
+ * AI-based live streaming face recognition result
+ * @class
+ */
+class LiveStreamFaceRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of figure.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Figure name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Figure library type, indicating to which figure library the recognized figure belongs:
+<li>Default: default figure library</li><li>UserDefine: custom figure library</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Start PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * End PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * Confidence of recognized segment. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+
+    }
+}
+
+/**
  * CreateSampleSnapshotTemplate request structure.
  * @class
  */
@@ -9521,76 +11674,20 @@ class DescribeSampleSnapshotTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Information of a video processing task
+ * Control parameter of intelligent cover generating task
  * @class
  */
-class WorkflowTask extends  AbstractModel {
+class CoverConfigureInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video processing task ID.
+         * Switch of intelligent cover generating task. Valid values:
+<li>ON: enables intelligent cover generating task;</li>
+<li>OFF: disables intelligent cover generating task.</li>
          * @type {string || null}
          */
-        this.TaskId = null;
-
-        /**
-         * Task flow status. Valid values:
-<li>PROCESSING: Processing;</li>
-<li>FINISH: Completed.</li>
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Disused. Please use `ErrCode` of each specific task.
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * Disused. Please use `Message` of each specific task.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Information of a target file of video processing.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MediaInputInfo || null}
-         */
-        this.InputInfo = null;
-
-        /**
-         * Metadata of a source video.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MediaMetaData || null}
-         */
-        this.MetaData = null;
-
-        /**
-         * Execution status and result of a video processing task.
-         * @type {Array.<MediaProcessTaskResult> || null}
-         */
-        this.MediaProcessResultSet = null;
-
-        /**
-         * Execution status and result of a video content audit task.
-         * @type {Array.<AiContentReviewResult> || null}
-         */
-        this.AiContentReviewResultSet = null;
-
-        /**
-         * 
-         * @type {Array.<AiAnalysisResult> || null}
-         */
-        this.AiAnalysisResultSet = null;
-
-        /**
-         * Execution status and result of a video content recognition task.
-         * @type {Array.<AiRecognitionResult> || null}
-         */
-        this.AiRecognitionResultSet = null;
+        this.Switch = null;
 
     }
 
@@ -9601,58 +11698,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.InputInfo) {
-            let obj = new MediaInputInfo();
-            obj.deserialize(params.InputInfo)
-            this.InputInfo = obj;
-        }
-
-        if (params.MetaData) {
-            let obj = new MediaMetaData();
-            obj.deserialize(params.MetaData)
-            this.MetaData = obj;
-        }
-
-        if (params.MediaProcessResultSet) {
-            this.MediaProcessResultSet = new Array();
-            for (let z in params.MediaProcessResultSet) {
-                let obj = new MediaProcessTaskResult();
-                obj.deserialize(params.MediaProcessResultSet[z]);
-                this.MediaProcessResultSet.push(obj);
-            }
-        }
-
-        if (params.AiContentReviewResultSet) {
-            this.AiContentReviewResultSet = new Array();
-            for (let z in params.AiContentReviewResultSet) {
-                let obj = new AiContentReviewResult();
-                obj.deserialize(params.AiContentReviewResultSet[z]);
-                this.AiContentReviewResultSet.push(obj);
-            }
-        }
-
-        if (params.AiAnalysisResultSet) {
-            this.AiAnalysisResultSet = new Array();
-            for (let z in params.AiAnalysisResultSet) {
-                let obj = new AiAnalysisResult();
-                obj.deserialize(params.AiAnalysisResultSet[z]);
-                this.AiAnalysisResultSet.push(obj);
-            }
-        }
-
-        if (params.AiRecognitionResultSet) {
-            this.AiRecognitionResultSet = new Array();
-            for (let z in params.AiRecognitionResultSet) {
-                let obj = new AiRecognitionResult();
-                obj.deserialize(params.AiRecognitionResultSet[z]);
-                this.AiRecognitionResultSet.push(obj);
-            }
-        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -9901,11 +11947,15 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Filter tag for politically sensitive information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>violation_photo: Violating photo;</li>
-<li>politician: Politically sensitive figure;</li>
-<li>entertainment: Entertainment celebrity;</li>
-<li>sport: Sports celebrity.</li>
+         * Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+<li>violation_photo: violating photo;</li>
+<li>politician: sensitive figure;</li>
+<li>entertainment: entertainment celebrity;</li>
+<li>sport: sports figure;</li>
+<li>entrepreneur: business figure;</li>
+<li>scholar: educator;</li>
+<li>celebrity: public-known figure;</li>
+<li>military: military figure.</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -9940,39 +11990,30 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Control parameter of a custom text audit task
+ * VOD video file editing information
  * @class
  */
-class UserDefineOcrTextReviewTemplateInfo extends  AbstractModel {
+class EditMediaFileInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of a custom text audit task. Valid values:
-<li>ON: Enables a custom text audit task;</li>
-<li>OFF: Disables a custom text audit task.</li>
-         * @type {string || null}
+         * Video input information.
+         * @type {MediaInputInfo || null}
          */
-        this.Switch = null;
+        this.InputInfo = null;
 
         /**
-         * Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
-There can be up to 10 tags, each with a length limit of 16 characters.
-         * @type {Array.<string> || null}
-         */
-        this.LabelSet = null;
-
-        /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Start time offset of video clipping in seconds.
          * @type {number || null}
          */
-        this.BlockConfidence = null;
+        this.StartTimeOffset = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * End time offset of video clipping in seconds.
          * @type {number || null}
          */
-        this.ReviewConfidence = null;
+        this.EndTimeOffset = null;
 
     }
 
@@ -9983,42 +12024,88 @@ There can be up to 10 tags, each with a length limit of 16 characters.
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
     }
 }
 
 /**
- * Control parameter of a custom audit task
+ * Information of intelligently generated cover
  * @class
  */
-class UserDefineConfigureInfo extends  AbstractModel {
+class MediaAiAnalysisCoverItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Control parameter of custom figure audit.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {UserDefineFaceReviewTemplateInfo || null}
+         * Storage path of intelligently generated cover.
+         * @type {string || null}
          */
-        this.FaceReviewInfo = null;
+        this.CoverPath = null;
 
         /**
-         * Control parameter of custom speech audit.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {UserDefineAsrTextReviewTemplateInfo || null}
+         * Confidence of intelligently generated cover between 0 and 100.
+         * @type {number || null}
          */
-        this.AsrReviewInfo = null;
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CoverPath = 'CoverPath' in params ? params.CoverPath : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * Adaptive bitrate streaming parameter template
+ * @class
+ */
+class AdaptiveStreamTemplate extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * Control parameter of custom text audit.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {UserDefineOcrTextReviewTemplateInfo || null}
+         * Video parameter information.
+         * @type {VideoTemplateInfo || null}
          */
-        this.OcrReviewInfo = null;
+        this.Video = null;
+
+        /**
+         * Audio parameter information.
+         * @type {AudioTemplateInfo || null}
+         */
+        this.Audio = null;
+
+        /**
+         * Whether to remove audio stream. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * Whether to remove video stream. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
 
     }
 
@@ -10030,23 +12117,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
 
-        if (params.FaceReviewInfo) {
-            let obj = new UserDefineFaceReviewTemplateInfo();
-            obj.deserialize(params.FaceReviewInfo)
-            this.FaceReviewInfo = obj;
+        if (params.Video) {
+            let obj = new VideoTemplateInfo();
+            obj.deserialize(params.Video)
+            this.Video = obj;
         }
 
-        if (params.AsrReviewInfo) {
-            let obj = new UserDefineAsrTextReviewTemplateInfo();
-            obj.deserialize(params.AsrReviewInfo)
-            this.AsrReviewInfo = obj;
+        if (params.Audio) {
+            let obj = new AudioTemplateInfo();
+            obj.deserialize(params.Audio)
+            this.Audio = obj;
         }
-
-        if (params.OcrReviewInfo) {
-            let obj = new UserDefineOcrTextReviewTemplateInfo();
-            obj.deserialize(params.OcrReviewInfo)
-            this.OcrReviewInfo = obj;
-        }
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
 
     }
 }
@@ -10089,6 +12172,36 @@ class CosInputInfo extends  AbstractModel {
         this.Bucket = 'Bucket' in params ? params.Bucket : null;
         this.Region = 'Region' in params ? params.Region : null;
         this.Object = 'Object' in params ? params.Object : null;
+
+    }
+}
+
+/**
+ * Control parameter of intelligent tagging task
+ * @class
+ */
+class TagConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of intelligent tagging task. Valid values:
+<li>ON: enables intelligent tagging task;</li>
+<li>OFF: disables intelligent tagging task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -10490,6 +12603,57 @@ class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAdaptiveDynamicStreamingTemplates request structure.
+ * @class
+ */
+class DescribeAdaptiveDynamicStreamingTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID filter of adaptive bitrate streaming templates. Array length limit: 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Template type filter. Valid values:
+<li>Preset: preset template;</li>
+<li>Custom: custom template.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
  * CreateWatermarkTemplate response structure.
  * @class
  */
@@ -10693,36 +12857,42 @@ class ResetWorkflowRequest extends  AbstractModel {
 }
 
 /**
- * Rule of the `{number}` variable in the output file name.
+ * Result type of intelligent cover generating task
  * @class
  */
-class NumberFormat extends  AbstractModel {
+class AiAnalysisTaskCoverResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start value of the `{number}` variable. Default value: 0.
-         * @type {number || null}
-         */
-        this.InitialValue = null;
-
-        /**
-         * Increment of the `{number}` variable. Default value: 1.
-         * @type {number || null}
-         */
-        this.Increment = null;
-
-        /**
-         * Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
-         * @type {number || null}
-         */
-        this.MinLength = null;
-
-        /**
-         * Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
-        this.PlaceHolder = null;
+        this.Status = null;
+
+        /**
+         * Error code. 0: success; other values: failure.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of intelligent cover generating task.
+         * @type {AiAnalysisTaskCoverInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of intelligent cover generating task.
+         * @type {AiAnalysisTaskCoverOutput || null}
+         */
+        this.Output = null;
 
     }
 
@@ -10733,10 +12903,21 @@ class NumberFormat extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InitialValue = 'InitialValue' in params ? params.InitialValue : null;
-        this.Increment = 'Increment' in params ? params.Increment : null;
-        this.MinLength = 'MinLength' in params ? params.MinLength : null;
-        this.PlaceHolder = 'PlaceHolder' in params ? params.PlaceHolder : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskCoverInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskCoverOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -10859,20 +13040,42 @@ class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
 }
 
 /**
- * Control parameter of a full text recognition task
+ * AI-based OCR-based live streaming keyword recognition result
  * @class
  */
-class OcrFullTextConfigureInfo extends  AbstractModel {
+class LiveStreamOcrWordsRecognitionResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of a full text recognition task. Valid values:
-<li>ON: Enables an intelligent full text recognition task;</li>
-<li>OFF: Disables an intelligent full text recognition task.</li>
+         * Text keyword.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Word = null;
+
+        /**
+         * Start PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * End PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * Confidence of recognized segment. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoords = null;
 
     }
 
@@ -10883,7 +13086,11 @@ class OcrFullTextConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Word = 'Word' in params ? params.Word : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoords = 'AreaCoords' in params ? params.AreaCoords : null;
 
     }
 }
@@ -11024,6 +13231,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeWatermarkTemplates response structure.
+ * @class
+ */
+class DescribeWatermarkTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of watermarking template details.
+         * @type {Array.<WatermarkTemplate> || null}
+         */
+        this.WatermarkTemplateSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.WatermarkTemplateSet) {
+            this.WatermarkTemplateSet = new Array();
+            for (let z in params.WatermarkTemplateSet) {
+                let obj = new WatermarkTemplate();
+                obj.deserialize(params.WatermarkTemplateSet[z]);
+                this.WatermarkTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Information of a time point screenshot
  * @class
  */
@@ -11073,6 +13330,12 @@ class AiAnalysisTaskInput extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Definition = null;
+
     }
 
     /**
@@ -11082,6 +13345,7 @@ class AiAnalysisTaskInput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -11188,6 +13452,102 @@ class DescribeAnimatedGraphicsTemplatesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Custom watermark specifications.
+ * @class
+ */
+class RawWatermarkParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * 
+         * @type {RawImageWatermarkInput || null}
+         */
+        this.ImageTemplate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+
+        if (params.ImageTemplate) {
+            let obj = new RawImageWatermarkInput();
+            obj.deserialize(params.ImageTemplate)
+            this.ImageTemplate = obj;
+        }
+
+    }
+}
+
+/**
+ * Result information of intelligent frame-specific tagging
+ * @class
+ */
+class MediaAiAnalysisFrameTagItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Frame-specific tag name.
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Confidence of intelligently generated frame-specific tag between 0 and 100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -11337,6 +13697,41 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
         this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+    }
+}
+
+/**
+ * CreateAIAnalysisTemplate response structure.
+ * @class
+ */
+class CreateAIAnalysisTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of video content analysis template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11545,6 +13940,34 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
 }
 
 /**
+ * ModifyAdaptiveDynamicStreamingTemplate response structure.
+ * @class
+ */
+class ModifyAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Speech keyword recognition control parameter.
  * @class
  */
@@ -11703,6 +14126,55 @@ class AiSampleFaceInfo extends  AbstractModel {
 }
 
 /**
+ * AI-based ASR-based live streaming keyword recognition result
+ * @class
+ */
+class LiveStreamAsrWordsRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Speech keyword.
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * Start PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * End PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * Confidence of recognized segment. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Word = 'Word' in params ? params.Word : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
  * ASR-detected politically sensitive information in text
  * @class
  */
@@ -11808,6 +14280,34 @@ class UserDefineConfigureInfoForUpdate extends  AbstractModel {
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * DeleteSampleSnapshotTemplate request structure.
+ * @class
+ */
+class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of a sampled screencapturing template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -12144,6 +14644,73 @@ class CreateAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Result type of adaptive bitrate streaming task
+ * @class
+ */
+class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: success; other values: failure.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of an adaptive bitrate streaming task.
+         * @type {AdaptiveDynamicStreamingTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of an adaptive bitrate streaming task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AdaptiveDynamicStreamingInfoItem || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AdaptiveDynamicStreamingTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AdaptiveDynamicStreamingInfoItem();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * Information of the audio stream in a VOD file
  * @class
  */
@@ -12189,110 +14756,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Details of a sampled screencapturing template
+ * Result type of intelligent categorization task
  * @class
  */
-class SampleSnapshotTemplate extends  AbstractModel {
+class AiAnalysisTaskClassificationResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a sampled screencapturing template.
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: success; other values: failure.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.ErrCode = null;
 
         /**
-         * Template type. Valid values:
-<li>Preset: Preset template;</li>
-<li>Custom: Custom template.</li>
+         * Error message.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Message = null;
 
         /**
-         * Name of a sampled screencapturing template.
-         * @type {string || null}
+         * Input of intelligent categorization task.
+         * @type {AiAnalysisTaskClassificationInput || null}
          */
-        this.Name = null;
+        this.Input = null;
 
         /**
-         * Template description.
-         * @type {string || null}
+         * Output of intelligent categorization task.
+         * @type {AiAnalysisTaskClassificationOutput || null}
          */
-        this.Comment = null;
-
-        /**
-         * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Resolution adaption. Valid values:
-<li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
-Default value: open.
-         * @type {string || null}
-         */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * Image format.
-         * @type {string || null}
-         */
-        this.Format = null;
-
-        /**
-         * Sampled screencapturing type.
-         * @type {string || null}
-         */
-        this.SampleType = null;
-
-        /**
-         * Sampling interval.
-         * @type {number || null}
-         */
-        this.SampleInterval = null;
-
-        /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-<li>white: Fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
-<li>gauss: Fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
-Default value: black.
-         * @type {string || null}
-         */
-        this.FillType = null;
+        this.Output = null;
 
     }
 
@@ -12303,19 +14802,65 @@ Default value: black.
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Format = 'Format' in params ? params.Format : null;
-        this.SampleType = 'SampleType' in params ? params.SampleType : null;
-        this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskClassificationInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskClassificationOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
+ * Control parameter of a politically sensitive information detection in text task
+ * @class
+ */
+class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of a politically sensitive information detection in text task. Valid values:
+<li>ON: Enables a politically sensitive information detection in text task;</li>
+<li>OFF: Disables a politically sensitive information detection in text task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -12721,6 +15266,34 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
+ * Input type of intelligent categorization task
+ * @class
+ */
+class AiAnalysisTaskCoverInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Intelligent video cover generating template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * CreateAIRecognitionTemplate request structure.
  * @class
  */
@@ -12844,18 +15417,24 @@ class DescribeTaskDetailRequest extends  AbstractModel {
 }
 
 /**
- * DeleteImageSpriteTemplate response structure.
+ * Intelligent categorization result
  * @class
  */
-class DeleteImageSpriteTemplateResponse extends  AbstractModel {
+class MediaAiAnalysisClassificationItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Name of intelligently generated category.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Classification = null;
+
+        /**
+         * Confidence of intelligently generated category between 0 and 100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
 
     }
 
@@ -12866,7 +15445,74 @@ class DeleteImageSpriteTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Classification = 'Classification' in params ? params.Classification : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * Result type of intelligent frame-specific tagging
+ * @class
+ */
+class AiAnalysisTaskFrameTagResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: success; other values: failure.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of intelligent frame-specific tagging task.
+         * @type {AiAnalysisTaskFrameTagInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of intelligent frame-specific tagging task.
+         * @type {AiAnalysisTaskFrameTagOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskFrameTagInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskFrameTagOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -13007,6 +15653,41 @@ class LiveStreamAiReviewResultInfo extends  AbstractModel {
 }
 
 /**
+ * EditMedia response structure.
+ * @class
+ */
+class EditMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video editing task ID, which can be used to query the status of an editing task.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Full speech recognition result.
  * @class
  */
@@ -13118,6 +15799,34 @@ class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * ModifyAIRecognitionTemplate response structure.
+ * @class
+ */
+class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Input for speech keyword recognition.
  * @class
  */
@@ -13146,48 +15855,24 @@ class AiRecognitionTaskAsrWordsResultInput extends  AbstractModel {
 }
 
 /**
- * CreateContentReviewTemplate request structure.
+ * CreateImageSpriteTemplate response structure.
  * @class
  */
-class CreateContentReviewTemplateRequest extends  AbstractModel {
+class CreateImageSpriteTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of a content audit template. Length limit: 64 characters.
+         * Unique ID of an image sprite generating template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Description of a content audit template. Length limit: 256 characters.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * Porn information detection control parameter.
-         * @type {PornConfigureInfo || null}
-         */
-        this.PornConfigure = null;
-
-        /**
-         * Terrorism information detection control parameter.
-         * @type {TerrorismConfigureInfo || null}
-         */
-        this.TerrorismConfigure = null;
-
-        /**
-         * Politically sensitive information detection control parameter.
-         * @type {PoliticalConfigureInfo || null}
-         */
-        this.PoliticalConfigure = null;
-
-        /**
-         * Custom content audit control parameter.
-         * @type {UserDefineConfigureInfo || null}
-         */
-        this.UserDefineConfigure = null;
+        this.RequestId = null;
 
     }
 
@@ -13198,32 +15883,8 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-
-        if (params.PornConfigure) {
-            let obj = new PornConfigureInfo();
-            obj.deserialize(params.PornConfigure)
-            this.PornConfigure = obj;
-        }
-
-        if (params.TerrorismConfigure) {
-            let obj = new TerrorismConfigureInfo();
-            obj.deserialize(params.TerrorismConfigure)
-            this.TerrorismConfigure = obj;
-        }
-
-        if (params.PoliticalConfigure) {
-            let obj = new PoliticalConfigureInfo();
-            obj.deserialize(params.PoliticalConfigure)
-            this.PoliticalConfigure = obj;
-        }
-
-        if (params.UserDefineConfigure) {
-            let obj = new UserDefineConfigureInfo();
-            obj.deserialize(params.UserDefineConfigure)
-            this.UserDefineConfigure = obj;
-        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13311,6 +15972,55 @@ Default value: 0.
         this.Fps = 'Fps' in params ? params.Fps : null;
         this.Quality = 'Quality' in params ? params.Quality : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
+ * Event notification configuration of a task.
+ * @class
+ */
+class LiveStreamTaskNotifyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+         * @type {string || null}
+         */
+        this.CmqModel = null;
+
+        /**
+         * CMQ region, such as `sh` and `bj`.
+         * @type {string || null}
+         */
+        this.CmqRegion = null;
+
+        /**
+         * This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CmqModel = 'CmqModel' in params ? params.CmqModel : null;
+        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -13458,6 +16168,80 @@ class AiRecognitionTaskOcrWordsSegmentItem extends  AbstractModel {
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+
+    }
+}
+
+/**
+ * Watermark parameter type of a video processing task
+ * @class
+ */
+class WatermarkInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of a watermarking template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 
+         * @type {RawWatermarkParameter || null}
+         */
+        this.RawParameter = null;
+
+        /**
+         * Text content of up to 100 characters. This field is required only when the watermark type is text.
+         * @type {string || null}
+         */
+        this.TextContent = null;
+
+        /**
+         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.
+         * @type {string || null}
+         */
+        this.SvgContent = null;
+
+        /**
+         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.
+<li>If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;</li>
+<li>If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;</li>
+<li>If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a watermark in seconds.
+<li>If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;</li>
+<li>If this value is greater than 0 (e.g., n), the watermark will exist till second n;</li>
+<li>If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.RawParameter) {
+            let obj = new RawWatermarkParameter();
+            obj.deserialize(params.RawParameter)
+            this.RawParameter = obj;
+        }
+        this.TextContent = 'TextContent' in params ? params.TextContent : null;
+        this.SvgContent = 'SvgContent' in params ? params.SvgContent : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
     }
 }
@@ -13709,54 +16493,78 @@ class ModifyPersonSampleRequest extends  AbstractModel {
 }
 
 /**
- * Watermark parameter type of a video processing task
+ * ProcessMedia request structure.
  * @class
  */
-class WatermarkInput extends  AbstractModel {
+class ProcessMediaRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of a watermarking template.
-         * @type {number || null}
+         * Input information of a file for video processing.
+         * @type {MediaInputInfo || null}
          */
-        this.Definition = null;
+        this.InputInfo = null;
+
+        /**
+         * Target bucket of a video processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * Target directory of a video processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be outputted to the same directory as that in `InputInfo`.
+         * @type {string || null}
+         */
+        this.OutputDir = null;
+
+        /**
+         * Parameter of a video processing task.
+         * @type {MediaProcessTaskInput || null}
+         */
+        this.MediaProcessTask = null;
+
+        /**
+         * Type parameter of a video content audit task.
+         * @type {AiContentReviewTaskInput || null}
+         */
+        this.AiContentReviewTask = null;
 
         /**
          * 
-         * @type {RawWatermarkParameter || null}
+         * @type {AiAnalysisTaskInput || null}
          */
-        this.RawParameter = null;
+        this.AiAnalysisTask = null;
 
         /**
-         * Text content of up to 100 characters. This field is required only when the watermark type is text.
-         * @type {string || null}
+         * Type parameter of a video content recognition task.
+         * @type {AiRecognitionTaskInput || null}
          */
-        this.TextContent = null;
+        this.AiRecognitionTask = null;
 
         /**
-         * SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.
-         * @type {string || null}
+         * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
+         * @type {TaskNotifyConfig || null}
          */
-        this.SvgContent = null;
+        this.TaskNotifyConfig = null;
 
         /**
-         * Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.
-<li>If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;</li>
-<li>If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;</li>
-<li>If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.</li>
+         * Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
-        this.StartTimeOffset = null;
+        this.TasksPriority = null;
 
         /**
-         * End time offset of a watermark in seconds.
-<li>If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;</li>
-<li>If this value is greater than 0 (e.g., n), the watermark will exist till second n;</li>
-<li>If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.</li>
-         * @type {number || null}
+         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+         * @type {string || null}
          */
-        this.EndTimeOffset = null;
+        this.SessionId = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
 
     }
 
@@ -13767,17 +16575,52 @@ class WatermarkInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
 
-        if (params.RawParameter) {
-            let obj = new RawWatermarkParameter();
-            obj.deserialize(params.RawParameter)
-            this.RawParameter = obj;
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
         }
-        this.TextContent = 'TextContent' in params ? params.TextContent : null;
-        this.SvgContent = 'SvgContent' in params ? params.SvgContent : null;
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+
+        if (params.MediaProcessTask) {
+            let obj = new MediaProcessTaskInput();
+            obj.deserialize(params.MediaProcessTask)
+            this.MediaProcessTask = obj;
+        }
+
+        if (params.AiContentReviewTask) {
+            let obj = new AiContentReviewTaskInput();
+            obj.deserialize(params.AiContentReviewTask)
+            this.AiContentReviewTask = obj;
+        }
+
+        if (params.AiAnalysisTask) {
+            let obj = new AiAnalysisTaskInput();
+            obj.deserialize(params.AiAnalysisTask)
+            this.AiAnalysisTask = obj;
+        }
+
+        if (params.AiRecognitionTask) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.AiRecognitionTask)
+            this.AiRecognitionTask = obj;
+        }
+
+        if (params.TaskNotifyConfig) {
+            let obj = new TaskNotifyConfig();
+            obj.deserialize(params.TaskNotifyConfig)
+            this.TaskNotifyConfig = obj;
+        }
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -13862,6 +16705,83 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * Input parameter type of adaptive bitrate streaming
+ * @class
+ */
+class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Adaptive bitrate streaming template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * List of up to 10 image or text watermarks.
+         * @type {Array.<WatermarkInput> || null}
+         */
+        this.WatermarkSet = null;
+
+        /**
+         * Target bucket of an output file after transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * The relative or absolute output path of the manifest file after transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+         * @type {string || null}
+         */
+        this.OutputObjectPath = null;
+
+        /**
+         * The relative output path of the substream file after transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+         * @type {string || null}
+         */
+        this.SubStreamObjectName = null;
+
+        /**
+         * The relative output path of the segment file after transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+         * @type {string || null}
+         */
+        this.SegmentObjectName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.WatermarkSet) {
+            this.WatermarkSet = new Array();
+            for (let z in params.WatermarkSet) {
+                let obj = new WatermarkInput();
+                obj.deserialize(params.WatermarkSet[z]);
+                this.WatermarkSet.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+        this.SubStreamObjectName = 'SubStreamObjectName' in params ? params.SubStreamObjectName : null;
+        this.SegmentObjectName = 'SegmentObjectName' in params ? params.SegmentObjectName : null;
+
+    }
+}
+
+/**
  * AI-based sample management - keyword input information.
  * @class
  */
@@ -13894,6 +16814,119 @@ class AiSampleWordInfo extends  AbstractModel {
         }
         this.Keyword = 'Keyword' in params ? params.Keyword : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
+ * Suspected segment identified during ASR-based text audit during content audit
+ * @class
+ */
+class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Confidence of a suspected segment.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Suggestion for suspected segment audit. Valid values:
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * List of suspected keywords.
+         * @type {Array.<string> || null}
+         */
+        this.KeywordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+
+    }
+}
+
+/**
+ * Adaptive bitrate streaming information
+ * @class
+ */
+class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Adaptive bitrate streaming specification.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Container format. Valid values: HLS, MPEG-DASH.
+         * @type {string || null}
+         */
+        this.Package = null;
+
+        /**
+         * Playback address.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * Storage location of adaptive bitrate streaming files.
+         * @type {TaskOutputStorage || null}
+         */
+        this.Storage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Package = 'Package' in params ? params.Package : null;
+        this.Path = 'Path' in params ? params.Path : null;
+
+        if (params.Storage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
 
     }
 }
@@ -14012,13 +17045,49 @@ Default value: 0 px.
 }
 
 /**
- * Specifications for custom transcoding.
+ * Specifications for custom transcoding
  * @class
  */
 class RawTranscodeParameter extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 
+         * @type {VideoTemplateInfo || null}
+         */
+        this.VideoTemplate = null;
+
+        /**
+         * 
+         * @type {AudioTemplateInfo || null}
+         */
+        this.AudioTemplate = null;
+
+        /**
+         * 
+         * @type {TEHDConfig || null}
+         */
+        this.TEHDConfig = null;
+
     }
 
     /**
@@ -14027,103 +17096,57 @@ class RawTranscodeParameter extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Container = 'Container' in params ? params.Container : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoTemplate) {
+            let obj = new VideoTemplateInfo();
+            obj.deserialize(params.VideoTemplate)
+            this.VideoTemplate = obj;
+        }
+
+        if (params.AudioTemplate) {
+            let obj = new AudioTemplateInfo();
+            obj.deserialize(params.AudioTemplate)
+            this.AudioTemplate = obj;
+        }
+
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfig();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
         }
 
     }
 }
 
 /**
- * Details of a watermarking template
+ * 
  * @class
  */
-class WatermarkTemplate extends  AbstractModel {
+class ProhibitedOcrReviewTemplateInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a watermarking template.
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
          * @type {number || null}
          */
-        this.Definition = null;
+        this.BlockConfidence = null;
 
         /**
-         * Watermark type. Valid values:
-<li>image: Image watermark;</li>
-<li>text: Text watermark.</li>
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.Type = null;
-
-        /**
-         * Name of a watermarking template.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Template description.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * Horizontal position of the origin of the watermark image relative to the origin of the video.
-<li>If the string ends in %, the `Left` edge of the watermark will be at the position of the specified percentage of the video width; for example, `10%` means that the `Left` edge is at 10% of the video width;</li>
-<li>If the string ends in px, the `Left` edge of the watermark will be at the position of the specified px of the video width; for example, `100px` means that the `Left` edge is at the position of 100 px.</li>
-         * @type {string || null}
-         */
-        this.XPos = null;
-
-        /**
-         * Vertical position of the origin of the watermark image relative to the origin of the video.
-<li>If the string ends in %, the `Top` edge of the watermark will beat the position of the specified percentage of the video height; for example, `10%` means that the `Top` edge is at 10% of the video height;</li>
-<li>If the string ends in px, the `Top` edge of the watermark will be at the position of the specified px of the video height; for example, `100px` means that the `Top` edge is at the position of 100 px.</li>
-         * @type {string || null}
-         */
-        this.YPos = null;
-
-        /**
-         * Image watermarking template. This field is valid only when `Type` is `image`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {ImageWatermarkTemplate || null}
-         */
-        this.ImageTemplate = null;
-
-        /**
-         * Text watermarking template. This field is valid only when `Type` is `text`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {TextWatermarkTemplateInput || null}
-         */
-        this.TextTemplate = null;
-
-        /**
-         * SVG watermarking template. This field is valid when `Type` is `svg`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {SvgWatermarkInput || null}
-         */
-        this.SvgTemplate = null;
-
-        /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Origin position. Valid values:
-<li>topLeft: The origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text;</li>
-<li>topRight: The origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text;</li>
-<li>bottomLeft: The origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text;</li>
-<li>bottomRight: The origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.</li>
-         * @type {string || null}
-         */
-        this.CoordinateOrigin = null;
+        this.ReviewConfidence = null;
 
     }
 
@@ -14134,33 +17157,65 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.XPos = 'XPos' in params ? params.XPos : null;
-        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
-        if (params.ImageTemplate) {
-            let obj = new ImageWatermarkTemplate();
-            obj.deserialize(params.ImageTemplate)
-            this.ImageTemplate = obj;
-        }
+    }
+}
 
-        if (params.TextTemplate) {
-            let obj = new TextWatermarkTemplateInput();
-            obj.deserialize(params.TextTemplate)
-            this.TextTemplate = obj;
-        }
+/**
+ * OCR-based full live stream recognition
+ * @class
+ */
+class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
 
-        if (params.SvgTemplate) {
-            let obj = new SvgWatermarkInput();
-            obj.deserialize(params.SvgTemplate)
-            this.SvgTemplate = obj;
+        /**
+         * Speech text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Start PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * End PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * Confidence of recognized segment. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
 
     }
 }
@@ -14194,30 +17249,18 @@ class DeleteWatermarkTemplateResponse extends  AbstractModel {
 }
 
 /**
- * DescribeImageSpriteTemplates response structure.
+ * DeleteWatermarkTemplate request structure.
  * @class
  */
-class DescribeImageSpriteTemplatesResponse extends  AbstractModel {
+class DeleteWatermarkTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible entries.
+         * Unique ID of a watermarking template.
          * @type {number || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * List of image sprite generating template details.
-         * @type {Array.<ImageSpriteTemplate> || null}
-         */
-        this.ImageSpriteTemplateSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Definition = null;
 
     }
 
@@ -14228,17 +17271,7 @@ class DescribeImageSpriteTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.ImageSpriteTemplateSet) {
-            this.ImageSpriteTemplateSet = new Array();
-            for (let z in params.ImageSpriteTemplateSet) {
-                let obj = new ImageSpriteTemplate();
-                obj.deserialize(params.ImageSpriteTemplateSet[z]);
-                this.ImageSpriteTemplateSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -14300,41 +17333,89 @@ class ModifyTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Text watermarking template
+ * Metadata of a VOD media file
  * @class
  */
-class TextWatermarkTemplateInput extends  AbstractModel {
+class MediaMetaData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Font type. Currently, two types are supported:
-<li>simkai.ttf: Both Chinese and English are supported;</li>
-<li>arial.ttf: Only English is supported.</li>
-         * @type {string || null}
-         */
-        this.FontType = null;
-
-        /**
-         * Font size in Npx format where N is a numeric value.
-         * @type {string || null}
-         */
-        this.FontSize = null;
-
-        /**
-         * Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
-         * @type {string || null}
-         */
-        this.FontColor = null;
-
-        /**
-         * Text transparency. Value range: (0, 1]
-<li>0: Completely transparent</li>
-<li>1: Completely opaque</li>
-Default value: 1.
+         * Size of an uploaded media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.FontAlpha = null;
+        this.Size = null;
+
+        /**
+         * Container, such as m4a and mp4.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * Sum of the average bitrate of a video stream and that of an audio stream in bps.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * Maximum value of the height of a video stream in px.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Maximum value of the width of a video stream in px.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Video duration in seconds.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Selected angle during video recording in degrees.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Rotate = null;
+
+        /**
+         * Video stream information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaVideoStreamItem> || null}
+         */
+        this.VideoStreamSet = null;
+
+        /**
+         * Audio stream information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaAudioStreamItem> || null}
+         */
+        this.AudioStreamSet = null;
+
+        /**
+         * Video duration in seconds.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VideoDuration = null;
+
+        /**
+         * Audio duration in seconds.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AudioDuration = null;
 
     }
 
@@ -14345,10 +17426,33 @@ Default value: 1.
         if (!params) {
             return;
         }
-        this.FontType = 'FontType' in params ? params.FontType : null;
-        this.FontSize = 'FontSize' in params ? params.FontSize : null;
-        this.FontColor = 'FontColor' in params ? params.FontColor : null;
-        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Rotate = 'Rotate' in params ? params.Rotate : null;
+
+        if (params.VideoStreamSet) {
+            this.VideoStreamSet = new Array();
+            for (let z in params.VideoStreamSet) {
+                let obj = new MediaVideoStreamItem();
+                obj.deserialize(params.VideoStreamSet[z]);
+                this.VideoStreamSet.push(obj);
+            }
+        }
+
+        if (params.AudioStreamSet) {
+            this.AudioStreamSet = new Array();
+            for (let z in params.AudioStreamSet) {
+                let obj = new MediaAudioStreamItem();
+                obj.deserialize(params.AudioStreamSet[z]);
+                this.AudioStreamSet.push(obj);
+            }
+        }
+        this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
+        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
 
     }
 }
@@ -14422,102 +17526,6 @@ There can be up to 10 tags, each with a length limit of 16 characters.
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
-
-    }
-}
-
-/**
- * Type of a video processing task
- * @class
- */
-class MediaProcessTaskInput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of transcoding tasks.
-         * @type {Array.<TranscodeTaskInput> || null}
-         */
-        this.TranscodeTaskSet = null;
-
-        /**
-         * List of animated image generating tasks.
-         * @type {Array.<AnimatedGraphicTaskInput> || null}
-         */
-        this.AnimatedGraphicTaskSet = null;
-
-        /**
-         * List of time point screencapturing tasks.
-         * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
-         */
-        this.SnapshotByTimeOffsetTaskSet = null;
-
-        /**
-         * List of sampled screencapturing tasks.
-         * @type {Array.<SampleSnapshotTaskInput> || null}
-         */
-        this.SampleSnapshotTaskSet = null;
-
-        /**
-         * List of image sprite generating tasks.
-         * @type {Array.<ImageSpriteTaskInput> || null}
-         */
-        this.ImageSpriteTaskSet = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TranscodeTaskSet) {
-            this.TranscodeTaskSet = new Array();
-            for (let z in params.TranscodeTaskSet) {
-                let obj = new TranscodeTaskInput();
-                obj.deserialize(params.TranscodeTaskSet[z]);
-                this.TranscodeTaskSet.push(obj);
-            }
-        }
-
-        if (params.AnimatedGraphicTaskSet) {
-            this.AnimatedGraphicTaskSet = new Array();
-            for (let z in params.AnimatedGraphicTaskSet) {
-                let obj = new AnimatedGraphicTaskInput();
-                obj.deserialize(params.AnimatedGraphicTaskSet[z]);
-                this.AnimatedGraphicTaskSet.push(obj);
-            }
-        }
-
-        if (params.SnapshotByTimeOffsetTaskSet) {
-            this.SnapshotByTimeOffsetTaskSet = new Array();
-            for (let z in params.SnapshotByTimeOffsetTaskSet) {
-                let obj = new SnapshotByTimeOffsetTaskInput();
-                obj.deserialize(params.SnapshotByTimeOffsetTaskSet[z]);
-                this.SnapshotByTimeOffsetTaskSet.push(obj);
-            }
-        }
-
-        if (params.SampleSnapshotTaskSet) {
-            this.SampleSnapshotTaskSet = new Array();
-            for (let z in params.SampleSnapshotTaskSet) {
-                let obj = new SampleSnapshotTaskInput();
-                obj.deserialize(params.SampleSnapshotTaskSet[z]);
-                this.SampleSnapshotTaskSet.push(obj);
-            }
-        }
-
-        if (params.ImageSpriteTaskSet) {
-            this.ImageSpriteTaskSet = new Array();
-            for (let z in params.ImageSpriteTaskSet) {
-                let obj = new ImageSpriteTaskInput();
-                obj.deserialize(params.ImageSpriteTaskSet[z]);
-                this.ImageSpriteTaskSet.push(obj);
-            }
-        }
 
     }
 }
@@ -14607,24 +17615,99 @@ Default value: black.
 }
 
 /**
- * CreateImageSpriteTemplate response structure.
+ * Text watermarking template
  * @class
  */
-class CreateImageSpriteTemplateResponse extends  AbstractModel {
+class TextWatermarkTemplateInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of an image sprite generating template.
+         * Font type. Currently, two types are supported:
+<li>simkai.ttf: Both Chinese and English are supported;</li>
+<li>arial.ttf: Only English is supported.</li>
+         * @type {string || null}
+         */
+        this.FontType = null;
+
+        /**
+         * Font size in Npx format where N is a numeric value.
+         * @type {string || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+        /**
+         * Text transparency. Value range: (0, 1]
+<li>0: Completely transparent</li>
+<li>1: Completely opaque</li>
+Default value: 1.
+         * @type {number || null}
+         */
+        this.FontAlpha = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FontType = 'FontType' in params ? params.FontType : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+
+    }
+}
+
+/**
+ * Input parameter type of a sampled screencapturing task.
+ * @class
+ */
+class SampleSnapshotTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sampled screencapturing template ID.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * List of up to 10 image or text watermarks.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<WatermarkInput> || null}
+         */
+        this.WatermarkSet = null;
+
+        /**
+         * Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OutputObjectPath = null;
+
+        /**
+         * Rule of the `{number}` variable in the sampled screenshot output path.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {NumberFormat || null}
+         */
+        this.ObjectNumberFormat = null;
 
     }
 
@@ -14636,7 +17719,202 @@ class CreateImageSpriteTemplateResponse extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.WatermarkSet) {
+            this.WatermarkSet = new Array();
+            for (let z in params.WatermarkSet) {
+                let obj = new WatermarkInput();
+                obj.deserialize(params.WatermarkSet[z]);
+                this.WatermarkSet.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+
+        if (params.ObjectNumberFormat) {
+            let obj = new NumberFormat();
+            obj.deserialize(params.ObjectNumberFormat)
+            this.ObjectNumberFormat = obj;
+        }
+
+    }
+}
+
+/**
+ * ParseNotification request structure.
+ * @class
+ */
+class ParseNotificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event notification obtained from CMQ.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * DescribeMediaMetaData request structure.
+ * @class
+ */
+class DescribeMediaMetaDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input information of file for metadata getting.
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * Control parameter of intelligent frame-specific tagging task
+ * @class
+ */
+class FrameTagConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of intelligent frame-specific tagging task. Valid values:
+<li>ON: enables intelligent frame-specific tagging task;</li>
+<li>OFF: disables intelligent frame-specific tagging task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * CreateContentReviewTemplate request structure.
+ * @class
+ */
+class CreateContentReviewTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of a content audit template. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description of a content audit template. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Porn information detection control parameter.
+         * @type {PornConfigureInfo || null}
+         */
+        this.PornConfigure = null;
+
+        /**
+         * Terrorism information detection control parameter.
+         * @type {TerrorismConfigureInfo || null}
+         */
+        this.TerrorismConfigure = null;
+
+        /**
+         * Politically sensitive information detection control parameter.
+         * @type {PoliticalConfigureInfo || null}
+         */
+        this.PoliticalConfigure = null;
+
+        /**
+         * Custom content audit control parameter.
+         * @type {UserDefineConfigureInfo || null}
+         */
+        this.UserDefineConfigure = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.PornConfigure) {
+            let obj = new PornConfigureInfo();
+            obj.deserialize(params.PornConfigure)
+            this.PornConfigure = obj;
+        }
+
+        if (params.TerrorismConfigure) {
+            let obj = new TerrorismConfigureInfo();
+            obj.deserialize(params.TerrorismConfigure)
+            this.TerrorismConfigure = obj;
+        }
+
+        if (params.PoliticalConfigure) {
+            let obj = new PoliticalConfigureInfo();
+            obj.deserialize(params.PoliticalConfigure)
+            this.PoliticalConfigure = obj;
+        }
+
+        if (params.UserDefineConfigure) {
+            let obj = new UserDefineConfigureInfo();
+            obj.deserialize(params.UserDefineConfigure)
+            this.UserDefineConfigure = obj;
+        }
 
     }
 }
@@ -14684,24 +17962,43 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Information of a COS output object generated from video processing.
+ * Politically sensitive information
  * @class
  */
-class CosOutputStorage extends  AbstractModel {
+class AiReviewPoliticalTaskOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of the target bucket of a video processing output file, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the parameter of the upper folder will be inherited.
-         * @type {string || null}
+         * Score of the detected politically sensitive information in video from 0 to 100.
+         * @type {number || null}
          */
-        this.Bucket = null;
+        this.Confidence = null;
 
         /**
-         * Region of the target bucket of a video processing output file, such as `ap-chongqing`. If this parameter is left empty, the parameter of the upper folder will be inherited.
+         * Suggestion for the detected politically sensitive information. Valid values:
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
-        this.Region = null;
+        this.Suggestion = null;
+
+        /**
+         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput) and this parameter is as follows:
+violation_photo:
+<li>violation_photo: violating photo.</li>
+Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
+<li>politician: politically sensitive figure.</li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * List of video segments that contain the detected politically sensitive information.
+         * @type {Array.<MediaContentReviewPoliticalSegmentItem> || null}
+         */
+        this.SegmentSet = null;
 
     }
 
@@ -14712,8 +18009,18 @@ class CosOutputStorage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-        this.Region = 'Region' in params ? params.Region : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new MediaContentReviewPoliticalSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
 
     }
 }
@@ -14774,6 +18081,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ImageSpriteTask = null;
 
+        /**
+         * Query result of an adaptive bitrate streaming task, which is valid if the task type is `AdaptiveDynamicStreaming`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {MediaProcessTaskAdaptiveDynamicStreamingResult || null}
+         */
+        this.AdaptiveDynamicStreamingTask = null;
+
     }
 
     /**
@@ -14815,40 +18129,53 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.ImageSpriteTask = obj;
         }
 
+        if (params.AdaptiveDynamicStreamingTask) {
+            let obj = new MediaProcessTaskAdaptiveDynamicStreamingResult();
+            obj.deserialize(params.AdaptiveDynamicStreamingTask)
+            this.AdaptiveDynamicStreamingTask = obj;
+        }
+
     }
 }
 
 /**
- * Face recognition result segment
+ * Face recognition result.
  * @class
  */
-class AiRecognitionTaskFaceSegmentItem extends  AbstractModel {
+class AiRecognitionTaskFaceResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time offset of a recognition segment in seconds.
-         * @type {number || null}
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
          */
-        this.StartTimeOffset = null;
+        this.Status = null;
 
         /**
-         * End time offset of a recognition segment in seconds.
+         * Error code. 0: success; other values: failure.
          * @type {number || null}
          */
-        this.EndTimeOffset = null;
+        this.ErrCode = null;
 
         /**
-         * Confidence of a recognition segment. Value range: 0–100.
-         * @type {number || null}
+         * Error message.
+         * @type {string || null}
          */
-        this.Confidence = null;
+        this.Message = null;
 
         /**
-         * Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-         * @type {Array.<number> || null}
+         * Input information of a face recognition task.
+         * @type {AiRecognitionTaskFaceResultInput || null}
          */
-        this.AreaCoordSet = null;
+        this.Input = null;
+
+        /**
+         * Output information of a face recognition task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskFaceResultOutput || null}
+         */
+        this.Output = null;
 
     }
 
@@ -14859,10 +18186,21 @@ class AiRecognitionTaskFaceSegmentItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskFaceResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiRecognitionTaskFaceResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -14931,42 +18269,20 @@ class CreateWordSamplesResponse extends  AbstractModel {
 }
 
 /**
- * Event notification configuration of a task.
+ * Control parameter of intelligent categorization task
  * @class
  */
-class TaskNotifyConfig extends  AbstractModel {
+class ClassificationConfigureInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+         * Switch of intelligent categorization task. Valid values:
+<li>ON: enables intelligent categorization task;</li>
+<li>OFF: disables intelligent categorization task.</li>
          * @type {string || null}
          */
-        this.CmqModel = null;
-
-        /**
-         * CMQ region, such as `sh` and `bj`.
-         * @type {string || null}
-         */
-        this.CmqRegion = null;
-
-        /**
-         * This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
-         * @type {string || null}
-         */
-        this.NotifyMode = null;
+        this.Switch = null;
 
     }
 
@@ -14977,11 +18293,7 @@ class TaskNotifyConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CmqModel = 'CmqModel' in params ? params.CmqModel : null;
-        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.NotifyMode = 'NotifyMode' in params ? params.NotifyMode : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -15092,25 +18404,28 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 module.exports = {
-    ProcessMediaRequest: ProcessMediaRequest,
+    MediaAiAnalysisFrameTagSegmentItem: MediaAiAnalysisFrameTagSegmentItem,
     ModifySnapshotByTimeOffsetTemplateResponse: ModifySnapshotByTimeOffsetTemplateResponse,
     ModifySampleSnapshotTemplateResponse: ModifySampleSnapshotTemplateResponse,
     LiveStreamAiReviewImagePornResult: LiveStreamAiReviewImagePornResult,
     ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
     CreateWordSamplesRequest: CreateWordSamplesRequest,
-    DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
+    AiAnalysisTaskFrameTagInput: AiAnalysisTaskFrameTagInput,
+    ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
+    DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     AiRecognitionTaskAsrWordsResultItem: AiRecognitionTaskAsrWordsResultItem,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
-    ParseNotificationRequest: ParseNotificationRequest,
+    MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     TaskSimpleInfo: TaskSimpleInfo,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
+    LiveStreamAiRecognitionResultItem: LiveStreamAiRecognitionResultItem,
     AiSampleFaceOperation: AiSampleFaceOperation,
-    DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
-    SvgWatermarkInput: SvgWatermarkInput,
+    AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
+    AIAnalysisTemplateItem: AIAnalysisTemplateItem,
     WorkflowInfo: WorkflowInfo,
     CreateTranscodeTemplateRequest: CreateTranscodeTemplateRequest,
     ProcessLiveStreamResponse: ProcessLiveStreamResponse,
@@ -15118,54 +18433,68 @@ module.exports = {
     DeleteWorkflowRequest: DeleteWorkflowRequest,
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
-    DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
-    DeleteWorkflowResponse: DeleteWorkflowResponse,
+    RawImageWatermarkInput: RawImageWatermarkInput,
+    DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
+    AdaptiveDynamicStreamingTemplate: AdaptiveDynamicStreamingTemplate,
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
-    RawWatermarkParameter: RawWatermarkParameter,
+    ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
     AiSampleTagOperation: AiSampleTagOperation,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
+    DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
+    DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     ResetWorkflowResponse: ResetWorkflowResponse,
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
+    ManageTaskResponse: ManageTaskResponse,
     DescribeTasksResponse: DescribeTasksResponse,
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
     PornImgReviewTemplateInfo: PornImgReviewTemplateInfo,
-    AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
+    AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
-    SampleSnapshotTaskInput: SampleSnapshotTaskInput,
+    SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
+    WorkflowTrigger: WorkflowTrigger,
+    ProhibitedConfigureInfo: ProhibitedConfigureInfo,
+    DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
+    EditMediaRequest: EditMediaRequest,
+    SampleSnapshotTemplate: SampleSnapshotTemplate,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
     AiAnalysisResult: AiAnalysisResult,
+    ManageTaskRequest: ManageTaskRequest,
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
-    AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
+    DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     MediaInputInfo: MediaInputInfo,
-    LiveStreamTaskNotifyConfig: LiveStreamTaskNotifyConfig,
+    MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
+    DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
     CreateWorkflowRequest: CreateWorkflowRequest,
     ParseLiveStreamProcessNotificationRequest: ParseLiveStreamProcessNotificationRequest,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
+    OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
     SnapshotByTimeOffsetTemplate: SnapshotByTimeOffsetTemplate,
     DeleteSnapshotByTimeOffsetTemplateResponse: DeleteSnapshotByTimeOffsetTemplateResponse,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
+    DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     DescribeTasksRequest: DescribeTasksRequest,
     FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
-    DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     CreateTranscodeTemplateResponse: CreateTranscodeTemplateResponse,
+    AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     AiSampleWord: AiSampleWord,
-    PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
+    CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
+    MediaProcessTaskInput: MediaProcessTaskInput,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     DescribeWorkflowsRequest: DescribeWorkflowsRequest,
@@ -15175,43 +18504,52 @@ module.exports = {
     ProcessLiveStreamRequest: ProcessLiveStreamRequest,
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
-    MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
-    WorkflowTrigger: WorkflowTrigger,
+    CreateAdaptiveDynamicStreamingTemplateRequest: CreateAdaptiveDynamicStreamingTemplateRequest,
+    TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
+    DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     DeletePersonSampleResponse: DeletePersonSampleResponse,
     DeleteAIRecognitionTemplateResponse: DeleteAIRecognitionTemplateResponse,
     DeleteWordSamplesRequest: DeleteWordSamplesRequest,
+    LiveStreamAiRecognitionResultInfo: LiveStreamAiRecognitionResultInfo,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
-    ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
+    ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
+    DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
     ModifyContentReviewTemplateResponse: ModifyContentReviewTemplateResponse,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
-    DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
+    AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
-    SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
-    VideoTemplateInfo: VideoTemplateInfo,
-    LiveStreamAiRecognitionResultInfo: LiveStreamAiRecognitionResultInfo,
+    WorkflowTask: WorkflowTask,
+    DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
+    CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
+    CosOutputStorage: CosOutputStorage,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
-    DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
+    AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
+    SvgWatermarkInput: SvgWatermarkInput,
     AiReviewTaskPornOcrResult: AiReviewTaskPornOcrResult,
     ImageSpriteTemplate: ImageSpriteTemplate,
-    AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
-    DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
+    AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
+    ClassificationConfigureInfo: ClassificationConfigureInfo,
     LiveStreamAiReviewVoicePornResult: LiveStreamAiReviewVoicePornResult,
+    MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
-    TaskOutputStorage: TaskOutputStorage,
     AiContentReviewResult: AiContentReviewResult,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
+    TaskOutputStorage: TaskOutputStorage,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
+    UserDefineOcrTextReviewTemplateInfo: UserDefineOcrTextReviewTemplateInfo,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
+    DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     ParseLiveStreamProcessNotificationResponse: ParseLiveStreamProcessNotificationResponse,
+    LiveStreamAsrFullTextRecognitionResult: LiveStreamAsrFullTextRecognitionResult,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
@@ -15219,55 +18557,69 @@ module.exports = {
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
     DisableWorkflowRequest: DisableWorkflowRequest,
-    MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
+    AiAnalysisTaskFrameTagOutput: AiAnalysisTaskFrameTagOutput,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
     AudioTemplateInfo: AudioTemplateInfo,
     DescribeContentReviewTemplatesResponse: DescribeContentReviewTemplatesResponse,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
-    ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
+    CoverConfigureInfo: CoverConfigureInfo,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
-    DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
+    DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
+    TaskNotifyConfig: TaskNotifyConfig,
     ModifyWordSampleRequest: ModifyWordSampleRequest,
     AIRecognitionTemplateItem: AIRecognitionTemplateItem,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
-    AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
+    AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
     CreateAnimatedGraphicsTemplateRequest: CreateAnimatedGraphicsTemplateRequest,
+    FrameTagConfigureInfo: FrameTagConfigureInfo,
     DescribeAnimatedGraphicsTemplatesRequest: DescribeAnimatedGraphicsTemplatesRequest,
-    MediaMetaData: MediaMetaData,
+    AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
+    ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
     ModifyPersonSampleResponse: ModifyPersonSampleResponse,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
-    ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
+    UserDefineConfigureInfo: UserDefineConfigureInfo,
+    NumberFormat: NumberFormat,
+    AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     MediaTranscodeItem: MediaTranscodeItem,
+    ModifyAdaptiveDynamicStreamingTemplateRequest: ModifyAdaptiveDynamicStreamingTemplateRequest,
+    VideoTemplateInfo: VideoTemplateInfo,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     LiveStreamProcessTask: LiveStreamProcessTask,
     PornConfigureInfo: PornConfigureInfo,
-    MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
+    DescribeMediaMetaDataResponse: DescribeMediaMetaDataResponse,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
-    DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,
+    DeleteWorkflowResponse: DeleteWorkflowResponse,
+    WatermarkTemplate: WatermarkTemplate,
+    ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
+    DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
+    DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     AiRecognitionTaskAsrWordsResult: AiRecognitionTaskAsrWordsResult,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
+    LiveStreamFaceRecognitionResult: LiveStreamFaceRecognitionResult,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
     UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
     DescribeSampleSnapshotTemplatesRequest: DescribeSampleSnapshotTemplatesRequest,
-    WorkflowTask: WorkflowTask,
+    CoverConfigureInfoForUpdate: CoverConfigureInfoForUpdate,
     DisableWorkflowResponse: DisableWorkflowResponse,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
     PoliticalImgReviewTemplateInfoForUpdate: PoliticalImgReviewTemplateInfoForUpdate,
-    UserDefineOcrTextReviewTemplateInfo: UserDefineOcrTextReviewTemplateInfo,
-    UserDefineConfigureInfo: UserDefineConfigureInfo,
+    EditMediaFileInfo: EditMediaFileInfo,
+    MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
+    AdaptiveStreamTemplate: AdaptiveStreamTemplate,
     CosInputInfo: CosInputInfo,
+    TagConfigureInfo: TagConfigureInfo,
     TranscodeTaskInput: TranscodeTaskInput,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
     FaceConfigureInfo: FaceConfigureInfo,
@@ -15275,42 +18627,52 @@ module.exports = {
     ParseNotificationResponse: ParseNotificationResponse,
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
+    DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     ResetWorkflowRequest: ResetWorkflowRequest,
-    NumberFormat: NumberFormat,
+    AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
-    OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
+    LiveStreamOcrWordsRecognitionResult: LiveStreamOcrWordsRecognitionResult,
     LiveStreamProcessErrorInfo: LiveStreamProcessErrorInfo,
     EnableWorkflowRequest: EnableWorkflowRequest,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
+    DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     AiAnalysisTaskInput: AiAnalysisTaskInput,
     DeleteAnimatedGraphicsTemplateRequest: DeleteAnimatedGraphicsTemplateRequest,
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
+    RawWatermarkParameter: RawWatermarkParameter,
+    MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
     DeleteContentReviewTemplateResponse: DeleteContentReviewTemplateResponse,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
+    CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
     AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ImageWatermarkInput: ImageWatermarkInput,
+    ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
     CosFileUploadTrigger: CosFileUploadTrigger,
     AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
     AiSampleFaceInfo: AiSampleFaceInfo,
+    LiveStreamAsrWordsRecognitionResult: LiveStreamAsrWordsRecognitionResult,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
     UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
+    DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
     TranscodeTemplate: TranscodeTemplate,
     AiSamplePerson: AiSamplePerson,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
+    MediaProcessTaskAdaptiveDynamicStreamingResult: MediaProcessTaskAdaptiveDynamicStreamingResult,
     MediaAudioStreamItem: MediaAudioStreamItem,
-    SampleSnapshotTemplate: SampleSnapshotTemplate,
+    AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
+    PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     MediaImageSpriteItem: MediaImageSpriteItem,
@@ -15319,48 +18681,62 @@ module.exports = {
     AsrWordsConfigureInfoForUpdate: AsrWordsConfigureInfoForUpdate,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
+    AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
-    DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
+    MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
+    AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
     CreateWorkflowResponse: CreateWorkflowResponse,
     LiveStreamAiReviewResultInfo: LiveStreamAiReviewResultInfo,
+    EditMediaResponse: EditMediaResponse,
     AiRecognitionTaskAsrFullTextResult: AiRecognitionTaskAsrFullTextResult,
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
+    ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     AiRecognitionTaskAsrWordsResultInput: AiRecognitionTaskAsrWordsResultInput,
-    CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
+    CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
+    LiveStreamTaskNotifyConfig: LiveStreamTaskNotifyConfig,
     TEHDConfig: TEHDConfig,
     PoliticalConfigureInfo: PoliticalConfigureInfo,
     AiRecognitionTaskOcrWordsSegmentItem: AiRecognitionTaskOcrWordsSegmentItem,
+    WatermarkInput: WatermarkInput,
     LiveStreamAiReviewImagePoliticalResult: LiveStreamAiReviewImagePoliticalResult,
     DeleteWordSamplesResponse: DeleteWordSamplesResponse,
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
-    WatermarkInput: WatermarkInput,
+    ProcessMediaRequest: ProcessMediaRequest,
     EnableWorkflowResponse: EnableWorkflowResponse,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
     AiSampleWordInfo: AiSampleWordInfo,
+    MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
+    AdaptiveDynamicStreamingInfoItem: AdaptiveDynamicStreamingInfoItem,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     RawTranscodeParameter: RawTranscodeParameter,
-    WatermarkTemplate: WatermarkTemplate,
+    ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
+    LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
-    DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
+    DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
-    TextWatermarkTemplateInput: TextWatermarkTemplateInput,
+    MediaMetaData: MediaMetaData,
     ProcessMediaResponse: ProcessMediaResponse,
     OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
-    MediaProcessTaskInput: MediaProcessTaskInput,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
-    CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
+    TextWatermarkTemplateInput: TextWatermarkTemplateInput,
+    SampleSnapshotTaskInput: SampleSnapshotTaskInput,
+    ParseNotificationRequest: ParseNotificationRequest,
+    DescribeMediaMetaDataRequest: DescribeMediaMetaDataRequest,
+    FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
+    CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
     DescribeAIRecognitionTemplatesRequest: DescribeAIRecognitionTemplatesRequest,
-    CosOutputStorage: CosOutputStorage,
+    AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     MediaProcessTaskResult: MediaProcessTaskResult,
-    AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
+    AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
     ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
     CreateWordSamplesResponse: CreateWordSamplesResponse,
-    TaskNotifyConfig: TaskNotifyConfig,
+    ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
     AiRecognitionResult: AiRecognitionResult,
 
 }

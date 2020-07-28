@@ -739,7 +739,7 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
 <li>address-ip - String - (Filter condition) Private IPv4 address.</li>
 <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
 <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
-<li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is ‘true’, filter only the primary ENI. If the value is ‘false’, filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
+<li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is 'true', filter only the primary ENI. If the value is 'false', filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1047,7 +1047,7 @@ class FlowLog extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID.
+         * ID of the VPC instance
          * @type {string || null}
          */
         this.VpcId = null;
@@ -1740,7 +1740,7 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID.
+         * ID of the VPC instance
          * @type {string || null}
          */
         this.VpcId = null;
@@ -2097,25 +2097,25 @@ class ModifyFlowLogAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID.
+         * ID of the VPC instance
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * The unique ID of the flow log collector.
+         * The unique ID of the flow log.
          * @type {string || null}
          */
         this.FlowLogId = null;
 
         /**
-         * The name of the flow log collector.
+         * The name of the flow log.
          * @type {string || null}
          */
         this.FlowLogName = null;
 
         /**
-         * The description of the flow log collector.
+         * The description of the flow log.
          * @type {string || null}
          */
         this.FlowLogDescription = null;
@@ -2977,7 +2977,7 @@ class DeleteFlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID.
+         * ID of the VPC instance
          * @type {string || null}
          */
         this.VpcId = null;
@@ -3507,7 +3507,7 @@ class DescribeFlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID.
+         * ID of the VPC instance
          * @type {string || null}
          */
         this.VpcId = null;
@@ -7885,7 +7885,7 @@ class NatGateway extends  AbstractModel {
         /**
          * The status of the NAT gateway.
  'PENDING': Creating, 'DELETING': Deleting, 'AVAILABLE': Operating, 'UPDATING': Upgrading,
-‘FAILED’: Failed.
+'FAILED': Failed.
          * @type {string || null}
          */
         this.State = null;
@@ -9316,7 +9316,7 @@ class CreateCcnRequest extends  AbstractModel {
         this.CcnDescription = null;
 
         /**
-         * CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is ‘AU’.
+         * CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
          * @type {string || null}
          */
         this.QosLevel = null;
@@ -10718,7 +10718,7 @@ class CvmInstance extends  AbstractModel {
         this.CPU = null;
 
         /**
-         * Instance’s memory capacity. Unit: GB.
+         * Instance's memory capacity. Unit: GB.
          * @type {number || null}
          */
         this.Memory = null;
@@ -12870,7 +12870,7 @@ class PrivateIpAddressSpecification extends  AbstractModel {
         this.PublicIpAddress = null;
 
         /**
-         * EIP instance ID, such as `eip-11112222`。
+         * EIP instance ID, such as `eip-11112222`.
          * @type {string || null}
          */
         this.AddressId = null;
@@ -13173,7 +13173,7 @@ class CreateFlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * The VPC ID or the unified ID. We recommend you use the unified ID.
+         * ID of the VPC instance
          * @type {string || null}
          */
         this.VpcId = null;
@@ -15722,7 +15722,7 @@ class CCN extends  AbstractModel {
         this.State = null;
 
         /**
-         * The instance service quality. ’PT’: Platinum , 'AU': Gold, 'AG': Silver.
+         * The instance service quality. 'PT': Platinum , 'AU': Gold, 'AG': Silver.
          * @type {string || null}
          */
         this.QosLevel = null;
@@ -17207,7 +17207,7 @@ class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * The information of the cross-region bandwidth limit for CCN instances.
  * @class
  */
 class CcnBandwidthInfo extends  AbstractModel {
@@ -17215,10 +17215,46 @@ class CcnBandwidthInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The CCN ID that the bandwidth belongs to.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * The creation time of the instance.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * The expiration time of the instance.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * The unique ID of the bandwidth instance.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.RegionFlowControlId = null;
+
+        /**
+         * The billing flag.
+Note: this field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.RenewFlag = null;
+
+        /**
+         * The information of bandwidth regions and bandwidth caps.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {CcnRegionBandwidthLimit || null}
+         */
+        this.CcnRegionBandwidthLimit = null;
 
     }
 
@@ -17229,7 +17265,17 @@ class CcnBandwidthInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.RegionFlowControlId = 'RegionFlowControlId' in params ? params.RegionFlowControlId : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+        if (params.CcnRegionBandwidthLimit) {
+            let obj = new CcnRegionBandwidthLimit();
+            obj.deserialize(params.CcnRegionBandwidthLimit)
+            this.CcnRegionBandwidthLimit = obj;
+        }
 
     }
 }

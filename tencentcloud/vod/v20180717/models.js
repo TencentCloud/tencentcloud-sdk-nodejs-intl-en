@@ -34,14 +34,14 @@ Default value: Black.
         this.Color = null;
 
         /**
-         * Canvas width, which is the width of the output video. Value range: 0–4096 px.
+         * Canvas width, which is the width of the output video. Value range: 0-4096 px.
 Default value: 0, which means that the value is the same as the video width of the first video segment in the first video track.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Canvas height, which is the height (or long side) of the output video. Value range: 0–4096 px.
+         * Canvas height, which is the height (or long side) of the output video. Value range: 0-4096 px.
 Default value: 0, which means that the value is the same as the video height of the first video segment in the first video track.
          * @type {number || null}
          */
@@ -214,7 +214,7 @@ class AiRecognitionTaskAsrFullTextSegmentItem extends  AbstractModel {
         super();
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -250,6 +250,86 @@ class AiRecognitionTaskAsrFullTextSegmentItem extends  AbstractModel {
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.Text = 'Text' in params ? params.Text : null;
+
+    }
+}
+
+/**
+ * Control parameter of custom text audit task.
+ * @class
+ */
+class UserDefineOcrTextReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of custom text audit task. Valid values:
+<li>ON: enables custom text audit task;</li>
+<li>OFF: disables custom text audit task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * DescribeAllClass request structure.
+ * @class
+ */
+class DescribeAllClassRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -839,12 +919,11 @@ class AdaptiveDynamicStreamingTemplate extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * Container type. Valid values:
-<li>hls; </li>
-<li>dash.</li>
+         * Adaptive bitstream format. Valid value:
+<li>HLS.</li>
          * @type {string || null}
          */
-        this.PackageType = null;
+        this.Format = null;
 
         /**
          * DRM type. Valid values:
@@ -855,25 +934,6 @@ If this field is a blank string, DRM will not be performed on the video.
          * @type {string || null}
          */
         this.DrmType = null;
-
-        /**
-         * List of video track templates.
-         * @type {Array.<VideoTrackTemplateInfo> || null}
-         */
-        this.VideoTrackTemplateSet = null;
-
-        /**
-         * List of audio track templates.
-         * @type {Array.<AudioTrackTemplateInfo> || null}
-         */
-        this.AudioTrackTemplateSet = null;
-
-        /**
-         * Adaptive bitstream format. Valid value:
-<li>HLS.</li>
-         * @type {string || null}
-         */
-        this.Format = null;
 
         /**
          * Parameter information of input stream for adaptive bitrate streaming. Up to 10 streams can be input.
@@ -922,27 +982,8 @@ If this field is a blank string, DRM will not be performed on the video.
         this.Type = 'Type' in params ? params.Type : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.PackageType = 'PackageType' in params ? params.PackageType : null;
-        this.DrmType = 'DrmType' in params ? params.DrmType : null;
-
-        if (params.VideoTrackTemplateSet) {
-            this.VideoTrackTemplateSet = new Array();
-            for (let z in params.VideoTrackTemplateSet) {
-                let obj = new VideoTrackTemplateInfo();
-                obj.deserialize(params.VideoTrackTemplateSet[z]);
-                this.VideoTrackTemplateSet.push(obj);
-            }
-        }
-
-        if (params.AudioTrackTemplateSet) {
-            this.AudioTrackTemplateSet = new Array();
-            for (let z in params.AudioTrackTemplateSet) {
-                let obj = new AudioTrackTemplateInfo();
-                obj.deserialize(params.AudioTrackTemplateSet[z]);
-                this.AudioTrackTemplateSet.push(obj);
-            }
-        }
         this.Format = 'Format' in params ? params.Format : null;
+        this.DrmType = 'DrmType' in params ? params.DrmType : null;
 
         if (params.StreamInfos) {
             this.StreamInfos = new Array();
@@ -1236,6 +1277,51 @@ class AiAnalysisTaskCoverOutput extends  AbstractModel {
                 let obj = new MediaAiAnalysisCoverItem();
                 obj.deserialize(params.CoverSet[z]);
                 this.CoverSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Information of time point screenshot in VOD file
+ * @class
+ */
+class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Information set of screenshots of the same specification. Each element represents a screenshot.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
+         */
+        this.PicInfoSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.PicInfoSet) {
+            this.PicInfoSet = new Array();
+            for (let z in params.PicInfoSet) {
+                let obj = new MediaSnapshotByTimePicInfoItem();
+                obj.deserialize(params.PicInfoSet[z]);
+                this.PicInfoSet.push(obj);
             }
         }
 
@@ -1640,6 +1726,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * AI-based sample management - keyword output information.
+ * @class
+ */
+class AiSampleWord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Keyword.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * Keyword tag.
+         * @type {Array.<string> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * Keyword use case.
+         * @type {Array.<string> || null}
+         */
+        this.UsageSet = null;
+
+        /**
+         * Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.TagSet = 'TagSet' in params ? params.TagSet : null;
+        this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * CreateImageSpriteTemplate request structure.
  * @class
  */
@@ -1682,6 +1824,21 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+Default value: black.
+         * @type {string || null}
+         */
+        this.FillType = null;
+
+        /**
          * Maximum value of the width (or long side) of a subimage in an image sprite in px. Value range: 0 and [128, 4,096].
 <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
 <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
@@ -1718,15 +1875,6 @@ Default value: open.
          */
         this.SubAppId = null;
 
-        /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-Default value: black.
-         * @type {string || null}
-         */
-        this.FillType = null;
-
     }
 
     /**
@@ -1741,11 +1889,12 @@ Default value: black.
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -1796,113 +1945,39 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Information of a transcoding to adaptive bitrate streaming video track template.
+ * Control parameter of custom figure audit task
  * @class
  */
-class VideoTrackTemplateInfo extends  AbstractModel {
+class UserDefineFaceReviewTemplateInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a video track template.
+         * Switch of custom figure audit task. Valid values:
+<li>ON: enables custom figure audit task;</li>
+<li>OFF: disables custom figure audit task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.BlockConfidence = null;
 
         /**
-         * Encoder. Valid values:
-<li>libx264: H.264</li>
-<li>libx265: H.265</li>
-Currently, a resolution within 640*480p must be specified for H.265.
-         * @type {string || null}
-         */
-        this.Codec = null;
-
-        /**
-         * Video frame rate in Hz. Value range: [0, 60].
-If the value is 0, the frame rate will be the same as that of the source video.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
-        this.Fps = null;
-
-        /**
-         * Bitrate of a video stream in Kbps. Value range: 0 and [128, 35,000].
-If the value is 0, the bitrate of the video will be the same as that of the source video.
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * Template name. Length limit: 64 characters.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Template description. Length limit: 256 characters.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * Template type. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Resolution adaption. Valid values:
-<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
-Default value: open.
-         * @type {string || null}
-         */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-Default value: black.
-         * @type {string || null}
-         */
-        this.FillType = null;
-
-        /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.ReviewConfidence = null;
 
     }
 
@@ -1913,19 +1988,10 @@ Default value: black.
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Codec = 'Codec' in params ? params.Codec : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -1981,7 +2047,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * Control parameter of prohibited information detection. Prohibited information includes:
 <li>Abusive;</li>
 <li>Drug-related.</li>
-Note: this parameter is not supported yet.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {ProhibitedConfigureInfo || null}
          */
@@ -2099,74 +2164,24 @@ class DeleteAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Blur parameter type of video processing task
+ * DeleteContentReviewTemplate request structure.
  * @class
  */
-class MosaicInput extends  AbstractModel {
+class DeleteContentReviewTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Origin position, which currently can only be:
-<li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.</li>
-Default value: TopLeft.
-         * @type {string || null}
-         */
-        this.CoordinateOrigin = null;
-
-        /**
-         * The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported:
-<li>If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
-<li>If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
-Default value: 0 px.
-         * @type {string || null}
-         */
-        this.XPos = null;
-
-        /**
-         * Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported:
-<li>If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
-<li>If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
-Default value: 0 px.
-         * @type {string || null}
-         */
-        this.YPos = null;
-
-        /**
-         * Blur width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.</li>
-Default value: 10%.
-         * @type {string || null}
-         */
-        this.Width = null;
-
-        /**
-         * Blur height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.</li>
-Default value: 10%.
-         * @type {string || null}
-         */
-        this.Height = null;
-
-        /**
-         * Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.
-<li>If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame;</li>
-<li>If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame;</li>
-<li>If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.</li>
+         * Unique ID of content audit template.
          * @type {number || null}
          */
-        this.StartTimeOffset = null;
+        this.Definition = null;
 
         /**
-         * End time offset of blur in seconds.
-<li>If this parameter is left empty or 0 is entered, the blur will exist till the last video frame;</li>
-<li>If this value is greater than 0 (e.g., n), the blur will exist till second n;</li>
-<li>If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.</li>
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
-        this.EndTimeOffset = null;
+        this.SubAppId = null;
 
     }
 
@@ -2177,13 +2192,8 @@ Default value: 10%.
         if (!params) {
             return;
         }
-        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
-        this.XPos = 'XPos' in params ? params.XPos : null;
-        this.YPos = 'YPos' in params ? params.YPos : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -2254,6 +2264,96 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.VolumeParam)
             this.VolumeParam = obj;
         }
+
+    }
+}
+
+/**
+ * ResetProcedureTemplate request structure.
+ * @class
+ */
+class ResetProcedureTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Parameter of video processing task.
+         * @type {MediaProcessTaskInput || null}
+         */
+        this.MediaProcessTask = null;
+
+        /**
+         * Parameter of AI-based content audit task.
+         * @type {AiContentReviewTaskInput || null}
+         */
+        this.AiContentReviewTask = null;
+
+        /**
+         * Parameter of AI-based content analysis task.
+         * @type {AiAnalysisTaskInput || null}
+         */
+        this.AiAnalysisTask = null;
+
+        /**
+         * Type parameter of AI-based content recognition task.
+         * @type {AiRecognitionTaskInput || null}
+         */
+        this.AiRecognitionTask = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.MediaProcessTask) {
+            let obj = new MediaProcessTaskInput();
+            obj.deserialize(params.MediaProcessTask)
+            this.MediaProcessTask = obj;
+        }
+
+        if (params.AiContentReviewTask) {
+            let obj = new AiContentReviewTaskInput();
+            obj.deserialize(params.AiContentReviewTask)
+            this.AiContentReviewTask = obj;
+        }
+
+        if (params.AiAnalysisTask) {
+            let obj = new AiAnalysisTaskInput();
+            obj.deserialize(params.AiAnalysisTask)
+            this.AiAnalysisTask = obj;
+        }
+
+        if (params.AiRecognitionTask) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.AiRecognitionTask)
+            this.AiRecognitionTask = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -2498,6 +2598,41 @@ class ModifySubAppIdInfoRequest extends  AbstractModel {
 }
 
 /**
+ * DeletePersonSample request structure.
+ * @class
+ */
+class DeletePersonSampleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Figure ID.
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Sampled screenshot information
  * @class
  */
@@ -2558,64 +2693,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
         this.WaterMarkDefinition = 'WaterMarkDefinition' in params ? params.WaterMarkDefinition : null;
-
-    }
-}
-
-/**
- * DescribeVideoTrackTemplates request structure.
- * @class
- */
-class DescribeVideoTrackTemplatesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID filter of templates. Array length limit: 100.
-         * @type {Array.<number> || null}
-         */
-        this.Definitions = null;
-
-        /**
-         * Paged offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Template type filter. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -2814,6 +2891,18 @@ class ComposeMediaRequest extends  AbstractModel {
         this.Canvas = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
          * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
@@ -2849,6 +2938,8 @@ class ComposeMediaRequest extends  AbstractModel {
             obj.deserialize(params.Canvas)
             this.Canvas = obj;
         }
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -3145,6 +3236,101 @@ class AiRecognitionTaskHeadTailResultInput extends  AbstractModel {
 }
 
 /**
+ * CreateAdaptiveDynamicStreamingTemplate request structure.
+ * @class
+ */
+class CreateAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Adaptive bitstream format. Valid values:
+<li>HLS.</li>
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output.
+Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
+         * @type {Array.<AdaptiveStreamTemplate> || null}
+         */
+        this.StreamInfos = null;
+
+        /**
+         * Template name. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * DRM scheme type. Valid values:
+<li>SimpleAES.</li>
+If this field is an empty string, DRM will not be performed on the video.
+         * @type {string || null}
+         */
+        this.DrmType = null;
+
+        /**
+         * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+Default value: no.
+         * @type {number || null}
+         */
+        this.DisableHigherVideoBitrate = null;
+
+        /**
+         * Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+Default value: no.
+         * @type {number || null}
+         */
+        this.DisableHigherVideoResolution = null;
+
+        /**
+         * Template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+
+        if (params.StreamInfos) {
+            this.StreamInfos = new Array();
+            for (let z in params.StreamInfos) {
+                let obj = new AdaptiveStreamTemplate();
+                obj.deserialize(params.StreamInfos[z]);
+                this.StreamInfos.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DrmType = 'DrmType' in params ? params.DrmType : null;
+        this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
+        this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * PushUrlCache response structure.
  * @class
  */
@@ -3245,18 +3431,46 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Output of full text recognition.
+ * Control parameter of terrorism information detection in video image task.
  * @class
  */
-class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
+class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Full text recognition result set.
-         * @type {Array.<AiRecognitionTaskOcrFullTextSegmentItem> || null}
+         * Switch of terrorism information detection in video image task. Valid values:
+<li>ON: enables terrorism information detection in video image task;</li>
+<li>OFF: disables terrorism information detection in video image task.</li>
+         * @type {string || null}
          */
-        this.SegmentSet = null;
+        this.Switch = null;
+
+        /**
+         * Filter tag for terrorism information detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+<li>guns: weapons and guns;</li>
+<li>crowd: crowd;</li>
+<li>bloody: bloody scenes;</li>
+<li>police: police force;</li>
+<li>banners: terrorism flags;</li>
+<li>militant: militants;</li>
+<li>explosion: explosions and fires;</li>
+<li>terrorists: terrorists.</li>
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
 
     }
 
@@ -3267,15 +3481,120 @@ class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
-        if (params.SegmentSet) {
-            this.SegmentSet = new Array();
-            for (let z in params.SegmentSet) {
-                let obj = new AiRecognitionTaskOcrFullTextSegmentItem();
-                obj.deserialize(params.SegmentSet[z]);
-                this.SegmentSet.push(obj);
-            }
+    }
+}
+
+/**
+ * ModifyTranscodeTemplate request structure.
+ * @class
+ */
+class ModifyTranscodeTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of transcoding template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * Transcoding template name. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Template description. Length limit: 256 bytes.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Whether to remove video data. Valid values:
+<li>0: retain</li>
+<li>1: remove</li>
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * Whether to remove audio data. Valid values:
+<li>0: retain</li>
+<li>1: remove</li>
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * Video stream configuration parameter.
+         * @type {VideoTemplateInfoForUpdate || null}
+         */
+        this.VideoTemplate = null;
+
+        /**
+         * Audio stream configuration parameter.
+         * @type {AudioTemplateInfoForUpdate || null}
+         */
+        this.AudioTemplate = null;
+
+        /**
+         * TESHD transcoding parameter.
+         * @type {TEHDConfigForUpdate || null}
+         */
+        this.TEHDConfig = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoTemplate) {
+            let obj = new VideoTemplateInfoForUpdate();
+            obj.deserialize(params.VideoTemplate)
+            this.VideoTemplate = obj;
+        }
+
+        if (params.AudioTemplate) {
+            let obj = new AudioTemplateInfoForUpdate();
+            obj.deserialize(params.AudioTemplate)
+            this.AudioTemplate = obj;
+        }
+
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfigForUpdate();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -3376,6 +3695,83 @@ class DeleteAIAnalysisTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * ApplyUpload response structure.
+ * @class
+ */
+class ApplyUploadResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage bucket, which is used as the `bucket_name` in the URL of the upload API.
+         * @type {string || null}
+         */
+        this.StorageBucket = null;
+
+        /**
+         * Storage region, which is used as the `Region` in the `Host` of the upload API.
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * VOD session, which is used to confirm the `VodSessionKey` parameter of the upload API.
+         * @type {string || null}
+         */
+        this.VodSessionKey = null;
+
+        /**
+         * Media storage path, which is used as the `Key` of the stored media of the upload API.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MediaStoragePath = null;
+
+        /**
+         * Cover storage path, which is used as the `Key` of the stored cover of the upload API.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CoverStoragePath = null;
+
+        /**
+         * Temporary credential, which is used for authentication of the upload API.
+         * @type {TempCertificate || null}
+         */
+        this.TempCertificate = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageBucket = 'StorageBucket' in params ? params.StorageBucket : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.VodSessionKey = 'VodSessionKey' in params ? params.VodSessionKey : null;
+        this.MediaStoragePath = 'MediaStoragePath' in params ? params.MediaStoragePath : null;
+        this.CoverStoragePath = 'CoverStoragePath' in params ? params.CoverStoragePath : null;
+
+        if (params.TempCertificate) {
+            let obj = new TempCertificate();
+            obj.deserialize(params.TempCertificate)
+            this.TempCertificate = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Text watermarking template
  * @class
  */
@@ -3424,6 +3820,41 @@ class TextWatermarkTemplateInputForUpdate extends  AbstractModel {
         this.FontSize = 'FontSize' in params ? params.FontSize : null;
         this.FontColor = 'FontColor' in params ? params.FontColor : null;
         this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+
+    }
+}
+
+/**
+ * DeleteSuperPlayerConfig request structure.
+ * @class
+ */
+class DeleteSuperPlayerConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Player configuration name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -3527,6 +3958,12 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
          * Parameter of video processing task.
          * @type {MediaProcessTaskInput || null}
          */
@@ -3566,6 +4003,7 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
         if (params.MediaProcessTask) {
             let obj = new MediaProcessTaskInput();
@@ -3640,6 +4078,75 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * CreatePersonSample request structure.
+ * @class
+ */
+class CreatePersonSampleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Figure name. Length limit: 20 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Figure use case. Valid values:
+1. Recognition: it is used for content recognition and equivalent to `Recognition.Face`.
+2. Review: it is used for content audit and equivalent to `Review.Face`.
+3. All: it is used for content recognition and content audit and equivalent to 1+2 above.
+         * @type {Array.<string> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * Figure description. Length limit: 1,024 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) face image. Only JPEG and PNG images are supported. Array length limit: 5 images.
+Note: the image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+         * @type {Array.<string> || null}
+         */
+        this.FaceContents = null;
+
+        /**
+         * Figure tag
+<li>Array length limit: 20 tags;</li>
+<li>Tag length limit: 128 characters.</li>
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Usages = 'Usages' in params ? params.Usages : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -3750,6 +4257,70 @@ class TagConfigureInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * ModifySuperPlayerConfig response structure.
+ * @class
+ */
+class ModifySuperPlayerConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Output of text keyword recognition.
+ * @class
+ */
+class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text keyword recognition result set.
+         * @type {Array.<AiRecognitionTaskOcrWordsResultItem> || null}
+         */
+        this.ResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultSet) {
+            this.ResultSet = new Array();
+            for (let z in params.ResultSet) {
+                let obj = new AiRecognitionTaskOcrWordsResultItem();
+                obj.deserialize(params.ResultSet[z]);
+                this.ResultSet.push(obj);
+            }
+        }
 
     }
 }
@@ -4025,76 +4596,18 @@ class FileDeleteTask extends  AbstractModel {
 }
 
 /**
- * ModifyTranscodeTemplate request structure.
+ * Output of full text recognition.
  * @class
  */
-class ModifyTranscodeTemplateRequest extends  AbstractModel {
+class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of transcoding template.
-         * @type {number || null}
+         * Full text recognition result set.
+         * @type {Array.<AiRecognitionTaskOcrFullTextSegmentItem> || null}
          */
-        this.Definition = null;
-
-        /**
-         * Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
-         * @type {string || null}
-         */
-        this.Container = null;
-
-        /**
-         * Transcoding template name. Length limit: 64 characters.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Template description. Length limit: 256 bytes.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * Whether to remove video data. Valid values:
-<li>0: retain</li>
-<li>1: remove</li>
-         * @type {number || null}
-         */
-        this.RemoveVideo = null;
-
-        /**
-         * Whether to remove audio data. Valid values:
-<li>0: retain</li>
-<li>1: remove</li>
-         * @type {number || null}
-         */
-        this.RemoveAudio = null;
-
-        /**
-         * Video stream configuration parameter.
-         * @type {VideoTemplateInfoForUpdate || null}
-         */
-        this.VideoTemplate = null;
-
-        /**
-         * Audio stream configuration parameter.
-         * @type {AudioTemplateInfoForUpdate || null}
-         */
-        this.AudioTemplate = null;
-
-        /**
-         * TESHD transcoding parameter.
-         * @type {TEHDConfigForUpdate || null}
-         */
-        this.TEHDConfig = null;
-
-        /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
+        this.SegmentSet = null;
 
     }
 
@@ -4105,31 +4618,15 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Container = 'Container' in params ? params.Container : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
-        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
 
-        if (params.VideoTemplate) {
-            let obj = new VideoTemplateInfoForUpdate();
-            obj.deserialize(params.VideoTemplate)
-            this.VideoTemplate = obj;
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new AiRecognitionTaskOcrFullTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
         }
-
-        if (params.AudioTemplate) {
-            let obj = new AudioTemplateInfoForUpdate();
-            obj.deserialize(params.AudioTemplate)
-            this.AudioTemplate = obj;
-        }
-
-        if (params.TEHDConfig) {
-            let obj = new TEHDConfigForUpdate();
-            obj.deserialize(params.TEHDConfig)
-            this.TEHDConfig = obj;
-        }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -4218,13 +4715,13 @@ There can be up to 10 tags, each with a length limit of 16 characters.
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -4247,18 +4744,30 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * Output of text keyword recognition.
+ * DescribeWordSamples response structure.
  * @class
  */
-class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
+class DescribeWordSamplesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Text keyword recognition result set.
-         * @type {Array.<AiRecognitionTaskOcrWordsResultItem> || null}
+         * Number of eligible entries.
+         * @type {number || null}
          */
-        this.ResultSet = null;
+        this.TotalCount = null;
+
+        /**
+         * Keyword information.
+         * @type {Array.<AiSampleWord> || null}
+         */
+        this.WordSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4269,32 +4778,40 @@ class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.ResultSet) {
-            this.ResultSet = new Array();
-            for (let z in params.ResultSet) {
-                let obj = new AiRecognitionTaskOcrWordsResultItem();
-                obj.deserialize(params.ResultSet[z]);
-                this.ResultSet.push(obj);
+        if (params.WordSet) {
+            this.WordSet = new Array();
+            for (let z in params.WordSet) {
+                let obj = new AiSampleWord();
+                obj.deserialize(params.WordSet[z]);
+                this.WordSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Result information of intelligent frame-specific tagging
+ * AI-based sample management - face information.
  * @class
  */
-class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
+class AiSampleFaceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of frame-specific video tags.
-         * @type {Array.<MediaAiAnalysisFrameTagSegmentItem> || null}
+         * Face image ID.
+         * @type {string || null}
          */
-        this.SegmentSet = null;
+        this.FaceId = null;
+
+        /**
+         * Face image address.
+         * @type {string || null}
+         */
+        this.Url = null;
 
     }
 
@@ -4305,15 +4822,8 @@ class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.SegmentSet) {
-            this.SegmentSet = new Array();
-            for (let z in params.SegmentSet) {
-                let obj = new MediaAiAnalysisFrameTagSegmentItem();
-                obj.deserialize(params.SegmentSet[z]);
-                this.SegmentSet.push(obj);
-            }
-        }
+        this.FaceId = 'FaceId' in params ? params.FaceId : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -4383,6 +4893,44 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * Control parameter of text keyword recognition.
+ * @class
+ */
+class OcrWordsConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of text keyword recognition task. Valid values:
+<li>ON: enables text keyword recognition task;</li>
+<li>OFF: disables text keyword recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results will be returned.
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
 
     }
 }
@@ -4550,24 +5098,41 @@ class CoverBySnapshotTaskOutput extends  AbstractModel {
 }
 
 /**
- * CommitUpload request structure.
+ * Text watermarking template
  * @class
  */
-class CommitUploadRequest extends  AbstractModel {
+class TextWatermarkTemplateInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VOD session, which takes the returned value (VodSessionKey) of the `ApplyUpload` API.
+         * Font type. Currently, two types are supported:
+<li>simkai.ttf: both Chinese and English are supported;</li>
+<li>arial.ttf: only English is supported.</li>
          * @type {string || null}
          */
-        this.VodSessionKey = null;
+        this.FontType = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * Font size in Npx format where N is a numeric value.
+         * @type {string || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+        /**
+         * Text transparency. Value range: (0, 1]
+<li>0: completely transparent</li>
+<li>1: completely opaque</li>
+Default value: 1.
          * @type {number || null}
          */
-        this.SubAppId = null;
+        this.FontAlpha = null;
 
     }
 
@@ -4578,8 +5143,10 @@ class CommitUploadRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VodSessionKey = 'VodSessionKey' in params ? params.VodSessionKey : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.FontType = 'FontType' in params ? params.FontType : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
 
     }
 }
@@ -4712,98 +5279,32 @@ class EditMediaResponse extends  AbstractModel {
 }
 
 /**
- * Information of a transcoding to adaptive bitrate streaming audio track template.
+ * Control parameter of politically sensitive information detection in text task.
  * @class
  */
-class AudioTrackTemplateInfo extends  AbstractModel {
+class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a template.
+         * Switch of politically sensitive information detection in text task. Valid values:
+<li>ON: enables politically sensitive information detection in text task;</li>
+<li>OFF: disables politically sensitive information detection in text task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.BlockConfidence = null;
 
         /**
-         * Audio track encoder.
-When `Container` is `mp3`, the valid value is:
-<li>libmp3lame.</li>
-When `Container` is `ogg` or `flac`, the valid value is:
-<li>flac.</li>
-When `Container` is `m4a`, the valid values include:
-<li>libfdk_aac;</li>
-<li>libmp3lame;</li>
-<li>ac3.</li>
-When the video track's `Container` is `mp4` or `flv`, the valid values include:
-<li>libfdk_aac: more suitable for mp4;</li>
-<li>libmp3lame: more suitable for flv;</li>
-<li>mp2.</li>
-When the video track's `Container` is `hls`, the valid values include:
-<li>libfdk_aac;</li>
-<li>libmp3lame.</li>
-         * @type {string || null}
-         */
-        this.Codec = null;
-
-        /**
-         * Audio stream bitrate in Kbps. Value range: 0 and [26, 256].
-If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
          * @type {number || null}
          */
-        this.Bitrate = null;
-
-        /**
-         * Audio stream sample rate. Valid values:
-<li>32,000</li>
-<li>44,100</li>
-<li>48,000</li>
-In Hz.
-         * @type {number || null}
-         */
-        this.SampleRate = null;
-
-        /**
-         * Template type. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Template name. Length limit: 64 characters.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Template description. Length limit: 256 characters.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * Audio channel system. Valid values:
-<li>1: Mono</li>
-<li>2: Dual</li>
-<li>6: Stereo</li>
-Default value: 2.
-         * @type {number || null}
-         */
-        this.AudioChannel = null;
-
-        /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.ReviewConfidence = null;
 
     }
 
@@ -4814,16 +5315,9 @@ Default value: 2.
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Codec = 'Codec' in params ? params.Codec : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.AudioChannel = 'AudioChannel' in params ? params.AudioChannel : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -4867,7 +5361,7 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.AiRecognitionTask = null;
 
         /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+         * Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
         this.TasksPriority = null;
@@ -4940,6 +5434,207 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * ModifyMediaInfo request structure.
+ * @class
+ */
+class ModifyMediaInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique media file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Media filename, which can contain up to 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Media file description, which can contain up to 128 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Media file category ID.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * Media file expiration time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The value `9999-12-31T23:59:59Z` indicates that the media file never expires. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted.
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) the video cover image file (such as .jpeg or .png file). Only .gif, .jpeg, and .png image formats are supported.
+         * @type {string || null}
+         */
+        this.CoverData = null;
+
+        /**
+         * Set of video timestamps to be added. If a timestamp already exists at an offset time point, it will be overwritten. Up to 100 timestamps can be added to one media file. In the same request, the time offset parameters of `AddKeyFrameDescs` must be different from those of `DeleteKeyFrameDescs`.
+         * @type {Array.<MediaKeyFrameDescItem> || null}
+         */
+        this.AddKeyFrameDescs = null;
+
+        /**
+         * Time offset of the set of video timestamps to be deleted in seconds. In the same request, the time offset parameters of `AddKeyFrameDescs` must be different from those of `DeleteKeyFrameDescs`.
+         * @type {Array.<number> || null}
+         */
+        this.DeleteKeyFrameDescs = null;
+
+        /**
+         * The value `1` indicates to delete all timestamps in the video. Other values are meaningless.
+In the same request, `ClearKeyFrameDescs` and `AddKeyFrameDescs` cannot be present at the same time.
+         * @type {number || null}
+         */
+        this.ClearKeyFrameDescs = null;
+
+        /**
+         * Set of tags to be added. Up to 16 tags can be added to one media file, and one tag can contain up to 16 characters. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
+         * @type {Array.<string> || null}
+         */
+        this.AddTags = null;
+
+        /**
+         * Set of tags to be deleted. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
+         * @type {Array.<string> || null}
+         */
+        this.DeleteTags = null;
+
+        /**
+         * The value `1` indicates to delete all tags of the media file. Other values are meaningless.
+In the same request, `ClearTags` and `AddTags` cannot be present at the same time.
+         * @type {number || null}
+         */
+        this.ClearTags = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.CoverData = 'CoverData' in params ? params.CoverData : null;
+
+        if (params.AddKeyFrameDescs) {
+            this.AddKeyFrameDescs = new Array();
+            for (let z in params.AddKeyFrameDescs) {
+                let obj = new MediaKeyFrameDescItem();
+                obj.deserialize(params.AddKeyFrameDescs[z]);
+                this.AddKeyFrameDescs.push(obj);
+            }
+        }
+        this.DeleteKeyFrameDescs = 'DeleteKeyFrameDescs' in params ? params.DeleteKeyFrameDescs : null;
+        this.ClearKeyFrameDescs = 'ClearKeyFrameDescs' in params ? params.ClearKeyFrameDescs : null;
+        this.AddTags = 'AddTags' in params ? params.AddTags : null;
+        this.DeleteTags = 'DeleteTags' in params ? params.DeleteTags : null;
+        this.ClearTags = 'ClearTags' in params ? params.ClearTags : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * DeleteTranscodeTemplate request structure.
+ * @class
+ */
+class DeleteTranscodeTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of transcoding template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Control parameter of porn detection in speech task.
+ * @class
+ */
+class PornAsrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of porn detection in speech task. Valid values:
+<li>ON: enables porn detection in speech task;</li>
+<li>OFF: disables porn detection in speech task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -5236,6 +5931,113 @@ Transcoding specification:
 }
 
 /**
+ * Control parameter of full text recognition task
+ * @class
+ */
+class OcrFullTextConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of full text recognition task. Valid values:
+<li>ON: enables intelligent full text recognition task;</li>
+<li>OFF: disables intelligent full text recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * ProcessMediaByProcedure request structure.
+ * @class
+ */
+class ProcessMediaByProcedureRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * [Task flow template](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
+         * @type {string || null}
+         */
+        this.ProcedureName = null;
+
+        /**
+         * Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
+         * @type {string || null}
+         */
+        this.TasksNotifyMode = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * ID used for deduplication. If there was a request with the same ID on the last day, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Reserved field for special purposes.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.ProcedureName = 'ProcedureName' in params ? params.ProcedureName : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Video processing task type
  * @class
  */
@@ -5369,36 +6171,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Face recognition result segment
+ * Result type of animated image generating task
  * @class
  */
-class AiRecognitionTaskFaceSegmentItem extends  AbstractModel {
+class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time offset of recognized segment in seconds.
-         * @type {number || null}
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
          */
-        this.StartTimeOffset = null;
+        this.Status = null;
 
         /**
-         * End time offset of recognition segment in seconds.
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.EndTimeOffset = null;
+        this.ErrCode = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
-         * @type {number || null}
+         * Error message.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Confidence = null;
+        this.Message = null;
 
         /**
-         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-         * @type {Array.<number> || null}
+         * Input of animated image generating task.
+         * @type {AnimatedGraphicTaskInput || null}
          */
-        this.AreaCoordSet = null;
+        this.Input = null;
+
+        /**
+         * Output of animated image generating task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {MediaAnimatedGraphicsItem || null}
+         */
+        this.Output = null;
 
     }
 
@@ -5409,10 +6223,21 @@ class AiRecognitionTaskFaceSegmentItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AnimatedGraphicTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new MediaAnimatedGraphicsItem();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -5453,6 +6278,34 @@ class ProcessMediaResponse extends  AbstractModel {
 }
 
 /**
+ * CreateWordSamples response structure.
+ * @class
+ */
+class CreateWordSamplesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Control parameter of intelligent categorization task
  * @class
  */
@@ -5483,6 +6336,136 @@ class ClassificationConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * DeleteAdaptiveDynamicStreamingTemplate response structure.
+ * @class
+ */
+class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateWordSamples request structure.
+ * @class
+ */
+class CreateWordSamplesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <b>Keyword use case. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition;
+2. Recognition.Asr: ASR-based content recognition;
+3. Review.Ocr: OCR-based content audit;
+4. Review.Asr: ASR-based content audit;
+<b>These values can be merged as follows:</b>
+5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
+6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
+7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+         * @type {Array.<string> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * Keyword. Array length limit: 100.
+         * @type {Array.<AiSampleWordInfo> || null}
+         */
+        this.Words = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Usages = 'Usages' in params ? params.Usages : null;
+
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new AiSampleWordInfo();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Control parameter of politically sensitive information detection in speech task.
+ * @class
+ */
+class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of politically sensitive information detection in speech task. Valid values:
+<li>ON: enables politically sensitive information detection in speech task;</li>
+<li>OFF: disables politically sensitive information detection in speech task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
  * Type of a release on WeChat Mini Program task
  * @class
  */
@@ -5506,6 +6489,51 @@ class WechatMiniProgramPublishTaskInput extends  AbstractModel {
             return;
         }
         this.SourceDefinition = 'SourceDefinition' in params ? params.SourceDefinition : null;
+
+    }
+}
+
+/**
+ * AI-based sample management - face data operation.
+ * @class
+ */
+class AiSampleFaceOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Operation type. Valid values: add, delete, reset. The `reset` operation will clear the existing face data of a figure and add `FaceContents` as the specified face data.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Face ID set, which is required if `Type` is `delete`.
+         * @type {Array.<string> || null}
+         */
+        this.FaceIds = null;
+
+        /**
+         * String set generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) the face image.
+<li>This field is required if `Type` is `add` or `reset`;</li>
+<li>Array length limit: 5 images.</li>
+Note: the image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+         * @type {Array.<string> || null}
+         */
+        this.FaceContents = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.FaceIds = 'FaceIds' in params ? params.FaceIds : null;
+        this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
 
     }
 }
@@ -5732,6 +6760,118 @@ class PornAsrReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * Video splitting results.
+ * @class
+ */
+class AiRecognitionTaskSegmentResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: success; other values: failure.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input information of video splitting task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskSegmentResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output information of video splitting task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskSegmentResultOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskSegmentResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiRecognitionTaskSegmentResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
+ * Control parameter of prohibited information detection in speech task
+ * @class
+ */
+class ProhibitedAsrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of prohibited information detection in speech task. Valid values:
+<li>ON: enables prohibited information detection in speech task;</li>
+<li>OFF: disables prohibited information detection in speech task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
          * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
@@ -5901,6 +7041,41 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.MetaDataRequired = 'MetaDataRequired' in params ? params.MetaDataRequired : null;
         this.Host = 'Host' in params ? params.Host : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * DeleteAdaptiveDynamicStreamingTemplate request structure.
+ * @class
+ */
+class DeleteAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of adaptive bitrate streaming template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -6194,7 +7369,7 @@ class EditMediaRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+         * Task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
         this.TasksPriority = null;
@@ -6400,14 +7575,12 @@ class DescribeMediaInfosResponse extends  AbstractModel {
 
         /**
          * Media file information list.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MediaInfo> || null}
          */
         this.MediaInfoSet = null;
 
         /**
          * List of IDs of files that do not exist.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.NotExistFileIdSet = null;
@@ -6739,6 +7912,44 @@ Default value: All, i.e., both default and custom object libraries will be used.
 }
 
 /**
+ * Control parameter of full speech recognition task.
+ * @class
+ */
+class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of full speech recognition task. Valid values:
+<li>ON: enables intelligent full speech recognition task;</li>
+<li>OFF: disables intelligent full speech recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Format of generated subtitles file. If an empty string is entered, no subtitles files will be generated. Valid values:
+<li>vtt: generates a WebVTT subtitles file.</li>
+         * @type {string || null}
+         */
+        this.SubtitleFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+
+    }
+}
+
+/**
  * Video opening and ending credits recognition result.
  * @class
  */
@@ -6900,6 +8111,96 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreatePersonSample response structure.
+ * @class
+ */
+class CreatePersonSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Figure information.
+         * @type {AiSamplePerson || null}
+         */
+        this.Person = null;
+
+        /**
+         * Face information failed to be processed.
+         * @type {Array.<AiSampleFailFaceInfo> || null}
+         */
+        this.FailFaceInfoSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Person) {
+            let obj = new AiSamplePerson();
+            obj.deserialize(params.Person)
+            this.Person = obj;
+        }
+
+        if (params.FailFaceInfoSet) {
+            this.FailFaceInfoSet = new Array();
+            for (let z in params.FailFaceInfoSet) {
+                let obj = new AiSampleFailFaceInfo();
+                obj.deserialize(params.FailFaceInfoSet[z]);
+                this.FailFaceInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateContentReviewTemplate response structure.
+ * @class
+ */
+class CreateContentReviewTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of content audit template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Control parameter of an intelligent highlight generating task
  * @class
  */
@@ -6988,6 +8289,51 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * Control parameter of prohibited information detection task
+ * @class
+ */
+class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Control parameter of prohibited information detection in speech.
+         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * Control parameter of prohibited information detection in text.
+         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
+
+    }
+}
+
+/**
  * Control parameter of intelligent tagging task
  * @class
  */
@@ -7013,6 +8359,41 @@ class TagConfigureInfoForUpdate extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * DeleteWordSamples request structure.
+ * @class
+ */
+class DeleteWordSamplesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Keyword. Array length limit: 100 words.
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -7268,13 +8649,13 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -7296,36 +8677,29 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Control parameter of custom figure audit task
+ * Control parameter of porn detection in text task.
  * @class
  */
-class UserDefineFaceReviewTemplateInfo extends  AbstractModel {
+class PornOcrReviewTemplateInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of custom figure audit task. Valid values:
-<li>ON: enables custom figure audit task;</li>
-<li>OFF: disables custom figure audit task.</li>
+         * Switch of porn detection in text task. Valid values:
+<li>ON: enables porn detection in text task;</li>
+<li>OFF: disables porn detection in text task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
-There can be up to 10 tags, each with a length limit of 16 characters.
-         * @type {Array.<string> || null}
-         */
-        this.LabelSet = null;
-
-        /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -7340,7 +8714,6 @@ There can be up to 10 tags, each with a length limit of 16 characters.
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
@@ -7415,6 +8788,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * ModifyContentReviewTemplate response structure.
+ * @class
+ */
+class ModifyContentReviewTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7542,6 +8943,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Control parameter of video splitting recognition task
+ * @class
+ */
+class SegmentConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of video splitting recognition task. Valid values:
+<li>ON: enables intelligent video splitting recognition task;</li>
+<li>OFF: disables intelligent video splitting recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Control parameter of custom audit task
  * @class
  */
@@ -7622,7 +9053,7 @@ class AiRecognitionTaskSegmentSegmentItem extends  AbstractModel {
         this.SegmentUrl = null;
 
         /**
-         * Confidence of split segment. Value range: 0–100.
+         * Confidence of split segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -7738,26 +9169,130 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * Information of time point screenshot in VOD file
+ * CreateSuperPlayerConfig response structure.
  * @class
  */
-class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
+class CreateSuperPlayerConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Result information of intelligent frame-specific tagging
+ * @class
+ */
+class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of frame-specific video tags.
+         * @type {Array.<MediaAiAnalysisFrameTagSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new MediaAiAnalysisFrameTagSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ModifyAdaptiveDynamicStreamingTemplate request structure.
+ * @class
+ */
+class ModifyAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of adaptive bitrate streaming template.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Information set of screenshots of the same specification. Each element represents a screenshot.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
+         * Template name. Length limit: 64 characters.
+         * @type {string || null}
          */
-        this.PicInfoSet = null;
+        this.Name = null;
+
+        /**
+         * Adaptive bitstream format. Valid values:
+<li>HLS.</li>
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.DisableHigherVideoBitrate = null;
+
+        /**
+         * Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.DisableHigherVideoResolution = null;
+
+        /**
+         * Parameter information of input stream for adaptive bitrate streaming. Up to 10 streams can be input.
+Note: the frame rate of all streams must be the same; otherwise, the frame rate of the first stream will be used as the output frame rate.
+         * @type {Array.<AdaptiveStreamTemplate> || null}
+         */
+        this.StreamInfos = null;
+
+        /**
+         * Template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -7769,69 +9304,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
+        this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
 
-        if (params.PicInfoSet) {
-            this.PicInfoSet = new Array();
-            for (let z in params.PicInfoSet) {
-                let obj = new MediaSnapshotByTimePicInfoItem();
-                obj.deserialize(params.PicInfoSet[z]);
-                this.PicInfoSet.push(obj);
+        if (params.StreamInfos) {
+            this.StreamInfos = new Array();
+            for (let z in params.StreamInfos) {
+                let obj = new AdaptiveStreamTemplate();
+                obj.deserialize(params.StreamInfos[z]);
+                this.StreamInfos.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * Text watermarking template
- * @class
- */
-class TextWatermarkTemplateInput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Font type. Currently, two types are supported:
-<li>simkai.ttf: both Chinese and English are supported;</li>
-<li>arial.ttf: only English is supported.</li>
-         * @type {string || null}
-         */
-        this.FontType = null;
-
-        /**
-         * Font size in Npx format where N is a numeric value.
-         * @type {string || null}
-         */
-        this.FontSize = null;
-
-        /**
-         * Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
-         * @type {string || null}
-         */
-        this.FontColor = null;
-
-        /**
-         * Text transparency. Value range: (0, 1]
-<li>0: completely transparent</li>
-<li>1: completely opaque</li>
-Default value: 1.
-         * @type {number || null}
-         */
-        this.FontAlpha = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FontType = 'FontType' in params ? params.FontType : null;
-        this.FontSize = 'FontSize' in params ? params.FontSize : null;
-        this.FontColor = 'FontColor' in params ? params.FontColor : null;
-        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -7988,48 +9475,44 @@ class DescribeCDNUsageDataResponse extends  AbstractModel {
 }
 
 /**
- * Result type of animated image generating task
+ * ModifyWordSample request structure.
  * @class
  */
-class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
+class ModifyWordSampleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Keyword. Length limit: 128 characters.
          * @type {string || null}
          */
-        this.Status = null;
+        this.Keyword = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <b>Keyword use case. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition;
+2. Recognition.Asr: ASR-based content recognition;
+3. Review.Ocr: OCR-based content audit;
+4. Review.Asr: ASR-based content audit;
+<b>These values can be merged as follows:</b>
+5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
+6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
+7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+         * @type {Array.<string> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * Tag operation information.
+         * @type {AiSampleTagOperation || null}
+         */
+        this.TagOperationInfo = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
-        this.ErrCode = null;
-
-        /**
-         * Error message.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Input of animated image generating task.
-         * @type {AnimatedGraphicTaskInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output of animated image generating task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {MediaAnimatedGraphicsItem || null}
-         */
-        this.Output = null;
+        this.SubAppId = null;
 
     }
 
@@ -8040,21 +9523,92 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.Usages = 'Usages' in params ? params.Usages : null;
 
-        if (params.Input) {
-            let obj = new AnimatedGraphicTaskInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
+        if (params.TagOperationInfo) {
+            let obj = new AiSampleTagOperation();
+            obj.deserialize(params.TagOperationInfo)
+            this.TagOperationInfo = obj;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
-        if (params.Output) {
-            let obj = new MediaAnimatedGraphicsItem();
-            obj.deserialize(params.Output)
-            this.Output = obj;
+    }
+}
+
+/**
+ * Face recognition result segment
+ * @class
+ */
+class AiRecognitionTaskFaceSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time offset of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of recognition segment in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Confidence of recognized segment. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+
+    }
+}
+
+/**
+ * DeleteMedia response structure.
+ * @class
+ */
+class DeleteMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8083,6 +9637,73 @@ class ModifySnapshotByTimeOffsetTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Object recognition result.
+ * @class
+ */
+class AiRecognitionTaskObjectResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: success; other values: failure.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input information of object recognition task.
+         * @type {AiRecognitionTaskObjectResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output information of object recognition task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskObjectResultOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskObjectResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiRecognitionTaskObjectResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -8317,7 +9938,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.AiRecognitionTask = null;
 
         /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+         * Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
         this.TasksPriority = null;
@@ -8392,6 +10013,42 @@ class ProcessMediaRequest extends  AbstractModel {
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * ModifyMediaInfo response structure.
+ * @class
+ */
+class ModifyMediaInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * URL of new video cover.
+* Note: this returned value is valid only if the request carries `CoverData`.*
+         * @type {string || null}
+         */
+        this.CoverUrl = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8572,6 +10229,34 @@ class AiRecognitionTaskAsrWordsResultOutput extends  AbstractModel {
 }
 
 /**
+ * ModifyAdaptiveDynamicStreamingTemplate response structure.
+ * @class
+ */
+class ModifyAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Result type of transcoding task
  * @class
  */
@@ -8703,6 +10388,210 @@ class ImageSpriteTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * Control parameter of object recognition task
+ * @class
+ */
+class ObjectConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of object recognition task. Valid values:
+<li>ON: enables intelligent object recognition task;</li>
+<li>OFF: disables intelligent object recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Object library. Valid values:
+<li>Default: default object library;</li>
+<li>UserDefine: custom object library.</li>
+<li>All: both default and custom object libraries will be used.</li>
+         * @type {string || null}
+         */
+        this.ObjectLibrary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.ObjectLibrary = 'ObjectLibrary' in params ? params.ObjectLibrary : null;
+
+    }
+}
+
+/**
+ * DeleteMedia request structure.
+ * @class
+ */
+class DeleteMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique media file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Content to be deleted. The default value is "[]", which indicates to delete the media file and all its corresponding files generated by video processing.
+         * @type {Array.<MediaDeleteItem> || null}
+         */
+        this.DeleteParts = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.DeleteParts) {
+            this.DeleteParts = new Array();
+            for (let z in params.DeleteParts) {
+                let obj = new MediaDeleteItem();
+                obj.deserialize(params.DeleteParts[z]);
+                this.DeleteParts.push(obj);
+            }
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * CreateSuperPlayerConfig request structure.
+ * @class
+ */
+class CreateSuperPlayerConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Player configuration name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Switch of DRM-protected adaptive bitstream playback:
+<li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
+<li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
+Default value: OFF.
+         * @type {string || null}
+         */
+        this.DrmSwitch = null;
+
+        /**
+         * ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `DrmSwitch` is `OFF`.
+         * @type {number || null}
+         */
+        this.AdaptiveDynamicStreamingDefinition = null;
+
+        /**
+         * Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if `DrmSwitch` is `ON`.
+         * @type {DrmStreamingsInfo || null}
+         */
+        this.DrmStreamingsInfo = null;
+
+        /**
+         * ID of the image sprite generating template that allows output.
+         * @type {number || null}
+         */
+        this.ImageSpriteDefinition = null;
+
+        /**
+         * Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used:
+<li>MinEdgeLength: 240, Name: LD;</li>
+<li>MinEdgeLength: 480, Name: SD;</li>
+<li>MinEdgeLength: 720, Name: HD;</li>
+<li>MinEdgeLength: 1080, Name: FHD;</li>
+<li>MinEdgeLength: 1440, Name: 2K;</li>
+<li>MinEdgeLength: 2160, Name: 4K;</li>
+<li>MinEdgeLength: 4320, Name: 8K.</li>
+         * @type {Array.<ResolutionNameInfo> || null}
+         */
+        this.ResolutionNames = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * Template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
+        this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
+
+        if (params.DrmStreamingsInfo) {
+            let obj = new DrmStreamingsInfo();
+            obj.deserialize(params.DrmStreamingsInfo)
+            this.DrmStreamingsInfo = obj;
+        }
+        this.ImageSpriteDefinition = 'ImageSpriteDefinition' in params ? params.ImageSpriteDefinition : null;
+
+        if (params.ResolutionNames) {
+            this.ResolutionNames = new Array();
+            for (let z in params.ResolutionNames) {
+                let obj = new ResolutionNameInfo();
+                obj.deserialize(params.ResolutionNames[z]);
+                this.ResolutionNames.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -8898,6 +10787,130 @@ class SimpleHlsClipRequest extends  AbstractModel {
 }
 
 /**
+ * Content to be deleted when a VOD video is deleted
+
+ * @class
+ */
+class MediaDeleteItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the content to be deleted. If this field is left empty, the parameter will be invalid. Valid values:
+<li>TranscodeFiles: deletes transcoded files.</li>
+<li>WechatPublishFiles: deletes files published on WeChat.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * ID of the template for which to delete the videos of the type specified by the `Type` parameter. For the template definition, please see [Transcoding Template](https://cloud.tencent.com/document/product/266/33478#.3Cspan-id-.3D-.22zm.22-.3E.3C.2Fspan.3E.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+Default value: 0, which indicates to delete all videos of the type specified by the `Type` parameter.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * AI-based sample management - figure information.
+ * @class
+ */
+class AiSamplePerson extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Figure ID.
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * Figure name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Figure description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Face information.
+         * @type {Array.<AiSampleFaceInfo> || null}
+         */
+        this.FaceInfoSet = null;
+
+        /**
+         * Figure tag.
+         * @type {Array.<string> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * Use case.
+         * @type {Array.<string> || null}
+         */
+        this.UsageSet = null;
+
+        /**
+         * Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.FaceInfoSet) {
+            this.FaceInfoSet = new Array();
+            for (let z in params.FaceInfoSet) {
+                let obj = new AiSampleFaceInfo();
+                obj.deserialize(params.FaceInfoSet[z]);
+                this.FaceInfoSet.push(obj);
+            }
+        }
+        this.TagSet = 'TagSet' in params ? params.TagSet : null;
+        this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * Adaptive bitrate streaming information
  * @class
  */
@@ -8930,6 +10943,94 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.AdaptiveDynamicStreamingSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeSuperPlayerConfigs response structure.
+ * @class
+ */
+class DescribeSuperPlayerConfigsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Player configuration array.
+         * @type {Array.<PlayerConfig> || null}
+         */
+        this.PlayerConfigSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.PlayerConfigSet) {
+            this.PlayerConfigSet = new Array();
+            for (let z in params.PlayerConfigSet) {
+                let obj = new PlayerConfig();
+                obj.deserialize(params.PlayerConfigSet[z]);
+                this.PlayerConfigSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Control parameter of speech keyword recognition.
+ * @class
+ */
+class AsrWordsConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of speech keyword recognition task. Valid values:
+<li>ON: enables speech keyword recognition task;</li>
+<li>OFF: disables speech keyword recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Keyword filter tag, which specifies the keyword tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results will be returned.
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
 
     }
 }
@@ -9079,53 +11180,6 @@ If this parameter is left blank or 0 is entered, there will be no upper limit fo
 }
 
 /**
- * Video clipping task information. This structure is only used for tasks initiated by the [ClipVideo](https://cloud.tencent.com/document/product/266/10156) API in v2017.
- * @class
- */
-class ClipTask2017 extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Video clipping task ID.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * ID of source file for video clipping task.
-         * @type {string || null}
-         */
-        this.SrcFileId = null;
-
-        /**
-         * Information of file output by video clipping.
-         * @type {ClipFileInfo2017 || null}
-         */
-        this.FileInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.SrcFileId = 'SrcFileId' in params ? params.SrcFileId : null;
-
-        if (params.FileInfo) {
-            let obj = new ClipFileInfo2017();
-            obj.deserialize(params.FileInfo)
-            this.FileInfo = obj;
-        }
-
-    }
-}
-
-/**
  * Details of an animated image generating template.
  * @class
  */
@@ -9246,6 +11300,102 @@ Default value: open.
 }
 
 /**
+ * Control parameter of terrorism information detection in text task
+ * @class
+ */
+class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of terrorism information detection in text task. Valid values:
+<li>ON: enables terrorism information detection in text task;</li>
+<li>OFF: disables terrorism information detection in text task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * Control parameter of custom speech audit task
+ * @class
+ */
+class UserDefineAsrTextReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of custom speech audit task. Valid values:
+<li>ON: enables custom speech audit task;</li>
+<li>OFF: disables custom speech audit task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
  * Output of video opening and ending credits recognition.
  * @class
  */
@@ -9254,7 +11404,7 @@ class AiRecognitionTaskHeadTailResultOutput extends  AbstractModel {
         super();
 
         /**
-         * Confidence of recognized opening credits. Value range: 0–100.
+         * Confidence of recognized opening credits. Value range: 0-100.
          * @type {number || null}
          */
         this.HeadConfidence = null;
@@ -9266,7 +11416,7 @@ class AiRecognitionTaskHeadTailResultOutput extends  AbstractModel {
         this.HeadTimeOffset = null;
 
         /**
-         * Confidence of recognized closing credits. Value range: 0–100.
+         * Confidence of recognized closing credits. Value range: 0-100.
          * @type {number || null}
          */
         this.TailConfidence = null;
@@ -9323,24 +11473,47 @@ class ModifyImageSpriteTemplateResponse extends  AbstractModel {
 }
 
 /**
- * PullEvents request structure.
+ * Result type of cover generating task
  * @class
  */
-class PullEventsRequest extends  AbstractModel {
+class MediaProcessTaskCoverBySnapshotResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Reserved field for special purposes.
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
-        this.ExtInfo = null;
+        this.Status = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.SubAppId = null;
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of cover generating task.
+         * @type {CoverBySnapshotTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of cover generating task.
+         * @type {CoverBySnapshotTaskOutput || null}
+         */
+        this.Output = null;
 
     }
 
@@ -9351,8 +11524,21 @@ class PullEventsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new CoverBySnapshotTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new CoverBySnapshotTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -9473,6 +11659,51 @@ Default value: 0 px.
             this.SvgTemplate = obj;
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Control parameter of terrorism information detection task.
+ * @class
+ */
+class TerrorismConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Control parameter of terrorism information detection in video image task.
+         * @type {TerrorismImgReviewTemplateInfoForUpdate || null}
+         */
+        this.ImgReviewInfo = null;
+
+        /**
+         * Control parameter of terrorism information detection in text task.
+         * @type {TerrorismOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImgReviewInfo) {
+            let obj = new TerrorismImgReviewTemplateInfoForUpdate();
+            obj.deserialize(params.ImgReviewInfo)
+            this.ImgReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new TerrorismOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
 
     }
 }
@@ -9638,6 +11869,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Control parameter of video opening and ending credits recognition task.
+ * @class
+ */
+class HeadTailConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of video opening and ending credits recognition task. Valid values:
+<li>ON: enables video opening and ending credits recognition task;</li>
+<li>OFF: disables video opening and ending credits recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Video transcoding playback information (v2017)
  * @class
  */
@@ -9790,6 +12051,96 @@ class AnimatedGraphicTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+    }
+}
+
+/**
+ * Blur parameter type of video processing task
+ * @class
+ */
+class MosaicInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Origin position, which currently can only be:
+<li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.</li>
+Default value: TopLeft.
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+        /**
+         * The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported:
+<li>If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
+<li>If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
+Default value: 0 px.
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported:
+<li>If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
+<li>If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
+Default value: 0 px.
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * Blur width. % and px formats are supported:
+<li>If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.</li>
+Default value: 10%.
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * Blur height. % and px formats are supported:
+<li>If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.</li>
+Default value: 10%.
+         * @type {string || null}
+         */
+        this.Height = null;
+
+        /**
+         * Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.
+<li>If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame;</li>
+<li>If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame;</li>
+<li>If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of blur in seconds.
+<li>If this parameter is left empty or 0 is entered, the blur will exist till the last video frame;</li>
+<li>If this value is greater than 0 (e.g., n), the blur will exist till second n;</li>
+<li>If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
@@ -10069,7 +12420,7 @@ class MediaKeyFrameDescItem extends  AbstractModel {
         this.TimeOffset = null;
 
         /**
-         * Content string of timestamp containing 1–128 characters.
+         * Content string of timestamp containing 1-128 characters.
          * @type {string || null}
          */
         this.Content = null;
@@ -10085,6 +12436,163 @@ class MediaKeyFrameDescItem extends  AbstractModel {
         }
         this.TimeOffset = 'TimeOffset' in params ? params.TimeOffset : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * AI-based sample management - tag operation.
+ * @class
+ */
+class AiSampleTagOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Operation type. Valid values: add, delete, reset.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Tag. Length limit: 128 characters.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
+ * Player configuration details
+ * @class
+ */
+class PlayerConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Player configuration name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Player configuration type. Valid values:
+<li>Preset: preset configuration;</li>
+<li>Custom: custom configuration.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Switch of DRM-protected adaptive bitstream playback:
+<li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
+<li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
+         * @type {string || null}
+         */
+        this.DrmSwitch = null;
+
+        /**
+         * ID of the unencrypted adaptive bitrate streaming template that allows output.
+         * @type {number || null}
+         */
+        this.AdaptiveDynamicStreamingDefinition = null;
+
+        /**
+         * Content of the DRM-protected adaptive bitrate streaming template that allows output.
+         * @type {DrmStreamingsInfo || null}
+         */
+        this.DrmStreamingsInfo = null;
+
+        /**
+         * ID of the image sprite generating template that allows output.
+         * @type {number || null}
+         */
+        this.ImageSpriteDefinition = null;
+
+        /**
+         * Display name of player for substreams with different resolutions.
+         * @type {Array.<ResolutionNameInfo> || null}
+         */
+        this.ResolutionNameSet = null;
+
+        /**
+         * Creation time of player configuration in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of player configuration in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * Template description.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
+        this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
+
+        if (params.DrmStreamingsInfo) {
+            let obj = new DrmStreamingsInfo();
+            obj.deserialize(params.DrmStreamingsInfo)
+            this.DrmStreamingsInfo = obj;
+        }
+        this.ImageSpriteDefinition = 'ImageSpriteDefinition' in params ? params.ImageSpriteDefinition : null;
+
+        if (params.ResolutionNameSet) {
+            this.ResolutionNameSet = new Array();
+            for (let z in params.ResolutionNameSet) {
+                let obj = new ResolutionNameInfo();
+                obj.deserialize(params.ResolutionNameSet[z]);
+                this.ResolutionNameSet.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
@@ -10133,6 +12641,41 @@ Array length limit: 16.
 }
 
 /**
+ * CreateAIRecognitionTemplate response structure.
+ * @class
+ */
+class CreateAIRecognitionTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of video content recognition template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifySubAppIdStatus request structure.
  * @class
  */
@@ -10165,6 +12708,41 @@ class ModifySubAppIdStatusRequest extends  AbstractModel {
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * CreateSubAppId response structure.
+ * @class
+ */
+class CreateSubAppIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of created subapplication.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10354,6 +12932,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * DRM-protected adaptive bitstream playback information
+ * @class
+ */
+class DrmStreamingsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the adaptive bitrate streaming template whose protection type is SimpleAES.
+         * @type {number || null}
+         */
+        this.SimpleAesDefinition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SimpleAesDefinition = 'SimpleAesDefinition' in params ? params.SimpleAesDefinition : null;
 
     }
 }
@@ -10596,6 +13202,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Player substream name information
+ * @class
+ */
+class ResolutionNameInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Length of video short side in px.
+         * @type {number || null}
+         */
+        this.MinEdgeLength = null;
+
+        /**
+         * Display name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MinEdgeLength = 'MinEdgeLength' in params ? params.MinEdgeLength : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * Text keyword recognition result.
  * @class
  */
@@ -10634,6 +13275,43 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ParseStreamingManifest request structure.
+ * @class
+ */
+class ParseStreamingManifestRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Index file content to be parsed.
+         * @type {string || null}
+         */
+        this.MediaManifestContent = null;
+
+        /**
+         * Video index file format, which is `m3u8` by default.
+<li>m3u8</li>
+<li>mpd</li>
+         * @type {string || null}
+         */
+        this.ManifestType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaManifestContent = 'MediaManifestContent' in params ? params.MediaManifestContent : null;
+        this.ManifestType = 'ManifestType' in params ? params.ManifestType : null;
 
     }
 }
@@ -10969,6 +13647,12 @@ class ProcedureTemplate extends  AbstractModel {
         this.Type = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
          * Parameter of video processing task.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {MediaProcessTaskInput || null}
@@ -11026,6 +13710,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
         if (params.MediaProcessTask) {
             let obj = new MediaProcessTaskInput();
@@ -11130,6 +13815,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * ProcessMediaByUrl response structure.
+ * @class
+ */
+class ProcessMediaByUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11240,7 +13960,28 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Tag of politically sensitive information detection result of a suspected segment.
+         * Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+violation_photo:
+<li>violation_photo: violating photo.</li>
+politician:
+<li>nation_politician: head of state/government;</li>
+<li>province_politician: province/state leader;</li>
+<li>bureau_politician: ministry leader;</li>
+<li>county_politician: county/city leader;</li>
+<li>rural_politician: town leader;</li>
+<li>sensitive_politician: politically sensitive figure.</li>
+entertainment:
+<li>sensitive_entertainment: sensitive entertainment celebrity.</li>
+sport:
+<li>sensitive_sport: sensitive sports figure.</li>
+entrepreneur:
+<li>sensitive_entrepreneur: sensitive business figure.</li>
+scholar:
+<li>sensitive_scholar: sensitive educator.</li>
+celebrity:
+<li>sensitive_celebrity: sensitive well-known figure.</li>
+military:
+<li>sensitive_military: militarily sensitive figure.</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -11294,6 +14035,34 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
 }
 
 /**
+ * DeletePersonSample response structure.
+ * @class
+ */
+class DeletePersonSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateSnapshotByTimeOffsetTemplate response structure.
  * @class
  */
@@ -11324,6 +14093,133 @@ class CreateSnapshotByTimeOffsetTemplateResponse extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyContentReviewTemplate request structure.
+ * @class
+ */
+class ModifyContentReviewTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of content audit template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Content audit template name. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description of content audit template. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Control parameter of porn detection.
+         * @type {PornConfigureInfoForUpdate || null}
+         */
+        this.PornConfigure = null;
+
+        /**
+         * Control parameter of terrorism information detection.
+         * @type {TerrorismConfigureInfoForUpdate || null}
+         */
+        this.TerrorismConfigure = null;
+
+        /**
+         * Control parameter of politically sensitive information detection.
+         * @type {PoliticalConfigureInfoForUpdate || null}
+         */
+        this.PoliticalConfigure = null;
+
+        /**
+         * Control parameter of prohibited information detection. Prohibited information includes:
+<li>Abusive;</li>
+<li>Drug-related.</li>
+         * @type {ProhibitedConfigureInfoForUpdate || null}
+         */
+        this.ProhibitedConfigure = null;
+
+        /**
+         * Control parameter of custom content audit.
+         * @type {UserDefineConfigureInfoForUpdate || null}
+         */
+        this.UserDefineConfigure = null;
+
+        /**
+         * Frame capturing interval in seconds. Minimum value: 0.5 seconds.
+         * @type {number || null}
+         */
+        this.ScreenshotInterval = null;
+
+        /**
+         * Switch controlling whether to add audit result to review list (for human review).
+<li>ON: yes;</li>
+<li>OFF: no.</li>
+         * @type {string || null}
+         */
+        this.ReviewWallSwitch = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.PornConfigure) {
+            let obj = new PornConfigureInfoForUpdate();
+            obj.deserialize(params.PornConfigure)
+            this.PornConfigure = obj;
+        }
+
+        if (params.TerrorismConfigure) {
+            let obj = new TerrorismConfigureInfoForUpdate();
+            obj.deserialize(params.TerrorismConfigure)
+            this.TerrorismConfigure = obj;
+        }
+
+        if (params.PoliticalConfigure) {
+            let obj = new PoliticalConfigureInfoForUpdate();
+            obj.deserialize(params.PoliticalConfigure)
+            this.PoliticalConfigure = obj;
+        }
+
+        if (params.ProhibitedConfigure) {
+            let obj = new ProhibitedConfigureInfoForUpdate();
+            obj.deserialize(params.ProhibitedConfigure)
+            this.ProhibitedConfigure = obj;
+        }
+
+        if (params.UserDefineConfigure) {
+            let obj = new UserDefineConfigureInfoForUpdate();
+            obj.deserialize(params.UserDefineConfigure)
+            this.UserDefineConfigure = obj;
+        }
+        this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
+        this.ReviewWallSwitch = 'ReviewWallSwitch' in params ? params.ReviewWallSwitch : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -11404,6 +14300,41 @@ class AiContentReviewTaskInput extends  AbstractModel {
 }
 
 /**
+ * CreateAdaptiveDynamicStreamingTemplate response structure.
+ * @class
+ */
+class CreateAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of adaptive bitrate streaming template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Control parameter of intelligent categorization task
  * @class
  */
@@ -11434,24 +14365,18 @@ class ClassificationConfigureInfo extends  AbstractModel {
 }
 
 /**
- * ProcessMediaByUrl response structure.
+ * Input parameter type of AI-based intelligent video analysis
  * @class
  */
-class ProcessMediaByUrlResponse extends  AbstractModel {
+class AiAnalysisTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
-         * @type {string || null}
+         * Video content analysis template ID.
+         * @type {number || null}
          */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Definition = null;
 
     }
 
@@ -11462,8 +14387,7 @@ class ProcessMediaByUrlResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -11572,6 +14496,12 @@ Default value: black.
          */
         this.FillType = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
+
     }
 
     /**
@@ -11594,6 +14524,7 @@ Default value: black.
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
@@ -11607,7 +14538,7 @@ class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
         super();
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -11655,6 +14586,12 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.ExtTimeOffsetSet = null;
+
+        /**
          * List of time points for screencapturing in <font color=red>milliseconds</font>.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
@@ -11678,6 +14615,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtTimeOffsetSet = 'ExtTimeOffsetSet' in params ? params.ExtTimeOffsetSet : null;
         this.TimeOffsetSet = 'TimeOffsetSet' in params ? params.TimeOffsetSet : null;
 
         if (params.WatermarkSet) {
@@ -11760,6 +14698,41 @@ class TaskStatDataItem extends  AbstractModel {
         this.Time = 'Time' in params ? params.Time : null;
         this.Count = 'Count' in params ? params.Count : null;
         this.Usage = 'Usage' in params ? params.Usage : null;
+
+    }
+}
+
+/**
+ * ParseStreamingManifest response structure.
+ * @class
+ */
+class ParseStreamingManifestResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Segment file list.
+         * @type {Array.<string> || null}
+         */
+        this.MediaSegmentSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaSegmentSet = 'MediaSegmentSet' in params ? params.MediaSegmentSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11881,6 +14854,12 @@ class ApplyUploadRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
          * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
@@ -11904,6 +14883,7 @@ class ApplyUploadRequest extends  AbstractModel {
         this.ClassId = 'ClassId' in params ? params.ClassId : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -11973,32 +14953,18 @@ class AiAnalysisTaskHighlightInput extends  AbstractModel {
 }
 
 /**
- * Control parameter of prohibited information detection in speech task
+ * DeleteContentReviewTemplate response structure.
  * @class
  */
-class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
+class DeleteContentReviewTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of prohibited information detection in speech task. Valid values:
-<li>ON: enables prohibited information detection in speech task;</li>
-<li>OFF: disables prohibited information detection in speech task.</li>
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
-         * @type {number || null}
-         */
-        this.BlockConfidence = null;
-
-        /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
-         * @type {number || null}
-         */
-        this.ReviewConfidence = null;
+        this.RequestId = null;
 
     }
 
@@ -12009,9 +14975,7 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12123,11 +15087,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TagSet = null;
 
         /**
-         * Unique ID of LVB recording file
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Unique ID of an LVB recording file.
          * @type {string || null}
          */
         this.Vid = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Category = null;
+
+        /**
+         * File status. Valid values: Normal, Forbidden.
+
+*Note: this field is not supported yet.
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -12158,6 +15135,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
         this.TagSet = 'TagSet' in params ? params.TagSet : null;
         this.Vid = 'Vid' in params ? params.Vid : null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -12199,8 +15178,8 @@ class PullUploadRequest extends  AbstractModel {
         super();
 
         /**
-         * URL of the media to be pulled. Media files in HLS and Dash formats cannot be pulled currently.
-For the supported extensions, please see [Media Types](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+         * URL of the media to be pulled. Supported media format: HLS; unsupported media format: DASH.
+For more information about supported extensions, please see [Media Types](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
          * @type {string || null}
          */
         this.MediaUrl = null;
@@ -12265,6 +15244,12 @@ For the supported extensions, please see [Media Types](https://cloud.tencent.com
          */
         this.SubAppId = null;
 
+        /**
+         * Source context, which is used to pass through the user request information. The [upload callback](/document/product/266/7830) API will return the value of this field. It can contain up to 250 characters.
+         * @type {string || null}
+         */
+        this.SourceContext = null;
+
     }
 
     /**
@@ -12285,6 +15270,7 @@ For the supported extensions, please see [Media Types](https://cloud.tencent.com
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
 
     }
 }
@@ -12325,24 +15311,30 @@ class SortBy extends  AbstractModel {
 }
 
 /**
- * Result information of intelligent tagging
+ * Video clipping task information. This structure is only used for tasks initiated by the [ClipVideo](https://cloud.tencent.com/document/product/266/10156) API in v2017.
  * @class
  */
-class MediaAiAnalysisTagItem extends  AbstractModel {
+class ClipTask2017 extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag name.
+         * Video clipping task ID.
          * @type {string || null}
          */
-        this.Tag = null;
+        this.TaskId = null;
 
         /**
-         * Confidence of tag between 0 and 100.
-         * @type {number || null}
+         * ID of source file for video clipping task.
+         * @type {string || null}
          */
-        this.Confidence = null;
+        this.SrcFileId = null;
+
+        /**
+         * Information of file output by video clipping.
+         * @type {ClipFileInfo2017 || null}
+         */
+        this.FileInfo = null;
 
     }
 
@@ -12353,8 +15345,14 @@ class MediaAiAnalysisTagItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Tag = 'Tag' in params ? params.Tag : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SrcFileId = 'SrcFileId' in params ? params.SrcFileId : null;
+
+        if (params.FileInfo) {
+            let obj = new ClipFileInfo2017();
+            obj.deserialize(params.FileInfo)
+            this.FileInfo = obj;
+        }
 
     }
 }
@@ -12571,56 +15569,6 @@ When the value of this field is 1, the total usage of all subapplications (inclu
 }
 
 /**
- * DescribeAudioTrackTemplates response structure.
- * @class
- */
-class DescribeAudioTrackTemplatesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of eligible entries.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of audio track template details.
-         * @type {Array.<AudioTrackTemplateInfo> || null}
-         */
-        this.AudioTrackTemplateSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.AudioTrackTemplateSet) {
-            this.AudioTrackTemplateSet = new Array();
-            for (let z in params.AudioTrackTemplateSet) {
-                let obj = new AudioTrackTemplateInfo();
-                obj.deserialize(params.AudioTrackTemplateSet[z]);
-                this.AudioTrackTemplateSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Control parameter of porn information detection in text task
  * @class
  */
@@ -12637,13 +15585,13 @@ class PornOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -12756,7 +15704,7 @@ class AiRecognitionTaskAsrWordsSegmentItem extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -12815,6 +15763,63 @@ class DescribeReviewDetailsRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Control parameter of porn detection task.
+ * @class
+ */
+class PornConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Control parameter of porn detection in video image.
+         * @type {PornImgReviewTemplateInfoForUpdate || null}
+         */
+        this.ImgReviewInfo = null;
+
+        /**
+         * Control parameter of porn detection in speech.
+         * @type {PornAsrReviewTemplateInfoForUpdate || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * Control parameter of porn detection in text.
+         * @type {PornOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImgReviewInfo) {
+            let obj = new PornImgReviewTemplateInfoForUpdate();
+            obj.deserialize(params.ImgReviewInfo)
+            this.ImgReviewInfo = obj;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new PornAsrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new PornOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
 
     }
 }
@@ -12945,13 +15950,13 @@ class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -13169,6 +16174,34 @@ class CreateClassResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteSuperPlayerConfig response structure.
+ * @class
+ */
+class DeleteSuperPlayerConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeSampleSnapshotTemplates request structure.
  * @class
  */
@@ -13257,110 +16290,43 @@ class CoverConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Details of a sampled screencapturing template
+ * Result type of intelligent categorization task
  * @class
  */
-class SampleSnapshotTemplate extends  AbstractModel {
+class AiAnalysisTaskClassificationResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a sampled screencapturing template.
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: success; other values: failure.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.ErrCode = null;
 
         /**
-         * Template type. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
+         * Error message.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Message = null;
 
         /**
-         * Name of a sampled screencapturing template.
-         * @type {string || null}
+         * Input of intelligent categorization task.
+         * @type {AiAnalysisTaskClassificationInput || null}
          */
-        this.Name = null;
+        this.Input = null;
 
         /**
-         * Template description.
-         * @type {string || null}
+         * Output of intelligent categorization task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskClassificationOutput || null}
          */
-        this.Comment = null;
-
-        /**
-         * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Resolution adaption. Valid values:
-<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
-Default value: open.
-         * @type {string || null}
-         */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * Image format.
-         * @type {string || null}
-         */
-        this.Format = null;
-
-        /**
-         * Sampled screencapturing type.
-         * @type {string || null}
-         */
-        this.SampleType = null;
-
-        /**
-         * Sampling interval.
-         * @type {number || null}
-         */
-        this.SampleInterval = null;
-
-        /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-<li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
-<li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
-Default value: black.
-         * @type {string || null}
-         */
-        this.FillType = null;
+        this.Output = null;
 
     }
 
@@ -13371,19 +16337,80 @@ Default value: black.
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Format = 'Format' in params ? params.Format : null;
-        this.SampleType = 'SampleType' in params ? params.SampleType : null;
-        this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskClassificationInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskClassificationOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
+ * Control parameter of politically sensitive information detection in video image task.
+ * @class
+ */
+class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of politically sensitive information detection in video image task. Valid values:
+<li>ON: enables politically sensitive information detection in video image task;</li>
+<li>OFF: disables politically sensitive information detection in video image task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+<li>violation_photo: violating photo;</li>
+<li>politician: political figure;</li>
+<li>entertainment: entertainment celebrity;</li>
+<li>sport: sports figure;</li>
+<li>entrepreneur: business figure;</li>
+<li>scholar: educator;</li>
+<li>celebrity: well-known figure;</li>
+<li>military: military figure.</li>
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -13412,13 +16439,13 @@ There can be up to 10 tags, each with a length limit of 16 characters.
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -13549,6 +16576,158 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.MosaicSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyAIRecognitionTemplate request structure.
+ * @class
+ */
+class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of video content recognition template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Video content recognition template name. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description of video content recognition template. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Control parameter of video opening and ending credits recognition.
+         * @type {HeadTailConfigureInfoForUpdate || null}
+         */
+        this.HeadTailConfigure = null;
+
+        /**
+         * Control parameter of video splitting recognition.
+         * @type {SegmentConfigureInfoForUpdate || null}
+         */
+        this.SegmentConfigure = null;
+
+        /**
+         * Control parameter of face recognition.
+         * @type {FaceConfigureInfoForUpdate || null}
+         */
+        this.FaceConfigure = null;
+
+        /**
+         * Control parameter of full text recognition.
+         * @type {OcrFullTextConfigureInfoForUpdate || null}
+         */
+        this.OcrFullTextConfigure = null;
+
+        /**
+         * Control parameter of text keyword recognition.
+         * @type {OcrWordsConfigureInfoForUpdate || null}
+         */
+        this.OcrWordsConfigure = null;
+
+        /**
+         * Control parameter of full speech recognition.
+         * @type {AsrFullTextConfigureInfoForUpdate || null}
+         */
+        this.AsrFullTextConfigure = null;
+
+        /**
+         * Control parameter of speech keyword recognition.
+         * @type {AsrWordsConfigureInfoForUpdate || null}
+         */
+        this.AsrWordsConfigure = null;
+
+        /**
+         * Control parameter of object recognition.
+         * @type {ObjectConfigureInfoForUpdate || null}
+         */
+        this.ObjectConfigure = null;
+
+        /**
+         * Frame capturing interval in seconds. Minimum value: 0.5 seconds.
+         * @type {number || null}
+         */
+        this.ScreenshotInterval = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.HeadTailConfigure) {
+            let obj = new HeadTailConfigureInfoForUpdate();
+            obj.deserialize(params.HeadTailConfigure)
+            this.HeadTailConfigure = obj;
+        }
+
+        if (params.SegmentConfigure) {
+            let obj = new SegmentConfigureInfoForUpdate();
+            obj.deserialize(params.SegmentConfigure)
+            this.SegmentConfigure = obj;
+        }
+
+        if (params.FaceConfigure) {
+            let obj = new FaceConfigureInfoForUpdate();
+            obj.deserialize(params.FaceConfigure)
+            this.FaceConfigure = obj;
+        }
+
+        if (params.OcrFullTextConfigure) {
+            let obj = new OcrFullTextConfigureInfoForUpdate();
+            obj.deserialize(params.OcrFullTextConfigure)
+            this.OcrFullTextConfigure = obj;
+        }
+
+        if (params.OcrWordsConfigure) {
+            let obj = new OcrWordsConfigureInfoForUpdate();
+            obj.deserialize(params.OcrWordsConfigure)
+            this.OcrWordsConfigure = obj;
+        }
+
+        if (params.AsrFullTextConfigure) {
+            let obj = new AsrFullTextConfigureInfoForUpdate();
+            obj.deserialize(params.AsrFullTextConfigure)
+            this.AsrFullTextConfigure = obj;
+        }
+
+        if (params.AsrWordsConfigure) {
+            let obj = new AsrWordsConfigureInfoForUpdate();
+            obj.deserialize(params.AsrWordsConfigure)
+            this.AsrWordsConfigure = obj;
+        }
+
+        if (params.ObjectConfigure) {
+            let obj = new ObjectConfigureInfoForUpdate();
+            obj.deserialize(params.ObjectConfigure)
+            this.ObjectConfigure = obj;
+        }
+        this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -13802,6 +16981,50 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+
+    }
+}
+
+/**
+ * Control parameter of prohibited information detection in speech task
+ * @class
+ */
+class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of prohibited information detection in speech task. Valid values:
+<li>ON: enables prohibited information detection in speech task;</li>
+<li>OFF: disables prohibited information detection in speech task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -14155,6 +17378,63 @@ class HighlightsConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * Control parameter of custom audit task.
+ * @class
+ */
+class UserDefineConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Control parameter of custom figure audit.
+         * @type {UserDefineFaceReviewTemplateInfoForUpdate || null}
+         */
+        this.FaceReviewInfo = null;
+
+        /**
+         * Control parameter of custom speech audit.
+         * @type {UserDefineAsrTextReviewTemplateInfoForUpdate || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * Control parameter of custom text audit.
+         * @type {UserDefineOcrTextReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FaceReviewInfo) {
+            let obj = new UserDefineFaceReviewTemplateInfoForUpdate();
+            obj.deserialize(params.FaceReviewInfo)
+            this.FaceReviewInfo = obj;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new UserDefineAsrTextReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new UserDefineOcrTextReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
+
+    }
+}
+
+/**
  * ASR-detected politically sensitive information in speech
  * @class
  */
@@ -14256,6 +17536,48 @@ Default value: 2.
         this.Codec = 'Codec' in params ? params.Codec : null;
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
         this.AudioChannel = 'AudioChannel' in params ? params.AudioChannel : null;
+
+    }
+}
+
+/**
+ * ModifyClass request structure.
+ * @class
+ */
+class ModifyClassRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Category ID
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * Category name, which can contain 1–64 characters.
+         * @type {string || null}
+         */
+        this.ClassName = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -14457,6 +17779,89 @@ class DescribeMediaInfosRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyPersonSample request structure.
+ * @class
+ */
+class ModifyPersonSampleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Figure ID.
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * Name. Length limit: 128 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description. Length limit: 1,024 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Figure use case. Valid values:
+1. Recognition: it is used for content recognition and equivalent to `Recognition.Face`.
+2. Review: it is used for content audit and equivalent to `Review.Face`.
+3. All: it is used for content recognition and content audit and equivalent to 1+2 above.
+         * @type {Array.<string> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * Face operation information.
+         * @type {AiSampleFaceOperation || null}
+         */
+        this.FaceOperationInfo = null;
+
+        /**
+         * Tag operation information.
+         * @type {AiSampleTagOperation || null}
+         */
+        this.TagOperationInfo = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Usages = 'Usages' in params ? params.Usages : null;
+
+        if (params.FaceOperationInfo) {
+            let obj = new AiSampleFaceOperation();
+            obj.deserialize(params.FaceOperationInfo)
+            this.FaceOperationInfo = obj;
+        }
+
+        if (params.TagOperationInfo) {
+            let obj = new AiSampleTagOperation();
+            obj.deserialize(params.TagOperationInfo)
+            this.TagOperationInfo = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Control parameter of full speech recognition task.
  * @class
  */
@@ -14495,44 +17900,84 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
 }
 
 /**
- * Video splitting results.
+ * CreateAIRecognitionTemplate request structure.
  * @class
  */
-class AiRecognitionTaskSegmentResult extends  AbstractModel {
+class CreateAIRecognitionTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Video content recognition template name. Length limit: 64 characters.
          * @type {string || null}
          */
-        this.Status = null;
+        this.Name = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Description of video content recognition template. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Control parameter of video opening and ending credits recognition.
+         * @type {HeadTailConfigureInfo || null}
+         */
+        this.HeadTailConfigure = null;
+
+        /**
+         * Control parameter of video splitting recognition.
+         * @type {SegmentConfigureInfo || null}
+         */
+        this.SegmentConfigure = null;
+
+        /**
+         * Control parameter of face recognition.
+         * @type {FaceConfigureInfo || null}
+         */
+        this.FaceConfigure = null;
+
+        /**
+         * Control parameter of full text recognition.
+         * @type {OcrFullTextConfigureInfo || null}
+         */
+        this.OcrFullTextConfigure = null;
+
+        /**
+         * Control parameter of text keyword recognition.
+         * @type {OcrWordsConfigureInfo || null}
+         */
+        this.OcrWordsConfigure = null;
+
+        /**
+         * Control parameter of full speech recognition.
+         * @type {AsrFullTextConfigureInfo || null}
+         */
+        this.AsrFullTextConfigure = null;
+
+        /**
+         * Control parameter of speech keyword recognition.
+         * @type {AsrWordsConfigureInfo || null}
+         */
+        this.AsrWordsConfigure = null;
+
+        /**
+         * Control parameter of object recognition.
+         * @type {ObjectConfigureInfo || null}
+         */
+        this.ObjectConfigure = null;
+
+        /**
+         * Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.ScreenshotInterval = null;
 
         /**
-         * Error message.
-         * @type {string || null}
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
          */
-        this.Message = null;
-
-        /**
-         * Input information of video splitting task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiRecognitionTaskSegmentResultInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output information of video splitting task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiRecognitionTaskSegmentResultOutput || null}
-         */
-        this.Output = null;
+        this.SubAppId = null;
 
     }
 
@@ -14543,21 +17988,58 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
-        if (params.Input) {
-            let obj = new AiRecognitionTaskSegmentResultInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
+        if (params.HeadTailConfigure) {
+            let obj = new HeadTailConfigureInfo();
+            obj.deserialize(params.HeadTailConfigure)
+            this.HeadTailConfigure = obj;
         }
 
-        if (params.Output) {
-            let obj = new AiRecognitionTaskSegmentResultOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
+        if (params.SegmentConfigure) {
+            let obj = new SegmentConfigureInfo();
+            obj.deserialize(params.SegmentConfigure)
+            this.SegmentConfigure = obj;
         }
+
+        if (params.FaceConfigure) {
+            let obj = new FaceConfigureInfo();
+            obj.deserialize(params.FaceConfigure)
+            this.FaceConfigure = obj;
+        }
+
+        if (params.OcrFullTextConfigure) {
+            let obj = new OcrFullTextConfigureInfo();
+            obj.deserialize(params.OcrFullTextConfigure)
+            this.OcrFullTextConfigure = obj;
+        }
+
+        if (params.OcrWordsConfigure) {
+            let obj = new OcrWordsConfigureInfo();
+            obj.deserialize(params.OcrWordsConfigure)
+            this.OcrWordsConfigure = obj;
+        }
+
+        if (params.AsrFullTextConfigure) {
+            let obj = new AsrFullTextConfigureInfo();
+            obj.deserialize(params.AsrFullTextConfigure)
+            this.AsrFullTextConfigure = obj;
+        }
+
+        if (params.AsrWordsConfigure) {
+            let obj = new AsrWordsConfigureInfo();
+            obj.deserialize(params.AsrWordsConfigure)
+            this.AsrWordsConfigure = obj;
+        }
+
+        if (params.ObjectConfigure) {
+            let obj = new ObjectConfigureInfo();
+            obj.deserialize(params.ObjectConfigure)
+            this.ObjectConfigure = obj;
+        }
+        this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -14835,6 +18317,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyAIRecognitionTemplate response structure.
+ * @class
+ */
+class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Control parameter of politically sensitive information detection in video image task
  * @class
  */
@@ -14851,23 +18361,27 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Filter tag for politically sensitive information detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+         * Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
 <li>violation_photo: violating photo;</li>
-<li>politician: politically sensitive figure;</li>
+<li>politician: political figure;</li>
 <li>entertainment: entertainment celebrity;</li>
-<li>sport: sports celebrity.</li>
+<li>sport: sports figure;</li>
+<li>entrepreneur: business figure;</li>
+<li>scholar: educator;</li>
+<li>celebrity: well-known figure;</li>
+<li>military: military figure.</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -15074,7 +18588,7 @@ class AiRecognitionTaskOcrWordsSegmentItem extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -15229,6 +18743,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DeleteWordSamples response structure.
+ * @class
+ */
+class DeleteWordSamplesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteProcedureTemplate request structure.
  * @class
  */
@@ -15328,6 +18870,43 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * AI-based sample management - keyword input information.
+ * @class
+ */
+class AiSampleWordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Keyword. Length limit: 20 characters.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * Keyword tag
+<li>Array length limit: 20 tags;</li>
+<li>Tag length limit: 128 characters.</li>
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
  * Adaptive bitrate streaming information
  * @class
  */
@@ -15393,13 +18972,13 @@ class ProhibitedOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -15416,6 +18995,34 @@ class ProhibitedOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * DeleteClass response structure.
+ * @class
+ */
+class DeleteClassResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15897,6 +19504,126 @@ Default value: black.
 }
 
 /**
+ * CreateContentReviewTemplate request structure.
+ * @class
+ */
+class CreateContentReviewTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch controlling whether to add audit result to review list (for human review).
+<li>ON: yes;</li>
+<li>OFF: no.</li>
+         * @type {string || null}
+         */
+        this.ReviewWallSwitch = null;
+
+        /**
+         * Content audit template name. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description of content audit template. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Control parameter of porn detection.
+         * @type {PornConfigureInfo || null}
+         */
+        this.PornConfigure = null;
+
+        /**
+         * Control parameter of terrorism information detection.
+         * @type {TerrorismConfigureInfo || null}
+         */
+        this.TerrorismConfigure = null;
+
+        /**
+         * Control parameter of politically sensitive information detection.
+         * @type {PoliticalConfigureInfo || null}
+         */
+        this.PoliticalConfigure = null;
+
+        /**
+         * Control parameter of prohibited information detection. Prohibited information includes:
+<li>Abusive;</li>
+<li>Drug-related.</li>
+         * @type {ProhibitedConfigureInfo || null}
+         */
+        this.ProhibitedConfigure = null;
+
+        /**
+         * Control parameter of custom content audit.
+         * @type {UserDefineConfigureInfo || null}
+         */
+        this.UserDefineConfigure = null;
+
+        /**
+         * Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
+         * @type {number || null}
+         */
+        this.ScreenshotInterval = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReviewWallSwitch = 'ReviewWallSwitch' in params ? params.ReviewWallSwitch : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.PornConfigure) {
+            let obj = new PornConfigureInfo();
+            obj.deserialize(params.PornConfigure)
+            this.PornConfigure = obj;
+        }
+
+        if (params.TerrorismConfigure) {
+            let obj = new TerrorismConfigureInfo();
+            obj.deserialize(params.TerrorismConfigure)
+            this.TerrorismConfigure = obj;
+        }
+
+        if (params.PoliticalConfigure) {
+            let obj = new PoliticalConfigureInfo();
+            obj.deserialize(params.PoliticalConfigure)
+            this.PoliticalConfigure = obj;
+        }
+
+        if (params.ProhibitedConfigure) {
+            let obj = new ProhibitedConfigureInfo();
+            obj.deserialize(params.ProhibitedConfigure)
+            this.ProhibitedConfigure = obj;
+        }
+
+        if (params.UserDefineConfigure) {
+            let obj = new UserDefineConfigureInfo();
+            obj.deserialize(params.UserDefineConfigure)
+            this.UserDefineConfigure = obj;
+        }
+        this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * DescribeContentReviewTemplates request structure.
  * @class
  */
@@ -16161,18 +19888,24 @@ class AiRecognitionTaskAsrWordsResultItem extends  AbstractModel {
 }
 
 /**
- * Input parameter type of AI-based intelligent video analysis
+ * Result information of intelligent tagging
  * @class
  */
-class AiAnalysisTaskInput extends  AbstractModel {
+class MediaAiAnalysisTagItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video content analysis template ID.
+         * Tag name.
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Confidence of tag between 0 and 100.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.Confidence = null;
 
     }
 
@@ -16183,7 +19916,8 @@ class AiAnalysisTaskInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -16497,7 +20231,7 @@ class CreateClassRequest extends  AbstractModel {
         this.ParentId = null;
 
         /**
-         * Category name. Length limit: 1–64 characters.
+         * Category name. Length limit: 1-64 characters.
          * @type {string || null}
          */
         this.ClassName = null;
@@ -16520,6 +20254,102 @@ class CreateClassRequest extends  AbstractModel {
         this.ParentId = 'ParentId' in params ? params.ParentId : null;
         this.ClassName = 'ClassName' in params ? params.ClassName : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * AI-based sample management - face information failed to be processed.
+ * @class
+ */
+class AiSampleFailFaceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * It corresponds to incorrect image subscripts in the `FaceContents` input parameter, starting from 0.
+         * @type {number || null}
+         */
+        this.Index = null;
+
+        /**
+         * Error code. Valid values:
+<li>0: success;</li>
+<li>Other values: failure.</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Index = 'Index' in params ? params.Index : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * Control parameter of custom figure audit task.
+ * @class
+ */
+class UserDefineFaceReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of custom figure audit task. Valid values:
+<li>ON: enables custom figure audit task;</li>
+<li>OFF: disables custom figure audit task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -16596,6 +20426,64 @@ class DescribeMediaProcessUsageDataResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSuperPlayerConfigs request structure.
+ * @class
+ */
+class DescribeSuperPlayerConfigsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Player configuration name filter. Array length limit: 100.
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries to be returned. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Player configuration type filter. Valid values:
+<li>Preset: preset configuration;</li>
+<li>Custom: custom configuration.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Names = 'Names' in params ? params.Names : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Input of full text recognition.
  * @class
  */
@@ -16652,44 +20540,30 @@ class AiRecognitionTaskSegmentResultInput extends  AbstractModel {
 }
 
 /**
- * DescribeAudioTrackTemplates request structure.
+ * DescribeTasks response structure.
  * @class
  */
-class DescribeAudioTrackTemplatesRequest extends  AbstractModel {
+class DescribeTasksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID filter of templates. Array length limit: 100.
-         * @type {Array.<number> || null}
+         * Task overview list.
+         * @type {Array.<TaskSimpleInfo> || null}
          */
-        this.Definitions = null;
+        this.TaskSet = null;
 
         /**
-         * Paged offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Template type filter. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
+         * Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is empty, there is no more data.
          * @type {string || null}
          */
-        this.Type = null;
+        this.ScrollToken = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.SubAppId = null;
+        this.RequestId = null;
 
     }
 
@@ -16700,11 +20574,17 @@ class DescribeAudioTrackTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.TaskSet) {
+            this.TaskSet = new Array();
+            for (let z in params.TaskSet) {
+                let obj = new TaskSimpleInfo();
+                obj.deserialize(params.TaskSet[z]);
+                this.TaskSet.push(obj);
+            }
+        }
+        this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16784,10 +20664,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Suggestion = null;
 
         /**
-         * Tag of detected politically sensitive information in video. Valid values:
-<li>politician: politically sensitive figure.</li>
+         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+violation_photo:
 <li>violation_photo: violating photo.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
+<li>politician: political figure.</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -17192,6 +21073,191 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifySuperPlayerConfig request structure.
+ * @class
+ */
+class ModifySuperPlayerConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Player configuration name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Switch of DRM-protected adaptive bitstream playback:
+<li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
+<li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
+         * @type {string || null}
+         */
+        this.DrmSwitch = null;
+
+        /**
+         * ID of the unencrypted adaptive bitrate streaming template that allows output.
+         * @type {number || null}
+         */
+        this.AdaptiveDynamicStreamingDefinition = null;
+
+        /**
+         * Content of the DRM-protected adaptive bitrate streaming template that allows output.
+         * @type {DrmStreamingsInfoForUpdate || null}
+         */
+        this.DrmStreamingsInfo = null;
+
+        /**
+         * ID of the image sprite generating template that allows output.
+         * @type {number || null}
+         */
+        this.ImageSpriteDefinition = null;
+
+        /**
+         * Display name of player for substreams with different resolutions.
+         * @type {Array.<ResolutionNameInfo> || null}
+         */
+        this.ResolutionNames = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * Template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
+        this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
+
+        if (params.DrmStreamingsInfo) {
+            let obj = new DrmStreamingsInfoForUpdate();
+            obj.deserialize(params.DrmStreamingsInfo)
+            this.DrmStreamingsInfo = obj;
+        }
+        this.ImageSpriteDefinition = 'ImageSpriteDefinition' in params ? params.ImageSpriteDefinition : null;
+
+        if (params.ResolutionNames) {
+            this.ResolutionNames = new Array();
+            for (let z in params.ResolutionNames) {
+                let obj = new ResolutionNameInfo();
+                obj.deserialize(params.ResolutionNames[z]);
+                this.ResolutionNames.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Task overview information
+ * @class
+ */
+class TaskSimpleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task type. Valid values:
+<li>Procedure: video processing task;</li>
+<li>EditMedia: video editing task</li>
+<li>WechatDistribute: release on WeChat task.</li>
+Task types compatible with v2017:
+<li>Transcode: transcoding task;</li>
+<li>SnapshotByTimeOffset: video screencapturing task</li>
+<li>Concat: video splicing task;</li>
+<li>Clip: video clipping task;</li>
+<li>ImageSprites: image sprite generating task.</li>
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * Creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). If the task has not been started yet, this field will be empty.
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * End time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). If the task has not been completed yet, this field will be empty.
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * ID used for deduplication if there was a request with the same ID in the last seven days.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Source context, which is used to pass through the user request information.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
  * DescribeSnapshotByTimeOffsetTemplates response structure.
  * @class
  */
@@ -17444,6 +21510,106 @@ class DeleteSnapshotByTimeOffsetTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Control parameter of prohibited information detection in text task
+ * @class
+ */
+class ProhibitedOcrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of prohibited information detection in text task. Valid values:
+<li>ON: enables prohibited information detection in text task;</li>
+<li>OFF: disables prohibited information detection in text task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * DescribeTasks request structure.
+ * @class
+ */
+class DescribeTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Filter: file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Number of entries to be returned. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.
+         * @type {string || null}
+         */
+        this.ScrollToken = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -17886,6 +22052,50 @@ class SubAppIdInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeAllClass response structure.
+ * @class
+ */
+class DescribeAllClassResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Category information set
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaClassInfo> || null}
+         */
+        this.ClassInfoSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClassInfoSet) {
+            this.ClassInfoSet = new Array();
+            for (let z in params.ClassInfoSet) {
+                let obj = new MediaClassInfo();
+                obj.deserialize(params.ClassInfoSet[z]);
+                this.ClassInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyImageSpriteTemplate request structure.
  * @class
  */
@@ -17955,12 +22165,6 @@ Default value: open.
         this.ColumnCount = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
 <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
@@ -17968,6 +22172,18 @@ Default value: black.
          * @type {string || null}
          */
         this.FillType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -17987,8 +22203,9 @@ Default value: black.
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -18096,6 +22313,77 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StreamId = 'StreamId' in params ? params.StreamId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * DescribeWordSamples request structure.
+ * @class
+ */
+class DescribeWordSamplesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <b>Keyword use case filter. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition;
+2. Recognition.Asr: ASR-based content recognition;
+3. Review.Ocr: OCR-based content audit;
+4. Review.Asr: ASR-based content audit;
+<b>These values can be merged as follows:</b>
+5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
+6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
+Multiple elements can be selected, and the relationship between them is "OR", i.e., any keyword use case that contains any element in this field set will be deemed eligible.
+         * @type {Array.<string> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * Keyword filter. Array length limit: 100 words.
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * Tag filter. Array length limit: 20 words.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries to be returned. Default value: 100. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Usages = 'Usages' in params ? params.Usages : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -18375,6 +22663,34 @@ class DescribeSampleSnapshotTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyWordSample response structure.
+ * @class
+ */
+class ModifyWordSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Content audit result
  * @class
  */
@@ -18573,13 +22889,13 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 80 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 80 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -18602,56 +22918,18 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * ApplyUpload response structure.
+ * Modification object of DRM-protected adaptive bitstream playback information
  * @class
  */
-class ApplyUploadResponse extends  AbstractModel {
+class DrmStreamingsInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Storage bucket, which is used as the `bucket_name` in the URL of the upload API.
-         * @type {string || null}
+         * ID of the adaptive bitrate streaming template whose protection type is SimpleAES.
+         * @type {number || null}
          */
-        this.StorageBucket = null;
-
-        /**
-         * Storage region, which is used as the `Region` in the `Host` of the upload API.
-         * @type {string || null}
-         */
-        this.StorageRegion = null;
-
-        /**
-         * VOD session, which is used to confirm the `VodSessionKey` parameter of the upload API.
-         * @type {string || null}
-         */
-        this.VodSessionKey = null;
-
-        /**
-         * Media storage path, which is used as the `Key` of the stored media of the upload API.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MediaStoragePath = null;
-
-        /**
-         * Cover storage path, which is used as the `Key` of the stored cover of the upload API.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CoverStoragePath = null;
-
-        /**
-         * Temporary credential, which is used for authentication of the upload API.
-         * @type {TempCertificate || null}
-         */
-        this.TempCertificate = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.SimpleAesDefinition = null;
 
     }
 
@@ -18662,18 +22940,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.StorageBucket = 'StorageBucket' in params ? params.StorageBucket : null;
-        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
-        this.VodSessionKey = 'VodSessionKey' in params ? params.VodSessionKey : null;
-        this.MediaStoragePath = 'MediaStoragePath' in params ? params.MediaStoragePath : null;
-        this.CoverStoragePath = 'CoverStoragePath' in params ? params.CoverStoragePath : null;
+        this.SimpleAesDefinition = 'SimpleAesDefinition' in params ? params.SimpleAesDefinition : null;
 
-        if (params.TempCertificate) {
-            let obj = new TempCertificate();
-            obj.deserialize(params.TempCertificate)
-            this.TempCertificate = obj;
+    }
+}
+
+/**
+ * DeleteClass request structure.
+ * @class
+ */
+class DeleteClassRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Category ID
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -18750,6 +23052,63 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Control parameter of politically sensitive information detection task.
+ * @class
+ */
+class PoliticalConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Control parameter of politically sensitive information detection in video image.
+         * @type {PoliticalImgReviewTemplateInfoForUpdate || null}
+         */
+        this.ImgReviewInfo = null;
+
+        /**
+         * Control parameter of politically sensitive information detection in speech.
+         * @type {PoliticalAsrReviewTemplateInfoForUpdate || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * Control parameter of politically sensitive information detection in text.
+         * @type {PoliticalOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImgReviewInfo) {
+            let obj = new PoliticalImgReviewTemplateInfoForUpdate();
+            obj.deserialize(params.ImgReviewInfo)
+            this.ImgReviewInfo = obj;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new PoliticalAsrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new PoliticalOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
 
     }
 }
@@ -18857,7 +23216,7 @@ class ImageTransform extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Rotation angle of image with its center point as origin. Value range: 0–360. This parameter is valid if `Type` is `Rotate`.
+         * Rotation angle of image with its center point as origin. Value range: 0-360. This parameter is valid if `Type` is `Rotate`.
          * @type {number || null}
          */
         this.RotateAngle = null;
@@ -19113,6 +23472,61 @@ class ConfirmEventsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyPersonSample response structure.
+ * @class
+ */
+class ModifyPersonSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Figure information.
+         * @type {AiSamplePerson || null}
+         */
+        this.Person = null;
+
+        /**
+         * Face information failed to be processed.
+         * @type {Array.<AiSampleFailFaceInfo> || null}
+         */
+        this.FailFaceInfoSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Person) {
+            let obj = new AiSamplePerson();
+            obj.deserialize(params.Person)
+            this.Person = obj;
+        }
+
+        if (params.FailFaceInfoSet) {
+            this.FailFaceInfoSet = new Array();
+            for (let z in params.FailFaceInfoSet) {
+                let obj = new AiSampleFailFaceInfo();
+                obj.deserialize(params.FailFaceInfoSet[z]);
+                this.FailFaceInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Video segment information of video track.
  * @class
  */
@@ -19240,60 +23654,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ProcessMediaByProcedure request structure.
+ * DeleteTranscodeTemplate response structure.
  * @class
  */
-class ProcessMediaByProcedureRequest extends  AbstractModel {
+class DeleteTranscodeTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Media file ID.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FileId = null;
-
-        /**
-         * [Task flow template](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
-         * @type {string || null}
-         */
-        this.ProcedureName = null;
-
-        /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
-         * @type {number || null}
-         */
-        this.TasksPriority = null;
-
-        /**
-         * Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
-         * @type {string || null}
-         */
-        this.TasksNotifyMode = null;
-
-        /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-         * @type {string || null}
-         */
-        this.SessionContext = null;
-
-        /**
-         * ID used for deduplication. If there was a request with the same ID on the last day, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-        /**
-         * Reserved field for special purposes.
-         * @type {string || null}
-         */
-        this.ExtInfo = null;
-
-        /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
+        this.RequestId = null;
 
     }
 
@@ -19304,14 +23676,7 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.ProcedureName = 'ProcedureName' in params ? params.ProcedureName : null;
-        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
-        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -19442,6 +23807,56 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribePersonSamples response structure.
+ * @class
+ */
+class DescribePersonSamplesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Figure information.
+         * @type {Array.<AiSamplePerson> || null}
+         */
+        this.PersonSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.PersonSet) {
+            this.PersonSet = new Array();
+            for (let z in params.PersonSet) {
+                let obj = new AiSamplePerson();
+                obj.deserialize(params.PersonSet[z]);
+                this.PersonSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Control parameter of porn information detection task
  * @class
  */
@@ -19522,7 +23937,7 @@ class AiRecognitionTaskObjectSeqmentItem extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0–100.
+         * Confidence of recognized segment. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -19551,47 +23966,24 @@ class AiRecognitionTaskObjectSeqmentItem extends  AbstractModel {
 }
 
 /**
- * Result type of cover generating task
+ * PullEvents request structure.
  * @class
  */
-class MediaProcessTaskCoverBySnapshotResult extends  AbstractModel {
+class PullEventsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Reserved field for special purposes.
          * @type {string || null}
          */
-        this.Status = null;
+        this.ExtInfo = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
-        this.ErrCode = null;
-
-        /**
-         * Error message.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Input of cover generating task.
-         * @type {CoverBySnapshotTaskInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output of cover generating task.
-         * @type {CoverBySnapshotTaskOutput || null}
-         */
-        this.Output = null;
+        this.SubAppId = null;
 
     }
 
@@ -19602,63 +23994,58 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new CoverBySnapshotTaskInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new CoverBySnapshotTaskOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
 
 /**
- * Object recognition result.
+ * Control parameter of face recognition task
  * @class
  */
-class AiRecognitionTaskObjectResult extends  AbstractModel {
+class FaceConfigureInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * Switch of face recognition task. Valid values:
+<li>ON: enables intelligent face recognition task;</li>
+<li>OFF: disables intelligent face recognition task.</li>
          * @type {string || null}
          */
-        this.Status = null;
+        this.Switch = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.Score = null;
 
         /**
-         * Error message.
+         * Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
+<li>entertainment: entertainment celebrity;</li>
+<li>sport: sports celebrity;</li>
+<li>politician: politically sensitive figure.</li>
+         * @type {Array.<string> || null}
+         */
+        this.DefaultLibraryLabelSet = null;
+
+        /**
+         * Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
+There can be up to 10 tags, each with a length limit of 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.UserDefineLibraryLabelSet = null;
+
+        /**
+         * Figure library. Valid values:
+<li>Default: default figure library;</li>
+<li>UserDefine: custom figure library.</li>
+<li>All: both default and custom figure libraries will be used.</li>
          * @type {string || null}
          */
-        this.Message = null;
-
-        /**
-         * Input information of object recognition task.
-         * @type {AiRecognitionTaskObjectResultInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output information of object recognition task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiRecognitionTaskObjectResultOutput || null}
-         */
-        this.Output = null;
+        this.FaceLibrary = null;
 
     }
 
@@ -19669,71 +24056,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new AiRecognitionTaskObjectResultInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new AiRecognitionTaskObjectResultOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
-
-    }
-}
-
-/**
- * DescribeVideoTrackTemplates response structure.
- * @class
- */
-class DescribeVideoTrackTemplatesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of eligible entries.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of video track template details.
-         * @type {Array.<VideoTrackTemplateInfo> || null}
-         */
-        this.VideoTrackTemplateSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.VideoTrackTemplateSet) {
-            this.VideoTrackTemplateSet = new Array();
-            for (let z in params.VideoTrackTemplateSet) {
-                let obj = new VideoTrackTemplateInfo();
-                obj.deserialize(params.VideoTrackTemplateSet[z]);
-                this.VideoTrackTemplateSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
+        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
+        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
 
     }
 }
@@ -19951,6 +24278,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateSubAppId request structure.
+ * @class
+ */
+class CreateSubAppIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subapplication name. Length limit: 40 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Subapplication overview. Length limit: 300 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * DescribeProcedureTemplates response structure.
  * @class
  */
@@ -20085,6 +24447,15 @@ class SearchMediaRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
+         * File type:
+<li>Video: video file</li>
+<li>Audio: audio file</li>
+<li>Image: image file</li>
+         * @type {Array.<string> || null}
+         */
+        this.Categories = null;
+
+        /**
          * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
@@ -20115,6 +24486,7 @@ class SearchMediaRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Categories = 'Categories' in params ? params.Categories : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -20338,7 +24710,7 @@ Default value: 0.
         this.Mute = null;
 
         /**
-         * Audio gain. Value range: 0–10.
+         * Audio gain. Value range: 0-10.
 <li>If the value is greater than 1, the volume will be increased.</li>
 <li>If the value is smaller than 1, the volume will be decreased.</li>
 <li>0 and 1: no change.</li>
@@ -20430,6 +24802,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * ModifyClass response structure.
+ * @class
+ */
+class ModifyClassResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -20565,7 +24965,7 @@ class FaceConfigureInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100. Default value: 95.
+         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100. Default value: 95.
          * @type {number || null}
          */
         this.Score = null;
@@ -20646,6 +25046,61 @@ class AiRecognitionTaskFaceResultOutput extends  AbstractModel {
                 this.ResultSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Control parameter of porn detection in video image task.
+ * @class
+ */
+class PornImgReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of porn detection in video image task. Valid values:
+<li>ON: enables porn detection in video image task;</li>
+<li>OFF: disables porn detection in video image task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Filter tag for porn detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+<li>porn: porn;</li>
+<li>vulgar: vulgarity;</li>
+<li>intimacy: intimacy;</li>
+<li>sexy: sexiness.</li>
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -20784,13 +25239,13 @@ class PornImgReviewTemplateInfo extends  AbstractModel {
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 0 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 0 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -20896,42 +25351,18 @@ class OcrFullTextConfigureInfo extends  AbstractModel {
 }
 
 /**
- * ResetProcedureTemplate request structure.
+ * CommitUpload request structure.
  * @class
  */
-class ResetProcedureTemplateRequest extends  AbstractModel {
+class CommitUploadRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task flow name
+         * VOD session, which takes the returned value (VodSessionKey) of the `ApplyUpload` API.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Parameter of video processing task.
-         * @type {MediaProcessTaskInput || null}
-         */
-        this.MediaProcessTask = null;
-
-        /**
-         * Parameter of AI-based content audit task.
-         * @type {AiContentReviewTaskInput || null}
-         */
-        this.AiContentReviewTask = null;
-
-        /**
-         * Parameter of AI-based content analysis task.
-         * @type {AiAnalysisTaskInput || null}
-         */
-        this.AiAnalysisTask = null;
-
-        /**
-         * Type parameter of AI-based content recognition task.
-         * @type {AiRecognitionTaskInput || null}
-         */
-        this.AiRecognitionTask = null;
+        this.VodSessionKey = null;
 
         /**
          * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -20948,31 +25379,7 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-
-        if (params.MediaProcessTask) {
-            let obj = new MediaProcessTaskInput();
-            obj.deserialize(params.MediaProcessTask)
-            this.MediaProcessTask = obj;
-        }
-
-        if (params.AiContentReviewTask) {
-            let obj = new AiContentReviewTaskInput();
-            obj.deserialize(params.AiContentReviewTask)
-            this.AiContentReviewTask = obj;
-        }
-
-        if (params.AiAnalysisTask) {
-            let obj = new AiAnalysisTaskInput();
-            obj.deserialize(params.AiAnalysisTask)
-            this.AiAnalysisTask = obj;
-        }
-
-        if (params.AiRecognitionTask) {
-            let obj = new AiRecognitionTaskInput();
-            obj.deserialize(params.AiRecognitionTask)
-            this.AiRecognitionTask = obj;
-        }
+        this.VodSessionKey = 'VodSessionKey' in params ? params.VodSessionKey : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -21074,6 +25481,62 @@ class SnapshotByTimeOffsetTask2017 extends  AbstractModel {
                 this.SnapshotInfoSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Category information description
+ * @class
+ */
+class MediaClassInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Category ID
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * Parent category ID, which is -1 for a first-level category.
+         * @type {number || null}
+         */
+        this.ParentId = null;
+
+        /**
+         * Category name
+         * @type {string || null}
+         */
+        this.ClassName = null;
+
+        /**
+         * Category level. 0 for first-level category, up to 3, i.e., up to 4 levels of categories are allowed.
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * Set of IDs of the immediate subcategories in current category
+         * @type {Array.<number> || null}
+         */
+        this.SubClassIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ParentId = 'ParentId' in params ? params.ParentId : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.SubClassIdSet = 'SubClassIdSet' in params ? params.SubClassIdSet : null;
 
     }
 }
@@ -21392,13 +25855,13 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -21455,43 +25918,110 @@ class CreateAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of intelligent categorization task
+ * Details of a sampled screencapturing template
  * @class
  */
-class AiAnalysisTaskClassificationResult extends  AbstractModel {
+class SampleSnapshotTemplate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error code. 0: success; other values: failure.
+         * Unique ID of a sampled screencapturing template.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.Definition = null;
 
         /**
-         * Error message.
+         * Template type. Valid values:
+<li>Preset: preset template;</li>
+<li>Custom: custom template.</li>
          * @type {string || null}
          */
-        this.Message = null;
+        this.Type = null;
 
         /**
-         * Input of intelligent categorization task.
-         * @type {AiAnalysisTaskClassificationInput || null}
+         * Name of a sampled screencapturing template.
+         * @type {string || null}
          */
-        this.Input = null;
+        this.Name = null;
 
         /**
-         * Output of intelligent categorization task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiAnalysisTaskClassificationOutput || null}
+         * Template description.
+         * @type {string || null}
          */
-        this.Output = null;
+        this.Comment = null;
+
+        /**
+         * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * Image format.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Sampled screencapturing type.
+         * @type {string || null}
+         */
+        this.SampleType = null;
+
+        /**
+         * Sampling interval.
+         * @type {number || null}
+         */
+        this.SampleInterval = null;
+
+        /**
+         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+<li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+<li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+Default value: black.
+         * @type {string || null}
+         */
+        this.FillType = null;
 
     }
 
@@ -21502,21 +26032,19 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new AiAnalysisTaskClassificationInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new AiAnalysisTaskClassificationOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.SampleType = 'SampleType' in params ? params.SampleType : null;
+        this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -21586,6 +26114,81 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
         this.WebVttUrl = 'WebVttUrl' in params ? params.WebVttUrl : null;
+
+    }
+}
+
+/**
+ * DescribePersonSamples request structure.
+ * @class
+ */
+class DescribePersonSamplesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pulled figure type. Valid values:
+<li>UserDefine: custom figure library;</li>
+<li>Default: default figure library.</li>
+
+Default value: UserDefine (the custom figure library will be pulled.)
+Note: the default figure library can be pulled only through "figure name" or "figure ID + figure name", and only one face image will be returned.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Figure ID. Array length limit: 100.
+         * @type {Array.<string> || null}
+         */
+        this.PersonIds = null;
+
+        /**
+         * Figure name. Array length limit: 20.
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * Figure tag. Array length limit: 20.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries to be returned. Default value: 100. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.PersonIds = 'PersonIds' in params ? params.PersonIds : null;
+        this.Names = 'Names' in params ? params.Names : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -22487,6 +27090,8 @@ module.exports = {
     ModifySampleSnapshotTemplateResponse: ModifySampleSnapshotTemplateResponse,
     ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
+    UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
+    DescribeAllClassRequest: DescribeAllClassRequest,
     WeChatMiniProgramPublishRequest: WeChatMiniProgramPublishRequest,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
     SvgWatermarkInput: SvgWatermarkInput,
@@ -22503,27 +27108,30 @@ module.exports = {
     AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
     MediaMiniProgramReviewElem: MediaMiniProgramReviewElem,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
+    MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
     MediaInputInfo: MediaInputInfo,
     CreateImageSpriteTask2017: CreateImageSpriteTask2017,
     TempCertificate: TempCertificate,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
+    AiSampleWord: AiSampleWord,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
-    VideoTrackTemplateInfo: VideoTrackTemplateInfo,
+    UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     DeleteAIRecognitionTemplateResponse: DeleteAIRecognitionTemplateResponse,
-    MosaicInput: MosaicInput,
+    DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
     AudioTransform: AudioTransform,
+    ResetProcedureTemplateRequest: ResetProcedureTemplateRequest,
     ComposeMediaResponse: ComposeMediaResponse,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
     DescribeStorageDataResponse: DescribeStorageDataResponse,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
     ModifySubAppIdInfoRequest: ModifySubAppIdInfoRequest,
+    DeletePersonSampleRequest: DeletePersonSampleRequest,
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
-    DescribeVideoTrackTemplatesRequest: DescribeVideoTrackTemplatesRequest,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     AudioTemplateInfo: AudioTemplateInfo,
     ExecuteFunctionResponse: ExecuteFunctionResponse,
@@ -22533,57 +27141,78 @@ module.exports = {
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
     AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
     AiRecognitionTaskHeadTailResultInput: AiRecognitionTaskHeadTailResultInput,
+    CreateAdaptiveDynamicStreamingTemplateRequest: CreateAdaptiveDynamicStreamingTemplateRequest,
     PushUrlCacheResponse: PushUrlCacheResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
-    AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
+    TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
+    ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
+    ApplyUploadResponse: ApplyUploadResponse,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
+    DeleteSuperPlayerConfigRequest: DeleteSuperPlayerConfigRequest,
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
     CreateProcedureTemplateRequest: CreateProcedureTemplateRequest,
     DescribeMediaProcessUsageDataRequest: DescribeMediaProcessUsageDataRequest,
+    CreatePersonSampleRequest: CreatePersonSampleRequest,
     MediaTransitionItem: MediaTransitionItem,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     TagConfigureInfo: TagConfigureInfo,
+    ModifySuperPlayerConfigResponse: ModifySuperPlayerConfigResponse,
+    AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
     ConcatTask2017: ConcatTask2017,
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
     FileUploadTask: FileUploadTask,
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
     FileDeleteTask: FileDeleteTask,
-    ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
+    AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
     EditMediaTaskInput: EditMediaTaskInput,
     UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
-    AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
-    AiAnalysisTaskFrameTagOutput: AiAnalysisTaskFrameTagOutput,
+    DescribeWordSamplesResponse: DescribeWordSamplesResponse,
+    AiSampleFaceInfo: AiSampleFaceInfo,
     MediaProcessTaskAdaptiveDynamicStreamingResult: MediaProcessTaskAdaptiveDynamicStreamingResult,
+    OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
     WatermarkTemplate: WatermarkTemplate,
     CoverBySnapshotTaskOutput: CoverBySnapshotTaskOutput,
-    CommitUploadRequest: CommitUploadRequest,
+    TextWatermarkTemplateInput: TextWatermarkTemplateInput,
     ForbidMediaDistributionRequest: ForbidMediaDistributionRequest,
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
     EditMediaResponse: EditMediaResponse,
-    AudioTrackTemplateInfo: AudioTrackTemplateInfo,
+    PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
+    ModifyMediaInfoRequest: ModifyMediaInfoRequest,
+    DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
+    PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     TaskStatData: TaskStatData,
+    OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
+    ProcessMediaByProcedureRequest: ProcessMediaByProcedureRequest,
     MediaProcessTaskInput: MediaProcessTaskInput,
-    AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
+    MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
     ProcessMediaResponse: ProcessMediaResponse,
+    CreateWordSamplesResponse: CreateWordSamplesResponse,
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
+    DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
+    CreateWordSamplesRequest: CreateWordSamplesRequest,
+    PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     WechatMiniProgramPublishTaskInput: WechatMiniProgramPublishTaskInput,
+    AiSampleFaceOperation: AiSampleFaceOperation,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
     AiReviewTaskTerrorismOcrResult: AiReviewTaskTerrorismOcrResult,
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
+    AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
+    ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     LiveRealTimeClipRequest: LiveRealTimeClipRequest,
+    DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     EditMediaOutputConfig: EditMediaOutputConfig,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
@@ -22600,77 +27229,108 @@ module.exports = {
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
     ImageWatermarkInput: ImageWatermarkInput,
     ObjectConfigureInfo: ObjectConfigureInfo,
+    AsrFullTextConfigureInfoForUpdate: AsrFullTextConfigureInfoForUpdate,
     AiRecognitionTaskHeadTailResult: AiRecognitionTaskHeadTailResult,
     TranscodeTask2017: TranscodeTask2017,
+    CreatePersonSampleResponse: CreatePersonSampleResponse,
+    CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
     HighlightsConfigureInfo: HighlightsConfigureInfo,
     DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
+    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
+    DeleteWordSamplesRequest: DeleteWordSamplesRequest,
     EmptyTrackItem: EmptyTrackItem,
     StickerTrackItem: StickerTrackItem,
     VideoTemplateInfo: VideoTemplateInfo,
     PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
-    UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
+    PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
     AiReviewTaskPornOcrResult: AiReviewTaskPornOcrResult,
+    ModifyContentReviewTemplateResponse: ModifyContentReviewTemplateResponse,
     DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
     CoverBySnapshotTaskInput: CoverBySnapshotTaskInput,
+    SegmentConfigureInfoForUpdate: SegmentConfigureInfoForUpdate,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
     AiRecognitionTaskSegmentSegmentItem: AiRecognitionTaskSegmentSegmentItem,
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
-    MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
-    TextWatermarkTemplateInput: TextWatermarkTemplateInput,
+    CreateSuperPlayerConfigResponse: CreateSuperPlayerConfigResponse,
+    AiAnalysisTaskFrameTagOutput: AiAnalysisTaskFrameTagOutput,
+    ModifyAdaptiveDynamicStreamingTemplateRequest: ModifyAdaptiveDynamicStreamingTemplateRequest,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
     DescribeCDNUsageDataResponse: DescribeCDNUsageDataResponse,
-    MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
+    ModifyWordSampleRequest: ModifyWordSampleRequest,
+    AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
+    DeleteMediaResponse: DeleteMediaResponse,
     ModifySnapshotByTimeOffsetTemplateResponse: ModifySnapshotByTimeOffsetTemplateResponse,
+    AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     ProcessMediaRequest: ProcessMediaRequest,
+    ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
+    ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
     AiRecognitionTaskSegmentResultOutput: AiRecognitionTaskSegmentResultOutput,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
+    ObjectConfigureInfoForUpdate: ObjectConfigureInfoForUpdate,
+    DeleteMediaRequest: DeleteMediaRequest,
+    CreateSuperPlayerConfigRequest: CreateSuperPlayerConfigRequest,
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ModifySubAppIdInfoResponse: ModifySubAppIdInfoResponse,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
     ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
     SimpleHlsClipRequest: SimpleHlsClipRequest,
+    MediaDeleteItem: MediaDeleteItem,
+    AiSamplePerson: AiSamplePerson,
     MediaAdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo,
+    DescribeSuperPlayerConfigsResponse: DescribeSuperPlayerConfigsResponse,
+    AsrWordsConfigureInfoForUpdate: AsrWordsConfigureInfoForUpdate,
     DescribeStorageDataRequest: DescribeStorageDataRequest,
     DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
     DescribeContentReviewTemplatesResponse: DescribeContentReviewTemplatesResponse,
     TEHDConfig: TEHDConfig,
-    ClipTask2017: ClipTask2017,
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
+    TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
+    UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     AiRecognitionTaskHeadTailResultOutput: AiRecognitionTaskHeadTailResultOutput,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
-    PullEventsRequest: PullEventsRequest,
+    MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
+    TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
     ComposeMediaTask: ComposeMediaTask,
+    HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
     ComposeMediaTaskInput: ComposeMediaTaskInput,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
+    MosaicInput: MosaicInput,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
     AiRecognitionTaskObjectResultItem: AiRecognitionTaskObjectResultItem,
     MediaSnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo,
     DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     MediaKeyFrameDescItem: MediaKeyFrameDescItem,
+    AiSampleTagOperation: AiSampleTagOperation,
+    PlayerConfig: PlayerConfig,
     ConfirmEventsRequest: ConfirmEventsRequest,
+    CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     ModifySubAppIdStatusRequest: ModifySubAppIdStatusRequest,
+    CreateSubAppIdResponse: CreateSubAppIdResponse,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
     ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
     ProhibitedConfigureInfo: ProhibitedConfigureInfo,
+    DrmStreamingsInfo: DrmStreamingsInfo,
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
     AiAnalysisResult: AiAnalysisResult,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     MediaTranscodeInfo: MediaTranscodeInfo,
+    ResolutionNameInfo: ResolutionNameInfo,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
+    ParseStreamingManifestRequest: ParseStreamingManifestRequest,
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
     MediaTrackItem: MediaTrackItem,
@@ -22680,35 +27340,40 @@ module.exports = {
     OutputVideoStream: OutputVideoStream,
     ProcedureTemplate: ProcedureTemplate,
     AiReviewTaskTerrorismResult: AiReviewTaskTerrorismResult,
+    ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
     MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
     MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
+    DeletePersonSampleResponse: DeletePersonSampleResponse,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,
+    ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
+    CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
-    ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
+    AiAnalysisTaskInput: AiAnalysisTaskInput,
     ImageSpriteTemplate: ImageSpriteTemplate,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     SegmentConfigureInfo: SegmentConfigureInfo,
     TaskStatDataItem: TaskStatDataItem,
+    ParseStreamingManifestResponse: ParseStreamingManifestResponse,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     ApplyUploadRequest: ApplyUploadRequest,
     CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
     AiAnalysisTaskHighlightInput: AiAnalysisTaskHighlightInput,
-    ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
+    DeleteContentReviewTemplateResponse: DeleteContentReviewTemplateResponse,
     MediaBasicInfo: MediaBasicInfo,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     PullUploadRequest: PullUploadRequest,
     SortBy: SortBy,
-    MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
+    ClipTask2017: ClipTask2017,
     TranscodeTemplate: TranscodeTemplate,
     DescribeCDNUsageDataRequest: DescribeCDNUsageDataRequest,
-    DescribeAudioTrackTemplatesResponse: DescribeAudioTrackTemplatesResponse,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     DescribeReviewDetailsRequest: DescribeReviewDetailsRequest,
+    PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
     MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
     TerrorismOcrReviewTemplateInfo: TerrorismOcrReviewTemplateInfo,
@@ -22716,75 +27381,94 @@ module.exports = {
     AiRecognitionTaskObjectResultOutput: AiRecognitionTaskObjectResultOutput,
     AiReviewProhibitedAsrTaskOutput: AiReviewProhibitedAsrTaskOutput,
     CreateClassResponse: CreateClassResponse,
+    DeleteSuperPlayerConfigResponse: DeleteSuperPlayerConfigResponse,
     DescribeSampleSnapshotTemplatesRequest: DescribeSampleSnapshotTemplatesRequest,
     CoverConfigureInfoForUpdate: CoverConfigureInfoForUpdate,
-    SampleSnapshotTemplate: SampleSnapshotTemplate,
+    AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
+    PoliticalImgReviewTemplateInfoForUpdate: PoliticalImgReviewTemplateInfoForUpdate,
     UserDefineOcrTextReviewTemplateInfo: UserDefineOcrTextReviewTemplateInfo,
     AdaptiveStreamTemplate: AdaptiveStreamTemplate,
     TranscodeTaskInput: TranscodeTaskInput,
+    ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     WechatPublishTask: WechatPublishTask,
     ClipFileInfo2017: ClipFileInfo2017,
     StatDataItem: StatDataItem,
     MediaSourceData: MediaSourceData,
+    ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     PushUrlCacheRequest: PushUrlCacheRequest,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     HeadTailConfigureInfo: HeadTailConfigureInfo,
     EventContent: EventContent,
     HighlightsConfigureInfoForUpdate: HighlightsConfigureInfoForUpdate,
+    UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
     OutputAudioStream: OutputAudioStream,
+    ModifyClassRequest: ModifyClassRequest,
     SpecificationDataItem: SpecificationDataItem,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
     ComposeMediaTaskOutput: ComposeMediaTaskOutput,
     DescribeMediaInfosRequest: DescribeMediaInfosRequest,
+    ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
-    AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
+    CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
     AiRecognitionTaskAsrFullTextResult: AiRecognitionTaskAsrFullTextResult,
+    ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     PoliticalConfigureInfo: PoliticalConfigureInfo,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     AiRecognitionTaskOcrWordsSegmentItem: AiRecognitionTaskOcrWordsSegmentItem,
     MediaProcessTaskResult: MediaProcessTaskResult,
+    DeleteWordSamplesResponse: DeleteWordSamplesResponse,
     DeleteProcedureTemplateRequest: DeleteProcedureTemplateRequest,
     WatermarkInput: WatermarkInput,
+    AiSampleWordInfo: AiSampleWordInfo,
     AdaptiveDynamicStreamingInfoItem: AdaptiveDynamicStreamingInfoItem,
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
+    DeleteClassResponse: DeleteClassResponse,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     MediaMetaData: MediaMetaData,
     MediaSampleSnapshotInfo: MediaSampleSnapshotInfo,
     DescribeSubAppIdsResponse: DescribeSubAppIdsResponse,
     MediaInfo: MediaInfo,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
+    CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
     DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,
     AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     AiAnalysisTaskFrameTagInput: AiAnalysisTaskFrameTagInput,
     MediaAiAnalysisFrameTagSegmentItem: MediaAiAnalysisFrameTagSegmentItem,
     AiRecognitionTaskAsrWordsResultItem: AiRecognitionTaskAsrWordsResultItem,
-    AiAnalysisTaskInput: AiAnalysisTaskInput,
+    MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     MediaKeyFrameDescInfo: MediaKeyFrameDescInfo,
     DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
     CreateClassRequest: CreateClassRequest,
+    AiSampleFailFaceInfo: AiSampleFailFaceInfo,
+    UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
     CreateProcedureTemplateResponse: CreateProcedureTemplateResponse,
     DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
+    DescribeSuperPlayerConfigsRequest: DescribeSuperPlayerConfigsRequest,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
     AiRecognitionTaskSegmentResultInput: AiRecognitionTaskSegmentResultInput,
-    DescribeAudioTrackTemplatesRequest: DescribeAudioTrackTemplatesRequest,
+    DescribeTasksResponse: DescribeTasksResponse,
     DescribeSubAppIdsRequest: DescribeSubAppIdsRequest,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ProcedureTask: ProcedureTask,
+    ModifySuperPlayerConfigRequest: ModifySuperPlayerConfigRequest,
+    TaskSimpleInfo: TaskSimpleInfo,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
     SnapshotByTimeOffsetTemplate: SnapshotByTimeOffsetTemplate,
     DeleteSnapshotByTimeOffsetTemplateResponse: DeleteSnapshotByTimeOffsetTemplateResponse,
+    ProhibitedOcrReviewTemplateInfoForUpdate: ProhibitedOcrReviewTemplateInfoForUpdate,
+    DescribeTasksRequest: DescribeTasksRequest,
     DescribeReviewDetailsResponse: DescribeReviewDetailsResponse,
     CreateTranscodeTemplateResponse: CreateTranscodeTemplateResponse,
     AiRecognitionTaskAsrWordsResultInput: AiRecognitionTaskAsrWordsResultInput,
@@ -22794,18 +27478,23 @@ module.exports = {
     MediaAudioStreamItem: MediaAudioStreamItem,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     SubAppIdInfo: SubAppIdInfo,
+    DescribeAllClassResponse: DescribeAllClassResponse,
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,
     AiReviewProhibitedOcrTaskInput: AiReviewProhibitedOcrTaskInput,
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     EditMediaStreamInfo: EditMediaStreamInfo,
+    DescribeWordSamplesRequest: DescribeWordSamplesRequest,
     LiveRealTimeClipResponse: LiveRealTimeClipResponse,
     ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     CommitUploadResponse: CommitUploadResponse,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
+    ModifyWordSampleResponse: ModifyWordSampleResponse,
     AiContentReviewResult: AiContentReviewResult,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
-    ApplyUploadResponse: ApplyUploadResponse,
+    DrmStreamingsInfoForUpdate: DrmStreamingsInfoForUpdate,
+    DeleteClassRequest: DeleteClassRequest,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
+    PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
     WeChatMiniProgramPublishResponse: WeChatMiniProgramPublishResponse,
     ImageTransform: ImageTransform,
@@ -22813,35 +27502,40 @@ module.exports = {
     FrameTagConfigureInfo: FrameTagConfigureInfo,
     ExecuteFunctionRequest: ExecuteFunctionRequest,
     ConfirmEventsResponse: ConfirmEventsResponse,
+    ModifyPersonSampleResponse: ModifyPersonSampleResponse,
     VideoTrackItem: VideoTrackItem,
-    ProcessMediaByProcedureRequest: ProcessMediaByProcedureRequest,
+    DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     MediaTranscodeItem: MediaTranscodeItem,
+    DescribePersonSamplesResponse: DescribePersonSamplesResponse,
     PornConfigureInfo: PornConfigureInfo,
     AiRecognitionTaskObjectSeqmentItem: AiRecognitionTaskObjectSeqmentItem,
-    MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
-    AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
-    DescribeVideoTrackTemplatesResponse: DescribeVideoTrackTemplatesResponse,
+    PullEventsRequest: PullEventsRequest,
+    FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
     DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     AiRecognitionTaskAsrWordsResult: AiRecognitionTaskAsrWordsResult,
+    CreateSubAppIdRequest: CreateSubAppIdRequest,
     DescribeProcedureTemplatesResponse: DescribeProcedureTemplatesResponse,
     SearchMediaRequest: SearchMediaRequest,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     AudioVolumeParam: AudioVolumeParam,
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
+    ModifyClassResponse: ModifyClassResponse,
     EditMediaFileInfo: EditMediaFileInfo,
     ProcessMediaByProcedureResponse: ProcessMediaByProcedureResponse,
     PullUploadResponse: PullUploadResponse,
     FaceConfigureInfo: FaceConfigureInfo,
     AiRecognitionTaskFaceResultOutput: AiRecognitionTaskFaceResultOutput,
+    PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
     EditMediaTask: EditMediaTask,
     PornImgReviewTemplateInfo: PornImgReviewTemplateInfo,
     AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
     OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
-    ResetProcedureTemplateRequest: ResetProcedureTemplateRequest,
+    CommitUploadRequest: CommitUploadRequest,
     WatermarkCycleConfigForUpdate: WatermarkCycleConfigForUpdate,
     SnapshotByTimeOffsetTask2017: SnapshotByTimeOffsetTask2017,
+    MediaClassInfo: MediaClassInfo,
     DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
     DeleteAnimatedGraphicsTemplateRequest: DeleteAnimatedGraphicsTemplateRequest,
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
@@ -22851,8 +27545,9 @@ module.exports = {
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
-    AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
+    SampleSnapshotTemplate: SampleSnapshotTemplate,
     MediaImageSpriteItem: MediaImageSpriteItem,
+    DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
     AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
     DescribeStorageDetailsRequest: DescribeStorageDetailsRequest,

@@ -43,7 +43,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.Storage = null;
 
         /**
-         * Number of instances purchased at a time. Value range: 1–100.
+         * Number of instances purchased at a time. Value range: 1-100.
          * @type {number || null}
          */
         this.InstanceCount = null;
@@ -358,7 +358,7 @@ class DescribeDBXlogsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of entries returned per page in paged query. Value range: 1–100.
+         * Number of entries returned per page in paged query. Value range: 1-100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -550,7 +550,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Number of entries returned per page. Default value: 20. Value range: 1–100.
+         * Number of entries returned per page. Default value: 20. Value range: 1-100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2230,7 +2230,7 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneState = null;
 
         /**
-         * Whether the availability zone supports IPv6 address access
+         * Whether the AZ supports IPv6 address access
          * @type {number || null}
          */
         this.ZoneSupportIpv6 = null;
@@ -2384,7 +2384,7 @@ class DescribeDBErrlogsRequest extends  AbstractModel {
         this.SearchKeys = null;
 
         /**
-         * Number of entries returned per page. Value range: 1–100
+         * Number of entries returned per page. Value range: 1-100
          * @type {number || null}
          */
         this.Limit = null;
@@ -2780,7 +2780,7 @@ class DescribeDBSlowlogsRequest extends  AbstractModel {
         this.OrderByType = null;
 
         /**
-         * Number of entries returned per page. Value range: 1–100. Default value: 20.
+         * Number of entries returned per page. Value range: 1-100. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -3502,6 +3502,12 @@ class Xlog extends  AbstractModel {
          */
         this.ExternalAddr = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Size = null;
+
     }
 
     /**
@@ -3516,6 +3522,7 @@ class Xlog extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
         this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }

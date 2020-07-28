@@ -3497,7 +3497,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of instances. Value range: 1–100. Default value: 1.
+         * Number of instances. Value range: 1-100. Default value: 1.
          * @type {number || null}
          */
         this.GoodsNum = null;
@@ -3569,7 +3569,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Port = null;
 
         /**
-         * Sets the root account password. Rule: the password can contain 8–64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+         * Sets the root account password. Rule: the password can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
          * @type {string || null}
          */
         this.Password = null;
@@ -4441,6 +4441,18 @@ class ModifyInstanceParamRequest extends  AbstractModel {
          */
         this.ParamList = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
     }
 
     /**
@@ -4460,6 +4472,8 @@ class ModifyInstanceParamRequest extends  AbstractModel {
                 this.ParamList.push(obj);
             }
         }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
 
     }
 }
@@ -9353,43 +9367,43 @@ class CommonTimeWindow extends  AbstractModel {
         super();
 
         /**
-         * Time window on Monday in the format of 02:00–06:00
+         * Time window on Monday in the format of 02:00-06:00
          * @type {string || null}
          */
         this.Monday = null;
 
         /**
-         * Time window on Tuesday in the format of 02:00–06:00
+         * Time window on Tuesday in the format of 02:00-06:00
          * @type {string || null}
          */
         this.Tuesday = null;
 
         /**
-         * Time window on Wednesday in the format of 02:00–06:00
+         * Time window on Wednesday in the format of 02:00-06:00
          * @type {string || null}
          */
         this.Wednesday = null;
 
         /**
-         * Time window on Thursday in the format of 02:00–06:00
+         * Time window on Thursday in the format of 02:00-06:00
          * @type {string || null}
          */
         this.Thursday = null;
 
         /**
-         * Time window on Friday in the format of 02:00–06:00
+         * Time window on Friday in the format of 02:00-06:00
          * @type {string || null}
          */
         this.Friday = null;
 
         /**
-         * Time window on Saturday in the format of 02:00–06:00
+         * Time window on Saturday in the format of 02:00-06:00
          * @type {string || null}
          */
         this.Saturday = null;
 
         /**
-         * Time window on Sunday in the format of 02:00–06:00
+         * Time window on Sunday in the format of 02:00-06:00
          * @type {string || null}
          */
         this.Sunday = null;
@@ -9730,6 +9744,12 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
          */
         this.WaitSwitch = null;
 
+        /**
+         * Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
+         * @type {number || null}
+         */
+        this.UpgradeSubversion = null;
+
     }
 
     /**
@@ -9742,6 +9762,7 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
         this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
 
     }
 }
@@ -9981,7 +10002,7 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
         this.UniqSubnetId = null;
 
         /**
-         * Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0–168 hours. Default value: 24 hours.
+         * Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0-168 hours. Default value: 24 hours.
          * @type {number || null}
          */
         this.ReleaseDuration = null;
@@ -11586,7 +11607,7 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.ExpireDays = null;
 
         /**
-         * (This parameter will be disused. The `BackupTimeWindow` parameter is recommended.) Backup time range in the format of 02:00–06:00, with the start time and end time on the hour. Valid values: 00:00–12:00, 02:00–06:00, 06:00–10:00, 10:00–14:00, 14:00–18:00, 18:00–22:00, 22:00–02:00.
+         * (This parameter will be disused. The `BackupTimeWindow` parameter is recommended.) Backup time range in the format of 02:00-06:00, with the start time and end time on the hour. Valid values: 00:00-12:00, 02:00-06:00, 06:00-10:00, 10:00-14:00, 14:00-18:00, 18:00-22:00, 22:00-02:00.
          * @type {string || null}
          */
         this.StartTime = null;

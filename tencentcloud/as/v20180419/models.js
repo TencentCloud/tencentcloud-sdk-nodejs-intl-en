@@ -255,6 +255,12 @@ If an availability zone or subnet in Zones/SubnetIds does not exist, a verificat
          */
         this.Ipv6AddressCount = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MultiZoneSubnetPolicy = null;
+
     }
 
     /**
@@ -285,6 +291,7 @@ If an availability zone or subnet in Zones/SubnetIds does not exist, a verificat
             this.ServiceSettings = obj;
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
+        this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
 
     }
 }
@@ -1008,6 +1015,41 @@ The maximum number of `Filters` per request is 10. The upper limit for `Filter.V
 }
 
 /**
+ * 
+ * @class
+ */
+class InstanceNameSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceNameStyle = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceNameStyle = 'InstanceNameStyle' in params ? params.InstanceNameStyle : null;
+
+    }
+}
+
+/**
  * ModifyScheduledAction response structure.
  * @class
  */
@@ -1044,7 +1086,7 @@ class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * The scaling group name. It must be unique under your account. The name can only contain Chinese characters, English letters, numbers, underscore, hyphen “-” and periods. It cannot exceed 55 bytes.
+         * The scaling group name. It must be unique under your account. The name can only contain letters, numbers, underscore, hyphen “-” and periods. It cannot exceed 55 bytes.
          * @type {string || null}
          */
         this.AutoScalingGroupName = null;
@@ -1056,13 +1098,13 @@ class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * The maximum number of instances. Value range: 0-2000.
+         * The minimum number of instances. Value range: 0 - 2000.
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
-         * The minimum number of instances. Value range: 0-2000.
+         * The maximum number of instances. Value range: 0 - 2000.
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -1904,6 +1946,18 @@ If a model in InstanceTypes does not exist or has been discontinued, a verificat
          */
         this.HostNameSettings = null;
 
+        /**
+         * 
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * 
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
     }
 
     /**
@@ -1976,6 +2030,18 @@ If a model in InstanceTypes does not exist or has been discontinued, a verificat
             let obj = new HostNameSettings();
             obj.deserialize(params.HostNameSettings)
             this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
         }
 
     }
@@ -3191,7 +3257,7 @@ If an availability zone or subnet in Zones/SubnetIds does not exist, a verificat
         this.ZonesCheckPolicy = null;
 
         /**
-         * List of tag descriptions. This parameter is used to bind a tag to a scaling group as well as corresponding resource instances. Each scaling group can have up to 30 tags.
+         * List of tag descriptions. In this parameter, you can specify the tags to be bound with a scaling group as well as corresponding resource instances. Each scaling group can have up to 30 tags.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -3418,6 +3484,18 @@ If a model in InstanceTypes does not exist or has been deactivated, a verificati
          */
         this.HostNameSettings = null;
 
+        /**
+         * 
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * 
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
     }
 
     /**
@@ -3490,6 +3568,18 @@ If a model in InstanceTypes does not exist or has been deactivated, a verificati
             let obj = new HostNameSettings();
             obj.deserialize(params.HostNameSettings)
             this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
         }
 
     }
@@ -4374,7 +4464,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * Additional information sent by Auto Scaling to the notification target. Default value is “”. Maximum length is 1024 characters.
+         * Additional information sent by Auto Scaling to the notification target. Default value is ''. Maximum length is 1024 characters.
          * @type {string || null}
          */
         this.NotificationMetadata = null;
@@ -4652,6 +4742,12 @@ class ServiceSettings extends  AbstractModel {
          */
         this.ReplaceMonitorUnhealthy = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ScalingMode = null;
+
     }
 
     /**
@@ -4662,6 +4758,7 @@ class ServiceSettings extends  AbstractModel {
             return;
         }
         this.ReplaceMonitorUnhealthy = 'ReplaceMonitorUnhealthy' in params ? params.ReplaceMonitorUnhealthy : null;
+        this.ScalingMode = 'ScalingMode' in params ? params.ScalingMode : null;
 
     }
 }
@@ -4822,6 +4919,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.HostNameSettings = null;
 
+        /**
+         * 
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * 
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
     }
 
     /**
@@ -4908,6 +5017,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new HostNameSettings();
             obj.deserialize(params.HostNameSettings)
             this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
         }
 
     }
@@ -5826,7 +5947,7 @@ class StartAutoScalingInstancesRequest extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * The list of the CVM instances you want to launch.
+         * The list of the CVM instances you want to start up.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -6265,7 +6386,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PublicIpAssigned = null;
 
         /**
-         * Bandwidth package ID. You can obtain the parameter value from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) API.
+         * Bandwidth package ID. You can obtain the ID from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) API.
 Note: this field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
@@ -6450,7 +6571,7 @@ class ExecuteScalingPolicyRequest extends  AbstractModel {
         this.HonorCooldown = null;
 
         /**
-         * Trigger source that executes a scaling policy. Valid values: API and CLOUD_MONITOR. Default value: API. The value `CLOUD_MONITOR` is specific to the Cloud Monitor service.
+         * Source that triggers the scaling policy. Valid values: API and CLOUD_MONITOR. Default value: API. The value `CLOUD_MONITOR` is specific to the Cloud Monitor service.
          * @type {string || null}
          */
         this.TriggerSource = null;
@@ -6490,6 +6611,7 @@ module.exports = {
     SpotMarketOptions: SpotMarketOptions,
     StopAutoScalingInstancesResponse: StopAutoScalingInstancesResponse,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
+    InstanceNameSettings: InstanceNameSettings,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
     CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
     ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,

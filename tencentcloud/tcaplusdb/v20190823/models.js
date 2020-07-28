@@ -255,6 +255,12 @@ class DescribeClustersRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Whether to enable IPv6 address access
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
     }
 
     /**
@@ -276,6 +282,7 @@ class DescribeClustersRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
@@ -562,10 +569,22 @@ class CreateClusterRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Cluster access password, which must contain lowercase letters (a–z), uppercase letters (A–Z), and digits (0–9).
+         * Cluster access password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
          * @type {string || null}
          */
         this.Password = null;
+
+        /**
+         * 
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * Whether to enable IPv6 address access for clusters
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
 
     }
 
@@ -581,6 +600,16 @@ class CreateClusterRequest extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.Password = 'Password' in params ? params.Password : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
@@ -977,6 +1006,12 @@ class CreateTablesRequest extends  AbstractModel {
          */
         this.SelectedTables = null;
 
+        /**
+         * 
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -1003,6 +1038,15 @@ class CreateTablesRequest extends  AbstractModel {
                 let obj = new SelectedTableInfoNew();
                 obj.deserialize(params.SelectedTables[z]);
                 this.SelectedTables.push(obj);
+            }
+        }
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
             }
         }
 
@@ -1283,6 +1327,12 @@ class RegionInfo extends  AbstractModel {
          */
         this.RegionId = null;
 
+        /**
+         * Whether to support IPv6 address access. Valid values: 0 (support), 1 (not support)
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
     }
 
     /**
@@ -1295,6 +1345,7 @@ class RegionInfo extends  AbstractModel {
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
@@ -1364,7 +1415,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TableGroupName = null;
 
         /**
-         * JSON string of table’s primary key field structure
+         * JSON string of table's primary key field structure
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1448,7 +1499,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CreatedTime = null;
 
         /**
-         * Table’s last modified time
+         * Table's last modified time
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1488,6 +1539,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {number || null}
          */
         this.SortRule = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DbClusterInfoStruct = null;
 
     }
 
@@ -1537,6 +1594,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ApiAccessId = 'ApiAccessId' in params ? params.ApiAccessId : null;
         this.SortFieldNum = 'SortFieldNum' in params ? params.SortFieldNum : null;
         this.SortRule = 'SortRule' in params ? params.SortRule : null;
+        this.DbClusterInfoStruct = 'DbClusterInfoStruct' in params ? params.DbClusterInfoStruct : null;
 
     }
 }
@@ -3319,7 +3377,7 @@ class ModifyClusterPasswordRequest extends  AbstractModel {
         this.OldPasswordExpireTime = null;
 
         /**
-         * New cluster password, which must contain lowercase letters (a–z), uppercase letters (A–Z), and digits (0–9).
+         * New cluster password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
          * @type {string || null}
          */
         this.NewPassword = null;
@@ -3441,6 +3499,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.OldPasswordExpireTime = null;
 
+        /**
+         * TcaplusDB SDK connection parameter for accessing IPv6 addresses
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApiAccessIpv6 = null;
+
     }
 
     /**
@@ -3464,6 +3529,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ApiAccessIp = 'ApiAccessIp' in params ? params.ApiAccessIp : null;
         this.ApiAccessPort = 'ApiAccessPort' in params ? params.ApiAccessPort : null;
         this.OldPasswordExpireTime = 'OldPasswordExpireTime' in params ? params.OldPasswordExpireTime : null;
+        this.ApiAccessIpv6 = 'ApiAccessIpv6' in params ? params.ApiAccessIpv6 : null;
 
     }
 }
@@ -4462,6 +4528,12 @@ class CreateTableGroupRequest extends  AbstractModel {
          */
         this.TableGroupId = null;
 
+        /**
+         * 
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -4474,6 +4546,15 @@ class CreateTableGroupRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.TableGroupName = 'TableGroupName' in params ? params.TableGroupName : null;
         this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }

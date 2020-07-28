@@ -596,13 +596,13 @@ class DescribeSnapshotOperationLogsRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * The start time of the operation logs to be queried, for example: “2019-11-22 00:00:00"
+         * The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * The end time of the operation logs to be queried, for example: “2019-11-22 23:59:59"
+         * The end time of the operation logs to be queried, for example: '2019-11-22 23:59:59"
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2223,13 +2223,13 @@ class DescribeDiskOperationLogsRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * The start time of the operation logs to be queried, for example: “2019-11-22 00:00:00"
+         * The start time of the operation logs to be queried, for example: '2019-11-22 00:00:00"
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * The end time of the operation logs to be queried, for example: “2019-11-22 23:59:59"
+         * The end time of the operation logs to be queried, for example: '2019-11-22 23:59:59"
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2313,7 +2313,7 @@ class CreateDisksRequest extends  AbstractModel {
         this.Placement = null;
 
         /**
-         * The displayed name of the cloud disk. If it is left empty, the default is “Not named”. The maximum length cannot exceed 60 bytes.
+         * The displayed name of the cloud disk. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
          * @type {string || null}
          */
         this.DiskName = null;
@@ -3074,7 +3074,7 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
         this.Policy = null;
 
         /**
-         * The name of the scheduled snapshot policy to be created. If it is left empty, the default is “Not named”. The maximum length cannot exceed 60 bytes.
+         * The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
          * @type {string || null}
          */
         this.AutoSnapshotPolicyName = null;
@@ -3366,7 +3366,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.Shareable = null;
 
         /**
-         * For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk’s Instance IDs currently mounted to the CVM.
+         * For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk's Instance IDs currently mounted to the CVM.
          * @type {Array.<string> || null}
          */
         this.InstanceIdList = null;
@@ -3469,7 +3469,7 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
         this.Policy = null;
 
         /**
-         * The name of the scheduled snapshot policy to be created. If it is left empty, the default is “Not named”. The maximum length cannot exceed 60 bytes.
+         * The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
          * @type {string || null}
          */
         this.AutoSnapshotPolicyName = null;

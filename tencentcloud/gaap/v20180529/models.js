@@ -142,6 +142,15 @@ class DeleteProxyGroupRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * Whether to enable forced deletion. Valid values:
+0: no;
+1: yes.
+Default value: 0. If there is a connection or listener/rule bound to an origin server in the connection group and `Force` is 0, the operation will return a failure.
+         * @type {number || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -152,6 +161,7 @@ class DeleteProxyGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -236,9 +246,9 @@ class DescribeListenerStatisticsRequest extends  AbstractModel {
 
         /**
          * Monitoring granularity. It currently supports: 300, 3,600, and 86,400. Unit: seconds.
-Time range: ≤ 1 day, supported minimum granularity: 300 seconds;
-Time range：≤ 7 days, supported minimum granularity:3,600 seconds;
-Time range: ＞7 days, supported minimum granularity:86,400 seconds;
+Time range: <= 1 day, supported minimum granularity: 300 seconds;
+Time range: <= 7 days, supported minimum granularity:3,600 seconds;
+Time range: > 7 days, supported minimum granularity:86,400 seconds;
          * @type {number || null}
          */
         this.Granularity = null;
@@ -464,7 +474,7 @@ class ModifyProxiesProjectRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * ID of one or multiple connections to be operated; It’s an old parameter, please switch to ProxyIds.
+         * ID of one or multiple connections to be operated; It's an old parameter, please switch to ProxyIds.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -477,7 +487,7 @@ For more information, please see How to Ensure Idempotence.
         this.ClientToken = null;
 
         /**
-         * ID of one or multiple connections to be operated; It’s a new parameter.
+         * ID of one or multiple connections to be operated; It's a new parameter.
          * @type {Array.<string> || null}
          */
         this.ProxyIds = null;
@@ -592,6 +602,48 @@ Note: this field may return null, indicating that no valid value is obtained.
         }
         this.Body = 'Body' in params ? params.Body : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * List of acceleration regions in a connection group, including acceleration regions and their bandwidth and concurrence configuration.
+ * @class
+ */
+class AccessConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Acceleration region.
+         * @type {string || null}
+         */
+        this.AccessRegion = null;
+
+        /**
+         * Connection bandwidth upper limit in Mbps.
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * Concurrent connection upper limit in 10,000 connections, which indicates the allowed number of concurrently online connections.
+         * @type {number || null}
+         */
+        this.Concurrent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessRegion = 'AccessRegion' in params ? params.AccessRegion : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
 
     }
 }
@@ -918,6 +970,12 @@ class DescribeHTTPListenersRequest extends  AbstractModel {
          */
         this.SearchValue = null;
 
+        /**
+         * Connection group ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -934,6 +992,7 @@ class DescribeHTTPListenersRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -1072,6 +1131,12 @@ class OpenSecurityPolicyRequest extends  AbstractModel {
          */
         this.ProxyId = null;
 
+        /**
+         * Security policy ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
     }
 
     /**
@@ -1082,6 +1147,7 @@ class OpenSecurityPolicyRequest extends  AbstractModel {
             return;
         }
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -1176,9 +1242,9 @@ class DescribeProxyGroupStatisticsRequest extends  AbstractModel {
 
         /**
          * Monitoring granularity. It currently supports: 60, 300, 3,600, 86,400. Unit: seconds.
-Time range: ≤ 1 day, supported minimum granularity: 60 seconds;
-Time range: ≤ 7 days, supported minimum granularity: 3,600 seconds;
-Time range: ≤ 30 days, supported minimum granularity: 86,400 seconds;
+Time range: <= 1 day, supported minimum granularity: 60 seconds;
+Time range: <= 7 days, supported minimum granularity: 3,600 seconds;
+Time range: <= 30 days, supported minimum granularity: 86,400 seconds;
          * @type {number || null}
          */
         this.Granularity = null;
@@ -1251,6 +1317,12 @@ class DescribeHTTPSListenersRequest extends  AbstractModel {
          */
         this.SearchValue = null;
 
+        /**
+         * Connection group ID as a filter
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -1267,6 +1339,7 @@ class DescribeHTTPSListenersRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -1455,7 +1528,7 @@ If this identifier is 0, the deletion can be performed only when all the connect
         this.Force = null;
 
         /**
-         * List of connection instance IDs; It’s an old parameter, please switch to ProxyIds.
+         * List of connection instance IDs; It's an old parameter, please switch to ProxyIds.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1468,7 +1541,7 @@ For more information, please see How to Ensure Idempotence.
         this.ClientToken = null;
 
         /**
-         * List of connection instance IDs; It’s a new parameter.
+         * List of connection instance IDs; It's a new parameter.
          * @type {Array.<string> || null}
          */
         this.ProxyIds = null;
@@ -1555,13 +1628,13 @@ class DescribeProxiesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Connection instance information list; It’s an old parameter, please switch to ProxySet.
+         * Connection instance information list; It's an old parameter, please switch to ProxySet.
          * @type {Array.<ProxyInfo> || null}
          */
         this.InstanceSet = null;
 
         /**
-         * Connection instance information list; It’s a new parameter.
+         * Connection instance information list; It's a new parameter.
          * @type {Array.<ProxyInfo> || null}
          */
         this.ProxySet = null;
@@ -1790,7 +1863,7 @@ class ModifyProxyConfigurationRequest extends  AbstractModel {
         super();
 
         /**
-         * Connection instance ID; It’s an old parameter, please switch to ProxyId.
+         * Connection instance ID; It's an old parameter, please switch to ProxyId.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1817,7 +1890,7 @@ For more information, please see How to Ensure Idempotence.
         this.ClientToken = null;
 
         /**
-         * Connection instance ID; It’s a new parameter.
+         * Connection instance ID; It's a new parameter.
          * @type {string || null}
          */
         this.ProxyId = null;
@@ -2084,7 +2157,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EndTime = null;
 
         /**
-         * Common name of the certificate’s issuer.
+         * Common name of the certificate's issuer.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2200,7 +2273,7 @@ class CloseProxiesRequest extends  AbstractModel {
         super();
 
         /**
-         * Connection instance ID; It’s an old parameter, please switch to ProxyIds.
+         * Connection instance ID; It's an old parameter, please switch to ProxyIds.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2213,7 +2286,7 @@ For more information, please see How to Ensure Idempotence.
         this.ClientToken = null;
 
         /**
-         * Connection instance ID; It’s a new parameter.
+         * Connection instance ID; It's a new parameter.
          * @type {Array.<string> || null}
          */
         this.ProxyIds = null;
@@ -2527,6 +2600,7 @@ class DescribeSecurityPolicyDetailResponse extends  AbstractModel {
 
         /**
          * Connection ID
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProxyId = null;
@@ -2687,6 +2761,12 @@ class CreateProxyGroupRequest extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * List of acceleration regions, including their names, bandwidth, and concurrence configuration.
+         * @type {Array.<AccessConfiguration> || null}
+         */
+        this.AccessRegionSet = null;
+
     }
 
     /**
@@ -2706,6 +2786,15 @@ class CreateProxyGroupRequest extends  AbstractModel {
                 let obj = new TagPair();
                 obj.deserialize(params.TagSet[z]);
                 this.TagSet.push(obj);
+            }
+        }
+
+        if (params.AccessRegionSet) {
+            this.AccessRegionSet = new Array();
+            for (let z in params.AccessRegionSet) {
+                let obj = new AccessConfiguration();
+                obj.deserialize(params.AccessRegionSet[z]);
+                this.AccessRegionSet.push(obj);
             }
         }
 
@@ -2789,7 +2878,7 @@ As long as one origin server is exceptional, this status will be exceptional. Pl
         this.BindStatus = null;
 
         /**
-         * The ‘host’ carried in the request forwarded from the connection to the origin server. `default` indicates directly forwarding the received “host”.
+         * The `host` carried in the request forwarded from the connection to the origin server. `default` indicates directly forwarding the received 'host'.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -3394,6 +3483,50 @@ class DescribeDestRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDomainErrorPageInfoByIds response structure.
+ * @class
+ */
+class DescribeDomainErrorPageInfoByIdsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration set of custom error responses
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DomainErrorPageInfo> || null}
+         */
+        this.ErrorPageSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ErrorPageSet) {
+            this.ErrorPageSet = new Array();
+            for (let z in params.ErrorPageSet) {
+                let obj = new DomainErrorPageInfo();
+                obj.deserialize(params.ErrorPageSet[z]);
+                this.ErrorPageSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProxies request structure.
  * @class
  */
@@ -3402,7 +3535,7 @@ class DescribeProxiesRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It’s an old parameter, please switch to ProxyIds.
+         * Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's an old parameter, please switch to ProxyIds.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3431,7 +3564,7 @@ GroupId - String - Required: No - Filter by a connection group ID.
         this.Filters = null;
 
         /**
-         * Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It’s a new parameter, and replaces InstanceIds.
+         * Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's a new parameter, and replaces InstanceIds.
          * @type {Array.<string> || null}
          */
         this.ProxyIds = null;
@@ -3769,7 +3902,7 @@ If `ForwardProtocol=default`, the `ForwardProtocol` of the listener will be used
         this.ForwardProtocol = null;
 
         /**
-         * The ‘host’ carried in the request forwarded from the acceleration connection to the origin server.
+         * The `host` carried in the request forwarded from the acceleration connection to the origin server.
 If `ForwardHost=default`, the domain name of rule will be used. For other cases, the value set in this field will be used.
          * @type {string || null}
          */
@@ -4054,8 +4187,8 @@ class CreateCertificateRequest extends  AbstractModel {
 
         /**
          * Certificate content. URL encoding. Where:
-If the certificate type is basic authentication, enter username/password pair for this parameter. Format: “username:password”, for example, root:FSGdT. The password is `htpasswd` or `openssl`, for example, openssl passwd -crypt 123456.
-When the certificate type is CA/SSL certificate, enter the certificate content for this parameter in the format of ‘pem’.
+If the certificate type is basic authentication, enter username/password pair for this parameter. Format: 'username:password', for example, root:FSGdT. The password is `htpasswd` or `openssl`, for example, openssl passwd -crypt 123456.
+When the certificate type is CA/SSL certificate, enter the certificate content for this parameter in the format of `pem`.
          * @type {string || null}
          */
         this.CertificateContent = null;
@@ -4067,7 +4200,7 @@ When the certificate type is CA/SSL certificate, enter the certificate content f
         this.CertificateAlias = null;
 
         /**
-         * Key content. URL encoding. This parameter is required only when the certificate type is SSL certificate. The format is ‘pem’.
+         * Key content. URL encoding. This parameter is required only when the certificate type is SSL certificate. The format is `pem`.
          * @type {string || null}
          */
         this.CertificateKey = null;
@@ -4252,7 +4385,7 @@ class HTTPSListener extends  AbstractModel {
         this.Port = null;
 
         /**
-         * Listener protocol. The value is `HTTP`.
+         * Listener protocol. Valid values: HTTP, HTTPS. The value `HTTPS` is used for this structure
          * @type {string || null}
          */
         this.Protocol = null;
@@ -4301,10 +4434,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ClientCertificateId = null;
 
         /**
-         * Listener authentication method:
+         * Listener authentication mode. Valid values:
 0: one-way authentication;
 1: mutual authentication.
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AuthType = null;
@@ -4450,6 +4583,12 @@ class CloseSecurityPolicyRequest extends  AbstractModel {
          */
         this.ProxyId = null;
 
+        /**
+         * Security group policy ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
     }
 
     /**
@@ -4460,6 +4599,7 @@ class CloseSecurityPolicyRequest extends  AbstractModel {
             return;
         }
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -4635,13 +4775,13 @@ class DescribeProxiesStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Connection ID list; It’s an old parameter, please switch to ProxyIds.
+         * Connection ID list; It's an old parameter, please switch to ProxyIds.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Connection ID list; It’s a new parameter.
+         * Connection ID list; It's a new parameter.
          * @type {Array.<string> || null}
          */
         this.ProxyIds = null;
@@ -4840,7 +4980,7 @@ class ModifyDomainRequest extends  AbstractModel {
         this.NewDomain = null;
 
         /**
-         * Server SSL certificate ID. It’s only applicable to the connections of version 3.0:
+         * Server SSL certificate ID. It's only applicable to the connections of version 3.0:
 If this field is not passed in, the original certificate will be used;
 If this field is passed in, and CertificateId=default, the listener certificate will be used;
 For other cases, the certificate specified by CertificateId will be used.
@@ -4849,7 +4989,7 @@ For other cases, the certificate specified by CertificateId will be used.
         this.CertificateId = null;
 
         /**
-         * Client CA certificate ID. It’s only applicable to the connections of version 3.0:
+         * Client CA certificate ID. It's only applicable to the connections of version 3.0:
 If this field is not passed in, the original certificate will be used;
 If this field is passed in, and ClientCertificateId=default, the listener certificate will be used;
 For other cases, the certificate specified by ClientCertificateId will be used.
@@ -5212,6 +5352,20 @@ Where:
          */
         this.TagSet = null;
 
+        /**
+         * Connection group version
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Creation time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -5241,6 +5395,8 @@ Where:
                 this.TagSet.push(obj);
             }
         }
+        this.Version = 'Version' in params ? params.Version : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -5295,7 +5451,7 @@ class Certificate extends  AbstractModel {
         this.CertificateId = null;
 
         /**
-         * Certificate name; It’s an old parameter, please switch to CertificateAlias.
+         * Certificate name; It's an old parameter, please switch to CertificateAlias.
          * @type {string || null}
          */
         this.CertificateName = null;
@@ -6041,7 +6197,7 @@ class HTTPListener extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Listener protocol
+         * Listener protocol. Valid values: HTTP, HTTPS. The value `HTTP` is used for this structure
          * @type {string || null}
          */
         this.Protocol = null;
@@ -6228,10 +6384,16 @@ class CreateHTTPListenerRequest extends  AbstractModel {
         this.Port = null;
 
         /**
-         * Connection ID
+         * Connection ID, which cannot be set together with `GroupId` at the same time. A listener will be created for the corresponding connection.
          * @type {string || null}
          */
         this.ProxyId = null;
+
+        /**
+         * Connection group ID, which cannot be set together with `ProxyId` at the same time. A listener will be created for the corresponding connection group.
+         * @type {string || null}
+         */
+        this.GroupId = null;
 
     }
 
@@ -6245,6 +6407,7 @@ class CreateHTTPListenerRequest extends  AbstractModel {
         this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
         this.Port = 'Port' in params ? params.Port : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -6786,7 +6949,7 @@ class SetAuthenticationRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * The domain name requiring advanced configuration, i.e., the domain name of the listener’s forwarding rules.
+         * The domain name requiring advanced configuration, i.e., the domain name of the listener's forwarding rules.
          * @type {string || null}
          */
         this.Domain = null;
@@ -7228,7 +7391,7 @@ class DeleteListenersResponse extends  AbstractModel {
 }
 
 /**
- * Health check parameters of the layer-7 listeners’ forwarding rules
+ * Health check parameters of the layer-7 listeners' forwarding rules
  * @class
  */
 class RuleCheckParams extends  AbstractModel {
@@ -7300,16 +7463,22 @@ class CreateSecurityPolicyRequest extends  AbstractModel {
         super();
 
         /**
+         * Default policy: ACCEPT or DROP
+         * @type {string || null}
+         */
+        this.DefaultAction = null;
+
+        /**
          * Acceleration connection ID
          * @type {string || null}
          */
         this.ProxyId = null;
 
         /**
-         * Default policy: ACCEPT or DROP
+         * Connection group ID
          * @type {string || null}
          */
-        this.DefaultAction = null;
+        this.GroupId = null;
 
     }
 
@@ -7320,8 +7489,9 @@ class CreateSecurityPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
         this.DefaultAction = 'DefaultAction' in params ? params.DefaultAction : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -8250,9 +8420,9 @@ class DescribeProxyStatisticsRequest extends  AbstractModel {
 
         /**
          * Monitoring granularity. It currently supports: 60, 300, 3,600, and 86,400. Unit: seconds.
-Time range: ≤ 1 day, supported minimum granularity: 60 seconds;
-Time range: ≤ 7 days, supported minimum granularity: 3,600 seconds;
-Time range: ≤ 30 days, supported minimum granularity: 86,400 seconds;
+Time range: <= 1 day, supported minimum granularity: 60 seconds;
+Time range: <= 7 days, supported minimum granularity: 3,600 seconds;
+Time range: <= 30 days, supported minimum granularity: 86,400 seconds;
          * @type {number || null}
          */
         this.Granularity = null;
@@ -8721,6 +8891,12 @@ class ModifyProxyGroupAttributeRequest extends  AbstractModel {
          */
         this.GroupName = null;
 
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
     }
 
     /**
@@ -8732,23 +8908,30 @@ class ModifyProxyGroupAttributeRequest extends  AbstractModel {
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
 
 /**
- * DescribeCertificateDetail response structure.
+ * CloseProxyGroup response structure.
  * @class
  */
-class DescribeCertificateDetailResponse extends  AbstractModel {
+class CloseProxyGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Certificate Details.
-         * @type {CertificateDetail || null}
+         * List of IDs of the connection instances that are not running, which cannot be enabled.
+         * @type {Array.<string> || null}
          */
-        this.CertificateDetail = null;
+        this.InvalidStatusInstanceSet = null;
+
+        /**
+         * List of IDs of the connection instances failed to be enabled.
+         * @type {Array.<string> || null}
+         */
+        this.OperationFailedInstanceSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8765,12 +8948,8 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.CertificateDetail) {
-            let obj = new CertificateDetail();
-            obj.deserialize(params.CertificateDetail)
-            this.CertificateDetail = obj;
-        }
+        this.InvalidStatusInstanceSet = 'InvalidStatusInstanceSet' in params ? params.InvalidStatusInstanceSet : null;
+        this.OperationFailedInstanceSet = 'OperationFailedInstanceSet' in params ? params.OperationFailedInstanceSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8833,6 +9012,34 @@ class ModifyProxiesAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDomainErrorPageInfoByIds request structure.
+ * @class
+ */
+class DescribeDomainErrorPageInfoByIdsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of custom error IDs. Up to 10 IDs are supported
+         * @type {Array.<string> || null}
+         */
+        this.ErrorPageIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorPageIds = 'ErrorPageIds' in params ? params.ErrorPageIds : null;
+
+    }
+}
+
+/**
  * CheckProxyCreate request structure.
  * @class
  */
@@ -8864,6 +9071,12 @@ class CheckProxyCreateRequest extends  AbstractModel {
          */
         this.Concurrent = null;
 
+        /**
+         * Connection group ID that needs to be entered when a connection is created in a connection group
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -8877,6 +9090,7 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.RealServerRegion = 'RealServerRegion' in params ? params.RealServerRegion : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -8968,7 +9182,7 @@ class ModifyProxiesAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of one or multiple connections to be operated; It’s an old parameter, please switch to ProxyIds.
+         * ID of one or multiple connections to be operated; It's an old parameter, please switch to ProxyIds.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -8987,7 +9201,7 @@ For more information, please see How to Ensure Idempotence.
         this.ClientToken = null;
 
         /**
-         * ID of one or multiple connections to be operated; It’s a new parameter.
+         * ID of one or multiple connections to be operated; It's a new parameter.
          * @type {Array.<string> || null}
          */
         this.ProxyIds = null;
@@ -9127,7 +9341,7 @@ class CreateHTTPSListenerRequest extends  AbstractModel {
         this.ForwardProtocol = null;
 
         /**
-         * Connection ID
+         * Connection ID, which cannot be set together with `GroupId` at the same time. A listener will be created for the corresponding connection.
          * @type {string || null}
          */
         this.ProxyId = null;
@@ -9153,6 +9367,12 @@ The one-way authentication is used by default.
          */
         this.PolyClientCertificateIds = null;
 
+        /**
+         * Connection group ID, which cannot be set together with `ProxyId` at the same time. A listener will be created for the corresponding connection group.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -9170,6 +9390,7 @@ The one-way authentication is used by default.
         this.AuthType = 'AuthType' in params ? params.AuthType : null;
         this.ClientCertificateId = 'ClientCertificateId' in params ? params.ClientCertificateId : null;
         this.PolyClientCertificateIds = 'PolyClientCertificateIds' in params ? params.PolyClientCertificateIds : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -9205,6 +9426,88 @@ class DeleteSecurityRulesRequest extends  AbstractModel {
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RuleIdList = 'RuleIdList' in params ? params.RuleIdList : null;
+
+    }
+}
+
+/**
+ * DescribeCertificateDetail response structure.
+ * @class
+ */
+class DescribeCertificateDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate Details.
+         * @type {CertificateDetail || null}
+         */
+        this.CertificateDetail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CertificateDetail) {
+            let obj = new CertificateDetail();
+            obj.deserialize(params.CertificateDetail)
+            this.CertificateDetail = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenProxyGroup response structure.
+ * @class
+ */
+class OpenProxyGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of IDs of the connection instances that are not disabled, which cannot be enabled.
+         * @type {Array.<string> || null}
+         */
+        this.InvalidStatusInstanceSet = null;
+
+        /**
+         * List of IDs of the connection instances failed to be enabled.
+         * @type {Array.<string> || null}
+         */
+        this.OperationFailedInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InvalidStatusInstanceSet = 'InvalidStatusInstanceSet' in params ? params.InvalidStatusInstanceSet : null;
+        this.OperationFailedInstanceSet = 'OperationFailedInstanceSet' in params ? params.OperationFailedInstanceSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9316,7 +9619,7 @@ class OpenProxiesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of connection instance IDs; It’s an old parameter, please switch to ProxyIds.
+         * List of connection instance IDs; It's an old parameter, please switch to ProxyIds.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -9329,7 +9632,7 @@ For more information, please see How to Ensure Idempotence.
         this.ClientToken = null;
 
         /**
-         * List of connection instance IDs; It’s a new parameter.
+         * List of connection instance IDs; It's a new parameter.
          * @type {Array.<string> || null}
          */
         this.ProxyIds = null;
@@ -9371,31 +9674,31 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.Bandwidth = null;
 
         /**
-         * Origin server region name. It’s an old parameter, please switch to RealServerRegion.
+         * Origin server region name. It's an old parameter, please switch to RealServerRegion.
          * @type {string || null}
          */
         this.DestRegion = null;
 
         /**
-         * Upper limit of connection concurrence, which indicates a number of simultaneous online connections. Unit: 10,000 connections. It’s an old parameter, please switch to Concurrent.
+         * Upper limit of connection concurrence, which indicates a number of simultaneous online connections. Unit: 10,000 connections. It's an old parameter, please switch to Concurrent.
          * @type {number || null}
          */
         this.Concurrency = null;
 
         /**
-         * Origin server region name; It’s a new parameter.
+         * Origin server region name; It's a new parameter.
          * @type {string || null}
          */
         this.RealServerRegion = null;
 
         /**
-         * Upper limit of connection concurrence, which indicates a number of simultaneous online connections. Unit: 10,000 connections. It’s a new parameter.
+         * Upper limit of connection concurrence, which indicates a number of simultaneous online connections. Unit: 10,000 connections. It's a new parameter.
          * @type {number || null}
          */
         this.Concurrent = null;
 
         /**
-         * Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+         * Billing mode. Valid values: 0: bill-by-bandwidth (default value); 1: bill-by-traffic.
          * @type {number || null}
          */
         this.BillingType = null;
@@ -9456,6 +9759,34 @@ class DescribeProxyGroupDetailsResponse extends  AbstractModel {
             this.ProxyGroupDetail = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenProxyGroup request structure.
+ * @class
+ */
+class OpenProxyGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Connection group instance ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -9581,7 +9912,7 @@ class ProxyInfo extends  AbstractModel {
         super();
 
         /**
-         * Connection instance ID; It’s an old parameter, please switch to ProxyId.
+         * Connection instance ID; It's an old parameter, please switch to ProxyId.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -9638,8 +9969,8 @@ OPENING: enabling;
 CLOSING: disabling;
 CLOSED: disabled;
 ADJUSTING: adjusting configuration
-ISOLATING: isolating (it’s triggered when the account is in arrears);
-ISOLATED: isolated (it’s triggered when the account is in arrears);
+ISOLATING: isolating (it's triggered when the account is in arrears);
+ISOLATED: isolated (it's triggered when the account is in arrears);
 UNKNOWN: unknown status.
          * @type {string || null}
          */
@@ -9664,7 +9995,7 @@ UNKNOWN: unknown status.
         this.Version = null;
 
         /**
-         * Connection instance ID; It’s a new parameter.
+         * Connection instance ID; It's a new parameter.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -9731,11 +10062,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SupportSecurity = null;
 
         /**
-         * Billing mode. 0: bill by bandwidth; 1: bill by traffic
-Note: this field may return null, indicating that no valid value is obtained.
+         * Billing mode. 0: bill-by-bandwidth; 1: bill-by-traffic.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BillingType = null;
+
+        /**
+         * List of domain names associated with resolution record
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RelatedGlobalDomains = null;
+
+        /**
+         * Configuration change time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ModifyConfigTime = null;
 
     }
 
@@ -9787,6 +10132,8 @@ Note: this field may return null, indicating that no valid value is obtained.
         }
         this.SupportSecurity = 'SupportSecurity' in params ? params.SupportSecurity : null;
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.RelatedGlobalDomains = 'RelatedGlobalDomains' in params ? params.RelatedGlobalDomains : null;
+        this.ModifyConfigTime = 'ModifyConfigTime' in params ? params.ModifyConfigTime : null;
 
     }
 }
@@ -9897,6 +10244,34 @@ class RealServerBindSetReq extends  AbstractModel {
 }
 
 /**
+ * CloseProxyGroup request structure.
+ * @class
+ */
+class CloseProxyGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Connection group instance ID.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
  * OpenProxies response structure.
  * @class
  */
@@ -9905,7 +10280,7 @@ class OpenProxiesResponse extends  AbstractModel {
         super();
 
         /**
-         * The connection instance ID list cannot be enabled if it’s not disabled.
+         * The connection instance ID list cannot be enabled if it's not disabled.
          * @type {Array.<string> || null}
          */
         this.InvalidStatusInstanceSet = null;
@@ -10056,6 +10431,7 @@ module.exports = {
     DescribeHTTPSListenersResponse: DescribeHTTPSListenersResponse,
     ModifyProxiesProjectRequest: ModifyProxiesProjectRequest,
     DomainErrorPageInfo: DomainErrorPageInfo,
+    AccessConfiguration: AccessConfiguration,
     DescribeCertificateDetailRequest: DescribeCertificateDetailRequest,
     TagResourceInfo: TagResourceInfo,
     SetAuthenticationResponse: SetAuthenticationResponse,
@@ -10117,6 +10493,7 @@ module.exports = {
     DeleteListenersRequest: DeleteListenersRequest,
     DescribeSecurityRulesRequest: DescribeSecurityRulesRequest,
     DescribeDestRegionsResponse: DescribeDestRegionsResponse,
+    DescribeDomainErrorPageInfoByIdsResponse: DescribeDomainErrorPageInfoByIdsResponse,
     DescribeProxiesRequest: DescribeProxiesRequest,
     BindListenerRealServersResponse: BindListenerRealServersResponse,
     ModifyProxyGroupAttributeResponse: ModifyProxyGroupAttributeResponse,
@@ -10222,9 +10599,10 @@ module.exports = {
     DescribeProxyStatisticsResponse: DescribeProxyStatisticsResponse,
     DescribeRealServersStatusResponse: DescribeRealServersStatusResponse,
     ModifyProxyGroupAttributeRequest: ModifyProxyGroupAttributeRequest,
-    DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
+    CloseProxyGroupResponse: CloseProxyGroupResponse,
     DeleteDomainErrorPageInfoResponse: DeleteDomainErrorPageInfoResponse,
     ModifyProxiesAttributeResponse: ModifyProxiesAttributeResponse,
+    DescribeDomainErrorPageInfoByIdsRequest: DescribeDomainErrorPageInfoByIdsRequest,
     CheckProxyCreateRequest: CheckProxyCreateRequest,
     DescribeRegionAndPriceRequest: DescribeRegionAndPriceRequest,
     AddRealServersRequest: AddRealServersRequest,
@@ -10233,17 +10611,21 @@ module.exports = {
     CertificateAliasInfo: CertificateAliasInfo,
     CreateHTTPSListenerRequest: CreateHTTPSListenerRequest,
     DeleteSecurityRulesRequest: DeleteSecurityRulesRequest,
+    DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
+    OpenProxyGroupResponse: OpenProxyGroupResponse,
     ProxyIdDict: ProxyIdDict,
     Filter: Filter,
     CreateProxyResponse: CreateProxyResponse,
     OpenProxiesRequest: OpenProxiesRequest,
     InquiryPriceCreateProxyRequest: InquiryPriceCreateProxyRequest,
     DescribeProxyGroupDetailsResponse: DescribeProxyGroupDetailsResponse,
+    OpenProxyGroupRequest: OpenProxyGroupRequest,
     UDPListener: UDPListener,
     ProxyInfo: ProxyInfo,
     RemoveRealServersResponse: RemoveRealServersResponse,
     DescribeRulesByRuleIdsRequest: DescribeRulesByRuleIdsRequest,
     RealServerBindSetReq: RealServerBindSetReq,
+    CloseProxyGroupRequest: CloseProxyGroupRequest,
     OpenProxiesResponse: OpenProxiesResponse,
     ModifyProxyConfigurationResponse: ModifyProxyConfigurationResponse,
     CreateDomainErrorPageInfoRequest: CreateDomainErrorPageInfoRequest,

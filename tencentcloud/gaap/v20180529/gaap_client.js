@@ -27,6 +27,7 @@ const BindRuleRealServersRequest = models.BindRuleRealServersRequest;
 const DescribeHTTPSListenersResponse = models.DescribeHTTPSListenersResponse;
 const ModifyProxiesProjectRequest = models.ModifyProxiesProjectRequest;
 const DomainErrorPageInfo = models.DomainErrorPageInfo;
+const AccessConfiguration = models.AccessConfiguration;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
 const TagResourceInfo = models.TagResourceInfo;
 const SetAuthenticationResponse = models.SetAuthenticationResponse;
@@ -88,6 +89,7 @@ const DescribeAccessRegionsResponse = models.DescribeAccessRegionsResponse;
 const DeleteListenersRequest = models.DeleteListenersRequest;
 const DescribeSecurityRulesRequest = models.DescribeSecurityRulesRequest;
 const DescribeDestRegionsResponse = models.DescribeDestRegionsResponse;
+const DescribeDomainErrorPageInfoByIdsResponse = models.DescribeDomainErrorPageInfoByIdsResponse;
 const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const BindListenerRealServersResponse = models.BindListenerRealServersResponse;
 const ModifyProxyGroupAttributeResponse = models.ModifyProxyGroupAttributeResponse;
@@ -193,9 +195,10 @@ const ModifyGroupDomainConfigResponse = models.ModifyGroupDomainConfigResponse;
 const DescribeProxyStatisticsResponse = models.DescribeProxyStatisticsResponse;
 const DescribeRealServersStatusResponse = models.DescribeRealServersStatusResponse;
 const ModifyProxyGroupAttributeRequest = models.ModifyProxyGroupAttributeRequest;
-const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
+const CloseProxyGroupResponse = models.CloseProxyGroupResponse;
 const DeleteDomainErrorPageInfoResponse = models.DeleteDomainErrorPageInfoResponse;
 const ModifyProxiesAttributeResponse = models.ModifyProxiesAttributeResponse;
+const DescribeDomainErrorPageInfoByIdsRequest = models.DescribeDomainErrorPageInfoByIdsRequest;
 const CheckProxyCreateRequest = models.CheckProxyCreateRequest;
 const DescribeRegionAndPriceRequest = models.DescribeRegionAndPriceRequest;
 const AddRealServersRequest = models.AddRealServersRequest;
@@ -204,17 +207,21 @@ const DescribeSecurityRulesResponse = models.DescribeSecurityRulesResponse;
 const CertificateAliasInfo = models.CertificateAliasInfo;
 const CreateHTTPSListenerRequest = models.CreateHTTPSListenerRequest;
 const DeleteSecurityRulesRequest = models.DeleteSecurityRulesRequest;
+const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
+const OpenProxyGroupResponse = models.OpenProxyGroupResponse;
 const ProxyIdDict = models.ProxyIdDict;
 const Filter = models.Filter;
 const CreateProxyResponse = models.CreateProxyResponse;
 const OpenProxiesRequest = models.OpenProxiesRequest;
 const InquiryPriceCreateProxyRequest = models.InquiryPriceCreateProxyRequest;
 const DescribeProxyGroupDetailsResponse = models.DescribeProxyGroupDetailsResponse;
+const OpenProxyGroupRequest = models.OpenProxyGroupRequest;
 const UDPListener = models.UDPListener;
 const ProxyInfo = models.ProxyInfo;
 const RemoveRealServersResponse = models.RemoveRealServersResponse;
 const DescribeRulesByRuleIdsRequest = models.DescribeRulesByRuleIdsRequest;
 const RealServerBindSetReq = models.RealServerBindSetReq;
+const CloseProxyGroupRequest = models.CloseProxyGroupRequest;
 const OpenProxiesResponse = models.OpenProxiesResponse;
 const ModifyProxyConfigurationResponse = models.ModifyProxyConfigurationResponse;
 const CreateDomainErrorPageInfoRequest = models.CreateDomainErrorPageInfoRequest;
@@ -319,7 +326,7 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * This API (DescribeRealServerStatistics) is used to query the statistics of an origin server’s health check results. Origin server status displayed as 1: normal, or 0: exceptional. The queried origin server must be bound to a listener or rule. The bound listener or rule ID must be specified when querying. This API supports displaying origin server status statistics for the past 1, 3, 6, 12, and 24 hours, with a granularity of 1 minute.
+     * This API (DescribeRealServerStatistics) is used to query the statistics of an origin server's health check results. Origin server status displayed as 1: normal, or 0: exceptional. The queried origin server must be bound to a listener or rule. The bound listener or rule ID must be specified when querying. This API supports displaying origin server status statistics for the past 1, 3, 6, 12, and 24 hours, with a granularity of 1 minute.
      * @param {DescribeRealServerStatisticsRequest} req
      * @param {function(string, DescribeRealServerStatisticsResponse):void} cb
      * @public
@@ -838,6 +845,17 @@ This API only supports connections of version 3.0.
     }
 
     /**
+     * This API is used to disable a connection group. Once disabled, the connection group will no longer generate traffic, but the basic connection configuration fees will still be incurred every day.
+     * @param {CloseProxyGroupRequest} req
+     * @param {function(string, CloseProxyGroupResponse):void} cb
+     * @public
+     */
+    CloseProxyGroup(req, cb) {
+        let resp = new CloseProxyGroupResponse();
+        this.request("CloseProxyGroup", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyTCPListenerAttribute) is used to modify the TCP listener configuration of a connection instance, including health check configuration and scheduling policies.
      * @param {ModifyTCPListenerAttributeRequest} req
      * @param {function(string, ModifyTCPListenerAttributeResponse):void} cb
@@ -971,6 +989,17 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     }
 
     /**
+     * This API is used to enable all connections in a connection group.
+     * @param {OpenProxyGroupRequest} req
+     * @param {function(string, OpenProxyGroupResponse):void} cb
+     * @public
+     */
+    OpenProxyGroup(req, cb) {
+        let resp = new OpenProxyGroupResponse();
+        this.request("OpenProxyGroup", req, resp, cb);
+    }
+
+    /**
      * This API (CloseProxies) is used to disable connections. If disabled, no traffic will be generated, but the basic configuration fee will still be incurred.
      * @param {CloseProxiesRequest} req
      * @param {function(string, CloseProxiesResponse):void} cb
@@ -979,6 +1008,17 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     CloseProxies(req, cb) {
         let resp = new CloseProxiesResponse();
         this.request("CloseProxies", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the corresponding error response by a custom error ID.
+     * @param {DescribeDomainErrorPageInfoByIdsRequest} req
+     * @param {function(string, DescribeDomainErrorPageInfoByIdsResponse):void} cb
+     * @public
+     */
+    DescribeDomainErrorPageInfoByIds(req, cb) {
+        let resp = new DescribeDomainErrorPageInfoByIdsResponse();
+        this.request("DescribeDomainErrorPageInfoByIds", req, resp, cb);
     }
 
     /**

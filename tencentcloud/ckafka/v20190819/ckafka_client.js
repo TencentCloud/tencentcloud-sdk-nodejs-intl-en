@@ -170,7 +170,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a topic IP whitelist.
+     * This API is used to create a topic IP allowlist.
      * @param {CreateTopicIpWhiteListRequest} req
      * @param {function(string, CreateTopicIpWhiteListResponse):void} cb
      * @public
@@ -258,7 +258,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a topic IP whitelist.
+     * This API is used to delete a topic IP allowlist.
      * @param {DeleteTopicIpWhiteListRequest} req
      * @param {function(string, DeleteTopicIpWhiteListResponse):void} cb
      * @public

@@ -613,7 +613,7 @@ class DDosPolicy extends  AbstractModel {
         this.PacketFilters = null;
 
         /**
-         * IP blacklist/whitelist
+         * IP blocklist/allowlist
          * @type {Array.<IpBlackWhite> || null}
          */
         this.IpBlackWhiteLists = null;
@@ -1043,6 +1043,53 @@ class DeleteL4RulesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyNewDomainRules request structure.
+ * @class
+ */
+class ModifyNewDomainRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Anti-DDoS instance ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Domain name forwarding rule.
+         * @type {NewL7RuleEntry || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Rule) {
+            let obj = new NewL7RuleEntry();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
+
+    }
+}
+
+/**
  * DDoS alarm threshold
  * @class
  */
@@ -1274,7 +1321,7 @@ class DescribeCCUrlAllowRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Blacklist or whitelist. Valid value: [white (whitelist)]. Currently, only whitelist is supported.
+         * Blocklist or allowlist. Valid value: [white (allowlist)]. Currently, only allowlist is supported.
 Note: this array can only have one value which can only be `white`
          * @type {Array.<string> || null}
          */
@@ -1353,7 +1400,7 @@ class KeyValue extends  AbstractModel {
 }
 
 /**
- * IP blacklist/whitelist
+ * IP blocklist/allowlist
  * @class
  */
 class IpBlackWhite extends  AbstractModel {
@@ -1367,7 +1414,7 @@ class IpBlackWhite extends  AbstractModel {
         this.Ip = null;
 
         /**
-         * Blacklist/whitelist type. Valid values: [black, white]
+         * Blocklist/allowlist type. Valid values: [black, white]
          * @type {string || null}
          */
         this.Type = null;
@@ -1476,7 +1523,7 @@ class CreateDDoSPolicyRequest extends  AbstractModel {
         this.PortLimits = null;
 
         /**
-         * IP blacklist/whitelist. Enter an empty array if there is no IP blacklist/whitelist
+         * IP blocklist/allowlist. Enter an empty array if there is no IP blocklist/allowlist
          * @type {Array.<IpBlackWhite> || null}
          */
         this.IpAllowDenys = null;
@@ -1699,7 +1746,7 @@ class CreateL7RuleCertRequest extends  AbstractModel {
         this.Business = null;
 
         /**
-         * Anti-DDoS instance ID
+         * The resource instance ID, such as the ID of an Anti-DDoS Advanced instance or the ID of an Anti-DDoS Ultimate instance.
          * @type {string || null}
          */
         this.Id = null;
@@ -2149,6 +2196,86 @@ class DescribeDDoSNetIpLogRequest extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * ModifyNewL4Rule response structure.
+ * @class
+ */
+class ModifyNewL4RuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Success code.
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNewDomainRules response structure.
+ * @class
+ */
+class ModifyNewDomainRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Success code.
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4080,7 +4207,7 @@ class ModifyCCUrlAllowRequest extends  AbstractModel {
         this.Method = null;
 
         /**
-         * Blacklist/whitelist type. Valid value: [white (whitelist)]
+         * Blocklist/allowlist type. Valid value: [white (allowlist)]
          * @type {string || null}
          */
         this.Type = null;
@@ -4236,10 +4363,10 @@ class DescribeCCIpAllowDenyResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * Returned Blacklist/whitelist record,
+         * Returned Blocklist/allowlist record,
 If "Key":"ip", "Value": IP;
 If "Key":"domain", "Value": domain name.
-If "Key":"type", "Value" can be `white` (whitelist) or `black` (blacklist).
+If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
 If "Key":"protocol", "Value": CC protection protocol (HTTP or HTTPS);
          * @type {Array.<KeyValueRecord> || null}
          */
@@ -4476,13 +4603,13 @@ class ModifyCCIpAllowDenyRequest extends  AbstractModel {
         this.Method = null;
 
         /**
-         * Blacklist/whitelist type. Valid values: [white (whitelist), black (blacklist)]
+         * Blocklist/allowlist type. Valid values: [white (allowlist), black (blocklist)]
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Blacklisted/whitelisted IP array
+         * Blocklisted/whitelisted IP array
          * @type {Array.<string> || null}
          */
         this.IpList = null;
@@ -5743,6 +5870,53 @@ class ModifyCCFrequencyRulesStatusResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyNewL4Rule request structure.
+ * @class
+ */
+class ModifyNewL4RuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Anti-DDoS instance ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Forwarding rule.
+         * @type {L4RuleEntry || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Rule) {
+            let obj = new L4RuleEntry();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeL4RulesErrHealth request structure.
  * @class
  */
@@ -6221,7 +6395,7 @@ class ModifyDDoSPolicyRequest extends  AbstractModel {
         this.PortLimits = null;
 
         /**
-         * IP blacklist/whitelist. Enter an empty array if there is no IP blacklist/whitelist
+         * IP blocklist/allowlist. Enter an empty array if there is no IP blocklist/allowlist
          * @type {Array.<IpBlackWhite> || null}
          */
         this.IpAllowDenys = null;
@@ -6647,7 +6821,7 @@ class ModifyCCFrequencyRulesRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * Number of access requests. Value range: [1–10000]
+         * Number of access requests. Value range: [1-10000]
          * @type {number || null}
          */
         this.ReqNumber = null;
@@ -8319,7 +8493,7 @@ class CCRuleConfig extends  AbstractModel {
         this.Period = null;
 
         /**
-         * Number of access requests. Value range: [1–10000]
+         * Number of access requests. Value range: [1-10000]
          * @type {number || null}
          */
         this.ReqNumber = null;
@@ -9471,7 +9645,7 @@ class CCFrequencyRule extends  AbstractModel {
         this.Period = null;
 
         /**
-         * Number of access requests. Value range: [1–10000]
+         * Number of access requests. Value range: [1-10000]
          * @type {number || null}
          */
         this.ReqNumber = null;
@@ -9546,6 +9720,204 @@ class CreateCCSelfDefinePolicyResponse extends  AbstractModel {
             this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Layer-7 rule.
+ * @class
+ */
+class NewL7RuleEntry extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Forwarding protocol. Valid values: `http` and `https`.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Forwarding domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Forwarding method. Valid values: `1` (by domain name); `2` (by IP).
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * Session persistence duration, in seconds.
+         * @type {number || null}
+         */
+        this.KeepTime = null;
+
+        /**
+         * List of sources
+         * @type {Array.<L4RuleSource> || null}
+         */
+        this.SourceList = null;
+
+        /**
+         * Load balancing method. Valid value: `1` (weighed polling).
+         * @type {number || null}
+         */
+        this.LbType = null;
+
+        /**
+         * Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
+         */
+        this.KeepEnable = null;
+
+        /**
+         * Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
+         * @type {number || null}
+         */
+        this.CertType = null;
+
+        /**
+         * When the certificate source is Tencent Cloud managed certificate, this field must be set to the ID of the managed certificate.
+         * @type {string || null}
+         */
+        this.SSLId = null;
+
+        /**
+         * [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
+         * @type {string || null}
+         */
+        this.Cert = null;
+
+        /**
+         * [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
+         * @type {string || null}
+         */
+        this.PrivateKey = null;
+
+        /**
+         * Rule description.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Rule status. Valid values: `0` (the rule was successfully configured), `1` (configuring the rule), `2` (rule configuration failed), `3` (deleting the rule), `5` (failed to delete rule), `6` (rule awaiting configuration), `7` (rule awaiting deletion), and `8` (rule awaiting certificate configuration).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
+         */
+        this.CCStatus = null;
+
+        /**
+         * CC protection status based on HTTPS. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
+         */
+        this.CCEnable = null;
+
+        /**
+         * CC protection threshold based on HTTPS.
+         * @type {number || null}
+         */
+        this.CCThreshold = null;
+
+        /**
+         * CC protection level based on HTTPS.
+         * @type {string || null}
+         */
+        this.CCLevel = null;
+
+        /**
+         * Region code.
+         * @type {number || null}
+         */
+        this.Region = null;
+
+        /**
+         * Anti-DDoS instance ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Anti-DDoS instance IP address.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Modification time.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). The default value is disabled.
+         * @type {number || null}
+         */
+        this.HttpsToHttpEnable = null;
+
+        /**
+         * Access port number.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VirtualPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.KeepTime = 'KeepTime' in params ? params.KeepTime : null;
+
+        if (params.SourceList) {
+            this.SourceList = new Array();
+            for (let z in params.SourceList) {
+                let obj = new L4RuleSource();
+                obj.deserialize(params.SourceList[z]);
+                this.SourceList.push(obj);
+            }
+        }
+        this.LbType = 'LbType' in params ? params.LbType : null;
+        this.KeepEnable = 'KeepEnable' in params ? params.KeepEnable : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.SSLId = 'SSLId' in params ? params.SSLId : null;
+        this.Cert = 'Cert' in params ? params.Cert : null;
+        this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CCStatus = 'CCStatus' in params ? params.CCStatus : null;
+        this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
+        this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
+        this.CCLevel = 'CCLevel' in params ? params.CCLevel : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.HttpsToHttpEnable = 'HttpsToHttpEnable' in params ? params.HttpsToHttpEnable : null;
+        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
 
     }
 }
@@ -10149,10 +10521,10 @@ class DescribeCCUrlAllowResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * Returned Blacklist/whitelist record,
+         * Returned Blocklist/allowlist record,
 If "Key":"url", "Value": URL;
 If "Key":"domain", "Value": domain name.
-If "Key":"type", "Value" can be `white` (whitelist) or `black` (blacklist).
+If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
 If "Key":"protocol", "Value": CC protection type (HTTP protection or HTTPS domain name protection);
          * @type {Array.<KeyValueRecord> || null}
          */
@@ -11333,7 +11705,7 @@ class DescribeSchedulingDomainListRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of items in a page. Returned results are not paged if you enter “0”.
+         * Number of items in a page. Returned results are not paged if you enter '0'.
          * @type {number || null}
          */
         this.Limit = null;
@@ -11871,8 +12243,8 @@ class DescribeCCIpAllowDenyRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Blacklist or whitelist. Valid values: [white (whitelist), black (blacklist)]
-Note: this array can only have one value. It cannot get the blacklist and whitelist at the same time
+         * Blocklist or allowlist. Valid values: [white (allowlist), black (blocklist)]
+Note: this array can only have one value. It cannot get the blocklist and allowlist at the same time
          * @type {Array.<string> || null}
          */
         this.Type = null;
@@ -12098,6 +12470,13 @@ class L7RuleEntry extends  AbstractModel {
          */
         this.HttpsToHttpEnable = null;
 
+        /**
+         * Access port number.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VirtualPort = null;
+
     }
 
     /**
@@ -12134,6 +12513,7 @@ class L7RuleEntry extends  AbstractModel {
         this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
         this.CCLevel = 'CCLevel' in params ? params.CCLevel : null;
         this.HttpsToHttpEnable = 'HttpsToHttpEnable' in params ? params.HttpsToHttpEnable : null;
+        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
 
     }
 }
@@ -12507,7 +12887,7 @@ class CreateCCFrequencyRulesRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * Number of access requests. Value range: [1–10000]
+         * Number of access requests. Value range: [1-10000]
          * @type {number || null}
          */
         this.ReqNumber = null;
@@ -13247,6 +13627,7 @@ module.exports = {
     DescribeCCAlarmThresholdResponse: DescribeCCAlarmThresholdResponse,
     DescribeDDoSNetEvListRequest: DescribeDDoSNetEvListRequest,
     DeleteL4RulesResponse: DeleteL4RulesResponse,
+    ModifyNewDomainRulesRequest: ModifyNewDomainRulesRequest,
     DDoSAlarmThreshold: DDoSAlarmThreshold,
     DescribePolicyCaseResponse: DescribePolicyCaseResponse,
     DescribeResIpListRequest: DescribeResIpListRequest,
@@ -13269,6 +13650,8 @@ module.exports = {
     RegionInstanceCount: RegionInstanceCount,
     WaterPrintKey: WaterPrintKey,
     DescribeDDoSNetIpLogRequest: DescribeDDoSNetIpLogRequest,
+    ModifyNewL4RuleResponse: ModifyNewL4RuleResponse,
+    ModifyNewDomainRulesResponse: ModifyNewDomainRulesResponse,
     DescribeDDoSUsedStatisResponse: DescribeDDoSUsedStatisResponse,
     DescribeBasicCCThresholdRequest: DescribeBasicCCThresholdRequest,
     CreateDDoSPolicyCaseResponse: CreateDDoSPolicyCaseResponse,
@@ -13336,6 +13719,7 @@ module.exports = {
     CreateL4RulesRequest: CreateL4RulesRequest,
     DescribeDDoSNetEvListResponse: DescribeDDoSNetEvListResponse,
     ModifyCCFrequencyRulesStatusResponse: ModifyCCFrequencyRulesStatusResponse,
+    ModifyNewL4RuleRequest: ModifyNewL4RuleRequest,
     DescribeL4RulesErrHealthRequest: DescribeL4RulesErrHealthRequest,
     L4RuleSource: L4RuleSource,
     CreateBasicDDoSAlarmThresholdResponse: CreateBasicDDoSAlarmThresholdResponse,
@@ -13406,6 +13790,7 @@ module.exports = {
     DescribeL7HealthConfigResponse: DescribeL7HealthConfigResponse,
     CCFrequencyRule: CCFrequencyRule,
     CreateCCSelfDefinePolicyResponse: CreateCCSelfDefinePolicyResponse,
+    NewL7RuleEntry: NewL7RuleEntry,
     DescribeDDoSAttackSourceResponse: DescribeDDoSAttackSourceResponse,
     CreateBoundIPResponse: CreateBoundIPResponse,
     DescribeDDoSUsedStatisRequest: DescribeDDoSUsedStatisRequest,

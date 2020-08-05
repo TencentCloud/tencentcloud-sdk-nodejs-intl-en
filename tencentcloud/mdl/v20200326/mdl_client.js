@@ -22,6 +22,7 @@ const DrmSettingsInfo = models.DrmSettingsInfo;
 const PipelineOutputStatistics = models.PipelineOutputStatistics;
 const AttachedInputInfo = models.AttachedInputInfo;
 const OutputGroupsInfo = models.OutputGroupsInfo;
+const StopMediaLiveChannelRequest = models.StopMediaLiveChannelRequest;
 const DashRemuxSettingsInfo = models.DashRemuxSettingsInfo;
 const MediaPackageSettingsInfo = models.MediaPackageSettingsInfo;
 const StartMediaLiveChannelRequest = models.StartMediaLiveChannelRequest;
@@ -29,17 +30,21 @@ const VideoTemplateInfo = models.VideoTemplateInfo;
 const DeleteMediaLiveInputSecurityGroupResponse = models.DeleteMediaLiveInputSecurityGroupResponse;
 const DeleteMediaLiveInputRequest = models.DeleteMediaLiveInputRequest;
 const ModifyMediaLiveInputSecurityGroupRequest = models.ModifyMediaLiveInputSecurityGroupRequest;
+const StreamVideoInfo = models.StreamVideoInfo;
 const OutputsStatistics = models.OutputsStatistics;
 const DeleteMediaLiveInputResponse = models.DeleteMediaLiveInputResponse;
 const ModifyMediaLiveInputResponse = models.ModifyMediaLiveInputResponse;
 const VideoPipelineInputStatistics = models.VideoPipelineInputStatistics;
 const CreateMediaLiveInputRequest = models.CreateMediaLiveInputRequest;
+const StreamScte35Info = models.StreamScte35Info;
 const Scte35SettingsInfo = models.Scte35SettingsInfo;
 const DescribeMediaLiveInputsRequest = models.DescribeMediaLiveInputsRequest;
 const PipelineInputStatistics = models.PipelineInputStatistics;
 const DescribeMediaLiveInputRequest = models.DescribeMediaLiveInputRequest;
-const AudioPidSelectionInfo = models.AudioPidSelectionInfo;
 const DescribeMediaLiveChannelRequest = models.DescribeMediaLiveChannelRequest;
+const AudioPidSelectionInfo = models.AudioPidSelectionInfo;
+const DescribeMediaLiveChannelLogsResponse = models.DescribeMediaLiveChannelLogsResponse;
+const StreamAudioInfo = models.StreamAudioInfo;
 const StartMediaLiveChannelResponse = models.StartMediaLiveChannelResponse;
 const DrmKey = models.DrmKey;
 const AudioPipelineInputStatistics = models.AudioPipelineInputStatistics;
@@ -62,7 +67,7 @@ const CreateMediaLiveChannelResponse = models.CreateMediaLiveChannelResponse;
 const DescribeMediaLiveInputResponse = models.DescribeMediaLiveInputResponse;
 const DescribeMediaLiveChannelInputStatisticsRequest = models.DescribeMediaLiveChannelInputStatisticsRequest;
 const InputSettingInfo = models.InputSettingInfo;
-const OutputInfo = models.OutputInfo;
+const LogMessageInfo = models.LogMessageInfo;
 const DescribeMediaLiveChannelAlertsRequest = models.DescribeMediaLiveChannelAlertsRequest;
 const CreateMediaLiveInputSecurityGroupResponse = models.CreateMediaLiveInputSecurityGroupResponse;
 const DescribeMediaLiveInputsResponse = models.DescribeMediaLiveInputsResponse;
@@ -72,18 +77,22 @@ const DescribeMediaLiveChannelAlertsResponse = models.DescribeMediaLiveChannelAl
 const DescribeMediaLiveChannelsResponse = models.DescribeMediaLiveChannelsResponse;
 const ChannelInputStatistics = models.ChannelInputStatistics;
 const HlsRemuxSettingsInfo = models.HlsRemuxSettingsInfo;
+const PipelineLogInfo = models.PipelineLogInfo;
 const ModifyMediaLiveChannelResponse = models.ModifyMediaLiveChannelResponse;
+const DescribeMediaLiveChannelLogsRequest = models.DescribeMediaLiveChannelLogsRequest;
 const CreateMediaLiveInputSecurityGroupRequest = models.CreateMediaLiveInputSecurityGroupRequest;
 const DeleteMediaLiveInputSecurityGroupRequest = models.DeleteMediaLiveInputSecurityGroupRequest;
+const StreamInfo = models.StreamInfo;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const DescribeMediaLiveChannelOutputStatisticsRequest = models.DescribeMediaLiveChannelOutputStatisticsRequest;
 const DescribeMediaLiveChannelInputStatisticsResponse = models.DescribeMediaLiveChannelInputStatisticsResponse;
 const AudioSelectorInfo = models.AudioSelectorInfo;
-const StopMediaLiveChannelRequest = models.StopMediaLiveChannelRequest;
+const LogInfo = models.LogInfo;
 const ModifyMediaLiveInputSecurityGroupResponse = models.ModifyMediaLiveInputSecurityGroupResponse;
 const ChannelOutputsStatistics = models.ChannelOutputsStatistics;
 const ModifyMediaLiveChannelRequest = models.ModifyMediaLiveChannelRequest;
 const DescribeMediaLiveChannelsRequest = models.DescribeMediaLiveChannelsRequest;
+const OutputInfo = models.OutputInfo;
 
 
 /**
@@ -105,6 +114,17 @@ class MdlClient extends AbstractClient {
     CreateMediaLiveInputSecurityGroup(req, cb) {
         let resp = new CreateMediaLiveInputSecurityGroupResponse();
         this.request("CreateMediaLiveInputSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query MediaLive channel logs, such as push event logs.
+     * @param {DescribeMediaLiveChannelLogsRequest} req
+     * @param {function(string, DescribeMediaLiveChannelLogsResponse):void} cb
+     * @public
+     */
+    DescribeMediaLiveChannelLogs(req, cb) {
+        let resp = new DescribeMediaLiveChannelLogsResponse();
+        this.request("DescribeMediaLiveChannelLogs", req, resp, cb);
     }
 
     /**

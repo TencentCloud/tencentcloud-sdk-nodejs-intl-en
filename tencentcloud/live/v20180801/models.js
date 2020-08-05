@@ -416,7 +416,7 @@ Only letters, digits, underscores, and hyphens can be contained.
 
         /**
          * Screencapturing interval in seconds. Default value: 10s.
-Value range: 5–600s.
+Value range: 5-600s.
          * @type {number || null}
          */
         this.SnapshotInterval = null;
@@ -491,7 +491,7 @@ h264/h265.
         this.Vcodec = null;
 
         /**
-         * Video bitrate. Value range: 100–8000 Kbps.
+         * Video bitrate. Value range: 100-8000 Kbps.
          * @type {number || null}
          */
         this.VideoBitrate = null;
@@ -503,31 +503,31 @@ h264/h265.
         this.Acodec = null;
 
         /**
-         * Audio bitrate. Value range: 0–500 Kbps.
+         * Audio bitrate. Value range: 0-500 Kbps.
          * @type {number || null}
          */
         this.AudioBitrate = null;
 
         /**
-         * Width. Value range: 0–3000.
+         * Width. Value range: 0-3000.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Height. Value range: 0–3000.
+         * Height. Value range: 0-3000.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Frame rate. Value range: 0–200 FPS.
+         * Frame rate. Value range: 0-200 FPS.
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Keyframe interval. Value range: 1–50s.
+         * Keyframe interval. Value range: 1-50s.
          * @type {number || null}
          */
         this.Gop = null;
@@ -600,7 +600,7 @@ baseline, main, high.
         this.AiTransCode = null;
 
         /**
-         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
+         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -7348,13 +7348,13 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
         this.DomainType = null;
 
         /**
-         * Number of entries per page. Value range: 10–100. Default value: 10.
+         * Number of entries per page. Value range: 10-100. Default value: 10.
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * Page number to get. Value range: 1–100000. Default value: 1.
+         * Page number to get. Value range: 1-100000. Default value: 1.
          * @type {number || null}
          */
         this.PageNum = null;
@@ -7460,20 +7460,20 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.TemplateName = null;
 
         /**
-         * Screencapturing interval. Value range: 5–300s.
+         * Screencapturing interval. Value range: 5-300s.
          * @type {number || null}
          */
         this.SnapshotInterval = null;
 
         /**
-         * Screenshot width. Value range: 0–3000. 
+         * Screenshot width. Value range: 0-3000. 
 0: original width and fit to the original ratio.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Screenshot height. Value range: 0–2000.
+         * Screenshot height. Value range: 0-2000.
 0: original height and fit to the original ratio.
          * @type {number || null}
          */
@@ -8599,7 +8599,7 @@ class RecordParam extends  AbstractModel {
         /**
          * Recording interval.
 In seconds. Default value: 1800.
-Value range: 300–7200.
+Value range: 300-7200.
 This parameter is not valid for HLS, and a file will be generated from push start to interruption during HLS recording.
          * @type {number || null}
          */
@@ -8607,7 +8607,7 @@ This parameter is not valid for HLS, and a file will be generated from push star
 
         /**
          * Recording storage period.
-In seconds. Value range: 0–93312000.
+In seconds. Value range: 0-93312000.
 0: permanent storage.
          * @type {number || null}
          */
@@ -9059,7 +9059,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
         this.TemplateName = null;
 
         /**
-         * Video bitrate. Value range: 100–8,000.
+         * Video bitrate. Value range: 100-8,000.
 Note: The bitrate must be a multiple of 100.
          * @type {number || null}
          */
@@ -9079,7 +9079,7 @@ Note: This parameter will take effect later.
         this.Acodec = null;
 
         /**
-         * Audio bitrate. Value range: 0–500. Default value: 0.
+         * Audio bitrate. Value range: 0-500. Default value: 0.
          * @type {number || null}
          */
         this.AudioBitrate = null;
@@ -9164,7 +9164,7 @@ baseline/main/high. Default value: baseline.
         this.AiTransCode = null;
 
         /**
-         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
+         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -9501,7 +9501,7 @@ aac/mp3.
 
         /**
          * Audio bitrate. Default value: 0.
-Value range: 0–500.
+Value range: 0-500.
          * @type {number || null}
          */
         this.AudioBitrate = null;
@@ -9513,7 +9513,7 @@ Value range: 0–500.
         this.Description = null;
 
         /**
-         * Video bitrate. Value range: 100–8000 Kbps.
+         * Video bitrate. Value range: 100-8000 Kbps.
 Note: the bitrate value must be a multiple of 100.
          * @type {number || null}
          */
@@ -9544,13 +9544,13 @@ Note: the bitrate value must be a multiple of 100.
         this.Height = null;
 
         /**
-         * Frame rate. Value range: 0–200.
+         * Frame rate. Value range: 0-200.
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Keyframe interval in seconds. Value range: 0–50.
+         * Keyframe interval in seconds. Value range: 0-50.
          * @type {number || null}
          */
         this.Gop = null;
@@ -9588,7 +9588,7 @@ baseline/main/high.
         this.FpsToOrig = null;
 
         /**
-         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1–0.5.
+         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -10853,7 +10853,7 @@ Maximum length: 1,024 bytes.
 
         /**
          * Screencapturing interval in seconds. Default value: 10s.
-Value range: 5–600s.
+Value range: 5-600s.
          * @type {number || null}
          */
         this.SnapshotInterval = null;

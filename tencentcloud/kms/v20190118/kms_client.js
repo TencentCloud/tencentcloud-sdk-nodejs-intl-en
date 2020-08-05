@@ -35,6 +35,7 @@ const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
 const EnableKeyRequest = models.EnableKeyRequest;
 const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
 const ListAlgorithmsRequest = models.ListAlgorithmsRequest;
+const Tag = models.Tag;
 const ListKeyDetailResponse = models.ListKeyDetailResponse;
 const GenerateDataKeyRequest = models.GenerateDataKeyRequest;
 const UpdateAliasResponse = models.UpdateAliasResponse;

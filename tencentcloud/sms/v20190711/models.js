@@ -444,6 +444,12 @@ Note: this parameter is currently fixed at 0.
          */
         this.SmsSdkAppid = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.EndDateTime = null;
+
     }
 
     /**
@@ -458,6 +464,7 @@ Note: this parameter is currently fixed at 0.
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+        this.EndDateTime = 'EndDateTime' in params ? params.EndDateTime : null;
 
     }
 }
@@ -2038,6 +2045,12 @@ Note: this parameter is currently fixed at 0.
          */
         this.SmsSdkAppid = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.EndDateTime = null;
+
     }
 
     /**
@@ -2052,6 +2065,7 @@ Note: this parameter is currently fixed at 0.
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+        this.EndDateTime = 'EndDateTime' in params ? params.EndDateTime : null;
 
     }
 }

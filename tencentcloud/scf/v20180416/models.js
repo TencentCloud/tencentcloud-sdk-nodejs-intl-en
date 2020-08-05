@@ -17,7 +17,7 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * HTTP domain name–related information
+ * HTTP domain name-related information
  * @class
  */
 class AccessInfo extends  AbstractModel {
@@ -216,7 +216,7 @@ class GetAliasResponse extends  AbstractModel {
         super();
 
         /**
-         * Master version of alias
+         * Master version pointed to by the alias
          * @type {string || null}
          */
         this.FunctionVersion = null;
@@ -461,34 +461,6 @@ class PublishLayerVersionResponse extends  AbstractModel {
 }
 
 /**
- * CreateFunction response structure.
- * @class
- */
-class CreateFunctionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Public network access configuration
  * @class
  */
@@ -549,7 +521,7 @@ class UpdateAliasRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Master version of alias
+         * Master version pointed to by the alias
          * @type {string || null}
          */
         this.FunctionVersion = null;
@@ -1524,13 +1496,13 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128–3,072 MB in increments of 128 MB.
+         * Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
          * @type {number || null}
          */
         this.MemorySize = null;
 
         /**
-         * Maximum execution duration of function in seconds. Value range: 1–900 seconds. Default value: 3 seconds
+         * Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
          * @type {number || null}
          */
         this.Timeout = null;
@@ -1607,6 +1579,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          */
         this.PublicNetConfig = null;
 
+        /**
+         * File system configuration input parameter, which is used for the function to bind the file system
+         * @type {CfsConfig || null}
+         */
+        this.CfsConfig = null;
+
     }
 
     /**
@@ -1659,6 +1637,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             let obj = new PublicNetConfigIn();
             obj.deserialize(params.PublicNetConfig)
             this.PublicNetConfig = obj;
+        }
+
+        if (params.CfsConfig) {
+            let obj = new CfsConfig();
+            obj.deserialize(params.CfsConfig)
+            this.CfsConfig = obj;
         }
 
     }
@@ -1932,6 +1916,70 @@ class LayerVersionSimple extends  AbstractModel {
         }
         this.LayerName = 'LayerName' in params ? params.LayerName : null;
         this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+
+    }
+}
+
+/**
+ * File system (CFS) configuration description
+ * @class
+ */
+class CfsConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File system information list
+         * @type {Array.<CfsInsInfo> || null}
+         */
+        this.CfsInsList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CfsInsList) {
+            this.CfsInsList = new Array();
+            for (let z in params.CfsInsList) {
+                let obj = new CfsInsInfo();
+                obj.deserialize(params.CfsInsList[z]);
+                this.CfsInsList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteNamespace request structure.
+ * @class
+ */
+class DeleteNamespaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Namespace name
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -2335,7 +2383,7 @@ class TriggerInfo extends  AbstractModel {
         super();
 
         /**
-         * Enablement switch
+         * Whether to enable
          * @type {number || null}
          */
         this.Enable = null;
@@ -2432,7 +2480,7 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Code = null;
 
         /**
-         * Name of the handler, which is in the “file name.handler name” form. Use periods (.) to separate a file name and function name. The file name and function name must start and end with a letter and can contain 2 to 60 characters, including letters, digits, hyphens (-), and underscores (_).
+         * Name of the handler, which is in the 'file name.handler name' form. Use periods (.) to separate a file name and function name. The file name and function name must start and end with a letter and can contain 2 to 60 characters, including letters, digits, hyphens (-), and underscores (_).
          * @type {string || null}
          */
         this.Handler = null;
@@ -2444,13 +2492,13 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128–3,072 MB in increments of 128 MB
+         * Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3072 MB in increments of 128 MB
          * @type {number || null}
          */
         this.MemorySize = null;
 
         /**
-         * Maximum execution duration of function in seconds. Value range: 1–900 seconds. Default value: 3 seconds
+         * Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
          * @type {number || null}
          */
         this.Timeout = null;
@@ -2527,6 +2575,12 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.PublicNetConfig = null;
 
+        /**
+         * File system configuration parameter, which is used for the function to mount the file system
+         * @type {CfsConfig || null}
+         */
+        this.CfsConfig = null;
+
     }
 
     /**
@@ -2586,6 +2640,12 @@ class CreateFunctionRequest extends  AbstractModel {
             let obj = new PublicNetConfigIn();
             obj.deserialize(params.PublicNetConfig)
             this.PublicNetConfig = obj;
+        }
+
+        if (params.CfsConfig) {
+            let obj = new CfsConfig();
+            obj.deserialize(params.CfsConfig)
+            this.CfsConfig = obj;
         }
 
     }
@@ -2900,7 +2960,7 @@ class CreateAliasRequest extends  AbstractModel {
         super();
 
         /**
-         * Alias name, which must be unique in the function, can contain 1–64 letters, digits, `_`, and `-`, and must begin with a letter
+         * Alias name, which must be unique in the function, can contain 1 to 64 letters, digits, `_`, and `-`, and must begin with a letter
          * @type {string || null}
          */
         this.Name = null;
@@ -2912,7 +2972,7 @@ class CreateAliasRequest extends  AbstractModel {
         this.FunctionName = null;
 
         /**
-         * Master version of alias
+         * Master version pointed to by the alias
          * @type {string || null}
          */
         this.FunctionVersion = null;
@@ -3099,7 +3159,7 @@ class PublishLayerVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * Layer name, which can contain 1–64 English letters, digits, hyphens, and underscores, must begin with a letter, and cannot end with a hyphen or underscore
+         * Layer name, which can contain 1-64 English letters, digits, hyphens, and underscores, must begin with a letter, and cannot end with a hyphen or underscore
          * @type {string || null}
          */
         this.LayerName = null;
@@ -3514,6 +3574,27 @@ Note: This field may return null, indicating that no valid value was found.
         this.OnsEnable = null;
 
         /**
+         * File system configuration parameter, which is used for the function to mount the file system
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {CfsConfig || null}
+         */
+        this.CfsConfig = null;
+
+        /**
+         * Function billing status
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AvailableStatus = null;
+
+        /**
+         * Function version
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3617,6 +3698,14 @@ Note: This field may return null, indicating that no valid value was found.
             this.PublicNetConfig = obj;
         }
         this.OnsEnable = 'OnsEnable' in params ? params.OnsEnable : null;
+
+        if (params.CfsConfig) {
+            let obj = new CfsConfig();
+            obj.deserialize(params.CfsConfig)
+            this.CfsConfig = obj;
+        }
+        this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3791,13 +3880,13 @@ class GetLayerVersionResponse extends  AbstractModel {
         this.CompatibleRuntimes = null;
 
         /**
-         * SHA256 encoding of file on layer version
+         * SHA256 encoding of version file on the layer
          * @type {string || null}
          */
         this.CodeSha256 = null;
 
         /**
-         * Download address of file on layer version
+         * Download address of version file on the layer
          * @type {string || null}
          */
         this.Location = null;
@@ -3979,6 +4068,93 @@ class FunctionLog extends  AbstractModel {
         this.Level = 'Level' in params ? params.Level : null;
         this.Source = 'Source' in params ? params.Source : null;
         this.RetryNum = 'RetryNum' in params ? params.RetryNum : null;
+
+    }
+}
+
+/**
+ * Configuration information of the CFS instance associated with function
+ * @class
+ */
+class CfsInsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * User group ID
+         * @type {string || null}
+         */
+        this.UserGroupId = null;
+
+        /**
+         * CFS instance ID
+         * @type {string || null}
+         */
+        this.CfsId = null;
+
+        /**
+         * File system mount target ID
+         * @type {string || null}
+         */
+        this.MountInsId = null;
+
+        /**
+         * Local mount target
+         * @type {string || null}
+         */
+        this.LocalMountDir = null;
+
+        /**
+         * Remote mount target
+         * @type {string || null}
+         */
+        this.RemoteMountDir = null;
+
+        /**
+         * File system IP
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IpAddress = null;
+
+        /**
+         * VPC ID of file system
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MountVpcId = null;
+
+        /**
+         * VPC subnet ID of file system
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MountSubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserGroupId = 'UserGroupId' in params ? params.UserGroupId : null;
+        this.CfsId = 'CfsId' in params ? params.CfsId : null;
+        this.MountInsId = 'MountInsId' in params ? params.MountInsId : null;
+        this.LocalMountDir = 'LocalMountDir' in params ? params.LocalMountDir : null;
+        this.RemoteMountDir = 'RemoteMountDir' in params ? params.RemoteMountDir : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+        this.MountVpcId = 'MountVpcId' in params ? params.MountVpcId : null;
+        this.MountSubnetId = 'MountSubnetId' in params ? params.MountSubnetId : null;
 
     }
 }
@@ -4342,7 +4518,7 @@ class ListTriggersRequest extends  AbstractModel {
 
         /**
          * * Qualifier:
-Function version, i.e., alias
+Function version, alias
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4376,18 +4552,18 @@ Function version, i.e., alias
 }
 
 /**
- * DeleteNamespace request structure.
+ * CreateFunction response structure.
  * @class
  */
-class DeleteNamespaceRequest extends  AbstractModel {
+class CreateFunctionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Namespace name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.RequestId = null;
 
     }
 
@@ -4398,7 +4574,7 @@ class DeleteNamespaceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4424,7 +4600,7 @@ class ListAliasesRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * If this parameter is provided, only aliases associated with this function version will be returned
+         * If this parameter is provided, only aliases associated with this function version will be returned.
          * @type {string || null}
          */
         this.FunctionVersion = null;
@@ -4503,7 +4679,7 @@ class Alias extends  AbstractModel {
         super();
 
         /**
-         * Master version of alias
+         * Master version pointed to by the alias
          * @type {string || null}
          */
         this.FunctionVersion = null;
@@ -4955,7 +5131,6 @@ module.exports = {
     LayerVersionInfo: LayerVersionInfo,
     UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
     PublishLayerVersionResponse: PublishLayerVersionResponse,
-    CreateFunctionResponse: CreateFunctionResponse,
     PublicNetConfigIn: PublicNetConfigIn,
     UpdateAliasRequest: UpdateAliasRequest,
     RoutingConfig: RoutingConfig,
@@ -4984,6 +5159,8 @@ module.exports = {
     CopyFunctionRequest: CopyFunctionRequest,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     LayerVersionSimple: LayerVersionSimple,
+    CfsConfig: CfsConfig,
+    DeleteNamespaceRequest: DeleteNamespaceRequest,
     ListFunctionsRequest: ListFunctionsRequest,
     CreateTriggerRequest: CreateTriggerRequest,
     ListLayersResponse: ListLayersResponse,
@@ -5013,13 +5190,14 @@ module.exports = {
     UpdateNamespaceRequest: UpdateNamespaceRequest,
     GetLayerVersionResponse: GetLayerVersionResponse,
     FunctionLog: FunctionLog,
+    CfsInsInfo: CfsInsInfo,
     FunctionVersion: FunctionVersion,
     Function: Function,
     DeadLetterConfig: DeadLetterConfig,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
     ListFunctionsResponse: ListFunctionsResponse,
     ListTriggersRequest: ListTriggersRequest,
-    DeleteNamespaceRequest: DeleteNamespaceRequest,
+    CreateFunctionResponse: CreateFunctionResponse,
     ListAliasesRequest: ListAliasesRequest,
     EipOutConfig: EipOutConfig,
     Alias: Alias,

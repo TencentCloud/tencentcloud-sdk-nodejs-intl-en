@@ -832,7 +832,7 @@ class DescribeBlockIPListResponse extends  AbstractModel {
         this.ClientIPField = null;
 
         /**
-         * List of IPs added to blacklist 12360
+         * List of IPs added to blocklist 12360
          * @type {Array.<BlockedIP> || null}
          */
         this.BlockedIPList = null;
@@ -1746,7 +1746,7 @@ class DeleteLoadBalancerListenersRequest extends  AbstractModel {
 }
 
 /**
- * IP added to blacklist 12306
+ * IP added to blocklist 12306
  * @class
  */
 class BlockedIP extends  AbstractModel {
@@ -3310,12 +3310,12 @@ class ModifyBlockIPListRequest extends  AbstractModel {
 
         /**
          * Operation type. Valid values:
-<li> add_customized_field (sets header initially to enable the blacklist feature)</li>
+<li> add_customized_field (sets header initially to enable the blocklist feature)</li>
 <li> set_customized_field (modifies header)</li>
 <li> del_customized_field (deletes header)</li>
-<li> add_blocked (adds IPs to blacklist)</li>
-<li> del_blocked (deletes IPs from blacklist)</li>
-<li> flush_blocked (clears blacklist)</li>
+<li> add_blocked (adds IPs to blocklist)</li>
+<li> del_blocked (deletes IPs from blocklist)</li>
+<li> flush_blocked (clears blocklist)</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -3339,7 +3339,7 @@ class ModifyBlockIPListRequest extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * IP adding policy. Valid value: fifo (if a blacklist is full, new IPs added to the blacklist will adopt the first-in first-out policy)
+         * IP adding policy. Valid value: fifo (if a blocklist is full, new IPs added to the blocklist will adopt the first-in first-out policy)
          * @type {string || null}
          */
         this.AddStrategy = null;

@@ -102,6 +102,42 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.AutoRenewFlag = null;
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupList = null;
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.Weekly = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Span = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HAType = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.MultiZones = null;
+
     }
 
     /**
@@ -124,6 +160,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.SecurityGroupList = 'SecurityGroupList' in params ? params.SecurityGroupList : null;
+        this.Weekly = 'Weekly' in params ? params.Weekly : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Span = 'Span' in params ? params.Span : null;
+        this.HAType = 'HAType' in params ? params.HAType : null;
+        this.MultiZones = 'MultiZones' in params ? params.MultiZones : null;
 
     }
 }
@@ -206,7 +248,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Number of results per page. Value range: 1–100. Default value: 20
+         * Number of results per page. Value range: 1-100. Default value: 20
          * @type {number || null}
          */
         this.Limit = null;
@@ -662,7 +704,7 @@ class DescribeBackupsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Number of results per page. Value range: 1–100. Default value: 20
+         * Number of results per page. Value range: 1-100. Default value: 20
          * @type {number || null}
          */
         this.Limit = null;
@@ -999,13 +1041,13 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.InstanceChargeType = null;
 
         /**
-         * Length of purchase in months. Value range: 1–48. Default value: 1
+         * Length of purchase in months. Value range: 1-48. Default value: 1
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Number of instances purchased at a time. Value range: 1–100. Default value: 1
+         * Number of instances purchased at a time. Value range: 1-100. Default value: 1
          * @type {number || null}
          */
         this.GoodsNum = null;
@@ -1015,6 +1057,24 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.DBVersion = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MachineType = null;
 
     }
 
@@ -1032,6 +1092,9 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
         this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
 
     }
 }
@@ -1687,7 +1750,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          * Instance status. Valid values:
 <li>1: applying</li>
 <li>2: running</li>
-<li>3: running restrictedly (master/slave switching)</li>
+<li>3: running restrictedly (primary/secondary switching)</li>
 <li>4: isolated</li>
 <li>5: repossessing</li>
 <li>6: repossessed</li>
@@ -1708,7 +1771,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of results per page. Value range: 1–100. Default value: 100
+         * Number of results per page. Value range: 1-100. Default value: 100
          * @type {number || null}
          */
         this.Limit = null;
@@ -2160,7 +2223,7 @@ class DescribeMigrationsRequest extends  AbstractModel {
         this.MigrateName = null;
 
         /**
-         * Number of results per page. Value range: 1–100. Default value: 100
+         * Number of results per page. Value range: 1-100. Default value: 100
          * @type {number || null}
          */
         this.Limit = null;
@@ -2245,7 +2308,7 @@ class DescribeDBsRequest extends  AbstractModel {
         this.InstanceIdSet = null;
 
         /**
-         * Number of results per page. Value range: 1–100. Default value: 20
+         * Number of results per page. Value range: 1-100. Default value: 20
          * @type {number || null}
          */
         this.Limit = null;
@@ -2565,6 +2628,12 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
          */
         this.Storage = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -2577,6 +2646,7 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -2935,7 +3005,7 @@ class DBInstance extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance status. Valid values: <li>1: applying </li> <li>2: running </li> <li>3: restrictedly running (master/slave switching) </li> <li>4: isolated </li> <li>5: repossessing </li> <li>6: repossessed </li> <li>7: task running (e.g., backing up or rolling back the instance) </li> <li>8: decommissioned </li> <li>9: scaling </li> <li>10: migrating </li> <li>11: read-only </li> <li>12: restarting </li>
+         * Instance status. Valid values: <li>1: applying </li> <li>2: running </li> <li>3: restrictedly running (primary/secondary switching) </li> <li>4: isolated </li> <li>5: repossessing </li> <li>6: repossessed </li> <li>7: task running (e.g., backing up or rolling back the instance) </li> <li>8: decommissioned </li> <li>9: scaling </li> <li>10: migrating </li> <li>11: read-only </li> <li>12: restarting </li>
          * @type {number || null}
          */
         this.Status = null;
@@ -3084,6 +3154,30 @@ class DBInstance extends  AbstractModel {
          */
         this.UniqSubnetId = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IsolateOperator = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SubFlag = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ROFlag = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HAFlag = null;
+
     }
 
     /**
@@ -3125,6 +3219,10 @@ class DBInstance extends  AbstractModel {
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
         this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.IsolateOperator = 'IsolateOperator' in params ? params.IsolateOperator : null;
+        this.SubFlag = 'SubFlag' in params ? params.SubFlag : null;
+        this.ROFlag = 'ROFlag' in params ? params.ROFlag : null;
+        this.HAFlag = 'HAFlag' in params ? params.HAFlag : null;
 
     }
 }
@@ -3629,6 +3727,12 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
          */
         this.VoucherIds = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -3643,6 +3747,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -4506,7 +4611,7 @@ class DescribeSlowlogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Number of results per page. Value range: 1–100. Default value: 20
+         * Number of results per page. Value range: 1-100. Default value: 20
          * @type {number || null}
          */
         this.Limit = null;

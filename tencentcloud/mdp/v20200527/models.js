@@ -938,14 +938,14 @@ class EndpointAuthInfo extends  AbstractModel {
         super();
 
         /**
-         * The security group whitelist in CIDR format.
+         * The security group allowlist in CIDR format.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.WhiteIpList = null;
 
         /**
-         * The security group blacklist in CIDR format.
+         * The security group blocklist in CIDR format.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */

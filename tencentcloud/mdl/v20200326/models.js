@@ -82,7 +82,7 @@ class ModifyMediaLiveInputRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Media input name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+         * Media input name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
          * @type {string || null}
          */
         this.Name = null;
@@ -128,7 +128,7 @@ Note: if it is left empty or the array is empty, the original `InputSettings` va
 }
 
 /**
- * Drm配置信息，目前只对HLS和DASH有效。
+ * DRM configuration information, which takes effect only for HLS and DASH.
  * @class
  */
 class DrmSettingsInfo extends  AbstractModel {
@@ -269,7 +269,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 频道输出组信息。
+ * Channel output group information.
  * @class
  */
 class OutputGroupsInfo extends  AbstractModel {
@@ -384,6 +384,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * StopMediaLiveChannel request structure.
+ * @class
+ */
+class StopMediaLiveChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * DASH configuration information.
  * @class
  */
@@ -490,7 +518,7 @@ class VideoTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Video transcoding template name, which can contain 1–20 letters and digits.
+         * Video transcoding template name, which can contain 1-20 letters and digits.
          * @type {string || null}
          */
         this.Name = null;
@@ -629,13 +657,13 @@ class ModifyMediaLiveInputSecurityGroupRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Input security group name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+         * Input security group name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * List of whitelist entries. Up to 10 entries are allowed.
+         * List of allowlist entries. Up to 10 entries are allowed.
          * @type {Array.<string> || null}
          */
         this.Whitelist = null;
@@ -652,6 +680,75 @@ class ModifyMediaLiveInputSecurityGroupRequest extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Whitelist = 'Whitelist' in params ? params.Whitelist : null;
+
+    }
+}
+
+/**
+ * Video information of pushed streams.
+ * @class
+ */
+class StreamVideoInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video `Pid`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Video codec.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * Video frame rate.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * Video bitrate.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * Video width.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Video height.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -814,7 +911,7 @@ class CreateMediaLiveInputRequest extends  AbstractModel {
         super();
 
         /**
-         * Media input name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+         * Media input name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
          * @type {string || null}
          */
         this.Name = null;
@@ -860,6 +957,35 @@ Only one security group can be associated.
                 this.InputSettings.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * SCTE-35 information.
+ * @class
+ */
+class StreamScte35Info extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SCTE-35 `Pid`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pid = 'Pid' in params ? params.Pid : null;
 
     }
 }
@@ -1011,6 +1137,34 @@ class DescribeMediaLiveInputRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeMediaLiveChannel request structure.
+ * @class
+ */
+class DescribeMediaLiveChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * Audio `Pid` selection.
  * @class
  */
@@ -1039,18 +1193,24 @@ class AudioPidSelectionInfo extends  AbstractModel {
 }
 
 /**
- * DescribeMediaLiveChannel request structure.
+ * DescribeMediaLiveChannelLogs response structure.
  * @class
  */
-class DescribeMediaLiveChannelRequest extends  AbstractModel {
+class DescribeMediaLiveChannelLogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID.
+         * Pipeline push information.
+         * @type {PipelineLogInfo || null}
+         */
+        this.Infos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Id = null;
+        this.RequestId = null;
 
     }
 
@@ -1061,7 +1221,74 @@ class DescribeMediaLiveChannelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Infos) {
+            let obj = new PipelineLogInfo();
+            obj.deserialize(params.Infos)
+            this.Infos = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Audio information.
+ * @class
+ */
+class StreamAudioInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audio `Pid`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Audio codec.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * Audio frame rate.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * Audio bitrate.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * Audio sample rate.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
 
     }
 }
@@ -1258,7 +1485,7 @@ class InputSecurityGroupInfo extends  AbstractModel {
         this.Name = null;
 
         /**
-         * List of whitelist entries.
+         * List of allowlist entries.
          * @type {Array.<string> || null}
          */
         this.Whitelist = null;
@@ -1331,7 +1558,7 @@ class CreateMediaLiveChannelRequest extends  AbstractModel {
         super();
 
         /**
-         * Channel name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+         * Channel name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
          * @type {string || null}
          */
         this.Name = null;
@@ -2073,14 +2300,14 @@ class InputSettingInfo extends  AbstractModel {
         super();
 
         /**
-         * Application name, which is used for RTMP_PUSH and can contain 1–32 letters and digits.
+         * Application name, which is used for RTMP_PUSH and can contain 1-32 letters and digits.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
-         * Stream name, which is used for RTMP_PUSH and can contain 1–32 letters and digits.
+         * Stream name, which is used for RTMP_PUSH and can contain 1-32 letters and digits.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2118,39 +2345,19 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Output information.
+ * Log details.
  * @class
  */
-class OutputInfo extends  AbstractModel {
+class LogMessageInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Output name.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Audio transcoding template name array.
-Quantity limit: [0,1] for RTMP; [0,20] for others.
+         * Push information.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * @type {StreamInfo || null}
          */
-        this.AudioTemplateNames = null;
-
-        /**
-         * Video transcoding template name array. Quantity limit: [0,1].
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.VideoTemplateNames = null;
-
-        /**
-         * SCTE-35 information configuration.
-         * @type {Scte35SettingsInfo || null}
-         */
-        this.Scte35Settings = null;
+        this.StreamInfo = null;
 
     }
 
@@ -2161,14 +2368,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.AudioTemplateNames = 'AudioTemplateNames' in params ? params.AudioTemplateNames : null;
-        this.VideoTemplateNames = 'VideoTemplateNames' in params ? params.VideoTemplateNames : null;
 
-        if (params.Scte35Settings) {
-            let obj = new Scte35SettingsInfo();
-            obj.deserialize(params.Scte35Settings)
-            this.Scte35Settings = obj;
+        if (params.StreamInfo) {
+            let obj = new StreamInfo();
+            obj.deserialize(params.StreamInfo)
+            this.StreamInfo = obj;
         }
 
     }
@@ -2526,6 +2730,59 @@ class HlsRemuxSettingsInfo extends  AbstractModel {
 }
 
 /**
+ * Pipeline log information.
+ * @class
+ */
+class PipelineLogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log information of pipeline 0.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<LogInfo> || null}
+         */
+        this.Pipeline0 = null;
+
+        /**
+         * Log information of pipeline 1.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<LogInfo> || null}
+         */
+        this.Pipeline1 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Pipeline0) {
+            this.Pipeline0 = new Array();
+            for (let z in params.Pipeline0) {
+                let obj = new LogInfo();
+                obj.deserialize(params.Pipeline0[z]);
+                this.Pipeline0.push(obj);
+            }
+        }
+
+        if (params.Pipeline1) {
+            this.Pipeline1 = new Array();
+            for (let z in params.Pipeline1) {
+                let obj = new LogInfo();
+                obj.deserialize(params.Pipeline1[z]);
+                this.Pipeline1.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyMediaLiveChannel response structure.
  * @class
  */
@@ -2554,6 +2811,50 @@ class ModifyMediaLiveChannelResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeMediaLiveChannelLogs request structure.
+ * @class
+ */
+class DescribeMediaLiveChannelLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * Log start time, which is one hour ago by default. Maximum value: the last 7 days.
+UTC time, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Log end time, which is one hour after `StartTime` by default.
+UTC time, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * CreateMediaLiveInputSecurityGroup request structure.
  * @class
  */
@@ -2568,7 +2869,7 @@ class CreateMediaLiveInputSecurityGroupRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * List of whitelist entries. Quantity limit: [1,10].
+         * List of allowlist entries. Quantity limit: [1,10].
          * @type {Array.<string> || null}
          */
         this.Whitelist = null;
@@ -2617,6 +2918,79 @@ class DeleteMediaLiveInputSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
+ * Push information.
+ * @class
+ */
+class StreamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Client IP.
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * Video information of pushed streams.
+         * @type {Array.<StreamVideoInfo> || null}
+         */
+        this.Video = null;
+
+        /**
+         * Audio information of pushed streams.
+         * @type {Array.<StreamAudioInfo> || null}
+         */
+        this.Audio = null;
+
+        /**
+         * SCTE-35 information of pushed streams.
+         * @type {Array.<StreamScte35Info> || null}
+         */
+        this.Scte35 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+
+        if (params.Video) {
+            this.Video = new Array();
+            for (let z in params.Video) {
+                let obj = new StreamVideoInfo();
+                obj.deserialize(params.Video[z]);
+                this.Video.push(obj);
+            }
+        }
+
+        if (params.Audio) {
+            this.Audio = new Array();
+            for (let z in params.Audio) {
+                let obj = new StreamAudioInfo();
+                obj.deserialize(params.Audio[z]);
+                this.Audio.push(obj);
+            }
+        }
+
+        if (params.Scte35) {
+            this.Scte35 = new Array();
+            for (let z in params.Scte35) {
+                let obj = new StreamScte35Info();
+                obj.deserialize(params.Scte35[z]);
+                this.Scte35.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Audio transcoding template.
  * @class
  */
@@ -2631,7 +3005,7 @@ class AudioTemplateInfo extends  AbstractModel {
         this.AudioSelectorName = null;
 
         /**
-         * Audio transcoding template name, which can contain 1–20 letters and digits.
+         * Audio transcoding template name, which can contain 1-20 letters and digits.
          * @type {string || null}
          */
         this.Name = null;
@@ -2776,7 +3150,7 @@ class AudioSelectorInfo extends  AbstractModel {
         super();
 
         /**
-         * Audio name, which can contain 1–32 letters, digits, and underscores.
+         * Audio name, which can contain 1-32 letters, digits, and underscores.
          * @type {string || null}
          */
         this.Name = null;
@@ -2808,18 +3182,31 @@ class AudioSelectorInfo extends  AbstractModel {
 }
 
 /**
- * StopMediaLiveChannel request structure.
+ * Log information.
  * @class
  */
-class StopMediaLiveChannelRequest extends  AbstractModel {
+class LogInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID.
+         * Log type.
+It contains the value of `StreamStart` which refers to the push information.
          * @type {string || null}
          */
-        this.Id = null;
+        this.Type = null;
+
+        /**
+         * Time when the log is printed.
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Log details.
+         * @type {LogMessageInfo || null}
+         */
+        this.Message = null;
 
     }
 
@@ -2830,7 +3217,14 @@ class StopMediaLiveChannelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Time = 'Time' in params ? params.Time : null;
+
+        if (params.Message) {
+            let obj = new LogMessageInfo();
+            obj.deserialize(params.Message)
+            this.Message = obj;
+        }
 
     }
 }
@@ -2918,7 +3312,7 @@ class ModifyMediaLiveChannelRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Channel name, which can contain 1–32 letters, digits, and underscores and must be unique at the region level.
+         * Channel name, which can contain 1-32 letters, digits, and underscores and must be unique at the region level.
          * @type {string || null}
          */
         this.Name = null;
@@ -3019,6 +3413,63 @@ class DescribeMediaLiveChannelsRequest extends  AbstractModel {
     }
 }
 
+/**
+ * Output information.
+ * @class
+ */
+class OutputInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Output name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Audio transcoding template name array.
+Quantity limit: [0,1] for RTMP; [0,20] for others.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AudioTemplateNames = null;
+
+        /**
+         * Video transcoding template name array. Quantity limit: [0,1].
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.VideoTemplateNames = null;
+
+        /**
+         * SCTE-35 information configuration.
+         * @type {Scte35SettingsInfo || null}
+         */
+        this.Scte35Settings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.AudioTemplateNames = 'AudioTemplateNames' in params ? params.AudioTemplateNames : null;
+        this.VideoTemplateNames = 'VideoTemplateNames' in params ? params.VideoTemplateNames : null;
+
+        if (params.Scte35Settings) {
+            let obj = new Scte35SettingsInfo();
+            obj.deserialize(params.Scte35Settings)
+            this.Scte35Settings = obj;
+        }
+
+    }
+}
+
 module.exports = {
     InputStatistics: InputStatistics,
     ModifyMediaLiveInputRequest: ModifyMediaLiveInputRequest,
@@ -3026,6 +3477,7 @@ module.exports = {
     PipelineOutputStatistics: PipelineOutputStatistics,
     AttachedInputInfo: AttachedInputInfo,
     OutputGroupsInfo: OutputGroupsInfo,
+    StopMediaLiveChannelRequest: StopMediaLiveChannelRequest,
     DashRemuxSettingsInfo: DashRemuxSettingsInfo,
     MediaPackageSettingsInfo: MediaPackageSettingsInfo,
     StartMediaLiveChannelRequest: StartMediaLiveChannelRequest,
@@ -3033,17 +3485,21 @@ module.exports = {
     DeleteMediaLiveInputSecurityGroupResponse: DeleteMediaLiveInputSecurityGroupResponse,
     DeleteMediaLiveInputRequest: DeleteMediaLiveInputRequest,
     ModifyMediaLiveInputSecurityGroupRequest: ModifyMediaLiveInputSecurityGroupRequest,
+    StreamVideoInfo: StreamVideoInfo,
     OutputsStatistics: OutputsStatistics,
     DeleteMediaLiveInputResponse: DeleteMediaLiveInputResponse,
     ModifyMediaLiveInputResponse: ModifyMediaLiveInputResponse,
     VideoPipelineInputStatistics: VideoPipelineInputStatistics,
     CreateMediaLiveInputRequest: CreateMediaLiveInputRequest,
+    StreamScte35Info: StreamScte35Info,
     Scte35SettingsInfo: Scte35SettingsInfo,
     DescribeMediaLiveInputsRequest: DescribeMediaLiveInputsRequest,
     PipelineInputStatistics: PipelineInputStatistics,
     DescribeMediaLiveInputRequest: DescribeMediaLiveInputRequest,
-    AudioPidSelectionInfo: AudioPidSelectionInfo,
     DescribeMediaLiveChannelRequest: DescribeMediaLiveChannelRequest,
+    AudioPidSelectionInfo: AudioPidSelectionInfo,
+    DescribeMediaLiveChannelLogsResponse: DescribeMediaLiveChannelLogsResponse,
+    StreamAudioInfo: StreamAudioInfo,
     StartMediaLiveChannelResponse: StartMediaLiveChannelResponse,
     DrmKey: DrmKey,
     AudioPipelineInputStatistics: AudioPipelineInputStatistics,
@@ -3066,7 +3522,7 @@ module.exports = {
     DescribeMediaLiveInputResponse: DescribeMediaLiveInputResponse,
     DescribeMediaLiveChannelInputStatisticsRequest: DescribeMediaLiveChannelInputStatisticsRequest,
     InputSettingInfo: InputSettingInfo,
-    OutputInfo: OutputInfo,
+    LogMessageInfo: LogMessageInfo,
     DescribeMediaLiveChannelAlertsRequest: DescribeMediaLiveChannelAlertsRequest,
     CreateMediaLiveInputSecurityGroupResponse: CreateMediaLiveInputSecurityGroupResponse,
     DescribeMediaLiveInputsResponse: DescribeMediaLiveInputsResponse,
@@ -3076,17 +3532,21 @@ module.exports = {
     DescribeMediaLiveChannelsResponse: DescribeMediaLiveChannelsResponse,
     ChannelInputStatistics: ChannelInputStatistics,
     HlsRemuxSettingsInfo: HlsRemuxSettingsInfo,
+    PipelineLogInfo: PipelineLogInfo,
     ModifyMediaLiveChannelResponse: ModifyMediaLiveChannelResponse,
+    DescribeMediaLiveChannelLogsRequest: DescribeMediaLiveChannelLogsRequest,
     CreateMediaLiveInputSecurityGroupRequest: CreateMediaLiveInputSecurityGroupRequest,
     DeleteMediaLiveInputSecurityGroupRequest: DeleteMediaLiveInputSecurityGroupRequest,
+    StreamInfo: StreamInfo,
     AudioTemplateInfo: AudioTemplateInfo,
     DescribeMediaLiveChannelOutputStatisticsRequest: DescribeMediaLiveChannelOutputStatisticsRequest,
     DescribeMediaLiveChannelInputStatisticsResponse: DescribeMediaLiveChannelInputStatisticsResponse,
     AudioSelectorInfo: AudioSelectorInfo,
-    StopMediaLiveChannelRequest: StopMediaLiveChannelRequest,
+    LogInfo: LogInfo,
     ModifyMediaLiveInputSecurityGroupResponse: ModifyMediaLiveInputSecurityGroupResponse,
     ChannelOutputsStatistics: ChannelOutputsStatistics,
     ModifyMediaLiveChannelRequest: ModifyMediaLiveChannelRequest,
     DescribeMediaLiveChannelsRequest: DescribeMediaLiveChannelsRequest,
+    OutputInfo: OutputInfo,
 
 }

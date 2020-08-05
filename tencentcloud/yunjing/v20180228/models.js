@@ -1508,6 +1508,12 @@ class SecurityDynamic extends  AbstractModel {
          */
         this.Message = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecurityLevel = null;
+
     }
 
     /**
@@ -1521,6 +1527,7 @@ class SecurityDynamic extends  AbstractModel {
         this.EventTime = 'EventTime' in params ? params.EventTime : null;
         this.EventType = 'EventType' in params ? params.EventType : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.SecurityLevel = 'SecurityLevel' in params ? params.SecurityLevel : null;
 
     }
 }
@@ -2481,6 +2488,12 @@ class MachineTag extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TagId = null;
+
     }
 
     /**
@@ -2492,6 +2505,7 @@ class MachineTag extends  AbstractModel {
         }
         this.Rid = 'Rid' in params ? params.Rid : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.TagId = 'TagId' in params ? params.TagId : null;
 
     }
 }
@@ -3475,7 +3489,7 @@ class Place extends  AbstractModel {
 }
 
 /**
- * Login whitelist
+ * Login allowlist
  * @class
  */
 class LoginWhiteLists extends  AbstractModel {
@@ -3542,6 +3556,18 @@ class LoginWhiteLists extends  AbstractModel {
          */
         this.HostIp = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -3569,6 +3595,8 @@ class LoginWhiteLists extends  AbstractModel {
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4385,7 +4413,7 @@ class DescribeLoginWhiteListResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Login whitelist array
+         * Login allowlist array
          * @type {Array.<LoginWhiteLists> || null}
          */
         this.LoginWhiteLists = null;
@@ -4867,6 +4895,36 @@ class DescribeSecurityTrendsResponse extends  AbstractModel {
         this.BaseLines = null;
 
         /**
+         * 
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.MaliciousRequests = null;
+
+        /**
+         * 
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.HighRiskBashs = null;
+
+        /**
+         * 
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.ReverseShells = null;
+
+        /**
+         * 
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.PrivilegeEscalations = null;
+
+        /**
+         * 
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.CyberAttacks = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4924,6 +4982,51 @@ class DescribeSecurityTrendsResponse extends  AbstractModel {
                 let obj = new SecurityTrend();
                 obj.deserialize(params.BaseLines[z]);
                 this.BaseLines.push(obj);
+            }
+        }
+
+        if (params.MaliciousRequests) {
+            this.MaliciousRequests = new Array();
+            for (let z in params.MaliciousRequests) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.MaliciousRequests[z]);
+                this.MaliciousRequests.push(obj);
+            }
+        }
+
+        if (params.HighRiskBashs) {
+            this.HighRiskBashs = new Array();
+            for (let z in params.HighRiskBashs) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.HighRiskBashs[z]);
+                this.HighRiskBashs.push(obj);
+            }
+        }
+
+        if (params.ReverseShells) {
+            this.ReverseShells = new Array();
+            for (let z in params.ReverseShells) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.ReverseShells[z]);
+                this.ReverseShells.push(obj);
+            }
+        }
+
+        if (params.PrivilegeEscalations) {
+            this.PrivilegeEscalations = new Array();
+            for (let z in params.PrivilegeEscalations) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.PrivilegeEscalations[z]);
+                this.PrivilegeEscalations.push(obj);
+            }
+        }
+
+        if (params.CyberAttacks) {
+            this.CyberAttacks = new Array();
+            for (let z in params.CyberAttacks) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.CyberAttacks[z]);
+                this.CyberAttacks.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -5203,7 +5306,7 @@ class LoginWhiteListsRule extends  AbstractModel {
         this.IsGlobal = null;
 
         /**
-         * Server for which the whitelist takes effect
+         * Server for which the allowlist takes effect
          * @type {string || null}
          */
         this.HostIp = null;
@@ -5213,6 +5316,18 @@ class LoginWhiteListsRule extends  AbstractModel {
          * @type {number || null}
          */
         this.Id = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -5237,6 +5352,8 @@ class LoginWhiteListsRule extends  AbstractModel {
         this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
         this.HostIp = 'HostIp' in params ? params.HostIp : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -5963,6 +6080,18 @@ class DescribeTagsRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
     }
 
     /**
@@ -5972,6 +6101,8 @@ class DescribeTagsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
 
     }
 }
@@ -6581,6 +6712,30 @@ class Machine extends  AbstractModel {
          */
         this.Tag = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BaselineNum = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CyberAttackNum = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecurityStatus = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InvasionNum = null;
+
     }
 
     /**
@@ -6610,6 +6765,10 @@ class Machine extends  AbstractModel {
                 this.Tag.push(obj);
             }
         }
+        this.BaselineNum = 'BaselineNum' in params ? params.BaselineNum : null;
+        this.CyberAttackNum = 'CyberAttackNum' in params ? params.CyberAttackNum : null;
+        this.SecurityStatus = 'SecurityStatus' in params ? params.SecurityStatus : null;
+        this.InvasionNum = 'InvasionNum' in params ? params.InvasionNum : null;
 
     }
 }

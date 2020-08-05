@@ -23,7 +23,7 @@ const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesRespon
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
-const RoVipInfo = models.RoVipInfo;
+const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const RoWeightValue = models.RoWeightValue;
@@ -48,6 +48,7 @@ const MasterInfo = models.MasterInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const ParamInfo = models.ParamInfo;
+const DescribeRoMinScaleRequest = models.DescribeRoMinScaleRequest;
 const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
 const DBSwitchInfo = models.DBSwitchInfo;
 const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
@@ -175,6 +176,7 @@ const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse
 const DatabasePrivilege = models.DatabasePrivilege;
 const RoGroupAttr = models.RoGroupAttr;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
+const RoVipInfo = models.RoVipInfo;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
@@ -554,7 +556,7 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API (SwitchForUpgrade) is used to switch to a new instance. You can initiate this process when the master instance being upgraded is pending switch.
+     * This API (SwitchForUpgrade) is used to switch to a new instance. You can initiate this process when the primary instance being upgraded is pending switch.
      * @param {SwitchForUpgradeRequest} req
      * @param {function(string, SwitchForUpgradeResponse):void} cb
      * @public
@@ -598,14 +600,14 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to create a pay-as-you-go TencentDB instance (which can be a master, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, and quantity.
+     * This API is used to create a pay-as-you-go TencentDB instance (which can be a primary, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, and quantity.
 
 This is an async API. You can also use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance details. If the `Status` value of an instance is 1 and `TaskStatus` is 0, the instance has been successfully delivered.
 
 1. Please use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/api/236/17229) API to query the supported instance specifications first and then use the [DescribeDBPrice](https://cloud.tencent.com/document/api/236/18566) API to query the prices of the supported instances;
 2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months;
 3. MySQL v5.5, v5.6, and v5.7 are supported;
-4. Master instances, read-only instances, and disaster recovery instances can be created;
+4. primary instances, read-only instances, and disaster recovery instances can be created;
 5. If `Port`, `ParamList`, or `Password` is set in the input parameters, the instance will be initialized.
      * @param {CreateDBInstanceHourRequest} req
      * @param {function(string, CreateDBInstanceHourResponse):void} cb
@@ -751,7 +753,7 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
-     * This API (UpgradeDBInstanceEngineVersion) is used to upgrade the version of a TencentDB instance, which can be a master instance, disaster recovery instance, or read-only instance.
+     * This API (UpgradeDBInstanceEngineVersion) is used to upgrade the version of a TencentDB instance, which can be a primary instance, disaster recovery instance, or read-only instance.
      * @param {UpgradeDBInstanceEngineVersionRequest} req
      * @param {function(string, UpgradeDBInstanceEngineVersionResponse):void} cb
      * @public
@@ -861,6 +863,17 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
+     * This API is used to query the minimum specification of a read-only instance that can be purchased or upgraded to.
+     * @param {DescribeRoMinScaleRequest} req
+     * @param {function(string, DescribeRoMinScaleResponse):void} cb
+     * @public
+     */
+    DescribeRoMinScale(req, cb) {
+        let resp = new DescribeRoMinScaleResponse();
+        this.request("DescribeRoMinScale", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyInstanceParam) is used to modify instance parameters.
      * @param {ModifyInstanceParamRequest} req
      * @param {function(string, ModifyInstanceParamResponse):void} cb
@@ -905,7 +918,7 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
-     * This API (DescribeDBInstances) is used to query the list of TencentDB instances (which can be master, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, access address, and instance status.
+     * This API (DescribeDBInstances) is used to query the list of TencentDB instances (which can be primary, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, access address, and instance status.
      * @param {DescribeDBInstancesRequest} req
      * @param {function(string, DescribeDBInstancesResponse):void} cb
      * @public
@@ -1012,7 +1025,7 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
      * This API (RestartDBInstances) is used to restart TencentDB instances.
 
 Note:
-1. This API only supports restarting master instances.
+1. This API only supports restarting primary instances.
 2. The instance status must be normal, and no other async tasks are in progress.
      * @param {RestartDBInstancesRequest} req
      * @param {function(string, RestartDBInstancesResponse):void} cb
@@ -1204,7 +1217,7 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to upgrade or downgrade a TencentDB instance, which can be a master instance, disaster recovery instance, or read-only instance.
+     * This API is used to upgrade or downgrade a TencentDB instance, which can be a primary instance, disaster recovery instance, or read-only instance.
      * @param {UpgradeDBInstanceRequest} req
      * @param {function(string, UpgradeDBInstanceResponse):void} cb
      * @public

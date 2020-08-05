@@ -53,25 +53,25 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
         super();
 
         /**
-         * Cluster’s account name
+         * Cluster's account name
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * Cluster’s password
+         * Cluster's password
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Cluster’s access CA certificate
+         * Cluster's access CA certificate
          * @type {string || null}
          */
         this.CertificationAuthority = null;
 
         /**
-         * Cluster’s access address
+         * Cluster's access address
          * @type {string || null}
          */
         this.ClusterExternalEndpoint = null;
@@ -83,13 +83,13 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Cluster’s endpoint address
+         * Cluster's endpoint address
          * @type {string || null}
          */
         this.PgwEndpoint = null;
 
         /**
-         * Cluster’s access policy group
+         * Cluster's access policy group
 Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
@@ -272,7 +272,7 @@ class ModifyClusterEndpointSPRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Security policy opens single IP or CIDR block to the Internet (for example: “192.168.1.0/24”, with “reject all” as the default).
+         * Security policy opens single IP or CIDR block to the Internet (for example: '192.168.1.0/24', with 'reject all' as the default).
          * @type {Array.<string> || null}
          */
         this.SecurityPolicies = null;
@@ -625,13 +625,13 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Query by one or more instance ID(s). Instance ID format: ins-xxxxxxxx. (Refer to section ID.N of the API overview for this parameter’s specific format.) Up to 100 instances are allowed for each request. You cannot specify InstanceIds and Filters at the same time.
+         * Query by one or more instance ID(s). Instance ID format: ins-xxxxxxxx. (Refer to section ID.N of the API overview for this parameter's specific format.) Up to 100 instances are allowed for each request. You cannot specify InstanceIds and Filters at the same time.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Filter condition. For fields and other information, see [the DescribeInstances API](https://cloud.tencent.com/document/api/213/15728). If a ClusterId has been set, then the cluster’s VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster’s VPC ID.
+         * Filter condition. For fields and other information, see [the DescribeInstances API](https://cloud.tencent.com/document/api/213/15728). If a ClusterId has been set, then the cluster's VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster's VPC ID.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -797,7 +797,7 @@ class ClusterAsGroup extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * Scaling group status (enabled, enabling, disabled, disabling, updating, deleting, scaleDownEnabling, scaleDownDisabling)
+         * Scaling group status (`enabled`, `enabling`, `disabled`, `disabling`, `updating`, `deleting`, `scaleDownEnabling`, `scaleDownDisabling`)
          * @type {string || null}
          */
         this.Status = null;
@@ -849,7 +849,7 @@ Note: this field may return null, indicating that no valid value was found.
 }
 
 /**
- * Cluster’s instance information
+ * Cluster's instance information
  * @class
  */
 class Instance extends  AbstractModel {
@@ -993,7 +993,7 @@ class ClusterNetworkSettings extends  AbstractModel {
         super();
 
         /**
-         * CIDR used to assign container and service IPs for the cluster. It cannot conflict with the VPC’s CIDR or the CIDRs of other clusters in the same VPC.
+         * CIDR used to assign container and service IPs for the cluster. It cannot conflict with the VPC's CIDR or the CIDRs of other clusters in the same VPC.
          * @type {string || null}
          */
         this.ClusterCIDR = null;
@@ -1227,7 +1227,7 @@ class CreateClusterEndpointVipResponse extends  AbstractModel {
         super();
 
         /**
-         * Request job’s FlowId
+         * Request job's FlowId
          * @type {number || null}
          */
         this.RequestFlowId = null;
@@ -1820,7 +1820,7 @@ class ClusterCIDRSettings extends  AbstractModel {
         super();
 
         /**
-         * CIDR used to assign container and service IPs for the cluster. It cannot conflict with the VPC’s CIDR or the CIDRs of other clusters in the same VPC
+         * CIDR used to assign container and service IPs for the cluster. It cannot conflict with the VPC's CIDR or the CIDRs of other clusters in the same VPC
          * @type {string || null}
          */
         this.ClusterCIDR = null;
@@ -1896,7 +1896,7 @@ class CreateClusterEndpointVipRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Security policy opens single IP or CIDR to the Internet (for example: “192.168.1.0/24”, with “reject all” as the default).
+         * Security policy opens single IP or CIDR to the Internet (for example: '192.168.1.0/24', with 'reject all' as the default).
          * @type {Array.<string> || null}
          */
         this.SecurityPolicies = null;
@@ -1959,14 +1959,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceName = null;
 
         /**
-         * List of private IPs of the instance’s primary ENI.
+         * List of private IPs of the instance's primary ENI.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.PrivateIpAddresses = null;
 
         /**
-         * List of public IPs of the instance’s primary ENI.
+         * List of public IPs of the instance's primary ENI.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -1980,14 +1980,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CreatedTime = null;
 
         /**
-         * Instance’s number of CPU cores. Unit: cores.
+         * Instance's number of CPU cores. Unit: cores.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CPU = null;
 
         /**
-         * Instance’s memory capacity. Unit: GB.
+         * Instance's memory capacity. Unit: GB.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2214,7 +2214,7 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
- * Cluster master custom parameter
+ * Cluster primary custom parameter
  * @class
  */
 class ClusterExtraArgs extends  AbstractModel {
@@ -2551,7 +2551,7 @@ class CreateClusterAsGroupRequest extends  AbstractModel {
         this.AutoScalingGroupPara = null;
 
         /**
-         * The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://cloud.tencent.com/document/api/377/20447) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it’s set through the **UserScript**.
+         * The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://cloud.tencent.com/document/api/377/20447) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it's set through the **UserScript**.
          * @type {string || null}
          */
         this.LaunchConfigurePara = null;
@@ -3290,7 +3290,7 @@ class Cluster extends  AbstractModel {
         this.Property = null;
 
         /**
-         * Number of master nodes currently in the cluster
+         * Number of primary nodes currently in the cluster
          * @type {number || null}
          */
         this.ClusterMaterNodeNum = null;
@@ -3584,7 +3584,7 @@ class CreateClusterEndpointRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * The ID of the subnet where the cluster’s port is located (only needs to be entered when the non-public network access is enabled, and must be within the subnet of the cluster’s VPC). 
+         * The ID of the subnet where the cluster's port is located (only needs to be entered when the non-public network access is enabled, and must be within the subnet of the cluster's VPC). 
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -3705,35 +3705,35 @@ class ClusterAsGroupOption extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable scale-down
+         * Whether to enable scale-in
 Note: this field may return null, indicating that no valid value was found.
          * @type {boolean || null}
          */
         this.IsScaleDownEnabled = null;
 
         /**
-         * Scale-up selection algorithm when there are multiple scaling groups (random: random selection. most-pods: pod with the most types. least-waste: least waste of resources. The default value is random.)
+         * The scale-out method when there are multiple scaling groups. `random`: select a random scaling group. `most-pods`: choose the scaling group that can schedule the most pods. `least-waste`: select the scaling group that can ensure the fewest remaining resources after Pod scheduling.. The default value is `random`.)
 Note: this field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.Expander = null;
 
         /**
-         * Max concurrent scale-down volume
+         * Max concurrent scale-in volume
 Note: this field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
         this.MaxEmptyBulkDelete = null;
 
         /**
-         * Number of minutes after cluster scale-up when the system starts judging whether to perform scale-down
+         * Number of minutes after cluster scale-out when the system starts judging whether to perform scale-in
 Note: this field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
         this.ScaleDownDelay = null;
 
         /**
-         * Number of consecutive minutes of idleness after which the node is subject to scale-down (default value: 10)
+         * Number of consecutive minutes of idleness after which the node is subject to scale-in (default value: 10)
 Note: this field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
@@ -3747,14 +3747,14 @@ Note: this field may return null, indicating that no valid value was found.
         this.ScaleDownUtilizationThreshold = null;
 
         /**
-         * Whether to skip scale-down for nodes with local storage pods (default value: False)
+         * During scale-in, ignore nodes with local storage pods (default value: False)
 Note: this field may return null, indicating that no valid value was found.
          * @type {boolean || null}
          */
         this.SkipNodesWithLocalStorage = null;
 
         /**
-         * Whether to skip scale-down for nodes with pods in the kube-system namespace that are not managed by DaemonSet (default value: False)
+         * During scale-in, ignore nodes with pods in the kube-system namespace that are not managed by DaemonSet (default value: False)
 Note: this field may return null, indicating that no valid value was found.
          * @type {boolean || null}
          */
@@ -3782,7 +3782,7 @@ Note: this field may return null, indicating that no valid value was found.
         this.MaxTotalUnreadyPercentage = null;
 
         /**
-         * Amount of time before unready nodes become eligible for scale-down
+         * Amount of time before unready nodes become eligible for scale-in
 Note: this field may return null, indicating that no valid value was found.
          * @type {number || null}
          */

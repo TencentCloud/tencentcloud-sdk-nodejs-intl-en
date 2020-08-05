@@ -514,7 +514,7 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add a whitelist rule.
+     * This API is used to add a allowlist rule.
      * @param {AddLoginWhiteListRequest} req
      * @param {function(string, AddLoginWhiteListResponse):void} cb
      * @public
@@ -657,7 +657,7 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * This API is used to edit a whitelist rule.
+     * This API is used to edit a allowlist rule.
      * @param {ModifyLoginWhiteListRequest} req
      * @param {function(string, ModifyLoginWhiteListResponse):void} cb
      * @public
@@ -778,7 +778,7 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a whitelist rule.
+     * This API is used to delete a allowlist rule.
      * @param {DeleteLoginWhiteListRequest} req
      * @param {function(string, DeleteLoginWhiteListResponse):void} cb
      * @public
@@ -943,7 +943,7 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of login whitelist entries.
+     * This API is used to get the list of login allowlist entries.
      * @param {DescribeLoginWhiteListRequest} req
      * @param {function(string, DescribeLoginWhiteListResponse):void} cb
      * @public

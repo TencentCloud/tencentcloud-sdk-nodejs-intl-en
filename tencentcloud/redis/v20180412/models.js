@@ -503,7 +503,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.RedisReplicasNum = null;
 
         /**
-         * Whether to support read-only replicas. Neither Redis 2.8 standard edition nor CKV standard edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed on slave nodes. To enable read-only replicas, we recommend you create 2 or more replicas.
+         * Whether to support read-only replicas. Neither Redis 2.8 standard edition nor CKV standard edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the primary node and read requests will be distributed on secondary nodes. To enable read-only replicas, we recommend you create 2 or more replicas.
          * @type {boolean || null}
          */
         this.ReplicasReadonly = null;
@@ -1209,7 +1209,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Privilege = null;
 
         /**
-         * Routing policy. master: master node; replication: slave node
+         * Routing policy. master: master node; replication: secondary node
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -1660,7 +1660,7 @@ class InstanceMultiParam extends  AbstractModel {
 
         /**
          * Parameter description
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
         this.EnumValue = null;
 
@@ -2416,7 +2416,7 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Sub-account routing policy. Enter `master` to route to the master node or `slave` to route to the slave node
+         * Sub-account routing policy. Enter `master` to route to the primary node or `slave` to route to the secondary node
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
@@ -3690,7 +3690,7 @@ class DescribeInstanceShardsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Whether to filter out the slave node information
+         * Whether to filter out the secondary node information
          * @type {boolean || null}
          */
         this.FilterSlave = null;
@@ -4048,7 +4048,7 @@ class CreateInstanceAccountRequest extends  AbstractModel {
         this.AccountPassword = null;
 
         /**
-         * Routing policy. Enter `master` for master node or `replication` for slave node
+         * Routing policy. Enter `master` for primary node or `replication` for secondary node
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
@@ -4214,13 +4214,13 @@ class ProductConf extends  AbstractModel {
         super();
 
         /**
-         * Product type. 2: Redis master-slave edition; 3: CKV master-slave edition; 4: CKV cluster edition; 5: Redis standalone edition; 7: Redis cluster edition
+         * Product type. 2: Redis primary-secondary edition; 3: CKV primary-secondary edition; 4: CKV cluster edition; 5: Redis standalone edition; 7: Redis cluster edition
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Product name: Redis master-slave edition, CKV master-slave edition, CKV cluster edition, Redis standalone edition, or Redis cluster edition
+         * Product name: Redis primary-secondary edition, CKV primary-secondary edition, CKV cluster edition, Redis standalone edition, or Redis cluster edition
          * @type {string || null}
          */
         this.TypeName = null;
@@ -4778,7 +4778,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Type edition. 1: standalone edition; 2: master-slave edition; 3: cluster edition
+         * Type edition. 1: standalone edition; 2: primary-secondary edition; 3: cluster edition
          * @type {number || null}
          */
         this.TypeVersion = null;
@@ -5374,7 +5374,7 @@ class InstanceSet extends  AbstractModel {
         this.SizeUsed = null;
 
         /**
-         * Instance type. 1: Redis 2.8 cluster edition; 2: Redis 2.8 master-slave edition; 3: CKV master-slave edition (Redis 3.2); 4: CKV cluster edition (Redis 3.2); 5: Redis 2.8 standalone edition; 6: Redis 4.0 master-slave edition; 7: Redis 4.0 cluster edition
+         * Instance type. 1: Redis 2.8 cluster edition; 2: Redis 2.8 primary-secondary edition; 3: CKV primary-secondary edition (Redis 3.2); 4: CKV cluster edition (Redis 3.2); 5: Redis 2.8 standalone edition; 6: Redis 4.0 primary-secondary edition; 7: Redis 4.0 cluster edition
          * @type {number || null}
          */
         this.Type = null;
@@ -5398,7 +5398,7 @@ class InstanceSet extends  AbstractModel {
         this.Engine = null;
 
         /**
-         * Product type: Redis 2.8 cluster edition, Redis 2.8 master-slave edition, Redis 3.2 master-slave edition (CKV master-slave edition), Redis 3.2 cluster edition (CKV cluster edition), Redis 2.8 standalone edition, Redis 4.0 cluster edition
+         * Product type: Redis 2.8 cluster edition, Redis 2.8 primary-secondary edition, Redis 3.2 primary-secondary edition (CKV primary-secondary edition), Redis 3.2 cluster edition (CKV cluster edition), Redis 2.8 standalone edition, Redis 4.0 cluster edition
          * @type {string || null}
          */
         this.ProductType = null;
@@ -5482,7 +5482,7 @@ class InstanceSet extends  AbstractModel {
         this.CloseTime = null;
 
         /**
-         * Read weight of a slave node
+         * Read weight of a secondary node
          * @type {number || null}
          */
         this.SlaveReadWeight = null;
@@ -5847,7 +5847,7 @@ class InstanceClusterNode extends  AbstractModel {
         this.RunId = null;
 
         /**
-         * Cluster role. 0: master; 1: slave
+         * Cluster role. 0: primary; 1: secondary
          * @type {number || null}
          */
         this.Role = null;
@@ -5953,7 +5953,7 @@ class EnableReplicaReadonlyRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Account routing policy. If `master` or `replication` is entered, it means to route to the master or slave node; if this is left blank, it means to write into the master node and read from the slave node by default
+         * Account routing policy. If `master` or `replication` is entered, it means to route to the primary or secondary node; if this is left blank, it means to write into the primary node and read from the secondary node by default
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
@@ -6739,13 +6739,13 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.MemSize = null;
 
         /**
-         * Number of shards. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, and Redis 2.8 standalone edition
+         * Number of shards. This parameter can be left blank for Redis 2.8 primary-secondary edition, CKV primary-secondary edition, and Redis 2.8 standalone edition
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Number of replicas. This parameter can be left blank for Redis 2.8 master-slave edition, CKV master-slave edition, and Redis 2.8 standalone edition
+         * Number of replicas. This parameter can be left blank for Redis 2.8 primary-secondary edition, CKV primary-secondary edition, and Redis 2.8 standalone edition
          * @type {number || null}
          */
         this.RedisReplicasNum = null;

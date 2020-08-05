@@ -1442,6 +1442,24 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.EnvType = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NextAction = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AttachedComputeNodeCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1482,6 +1500,9 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         }
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.NextAction = 'NextAction' in params ? params.NextAction : null;
+        this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3045,6 +3066,15 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.Encrypt = null;
 
+        /**
+         * ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+
+Currently, this parameter is only used in the `RunInstances` API.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
+
     }
 
     /**
@@ -3060,6 +3090,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
 
     }
 }
@@ -4178,7 +4209,7 @@ class ModifyComputeEnvResponse extends  AbstractModel {
 }
 
 /**
- * Describes the location of an instance, including its availability zone, project, host (for CDH products only), master host IP, etc.
+ * Describes the location of an instance, including its availability zone, project, host (for CDH products only), primary host IP, etc.
  * @class
  */
 class Placement extends  AbstractModel {
@@ -4301,6 +4332,18 @@ class ComputeNode extends  AbstractModel {
          */
         this.PublicIpAddresses = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceOrigin = null;
+
     }
 
     /**
@@ -4320,6 +4363,8 @@ class ComputeNode extends  AbstractModel {
         this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
         this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceOrigin = 'ResourceOrigin' in params ? params.ResourceOrigin : null;
 
     }
 }
@@ -4333,7 +4378,7 @@ class ItemPrice extends  AbstractModel {
         super();
 
         /**
-         * The original unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
+         * The original unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
 Note: this field may return null, indicating that no valid value is obtained.
          * @type {number || null}
          */
@@ -4368,7 +4413,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Discount = null;
 
         /**
-         * The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to the unit price for the usage between 0 and ∞ hours.
+         * The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
 Note: this field may return null, indicating that no valid value is obtained.
          * @type {number || null}
          */
@@ -4513,6 +4558,48 @@ Note: this field may return null, indicating that no valid value is obtained.
          */
         this.SoldOutReason = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InstanceBandwidth = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InstancePps = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.StorageBlockAmount = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CpuType = null;
+
+        /**
+         * Number of GPUs of the instance.
+         * @type {number || null}
+         */
+        this.Gpu = null;
+
+        /**
+         * Number of FPGAs of the instance.
+         * @type {number || null}
+         */
+        this.Fpga = null;
+
+        /**
+         * Descriptive information of the instance.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
     }
 
     /**
@@ -4553,6 +4640,13 @@ Note: this field may return null, indicating that no valid value is obtained.
             this.Price = obj;
         }
         this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
+        this.InstanceBandwidth = 'InstanceBandwidth' in params ? params.InstanceBandwidth : null;
+        this.InstancePps = 'InstancePps' in params ? params.InstancePps : null;
+        this.StorageBlockAmount = 'StorageBlockAmount' in params ? params.StorageBlockAmount : null;
+        this.CpuType = 'CpuType' in params ? params.CpuType : null;
+        this.Gpu = 'Gpu' in params ? params.Gpu : null;
+        this.Fpga = 'Fpga' in params ? params.Fpga : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -5300,6 +5394,24 @@ class ComputeEnvView extends  AbstractModel {
          */
         this.DesiredComputeNodeCount = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NextAction = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AttachedComputeNodeCount = null;
+
     }
 
     /**
@@ -5326,6 +5438,9 @@ class ComputeEnvView extends  AbstractModel {
         }
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.NextAction = 'NextAction' in params ? params.NextAction : null;
+        this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
 
     }
 }

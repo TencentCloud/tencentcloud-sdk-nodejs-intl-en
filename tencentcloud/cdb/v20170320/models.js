@@ -123,7 +123,7 @@ class TaskDetail extends  AbstractModel {
 "OPEN GTID" - enabling GTID of a TencentDB instance;
 "UPGRADE RO" - upgrading a read-only instance;
 "BATCH ROLLBACK" - rolling back databases in batches;
-"UPGRADE MASTER" - upgrading a master instance;
+"UPGRADE MASTER" - upgrading a primary instance;
 "DROP TABLES" - dropping a TencentDB table;
 "SWITCH DR TO MASTER" - promoting a disaster recovery instance.
          * @type {string || null}
@@ -441,42 +441,30 @@ class DescribeBackupConfigRequest extends  AbstractModel {
 }
 
 /**
- * VIP information of the read-only instance
+ * DescribeRoMinScale response structure.
  * @class
  */
-class RoVipInfo extends  AbstractModel {
+class DescribeRoMinScaleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VIP status of the read-only instance
+         * Memory size in MB.
          * @type {number || null}
          */
-        this.RoVipStatus = null;
+        this.Memory = null;
 
         /**
-         * VPC subnet of the read-only instance
+         * Disk size in GB.
          * @type {number || null}
          */
-        this.RoSubnetId = null;
+        this.Volume = null;
 
         /**
-         * VPC of the read-only instance
-         * @type {number || null}
-         */
-        this.RoVpcId = null;
-
-        /**
-         * VIP port number of the read-only instance
-         * @type {number || null}
-         */
-        this.RoVport = null;
-
-        /**
-         * VIP of the read-only instance
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.RoVip = null;
+        this.RequestId = null;
 
     }
 
@@ -487,11 +475,9 @@ class RoVipInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoVipStatus = 'RoVipStatus' in params ? params.RoVipStatus : null;
-        this.RoSubnetId = 'RoSubnetId' in params ? params.RoSubnetId : null;
-        this.RoVpcId = 'RoVpcId' in params ? params.RoVpcId : null;
-        this.RoVport = 'RoVport' in params ? params.RoVport : null;
-        this.RoVip = 'RoVip' in params ? params.RoVip : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1735,6 +1721,41 @@ class ParamInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeRoMinScale request structure.
+ * @class
+ */
+class DescribeRoMinScaleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Read-only instance ID in the format of "cdbro-c1nl9rpv". Its value is the same as the instance ID in the TencentDB Console. This parameter and the `MasterInstanceId` parameter cannot both be empty.
+         * @type {string || null}
+         */
+        this.RoInstanceId = null;
+
+        /**
+         * Primary instance ID in the format of "cdbro-c1nl9rpv". Its value is the same as the instance ID in the TencentDB Console. This parameter and the `RoInstanceId` parameter cannot both be empty. Note: when the parameters are passed in with `RoInstanceId`, the return value refers to the minimum specification to which a read-only instance can be upgraded; when the parameters are passed in with `MasterInstanceId` but without `RoInstanceId`, the return value refers to the minimum purchasable specification for a read-only instance.
+         * @type {string || null}
+         */
+        this.MasterInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoInstanceId = 'RoInstanceId' in params ? params.RoInstanceId : null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
+
+    }
+}
+
+/**
  * DescribeDefaultParams request structure.
  * @class
  */
@@ -1777,7 +1798,7 @@ class DBSwitchInfo extends  AbstractModel {
         this.SwitchTime = null;
 
         /**
-         * Switch type. Value range: TRANSFER (data migration), MASTER2SLAVE (master/slave switch), RECOVERY (master/slave recovery)
+         * Switch type. Value range: TRANSFER (data migration), MASTER2SLAVE (primary/secondary switch), RECOVERY (primary/secondary recovery)
          * @type {string || null}
          */
         this.SwitchType = null;
@@ -2378,7 +2399,7 @@ class RoGroup extends  AbstractModel {
         this.RoGroupName = null;
 
         /**
-         * Whether to enable the function of isolating an instance that exceeds the latency threshold. If it is enabled, when the latency between the read-only instance and the master instance exceeds the latency threshold, the read-only instance will be isolated. Valid values: 1 (enabled), 0 (not enabled)
+         * Whether to enable the function of isolating an instance that exceeds the latency threshold. If it is enabled, when the latency between the read-only instance and the primary instance exceeds the latency threshold, the read-only instance will be isolated. Valid values: 1 (enabled), 0 (not enabled)
          * @type {number || null}
          */
         this.RoOfflineDelay = null;
@@ -3031,7 +3052,7 @@ class DescribeTasksRequest extends  AbstractModel {
 8 - enabling GTID of a TencentDB instance;
 9 - upgrading a read-only instance;
 10 - rolling back databases in batches;
-11 - upgrading a master instance;
+11 - upgrading a primary instance;
 12 - deleting a TencentDB table;
 13 - promoting a disaster recovery instance.
          * @type {Array.<number> || null}
@@ -3545,19 +3566,19 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Instance ID, which is required and the same as the master instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance IDs.
+         * Instance ID, which is required and the same as the primary instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) API to query the instance IDs.
          * @type {string || null}
          */
         this.MasterInstanceId = null;
 
         /**
-         * Instance type. Valid values: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+         * Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
          * @type {string || null}
          */
         this.InstanceRole = null;
 
         /**
-         * AZ information of the master instance, which is required for purchasing disaster recovery instances.
+         * AZ information of the primary instance, which is required for purchasing disaster recovery instances.
          * @type {string || null}
          */
         this.MasterRegion = null;
@@ -3569,7 +3590,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Port = null;
 
         /**
-         * Sets the root account password. Rule: the password can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+         * Sets the root account password. Rule: the password can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
          * @type {string || null}
          */
         this.Password = null;
@@ -3581,25 +3602,25 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.ParamList = null;
 
         /**
-         * Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+         * Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
          * @type {number || null}
          */
         this.ProtectMode = null;
 
         /**
-         * Multi-AZ. Valid value: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+         * Multi-AZ. Valid value: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
          * @type {number || null}
          */
         this.DeployMode = null;
 
         /**
-         * AZ information of slave database 1, which is the `Zone` value by default. This parameter can be specified when purchasing master instances and is meaningless for read-only or disaster recovery instances.
+         * AZ information of secondary database 1, which is the `Zone` value by default. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
          * @type {string || null}
          */
         this.SlaveZone = null;
 
         /**
-         * AZ information of slave database 2, which is empty by default. This parameter can be specified when purchasing strong sync master instances and is meaningless for other types of instances.
+         * AZ information of secondary database 2, which is empty by default. This parameter can be specified when purchasing strong sync primary instances and is meaningless for other types of instances.
          * @type {string || null}
          */
         this.BackupZone = null;
@@ -4026,7 +4047,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Instance type. Value range: 1 (master), 2 (disaster recovery), 3 (read-only).
+         * Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only).
          * @type {Array.<number> || null}
          */
         this.InstanceTypes = null;
@@ -4074,7 +4095,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.InstanceNames = null;
 
         /**
-         * Instance task status. Value range: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - activating slave <br>4 - public network access enabled <br>5 - batch operation in progress <br>6 - rolling back <br>7 - public network access not enabled <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built instance <br>13 - dropping table <br>14 - creating and syncing disaster recovery instance <br>15 - pending upgrade and switch <br>16 - upgrade and switch in progress <br>17 - upgrade and switch completed
+         * Instance task status. Valid values: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - enabling secondary instance access <br>4 - enabling public network access <br>5 - batch operation in progress <br>6 - rolling back <br>7 - disabling public network access <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built database <br>13 - dropping tables <br>14 - Disaster recovery instance creating sync task <br>15 - waiting for switch <br>16 - switching <br>17 - upgrade and switch completed <br>19 - parameter settings to be executed
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
@@ -4152,7 +4173,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.InitFlag = null;
 
         /**
-         * Whether instances corresponding to the disaster recovery relationship are included. Valid values: 0 (not included), 1 (included). Default value: 1. If a master instance is pulled, the data of the disaster recovery relationship will be in the `DrInfo` field. If a disaster recovery instance is pulled, the data of the disaster recovery relationship will be in the `MasterInfo` field. The disaster recovery relationship contains only partial basic data. To get the detailed data, you need to call an API to pull it.
+         * Whether instances corresponding to the disaster recovery relationship are included. Valid values: 0 (not included), 1 (included). Default value: 1. If a primary instance is pulled, the data of the disaster recovery relationship will be in the `DrInfo` field. If a disaster recovery instance is pulled, the data of the disaster recovery relationship will be in the `MasterInfo` field. The disaster recovery relationship contains only partial basic data. To get the detailed data, you need to call an API to pull it.
          * @type {number || null}
          */
         this.WithDr = null;
@@ -4164,7 +4185,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.WithRo = null;
 
         /**
-         * Whether master instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
+         * Whether primary instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
          * @type {number || null}
          */
         this.WithMaster = null;
@@ -4442,13 +4463,13 @@ class ModifyInstanceParamRequest extends  AbstractModel {
         this.ParamList = null;
 
         /**
-         * 
+         * Template ID. At least one of `ParamList` and `TemplateId` must be passed in.
          * @type {number || null}
          */
         this.TemplateId = null;
 
         /**
-         * 
+         * When to perform the parameter adjustment task. Default value: 0. Valid values: 0 - execute immediately, 1 - execute during window. When its value is 1, only one instance ID can be passed in (i.e., only one `InstanceIds` can be passed in).
          * @type {number || null}
          */
         this.WaitSwitch = null;
@@ -6215,7 +6236,7 @@ class ZoneConf extends  AbstractModel {
         this.DeployMode = null;
 
         /**
-         * AZ where the master instance is located
+         * AZ where the primary instance is located
          * @type {Array.<string> || null}
          */
         this.MasterZone = null;
@@ -6342,13 +6363,13 @@ class SlaveInfo extends  AbstractModel {
         super();
 
         /**
-         * Information of slave server 1
+         * Information of secondary server 1
          * @type {SlaveInstanceInfo || null}
          */
         this.First = null;
 
         /**
-         * Information of slave server 2
+         * Information of secondary server 2
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SlaveInstanceInfo || null}
          */
@@ -7163,7 +7184,7 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Data protection mode of the master instance. Value range: 0 (async replication), 1 (semi-sync replication), 2 (strong sync replication).
+         * Data protection mode of the primary instance. Value range: 0 (async replication), 1 (semi-sync replication), 2 (strong sync replication).
          * @type {number || null}
          */
         this.ProtectMode = null;
@@ -7181,13 +7202,13 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Configuration information of the slave database.
+         * Configuration information of the secondary database.
          * @type {SlaveConfig || null}
          */
         this.SlaveConfig = null;
 
         /**
-         * Configuration information of slave database 2 of a strong sync instance.
+         * Configuration information of secondary database 2 of a strong sync instance.
          * @type {BackupConfig || null}
          */
         this.BackupConfig = null;
@@ -7313,7 +7334,7 @@ class ModifyAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
- * Configuration information of ECDB slave database 2. This field is only applicable to ECDB instances
+ * Configuration information of ECDB secondary database 2. This field is only applicable to ECDB instances
  * @class
  */
 class BackupConfig extends  AbstractModel {
@@ -7321,25 +7342,25 @@ class BackupConfig extends  AbstractModel {
         super();
 
         /**
-         * Replication mode of slave database 2. Value range: async, semi-sync
+         * Replication mode of secondary database 2. Value range: async, semi-sync
          * @type {string || null}
          */
         this.ReplicationMode = null;
 
         /**
-         * Name of the AZ of slave database 2, such as ap-shanghai-1
+         * Name of the AZ of secondary database 2, such as ap-shanghai-1
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Private IP address of slave database 2
+         * Private IP address of secondary database 2
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * Access port of slave database 2
+         * Access port of secondary database 2
          * @type {number || null}
          */
         this.Vport = null;
@@ -7655,7 +7676,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VpcId = null;
 
         /**
-         * Information of a slave server
+         * Information of a secondary server
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SlaveInfo || null}
          */
@@ -7699,7 +7720,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SubnetId = null;
 
         /**
-         * Instance type. Value range: 1 (master), 2 (disaster recovery), 3 (read-only)
+         * Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only)
          * @type {number || null}
          */
         this.InstanceType = null;
@@ -7729,13 +7750,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DeployMode = null;
 
         /**
-         * Instance task status. 0 - no task; 1 - upgrading; 2 - importing data; 3 - activating slave; 4 - enabling public network access; 5 - batch operation in progress; 6 - rolling back; 7 - disabling public network access; 8 - changing password; 9 - renaming instance; 10 - restarting; 12 - migrating self-built instance; 13 - dropping table; 14 - creating and syncing disaster recovery instance; 15 - pending upgrade and switch; 16 - upgrade and switch in progress; 17 - upgrade and switch completed
+         * Instance task status. 0 - no task; 1 - upgrading; 2 - importing data; 3 - activating secondary; 4 - enabling public network access; 5 - batch operation in progress; 6 - rolling back; 7 - disabling public network access; 8 - changing password; 9 - renaming instance; 10 - restarting; 12 - migrating self-built instance; 13 - dropping table; 14 - creating and syncing disaster recovery instance; 15 - pending upgrade and switch; 16 - upgrade and switch in progress; 17 - upgrade and switch completed
          * @type {number || null}
          */
         this.TaskStatus = null;
 
         /**
-         * Details of a master instance
+         * Details of a primary instance
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MasterInfo || null}
          */
@@ -8098,6 +8119,62 @@ class ModifyBackupConfigResponse extends  AbstractModel {
 }
 
 /**
+ * VIP information of the read-only instance
+ * @class
+ */
+class RoVipInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VIP status of the read-only instance
+         * @type {number || null}
+         */
+        this.RoVipStatus = null;
+
+        /**
+         * VPC subnet of the read-only instance
+         * @type {number || null}
+         */
+        this.RoSubnetId = null;
+
+        /**
+         * VPC of the read-only instance
+         * @type {number || null}
+         */
+        this.RoVpcId = null;
+
+        /**
+         * VIP port number of the read-only instance
+         * @type {number || null}
+         */
+        this.RoVport = null;
+
+        /**
+         * VIP of the read-only instance
+         * @type {string || null}
+         */
+        this.RoVip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoVipStatus = 'RoVipStatus' in params ? params.RoVipStatus : null;
+        this.RoSubnetId = 'RoSubnetId' in params ? params.RoSubnetId : null;
+        this.RoVpcId = 'RoVpcId' in params ? params.RoVpcId : null;
+        this.RoVport = 'RoVport' in params ? params.RoVport : null;
+        this.RoVip = 'RoVip' in params ? params.RoVip : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceName response structure.
  * @class
  */
@@ -8343,25 +8420,25 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.Volume = null;
 
         /**
-         * Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+         * Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
          * @type {number || null}
          */
         this.ProtectMode = null;
 
         /**
-         * Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+         * Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
          * @type {number || null}
          */
         this.DeployMode = null;
 
         /**
-         * AZ information of slave database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading master instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the supported AZs.
+         * AZ information of secondary database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading primary instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://cloud.tencent.com/document/product/236/17229) API to query the supported AZs.
          * @type {string || null}
          */
         this.SlaveZone = null;
 
         /**
-         * Version of master instance database engine. Valid values: 5.5, 5.6, 5.7.
+         * Version of primary instance database engine. Valid values: 5.5, 5.6, 5.7.
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -8373,13 +8450,13 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.WaitSwitch = null;
 
         /**
-         * AZ information of slave database 2, which is empty by default. This parameter can be specified when upgrading master instances and is meaningless for read-only or disaster recovery instances.
+         * AZ information of secondary database 2, which is empty by default. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
          * @type {string || null}
          */
         this.BackupZone = null;
 
         /**
-         * Instance type. Valid values: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+         * Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
          * @type {string || null}
          */
         this.InstanceRole = null;
@@ -8775,13 +8852,13 @@ class SlaveConfig extends  AbstractModel {
         super();
 
         /**
-         * Replication mode of the slave database. Value range: async, semi-sync
+         * Replication mode of the secondary database. Value range: async, semi-sync
          * @type {string || null}
          */
         this.ReplicationMode = null;
 
         /**
-         * AZ name of the slave database, such as ap-shanghai-1
+         * AZ name of the secondary database, such as ap-shanghai-1
          * @type {string || null}
          */
         this.Zone = null;
@@ -8858,7 +8935,7 @@ class RoInstanceInfo extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Instance type. Value range: 1 (master), 2 (disaster recovery), 3 (read-only)
+         * Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only)
          * @type {number || null}
          */
         this.InstanceType = null;
@@ -8876,7 +8953,7 @@ class RoInstanceInfo extends  AbstractModel {
         this.HourFeeStatus = null;
 
         /**
-         * RO instance task status. Value range: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - activating slave <br>4 - public network access enabled <br>5 - batch operation in progress <br>6 - rolling back <br>7 - public network access not enabled <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built instance <br>13 - dropping table <br>14 - creating and syncing disaster recovery instance
+         * RO instance task status. Value range: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - activating secondary <br>4 - public network access enabled <br>5 - batch operation in progress <br>6 - rolling back <br>7 - public network access not enabled <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built instance <br>13 - dropping table <br>14 - creating and syncing disaster recovery instance
          * @type {number || null}
          */
         this.TaskStatus = null;
@@ -9733,7 +9810,7 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Version of master instance database engine. Value range: 5.6, 5.7
+         * Version of primary instance database engine. Value range: 5.6, 5.7
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -11875,7 +11952,7 @@ module.exports = {
     CreateDBImportJobRequest: CreateDBImportJobRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
-    RoVipInfo: RoVipInfo,
+    DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
     DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobRequest: StopDBImportJobRequest,
     RoWeightValue: RoWeightValue,
@@ -11900,6 +11977,7 @@ module.exports = {
     DescribeBinlogsResponse: DescribeBinlogsResponse,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     ParamInfo: ParamInfo,
+    DescribeRoMinScaleRequest: DescribeRoMinScaleRequest,
     DescribeDefaultParamsRequest: DescribeDefaultParamsRequest,
     DBSwitchInfo: DBSwitchInfo,
     ModifyNameOrDescByDpIdResponse: ModifyNameOrDescByDpIdResponse,
@@ -12027,6 +12105,7 @@ module.exports = {
     DatabasePrivilege: DatabasePrivilege,
     RoGroupAttr: RoGroupAttr,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
+    RoVipInfo: RoVipInfo,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     ModifyAccountPasswordRequest: ModifyAccountPasswordRequest,

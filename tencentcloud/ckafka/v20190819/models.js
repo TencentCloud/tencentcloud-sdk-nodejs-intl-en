@@ -62,13 +62,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CreateTime = null;
 
         /**
-         * Whether to enable IP authentication whitelist. true: yes, false: no
+         * Whether to enable IP authentication allowlist. true: yes, false: no
          * @type {boolean || null}
          */
         this.EnableWhiteList = null;
 
         /**
-         * Number of IPs in IP whitelist
+         * Number of IPs in IP allowlist
          * @type {number || null}
          */
         this.IpWhiteListCount = null;
@@ -162,7 +162,7 @@ class DeleteAclRequest extends  AbstractModel {
         this.Operation = null;
 
         /**
-         * Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to whitelist), and other fields will be used for future ACLs compatible with open-source Kafka
+         * Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
          * @type {number || null}
          */
         this.PermissionType = null;
@@ -1366,7 +1366,7 @@ class CreateAclRequest extends  AbstractModel {
         this.Operation = null;
 
         /**
-         * Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to whitelist), and other fields will be used for future ACLs compatible with open-source Kafka
+         * Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
          * @type {number || null}
          */
         this.PermissionType = null;
@@ -1612,7 +1612,7 @@ class CreateTopicIpWhiteListResponse extends  AbstractModel {
         super();
 
         /**
-         * Result of deleting topic IP whitelist
+         * Result of deleting topic IP allowlist
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
@@ -1828,13 +1828,13 @@ class CreateTopicRequest extends  AbstractModel {
         this.ReplicaNum = null;
 
         /**
-         * IP whitelist switch. 1: enabled, 0: disabled. Default value: 0
+         * IP allowlist switch. 1: enabled, 0: disabled. Default value: 0
          * @type {number || null}
          */
         this.EnableWhiteList = null;
 
         /**
-         * IP whitelist list for quota limit, which is required if `enableWhileList` is 1
+         * IP allowlist list for quota limit, which is required if `enableWhileList` is 1
          * @type {Array.<string> || null}
          */
         this.IpWhiteList = null;
@@ -3523,7 +3523,7 @@ class DeleteTopicIpWhiteListResponse extends  AbstractModel {
         super();
 
         /**
-         * Result of deleting topic IP whitelist
+         * Result of deleting topic IP allowlist
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
@@ -3825,13 +3825,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.PartitionNum = null;
 
         /**
-         * IP whitelist switch. 1: enabled, 0: disabled
+         * IP allowlist switch. 1: enabled, 0: disabled
          * @type {number || null}
          */
         this.EnableWhiteList = null;
 
         /**
-         * IP whitelist list
+         * IP allowlist list
          * @type {Array.<string> || null}
          */
         this.IpWhiteList = null;
@@ -4259,7 +4259,7 @@ class CreateTopicIpWhiteListRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * IP whitelist list
+         * IP allowlist list
          * @type {Array.<string> || null}
          */
         this.IpWhiteList = null;
@@ -4449,7 +4449,7 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.Note = null;
 
         /**
-         * IP whitelist switch. 1: enabled, 0: disabled.
+         * IP allowlist switch. 1: enabled, 0: disabled.
          * @type {number || null}
          */
         this.EnableWhiteList = null;
@@ -4574,7 +4574,7 @@ class DeleteTopicIpWhiteListRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * IP whitelist list
+         * IP allowlist list
          * @type {Array.<string> || null}
          */
         this.IpWhiteList = null;

@@ -882,6 +882,69 @@ class CreateInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class PodSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceProviderIdentifier = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceProviderType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DataVolumes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceProviderIdentifier = 'ResourceProviderIdentifier' in params ? params.ResourceProviderIdentifier : null;
+        this.ResourceProviderType = 'ResourceProviderType' in params ? params.ResourceProviderType : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.DataVolumes = 'DataVolumes' in params ? params.DataVolumes : null;
+
+    }
+}
+
+/**
  * InquiryPriceRenewInstance response structure.
  * @class
  */
@@ -1077,6 +1140,18 @@ Note: only the above values are supported for the time being. Entering other val
          */
         this.Limit = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
+
+        /**
+         * 
+         * @type {Array.<SearchItem> || null}
+         */
+        this.SearchFields = null;
+
     }
 
     /**
@@ -1090,6 +1165,16 @@ Note: only the above values are supported for the time being. Entering other val
         this.NodeFlag = 'NodeFlag' in params ? params.NodeFlag : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
+
+        if (params.SearchFields) {
+            this.SearchFields = new Array();
+            for (let z in params.SearchFields) {
+                let obj = new SearchItem();
+                obj.deserialize(params.SearchFields[z]);
+                this.SearchFields.push(obj);
+            }
+        }
 
     }
 }
@@ -1249,7 +1334,7 @@ class CreateInstanceRequest extends  AbstractModel {
 
         /**
          * Instance name.
-<li>Length limit: 6–36 characters.</li>
+<li>Length limit: 6-36 characters.</li>
 <li>Only letters, numbers, dashes (-), and underscores (_) are supported.</li>
          * @type {string || null}
          */
@@ -2264,6 +2349,41 @@ class MultiDisk extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class SearchItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SearchType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SearchValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SearchType = 'SearchType' in params ? params.SearchType : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+
+    }
+}
+
+/**
  * InquiryPriceScaleOutInstance response structure.
  * @class
  */
@@ -2528,6 +2648,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TagKeys = null;
 
         /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.HardwareResourceTypeList = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2553,6 +2679,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.HardwareResourceTypeList = 'HardwareResourceTypeList' in params ? params.HardwareResourceTypeList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2812,11 +2939,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Tags = null;
 
         /**
-         * Whether it is an automatically scalable node. 0: general node, 1: automatically scalable node.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.AutoFlag = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
 
     }
 
@@ -2884,6 +3016,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.AutoFlag = 'AutoFlag' in params ? params.AutoFlag : null;
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
 
     }
 }
@@ -3352,6 +3485,18 @@ class ScaleOutInstanceRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
+
+        /**
+         * 
+         * @type {PodSpec || null}
+         */
+        this.PodSpec = null;
+
     }
 
     /**
@@ -3391,6 +3536,13 @@ class ScaleOutInstanceRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
+
+        if (params.PodSpec) {
+            let obj = new PodSpec();
+            obj.deserialize(params.PodSpec)
+            this.PodSpec = obj;
+        }
 
     }
 }
@@ -3407,6 +3559,7 @@ module.exports = {
     TerminateInstanceRequest: TerminateInstanceRequest,
     TerminateInstanceResponse: TerminateInstanceResponse,
     CreateInstanceResponse: CreateInstanceResponse,
+    PodSpec: PodSpec,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     TerminateTasksRequest: TerminateTasksRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
@@ -3423,6 +3576,7 @@ module.exports = {
     COSSettings: COSSettings,
     ClusterInstancesInfo: ClusterInstancesInfo,
     MultiDisk: MultiDisk,
+    SearchItem: SearchItem,
     InquiryPriceScaleOutInstanceResponse: InquiryPriceScaleOutInstanceResponse,
     OutterResource: OutterResource,
     UpdateInstanceSettings: UpdateInstanceSettings,

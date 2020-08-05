@@ -32,6 +32,7 @@ const DescribeBasicDeviceThresholdResponse = models.DescribeBasicDeviceThreshold
 const DescribeCCAlarmThresholdResponse = models.DescribeCCAlarmThresholdResponse;
 const DescribeDDoSNetEvListRequest = models.DescribeDDoSNetEvListRequest;
 const DeleteL4RulesResponse = models.DeleteL4RulesResponse;
+const ModifyNewDomainRulesRequest = models.ModifyNewDomainRulesRequest;
 const DDoSAlarmThreshold = models.DDoSAlarmThreshold;
 const DescribePolicyCaseResponse = models.DescribePolicyCaseResponse;
 const DescribeResIpListRequest = models.DescribeResIpListRequest;
@@ -54,6 +55,8 @@ const DescribeDDoSCountRequest = models.DescribeDDoSCountRequest;
 const RegionInstanceCount = models.RegionInstanceCount;
 const WaterPrintKey = models.WaterPrintKey;
 const DescribeDDoSNetIpLogRequest = models.DescribeDDoSNetIpLogRequest;
+const ModifyNewL4RuleResponse = models.ModifyNewL4RuleResponse;
+const ModifyNewDomainRulesResponse = models.ModifyNewDomainRulesResponse;
 const DescribeDDoSUsedStatisResponse = models.DescribeDDoSUsedStatisResponse;
 const DescribeBasicCCThresholdRequest = models.DescribeBasicCCThresholdRequest;
 const CreateDDoSPolicyCaseResponse = models.CreateDDoSPolicyCaseResponse;
@@ -121,6 +124,7 @@ const CreateL7RulesRequest = models.CreateL7RulesRequest;
 const CreateL4RulesRequest = models.CreateL4RulesRequest;
 const DescribeDDoSNetEvListResponse = models.DescribeDDoSNetEvListResponse;
 const ModifyCCFrequencyRulesStatusResponse = models.ModifyCCFrequencyRulesStatusResponse;
+const ModifyNewL4RuleRequest = models.ModifyNewL4RuleRequest;
 const DescribeL4RulesErrHealthRequest = models.DescribeL4RulesErrHealthRequest;
 const L4RuleSource = models.L4RuleSource;
 const CreateBasicDDoSAlarmThresholdResponse = models.CreateBasicDDoSAlarmThresholdResponse;
@@ -191,6 +195,7 @@ const DescribeDDoSPolicyRequest = models.DescribeDDoSPolicyRequest;
 const DescribeL7HealthConfigResponse = models.DescribeL7HealthConfigResponse;
 const CCFrequencyRule = models.CCFrequencyRule;
 const CreateCCSelfDefinePolicyResponse = models.CreateCCSelfDefinePolicyResponse;
+const NewL7RuleEntry = models.NewL7RuleEntry;
 const DescribeDDoSAttackSourceResponse = models.DescribeDDoSAttackSourceResponse;
 const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const DescribeDDoSUsedStatisRequest = models.DescribeDDoSUsedStatisRequest;
@@ -263,7 +268,7 @@ class DayuClient extends AbstractClient {
     }
     
     /**
-     * This API is used to add/remove a CC IP to/from the blacklist/whitelist.
+     * This API is used to add/remove a CC IP to/from the blocklist/allowlist.
      * @param {ModifyCCIpAllowDenyRequest} req
      * @param {function(string, ModifyCCIpAllowDenyResponse):void} cb
      * @public
@@ -626,7 +631,7 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add/remove a CC URL to/from the whitelist.
+     * This API is used to add/remove a CC URL to/from the allowlist.
      * @param {ModifyCCUrlAllowRequest} req
      * @param {function(string, ModifyCCUrlAllowResponse):void} cb
      * @public
@@ -667,6 +672,17 @@ class DayuClient extends AbstractClient {
     DeleteDDoSPolicy(req, cb) {
         let resp = new DeleteDDoSPolicyResponse();
         this.request("DeleteDDoSPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify layer-4 forwarding rules.
+     * @param {ModifyNewL4RuleRequest} req
+     * @param {function(string, ModifyNewL4RuleResponse):void} cb
+     * @public
+     */
+    ModifyNewL4Rule(req, cb) {
+        let resp = new ModifyNewL4RuleResponse();
+        this.request("ModifyNewL4Rule", req, resp, cb);
     }
 
     /**
@@ -802,7 +818,7 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the CC IP blacklist/whitelist.
+     * This API is used to get the CC IP blocklist/allowlist.
      * @param {DescribeCCIpAllowDenyRequest} req
      * @param {function(string, DescribeCCIpAllowDenyResponse):void} cb
      * @public
@@ -1198,7 +1214,18 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the CC URL whitelist.
+     * This API is used to modify layer-7 forwarding rules.
+     * @param {ModifyNewDomainRulesRequest} req
+     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
+     * @public
+     */
+    ModifyNewDomainRules(req, cb) {
+        let resp = new ModifyNewDomainRulesResponse();
+        this.request("ModifyNewDomainRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the CC URL allowlist.
      * @param {DescribeCCUrlAllowRequest} req
      * @param {function(string, DescribeCCUrlAllowResponse):void} cb
      * @public

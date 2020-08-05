@@ -63,7 +63,7 @@ class GmeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the status of an application's master switch.
+     * This API is used to change the status of an application's primary switch.
      * @param {ModifyAppStatusRequest} req
      * @param {function(string, ModifyAppStatusResponse):void} cb
      * @public
@@ -143,7 +143,7 @@ class GmeClient extends AbstractClient {
 <p>ad: advertising</p>
 <p>terrorism: terrorism</p>
 <p>contraband: prohibited</p>
-<p>customized: custom keyword library. This feature is only available to whitelisted users. To try it out, please <a href="https://cloud.tencent.com/apply/p/8809fjcik56">contact us</a>.</p>
+<p>customized: custom keyword library. This feature is only available to allowlisted users. To try it out, please <a href="https://cloud.tencent.com/apply/p/8809fjcik56">contact us</a>.</p>
 </td>
 </tr>
 </tbody>

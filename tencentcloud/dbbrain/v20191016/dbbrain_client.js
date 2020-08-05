@@ -16,19 +16,29 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
-const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
-const DiagHistoryEventItem = models.DiagHistoryEventItem;
-const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
+const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
 const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
-const DescribeDBDiagEventRequest = models.DescribeDBDiagEventRequest;
-const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
-const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
-const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
+const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
 const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
 const TimeSlice = models.TimeSlice;
+const MonitorFloatMetric = models.MonitorFloatMetric;
 const MonitorMetric = models.MonitorMetric;
+const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
+const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
+const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
+const DescribeDBDiagEventRequest = models.DescribeDBDiagEventRequest;
+const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
+const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
+const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
+const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
+const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
+const DiagHistoryEventItem = models.DiagHistoryEventItem;
+const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
+const MonitorFloatMetricSeriesData = models.MonitorFloatMetricSeriesData;
 const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
+const TableSpaceData = models.TableSpaceData;
+const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
+const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
 
 
 /**
@@ -42,14 +52,14 @@ class DbbrainClient extends AbstractClient {
     }
     
     /**
-     * This API is used to get the list of instance diagnosis events.
-     * @param {DescribeDBDiagHistoryRequest} req
-     * @param {function(string, DescribeDBDiagHistoryResponse):void} cb
+     * This API is used to query the daily space data of top tables consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
+     * @param {DescribeTopSpaceTableTimeSeriesRequest} req
+     * @param {function(string, DescribeTopSpaceTableTimeSeriesResponse):void} cb
      * @public
      */
-    DescribeDBDiagHistory(req, cb) {
-        let resp = new DescribeDBDiagHistoryResponse();
-        this.request("DescribeDBDiagHistory", req, resp, cb);
+    DescribeTopSpaceTableTimeSeries(req, cb) {
+        let resp = new DescribeTopSpaceTableTimeSeriesResponse();
+        this.request("DescribeTopSpaceTableTimeSeries", req, resp, cb);
     }
 
     /**
@@ -64,14 +74,25 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get and sort the top slow SQL statements in a specified time period by the aggregation mode of SQL template plus schema.
-     * @param {DescribeSlowLogTopSqlsRequest} req
-     * @param {function(string, DescribeSlowLogTopSqlsResponse):void} cb
+     * This API is used to get the list of instance diagnosis events.
+     * @param {DescribeDBDiagHistoryRequest} req
+     * @param {function(string, DescribeDBDiagHistoryResponse):void} cb
      * @public
      */
-    DescribeSlowLogTopSqls(req, cb) {
-        let resp = new DescribeSlowLogTopSqlsResponse();
-        this.request("DescribeSlowLogTopSqls", req, resp, cb);
+    DescribeDBDiagHistory(req, cb) {
+        let resp = new DescribeDBDiagHistoryResponse();
+        this.request("DescribeDBDiagHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the overview of instance space usage during a specified time period, including disk usage growth (MB), available disk space (MB), total disk space (MB), and estimated number of available days.
+     * @param {DescribeDBSpaceStatusRequest} req
+     * @param {function(string, DescribeDBSpaceStatusResponse):void} cb
+     * @public
+     */
+    DescribeDBSpaceStatus(req, cb) {
+        let resp = new DescribeDBSpaceStatusResponse();
+        this.request("DescribeDBSpaceStatus", req, resp, cb);
     }
 
     /**
@@ -83,6 +104,28 @@ class DbbrainClient extends AbstractClient {
     DescribeDBDiagEvent(req, cb) {
         let resp = new DescribeDBDiagEventResponse();
         this.request("DescribeDBDiagEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query real-time space statistics of top tables of an instance. The return results are sorted by size by default.
+     * @param {DescribeTopSpaceTablesRequest} req
+     * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
+     * @public
+     */
+    DescribeTopSpaceTables(req, cb) {
+        let resp = new DescribeTopSpaceTablesResponse();
+        this.request("DescribeTopSpaceTables", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get and sort the top slow SQL statements in a specified time period by the aggregation mode of SQL template plus schema.
+     * @param {DescribeSlowLogTopSqlsRequest} req
+     * @param {function(string, DescribeSlowLogTopSqlsResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogTopSqls(req, cb) {
+        let resp = new DescribeSlowLogTopSqlsResponse();
+        this.request("DescribeSlowLogTopSqls", req, resp, cb);
     }
 
 

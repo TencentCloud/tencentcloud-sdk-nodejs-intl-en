@@ -813,7 +813,7 @@ class RealtimeSpeechConf extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Voice chat sound quality type. Valid values: high (HD), ordinary (SD). Default value: high. SD sound quality is only available to whitelisted users. To try it out, please contact your Tencent Cloud rep.
+         * Voice chat sound quality type. Valid values: high (HD), ordinary (SD). Default value: high. SD sound quality is only available to allowllisted users. To try it out, please contact your Tencent Cloud rep.
          * @type {string || null}
          */
         this.Quality = null;

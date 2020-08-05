@@ -269,7 +269,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of TencentDB instances (which can be master, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, and instance status.
+     * This API is used to query the list of TencentDB instances (which can be primary, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, and instance status.
      * @param {DescribeDBInstancesRequest} req
      * @param {function(string, DescribeDBInstancesResponse):void} cb
      * @public

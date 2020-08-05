@@ -25,7 +25,7 @@ class UpdateAliasRequest extends  AbstractModel {
         super();
 
         /**
-         * New alias containing 1–60 characters or digits
+         * New alias containing 1-60 characters or digits
          * @type {string || null}
          */
         this.Alias = null;
@@ -201,7 +201,7 @@ class CreateKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1–60 letters, digits, `-`, and `_`, and must begin with a letter or digit. The `kms-` prefix is used for Tencent Cloud products.
+         * Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1-60 letters, digits, `-`, and `_`, and must begin with a letter or digit. The `kms-` prefix is used for Tencent Cloud products.
          * @type {string || null}
          */
         this.Alias = null;
@@ -224,6 +224,12 @@ class CreateKeyRequest extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -237,6 +243,15 @@ class CreateKeyRequest extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -632,7 +647,7 @@ class ImportKeyMaterialRequest extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * Unix timestamp of the key material’s expiration time. If this value is empty or 0, the key material will never expire. To specify the expiration time, it should be later than the current time. Maximum value: 2147443200.
+         * Unix timestamp of the key material's expiration time. If this value is empty or 0, the key material will never expire. To specify the expiration time, it should be later than the current time. Maximum value: 2147443200.
          * @type {number || null}
          */
         this.ValidTo = null;
@@ -727,6 +742,41 @@ class ListAlgorithmsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1194,6 +1244,18 @@ class CreateWhiteBoxKeyResponse extends  AbstractModel {
         this.KeyId = null;
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.TagCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TagMsg = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1211,6 +1273,8 @@ class CreateWhiteBoxKeyResponse extends  AbstractModel {
         this.EncryptKey = 'EncryptKey' in params ? params.EncryptKey : null;
         this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.TagCode = 'TagCode' in params ? params.TagCode : null;
+        this.TagMsg = 'TagMsg' in params ? params.TagMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1820,6 +1884,12 @@ class CreateWhiteBoxKeyRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1832,6 +1902,15 @@ class CreateWhiteBoxKeyRequest extends  AbstractModel {
         this.Alias = 'Alias' in params ? params.Alias : null;
         this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2576,7 +2655,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Origin = null;
 
         /**
-         * It’s valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
+         * It's valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -3413,6 +3492,7 @@ module.exports = {
     EnableKeyRequest: EnableKeyRequest,
     ImportKeyMaterialResponse: ImportKeyMaterialResponse,
     ListAlgorithmsRequest: ListAlgorithmsRequest,
+    Tag: Tag,
     ListKeyDetailResponse: ListKeyDetailResponse,
     GenerateDataKeyRequest: GenerateDataKeyRequest,
     UpdateAliasResponse: UpdateAliasResponse,

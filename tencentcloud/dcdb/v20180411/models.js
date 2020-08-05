@@ -335,7 +335,7 @@ class DCDBShardInfo extends  AbstractModel {
         this.PeriodEndTime = null;
 
         /**
-         * Number of nodes. 2: one master and one slave; 3: one master and two slaves
+         * Number of nodes. 2: one primary and one secondary; 3: one primary and two secondaries
          * @type {number || null}
          */
         this.NodeCount = null;
@@ -385,7 +385,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ShardMasterZone = null;
 
         /**
-         * List of slave AZs of a shard
+         * List of secondary AZs of a shard
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -1019,7 +1019,7 @@ class ResetAccountPasswordRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * New password, which can contain 6–32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
          * @type {string || null}
          */
         this.Password = null;
@@ -1653,25 +1653,25 @@ class CreateAccountRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * Account password, which can contain 6–32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * Account password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail; 3: only the slave will be read from.
+         * Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail; 3: only the secondary will be read from.
          * @type {number || null}
          */
         this.ReadOnly = null;
 
         /**
-         * Account remarks, which can contain 0–256 letters, digits, and common symbols.
+         * Account remarks, which can contain 0-256 letters, digits, and common symbols.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * If the slave delay exceeds the set value of this parameter, the slave will be deemed to have failed.
+         * If the secondary delay exceeds the set value of this parameter, the secondary will be deemed to have failed.
 It is recommended that this parameter be set to a value greater than 10. This parameter takes effect when `ReadOnly` is 1 or 2.
          * @type {number || null}
          */
@@ -1736,13 +1736,13 @@ class DBAccount extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
-         * Read-only flag. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail.
+         * Read-only flag. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail.
          * @type {number || null}
          */
         this.ReadOnly = null;
 
         /**
-         * If the slave delay exceeds the set value of this parameter, the slave will be deemed to have failed.
+         * If the secondary delay exceeds the set value of this parameter, the secondary will be deemed to have failed.
 It is recommended that this parameter be set to a value greater than 10. This parameter takes effect when `ReadOnly` is 1 or 2.
          * @type {number || null}
          */
@@ -1939,7 +1939,7 @@ class ShardInfo extends  AbstractModel {
         this.ShardId = null;
 
         /**
-         * Number of nodes. 2: one master and one slave; 3: one master and two slaves
+         * Number of nodes. 2: one primary and one secondary; 3: one primary and two secondaries
          * @type {number || null}
          */
         this.NodeCount = null;
@@ -3005,7 +3005,7 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * New account remarks, which can contain 0–256 characters.
+         * New account remarks, which can contain 0-256 characters.
          * @type {string || null}
          */
         this.Description = null;
@@ -3282,7 +3282,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.ShardDetail = null;
 
         /**
-         * Number of nodes. 2: one master and one slave; 3: one master and two slaves
+         * Number of nodes. 2: one primary and one secondary; 3: one primary and two secondaries
          * @type {number || null}
          */
         this.NodeCount = null;

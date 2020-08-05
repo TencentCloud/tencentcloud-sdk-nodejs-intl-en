@@ -165,7 +165,7 @@ class TaskDetail extends  AbstractModel {
 }
 
 /**
- * Specification information of a node type in the cluster (such as hot data node, warm data node, or dedicated master node), including node type, number of nodes, node specification, disk type, and disk size. If `Type` is not specified, it will be a hot data node by default; if the node is a master node, then the `DiskType` and `DiskSize` parameters will be ignored (as a master node has no data disks)
+ * Specification information of a node type in the cluster (such as hot data node, warm data node, or dedicated primary node), including node type, number of nodes, node specification, disk type, and disk size. If `Type` is not specified, it will be a hot data node by default; if the node is a primary node, then the `DiskType` and `DiskSize` parameters will be ignored (as a primary node has no data disks)
  * @class
  */
 class NodeInfo extends  AbstractModel {
@@ -187,7 +187,7 @@ class NodeInfo extends  AbstractModel {
         /**
          * Node type <li>hotData: hot data node</li>
 <li>warmData: warm data node</li>
-<li>dedicatedMaster: dedicated master node</li>
+<li>dedicatedMaster: dedicated primary node</li>
 Default value: hotData
          * @type {string || null}
          */
@@ -218,6 +218,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.DiskCount = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DiskEncrypt = null;
+
     }
 
     /**
@@ -239,6 +245,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.LocalDiskInfo = obj;
         }
         this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
+        this.DiskEncrypt = 'DiskEncrypt' in params ? params.DiskEncrypt : null;
 
     }
 }
@@ -359,13 +366,13 @@ class EsPublicAcl extends  AbstractModel {
         super();
 
         /**
-         * Access blacklist
+         * Access blocklist
          * @type {Array.<string> || null}
          */
         this.BlackIpList = null;
 
         /**
-         * Access whitelist
+         * Access allowlist
          * @type {Array.<string> || null}
          */
         this.WhiteIpList = null;
@@ -506,7 +513,7 @@ class DescribeInstanceLogsRequest extends  AbstractModel {
 
         /**
          * Log type. Default value: 1
-<li>1: master log</li>
+<li>1: primary log</li>
 <li>2: search slow log</li>
 <li>3: index slow log</li>
 <li>4: GC log</li>
@@ -787,7 +794,7 @@ class CreateInstanceRequest extends  AbstractModel {
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Number of nodes (2–50)
+Number of nodes (2-50)
          * @type {number || null}
          */
         this.NodeNum = null;
@@ -851,28 +858,28 @@ Node disk size in GB
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Whether to create a dedicated master node <li>true: yes </li><li>false: no </li>Default value: false
+Whether to create a dedicated primary node <li>true: yes </li><li>false: no </li>Default value: false
          * @type {boolean || null}
          */
         this.EnableDedicatedMaster = null;
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Number of dedicated master nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is `true`)
+Number of dedicated primary nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is `true`)
          * @type {number || null}
          */
         this.MasterNodeNum = null;
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Dedicated master node type, which must be passed in if `EnableDedicatedMaster` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+Dedicated primary node type, which must be passed in if `EnableDedicatedMaster` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
          * @type {string || null}
          */
         this.MasterNodeType = null;
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Dedicated master node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
+Dedicated primary node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
          * @type {number || null}
          */
         this.MasterNodeDiskSize = null;
@@ -1172,7 +1179,7 @@ class InstanceInfo extends  AbstractModel {
         this.IkConfig = null;
 
         /**
-         * Dedicated master node configuration
+         * Dedicated primary node configuration
          * @type {MasterNodeInfo || null}
          */
         this.MasterNodeInfo = null;
@@ -1745,7 +1752,7 @@ class UpdateInstanceRequest extends  AbstractModel {
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Number of nodes (2–50)
+Number of nodes (2-50)
          * @type {number || null}
          */
         this.NodeNum = null;
@@ -1757,7 +1764,7 @@ Number of nodes (2–50)
         this.EsConfig = null;
 
         /**
-         * Password of the default user “elastic“, which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
+         * Password of the default user 'elastic', which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
          * @type {string || null}
          */
         this.Password = null;
@@ -1784,21 +1791,21 @@ Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Number of dedicated master nodes (only 3 and 5 are supported)
+Number of dedicated primary nodes (only 3 and 5 are supported)
          * @type {number || null}
          */
         this.MasterNodeNum = null;
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+Dedicated primary node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
          * @type {string || null}
          */
         this.MasterNodeType = null;
 
         /**
          * This parameter has been disused. Please use `NodeInfoList`
-Dedicated master node disk size in GB. This is 50 GB by default and currently cannot be customized
+Dedicated primary node disk size in GB. This is 50 GB by default and currently cannot be customized
          * @type {number || null}
          */
         this.MasterNodeDiskSize = null;
@@ -1857,6 +1864,12 @@ Dedicated master node disk size in GB. This is 50 GB by default and currently ca
          */
         this.KibanaPrivatePort = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ScaleType = null;
+
     }
 
     /**
@@ -1909,6 +1922,7 @@ Dedicated master node disk size in GB. This is 50 GB by default and currently ca
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
         this.KibanaPrivatePort = 'KibanaPrivatePort' in params ? params.KibanaPrivatePort : null;
+        this.ScaleType = 'ScaleType' in params ? params.ScaleType : null;
 
     }
 }
@@ -1932,6 +1946,24 @@ class EsDictionaryInfo extends  AbstractModel {
          * @type {Array.<DictInfo> || null}
          */
         this.Stopwords = null;
+
+        /**
+         * 
+         * @type {Array.<DictInfo> || null}
+         */
+        this.QQDict = null;
+
+        /**
+         * 
+         * @type {Array.<DictInfo> || null}
+         */
+        this.Synonym = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.UpdateType = null;
 
     }
 
@@ -1960,6 +1992,25 @@ class EsDictionaryInfo extends  AbstractModel {
                 this.Stopwords.push(obj);
             }
         }
+
+        if (params.QQDict) {
+            this.QQDict = new Array();
+            for (let z in params.QQDict) {
+                let obj = new DictInfo();
+                obj.deserialize(params.QQDict[z]);
+                this.QQDict.push(obj);
+            }
+        }
+
+        if (params.Synonym) {
+            this.Synonym = new Array();
+            for (let z in params.Synonym) {
+                let obj = new DictInfo();
+                obj.deserialize(params.Synonym[z]);
+                this.Synonym.push(obj);
+            }
+        }
+        this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
 
     }
 }
@@ -2051,13 +2102,13 @@ class EsAcl extends  AbstractModel {
         super();
 
         /**
-         * Kibana access blacklist
+         * Kibana access blocklist
          * @type {Array.<string> || null}
          */
         this.BlackIpList = null;
 
         /**
-         * Kibana access whitelist
+         * Kibana access allowlist
          * @type {Array.<string> || null}
          */
         this.WhiteIpList = null;
@@ -2078,7 +2129,7 @@ class EsAcl extends  AbstractModel {
 }
 
 /**
- * Information of the dedicated master node in an instance
+ * Information of the dedicated primary node in an instance
  * @class
  */
 class MasterNodeInfo extends  AbstractModel {
@@ -2086,43 +2137,43 @@ class MasterNodeInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the dedicated master node
+         * Whether to enable the dedicated primary node
          * @type {boolean || null}
          */
         this.EnableDedicatedMaster = null;
 
         /**
-         * Dedicated master node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+         * Dedicated primary node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
          * @type {string || null}
          */
         this.MasterNodeType = null;
 
         /**
-         * Number of dedicated master nodes
+         * Number of dedicated primary nodes
          * @type {number || null}
          */
         this.MasterNodeNum = null;
 
         /**
-         * Number of CPU cores of the dedicated master node
+         * Number of CPU cores of the dedicated primary node
          * @type {number || null}
          */
         this.MasterNodeCpuNum = null;
 
         /**
-         * Memory size of the dedicated master node in GB
+         * Memory size of the dedicated primary node in GB
          * @type {number || null}
          */
         this.MasterNodeMemSize = null;
 
         /**
-         * Disk size of the dedicated master node in GB
+         * Disk size of the dedicated primary node in GB
          * @type {number || null}
          */
         this.MasterNodeDiskSize = null;
 
         /**
-         * Disk type of the dedicated master node
+         * Disk type of the dedicated primary node
          * @type {string || null}
          */
         this.MasterNodeDiskType = null;

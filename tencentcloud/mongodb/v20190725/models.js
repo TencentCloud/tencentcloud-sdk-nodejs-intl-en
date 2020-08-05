@@ -53,7 +53,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of slave nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+         * Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of secondary nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
          * @type {number || null}
          */
         this.NodeNum = null;
@@ -131,7 +131,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance password. If this parameter is not set, you need to set an instance password through the `SetPassword` API after creating an instance. The password can only contain 8–16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()`.
+         * Instance password. If this parameter is not set, you need to set an instance password through the `SetPassword` API after creating an instance. The password can only contain 8-16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()`.
          * @type {string || null}
          */
         this.Password = null;
@@ -147,6 +147,30 @@ class CreateDBInstanceRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Clone = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Father = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroup = null;
 
     }
 
@@ -181,6 +205,10 @@ class CreateDBInstanceRequest extends  AbstractModel {
             }
         }
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.Clone = 'Clone' in params ? params.Clone : null;
+        this.Father = 'Father' in params ? params.Father : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
 
     }
 }
@@ -487,7 +515,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance password. If this parameter is not set, you need to set an instance password through the password setting API after creating an instance. The password can only contain 8–16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()` |
+         * Instance password. If this parameter is not set, you need to set an instance password through the password setting API after creating an instance. The password can only contain 8-16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()` |
          * @type {string || null}
          */
         this.Password = null;
@@ -503,6 +531,24 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Clone = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Father = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroup = null;
 
     }
 
@@ -535,6 +581,9 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.Clone = 'Clone' in params ? params.Clone : null;
+        this.Father = 'Father' in params ? params.Father : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
 
     }
 }
@@ -872,7 +921,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * Number of results to be returned for a single request. Valid values: 1–100. Default value: 20
+         * Number of results to be returned for a single request. Valid values: 1-100. Default value: 20
          * @type {number || null}
          */
         this.Limit = null;
@@ -1270,13 +1319,13 @@ class SpecItem extends  AbstractModel {
         this.ClusterType = null;
 
         /**
-         * Minimum number of slave nodes in a replica set
+         * Minimum number of secondary nodes in a replica set
          * @type {number || null}
          */
         this.MinNodeNum = null;
 
         /**
-         * Maximum number of slave nodes in a replica set
+         * Maximum number of secondary nodes in a replica set
          * @type {number || null}
          */
         this.MaxNodeNum = null;
@@ -1294,13 +1343,13 @@ class SpecItem extends  AbstractModel {
         this.MaxReplicateSetNum = null;
 
         /**
-         * Minimum number of slave nodes in a shard
+         * Minimum number of secondary nodes in a shard
          * @type {number || null}
          */
         this.MinReplicateSetNodeNum = null;
 
         /**
-         * Maximum number of slave nodes in a shard
+         * Maximum number of secondary nodes in a shard
          * @type {number || null}
          */
         this.MaxReplicateSetNodeNum = null;
@@ -1584,7 +1633,7 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of slave nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+         * Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of secondary nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
          * @type {number || null}
          */
         this.NodeNum = null;
@@ -1779,6 +1828,18 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Offset = null;
+
     }
 
     /**
@@ -1789,6 +1850,8 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1929,7 +1992,7 @@ class ShardInfo extends  AbstractModel {
         this.OplogSize = null;
 
         /**
-         * Number of slave nodes of a shard
+         * Number of secondary nodes of a shard
          * @type {number || null}
          */
         this.SecondaryNum = null;
@@ -2172,6 +2235,12 @@ class DescribeClientConnectionsResponse extends  AbstractModel {
         this.Clients = null;
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2195,6 +2264,7 @@ class DescribeClientConnectionsResponse extends  AbstractModel {
                 this.Clients.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2477,7 +2547,7 @@ class InstanceDetail extends  AbstractModel {
         this.MachineType = null;
 
         /**
-         * Number of slave nodes of an instance
+         * Number of secondary nodes of an instance
          * @type {number || null}
          */
         this.SecondaryNum = null;
@@ -2537,7 +2607,7 @@ class InstanceDetail extends  AbstractModel {
         this.CloneInstances = null;
 
         /**
-         * Information of associated instances. For a promoted instance, this field represents information of its temp instance; for a temp instance, this field represents information of its promoted instance; and for a read-only/disaster recovery instance, this field represents information of its master instance
+         * Information of associated instances. For a promoted instance, this field represents information of its temp instance; for a temp instance, this field represents information of its promoted instance; and for a read-only/disaster recovery instance, this field represents information of its primary instance
          * @type {DBInstanceInfo || null}
          */
         this.RelatedInstance = null;

@@ -424,13 +424,13 @@ class DescribeDBPerformanceResponse extends  AbstractModel {
         this.ConnActive = null;
 
         /**
-         * Whether master/slave switch occurred. 1: yes, 0: no
+         * Whether primary/secondary switch occurred. 1: yes, 0: no
          * @type {MonitorData || null}
          */
         this.IsMasterSwitched = null;
 
         /**
-         * Master/slave delay
+         * primary/secondary delay
          * @type {MonitorData || null}
          */
         this.SlaveDelay = null;
@@ -937,7 +937,7 @@ class ResetAccountPasswordRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * New password, which can contain 6–32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
          * @type {string || null}
          */
         this.Password = null;
@@ -1358,7 +1358,7 @@ class DescribeDBSlowLogsRequest extends  AbstractModel {
         this.OrderByType = null;
 
         /**
-         * Whether to query slow queries of the slave. 0: master, 1: slave
+         * Whether to query slow queries of the secondary. 0: primary, 1: secondary
          * @type {number || null}
          */
         this.Slave = null;
@@ -1474,7 +1474,7 @@ class PerformanceMonitorSet extends  AbstractModel {
         this.MemHitRate = null;
 
         /**
-         * Master/slave delay
+         * Primary/Secondary delay
          * @type {MonitorData || null}
          */
         this.SlaveDelay = null;
@@ -1504,7 +1504,7 @@ class PerformanceMonitorSet extends  AbstractModel {
         this.InsertTotal = null;
 
         /**
-         * Whether master/slave switch occurred. 1: yes, 0: no
+         * Whether primary/Secondary switch occurred. 1: yes, 0: no
          * @type {MonitorData || null}
          */
         this.IsMasterSwitched = null;
@@ -1961,7 +1961,7 @@ class DBInstance extends  AbstractModel {
         this.OriginSerialId = null;
 
         /**
-         * Number of nodes. 2: one master and one slave, 3: one master and two slaves
+         * Number of nodes. 2: one primary and one secondary, 3: one primary and two secondaries
          * @type {number || null}
          */
         this.NodeCount = null;
@@ -2316,7 +2316,7 @@ class CreateAccountRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Login username, which can contain 1–32 letters, digits, underscores, and hyphens.
+         * Login username, which can contain 1-32 letters, digits, underscores, and hyphens.
          * @type {string || null}
          */
         this.UserName = null;
@@ -2328,25 +2328,25 @@ class CreateAccountRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * Account password, which can contain 6–32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * Account password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail.
+         * Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail.
          * @type {number || null}
          */
         this.ReadOnly = null;
 
         /**
-         * Account remarks, which can contain 0–256 letters, digits, and common symbols.
+         * Account remarks, which can contain 0-256 letters, digits, and common symbols.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Determines whether the slave is unavailable based on the passed-in time
+         * Determines whether the secondary is unavailable based on the passed-in time
          * @type {number || null}
          */
         this.DelayThresh = null;
@@ -2480,13 +2480,13 @@ class DBAccount extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
-         * Read-only flag. 0: no; 1: for the account's SQL requests, the slave will be used first, and if it is unavailable, the master will be used; 2: the slave will be used first, and if it is unavailable, the operation will fail.
+         * Read-only flag. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail.
          * @type {number || null}
          */
         this.ReadOnly = null;
 
         /**
-         * This field is meaningful for read-only accounts, indicating to select a slave where the master/slave delay is below this value
+         * This field is meaningful for read-only accounts, indicating to select a secondary where the primary/secondary delay is below this value
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2654,7 +2654,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Slave1 = null;
 
         /**
-         * Slave 2 performance monitoring data. If the instance is one-master-one-slave, it does not have this field
+         * Slave 2 performance monitoring data. If the instance is one-primary-one-secondary, it does not have this field
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {PerformanceMonitorSet || null}
          */
@@ -3221,7 +3221,7 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * New account remarks, which can contain 0–256 characters.
+         * New account remarks, which can contain 0-256 characters.
          * @type {string || null}
          */
         this.Description = null;

@@ -16,25 +16,43 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeAbnormalEventResponse = models.DescribeAbnormalEventResponse;
 const RealtimeData = models.RealtimeData;
+const DescribeAbnormalEventRequest = models.DescribeAbnormalEventRequest;
+const LayoutParams = models.LayoutParams;
 const TimeValue = models.TimeValue;
+const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
 const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
 const DismissRoomResponse = models.DismissRoomResponse;
-const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
+const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
 const RemoveUserRequest = models.RemoveUserRequest;
 const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
 const DescribeRealtimeNetworkRequest = models.DescribeRealtimeNetworkRequest;
 const DismissRoomRequest = models.DismissRoomRequest;
+const EncodeParams = models.EncodeParams;
+const StartMCUMixTranscodeRequest = models.StartMCUMixTranscodeRequest;
 const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
+const StopMCUMixTranscodeRequest = models.StopMCUMixTranscodeRequest;
+const UserInformation = models.UserInformation;
 const DescribeHistoryScaleRequest = models.DescribeHistoryScaleRequest;
 const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
+const OutputParams = models.OutputParams;
+const EventMessage = models.EventMessage;
+const CreateTroubleInfoResponse = models.CreateTroubleInfoResponse;
 const QualityData = models.QualityData;
-const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
+const AbnormalEvent = models.AbnormalEvent;
+const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
 const ScaleInfomation = models.ScaleInfomation;
+const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
+const EventList = models.EventList;
+const DescribeDetailEventResponse = models.DescribeDetailEventResponse;
+const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
+const SmallVideoLayoutParams = models.SmallVideoLayoutParams;
 const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
 const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
 const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
-const UserInformation = models.UserInformation;
+const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
+const AbnormalExperience = models.AbnormalExperience;
 const RoomState = models.RoomState;
 const RemoveUserResponse = models.RemoveUserResponse;
 const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
@@ -51,18 +69,29 @@ class TrtcClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query real-time quality data for the last 24 hours according to `sdkappid`, including the room entry success rate, instant playback rate of the first frame, audio lag rate, and video lag rate. The query time range cannot exceed 1 hour.
-     * @param {DescribeRealtimeQualityRequest} req
-     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
+     * This API is used to remove a user from a room. It is applicable to scenarios where the anchor, room owner, or admin wants to kick out a user. It supports all platforms. For Android, iOS, Windows, and macOS, the TRTC SDK needs to be upgraded to v6.6 or above.
+     * @param {RemoveUserRequest} req
+     * @param {function(string, RemoveUserResponse):void} cb
      * @public
      */
-    DescribeRealtimeQuality(req, cb) {
-        let resp = new DescribeRealtimeQualityResponse();
-        this.request("DescribeRealtimeQuality", req, resp, cb);
+    RemoveUser(req, cb) {
+        let resp = new RemoveUserResponse();
+        this.request("RemoveUser", req, resp, cb);
     }
 
     /**
-     * This API is used to query the number of historical rooms and users for the last 5 days. It can query once per minute.
+     * This API is used to create exception information.
+     * @param {CreateTroubleInfoRequest} req
+     * @param {function(string, CreateTroubleInfoResponse):void} cb
+     * @public
+     */
+    CreateTroubleInfo(req, cb) {
+        let resp = new CreateTroubleInfoResponse();
+        this.request("CreateTroubleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the daily numbers of rooms and users under a specified `sdkqppid`. It can query data once per minute for the last 5 days. If a day has not ended, the numbers of rooms and users on the day cannot be queried.
      * @param {DescribeHistoryScaleRequest} req
      * @param {function(string, DescribeHistoryScaleResponse):void} cb
      * @public
@@ -70,6 +99,30 @@ class TrtcClient extends AbstractClient {
     DescribeHistoryScale(req, cb) {
         let resp = new DescribeHistoryScaleResponse();
         this.request("DescribeHistoryScale", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable On-Cloud MixTranscoding and specify the layout position of each channel of video image in the mixed video image.
+
+There may be multiple channels of audio/video streams in a TRTC room. You can call this API to request the Tencent Cloud server to combine multiple channels of video images into one channel, specify the position of each channel, and mix the multiple channels of audio so as to output one channel of audio/video stream for easier recording and live streaming.
+
+You can use this API to perform the following operations:
+- Set the image and audio quality parameters of the final live stream, including video resolution, video bitrate, video frame rate, and audio quality.
+- Set the image layout, i.e., positions of all channels of images. You only need to set the layout once when enabling On-Cloud MixTranscoding, and the layout engine will automatically arrange the video images in the configured layout in subsequent operations.
+- Set the recording file name for future playback.
+- Set the CDN live stream ID for live streaming over CDN.
+
+Currently, the following layout templates are supported:
+- Floating template: the entire screen will be covered by the video image of the first user who enters the room, and the video images of other users will be displayed as small images in horizontal rows from the bottom-left corner in room entry sequence. The screen can contain up to 4 lines with 4 small images each row, which float over the big image. Up to 1 big image and 15 small images are supported. If a user sends audio only, the user will still use an image spot.
+- 9-grid template: the screen is divided into user video images with the same dimensions. The more the users, the smaller the image dimensions. Up to 16 images are supported. If a user sends audio only, the user will still use an image spot.
+- Screen sharing template: it is suitable for video conferencing and online education. The shared screen (or camera of the anchor) is always displayed in the big image on the left of the screen, and the video images of other users are vertically displayed on the right in up to 2 columns with up to 8 small images in each column. Up to 1 big image and 15 small images are supported. If a user sends audio only, the user will still use an image spot.
+     * @param {StartMCUMixTranscodeRequest} req
+     * @param {function(string, StartMCUMixTranscodeResponse):void} cb
+     * @public
+     */
+    StartMCUMixTranscode(req, cb) {
+        let resp = new StartMCUMixTranscodeResponse();
+        this.request("StartMCUMixTranscode", req, resp, cb);
     }
 
     /**
@@ -106,18 +159,18 @@ class TrtcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to remove a user from a room. It is applicable to scenarios where the anchor, room owner, or admin wants to kick out a user. It supports all platforms. For Android, iOS, Windows, and macOS, the TRTC SDK needs to be upgraded to v6.6 or above.
-     * @param {RemoveUserRequest} req
-     * @param {function(string, RemoveUserResponse):void} cb
+     * This API is used to query detailed events of a user such as room entry/exit and video enablement/disablement during a call. It can query data for the last 5 days.
+     * @param {DescribeDetailEventRequest} req
+     * @param {function(string, DescribeDetailEventResponse):void} cb
      * @public
      */
-    RemoveUser(req, cb) {
-        let resp = new RemoveUserResponse();
-        this.request("RemoveUser", req, resp, cb);
+    DescribeDetailEvent(req, cb) {
+        let resp = new DescribeDetailEventResponse();
+        this.request("DescribeDetailEvent", req, resp, cb);
     }
 
     /**
-     * This API is used to query the user list and user call quality data in a specified time period. It can query data of up to 6 users for the last 5 days, and the query time range cannot exceed 1 hour.
+     * This API is used to query the user list and user call quality data in a specified time period. It queries data of up to 6 users in the last 5 days. The query period is up to 1 hour, which must start and end on the same day.
      * @param {DescribeCallDetailRequest} req
      * @param {function(string, DescribeCallDetailResponse):void} cb
      * @public
@@ -125,6 +178,39 @@ class TrtcClient extends AbstractClient {
     DescribeCallDetail(req, cb) {
         let resp = new DescribeCallDetailResponse();
         this.request("DescribeCallDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to end On-Cloud MixTranscoding.
+     * @param {StopMCUMixTranscodeRequest} req
+     * @param {function(string, StopMCUMixTranscodeResponse):void} cb
+     * @public
+     */
+    StopMCUMixTranscode(req, cb) {
+        let resp = new StopMCUMixTranscodeResponse();
+        this.request("StopMCUMixTranscode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query users’ exceptional experience events according to `SDKAppID` and return the exceptional experience ID and possible causes. It queries data in last 24 hours, and the query period is up to 1 hour which can start and end on different days. For more information about exceptional experience ID mapping, please see here.
+     * @param {DescribeAbnormalEventRequest} req
+     * @param {function(string, DescribeAbnormalEventResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalEvent(req, cb) {
+        let resp = new DescribeAbnormalEventResponse();
+        this.request("DescribeAbnormalEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query real-time quality data for the last 24 hours according to `sdkappid`, including the room entry success rate, instant playback rate of the first frame, audio lag rate, and video lag rate. The query time range cannot exceed 1 hour.
+     * @param {DescribeRealtimeQualityRequest} req
+     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
+     * @public
+     */
+    DescribeRealtimeQuality(req, cb) {
+        let resp = new DescribeRealtimeQualityResponse();
+        this.request("DescribeRealtimeQuality", req, resp, cb);
     }
 
     /**

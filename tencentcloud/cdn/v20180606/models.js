@@ -837,13 +837,13 @@ class DomainFilter extends  AbstractModel {
 
         /**
          * Filter field name, the list supported is as follows:
-- origin: master origin server.
+- origin: primary origin server.
 - domain: domain name.
 - resourceId: domain name id.
 - status: domain name status. Values include `online`, `offline`, or `processing`.
 - serviceType: service type. Values include `web`, `download`, or `media`.
 - projectId: project ID.
-- domainType: master origin server type, `cname` indicates external origin, `COS` indicates COS origin.
+- domainType: primary origin server type, `cname` indicates external origin, `COS` indicates COS origin.
 - fullUrlCache: full-path cache, which can be on or off.
 - https: whether to configure HTTPS, which can be on, off or processing.
 - originPullProtocol: origin-pull protocol type. HTTP, follow, or HTTPS are supported.
@@ -1026,7 +1026,7 @@ class DescribePurgeQuotaRequest extends  AbstractModel {
 }
 
 /**
- * Referer blacklist/whitelist configuration. This is disabled by default.
+ * Referer blocklist/allowlist configuration. This is disabled by default.
  * @class
  */
 class Referer extends  AbstractModel {
@@ -1034,7 +1034,7 @@ class Referer extends  AbstractModel {
         super();
 
         /**
-         * Referer blacklist/whitelist configuration switch
+         * Referer blocklist/allowlist configuration switch
 on: enabled
 off: disabled
          * @type {string || null}
@@ -1042,7 +1042,7 @@ off: disabled
         this.Switch = null;
 
         /**
-         * Referer blacklist/whitelist configuration rule
+         * Referer blocklist/allowlist configuration rule
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RefererRule> || null}
          */
@@ -1072,7 +1072,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * `UserAgent` blacklist/whitelist configuration
+ * `UserAgent` blocklist/allowlist configuration
  * @class
  */
 class UserAgentFilter extends  AbstractModel {
@@ -1087,7 +1087,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Switch = null;
 
         /**
-         * UA blacklist/whitelist effect rule list
+         * UA blocklist/allowlist effect rule list
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<UserAgentFilterRule> || null}
          */
@@ -1357,7 +1357,7 @@ Data generated before or at 23:59:59 on the end date will be returned
         /**
          * Object representing the sort criteria. The following objects are supported:
 url: sorts by access URL (including the query string). Supported filters are `flux` and `request`
-path: sorts by access URL (excluding the query string). Supported filters are `flux` and `request` (whitelist-based feature)
+path: sorts by access URL (excluding the query string). Supported filters are `flux` and `request` (allowlist-based feature)
 district: sorts by district. Supported filters are `flux` and `request`
 isp: sorts by ISP. Supported filters are `flux` and `request`
 host: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, 2XX, 3XX, 4XX, 5XX, and `statusCode`
@@ -1400,7 +1400,7 @@ Please note that if domain names are specified, this parameter will be ignored.
         this.Project = null;
 
         /**
-         * Default is `false` for multi–domain name queries, which returns sorted results of all domain names. 
+         * Default is `false` for multi-domain name queries, which returns sorted results of all domain names. 
 If `Metric` is `url`, `path`, `district`, or `isp` and `Filter` is `flux` or `request`, it can be set to `true` to return the sorted results of each domain.
          * @type {boolean || null}
          */
@@ -1719,7 +1719,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Origins = null;
 
         /**
-         * Master origin server type
+         * Primary origin server type
 The following types are supported for input parameters:
 domain: domain name type
 cos: COS origin
@@ -1730,14 +1730,14 @@ The following types of output parameters are added:
 image: Cloud Infinite origin
 ftp: legacy FTP origin, which is no longer maintained.
 When modifying `Origins`, you need to enter the corresponding OriginType.
-The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
+The IPv6 feature is not generally available yet. Please send in a allowlist application to use this feature.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+         * Host header used when accessing the primary origin server. If left empty, the acceleration domain name will be used by default.
 If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -1781,7 +1781,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BackupOriginType = null;
 
         /**
-         * Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
+         * Host header used when accessing the backup origin server. If left empty, the ServerName of primary origin server will be used by default.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2104,9 +2104,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Forced cache
-on: enabled
-off: disabled
-This is disabled by default. If enabled, `no-store` and `no-cache` resources returned from the origin server will be cached according to CacheRules rules.
+on: enable
+off: disable
+This is disabled by default. If enabled, the `no-store` and `no-cache` resources returned from the origin server will be cached according to `CacheRules` rules.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -3054,7 +3054,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Https = null;
 
         /**
-         * IP blacklist/whitelist configuration.
+         * IP blocklist/allowlist configuration.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {IpFilter || null}
          */
@@ -3339,7 +3339,7 @@ media: streaming media VOD acceleration
         this.ProjectId = null;
 
         /**
-         * IP blacklist/whitelist configuration
+         * IP blocklist/allowlist configuration
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
@@ -3673,7 +3673,7 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
 }
 
 /**
- * `UserAgent` blacklist/whitelist rule configuration
+ * `UserAgent` blocklist/allowlist rule configuration
  * @class
  */
 class UserAgentFilterRule extends  AbstractModel {
@@ -3706,7 +3706,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UserAgents = null;
 
         /**
-         * Blacklist or whitelist. Valid values: blacklist, whitelist
+         * blocklist or allowlist. Valid values: blacklist, whitelist
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4214,7 +4214,7 @@ If it contains an asterisk (*), this indicates all files.
         this.FileExtensions = null;
 
         /**
-         * whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+         * allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 blacklist: indicates that only the file types in the FileExtensions list are authenticated
          * @type {string || null}
          */
@@ -4296,7 +4296,7 @@ If it contains an asterisk (*), this indicates all files.
         this.FileExtensions = null;
 
         /**
-         * whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+         * allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 blacklist: indicates that only the file types in the FileExtensions list are authenticated
          * @type {string || null}
          */
@@ -4350,7 +4350,7 @@ If it contains an asterisk (*), this indicates all files.
         this.FileExtensions = null;
 
         /**
-         * whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+         * allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 blacklist: indicates that only the file types in the FileExtensions list are authenticated
          * @type {string || null}
          */
@@ -4417,7 +4417,7 @@ If it contains an asterisk (*), this indicates all files.
         this.FileExtensions = null;
 
         /**
-         * whitelist: indicates that all file types apart from the FileExtensions list are authenticated
+         * allowlist: indicates that all file types apart from the FileExtensions list are authenticated
 blacklist: indicates that only the file types in the FileExtensions list are authenticated
          * @type {string || null}
          */
@@ -5156,7 +5156,7 @@ media: streaming VOD acceleration
         this.Origin = null;
 
         /**
-         * IP blacklist/whitelist configuration
+         * IP blocklist/allowlist configuration
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {IpFilter || null}
          */
@@ -6324,7 +6324,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Https = null;
 
         /**
-         * IP blacklist/whitelist configuration.
+         * IP blocklist/allowlist configuration.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {IpFilter || null}
          */
@@ -6775,7 +6775,7 @@ class DescribeUrlViolationsRequest extends  AbstractModel {
 }
 
 /**
- * Referer blacklist/whitelist configuration rules, which is effective for specific resources.
+ * Referer blocklist/allowlist configuration rules, which is effective for specific resources.
  * @class
  */
 class RefererRule extends  AbstractModel {
@@ -6804,8 +6804,8 @@ For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 
         /**
          * Referer configuration types
-whitelist: whitelist
-blacklist: blacklist
+whitelist: allowlist
+blacklist: blocklist
          * @type {string || null}
          */
         this.RefererType = null;
@@ -8301,6 +8301,16 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
          */
         this.Urls = null;
 
+        /**
+         * Purging region
+The acceleration region of the acceleration domain name will be purged if this parameter is not passed in
+If `mainland` is passed in, only the content cached on nodes in the Chinese mainland will be purged
+If `overseas` is passed in, only the content cached on nodes outside the Chinese mainland will be purged
+The specified purging region should match the domain name acceleration region
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -8311,6 +8321,7 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
             return;
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -9176,7 +9187,7 @@ class UpdateDomainConfigRequest extends  AbstractModel {
         this.Origin = null;
 
         /**
-         * IP blacklist/whitelist configuration
+         * IP blocklist/allowlist configuration
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
@@ -9345,7 +9356,7 @@ global: global acceleration
         this.AwsPrivateAccess = null;
 
         /**
-         * UA blacklist/whitelist Configuration
+         * UA blocklist/allowlist Configuration
          * @type {UserAgentFilter || null}
          */
         this.UserAgentFilter = null;
@@ -9762,7 +9773,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * IP blacklist/whitelist configuration. This is disabled by default.
+ * IP blocklist/allowlist configuration. This is disabled by default.
  * @class
  */
 class IpFilter extends  AbstractModel {
@@ -9770,7 +9781,7 @@ class IpFilter extends  AbstractModel {
         super();
 
         /**
-         * IP blacklist/whitelist configuration switch
+         * IP blocklist/allowlist configuration switch
 on: enabled
 off: disabled
          * @type {string || null}
@@ -9778,18 +9789,18 @@ off: disabled
         this.Switch = null;
 
         /**
-         * IP blacklist/whitelist type
-whitelist: whitelist
-blacklist: blacklist
+         * IP blocklist/allowlist type
+whitelist: allowlist
+blacklist: blocklist
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * IP blacklist/whitelist list
+         * IP blocklist/allowlist list
 Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
-Up to 50 whitelists or blacklists can be entered
+Up to 50 allowlists or blocklists can be entered
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -10261,7 +10272,7 @@ https: specifies the HTTPS metric to be queried
         this.Protocol = null;
 
         /**
-         * Specifies the data source to be queried, which can be seen as the whitelist function.
+         * Specifies the data source to be queried, which can be seen as the allowlist function.
          * @type {string || null}
          */
         this.DataSource = null;
@@ -10272,7 +10283,7 @@ all: all protocols
 ipv4: specifies to query IPv4 metrics
 ipv6: specifies to query IPv6 metrics
 If the IP protocol to be queried is specified, the district and ISP cannot be specified at the same time
-Note: non-IPv6 whitelisted users cannot specify `ipv4` and `ipv6` for query
+Note: non-IPv6 allowlisted users cannot specify `ipv4` and `ipv6` for query
          * @type {string || null}
          */
         this.IpProtocol = null;

@@ -94,9 +94,9 @@ dynamic_bandwidth: dynamic bandwidth in bps
         /**
          * Time granularity, which can be:
 1 day	 1, 5, 15, 30, 60, 120, 240, 1440 
-2–3 days 15, 30, 60, 120, 240, 1440
-4–7 days 30, 60, 120, 240, 1440
-8–90 days	 60, 120, 240, 1440
+2-3 days 15, 30, 60, 120, 240, 1440
+4-7 days 30, 60, 120, 240, 1440
+8-90 days	 60, 120, 240, 1440
          * @type {number || null}
          */
         this.Interval = null;
@@ -277,6 +277,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SslStatus = null;
 
+        /**
+         * 
+         * @type {Hsts || null}
+         */
+        this.Hsts = null;
+
     }
 
     /**
@@ -304,6 +310,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Spdy = 'Spdy' in params ? params.Spdy : null;
         this.SslStatus = 'SslStatus' in params ? params.SslStatus : null;
+
+        if (params.Hsts) {
+            let obj = new Hsts();
+            obj.deserialize(params.Hsts)
+            this.Hsts = obj;
+        }
 
     }
 }
@@ -926,6 +938,48 @@ class DomainLogs extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class Hsts extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxAge = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IncludeSubDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.MaxAge = 'MaxAge' in params ? params.MaxAge : null;
+        this.IncludeSubDomains = 'IncludeSubDomains' in params ? params.IncludeSubDomains : null;
+
+    }
+}
+
+/**
  * Path-specific HTTP header setting rule.
  * @class
  */
@@ -1192,7 +1246,7 @@ class UpdateDomainConfigRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * IP blacklist/whitelist configuration.
+         * IP blocklist/allowlist configuration.
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
@@ -1683,7 +1737,7 @@ class PurgeUrlsCacheResponse extends  AbstractModel {
 }
 
 /**
- * IP blacklist/whitelist.
+ * IP blocklist/allowlist.
  * @class
  */
 class IpFilter extends  AbstractModel {
@@ -1691,20 +1745,20 @@ class IpFilter extends  AbstractModel {
         super();
 
         /**
-         * IP blacklist/whitelist switch. Valid values: on, off.
+         * IP blocklist/allowlist switch. Valid values: on, off.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * IP blacklist/whitelist type. Valid values: whitelist, blacklist.
+         * IP blocklist/allowlist type. Valid values: whitelist, blacklist.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * IP blacklist/whitelist list.
+         * IP blocklist/allowlist list.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -1759,7 +1813,7 @@ class AddEcdnDomainRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * IP blacklist/whitelist configuration.
+         * IP block/allowlist configuration.
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
@@ -2631,7 +2685,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Origin = null;
 
         /**
-         * IP blacklist/whitelist configuration.
+         * IP blocklist/allowlist configuration.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {IpFilter || null}
          */
@@ -2842,6 +2896,7 @@ module.exports = {
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     DomainFilter: DomainFilter,
     DomainLogs: DomainLogs,
+    Hsts: Hsts,
     HttpHeaderPathRule: HttpHeaderPathRule,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
     DetailData: DetailData,

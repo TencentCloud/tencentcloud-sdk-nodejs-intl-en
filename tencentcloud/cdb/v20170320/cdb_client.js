@@ -111,16 +111,18 @@ const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetRespon
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
-const ParamTemplateInfo = models.ParamTemplateInfo;
+const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
+const ParamTemplateInfo = models.ParamTemplateInfo;
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
 const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
 const RollbackTask = models.RollbackTask;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
+const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
@@ -274,6 +276,17 @@ class CdbClient extends AbstractClient {
     DescribeDBInstanceGTID(req, cb) {
         let resp = new DescribeDBInstanceGTIDResponse();
         this.request("DescribeDBInstanceGTID", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a VIP exclusive to a TencentDB read-only instance.
+     * @param {CreateRoInstanceIpRequest} req
+     * @param {function(string, CreateRoInstanceIpResponse):void} cb
+     * @public
+     */
+    CreateRoInstanceIp(req, cb) {
+        let resp = new CreateRoInstanceIpResponse();
+        this.request("CreateRoInstanceIp", req, resp, cb);
     }
 
     /**

@@ -21,7 +21,7 @@ const BillDataInfo = models.BillDataInfo;
 const EnableLiveDomainResponse = models.EnableLiveDomainResponse;
 const CreateLiveCertRequest = models.CreateLiveCertRequest;
 const StopRecordTaskResponse = models.StopRecordTaskResponse;
-const DescribeLiveCallbackTemplatesRequest = models.DescribeLiveCallbackTemplatesRequest;
+const DescribeDeliverBandwidthListResponse = models.DescribeDeliverBandwidthListResponse;
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateResponse;
@@ -52,7 +52,7 @@ const ModifyLivePushAuthKeyRequest = models.ModifyLivePushAuthKeyRequest;
 const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
 const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
 const DescribeLivePlayAuthKeyResponse = models.DescribeLivePlayAuthKeyResponse;
-const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateRequest;
+const DescribeLiveCallbackTemplatesRequest = models.DescribeLiveCallbackTemplatesRequest;
 const DomainInfo = models.DomainInfo;
 const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesRequest;
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
@@ -67,11 +67,13 @@ const DeleteLiveTranscodeRuleRequest = models.DeleteLiveTranscodeRuleRequest;
 const CreateLiveRecordRuleRequest = models.CreateLiveRecordRuleRequest;
 const DescribeLiveSnapshotTemplatesRequest = models.DescribeLiveSnapshotTemplatesRequest;
 const AddLiveWatermarkResponse = models.AddLiveWatermarkResponse;
+const DescribeLiveStreamPushInfoListResponse = models.DescribeLiveStreamPushInfoListResponse;
 const DescribeLiveDomainCertResponse = models.DescribeLiveDomainCertResponse;
 const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateRequest;
 const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
+const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
 const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
@@ -135,6 +137,7 @@ const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
 const CdnPlayStatData = models.CdnPlayStatData;
 const AddLiveDomainResponse = models.AddLiveDomainResponse;
 const DescribeHttpStatusInfoListRequest = models.DescribeHttpStatusInfoListRequest;
+const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
 const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInfoListRequest;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
@@ -164,7 +167,7 @@ const SnapshotTemplateInfo = models.SnapshotTemplateInfo;
 const DeleteLiveSnapshotRuleResponse = models.DeleteLiveSnapshotRuleResponse;
 const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
-const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
+const BandwidthInfo = models.BandwidthInfo;
 const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
 const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const CertInfo = models.CertInfo;
@@ -188,7 +191,7 @@ const RecordParam = models.RecordParam;
 const DomainDetailInfo = models.DomainDetailInfo;
 const HttpStatusInfo = models.HttpStatusInfo;
 const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
-const DescribeLiveStreamPushInfoListResponse = models.DescribeLiveStreamPushInfoListResponse;
+const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
 const StopRecordTaskRequest = models.StopRecordTaskRequest;
 const HttpStatusData = models.HttpStatusData;
 const HttpCodeInfo = models.HttpCodeInfo;
@@ -222,7 +225,7 @@ const DescribeLiveDomainPlayInfoListResponse = models.DescribeLiveDomainPlayInfo
 const HttpCodeValue = models.HttpCodeValue;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
 const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
-const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
+const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateRequest;
 const DeleteLiveCertResponse = models.DeleteLiveCertResponse;
 const CreateCommonMixStreamResponse = models.CreateCommonMixStreamResponse;
 const CreateLiveCallbackTemplateResponse = models.CreateLiveCallbackTemplateResponse;
@@ -387,8 +390,9 @@ Note: This API can filter by IsFilter and return the push history.
     }
 
     /**
-     * This API is used to create a general stream mix. It can be used basically in the same way as the legacy `mix_streamv2.cancel_mix_stream` API.
+     * This API is used to create a general stream mix. It can be used basically in the same way as the legacy `mix_streamv2.start_mix_stream_advanced` API.
 Note: currently, up to 16 streams can be mixed.
+Best practice: https://cloud.tencent.com/document/product/267/45566
      * @param {CreateCommonMixStreamRequest} req
      * @param {function(string, CreateCommonMixStreamResponse):void} cb
      * @public
@@ -566,7 +570,8 @@ Note: data can be queried one hour after it is generated. For example, data betw
     }
 
     /**
-     * This API is used to return the live stream list.
+     * This API is used to return a list of live streams. It queries the information of live streams after they are pushed successfully.
+Note: this API can query up to 20,000 streams. If you want to query more than 20,000 streams, please contact after-sales service.
      * @param {DescribeLiveStreamOnlineListRequest} req
      * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
      * @public
@@ -1103,6 +1108,17 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     AddLiveDomain(req, cb) {
         let resp = new AddLiveDomainResponse();
         this.request("AddLiveDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the billable bandwidth of live stream relaying in the last 3 months. The query period is up to 31 days.
+     * @param {DescribeDeliverBandwidthListRequest} req
+     * @param {function(string, DescribeDeliverBandwidthListResponse):void} cb
+     * @public
+     */
+    DescribeDeliverBandwidthList(req, cb) {
+        let resp = new DescribeDeliverBandwidthListResponse();
+        this.request("DescribeDeliverBandwidthList", req, resp, cb);
     }
 
     /**

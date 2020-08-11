@@ -237,12 +237,24 @@ class StopRecordTaskResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLiveCallbackTemplates request structure.
+ * DescribeDeliverBandwidthList response structure.
  * @class
  */
-class DescribeLiveCallbackTemplatesRequest extends  AbstractModel {
+class DescribeDeliverBandwidthListResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Billable bandwidth of live stream relaying.
+         * @type {Array.<BandwidthInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -253,6 +265,16 @@ class DescribeLiveCallbackTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new BandwidthInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1882,19 +1904,12 @@ class DescribeLivePlayAuthKeyResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLiveSnapshotTemplate request structure.
+ * DescribeLiveCallbackTemplates request structure.
  * @class
  */
-class DescribeLiveSnapshotTemplateRequest extends  AbstractModel {
+class DescribeLiveCallbackTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Template ID.
-Template ID returned by the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
-         * @type {number || null}
-         */
-        this.TemplateId = null;
 
     }
 
@@ -1905,7 +1920,6 @@ Template ID returned by the [CreateLiveSnapshotTemplate](/document/product/267/3
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -2700,6 +2714,77 @@ class AddLiveWatermarkResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeLiveStreamPushInfoList response structure.
+ * @class
+ */
+class DescribeLiveStreamPushInfoListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Live stream statistics list.
+         * @type {Array.<PushDataInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * Total number of live streams.
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * Total number of pages.
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * Page number where the current data resides.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of live streams per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new PushDataInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveDomainCert response structure.
  * @class
  */
@@ -2913,6 +2998,41 @@ Note: `EndTime` and `StartTime` only support querying data for the last day.
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
         this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
+
+    }
+}
+
+/**
+ * DescribeDeliverBandwidthList request structure.
+ * @class
+ */
+class DescribeDeliverBandwidthListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time in the format of "%Y-%m-%d %H:%M:%S".
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in the format of "%Y-%m-%d %H:%M:%S". Data in the last 3 months can be queried, and the query period is up to 1 month.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -6115,6 +6235,91 @@ Note: `EndTime` and `StartTime` only support querying data for the last day.
 }
 
 /**
+ * ModifyLiveCallbackTemplate request structure.
+ * @class
+ */
+class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID returned by the `DescribeLiveCallbackTemplates` API.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Stream starting callback URL.
+         * @type {string || null}
+         */
+        this.StreamBeginNotifyUrl = null;
+
+        /**
+         * Interruption callback URL.
+         * @type {string || null}
+         */
+        this.StreamEndNotifyUrl = null;
+
+        /**
+         * Recording callback URL.
+         * @type {string || null}
+         */
+        this.RecordNotifyUrl = null;
+
+        /**
+         * Screencapturing callback URL.
+         * @type {string || null}
+         */
+        this.SnapshotNotifyUrl = null;
+
+        /**
+         * Porn detection callback URL.
+         * @type {string || null}
+         */
+        this.PornCensorshipNotifyUrl = null;
+
+        /**
+         * Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
+[Event Message Notification](/document/product/267/32744).
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.StreamBeginNotifyUrl = 'StreamBeginNotifyUrl' in params ? params.StreamBeginNotifyUrl : null;
+        this.StreamEndNotifyUrl = 'StreamEndNotifyUrl' in params ? params.StreamEndNotifyUrl : null;
+        this.RecordNotifyUrl = 'RecordNotifyUrl' in params ? params.RecordNotifyUrl : null;
+        this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
+        this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
+
+    }
+}
+
+/**
  * DescribeProvinceIspPlayInfoList request structure.
  * @class
  */
@@ -7713,24 +7918,26 @@ class ForbidLiveStreamResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLiveSnapshotTemplates response structure.
+ * Bandwidth information
  * @class
  */
-class DescribeLiveSnapshotTemplatesResponse extends  AbstractModel {
+class BandwidthInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Screencapturing template list.
-         * @type {Array.<SnapshotTemplateInfo> || null}
-         */
-        this.Templates = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Format of return value:
+yyyy-mm-dd HH:MM:SS
+The time accuracy matches with the query granularity.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Time = null;
+
+        /**
+         * Bandwidth.
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
 
     }
 
@@ -7741,16 +7948,8 @@ class DescribeLiveSnapshotTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Templates) {
-            this.Templates = new Array();
-            for (let z in params.Templates) {
-                let obj = new SnapshotTemplateInfo();
-                obj.deserialize(params.Templates[z]);
-                this.Templates.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
 
     }
 }
@@ -8398,7 +8597,7 @@ class ModifyLiveCertRequest extends  AbstractModel {
 }
 
 /**
- * General stream mix control parameter
+ * 
  * @class
  */
 class CommonMixControlParams extends  AbstractModel {
@@ -8406,11 +8605,16 @@ class CommonMixControlParams extends  AbstractModel {
         super();
 
         /**
-         * Valid values: [0,1].
-If 1 is entered, when the layer resolution in the parameter is different from the actual video resolution, the video will be automatically cropped according to the resolution set by the layer.
+         * 
          * @type {number || null}
          */
         this.UseMixCropCenter = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AllowCopy = null;
 
     }
 
@@ -8422,6 +8626,7 @@ If 1 is entered, when the layer resolution in the parameter is different from th
             return;
         }
         this.UseMixCropCenter = 'UseMixCropCenter' in params ? params.UseMixCropCenter : null;
+        this.AllowCopy = 'AllowCopy' in params ? params.AllowCopy : null;
 
     }
 }
@@ -8796,42 +9001,18 @@ class DeleteLiveRecordRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLiveStreamPushInfoList response structure.
+ * DescribeLiveSnapshotTemplates response structure.
  * @class
  */
-class DescribeLiveStreamPushInfoListResponse extends  AbstractModel {
+class DescribeLiveSnapshotTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Live stream statistics list.
-         * @type {Array.<PushDataInfo> || null}
+         * Screencapturing template list.
+         * @type {Array.<SnapshotTemplateInfo> || null}
          */
-        this.DataInfoList = null;
-
-        /**
-         * Total number of live streams.
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * Total number of pages.
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * Page number where the current data resides.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Number of live streams per page.
-         * @type {number || null}
-         */
-        this.PageSize = null;
+        this.Templates = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8849,18 +9030,14 @@ class DescribeLiveStreamPushInfoListResponse extends  AbstractModel {
             return;
         }
 
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new PushDataInfo();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
+        if (params.Templates) {
+            this.Templates = new Array();
+            for (let z in params.Templates) {
+                let obj = new SnapshotTemplateInfo();
+                obj.deserialize(params.Templates[z]);
+                this.Templates.push(obj);
             }
         }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9092,6 +9269,7 @@ Note: This parameter will take effect later.
 
         /**
          * Width. Default value: 0.
+Value range: [0-3000].
          * @type {number || null}
          */
         this.Width = null;
@@ -9110,6 +9288,7 @@ Note: This parameter will take effect later.
 
         /**
          * Height. Default value: 0.
+Value range: [0-3000].
          * @type {number || null}
          */
         this.Height = null;
@@ -10554,67 +10733,19 @@ class DeleteLiveSnapshotTemplateResponse extends  AbstractModel {
 }
 
 /**
- * ModifyLiveCallbackTemplate request structure.
+ * DescribeLiveSnapshotTemplate request structure.
  * @class
  */
-class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
+class DescribeLiveSnapshotTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
          * Template ID.
+Template ID returned by the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
          * @type {number || null}
          */
         this.TemplateId = null;
-
-        /**
-         * Template name.
-         * @type {string || null}
-         */
-        this.TemplateName = null;
-
-        /**
-         * Description.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Stream starting callback URL.
-         * @type {string || null}
-         */
-        this.StreamBeginNotifyUrl = null;
-
-        /**
-         * Interruption callback URL.
-         * @type {string || null}
-         */
-        this.StreamEndNotifyUrl = null;
-
-        /**
-         * Recording callback URL.
-         * @type {string || null}
-         */
-        this.RecordNotifyUrl = null;
-
-        /**
-         * Screencapturing callback URL.
-         * @type {string || null}
-         */
-        this.SnapshotNotifyUrl = null;
-
-        /**
-         * Porn detection callback URL.
-         * @type {string || null}
-         */
-        this.PornCensorshipNotifyUrl = null;
-
-        /**
-         * Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
-[Event Message Notification](/document/product/267/32744).
-         * @type {string || null}
-         */
-        this.CallbackKey = null;
 
     }
 
@@ -10626,14 +10757,6 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
             return;
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.StreamBeginNotifyUrl = 'StreamBeginNotifyUrl' in params ? params.StreamBeginNotifyUrl : null;
-        this.StreamEndNotifyUrl = 'StreamEndNotifyUrl' in params ? params.StreamEndNotifyUrl : null;
-        this.RecordNotifyUrl = 'RecordNotifyUrl' in params ? params.RecordNotifyUrl : null;
-        this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
-        this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
-        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
 
     }
 }
@@ -12171,7 +12294,7 @@ module.exports = {
     EnableLiveDomainResponse: EnableLiveDomainResponse,
     CreateLiveCertRequest: CreateLiveCertRequest,
     StopRecordTaskResponse: StopRecordTaskResponse,
-    DescribeLiveCallbackTemplatesRequest: DescribeLiveCallbackTemplatesRequest,
+    DescribeDeliverBandwidthListResponse: DescribeDeliverBandwidthListResponse,
     DeleteLiveRecordRuleRequest: DeleteLiveRecordRuleRequest,
     ResumeLiveStreamRequest: ResumeLiveStreamRequest,
     DeleteLiveTranscodeTemplateResponse: DeleteLiveTranscodeTemplateResponse,
@@ -12202,7 +12325,7 @@ module.exports = {
     DeleteLiveCallbackTemplateRequest: DeleteLiveCallbackTemplateRequest,
     DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
     DescribeLivePlayAuthKeyResponse: DescribeLivePlayAuthKeyResponse,
-    DescribeLiveSnapshotTemplateRequest: DescribeLiveSnapshotTemplateRequest,
+    DescribeLiveCallbackTemplatesRequest: DescribeLiveCallbackTemplatesRequest,
     DomainInfo: DomainInfo,
     DescribeLiveTranscodeRulesRequest: DescribeLiveTranscodeRulesRequest,
     DeleteLiveSnapshotRuleRequest: DeleteLiveSnapshotRuleRequest,
@@ -12217,11 +12340,13 @@ module.exports = {
     CreateLiveRecordRuleRequest: CreateLiveRecordRuleRequest,
     DescribeLiveSnapshotTemplatesRequest: DescribeLiveSnapshotTemplatesRequest,
     AddLiveWatermarkResponse: AddLiveWatermarkResponse,
+    DescribeLiveStreamPushInfoListResponse: DescribeLiveStreamPushInfoListResponse,
     DescribeLiveDomainCertResponse: DescribeLiveDomainCertResponse,
     DescribeLiveRecordTemplateRequest: DescribeLiveRecordTemplateRequest,
     ModifyLiveDomainCertRequest: ModifyLiveDomainCertRequest,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     DescribeProIspPlaySumInfoListRequest: DescribeProIspPlaySumInfoListRequest,
+    DescribeDeliverBandwidthListRequest: DescribeDeliverBandwidthListRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
     DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
     ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
@@ -12285,6 +12410,7 @@ module.exports = {
     CdnPlayStatData: CdnPlayStatData,
     AddLiveDomainResponse: AddLiveDomainResponse,
     DescribeHttpStatusInfoListRequest: DescribeHttpStatusInfoListRequest,
+    ModifyLiveCallbackTemplateRequest: ModifyLiveCallbackTemplateRequest,
     DescribeProvinceIspPlayInfoListRequest: DescribeProvinceIspPlayInfoListRequest,
     DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
@@ -12314,7 +12440,7 @@ module.exports = {
     DeleteLiveSnapshotRuleResponse: DeleteLiveSnapshotRuleResponse,
     CreateLiveRecordRequest: CreateLiveRecordRequest,
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
-    DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,
+    BandwidthInfo: BandwidthInfo,
     CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
     UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
     CertInfo: CertInfo,
@@ -12338,7 +12464,7 @@ module.exports = {
     DomainDetailInfo: DomainDetailInfo,
     HttpStatusInfo: HttpStatusInfo,
     DeleteLiveRecordRequest: DeleteLiveRecordRequest,
-    DescribeLiveStreamPushInfoListResponse: DescribeLiveStreamPushInfoListResponse,
+    DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,
     StopRecordTaskRequest: StopRecordTaskRequest,
     HttpStatusData: HttpStatusData,
     HttpCodeInfo: HttpCodeInfo,
@@ -12372,7 +12498,7 @@ module.exports = {
     HttpCodeValue: HttpCodeValue,
     DescribeLiveStreamOnlineListRequest: DescribeLiveStreamOnlineListRequest,
     DeleteLiveSnapshotTemplateResponse: DeleteLiveSnapshotTemplateResponse,
-    ModifyLiveCallbackTemplateRequest: ModifyLiveCallbackTemplateRequest,
+    DescribeLiveSnapshotTemplateRequest: DescribeLiveSnapshotTemplateRequest,
     DeleteLiveCertResponse: DeleteLiveCertResponse,
     CreateCommonMixStreamResponse: CreateCommonMixStreamResponse,
     CreateLiveCallbackTemplateResponse: CreateLiveCallbackTemplateResponse,

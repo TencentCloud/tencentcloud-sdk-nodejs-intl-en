@@ -2920,6 +2920,48 @@ class DisableWhiteBoxKeyRequest extends  AbstractModel {
 }
 
 /**
+ * UnbindCloudResource request structure.
+ * @class
+ */
+class UnbindCloudResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * Unique ID of a Tencent Cloud service
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * Resource/instance ID, which is stored as a string and defined by the caller based on the Tencent Cloud service’s features.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
  * ListKeyDetail request structure.
  * @class
  */
@@ -3001,6 +3043,34 @@ class ListKeyDetailRequest extends  AbstractModel {
  * @class
  */
 class EnableKeyRotationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * BindCloudResource response structure.
+ * @class
+ */
+class BindCloudResourceResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3291,6 +3361,48 @@ class GetPublicKeyResponse extends  AbstractModel {
 }
 
 /**
+ * BindCloudResource request structure.
+ * @class
+ */
+class BindCloudResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * Unique ID of a Tencent Cloud service
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * Resource/instance ID, which is stored as a string and defined by the caller based on the Tencent Cloud service’s features.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
  * DescribeWhiteBoxDecryptKey response structure.
  * @class
  */
@@ -3399,6 +3511,34 @@ class UpdateKeyDescriptionRequest extends  AbstractModel {
         }
         this.Description = 'Description' in params ? params.Description : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * UnbindCloudResource response structure.
+ * @class
+ */
+class UnbindCloudResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3548,8 +3688,10 @@ module.exports = {
     CancelKeyDeletionResponse: CancelKeyDeletionResponse,
     DisableKeysRequest: DisableKeysRequest,
     DisableWhiteBoxKeyRequest: DisableWhiteBoxKeyRequest,
+    UnbindCloudResourceRequest: UnbindCloudResourceRequest,
     ListKeyDetailRequest: ListKeyDetailRequest,
     EnableKeyRotationResponse: EnableKeyRotationResponse,
+    BindCloudResourceResponse: BindCloudResourceResponse,
     EnableKeysResponse: EnableKeysResponse,
     DescribeWhiteBoxDeviceFingerprintsRequest: DescribeWhiteBoxDeviceFingerprintsRequest,
     EncryptByWhiteBoxRequest: EncryptByWhiteBoxRequest,
@@ -3558,9 +3700,11 @@ module.exports = {
     DisableKeyRequest: DisableKeyRequest,
     GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
     GetPublicKeyResponse: GetPublicKeyResponse,
+    BindCloudResourceRequest: BindCloudResourceRequest,
     DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
     DescribeWhiteBoxDeviceFingerprintsResponse: DescribeWhiteBoxDeviceFingerprintsResponse,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
+    UnbindCloudResourceResponse: UnbindCloudResourceResponse,
     DescribeKeyResponse: DescribeKeyResponse,
     DisableKeyRotationRequest: DisableKeyRotationRequest,
 

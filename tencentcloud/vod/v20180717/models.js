@@ -7838,8 +7838,8 @@ class ImageWatermarkInput extends  AbstractModel {
 
         /**
          * Watermark width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
 Default value: 10%.
          * @type {string || null}
          */
@@ -7847,9 +7847,9 @@ Default value: 10%.
 
         /**
          * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
-Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
          * @type {string || null}
          */
         this.Height = null;
@@ -10537,13 +10537,15 @@ Default value: OFF.
         this.ResolutionNames = null;
 
         /**
-         * 
+         * Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 
+         * Scheme used for playback. If it is left empty or set to `Default`, the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used. Other valid values:
+<li>HTTP;</li>
+<li>HTTPS.</li>
          * @type {string || null}
          */
         this.Scheme = null;
@@ -12542,13 +12544,16 @@ class PlayerConfig extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
-         * 
+         * Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 
+         * Scheme used for playback. Valid values:
+<li>Default: the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used;</li>
+<li>HTTP;</li>
+<li>HTTPS.</li>
          * @type {string || null}
          */
         this.Scheme = null;
@@ -13969,7 +13974,8 @@ politician:
 <li>bureau_politician: ministry leader;</li>
 <li>county_politician: county/city leader;</li>
 <li>rural_politician: town leader;</li>
-<li>sensitive_politician: politically sensitive figure.</li>
+<li>sensitive_politician: politically sensitive figure;</li>
+<li>foreign_politician: head of a foreign country/government.</li>
 entertainment:
 <li>sensitive_entertainment: sensitive entertainment celebrity.</li>
 sport:
@@ -13979,7 +13985,8 @@ entrepreneur:
 scholar:
 <li>sensitive_scholar: sensitive educator.</li>
 celebrity:
-<li>sensitive_celebrity: sensitive well-known figure.</li>
+<li>sensitive_celebrity: sensitive well-known figure;</li>
+<li>historical_celebrity: well-known historical figures.</li>
 military:
 <li>sensitive_military: militarily sensitive figure.</li>
          * @type {string || null}
@@ -14240,17 +14247,17 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
 
         /**
          * Watermark width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
          * @type {string || null}
          */
         this.Width = null;
 
         /**
          * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
-`0px` means that `Height` will be proportionally scaled according to the video width.
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
          * @type {string || null}
          */
         this.Height = null;
@@ -15179,7 +15186,7 @@ class PullUploadRequest extends  AbstractModel {
 
         /**
          * URL of the media to be pulled. Supported media format: HLS; unsupported media format: DASH.
-For more information about supported extensions, please see [Media Types](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B?from_cn_redirect=1).
          * @type {string || null}
          */
         this.MediaUrl = null;
@@ -15209,7 +15216,9 @@ For more information about supported extensions, please see [Media Types](https:
         this.ExpireTime = null;
 
         /**
-         * Specifies upload region. This is only applicable to users that have special requirements for the upload region (currently, only Beijing, Shanghai, and Chongqing regions are supported).
+         * Specifies upload region. This is only applicable to users that have special requirements for the upload region:
+<li>If it is left empty, the upload region is your [default region](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4);</li>
+<li>If it is specified, please make sure that the upload region has been [enabled for storage](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4).</li>
          * @type {string || null}
          */
         this.StorageRegion = null;
@@ -15245,7 +15254,7 @@ For more information about supported extensions, please see [Media Types](https:
         this.SubAppId = null;
 
         /**
-         * Source context, which is used to pass through the user request information. The [upload callback](/document/product/266/7830) API will return the value of this field. It can contain up to 250 characters.
+         * Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
          * @type {string || null}
          */
         this.SourceContext = null;
@@ -20664,7 +20673,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Suggestion = null;
 
         /**
-         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/34187#PoliticalImgReviewTemplateInfo?from_cn_redirect=1) and this parameter is as follows:
 violation_photo:
 <li>violation_photo: violating photo.</li>
 Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
@@ -21119,13 +21128,16 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.ResolutionNames = null;
 
         /**
-         * 
+         * Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 
+         * Scheme used for playback. Valid values:
+<li>Default: the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used;</li>
+<li>HTTP;</li>
+<li>HTTPS.</li>
          * @type {string || null}
          */
         this.Scheme = null;
@@ -24001,7 +24013,7 @@ class PullEventsRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of face recognition task
+ * 
  * @class
  */
 class FaceConfigureInfoForUpdate extends  AbstractModel {
@@ -24009,40 +24021,31 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of face recognition task. Valid values:
-<li>ON: enables intelligent face recognition task;</li>
-<li>OFF: disables intelligent face recognition task.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
+         * 
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
-<li>entertainment: entertainment celebrity;</li>
-<li>sport: sports celebrity;</li>
-<li>politician: politically sensitive figure.</li>
+         * 
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
 
         /**
-         * Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * 
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
 
         /**
-         * Figure library. Valid values:
-<li>Default: default figure library;</li>
-<li>UserDefine: custom figure library.</li>
-<li>All: both default and custom figure libraries will be used.</li>
+         * 
          * @type {string || null}
          */
         this.FaceLibrary = null;
@@ -24965,7 +24968,7 @@ class FaceConfigureInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100. Default value: 95.
+         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100. Default value: 95.
          * @type {number || null}
          */
         this.Score = null;

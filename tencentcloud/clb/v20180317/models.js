@@ -508,6 +508,66 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
 }
 
 /**
+ * Health check status of a forwarding rule
+ * @class
+ */
+class RuleHealth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Forwarding rule ID
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Domain name of the forwarding rule
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Forwarding rule Url
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Health check status of the real server bound to this rule
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TargetHealth> || null}
+         */
+        this.Targets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new TargetHealth();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteRule request structure.
  * @class
  */
@@ -1711,6 +1771,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * SetLoadBalancerClsLog request structure.
+ * @class
+ */
+class SetLoadBalancerClsLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLS logset ID
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * CLS log topic ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+
+    }
+}
+
+/**
  * DeleteLoadBalancerListeners request structure.
  * @class
  */
@@ -2100,18 +2202,25 @@ class DescribeTaskStatusResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTargetHealth request structure.
+ * BatchRegisterTargets response structure.
  * @class
  */
-class DescribeTargetHealthRequest extends  AbstractModel {
+class BatchRegisterTargetsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of IDs of CLB instances to be queried
+         * IDs of the listeners failed to bind. If this is blank, all listeners are bound successfully.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
-        this.LoadBalancerIds = null;
+        this.FailListenerIdSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2122,7 +2231,8 @@ class DescribeTargetHealthRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.FailListenerIdSet = 'FailListenerIdSet' in params ? params.FailListenerIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2319,39 +2429,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Health check status of a forwarding rule
+ * DescribeClsLogSet request structure.
  * @class
  */
-class RuleHealth extends  AbstractModel {
+class DescribeClsLogSetRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Forwarding rule ID
-         * @type {string || null}
-         */
-        this.LocationId = null;
-
-        /**
-         * Domain name of the forwarding rule
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * Forwarding rule Url
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Health check status of the real server bound to this rule
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TargetHealth> || null}
-         */
-        this.Targets = null;
 
     }
 
@@ -2361,18 +2444,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
-
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new TargetHealth();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
-            }
         }
 
     }
@@ -3024,6 +3095,41 @@ class AssociateTargetGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * CreateTopic request structure.
+ * @class
+ */
+class CreateTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * The number of topic partitions, which changes as partitions are split or merged. Each log topic can have up to 50 partitions. If this parameter is not passed in, 1 partition will be created by default and up to 10 partitions are allowed to be created.
+         * @type {number || null}
+         */
+        this.PartitionCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
+
+    }
+}
+
+/**
  * DeleteListener request structure.
  * @class
  */
@@ -3549,6 +3655,41 @@ class ModifyDomainRequest extends  AbstractModel {
 }
 
 /**
+ * CreateClsLogSet response structure.
+ * @class
+ */
+class CreateClsLogSetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset ID.
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Details of a real server bound to a listener
  * @class
  */
@@ -3817,6 +3958,34 @@ class ClassicalListener extends  AbstractModel {
         this.CertId = 'CertId' in params ? params.CertId : null;
         this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DeleteLoadBalancer request structure.
+ * @class
+ */
+class DeleteLoadBalancerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of IDs of the CLB instances to be deleted. Array length limit: 20
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
 
     }
 }
@@ -4231,18 +4400,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DeleteLoadBalancer request structure.
+ * CreateTopic response structure.
  * @class
  */
-class DeleteLoadBalancerRequest extends  AbstractModel {
+class CreateTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of IDs of the CLB instances to be deleted. Array length limit: 20
-         * @type {Array.<string> || null}
+         * Log topic ID
+         * @type {string || null}
          */
-        this.LoadBalancerIds = null;
+        this.TopicId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4253,7 +4428,8 @@ class DeleteLoadBalancerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4865,6 +5041,41 @@ They represent weighted round robin and least connections, respectively. Default
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
+
+    }
+}
+
+/**
+ * CreateClsLogSet request structure.
+ * @class
+ */
+class CreateClsLogSetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset retention period in days; max value: 90
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Logset name, which must be unique among all CLS logsets; default value: clb_logset
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
 
     }
 }
@@ -5632,25 +5843,18 @@ class TargetRegionInfo extends  AbstractModel {
 }
 
 /**
- * BatchRegisterTargets response structure.
+ * DescribeTargetHealth request structure.
  * @class
  */
-class BatchRegisterTargetsResponse extends  AbstractModel {
+class DescribeTargetHealthRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * IDs of the listeners failed to bind. If this is blank, all listeners are bound successfully.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of IDs of CLB instances to be queried
          * @type {Array.<string> || null}
          */
-        this.FailListenerIdSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.LoadBalancerIds = null;
 
     }
 
@@ -5661,8 +5865,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.FailListenerIdSet = 'FailListenerIdSet' in params ? params.FailListenerIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
 
     }
 }
@@ -5736,30 +5939,24 @@ class DeleteRuleResponse extends  AbstractModel {
 }
 
 /**
- * SetLoadBalancerClsLog request structure.
+ * DescribeClsLogSet response structure.
  * @class
  */
-class SetLoadBalancerClsLogRequest extends  AbstractModel {
+class DescribeClsLogSetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB instance ID
+         * Logset ID
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
+        this.LogsetId = null;
 
         /**
-         * CLS logset ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.LogSetId = null;
-
-        /**
-         * CLS log topic ID
-         * @type {string || null}
-         */
-        this.LogTopicId = null;
+        this.RequestId = null;
 
     }
 
@@ -5770,9 +5967,8 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
-        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8022,6 +8218,7 @@ module.exports = {
     BatchModifyTargetWeightResponse: BatchModifyTargetWeightResponse,
     SetSecurityGroupForLoadbalancersRequest: SetSecurityGroupForLoadbalancersRequest,
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
+    RuleHealth: RuleHealth,
     DeleteRuleRequest: DeleteRuleRequest,
     ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
@@ -8048,6 +8245,7 @@ module.exports = {
     RegisterTargetsWithClassicalLBResponse: RegisterTargetsWithClassicalLBResponse,
     DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
+    SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
     DeleteLoadBalancerListenersRequest: DeleteLoadBalancerListenersRequest,
     BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
@@ -8058,12 +8256,12 @@ module.exports = {
     ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
-    DescribeTargetHealthRequest: DescribeTargetHealthRequest,
+    BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     Target: Target,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
     CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
-    RuleHealth: RuleHealth,
+    DescribeClsLogSetRequest: DescribeClsLogSetRequest,
     Listener: Listener,
     ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
@@ -8074,6 +8272,7 @@ module.exports = {
     RegisterTargetsRequest: RegisterTargetsRequest,
     HealthCheck: HealthCheck,
     AssociateTargetGroupsResponse: AssociateTargetGroupsResponse,
+    CreateTopicRequest: CreateTopicRequest,
     DeleteListenerRequest: DeleteListenerRequest,
     ClassicalHealth: ClassicalHealth,
     ModifyTargetPortResponse: ModifyTargetPortResponse,
@@ -8085,16 +8284,18 @@ module.exports = {
     ExclusiveCluster: ExclusiveCluster,
     DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
     ModifyDomainRequest: ModifyDomainRequest,
+    CreateClsLogSetResponse: CreateClsLogSetResponse,
     Backend: Backend,
     LBChargePrepaid: LBChargePrepaid,
     ClassicalListener: ClassicalListener,
+    DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
     CertificateInput: CertificateInput,
     CreateListenerResponse: CreateListenerResponse,
     CreateTargetGroupResponse: CreateTargetGroupResponse,
     CreateLoadBalancerSnatIpsResponse: CreateLoadBalancerSnatIpsResponse,
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     RuleOutput: RuleOutput,
-    DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
+    CreateTopicResponse: CreateTopicResponse,
     CreateRuleRequest: CreateRuleRequest,
     ModifyTargetGroupInstancesPortResponse: ModifyTargetGroupInstancesPortResponse,
     RuleTargets: RuleTargets,
@@ -8107,6 +8308,7 @@ module.exports = {
     CreateTargetGroupRequest: CreateTargetGroupRequest,
     ClusterItem: ClusterItem,
     CreateListenerRequest: CreateListenerRequest,
+    CreateClsLogSetRequest: CreateClsLogSetRequest,
     DisassociateTargetGroupsRequest: DisassociateTargetGroupsRequest,
     Filter: Filter,
     ModifyDomainResponse: ModifyDomainResponse,
@@ -8124,10 +8326,10 @@ module.exports = {
     BatchTarget: BatchTarget,
     DescribeLoadBalancerListByCertIdRequest: DescribeLoadBalancerListByCertIdRequest,
     TargetRegionInfo: TargetRegionInfo,
-    BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
+    DescribeTargetHealthRequest: DescribeTargetHealthRequest,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DeleteRuleResponse: DeleteRuleResponse,
-    SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
+    DescribeClsLogSetResponse: DescribeClsLogSetResponse,
     ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,

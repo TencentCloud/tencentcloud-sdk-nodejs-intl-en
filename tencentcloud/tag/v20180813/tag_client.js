@@ -16,39 +16,53 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeTagsResponse = models.DescribeTagsResponse;
+const TagWithDelete = models.TagWithDelete;
+const DetachResourcesTagRequest = models.DetachResourcesTagRequest;
+const AttachResourcesTagResponse = models.AttachResourcesTagResponse;
 const DeleteTagRequest = models.DeleteTagRequest;
 const DeleteResourceTagResponse = models.DeleteResourceTagResponse;
 const DescribeResourceTagsByTagKeysRequest = models.DescribeResourceTagsByTagKeysRequest;
 const ModifyResourceTagsResponse = models.ModifyResourceTagsResponse;
+const DescribeTagsRequest = models.DescribeTagsRequest;
 const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
+const DescribeResourcesByTagsUnionRequest = models.DescribeResourcesByTagsUnionRequest;
+const DescribeTagsResponse = models.DescribeTagsResponse;
 const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
+const DescribeTagsSeqResponse = models.DescribeTagsSeqResponse;
 const DescribeResourceTagsResponse = models.DescribeResourceTagsResponse;
 const DescribeResourceTagsByResourceIdsRequest = models.DescribeResourceTagsByResourceIdsRequest;
+const DescribeResourcesByTagsUnionResponse = models.DescribeResourcesByTagsUnionResponse;
 const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByResourceIdsResponse;
+const ModifyResourcesTagValueRequest = models.ModifyResourcesTagValueRequest;
 const TagResource = models.TagResource;
-const DescribeTagsRequest = models.DescribeTagsRequest;
+const AddResourceTagResponse = models.AddResourceTagResponse;
+const ModifyResourcesTagValueResponse = models.ModifyResourcesTagValueResponse;
 const AddResourceTagRequest = models.AddResourceTagRequest;
+const DescribeTagValuesSeqResponse = models.DescribeTagValuesSeqResponse;
 const CreateTagRequest = models.CreateTagRequest;
 const DescribeResourceTagsByTagKeysResponse = models.DescribeResourceTagsByTagKeysResponse;
+const DescribeTagsSeqRequest = models.DescribeTagsSeqRequest;
+const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
 const TagFilter = models.TagFilter;
 const Tag = models.Tag;
-const DescribeResourceTagsRequest = models.DescribeResourceTagsRequest;
+const AttachResourcesTagRequest = models.AttachResourcesTagRequest;
 const CreateTagResponse = models.CreateTagResponse;
+const DetachResourcesTagResponse = models.DetachResourcesTagResponse;
+const DescribeResourceTagsByResourceIdsSeqResponse = models.DescribeResourceTagsByResourceIdsSeqResponse;
 const DeleteTagResponse = models.DeleteTagResponse;
 const ResourceIdTag = models.ResourceIdTag;
-const AddResourceTagResponse = models.AddResourceTagResponse;
+const DescribeTagValuesSeqRequest = models.DescribeTagValuesSeqRequest;
 const UpdateResourceTagValueRequest = models.UpdateResourceTagValueRequest;
-const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
+const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
 const DeleteResourceTagRequest = models.DeleteResourceTagRequest;
 const UpdateResourceTagValueResponse = models.UpdateResourceTagValueResponse;
 const TagKeyObject = models.TagKeyObject;
+const DescribeResourceTagsRequest = models.DescribeResourceTagsRequest;
+const DescribeResourceTagsByResourceIdsSeqRequest = models.DescribeResourceTagsByResourceIdsSeqRequest;
 const ResourceTag = models.ResourceTag;
-const TagWithDelete = models.TagWithDelete;
-const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
 
 
 /**
@@ -73,14 +87,25 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the values of tags associated with a resource (the tag key does not change).
-     * @param {UpdateResourceTagValueRequest} req
-     * @param {function(string, UpdateResourceTagValueResponse):void} cb
+     * This API is used to query tag values in a created tag list.
+     * @param {DescribeTagValuesSeqRequest} req
+     * @param {function(string, DescribeTagValuesSeqResponse):void} cb
      * @public
      */
-    UpdateResourceTagValue(req, cb) {
-        let resp = new UpdateResourceTagValueResponse();
-        this.request("UpdateResourceTagValue", req, resp, cb);
+    DescribeTagValuesSeq(req, cb) {
+        let resp = new DescribeTagValuesSeqResponse();
+        this.request("DescribeTagValuesSeq", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a tag from multiple resources.
+     * @param {DetachResourcesTagRequest} req
+     * @param {function(string, DetachResourcesTagResponse):void} cb
+     * @public
+     */
+    DetachResourcesTag(req, cb) {
+        let resp = new DetachResourcesTagResponse();
+        this.request("DetachResourcesTag", req, resp, cb);
     }
 
     /**
@@ -140,6 +165,17 @@ class TagClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the values of tags associated with a resource (the tag key does not change).
+     * @param {UpdateResourceTagValueRequest} req
+     * @param {function(string, UpdateResourceTagValueResponse):void} cb
+     * @public
+     */
+    UpdateResourceTagValue(req, cb) {
+        let resp = new UpdateResourceTagValueResponse();
+        this.request("UpdateResourceTagValue", req, resp, cb);
+    }
+
+    /**
      * This API is used to unassociate tags and resources.
      * @param {DeleteResourceTagRequest} req
      * @param {function(string, DeleteResourceTagResponse):void} cb
@@ -148,6 +184,28 @@ class TagClient extends AbstractClient {
     DeleteResourceTag(req, cb) {
         let resp = new DeleteResourceTagResponse();
         this.request("DeleteResourceTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query resource list by tags.
+     * @param {DescribeResourcesByTagsUnionRequest} req
+     * @param {function(string, DescribeResourcesByTagsUnionResponse):void} cb
+     * @public
+     */
+    DescribeResourcesByTagsUnion(req, cb) {
+        let resp = new DescribeResourcesByTagsUnionResponse();
+        this.request("DescribeResourcesByTagsUnion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view the tags associated with a resource in sequence.
+     * @param {DescribeResourceTagsByResourceIdsSeqRequest} req
+     * @param {function(string, DescribeResourceTagsByResourceIdsSeqResponse):void} cb
+     * @public
+     */
+    DescribeResourceTagsByResourceIdsSeq(req, cb) {
+        let resp = new DescribeResourceTagsByResourceIdsSeqResponse();
+        this.request("DescribeResourceTagsByResourceIdsSeq", req, resp, cb);
     }
 
     /**
@@ -160,6 +218,18 @@ class TagClient extends AbstractClient {
     DescribeTags(req, cb) {
         let resp = new DescribeTagsResponse();
         this.request("DescribeTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the created tag lists.
+
+     * @param {DescribeTagsSeqRequest} req
+     * @param {function(string, DescribeTagsSeqResponse):void} cb
+     * @public
+     */
+    DescribeTagsSeq(req, cb) {
+        let resp = new DescribeTagsSeqResponse();
+        this.request("DescribeTagsSeq", req, resp, cb);
     }
 
     /**
@@ -196,6 +266,17 @@ class TagClient extends AbstractClient {
     }
 
     /**
+     * This API is used to associate a tag with multiple resources.
+     * @param {AttachResourcesTagRequest} req
+     * @param {function(string, AttachResourcesTagResponse):void} cb
+     * @public
+     */
+    AttachResourcesTag(req, cb) {
+        let resp = new AttachResourcesTagResponse();
+        this.request("AttachResourcesTag", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a tag key and tag value pair.
      * @param {CreateTagRequest} req
      * @param {function(string, CreateTagResponse):void} cb
@@ -204,6 +285,17 @@ class TagClient extends AbstractClient {
     CreateTag(req, cb) {
         let resp = new CreateTagResponse();
         this.request("CreateTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the tag value corresponding to a tag key associated with multiple resources.
+     * @param {ModifyResourcesTagValueRequest} req
+     * @param {function(string, ModifyResourcesTagValueResponse):void} cb
+     * @public
+     */
+    ModifyResourcesTagValue(req, cb) {
+        let resp = new ModifyResourcesTagValueResponse();
+        this.request("ModifyResourcesTagValue", req, resp, cb);
     }
 
 

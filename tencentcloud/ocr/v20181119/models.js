@@ -199,6 +199,61 @@ class Coord extends  AbstractModel {
 }
 
 /**
+ * HKIDCardOCR request structure.
+ * @class
+ */
+class HKIDCardOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to check for authenticity.
+         * @type {boolean || null}
+         */
+        this.DetectFake = null;
+
+        /**
+         * Whether to return identity photo.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+        /**
+         * Base64-encoded value of image.
+Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * URL of the image.
+Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DetectFake = 'DetectFake' in params ? params.DetectFake : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
  * BankCardOCR response structure.
  * @class
  */
@@ -521,7 +576,7 @@ class TextDetection extends  AbstractModel {
         this.DetectedText = null;
 
         /**
-         * Confidence. Value range: 0–100
+         * Confidence. Value range: 0-100
          * @type {number || null}
          */
         this.Confidence = null;
@@ -614,6 +669,137 @@ Either the `ImageUrl` or `ImageBase64` of the image must be provided; if both ar
 }
 
 /**
+ * HKIDCardOCR response structure.
+ * @class
+ */
+class HKIDCardOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name in Chinese
+         * @type {string || null}
+         */
+        this.CnName = null;
+
+        /**
+         * Name in English
+         * @type {string || null}
+         */
+        this.EnName = null;
+
+        /**
+         * Telecode for the name in Chinese
+         * @type {string || null}
+         */
+        this.TelexCode = null;
+
+        /**
+         * Gender. Valid values: Male, Female
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Date of birth
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Permanent identity card.
+0: non-permanent;
+1: permanent;
+-1: unknown.
+         * @type {number || null}
+         */
+        this.Permanent = null;
+
+        /**
+         * Identity card number
+         * @type {string || null}
+         */
+        this.IdNum = null;
+
+        /**
+         * Document symbol, i.e., the symbol under the date of birth, such as "***AZ"
+         * @type {string || null}
+         */
+        this.Symbol = null;
+
+        /**
+         * First issue date
+         * @type {string || null}
+         */
+        this.FirstIssueDate = null;
+
+        /**
+         * Last receipt date
+         * @type {string || null}
+         */
+        this.CurrentIssueDate = null;
+
+        /**
+         * Authenticity check.
+0: unable to judge (because the image is blurred, incomplete, reflective, too dark, etc.);
+1: forged;
+2: authentic.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FakeDetectResult = null;
+
+        /**
+         * Base64-encoded identity photo
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HeadImage = null;
+
+        /**
+         * Multiple alarm codes. If the ID card is spoofed, photocopied, or doctored, the corresponding alarm code will be returned.
+-9102: alarm for photocopied document
+-9103: alarm for spoofed document
+-9104: alarm for doctored document
+-9105: alarm for forged document
+         * @type {Array.<number> || null}
+         */
+        this.WarningCode = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CnName = 'CnName' in params ? params.CnName : null;
+        this.EnName = 'EnName' in params ? params.EnName : null;
+        this.TelexCode = 'TelexCode' in params ? params.TelexCode : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Permanent = 'Permanent' in params ? params.Permanent : null;
+        this.IdNum = 'IdNum' in params ? params.IdNum : null;
+        this.Symbol = 'Symbol' in params ? params.Symbol : null;
+        this.FirstIssueDate = 'FirstIssueDate' in params ? params.FirstIssueDate : null;
+        this.CurrentIssueDate = 'CurrentIssueDate' in params ? params.CurrentIssueDate : null;
+        this.FakeDetectResult = 'FakeDetectResult' in params ? params.FakeDetectResult : null;
+        this.HeadImage = 'HeadImage' in params ? params.HeadImage : null;
+        this.WarningCode = 'WarningCode' in params ? params.WarningCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GeneralBasicOCR request structure.
  * @class
  */
@@ -680,12 +866,14 @@ module.exports = {
     MLIDCardOCRRequest: MLIDCardOCRRequest,
     BankCardOCRRequest: BankCardOCRRequest,
     Coord: Coord,
+    HKIDCardOCRRequest: HKIDCardOCRRequest,
     BankCardOCRResponse: BankCardOCRResponse,
     ItemCoord: ItemCoord,
     MLIDPassportOCRResponse: MLIDPassportOCRResponse,
     MLIDCardOCRResponse: MLIDCardOCRResponse,
     TextDetection: TextDetection,
     MLIDPassportOCRRequest: MLIDPassportOCRRequest,
+    HKIDCardOCRResponse: HKIDCardOCRResponse,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
 
 }

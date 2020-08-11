@@ -91,8 +91,10 @@ const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
 const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
 const DisableKeysRequest = models.DisableKeysRequest;
 const DisableWhiteBoxKeyRequest = models.DisableWhiteBoxKeyRequest;
+const UnbindCloudResourceRequest = models.UnbindCloudResourceRequest;
 const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
+const BindCloudResourceResponse = models.BindCloudResourceResponse;
 const EnableKeysResponse = models.EnableKeysResponse;
 const DescribeWhiteBoxDeviceFingerprintsRequest = models.DescribeWhiteBoxDeviceFingerprintsRequest;
 const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
@@ -101,9 +103,11 @@ const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
 const DisableKeyRequest = models.DisableKeyRequest;
 const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
 const GetPublicKeyResponse = models.GetPublicKeyResponse;
+const BindCloudResourceRequest = models.BindCloudResourceRequest;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
+const UnbindCloudResourceResponse = models.UnbindCloudResourceResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 
@@ -249,6 +253,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     DescribeWhiteBoxKeyDetails(req, cb) {
         let resp = new DescribeWhiteBoxKeyDetailsResponse();
         this.request("DescribeWhiteBoxKeyDetails", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind a key with a Tencent Cloud resource. If the key has been set to be expired automatically, the setting will be canceled to ensure that the key will not be invalid automatically. If the key and the resource has already been bound, the call will still be successful.
+     * @param {BindCloudResourceRequest} req
+     * @param {function(string, BindCloudResourceResponse):void} cb
+     * @public
+     */
+    BindCloudResource(req, cb) {
+        let resp = new BindCloudResourceResponse();
+        this.request("BindCloudResource", req, resp, cb);
     }
 
     /**
@@ -469,6 +484,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     AsymmetricRsaDecrypt(req, cb) {
         let resp = new AsymmetricRsaDecryptResponse();
         this.request("AsymmetricRsaDecrypt", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a key with a Tencent Cloud resource, indicating that the Tencent Cloud resource will not use the key any longer.
+     * @param {UnbindCloudResourceRequest} req
+     * @param {function(string, UnbindCloudResourceResponse):void} cb
+     * @public
+     */
+    UnbindCloudResource(req, cb) {
+        let resp = new UnbindCloudResourceResponse();
+        this.request("UnbindCloudResource", req, resp, cb);
     }
 
     /**

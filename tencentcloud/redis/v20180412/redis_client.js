@@ -23,6 +23,7 @@ const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const TaskInfoDetail = models.TaskInfoDetail;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
+const UpgradeInstanceVersionResponse = models.UpgradeInstanceVersionResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
@@ -36,7 +37,7 @@ const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
+const InstanceEnumParam = models.InstanceEnumParam;
 const Account = models.Account;
 const SecurityGroupsInboundAndOutbound = models.SecurityGroupsInboundAndOutbound;
 const ResetPasswordResponse = models.ResetPasswordResponse;
@@ -66,6 +67,7 @@ const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
 const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
 const DelayDistribution = models.DelayDistribution;
@@ -74,6 +76,7 @@ const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTo
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const InstanceIntegerParam = models.InstanceIntegerParam;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
+const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
@@ -98,7 +101,7 @@ const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMon
 const SecurityGroup = models.SecurityGroup;
 const CreateInstanceAccountRequest = models.CreateInstanceAccountRequest;
 const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
-const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
+const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
 const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
 const ProductConf = models.ProductConf;
 const InstanceNode = models.InstanceNode;
@@ -115,19 +118,22 @@ const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
 const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
 const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
 const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
-const InstanceEnumParam = models.InstanceEnumParam;
+const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
 const DeleteInstanceAccountRequest = models.DeleteInstanceAccountRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
 const InstanceSet = models.InstanceSet;
+const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
 const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
+const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
 const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
+const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
 const DisableReplicaReadonlyRequest = models.DisableReplicaReadonlyRequest;
@@ -183,6 +189,17 @@ class RedisClient extends AbstractClient {
     CreateInstanceAccount(req, cb) {
         let resp = new CreateInstanceAccountResponse();
         this.request("CreateInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business. Note: if the compatible version upgrade or architecture upgrade task has been initiated for an instance, its maintenance window cannot be modified.
+     * @param {ModifyMaintenanceWindowRequest} req
+     * @param {function(string, ModifyMaintenanceWindowResponse):void} cb
+     * @public
+     */
+    ModifyMaintenanceWindow(req, cb) {
+        let resp = new ModifyMaintenanceWindowResponse();
+        this.request("ModifyMaintenanceWindow", req, resp, cb);
     }
 
     /**
@@ -318,14 +335,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify instance parameters.
-     * @param {ModifyInstanceParamsRequest} req
-     * @param {function(string, ModifyInstanceParamsResponse):void} cb
+     * This API is used to query instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business.
+     * @param {DescribeMaintenanceWindowRequest} req
+     * @param {function(string, DescribeMaintenanceWindowResponse):void} cb
      * @public
      */
-    ModifyInstanceParams(req, cb) {
-        let resp = new ModifyInstanceParamsResponse();
-        this.request("ModifyInstanceParams", req, resp, cb);
+    DescribeMaintenanceWindow(req, cb) {
+        let resp = new DescribeMaintenanceWindowResponse();
+        this.request("DescribeMaintenanceWindow", req, resp, cb);
     }
 
     /**
@@ -392,6 +409,17 @@ class RedisClient extends AbstractClient {
     CreateInstances(req, cb) {
         let resp = new CreateInstancesResponse();
         this.request("CreateInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade compatible instance version (for example, from Redis 2.8 to 4.0), or upgrade instance architecture (for example, from standard architecture to cluster architecture).
+     * @param {UpgradeInstanceVersionRequest} req
+     * @param {function(string, UpgradeInstanceVersionResponse):void} cb
+     * @public
+     */
+    UpgradeInstanceVersion(req, cb) {
+        let resp = new UpgradeInstanceVersionResponse();
+        this.request("UpgradeInstanceVersion", req, resp, cb);
     }
 
     /**
@@ -469,6 +497,17 @@ class RedisClient extends AbstractClient {
     AssociateSecurityGroups(req, cb) {
         let resp = new AssociateSecurityGroupsResponse();
         this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance parameters.
+     * @param {ModifyInstanceParamsRequest} req
+     * @param {function(string, ModifyInstanceParamsResponse):void} cb
+     * @public
+     */
+    ModifyInstanceParams(req, cb) {
+        let resp = new ModifyInstanceParamsResponse();
+        this.request("ModifyInstanceParams", req, resp, cb);
     }
 
     /**

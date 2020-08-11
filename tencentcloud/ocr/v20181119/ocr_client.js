@@ -20,12 +20,14 @@ const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
 const BankCardOCRRequest = models.BankCardOCRRequest;
 const Coord = models.Coord;
+const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const ItemCoord = models.ItemCoord;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const TextDetection = models.TextDetection;
 const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
+const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 
 
@@ -133,6 +135,19 @@ The differences between different editions of general print recognition are as d
     GeneralBasicOCR(req, cb) {
         let resp = new GeneralBasicOCRResponse();
         this.request("GeneralBasicOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize key fields on the photo side of a Hong Kong (China) identity card, including name in Chinese, name in English, telecode for name, date of birth, gender, document symbol, date of the first issue, date of the last receipt, identity card number, and permanent residency attribute. It can check for card authenticity and crop the identity photo.
+This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://cloud.tencent.com/about/connect).
+
+     * @param {HKIDCardOCRRequest} req
+     * @param {function(string, HKIDCardOCRResponse):void} cb
+     * @public
+     */
+    HKIDCardOCR(req, cb) {
+        let resp = new HKIDCardOCRResponse();
+        this.request("HKIDCardOCR", req, resp, cb);
     }
 
     /**

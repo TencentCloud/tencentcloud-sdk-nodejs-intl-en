@@ -405,6 +405,41 @@ class SwitchInstanceVipRequest extends  AbstractModel {
 }
 
 /**
+ * UpgradeInstanceVersion response structure.
+ * @class
+ */
+class UpgradeInstanceVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateInstances request structure.
  * @class
  */
@@ -1145,18 +1180,60 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DestroyPostpaidInstance request structure.
+ * Descriptions of enumeration parameters of the instance
  * @class
  */
-class DestroyPostpaidInstanceRequest extends  AbstractModel {
+class InstanceEnumParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Parameter name
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ParamName = null;
+
+        /**
+         * Parameter type: Enum
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+        /**
+         * Whether restart is required after a modification is made. Value range: true, false
+         * @type {string || null}
+         */
+        this.NeedRestart = null;
+
+        /**
+         * Default value of the parameter
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Current value of a parameter
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Tips = null;
+
+        /**
+         * Value range of a parameter
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * Parameter status. 1: modifying; 2: modified
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -1167,7 +1244,14 @@ class DestroyPostpaidInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2531,6 +2615,49 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * Security group information of an instance
+ * @class
+ */
+class InstanceSecurityGroupDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Security group information
+         * @type {Array.<SecurityGroupDetail> || null}
+         */
+        this.SecurityGroupDetails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.SecurityGroupDetails) {
+            this.SecurityGroupDetails = new Array();
+            for (let z in params.SecurityGroupDetails) {
+                let obj = new SecurityGroupDetail();
+                obj.deserialize(params.SecurityGroupDetails[z]);
+                this.SecurityGroupDetails.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ResetPassword request structure.
  * @class
  */
@@ -2914,6 +3041,48 @@ class DescribeInstanceMonitorTookDistRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Date = 'Date' in params ? params.Date : null;
         this.SpanType = 'SpanType' in params ? params.SpanType : null;
+
+    }
+}
+
+/**
+ * ModifyMaintenanceWindow request structure.
+ * @class
+ */
+class ModifyMaintenanceWindowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time of the maintenance window, such as 17:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the maintenance window, such as 19:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4120,24 +4289,30 @@ class EnableReplicaReadonlyResponse extends  AbstractModel {
 }
 
 /**
- * Security group information of an instance
+ * DescribeMaintenanceWindow response structure.
  * @class
  */
-class InstanceSecurityGroupDetail extends  AbstractModel {
+class DescribeMaintenanceWindowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Start time of the maintenance window, such as 17:00.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.StartTime = null;
 
         /**
-         * Security group information
-         * @type {Array.<SecurityGroupDetail> || null}
+         * End time of the maintenance window, such as 19:00.
+         * @type {string || null}
          */
-        this.SecurityGroupDetails = null;
+        this.EndTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4148,16 +4323,9 @@ class InstanceSecurityGroupDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.SecurityGroupDetails) {
-            this.SecurityGroupDetails = new Array();
-            for (let z in params.SecurityGroupDetails) {
-                let obj = new SecurityGroupDetail();
-                obj.deserialize(params.SecurityGroupDetails[z]);
-                this.SecurityGroupDetails.push(obj);
-            }
-        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5065,60 +5233,18 @@ class DescribeInstanceMonitorSIPResponse extends  AbstractModel {
 }
 
 /**
- * Descriptions of enumeration parameters of the instance
+ * DestroyPostpaidInstance request structure.
  * @class
  */
-class InstanceEnumParam extends  AbstractModel {
+class DestroyPostpaidInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * Instance ID
          * @type {string || null}
          */
-        this.ParamName = null;
-
-        /**
-         * Parameter type: Enum
-         * @type {string || null}
-         */
-        this.ValueType = null;
-
-        /**
-         * Whether restart is required after a modification is made. Value range: true, false
-         * @type {string || null}
-         */
-        this.NeedRestart = null;
-
-        /**
-         * Default value of the parameter
-         * @type {string || null}
-         */
-        this.DefaultValue = null;
-
-        /**
-         * Current value of a parameter
-         * @type {string || null}
-         */
-        this.CurrentValue = null;
-
-        /**
-         * Parameter description
-         * @type {string || null}
-         */
-        this.Tips = null;
-
-        /**
-         * Value range of a parameter
-         * @type {Array.<string> || null}
-         */
-        this.EnumValue = null;
-
-        /**
-         * Parameter status. 1: modifying; 2: modified
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.InstanceId = null;
 
     }
 
@@ -5129,14 +5255,7 @@ class InstanceEnumParam extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.ValueType = 'ValueType' in params ? params.ValueType : null;
-        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
-        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
-        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
-        this.Tips = 'Tips' in params ? params.Tips : null;
-        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5630,6 +5749,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyMaintenanceWindow response structure.
+ * @class
+ */
+class ModifyMaintenanceWindowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Modification status. Valid values: success, failed.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceMonitorTopNCmdTook request structure.
  * @class
  */
@@ -5827,6 +5981,34 @@ class BigKeyTypeInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeMaintenanceWindow request structure.
+ * @class
+ */
+class DescribeMaintenanceWindowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * Instance node type
  * @class
  */
@@ -5969,6 +6151,48 @@ class EnableReplicaReadonlyRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.ReadonlyPolicy = 'ReadonlyPolicy' in params ? params.ReadonlyPolicy : null;
+
+    }
+}
+
+/**
+ * UpgradeInstanceVersion request structure.
+ * @class
+ */
+class UpgradeInstanceVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target instance type. Its value is the same as the `Type` parameter of the `CreateInstances` API.
+         * @type {string || null}
+         */
+        this.TargetInstanceType = null;
+
+        /**
+         * Switch mode. Valid values: 1 (switch during the maintenance window), 2 (switch immediately).
+         * @type {number || null}
+         */
+        this.SwitchOption = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetInstanceType = 'TargetInstanceType' in params ? params.TargetInstanceType : null;
+        this.SwitchOption = 'SwitchOption' in params ? params.SwitchOption : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -7015,6 +7239,7 @@ module.exports = {
     RestoreInstanceRequest: RestoreInstanceRequest,
     TaskInfoDetail: TaskInfoDetail,
     SwitchInstanceVipRequest: SwitchInstanceVipRequest,
+    UpgradeInstanceVersionResponse: UpgradeInstanceVersionResponse,
     CreateInstancesRequest: CreateInstancesRequest,
     ModifyNetworkConfigResponse: ModifyNetworkConfigResponse,
     CommandTake: CommandTake,
@@ -7028,7 +7253,7 @@ module.exports = {
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
-    DestroyPostpaidInstanceRequest: DestroyPostpaidInstanceRequest,
+    InstanceEnumParam: InstanceEnumParam,
     Account: Account,
     SecurityGroupsInboundAndOutbound: SecurityGroupsInboundAndOutbound,
     ResetPasswordResponse: ResetPasswordResponse,
@@ -7058,6 +7283,7 @@ module.exports = {
     ModifyInstanceAccountRequest: ModifyInstanceAccountRequest,
     DescribeBackupUrlResponse: DescribeBackupUrlResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
     ResetPasswordRequest: ResetPasswordRequest,
     ModifyInstanceAccountResponse: ModifyInstanceAccountResponse,
     DelayDistribution: DelayDistribution,
@@ -7066,6 +7292,7 @@ module.exports = {
     DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
     InstanceIntegerParam: InstanceIntegerParam,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
+    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
     InstanceTextParam: InstanceTextParam,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
@@ -7090,7 +7317,7 @@ module.exports = {
     SecurityGroup: SecurityGroup,
     CreateInstanceAccountRequest: CreateInstanceAccountRequest,
     EnableReplicaReadonlyResponse: EnableReplicaReadonlyResponse,
-    InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
+    DescribeMaintenanceWindowResponse: DescribeMaintenanceWindowResponse,
     DescribeInstanceSecurityGroupResponse: DescribeInstanceSecurityGroupResponse,
     ProductConf: ProductConf,
     InstanceNode: InstanceNode,
@@ -7107,19 +7334,22 @@ module.exports = {
     DescribeSlowLogRequest: DescribeSlowLogRequest,
     DescribeAutoBackupConfigRequest: DescribeAutoBackupConfigRequest,
     DescribeInstanceMonitorSIPResponse: DescribeInstanceMonitorSIPResponse,
-    InstanceEnumParam: InstanceEnumParam,
+    DestroyPostpaidInstanceRequest: DestroyPostpaidInstanceRequest,
     DeleteInstanceAccountRequest: DeleteInstanceAccountRequest,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     ManualBackupInstanceRequest: ManualBackupInstanceRequest,
     ModfiyInstancePasswordResponse: ModfiyInstancePasswordResponse,
     InstanceSet: InstanceSet,
+    ModifyMaintenanceWindowResponse: ModifyMaintenanceWindowResponse,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
     DestroyPrepaidInstanceResponse: DestroyPrepaidInstanceResponse,
     DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
     ModifyInstanceParamsRequest: ModifyInstanceParamsRequest,
     BigKeyTypeInfo: BigKeyTypeInfo,
+    DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
     InstanceClusterNode: InstanceClusterNode,
     EnableReplicaReadonlyRequest: EnableReplicaReadonlyRequest,
+    UpgradeInstanceVersionRequest: UpgradeInstanceVersionRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
     DisableReplicaReadonlyRequest: DisableReplicaReadonlyRequest,

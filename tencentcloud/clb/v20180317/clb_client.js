@@ -26,6 +26,7 @@ const ExtraInfo = models.ExtraInfo;
 const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
 const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadbalancersRequest;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
+const RuleHealth = models.RuleHealth;
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
@@ -52,6 +53,7 @@ const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
 const DescribeTargetGroupsResponse = models.DescribeTargetGroupsResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
+const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
 const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
@@ -62,12 +64,12 @@ const DescribeLoadBalancerListByCertIdResponse = models.DescribeLoadBalancerList
 const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
 const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
-const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
+const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const Target = models.Target;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
-const RuleHealth = models.RuleHealth;
+const DescribeClsLogSetRequest = models.DescribeClsLogSetRequest;
 const Listener = models.Listener;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
@@ -78,6 +80,7 @@ const DeregisterTargetGroupInstancesResponse = models.DeregisterTargetGroupInsta
 const RegisterTargetsRequest = models.RegisterTargetsRequest;
 const HealthCheck = models.HealthCheck;
 const AssociateTargetGroupsResponse = models.AssociateTargetGroupsResponse;
+const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteListenerRequest = models.DeleteListenerRequest;
 const ClassicalHealth = models.ClassicalHealth;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
@@ -89,16 +92,18 @@ const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
 const ExclusiveCluster = models.ExclusiveCluster;
 const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
+const CreateClsLogSetResponse = models.CreateClsLogSetResponse;
 const Backend = models.Backend;
 const LBChargePrepaid = models.LBChargePrepaid;
 const ClassicalListener = models.ClassicalListener;
+const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CertificateInput = models.CertificateInput;
 const CreateListenerResponse = models.CreateListenerResponse;
 const CreateTargetGroupResponse = models.CreateTargetGroupResponse;
 const CreateLoadBalancerSnatIpsResponse = models.CreateLoadBalancerSnatIpsResponse;
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const RuleOutput = models.RuleOutput;
-const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
+const CreateTopicResponse = models.CreateTopicResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const ModifyTargetGroupInstancesPortResponse = models.ModifyTargetGroupInstancesPortResponse;
 const RuleTargets = models.RuleTargets;
@@ -111,6 +116,7 @@ const DescribeTargetGroupInstancesResponse = models.DescribeTargetGroupInstances
 const CreateTargetGroupRequest = models.CreateTargetGroupRequest;
 const ClusterItem = models.ClusterItem;
 const CreateListenerRequest = models.CreateListenerRequest;
+const CreateClsLogSetRequest = models.CreateClsLogSetRequest;
 const DisassociateTargetGroupsRequest = models.DisassociateTargetGroupsRequest;
 const Filter = models.Filter;
 const ModifyDomainResponse = models.ModifyDomainResponse;
@@ -128,10 +134,10 @@ const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const BatchTarget = models.BatchTarget;
 const DescribeLoadBalancerListByCertIdRequest = models.DescribeLoadBalancerListByCertIdRequest;
 const TargetRegionInfo = models.TargetRegionInfo;
-const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
+const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
-const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
+const DescribeClsLogSetResponse = models.DescribeClsLogSetResponse;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
@@ -214,6 +220,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     DescribeClassicalLBListeners(req, cb) {
         let resp = new DescribeClassicalLBListenersResponse();
         this.request("DescribeClassicalLBListeners", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a topic with the full-text index and key-value index enabled by default. The creation will fail if there is no CLB exclusive logset.
+     * @param {CreateTopicRequest} req
+     * @param {function(string, CreateTopicResponse):void} cb
+     * @public
+     */
+    CreateTopic(req, cb) {
+        let resp = new CreateTopicResponse();
+        this.request("CreateTopic", req, resp, cb);
     }
 
     /**
@@ -356,6 +373,18 @@ During an unbinding operation, the input parameters need to be all the security 
     }
 
     /**
+     * This API is used to modify the client IP blocklist of a CLB instance. One forwarding rule supports blocking up to 2,000,000 IPs. One blocklist can contain up to 2,000,000 entries.
+(This API is in beta test. To use it, please submit a ticket.)
+     * @param {ModifyBlockIPListRequest} req
+     * @param {function(string, ModifyBlockIPListResponse):void} cb
+     * @public
+     */
+    ModifyBlockIPList(req, cb) {
+        let resp = new ModifyBlockIPListResponse();
+        this.request("ModifyBlockIPList", req, resp, cb);
+    }
+
+    /**
      * This API (DeregisterTargetsFromClassicalLB) is used to unbind real servers from a classic load balancer.
 This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
      * @param {DeregisterTargetsFromClassicalLBRequest} req
@@ -368,14 +397,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to add a SNAT IP for a SnatPro CLB instance. If SnatPro is not enabled for CLB, it will be automatically enabled after the SNAT IP is added.
-     * @param {CreateLoadBalancerSnatIpsRequest} req
-     * @param {function(string, CreateLoadBalancerSnatIpsResponse):void} cb
+     * This API is used to create a CLB exclusive logset for storing CLB logs.
+     * @param {CreateClsLogSetRequest} req
+     * @param {function(string, CreateClsLogSetResponse):void} cb
      * @public
      */
-    CreateLoadBalancerSnatIps(req, cb) {
-        let resp = new CreateLoadBalancerSnatIpsResponse();
-        this.request("CreateLoadBalancerSnatIps", req, resp, cb);
+    CreateClsLogSet(req, cb) {
+        let resp = new CreateClsLogSetResponse();
+        this.request("CreateClsLogSet", req, resp, cb);
     }
 
     /**
@@ -533,6 +562,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
+     * This API is used to obtain the CLB exclusive logset of a user.
+     * @param {DescribeClsLogSetRequest} req
+     * @param {function(string, DescribeClsLogSetResponse):void} cb
+     * @public
+     */
+    DescribeClsLogSet(req, cb) {
+        let resp = new DescribeClsLogSetResponse();
+        this.request("DescribeClsLogSet", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyTargetPort) is used to modify the port of a real server bound to a listener.
 This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
      * @param {ModifyTargetPortRequest} req
@@ -602,15 +642,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to modify the client IP blocklist of a CLB instance. One forwarding rule supports blocking up to 2,000,000 IPs. One blocklist can contain up to 2,000,000 entries.
-(This API is in beta test. To use it, please submit a ticket.)
-     * @param {ModifyBlockIPListRequest} req
-     * @param {function(string, ModifyBlockIPListResponse):void} cb
+     * This API is used to query the execution status of an async IP blocking (blocklisting) task by the async task ID returned by the `ModifyBlockIPList` API. (This API is in beta test. To use it, please submit a ticket.)
+     * @param {DescribeBlockIPTaskRequest} req
+     * @param {function(string, DescribeBlockIPTaskResponse):void} cb
      * @public
      */
-    ModifyBlockIPList(req, cb) {
-        let resp = new ModifyBlockIPListResponse();
-        this.request("ModifyBlockIPList", req, resp, cb);
+    DescribeBlockIPTask(req, cb) {
+        let resp = new DescribeBlockIPTaskResponse();
+        this.request("DescribeBlockIPTask", req, resp, cb);
     }
 
     /**
@@ -739,14 +778,14 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API is used to query the execution status of an async IP blocking (blocklisting) task by the async task ID returned by the `ModifyBlockIPList` API. (This API is in beta test. To use it, please submit a ticket.)
-     * @param {DescribeBlockIPTaskRequest} req
-     * @param {function(string, DescribeBlockIPTaskResponse):void} cb
+     * This API is used to add a SNAT IP for a SnatPro CLB instance. If SnatPro is not enabled for CLB, it will be automatically enabled after the SNAT IP is added.
+     * @param {CreateLoadBalancerSnatIpsRequest} req
+     * @param {function(string, CreateLoadBalancerSnatIpsResponse):void} cb
      * @public
      */
-    DescribeBlockIPTask(req, cb) {
-        let resp = new DescribeBlockIPTaskResponse();
-        this.request("DescribeBlockIPTask", req, resp, cb);
+    CreateLoadBalancerSnatIps(req, cb) {
+        let resp = new CreateLoadBalancerSnatIpsResponse();
+        this.request("CreateLoadBalancerSnatIps", req, resp, cb);
     }
 
     /**

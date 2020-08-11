@@ -5002,36 +5002,42 @@ class RestartDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * Parameter template information
+ * CreateRoInstanceIp response structure.
  * @class
  */
-class ParamTemplateInfo extends  AbstractModel {
+class CreateRoInstanceIpResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter template ID
+         * VPC ID of the read-only instance.
          * @type {number || null}
          */
-        this.TemplateId = null;
+        this.RoVpcId = null;
 
         /**
-         * Parameter template name
-         * @type {string || null}
+         * Subnet ID of the read-only instance.
+         * @type {number || null}
          */
-        this.Name = null;
+        this.RoSubnetId = null;
 
         /**
-         * Parameter template description
+         * Private IP address of the read-only instance.
          * @type {string || null}
          */
-        this.Description = null;
+        this.RoVip = null;
 
         /**
-         * Instance engine version
+         * Private port number of the read-only instance.
+         * @type {number || null}
+         */
+        this.RoVport = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EngineVersion = null;
+        this.RequestId = null;
 
     }
 
@@ -5042,10 +5048,11 @@ class ParamTemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.RoVpcId = 'RoVpcId' in params ? params.RoVpcId : null;
+        this.RoSubnetId = 'RoSubnetId' in params ? params.RoSubnetId : null;
+        this.RoVip = 'RoVip' in params ? params.RoVip : null;
+        this.RoVport = 'RoVport' in params ? params.RoVport : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5188,6 +5195,55 @@ class DescribeInstanceParamRecordsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Parameter template information
+ * @class
+ */
+class ParamTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template ID
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Parameter template name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Parameter template description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Instance engine version
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
 
     }
 }
@@ -5422,6 +5478,48 @@ class DescribeTimeWindowRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * CreateRoInstanceIp request structure.
+ * @class
+ */
+class CreateRoInstanceIpRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Read-only instance ID in the format of "cdbro-3i70uj0k". Its value is the same as the read-only instance ID in the TencentDB Console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Subnet descriptor, such as "subnet-1typ0s7d".
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * VPC descriptor, such as "vpc-xxx". If this field is passed in, `UniqSubnetId` will be required.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
 
     }
 }
@@ -12040,16 +12138,18 @@ module.exports = {
     DeleteAccountsResponse: DeleteAccountsResponse,
     CloseWanServiceRequest: CloseWanServiceRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
-    ParamTemplateInfo: ParamTemplateInfo,
+    CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
+    ParamTemplateInfo: ParamTemplateInfo,
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
     DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
     RollbackTask: RollbackTask,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
+    CreateRoInstanceIpRequest: CreateRoInstanceIpRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     DescribeTimeWindowResponse: DescribeTimeWindowResponse,

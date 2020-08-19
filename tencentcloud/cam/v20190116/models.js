@@ -17,24 +17,60 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * ListAttachedRolePolicies response structure.
+ * GetUser response structure.
  * @class
  */
-class ListAttachedRolePoliciesResponse extends  AbstractModel {
+class GetUserResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of policies associated with the role
-         * @type {Array.<AttachedPolicyOfRole> || null}
-         */
-        this.List = null;
-
-        /**
-         * Total number of policies associated with the role
+         * Sub-user UIN
          * @type {number || null}
          */
-        this.TotalNum = null;
+        this.Uin = null;
+
+        /**
+         * Sub-user username
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Sub-user UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * Sub-user remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * If sub-user can log in to the Console
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * Mobile number
+         * @type {string || null}
+         */
+        this.PhoneNum = null;
+
+        /**
+         * Country/Area code
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * Email
+         * @type {string || null}
+         */
+        this.Email = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -51,16 +87,14 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new AttachedPolicyOfRole();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.Email = 'Email' in params ? params.Email : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -533,10 +567,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * AttachGroupPolicy response structure.
+ * DeleteUserPermissionsBoundary response structure.
  * @class
  */
-class AttachGroupPolicyResponse extends  AbstractModel {
+class DeleteUserPermissionsBoundaryResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -904,6 +938,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
         this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
         this.IsDefaultVersion = 'IsDefaultVersion' in params ? params.IsDefaultVersion : null;
+
+    }
+}
+
+/**
+ * DeleteUserPermissionsBoundary request structure.
+ * @class
+ */
+class DeleteUserPermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sub-account `Uin`
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
 
     }
 }
@@ -1591,60 +1653,24 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
- * GetUser response structure.
+ * ListAttachedRolePolicies response structure.
  * @class
  */
-class GetUserResponse extends  AbstractModel {
+class ListAttachedRolePoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sub-user UIN
+         * List of policies associated with the role
+         * @type {Array.<AttachedPolicyOfRole> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number of policies associated with the role
          * @type {number || null}
          */
-        this.Uin = null;
-
-        /**
-         * Sub-user username
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Sub-user UID
-         * @type {number || null}
-         */
-        this.Uid = null;
-
-        /**
-         * Sub-user remarks
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * If sub-user can log in to the Console
-         * @type {number || null}
-         */
-        this.ConsoleLogin = null;
-
-        /**
-         * Mobile number
-         * @type {string || null}
-         */
-        this.PhoneNum = null;
-
-        /**
-         * Country/Area code
-         * @type {string || null}
-         */
-        this.CountryCode = null;
-
-        /**
-         * Email
-         * @type {string || null}
-         */
-        this.Email = null;
+        this.TotalNum = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1661,14 +1687,16 @@ class GetUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Uid = 'Uid' in params ? params.Uid : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
-        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
-        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
-        this.Email = 'Email' in params ? params.Email : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AttachedPolicyOfRole();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1747,6 +1775,41 @@ class DetachRolePolicyRequest extends  AbstractModel {
         this.DetachRoleId = 'DetachRoleId' in params ? params.DetachRoleId : null;
         this.DetachRoleName = 'DetachRoleName' in params ? params.DetachRoleName : null;
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+
+    }
+}
+
+/**
+ * DeleteRolePermissionsBoundary request structure.
+ * @class
+ */
+class DeleteRolePermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role ID (either it or the role name must be entered)
+         * @type {string || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * Role name (either it or the role ID must be entered)
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
     }
 }
@@ -2249,6 +2312,34 @@ class CreateSAMLProviderResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteRolePermissionsBoundary response structure.
+ * @class
+ */
+class DeleteRolePermissionsBoundaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetUser request structure.
  * @class
  */
@@ -2391,6 +2482,41 @@ class SubAccountInfo extends  AbstractModel {
         this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
+
+    }
+}
+
+/**
+ * CreateGroup request structure.
+ * @class
+ */
+class CreateGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User Group name
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * User Group description
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -2640,7 +2766,8 @@ Note: This field may return null, indicating that no valid value was found.
         this.Remark = null;
 
         /**
-         * 
+         * Root account of the operator associating the policy
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OperateOwnerUin = null;
@@ -2691,6 +2818,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.OperateUinType = 'OperateUinType' in params ? params.OperateUinType : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+
+    }
+}
+
+/**
+ * PutRolePermissionsBoundary request structure.
+ * @class
+ */
+class PutRolePermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Role ID (either it or the role name must be entered)
+         * @type {string || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * Role name (either it or the role ID must be entered)
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
     }
 }
@@ -2916,6 +3085,34 @@ class GetPolicyVersionRequest extends  AbstractModel {
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
+ * PutUserPermissionsBoundary response structure.
+ * @class
+ */
+class PutUserPermissionsBoundaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3280,8 +3477,8 @@ class UpdatePolicyResponse extends  AbstractModel {
         super();
 
         /**
-         * Policy ID
-Note: This field may return null, indicating that no valid value was found.
+         * Policy ID, which will be returned only if the input parameter is `PolicyName`
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -3308,24 +3505,18 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * CreateGroup request structure.
+ * AttachGroupPolicy response structure.
  * @class
  */
-class CreateGroupRequest extends  AbstractModel {
+class AttachGroupPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * User Group name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.GroupName = null;
-
-        /**
-         * User Group description
-         * @type {string || null}
-         */
-        this.Remark = null;
+        this.RequestId = null;
 
     }
 
@@ -3336,8 +3527,7 @@ class CreateGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3539,7 +3729,7 @@ class CreatePolicyRequest extends  AbstractModel {
         this.PolicyName = null;
 
         /**
-         * Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://cloud.tencent.com/document/product/598/36221) API
+         * Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://intl.cloud.tencent.com/document/product/598/36221?from_cn_redirect=1) API
          * @type {string || null}
          */
         this.PolicyDocument = null;
@@ -4024,6 +4214,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * PutUserPermissionsBoundary request structure.
+ * @class
+ */
+class PutUserPermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sub-account `Uin`
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -4713,13 +4938,13 @@ class AddUserResponse extends  AbstractModel {
         this.Password = null;
 
         /**
-         * Sub-user’s key ID
+         * Sub-user's key ID
          * @type {string || null}
          */
         this.SecretId = null;
 
         /**
-         * Sub-user’s secret key
+         * Sub-user's secret key
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -4841,6 +5066,34 @@ class AddUserToGroupResponse extends  AbstractModel {
  * @class
  */
 class AttachUserPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PutRolePermissionsBoundary response structure.
+ * @class
+ */
+class PutRolePermissionsBoundaryResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5061,13 +5314,13 @@ class UpdatePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * Policy ID
+         * Policy ID. Either `PolicyId` or `PolicyName` must be entered
          * @type {number || null}
          */
         this.PolicyId = null;
 
         /**
-         * Policy Name
+         * Policy name. Either `PolicyName` or `PolicyId` must be entered
          * @type {string || null}
          */
         this.PolicyName = null;
@@ -5079,7 +5332,7 @@ class UpdatePolicyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Policy documentation, for example: `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the service that is authorized to use the role. For more information about this parameter, see **RoleInfo** under **Output Parameters** in the [GetRole](https://cloud.tencent.com/document/product/598/36221).
+         * Policy documentation, for example: `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the service that is authorized to use the role. For more information about this parameter, see **RoleInfo** under **Output Parameters** in the [GetRole](https://intl.cloud.tencent.com/document/product/598/36221?from_cn_redirect=1).
          * @type {string || null}
          */
         this.PolicyDocument = null;
@@ -5242,7 +5495,7 @@ class CreateGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
-    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    GetUserResponse: GetUserResponse,
     ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
@@ -5255,7 +5508,7 @@ module.exports = {
     ListGroupsForUserRequest: ListGroupsForUserRequest,
     AttachRolePolicyResponse: AttachRolePolicyResponse,
     GetServiceLinkedRoleDeletionStatusResponse: GetServiceLinkedRoleDeletionStatusResponse,
-    AttachGroupPolicyResponse: AttachGroupPolicyResponse,
+    DeleteUserPermissionsBoundaryResponse: DeleteUserPermissionsBoundaryResponse,
     ListUsersResponse: ListUsersResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
@@ -5266,6 +5519,7 @@ module.exports = {
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
     PolicyVersionItem: PolicyVersionItem,
+    DeleteUserPermissionsBoundaryRequest: DeleteUserPermissionsBoundaryRequest,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
     ListGroupsRequest: ListGroupsRequest,
     DeletePolicyVersionResponse: DeletePolicyVersionResponse,
@@ -5282,9 +5536,10 @@ module.exports = {
     RoleInfo: RoleInfo,
     CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     DeleteGroupRequest: DeleteGroupRequest,
-    GetUserResponse: GetUserResponse,
+    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
     DeleteUserResponse: DeleteUserResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
+    DeleteRolePermissionsBoundaryRequest: DeleteRolePermissionsBoundaryRequest,
     StrategyInfo: StrategyInfo,
     DeletePolicyRequest: DeletePolicyRequest,
     GroupInfo: GroupInfo,
@@ -5295,20 +5550,24 @@ module.exports = {
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
     CreateSAMLProviderResponse: CreateSAMLProviderResponse,
+    DeleteRolePermissionsBoundaryResponse: DeleteRolePermissionsBoundaryResponse,
     GetUserRequest: GetUserRequest,
     LoginActionMfaFlag: LoginActionMfaFlag,
     SubAccountInfo: SubAccountInfo,
+    CreateGroupRequest: CreateGroupRequest,
     SAMLProviderInfo: SAMLProviderInfo,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
     UpdateUserRequest: UpdateUserRequest,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
     AttachPolicyInfo: AttachPolicyInfo,
+    PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
     UpdateRoleConsoleLoginResponse: UpdateRoleConsoleLoginResponse,
     AttachRolePolicyRequest: AttachRolePolicyRequest,
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
     ListAttachedGroupPoliciesResponse: ListAttachedGroupPoliciesResponse,
     GetPolicyVersionRequest: GetPolicyVersionRequest,
+    PutUserPermissionsBoundaryResponse: PutUserPermissionsBoundaryResponse,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
     AccessKey: AccessKey,
@@ -5320,7 +5579,7 @@ module.exports = {
     ListUsersRequest: ListUsersRequest,
     ListCollaboratorsRequest: ListCollaboratorsRequest,
     UpdatePolicyResponse: UpdatePolicyResponse,
-    CreateGroupRequest: CreateGroupRequest,
+    AttachGroupPolicyResponse: AttachGroupPolicyResponse,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
     ListPoliciesRequest: ListPoliciesRequest,
@@ -5338,6 +5597,7 @@ module.exports = {
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,
     DetachRolePolicyResponse: DetachRolePolicyResponse,
     AttachedPolicyOfRole: AttachedPolicyOfRole,
+    PutUserPermissionsBoundaryRequest: PutUserPermissionsBoundaryRequest,
     ListSAMLProvidersResponse: ListSAMLProvidersResponse,
     SetDefaultPolicyVersionResponse: SetDefaultPolicyVersionResponse,
     ListAttachedRolePoliciesRequest: ListAttachedRolePoliciesRequest,
@@ -5357,6 +5617,7 @@ module.exports = {
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    PutRolePermissionsBoundaryResponse: PutRolePermissionsBoundaryResponse,
     SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,
     ListAccessKeysResponse: ListAccessKeysResponse,

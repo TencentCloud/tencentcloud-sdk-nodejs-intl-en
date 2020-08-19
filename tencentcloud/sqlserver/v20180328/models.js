@@ -103,37 +103,37 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.AutoRenewFlag = null;
 
         /**
-         * 
+         * Security group list, which contains security group IDs in the format of sg-xxx.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupList = null;
 
         /**
-         * 
+         * Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: 1 (Monday), 2 (Tuesday), 3 (Wednesday), 4 (Thursday), 5 (Friday), 6 (Saturday), 7 (Sunday).
          * @type {Array.<number> || null}
          */
         this.Weekly = null;
 
         /**
-         * 
+         * Configuration of the maintenance window, which specifies the start time of daily maintenance.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * Configuration of the maintenance window, which specifies the maintenance duration in hours.
          * @type {number || null}
          */
         this.Span = null;
 
         /**
-         * 
+         * The type of purchased high-availability instance. Valid values: DUAL (dual-server high availability), CLUSTER (cluster). Default value: DUAL.
          * @type {string || null}
          */
         this.HAType = null;
 
         /**
-         * 
+         * Whether to deploy across availability zones. Default value: false.
          * @type {boolean || null}
          */
         this.MultiZones = null;
@@ -311,6 +311,34 @@ class CreateMigrationResponse extends  AbstractModel {
 }
 
 /**
+ * RestartDBInstance request structure.
+ * @class
+ */
+class RestartDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database instance ID in the format of mssql-njj2mtpl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DeleteDB response structure.
  * @class
  */
@@ -346,24 +374,30 @@ class DeleteDBResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDBRemark request structure.
+ * ModifyBackupStrategy response structure.
  * @class
  */
-class ModifyDBRemarkRequest extends  AbstractModel {
+class ModifyBackupStrategyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of mssql-rljoi3bf
-         * @type {string || null}
+         * Returned error code.
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.Errno = null;
 
         /**
-         * Array of database names and remarks, where each element contains a database name and the corresponding remarks
-         * @type {Array.<DBRemark> || null}
+         * Returned error message.
+         * @type {string || null}
          */
-        this.DBRemarks = null;
+        this.Msg = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -374,16 +408,9 @@ class ModifyDBRemarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.DBRemarks) {
-            this.DBRemarks = new Array();
-            for (let z in params.DBRemarks) {
-                let obj = new DBRemark();
-                obj.deserialize(params.DBRemarks[z]);
-                this.DBRemarks.push(obj);
-            }
-        }
+        this.Errno = 'Errno' in params ? params.Errno : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -910,49 +937,6 @@ class RestoreInstanceResponse extends  AbstractModel {
 }
 
 /**
- * CreateDB request structure.
- * @class
- */
-class CreateDBRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Database creation information
-         * @type {Array.<DBCreateInfo> || null}
-         */
-        this.DBs = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.DBs) {
-            this.DBs = new Array();
-            for (let z in params.DBs) {
-                let obj = new DBCreateInfo();
-                obj.deserialize(params.DBs[z]);
-                this.DBs.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * AZ information
  * @class
  */
@@ -1059,19 +1043,19 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.DBVersion = null;
 
         /**
-         * 
+         * The number of CPU cores of the instance you want to purchase.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * The type of purchased instance. Valid values: HA (high-availability edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (basic edition). Default value: HA.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * 
+         * The host type of purchased instance. Valid values: PM (physical machine), CLOUD_PREMIUM (physical machine with premium cloud disk), CLOUD_SSD (physical machine with SSD). Default value: PM.
          * @type {string || null}
          */
         this.MachineType = null;
@@ -1100,18 +1084,36 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeMigrationDetail request structure.
+ * ModifyBackupStrategy request structure.
  * @class
  */
-class DescribeMigrationDetailRequest extends  AbstractModel {
+class ModifyBackupStrategyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Migration task ID
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup mode, which supports daily backup only. Valid value: daily.
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * Backup time. Value range: an integer from 0 to 23.
          * @type {number || null}
          */
-        this.MigrateId = null;
+        this.BackupTime = null;
+
+        /**
+         * Backup interval in days when the `BackupType` is `daily`. Valid value: 1.
+         * @type {number || null}
+         */
+        this.BackupDay = null;
 
     }
 
@@ -1122,7 +1124,10 @@ class DescribeMigrationDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MigrateId = 'MigrateId' in params ? params.MigrateId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
+        this.BackupDay = 'BackupDay' in params ? params.BackupDay : null;
 
     }
 }
@@ -2512,6 +2517,34 @@ class DeleteMigrationRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeMigrationDetail request structure.
+ * @class
+ */
+class DescribeMigrationDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Migration task ID
+         * @type {number || null}
+         */
+        this.MigrateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MigrateId = 'MigrateId' in params ? params.MigrateId : null;
+
+    }
+}
+
+/**
  * Database permission change information
  * @class
  */
@@ -2575,18 +2608,24 @@ class TerminateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * RestartDBInstance request structure.
+ * CreateDB request structure.
  * @class
  */
-class RestartDBInstanceRequest extends  AbstractModel {
+class CreateDBRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database instance ID in the format of mssql-njj2mtpl
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Database creation information
+         * @type {Array.<DBCreateInfo> || null}
+         */
+        this.DBs = null;
 
     }
 
@@ -2598,6 +2637,15 @@ class RestartDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.DBs) {
+            this.DBs = new Array();
+            for (let z in params.DBs) {
+                let obj = new DBCreateInfo();
+                obj.deserialize(params.DBs[z]);
+                this.DBs.push(obj);
+            }
+        }
 
     }
 }
@@ -2629,7 +2677,7 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
         this.Storage = null;
 
         /**
-         * 
+         * The number of CUP cores after the instance is upgraded, which cannot be smaller than that of the current cores.
          * @type {number || null}
          */
         this.Cpu = null;
@@ -2647,6 +2695,49 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
+
+    }
+}
+
+/**
+ * ModifyDBRemark request structure.
+ * @class
+ */
+class ModifyDBRemarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of mssql-rljoi3bf
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Array of database names and remarks, where each element contains a database name and the corresponding remarks
+         * @type {Array.<DBRemark> || null}
+         */
+        this.DBRemarks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.DBRemarks) {
+            this.DBRemarks = new Array();
+            for (let z in params.DBRemarks) {
+                let obj = new DBRemark();
+                obj.deserialize(params.DBRemarks[z]);
+                this.DBRemarks.push(obj);
+            }
+        }
 
     }
 }
@@ -3155,25 +3246,29 @@ class DBInstance extends  AbstractModel {
         this.UniqSubnetId = null;
 
         /**
-         * 
+         * Instance isolation.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IsolateOperator = null;
 
         /**
-         * 
+         * Pub/sub flag. Valid values: SUB (subscribe instance), PUB (publish instance). If it is left empty, it refers to a regular instance without a pub/sub design.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubFlag = null;
 
         /**
-         * 
+         * Read-only flag. Valid values: RO (read-only instance), MASTER (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ROFlag = null;
 
         /**
-         * 
+         * Disaster recovery type. Valid values: MIRROR (image), ALWAYSON (AlwaysOn), SINGLE (singleton).
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HAFlag = null;
@@ -3467,6 +3562,12 @@ class Backup extends  AbstractModel {
          */
         this.BackupWay = null;
 
+        /**
+         * Backup name, which can be customized.
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
     }
 
     /**
@@ -3487,6 +3588,7 @@ class Backup extends  AbstractModel {
         this.DBs = 'DBs' in params ? params.DBs : null;
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
 
     }
 }
@@ -3728,7 +3830,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.VoucherIds = null;
 
         /**
-         * 
+         * The number of CUP cores after the instance is upgraded.
          * @type {number || null}
          */
         this.Cpu = null;
@@ -4989,8 +5091,9 @@ module.exports = {
     DealInfo: DealInfo,
     DescribeAccountsRequest: DescribeAccountsRequest,
     CreateMigrationResponse: CreateMigrationResponse,
+    RestartDBInstanceRequest: RestartDBInstanceRequest,
     DeleteDBResponse: DeleteDBResponse,
-    ModifyDBRemarkRequest: ModifyDBRemarkRequest,
+    ModifyBackupStrategyResponse: ModifyBackupStrategyResponse,
     MigrateDetail: MigrateDetail,
     RunMigrationResponse: RunMigrationResponse,
     DescribeProductConfigRequest: DescribeProductConfigRequest,
@@ -5005,10 +5108,9 @@ module.exports = {
     RestoreInstanceRequest: RestoreInstanceRequest,
     RunMigrationRequest: RunMigrationRequest,
     RestoreInstanceResponse: RestoreInstanceResponse,
-    CreateDBRequest: CreateDBRequest,
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
-    DescribeMigrationDetailRequest: DescribeMigrationDetailRequest,
+    ModifyBackupStrategyRequest: ModifyBackupStrategyRequest,
     MigrateTask: MigrateTask,
     SpecInfo: SpecInfo,
     DescribeOrdersResponse: DescribeOrdersResponse,
@@ -5036,10 +5138,12 @@ module.exports = {
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeFlowStatusResponse: DescribeFlowStatusResponse,
     DeleteMigrationRequest: DeleteMigrationRequest,
+    DescribeMigrationDetailRequest: DescribeMigrationDetailRequest,
     DBPrivilegeModifyInfo: DBPrivilegeModifyInfo,
     TerminateDBInstanceRequest: TerminateDBInstanceRequest,
-    RestartDBInstanceRequest: RestartDBInstanceRequest,
+    CreateDBRequest: CreateDBRequest,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
+    ModifyDBRemarkRequest: ModifyDBRemarkRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     AccountPassword: AccountPassword,
     DeleteMigrationResponse: DeleteMigrationResponse,

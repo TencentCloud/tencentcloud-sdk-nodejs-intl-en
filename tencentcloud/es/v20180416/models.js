@@ -219,7 +219,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DiskCount = null;
 
         /**
-         * 
+         * Whether to encrypt node disk. 0: no (default); 1: yes.
          * @type {number || null}
          */
         this.DiskEncrypt = null;
@@ -1569,6 +1569,34 @@ class DescribeInstanceLogsResponse extends  AbstractModel {
 }
 
 /**
+ * UpdatePlugins response structure.
+ * @class
+ */
+class UpdatePluginsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RestartInstance request structure.
  * @class
  */
@@ -1865,7 +1893,7 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
         this.KibanaPrivatePort = null;
 
         /**
-         * 
+         * 0: scaling in blue/green deployment mode without cluster restart (default); 1: scaling by unmounting disk with rolling cluster restart
          * @type {number || null}
          */
         this.ScaleType = null;
@@ -1928,7 +1956,7 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
 }
 
 /**
- * ES IK dictionary information
+ * ES dictionary information
  * @class
  */
 class EsDictionaryInfo extends  AbstractModel {
@@ -1948,19 +1976,19 @@ class EsDictionaryInfo extends  AbstractModel {
         this.Stopwords = null;
 
         /**
-         * 
+         * QQ dictionary list
          * @type {Array.<DictInfo> || null}
          */
         this.QQDict = null;
 
         /**
-         * 
+         * Synonym dictionary list
          * @type {Array.<DictInfo> || null}
          */
         this.Synonym = null;
 
         /**
-         * 
+         * Update dictionary type
          * @type {string || null}
          */
         this.UpdateType = null;
@@ -2061,6 +2089,55 @@ class DescribeInstanceOperationsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdatePlugins request structure.
+ * @class
+ */
+class UpdatePluginsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List of names of the plugins to be installed
+         * @type {Array.<string> || null}
+         */
+        this.InstallPluginList = null;
+
+        /**
+         * List of names of the plugins to be uninstalled
+         * @type {Array.<string> || null}
+         */
+        this.RemovePluginList = null;
+
+        /**
+         * Whether to force restart
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstallPluginList = 'InstallPluginList' in params ? params.InstallPluginList : null;
+        this.RemovePluginList = 'RemovePluginList' in params ? params.RemovePluginList : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -2519,12 +2596,14 @@ module.exports = {
     DeleteInstanceResponse: DeleteInstanceResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeInstanceLogsResponse: DescribeInstanceLogsResponse,
+    UpdatePluginsResponse: UpdatePluginsResponse,
     RestartInstanceRequest: RestartInstanceRequest,
     ZoneDetail: ZoneDetail,
     DescribeInstancesRequest: DescribeInstancesRequest,
     UpdateInstanceRequest: UpdateInstanceRequest,
     EsDictionaryInfo: EsDictionaryInfo,
     DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
+    UpdatePluginsRequest: UpdatePluginsRequest,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,

@@ -20,8 +20,9 @@ const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const DealInfo = models.DealInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
+const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
 const DeleteDBResponse = models.DeleteDBResponse;
-const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
+const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
 const MigrateDetail = models.MigrateDetail;
 const RunMigrationResponse = models.RunMigrationResponse;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
@@ -36,10 +37,9 @@ const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const RunMigrationRequest = models.RunMigrationRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
-const CreateDBRequest = models.CreateDBRequest;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
-const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
+const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
@@ -67,10 +67,12 @@ const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
 const DeleteMigrationRequest = models.DeleteMigrationRequest;
+const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
 const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
 const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
-const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const CreateDBRequest = models.CreateDBRequest;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
+const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const AccountPassword = models.AccountPassword;
 const DeleteMigrationResponse = models.DeleteMigrationResponse;
@@ -127,6 +129,17 @@ class SqlserverClient extends AbstractClient {
         super("sqlserver.tencentcloudapi.com", "2018-03-28", credential, region, profile);
     }
     
+    /**
+     * This API is used to modify the backup policy.
+     * @param {ModifyBackupStrategyRequest} req
+     * @param {function(string, ModifyBackupStrategyResponse):void} cb
+     * @public
+     */
+    ModifyBackupStrategy(req, cb) {
+        let resp = new ModifyBackupStrategyResponse();
+        this.request("ModifyBackupStrategy", req, resp, cb);
+    }
+
     /**
      * This API is used to modify an existing migration task.
      * @param {ModifyMigrationRequest} req

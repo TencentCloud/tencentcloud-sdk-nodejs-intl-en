@@ -882,7 +882,7 @@ class CreateInstanceResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Resource description for container resource expansion
  * @class
  */
 class PodSpec extends  AbstractModel {
@@ -890,37 +890,37 @@ class PodSpec extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Identifier of external resource provider, such as "cls-a1cd23fa".
          * @type {string || null}
          */
         this.ResourceProviderIdentifier = null;
 
         /**
-         * 
+         * Type of external resource provider, such as "tke". Currently, only "tke" is supported.
          * @type {string || null}
          */
         this.ResourceProviderType = null;
 
         /**
-         * 
+         * Purpose of the resource, i.e., node type, which currently can only be "TASK".
          * @type {string || null}
          */
         this.NodeType = null;
 
         /**
-         * 
+         * Number of CPU cores.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Memory size in GB.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Mount point of resource for host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod.
          * @type {Array.<string> || null}
          */
         this.DataVolumes = null;
@@ -1141,13 +1141,13 @@ Note: only the above values are supported for the time being. Entering other val
         this.Limit = null;
 
         /**
-         * 
+         * Resource type. Valid values: all, host, pod. Default value: all
          * @type {string || null}
          */
         this.HardwareResourceType = null;
 
         /**
-         * 
+         * Searchable field
          * @type {Array.<SearchItem> || null}
          */
         this.SearchFields = null;
@@ -2349,7 +2349,7 @@ class MultiDisk extends  AbstractModel {
 }
 
 /**
- * 
+ * Search field
  * @class
  */
 class SearchItem extends  AbstractModel {
@@ -2357,13 +2357,13 @@ class SearchItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Searchable type
          * @type {string || null}
          */
         this.SearchType = null;
 
         /**
-         * 
+         * Searchable value
          * @type {string || null}
          */
         this.SearchValue = null;
@@ -2648,7 +2648,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TagKeys = null;
 
         /**
-         * 
+         * Resource type list
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.HardwareResourceTypeList = null;
@@ -2945,7 +2946,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AutoFlag = null;
 
         /**
-         * 
+         * Resource type. Valid values: host, pod
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HardwareResourceType = null;
@@ -3486,13 +3488,13 @@ class ScaleOutInstanceRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 
+         * Resource type selected for expansion. Valid values: host (general CVM resource), pod (resource provided by TKE cluster)
          * @type {string || null}
          */
         this.HardwareResourceType = null;
 
         /**
-         * 
+         * Specified information such as pod specification and source for expansion with pod resources
          * @type {PodSpec || null}
          */
         this.PodSpec = null;

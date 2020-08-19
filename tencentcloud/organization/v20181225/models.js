@@ -444,13 +444,13 @@ class CreateOrganizationResponse extends  AbstractModel {
         this.OrgId = null;
 
         /**
-         * Creator’s name
+         * Creator's name
          * @type {string || null}
          */
         this.Nickname = null;
 
         /**
-         * Creator’s email address
+         * Creator's email address
          * @type {string || null}
          */
         this.Mail = null;
@@ -787,13 +787,13 @@ class OrgInvitation extends  AbstractModel {
         this.HostUin = null;
 
         /**
-         * Creator’s name
+         * Creator's name
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
-         * Creator’s email address
+         * Creator's email address
          * @type {string || null}
          */
         this.HostMail = null;
@@ -1397,13 +1397,13 @@ class GetOrganizationResponse extends  AbstractModel {
         this.HostUin = null;
 
         /**
-         * Creator’s name
+         * Creator's name
          * @type {string || null}
          */
         this.Nickname = null;
 
         /**
-         * Creator’s email address
+         * Creator's email address
          * @type {string || null}
          */
         this.Mail = null;

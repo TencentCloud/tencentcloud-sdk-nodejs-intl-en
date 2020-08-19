@@ -153,6 +153,12 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
          */
         this.FaultReportContactNumber = null;
 
+        /**
+         * Whether the connection applicant has signed the service agreement.
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
     }
 
     /**
@@ -173,6 +179,7 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
         this.CustomerContactNumber = 'CustomerContactNumber' in params ? params.CustomerContactNumber : null;
         this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
         this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
 
     }
 }
@@ -427,11 +434,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ChargeState = null;
 
         /**
-         * Connection activation time.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.StartTime = null;
+
+        /**
+         * Whether the connection has the service agreement signed.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
 
     }
 
@@ -477,6 +490,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IdcCity = 'IdcCity' in params ? params.IdcCity : null;
         this.ChargeState = 'ChargeState' in params ? params.ChargeState : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
 
     }
 }
@@ -901,6 +915,13 @@ class DescribeDirectConnectsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
+         * Whether all connections under the account have the service agreement signed.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {boolean || null}
+         */
+        this.AllSignLaw = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -925,6 +946,7 @@ class DescribeDirectConnectsResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.AllSignLaw = 'AllSignLaw' in params ? params.AllSignLaw : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1184,12 +1206,6 @@ You can call `DescribeAccessPoints` to get the region ID. The selected access po
         this.LineOperator = null;
 
         /**
-         * Local IDC location.
-         * @type {string || null}
-         */
-        this.Location = null;
-
-        /**
          * Port type of connection. Valid values: 100Base-T (100-Megabit electrical Ethernet interface), 1000Base-T (1-Gigabit electrical Ethernet interface), 1000Base-LX (1-Gigabit single-module optical Ethernet interface; 10 KM), 10GBase-T (10-Gigabit electrical Ethernet interface), 10GBase-LR (10-Gigabit single-module optical Ethernet interface; 10 KM). Default value: 1000Base-LX.
          * @type {string || null}
          */
@@ -1200,6 +1216,12 @@ You can call `DescribeAccessPoints` to get the region ID. The selected access po
          * @type {string || null}
          */
         this.CircuitCode = null;
+
+        /**
+         * Local IDC location.
+         * @type {string || null}
+         */
+        this.Location = null;
 
         /**
          * Connection port bandwidth in Mbps. Value range: [2,10240]. Default value: 1000.
@@ -1261,6 +1283,12 @@ You can call `DescribeAccessPoints` to get the region ID. The selected access po
          */
         this.FaultReportContactNumber = null;
 
+        /**
+         * Whether the connection applicant has signed the service agreement. Default value: true.
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
     }
 
     /**
@@ -1273,9 +1301,9 @@ You can call `DescribeAccessPoints` to get the region ID. The selected access po
         this.DirectConnectName = 'DirectConnectName' in params ? params.DirectConnectName : null;
         this.AccessPointId = 'AccessPointId' in params ? params.AccessPointId : null;
         this.LineOperator = 'LineOperator' in params ? params.LineOperator : null;
-        this.Location = 'Location' in params ? params.Location : null;
         this.PortType = 'PortType' in params ? params.PortType : null;
         this.CircuitCode = 'CircuitCode' in params ? params.CircuitCode : null;
+        this.Location = 'Location' in params ? params.Location : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.RedundantDirectConnectId = 'RedundantDirectConnectId' in params ? params.RedundantDirectConnectId : null;
         this.Vlan = 'Vlan' in params ? params.Vlan : null;
@@ -1286,6 +1314,7 @@ You can call `DescribeAccessPoints` to get the region ID. The selected access po
         this.CustomerContactNumber = 'CustomerContactNumber' in params ? params.CustomerContactNumber : null;
         this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
         this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
 
     }
 }
@@ -1410,7 +1439,7 @@ class DeleteDirectConnectTunnelResponse extends  AbstractModel {
 }
 
 /**
- * Access point information.
+ * 
  * @class
  */
 class AccessPoint extends  AbstractModel {
@@ -1418,40 +1447,47 @@ class AccessPoint extends  AbstractModel {
         super();
 
         /**
-         * Access point name.
+         * 
          * @type {string || null}
          */
         this.AccessPointName = null;
 
         /**
-         * Unique access point ID.
+         * 
          * @type {string || null}
          */
         this.AccessPointId = null;
 
         /**
-         * Access point status. Valid values: available, unavailable.
+         * 
          * @type {string || null}
          */
         this.State = null;
 
         /**
-         * Access point location.
+         * 
          * @type {string || null}
          */
         this.Location = null;
 
         /**
-         * List of ISPs supported by access point.
+         * 
          * @type {Array.<string> || null}
          */
         this.LineOperator = null;
 
         /**
-         * ID of the region that manages the access point.
+         * 
          * @type {string || null}
          */
         this.RegionId = null;
+
+        /**
+         * Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AvailablePortType = null;
 
     }
 
@@ -1468,6 +1504,7 @@ class AccessPoint extends  AbstractModel {
         this.Location = 'Location' in params ? params.Location : null;
         this.LineOperator = 'LineOperator' in params ? params.LineOperator : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.AvailablePortType = 'AvailablePortType' in params ? params.AvailablePortType : null;
 
     }
 }
@@ -1588,7 +1625,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Dedicated tunnel information list
+ * Dedicated tunnel information list.
  * @class
  */
 class DirectConnectTunnel extends  AbstractModel {
@@ -1596,7 +1633,7 @@ class DirectConnectTunnel extends  AbstractModel {
         super();
 
         /**
-         * Dedicated tunnel ID
+         * Dedicated tunnel ID.
          * @type {string || null}
          */
         this.DirectConnectTunnelId = null;
@@ -1608,16 +1645,16 @@ class DirectConnectTunnel extends  AbstractModel {
         this.DirectConnectId = null;
 
         /**
-         * Dedicated tunnel status
-AVAILABLE: ready or connected
-PENDING: applying
-ALLOCATING: configuring
-ALLOCATED: configured
-ALTERING: modifying
-DELETING: deleting
-DELETED: deleted
-CONFIRMING: to be accepted
-REJECTED: rejected
+         * Dedicated tunnel status.
+AVAILABLE: Ready or connected.
+PENDING: Applying.
+ALLOCATING: Configuring.
+ALLOCATED: Configured.
+ALTERING: Modifying.
+DELETING: Deleting.
+DELETED: Deleted.
+COMFIRMING: To be accepted.
+REJECTED: Rejected.
          * @type {string || null}
          */
         this.State = null;
@@ -1629,7 +1666,7 @@ REJECTED: rejected
         this.DirectConnectOwnerAccount = null;
 
         /**
-         * Dedicated tunnel owner, i.e., developer account ID
+         * Dedicated tunnel owner, i.e., developer account ID.
          * @type {string || null}
          */
         this.OwnerAccount = null;
@@ -1678,7 +1715,7 @@ REJECTED: rejected
         this.RouteFilterPrefixes = null;
 
         /**
-         * Dedicated tunnel `Vlan`
+         * VLAN of a dedicated tunnel.
          * @type {number || null}
          */
         this.Vlan = null;
@@ -1696,25 +1733,25 @@ REJECTED: rejected
         this.CustomerAddress = null;
 
         /**
-         * Dedicated tunnel name
+         * Dedicated tunnel name.
          * @type {string || null}
          */
         this.DirectConnectTunnelName = null;
 
         /**
-         * Dedicated tunnel creation time
+         * Creation time of a dedicated tunnel.
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * Dedicated tunnel bandwidth value
+         * Bandwidth value of a dedicated tunnel.
          * @type {number || null}
          */
         this.Bandwidth = null;
 
         /**
-         * Dedicated tunnel tag value
+         * Tag value of a dedicated tunnel.
          * @type {Array.<Tag> || null}
          */
         this.TagSet = null;
@@ -1755,7 +1792,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BfdEnable = null;
 
         /**
-         * Dedicated tunnel access point type
+         * Access point type of a dedicated tunnel.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1776,11 +1813,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.VpcName = null;
 
         /**
-         * TencentBackupAddress, i.e., Tencent-side standby IP address
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
         this.TencentBackupAddress = null;
+
+        /**
+         * Whether the connection associated with the dedicated tunnel has the service agreement signed.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
 
     }
 
@@ -1840,6 +1883,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
 
     }
 }

@@ -162,7 +162,7 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
         this.SvgTemplate = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -315,7 +315,7 @@ class DescribeAllClassRequest extends  AbstractModel {
         super();
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -355,7 +355,7 @@ class WeChatMiniProgramPublishRequest extends  AbstractModel {
         this.SourceDefinition = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -518,7 +518,7 @@ Default value: 0.
         this.TEHDConfig = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -791,7 +791,7 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -958,13 +958,13 @@ If this field is a blank string, DRM will not be performed on the video.
         this.DisableHigherVideoResolution = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -1292,7 +1292,7 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
         super();
 
         /**
-         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -1408,7 +1408,7 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -1519,7 +1519,7 @@ class MediaInputInfo extends  AbstractModel {
 }
 
 /**
- * Image sprite generating task. This structure is only used for tasks initiated by the [CreateImageSprite](https://cloud.tencent.com/document/product/266/8101) API in v2017.
+ * Image sprite generating task. This structure is only used for tasks initiated by the [CreateImageSprite](https://intl.cloud.tencent.com/document/product/266/8101?from_cn_redirect=1) API in v2017.
  * @class
  */
 class CreateImageSpriteTask2017 extends  AbstractModel {
@@ -1556,7 +1556,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.FileId = null;
 
         /**
-         * Image sprite specification. For more information, please see [Image Sprite Generating Template](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Image sprite specification. For more information, please see [Image Sprite Generating Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -1752,13 +1752,13 @@ class AiSampleWord extends  AbstractModel {
         this.UsageSet = null;
 
         /**
-         * Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -1870,7 +1870,7 @@ Default value: open.
         this.ResolutionAdaptive = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -2074,13 +2074,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ScreenshotInterval = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -2178,7 +2178,7 @@ class DeleteContentReviewTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -2313,7 +2313,7 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
         this.AiRecognitionTask = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -2408,7 +2408,7 @@ class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -2612,7 +2612,7 @@ class DeletePersonSampleRequest extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -2641,7 +2641,7 @@ class MediaSampleSnapshotItem extends  AbstractModel {
         super();
 
         /**
-         * Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2903,7 +2903,7 @@ class ComposeMediaRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -3034,13 +3034,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ScreenshotInterval = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -3296,7 +3296,7 @@ Default value: no.
         this.Comment = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -3556,7 +3556,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         this.TEHDConfig = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -3839,7 +3839,7 @@ class DeleteSuperPlayerConfigRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -3988,7 +3988,7 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.AiRecognitionTask = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -4042,13 +4042,13 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Start date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
+         * End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4061,7 +4061,7 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -4128,7 +4128,7 @@ Note: the image must be a relatively clear full-face photo of a figure in at lea
         this.Tags = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -4326,7 +4326,7 @@ class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
 }
 
 /**
- * Video splicing task information. This structure is only used for tasks initiated by the [ConcatVideo](https://cloud.tencent.com/document/product/266/7821) API in v2017.
+ * Video splicing task information. This structure is only used for tasks initiated by the [ConcatVideo](https://intl.cloud.tencent.com/document/product/266/7821?from_cn_redirect=1) API in v2017.
  * @class
  */
 class ConcatTask2017 extends  AbstractModel {
@@ -4383,7 +4383,7 @@ class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5008,13 +5008,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SvgTemplate = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -5172,7 +5172,7 @@ class ForbidMediaDistributionRequest extends  AbstractModel {
         this.Operation = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5385,7 +5385,7 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5471,7 +5471,7 @@ class ModifyMediaInfoRequest extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * Media file expiration time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The value `9999-12-31T23:59:59Z` indicates that the media file never expires. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted.
+         * Media file expiration time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The value `9999-12-31T23:59:59Z` indicates that the media file never expires. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted.
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -5521,7 +5521,7 @@ In the same request, `ClearTags` and `AddTags` cannot be present at the same tim
         this.ClearTags = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5575,7 +5575,7 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5711,7 +5711,7 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5975,7 +5975,7 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         this.FileId = null;
 
         /**
-         * [Task flow template](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
+         * [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
          * @type {string || null}
          */
         this.ProcedureName = null;
@@ -6011,7 +6011,7 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -6392,7 +6392,7 @@ class CreateWordSamplesRequest extends  AbstractModel {
         this.Words = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -6964,19 +6964,19 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         super();
 
         /**
-         * [LVB code](https://cloud.tencent.com/document/product/267/5959) of a stream.
+         * [LVB code](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) of a stream.
          * @type {string || null}
          */
         this.StreamId = null;
 
         /**
-         * Start time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Start time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6988,13 +6988,13 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.IsPersistence = null;
 
         /**
-         * Storage expiration time of video generated by persistent clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). `9999-12-31T23:59:59Z` means `never expire`. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter will be valid only when `IsPersistence` is 1. By default, the video will never expire.
+         * Storage expiration time of video generated by persistent clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). `9999-12-31T23:59:59Z` means `never expire`. After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter will be valid only when `IsPersistence` is 1. By default, the video will never expire.
          * @type {string || null}
          */
         this.ExpireTime = null;
 
         /**
-         * VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://cloud.tencent.com/document/product/266/9759). This parameter will be valid only when `IsPersistence` is 1.
+         * VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1). This parameter will be valid only when `IsPersistence` is 1.
          * @type {string || null}
          */
         this.Procedure = null;
@@ -7018,7 +7018,7 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -7061,7 +7061,7 @@ class DeleteAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -7152,14 +7152,14 @@ class EditMediaOutputConfig extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 <li>Default value: 0, which means "Other".</li>
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
-         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -7296,7 +7296,7 @@ class DeleteAIAnalysisTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -7351,7 +7351,7 @@ class EditMediaRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Task flow template](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name, which should be entered if you want to perform a task flow on the generated new video.
+         * [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name, which should be entered if you want to perform a task flow on the generated new video.
          * @type {string || null}
          */
         this.ProcedureName = null;
@@ -7381,7 +7381,7 @@ class EditMediaRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -7799,7 +7799,7 @@ class DescribeAdaptiveDynamicStreamingTemplatesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -8017,7 +8017,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Video transcoding task information. This structure is only used for tasks initiated by the [ConvertVodFile](https://cloud.tencent.com/document/product/266/7822) API in v2017.
+ * Video transcoding task information. This structure is only used for tasks initiated by the [ConvertVodFile](https://intl.cloud.tencent.com/document/product/266/7822?from_cn_redirect=1) API in v2017.
  * @class
  */
 class TranscodeTask2017 extends  AbstractModel {
@@ -8265,7 +8265,7 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -8378,7 +8378,7 @@ class DeleteWordSamplesRequest extends  AbstractModel {
         this.Keywords = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -8857,7 +8857,7 @@ class DescribeWatermarkTemplatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -9289,7 +9289,7 @@ Note: the frame rate of all streams must be the same; otherwise, the frame rate 
         this.Comment = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -9339,7 +9339,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Url = null;
 
         /**
-         * Animated image generating template ID. For more information, please see [Animated Image Generating Parameter Template](https://cloud.tencent.com/document/product/266/33481#.3Cspan-id-.3D-.22zdt.22.3E.3C.2Fspan.3E.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Animated image generating template ID. For more information, please see [Animated Image Generating Parameter Template](https://intl.cloud.tencent.com/document/product/266/33481?from_cn_redirect=1#.3Cspan-id-.3D-.22zdt.22.3E.3C.2Fspan.3E.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -9509,7 +9509,7 @@ class ModifyWordSampleRequest extends  AbstractModel {
         this.TagOperationInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -9908,7 +9908,7 @@ class ProcessMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](/document/product/266/7830) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+         * Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
          * @type {string || null}
          */
         this.FileId = null;
@@ -9968,7 +9968,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -10453,7 +10453,7 @@ class DeleteMediaRequest extends  AbstractModel {
         this.DeleteParts = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -10537,13 +10537,13 @@ Default value: OFF.
         this.ResolutionNames = null;
 
         /**
-         * Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
+         * Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Scheme used for playback. If it is left empty or set to `Default`, the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used. Other valid values:
+         * Scheme used for playback. If it is left empty or set to `Default`, the scheme configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used. Other valid values:
 <li>HTTP;</li>
 <li>HTTPS.</li>
          * @type {string || null}
@@ -10557,7 +10557,7 @@ Default value: OFF.
         this.Comment = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -10766,7 +10766,7 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -10806,7 +10806,7 @@ class MediaDeleteItem extends  AbstractModel {
         this.Type = null;
 
         /**
-         * ID of the template for which to delete the videos of the type specified by the `Type` parameter. For the template definition, please see [Transcoding Template](https://cloud.tencent.com/document/product/266/33478#.3Cspan-id-.3D-.22zm.22-.3E.3C.2Fspan.3E.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+         * ID of the template for which to delete the videos of the type specified by the `Type` parameter. For the template definition, please see [Transcoding Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.3Cspan-id-.3D-.22zm.22-.3E.3C.2Fspan.3E.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
 Default value: 0, which indicates to delete all videos of the type specified by the `Type` parameter.
          * @type {number || null}
          */
@@ -10872,13 +10872,13 @@ class AiSamplePerson extends  AbstractModel {
         this.UsageSet = null;
 
         /**
-         * Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -11046,7 +11046,7 @@ class DescribeStorageDataRequest extends  AbstractModel {
         super();
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -11265,13 +11265,13 @@ Default value: open.
         this.Quality = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -11622,7 +11622,7 @@ Default value: 0 px.
         this.SvgTemplate = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -11915,7 +11915,7 @@ class TranscodePlayInfo2017 extends  AbstractModel {
         this.Url = null;
 
         /**
-         * Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://cloud.tencent.com/document/product/266/33478#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+         * Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
@@ -12210,13 +12210,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.HighlightConfigure = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -12384,7 +12384,7 @@ class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -12532,26 +12532,26 @@ class PlayerConfig extends  AbstractModel {
         this.ResolutionNameSet = null;
 
         /**
-         * Creation time of player configuration in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of player configuration in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of player configuration in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of player configuration in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
+         * Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
          * Scheme used for playback. Valid values:
-<li>Default: the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used;</li>
+<li>Default: the scheme configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used;</li>
 <li>HTTP;</li>
 <li>HTTPS.</li>
          * @type {string || null}
@@ -12611,7 +12611,7 @@ class ConfirmEventsRequest extends  AbstractModel {
         super();
 
         /**
-         * Event handler, i.e., the `EventSet. EventHandle` field in the output parameters of the [event notification pulling](/document/product/266/33433) API.
+         * Event handler, i.e., the `EventSet. EventHandle` field in the output parameters of the [event notification pulling](https://intl.cloud.tencent.com/document/product/266/33433?from_cn_redirect=1) API.
 Array length limit: 16.
          * @type {Array.<string> || null}
          */
@@ -12624,7 +12624,7 @@ Array length limit: 16.
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -13147,7 +13147,7 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -13693,13 +13693,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MiniProgramPublishTask = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -13965,7 +13965,7 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+         * Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
 violation_photo:
 <li>violation_photo: violating photo.</li>
 politician:
@@ -14013,7 +14013,7 @@ military:
         this.PicUrlExpireTimeStamp = null;
 
         /**
-         * Expiration time of suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -14177,7 +14177,7 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.ReviewWallSwitch = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -14483,13 +14483,13 @@ Default value: open.
         this.ColumnCount = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -14676,7 +14676,7 @@ class TaskStatDataItem extends  AbstractModel {
         super();
 
         /**
-         * Start time of data time range in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
+         * Start time of data time range in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
          * @type {string || null}
          */
         this.Time = null;
@@ -14806,7 +14806,7 @@ class ApplyUploadRequest extends  AbstractModel {
         super();
 
         /**
-         * Media type. For the detailed valid values, please see [Upload Overview](/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
+         * Media type. For the detailed valid values, please see [Upload Overview](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
          * @type {string || null}
          */
         this.MediaType = null;
@@ -14818,19 +14818,19 @@ class ApplyUploadRequest extends  AbstractModel {
         this.MediaName = null;
 
         /**
-         * Cover type. For the detailed valid values, please see [Upload Overview](/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
+         * Cover type. For the detailed valid values, please see [Upload Overview](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
          * @type {string || null}
          */
         this.CoverType = null;
 
         /**
-         * Subsequent task operation on a media file, i.e., after a media file is uploaded, task flow operations will be initiated automatically. This parameter value is a task flow template name. VOD supports [creating task flow templates](/document/product/266/33819) and naming the templates.
+         * Subsequent task operation on a media file, i.e., after a media file is uploaded, task flow operations will be initiated automatically. This parameter value is a task flow template name. VOD supports [creating task flow templates](https://intl.cloud.tencent.com/document/product/266/33819?from_cn_redirect=1) and naming the templates.
          * @type {string || null}
          */
         this.Procedure = null;
 
         /**
-         * Expiration time of a media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of a media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -14842,20 +14842,20 @@ class ApplyUploadRequest extends  AbstractModel {
         this.StorageRegion = null;
 
         /**
-         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 <li>Default value: 0, which means "Other".</li>
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
-         * Source context, which is used to pass through the user request information. The [upload callback](/document/product/266/7830) API will return the value of this field. It can contain up to 250 characters.
+         * Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
          * @type {string || null}
          */
         this.SourceContext = null;
 
         /**
-         * Session context, which is used to pass through the user request information. If the `Procedure` parameter is specified, the [task flow status change callback](/document/product/266/9636) API will return the value of this field. It can contain up to 1,000 characters.
+         * Session context, which is used to pass through the user request information. If the `Procedure` parameter is specified, the [task flow status change callback](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) API will return the value of this field. It can contain up to 1,000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -14867,7 +14867,7 @@ class ApplyUploadRequest extends  AbstractModel {
         this.ExtInfo = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -15010,21 +15010,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Description = null;
 
         /**
-         * Creation time of media file in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of media file in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last update time of media file (by an operation that triggers updating of media file information such as modifying video attributes or initiating video processing) in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last update time of media file (by an operation that triggers updating of media file information such as modifying video attributes or initiating video processing) in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Expiration time of media file in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. `9999-12-31T23:59:59Z` means "never expire".
+         * Expiration time of media file in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). After the expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. `9999-12-31T23:59:59Z` means "never expire".
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -15080,7 +15080,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SourceInfo = null;
 
         /**
-         * Storage region of media file, such as ap-guangzhou. For more information, please see [Region List](https://cloud.tencent.com/document/api/213/15692#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
+         * Storage region of media file, such as ap-guangzhou. For more information, please see [Region List](https://intl.cloud.tencent.com/document/api/213/15692?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -15186,7 +15186,7 @@ class PullUploadRequest extends  AbstractModel {
 
         /**
          * URL of the media to be pulled. Supported media format: HLS; unsupported media format: DASH.
-For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B?from_cn_redirect=1).
+For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
          * @type {string || null}
          */
         this.MediaUrl = null;
@@ -15204,27 +15204,27 @@ For more information about supported extensions, please see [Media Types](https:
         this.CoverUrl = null;
 
         /**
-         * Subsequent task for media. For more information, please see [Specifying Task Flow After Upload](https://cloud.tencent.com/document/product/266/9759).
+         * Subsequent task for media. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Procedure = null;
 
         /**
-         * Expiration time of media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Expiration time of media file in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
 
         /**
          * Specifies upload region. This is only applicable to users that have special requirements for the upload region:
-<li>If it is left empty, the upload region is your [default region](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4);</li>
-<li>If it is specified, please make sure that the upload region has been [enabled for storage](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4).</li>
+<li>If it is left empty, the upload region is your [default region](https://intl.cloud.tencent.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4);</li>
+<li>If it is specified, please make sure that the upload region has been [enabled for storage](https://intl.cloud.tencent.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4).</li>
          * @type {string || null}
          */
         this.StorageRegion = null;
 
         /**
-         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [CreateClass](https://cloud.tencent.com/document/product/266/7812) API.
+         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.ClassId = null;
@@ -15248,7 +15248,7 @@ For more information about supported extensions, please see [Media Types](https:
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -15320,7 +15320,7 @@ class SortBy extends  AbstractModel {
 }
 
 /**
- * Video clipping task information. This structure is only used for tasks initiated by the [ClipVideo](https://cloud.tencent.com/document/product/266/10156) API in v2017.
+ * Video clipping task information. This structure is only used for tasks initiated by the [ClipVideo](https://intl.cloud.tencent.com/document/product/266/10156?from_cn_redirect=1) API in v2017.
  * @class
  */
 class ClipTask2017 extends  AbstractModel {
@@ -15454,13 +15454,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ContainerType = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -15515,13 +15515,13 @@ class DescribeCDNUsageDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Start date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The end date must be after the start date.
+         * End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -15552,7 +15552,7 @@ When the value of this field is 1, the total usage of all subapplications (inclu
         this.DomainNames = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin. In this case, only 1-day granularity is supported.
          * @type {number || null}
          */
@@ -15743,19 +15743,19 @@ class DescribeReviewDetailsRequest extends  AbstractModel {
         super();
 
         /**
-         * Start date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Start date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End date in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). The end date must be after the start date.
+         * End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -15916,7 +15916,7 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         this.PicUrlExpireTimeStamp = null;
 
         /**
-         * Expiration time of suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -16245,7 +16245,7 @@ class DescribeSampleSnapshotTemplatesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -16670,7 +16670,7 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
         this.ScreenshotInterval = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -16921,7 +16921,7 @@ class StatDataItem extends  AbstractModel {
         super();
 
         /**
-         * Start time of data time range in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
+         * Start time of data time range in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
 <li>For data at hourly level, `2019-08-22T00:00:00+08:00` indicates the statistics between 00:00 and 01:00 AM on August 22, 2019.</li>
 <li>For data at daily level, `2019-08-22T00:00:00+08:00` indicates statistics on August 22, 2019.</li>
          * @type {string || null}
@@ -17053,7 +17053,7 @@ class PushUrlCacheRequest extends  AbstractModel {
         this.Urls = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -17570,7 +17570,7 @@ class ModifyClassRequest extends  AbstractModel {
         this.ClassName = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -17704,14 +17704,14 @@ class ComposeMediaTaskOutput extends  AbstractModel {
         this.MediaName = null;
 
         /**
-         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 <li>Default value: 0, which means "Other".</li>
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
-         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -17766,7 +17766,7 @@ class DescribeMediaInfosRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -17835,7 +17835,7 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         this.TagOperationInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -17983,7 +17983,7 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
         this.ScreenshotInterval = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -18068,7 +18068,7 @@ class DescribeTaskDetailRequest extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -18548,7 +18548,7 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -18794,7 +18794,7 @@ class DeleteProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -19579,7 +19579,7 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.ScreenshotInterval = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -19659,7 +19659,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -19968,19 +19968,19 @@ Task types compatible with v2017:
         this.Status = null;
 
         /**
-         * Creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * End time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -20205,7 +20205,7 @@ class DeleteImageSpriteTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -20246,7 +20246,7 @@ class CreateClassRequest extends  AbstractModel {
         this.ClassName = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -20469,7 +20469,7 @@ class DescribeSuperPlayerConfigsRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -20673,7 +20673,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Suggestion = null;
 
         /**
-         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/34187#PoliticalImgReviewTemplateInfo?from_cn_redirect=1) and this parameter is as follows:
+         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
 violation_photo:
 <li>violation_photo: violating photo.</li>
 Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
@@ -20850,7 +20850,7 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -20926,8 +20926,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Media file ID.
-<li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `FileId` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
-<li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Id` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
+<li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `FileId` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
+<li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Id` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -20935,8 +20935,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Media filename
-<li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `BasicInfo.Name` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
-<li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Name` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
+<li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `BasicInfo.Name` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
+<li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Name` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -20944,8 +20944,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Media file address
-<li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `BasicInfo.MediaUrl` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
-<li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Url` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
+<li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `BasicInfo.MediaUrl` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
+<li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Url` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
          * @type {string || null}
          */
         this.FileUrl = null;
@@ -21128,14 +21128,14 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.ResolutionNames = null;
 
         /**
-         * Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used.
+         * Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
          * Scheme used for playback. Valid values:
-<li>Default: the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used;</li>
+<li>Default: the scheme configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used;</li>
 <li>HTTP;</li>
 <li>HTTPS.</li>
          * @type {string || null}
@@ -21149,7 +21149,7 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -21220,19 +21220,19 @@ Task types compatible with v2017:
         this.TaskType = null;
 
         /**
-         * Creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). If the task has not been started yet, this field will be empty.
+         * Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). If the task has not been started yet, this field will be empty.
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * End time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I). If the task has not been completed yet, this field will be empty.
+         * End time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). If the task has not been completed yet, this field will be empty.
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -21452,13 +21452,13 @@ Default value: open.
         this.Format = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -21603,7 +21603,7 @@ class DescribeTasksRequest extends  AbstractModel {
         this.ScrollToken = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -21844,7 +21844,7 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
         this.HighlightConfigure = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -22032,7 +22032,7 @@ class SubAppIdInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Subapplication creation time of task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Subapplication creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -22192,7 +22192,7 @@ Default value: black.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -22265,7 +22265,7 @@ class DeleteWatermarkTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -22300,14 +22300,14 @@ class EditMediaStreamInfo extends  AbstractModel {
         this.StreamId = null;
 
         /**
-         * Start time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Start time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time of stream clipping in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -22376,7 +22376,7 @@ Multiple elements can be selected, and the relationship between them is "OR", i.
         this.Limit = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -22521,7 +22521,7 @@ class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
         this.HighlightConfigure = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -22972,7 +22972,7 @@ class DeleteClassRequest extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -23043,7 +23043,7 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -23328,7 +23328,7 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -23431,7 +23431,7 @@ class ExecuteFunctionRequest extends  AbstractModel {
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -23709,7 +23709,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Url = null;
 
         /**
-         * Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://cloud.tencent.com/document/product/266/33478#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+         * Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -23992,7 +23992,7 @@ class PullEventsRequest extends  AbstractModel {
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -24013,7 +24013,7 @@ class PullEventsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Control parameter of face recognition task
  * @class
  */
 class FaceConfigureInfoForUpdate extends  AbstractModel {
@@ -24021,31 +24021,40 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switch of face recognition task. Valid values:
+<li>ON: enables intelligent face recognition task;</li>
+<li>OFF: disables intelligent face recognition task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 
+         * Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
+<li>entertainment: entertainment celebrity;</li>
+<li>sport: sports celebrity;</li>
+<li>politician: politically sensitive figure.</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
 
         /**
-         * 
+         * Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
+There can be up to 10 tags, each with a length limit of 16 characters.
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
 
         /**
-         * 
+         * Figure library. Valid values:
+<li>Default: default figure library;</li>
+<li>UserDefine: custom figure library.</li>
+<li>All: both default and custom figure libraries will be used.</li>
          * @type {string || null}
          */
         this.FaceLibrary = null;
@@ -24176,7 +24185,7 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -24396,7 +24405,7 @@ class SearchMediaRequest extends  AbstractModel {
         /**
          * Start time in the creation time range.
 <li>After or at the start time.</li>
-<li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).</li>
+<li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
          * @type {string || null}
          */
         this.StartTime = null;
@@ -24404,19 +24413,19 @@ class SearchMediaRequest extends  AbstractModel {
         /**
          * End time in the creation time range.
 <li>Before the end time.</li>
-<li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).</li>
+<li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Media file source. For valid values, please see [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData).
+         * Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
          * @type {string || null}
          */
         this.SourceType = null;
 
         /**
-         * [LVB code](https://cloud.tencent.com/document/product/267/5959) of a stream.
+         * [LVB code](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) of a stream.
          * @type {string || null}
          */
         this.StreamId = null;
@@ -24459,7 +24468,7 @@ class SearchMediaRequest extends  AbstractModel {
         this.Categories = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -24569,7 +24578,7 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -24669,7 +24678,7 @@ and will be deleted after `PicUrlExpireTime`).
         this.Url = null;
 
         /**
-         * Expiration time of suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -25368,7 +25377,7 @@ class CommitUploadRequest extends  AbstractModel {
         this.VodSessionKey = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -25432,7 +25441,7 @@ If 0 is entered, a watermark will last for only one cycle (i.e., visible for `Di
 }
 
 /**
- * Time point screencapturing task information. This structure is only used for tasks initiated by the [CreateSnapshotByTimeOffset](https://cloud.tencent.com/document/product/266/8102) API in v2017.
+ * Time point screencapturing task information. This structure is only used for tasks initiated by the [CreateSnapshotByTimeOffset](https://intl.cloud.tencent.com/document/product/266/8102?from_cn_redirect=1) API in v2017.
  * @class
  */
 class SnapshotByTimeOffsetTask2017 extends  AbstractModel {
@@ -25452,7 +25461,7 @@ class SnapshotByTimeOffsetTask2017 extends  AbstractModel {
         this.FileId = null;
 
         /**
-         * screenshot specification. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * screenshot specification. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
@@ -25610,7 +25619,7 @@ class DeleteAnimatedGraphicsTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -25645,7 +25654,7 @@ class DeleteSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * ID of a [subapplication](/document/product/266/14574) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -26004,13 +26013,13 @@ Default value: open.
         this.SampleInterval = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -26061,7 +26070,7 @@ class MediaImageSpriteItem extends  AbstractModel {
         super();
 
         /**
-         * Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -26171,7 +26180,7 @@ Note: the default figure library can be pulled only through "figure name" or "fi
         this.Limit = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -26292,13 +26301,13 @@ class DescribeStorageDetailsRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Start time in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time in ISO 8601 format, which must be after the start time. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * End time in ISO 8601 format, which must be after the start time. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.EndTime = null;
@@ -26324,7 +26333,7 @@ Default value: TotalStorage.
         this.StorageType = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
          * @type {number || null}
          */
@@ -26476,7 +26485,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MediaName = null;
 
         /**
-         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 <li>Default value: 0, which means "Other".</li>
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
@@ -26484,7 +26493,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ClassId = null;
 
         /**
-         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -26600,14 +26609,14 @@ class ComposeMediaOutput extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](/document/product/266/7812) API.
+         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
 <li>Default value: 0, which means "Other".</li>
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
-         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -26883,7 +26892,7 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * [Subapplication](/document/product/266/14574) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;

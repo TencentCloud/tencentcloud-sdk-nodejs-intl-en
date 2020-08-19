@@ -447,13 +447,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OutputDir = null;
 
         /**
-         * Creation time of a workflow in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a workflow in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -835,13 +835,13 @@ class AdaptiveDynamicStreamingTemplate extends  AbstractModel {
         this.DisableHigherVideoResolution = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -1992,13 +1992,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UserDefineConfigure = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -2350,7 +2350,7 @@ class MediaSampleSnapshotItem extends  AbstractModel {
         super();
 
         /**
-         * Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
@@ -2701,13 +2701,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AsrWordsConfigure = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -3631,7 +3631,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Template description. Length limit: 256 bytes.
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -4060,13 +4060,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SvgTemplate = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -5465,7 +5465,7 @@ class EditMediaRequest extends  AbstractModel {
         this.TaskNotifyConfig = null;
 
         /**
-         * Task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+         * Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
         this.TasksPriority = null;
@@ -5695,7 +5695,7 @@ and will be deleted after `PicUrlExpireTime`).
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -5788,8 +5788,8 @@ class ImageWatermarkInput extends  AbstractModel {
 
         /**
          * Watermark width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
 Default value: 10%.
          * @type {string || null}
          */
@@ -5797,9 +5797,9 @@ Default value: 10%.
 
         /**
          * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
-Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
          * @type {string || null}
          */
         this.Height = null;
@@ -6650,7 +6650,7 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
         super();
 
         /**
-         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
@@ -6802,7 +6802,7 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
         this.Path = null;
 
         /**
-         * ID of an animated image generating template. For more information, please see [Animated Image Generating Parameter Template](https://cloud.tencent.com/document/product/266/33481#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * ID of an animated image generating template. For more information, please see [Animated Image Generating Parameter Template](https://intl.cloud.tencent.com/document/product/266/33481?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
@@ -7408,13 +7408,13 @@ class AiSampleWord extends  AbstractModel {
         this.UsageSet = null;
 
         /**
-         * Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -7500,7 +7500,7 @@ class LiveStreamOcrWordsRecognitionResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0-100.
+         * Confidence of recognized segment. Value range: 0–100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -7875,8 +7875,8 @@ class ImageWatermarkTemplate extends  AbstractModel {
 
         /**
          * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px;</li>
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels.</li>
 `0px` means that `Height` will be proportionally scaled according to the video width.
          * @type {string || null}
          */
@@ -7963,7 +7963,7 @@ class LiveStreamAsrWordsRecognitionResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0-100.
+         * Confidence of recognized segment. Value range: 0–100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -8030,13 +8030,13 @@ class AiSamplePerson extends  AbstractModel {
         this.UsageSet = null;
 
         /**
-         * Creation time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -8358,13 +8358,13 @@ Default value: open.
         this.Quality = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -8534,7 +8534,7 @@ and will be deleted after `PicUrlExpireTime`).
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -8982,13 +8982,13 @@ class AIAnalysisTemplateItem extends  AbstractModel {
         this.FrameTagConfigure = null;
 
         /**
-         * Creation time of template in [ISO date format](https://cloud.tencent.com/document/product/862/37710#52).
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of template in [ISO date format](https://cloud.tencent.com/document/product/862/37710#52).
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -9978,7 +9978,7 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/862/37615#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+         * Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
 violation_photo:
 <li>violation_photo: violating photo.</li>
 politician:
@@ -9988,6 +9988,7 @@ politician:
 <li>county_politician: county/city leader;</li>
 <li>rural_politician: town leader;</li>
 <li>sensitive_politician: politically sensitive figure.</li>
+<li>foreign_politician: head of a foreign country/government.</li>
 entertainment:
 <li>sensitive_entertainment: sensitive entertainment celebrity.</li>
 sport:
@@ -9997,7 +9998,8 @@ entrepreneur:
 scholar:
 <li>sensitive_scholar: sensitive educator.</li>
 celebrity:
-<li>sensitive_celebrity: sensitive well-known figure.</li>
+<li>sensitive_celebrity: sensitive well-known figure;</li>
+<li>historical_celebrity: well-known historical figure.</li>
 military:
 <li>sensitive_military: militarily sensitive figure.</li>
          * @type {string || null}
@@ -10018,7 +10020,7 @@ military:
         this.AreaCoordSet = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -10226,17 +10228,17 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
 
         /**
          * Watermark width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
+<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
          * @type {string || null}
          */
         this.Width = null;
 
         /**
          * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.</li>
-`0px` means that `Height` will be proportionally scaled according to the video width.
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
          * @type {string || null}
          */
         this.Height = null;
@@ -10447,13 +10449,13 @@ class ImageSpriteTemplate extends  AbstractModel {
         this.ColumnCount = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -10569,7 +10571,7 @@ class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0-100.
+         * Confidence of recognized segment. Value range: 0–100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -10872,13 +10874,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ContainerType = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -11211,7 +11213,7 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -11437,7 +11439,7 @@ class LiveStreamFaceRecognitionResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0-100.
+         * Confidence of recognized segment. Value range: 0–100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -11661,13 +11663,13 @@ Default value: open.
         this.SampleInterval = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -11924,7 +11926,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OutputStorage = null;
 
         /**
-         * Path to a master output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+         * Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
@@ -13704,7 +13706,7 @@ class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * Confidence of recognized segment. Value range: 0-100.
+         * Confidence of recognized segment. Value range: 0–100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -14511,19 +14513,19 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Creation time of a task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * End time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -14574,6 +14576,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SessionContext = null;
 
         /**
+         * Extended information field, used in specific scenarios.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -14620,6 +14628,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -15022,7 +15031,7 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput) and this parameter is as follows:
+         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) and this parameter is as follows:
 violation_photo:
 <li>violation_photo: violating photo.</li>
 Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
@@ -15115,7 +15124,7 @@ and will be deleted after `PicUrlExpireTime`).
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -15332,19 +15341,19 @@ class TaskSimpleInfo extends  AbstractModel {
         this.TaskType = null;
 
         /**
-         * Creation time of a task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Start time of task execution in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been started yet, this field will be `0000-00-00T00:00:00Z`.
+         * Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been started yet, this field will be `0000-00-00T00:00:00Z`.
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * End time of a task in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been completed yet, this field will be `0000-00-00T00:00:00Z`.
+         * End time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been completed yet, this field will be `0000-00-00T00:00:00Z`.
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -15550,13 +15559,13 @@ Default value: open.
         this.Format = null;
 
         /**
-         * Creation time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of a template in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -16101,7 +16110,7 @@ and will be deleted after `PicUrlExpireTime`).
         this.Url = null;
 
         /**
-         * Expiration time of a suspected image URL in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -17375,7 +17384,7 @@ class MediaTranscodeItem extends  AbstractModel {
         this.Path = null;
 
         /**
-         * Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://cloud.tencent.com/document/product/266/33478#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+         * Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
@@ -18982,7 +18991,7 @@ class MediaImageSpriteItem extends  AbstractModel {
         super();
 
         /**
-         * Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;

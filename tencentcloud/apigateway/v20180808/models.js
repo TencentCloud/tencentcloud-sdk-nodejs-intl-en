@@ -199,6 +199,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.TradeIsolateStatus = null;
 
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -223,6 +229,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InnerHttpPort = 'InnerHttpPort' in params ? params.InnerHttpPort : null;
         this.InnerSubDomain = 'InnerSubDomain' in params ? params.InnerSubDomain : null;
         this.TradeIsolateStatus = 'TradeIsolateStatus' in params ? params.TradeIsolateStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -835,7 +850,7 @@ class CreateIPStrategyRequest extends  AbstractModel {
         this.StrategyName = null;
 
         /**
-         * Policy type. Valid values: WHITE (whitelist), BLACK (blacklist).
+         * Policy type. Valid values: WHITE (allowlist), BLACK (blocklist).
          * @type {string || null}
          */
         this.StrategyType = null;
@@ -886,7 +901,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StrategyName = null;
 
         /**
-         * Policy type. Valid values: WHITE (whitelist), BLACK (blacklist).
+         * Policy type. Valid values: WHITE (allowlist), BLACK (blocklist).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1474,7 +1489,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ModifiedTime = null;
 
         /**
-         * Self-deployed cluster name.
+         * Dedicated cluster name.
          * @type {string || null}
          */
         this.ExclusiveSetName = null;
@@ -1557,6 +1572,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SetId = null;
 
         /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1607,6 +1628,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
         this.UserType = 'UserType' in params ? params.UserType : null;
         this.SetId = 'SetId' in params ? params.SetId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3258,7 +3288,7 @@ class CreateServiceRequest extends  AbstractModel {
         this.ServiceDesc = null;
 
         /**
-         * Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
+         * Dedicated cluster name, which is used to specify the dedicated cluster where the service is to be created.
          * @type {string || null}
          */
         this.ExclusiveSetName = null;

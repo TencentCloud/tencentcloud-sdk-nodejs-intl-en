@@ -167,25 +167,25 @@ class LayoutParams extends  AbstractModel {
         super();
 
         /**
-         * On-Cloud MixTranscoding layout template ID. 0: floating template (default value); 1: 9-grid template; 2: screen sharing template
+         * On-cloud stream mix layout template ID. 0: floating template (default value); 1: grid template; 2: screen sharing template; 3: picture-in-picture template.
          * @type {number || null}
          */
         this.Template = null;
 
         /**
-         * ID of the user in the big image on the left, which takes effect in the screen sharing template
+         * ID of the user in the big image, which takes effect in a screen sharing, floating, or picture-in-picture template.
          * @type {string || null}
          */
         this.MainVideoUserId = null;
 
         /**
-         * Stream type of the big image on the left, which takes effect in the screen sharing template. 0: camera; 1: screen sharing. If a web user's stream is displayed in the big image on the left, enter 0 for this parameter
+         * Stream type of the big image, which takes effect in a screen sharing, floating, or picture-in-picture template. 0: camera; 1: screen sharing. If a web user's stream is displayed in the big image on the left, enter 0 for this parameter.
          * @type {number || null}
          */
         this.MainVideoStreamType = null;
 
         /**
-         * 
+         * Layout parameter of the small image, which takes effect in a picture-in-picture template.
          * @type {SmallVideoLayoutParams || null}
          */
         this.SmallVideoLayoutParams = null;
@@ -440,7 +440,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://cloud.tencent.com/document/product/647/44050).
+         * Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CommId = null;
@@ -860,7 +860,7 @@ class UserInformation extends  AbstractModel {
         this.JoinTs = null;
 
         /**
-         * 
+         * The time when the user exits the room. If the user is still in the room, the current time will be returned
          * @type {number || null}
          */
         this.LeaveTs = null;
@@ -1076,7 +1076,7 @@ class EventMessage extends  AbstractModel {
         this.Time = null;
 
         /**
-         * Event ID. Events divide into SDK events and WebRTC events. For more information, please see Appendix - Event ID Mapping Table at https://cloud.tencent.com/document/product/647/44916
+         * Event ID. Events divide into SDK events and WebRTC events. For more information, please see Appendix - Event ID Mapping Table at https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
          * @type {number || null}
          */
         this.EventId = null;
@@ -1537,7 +1537,7 @@ class StartMCUMixTranscodeResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Layout parameter of the small image, which takes effect in a picture-in-picture template
  * @class
  */
 class SmallVideoLayoutParams extends  AbstractModel {
@@ -1545,37 +1545,37 @@ class SmallVideoLayoutParams extends  AbstractModel {
         super();
 
         /**
-         * 
+         * ID of the user in the small image.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * 
+         * Stream type of the small image. 0: camera; 1: screen sharing. If a web user's stream is displayed in the small image, enter 0 for this parameter.
          * @type {number || null}
          */
         this.StreamType = null;
 
         /**
-         * 
+         * Output width of the small image in pixels. If this parameter is left empty, 0 will be used by default.
          * @type {number || null}
          */
         this.ImageWidth = null;
 
         /**
-         * 
+         * Output height of the small image in pixels. If this parameter is left empty, 0 will be used by default.
          * @type {number || null}
          */
         this.ImageHeight = null;
 
         /**
-         * 
+         * Output X-axis offset of the small image in pixels. The sum of `LocationX` and `ImageWidth` cannot exceed the total width of the output mixed stream. If this parameter is left empty, 0 will be used by default.
          * @type {number || null}
          */
         this.LocationX = null;
 
         /**
-         * 
+         * Output Y-axis offset of the small image in pixels. The sum of `LocationY` and `ImageHeight` cannot exceed the total height of the output mixed stream. If this parameter is left empty, 0 will be used by default.
          * @type {number || null}
          */
         this.LocationY = null;
@@ -1748,13 +1748,13 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.RoomId = null;
 
         /**
-         * Page index. If it is left empty, 10 entries will be returned by default.
+         * Page index starting from 0 (if either `PageNumber` or `PageSize` is left empty, 10 data entries will be returned by default)
          * @type {string || null}
          */
         this.PageNumber = null;
 
         /**
-         * Page size. Maximum value: 100. If it is left empty, 10 entries will be returned by default.
+         * Number of entries per page (if either `PageNumber` or `PageSize` is left empty, 10 data entries will be returned by default. Maximum value: 100)
          * @type {string || null}
          */
         this.PageSize = null;
@@ -1787,7 +1787,7 @@ class DescribeDetailEventRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://cloud.tencent.com/document/product/647/44050).
+         * Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CommId = null;

@@ -369,7 +369,7 @@ class DescribeProductEventListRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Filter by product type. For example, “cvm” indicates Cloud Virtual Machine.
+         * Filter by product type. For example, 'cvm' indicates Cloud Virtual Machine.
          * @type {Array.<string> || null}
          */
         this.ProductName = null;
@@ -943,7 +943,7 @@ class CreatePolicyGroupRequest extends  AbstractModel {
         this.BackEndCall = null;
 
         /**
-         * The “AND” and “OR” rules for alarm metrics. The value 0 indicates “OR”, which means that an alarm will be triggered when any rule is met. The value 1 indicates “AND”, which means that an alarm will be triggered only when all rules are met.
+         * The 'AND' and 'OR' rules for alarm metrics. The value 0 indicates 'OR', which means that an alarm will be triggered when any rule is met. The value 1 indicates 'AND', which means that an alarm will be triggered only when all rules are met.
          * @type {number || null}
          */
         this.IsUnionRule = null;
@@ -1087,7 +1087,7 @@ class DescribePolicyGroupInfoReceiverInfo extends  AbstractModel {
         this.ReceiverUserList = null;
 
         /**
-         * Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates “10:0:0”.
+         * Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -1314,7 +1314,7 @@ class ModifyPolicyGroupRequest extends  AbstractModel {
         this.GroupName = null;
 
         /**
-         * The “AND” and “OR” rules for metric alarms. The value 1 indicates “AND”, which means that an alarm will be triggered only when all rules are met. The value 0 indicates “OR”, which means that an alarm will be triggered when any rule is met.
+         * The 'AND' and 'OR' rules for metric alarms. The value 1 indicates 'AND', which means that an alarm will be triggered only when all rules are met. The value 0 indicates 'OR', which means that an alarm will be triggered when any rule is met.
          * @type {number || null}
          */
         this.IsUnionRule = null;
@@ -1910,7 +1910,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.InstanceGroup = null;
 
         /**
-         * The “AND” or “OR” rule. The value 0 indicates the “OR” rule (indicating that an alarm will be triggered if any rule meets the threshold condition). The value 1 indicates the “AND” rule (indicating that an alarm will be triggered when all rules meet the threshold conditions).
+         * The 'AND' or 'OR' rule. The value 0 indicates the 'OR' rule (indicating that an alarm will be triggered if any rule meets the threshold condition). The value 1 indicates the 'AND' rule (indicating that an alarm will be triggered when all rules meet the threshold conditions).
 Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
@@ -2196,13 +2196,13 @@ class GetMonitorDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Namespace. Each Tencent Cloud product has a namespace
+         * Namespace. For detailed namespace descriptions of each Tencent Cloud service, see the corresponding [Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1) documentation
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * Metric name. For detailed metric descriptions of each Tencent Cloud product, see the corresponding [Monitoring API](https://cloud.tencent.com/document/product/248/30384) document
+         * Metric name. For detailed metric descriptions of each Tencent Cloud service, see the corresponding [Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1) documentation
          * @type {string || null}
          */
         this.MetricName = null;
@@ -2827,7 +2827,7 @@ class ReceiverInfo extends  AbstractModel {
         super();
 
         /**
-         * Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates “10:0:0”.
+         * Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -3139,7 +3139,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.CanSetDefault = null;
 
         /**
-         * Whether the “AND” rule is used.
+         * Whether the 'AND' rule is used.
 Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
@@ -3736,7 +3736,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.InsertTime = null;
 
         /**
-         * Whether the “AND” rule is used.
+         * Whether the 'AND' rule is used.
 Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
@@ -4433,10 +4433,16 @@ class DescribePolicyGroupListRequest extends  AbstractModel {
         this.ConditionTempGroupId = null;
 
         /**
-         * Filter by recipient or recipient group. The value “user” indicates by recipient. The value “group” indicates by recipient group.
+         * Filter by recipient or recipient group. The value 'user' indicates by recipient. The value 'group' indicates by recipient group.
          * @type {string || null}
          */
         this.ReceiverType = null;
+
+        /**
+         * Filter conditions. Whether the alarm policy has been enabled or disabled
+         * @type {boolean || null}
+         */
+        this.IsOpen = null;
 
     }
 
@@ -4461,6 +4467,7 @@ class DescribePolicyGroupListRequest extends  AbstractModel {
         this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
         this.ConditionTempGroupId = 'ConditionTempGroupId' in params ? params.ConditionTempGroupId : null;
         this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
+        this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
 
     }
 }
@@ -4590,13 +4597,13 @@ class DescribeBaseMetricsRequest extends  AbstractModel {
         super();
 
         /**
-         * Service namespace. Different Tencent Cloud services have different namespaces. For more information on service namespaces, see the monitoring API documentation of each product. For example, you can see [CVM Monitoring APIs](https://cloud.tencent.com/document/api/248/30385) for the namespace of CVM.
+         * Service namespace. Tencent Cloud services have different namespaces. For more information on service namespaces, see the monitoring metric documentation of each service. For example, see [CVM Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6843?from_cn_redirect=1) for the namespace of CVM
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * Metric name. Different Tencent Cloud services have different metric names. For more information on service metric names, see the monitoring API documentation of each product. For example, you can see the [CVM Monitoring APIs](https://cloud.tencent.com/document/api/248/30385) for the metric names of CVM.
+         * Metric name. Tencent Cloud services have different metric names. For more information on metric names, see the monitoring metric documentation of each service. For example, see [CVM Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6843?from_cn_redirect=1) for the metric names of CVM
          * @type {string || null}
          */
         this.MetricName = null;

@@ -124,18 +124,12 @@ class DescribeTargetGroupListResponse extends  AbstractModel {
 }
 
 /**
- * DisassociateTargetGroups response structure.
+ * DescribeQuota request structure.
  * @class
  */
-class DisassociateTargetGroupsResponse extends  AbstractModel {
+class DescribeQuotaRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -146,7 +140,6 @@ class DisassociateTargetGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -468,6 +461,12 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
          */
         this.Tags = null;
 
+        /**
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
     }
 
     /**
@@ -503,6 +502,7 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
                 this.Tags.push(obj);
             }
         }
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
 
     }
 }
@@ -631,48 +631,18 @@ class DeleteRuleRequest extends  AbstractModel {
 }
 
 /**
- * ModifyLoadBalancerAttributes request structure.
+ * DisassociateTargetGroups response structure.
  * @class
  */
-class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
+class DisassociateTargetGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique CLB ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * CLB instance name
-         * @type {string || null}
-         */
-        this.LoadBalancerName = null;
-
-        /**
-         * Region information of the real server bound to a CLB.
-         * @type {TargetRegionInfo || null}
-         */
-        this.TargetRegionInfo = null;
-
-        /**
-         * Network billing parameter
-         * @type {InternetAccessible || null}
-         */
-        this.InternetChargeInfo = null;
-
-        /**
-         * Whether the target opens traffic from CLB to the internet. If yes (true), only security groups on CLB will be verified; if no (false), security groups on both CLB and backend instance need to be verified.
-         * @type {boolean || null}
-         */
-        this.LoadBalancerPassToTarget = null;
-
-        /**
-         * Whether to enable SnatPro
-         * @type {boolean || null}
-         */
-        this.SnatPro = null;
+        this.RequestId = null;
 
     }
 
@@ -683,22 +653,7 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
-
-        if (params.TargetRegionInfo) {
-            let obj = new TargetRegionInfo();
-            obj.deserialize(params.TargetRegionInfo)
-            this.TargetRegionInfo = obj;
-        }
-
-        if (params.InternetChargeInfo) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetChargeInfo)
-            this.InternetChargeInfo = obj;
-        }
-        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
-        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2238,6 +2193,79 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyLoadBalancerAttributes request structure.
+ * @class
+ */
+class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique CLB ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB instance name
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * Region information of the real server bound to a CLB.
+         * @type {TargetRegionInfo || null}
+         */
+        this.TargetRegionInfo = null;
+
+        /**
+         * Network billing parameter
+         * @type {InternetAccessible || null}
+         */
+        this.InternetChargeInfo = null;
+
+        /**
+         * Whether the target opens traffic from CLB to the internet. If yes (true), only security groups on CLB will be verified; if no (false), security groups on both CLB and backend instance need to be verified.
+         * @type {boolean || null}
+         */
+        this.LoadBalancerPassToTarget = null;
+
+        /**
+         * Whether to enable SnatPro
+         * @type {boolean || null}
+         */
+        this.SnatPro = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+
+        if (params.TargetRegionInfo) {
+            let obj = new TargetRegionInfo();
+            obj.deserialize(params.TargetRegionInfo)
+            this.TargetRegionInfo = obj;
+        }
+
+        if (params.InternetChargeInfo) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetChargeInfo)
+            this.InternetChargeInfo = obj;
+        }
+        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
+        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
+
+    }
+}
+
+/**
  * Redirect target, i.e., the real server bound to a CLB
  * @class
  */
@@ -2552,6 +2580,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TargetGroup = null;
 
+        /**
+         * Session persistence type. Valid values: Normal: the default session persistence type; QUIC_CID: session persistence by QUIC connection ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SessionType = null;
+
+        /**
+         * Whether a persistent connection is enabled (This parameter can only be configured in HTTP/HTTPS listeners)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.KeepaliveEnable = null;
+
     }
 
     /**
@@ -2598,6 +2640,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.TargetGroup)
             this.TargetGroup = obj;
         }
+        this.SessionType = 'SessionType' in params ? params.SessionType : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
 
     }
 }
@@ -2731,6 +2775,50 @@ class ReplaceCertForLoadBalancersResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTargets response structure.
+ * @class
+ */
+class DescribeTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of real servers bound to the listener
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ListenerBackend> || null}
+         */
+        this.Listeners = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Listeners) {
+            this.Listeners = new Array();
+            for (let z in params.Listeners) {
+                let obj = new ListenerBackend();
+                obj.deserialize(params.Listeners[z]);
+                this.Listeners.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3244,6 +3332,80 @@ class ModifyTargetPortResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLoadBalancersDetail request structure.
+ * @class
+ */
+class DescribeLoadBalancersDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of CLB instance lists returned. Default value: 20; maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Starting offset of the CLB instance list returned. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * List of fields to be returned. The `LoadBalancerId` and `LoadBalancerName` are returned by default.
+         * @type {Array.<string> || null}
+         */
+        this.Fields = null;
+
+        /**
+         * Target type. Valid values: NODE and GROUP. If the list of fields contains `TargetId`, `TargetAddress`, `TargetPort`, `TargetWeight` and other fields, `Target` of the target group or non-target group must be exported.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * Filter condition of querying lists describing CLB instance details:
+<li> loadbalancer-id - String - Required: no - (Filter condition) CLB instance ID, such as "lb-12345678". </li>
+<li> project-id - String - Required: no - (Filter condition) Project ID, such as "0" and "123".</li>
+<li> network - String - Required: no - (Filter condition) Network type of the CLB instance, such as "Public" and "Private".</li>
+<li> vip - String - Required: no - (Filter condition) CLB instance VIP, such as "1.1.1.1" and "2204::22:3". </li>
+<li> target-ip - String - Required: no - (Filter condition) Private IP of the target real servers, such as"1.1.1.1" and "2203::214:4".</li>
+<li> vpcid - String - Required: no - (Filter condition) Identifier of the VPC instance to which the CLB instance belongs, such as "vpc-12345678".</li>
+<li> zone - String - Required: no - (Filter condition) Availability zone where the CLB instance resides, such as "ap-guangzhou-1".</li>
+<li> tag-key - String - Required: no - (Filter condition) Tag key of the CLB instance, such as "name".</li>
+<li> tag:* - String - Required: no - (Filter condition) CLB instance tag, followed by tag key after the colon ':'. For example, use {"Name": "tag:name","Values": ["zhangsan", "lisi"]} to filter the tag key “name” with the tag value “zhangsan” and “lisi”.</li>
+<li> fuzzy-search - String - Required: no - (Filter condition) Fuzzy search for CLB instance VIP and CLB instance name, such as "1.1".</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Fields = 'Fields' in params ? params.Fields : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5012,6 +5174,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.TargetType = null;
 
+        /**
+         * Session persistence type. Valid values: Normal: the default session persistence type; QUIC_CID: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+         * @type {string || null}
+         */
+        this.SessionType = null;
+
     }
 
     /**
@@ -5041,6 +5209,7 @@ They represent weighted round robin and least connections, respectively. Default
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.SessionType = 'SessionType' in params ? params.SessionType : null;
 
     }
 }
@@ -5602,19 +5771,25 @@ class ModifyTargetWeightRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTargets response structure.
+ * DescribeLoadBalancersDetail response structure.
  * @class
  */
-class DescribeTargetsResponse extends  AbstractModel {
+class DescribeLoadBalancersDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Information of real servers bound to the listener
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ListenerBackend> || null}
+         * Total number of lists describing CLB instance details.
+         * @type {number || null}
          */
-        this.Listeners = null;
+        this.TotalCount = null;
+
+        /**
+         * List of CLB instance details.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<LoadBalancerDetail> || null}
+         */
+        this.LoadBalancerDetailSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5631,16 +5806,301 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Listeners) {
-            this.Listeners = new Array();
-            for (let z in params.Listeners) {
-                let obj = new ListenerBackend();
-                obj.deserialize(params.Listeners[z]);
-                this.Listeners.push(obj);
+        if (params.LoadBalancerDetailSet) {
+            this.LoadBalancerDetailSet = new Array();
+            for (let z in params.LoadBalancerDetailSet) {
+                let obj = new LoadBalancerDetail();
+                obj.deserialize(params.LoadBalancerDetailSet[z]);
+                this.LoadBalancerDetailSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CLB instance details
+ * @class
+ */
+class LoadBalancerDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID.
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB instance name.
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * CLB instance network type:
+Public: public network; Private: private network.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LoadBalancerType = null;
+
+        /**
+         * CLB instance status, including:
+0: creating; 1: running.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * CLB instance VIP.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * IPv6 VIP address of the CLB instance.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AddressIPv6 = null;
+
+        /**
+         * IP version of the CLB instance. Valid values: IPv4, IPv6.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AddressIPVersion = null;
+
+        /**
+         * IPv6 address type of the CLB instance. Valid values: IPv6Nat64, IPv6FullChain.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IPv6Mode = null;
+
+        /**
+         * Availability zone where the CLB instance resides.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * ISP to which the CLB IP address belongs.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AddressIsp = null;
+
+        /**
+         * ID of the VPC instance to which the CLB instance belongs.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ID of the project to which the CLB instance belongs. 0: default project.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * CLB instance creation time.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * CLB instance billing mode.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * CLB instance network attribute.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {InternetAccessible || null}
+         */
+        this.NetworkAttributes = null;
+
+        /**
+         * Pay-as-you-go attribute of the CLB instance.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {LBChargePrepaid || null}
+         */
+        this.PrepaidAttributes = null;
+
+        /**
+         * Reserved field, which can be ignored generally.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ExtraInfo || null}
+         */
+        this.ExtraInfo = null;
+
+        /**
+         * Custom configuration ID at the CLB instance level.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * CLB instance tag information.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * CLB listener ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * Listener protocol.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Listener port.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Forwarding rule ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Domain name of the forwarding rule.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Forwarding rule path.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * ID of target real servers.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TargetId = null;
+
+        /**
+         * Address of target real servers.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TargetAddress = null;
+
+        /**
+         * Listening port of target real servers.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TargetPort = null;
+
+        /**
+         * Forwarding weight of target real servers.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TargetWeight = null;
+
+        /**
+         * 0: not isolated; 1: isolated.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Isolation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.LoadBalancerType = 'LoadBalancerType' in params ? params.LoadBalancerType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.AddressIPv6 = 'AddressIPv6' in params ? params.AddressIPv6 : null;
+        this.AddressIPVersion = 'AddressIPVersion' in params ? params.AddressIPVersion : null;
+        this.IPv6Mode = 'IPv6Mode' in params ? params.IPv6Mode : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.AddressIsp = 'AddressIsp' in params ? params.AddressIsp : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+
+        if (params.NetworkAttributes) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.NetworkAttributes)
+            this.NetworkAttributes = obj;
+        }
+
+        if (params.PrepaidAttributes) {
+            let obj = new LBChargePrepaid();
+            obj.deserialize(params.PrepaidAttributes)
+            this.PrepaidAttributes = obj;
+        }
+
+        if (params.ExtraInfo) {
+            let obj = new ExtraInfo();
+            obj.deserialize(params.ExtraInfo)
+            this.ExtraInfo = obj;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.TargetId = 'TargetId' in params ? params.TargetId : null;
+        this.TargetAddress = 'TargetAddress' in params ? params.TargetAddress : null;
+        this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
+        this.TargetWeight = 'TargetWeight' in params ? params.TargetWeight : null;
+        this.Isolation = 'Isolation' in params ? params.Isolation : null;
 
     }
 }
@@ -6299,6 +6759,62 @@ class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeClassicalLBListeners request structure.
+ * @class
+ */
+class DescribeClassicalLBListenersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * List of CLB listener IDs
+         * @type {Array.<string> || null}
+         */
+        this.ListenerIds = null;
+
+        /**
+         * CLB listening protocol. Value range: TCP, UDP, HTTP, HTTPS
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * CLB listening port. Value range: [1-65535]
+         * @type {number || null}
+         */
+        this.ListenerPort = null;
+
+        /**
+         * Listener status. Value range: 0 (creating), 1 (running)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DeleteTargetGroups response structure.
  * @class
  */
@@ -6521,7 +7037,7 @@ class RuleInput extends  AbstractModel {
         this.SessionExpireTime = null;
 
         /**
-         * Health check information
+         * Health check information. For more information, please see [Health Check](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1)
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
@@ -6853,6 +7369,54 @@ class CreateLoadBalancerResponse extends  AbstractModel {
         }
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Quota description. All quotas are in the current region.
+ * @class
+ */
+class Quota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Quota name. Valid values:
+<li> TOTAL_OPEN_CLB_QUOTA: quota of public network CLB instances in the current region</li>
+<li> TOTAL_INTERNAL_CLB_QUOTA: quota of private network CLB instances in the current region</li>
+<li> TOTAL_LISTENER_QUOTA: quota of listeners under one CLB instance</li>
+<li> TOTAL_LISTENER_RULE_QUOTA: quota of forwarding rules under one listener</li>
+<li> TOTAL_TARGET_BIND_QUOTA: quota of CVM instances can be bound under one forwarding rule</li>
+         * @type {string || null}
+         */
+        this.QuotaId = null;
+
+        /**
+         * Currently used quantity. If it is `null`, it is meaningless.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QuotaCurrent = null;
+
+        /**
+         * Quota limit.
+         * @type {number || null}
+         */
+        this.QuotaLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QuotaId = 'QuotaId' in params ? params.QuotaId : null;
+        this.QuotaCurrent = 'QuotaCurrent' in params ? params.QuotaCurrent : null;
+        this.QuotaLimit = 'QuotaLimit' in params ? params.QuotaLimit : null;
 
     }
 }
@@ -7339,42 +7903,24 @@ class DeleteTargetGroupsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeClassicalLBListeners request structure.
+ * DescribeQuota response structure.
  * @class
  */
-class DescribeClassicalLBListenersRequest extends  AbstractModel {
+class DescribeQuotaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB instance ID
+         * Quota list
+         * @type {Array.<Quota> || null}
+         */
+        this.QuotaSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * List of CLB listener IDs
-         * @type {Array.<string> || null}
-         */
-        this.ListenerIds = null;
-
-        /**
-         * CLB listening protocol. Value range: TCP, UDP, HTTP, HTTPS
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * CLB listening port. Value range: [1-65535]
-         * @type {number || null}
-         */
-        this.ListenerPort = null;
-
-        /**
-         * Listener status. Value range: 0 (creating), 1 (running)
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -7385,11 +7931,16 @@ class DescribeClassicalLBListenersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
-        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.QuotaSet) {
+            this.QuotaSet = new Array();
+            for (let z in params.QuotaSet) {
+                let obj = new Quota();
+                obj.deserialize(params.QuotaSet[z]);
+                this.QuotaSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8054,14 +8605,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IPv6Mode = null;
 
         /**
-         * Whether to enable SnatPro
+         * Whether to enable SnatPro.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.SnatPro = null;
 
         /**
-         * SnatIp list after SnatPro load balancing is enabled
+         * `SnatIp` list after SnatPro load balancing is enabled.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SnatIp> || null}
          */
@@ -8089,11 +8640,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IsBlockTime = null;
 
         /**
-         * Whether the IP type is the local BGP
-Note: this field may return null, indicating that no valid values can be obtained
+         * 
          * @type {boolean || null}
          */
         this.LocalBgp = null;
+
+        /**
+         * Dedicated layer-7 tag.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterTag = null;
+
+        /**
+         * If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.MixIpTarget = null;
 
     }
 
@@ -8203,6 +8767,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IsBlock = 'IsBlock' in params ? params.IsBlock : null;
         this.IsBlockTime = 'IsBlockTime' in params ? params.IsBlockTime : null;
         this.LocalBgp = 'LocalBgp' in params ? params.LocalBgp : null;
+        this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
+        this.MixIpTarget = 'MixIpTarget' in params ? params.MixIpTarget : null;
 
     }
 }
@@ -8210,7 +8776,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 module.exports = {
     DeleteRewriteRequest: DeleteRewriteRequest,
     DescribeTargetGroupListResponse: DescribeTargetGroupListResponse,
-    DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
+    DescribeQuotaRequest: DescribeQuotaRequest,
     DescribeTargetGroupListRequest: DescribeTargetGroupListRequest,
     BatchDeregisterTargetsResponse: BatchDeregisterTargetsResponse,
     SetLoadBalancerSecurityGroupsResponse: SetLoadBalancerSecurityGroupsResponse,
@@ -8220,7 +8786,7 @@ module.exports = {
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
     RuleHealth: RuleHealth,
     DeleteRuleRequest: DeleteRuleRequest,
-    ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
+    DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
@@ -8257,6 +8823,7 @@ module.exports = {
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
+    ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
     Target: Target,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
     CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
@@ -8267,6 +8834,7 @@ module.exports = {
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
     ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
     ReplaceCertForLoadBalancersResponse: ReplaceCertForLoadBalancersResponse,
+    DescribeTargetsResponse: DescribeTargetsResponse,
     ModifyListenerRequest: ModifyListenerRequest,
     DeregisterTargetGroupInstancesResponse: DeregisterTargetGroupInstancesResponse,
     RegisterTargetsRequest: RegisterTargetsRequest,
@@ -8276,6 +8844,7 @@ module.exports = {
     DeleteListenerRequest: DeleteListenerRequest,
     ClassicalHealth: ClassicalHealth,
     ModifyTargetPortResponse: ModifyTargetPortResponse,
+    DescribeLoadBalancersDetailRequest: DescribeLoadBalancersDetailRequest,
     TargetGroupBackend: TargetGroupBackend,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
     ManualRewriteResponse: ManualRewriteResponse,
@@ -8320,7 +8889,8 @@ module.exports = {
     DeregisterTargetsResponse: DeregisterTargetsResponse,
     RewriteTarget: RewriteTarget,
     ModifyTargetWeightRequest: ModifyTargetWeightRequest,
-    DescribeTargetsResponse: DescribeTargetsResponse,
+    DescribeLoadBalancersDetailResponse: DescribeLoadBalancersDetailResponse,
+    LoadBalancerDetail: LoadBalancerDetail,
     BatchModifyTargetWeightRequest: BatchModifyTargetWeightRequest,
     DeleteRewriteResponse: DeleteRewriteResponse,
     BatchTarget: BatchTarget,
@@ -8336,6 +8906,7 @@ module.exports = {
     InternetAccessible: InternetAccessible,
     CreateLoadBalancerSnatIpsRequest: CreateLoadBalancerSnatIpsRequest,
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
+    DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
     DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
     ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
     BatchRegisterTargetsRequest: BatchRegisterTargetsRequest,
@@ -8348,6 +8919,7 @@ module.exports = {
     ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
     DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
+    Quota: Quota,
     DeleteLoadBalancerListenersResponse: DeleteLoadBalancerListenersResponse,
     DescribeListenersRequest: DescribeListenersRequest,
     DeleteLoadBalancerSnatIpsRequest: DeleteLoadBalancerSnatIpsRequest,
@@ -8360,7 +8932,7 @@ module.exports = {
     DeleteLoadBalancerSnatIpsResponse: DeleteLoadBalancerSnatIpsResponse,
     CertificateOutput: CertificateOutput,
     DeleteTargetGroupsRequest: DeleteTargetGroupsRequest,
-    DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
+    DescribeQuotaResponse: DescribeQuotaResponse,
     TargetHealth: TargetHealth,
     TargetGroupAssociation: TargetGroupAssociation,
     ListenerHealth: ListenerHealth,

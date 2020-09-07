@@ -1642,7 +1642,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * File compression algorithm
 gzip: specifies Gzip compression
-brotli: this can be enabled when the Gzip compression is specified
+brotli: specifies Brotli compression
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -1719,7 +1719,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Origins = null;
 
         /**
-         * Primary origin server type
+         * Master origin server type
 The following types are supported for input parameters:
 domain: domain name type
 cos: COS origin
@@ -1730,14 +1730,14 @@ The following types of output parameters are added:
 image: Cloud Infinite origin
 ftp: legacy FTP origin, which is no longer maintained.
 When modifying `Origins`, you need to enter the corresponding OriginType.
-The IPv6 feature is not generally available yet. Please send in a allowlist application to use this feature.
+The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * Host header used when accessing the primary origin server. If left empty, the acceleration domain name will be used by default.
+         * Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
 If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -1781,18 +1781,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BackupOriginType = null;
 
         /**
-         * Host header used when accessing the backup origin server. If left empty, the ServerName of primary origin server will be used by default.
+         * Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BackupServerName = null;
-
-        /**
-         * Origin-pull path
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.BasePath = null;
 
     }
 
@@ -1811,7 +1804,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BackupOrigins = 'BackupOrigins' in params ? params.BackupOrigins : null;
         this.BackupOriginType = 'BackupOriginType' in params ? params.BackupOriginType : null;
         this.BackupServerName = 'BackupServerName' in params ? params.BackupServerName : null;
-        this.BasePath = 'BasePath' in params ? params.BasePath : null;
 
     }
 }
@@ -2037,7 +2029,7 @@ If this parameter is left empty, `mainland` will be used by default
 
         /**
          * Country/region to be queried if `Area` is `overseas`
-For district or country/region codes, please see [District Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
+For district or country/region codes, please see [District Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
 If this parameter is left empty, all countries/regions will be queried
          * @type {number || null}
          */
@@ -3929,7 +3921,7 @@ class DescribeDomainsConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset for paginated queries. Default value: 0 (the first page).
+         * Offset for paginated queries. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -5156,7 +5148,7 @@ media: streaming VOD acceleration
         this.Origin = null;
 
         /**
-         * IP blocklist/allowlist configuration
+         * IP blacklist/whitelist configuration
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {IpFilter || null}
          */
@@ -5399,11 +5391,33 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UserAgentFilter = null;
 
         /**
-         * Access control
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {AccessControl || null}
          */
         this.AccessControl = null;
+
+        /**
+         * Whether to support advanced configuration items
+on: supported
+off: not supported
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Advance = null;
+
+        /**
+         * URL redirect configuration
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {UrlRedirect || null}
+         */
+        this.UrlRedirect = null;
+
+        /**
+         * Access port configuration
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.AccessPort = null;
 
     }
 
@@ -5618,6 +5632,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.AccessControl)
             this.AccessControl = obj;
         }
+        this.Advance = 'Advance' in params ? params.Advance : null;
+
+        if (params.UrlRedirect) {
+            let obj = new UrlRedirect();
+            obj.deserialize(params.UrlRedirect)
+            this.UrlRedirect = obj;
+        }
+        this.AccessPort = 'AccessPort' in params ? params.AccessPort : null;
 
     }
 }
@@ -6223,6 +6245,12 @@ Default value: `mainland`. You can prefetch a URL to nodes in a region provided 
          */
         this.Area = null;
 
+        /**
+         * If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node
+         * @type {string || null}
+         */
+        this.Layer = null;
+
     }
 
     /**
@@ -6235,6 +6263,7 @@ Default value: `mainland`. You can prefetch a URL to nodes in a region provided 
         this.Urls = 'Urls' in params ? params.Urls : null;
         this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.Layer = 'Layer' in params ? params.Layer : null;
 
     }
 }
@@ -7886,6 +7915,52 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * URL redirect configuration
+ * @class
+ */
+class UrlRedirect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * URL redirect configuration switch
+on: enabled
+off: disabled
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * URL redirect rule, which is required if `Switch` is `on`. There can be up to 10 rules.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<UrlRedirectRule> || null}
+         */
+        this.PathRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.PathRules) {
+            this.PathRules = new Array();
+            for (let z in params.PathRules) {
+                let obj = new UrlRedirectRule();
+                obj.deserialize(params.PathRules[z]);
+                this.PathRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * A part of `CacheKey`
  * @class
  */
@@ -9121,7 +9196,7 @@ class SearchClsLogRequest extends  AbstractModel {
         this.Channel = null;
 
         /**
-         * Content to be queried. For more information, please visit https://cloud.tencent.com/document/product/614/16982
+         * Content to be queried. For more information, please visit https://intl.cloud.tencent.com/document/product/614/16982?from_cn_redirect=1
          * @type {string || null}
          */
         this.Query = null;
@@ -9361,6 +9436,24 @@ global: global acceleration
          */
         this.UserAgentFilter = null;
 
+        /**
+         * Access control
+         * @type {AccessControl || null}
+         */
+        this.AccessControl = null;
+
+        /**
+         * URL redirect configuration
+         * @type {UrlRedirect || null}
+         */
+        this.UrlRedirect = null;
+
+        /**
+         * Access port configuration
+         * @type {Array.<number> || null}
+         */
+        this.AccessPort = null;
+
     }
 
     /**
@@ -9536,6 +9629,19 @@ global: global acceleration
             obj.deserialize(params.UserAgentFilter)
             this.UserAgentFilter = obj;
         }
+
+        if (params.AccessControl) {
+            let obj = new AccessControl();
+            obj.deserialize(params.AccessControl)
+            this.AccessControl = obj;
+        }
+
+        if (params.UrlRedirect) {
+            let obj = new UrlRedirect();
+            obj.deserialize(params.UrlRedirect)
+            this.UrlRedirect = obj;
+        }
+        this.AccessPort = 'AccessPort' in params ? params.AccessPort : null;
 
     }
 }
@@ -9870,6 +9976,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * URL redirect rule configuration
+ * @class
+ */
+class UrlRedirectRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Redirect status code. Valid values: 301, 302
+         * @type {number || null}
+         */
+        this.RedirectStatusCode = null;
+
+        /**
+         * Pattern of the URL to be matched, which can contain up to 1,024 characters. Full-path match and regex match are supported.
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * Target URL, which must begin with `/` and can contain up to 1,024 characters.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
 
     }
 }
@@ -10247,7 +10395,7 @@ You can set it to true to return the details for each Domain (the statusCode met
 
         /**
          * Specifies an ISP when you query the CDN data within Mainland China. If this is left blank, all ISPs will be queried.
-To view ISP codes, see [ISP Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+To view ISP codes, see [ISP Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
 If you have specified an ISP, you cannot specify a province or an IP protocol for the same query.
          * @type {number || null}
          */
@@ -10256,7 +10404,7 @@ If you have specified an ISP, you cannot specify a province or an IP protocol fo
         /**
          * Specifies a province when you query the CDN data within Mainland China. If this is left blank, all provinces will be queried.
 Specifies a country/region when you query the CDN data outside Mainland China. If this is left blank, all countries/regions will be queried.
-To view codes of provinces or countries/regions, see [Province Code Mappings](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+To view codes of provinces or countries/regions, see [Province Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
 If you have specified a province for your query on CDN data within mainland China, you cannot specify an ISP or an IP protocol for the same query.
          * @type {number || null}
          */
@@ -10544,6 +10692,7 @@ module.exports = {
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     AccessControl: AccessControl,
     CacheKey: CacheKey,
+    UrlRedirect: UrlRedirect,
     CookieKey: CookieKey,
     CappingRule: CappingRule,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
@@ -10581,6 +10730,7 @@ module.exports = {
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
+    UrlRedirectRule: UrlRedirectRule,
     ErrorPageRule: ErrorPageRule,
     DescribeOriginDataResponse: DescribeOriginDataResponse,
     PurgeTask: PurgeTask,

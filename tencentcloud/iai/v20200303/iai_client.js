@@ -17,66 +17,69 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
-const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
+const Eye = models.Eye;
 const Candidate = models.Candidate;
 const ModifyGroupResponse = models.ModifyGroupResponse;
-const VerifyFaceResponse = models.VerifyFaceResponse;
+const GetGroupInfoResponse = models.GetGroupInfoResponse;
 const DeletePersonRequest = models.DeletePersonRequest;
 const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
-const GetSimilarPersonResultResponse = models.GetSimilarPersonResultResponse;
+const AnalyzeDenseLandmarksResponse = models.AnalyzeDenseLandmarksResponse;
 const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
 const DeleteFaceRequest = models.DeleteFaceRequest;
+const HeadPose = models.HeadPose;
 const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
 const GetGroupListResponse = models.GetGroupListResponse;
 const GroupInfo = models.GroupInfo;
 const GetPersonListResponse = models.GetPersonListResponse;
+const Hat = models.Hat;
 const FaceQualityCompleteness = models.FaceQualityCompleteness;
 const FaceAttributesInfo = models.FaceAttributesInfo;
-const PersonGroupInfo = models.PersonGroupInfo;
+const DetectFaceAttributesRequest = models.DetectFaceAttributesRequest;
 const ModifyGroupRequest = models.ModifyGroupRequest;
 const CreatePersonRequest = models.CreatePersonRequest;
 const GetGroupListRequest = models.GetGroupListRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
 const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
-const GetSimilarPersonResultRequest = models.GetSimilarPersonResultRequest;
-const GetGroupInfoResponse = models.GetGroupInfoResponse;
+const DetectFaceAttributesResponse = models.DetectFaceAttributesResponse;
 const GroupCandidate = models.GroupCandidate;
 const SearchPersonsResponse = models.SearchPersonsResponse;
-const FaceQualityInfo = models.FaceQualityInfo;
+const VerifyPersonRequest = models.VerifyPersonRequest;
 const CompareFaceResponse = models.CompareFaceResponse;
 const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
 const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
-const JobIdInfo = models.JobIdInfo;
+const VerifyFaceResponse = models.VerifyFaceResponse;
 const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
 const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
 const CreateFaceRequest = models.CreateFaceRequest;
-const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
+const Mouth = models.Mouth;
 const CreateGroupRequest = models.CreateGroupRequest;
+const PersonGroupInfo = models.PersonGroupInfo;
 const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const GetPersonGroupInfoRequest = models.GetPersonGroupInfoRequest;
 const Result = models.Result;
-const GetCheckSimilarPersonJobIdListRequest = models.GetCheckSimilarPersonJobIdListRequest;
-const VerifyPersonRequest = models.VerifyPersonRequest;
+const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const FaceInfo = models.FaceInfo;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const SearchPersonsRequest = models.SearchPersonsRequest;
-const EstimateCheckSimilarPersonCostTimeResponse = models.EstimateCheckSimilarPersonCostTimeResponse;
+const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
+const FaceQualityInfo = models.FaceQualityInfo;
 const CompareFaceRequest = models.CompareFaceRequest;
 const PersonInfo = models.PersonInfo;
-const CheckSimilarPersonRequest = models.CheckSimilarPersonRequest;
-const FaceShape = models.FaceShape;
+const Eyebrow = models.Eyebrow;
+const AnalyzeDenseLandmarksRequest = models.AnalyzeDenseLandmarksRequest;
 const DetectFaceResponse = models.DetectFaceResponse;
 const CopyPersonRequest = models.CopyPersonRequest;
-const CheckSimilarPersonResponse = models.CheckSimilarPersonResponse;
+const GetPersonListNumRequest = models.GetPersonListNumRequest;
 const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
 const DeletePersonFromGroupResponse = models.DeletePersonFromGroupResponse;
 const VerifyPersonResponse = models.VerifyPersonResponse;
 const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
 const GetGroupInfoRequest = models.GetGroupInfoRequest;
-const GetPersonListNumResponse = models.GetPersonListNumResponse;
+const FaceShape = models.FaceShape;
+const FaceDetailInfo = models.FaceDetailInfo;
 const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
-const GetCheckSimilarPersonJobIdListResponse = models.GetCheckSimilarPersonJobIdListResponse;
+const DenseFaceShape = models.DenseFaceShape;
 const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
 const Point = models.Point;
 const DetectFaceRequest = models.DetectFaceRequest;
@@ -86,11 +89,13 @@ const SearchFacesResponse = models.SearchFacesResponse;
 const GroupExDescriptionInfo = models.GroupExDescriptionInfo;
 const VerifyFaceRequest = models.VerifyFaceRequest;
 const CopyPersonResponse = models.CopyPersonResponse;
-const EstimateCheckSimilarPersonCostTimeRequest = models.EstimateCheckSimilarPersonCostTimeRequest;
+const Hair = models.Hair;
+const GetPersonListNumResponse = models.GetPersonListNumResponse;
 const GetPersonListRequest = models.GetPersonListRequest;
-const GetPersonListNumRequest = models.GetPersonListNumRequest;
+const FaceDetailAttributesInfo = models.FaceDetailAttributesInfo;
 const DeleteFaceResponse = models.DeleteFaceResponse;
 const DeletePersonResponse = models.DeletePersonResponse;
+const AttributeItem = models.AttributeItem;
 const FaceRect = models.FaceRect;
 const ModifyPersonGroupInfoResponse = models.ModifyPersonGroupInfoResponse;
 const SearchFacesRequest = models.SearchFacesRequest;
@@ -126,9 +131,9 @@ Up to 10 faces in the image can be recognized at a time, and cross-group search 
 
 The maximum number of faces in a group that can be searched for at a time is subject to the group's algorithm model version (`FaceModelVersion`), which is 1 million for v2.0 or 3 million for v3.0.
 
-This API recognizes each face of a person as an independent one. By contrast, the [SearchPersons](https://cloud.tencent.com/document/product/867/38881) and [SearchPersonsReturnsByGroup](https://cloud.tencent.com/document/product/867/38880) APIs fuse the features of all faces of a person; for example, if a person has 4 faces, they will fuse the features of the 4 faces and generate the summarized facial features of the person to make the search more accurate.
+This API recognizes each face of a person as an independent one. By contrast, the [SearchPersons](https://intl.cloud.tencent.com/document/product/867/44992?from_cn_redirect=1) and [SearchPersonsReturnsByGroup](https://intl.cloud.tencent.com/document/product/867/44991?from_cn_redirect=1) APIs fuse the features of all faces of a person; for example, if a person has 4 faces, they will fuse the features of the 4 faces and generate the summarized facial features of the person to make the search more accurate.
 
-This API should be used together with the [CreateGroup API](https://cloud.tencent.com/document/product/867/32794).
+This API should be used together with the [CreateGroup API](https://intl.cloud.tencent.com/document/product/867/45015?from_cn_redirect=1).
 
 >     
 - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
@@ -160,19 +165,6 @@ The maximum number of faces that can be included in one group varies by algorith
     }
 
     /**
-     * This API is used to get the list of duplicate person check tasks and sort them in reverse order by task creation time (i.e., the newest one is at the top)
-
-Only data in the past year is retained.
-     * @param {GetCheckSimilarPersonJobIdListRequest} req
-     * @param {function(string, GetCheckSimilarPersonJobIdListResponse):void} cb
-     * @public
-     */
-    GetCheckSimilarPersonJobIdList(req, cb) {
-        let resp = new GetCheckSimilarPersonJobIdListResponse();
-        this.request("GetCheckSimilarPersonJobIdList", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the information of a specified person, including name, gender, face, etc.
      * @param {GetPersonBaseInfoRequest} req
      * @param {function(string, GetPersonBaseInfoResponse):void} cb
@@ -186,7 +178,7 @@ Only data in the past year is retained.
     /**
      * This API is used to detect the liveness of a user with a user-uploaded image. Its difference from video-based liveness detection lies in that the user does not need to speak, shake their head, or wink for detection.
 
-Image-based liveness detection is suitable for scenarios where the image is a selfie or the requirement for attack defense is not high. If you have a higher security requirement for liveness detection, please use [Faceid](https://cloud.tencent.com/product/faceid).
+Image-based liveness detection is suitable for scenarios where the image is a selfie or the requirement for attack defense is not high. If you have a higher security requirement for liveness detection, please use [Faceid](https://intl.cloud.tencent.com/product/faceid?from_cn_redirect=1).
 
 >     
 - The aspect ratio of the image should be close to 3:4 (width:height); otherwise, the score returned for the image will be meaningless. This API is suitable for selfie scenarios, and the score returned in other scenarios will be meaningless.
@@ -214,6 +206,18 @@ Image-based liveness detection is suitable for scenarios where the image is a se
     CreateFace(req, cb) {
         let resp = new CreateFaceResponse();
         this.request("CreateFace", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a group and all persons in it. Meanwhile, all face information corresponding to the persons will be deleted. If a person exists in multiple groups at the same time, deleting a group will not delete the person, but the custom description field information in the group will be deleted. Custom description field information in other groups will not be affected.
+
+     * @param {DeleteGroupRequest} req
+     * @param {function(string, DeleteGroupResponse):void} cb
+     * @public
+     */
+    DeleteGroup(req, cb) {
+        let resp = new DeleteGroupResponse();
+        this.request("DeleteGroup", req, resp, cb);
     }
 
     /**
@@ -270,10 +274,10 @@ Up to 10 faces in an image can be recognized at a time, and up to 100 groups can
 
 The maximum number of faces in a group that can be searched for at a time is subject to the group's algorithm model version (`FaceModelVersion`), which is 1 million for v2.0 or 3 million for v3.0.
 
-This API recognizes each face of a person as an independent one. By contrast, the [SearchPersons](https://cloud.tencent.com/document/product/867/38881) and [SearchPersonsReturnsByGroup](https://cloud.tencent.com/document/product/867/38880) APIs fuse the features of all faces of a person; for example, if a person has 4 faces, they will fuse the features of the 4 faces and generate the summarized facial features of the person to make the search more accurate.
+This API recognizes each face of a person as an independent one. By contrast, the [SearchPersons](https://intl.cloud.tencent.com/document/product/867/44992?from_cn_redirect=1) and [SearchPersonsReturnsByGroup](https://intl.cloud.tencent.com/document/product/867/44991?from_cn_redirect=1) APIs fuse the features of all faces of a person; for example, if a person has 4 faces, they will fuse the features of the 4 faces and generate the summarized facial features of the person to make the search more accurate.
 
 
-This API should be used together with the [CreateGroup API](https://cloud.tencent.com/document/product/867/32794).
+This API should be used together with the [CreateGroup API](https://intl.cloud.tencent.com/document/product/867/45015?from_cn_redirect=1).
 
 >     
 - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
@@ -300,36 +304,32 @@ This API should be used together with the [CreateGroup API](https://cloud.tencen
     }
 
     /**
-     * This API is used to check a specified group for suspected duplicate persons and list their information.
+     * This API is used to judge whether a person in an image corresponds to a given `PersonId`. For more information on `PersonId`, please see [CreateGroup](https://intl.cloud.tencent.com/document/product/867/45015?from_cn_redirect=1). 
 
-You can use this API to check for duplicate persons in one group so as to avoid situations where the same person has multiple roles in the group. You can also use it to check for duplicate persons across multiple groups to see whether the same person exists in multiple groups at the same time.
+Unlike the [CompareFace](https://intl.cloud.tencent.com/document/product/867/44987?from_cn_redirect=1) API that is used to judge the similarity between two faces, this API is used to judge "whether the person in the image is someone specified" whose information is stored in a group. This "someone" may have multiple face images.
 
-Duplicate check across algorithm model versions is not supported. Currently, this feature is available only to groups with algorithm model v3.0.
-
->     
-- If you perform a duplicate check on the same group again, you need to wait for the last operation to complete, that is, when the `GroupIds` entered in the two requests are the same, if the first request is not completed, the second request will fail.
+This API recognizes each face of a person as an independent one. By contrast, the [VerifyPerson](https://intl.cloud.tencent.com/document/product/867/44982?from_cn_redirect=1) API fuses the features of all faces of a person; for example, if a person has 4 faces, it will fuse the features of the 4 faces and generate the summarized facial features of the person to make the person verification (i.e., judging whether the face image to be recognized is of a specified person) more accurate.
 
 >     
-- The status of the group on which the duplicate check is to be performed is that when the duplicate check task really starts, that is, after you initiate the duplicate check request; if your duplicate check task needs to queue up, any addition or deletion operation performed on the group during the queuing will affect the duplicate check result. Tencent Cloud will use the group status when the duplicate check task actually starts. After the task starts, any operation on the group will not affect the task execution; however, you are still recommended not to add/delete persons or faces to/from the group after the task starts.
-     * @param {CheckSimilarPersonRequest} req
-     * @param {function(string, CheckSimilarPersonResponse):void} cb
+- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
+     * @param {VerifyFaceRequest} req
+     * @param {function(string, VerifyFaceResponse):void} cb
      * @public
      */
-    CheckSimilarPerson(req, cb) {
-        let resp = new CheckSimilarPersonResponse();
-        this.request("CheckSimilarPerson", req, resp, cb);
+    VerifyFace(req, cb) {
+        let resp = new VerifyFaceResponse();
+        this.request("VerifyFace", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a group and all persons in it. Meanwhile, all face information corresponding to the persons will be deleted. If a person exists in multiple groups at the same time, deleting a group will not delete the person, but the custom description field information in the group will be deleted. Custom description field information in other groups will not be affected.
-
-     * @param {DeleteGroupRequest} req
-     * @param {function(string, DeleteGroupResponse):void} cb
+     * This API is used to locate facial features (i.e., facial keypoints) in the requested image to get the accurate facial information. It can return the information of up to 888 keypoints so as to precisely locate the facial features and contour.
+     * @param {AnalyzeDenseLandmarksRequest} req
+     * @param {function(string, AnalyzeDenseLandmarksResponse):void} cb
      * @public
      */
-    DeleteGroup(req, cb) {
-        let resp = new DeleteGroupResponse();
-        this.request("DeleteGroup", req, resp, cb);
+    AnalyzeDenseLandmarks(req, cb) {
+        let resp = new AnalyzeDenseLandmarksResponse();
+        this.request("AnalyzeDenseLandmarks", req, resp, cb);
     }
 
     /**
@@ -352,17 +352,6 @@ Duplicate check across algorithm model versions is not supported. Currently, thi
     ModifyGroup(req, cb) {
         let resp = new ModifyGroupResponse();
         this.request("ModifyGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the result of the `CheckSimilarPerson` API.
-     * @param {GetSimilarPersonResultRequest} req
-     * @param {function(string, GetSimilarPersonResultResponse):void} cb
-     * @public
-     */
-    GetSimilarPersonResult(req, cb) {
-        let resp = new GetSimilarPersonResultResponse();
-        this.request("GetSimilarPersonResult", req, resp, cb);
     }
 
     /**
@@ -396,13 +385,13 @@ Duplicate check across algorithm model versions is not supported. Currently, thi
  
 The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, you are recommended to evaluate the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
 
-1). [Creating](https://cloud.tencent.com/document/product/867/32793)/[Adding](https://cloud.tencent.com/document/product/867/32795) a person in a group: this is to ensure the quality of the face information to facilitate subsequent processing.
+1). [Creating](https://intl.cloud.tencent.com/document/product/867/45014?from_cn_redirect=1)/[Adding](https://intl.cloud.tencent.com/document/product/867/45016?from_cn_redirect=1) a person in a group: this is to ensure the quality of the face information to facilitate subsequent processing.
 
-2). [Face search](https://cloud.tencent.com/document/product/867/32798): this is to ensure the quality of the input image to quickly find the corresponding person.
+2). [Face search](https://intl.cloud.tencent.com/document/product/867/44994?from_cn_redirect=1): this is to ensure the quality of the input image to quickly find the corresponding person.
 
-3). [Face verification](https://cloud.tencent.com/document/product/867/32806): this is to ensure the quality of the face information to avoid cases where the verification incorrectly fails.
+3). [Face verification](https://intl.cloud.tencent.com/document/product/867/44983?from_cn_redirect=1): this is to ensure the quality of the face information to avoid cases where the verification incorrectly fails.
 
-4). [Face fusion](https://cloud.tencent.com/product/facefusion): this is to ensure the quality of the uploaded face images to improve the fusion effect.
+4). Face fusion: this is to ensure the quality of the uploaded face images to improve the fusion effect.
 
 >     
 - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
@@ -429,7 +418,7 @@ The face quality information is mainly used to evaluate the quality of the input
     }
 
     /**
-     * This API is used to judge whether a person in an image corresponds to a given `PersonId`. For more information on `PersonId`, please see [CreateGroup](https://cloud.tencent.com/document/product/867/32794).
+     * This API is used to judge whether a person in an image corresponds to a given `PersonId`. For more information on `PersonId`, please see [CreateGroup](https://intl.cloud.tencent.com/document/product/867/45015?from_cn_redirect=1).
 This API fuses the features of all faces of a person; for example, if a person has 4 faces, it will fuse the features of the 4 faces and generate the summarized facial features of the person to make the person verification (i.e., judging whether the face image to be recognized is of a specified person) more accurate.
 
  Unlike the `CompareFace` API that is used to judge the similarity between two faces, this API is used to judge "whether the person in the image is someone specified" whose information is stored in a group. This "someone" may have multiple face images.
@@ -448,6 +437,37 @@ This API fuses the features of all faces of a person; for example, if a person h
     }
 
     /**
+     * This API is used to detect the position, attributes, and quality information of a face in the given image. The position information includes (x, y, w, h); the face attributes include gender, age, expression, beauty, glass, hair, mask, and pose (pitch, roll, yaw); and the face quality information includes the overall quality score, sharpness, brightness, and completeness.
+
+ 
+The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, you are recommended to evaluate the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
+
+1). [Creating](https://intl.cloud.tencent.com/document/product/867/32793?from_cn_redirect=1)/[Adding](https://intl.cloud.tencent.com/document/product/867/32795?from_cn_redirect=1) a person in a group: this is to ensure the quality of the face information to facilitate subsequent processing.
+
+2). [Face search](https://intl.cloud.tencent.com/document/product/867/32798?from_cn_redirect=1): this is to ensure the quality of the input image to quickly find the corresponding person.
+
+3). [Face verification](https://intl.cloud.tencent.com/document/product/867/32806?from_cn_redirect=1): this is to ensure the quality of the face information to avoid cases where the verification incorrectly fails.
+
+4). [Face fusion](https://intl.cloud.tencent.com/product/facefusion?from_cn_redirect=1): this is to ensure the quality of the uploaded face images to improve the fusion effect.
+
+>     
+- This API is an upgrade of [DetectFace](https://intl.cloud.tencent.com/document/product/867/44989?from_cn_redirect=1) in the following terms:
+1. This API can specify the face attributes that need to be computed and returned, which avoids ineffective computation and reduces the time consumption.
+2. This API supports more detailed attribute items and will continue providing new features in the future.
+Please use this API to satisfy your corresponding face detection and attribute analysis needs.
+
+>     
+- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
+     * @param {DetectFaceAttributesRequest} req
+     * @param {function(string, DetectFaceAttributesResponse):void} cb
+     * @public
+     */
+    DetectFaceAttributes(req, cb) {
+        let resp = new DetectFaceAttributesResponse();
+        this.request("DetectFaceAttributes", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the description of a specified person in a group.
      * @param {ModifyPersonGroupInfoRequest} req
      * @param {function(string, ModifyPersonGroupInfoResponse):void} cb
@@ -459,31 +479,13 @@ This API fuses the features of all faces of a person; for example, if a person h
     }
 
     /**
-     * This API is used to judge whether a person in an image corresponds to a given `PersonId`. For more information on `PersonId`, please see [CreateGroup](https://cloud.tencent.com/document/product/867/32794). 
-
-Unlike the [CompareFace](https://cloud.tencent.com/document/product/867/32802) API that is used to judge the similarity between two faces, this API is used to judge "whether the person in the image is someone specified" whose information is stored in a group. This "someone" may have multiple face images.
-
-This API recognizes each face of a person as an independent one. By contrast, the [VerifyPerson](https://cloud.tencent.com/document/product/867/38879) API fuses the features of all faces of a person; for example, if a person has 4 faces, it will fuse the features of the 4 faces and generate the summarized facial features of the person to make the person verification (i.e., judging whether the face image to be recognized is of a specified person) more accurate.
-
->     
-- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
-     * @param {VerifyFaceRequest} req
-     * @param {function(string, VerifyFaceResponse):void} cb
-     * @public
-     */
-    VerifyFace(req, cb) {
-        let resp = new VerifyFaceResponse();
-        this.request("VerifyFace", req, resp, cb);
-    }
-
-    /**
      * This API is used to recognize top K persons in one or more groups who are similar to the person in a given image and rank the similarity in a descending order.
 
 Up to 10 faces in an image can be recognized at a time, and up to 100 groups can be searched in at a time.
 
 The maximum number of faces in a group that can be searched for at a time is subject to the group's algorithm model version (`FaceModelVersion`), which is 1 million for v2.0 or 3 million for v3.0.
 
-This API fuses the features of all faces of a person; for example, if a person has 4 faces, it will fuse the features of the 4 faces and generate the summarized facial features of the person to make the person search (i.e., judging whether the face image to be recognized is of a specified person) more accurate. By contrast, the [SearchFaces](https://cloud.tencent.com/document/product/867/32798) and [SearchFacesReturnsByGroup](https://cloud.tencent.com/document/product/867/38882) APIs recognize each face of a person as an independent one for search.
+This API fuses the features of all faces of a person; for example, if a person has 4 faces, it will fuse the features of the 4 faces and generate the summarized facial features of the person to make the person search (i.e., judging whether the face image to be recognized is of a specified person) more accurate. By contrast, the [SearchFaces](https://intl.cloud.tencent.com/document/product/867/44994?from_cn_redirect=1) and [SearchFacesReturnsByGroup](https://intl.cloud.tencent.com/document/product/867/44993?from_cn_redirect=1) APIs recognize each face of a person as an independent one for search.
 
 >     
 - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
@@ -500,7 +502,7 @@ This API fuses the features of all faces of a person; for example, if a person h
     /**
      * This API is used to calculate the similarity of faces in two images and return the face similarity score.
 
-If you need to judge "whether the person in the image is someone specified" in scenarios such as face login, i.e., checking whether the person in a given image is someone with a known identity, you are recommended to use the [VerifyFace](https://cloud.tencent.com/document/product/867/32806) or [VerifyPerson](https://cloud.tencent.com/document/product/867/38879) API.
+If you need to judge "whether the person in the image is someone specified" in scenarios such as face login, i.e., checking whether the person in a given image is someone with a known identity, you are recommended to use the [VerifyFace](https://intl.cloud.tencent.com/document/product/867/44983?from_cn_redirect=1) or [VerifyPerson](https://intl.cloud.tencent.com/document/product/867/44982?from_cn_redirect=1) API.
 
 >     
 - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
@@ -520,7 +522,7 @@ Up to 10 faces in the image can be recognized at a time, and cross-group search 
 
 The maximum number of faces in a group that can be searched for at a time is subject to the group's algorithm model version (`FaceModelVersion`), which is 1 million for v2.0 or 3 million for v3.0.
 
-This API fuses the features of all faces of a person; for example, if a person has 4 faces, it will fuse the features of the 4 faces and generate the summarized facial features of the person to make the person search (i.e., judging whether the face image to be recognized is of a specified person) more accurate. By contrast, the [SearchFaces](https://cloud.tencent.com/document/product/867/32798) and [SearchFacesReturnsByGroup](https://cloud.tencent.com/document/product/867/38882) APIs recognize each face of a person as an independent one for search.
+This API fuses the features of all faces of a person; for example, if a person has 4 faces, it will fuse the features of the 4 faces and generate the summarized facial features of the person to make the person search (i.e., judging whether the face image to be recognized is of a specified person) more accurate. By contrast, the [SearchFaces](https://intl.cloud.tencent.com/document/product/867/44994?from_cn_redirect=1) and [SearchFacesReturnsByGroup](https://intl.cloud.tencent.com/document/product/867/44993?from_cn_redirect=1) APIs recognize each face of a person as an independent one for search.
 >     
 - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
 - This feature is available only to groups whose algorithm model version (`FaceModelVersion`) is 3.0.
@@ -542,21 +544,6 @@ This API fuses the features of all faces of a person; for example, if a person h
     GetGroupList(req, cb) {
         let resp = new GetGroupListResponse();
         this.request("GetGroupList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the estimated duration of a duplicate person check task.
-
-If the `EndTimestamp` meets your expectations, please initiate the duplicate person check request as soon as possible; otherwise, the task may take more time.
-
-If the estimated duration is more than 5 hours, the duplicate person check feature cannot be used.
-     * @param {EstimateCheckSimilarPersonCostTimeRequest} req
-     * @param {function(string, EstimateCheckSimilarPersonCostTimeResponse):void} cb
-     * @public
-     */
-    EstimateCheckSimilarPersonCostTime(req, cb) {
-        let resp = new EstimateCheckSimilarPersonCostTimeResponse();
-        this.request("EstimateCheckSimilarPersonCostTime", req, resp, cb);
     }
 
     /**

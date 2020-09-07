@@ -114,6 +114,76 @@ The Z axis determines the overlap sequence of images. The image with the largest
 }
 
 /**
+ * A group of parameters for recording over specified streams. It specifies whether to disable the audio recording and whether to record high-resolution or low-resolution videos.
+ * @class
+ */
+class StreamControl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video stream ID
+Description of the possible video stream ID values:
+1. `tic_record_user`: the whiteboard video stream
+2. `tic_substream`: the auxiliary video stream
+3. Specific user ID: the video stream of the specified user
+
+The actual recording uses the prefix match of the video stream ID. The real stream becomes the specified stream once its ID prefix matches with the stream ID.
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * Whether to disable recording over the stream.
+
+true: does not record this stream. This stream will not be included in the final recording file.
+false: records this stream. This stream will be included in the final recording file.
+
+Default value: false
+         * @type {boolean || null}
+         */
+        this.DisableRecord = null;
+
+        /**
+         * Whether to disable the audio recording of the stream.
+
+true: does not record the audio of the stream. In the final recording file, this stream will be soundless.
+false: the stream has both video and audio recording.
+
+Default value: false
+         * @type {boolean || null}
+         */
+        this.DisableAudio = null;
+
+        /**
+         * Whether to only record low-resolution stream videos.
+
+true: records only low-resolution videos. In this case, please make sure that the client pushes low-resolution videos upstream. Otherwise, the recorded video may be black. 
+false: records only high-resolution videos.
+
+Default value: false
+         * @type {boolean || null}
+         */
+        this.PullSmallVideo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.DisableRecord = 'DisableRecord' in params ? params.DisableRecord : null;
+        this.DisableAudio = 'DisableAudio' in params ? params.DisableAudio : null;
+        this.PullSmallVideo = 'PullSmallVideo' in params ? params.PullSmallVideo : null;
+
+    }
+}
+
+/**
  * ResumeOnlineRecord response structure.
  * @class
  */
@@ -175,7 +245,7 @@ The ID must be an unused ID in the SDK. The real-time recording service uses the
         this.RecordUserSig = null;
 
         /**
-         * IM group ID of the whiteboard. By default, it is the same as the room ID.
+         * (Disused) IM group ID of the whiteboard. By default, it is the same as the room ID.
          * @type {string || null}
          */
         this.GroupId = null;
@@ -215,6 +285,12 @@ MIX_STREAM - Stream mixing feature
          */
         this.AudioFileNeeded = null;
 
+        /**
+         * A group of real-time recording parameters. It specifies the streams to be recorded, whether to disable the audio recording, and whether to record only low-resolution videos, etc.
+         * @type {RecordControl || null}
+         */
+        this.RecordControl = null;
+
     }
 
     /**
@@ -249,6 +325,12 @@ MIX_STREAM - Stream mixing feature
         }
         this.Extras = 'Extras' in params ? params.Extras : null;
         this.AudioFileNeeded = 'AudioFileNeeded' in params ? params.AudioFileNeeded : null;
+
+        if (params.RecordControl) {
+            let obj = new RecordControl();
+            obj.deserialize(params.RecordControl)
+            this.RecordControl = obj;
+        }
 
     }
 }
@@ -387,7 +469,7 @@ class StopOnlineRecordRequest extends  AbstractModel {
 }
 
 /**
- * Stream layout parameter
+ * 
  * @class
  */
 class StreamLayout extends  AbstractModel {
@@ -395,27 +477,31 @@ class StreamLayout extends  AbstractModel {
         super();
 
         /**
-         * Stream layout configuration
+         * 
          * @type {LayoutParams || null}
          */
         this.LayoutParams = null;
 
         /**
-         * Video stream ID
-Description of possible stream ID values:
-1. tic_record_user: the current picture is used to display the whiteboard video stream.
-2. tic_substream: the current picture is used to display the auxiliary video stream.
-3. Specific user ID: the current picture is used to display the video stream of a specific user.
-4. Left empty: the current picture is vacant for new video stream.
+         * 
          * @type {string || null}
          */
         this.InputStreamId = null;
 
         /**
-         * Background color, which is black by default. Its format is RGB, for example, "#FF0000" for the red color.
+         * 
          * @type {string || null}
          */
         this.BackgroundColor = null;
+
+        /**
+         * Video filling mode.
+
+0: self-adaption mode. Scales the video proportionally to completely display it in the specified area. In this mode, there may be black bars.
+1: full-screen mode. Scales the video to make it fill the entire specified area. In this mode, no black bars will appear, but the video may not be displayed fully.
+         * @type {number || null}
+         */
+        this.FillMode = null;
 
     }
 
@@ -434,6 +520,7 @@ Description of possible stream ID values:
         }
         this.InputStreamId = 'InputStreamId' in params ? params.InputStreamId : null;
         this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
+        this.FillMode = 'FillMode' in params ? params.FillMode : null;
 
     }
 }
@@ -518,12 +605,7 @@ class VideoInfo extends  AbstractModel {
         this.VideoId = null;
 
         /**
-         * Video stream type 
-- 0: camera video 
-- 1: screen-sharing video
-- 2: whiteboard video 
-- 3: mixed stream video
-- 4: audio-only (mp3)
+         * Video stream type - 0: camera video - 1: screen-sharing video - 2: whiteboard video - 3: mixed stream video - 4: audio-only (mp3)
          * @type {number || null}
          */
         this.VideoType = null;
@@ -533,6 +615,18 @@ class VideoInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.UserId = null;
+
+        /**
+         * Width of the video resolution.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Height of the video resolution.
+         * @type {number || null}
+         */
+        this.Height = null;
 
     }
 
@@ -551,6 +645,8 @@ class VideoInfo extends  AbstractModel {
         this.VideoId = 'VideoId' in params ? params.VideoId : null;
         this.VideoType = 'VideoType' in params ? params.VideoType : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -1057,7 +1153,7 @@ class SetTranscodeCallbackKeyRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Authentication key of the document transcoding callback. It is a string of up to 64 characters. If it is specified as null, the existing callback authentication key is deleted.
+         * Authentication key for the document transcoding callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information about callback authentication, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -1262,7 +1358,7 @@ class SetOnlineRecordCallbackKeyRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Authentication key of the real-time recording callback. It is a string of up to 64 characters. If it is specified as null, the existing callback authentication key is deleted.
+         * Authentication key for the real-time recording callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -1430,7 +1526,8 @@ class SetTranscodeCallbackRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Callback address for the document transcoding progress. If it is specified as null, the set callback address is deleted. The callback address only supports the HTTP or HTTPS protocol, and therefore the callback address must start with http:// or https://.
+         * Callback address for the document transcoding progress. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`.
+For more information about the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Callback = null;
@@ -1451,6 +1548,85 @@ class SetTranscodeCallbackRequest extends  AbstractModel {
 }
 
 /**
+ * It specifies the global recording parameters and the recording parameters over a specific stream. For example, you can specify the streams you want to record and whether to record low-resolution videos only.
+ * @class
+ */
+class RecordControl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * It specifies whether to enable RecordControl. Valid values: true (yes); false (no).
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * A global parameter generally used in conjunction with `StreamControls` that specifies whether to disable recording. Valid values:
+
+true: no stream is recorded.
+false: all streams are recorded. Default value: false.
+
+The setting in this parameter is applied to all streams. However, if `StreamControls` is passed in, the parameters in `StreamControls` will take precedence.
+         * @type {boolean || null}
+         */
+        this.DisableRecord = null;
+
+        /**
+         * A global parameter generally used in conjunction with `StreamControls` that specifies whether to disable audio recording over all streams. Valid values:
+
+true: no audio recording of any streams.
+false: audio recording of all streams. Default value: false.
+
+The setting in this parameter is applied to all streams. However, if `StreamControls` is passed in, the parameters in `StreamControls` will take precedence.
+         * @type {boolean || null}
+         */
+        this.DisableAudio = null;
+
+        /**
+         * A global parameter generally used in conjunction with `StreamControls` that specifies whether to record low-resolution videos only. Valid values:
+
+true: only records low-resolution videos for all streams. Please ensure that the up-streaming end pushes the low-resolution videos. Otherwise, the recorded video may be black.
+false: high-resolution video recording of all streams. Default value: false.
+
+The setting in this parameter is applied to all streams. However, if `StreamControls` is passed in, the parameters in `StreamControls` will take precedence.
+         * @type {boolean || null}
+         */
+        this.PullSmallVideo = null;
+
+        /**
+         * Parameters over specific streams, which take priority over global configurations. If it’s empty, all streams are recorded according to the global configurations. 
+         * @type {Array.<StreamControl> || null}
+         */
+        this.StreamControls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.DisableRecord = 'DisableRecord' in params ? params.DisableRecord : null;
+        this.DisableAudio = 'DisableAudio' in params ? params.DisableAudio : null;
+        this.PullSmallVideo = 'PullSmallVideo' in params ? params.PullSmallVideo : null;
+
+        if (params.StreamControls) {
+            this.StreamControls = new Array();
+            for (let z in params.StreamControls) {
+                let obj = new StreamControl();
+                obj.deserialize(params.StreamControls[z]);
+                this.StreamControls.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * SetOnlineRecordCallback request structure.
  * @class
  */
@@ -1465,7 +1641,7 @@ class SetOnlineRecordCallbackRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Callback address of the real-time recording task result. If it is specified as null, the set callback address is deleted. The callback address only supports the HTTP or HTTPS protocol, and therefore the callback address must start with http:// or https://.
+         * Callback address of the real-time recording task result. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Callback = null;
@@ -1630,6 +1806,7 @@ class PauseOnlineRecordRequest extends  AbstractModel {
 module.exports = {
     Canvas: Canvas,
     LayoutParams: LayoutParams,
+    StreamControl: StreamControl,
     ResumeOnlineRecordResponse: ResumeOnlineRecordResponse,
     StartOnlineRecordRequest: StartOnlineRecordRequest,
     DescribeOnlineRecordCallbackRequest: DescribeOnlineRecordCallbackRequest,
@@ -1659,6 +1836,7 @@ module.exports = {
     ResumeOnlineRecordRequest: ResumeOnlineRecordRequest,
     DescribeTranscodeCallbackResponse: DescribeTranscodeCallbackResponse,
     SetTranscodeCallbackRequest: SetTranscodeCallbackRequest,
+    RecordControl: RecordControl,
     SetOnlineRecordCallbackRequest: SetOnlineRecordCallbackRequest,
     MixStream: MixStream,
     OmittedDuration: OmittedDuration,

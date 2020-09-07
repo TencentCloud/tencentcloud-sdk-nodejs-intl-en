@@ -120,6 +120,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.NeedSupportIpv6 = null;
 
+        /**
+         * The information of tags to be associated with instances. This parameter is left empty by default.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -145,6 +151,15 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -797,7 +812,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter. Valid values: db-instance-id, db-instance-name
+         * Filter condition. Valid values: db-instance-id, db-instance-name, db-project-id, db-pay-mode, db-tag-key.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1120,6 +1135,41 @@ class RegionInfo extends  AbstractModel {
 }
 
 /**
+ * The information of tags associated with instances, including `TagKey` and `TagValue`
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * Slow query details
  * @class
  */
@@ -1413,7 +1463,7 @@ class DBInstance extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * Subnet ID
+         * SubnetId
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -1431,7 +1481,7 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * Instance status. Valid values: applying, init (to be initialized), initing (initializing), running, limited run, isolated, recycling, recycled, job running, offline, migrating, expanding, readonly, restarting
+         * Instance status
          * @type {string || null}
          */
         this.DBInstanceStatus = null;
@@ -1461,13 +1511,13 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceClass = null;
 
         /**
-         * Instance type. 1: primary (primary instance), 2: readonly (read-only instance), 3: guard (disaster recovery instance), 4: temp (temp instance)
+         * Instance type. 1: primary (master instance), 2: readonly (read-only instance), 3: guard (disaster recovery instance), 4: temp (temp instance)
          * @type {string || null}
          */
         this.DBInstanceType = null;
 
         /**
-         * Instance edition. Currently, only `standard` edition (dual-server high-availability one-primary-one-secondary edition) is supported
+         * Instance edition. Currently, only `standard` edition (dual-server high-availability one-master-one-slave edition) is supported
          * @type {string || null}
          */
         this.DBInstanceVersion = null;
@@ -1545,10 +1595,17 @@ class DBInstance extends  AbstractModel {
         this.Uid = null;
 
         /**
-         * Whether the instance supports IPv6 address access. Valid values: 1 (yes), 0 (no)
+         * 
          * @type {number || null}
          */
         this.SupportIpv6 = null;
+
+        /**
+         * The information of tags associated with instances.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
 
     }
 
@@ -1594,6 +1651,15 @@ class DBInstance extends  AbstractModel {
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.Uid = 'Uid' in params ? params.Uid : null;
         this.SupportIpv6 = 'SupportIpv6' in params ? params.SupportIpv6 : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -1873,7 +1939,7 @@ class DescribeDBBackupsRequest extends  AbstractModel {
 }
 
 /**
- * Specification information
+ * Specification description
  * @class
  */
 class SpecItemInfo extends  AbstractModel {
@@ -2514,7 +2580,7 @@ class DBBackup extends  AbstractModel {
 }
 
 /**
- * Instance network connection information.
+ * Instance network connection information
  * @class
  */
 class DBInstanceNetInfo extends  AbstractModel {
@@ -2528,7 +2594,7 @@ class DBInstanceNetInfo extends  AbstractModel {
         this.Address = null;
 
         /**
-         * IP address
+         * Ip
          * @type {string || null}
          */
         this.Ip = null;
@@ -2540,7 +2606,7 @@ class DBInstanceNetInfo extends  AbstractModel {
         this.Port = null;
 
         /**
-         * Network type. Valid values: inner (private address of classic network), private (private address of VPC), public (public address of classic network/VPC)
+         * Network type. 1: inner (private network address), 2: public (public network address)
          * @type {string || null}
          */
         this.NetType = null;
@@ -3551,6 +3617,7 @@ module.exports = {
     DescribeZonesRequest: DescribeZonesRequest,
     SpecInfo: SpecInfo,
     RegionInfo: RegionInfo,
+    Tag: Tag,
     SlowlogDetail: SlowlogDetail,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RestartDBInstanceResponse: RestartDBInstanceResponse,

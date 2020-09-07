@@ -141,6 +141,7 @@ const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
 const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
 const AccessControl = models.AccessControl;
 const CacheKey = models.CacheKey;
+const UrlRedirect = models.UrlRedirect;
 const CookieKey = models.CookieKey;
 const CappingRule = models.CappingRule;
 const ListClsLogTopicsRequest = models.ListClsLogTopicsRequest;
@@ -178,6 +179,7 @@ const ClsSearchLogs = models.ClsSearchLogs;
 const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
 const IpFilter = models.IpFilter;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const UrlRedirectRule = models.UrlRedirectRule;
 const ErrorPageRule = models.ErrorPageRule;
 const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
 const PurgeTask = models.PurgeTask;
@@ -429,7 +431,8 @@ Note: only data from the last 90 days will be queried.
     }
 
     /**
-     * This API is used to query CDN IP ownership.
+     * This API is used to query the CDN IP ownership.
+(Note: the request rate limit of this API is subject to the limit in CDN, which is 200 calls/10 minutes).
      * @param {DescribeCdnIpRequest} req
      * @param {function(string, DescribeCdnIpResponse):void} cb
      * @public

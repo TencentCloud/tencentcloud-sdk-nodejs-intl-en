@@ -164,6 +164,13 @@ class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
         this.KeyInfos = null;
 
         /**
+         * Total number of keys
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -187,6 +194,7 @@ class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
                 this.KeyInfos.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -362,7 +370,7 @@ class DescribeKeyRequest extends  AbstractModel {
 }
 
 /**
- * White-box key information
+ * 
  * @class
  */
 class WhiteboxKeyInfo extends  AbstractModel {
@@ -370,70 +378,77 @@ class WhiteboxKeyInfo extends  AbstractModel {
         super();
 
         /**
-         * Globally unique white-box key ID
+         * 
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * Unique alias that makes a key more recognizable and understandable. This parameter should be 1 to 60 letters, digits, `-`, and `_`; it must begin with a letter or digit and cannot be left empty.
+         * 
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * Creator
+         * 
          * @type {number || null}
          */
         this.CreatorUin = null;
 
         /**
-         * Key description information
+         * 
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Key creation time in Unix timestamp
+         * 
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * White-box key status. Valid values: Enabled, Disabled
+         * 
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Creator
+         * 
          * @type {number || null}
          */
         this.OwnerUin = null;
 
         /**
-         * Key algorithm type
+         * 
          * @type {string || null}
          */
         this.Algorithm = null;
 
         /**
-         * Base64-encoded white-box encryption key
+         * 
          * @type {string || null}
          */
         this.EncryptKey = null;
 
         /**
-         * Base64-encoded white-box decryption key
+         * 
          * @type {string || null}
          */
         this.DecryptKey = null;
 
         /**
-         * Resource ID in the format of `creatorUin/$creatorUin/$keyId`.
+         * 
          * @type {string || null}
          */
         this.ResourceId = null;
+
+        /**
+         * Whether there is a device fingerprint bound to the current key
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.DeviceFingerprintBind = null;
 
     }
 
@@ -455,6 +470,7 @@ class WhiteboxKeyInfo extends  AbstractModel {
         this.EncryptKey = 'EncryptKey' in params ? params.EncryptKey : null;
         this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.DeviceFingerprintBind = 'DeviceFingerprintBind' in params ? params.DeviceFingerprintBind : null;
 
     }
 }
@@ -511,6 +527,34 @@ class ListAlgorithmsResponse extends  AbstractModel {
                 obj.deserialize(params.AsymmetricAlgorithms[z]);
                 this.AsymmetricAlgorithms.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableKeys response structure.
+ * @class
+ */
+class DisableKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -698,18 +742,18 @@ class EnableKeyRequest extends  AbstractModel {
 }
 
 /**
- * ImportKeyMaterial response structure.
+ * GetKeyRotationStatus request structure.
  * @class
  */
-class ImportKeyMaterialResponse extends  AbstractModel {
+class GetKeyRotationStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Unique CMK ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.KeyId = null;
 
     }
 
@@ -720,7 +764,7 @@ class ImportKeyMaterialResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -1068,6 +1112,34 @@ class GetServiceStatusRequest extends  AbstractModel {
  * @class
  */
 class EnableWhiteBoxKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ArchiveKey response structure.
+ * @class
+ */
+class ArchiveKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1606,24 +1678,24 @@ class ListKeysResponse extends  AbstractModel {
 }
 
 /**
- * GetServiceStatus response structure.
+ * AsymmetricSm2Decrypt response structure.
  * @class
  */
-class GetServiceStatusResponse extends  AbstractModel {
+class AsymmetricSm2DecryptResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether the KMS service has been activated. true: activated
-         * @type {boolean || null}
+         * Unique CMK ID
+         * @type {string || null}
          */
-        this.ServiceEnabled = null;
+        this.KeyId = null;
 
         /**
-         * Service unavailability type. 0: not purchased; 1: normal; 2: suspended due to arrears; 3: resource released
-         * @type {number || null}
+         * Base64-encoded plaintext after decryption
+         * @type {string || null}
          */
-        this.InvalidType = null;
+        this.Plaintext = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1640,8 +1712,8 @@ class GetServiceStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
-        this.InvalidType = 'InvalidType' in params ? params.InvalidType : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1704,24 +1776,66 @@ class DisableWhiteBoxKeysRequest extends  AbstractModel {
 }
 
 /**
- * OverwriteWhiteBoxDeviceFingerprints request structure.
+ * ListKeyDetail request structure.
  * @class
  */
-class OverwriteWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
+class ListKeyDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * White-box key ID
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.KeyId = null;
+        this.Offset = null;
 
         /**
-         * Device fingerprint list. If the list is empty, it means to delete all fingerprint information corresponding to the key. There can be up to 200 entries in the list.
-         * @type {Array.<DeviceFingerprint> || null}
+         * This parameter has the same meaning of the `Limit` in an SQL query, indicating that up to `Limit` value elements can be obtained in this request. The default value is 10 and the maximum value is 200.
+         * @type {number || null}
          */
-        this.DeviceFingerprints = null;
+        this.Limit = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Role = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * Filters by CMK status. 0: all CMKs; 1: CMKs in `Enabled` status only; 2: CMKs in `Disabled` status only; 3: CMKs in `PendingDelete` status only (i.e., keys with schedule deletion enabled); 4: CMKs in `PendingImport` status only; 5: CMKs in `Archived` status only.
+         * @type {number || null}
+         */
+        this.KeyState = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SearchKeyAlias = null;
+
+        /**
+         * Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
+         * @type {string || null}
+         */
+        this.Origin = null;
+
+        /**
+         * Filter by `KeyUsage` of CMKs. Valid values: `ALL` (filter all CMKs), `ENCRYPT_DECRYPT` (it will be used when the parameter is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`.
+         * @type {string || null}
+         */
+        this.KeyUsage = null;
+
+        /**
+         * Tag filter condition
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
 
     }
 
@@ -1732,14 +1846,21 @@ class OverwriteWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.KeyState = 'KeyState' in params ? params.KeyState : null;
+        this.SearchKeyAlias = 'SearchKeyAlias' in params ? params.SearchKeyAlias : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
+        this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
 
-        if (params.DeviceFingerprints) {
-            this.DeviceFingerprints = new Array();
-            for (let z in params.DeviceFingerprints) {
-                let obj = new DeviceFingerprint();
-                obj.deserialize(params.DeviceFingerprints[z]);
-                this.DeviceFingerprints.push(obj);
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
             }
         }
 
@@ -1805,6 +1926,42 @@ class AlgorithmInfo extends  AbstractModel {
         }
         this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
         this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+
+    }
+}
+
+/**
+ * GetRegions response structure.
+ * @class
+ */
+class GetRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of supported regions
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Regions = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Regions = 'Regions' in params ? params.Regions : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1967,6 +2124,34 @@ class DisableWhiteBoxKeysResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ArchiveKey request structure.
+ * @class
+ */
+class ArchiveKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique CMK ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -2280,24 +2465,24 @@ class EnableKeyResponse extends  AbstractModel {
 }
 
 /**
- * AsymmetricSm2Decrypt response structure.
+ * GetServiceStatus response structure.
  * @class
  */
-class AsymmetricSm2DecryptResponse extends  AbstractModel {
+class GetServiceStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique CMK ID
-         * @type {string || null}
+         * Whether the KMS service has been activated. true: activated
+         * @type {boolean || null}
          */
-        this.KeyId = null;
+        this.ServiceEnabled = null;
 
         /**
-         * Base64-encoded plaintext after decryption
-         * @type {string || null}
+         * Service unavailability type. 0: not purchased; 1: normal; 2: suspended due to arrears; 3: resource released
+         * @type {number || null}
          */
-        this.Plaintext = null;
+        this.InvalidType = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2314,8 +2499,8 @@ class AsymmetricSm2DecryptResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
+        this.InvalidType = 'InvalidType' in params ? params.InvalidType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2600,7 +2785,7 @@ class KeyMetadata extends  AbstractModel {
         this.Description = null;
 
         /**
-         * CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport.
+         * CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport, Archived.
          * @type {string || null}
          */
         this.KeyState = null;
@@ -2696,10 +2881,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DisableKeys response structure.
+ * CancelKeyArchive response structure.
  * @class
  */
-class DisableKeysResponse extends  AbstractModel {
+class CancelKeyArchiveResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2772,6 +2957,24 @@ class DescribeWhiteBoxKeyDetailsRequest extends  AbstractModel {
          */
         this.KeyStatus = null;
 
+        /**
+         * This parameter has the same meaning of the `Offset` in an SQL query, indicating that this acquisition starts from the "No. Offset value" element of the array arranged in a certain order. The default value is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * This parameter has the same meaning of the `Limit` in an SQL query, indicating that up to `Limit` value elements can be obtained in this request. The default value is 0, indicating not to paginate.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Tag filter condition
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
     }
 
     /**
@@ -2782,6 +2985,17 @@ class DescribeWhiteBoxKeyDetailsRequest extends  AbstractModel {
             return;
         }
         this.KeyStatus = 'KeyStatus' in params ? params.KeyStatus : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
 
     }
 }
@@ -2962,60 +3176,24 @@ class UnbindCloudResourceRequest extends  AbstractModel {
 }
 
 /**
- * ListKeyDetail request structure.
+ * OverwriteWhiteBoxDeviceFingerprints request structure.
  * @class
  */
-class ListKeyDetailRequest extends  AbstractModel {
+class OverwriteWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * This parameter has the same meaning of the `Limit` in an SQL query, indicating that up to `Limit` value elements can be obtained in this request. The default value is 10 and the maximum value is 200.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.Role = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.OrderType = null;
-
-        /**
-         * Filters by CMK status. 0: all CMKs; 1: CMKs in `Enabled` status only; 2: CMKs in `Disabled` status only; 3: CMKs in `PendingDelete` status only (i.e., keys with schedule deletion enabled); 4: CMKs in `PendingImport` status only.
-         * @type {number || null}
-         */
-        this.KeyState = null;
-
-        /**
-         * 
+         * White-box key ID
          * @type {string || null}
          */
-        this.SearchKeyAlias = null;
+        this.KeyId = null;
 
         /**
-         * Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
-         * @type {string || null}
+         * Device fingerprint list. If the list is empty, it means to delete all fingerprint information corresponding to the key. There can be up to 200 entries in the list.
+         * @type {Array.<DeviceFingerprint> || null}
          */
-        this.Origin = null;
-
-        /**
-         * Filter by `KeyUsage` of CMKs. Valid values: `ALL` (filter all CMKs), `ENCRYPT_DECRYPT` (it will be used when the parameter is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`.
-         * @type {string || null}
-         */
-        this.KeyUsage = null;
+        this.DeviceFingerprints = null;
 
     }
 
@@ -3026,14 +3204,16 @@ class ListKeyDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.OrderType = 'OrderType' in params ? params.OrderType : null;
-        this.KeyState = 'KeyState' in params ? params.KeyState : null;
-        this.SearchKeyAlias = 'SearchKeyAlias' in params ? params.SearchKeyAlias : null;
-        this.Origin = 'Origin' in params ? params.Origin : null;
-        this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.DeviceFingerprints) {
+            this.DeviceFingerprints = new Array();
+            for (let z in params.DeviceFingerprints) {
+                let obj = new DeviceFingerprint();
+                obj.deserialize(params.DeviceFingerprints[z]);
+                this.DeviceFingerprints.push(obj);
+            }
+        }
 
     }
 }
@@ -3146,6 +3326,27 @@ class DescribeWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * GetRegions request structure.
+ * @class
+ */
+class GetRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -3284,18 +3485,18 @@ class DisableKeyRequest extends  AbstractModel {
 }
 
 /**
- * GetKeyRotationStatus request structure.
+ * ImportKeyMaterial response structure.
  * @class
  */
-class GetKeyRotationStatusRequest extends  AbstractModel {
+class ImportKeyMaterialResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique CMK ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.KeyId = null;
+        this.RequestId = null;
 
     }
 
@@ -3306,7 +3507,7 @@ class GetKeyRotationStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3398,6 +3599,41 @@ class BindCloudResourceRequest extends  AbstractModel {
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
+ * Tag filter
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {Array.<string> || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -3585,6 +3821,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CancelKeyArchive request structure.
+ * @class
+ */
+class CancelKeyArchiveRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique CMK ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
  * DisableKeyRotation request structure.
  * @class
  */
@@ -3625,12 +3889,13 @@ module.exports = {
     DescribeKeyRequest: DescribeKeyRequest,
     WhiteboxKeyInfo: WhiteboxKeyInfo,
     ListAlgorithmsResponse: ListAlgorithmsResponse,
+    DisableKeysResponse: DisableKeysResponse,
     DescribeWhiteBoxKeyResponse: DescribeWhiteBoxKeyResponse,
     UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,
     DescribeWhiteBoxServiceStatusResponse: DescribeWhiteBoxServiceStatusResponse,
     ImportKeyMaterialRequest: ImportKeyMaterialRequest,
     EnableKeyRequest: EnableKeyRequest,
-    ImportKeyMaterialResponse: ImportKeyMaterialResponse,
+    GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
     ListAlgorithmsRequest: ListAlgorithmsRequest,
     Tag: Tag,
     ListKeyDetailResponse: ListKeyDetailResponse,
@@ -3642,6 +3907,7 @@ module.exports = {
     GetPublicKeyRequest: GetPublicKeyRequest,
     GetServiceStatusRequest: GetServiceStatusRequest,
     EnableWhiteBoxKeysResponse: EnableWhiteBoxKeysResponse,
+    ArchiveKeyResponse: ArchiveKeyResponse,
     DescribeWhiteBoxKeyRequest: DescribeWhiteBoxKeyRequest,
     GetParametersForImportResponse: GetParametersForImportResponse,
     DecryptResponse: DecryptResponse,
@@ -3655,16 +3921,18 @@ module.exports = {
     EnableWhiteBoxKeyResponse: EnableWhiteBoxKeyResponse,
     ReEncryptRequest: ReEncryptRequest,
     ListKeysResponse: ListKeysResponse,
-    GetServiceStatusResponse: GetServiceStatusResponse,
+    AsymmetricSm2DecryptResponse: AsymmetricSm2DecryptResponse,
     DisableKeyRotationResponse: DisableKeyRotationResponse,
     DisableWhiteBoxKeysRequest: DisableWhiteBoxKeysRequest,
-    OverwriteWhiteBoxDeviceFingerprintsRequest: OverwriteWhiteBoxDeviceFingerprintsRequest,
+    ListKeyDetailRequest: ListKeyDetailRequest,
     DeleteWhiteBoxKeyRequest: DeleteWhiteBoxKeyRequest,
     AlgorithmInfo: AlgorithmInfo,
+    GetRegionsResponse: GetRegionsResponse,
     GenerateDataKeyResponse: GenerateDataKeyResponse,
     CreateWhiteBoxKeyRequest: CreateWhiteBoxKeyRequest,
     OverwriteWhiteBoxDeviceFingerprintsResponse: OverwriteWhiteBoxDeviceFingerprintsResponse,
     DisableWhiteBoxKeysResponse: DisableWhiteBoxKeysResponse,
+    ArchiveKeyRequest: ArchiveKeyRequest,
     GetParametersForImportRequest: GetParametersForImportRequest,
     CreateKeyResponse: CreateKeyResponse,
     ReEncryptResponse: ReEncryptResponse,
@@ -3672,7 +3940,7 @@ module.exports = {
     CancelKeyDeletionRequest: CancelKeyDeletionRequest,
     DeleteImportedKeyMaterialRequest: DeleteImportedKeyMaterialRequest,
     EnableKeyResponse: EnableKeyResponse,
-    AsymmetricSm2DecryptResponse: AsymmetricSm2DecryptResponse,
+    GetServiceStatusResponse: GetServiceStatusResponse,
     DeviceFingerprint: DeviceFingerprint,
     GetKeyRotationStatusResponse: GetKeyRotationStatusResponse,
     EncryptRequest: EncryptRequest,
@@ -3681,7 +3949,7 @@ module.exports = {
     ListKeysRequest: ListKeysRequest,
     DescribeWhiteBoxDecryptKeyRequest: DescribeWhiteBoxDecryptKeyRequest,
     KeyMetadata: KeyMetadata,
-    DisableKeysResponse: DisableKeysResponse,
+    CancelKeyArchiveResponse: CancelKeyArchiveResponse,
     DecryptRequest: DecryptRequest,
     DescribeWhiteBoxKeyDetailsRequest: DescribeWhiteBoxKeyDetailsRequest,
     AsymmetricRsaDecryptResponse: AsymmetricRsaDecryptResponse,
@@ -3689,23 +3957,26 @@ module.exports = {
     DisableKeysRequest: DisableKeysRequest,
     DisableWhiteBoxKeyRequest: DisableWhiteBoxKeyRequest,
     UnbindCloudResourceRequest: UnbindCloudResourceRequest,
-    ListKeyDetailRequest: ListKeyDetailRequest,
+    OverwriteWhiteBoxDeviceFingerprintsRequest: OverwriteWhiteBoxDeviceFingerprintsRequest,
     EnableKeyRotationResponse: EnableKeyRotationResponse,
     BindCloudResourceResponse: BindCloudResourceResponse,
     EnableKeysResponse: EnableKeysResponse,
     DescribeWhiteBoxDeviceFingerprintsRequest: DescribeWhiteBoxDeviceFingerprintsRequest,
+    GetRegionsRequest: GetRegionsRequest,
     EncryptByWhiteBoxRequest: EncryptByWhiteBoxRequest,
     GenerateRandomRequest: GenerateRandomRequest,
     ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,
     DisableKeyRequest: DisableKeyRequest,
-    GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
+    ImportKeyMaterialResponse: ImportKeyMaterialResponse,
     GetPublicKeyResponse: GetPublicKeyResponse,
     BindCloudResourceRequest: BindCloudResourceRequest,
+    TagFilter: TagFilter,
     DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
     DescribeWhiteBoxDeviceFingerprintsResponse: DescribeWhiteBoxDeviceFingerprintsResponse,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
     UnbindCloudResourceResponse: UnbindCloudResourceResponse,
     DescribeKeyResponse: DescribeKeyResponse,
+    CancelKeyArchiveRequest: CancelKeyArchiveRequest,
     DisableKeyRotationRequest: DisableKeyRotationRequest,
 
 }

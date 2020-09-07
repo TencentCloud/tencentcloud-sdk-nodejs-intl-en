@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const Canvas = models.Canvas;
 const LayoutParams = models.LayoutParams;
+const StreamControl = models.StreamControl;
 const ResumeOnlineRecordResponse = models.ResumeOnlineRecordResponse;
 const StartOnlineRecordRequest = models.StartOnlineRecordRequest;
 const DescribeOnlineRecordCallbackRequest = models.DescribeOnlineRecordCallbackRequest;
@@ -47,6 +48,7 @@ const DescribeTranscodeCallbackRequest = models.DescribeTranscodeCallbackRequest
 const ResumeOnlineRecordRequest = models.ResumeOnlineRecordRequest;
 const DescribeTranscodeCallbackResponse = models.DescribeTranscodeCallbackResponse;
 const SetTranscodeCallbackRequest = models.SetTranscodeCallbackRequest;
+const RecordControl = models.RecordControl;
 const SetOnlineRecordCallbackRequest = models.SetOnlineRecordCallbackRequest;
 const MixStream = models.MixStream;
 const OmittedDuration = models.OmittedDuration;
@@ -64,7 +66,7 @@ class TiwClient extends AbstractClient {
     }
     
     /**
-     * This API is used to set the real-time recording callback address.
+     * This API is used to set the real-time recording callback address. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
      * @param {SetOnlineRecordCallbackRequest} req
      * @param {function(string, SetOnlineRecordCallbackResponse):void} cb
      * @public
@@ -75,7 +77,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the authentication key for the document transcoding callback.
+     * This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
      * @param {SetTranscodeCallbackKeyRequest} req
      * @param {function(string, SetTranscodeCallbackKeyResponse):void} cb
      * @public
@@ -119,7 +121,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the document transcoding callback address.
+     * This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
      * @param {SetTranscodeCallbackRequest} req
      * @param {function(string, SetTranscodeCallbackResponse):void} cb
      * @public
@@ -141,7 +143,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the authentication key for the real-time recording callback.
+     * This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
      * @param {SetOnlineRecordCallbackKeyRequest} req
      * @param {function(string, SetOnlineRecordCallbackKeyResponse):void} cb
      * @public

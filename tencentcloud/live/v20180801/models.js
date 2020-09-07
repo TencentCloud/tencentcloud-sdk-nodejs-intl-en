@@ -418,6 +418,7 @@ Only letters, digits, underscores, and hyphens can be contained.
 
         /**
          * COS bucket name.
+Note: the value of `CosBucket` cannot contain `-[appid]`.
          * @type {string || null}
          */
         this.CosBucket = null;
@@ -438,7 +439,7 @@ Only letters, digits, underscores, and hyphens can be contained.
 
         /**
          * Screencapturing interval in seconds. Default value: 10s.
-Value range: 5-600s.
+Value range: 5-300s.
          * @type {number || null}
          */
         this.SnapshotInterval = null;
@@ -462,13 +463,19 @@ Value range: 5-600s.
         this.PornFlag = null;
 
         /**
-         * COS bucket folder prefix.
+         * COS Bucket folder prefix.
+If no value is entered, the default value
+`/{Year}-{Month}-{Day}`
+will be used.
          * @type {string || null}
          */
         this.CosPrefix = null;
 
         /**
          * COS filename.
+If no value is entered, the default value 
+`{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}`
+will be used.
          * @type {string || null}
          */
         this.CosFileName = null;
@@ -823,8 +830,8 @@ class DeleteLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
-1. Get from the returned value of the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
-2. You can query the list of created screencapturing templates through the [DescribeLiveSnapshotTemplates](/document/product/267/32619) API.
+1. Get from the returned value of the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API call.
+2. You can query the list of created screencapturing templates through the [DescribeLiveSnapshotTemplates](https://intl.cloud.tencent.com/document/product/267/32619?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1801,8 +1808,8 @@ class DeleteLiveCallbackTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
-1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](/document/product/267/32637) API call.
-2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](/document/product/267/32632) API.
+1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
+2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -2946,13 +2953,13 @@ Note: `EndTime` and `StartTime` only support querying data for the last day.
         this.EndTime = null;
 
         /**
-         * Statistics type. Valid values: Province, Isp, CountryOrArea.
+         * Statistics type. Valid values: Province (district), Isp (ISP), CountryOrArea (country or region).
          * @type {string || null}
          */
         this.StatType = null;
 
         /**
-         * If this parameter is left empty, full data will be queried.
+         * Playback domain name list. If it is left empty, it refers to all playback domain names.
          * @type {Array.<string> || null}
          */
         this.PlayDomains = null;
@@ -3299,7 +3306,7 @@ class AddDelayLiveStreamRequest extends  AbstractModel {
          * Expiration time of the configured delayed playback in UTC format, such as 2018-11-29T19:00:00Z.
 Notes:
 1. The configuration will expire after 7 days by default and can last up to 7 days.
-2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -3813,7 +3820,7 @@ class ForbidLiveStreamRequest extends  AbstractModel {
          * Time to resume the stream in UTC format, such as 2018-11-29T19:00:00Z.
 Notes:
 1. The duration of forbidding is 7 days by default and can be up to 90 days.
-2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.ResumeTime = null;
@@ -4745,45 +4752,52 @@ Only letters, digits, underscores, and hyphens can be contained.
 
         /**
          * Stream starting callback URL,
-Protocol document: [Event Message Notification](/document/product/267/32744).
+Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
          * @type {string || null}
          */
         this.StreamBeginNotifyUrl = null;
 
         /**
          * Interruption callback URL,
-Protocol document: [Event Message Notification](/document/product/267/32744).
+Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
 
         /**
          * Recording callback URL,
-Protocol document: [Event Message Notification](/document/product/267/32744).
+Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
          * @type {string || null}
          */
         this.RecordNotifyUrl = null;
 
         /**
          * Screencapturing callback URL,
-Protocol document: [Event Message Notification](/document/product/267/32744).
+Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SnapshotNotifyUrl = null;
 
         /**
          * Porn detection callback URL,
-Protocol document: [Event Message Notification](/document/product/267/32741).
+Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32741?from_cn_redirect=1).
          * @type {string || null}
          */
         this.PornCensorshipNotifyUrl = null;
 
         /**
          * Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
-[Event Message Notification](/document/product/267/32744).
+[Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CallbackKey = null;
+
+        /**
+         * Stream mixing callback URL,
+Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.StreamMixNotifyUrl = null;
 
     }
 
@@ -4802,6 +4816,7 @@ Protocol document: [Event Message Notification](/document/product/267/32741).
         this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
         this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
+        this.StreamMixNotifyUrl = 'StreamMixNotifyUrl' in params ? params.StreamMixNotifyUrl : null;
 
     }
 }
@@ -6197,17 +6212,16 @@ class DescribeHttpStatusInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time (Beijing time),
-In the format of `yyyy-mm-dd HH:MM:SS`.
-`StartTime` cannot be more than 3 months ago.
+         * Start time (Beijing time).
+Format: yyyy-mm-dd HH:MM:SS.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time (Beijing time),
-In the format of `yyyy-mm-dd HH:MM:SS`.
-Note: `EndTime` and `StartTime` only support querying data for the last day.
+         * End time (Beijing time).
+Format: yyyy-mm-dd HH:MM:SS.
+Note: data in the last 3 months can be queried and the query period is up to 1 day.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6292,7 +6306,7 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
 
         /**
          * Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
-[Event Message Notification](/document/product/267/32744).
+[Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -7512,7 +7526,7 @@ class DeleteLiveWatermarkRequest extends  AbstractModel {
 
         /**
          * Watermark ID.
-Watermark ID obtained in the returned value of the [AddLiveWatermark](/document/product/267/30154) API call.
+Watermark ID obtained in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
 Watermark ID returned by the `DescribeLiveWatermarks` API.
          * @type {number || null}
          */
@@ -7993,7 +8007,7 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
 
         /**
          * Watermark ID.
-Get the watermark ID in the returned value of the [AddLiveWatermark](/document/product/267/30154) API call.
+Get the watermark ID in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
          * @type {number || null}
          */
         this.WatermarkId = null;
@@ -8215,8 +8229,8 @@ class DeleteLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
-1. Get the template ID in the returned value of the [CreateLiveTranscodeTemplate](/document/product/267/32646) API call.
-2. You can query the list of created templates through the [DescribeLiveTranscodeTemplates](/document/product/267/32641) API.
+1. Get the template ID in the returned value of the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API call.
+2. You can query the list of created templates through the [DescribeLiveTranscodeTemplates](https://intl.cloud.tencent.com/document/product/267/32641?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -8611,7 +8625,8 @@ class CommonMixControlParams extends  AbstractModel {
         this.UseMixCropCenter = null;
 
         /**
-         * 
+         * Value range: [0,1].
+If this parameter is set to 1, when both `InputStreamList` and `OutputParams.OutputStreamType` are set to 1, you can copy a stream instead of canceling it.
          * @type {number || null}
          */
         this.AllowCopy = null;
@@ -9196,9 +9211,9 @@ If this parameter is left empty, full playback data will be queried.
         this.StreamName = null;
 
         /**
-         * Push path, which is the same as the `AppName` in the playback address, subject to exact match, and valid if `StreamName` is passed in.
-If this parameter is left empty, full playback data will be queried.
-Note: to query by `AppName`, you need to submit a ticket for application.
+         * Push address. Its value is the same as the `AppName` in playback address. It supports exact match, and takes effect only when `StreamName` is passed at the same time.
+If it is left empty, the full playback data will be queried.
+Note: to query by `AppName`, you need to submit a ticket first. After your application succeeds, it will take about 5 business days (subject to the time in the reply) for the configuration to take effect.
          * @type {string || null}
          */
         this.AppName = null;
@@ -9343,7 +9358,10 @@ baseline/main/high. Default value: baseline.
         this.AiTransCode = null;
 
         /**
-         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
+         * Bitrate compression ratio of top speed codec video.
+Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
+
+Value range: 0.0-0.5.
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -9767,7 +9785,10 @@ baseline/main/high.
         this.FpsToOrig = null;
 
         /**
-         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
+         * Bitrate compression ratio of top speed codec video.
+Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
+
+Value range: 0.0-0.5.
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -10163,7 +10184,7 @@ Default value: 20.
         this.TopIndex = null;
 
         /**
-         * Sorting metric. Valid values: "AvgFluxPerSecond", "TotalRequest" (default), "TotalFlux".
+         * Sorting metric. Valid values: AvgFluxPerSecond (sort by average traffic per second), TotalRequest (sort by total requests), TotalFlux (sort by total traffic). Default value: TotalRequest.
          * @type {string || null}
          */
         this.OrderParam = null;
@@ -10386,7 +10407,8 @@ class HlsSpecialParam extends  AbstractModel {
         super();
 
         /**
-         * HLS timeout period.
+         * Timeout period for restarting an interrupted HLS push.
+Value range: [0, 1,800].
          * @type {number || null}
          */
         this.FlowContinueDuration = null;
@@ -10742,7 +10764,7 @@ class DescribeLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
-Template ID returned by the [CreateLiveSnapshotTemplate](/document/product/267/32624) API call.
+Template ID returned by the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API call.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -10926,8 +10948,8 @@ class DescribeLiveCallbackTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
-1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](/document/product/267/32637) API call.
-2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](/document/product/267/32632) API.
+1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
+2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -10976,7 +10998,7 @@ Maximum length: 1,024 bytes.
 
         /**
          * Screencapturing interval in seconds. Default value: 10s.
-Value range: 5-600s.
+Value range: 5-300s.
          * @type {number || null}
          */
         this.SnapshotInterval = null;
@@ -11009,6 +11031,7 @@ Value range: 5-600s.
 
         /**
          * COS bucket name.
+Note: the value of `CosBucket` cannot contain `-[appid]`.
          * @type {string || null}
          */
         this.CosBucket = null;
@@ -11134,7 +11157,7 @@ class DescribeLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * Template ID.
-Note: get the template ID in the returned value of the [CreateLiveTranscodeTemplate](/document/product/267/32646) API call.
+Note: get the template ID in the returned value of the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API call.
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -11276,7 +11299,7 @@ class CreateLiveWatermarkRuleRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * Watermark ID, which is the `WatermarkId` returned by the [AddLiveWatermark](/document/product/267/30154) API.
+         * Watermark ID, which is the `WatermarkId` returned by the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.TemplateId = null;

@@ -2629,7 +2629,8 @@ class DescribeNatGatewaysRequest extends  AbstractModel {
          * Filter condition. `NatGatewayIds` and `Filters` cannot be specified at the same time.
 <li>nat-gateway-id - String - (Filter condition) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
 <li>vpc-id - String - (Filter condition) The unique ID of the VPC, such as `vpc-123xx454`.</li>
-<li>nat-gateway-name - String - (Filter condition) The ID of the protocol port template instance, such as `test_nat`.</li>
+<li>nat-gateway-name - String - (Filter condition) The name of the protocol port template instance, such as `test_nat`.</li>
+<li>tag-key - String - (Filter condition) The tag key, such as `test-key`.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5046,6 +5047,12 @@ class CreateVpnConnectionRequest extends  AbstractModel {
          */
         this.IPSECOptionsSpecification = null;
 
+        /**
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -5080,6 +5087,15 @@ class CreateVpnConnectionRequest extends  AbstractModel {
             let obj = new IPSECOptionsSpecification();
             obj.deserialize(params.IPSECOptionsSpecification)
             this.IPSECOptionsSpecification = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -5147,6 +5163,30 @@ class CcnRoute extends  AbstractModel {
          */
         this.InstanceUin = null;
 
+        /**
+         * Additional status of the route
+         * @type {string || null}
+         */
+        this.ExtraState = null;
+
+        /**
+         * Whether it is a dynamic route
+         * @type {boolean || null}
+         */
+        this.IsBgp = null;
+
+        /**
+         * Route priority
+         * @type {number || null}
+         */
+        this.RoutePriority = null;
+
+        /**
+         * Next hop port name (associated instance’s port name)
+         * @type {string || null}
+         */
+        this.InstanceExtraName = null;
+
     }
 
     /**
@@ -5165,6 +5205,10 @@ class CcnRoute extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.InstanceUin = 'InstanceUin' in params ? params.InstanceUin : null;
+        this.ExtraState = 'ExtraState' in params ? params.ExtraState : null;
+        this.IsBgp = 'IsBgp' in params ? params.IsBgp : null;
+        this.RoutePriority = 'RoutePriority' in params ? params.RoutePriority : null;
+        this.InstanceExtraName = 'InstanceExtraName' in params ? params.InstanceExtraName : null;
 
     }
 }
@@ -6198,13 +6242,13 @@ class SecurityGroupPolicy extends  AbstractModel {
         super();
 
         /**
-         * Security group policy index number.
+         * The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
          * @type {number || null}
          */
         this.PolicyIndex = null;
 
         /**
-         * Protocol. Values: TCP, UDP, ICMP
+         * Protocol. Valid values: TCP, UDP, ICMP, ICMPv6, ALL.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -7933,6 +7977,24 @@ class NatGateway extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DirectConnectGatewayIds = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Tag key-value pair.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -7969,6 +8031,17 @@ class NatGateway extends  AbstractModel {
         }
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DirectConnectGatewayIds = 'DirectConnectGatewayIds' in params ? params.DirectConnectGatewayIds : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -9894,6 +9967,34 @@ class ModifyVpnGatewayAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * AssociateDirectConnectGatewayNatGateway response structure.
+ * @class
+ */
+class AssociateDirectConnectGatewayNatGatewayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeVpnGatewayCcnRoutes request structure.
  * @class
  */
@@ -9931,6 +10032,34 @@ class DescribeVpnGatewayCcnRoutesRequest extends  AbstractModel {
         this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DisassociateDirectConnectGatewayNatGateway response structure.
+ * @class
+ */
+class DisassociateDirectConnectGatewayNatGatewayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10337,6 +10466,12 @@ class CcnAttachedInstance extends  AbstractModel {
          */
         this.CcnUin = null;
 
+        /**
+         * General location of the associated instance, such as CHINA_MAINLAND.
+         * @type {string || null}
+         */
+        this.InstanceArea = null;
+
     }
 
     /**
@@ -10356,6 +10491,7 @@ class CcnAttachedInstance extends  AbstractModel {
         this.State = 'State' in params ? params.State : null;
         this.AttachedTime = 'AttachedTime' in params ? params.AttachedTime : null;
         this.CcnUin = 'CcnUin' in params ? params.CcnUin : null;
+        this.InstanceArea = 'InstanceArea' in params ? params.InstanceArea : null;
 
     }
 }
@@ -11844,6 +11980,48 @@ class ModifySecurityGroupAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * AssociateDirectConnectGatewayNatGateway request structure.
+ * @class
+ */
+class AssociateDirectConnectGatewayNatGatewayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The direct connect gateway ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The NAT Gateway ID.
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+
+    }
+}
+
+/**
  * Address information
  * @class
  */
@@ -13286,7 +13464,7 @@ class DisassociateNatGatewayAddressRequest extends  AbstractModel {
         this.NatGatewayId = null;
 
         /**
-         * The array of EIPs bound to the NAT gateway.
+         * Array of the EIPs to be unbound from the NAT gateway.
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
@@ -13533,6 +13711,48 @@ class DescribeSecurityGroupReferencesRequest extends  AbstractModel {
             return;
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
+ * DisassociateDirectConnectGatewayNatGateway request structure.
+ * @class
+ */
+class DisassociateDirectConnectGatewayNatGatewayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The direct connect gateway ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The NAT Gateway ID.
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
 
     }
 }
@@ -15764,6 +15984,12 @@ Note: This field may return null, indicating no valid value.
          */
         this.TagSet = null;
 
+        /**
+         * Whether the CCN route priority feature is supported. Valid values: False: do not support; True: support.
+         * @type {boolean || null}
+         */
+        this.RoutePriorityFlag = null;
+
     }
 
     /**
@@ -15791,6 +16017,7 @@ Note: This field may return null, indicating no valid value.
                 this.TagSet.push(obj);
             }
         }
+        this.RoutePriorityFlag = 'RoutePriorityFlag' in params ? params.RoutePriorityFlag : null;
 
     }
 }
@@ -16848,6 +17075,12 @@ class CreateVpnGatewayRequest extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -16869,6 +17102,15 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -18969,6 +19211,12 @@ class CreateCustomerGatewayRequest extends  AbstractModel {
          */
         this.IpAddress = null;
 
+        /**
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -18980,6 +19228,15 @@ class CreateCustomerGatewayRequest extends  AbstractModel {
         }
         this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
         this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -20853,7 +21110,9 @@ module.exports = {
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
+    AssociateDirectConnectGatewayNatGatewayResponse: AssociateDirectConnectGatewayNatGatewayResponse,
     DescribeVpnGatewayCcnRoutesRequest: DescribeVpnGatewayCcnRoutesRequest,
+    DisassociateDirectConnectGatewayNatGatewayResponse: DisassociateDirectConnectGatewayNatGatewayResponse,
     CreateServiceTemplateGroupRequest: CreateServiceTemplateGroupRequest,
     DescribeClassicLinkInstancesResponse: DescribeClassicLinkInstancesResponse,
     DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
@@ -20890,6 +21149,7 @@ module.exports = {
     ModifyAssistantCidrRequest: ModifyAssistantCidrRequest,
     ModifyGatewayFlowQosResponse: ModifyGatewayFlowQosResponse,
     ModifySecurityGroupAttributeResponse: ModifySecurityGroupAttributeResponse,
+    AssociateDirectConnectGatewayNatGatewayRequest: AssociateDirectConnectGatewayNatGatewayRequest,
     AddressTemplateItem: AddressTemplateItem,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
     AttachClassicLinkVpcRequest: AttachClassicLinkVpcRequest,
@@ -20934,6 +21194,7 @@ module.exports = {
     ResetAttachCcnInstancesRequest: ResetAttachCcnInstancesRequest,
     CreateHaVipResponse: CreateHaVipResponse,
     DescribeSecurityGroupReferencesRequest: DescribeSecurityGroupReferencesRequest,
+    DisassociateDirectConnectGatewayNatGatewayRequest: DisassociateDirectConnectGatewayNatGatewayRequest,
     DescribeAddressTemplateGroupsResponse: DescribeAddressTemplateGroupsResponse,
     ReleaseAddressesRequest: ReleaseAddressesRequest,
     CreateDirectConnectGatewayCcnRoutesRequest: CreateDirectConnectGatewayCcnRoutesRequest,

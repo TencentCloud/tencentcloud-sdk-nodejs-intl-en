@@ -220,7 +220,9 @@ const DirectConnectGateway = models.DirectConnectGateway;
 const Price = models.Price;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
+const AssociateDirectConnectGatewayNatGatewayResponse = models.AssociateDirectConnectGatewayNatGatewayResponse;
 const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
+const DisassociateDirectConnectGatewayNatGatewayResponse = models.DisassociateDirectConnectGatewayNatGatewayResponse;
 const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
 const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
 const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
@@ -257,6 +259,7 @@ const NatGatewayAddress = models.NatGatewayAddress;
 const ModifyAssistantCidrRequest = models.ModifyAssistantCidrRequest;
 const ModifyGatewayFlowQosResponse = models.ModifyGatewayFlowQosResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
+const AssociateDirectConnectGatewayNatGatewayRequest = models.AssociateDirectConnectGatewayNatGatewayRequest;
 const AddressTemplateItem = models.AddressTemplateItem;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
@@ -301,6 +304,7 @@ const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
 const DescribeSecurityGroupReferencesRequest = models.DescribeSecurityGroupReferencesRequest;
+const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
 const CreateDirectConnectGatewayCcnRoutesRequest = models.CreateDirectConnectGatewayCcnRoutesRequest;
@@ -776,14 +780,14 @@ This API is completed asynchronously. If you need to query the async execution r
     }
 
     /**
-     * This API is used to query a list of network ACLs.
-     * @param {DescribeNetworkAclsRequest} req
-     * @param {function(string, DescribeNetworkAclsResponse):void} cb
+     * This API is used to bind a direct connect gateway with a NAT gateway,  and direct its default route to the NAT Gateway.
+     * @param {AssociateDirectConnectGatewayNatGatewayRequest} req
+     * @param {function(string, AssociateDirectConnectGatewayNatGatewayResponse):void} cb
      * @public
      */
-    DescribeNetworkAcls(req, cb) {
-        let resp = new DescribeNetworkAclsResponse();
-        this.request("DescribeNetworkAcls", req, resp, cb);
+    AssociateDirectConnectGatewayNatGateway(req, cb) {
+        let resp = new AssociateDirectConnectGatewayNatGatewayResponse();
+        this.request("AssociateDirectConnectGatewayNatGateway", req, resp, cb);
     }
 
     /**
@@ -1116,6 +1120,17 @@ After unbinding the network instance, the corresponding routing policy will also
     DescribeGatewayFlowQos(req, cb) {
         let resp = new DescribeGatewayFlowQosResponse();
         this.request("DescribeGatewayFlowQos", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a direct connect gateway from a NAT Gateway. After unbinding, the direct connect gateway cannot access internet through the NAT Gateway.
+     * @param {DisassociateDirectConnectGatewayNatGatewayRequest} req
+     * @param {function(string, DisassociateDirectConnectGatewayNatGatewayResponse):void} cb
+     * @public
+     */
+    DisassociateDirectConnectGatewayNatGateway(req, cb) {
+        let resp = new DisassociateDirectConnectGatewayNatGatewayResponse();
+        this.request("DisassociateDirectConnectGatewayNatGateway", req, resp, cb);
     }
 
     /**
@@ -2218,6 +2233,17 @@ Each account can only create a limited number of CCN instances. For more informa
     ModifyCustomerGatewayAttribute(req, cb) {
         let resp = new ModifyCustomerGatewayAttributeResponse();
         this.request("ModifyCustomerGatewayAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a list of network ACLs.
+     * @param {DescribeNetworkAclsRequest} req
+     * @param {function(string, DescribeNetworkAclsResponse):void} cb
+     * @public
+     */
+    DescribeNetworkAcls(req, cb) {
+        let resp = new DescribeNetworkAclsResponse();
+        this.request("DescribeNetworkAcls", req, resp, cb);
     }
 
     /**

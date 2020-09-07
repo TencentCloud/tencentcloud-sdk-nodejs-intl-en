@@ -39,6 +39,7 @@ const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const SpecInfo = models.SpecInfo;
 const RegionInfo = models.RegionInfo;
+const Tag = models.Tag;
 const SlowlogDetail = models.SlowlogDetail;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;

@@ -76,36 +76,40 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SearchFacesReturnsByGroup response structure.
+ * Eye information
  * @class
  */
-class SearchFacesReturnsByGroupResponse extends  AbstractModel {
+class Eye extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of faces included in searched groups.
-         * @type {number || null}
+         * Whether glasses are worn.
+The `Type` values of the `AttributeItem` include: 0: no glasses; 1: general glasses; 2: sunglasses
+         * @type {AttributeItem || null}
          */
-        this.FaceNum = null;
+        this.Glass = null;
 
         /**
-         * Recognition result.
-         * @type {Array.<ResultsReturnsByGroup> || null}
+         * Whether the eyes are open.
+The `Type` values of the `AttributeItem` include: 0: open; 1: closed
+         * @type {AttributeItem || null}
          */
-        this.ResultsReturnsByGroup = null;
+        this.EyeOpen = null;
 
         /**
-         * Algorithm model version used for face recognition.
-         * @type {string || null}
+         * Whether the person has double eyelids.
+The `Type` values of the `AttributeItem` include: 0: no; 1: yes.
+         * @type {AttributeItem || null}
          */
-        this.FaceModelVersion = null;
+        this.EyelidType = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Eye size.
+The `Type` values of the `AttributeItem` include: 0: small eyes; 1: general eyes; 2: big eyes.
+         * @type {AttributeItem || null}
          */
-        this.RequestId = null;
+        this.EyeSize = null;
 
     }
 
@@ -116,18 +120,30 @@ class SearchFacesReturnsByGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FaceNum = 'FaceNum' in params ? params.FaceNum : null;
 
-        if (params.ResultsReturnsByGroup) {
-            this.ResultsReturnsByGroup = new Array();
-            for (let z in params.ResultsReturnsByGroup) {
-                let obj = new ResultsReturnsByGroup();
-                obj.deserialize(params.ResultsReturnsByGroup[z]);
-                this.ResultsReturnsByGroup.push(obj);
-            }
+        if (params.Glass) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Glass)
+            this.Glass = obj;
         }
-        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.EyeOpen) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyeOpen)
+            this.EyeOpen = obj;
+        }
+
+        if (params.EyelidType) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyelidType)
+            this.EyelidType = obj;
+        }
+
+        if (params.EyeSize) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyeSize)
+            this.EyeSize = obj;
+        }
 
     }
 }
@@ -241,34 +257,48 @@ class ModifyGroupResponse extends  AbstractModel {
 }
 
 /**
- * VerifyFace response structure.
+ * GetGroupInfo response structure.
  * @class
  */
-class VerifyFaceResponse extends  AbstractModel {
+class GetGroupInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Similarity between given face image and `PersonId`. If there are multiple faces under the `PersonId`, the score of the highest similarity will be returned.
-
-The returned similarity score varies by algorithm version.
-If you need to verify whether the faces in the two images are the same person, then the 0.1%, 0.01%, and 0.001% FARs on v3.0 correspond to scores of 40, 50, and 60, respectively. Generally, if the score is above 50, it can be judged that they are the same person.
-The 0.1%, 0.01%, and 0.001% FARs on v2.0 correspond to scores of 70, 80, and 90, respectively. Generally, if the score is above 80, it can be judged that they are the same person.
-         * @type {number || null}
+         * Group name
+         * @type {string || null}
          */
-        this.Score = null;
+        this.GroupName = null;
 
         /**
-         * Whether the person in the image matches the `PersonId`.
-         * @type {boolean || null}
+         * Group ID
+         * @type {string || null}
          */
-        this.IsMatch = null;
+        this.GroupId = null;
+
+        /**
+         * Custom group description field
+         * @type {Array.<string> || null}
+         */
+        this.GroupExDescriptions = null;
+
+        /**
+         * Group remarks
+         * @type {string || null}
+         */
+        this.Tag = null;
 
         /**
          * Algorithm model version used for face recognition.
          * @type {string || null}
          */
         this.FaceModelVersion = null;
+
+        /**
+         * Group creation time and date (`CreationTimestamp`), whose value is the number of milliseconds between the UNIX epoch time and the group creation time.
+         * @type {number || null}
+         */
+        this.CreationTimestamp = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -285,9 +315,12 @@ The 0.1%, 0.01%, and 0.001% FARs on v2.0 correspond to scores of 70, 80, and 90,
         if (!params) {
             return;
         }
-        this.Score = 'Score' in params ? params.Score : null;
-        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupExDescriptions = 'GroupExDescriptions' in params ? params.GroupExDescriptions : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
         this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.CreationTimestamp = 'CreationTimestamp' in params ? params.CreationTimestamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -302,7 +335,7 @@ class DeletePersonRequest extends  AbstractModel {
         super();
 
         /**
-         * Person ID
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
          * @type {string || null}
          */
         this.PersonId = null;
@@ -373,25 +406,36 @@ This field is meaningful only if `FaceModelVersion` is 3.0.
 }
 
 /**
- * GetSimilarPersonResult response structure.
+ * AnalyzeDenseLandmarks response structure.
  * @class
  */
-class GetSimilarPersonResultResponse extends  AbstractModel {
+class AnalyzeDenseLandmarksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Duplicate check task completion progress. Value range: [0.0,100.0]. `SimilarPersons` takes effect only if this parameter value is 100.
+         * Width of requested image.
          * @type {number || null}
          */
-        this.Progress = null;
+        this.ImageWidth = null;
 
         /**
-         * Temporary download link for the information file of the persons suspected to be duplicate. The validity period is 5 minutes, and the result file retention duration is 90 days.
-The file content is an array of `SimilarPerson` values.
+         * Height of requested image.
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * Specific information of dense facial keypoints.
+         * @type {Array.<DenseFaceShape> || null}
+         */
+        this.DenseFaceShapeSet = null;
+
+        /**
+         * Algorithm model version used by the Face Recognition service. You can enter only `3.0` for this API.
          * @type {string || null}
          */
-        this.SimilarPersonsUrl = null;
+        this.FaceModelVersion = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -408,8 +452,18 @@ The file content is an array of `SimilarPerson` values.
         if (!params) {
             return;
         }
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.SimilarPersonsUrl = 'SimilarPersonsUrl' in params ? params.SimilarPersonsUrl : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+
+        if (params.DenseFaceShapeSet) {
+            this.DenseFaceShapeSet = new Array();
+            for (let z in params.DenseFaceShapeSet) {
+                let obj = new DenseFaceShape();
+                obj.deserialize(params.DenseFaceShapeSet[z]);
+                this.DenseFaceShapeSet.push(obj);
+            }
+        }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -481,13 +535,13 @@ class DeleteFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * Person ID
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
          * @type {string || null}
          */
         this.PersonId = null;
 
         /**
-         * List of IDs of the faces to be deleted
+         * List of IDs of the faces to be deleted. The array element value is the `FaceId` returned by the `CreateFace` API
          * @type {Array.<string> || null}
          */
         this.FaceIds = null;
@@ -503,6 +557,48 @@ class DeleteFaceRequest extends  AbstractModel {
         }
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.FaceIds = 'FaceIds' in params ? params.FaceIds : null;
+
+    }
+}
+
+/**
+ * Pose information.
+ * @class
+ */
+class HeadPose extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pitch. Value range: [-30,30].
+         * @type {number || null}
+         */
+        this.Pitch = null;
+
+        /**
+         * Yaw. Value range: [-30,30].
+         * @type {number || null}
+         */
+        this.Yaw = null;
+
+        /**
+         * Roll. Value range: [-180,180].
+         * @type {number || null}
+         */
+        this.Roll = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pitch = 'Pitch' in params ? params.Pitch : null;
+        this.Yaw = 'Yaw' in params ? params.Yaw : null;
+        this.Roll = 'Roll' in params ? params.Roll : null;
 
     }
 }
@@ -722,6 +818,53 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Hat information
+ * @class
+ */
+class Hat extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Hat wearing status information.
+The `Type` values of the `AttributeItem` include: 0: no hat; 1: general hat; 2: helmet; 3: security guard hat.
+         * @type {AttributeItem || null}
+         */
+        this.Style = null;
+
+        /**
+         * Hat color.
+The `Type` values of the `AttributeItem` include: 0: no hat; 1: red; 2: yellow; 3: blue; 4: black; 5: gray; 6: mixed colors.
+         * @type {AttributeItem || null}
+         */
+        this.Color = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Style) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Style)
+            this.Style = obj;
+        }
+
+        if (params.Color) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Color)
+            this.Color = obj;
+        }
+
+    }
+}
+
+/**
  * Completeness of facial features, which assesses the completeness of the eyebrows, eyes, nose, cheeks, mouth, and chin.
  * @class
  */
@@ -818,7 +961,7 @@ class FaceAttributesInfo extends  AbstractModel {
         this.Age = null;
 
         /**
-         * Expression. Value range: [0 (normal)–50 (smile)–100 (laugh)]. If `NeedFaceAttributes` is not 1 or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * Expression. Value range: [0 (normal)-50 (smile)-100 (laugh)]. If `NeedFaceAttributes` is not 1 or more than 5 faces are detected, this parameter will still be returned but meaningless.
          * @type {number || null}
          */
         this.Expression = null;
@@ -851,7 +994,7 @@ You are recommended to select images in the [-20,20] range for adding faces.
         this.Roll = null;
 
         /**
-         * Beauty. Value range: [0–100]. If `NeedFaceAttributes` is not 1 or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * Beauty. Value range: [0-100]. If `NeedFaceAttributes` is not 1 or more than 5 faces are detected, this parameter will still be returned but meaningless.
          * @type {number || null}
          */
         this.Beauty = null;
@@ -915,24 +1058,64 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * List of groups containing this person and their description fields
+ * DetectFaceAttributes request structure.
  * @class
  */
-class PersonGroupInfo extends  AbstractModel {
+class DetectFaceAttributesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the group that contains this person
-         * @type {string || null}
+         * Maximum number of processable faces. 
+Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 120. 
+This parameter is used to control the number of faces in the image to be detected. The smaller the value, the faster the processing.
+         * @type {number || null}
          */
-        this.GroupId = null;
+        this.MaxFaceNum = null;
 
         /**
-         * Content of person description field
-         * @type {Array.<string> || null}
+         * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats. 
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
          */
-        this.PersonExDescriptions = null;
+        this.Image = null;
+
+        /**
+         * Image URL. 
+The image cannot exceed 5 MB in size after being Base64-encoded. 
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
+You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+The download speed and stability of non-Tencent Cloud URLs may be low. 
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Whether to return attributes such as age, gender, and emotion. 
+Valid values (case-insensitive): None, Age, Beauty, Emotion, Eye, Eyebrow, 
+Gender, Hair, Hat, Headpose, Mask, Mouth, Moustache, Nose, Shape, Skin, Smile. 
+`None` indicates that no attributes need to be returned, which is the default value. 
+You need to combine the attributes into a string and separate them with commas. The sequence of the attributes is not limited. 
+For more information on the attributes, please see the output parameters as described below. 
+The face attribute information of up to 5 largest faces in the image will be returned, and `AttributesInfo` of the 6th and rest faces is meaningless.
+         * @type {string || null}
+         */
+        this.FaceAttributesType = null;
+
+        /**
+         * Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
+        /**
+         * Algorithm model version used by the Face Recognition service. You can enter only `3.0` for this API.
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
 
     }
 
@@ -943,8 +1126,12 @@ class PersonGroupInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.PersonExDescriptions = 'PersonExDescriptions' in params ? params.PersonExDescriptions : null;
+        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FaceAttributesType = 'FaceAttributesType' in params ? params.FaceAttributesType : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
 
     }
 }
@@ -958,7 +1145,7 @@ class ModifyGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Group ID
+         * Group ID, which is the `GroupId` in the `CreateGroup` API
          * @type {string || null}
          */
         this.GroupId = null;
@@ -1015,13 +1202,13 @@ class CreatePersonRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the group to add to.
+         * ID of the group to join, which is the `GroupId` in the `CreateGroup` API
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * Person name, which can contain 1–60 characters and is modifiable and repeatable.
+         * Person name, which can contain 1-60 characters and is modifiable and repeatable.
          * @type {string || null}
          */
         this.PersonName = null;
@@ -1039,13 +1226,14 @@ class CreatePersonRequest extends  AbstractModel {
         this.Gender = null;
 
         /**
-         * Content of person description field, which is a `key-value` pair, can contain 0–60 characters, and is modifiable and repeatable.
+         * Content of person description field, which is a `key-value` pair, can contain 0-60 characters, and is modifiable and repeatable.
          * @type {Array.<PersonExDescriptionInfo> || null}
          */
         this.PersonExDescriptionInfos = null;
 
         /**
          * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
          */
@@ -1053,6 +1241,7 @@ class CreatePersonRequest extends  AbstractModel {
 
         /**
          * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -1170,7 +1359,7 @@ class DeleteGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Group ID.
+         * Group ID, which is the `GroupId` in the `CreateGroup` API
          * @type {string || null}
          */
         this.GroupId = null;
@@ -1280,7 +1469,7 @@ class ModifyPersonBaseInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Person ID
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
          * @type {string || null}
          */
         this.PersonId = null;
@@ -1292,7 +1481,7 @@ class ModifyPersonBaseInfoRequest extends  AbstractModel {
         this.PersonName = null;
 
         /**
-         * Gender of the person to be modified
+         * Gender of the person to be modified. 1: male; 2: female
          * @type {number || null}
          */
         this.Gender = null;
@@ -1314,76 +1503,36 @@ class ModifyPersonBaseInfoRequest extends  AbstractModel {
 }
 
 /**
- * GetSimilarPersonResult request structure.
+ * DetectFaceAttributes response structure.
  * @class
  */
-class GetSimilarPersonResultRequest extends  AbstractModel {
+class DetectFaceAttributesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Duplicate check task ID, which is used to query and get the progress and result of the task.
-         * @type {string || null}
+         * Width of requested image.
+         * @type {number || null}
          */
-        this.JobId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-
-    }
-}
-
-/**
- * GetGroupInfo response structure.
- * @class
- */
-class GetGroupInfoResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.ImageWidth = null;
 
         /**
-         * Group name
-         * @type {string || null}
+         * Height of requested image.
+         * @type {number || null}
          */
-        this.GroupName = null;
+        this.ImageHeight = null;
 
         /**
-         * Group ID
-         * @type {string || null}
+         * Face information list.
+         * @type {Array.<FaceDetailInfo> || null}
          */
-        this.GroupId = null;
-
-        /**
-         * Custom group description field
-         * @type {Array.<string> || null}
-         */
-        this.GroupExDescriptions = null;
-
-        /**
-         * Group remarks
-         * @type {string || null}
-         */
-        this.Tag = null;
+        this.FaceDetailInfos = null;
 
         /**
          * Algorithm model version used for face recognition.
          * @type {string || null}
          */
         this.FaceModelVersion = null;
-
-        /**
-         * Group creation time and date (`CreationTimestamp`), whose value is the number of milliseconds between the UNIX epoch time and the group creation time.
-         * @type {number || null}
-         */
-        this.CreationTimestamp = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1400,12 +1549,18 @@ class GetGroupInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.GroupExDescriptions = 'GroupExDescriptions' in params ? params.GroupExDescriptions : null;
-        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+
+        if (params.FaceDetailInfos) {
+            this.FaceDetailInfos = new Array();
+            for (let z in params.FaceDetailInfos) {
+                let obj = new FaceDetailInfo();
+                obj.deserialize(params.FaceDetailInfos[z]);
+                this.FaceDetailInfos.push(obj);
+            }
+        }
         this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
-        this.CreationTimestamp = 'CreationTimestamp' in params ? params.CreationTimestamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1513,47 +1668,58 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Face quality information, including score, sharpness, brightness, and completeness. Valid information will be returned only if `NeedFaceDetection` is set to 1.
+ * VerifyPerson request structure.
  * @class
  */
-class FaceQualityInfo extends  AbstractModel {
+class VerifyPersonRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Quality score. Value range: [0,100]. It comprehensively evaluates whether the image quality is suitable for face recognition; the higher the score, the higher the quality. 
-In normal cases, you only need to use `Score` as the overall quality standard score. Specific item scores such as `Sharpness`, `Brightness`, `Completeness` are for reference only.
-Reference range: [0,40]: poor; [40,60]: fine; [60,80]: good; [80,100]: excellent. 
-You are recommended to select images with a score above 70 for adding faces.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Base64-encoded data of image.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+If there are multiple faces in the image, only the face with the largest size will be selected.
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
          */
-        this.Score = null;
+        this.Image = null;
 
         /**
-         * Sharpness. Value range: [0,100]. It evaluates the sharpness of the image. The higher the score, the sharper the image. 
-Reference range: [0,40]: very blurry; [40,60]: blurry; [60,80]: fine; [80,100]: sharp. 
-You are recommended to select images with a score above 80 for adding faces.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Image URL 
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+ Either `Url` or `Image` of the image must be provided; if both are provided, only `Url` will be used. 
+You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+The download speed and stability of non-Tencent Cloud URLs may be low.
+If there are multiple faces in the image, only the face with the largest size will be selected.
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
          */
-        this.Sharpness = null;
+        this.Url = null;
 
         /**
-         * Brightness. Value range: [0,100]. The brighter the image, the higher the score. 
-Reference range: [0,30]: dark; [30,70]: normal; [70,100]: bright. 
-You are recommended to select images in the [30,70] range for adding faces.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * ID of the person to be verified. For more information on `PersonId`, please see the group management APIs.
+         * @type {string || null}
          */
-        this.Brightness = null;
+        this.PersonId = null;
 
         /**
-         * Completeness of facial features, which assesses the completeness of the eyebrows, eyes, nose, cheeks, mouth, and chin.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {FaceQualityCompleteness || null}
+         * Image quality control. 
+0: no control. 
+1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+2: average quality requirement. The image has at least three of following problems: extreme brightness, extreme dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+3: high quality requirement. The image has one to two of following problems: extreme brightness, extreme dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+4: very high quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+Default value: 0. 
+If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+         * @type {number || null}
          */
-        this.Completeness = null;
+        this.QualityControl = null;
+
+        /**
+         * Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
 
     }
 
@@ -1564,15 +1730,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Score = 'Score' in params ? params.Score : null;
-        this.Sharpness = 'Sharpness' in params ? params.Sharpness : null;
-        this.Brightness = 'Brightness' in params ? params.Brightness : null;
-
-        if (params.Completeness) {
-            let obj = new FaceQualityCompleteness();
-            obj.deserialize(params.Completeness)
-            this.Completeness = obj;
-        }
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -1668,7 +1830,8 @@ class DetectLiveFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded image data, which cannot exceed 5 MB. (The aspect ratio of the image should be close to 3:4 (width:height); otherwise, the score returned for the image will be meaningless.)
+         * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats. (The aspect ratio of the image should be close to 3:4 (width:height); otherwise, the score returned for the image will be meaningless.)
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
          */
@@ -1676,6 +1839,7 @@ class DetectLiveFaceRequest extends  AbstractModel {
 
         /**
          * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
 (The aspect ratio of the image should be close to 3:4 (width:height); otherwise, the score returned for the image will be meaningless.) 
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
@@ -1710,33 +1874,40 @@ Different algorithm model versions correspond to different face recognition algo
 }
 
 /**
- * Duplicate check task information
+ * VerifyFace response structure.
  * @class
  */
-class JobIdInfo extends  AbstractModel {
+class VerifyFaceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Duplicate check task ID, which is used to query and get the progress and result of the task.
+         * Similarity between given face image and `PersonId`. If there are multiple faces under the `PersonId`, the score of the highest similarity will be returned.
+
+The returned similarity score varies by algorithm version.
+If you need to verify whether the faces in the two images are the same person, then the 0.1%, 0.01%, and 0.001% FARs on v3.0 correspond to scores of 40, 50, and 60, respectively. Generally, if the score is above 50, it can be judged that they are the same person.
+The 0.1%, 0.01%, and 0.001% FARs on v2.0 correspond to scores of 70, 80, and 90, respectively. Generally, if the score is above 80, it can be judged that they are the same person.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * Whether the person in the image matches the `PersonId`.
+         * @type {boolean || null}
+         */
+        this.IsMatch = null;
+
+        /**
+         * Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created. For more information, please see [Algorithm Model Version](https://intl.cloud.tencent.com/document/product/867/40042?from_cn_redirect=1)
          * @type {string || null}
          */
-        this.JobId = null;
+        this.FaceModelVersion = null;
 
         /**
-         * Start time. 
-The `StartTime` value is the number of milliseconds between the UNIX epoch time and the group creation time. 
-The UNIX epoch time is 00:00:00, Thursday, January 1, 1970, Coordinated Universal Time (UTC). 
-For more information, please see the UNIX time document.
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * Whether the duplicate check task is completed. 0: completed; 1: uncompleted; 2: failed.
-         * @type {number || null}
-         */
-        this.JobStatus = null;
+        this.RequestId = null;
 
     }
 
@@ -1747,9 +1918,10 @@ For more information, please see the UNIX time document.
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.JobStatus = 'JobStatus' in params ? params.JobStatus : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1769,7 +1941,7 @@ class GetPersonBaseInfoResponse extends  AbstractModel {
         this.PersonName = null;
 
         /**
-         * Person gender
+         * Person gender. 0: empty; 1: male; 2: female
          * @type {number || null}
          */
         this.Gender = null;
@@ -1869,13 +2041,14 @@ class CreateFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * Person ID.
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
          * @type {string || null}
          */
         this.PersonId = null;
 
         /**
          * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 There can be up to 5 faces in one image.
 If there are multiple faces in the image, only the face with the largest size will be selected.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
@@ -1885,6 +2058,7 @@ If there are multiple faces in the image, only the face with the largest size wi
 
         /**
          * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -1941,89 +2115,19 @@ If the image quality does not meet the requirement, the returned result will pro
 }
 
 /**
- * SearchFacesReturnsByGroup request structure.
+ * Mouth information
  * @class
  */
-class SearchFacesReturnsByGroupRequest extends  AbstractModel {
+class Mouth extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of groups to be searched in. Up to 60 groups are supported.
-         * @type {Array.<string> || null}
+         * Whether the mouth is open.
+The `Type` values of the `AttributeItem` include: 0: open; 1: closed.
+         * @type {AttributeItem || null}
          */
-        this.GroupIds = null;
-
-        /**
-         * Base64-encoded image data, which cannot exceed 5 MB.
-.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
-Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.
-You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
-The download speed and stability of non-Tencent Cloud URLs may be low.
-.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Maximum number of recognizable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 10.
-`MaxFaceNum` is used to control the number of faces to be searched for if there are multiple faces in the input image to be recognized.
-For example, if the input image in `Image` or `Url` contains multiple faces and `MaxFaceNum` is 5, top 5 faces with the largest size in the image will be recognized.
-         * @type {number || null}
-         */
-        this.MaxFaceNum = null;
-
-        /**
-         * Minimum height and width of face in px. Default value: 34. A value below 34 will affect the search accuracy. You are recommended to set this parameter to 80.
-         * @type {number || null}
-         */
-        this.MinFaceSize = null;
-
-        /**
-         * Detected faces, which is corresponding to the maximum number of returned most matching persons. Default value: 5. Maximum value: 10.  
-For example, if `MaxFaceNum` is 3 and `MaxPersonNum` is 5, up to 15 (3 * 5) persons will be returned.
-         * @type {number || null}
-         */
-        this.MaxPersonNumPerGroup = null;
-
-        /**
-         * Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default
-         * @type {number || null}
-         */
-        this.NeedPersonInfo = null;
-
-        /**
-         * Image quality control. 
-0: no control. 
-1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
-2: average quality requirement. The image has at least three of following problems: extreme brightness, extreme dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
-3: high quality requirement. The image has one to two of following problems: extreme brightness, extreme dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
-4: very high quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
-Default value: 0. 
-If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
-         * @type {number || null}
-         */
-        this.QualityControl = null;
-
-        /**
-         * In the output parameter `Score`, the result will be returned only if the result value is greater than or equal to the `FaceMatchThreshold` value.
-Default value: 0.
-Value range: [0.0,100.0).
-         * @type {number || null}
-         */
-        this.FaceMatchThreshold = null;
-
-        /**
-         * Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
-         * @type {number || null}
-         */
-        this.NeedRotateDetection = null;
+        this.MouthOpen = null;
 
     }
 
@@ -2034,16 +2138,12 @@ Value range: [0.0,100.0).
         if (!params) {
             return;
         }
-        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
-        this.Image = 'Image' in params ? params.Image : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
-        this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
-        this.MaxPersonNumPerGroup = 'MaxPersonNumPerGroup' in params ? params.MaxPersonNumPerGroup : null;
-        this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
-        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
-        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
-        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
+
+        if (params.MouthOpen) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.MouthOpen)
+            this.MouthOpen = obj;
+        }
 
     }
 }
@@ -2057,7 +2157,7 @@ class CreateGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Group name, which is modifiable, must be unique, and can contain 1–60 characters.
+         * Group name, which is modifiable, must be unique, and can contain 1-60 characters.
          * @type {string || null}
          */
         this.GroupName = null;
@@ -2071,7 +2171,7 @@ class CreateGroupRequest extends  AbstractModel {
         /**
          * Custom group description field that describes the person attributes in the group, which will be applied to all persons in the group. 
 Up to 5 ones can be created. 
-Each custom description field can contain 1–30 characters. 
+Each custom description field can contain 1-30 characters. 
 The custom description field must be unique in the group. 
 Example: if you set the "custom description field" of a group to ["student ID","employee ID","mobile number"], 
 then all the persons in the group will have description fields named "student ID", "employee ID", and "mobile number". 
@@ -2081,7 +2181,7 @@ You can enter content in the corresponding field to register a person's student 
         this.GroupExDescriptions = null;
 
         /**
-         * Group remarks, which can contain 0–40 characters.
+         * Group remarks, which can contain 0-40 characters.
          * @type {string || null}
          */
         this.Tag = null;
@@ -2113,6 +2213,41 @@ Different algorithm model versions correspond to different face recognition algo
 }
 
 /**
+ * List of groups containing this person and their description fields
+ * @class
+ */
+class PersonGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the group that contains this person
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Content of person description field
+         * @type {Array.<string> || null}
+         */
+        this.PersonExDescriptions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.PersonExDescriptions = 'PersonExDescriptions' in params ? params.PersonExDescriptions : null;
+
+    }
+}
+
+/**
  * ModifyPersonGroupInfo request structure.
  * @class
  */
@@ -2121,13 +2256,13 @@ class ModifyPersonGroupInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Group ID
+         * Group ID, which is the `GroupId` in the `CreateGroup` API
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * Person ID
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
          * @type {string || null}
          */
         this.PersonId = null;
@@ -2171,7 +2306,7 @@ class GetPersonGroupInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Person ID
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
          * @type {string || null}
          */
         this.PersonId = null;
@@ -2261,24 +2396,36 @@ class Result extends  AbstractModel {
 }
 
 /**
- * GetCheckSimilarPersonJobIdList request structure.
+ * SearchFacesReturnsByGroup response structure.
  * @class
  */
-class GetCheckSimilarPersonJobIdListRequest extends  AbstractModel {
+class SearchFacesReturnsByGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Starting number. Default value: 0.
+         * Number of faces included in searched groups.
          * @type {number || null}
          */
-        this.Offset = null;
+        this.FaceNum = null;
 
         /**
-         * Number of returned results. Default value: 10. Maximum value: 1000.
-         * @type {number || null}
+         * Recognition result.
+         * @type {Array.<ResultsReturnsByGroup> || null}
          */
-        this.Limit = null;
+        this.ResultsReturnsByGroup = null;
+
+        /**
+         * Algorithm model version used for face recognition.
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2289,83 +2436,24 @@ class GetCheckSimilarPersonJobIdListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FaceNum = 'FaceNum' in params ? params.FaceNum : null;
 
-    }
-}
-
-/**
- * VerifyPerson request structure.
- * @class
- */
-class VerifyPersonRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Base64-encoded data of image.
-If there are multiple faces in the image, only the face with the largest size will be selected.
-.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * Image URL. Either the `Url` or `Image` of the image must be provided; if both are provided, only `Url` will be used. 
-You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
-The download speed and stability of non-Tencent Cloud URLs may be low.
-If there are multiple faces in the image, only the face with the largest size will be selected.
-.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * ID of the person to be verified. For more information on `PersonId`, please see the group management APIs.
-         * @type {string || null}
-         */
-        this.PersonId = null;
-
-        /**
-         * Image quality control. 
-0: no control. 
-1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
-2: average quality requirement. The image has at least three of following problems: extreme brightness, extreme dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
-3: high quality requirement. The image has one to two of following problems: extreme brightness, extreme dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
-4: very high quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
-Default value: 0. 
-If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
-         * @type {number || null}
-         */
-        this.QualityControl = null;
-
-        /**
-         * Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
-         * @type {number || null}
-         */
-        this.NeedRotateDetection = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.ResultsReturnsByGroup) {
+            this.ResultsReturnsByGroup = new Array();
+            for (let z in params.ResultsReturnsByGroup) {
+                let obj = new ResultsReturnsByGroup();
+                obj.deserialize(params.ResultsReturnsByGroup[z]);
+                this.ResultsReturnsByGroup.push(obj);
+            }
         }
-        this.Image = 'Image' in params ? params.Image : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.PersonId = 'PersonId' in params ? params.PersonId : null;
-        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
-        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 人脸信息列表。
+ * Face information list.
  * @class
  */
 class FaceInfo extends  AbstractModel {
@@ -2373,42 +2461,41 @@ class FaceInfo extends  AbstractModel {
         super();
 
         /**
-         * 人脸框左上角横坐标。
-人脸框包含人脸五官位置并在此基础上进行一定的扩展，若人脸框超出图片范围，会导致坐标负值。 
-若需截取完整人脸，可以在完整分completeness满足需求的情况下，将负值坐标取0。
+         * Horizontal coordinate of the top-left corner of face frame.
+The face frame encompasses the facial features and is extended accordingly. If it is larger than the image, the coordinates will be negative. 
+If you want to capture a complete face, you can set the negative coordinates to 0 if the `completeness` score meets the requirement.
          * @type {number || null}
          */
         this.X = null;
 
         /**
-         * 人脸框左上角纵坐标。 
-人脸框包含人脸五官位置并在此基础上进行一定的扩展，若人脸框超出图片范围，会导致坐标负值。 
-若需截取完整人脸，可以在完整分completeness满足需求的情况下，将负值坐标取0。
+         * Vertical coordinate of the top-left corner of face frame. 
+The face frame encompasses the facial features and is extended accordingly. If it is larger than the image, the coordinates will be negative. 
+If you want to capture a complete face, you can set the negative coordinates to 0 if the `completeness` score meets the requirement.
          * @type {number || null}
          */
         this.Y = null;
 
         /**
-         * 人脸框宽度。
+         * Face frame width. 
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 人脸框高度。
+         * Face frame height.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * 人脸属性信息，包含性别( gender )、年龄( age )、表情( expression )、 
-魅力( beauty )、眼镜( glass )、口罩（mask）、头发（hair）和姿态 (pitch，roll，yaw )。只有当 NeedFaceAttributes 设为 1 时才返回有效信息。
+         * Face attributes, including gender, age, expression, beauty, glass, mask, hair, and pose (pitch, roll, yaw). Valid information will be returned only if `NeedFaceAttributes` is set to 1. 
          * @type {FaceAttributesInfo || null}
          */
         this.FaceAttributesInfo = null;
 
         /**
-         * 人脸质量信息，包含质量分（score）、模糊分（sharpness）、光照分（brightness）、遮挡分（completeness）。只有当NeedFaceDetection设为1时才返回有效信息。
+         * Face quality information, including score, sharpness, brightness, and completeness. Valid information will be returned only if `NeedFaceDetection` is set to 1. Note: this field may return null, indicating that no valid values can be obtained. 
          * @type {FaceQualityInfo || null}
          */
         this.FaceQualityInfo = null;
@@ -2479,13 +2566,14 @@ class SearchPersonsRequest extends  AbstractModel {
         super();
 
         /**
-         * List of groups to be searched in. Up to 100 groups are supported.
+         * List of groups to be searched for (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
 
         /**
          * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 If there are multiple faces in the image, only the face with the largest size will be selected.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
@@ -2494,6 +2582,7 @@ If there are multiple faces in the image, only the face with the largest size wi
 
         /**
          * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -2579,24 +2668,91 @@ If the image quality does not meet the requirement, the returned result will pro
 }
 
 /**
- * EstimateCheckSimilarPersonCostTime response structure.
+ * SearchFacesReturnsByGroup request structure.
  * @class
  */
-class EstimateCheckSimilarPersonCostTimeResponse extends  AbstractModel {
+class SearchFacesReturnsByGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Estimated duration of duplicate person check task in minutes.
-         * @type {number || null}
+         * List of groups to be searched for (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
+         * @type {Array.<string> || null}
          */
-        this.EstimatedTimeCost = null;
+        this.GroupIds = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Image = null;
+
+        /**
+         * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.
+You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Maximum number of recognizable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 10.
+`MaxFaceNum` is used to control the number of faces to be searched for if there are multiple faces in the input image to be recognized.
+For example, if the input image in `Image` or `Url` contains multiple faces and `MaxFaceNum` is 5, top 5 faces with the largest size in the image will be recognized.
+         * @type {number || null}
+         */
+        this.MaxFaceNum = null;
+
+        /**
+         * Minimum height and width of face in px. Default value: 34. A value below 34 will affect the search accuracy. You are recommended to set this parameter to 80.
+         * @type {number || null}
+         */
+        this.MinFaceSize = null;
+
+        /**
+         * Detected faces, which is corresponding to the maximum number of returned most matching persons. Default value: 5. Maximum value: 10.  
+For example, if `MaxFaceNum` is 3 and `MaxPersonNum` is 5, up to 15 (3 * 5) persons will be returned.
+         * @type {number || null}
+         */
+        this.MaxPersonNumPerGroup = null;
+
+        /**
+         * Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default
+         * @type {number || null}
+         */
+        this.NeedPersonInfo = null;
+
+        /**
+         * Image quality control. 
+0: no control. 
+1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+2: average quality requirement. The image has at least three of following problems: extreme brightness, extreme dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+3: high quality requirement. The image has one to two of following problems: extreme brightness, extreme dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+4: very high quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+Default value: 0. 
+If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
+        /**
+         * In the output parameter `Score`, the result will be returned only if the result value is greater than or equal to the `FaceMatchThreshold` value.
+Default value: 0.
+Value range: [0.0,100.0).
+         * @type {number || null}
+         */
+        this.FaceMatchThreshold = null;
+
+        /**
+         * Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
 
     }
 
@@ -2607,8 +2763,81 @@ class EstimateCheckSimilarPersonCostTimeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EstimatedTimeCost = 'EstimatedTimeCost' in params ? params.EstimatedTimeCost : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
+        this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
+        this.MaxPersonNumPerGroup = 'MaxPersonNumPerGroup' in params ? params.MaxPersonNumPerGroup : null;
+        this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
+
+    }
+}
+
+/**
+ * Face quality information, including score, sharpness, brightness, and completeness. Valid information will be returned only if `NeedFaceDetection` is set to 1.
+ * @class
+ */
+class FaceQualityInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Quality score. Value range: [0,100]. It comprehensively evaluates whether the image quality is suitable for face recognition; the higher the score, the higher the quality. 
+In normal cases, you only need to use `Score` as the overall quality standard score. Specific item scores such as `Sharpness`, `Brightness`, `Completeness` are for reference only.
+Reference range: [0,40]: poor; [40,60]: fine; [60,80]: good; [80,100]: excellent. 
+You are recommended to select images with a score above 70 for adding faces.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * Sharpness. Value range: [0,100]. It evaluates the sharpness of the image. The higher the score, the sharper the image. 
+Reference range: [0,40]: very blurry; [40,60]: blurry; [60,80]: fine; [80,100]: sharp. 
+You are recommended to select images with a score above 80 for adding faces.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Sharpness = null;
+
+        /**
+         * Brightness. Value range: [0,100]. The brighter the image, the higher the score. 
+Reference range: [0,30]: dark; [30,70]: normal; [70,100]: bright. 
+You are recommended to select images in the [30,70] range for adding faces.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Brightness = null;
+
+        /**
+         * Completeness of facial features, which assesses the completeness of the eyebrows, eyes, nose, cheeks, mouth, and chin.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {FaceQualityCompleteness || null}
+         */
+        this.Completeness = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Score = 'Score' in params ? params.Score : null;
+        this.Sharpness = 'Sharpness' in params ? params.Sharpness : null;
+        this.Brightness = 'Brightness' in params ? params.Brightness : null;
+
+        if (params.Completeness) {
+            let obj = new FaceQualityCompleteness();
+            obj.deserialize(params.Completeness)
+            this.Completeness = obj;
+        }
 
     }
 }
@@ -2623,6 +2852,7 @@ class CompareFaceRequest extends  AbstractModel {
 
         /**
          * Base64-encoded image A data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 If there are multiple faces in the image, only the face with the largest size will be selected.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
@@ -2631,6 +2861,7 @@ If there are multiple faces in the image, only the face with the largest size wi
 
         /**
          * Base64-encoded image B data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 If there are multiple faces in the image, only the face with the largest size will be selected.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
@@ -2639,6 +2870,7 @@ If there are multiple faces in the image, only the face with the largest size wi
 
         /**
          * Image A URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` of image A must be provided; if both are provided, only `Url` will be used. 
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -2650,6 +2882,7 @@ If there are multiple faces in the image, only the face with the largest size wi
 
         /**
          * Image B URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` of image B must be provided; if both are provided, only `Url` will be used. 
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -2771,27 +3004,341 @@ The UNIX epoch time is 00:00:00, Thursday, January 1, 1970, Coordinated Universa
 }
 
 /**
- * CheckSimilarPerson request structure.
+ * Eyebrow information
  * @class
  */
-class CheckSimilarPersonRequest extends  AbstractModel {
+class Eyebrow extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of groups to be checked. 
-There can be up to 2 million persons in one group and up to 10 groups.
+         * Eyebrow thickness.
+The `Type` values of the `AttributeItem` include: 0: light; 1: thick.
+         * @type {AttributeItem || null}
+         */
+        this.EyebrowDensity = null;
+
+        /**
+         * Eyebrow curve.
+The `Type` values of the `AttributeItem` include: 0: flat; 1: curved.
+         * @type {AttributeItem || null}
+         */
+        this.EyebrowCurve = null;
+
+        /**
+         * Eyebrow length.
+The `Type` values of the `AttributeItem` include: 0: short; 1: long.
+         * @type {AttributeItem || null}
+         */
+        this.EyebrowLength = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EyebrowDensity) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowDensity)
+            this.EyebrowDensity = obj;
+        }
+
+        if (params.EyebrowCurve) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowCurve)
+            this.EyebrowCurve = obj;
+        }
+
+        if (params.EyebrowLength) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowLength)
+            this.EyebrowLength = obj;
+        }
+
+    }
+}
+
+/**
+ * AnalyzeDenseLandmarks request structure.
+ * @class
+ */
+class AnalyzeDenseLandmarksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Detect mode. 0: detects all faces that appear; 1: detects the largest face. 
+Default value: 0. 
+Specific information of facial feature localization (facial keypoints) of up to 5 faces can be returned.
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * Base64-encoded image data, which cannot exceed 5 MB.  
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.  
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
+You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.  
+The download speed and stability of non-Tencent Cloud URLs may be low.  
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Algorithm model version used by the Face Recognition service. You can enter only `3.0` for this API.
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
+
+    }
+}
+
+/**
+ * DetectFace response structure.
+ * @class
+ */
+class DetectFaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Width of requested image.
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * Height of requested image.
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * Face information list, including face coordinate information, attribute information (if needed), and quality score information (if needed).
+         * @type {Array.<FaceInfo> || null}
+         */
+        this.FaceInfos = null;
+
+        /**
+         * Algorithm model version used for face recognition.
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+
+        if (params.FaceInfos) {
+            this.FaceInfos = new Array();
+            for (let z in params.FaceInfos) {
+                let obj = new FaceInfo();
+                obj.deserialize(params.FaceInfos[z]);
+                this.FaceInfos.push(obj);
+            }
+        }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CopyPerson request structure.
+ * @class
+ */
+class CopyPersonRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * List of groups to join. The array element value is the `GroupId` in the `CreateGroup` API.
+         * @type {Array.<string> || null}
+         */
+        this.GroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+
+    }
+}
+
+/**
+ * GetPersonListNum request structure.
+ * @class
+ */
+class GetPersonListNumRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group ID, which is the `GroupId` in the `CreateGroup` API
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * SearchPersonsReturnsByGroup request structure.
+ * @class
+ */
+class SearchPersonsReturnsByGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of groups to be searched for (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
 
         /**
-         * Control over the strictness of duplicate person check.
-1: archive sorting with high strictness, which can eliminate more duplicate identities but leads to higher false elimination rate for non-duplicate identities.
-2: archive sorting with low strictness, which leads to lower false elimination rate for non-duplicate identities and lower elimination rate for duplicate identities.
+         * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.
+You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Maximum number of recognizable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 10.
+`MaxFaceNum` is used to control the number of faces to be searched for if there are multiple faces in the input image to be recognized.
+For example, if the input image in `Image` or `Url` contains multiple faces and `MaxFaceNum` is 5, top 5 faces with the largest size in the image will be recognized.
          * @type {number || null}
          */
-        this.UniquePersonControl = null;
+        this.MaxFaceNum = null;
+
+        /**
+         * Minimum height and width of face in px. Default value: 34. A value below 34 will affect the search accuracy. You are recommended to set this parameter to 80.
+         * @type {number || null}
+         */
+        this.MinFaceSize = null;
+
+        /**
+         * Detected faces, which is corresponding to the maximum number of returned most matching persons. Default value: 5. Maximum value: 10.  
+For example, if `MaxFaceNum` is 3, `MaxPersonNumPerGroup` is 3, and the `GroupIds` length is 3, up to 45 (3 * 5 * 3) persons will be returned.
+         * @type {number || null}
+         */
+        this.MaxPersonNumPerGroup = null;
+
+        /**
+         * Image quality control. 
+0: no control. 
+1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+2: average quality requirement. The image has at least three of following problems: extreme brightness, extreme dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+3: high quality requirement. The image has one to two of following problems: extreme brightness, extreme dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+4: very high quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+Default value: 0. 
+If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
+        /**
+         * In the output parameter `Score`, the result will be returned only if the result value is above the `FaceMatchThreshold` value. Default value: 0.
+         * @type {number || null}
+         */
+        this.FaceMatchThreshold = null;
+
+        /**
+         * Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default
+         * @type {number || null}
+         */
+        this.NeedPersonInfo = null;
+
+        /**
+         * Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
 
     }
 
@@ -2803,7 +3350,184 @@ There can be up to 2 million persons in one group and up to 10 groups.
             return;
         }
         this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
-        this.UniquePersonControl = 'UniquePersonControl' in params ? params.UniquePersonControl : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
+        this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
+        this.MaxPersonNumPerGroup = 'MaxPersonNumPerGroup' in params ? params.MaxPersonNumPerGroup : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
+        this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
+
+    }
+}
+
+/**
+ * DeletePersonFromGroup response structure.
+ * @class
+ */
+class DeletePersonFromGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VerifyPerson response structure.
+ * @class
+ */
+class VerifyPersonResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Similarity between given face image and `PersonId`. If there are multiple faces under the `PersonId`, their information will be fused for verification.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * Whether the person in the image matches the `PersonId`.
+         * @type {boolean || null}
+         */
+        this.IsMatch = null;
+
+        /**
+         * Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created. For more information, please see [Algorithm Model Version](https://intl.cloud.tencent.com/document/product/867/40042?from_cn_redirect=1)
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Score = 'Score' in params ? params.Score : null;
+        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AnalyzeFace response structure.
+ * @class
+ */
+class AnalyzeFaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Width of requested image.
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * Height of requested image.
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * Specific information of facial feature localization (facial keypoints).
+         * @type {Array.<FaceShape> || null}
+         */
+        this.FaceShapeSet = null;
+
+        /**
+         * Algorithm model version used for face recognition.
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+
+        if (params.FaceShapeSet) {
+            this.FaceShapeSet = new Array();
+            for (let z in params.FaceShapeSet) {
+                let obj = new FaceShape();
+                obj.deserialize(params.FaceShapeSet[z]);
+                this.FaceShapeSet.push(obj);
+            }
+        }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetGroupInfo request structure.
+ * @class
+ */
+class GetGroupInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group ID, which is the `GroupId` in the `CreateGroup` API
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -2965,42 +3689,28 @@ class FaceShape extends  AbstractModel {
 }
 
 /**
- * DetectFace response structure.
+ * Face information list.
  * @class
  */
-class DetectFaceResponse extends  AbstractModel {
+class FaceDetailInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Width of requested image.
-         * @type {number || null}
+         * Position of detected face frame.
+         * @type {FaceRect || null}
          */
-        this.ImageWidth = null;
+        this.FaceRect = null;
 
         /**
-         * Height of requested image.
-         * @type {number || null}
+         * Face attribute information. According to the types specified in `FaceAttributesType`, the following face attributes will be returned: age (Age), beauty score (Beauty), 
+emotion (Emotion), eye information (Eye), eyebrow information (Eyebrow), gender (Gender), 
+hair information (Hair), hat information (Hat), pose (Headpose), mask information (Mask), mouth information (Mouse), beard information (Moustache), 
+nose information (Nose), face shape (Shape), skin color (Skin), and smile information (Smile).  
+If no types are specified in `FaceAttributesType`, the detailed items returned by `FaceDetailAttributesInfo` will be meaningless.
+         * @type {FaceDetailAttributesInfo || null}
          */
-        this.ImageHeight = null;
-
-        /**
-         * Face information list, including face coordinate information, attribute information (if needed), and quality score information (if needed).
-         * @type {Array.<FaceInfo> || null}
-         */
-        this.FaceInfos = null;
-
-        /**
-         * Algorithm model version used for face recognition.
-         * @type {string || null}
-         */
-        this.FaceModelVersion = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.FaceDetailAttributesInfo = null;
 
     }
 
@@ -3011,406 +3721,18 @@ class DetectFaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
-        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
 
-        if (params.FaceInfos) {
-            this.FaceInfos = new Array();
-            for (let z in params.FaceInfos) {
-                let obj = new FaceInfo();
-                obj.deserialize(params.FaceInfos[z]);
-                this.FaceInfos.push(obj);
-            }
+        if (params.FaceRect) {
+            let obj = new FaceRect();
+            obj.deserialize(params.FaceRect)
+            this.FaceRect = obj;
         }
-        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-    }
-}
-
-/**
- * CopyPerson request structure.
- * @class
- */
-class CopyPersonRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Person ID
-         * @type {string || null}
-         */
-        this.PersonId = null;
-
-        /**
-         * List of the groups to add to.
-         * @type {Array.<string> || null}
-         */
-        this.GroupIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.FaceDetailAttributesInfo) {
+            let obj = new FaceDetailAttributesInfo();
+            obj.deserialize(params.FaceDetailAttributesInfo)
+            this.FaceDetailAttributesInfo = obj;
         }
-        this.PersonId = 'PersonId' in params ? params.PersonId : null;
-        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
-
-    }
-}
-
-/**
- * CheckSimilarPerson response structure.
- * @class
- */
-class CheckSimilarPersonResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Duplicate check task ID, which is used to query and get the progress and result of the task.
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SearchPersonsReturnsByGroup request structure.
- * @class
- */
-class SearchPersonsReturnsByGroupRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of groups to be searched in. Up to 60 groups are supported.
-         * @type {Array.<string> || null}
-         */
-        this.GroupIds = null;
-
-        /**
-         * Base64-encoded image data, which cannot exceed 5 MB.
-.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
-Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.
-You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
-The download speed and stability of non-Tencent Cloud URLs may be low.
-.png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Maximum number of recognizable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 10.
-`MaxFaceNum` is used to control the number of faces to be searched for if there are multiple faces in the input image to be recognized.
-For example, if the input image in `Image` or `Url` contains multiple faces and `MaxFaceNum` is 5, top 5 faces with the largest size in the image will be recognized.
-         * @type {number || null}
-         */
-        this.MaxFaceNum = null;
-
-        /**
-         * Minimum height and width of face in px. Default value: 34. A value below 34 will affect the search accuracy. You are recommended to set this parameter to 80.
-         * @type {number || null}
-         */
-        this.MinFaceSize = null;
-
-        /**
-         * Detected faces, which is corresponding to the maximum number of returned most matching persons. Default value: 5. Maximum value: 10.  
-For example, if `MaxFaceNum` is 3, `MaxPersonNumPerGroup` is 3, and the `GroupIds` length is 3, up to 45 (3 * 5 * 3) persons will be returned.
-         * @type {number || null}
-         */
-        this.MaxPersonNumPerGroup = null;
-
-        /**
-         * Image quality control. 
-0: no control. 
-1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
-2: average quality requirement. The image has at least three of following problems: extreme brightness, extreme dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
-3: high quality requirement. The image has one to two of following problems: extreme brightness, extreme dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
-4: very high quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
-Default value: 0. 
-If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
-         * @type {number || null}
-         */
-        this.QualityControl = null;
-
-        /**
-         * In the output parameter `Score`, the result will be returned only if the result value is above the `FaceMatchThreshold` value. Default value: 0.
-         * @type {number || null}
-         */
-        this.FaceMatchThreshold = null;
-
-        /**
-         * Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default
-         * @type {number || null}
-         */
-        this.NeedPersonInfo = null;
-
-        /**
-         * Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
-         * @type {number || null}
-         */
-        this.NeedRotateDetection = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
-        this.Image = 'Image' in params ? params.Image : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
-        this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
-        this.MaxPersonNumPerGroup = 'MaxPersonNumPerGroup' in params ? params.MaxPersonNumPerGroup : null;
-        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
-        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
-        this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
-        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
-
-    }
-}
-
-/**
- * DeletePersonFromGroup response structure.
- * @class
- */
-class DeletePersonFromGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * VerifyPerson response structure.
- * @class
- */
-class VerifyPersonResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Similarity between given face image and `PersonId`. If there are multiple faces under the `PersonId`, their information will be fused for verification.
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * Whether the person in the image matches the `PersonId`.
-         * @type {boolean || null}
-         */
-        this.IsMatch = null;
-
-        /**
-         * Algorithm model version used for face recognition.
-         * @type {string || null}
-         */
-        this.FaceModelVersion = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Score = 'Score' in params ? params.Score : null;
-        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
-        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * AnalyzeFace response structure.
- * @class
- */
-class AnalyzeFaceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Width of requested image.
-         * @type {number || null}
-         */
-        this.ImageWidth = null;
-
-        /**
-         * Height of requested image.
-         * @type {number || null}
-         */
-        this.ImageHeight = null;
-
-        /**
-         * Specific information of facial feature localization (facial keypoints).
-         * @type {Array.<FaceShape> || null}
-         */
-        this.FaceShapeSet = null;
-
-        /**
-         * Algorithm model version used for face recognition.
-         * @type {string || null}
-         */
-        this.FaceModelVersion = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
-        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
-
-        if (params.FaceShapeSet) {
-            this.FaceShapeSet = new Array();
-            for (let z in params.FaceShapeSet) {
-                let obj = new FaceShape();
-                obj.deserialize(params.FaceShapeSet[z]);
-                this.FaceShapeSet.push(obj);
-            }
-        }
-        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetGroupInfo request structure.
- * @class
- */
-class GetGroupInfoRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Group ID.
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-    }
-}
-
-/**
- * GetPersonListNum response structure.
- * @class
- */
-class GetPersonListNumResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of persons
-         * @type {number || null}
-         */
-        this.PersonNum = null;
-
-        /**
-         * Number of faces
-         * @type {number || null}
-         */
-        this.FaceNum = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PersonNum = 'PersonNum' in params ? params.PersonNum : null;
-        this.FaceNum = 'FaceNum' in params ? params.FaceNum : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3461,30 +3783,120 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetCheckSimilarPersonJobIdList response structure.
+ * Dense keypoint details
  * @class
  */
-class GetCheckSimilarPersonJobIdListResponse extends  AbstractModel {
+class DenseFaceShape extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of duplicate person check task information.
-         * @type {Array.<JobIdInfo> || null}
-         */
-        this.JobIdInfos = null;
-
-        /**
-         * Total number of duplicate check tasks.
+         * Horizontal coordinate of the top-left corner of face frame.
          * @type {number || null}
          */
-        this.JobIdNum = null;
+        this.X = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Vertical coordinate of the top-left corner of face frame.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Y = null;
+
+        /**
+         * Face frame width.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Face frame height.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * XX points that describe the left eye.
+         * @type {Array.<Point> || null}
+         */
+        this.LeftEye = null;
+
+        /**
+         * XX points that describe the right eye.
+         * @type {Array.<Point> || null}
+         */
+        this.RightEye = null;
+
+        /**
+         * XX points that describe the left eyebrow.
+         * @type {Array.<Point> || null}
+         */
+        this.LeftEyeBrow = null;
+
+        /**
+         * XX points that describe the right eyebrow.
+         * @type {Array.<Point> || null}
+         */
+        this.RightEyeBrow = null;
+
+        /**
+         * XX points that describe the outer contour of the mouth, which are returned from left anticlockwise.
+         * @type {Array.<Point> || null}
+         */
+        this.MouthOutside = null;
+
+        /**
+         * XX points that describe the inner contour of the mouth, which are returned from left anticlockwise.
+         * @type {Array.<Point> || null}
+         */
+        this.MouthInside = null;
+
+        /**
+         * XX points that describe the nose.
+         * @type {Array.<Point> || null}
+         */
+        this.Nose = null;
+
+        /**
+         * XX points that describe the left pupil.
+         * @type {Array.<Point> || null}
+         */
+        this.LeftPupil = null;
+
+        /**
+         * XX points that describe the right pupil.
+         * @type {Array.<Point> || null}
+         */
+        this.RightPupil = null;
+
+        /**
+         * XX points that describe the midline.
+         * @type {Array.<Point> || null}
+         */
+        this.CentralAxis = null;
+
+        /**
+         * XX points that describe the chin.
+         * @type {Array.<Point> || null}
+         */
+        this.Chin = null;
+
+        /**
+         * XX points that describe the left eye bag.
+         * @type {Array.<Point> || null}
+         */
+        this.LeftEyeBags = null;
+
+        /**
+         * XX points that describe the right eye bag.
+         * @type {Array.<Point> || null}
+         */
+        this.RightEyeBags = null;
+
+        /**
+         * XX points that describe the forehead.
+         * @type {Array.<Point> || null}
+         */
+        this.Forehead = null;
 
     }
 
@@ -3495,17 +3907,136 @@ class GetCheckSimilarPersonJobIdListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
-        if (params.JobIdInfos) {
-            this.JobIdInfos = new Array();
-            for (let z in params.JobIdInfos) {
-                let obj = new JobIdInfo();
-                obj.deserialize(params.JobIdInfos[z]);
-                this.JobIdInfos.push(obj);
+        if (params.LeftEye) {
+            this.LeftEye = new Array();
+            for (let z in params.LeftEye) {
+                let obj = new Point();
+                obj.deserialize(params.LeftEye[z]);
+                this.LeftEye.push(obj);
             }
         }
-        this.JobIdNum = 'JobIdNum' in params ? params.JobIdNum : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.RightEye) {
+            this.RightEye = new Array();
+            for (let z in params.RightEye) {
+                let obj = new Point();
+                obj.deserialize(params.RightEye[z]);
+                this.RightEye.push(obj);
+            }
+        }
+
+        if (params.LeftEyeBrow) {
+            this.LeftEyeBrow = new Array();
+            for (let z in params.LeftEyeBrow) {
+                let obj = new Point();
+                obj.deserialize(params.LeftEyeBrow[z]);
+                this.LeftEyeBrow.push(obj);
+            }
+        }
+
+        if (params.RightEyeBrow) {
+            this.RightEyeBrow = new Array();
+            for (let z in params.RightEyeBrow) {
+                let obj = new Point();
+                obj.deserialize(params.RightEyeBrow[z]);
+                this.RightEyeBrow.push(obj);
+            }
+        }
+
+        if (params.MouthOutside) {
+            this.MouthOutside = new Array();
+            for (let z in params.MouthOutside) {
+                let obj = new Point();
+                obj.deserialize(params.MouthOutside[z]);
+                this.MouthOutside.push(obj);
+            }
+        }
+
+        if (params.MouthInside) {
+            this.MouthInside = new Array();
+            for (let z in params.MouthInside) {
+                let obj = new Point();
+                obj.deserialize(params.MouthInside[z]);
+                this.MouthInside.push(obj);
+            }
+        }
+
+        if (params.Nose) {
+            this.Nose = new Array();
+            for (let z in params.Nose) {
+                let obj = new Point();
+                obj.deserialize(params.Nose[z]);
+                this.Nose.push(obj);
+            }
+        }
+
+        if (params.LeftPupil) {
+            this.LeftPupil = new Array();
+            for (let z in params.LeftPupil) {
+                let obj = new Point();
+                obj.deserialize(params.LeftPupil[z]);
+                this.LeftPupil.push(obj);
+            }
+        }
+
+        if (params.RightPupil) {
+            this.RightPupil = new Array();
+            for (let z in params.RightPupil) {
+                let obj = new Point();
+                obj.deserialize(params.RightPupil[z]);
+                this.RightPupil.push(obj);
+            }
+        }
+
+        if (params.CentralAxis) {
+            this.CentralAxis = new Array();
+            for (let z in params.CentralAxis) {
+                let obj = new Point();
+                obj.deserialize(params.CentralAxis[z]);
+                this.CentralAxis.push(obj);
+            }
+        }
+
+        if (params.Chin) {
+            this.Chin = new Array();
+            for (let z in params.Chin) {
+                let obj = new Point();
+                obj.deserialize(params.Chin[z]);
+                this.Chin.push(obj);
+            }
+        }
+
+        if (params.LeftEyeBags) {
+            this.LeftEyeBags = new Array();
+            for (let z in params.LeftEyeBags) {
+                let obj = new Point();
+                obj.deserialize(params.LeftEyeBags[z]);
+                this.LeftEyeBags.push(obj);
+            }
+        }
+
+        if (params.RightEyeBags) {
+            this.RightEyeBags = new Array();
+            for (let z in params.RightEyeBags) {
+                let obj = new Point();
+                obj.deserialize(params.RightEyeBags[z]);
+                this.RightEyeBags.push(obj);
+            }
+        }
+
+        if (params.Forehead) {
+            this.Forehead = new Array();
+            for (let z in params.Forehead) {
+                let obj = new Point();
+                obj.deserialize(params.Forehead[z]);
+                this.Forehead.push(obj);
+            }
+        }
 
     }
 }
@@ -3526,6 +4057,7 @@ class AnalyzeFaceRequest extends  AbstractModel {
 
         /**
          * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
          */
@@ -3533,6 +4065,7 @@ class AnalyzeFaceRequest extends  AbstractModel {
 
         /**
          * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -3633,6 +4166,7 @@ Faces below the `MinFaceSize` value will not be detected.
 
         /**
          * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
          */
@@ -3640,6 +4174,7 @@ Faces below the `MinFaceSize` value will not be detected.
 
         /**
          * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -3773,7 +4308,7 @@ class GetPersonBaseInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Person ID
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
          * @type {string || null}
          */
         this.PersonId = null;
@@ -3901,6 +4436,7 @@ class VerifyFaceRequest extends  AbstractModel {
 
         /**
          * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 If there are multiple faces in the image, only the face with the largest size will be selected.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
@@ -3909,6 +4445,7 @@ If there are multiple faces in the image, only the face with the largest size wi
 
         /**
          * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -3998,19 +4535,33 @@ class CopyPersonResponse extends  AbstractModel {
 }
 
 /**
- * EstimateCheckSimilarPersonCostTime request structure.
+ * Hair information
  * @class
  */
-class EstimateCheckSimilarPersonCostTimeRequest extends  AbstractModel {
+class Hair extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of groups to be checked. 
-There can be up to 2 million persons in one group and up to 10 groups.
-         * @type {Array.<string> || null}
+         * Hair length information.
+The `Type` values of the `AttributeItem` include: 0: shaved head, 1: short hair, 2: medium hair, 3: long hair, 4: braid.
+         * @type {AttributeItem || null}
          */
-        this.GroupIds = null;
+        this.Length = null;
+
+        /**
+         * Bang information.
+The `Type` values of the `AttributeItem` include: 0: no bang; 1: bang detected.
+         * @type {AttributeItem || null}
+         */
+        this.Bang = null;
+
+        /**
+         * Hair color information.
+The `Type` values of the `AttributeItem` include: 0: black; 1: golden; 2: brown; 3: gray.
+         * @type {AttributeItem || null}
+         */
+        this.Color = null;
 
     }
 
@@ -4021,7 +4572,66 @@ There can be up to 2 million persons in one group and up to 10 groups.
         if (!params) {
             return;
         }
-        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+
+        if (params.Length) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Length)
+            this.Length = obj;
+        }
+
+        if (params.Bang) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Bang)
+            this.Bang = obj;
+        }
+
+        if (params.Color) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Color)
+            this.Color = obj;
+        }
+
+    }
+}
+
+/**
+ * GetPersonListNum response structure.
+ * @class
+ */
+class GetPersonListNumResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of persons
+         * @type {number || null}
+         */
+        this.PersonNum = null;
+
+        /**
+         * Number of faces
+         * @type {number || null}
+         */
+        this.FaceNum = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonNum = 'PersonNum' in params ? params.PersonNum : null;
+        this.FaceNum = 'FaceNum' in params ? params.FaceNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4035,7 +4645,7 @@ class GetPersonListRequest extends  AbstractModel {
         super();
 
         /**
-         * Group ID
+         * Group ID, which is the `GroupId` in the `CreateGroup` API
          * @type {string || null}
          */
         this.GroupId = null;
@@ -4069,18 +4679,135 @@ class GetPersonListRequest extends  AbstractModel {
 }
 
 /**
- * GetPersonListNum request structure.
+ * Face attribute information. According to the types specified in `FaceAttributesType`, the following face attributes will be returned: age (Age), beauty score (Beauty), 
+emotion (Emotion), eye information (Eye), eyebrow information (Eyebrow), gender (Gender), 
+hair information (Hair), hat information (Hat), pose (Headpose), mask information (Mask), mouth information (Mouse), beard information (Moustache), 
+nose information (Nose), face shape (Shape), skin color (Skin), and smile information (Smile).  
+If no types are specified in `FaceAttributesType`, the detailed items returned by `FaceDetailAttributesInfo` will be meaningless.
  * @class
  */
-class GetPersonListNumRequest extends  AbstractModel {
+class FaceDetailAttributesInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Group ID
-         * @type {string || null}
+         * Age. Value range: [0,65], where 65 indicates 65 years old or above. 
+If `FaceAttributesType` does not include `Age` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {number || null}
          */
-        this.GroupId = null;
+        this.Age = null;
+
+        /**
+         * Beauty score. Value range: [0,100]. 
+If `FaceAttributesType` does not include `Beauty` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {number || null}
+         */
+        this.Beauty = null;
+
+        /**
+         * Emotion, including relaxed, happy, surprised, angry, sad, disgusted, and scared. 
+The `Type` values of the `AttributeItem` include: 0: relaxed; 1: happy; 2: surprised; 3: angry; 4: sad; 5: disgusted; 6: scared
+If `FaceAttributesType` does not include `Emotion` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {AttributeItem || null}
+         */
+        this.Emotion = null;
+
+        /**
+         * Eye information, including whether glasses are worn, whether eyes are closed, whether the person has double eyelids, and the eye size. 
+If `FaceAttributesType` does not include `Eye` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {Eye || null}
+         */
+        this.Eye = null;
+
+        /**
+         * Eyebrow information, including whether the eyebrows are thick, curved, or long. 
+If `FaceAttributesType` does not include `Eyebrow` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {Eyebrow || null}
+         */
+        this.Eyebrow = null;
+
+        /**
+         * Gender information. 
+The `Type` values of the `AttributeItem` include: 0: male; 1: female.	
+If `FaceAttributesType` does not include `Gender` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {AttributeItem || null}
+         */
+        this.Gender = null;
+
+        /**
+         * Hair information, including length, bang, and color. 
+If `FaceAttributesType` does not include `Hair` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {Hair || null}
+         */
+        this.Hair = null;
+
+        /**
+         * Hat information, including whether a hat is worn, hat style, and hat color. 
+If `FaceAttributesType` does not include `Hat` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {Hat || null}
+         */
+        this.Hat = null;
+
+        /**
+         * Pose information, including the face pitch, yaw, and roll. 
+If `FaceAttributesType` does not include `Headpose` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {HeadPose || null}
+         */
+        this.HeadPose = null;
+
+        /**
+         * Mask information. 
+The `Type` values of the `AttributeItem` include: 0: no mask; 1: the mask is worn and does not cover the face; 2: the mask is worn and covers the chin; 3: the mask is worn and covers the mouth; 4: the mask is worn properly.
+If `FaceAttributesType` does not include `Mask` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {AttributeItem || null}
+         */
+        this.Mask = null;
+
+        /**
+         * Mouth information, including whether the mouth is open and the lip thickness. 
+If `FaceAttributesType` does not include `Mouth` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {Mouth || null}
+         */
+        this.Mouth = null;
+
+        /**
+         * Beard information.
+The `Type` values of the `AttributeItem` include: 0: no beard; 1: beard detected. 
+If `FaceAttributesType` does not include `Moustache` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {AttributeItem || null}
+         */
+        this.Moustache = null;
+
+        /**
+         * Nose information. 
+The `Type` values of the `AttributeItem` include: 0: upturned nose; 1: aquiline nose; 2: general nose; 3: bulbous nose
+If `FaceAttributesType` does not include `Nose` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {AttributeItem || null}
+         */
+        this.Nose = null;
+
+        /**
+         * Face shape information. 
+The `Type` values of the `AttributeItem` include: 0: square; 1: triangular; 2: oval; 3: heart-shaped; 4: round.
+If `FaceAttributesType` does not include `Shape` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {AttributeItem || null}
+         */
+        this.Shape = null;
+
+        /**
+         * Skin color information. 
+The `Type` values of the `AttributeItem` include: 0: yellow; 1: brown; 2: black; 3: white.
+If `FaceAttributesType` does not include `Skin` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {AttributeItem || null}
+         */
+        this.Skin = null;
+
+        /**
+         * Smile level. Value range: [0,100]. 
+If `FaceAttributesType` does not include `Smile` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+         * @type {number || null}
+         */
+        this.Smile = null;
 
     }
 
@@ -4091,7 +4818,87 @@ class GetPersonListNumRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Beauty = 'Beauty' in params ? params.Beauty : null;
+
+        if (params.Emotion) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Emotion)
+            this.Emotion = obj;
+        }
+
+        if (params.Eye) {
+            let obj = new Eye();
+            obj.deserialize(params.Eye)
+            this.Eye = obj;
+        }
+
+        if (params.Eyebrow) {
+            let obj = new Eyebrow();
+            obj.deserialize(params.Eyebrow)
+            this.Eyebrow = obj;
+        }
+
+        if (params.Gender) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Gender)
+            this.Gender = obj;
+        }
+
+        if (params.Hair) {
+            let obj = new Hair();
+            obj.deserialize(params.Hair)
+            this.Hair = obj;
+        }
+
+        if (params.Hat) {
+            let obj = new Hat();
+            obj.deserialize(params.Hat)
+            this.Hat = obj;
+        }
+
+        if (params.HeadPose) {
+            let obj = new HeadPose();
+            obj.deserialize(params.HeadPose)
+            this.HeadPose = obj;
+        }
+
+        if (params.Mask) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Mask)
+            this.Mask = obj;
+        }
+
+        if (params.Mouth) {
+            let obj = new Mouth();
+            obj.deserialize(params.Mouth)
+            this.Mouth = obj;
+        }
+
+        if (params.Moustache) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Moustache)
+            this.Moustache = obj;
+        }
+
+        if (params.Nose) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Nose)
+            this.Nose = obj;
+        }
+
+        if (params.Shape) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Shape)
+            this.Shape = obj;
+        }
+
+        if (params.Skin) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Skin)
+            this.Skin = obj;
+        }
+        this.Smile = 'Smile' in params ? params.Smile : null;
 
     }
 }
@@ -4162,6 +4969,41 @@ class DeletePersonResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Face attribute information
+ * @class
+ */
+class AttributeItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Attribute value
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Probability of recognizing `Type`, which indicates the probability of correct recognition. Value range: [0,1].
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
 
     }
 }
@@ -4256,13 +5098,14 @@ class SearchFacesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of groups to be searched in. Up to 100 groups are supported.
+         * List of groups to be searched for (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
 
         /**
          * Base64-encoded image data, which cannot exceed 5 MB.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 .png, .jpg, .jpeg, and .bmp images are supported, while .gif images are not.
          * @type {string || null}
          */
@@ -4270,6 +5113,7 @@ class SearchFacesRequest extends  AbstractModel {
 
         /**
          * Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
 Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
 You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
 The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -4363,13 +5207,13 @@ class DeletePersonFromGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Person ID
+         * Person ID, which is the `PersonId` in the `CreatePerson` API
          * @type {string || null}
          */
         this.PersonId = null;
 
         /**
-         * Group ID
+         * Group ID, which is the `GroupId` in the `CreateGroup` API
          * @type {string || null}
          */
         this.GroupId = null;
@@ -4426,66 +5270,69 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     GetPersonGroupInfoResponse: GetPersonGroupInfoResponse,
-    SearchFacesReturnsByGroupResponse: SearchFacesReturnsByGroupResponse,
+    Eye: Eye,
     Candidate: Candidate,
     ModifyGroupResponse: ModifyGroupResponse,
-    VerifyFaceResponse: VerifyFaceResponse,
+    GetGroupInfoResponse: GetGroupInfoResponse,
     DeletePersonRequest: DeletePersonRequest,
     DetectLiveFaceResponse: DetectLiveFaceResponse,
-    GetSimilarPersonResultResponse: GetSimilarPersonResultResponse,
+    AnalyzeDenseLandmarksResponse: AnalyzeDenseLandmarksResponse,
     SearchPersonsReturnsByGroupResponse: SearchPersonsReturnsByGroupResponse,
     DeleteFaceRequest: DeleteFaceRequest,
+    HeadPose: HeadPose,
     ModifyPersonBaseInfoResponse: ModifyPersonBaseInfoResponse,
     GetGroupListResponse: GetGroupListResponse,
     GroupInfo: GroupInfo,
     GetPersonListResponse: GetPersonListResponse,
+    Hat: Hat,
     FaceQualityCompleteness: FaceQualityCompleteness,
     FaceAttributesInfo: FaceAttributesInfo,
-    PersonGroupInfo: PersonGroupInfo,
+    DetectFaceAttributesRequest: DetectFaceAttributesRequest,
     ModifyGroupRequest: ModifyGroupRequest,
     CreatePersonRequest: CreatePersonRequest,
     GetGroupListRequest: GetGroupListRequest,
     DeleteGroupRequest: DeleteGroupRequest,
     CreateFaceResponse: CreateFaceResponse,
     ModifyPersonBaseInfoRequest: ModifyPersonBaseInfoRequest,
-    GetSimilarPersonResultRequest: GetSimilarPersonResultRequest,
-    GetGroupInfoResponse: GetGroupInfoResponse,
+    DetectFaceAttributesResponse: DetectFaceAttributesResponse,
     GroupCandidate: GroupCandidate,
     SearchPersonsResponse: SearchPersonsResponse,
-    FaceQualityInfo: FaceQualityInfo,
+    VerifyPersonRequest: VerifyPersonRequest,
     CompareFaceResponse: CompareFaceResponse,
     PersonExDescriptionInfo: PersonExDescriptionInfo,
     DetectLiveFaceRequest: DetectLiveFaceRequest,
-    JobIdInfo: JobIdInfo,
+    VerifyFaceResponse: VerifyFaceResponse,
     GetPersonBaseInfoResponse: GetPersonBaseInfoResponse,
     ResultsReturnsByGroup: ResultsReturnsByGroup,
     CreateFaceRequest: CreateFaceRequest,
-    SearchFacesReturnsByGroupRequest: SearchFacesReturnsByGroupRequest,
+    Mouth: Mouth,
     CreateGroupRequest: CreateGroupRequest,
+    PersonGroupInfo: PersonGroupInfo,
     ModifyPersonGroupInfoRequest: ModifyPersonGroupInfoRequest,
     GetPersonGroupInfoRequest: GetPersonGroupInfoRequest,
     Result: Result,
-    GetCheckSimilarPersonJobIdListRequest: GetCheckSimilarPersonJobIdListRequest,
-    VerifyPersonRequest: VerifyPersonRequest,
+    SearchFacesReturnsByGroupResponse: SearchFacesReturnsByGroupResponse,
     FaceInfo: FaceInfo,
     DeleteGroupResponse: DeleteGroupResponse,
     SearchPersonsRequest: SearchPersonsRequest,
-    EstimateCheckSimilarPersonCostTimeResponse: EstimateCheckSimilarPersonCostTimeResponse,
+    SearchFacesReturnsByGroupRequest: SearchFacesReturnsByGroupRequest,
+    FaceQualityInfo: FaceQualityInfo,
     CompareFaceRequest: CompareFaceRequest,
     PersonInfo: PersonInfo,
-    CheckSimilarPersonRequest: CheckSimilarPersonRequest,
-    FaceShape: FaceShape,
+    Eyebrow: Eyebrow,
+    AnalyzeDenseLandmarksRequest: AnalyzeDenseLandmarksRequest,
     DetectFaceResponse: DetectFaceResponse,
     CopyPersonRequest: CopyPersonRequest,
-    CheckSimilarPersonResponse: CheckSimilarPersonResponse,
+    GetPersonListNumRequest: GetPersonListNumRequest,
     SearchPersonsReturnsByGroupRequest: SearchPersonsReturnsByGroupRequest,
     DeletePersonFromGroupResponse: DeletePersonFromGroupResponse,
     VerifyPersonResponse: VerifyPersonResponse,
     AnalyzeFaceResponse: AnalyzeFaceResponse,
     GetGroupInfoRequest: GetGroupInfoRequest,
-    GetPersonListNumResponse: GetPersonListNumResponse,
+    FaceShape: FaceShape,
+    FaceDetailInfo: FaceDetailInfo,
     FaceHairAttributesInfo: FaceHairAttributesInfo,
-    GetCheckSimilarPersonJobIdListResponse: GetCheckSimilarPersonJobIdListResponse,
+    DenseFaceShape: DenseFaceShape,
     AnalyzeFaceRequest: AnalyzeFaceRequest,
     Point: Point,
     DetectFaceRequest: DetectFaceRequest,
@@ -4495,11 +5342,13 @@ module.exports = {
     GroupExDescriptionInfo: GroupExDescriptionInfo,
     VerifyFaceRequest: VerifyFaceRequest,
     CopyPersonResponse: CopyPersonResponse,
-    EstimateCheckSimilarPersonCostTimeRequest: EstimateCheckSimilarPersonCostTimeRequest,
+    Hair: Hair,
+    GetPersonListNumResponse: GetPersonListNumResponse,
     GetPersonListRequest: GetPersonListRequest,
-    GetPersonListNumRequest: GetPersonListNumRequest,
+    FaceDetailAttributesInfo: FaceDetailAttributesInfo,
     DeleteFaceResponse: DeleteFaceResponse,
     DeletePersonResponse: DeletePersonResponse,
+    AttributeItem: AttributeItem,
     FaceRect: FaceRect,
     ModifyPersonGroupInfoResponse: ModifyPersonGroupInfoResponse,
     SearchFacesRequest: SearchFacesRequest,

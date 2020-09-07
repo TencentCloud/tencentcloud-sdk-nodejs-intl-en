@@ -17,34 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DeleteCfsFileSystem request structure.
- * @class
- */
-class DeleteCfsFileSystemRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * File system ID. Note: please call the `DeleteMountTarget` API to delete the mount target first before deleting a file system; otherwise, the delete operation will fail.
-         * @type {string || null}
-         */
-        this.FileSystemId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
-
-    }
-}
-
-/**
  * DeleteCfsFileSystem response structure.
  * @class
  */
@@ -68,6 +40,70 @@ class DeleteCfsFileSystemResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Versioning - array of AZs
+ * @class
+ */
+class AvailableZone extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * AZ ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Chinese name of an AZ
+         * @type {string || null}
+         */
+        this.ZoneCnName = null;
+
+        /**
+         * Array of classes
+         * @type {Array.<AvailableType> || null}
+         */
+        this.Types = null;
+
+        /**
+         * Chinese and English names of an AZ
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneCnName = 'ZoneCnName' in params ? params.ZoneCnName : null;
+
+        if (params.Types) {
+            this.Types = new Array();
+            for (let z in params.Types) {
+                let obj = new AvailableType();
+                obj.deserialize(params.Types[z]);
+                this.Types.push(obj);
+            }
+        }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -111,7 +147,7 @@ class UpdateCfsRuleRequest extends  AbstractModel {
         this.UserPermission = null;
 
         /**
-         * Rule priority. Value range: 1–100. 1 represents the highest priority, while 100 the lowest
+         * Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
          * @type {number || null}
          */
         this.Priority = null;
@@ -131,6 +167,48 @@ class UpdateCfsRuleRequest extends  AbstractModel {
         this.RWPermission = 'RWPermission' in params ? params.RWPermission : null;
         this.UserPermission = 'UserPermission' in params ? params.UserPermission : null;
         this.Priority = 'Priority' in params ? params.Priority : null;
+
+    }
+}
+
+/**
+ * DescribeCfsFileSystems request structure.
+ * @class
+ */
+class DescribeCfsFileSystemsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File system ID
+         * @type {string || null}
+         */
+        this.FileSystemId = null;
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -191,7 +269,7 @@ class CreateCfsRuleRequest extends  AbstractModel {
         this.AuthClientIp = null;
 
         /**
-         * Rule priority. Value range: 1–100. 1 represents the highest priority, while 100 the lowest
+         * Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
          * @type {number || null}
          */
         this.Priority = null;
@@ -432,30 +510,24 @@ class DescribeCfsPGroupsResponse extends  AbstractModel {
 }
 
 /**
- * UpdateCfsPGroup request structure.
+ * DescribeCfsFileSystemClients response structure.
  * @class
  */
-class UpdateCfsPGroupRequest extends  AbstractModel {
+class DescribeCfsFileSystemClientsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Permission group ID
-         * @type {string || null}
+         * Client list
+         * @type {Array.<FileSystemClient> || null}
          */
-        this.PGroupId = null;
+        this.ClientList = null;
 
         /**
-         * Permission group name, which can contain 1–64 Chinese characters, letters, numbers, underscores, or dashes
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Permission group description, which can contain 1–255 characters
-         * @type {string || null}
-         */
-        this.DescInfo = null;
+        this.RequestId = null;
 
     }
 
@@ -466,9 +538,16 @@ class UpdateCfsPGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PGroupId = 'PGroupId' in params ? params.PGroupId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.DescInfo = 'DescInfo' in params ? params.DescInfo : null;
+
+        if (params.ClientList) {
+            this.ClientList = new Array();
+            for (let z in params.ClientList) {
+                let obj = new FileSystemClient();
+                obj.deserialize(params.ClientList[z]);
+                this.ClientList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -624,6 +703,48 @@ class DeleteCfsRuleRequest extends  AbstractModel {
         }
         this.PGroupId = 'PGroupId' in params ? params.PGroupId : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * UpdateCfsPGroup request structure.
+ * @class
+ */
+class UpdateCfsPGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Permission group ID
+         * @type {string || null}
+         */
+        this.PGroupId = null;
+
+        /**
+         * Permission group name, which can contain 1-64 Chinese characters, letters, numbers, underscores, or dashes
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Permission group description, which can contain 1-255 characters
+         * @type {string || null}
+         */
+        this.DescInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PGroupId = 'PGroupId' in params ? params.PGroupId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DescInfo = 'DescInfo' in params ? params.DescInfo : null;
 
     }
 }
@@ -785,6 +906,69 @@ class UpdateCfsRuleResponse extends  AbstractModel {
         this.UserPermission = 'UserPermission' in params ? params.UserPermission : null;
         this.Priority = 'Priority' in params ? params.Priority : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information on the file system client
+ * @class
+ */
+class FileSystemClient extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP address of the file system
+         * @type {string || null}
+         */
+        this.CfsVip = null;
+
+        /**
+         * Client IP
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * File system VPCID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Name of the availability zone, e.g. ap-beijing-1. For more information, see regions and availability zones in the Overview document
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * Path in which the file system is mounted to the client
+         * @type {string || null}
+         */
+        this.MountDirectory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CfsVip = 'CfsVip' in params ? params.CfsVip : null;
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.MountDirectory = 'MountDirectory' in params ? params.MountDirectory : null;
 
     }
 }
@@ -992,7 +1176,7 @@ class FileSystemInfo extends  AbstractModel {
         this.StorageType = null;
 
         /**
-         * Prepaid storage pack bound to a file system (not supported currently)
+         * Prepaid storage pack bound with the file system
          * @type {string || null}
          */
         this.StorageResourcePkg = null;
@@ -1033,6 +1217,12 @@ class FileSystemInfo extends  AbstractModel {
          */
         this.AppId = null;
 
+        /**
+         * The upper limit on the file system’s throughput, which is determined based on its current usage, and bound resource packs for both storage and throughput
+         * @type {number || null}
+         */
+        this.BandwidthLimit = null;
+
     }
 
     /**
@@ -1064,6 +1254,7 @@ class FileSystemInfo extends  AbstractModel {
         this.Encrypted = 'Encrypted' in params ? params.Encrypted : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
+        this.BandwidthLimit = 'BandwidthLimit' in params ? params.BandwidthLimit : null;
 
     }
 }
@@ -1125,42 +1316,18 @@ class DescribeCfsPGroupsRequest extends  AbstractModel {
 }
 
 /**
- * Versioning - array of AZs
+ * DescribeCfsFileSystemClients request structure.
  * @class
  */
-class AvailableZone extends  AbstractModel {
+class DescribeCfsFileSystemClientsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ name
+         * File system ID
          * @type {string || null}
          */
-        this.Zone = null;
-
-        /**
-         * AZ ID
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Chinese name of an AZ
-         * @type {string || null}
-         */
-        this.ZoneCnName = null;
-
-        /**
-         * Array of classes
-         * @type {Array.<AvailableType> || null}
-         */
-        this.Types = null;
-
-        /**
-         * Chinese and English names of an AZ
-         * @type {string || null}
-         */
-        this.ZoneName = null;
+        this.FileSystemId = null;
 
     }
 
@@ -1171,19 +1338,7 @@ class AvailableZone extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ZoneCnName = 'ZoneCnName' in params ? params.ZoneCnName : null;
-
-        if (params.Types) {
-            this.Types = new Array();
-            for (let z in params.Types) {
-                let obj = new AvailableType();
-                obj.deserialize(params.Types[z]);
-                this.Types.push(obj);
-            }
-        }
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
 
     }
 }
@@ -1197,13 +1352,13 @@ class CreateCfsPGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Permission group name, which can contain 1–64 Chinese characters, letters, numbers, underscores, or dashes
+         * Permission group name, which can contain 1-64 Chinese characters, letters, numbers, underscores, or dashes
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Permission group description, which can contain 1–255 characters
+         * Permission group description, which can contain 1-255 characters
          * @type {string || null}
          */
         this.DescInfo = null;
@@ -1387,7 +1542,7 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
         super();
 
         /**
-         * AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://cloud.tencent.com/document/product/582/13225)
+         * AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://intl.cloud.tencent.com/document/product/582/13225?from_cn_redirect=1)
          * @type {string || null}
          */
         this.Zone = null;
@@ -1938,7 +2093,7 @@ class PGroupRuleInfo extends  AbstractModel {
         this.UserPermission = null;
 
         /**
-         * Rule priority. Value range: 1–100. 1 represents the highest priority, while 100 the lowest
+         * Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
          * @type {number || null}
          */
         this.Priority = null;
@@ -2004,10 +2159,16 @@ class AvailableType extends  AbstractModel {
         this.Protocols = null;
 
         /**
-         * Storage class. Valid values: SD (standard), HP (high-performance)
+         * Storage class. Valid values: `SD` (standard storage) and `HP` (high-performance storage)
          * @type {string || null}
          */
         this.Type = null;
+
+        /**
+         * Indicates whether prepaid is supported. `true`: yes; `false`: no
+         * @type {boolean || null}
+         */
+        this.Prepayment = null;
 
     }
 
@@ -2028,6 +2189,7 @@ class AvailableType extends  AbstractModel {
             }
         }
         this.Type = 'Type' in params ? params.Type : null;
+        this.Prepayment = 'Prepayment' in params ? params.Prepayment : null;
 
     }
 }
@@ -2041,7 +2203,7 @@ class UpdateCfsFileSystemSizeLimitRequest extends  AbstractModel {
         super();
 
         /**
-         * File system capacity limit in GB. Value range: 0–1,073,741,824. If 0 is entered, no limit will be imposed on the file system capacity.
+         * File system capacity limit in GB. Value range: 0-1,073,741,824. If 0 is entered, no limit will be imposed on the file system capacity.
          * @type {number || null}
          */
         this.FsLimit = null;
@@ -2068,30 +2230,18 @@ class UpdateCfsFileSystemSizeLimitRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCfsFileSystems request structure.
+ * DeleteCfsFileSystem request structure.
  * @class
  */
-class DescribeCfsFileSystemsRequest extends  AbstractModel {
+class DeleteCfsFileSystemRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * File system ID
+         * File system ID. Note: please call the `DeleteMountTarget` API to delete the mount target first before deleting a file system; otherwise, the delete operation will fail.
          * @type {string || null}
          */
         this.FileSystemId = null;
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
 
     }
 
@@ -2103,8 +2253,6 @@ class DescribeCfsFileSystemsRequest extends  AbstractModel {
             return;
         }
         this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -2244,9 +2392,10 @@ class UpdateCfsFileSystemPGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
-    DeleteCfsFileSystemRequest: DeleteCfsFileSystemRequest,
     DeleteCfsFileSystemResponse: DeleteCfsFileSystemResponse,
+    AvailableZone: AvailableZone,
     UpdateCfsRuleRequest: UpdateCfsRuleRequest,
+    DescribeCfsFileSystemsRequest: DescribeCfsFileSystemsRequest,
     DeleteMountTargetRequest: DeleteMountTargetRequest,
     CreateCfsRuleRequest: CreateCfsRuleRequest,
     PGroup: PGroup,
@@ -2254,19 +2403,21 @@ module.exports = {
     UpdateCfsFileSystemNameResponse: UpdateCfsFileSystemNameResponse,
     UpdateCfsFileSystemNameRequest: UpdateCfsFileSystemNameRequest,
     DescribeCfsPGroupsResponse: DescribeCfsPGroupsResponse,
-    UpdateCfsPGroupRequest: UpdateCfsPGroupRequest,
+    DescribeCfsFileSystemClientsResponse: DescribeCfsFileSystemClientsResponse,
     DeleteMountTargetResponse: DeleteMountTargetResponse,
     DescribeMountTargetsResponse: DescribeMountTargetsResponse,
     DeleteCfsRuleResponse: DeleteCfsRuleResponse,
     DeleteCfsRuleRequest: DeleteCfsRuleRequest,
+    UpdateCfsPGroupRequest: UpdateCfsPGroupRequest,
     MountInfo: MountInfo,
     UpdateCfsRuleResponse: UpdateCfsRuleResponse,
+    FileSystemClient: FileSystemClient,
     DescribeCfsFileSystemsResponse: DescribeCfsFileSystemsResponse,
     CreateCfsFileSystemResponse: CreateCfsFileSystemResponse,
     FileSystemInfo: FileSystemInfo,
     TagInfo: TagInfo,
     DescribeCfsPGroupsRequest: DescribeCfsPGroupsRequest,
-    AvailableZone: AvailableZone,
+    DescribeCfsFileSystemClientsRequest: DescribeCfsFileSystemClientsRequest,
     CreateCfsPGroupRequest: CreateCfsPGroupRequest,
     DeleteCfsPGroupResponse: DeleteCfsPGroupResponse,
     UpdateCfsFileSystemSizeLimitResponse: UpdateCfsFileSystemSizeLimitResponse,
@@ -2288,7 +2439,7 @@ module.exports = {
     DeleteCfsPGroupRequest: DeleteCfsPGroupRequest,
     AvailableType: AvailableType,
     UpdateCfsFileSystemSizeLimitRequest: UpdateCfsFileSystemSizeLimitRequest,
-    DescribeCfsFileSystemsRequest: DescribeCfsFileSystemsRequest,
+    DeleteCfsFileSystemRequest: DeleteCfsFileSystemRequest,
     UpdateCfsPGroupResponse: UpdateCfsPGroupResponse,
     DescribeCfsRulesResponse: DescribeCfsRulesResponse,
     UpdateCfsFileSystemPGroupResponse: UpdateCfsFileSystemPGroupResponse,

@@ -533,7 +533,7 @@ class RunInstancesForNode extends  AbstractModel {
         this.NodeRole = null;
 
         /**
-         * Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://cloud.tencent.com/document/product/213/15730). Pass any parameter other than common parameters. ImageId will be replaced with the image corresponding to the TKE cluster operating system.
+         * Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1). Pass any parameter other than common parameters. ImageId will be replaced with the image corresponding to the TKE cluster operating system.
          * @type {Array.<string> || null}
          */
         this.RunInstancesPara = null;
@@ -577,7 +577,7 @@ class DeleteClusterAsGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * The cluster ID, obtained through the [DescribeClusters](https://cloud.tencent.com/document/api/457/31862) API.
+         * The cluster ID, obtained through the [DescribeClusters](https://intl.cloud.tencent.com/document/api/457/31862?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -631,7 +631,7 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Filter condition. For fields and other information, see [the DescribeInstances API](https://cloud.tencent.com/document/api/213/15728). If a ClusterId has been set, then the cluster's VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster's VPC ID.
+         * Filter condition. For fields and other information, see [the DescribeInstances API](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). If a ClusterId has been set, then the cluster's VPC ID will be attached as a query field. In this situation, if a "vpc-id" is specified in Filter, then the specified VPC ID must be consistent with the cluster's VPC ID.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -649,13 +649,13 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
         this.VagueInstanceName = null;
 
         /**
-         * Offset. Default value: 0. For more information on Offset, see the relevant section in the API [Introduction](https://cloud.tencent.com/document/api/213/15688).
+         * Offset. Default value: 0. For more information on Offset, see the relevant section in the API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100. For more information on Limit, see the relevant section in the API [Introduction](https://cloud.tencent.com/document/api/213/15688).
+         * Number of returned results. Default value: 20. Maximum value: 100. For more information on Limit, see the relevant section in the API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Limit = null;
@@ -1729,7 +1729,7 @@ class CreateClusterInstancesRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the [RunInstances](https://cloud.tencent.com/document/product/213/15730) API.
+         * Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.RunInstancePara = null;
@@ -2214,7 +2214,7 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
- * Cluster primary custom parameter
+ * Cluster master custom parameter
  * @class
  */
 class ClusterExtraArgs extends  AbstractModel {
@@ -2222,8 +2222,8 @@ class ClusterExtraArgs extends  AbstractModel {
         super();
 
         /**
-         * kube-apiserver custom parameter
-Note: this field may return null, indicating that no valid value is obtained.
+         * kube-apiserver custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {Array.<string> || null}
          */
         this.KubeAPIServer = null;
@@ -2421,7 +2421,7 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.Password = null;
 
         /**
-         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://cloud.tencent.com/document/api/213/15699) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
 Note: this field may return null, indicating that no valid value is obtained.
          * @type {Array.<string> || null}
          */
@@ -2545,13 +2545,13 @@ class CreateClusterAsGroupRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://cloud.tencent.com/document/api/377/20440) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
+         * The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://intl.cloud.tencent.com/document/api/377/20440?from_cn_redirect=1) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
          * @type {string || null}
          */
         this.AutoScalingGroupPara = null;
 
         /**
-         * The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://cloud.tencent.com/document/api/377/20447) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it's set through the **UserScript**.
+         * The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://intl.cloud.tencent.com/document/api/377/20447?from_cn_redirect=1) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it's set through the **UserScript**.
          * @type {string || null}
          */
         this.LaunchConfigurePara = null;
@@ -2643,7 +2643,7 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
+         * Whether to enable [Cloud Security](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
          * @type {boolean || null}
          */
         this.Enabled = null;
@@ -2711,7 +2711,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.ClusterType = null;
 
         /**
-         * Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://cloud.tencent.com/document/product/213/15730).
+         * Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the API for [creating a CVM instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1).
          * @type {Array.<RunInstancesForNode> || null}
          */
         this.RunInstancesForNode = null;
@@ -2820,8 +2820,8 @@ class InstanceExtraArgs extends  AbstractModel {
         super();
 
         /**
-         * Kubelet custom parameter
-Note: this field may return null, indicating that no valid value is obtained.
+         * Kubelet custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {Array.<string> || null}
          */
         this.Kubelet = null;
@@ -2971,7 +2971,7 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
 > * If there are multiple `Filter` parameters, they are evaluated using the logical `AND` operator.
 > * If a `Filter` contains multiple `Values`, they are evaluated using the logical `OR` operator.
 >
-> Take [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) as an example. You can use the following filters to query the instances in availability zone (`zone`) Guangzhou Zone 1 ***and*** whose billing plan (`instance-charge-type`) is pay-as-you-go:
+> Take [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) as an example. You can use the following filters to query the instances in availability zone (`zone`) Guangzhou Zone 1 ***and*** whose billing plan (`instance-charge-type`) is pay-as-you-go:
 ```
 Filters.0.Name=zone
 &Filters.0.Values.0=ap-guangzhou-1
@@ -3149,10 +3149,28 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.DeletionProtection = null;
 
         /**
-         * Cluster network proxy model
+         * 
          * @type {string || null}
          */
         this.KubeProxyMode = null;
+
+        /**
+         * Indicates whether to enable auditing
+         * @type {boolean || null}
+         */
+        this.AuditEnabled = null;
+
+        /**
+         * Specifies the ID of logset to which the audit logs are uploaded.
+         * @type {string || null}
+         */
+        this.AuditLogsetId = null;
+
+        /**
+         * Specifies the ID of topic to which the audit logs are uploaded.
+         * @type {string || null}
+         */
+        this.AuditLogTopicId = null;
 
     }
 
@@ -3177,6 +3195,9 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
         this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
         this.KubeProxyMode = 'KubeProxyMode' in params ? params.KubeProxyMode : null;
+        this.AuditEnabled = 'AuditEnabled' in params ? params.AuditEnabled : null;
+        this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
+        this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
 
     }
 }
@@ -3943,6 +3964,12 @@ class DescribeClusterRoutesRequest extends  AbstractModel {
          */
         this.RouteTableName = null;
 
+        /**
+         * Filtering conditions, which are optional. Currently, only filtering by GatewayIP is supported.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -3953,6 +3980,15 @@ class DescribeClusterRoutesRequest extends  AbstractModel {
             return;
         }
         this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4104,13 +4140,13 @@ class DescribeClusterAsGroupsRequest extends  AbstractModel {
         this.AutoScalingGroupIds = null;
 
         /**
-         * Offset. This value defaults to 0. For more information on Offset, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+         * Offset. This value defaults to 0. For more information on Offset, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. This value defaults to 20. The maximum is 100. For more information on Limit, see the relevant sections in API [Overview](https://cloud.tencent.com/document/api/213/15688).
+         * Number of returned results. This value defaults to 20. The maximum is 100. For more information on Limit, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Limit = null;
@@ -4391,7 +4427,7 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable [Cloud Monitor](/document/product/248). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
+         * Whether to enable [Cloud Monitor](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
          * @type {boolean || null}
          */
         this.Enabled = null;

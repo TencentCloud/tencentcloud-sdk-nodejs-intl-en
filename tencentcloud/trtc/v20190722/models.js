@@ -159,7 +159,7 @@ class DescribeAbnormalEventRequest extends  AbstractModel {
 }
 
 /**
- * MCU On-Cloud MixTranscoding layout parameters
+ * 
  * @class
  */
 class LayoutParams extends  AbstractModel {
@@ -190,6 +190,12 @@ class LayoutParams extends  AbstractModel {
          */
         this.SmallVideoLayoutParams = null;
 
+        /**
+         * You can set the layout parameter as 1 or 0 in the screen sharing template. 1: big image on the right and small images on the left, 0: big image on the left and small images on the right. The default value is 0. 
+         * @type {number || null}
+         */
+        this.MainVideoRightAlign = null;
+
     }
 
     /**
@@ -208,6 +214,7 @@ class LayoutParams extends  AbstractModel {
             obj.deserialize(params.SmallVideoLayoutParams)
             this.SmallVideoLayoutParams = obj;
         }
+        this.MainVideoRightAlign = 'MainVideoRightAlign' in params ? params.MainVideoRightAlign : null;
 
     }
 }

@@ -28,12 +28,13 @@ const DescribeWhiteBoxServiceStatusRequest = models.DescribeWhiteBoxServiceStatu
 const DescribeKeyRequest = models.DescribeKeyRequest;
 const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
 const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
+const DisableKeysResponse = models.DisableKeysResponse;
 const DescribeWhiteBoxKeyResponse = models.DescribeWhiteBoxKeyResponse;
 const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
 const DescribeWhiteBoxServiceStatusResponse = models.DescribeWhiteBoxServiceStatusResponse;
 const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
 const EnableKeyRequest = models.EnableKeyRequest;
-const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
+const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
 const ListAlgorithmsRequest = models.ListAlgorithmsRequest;
 const Tag = models.Tag;
 const ListKeyDetailResponse = models.ListKeyDetailResponse;
@@ -45,6 +46,7 @@ const DescribeKeysRequest = models.DescribeKeysRequest;
 const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const EnableWhiteBoxKeysResponse = models.EnableWhiteBoxKeysResponse;
+const ArchiveKeyResponse = models.ArchiveKeyResponse;
 const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
 const GetParametersForImportResponse = models.GetParametersForImportResponse;
 const DecryptResponse = models.DecryptResponse;
@@ -58,16 +60,18 @@ const DescribeKeysResponse = models.DescribeKeysResponse;
 const EnableWhiteBoxKeyResponse = models.EnableWhiteBoxKeyResponse;
 const ReEncryptRequest = models.ReEncryptRequest;
 const ListKeysResponse = models.ListKeysResponse;
-const GetServiceStatusResponse = models.GetServiceStatusResponse;
+const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
 const DisableKeyRotationResponse = models.DisableKeyRotationResponse;
 const DisableWhiteBoxKeysRequest = models.DisableWhiteBoxKeysRequest;
-const OverwriteWhiteBoxDeviceFingerprintsRequest = models.OverwriteWhiteBoxDeviceFingerprintsRequest;
+const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
 const AlgorithmInfo = models.AlgorithmInfo;
+const GetRegionsResponse = models.GetRegionsResponse;
 const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
 const CreateWhiteBoxKeyRequest = models.CreateWhiteBoxKeyRequest;
 const OverwriteWhiteBoxDeviceFingerprintsResponse = models.OverwriteWhiteBoxDeviceFingerprintsResponse;
 const DisableWhiteBoxKeysResponse = models.DisableWhiteBoxKeysResponse;
+const ArchiveKeyRequest = models.ArchiveKeyRequest;
 const GetParametersForImportRequest = models.GetParametersForImportRequest;
 const CreateKeyResponse = models.CreateKeyResponse;
 const ReEncryptResponse = models.ReEncryptResponse;
@@ -75,7 +79,7 @@ const EncryptResponse = models.EncryptResponse;
 const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
 const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
 const EnableKeyResponse = models.EnableKeyResponse;
-const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
+const GetServiceStatusResponse = models.GetServiceStatusResponse;
 const DeviceFingerprint = models.DeviceFingerprint;
 const GetKeyRotationStatusResponse = models.GetKeyRotationStatusResponse;
 const EncryptRequest = models.EncryptRequest;
@@ -84,7 +88,7 @@ const DeleteWhiteBoxKeyResponse = models.DeleteWhiteBoxKeyResponse;
 const ListKeysRequest = models.ListKeysRequest;
 const DescribeWhiteBoxDecryptKeyRequest = models.DescribeWhiteBoxDecryptKeyRequest;
 const KeyMetadata = models.KeyMetadata;
-const DisableKeysResponse = models.DisableKeysResponse;
+const CancelKeyArchiveResponse = models.CancelKeyArchiveResponse;
 const DecryptRequest = models.DecryptRequest;
 const DescribeWhiteBoxKeyDetailsRequest = models.DescribeWhiteBoxKeyDetailsRequest;
 const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
@@ -92,23 +96,26 @@ const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
 const DisableKeysRequest = models.DisableKeysRequest;
 const DisableWhiteBoxKeyRequest = models.DisableWhiteBoxKeyRequest;
 const UnbindCloudResourceRequest = models.UnbindCloudResourceRequest;
-const ListKeyDetailRequest = models.ListKeyDetailRequest;
+const OverwriteWhiteBoxDeviceFingerprintsRequest = models.OverwriteWhiteBoxDeviceFingerprintsRequest;
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
 const BindCloudResourceResponse = models.BindCloudResourceResponse;
 const EnableKeysResponse = models.EnableKeysResponse;
 const DescribeWhiteBoxDeviceFingerprintsRequest = models.DescribeWhiteBoxDeviceFingerprintsRequest;
+const GetRegionsRequest = models.GetRegionsRequest;
 const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
 const GenerateRandomRequest = models.GenerateRandomRequest;
 const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
 const DisableKeyRequest = models.DisableKeyRequest;
-const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
+const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
 const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const BindCloudResourceRequest = models.BindCloudResourceRequest;
+const TagFilter = models.TagFilter;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const UnbindCloudResourceResponse = models.UnbindCloudResourceResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
+const CancelKeyArchiveRequest = models.CancelKeyArchiveRequest;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 
 
@@ -212,6 +219,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
+     * Used to query whether the user has activated the KMS service.
+     * @param {GetServiceStatusRequest} req
+     * @param {function(string, GetServiceStatusResponse):void} cb
+     * @public
+     */
+    GetServiceStatus(req, cb) {
+        let resp = new GetServiceStatusResponse();
+        this.request("GetServiceStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to decrypt data with the specified private key that is encrypted with SM2 asymmetric cryptographic algorithm. The ciphertext must be encrypted with the corresponding public key. The asymmetric key must be in `Enabled` state for decryption. The length of the ciphertext passed in cannot exceed 256 bytes.
      * @param {AsymmetricSm2DecryptRequest} req
      * @param {function(string, AsymmetricSm2DecryptResponse):void} cb
@@ -267,14 +285,25 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
-     * Used to query whether the user has activated the KMS service.
-     * @param {GetServiceStatusRequest} req
-     * @param {function(string, GetServiceStatusResponse):void} cb
+     * This API is used to archive keys. The archived keys can only be used for decryption but not encryption.
+     * @param {ArchiveKeyRequest} req
+     * @param {function(string, ArchiveKeyResponse):void} cb
      * @public
      */
-    GetServiceStatus(req, cb) {
-        let resp = new GetServiceStatusResponse();
-        this.request("GetServiceStatus", req, resp, cb);
+    ArchiveKey(req, cb) {
+        let resp = new ArchiveKeyResponse();
+        this.request("ArchiveKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unarchive keys. If a key is unarchived, its status will be `Enabled`.
+     * @param {CancelKeyArchiveRequest} req
+     * @param {function(string, CancelKeyArchiveResponse):void} cb
+     * @public
+     */
+    CancelKeyArchive(req, cb) {
+        let resp = new CancelKeyArchiveResponse();
+        this.request("CancelKeyArchive", req, resp, cb);
     }
 
     /**
@@ -605,6 +634,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     DescribeWhiteBoxDecryptKey(req, cb) {
         let resp = new DescribeWhiteBoxDecryptKeyResponse();
         this.request("DescribeWhiteBoxDecryptKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of supported regions.
+     * @param {GetRegionsRequest} req
+     * @param {function(string, GetRegionsResponse):void} cb
+     * @public
+     */
+    GetRegions(req, cb) {
+        let resp = new GetRegionsResponse();
+        this.request("GetRegions", req, resp, cb);
     }
 
 

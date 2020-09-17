@@ -434,7 +434,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ChargeState = null;
 
         /**
-         * 
+         * Connection activation time.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -1439,7 +1439,7 @@ class DeleteDirectConnectTunnelResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Access point information.
  * @class
  */
 class AccessPoint extends  AbstractModel {
@@ -1447,37 +1447,37 @@ class AccessPoint extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Access point name.
          * @type {string || null}
          */
         this.AccessPointName = null;
 
         /**
-         * 
+         * Unique ID of access point.
          * @type {string || null}
          */
         this.AccessPointId = null;
 
         /**
-         * 
+         * Access point status. Valid values: available, unavailable.
          * @type {string || null}
          */
         this.State = null;
 
         /**
-         * 
+         * Access point location.
          * @type {string || null}
          */
         this.Location = null;
 
         /**
-         * 
+         * Supported ISP list of access pint.
          * @type {Array.<string> || null}
          */
         this.LineOperator = null;
 
         /**
-         * 
+         * Region ID where the access point resides.
          * @type {string || null}
          */
         this.RegionId = null;
@@ -1813,7 +1813,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.VpcName = null;
 
         /**
-         * 
+         * Backup IP address on the Tencent side.
          * @type {string || null}
          */
         this.TencentBackupAddress = null;

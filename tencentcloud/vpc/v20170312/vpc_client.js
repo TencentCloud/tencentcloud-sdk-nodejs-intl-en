@@ -88,8 +88,10 @@ const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesRe
 const HaVipAssociateAddressIpRequest = models.HaVipAssociateAddressIpRequest;
 const DisassociateNatGatewayAddressResponse = models.DisassociateNatGatewayAddressResponse;
 const DeleteRoutesResponse = models.DeleteRoutesResponse;
+const DescribeCrossBorderComplianceRequest = models.DescribeCrossBorderComplianceRequest;
 const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
 const ModifyAssistantCidrResponse = models.ModifyAssistantCidrResponse;
+const NatGatewayAddress = models.NatGatewayAddress;
 const ModifyNetworkAclEntriesResponse = models.ModifyNetworkAclEntriesResponse;
 const DescribeFlowLogRequest = models.DescribeFlowLogRequest;
 const DescribeAccountAttributesResponse = models.DescribeAccountAttributesResponse;
@@ -219,6 +221,7 @@ const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInterne
 const DirectConnectGateway = models.DirectConnectGateway;
 const Price = models.Price;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
+const DescribeCrossBorderComplianceResponse = models.DescribeCrossBorderComplianceResponse;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
 const AssociateDirectConnectGatewayNatGatewayResponse = models.AssociateDirectConnectGatewayNatGatewayResponse;
 const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
@@ -255,7 +258,7 @@ const CreateAndAttachNetworkInterfaceRequest = models.CreateAndAttachNetworkInte
 const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
-const NatGatewayAddress = models.NatGatewayAddress;
+const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
 const ModifyAssistantCidrRequest = models.ModifyAssistantCidrRequest;
 const ModifyGatewayFlowQosResponse = models.ModifyGatewayFlowQosResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
@@ -294,7 +297,7 @@ const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
 const DeleteRouteTableResponse = models.DeleteRouteTableResponse;
 const DescribeVpcInstancesResponse = models.DescribeVpcInstancesResponse;
 const AccountAttribute = models.AccountAttribute;
-const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
+const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
 const CreateNatGatewayDestinationIpPortTranslationNatRuleRequest = models.CreateNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const CreateFlowLogRequest = models.CreateFlowLogRequest;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
@@ -385,11 +388,12 @@ const UnassignIpv6CidrBlockResponse = models.UnassignIpv6CidrBlockResponse;
 const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
 const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
+const AuditCrossBorderComplianceResponse = models.AuditCrossBorderComplianceResponse;
 const InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest;
 const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
 const EnableGatewayFlowMonitorRequest = models.EnableGatewayFlowMonitorRequest;
 const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
-const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
+const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
 const CcnBandwidthInfo = models.CcnBandwidthInfo;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
@@ -432,7 +436,7 @@ const Ipv6SubnetCidrBlock = models.Ipv6SubnetCidrBlock;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
 const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
-const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
+const CrossBorderCompliance = models.CrossBorderCompliance;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
 const ItemPrice = models.ItemPrice;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
@@ -468,6 +472,7 @@ const DescribeBandwidthPackageQuotaRequest = models.DescribeBandwidthPackageQuot
 const DeleteVpcResponse = models.DeleteVpcResponse;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const AuditCrossBorderComplianceRequest = models.AuditCrossBorderComplianceRequest;
 const DescribeNetDetectsResponse = models.DescribeNetDetectsResponse;
 
 
@@ -1909,6 +1914,18 @@ You can also use the Force parameter to forcibly return a default VPC.
     }
 
     /**
+     * This API is used to query the compliance review form created.
+The service provider can query all review forms created by any `APPID` under the service. Other users can only query their own review forms.
+     * @param {DescribeCrossBorderComplianceRequest} req
+     * @param {function(string, DescribeCrossBorderComplianceResponse):void} cb
+     * @public
+     */
+    DescribeCrossBorderCompliance(req, cb) {
+        let resp = new DescribeCrossBorderComplianceResponse();
+        this.request("DescribeCrossBorderCompliance", req, resp, cb);
+    }
+
+    /**
      * This API (CreateAddressTemplateGroup) is used to create an IP address template group.
      * @param {CreateAddressTemplateGroupRequest} req
      * @param {function(string, CreateAddressTemplateGroupResponse):void} cb
@@ -1942,6 +1959,19 @@ You can also use the Force parameter to forcibly return a default VPC.
     CreateSecurityGroup(req, cb) {
         let resp = new CreateSecurityGroupResponse();
         this.request("CreateSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used by the service provider to perform a compliance audit.
+* To call this API, the service provider needs to prove identity and provide `APPID` to audit the compliance review forms received.
+* The review form can be changed between the `APPROVED` and `DENY` status.
+     * @param {AuditCrossBorderComplianceRequest} req
+     * @param {function(string, AuditCrossBorderComplianceResponse):void} cb
+     * @public
+     */
+    AuditCrossBorderCompliance(req, cb) {
+        let resp = new AuditCrossBorderComplianceResponse();
+        this.request("AuditCrossBorderCompliance", req, resp, cb);
     }
 
     /**

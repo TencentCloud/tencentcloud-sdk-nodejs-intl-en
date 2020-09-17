@@ -7698,7 +7698,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Protocol = null;
 
         /**
-         * 
+         * Security policy ID
          * @type {string || null}
          */
         this.PolicyId = null;

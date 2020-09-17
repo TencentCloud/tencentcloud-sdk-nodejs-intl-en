@@ -278,7 +278,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SslStatus = null;
 
         /**
-         * 
+         * Hsts configuration.
          * @type {Hsts || null}
          */
         this.Hsts = null;
@@ -938,7 +938,7 @@ class DomainLogs extends  AbstractModel {
 }
 
 /**
- * 
+ * HSTS configuration.
  * @class
  */
 class Hsts extends  AbstractModel {
@@ -946,19 +946,19 @@ class Hsts extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable. Valid values: on, off.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * `MaxAge` value.
          * @type {number || null}
          */
         this.MaxAge = null;
 
         /**
-         * 
+         * Whether to include subdomain names. Valid values: on, off.
          * @type {string || null}
          */
         this.IncludeSubDomains = null;

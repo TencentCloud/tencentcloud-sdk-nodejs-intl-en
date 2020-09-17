@@ -17,6 +17,45 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * GeneralAccurateOCR request structure.
+ * @class
+ */
+class GeneralAccurateOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded value of image.
+The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
+Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * URL address of image.
+The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
  * GeneralBasicOCR response structure.
  * @class
  */
@@ -37,10 +76,16 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         this.Language = null;
 
         /**
-         * Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://cloud.tencent.com/document/product/866/45139">How to Correct Tilted Text</a>
+         * Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>
          * @type {number || null}
          */
         this.Angel = null;
+
+        /**
+         * Total number of PDF pages to be returned if the image is a PDF. Default value: 0
+         * @type {number || null}
+         */
+        this.PdfPageSize = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -68,7 +113,100 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         }
         this.Language = 'Language' in params ? params.Language : null;
         this.Angel = 'Angel' in params ? params.Angel : null;
+        this.PdfPageSize = 'PdfPageSize' in params ? params.PdfPageSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Form recognition result.
+ * @class
+ */
+class TextTable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Column index of the top-left corner of the cell
+         * @type {number || null}
+         */
+        this.ColTl = null;
+
+        /**
+         * Row index of the top-left corner of the cell
+         * @type {number || null}
+         */
+        this.RowTl = null;
+
+        /**
+         * Column index of the bottom-right corner of the cell
+         * @type {number || null}
+         */
+        this.ColBr = null;
+
+        /**
+         * Row index of the bottom-right corner of the cell
+         * @type {number || null}
+         */
+        this.RowBr = null;
+
+        /**
+         * Cell text
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Cell type. Valid values: body, header, footer
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Confidence. Value range: 0–100
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Text line coordinates, which are represented as 4 vertex coordinates
+         * @type {Array.<Coord> || null}
+         */
+        this.Polygon = null;
+
+        /**
+         * Extended field
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ColTl = 'ColTl' in params ? params.ColTl : null;
+        this.RowTl = 'RowTl' in params ? params.RowTl : null;
+        this.ColBr = 'ColBr' in params ? params.ColBr : null;
+        this.RowBr = 'RowBr' in params ? params.RowBr : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Polygon) {
+            this.Polygon = new Array();
+            for (let z in params.Polygon) {
+                let obj = new Coord();
+                obj.deserialize(params.Polygon[z]);
+                this.Polygon.push(obj);
+            }
+        }
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
 
     }
 }
@@ -117,6 +255,98 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.RetImage = 'RetImage' in params ? params.RetImage : null;
+
+    }
+}
+
+/**
+ * TableOCR request structure.
+ * @class
+ */
+class TableOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded value of image.
+Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
+Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * URL address of image.
+Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
+Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * TableOCR response structure.
+ * @class
+ */
+class TableOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recognized text. For more information, please click the link on the left.
+         * @type {Array.<TextTable> || null}
+         */
+        this.TextDetections = null;
+
+        /**
+         * Base64-encoded Excel data.
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TextDetections) {
+            this.TextDetections = new Array();
+            for (let z in params.TextDetections) {
+                let obj = new TextTable();
+                obj.deserialize(params.TextDetections[z]);
+                this.TextDetections.push(obj);
+            }
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -461,77 +691,24 @@ class MLIDPassportOCRResponse extends  AbstractModel {
 }
 
 /**
- * MLIDCardOCR response structure.
+ * GeneralAccurateOCR response structure.
  * @class
  */
-class MLIDCardOCRResponse extends  AbstractModel {
+class GeneralAccurateOCRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Identity card number
-         * @type {string || null}
+         * Information of recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
+         * @type {Array.<TextDetection> || null}
          */
-        this.ID = null;
+        this.TextDetections = null;
 
         /**
-         * Name
-         * @type {string || null}
+         * Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation.
+         * @type {number || null}
          */
-        this.Name = null;
-
-        /**
-         * Address
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * Gender
-         * @type {string || null}
-         */
-        this.Sex = null;
-
-        /**
-         * Alarm code
--9103	Alarm for photographed document
--9102	Alarm for photocopied document
--9106       Alarm for covered card
-         * @type {Array.<number> || null}
-         */
-        this.Warn = null;
-
-        /**
-         * Identity photo
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * Extended field:
-{
-    ID:{
-        Confidence:0.9999
-    },
-    Name:{
-        Confidence:0.9996
-    }
-}
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-        /**
-         * Certificate types
-MyKad: Malaysian Identity Card
-MyPR: Malaysia Permanent Resident Identity Card
-MyTentera: Malaysian Armed Forces Identity Card
-MyKAS: Malaysian Temporary Resident Identity Card
-POLIS: Royal Malaysia Police Identity Card
-IKAD: Malaysia Temporary Employment Visit Pass
-         * @type {string || null}
-         */
-        this.Type = null;
+        this.Angel = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -548,14 +725,16 @@ IKAD: Malaysia Temporary Employment Visit Pass
         if (!params) {
             return;
         }
-        this.ID = 'ID' in params ? params.ID : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Address = 'Address' in params ? params.Address : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.Warn = 'Warn' in params ? params.Warn : null;
-        this.Image = 'Image' in params ? params.Image : null;
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.TextDetections) {
+            this.TextDetections = new Array();
+            for (let z in params.TextDetections) {
+                let obj = new TextDetection();
+                obj.deserialize(params.TextDetections[z]);
+                this.TextDetections.push(obj);
+            }
+        }
+        this.Angel = 'Angel' in params ? params.Angel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -641,14 +820,13 @@ class MLIDPassportOCRRequest extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded value of the image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution of 500x800 or above is recommended. Supported formats include PNG, JPG, JPEG, and BMP. It is recommended that the card part occupies more than 2/3 of the image.
-Either the `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+         * Base64-encoded value of image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 500x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies more than 2/3 area of the image.
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * Whether to return an image
+         * Whether to return an image. Default value: false
          * @type {boolean || null}
          */
         this.RetImage = null;
@@ -800,6 +978,114 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * MLIDCardOCR response structure.
+ * @class
+ */
+class MLIDCardOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Identity card number
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Address
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Gender
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Alarm code
+-9103	Alarm for photographed document
+-9102	Alarm for photocopied document
+-9106       Alarm for covered card
+         * @type {Array.<number> || null}
+         */
+        this.Warn = null;
+
+        /**
+         * Identity photo
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * Extended field:
+{
+    ID:{
+        Confidence:0.9999
+    },
+    Name:{
+        Confidence:0.9996
+    }
+}
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * Certificate types
+MyKad: Malaysian Identity Card
+MyPR: Malaysia Permanent Resident Identity Card
+MyTentera: Malaysian Armed Forces Identity Card
+MyKAS: Malaysian Temporary Resident Identity Card
+POLIS: Royal Malaysia Police Identity Card
+IKAD: Malaysia Temporary Employment Visit Pass
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Date of birth (currently, this field is only supported for IKAD)
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Warn = 'Warn' in params ? params.Warn : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GeneralBasicOCR request structure.
  * @class
  */
@@ -808,17 +1094,17 @@ class GeneralBasicOCRRequest extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded value of image.
-The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
+         * Base64-encoded value of image/PDF.
+The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
 Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * URL address of image.
-The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
-You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+         * URL address of image/PDF.
+The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
         this.ImageUrl = null;
@@ -833,16 +1119,33 @@ You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL 
          * Language to be recognized.
 The language can be automatically recognized or manually specified. Chinese-English mix (`zh`) is selected by default. Mixed characters in English and each supported language can be recognized together.
 Valid values:
-zh\auto\jap\kor\nspa\fre\ger\por\nvie\may\rus\ita\nhol\swe\fin\dan\nnor\hun\tha\lat
+zh\auto\jap\kor\
+spa\fre\ger\por\
+vie\may\rus\ita\
+hol\swe\fin\dan\
+nor\hun\tha\lat\ara
 Value meanings:
 Chinese-English mix, automatic recognition, Japanese, Korean,
 Spanish, French, German, Portuguese,
 Vietnamese, Malay, Russian, Italian,
 Dutch, Swedish, Finnish, Danish,
-Norwegian, Hungarian, Thai, Latin.
+Norwegian, Hungarian, Thai, Latin,
+Arabic.
          * @type {string || null}
          */
         this.LanguageType = null;
+
+        /**
+         * Whether to enable PDF recognition. Default value: false. After this feature is enabled, both images and PDF files can be recognized at the same time.
+         * @type {boolean || null}
+         */
+        this.IsPdf = null;
+
+        /**
+         * Page number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of the `IsPdf` parameter is `true`. Default value: 1.
+         * @type {number || null}
+         */
+        this.PdfPageNumber = null;
 
     }
 
@@ -857,23 +1160,30 @@ Norwegian, Hungarian, Thai, Latin.
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.Scene = 'Scene' in params ? params.Scene : null;
         this.LanguageType = 'LanguageType' in params ? params.LanguageType : null;
+        this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
+        this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
 
     }
 }
 
 module.exports = {
+    GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
+    TextTable: TextTable,
     MLIDCardOCRRequest: MLIDCardOCRRequest,
+    TableOCRRequest: TableOCRRequest,
+    TableOCRResponse: TableOCRResponse,
     BankCardOCRRequest: BankCardOCRRequest,
     Coord: Coord,
     HKIDCardOCRRequest: HKIDCardOCRRequest,
     BankCardOCRResponse: BankCardOCRResponse,
     ItemCoord: ItemCoord,
     MLIDPassportOCRResponse: MLIDPassportOCRResponse,
-    MLIDCardOCRResponse: MLIDCardOCRResponse,
+    GeneralAccurateOCRResponse: GeneralAccurateOCRResponse,
     TextDetection: TextDetection,
     MLIDPassportOCRRequest: MLIDPassportOCRRequest,
     HKIDCardOCRResponse: HKIDCardOCRResponse,
+    MLIDCardOCRResponse: MLIDCardOCRResponse,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
 
 }

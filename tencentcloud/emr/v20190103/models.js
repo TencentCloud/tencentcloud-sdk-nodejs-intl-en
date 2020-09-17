@@ -826,6 +826,61 @@ class TerminateInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Pod storage device description.
+ * @class
+ */
+class PodVolume extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage type. Valid values: "pvc", "hostpath".
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VolumeType = null;
+
+        /**
+         * This field will take effect if `VolumeType` is `pvc`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {PersistentVolumeContext || null}
+         */
+        this.PVCVolume = null;
+
+        /**
+         * This field will take effect if `VolumeType` is `hostpath`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {HostVolumeContext || null}
+         */
+        this.HostVolume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VolumeType = 'VolumeType' in params ? params.VolumeType : null;
+
+        if (params.PVCVolume) {
+            let obj = new PersistentVolumeContext();
+            obj.deserialize(params.PVCVolume)
+            this.PVCVolume = obj;
+        }
+
+        if (params.HostVolume) {
+            let obj = new HostVolumeContext();
+            obj.deserialize(params.HostVolume)
+            this.HostVolume = obj;
+        }
+
+    }
+}
+
+/**
  * TerminateInstance response structure.
  * @class
  */
@@ -920,10 +975,22 @@ class PodSpec extends  AbstractModel {
         this.Memory = null;
 
         /**
-         * Mount point of resource for host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod.
+         * Mount point of resource for host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
          * @type {Array.<string> || null}
          */
         this.DataVolumes = null;
+
+        /**
+         * EKS cluster - CPU type. Valid values: "intel", "amd"
+         * @type {string || null}
+         */
+        this.CpuType = null;
+
+        /**
+         * Pod node data directory mounting information.
+         * @type {Array.<PodVolume> || null}
+         */
+        this.PodVolumes = null;
 
     }
 
@@ -940,6 +1007,16 @@ class PodSpec extends  AbstractModel {
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.DataVolumes = 'DataVolumes' in params ? params.DataVolumes : null;
+        this.CpuType = 'CpuType' in params ? params.CpuType : null;
+
+        if (params.PodVolumes) {
+            this.PodVolumes = new Array();
+            for (let z in params.PodVolumes) {
+                let obj = new PodVolume();
+                obj.deserialize(params.PodVolumes[z]);
+                this.PodVolumes.push(obj);
+            }
+        }
 
     }
 }
@@ -1096,6 +1173,35 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Pod `HostPath` mounting method description
+ * @class
+ */
+class HostVolumeContext extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Directory in the pod for mounting the host, which is the mount point of resources for the host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VolumePath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VolumePath = 'VolumePath' in params ? params.VolumePath : null;
 
     }
 }
@@ -2723,7 +2829,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.WanIp = null;
 
         /**
-         * Node type
+         * Node type. 0: common node; 1: master node;
+2: core node; 3: task node
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2940,7 +3047,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Tags = null;
 
         /**
-         * 
+         * Wether the node is auto-scaling. 0 means common node. 1 means auto-scaling node.
          * @type {number || null}
          */
         this.AutoFlag = null;
@@ -3177,6 +3284,43 @@ class NewResourceSpec extends  AbstractModel {
             this.CommonResourceSpec = obj;
         }
         this.CommonCount = 'CommonCount' in params ? params.CommonCount : null;
+
+    }
+}
+
+/**
+ * Pod `PVC` storage method description
+ * @class
+ */
+class PersistentVolumeContext extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Disk size in GB
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Disk type. Valid values: CLOUD_PREMIUM, CLOUD_SSD
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
 
     }
 }
@@ -3559,12 +3703,14 @@ module.exports = {
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     Resource: Resource,
     TerminateInstanceRequest: TerminateInstanceRequest,
+    PodVolume: PodVolume,
     TerminateInstanceResponse: TerminateInstanceResponse,
     CreateInstanceResponse: CreateInstanceResponse,
     PodSpec: PodSpec,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     TerminateTasksRequest: TerminateTasksRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
+    HostVolumeContext: HostVolumeContext,
     DescribeClusterNodesRequest: DescribeClusterNodesRequest,
     PreExecuteFileSettings: PreExecuteFileSettings,
     CreateInstanceRequest: CreateInstanceRequest,
@@ -3587,6 +3733,7 @@ module.exports = {
     NodeHardwareInfo: NodeHardwareInfo,
     InquiryPriceUpdateInstanceResponse: InquiryPriceUpdateInstanceResponse,
     NewResourceSpec: NewResourceSpec,
+    PersistentVolumeContext: PersistentVolumeContext,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
     CdbInfo: CdbInfo,
     ScaleOutInstanceRequest: ScaleOutInstanceRequest,

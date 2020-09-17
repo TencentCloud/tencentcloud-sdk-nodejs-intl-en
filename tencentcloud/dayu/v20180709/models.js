@@ -8394,7 +8394,7 @@ Required if `Protocol` is `https`;
         this.BasicIspCode = null;
 
         /**
-         * 
+         * This optional field must be specified when HTTPS protocol is used.
          * @type {string || null}
          */
         this.Domain = null;
@@ -12562,7 +12562,7 @@ class L7RuleEntry extends  AbstractModel {
         this.CCLevel = null;
 
         /**
-         * 
+         * Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). The default value is disabled.
          * @type {number || null}
          */
         this.HttpsToHttpEnable = null;
@@ -13175,7 +13175,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.EndTime = null;
 
         /**
-         * Value array
+         * Value array. The unit for attack traffic bandwidth is Mbps, and that for the packet rate is pps.
          * @type {Array.<number> || null}
          */
         this.Data = null;
@@ -13687,6 +13687,12 @@ class DescribeCCTrendRequest extends  AbstractModel {
          */
         this.Id = null;
 
+        /**
+         * (Optional) Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
     }
 
     /**
@@ -13703,6 +13709,7 @@ class DescribeCCTrendRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }

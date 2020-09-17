@@ -1961,7 +1961,7 @@ class DBInstance extends  AbstractModel {
         this.OriginSerialId = null;
 
         /**
-         * Number of nodes. 2: one primary and one secondary, 3: one primary and two secondaries
+         * Number of nodes. 2: one master and one slave, 3: one master and two slaves
          * @type {number || null}
          */
         this.NodeCount = null;

@@ -445,7 +445,7 @@ Note: this parameter is currently fixed at 0.
         this.SmsSdkAppid = null;
 
         /**
-         * 
+         * Pull end time in UNIX timestamp accurate to seconds.
          * @type {number || null}
          */
         this.EndDateTime = null;
@@ -601,7 +601,7 @@ class PullSmsReplyStatus extends  AbstractModel {
         super();
 
         /**
-         * SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://cloud.tencent.com/document/product/382/3773).
+         * SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1).
          * @type {string || null}
          */
         this.ExtendCode = null;
@@ -1096,7 +1096,7 @@ Example: +8613711112222, which has a + sign followed by 86 (country/region code)
         this.TemplateParamSet = null;
 
         /**
-         * SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://cloud.tencent.com/document/product/382/3773).
+         * SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1).
          * @type {string || null}
          */
         this.ExtendCode = null;
@@ -1108,7 +1108,7 @@ Example: +8613711112222, which has a + sign followed by 86 (country/region code)
         this.SessionContext = null;
 
         /**
-         * `senderid` for Global SMS, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://cloud.tencent.com/document/product/382/3773) for assistance. This parameter should be empty for Mainland China SMS.
+         * `senderid` for Global SMS, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1) for assistance. This parameter should be empty for Mainland China SMS.
          * @type {string || null}
          */
         this.SenderId = null;
@@ -1849,7 +1849,7 @@ class SendStatus extends  AbstractModel {
         this.PhoneNumber = null;
 
         /**
-         * Number of billable SMS messages. For billing rules, please see [Billing Policy](https://cloud.tencent.com/document/product/382/36135).
+         * Number of billable SMS messages. For billing rules, please see [Billing Policy](https://intl.cloud.tencent.com/document/product/382/36135?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Fee = null;
@@ -2046,7 +2046,7 @@ Note: this parameter is currently fixed at 0.
         this.SmsSdkAppid = null;
 
         /**
-         * 
+         * Pull end time in UNIX timestamp accurate to seconds.
          * @type {number || null}
          */
         this.EndDateTime = null;

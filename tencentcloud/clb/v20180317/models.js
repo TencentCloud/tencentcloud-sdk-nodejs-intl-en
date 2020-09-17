@@ -8640,7 +8640,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IsBlockTime = null;
 
         /**
-         * 
+         * Whether the IP type is the local BGP
          * @type {boolean || null}
          */
         this.LocalBgp = null;

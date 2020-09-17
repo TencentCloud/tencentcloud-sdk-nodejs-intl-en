@@ -601,6 +601,55 @@ class DescribeProcessTaskStatusRequest extends  AbstractModel {
 }
 
 /**
+ * Region information
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region, such as `ap-guangzhou`, `ap-shanghai` and `ap-beijing`
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Region name, such as `South China (Guangzhou)`, `East China (Shanghai)`, and `North China (Beijing)`
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Region ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region code, such as `gz`, `sh`, and `bj`
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+
+    }
+}
+
+/**
  * ModifyAlarmAttribute request structure.
  * @class
  */
@@ -1509,7 +1558,11 @@ class SecurityDynamic extends  AbstractModel {
         this.Message = null;
 
         /**
-         * 
+         * Security event level.
+<li>RISK: severe</li>
+<li>HIGH: high</li>
+<li>NORMAL: medium</li>
+<li>LOW: low</li>
          * @type {string || null}
          */
         this.SecurityLevel = null;
@@ -2489,7 +2542,7 @@ class MachineTag extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 
+         * Tag ID
          * @type {number || null}
          */
         this.TagId = null;
@@ -3557,13 +3610,13 @@ class LoginWhiteLists extends  AbstractModel {
         this.HostIp = null;
 
         /**
-         * 
+         * Start time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * End time
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4228,6 +4281,12 @@ class ExportNonlocalLoginPlacesResponse extends  AbstractModel {
         this.DownloadUrl = null;
 
         /**
+         * Export task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4243,6 +4302,7 @@ class ExportNonlocalLoginPlacesResponse extends  AbstractModel {
             return;
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4895,31 +4955,31 @@ class DescribeSecurityTrendsResponse extends  AbstractModel {
         this.BaseLines = null;
 
         /**
-         * 
+         * Statistics array of malicious requests.
          * @type {Array.<SecurityTrend> || null}
          */
         this.MaliciousRequests = null;
 
         /**
-         * 
+         * Statistics array of high-risk commands.
          * @type {Array.<SecurityTrend> || null}
          */
         this.HighRiskBashs = null;
 
         /**
-         * 
+         * Statistics array of reverse shells.
          * @type {Array.<SecurityTrend> || null}
          */
         this.ReverseShells = null;
 
         /**
-         * 
+         * Statistics array of local privilege escalations.
          * @type {Array.<SecurityTrend> || null}
          */
         this.PrivilegeEscalations = null;
 
         /**
-         * 
+         * Statistics array of network attacks.
          * @type {Array.<SecurityTrend> || null}
          */
         this.CyberAttacks = null;
@@ -5318,13 +5378,13 @@ class LoginWhiteListsRule extends  AbstractModel {
         this.Id = null;
 
         /**
-         * 
+         * Start time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 
+         * End time
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6081,13 +6141,15 @@ class DescribeTagsRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * CVM instance type.
+<li>CVM: CVM</li>
+<li>BM: CPM</li>
          * @type {string || null}
          */
         this.MachineType = null;
 
         /**
-         * 
+         * Server region, such as `ap-guangzhou` and `ap-shanghai`
          * @type {string || null}
          */
         this.MachineRegion = null;
@@ -6713,28 +6775,37 @@ class Machine extends  AbstractModel {
         this.Tag = null;
 
         /**
-         * 
+         * Number of baseline risks.
          * @type {number || null}
          */
         this.BaselineNum = null;
 
         /**
-         * 
+         * Number of network risks.
          * @type {number || null}
          */
         this.CyberAttackNum = null;
 
         /**
-         * 
+         * Risk status.
+<li>SAFE: safe</li>
+<li>RISK: at risk</li>
+<li>UNKNOWN: unknown</li>
          * @type {string || null}
          */
         this.SecurityStatus = null;
 
         /**
-         * 
+         * Number of intrusions
          * @type {number || null}
          */
         this.InvasionNum = null;
+
+        /**
+         * Region information
+         * @type {RegionInfo || null}
+         */
+        this.RegionInfo = null;
 
     }
 
@@ -6769,6 +6840,12 @@ class Machine extends  AbstractModel {
         this.CyberAttackNum = 'CyberAttackNum' in params ? params.CyberAttackNum : null;
         this.SecurityStatus = 'SecurityStatus' in params ? params.SecurityStatus : null;
         this.InvasionNum = 'InvasionNum' in params ? params.InvasionNum : null;
+
+        if (params.RegionInfo) {
+            let obj = new RegionInfo();
+            obj.deserialize(params.RegionInfo)
+            this.RegionInfo = obj;
+        }
 
     }
 }
@@ -8087,10 +8164,10 @@ class DescribeMachinesRequest extends  AbstractModel {
 
         /**
          * Filter.
-<li>Keywords - String - Required: No - Query keywords</li>
-<li>Status - String - Required: No - Agent status (OFFLINE: offline, ONLINE: online)</li>
-<li>Version - String  Required: No - Current CWP edition (PRO_VERSION: Pro, BASIC_VERSION: Basic)</li>
-Each filter supports only one value. Query with multiple values in "OR" relationship is not supported for the time being
+<li>Keywords - String - Required: no - Query keywords </li>
+<li>Status - String - Required: no - CWP client status (valid values: OFFLINE, ONLINE, UNINSTALLED)</li>
+<li>Version - String - Required: no - Current CWP version (valid values: PRO_VERSION, BASIC_VERSION)</li>
+Each filter can have only one value but does not support "OR" queries with multiple values
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8268,6 +8345,7 @@ module.exports = {
     DescribeWeeklyReportBruteAttacksRequest: DescribeWeeklyReportBruteAttacksRequest,
     CreateUsualLoginPlacesRequest: CreateUsualLoginPlacesRequest,
     DescribeProcessTaskStatusRequest: DescribeProcessTaskStatusRequest,
+    RegionInfo: RegionInfo,
     ModifyAlarmAttributeRequest: ModifyAlarmAttributeRequest,
     ComponentStatistics: ComponentStatistics,
     ExportMalwaresRequest: ExportMalwaresRequest,

@@ -1982,13 +1982,13 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 
+         * The number of records that will be returned. Default value: 10,000.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 
+         * Offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -2388,7 +2388,7 @@ class DescribeClientConnectionsResponse extends  AbstractModel {
         this.Clients = null;
 
         /**
-         * 
+         * The total number of records that meet the query condition, which can be used for paginated queries.
          * @type {number || null}
          */
         this.TotalCount = null;

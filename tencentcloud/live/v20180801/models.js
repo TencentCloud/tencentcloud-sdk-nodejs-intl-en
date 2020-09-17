@@ -8611,7 +8611,7 @@ class ModifyLiveCertRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * General stream mix control parameter
  * @class
  */
 class CommonMixControlParams extends  AbstractModel {
@@ -8619,7 +8619,8 @@ class CommonMixControlParams extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Value range: [0,1]. 
+If 1 is entered, when the layer resolution in the parameter is different from the actual video resolution, the video will be automatically cropped according to the resolution set by the layer.
          * @type {number || null}
          */
         this.UseMixCropCenter = null;

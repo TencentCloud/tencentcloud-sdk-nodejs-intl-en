@@ -575,7 +575,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * 
+         * Cluster tag list
          * @type {Array.<TagInfoUnit> || null}
          */
         this.ResourceTags = null;
@@ -1007,7 +1007,7 @@ class CreateTablesRequest extends  AbstractModel {
         this.SelectedTables = null;
 
         /**
-         * 
+         * Table tag list
          * @type {Array.<TagInfoUnit> || null}
          */
         this.ResourceTags = null;
@@ -1541,7 +1541,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SortRule = null;
 
         /**
-         * 
+         * Distributed index information of table
          * @type {string || null}
          */
         this.DbClusterInfoStruct = null;
@@ -4529,7 +4529,7 @@ class CreateTableGroupRequest extends  AbstractModel {
         this.TableGroupId = null;
 
         /**
-         * 
+         * Table group tag list
          * @type {Array.<TagInfoUnit> || null}
          */
         this.ResourceTags = null;

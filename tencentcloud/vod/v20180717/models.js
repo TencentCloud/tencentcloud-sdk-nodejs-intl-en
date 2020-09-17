@@ -3516,7 +3516,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Template description. Length limit: 256 bytes.
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -5735,6 +5735,49 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * CDN log information
+ * @class
+ */
+class CdnLogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log date in the format of `yyyy-MM-dd`, such as 2018-03-01.
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * Log name in the format of date and time-domain name,
+such as 2018120101-test.vod2.mqcloud.com.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Log download link, which is valid for 24 hours.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Date = 'Date' in params ? params.Date : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * Input of full speech recognition.
  * @class
  */
@@ -7765,6 +7808,43 @@ class ForbidMediaDistributionResponse extends  AbstractModel {
 }
 
 /**
+ * General data type used to describe a time period.
+ * @class
+ */
+class TimeRange extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li>After or at this time (start time).</li>
+<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * @type {string || null}
+         */
+        this.After = null;
+
+        /**
+         * <li>Before or at this time (end time).</li>
+<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * @type {string || null}
+         */
+        this.Before = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.After = 'After' in params ? params.After : null;
+        this.Before = 'Before' in params ? params.Before : null;
+
+    }
+}
+
+/**
  * DescribeAdaptiveDynamicStreamingTemplates request structure.
  * @class
  */
@@ -7847,9 +7927,9 @@ Default value: 10%.
 
         /**
          * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
-Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
+Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
          * @type {string || null}
          */
         this.Height = null;
@@ -9791,7 +9871,7 @@ class SearchMediaResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of media file information, only including the basic information (BasicInfo).
+         * Media file information list.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MediaInfo> || null}
          */
@@ -10623,7 +10703,7 @@ class ImageWatermarkTemplate extends  AbstractModel {
         /**
          * Watermark height. % and px formats are supported:
 <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px;</li>
 `0px` means that `Height` will be proportionally scaled according to the video width.
          * @type {string || null}
          */
@@ -13592,6 +13672,55 @@ class AiRecognitionTaskObjectResultInput extends  AbstractModel {
 }
 
 /**
+ * DescribeCdnLogs request structure.
+ * @class
+ */
+class DescribeCdnLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Start time for log acquisition in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F), which must be after the start time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Information of output video stream
  * @class
  */
@@ -13919,6 +14048,66 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
         this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+
+    }
+}
+
+/**
+ * DescribeCdnLogs response structure.
+ * @class
+ */
+class DescribeCdnLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log download list for CDN nodes in Mainland China.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CdnLogInfo> || null}
+         */
+        this.DomesticCdnLogs = null;
+
+        /**
+         * Log download list for CDN nodes outside Mainland China. If global acceleration is not enabled for the domain name, ignore this parameter.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CdnLogInfo> || null}
+         */
+        this.OverseaCdnLogs = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomesticCdnLogs) {
+            this.DomesticCdnLogs = new Array();
+            for (let z in params.DomesticCdnLogs) {
+                let obj = new CdnLogInfo();
+                obj.deserialize(params.DomesticCdnLogs[z]);
+                this.DomesticCdnLogs.push(obj);
+            }
+        }
+
+        if (params.OverseaCdnLogs) {
+            this.OverseaCdnLogs = new Array();
+            for (let z in params.OverseaCdnLogs) {
+                let obj = new CdnLogInfo();
+                obj.deserialize(params.OverseaCdnLogs[z]);
+                this.OverseaCdnLogs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14255,9 +14444,8 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
 
         /**
          * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
-Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
          * @type {string || null}
          */
         this.Height = null;
@@ -20926,8 +21114,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Media file ID.
-<li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `FileId` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
-<li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Id` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
+<li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `FileId` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
+<li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Id` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -20935,8 +21123,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Media filename
-<li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `BasicInfo.Name` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
-<li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Name` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
+<li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `BasicInfo.Name` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
+<li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Name` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -20944,8 +21132,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Media file address
-<li>If the task flow is initiated by [ProcessMedia](https://intl.cloud.tencent.com/document/product/266/33427?from_cn_redirect=1), this field means the `BasicInfo.MediaUrl` in [MediaInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInfo);</li>
-<li>If the task flow is initiated by [ProcessMediaByUrl](https://intl.cloud.tencent.com/document/product/266/33426?from_cn_redirect=1), this field means the `Url` in [MediaInputInfo](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaInputInfo).</li>
+<li>If the task flow is initiated by [ProcessMedia](https://cloud.tencent.com/document/product/266/33427), this field means the `BasicInfo.MediaUrl` in [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo);</li>
+<li>If the task flow is initiated by [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426), this field means the `Url` in [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo).</li>
          * @type {string || null}
          */
         this.FileUrl = null;
@@ -24383,12 +24571,6 @@ class SearchMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
-         * @type {string || null}
-         */
-        this.Text = null;
-
-        /**
          * Tag set, which matches any element in the set.
 <li>Tag length limit: 8 characters.</li>
 <li>Array length limit: 10.</li>
@@ -24397,49 +24579,85 @@ class SearchMediaRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Category ID set, which matches the categories of the specified IDs and all subcategories. Array length limit: 10.
+         * Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
+<li>Array length limit: 10.</li>
          * @type {Array.<number> || null}
          */
         this.ClassIds = null;
 
         /**
-         * Start time in the creation time range.
-<li>After or at the start time.</li>
-<li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
-         * @type {string || null}
+         * [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
          */
-        this.StartTime = null;
+        this.StreamIds = null;
 
         /**
-         * End time in the creation time range.
-<li>Before the end time.</li>
-<li>In ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
-         * @type {string || null}
+         * Unique ID of LVB recording file. Any element in the set can be matched.
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
          */
-        this.EndTime = null;
+        this.Vids = null;
 
         /**
-         * Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-         * @type {string || null}
+         * Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
          */
-        this.SourceType = null;
+        this.SourceTypes = null;
 
         /**
-         * [LVB code](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) of a stream.
-         * @type {string || null}
+         * File type. Any element in the set can be matched.
+<li>Video: video file</li>
+<li>Audio: audio file</li>
+<li>Image: image file</li>
+         * @type {Array.<string> || null}
          */
-        this.StreamId = null;
+        this.Categories = null;
 
         /**
-         * Unique ID of LVB recording file.
-         * @type {string || null}
+         * Matches files created within the time period.
+<li>Includes specified start and end points in time.</li>
+         * @type {TimeRange || null}
          */
-        this.Vid = null;
+        this.CreateTime = null;
+
+        /**
+         * File ID set. Any element in the set can be matched.
+<li>Array length limit: 10.</li>
+<li>ID length limit: 40 characters.</li>
+         * @type {Array.<string> || null}
+         */
+        this.FileIds = null;
+
+        /**
+         * Filename set. Filenames of media files are fuzzily matched. The higher the match rate, the higher-ranked the result.
+<li>Filename length limit: 40 characters.</li>
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * Filename prefix, which matches the filenames of media files.
+<li>Filename prefix length limit: 20 characters.</li>
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
+         */
+        this.NamePrefixes = null;
+
+        /**
+         * File description set. Any element in the set can be matched.
+<li>Description length limit: 100 characters.</li>
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
+         */
+        this.Descriptions = null;
 
         /**
          * Sorting order.
-<li>Valid value of `Sort.Field`: CreateTime</li>
-<li>If `Text` is specified for the search, the results will be sorted by the match rate, and this field will not take effect</li>
+<li>Valid value of `Sort.Field`: CreateTime.</li>
+<li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
          * @type {SortBy || null}
          */
         this.Sort = null;
@@ -24459,19 +24677,74 @@ class SearchMediaRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * File type:
-<li>Video: video file</li>
-<li>Audio: audio file</li>
-<li>Image: image file</li>
+         * Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
+<li>basicInfo (basic video information).</li>
+<li>metaData (video metadata).</li>
+<li>transcodeInfo (result information of video transcoding).</li>
+<li>animatedGraphicsInfo (result information of animated image generating task).</li>
+<li>imageSpriteInfo (image sprite information).</li>
+<li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
+<li>sampleSnapshotInfo (sampled screenshot information).</li>
+<li>keyFrameDescInfo (timestamp information).</li>
+<li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
+<li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
          * @type {Array.<string> || null}
          */
-        this.Categories = null;
+        this.Filters = null;
 
         /**
          * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
+
+        /**
+         * (This is not recommended. `StreamIds` should be used instead)
+[Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * (This is not recommended. `Vids` should be used instead)
+Unique ID of LVB recording file.
+         * @type {string || null}
+         */
+        this.Vid = null;
+
+        /**
+         * (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
+Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * (This is not recommended. `CreateTime` should be used instead)
+Start time in the creation time range.
+<li>After or at the start time.</li>
+<li>If `CreateTime.After` also exists, it will be used first.</li>
+<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * (This is not recommended. `CreateTime` should be used instead)
+End time in the creation time range.
+<li>Before the end time.</li>
+<li>If `CreateTime.Before` also exists, it will be used first.</li>
+<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * (This is not recommended. `SourceTypes` should be used instead)
+Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+         * @type {string || null}
+         */
+        this.SourceType = null;
 
     }
 
@@ -24482,14 +24755,22 @@ class SearchMediaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = 'Text' in params ? params.Text : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.ClassIds = 'ClassIds' in params ? params.ClassIds : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.StreamId = 'StreamId' in params ? params.StreamId : null;
-        this.Vid = 'Vid' in params ? params.Vid : null;
+        this.StreamIds = 'StreamIds' in params ? params.StreamIds : null;
+        this.Vids = 'Vids' in params ? params.Vids : null;
+        this.SourceTypes = 'SourceTypes' in params ? params.SourceTypes : null;
+        this.Categories = 'Categories' in params ? params.Categories : null;
+
+        if (params.CreateTime) {
+            let obj = new TimeRange();
+            obj.deserialize(params.CreateTime)
+            this.CreateTime = obj;
+        }
+        this.FileIds = 'FileIds' in params ? params.FileIds : null;
+        this.Names = 'Names' in params ? params.Names : null;
+        this.NamePrefixes = 'NamePrefixes' in params ? params.NamePrefixes : null;
+        this.Descriptions = 'Descriptions' in params ? params.Descriptions : null;
 
         if (params.Sort) {
             let obj = new SortBy();
@@ -24498,8 +24779,14 @@ class SearchMediaRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Categories = 'Categories' in params ? params.Categories : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.Vid = 'Vid' in params ? params.Vid : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
 
     }
 }
@@ -25739,6 +26026,13 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         this.Tag = null;
 
         /**
+         * Category list of frame-specific tag names. `CategorySet.N` indicates the N+1-level category.
+For example, if the `Tag` is "tower", and `CategorySet` contains two elements (`CategorySet.0` is "scene", and `CategorySet.1` is "architecture"), then the frame-specific tag is "tower", the first-level category is "scene", and the second-level category is "architecture".
+         * @type {Array.<string> || null}
+         */
+        this.CategorySet = null;
+
+        /**
          * Confidence of intelligently generated frame-specific tag between 0 and 100.
          * @type {number || null}
          */
@@ -25754,6 +26048,7 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
             return;
         }
         this.Tag = 'Tag' in params ? params.Tag : null;
+        this.CategorySet = 'CategorySet' in params ? params.CategorySet : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
@@ -27200,6 +27495,7 @@ module.exports = {
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    CdnLogInfo: CdnLogInfo,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     TaskStatData: TaskStatData,
@@ -27238,6 +27534,7 @@ module.exports = {
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaMiniProgramReviewInfo: MediaMiniProgramReviewInfo,
     ForbidMediaDistributionResponse: ForbidMediaDistributionResponse,
+    TimeRange: TimeRange,
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
     ImageWatermarkInput: ImageWatermarkInput,
     ObjectConfigureInfo: ObjectConfigureInfo,
@@ -27349,11 +27646,13 @@ module.exports = {
     DescribeStorageDetailsResponse: DescribeStorageDetailsResponse,
     PullEventsResponse: PullEventsResponse,
     AiRecognitionTaskObjectResultInput: AiRecognitionTaskObjectResultInput,
+    DescribeCdnLogsRequest: DescribeCdnLogsRequest,
     OutputVideoStream: OutputVideoStream,
     ProcedureTemplate: ProcedureTemplate,
     AiReviewTaskTerrorismResult: AiReviewTaskTerrorismResult,
     ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
     MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
+    DescribeCdnLogsResponse: DescribeCdnLogsResponse,
     MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
     DeletePersonSampleResponse: DeletePersonSampleResponse,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,

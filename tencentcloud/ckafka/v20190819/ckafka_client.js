@@ -29,15 +29,18 @@ const Assignment = models.Assignment;
 const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
 const DeleteTopicRequest = models.DeleteTopicRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
 const GroupInfoTopics = models.GroupInfoTopics;
-const TopicResult = models.TopicResult;
+const FetchMessageListByOffsetRequest = models.FetchMessageListByOffsetRequest;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const DescribeACLResponse = models.DescribeACLResponse;
 const JgwOperateResponse = models.JgwOperateResponse;
 const Topic = models.Topic;
 const Tag = models.Tag;
 const GroupResponse = models.GroupResponse;
+const FetchMessageListByTimestampRequest = models.FetchMessageListByTimestampRequest;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
+const FetchMessageListByOffsetResponse = models.FetchMessageListByOffsetResponse;
 const RouteResponse = models.RouteResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
@@ -58,6 +61,7 @@ const CreateAclResponse = models.CreateAclResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
+const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
 const UserResponse = models.UserResponse;
 const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
@@ -99,11 +103,14 @@ const DescribeGroup = models.DescribeGroup;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
 const DescribeRouteResponse = models.DescribeRouteResponse;
+const TopicResult = models.TopicResult;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
+const ConsumerRecord = models.ConsumerRecord;
 const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
 const Route = models.Route;
+const FetchMessageListByTimestampResponse = models.FetchMessageListByTimestampResponse;
 const Acl = models.Acl;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
@@ -236,6 +243,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the message list based on an offset.
+     * @param {FetchMessageListByOffsetRequest} req
+     * @param {function(string, FetchMessageListByOffsetResponse):void} cb
+     * @public
+     */
+    FetchMessageListByOffset(req, cb) {
+        let resp = new FetchMessageListByOffsetResponse();
+        this.request("FetchMessageListByOffset", req, resp, cb);
+    }
+
+    /**
      * This API is used to enumerate ACLs.
      * @param {DescribeACLRequest} req
      * @param {function(string, DescribeACLResponse):void} cb
@@ -255,6 +273,17 @@ class CkafkaClient extends AbstractClient {
     DescribeTopicDetail(req, cb) {
         let resp = new DescribeTopicDetailResponse();
         this.request("DescribeTopicDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query messages based on a specified offset position.
+     * @param {FetchMessageByOffsetRequest} req
+     * @param {function(string, FetchMessageByOffsetResponse):void} cb
+     * @public
+     */
+    FetchMessageByOffset(req, cb) {
+        let resp = new FetchMessageByOffsetResponse();
+        this.request("FetchMessageByOffset", req, resp, cb);
     }
 
     /**
@@ -388,6 +417,17 @@ class CkafkaClient extends AbstractClient {
     DescribeGroupOffsets(req, cb) {
         let resp = new DescribeGroupOffsetsResponse();
         this.request("DescribeGroupOffsets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the message list based on a timestamp.
+     * @param {FetchMessageListByTimestampRequest} req
+     * @param {function(string, FetchMessageListByTimestampResponse):void} cb
+     * @public
+     */
+    FetchMessageListByTimestamp(req, cb) {
+        let resp = new FetchMessageListByTimestampResponse();
+        this.request("FetchMessageListByTimestamp", req, resp, cb);
     }
 
     /**

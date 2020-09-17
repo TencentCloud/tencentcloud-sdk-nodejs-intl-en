@@ -3386,6 +3386,139 @@ class DeleteRoutesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCrossBorderCompliance request structure.
+ * @class
+ */
+class DescribeCrossBorderComplianceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * (Exact match) Service provider. Valid values: `UNICOM`.
+         * @type {string || null}
+         */
+        this.ServiceProvider = null;
+
+        /**
+         * (Exact match) ID of compliance review form.
+         * @type {number || null}
+         */
+        this.ComplianceId = null;
+
+        /**
+         * (Fuzzy match) Company name.
+         * @type {string || null}
+         */
+        this.Company = null;
+
+        /**
+         * (Fuzzy match) Unified Social Credit Code.
+         * @type {string || null}
+         */
+        this.UniformSocialCreditCode = null;
+
+        /**
+         * (Fuzzy match) Legal person.
+         * @type {string || null}
+         */
+        this.LegalPerson = null;
+
+        /**
+         * (Fuzzy match) Issuing authority.
+         * @type {string || null}
+         */
+        this.IssuingAuthority = null;
+
+        /**
+         * (Fuzzy match) Business address.
+         * @type {string || null}
+         */
+        this.BusinessAddress = null;
+
+        /**
+         * (Exact match) Zip code.
+         * @type {number || null}
+         */
+        this.PostCode = null;
+
+        /**
+         * (Fuzzy match) Operator.
+         * @type {string || null}
+         */
+        this.Manager = null;
+
+        /**
+         * (Exact match) Operator ID card number.
+         * @type {string || null}
+         */
+        this.ManagerId = null;
+
+        /**
+         * (Fuzzy match) Operator address.
+         * @type {string || null}
+         */
+        this.ManagerAddress = null;
+
+        /**
+         * (Exact match) Operator phone number.
+         * @type {string || null}
+         */
+        this.ManagerTelephone = null;
+
+        /**
+         * (Exact match) Email.
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * (Exact match) Service start date, such as `2020-07-28`.
+         * @type {string || null}
+         */
+        this.ServiceStartDate = null;
+
+        /**
+         * (Exact match) Service end date, such as `2020-07-28`.
+         * @type {string || null}
+         */
+        this.ServiceEndDate = null;
+
+        /**
+         * (Exact match) Status. Valid values: `PENDING`, `APPROVED`, and `DENY`.
+         * @type {string || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceProvider = 'ServiceProvider' in params ? params.ServiceProvider : null;
+        this.ComplianceId = 'ComplianceId' in params ? params.ComplianceId : null;
+        this.Company = 'Company' in params ? params.Company : null;
+        this.UniformSocialCreditCode = 'UniformSocialCreditCode' in params ? params.UniformSocialCreditCode : null;
+        this.LegalPerson = 'LegalPerson' in params ? params.LegalPerson : null;
+        this.IssuingAuthority = 'IssuingAuthority' in params ? params.IssuingAuthority : null;
+        this.BusinessAddress = 'BusinessAddress' in params ? params.BusinessAddress : null;
+        this.PostCode = 'PostCode' in params ? params.PostCode : null;
+        this.Manager = 'Manager' in params ? params.Manager : null;
+        this.ManagerId = 'ManagerId' in params ? params.ManagerId : null;
+        this.ManagerAddress = 'ManagerAddress' in params ? params.ManagerAddress : null;
+        this.ManagerTelephone = 'ManagerTelephone' in params ? params.ManagerTelephone : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.ServiceStartDate = 'ServiceStartDate' in params ? params.ServiceStartDate : null;
+        this.ServiceEndDate = 'ServiceEndDate' in params ? params.ServiceEndDate : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
  * DescribeSecurityGroupAssociationStatistics response structure.
  * @class
  */
@@ -3468,6 +3601,48 @@ Note: This field may return null, indicating that no valid value was found.
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The EIP bound to the NAT gateway
+ * @class
+ */
+class NatGatewayAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the Elastic IP (EIP), such as `eip-11112222`.
+         * @type {string || null}
+         */
+        this.AddressId = null;
+
+        /**
+         * The public IP address, such as `123.121.34.33`.
+         * @type {string || null}
+         */
+        this.PublicIpAddress = null;
+
+        /**
+         * The block status of the resource. `true` indicates the EIP is blocked. `false` indicates that the EIP is not blocked.
+         * @type {boolean || null}
+         */
+        this.IsBlocked = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
+        this.IsBlocked = 'IsBlocked' in params ? params.IsBlocked : null;
 
     }
 }
@@ -7978,13 +8153,13 @@ class NatGateway extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 
+         * IDs of direct connect gateway associated.
          * @type {Array.<string> || null}
          */
         this.DirectConnectGatewayIds = null;
 
         /**
-         * 
+         * Subnet ID.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -8241,7 +8416,7 @@ class ResourceDashboard extends  AbstractModel {
         this.Oracle = null;
 
         /**
-         * 
+         * ElasticSearch Service.
          * @type {number || null}
          */
         this.ElasticSearch = null;
@@ -9827,7 +10002,7 @@ NAT type supports network address switch configuration. After the type is confir
         this.EnableBGP = null;
 
         /**
-         * 
+         * Whether to enable BGP's `community` attribute. Valid values: enable, disable
          * @type {boolean || null}
          */
         this.EnableBGPCommunity = null;
@@ -9934,6 +10109,56 @@ class HaVipDisassociateAddressIpRequest extends  AbstractModel {
             return;
         }
         this.HaVipId = 'HaVipId' in params ? params.HaVipId : null;
+
+    }
+}
+
+/**
+ * DescribeCrossBorderCompliance response structure.
+ * @class
+ */
+class DescribeCrossBorderComplianceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of compliance review forms.
+         * @type {Array.<CrossBorderCompliance> || null}
+         */
+        this.CrossBorderComplianceSet = null;
+
+        /**
+         * Total number of compliance review forms.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CrossBorderComplianceSet) {
+            this.CrossBorderComplianceSet = new Array();
+            for (let z in params.CrossBorderComplianceSet) {
+                let obj = new CrossBorderCompliance();
+                obj.deserialize(params.CrossBorderComplianceSet[z]);
+                this.CrossBorderComplianceSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10875,7 +11100,7 @@ class CvmInstance extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * 
+         * Instance type.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -11840,30 +12065,48 @@ Whether the Anycast EIP can be bound to CLB instances.
 }
 
 /**
- * The EIP bound to the NAT gateway
+ * ModifyVpnConnectionAttribute request structure.
  * @class
  */
-class NatGatewayAddress extends  AbstractModel {
+class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique ID of the Elastic IP (EIP), such as `eip-11112222`.
+         * The ID of the VPN tunnel instance, such as `vpnx-f49l6u0z`.
          * @type {string || null}
          */
-        this.AddressId = null;
+        this.VpnConnectionId = null;
 
         /**
-         * The public IP address, such as `123.121.34.33`.
+         * VPN tunnel can be named freely, but the maximum length is 60 characters.
          * @type {string || null}
          */
-        this.PublicIpAddress = null;
+        this.VpnConnectionName = null;
 
         /**
-         * The block status of the resource. `true` indicates the EIP is blocked. `false` indicates that the EIP is not blocked.
-         * @type {boolean || null}
+         * The pre-shared key.
+         * @type {string || null}
          */
-        this.IsBlocked = null;
+        this.PreShareKey = null;
+
+        /**
+         * The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
+         * @type {Array.<SecurityPolicyDatabase> || null}
+         */
+        this.SecurityPolicyDatabases = null;
+
+        /**
+         * IKE (Internet Key Exchange) configuration. IKE comes with a self-protection mechanism. The network security protocol is configured by the user.
+         * @type {IKEOptionsSpecification || null}
+         */
+        this.IKEOptionsSpecification = null;
+
+        /**
+         * IPSec configuration. The IPSec secure session configuration is provided by Tencent Cloud.
+         * @type {IPSECOptionsSpecification || null}
+         */
+        this.IPSECOptionsSpecification = null;
 
     }
 
@@ -11874,9 +12117,30 @@ class NatGatewayAddress extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressId = 'AddressId' in params ? params.AddressId : null;
-        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
-        this.IsBlocked = 'IsBlocked' in params ? params.IsBlocked : null;
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
+        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
+        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
+
+        if (params.SecurityPolicyDatabases) {
+            this.SecurityPolicyDatabases = new Array();
+            for (let z in params.SecurityPolicyDatabases) {
+                let obj = new SecurityPolicyDatabase();
+                obj.deserialize(params.SecurityPolicyDatabases[z]);
+                this.SecurityPolicyDatabases.push(obj);
+            }
+        }
+
+        if (params.IKEOptionsSpecification) {
+            let obj = new IKEOptionsSpecification();
+            obj.deserialize(params.IKEOptionsSpecification)
+            this.IKEOptionsSpecification = obj;
+        }
+
+        if (params.IPSECOptionsSpecification) {
+            let obj = new IPSECOptionsSpecification();
+            obj.deserialize(params.IPSECOptionsSpecification)
+            this.IPSECOptionsSpecification = obj;
+        }
 
     }
 }
@@ -13281,18 +13545,24 @@ class AccountAttribute extends  AbstractModel {
 }
 
 /**
- * ModifyHaVipAttribute response structure.
+ * DeleteDirectConnectGatewayCcnRoutes request structure.
  * @class
  */
-class ModifyHaVipAttributeResponse extends  AbstractModel {
+class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DirectConnectGatewayId = null;
+
+        /**
+         * The route ID, such as `ccnr-f49l6u0z`.
+         * @type {Array.<string> || null}
+         */
+        this.RouteIds = null;
 
     }
 
@@ -13303,7 +13573,8 @@ class ModifyHaVipAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
 
     }
 }
@@ -13401,6 +13672,12 @@ class CreateFlowLogRequest extends  AbstractModel {
          */
         this.FlowLogDescription = null;
 
+        /**
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -13417,6 +13694,15 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.TrafficType = 'TrafficType' in params ? params.TrafficType : null;
         this.CloudLogId = 'CloudLogId' in params ? params.CloudLogId : null;
         this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -14906,6 +15192,26 @@ class Address extends  AbstractModel {
          */
         this.InternetServiceProvider = null;
 
+        /**
+         * Whether the EIP is in a local BGP.
+         * @type {boolean || null}
+         */
+        this.LocalBgp = null;
+
+        /**
+         * Bandwidth value of EIP. The EIP for the bill-by-CVM account will return `null`.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * Network billing mode of EIP. The EIP for the bill-by-CVM account will return `null`.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
     }
 
     /**
@@ -14935,6 +15241,9 @@ class Address extends  AbstractModel {
             this.EipAlgType = obj;
         }
         this.InternetServiceProvider = 'InternetServiceProvider' in params ? params.InternetServiceProvider : null;
+        this.LocalBgp = 'LocalBgp' in params ? params.LocalBgp : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
 
     }
 }
@@ -16229,7 +16538,7 @@ class CheckAssistantCidrResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Array of conflict resources.
          * @type {Array.<ConflictSource> || null}
          */
         this.ConflictSourceSet = null;
@@ -17309,6 +17618,34 @@ class ReleaseAddressesResponse extends  AbstractModel {
 }
 
 /**
+ * AuditCrossBorderCompliance response structure.
+ * @class
+ */
+class AuditCrossBorderComplianceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquiryPriceResetVpnGatewayInternetMaxBandwidth request structure.
  * @class
  */
@@ -17431,24 +17768,18 @@ class ModifyPrivateIpAddressesAttributeResponse extends  AbstractModel {
 }
 
 /**
- * DeleteDirectConnectGatewayCcnRoutes request structure.
+ * ModifyHaVipAttribute response structure.
  * @class
  */
-class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
+class ModifyHaVipAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DirectConnectGatewayId = null;
-
-        /**
-         * The route ID, such as `ccnr-f49l6u0z`.
-         * @type {Array.<string> || null}
-         */
-        this.RouteIds = null;
+        this.RequestId = null;
 
     }
 
@@ -17459,8 +17790,7 @@ class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
-        this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -19270,48 +19600,144 @@ class DeleteSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * ModifyVpnConnectionAttribute request structure.
+ * Compliance review form.
  * @class
  */
-class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
+class CrossBorderCompliance extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The ID of the VPN tunnel instance, such as `vpnx-f49l6u0z`.
+         * Service provider. Valid values: `UNICOM`.
          * @type {string || null}
          */
-        this.VpnConnectionId = null;
+        this.ServiceProvider = null;
 
         /**
-         * VPN tunnel can be named freely, but the maximum length is 60 characters.
+         * ID of compliance review form.
+         * @type {number || null}
+         */
+        this.ComplianceId = null;
+
+        /**
+         * Full company name.
          * @type {string || null}
          */
-        this.VpnConnectionName = null;
+        this.Company = null;
 
         /**
-         * The pre-shared key.
+         * Unified Social Credit Code.
          * @type {string || null}
          */
-        this.PreShareKey = null;
+        this.UniformSocialCreditCode = null;
 
         /**
-         * The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
-         * @type {Array.<SecurityPolicyDatabase> || null}
+         * Legal person.
+         * @type {string || null}
          */
-        this.SecurityPolicyDatabases = null;
+        this.LegalPerson = null;
 
         /**
-         * IKE (Internet Key Exchange) configuration. IKE comes with a self-protection mechanism. The network security protocol is configured by the user.
-         * @type {IKEOptionsSpecification || null}
+         * Issuing authority.
+         * @type {string || null}
          */
-        this.IKEOptionsSpecification = null;
+        this.IssuingAuthority = null;
 
         /**
-         * IPSec configuration. The IPSec secure session configuration is provided by Tencent Cloud.
-         * @type {IPSECOptionsSpecification || null}
+         * Business License.
+         * @type {string || null}
          */
-        this.IPSECOptionsSpecification = null;
+        this.BusinessLicense = null;
+
+        /**
+         * Business address.
+         * @type {string || null}
+         */
+        this.BusinessAddress = null;
+
+        /**
+         * Zip code.
+         * @type {number || null}
+         */
+        this.PostCode = null;
+
+        /**
+         * Operator.
+         * @type {string || null}
+         */
+        this.Manager = null;
+
+        /**
+         * Operator ID card number.
+         * @type {string || null}
+         */
+        this.ManagerId = null;
+
+        /**
+         * Operator ID card.
+         * @type {string || null}
+         */
+        this.ManagerIdCard = null;
+
+        /**
+         * Operator address.
+         * @type {string || null}
+         */
+        this.ManagerAddress = null;
+
+        /**
+         * Operator phone number.
+         * @type {string || null}
+         */
+        this.ManagerTelephone = null;
+
+        /**
+         * Email.
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * Service handling form.
+         * @type {string || null}
+         */
+        this.ServiceHandlingForm = null;
+
+        /**
+         * Authorization letter.
+         * @type {string || null}
+         */
+        this.AuthorizationLetter = null;
+
+        /**
+         * Information security commitment.
+         * @type {string || null}
+         */
+        this.SafetyCommitment = null;
+
+        /**
+         * Service start date.
+         * @type {string || null}
+         */
+        this.ServiceStartDate = null;
+
+        /**
+         * Service end date.
+         * @type {string || null}
+         */
+        this.ServiceEndDate = null;
+
+        /**
+         * Status. Valid values: `PENDING`, `APPROVED`, and `DENY`.
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Creation time of the review form.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
 
     }
 
@@ -19322,30 +19748,28 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
-        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
-        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
-
-        if (params.SecurityPolicyDatabases) {
-            this.SecurityPolicyDatabases = new Array();
-            for (let z in params.SecurityPolicyDatabases) {
-                let obj = new SecurityPolicyDatabase();
-                obj.deserialize(params.SecurityPolicyDatabases[z]);
-                this.SecurityPolicyDatabases.push(obj);
-            }
-        }
-
-        if (params.IKEOptionsSpecification) {
-            let obj = new IKEOptionsSpecification();
-            obj.deserialize(params.IKEOptionsSpecification)
-            this.IKEOptionsSpecification = obj;
-        }
-
-        if (params.IPSECOptionsSpecification) {
-            let obj = new IPSECOptionsSpecification();
-            obj.deserialize(params.IPSECOptionsSpecification)
-            this.IPSECOptionsSpecification = obj;
-        }
+        this.ServiceProvider = 'ServiceProvider' in params ? params.ServiceProvider : null;
+        this.ComplianceId = 'ComplianceId' in params ? params.ComplianceId : null;
+        this.Company = 'Company' in params ? params.Company : null;
+        this.UniformSocialCreditCode = 'UniformSocialCreditCode' in params ? params.UniformSocialCreditCode : null;
+        this.LegalPerson = 'LegalPerson' in params ? params.LegalPerson : null;
+        this.IssuingAuthority = 'IssuingAuthority' in params ? params.IssuingAuthority : null;
+        this.BusinessLicense = 'BusinessLicense' in params ? params.BusinessLicense : null;
+        this.BusinessAddress = 'BusinessAddress' in params ? params.BusinessAddress : null;
+        this.PostCode = 'PostCode' in params ? params.PostCode : null;
+        this.Manager = 'Manager' in params ? params.Manager : null;
+        this.ManagerId = 'ManagerId' in params ? params.ManagerId : null;
+        this.ManagerIdCard = 'ManagerIdCard' in params ? params.ManagerIdCard : null;
+        this.ManagerAddress = 'ManagerAddress' in params ? params.ManagerAddress : null;
+        this.ManagerTelephone = 'ManagerTelephone' in params ? params.ManagerTelephone : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.ServiceHandlingForm = 'ServiceHandlingForm' in params ? params.ServiceHandlingForm : null;
+        this.AuthorizationLetter = 'AuthorizationLetter' in params ? params.AuthorizationLetter : null;
+        this.SafetyCommitment = 'SafetyCommitment' in params ? params.SafetyCommitment : null;
+        this.ServiceStartDate = 'ServiceStartDate' in params ? params.ServiceStartDate : null;
+        this.ServiceEndDate = 'ServiceEndDate' in params ? params.ServiceEndDate : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -20854,6 +21278,48 @@ class InstanceChargePrepaid extends  AbstractModel {
 }
 
 /**
+ * AuditCrossBorderCompliance request structure.
+ * @class
+ */
+class AuditCrossBorderComplianceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service provider. Valid values: `UNICOM`.
+         * @type {string || null}
+         */
+        this.ServiceProvider = null;
+
+        /**
+         * Unique ID of compliance review form.
+         * @type {number || null}
+         */
+        this.ComplianceId = null;
+
+        /**
+         * Audit behavior. Valid values: `APPROVED` and `DENY`.
+         * @type {string || null}
+         */
+        this.AuditBehavior = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceProvider = 'ServiceProvider' in params ? params.ServiceProvider : null;
+        this.ComplianceId = 'ComplianceId' in params ? params.ComplianceId : null;
+        this.AuditBehavior = 'AuditBehavior' in params ? params.AuditBehavior : null;
+
+    }
+}
+
+/**
  * DescribeNetDetects response structure.
  * @class
  */
@@ -20978,8 +21444,10 @@ module.exports = {
     HaVipAssociateAddressIpRequest: HaVipAssociateAddressIpRequest,
     DisassociateNatGatewayAddressResponse: DisassociateNatGatewayAddressResponse,
     DeleteRoutesResponse: DeleteRoutesResponse,
+    DescribeCrossBorderComplianceRequest: DescribeCrossBorderComplianceRequest,
     DescribeSecurityGroupAssociationStatisticsResponse: DescribeSecurityGroupAssociationStatisticsResponse,
     ModifyAssistantCidrResponse: ModifyAssistantCidrResponse,
+    NatGatewayAddress: NatGatewayAddress,
     ModifyNetworkAclEntriesResponse: ModifyNetworkAclEntriesResponse,
     DescribeFlowLogRequest: DescribeFlowLogRequest,
     DescribeAccountAttributesResponse: DescribeAccountAttributesResponse,
@@ -21109,6 +21577,7 @@ module.exports = {
     DirectConnectGateway: DirectConnectGateway,
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
+    DescribeCrossBorderComplianceResponse: DescribeCrossBorderComplianceResponse,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
     AssociateDirectConnectGatewayNatGatewayResponse: AssociateDirectConnectGatewayNatGatewayResponse,
     DescribeVpnGatewayCcnRoutesRequest: DescribeVpnGatewayCcnRoutesRequest,
@@ -21145,7 +21614,7 @@ module.exports = {
     DownloadCustomerGatewayConfigurationResponse: DownloadCustomerGatewayConfigurationResponse,
     DeleteNetDetectResponse: DeleteNetDetectResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
-    NatGatewayAddress: NatGatewayAddress,
+    ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
     ModifyAssistantCidrRequest: ModifyAssistantCidrRequest,
     ModifyGatewayFlowQosResponse: ModifyGatewayFlowQosResponse,
     ModifySecurityGroupAttributeResponse: ModifySecurityGroupAttributeResponse,
@@ -21184,7 +21653,7 @@ module.exports = {
     DeleteRouteTableResponse: DeleteRouteTableResponse,
     DescribeVpcInstancesResponse: DescribeVpcInstancesResponse,
     AccountAttribute: AccountAttribute,
-    ModifyHaVipAttributeResponse: ModifyHaVipAttributeResponse,
+    DeleteDirectConnectGatewayCcnRoutesRequest: DeleteDirectConnectGatewayCcnRoutesRequest,
     CreateNatGatewayDestinationIpPortTranslationNatRuleRequest: CreateNatGatewayDestinationIpPortTranslationNatRuleRequest,
     CreateFlowLogRequest: CreateFlowLogRequest,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
@@ -21275,11 +21744,12 @@ module.exports = {
     CreateBandwidthPackageResponse: CreateBandwidthPackageResponse,
     ResetVpnConnectionRequest: ResetVpnConnectionRequest,
     ReleaseAddressesResponse: ReleaseAddressesResponse,
+    AuditCrossBorderComplianceResponse: AuditCrossBorderComplianceResponse,
     InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest: InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest,
     ReplaceSecurityGroupPolicyResponse: ReplaceSecurityGroupPolicyResponse,
     EnableGatewayFlowMonitorRequest: EnableGatewayFlowMonitorRequest,
     ModifyPrivateIpAddressesAttributeResponse: ModifyPrivateIpAddressesAttributeResponse,
-    DeleteDirectConnectGatewayCcnRoutesRequest: DeleteDirectConnectGatewayCcnRoutesRequest,
+    ModifyHaVipAttributeResponse: ModifyHaVipAttributeResponse,
     CcnBandwidthInfo: CcnBandwidthInfo,
     DeleteSecurityGroupResponse: DeleteSecurityGroupResponse,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
@@ -21322,7 +21792,7 @@ module.exports = {
     DescribeAddressQuotaResponse: DescribeAddressQuotaResponse,
     CreateCustomerGatewayRequest: CreateCustomerGatewayRequest,
     DeleteSecurityGroupRequest: DeleteSecurityGroupRequest,
-    ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
+    CrossBorderCompliance: CrossBorderCompliance,
     CreateRouteTableResponse: CreateRouteTableResponse,
     ItemPrice: ItemPrice,
     DescribeDirectConnectGatewayCcnRoutesResponse: DescribeDirectConnectGatewayCcnRoutesResponse,
@@ -21358,6 +21828,7 @@ module.exports = {
     DeleteVpcResponse: DeleteVpcResponse,
     AcceptAttachCcnInstancesResponse: AcceptAttachCcnInstancesResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
+    AuditCrossBorderComplianceRequest: AuditCrossBorderComplianceRequest,
     DescribeNetDetectsResponse: DescribeNetDetectsResponse,
 
 }

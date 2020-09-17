@@ -4987,6 +4987,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.TypeList = null;
 
+        /**
+         * Internal parameter, which can be ignored
+         * @type {string || null}
+         */
+        this.MonitorVersion = null;
+
     }
 
     /**
@@ -5017,6 +5023,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.SearchKeys = 'SearchKeys' in params ? params.SearchKeys : null;
         this.TypeList = 'TypeList' in params ? params.TypeList : null;
+        this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
 
     }
 }
@@ -5676,6 +5683,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.RemainBandwidthDuration = null;
 
+        /**
+         * Disk size of the Tendis instance
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Monitoring granularity type. Valid values: 1m (monitoring at 1-minute granularity), 5s (monitoring at 5-second granularity)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MonitorVersion = null;
+
     }
 
     /**
@@ -5744,6 +5765,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
         this.RemainBandwidthDuration = 'RemainBandwidthDuration' in params ? params.RemainBandwidthDuration : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
 
     }
 }

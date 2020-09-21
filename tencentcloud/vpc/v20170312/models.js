@@ -3400,7 +3400,7 @@ class DescribeCrossBorderComplianceRequest extends  AbstractModel {
         this.ServiceProvider = null;
 
         /**
-         * (Exact match) ID of compliance review form.
+         * (Exact match) ID of compliance review request.
          * @type {number || null}
          */
         this.ComplianceId = null;
@@ -10122,13 +10122,13 @@ class DescribeCrossBorderComplianceResponse extends  AbstractModel {
         super();
 
         /**
-         * List of compliance review forms.
+         * List of compliance review requests.
          * @type {Array.<CrossBorderCompliance> || null}
          */
         this.CrossBorderComplianceSet = null;
 
         /**
-         * Total number of compliance review forms.
+         * Total number of compliance review requests.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -19600,7 +19600,7 @@ class DeleteSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * Compliance review form.
+ * Compliance review request
  * @class
  */
 class CrossBorderCompliance extends  AbstractModel {
@@ -19614,7 +19614,7 @@ class CrossBorderCompliance extends  AbstractModel {
         this.ServiceProvider = null;
 
         /**
-         * ID of compliance review form.
+         * ID of compliance review request.
          * @type {number || null}
          */
         this.ComplianceId = null;
@@ -19644,7 +19644,7 @@ class CrossBorderCompliance extends  AbstractModel {
         this.IssuingAuthority = null;
 
         /**
-         * Business License.
+         * Business license.
          * @type {string || null}
          */
         this.BusinessLicense = null;
@@ -21292,7 +21292,7 @@ class AuditCrossBorderComplianceRequest extends  AbstractModel {
         this.ServiceProvider = null;
 
         /**
-         * Unique ID of compliance review form.
+         * Unique ID of compliance review request.
          * @type {number || null}
          */
         this.ComplianceId = null;

@@ -1824,7 +1824,7 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -2283,7 +2283,7 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -2891,13 +2891,13 @@ class ComposeMediaRequest extends  AbstractModel {
         this.Canvas = null;
 
         /**
-         * 
+         * This parameter is used to pass through user request information. `ComposeMediaComplete` callback will return the value of this field. It contains up to 1,000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * 
+         * This parameter is used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is null or an empty string, the above operation will not be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -3958,7 +3958,7 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -13781,7 +13781,7 @@ class ProcedureTemplate extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -14692,7 +14692,7 @@ Default value: black.
         this.FillType = null;
 
         /**
-         * 
+         * Template description.
          * @type {string || null}
          */
         this.Comment = null;
@@ -14781,7 +14781,9 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 
+         * The list of screenshot time points. “s” and “%” formats are supported:
+<li>When a time point string ends with “s”, its unit is second. For example, “3.5 s” means the 3.5th second of the video;</li>
+<li>When a time point string ends with “%”, it is marked with corresponding percentage of the video’s duration. For example, “10%” means that the time point is at the 10% of the video’s entire duration.</li>
          * @type {Array.<string> || null}
          */
         this.ExtTimeOffsetSet = null;
@@ -15049,7 +15051,7 @@ class ApplyUploadRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * 
+         * Reserved field for special purposes.
          * @type {string || null}
          */
         this.ExtInfo = null;
@@ -15288,7 +15290,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Vid = null;
 
         /**
-         * 
+         * File type:
+<li>Video: video file</li>
+<li>Audio: audio file</li>
+<li>Image: image file</li>
          * @type {string || null}
          */
         this.Category = null;
@@ -22374,7 +22379,7 @@ Default value: black.
         this.FillType = null;
 
         /**
-         * 
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;

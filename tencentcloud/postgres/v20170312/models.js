@@ -103,7 +103,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.AutoRenewFlag = null;
 
         /**
-         * 
+         * Activity ID
          * @type {number || null}
          */
         this.ActivityId = null;
@@ -830,13 +830,13 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 
+         * Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * 
+         * In ascending or descending order
          * @type {string || null}
          */
         this.OrderByType = null;
@@ -1403,7 +1403,7 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         this.DealName = null;
 
         /**
-         * 
+         * Bill ID of frozen fees
          * @type {string || null}
          */
         this.BillId = null;
@@ -1583,19 +1583,19 @@ class DBInstance extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * User `AppId`
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * 
+         * Instance `Uid`
          * @type {number || null}
          */
         this.Uid = null;
 
         /**
-         * 
+         * Whether the instance supports IPv6 address access. Valid values: 1 (yes), 0 (no)
          * @type {number || null}
          */
         this.SupportIpv6 = null;
@@ -3199,7 +3199,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.VoucherIds = null;
 
         /**
-         * 
+         * Activity ID
          * @type {number || null}
          */
         this.ActivityId = null;
@@ -3496,13 +3496,13 @@ class CreateDBInstancesResponse extends  AbstractModel {
         this.DealNames = null;
 
         /**
-         * 
+         * Bill ID of frozen fees
          * @type {string || null}
          */
         this.BillId = null;
 
         /**
-         * 
+         * ID set of instances which have been created successfully. The parameter value will be returned only when the billing mode is postpaid.
          * @type {Array.<string> || null}
          */
         this.DBInstanceIdSet = null;
@@ -3569,7 +3569,7 @@ class Xlog extends  AbstractModel {
         this.ExternalAddr = null;
 
         /**
-         * 
+         * Backup file size
          * @type {number || null}
          */
         this.Size = null;

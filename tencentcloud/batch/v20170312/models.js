@@ -723,7 +723,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. For more information on system disk types and their limits, refer to [Storage Overview](https://cloud.tencent.com/document/product/213/4952). Valid values: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
+         * System disk type. For more information on system disk types and their limits, refer to [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1442,19 +1442,19 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.EnvType = null;
 
         /**
-         * 
+         * Compute environment resource type. Valid values: CVM, CPM (Bare Metal)
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * 
+         * Next action
          * @type {string || null}
          */
         this.NextAction = null;
 
         /**
-         * 
+         * Number of compute nodes added to the compute environment by the user
          * @type {number || null}
          */
         this.AttachedComputeNodeCount = null;
@@ -1903,7 +1903,7 @@ class LocalDiskType extends  AbstractModel {
         this.MaxSize = null;
 
         /**
-         * 
+         * Whether a local disk is required during purchase. Valid values:<br><li>REQUIRED: required<br><li>OPTIONAL: optional
          * @type {string || null}
          */
         this.Required = null;
@@ -3020,13 +3020,13 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [Storage Overview](https://cloud.tencent.com/document/product/213/4952). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
+         * Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * The type of the data disk. For more information regarding data disk types and limits, refer to [Storage Overview](https://cloud.tencent.com/document/product/213/4952). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for `ResizeInstanceDisk`.
+         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3694,7 +3694,7 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable [Cloud Security](/document/product/296). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
+         * Whether to enable [Cloud Security](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
          * @type {boolean || null}
          */
         this.Enabled = null;
@@ -4056,7 +4056,7 @@ class Dependence extends  AbstractModel {
 > * If there are multiple `Filter` parameters, they are evaluated using the logical `AND` operator.
 > * If a `Filter` contains multiple `Values`, they are evaluated using the logical `OR` operator.
 >
-> Take [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) as an example. You can use the following filters to query the instances in availability zone (`zone`) Guangzhou Zone 1 ***and*** whose billing plan (`instance-charge-type`) is pay-as-you-go:
+> Take [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) as an example. You can use the following filters to query the instances in availability zone (`zone`) Guangzhou Zone 1 ***and*** whose billing plan (`instance-charge-type`) is pay-as-you-go:
 ```
 Filters.0.Name=zone
 &Filters.0.Values.0=ap-guangzhou-1
@@ -4217,13 +4217,13 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * The ID of [availability zone](https://cloud.tencent.com/document/product/213/15753#ZoneInfo) where the instance locates. It can obtained in the `Zone` field returned by [DescribeZones](https://cloud.tencent.com/document/213/15707) API.
+         * The ID of [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) where the instance locates. It can obtained in the `Zone` field returned by [DescribeZones](https://intl.cloud.tencent.com/document/213/15707?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](/document/api/378/4400) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
+         * ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -4241,7 +4241,7 @@ class Placement extends  AbstractModel {
         this.HostIps = null;
 
         /**
-         * 
+         * The ID of the CDH to which the instance belongs, only used as an output parameter.
          * @type {string || null}
          */
         this.HostId = null;
@@ -4333,13 +4333,14 @@ class ComputeNode extends  AbstractModel {
         this.PublicIpAddresses = null;
 
         /**
-         * 
+         * Compute environment resource type. Valid values: `CVM`, `CPM` (Bare Metal)
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * 
+         * Source of compute environment resources. <br>BATCH_CREATED: instance resources created by BatchCompute.<br>
+USER_ATTACHED: instance resources added by users to the compute environment.
          * @type {string || null}
          */
         this.ResourceOrigin = null;
@@ -4491,7 +4492,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * Instance billing plan. Valid values: <br><li>POSTPAID_BY_HOUR: pay after use. You are billed for your traffic by the hour.<br><li>`CDHPAID`: [`CDH`](https://cloud.tencent.com/document/product/416) billing plan. Applicable to `CDH` only, not the instances on the host.
+         * Instance billing plan. Valid values: <br><li>POSTPAID_BY_HOUR: pay after use. You are billed for your traffic by the hour.<br><li>`CDHPAID`: [`CDH`](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) billing plan. Applicable to `CDH` only, not the instances on the host.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -4559,25 +4560,25 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.SoldOutReason = null;
 
         /**
-         * 
+         * Private network bandwidth, in Gbps.
          * @type {number || null}
          */
         this.InstanceBandwidth = null;
 
         /**
-         * 
+         * The max packet sending and receiving capability (in 10k PPS).
          * @type {number || null}
          */
         this.InstancePps = null;
 
         /**
-         * 
+         * Number of local storage blocks.
          * @type {number || null}
          */
         this.StorageBlockAmount = null;
 
         /**
-         * 
+         * CPU type.
          * @type {string || null}
          */
         this.CpuType = null;
@@ -5395,19 +5396,19 @@ class ComputeEnvView extends  AbstractModel {
         this.DesiredComputeNodeCount = null;
 
         /**
-         * 
+         * Compute environment resource type. Valid values: `CVM`, `CPM` (Bare Metal)
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * 
+         * Next action
          * @type {string || null}
          */
         this.NextAction = null;
 
         /**
-         * 
+         * Number of compute nodes added to the compute environment by the user
          * @type {number || null}
          */
         this.AttachedComputeNodeCount = null;
@@ -5858,7 +5859,7 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable [Cloud Monitor](/document/product/248). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
+         * Whether to enable [Cloud Monitor](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
          * @type {boolean || null}
          */
         this.Enabled = null;
@@ -5914,13 +5915,13 @@ class VirtualPrivateCloud extends  AbstractModel {
         super();
 
         /**
-         * 
+         * VPC ID in the format of `vpc-xxx`. To obtain valid VPC IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/vpc?rid=1) or call the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API and look for the `unVpcId` fields in the response. If you specify `DEFAULT` for both `VpcId` and `SubnetId` when creating an instance, the default VPC will be used.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * VPC subnet ID in the format `subnet-xxx`. To obtain valid subnet IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/subnet?rid=1) or call [DescribeSubnets](/document/api/215/15784) and look for the `unSubnetId` fields in the response. If you specify `DEFAULT` for both `SubnetId` and `VpcId` when creating an instance, the default VPC will be used.
+         * VPC subnet ID in the format `subnet-xxx`. To obtain valid subnet IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/subnet?rid=1) or call [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) and look for the `unSubnetId` fields in the response. If you specify `DEFAULT` for both `SubnetId` and `VpcId` when creating an instance, the default VPC will be used.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -5938,7 +5939,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.PrivateIpAddresses = null;
 
         /**
-         * 
+         * Number of IPv6 addresses randomly generated for the ENI.
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
@@ -6096,7 +6097,7 @@ class InternetAccessible extends  AbstractModel {
         this.InternetChargeType = null;
 
         /**
-         * The maximum outbound bandwidth of the public network, in Mbps. The default value is 0 Mbps. The upper limit of bandwidth varies for different models. For more information, see [Purchase Network Bandwidth](https://cloud.tencent.com/document/product/213/12523).
+         * The maximum outbound bandwidth of the public network, in Mbps. The default value is 0 Mbps. The upper limit of bandwidth varies for different models. For more information, see [Purchase Network Bandwidth](https://intl.cloud.tencent.com/document/product/213/12523?from_cn_redirect=1).
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
@@ -6108,7 +6109,7 @@ class InternetAccessible extends  AbstractModel {
         this.PublicIpAssigned = null;
 
         /**
-         * Bandwidth package ID. To obatin the IDs, you can call [`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209) and look for the `BandwidthPackageId` fields in the response.
+         * Bandwidth package ID. To obatin the IDs, you can call [`DescribeBandwidthPackages`](https://intl.cloud.tencent.com/document/api/215/19209?from_cn_redirect=1) and look for the `BandwidthPackageId` fields in the response.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;

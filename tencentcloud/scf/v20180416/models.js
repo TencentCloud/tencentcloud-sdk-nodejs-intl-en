@@ -368,11 +368,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.LayerName = null;
 
         /**
-         * The status of the layer version. Values can be: 
-`Active`: normal
-`Publishing`: publishing
-`PublishFailed`: failed to publish
-`Deleted`: deleted
+         * Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
          * @type {string || null}
          */
         this.Status = null;
@@ -1585,6 +1581,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          */
         this.CfsConfig = null;
 
+        /**
+         * Timeout period for function initialization. Default value: 15 seconds
+         * @type {number || null}
+         */
+        this.InitTimeout = null;
+
     }
 
     /**
@@ -1644,6 +1646,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             obj.deserialize(params.CfsConfig)
             this.CfsConfig = obj;
         }
+        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
 
     }
 }
@@ -2099,7 +2102,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * For parameters of triggers, see [Trigger Description](https://cloud.tencent.com/document/product/583/39901)
+         * For parameters of triggers, see [Trigger Description](https://intl.cloud.tencent.com/document/product/583/39901?from_cn_redirect=1)
          * @type {string || null}
          */
         this.TriggerDesc = null;
@@ -2581,6 +2584,12 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.CfsConfig = null;
 
+        /**
+         * Timeout period for function initialization
+         * @type {number || null}
+         */
+        this.InitTimeout = null;
+
     }
 
     /**
@@ -2647,6 +2656,7 @@ class CreateFunctionRequest extends  AbstractModel {
             obj.deserialize(params.CfsConfig)
             this.CfsConfig = obj;
         }
+        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
 
     }
 }
@@ -3482,7 +3492,7 @@ class GetFunctionResponse extends  AbstractModel {
         this.InstallDependency = null;
 
         /**
-         * Function status
+         * Function status. For valid values and status change process, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1)
          * @type {string || null}
          */
         this.Status = null;
@@ -3581,7 +3591,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CfsConfig = null;
 
         /**
-         * Function billing status
+         * Function billing status. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E8.AE.A1.E8.B4.B9.E7.8A.B6.E6.80.81)
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -3593,6 +3603,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.Qualifier = null;
+
+        /**
+         * Timeout period for function initialization
+         * @type {number || null}
+         */
+        this.InitTimeout = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3706,6 +3722,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4117,21 +4134,21 @@ class CfsInsInfo extends  AbstractModel {
         this.RemoteMountDir = null;
 
         /**
-         * File system IP
+         * File system IP, which is not required when you configure CFS.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IpAddress = null;
 
         /**
-         * VPC ID of file system
+         * VPC ID of file system, which is not required when you configure CFS.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MountVpcId = null;
 
         /**
-         * VPC subnet ID of file system
+         * VPC subnet ID of file system, which is not required when you configure CFS.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */

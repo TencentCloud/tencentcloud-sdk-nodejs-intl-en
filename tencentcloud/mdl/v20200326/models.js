@@ -136,13 +136,14 @@ class DrmSettingsInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable DRM encryption. Valid value: CLOSE/OPEN. Default value: CLOSE.
+Currently, this is supported only for HLS/DASH/HLS_ARCHIVE/DASH_ARCHIVE.
          * @type {string || null}
          */
         this.State = null;
 
         /**
-         * When `Scheme` is set to TencentDRM, this parameter should be set to the `ContentId` of DRM encryption, and if this parameter is left empty, a `ContentId` will be automatically created. For more information, please see [here](https://cloud.tencent.com/document/product/1000/40960).
+         * When `Scheme` is set to TencentDRM, this parameter should be set to the `ContentId` of DRM encryption, and if this parameter is left empty, a `ContentId` will be automatically created. For more information, please see [here](https://intl.cloud.tencent.com/document/product/1000/40960?from_cn_redirect=1).
 When `Scheme` is set to CustomDRMKeys, this parameter is required and should be specified by the user.
          * @type {string || null}
          */
@@ -150,7 +151,7 @@ When `Scheme` is set to CustomDRMKeys, this parameter is required and should be 
 
         /**
          * Valid values: TencentDRM, CustomDRMKeys. If this parameter is left empty, TencentDRM will be used by default.
-TencentDRM refers to Tencent digital rights management (DRM) encryption. For more information, please see [here](https://cloud.tencent.com/solution/drm).
+TencentDRM refers to Tencent digital rights management (DRM) encryption. For more information, please see [here](https://intl.cloud.tencent.com/solution/drm?from_cn_redirect=1).
 CustomDRMKeys refers to an encryption key customized by the user.
          * @type {string || null}
          */
@@ -277,7 +278,7 @@ class OutputGroupsInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Channel output group name, which can contain 1–32 letters, digits, and underscores and must be unique at the channel level.
          * @type {string || null}
          */
         this.Name = null;
@@ -290,31 +291,32 @@ Valid values: HLS, DASH, HLS_ARCHIVE, HLS_MEDIA_PACKAGE, DASH_MEDIA_PACKAGE.
         this.Type = null;
 
         /**
-         * 
+         * Output information.
+Quantity limit: [1,1] for RTMP/RTP; [1,10] for HLS/DASH.
          * @type {Array.<OutputInfo> || null}
          */
         this.Outputs = null;
 
         /**
-         * 
+         * Relay destination address. Quantity limit: [1,2].
          * @type {Array.<DestinationInfo> || null}
          */
         this.Destinations = null;
 
         /**
-         * 
+         * HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE.
          * @type {HlsRemuxSettingsInfo || null}
          */
         this.HlsRemuxSettings = null;
 
         /**
-         * 
+         * DASH protocol configuration information, which takes effect only for DASH/DSAH_ARCHIVE.
          * @type {DashRemuxSettingsInfo || null}
          */
         this.DashRemuxSettings = null;
 
         /**
-         * 
+         * DRM configuration information.
          * @type {DrmSettingsInfo || null}
          */
         this.DrmSettings = null;

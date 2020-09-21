@@ -18680,7 +18680,7 @@ class DescribeAnimatedGraphicsTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Result information of intelligent frame-specific tagging
+ * 
  * @class
  */
 class MediaAiAnalysisFrameTagItem extends  AbstractModel {
@@ -18688,13 +18688,19 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         super();
 
         /**
-         * Frame-specific tag name.
+         * 
          * @type {string || null}
          */
         this.Tag = null;
 
         /**
-         * Confidence of intelligently generated frame-specific tag between 0 and 100.
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.CategorySet = null;
+
+        /**
+         * 
          * @type {number || null}
          */
         this.Confidence = null;
@@ -18709,6 +18715,7 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
             return;
         }
         this.Tag = 'Tag' in params ? params.Tag : null;
+        this.CategorySet = 'CategorySet' in params ? params.CategorySet : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }

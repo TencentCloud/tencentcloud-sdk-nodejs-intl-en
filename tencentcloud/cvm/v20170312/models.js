@@ -25,7 +25,7 @@ class ChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Purchased usage period, in month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36
          * @type {number || null}
          */
         this.Period = null;
@@ -84,7 +84,7 @@ class LocalDiskType extends  AbstractModel {
         this.MaxSize = null;
 
         /**
-         * 
+         * Whether a local disk is required during purchase. Valid values:<br><li>REQUIRED: required<br><li>OPTIONAL: optional
          * @type {string || null}
          */
         this.Required = null;
@@ -278,7 +278,7 @@ class HostResource extends  AbstractModel {
         this.DiskAvailable = null;
 
         /**
-         * 
+         * CDH instance disk type.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -775,7 +775,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.DataDisks = null;
 
         /**
-         * VPC configurations. You can use this parameter to specify the VPC ID, subnet ID, etc. If this parameter is not specified, the basic network will be used by default. If a VPC IP is specified in this parameter, it will represent the primary ENI IP of each instance. The value of `InstanceCount` must be the same as the number of VPC IPs.
+         * Configuration information of VPC. This parameter is used to specify VPC ID and subnet ID, etc. If this parameter is not specified, the classic network is used by default. If a VPC IP is specified in this parameter, it indicates the primary ENI IP of each instance. The value of parameter InstanceCount must be same as the number of VPC IPs, which cannot be greater than 20.
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
@@ -1533,6 +1533,12 @@ class PurchaseReservedInstancesOfferingRequest extends  AbstractModel {
          */
         this.ClientToken = null;
 
+        /**
+         * Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+         * @type {string || null}
+         */
+        this.ReservedInstanceName = null;
+
     }
 
     /**
@@ -1546,6 +1552,7 @@ class PurchaseReservedInstancesOfferingRequest extends  AbstractModel {
         this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.ReservedInstanceName = 'ReservedInstanceName' in params ? params.ReservedInstanceName : null;
 
     }
 }
@@ -2062,18 +2069,47 @@ class ModifyInstancesVpcAttributeResponse extends  AbstractModel {
 }
 
 /**
- * CreateKeyPair response structure.
+ * InquiryPriceResetInstancesType request structure.
  * @class
  */
-class CreateKeyPairResponse extends  AbstractModel {
+class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Key pair information.
-         * @type {KeyPair || null}
+         * Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API. The maximum number of instances in each request is 1.
+         * @type {Array.<string> || null}
          */
-        this.KeyPair = null;
+        this.InstanceIds = null;
+
+        /**
+         * Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types] (https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) or in the latest specifications via the [DescribeInstanceTypeConfigs] (https://intl.cloud.tencent.com/document/product/213/15749?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+    }
+}
+
+/**
+ * DeleteKeyPairs response structure.
+ * @class
+ */
+class DeleteKeyPairsResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2090,22 +2126,16 @@ class CreateKeyPairResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.KeyPair) {
-            let obj = new KeyPair();
-            obj.deserialize(params.KeyPair)
-            this.KeyPair = obj;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DeleteKeyPairs response structure.
+ * DescribeSpotTypeConfig response structure.
  * @class
  */
-class DeleteKeyPairsResponse extends  AbstractModel {
+class DescribeSpotTypeConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2308,6 +2338,55 @@ class RunInstancesResponse extends  AbstractModel {
         }
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Price of the reserved instance. Currently, RIs are only offered to beta users.
+ * @class
+ */
+class ReservedInstancePrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original upfront price, in USD.
+         * @type {number || null}
+         */
+        this.OriginalFixedPrice = null;
+
+        /**
+         * Discounted upfront price, in USD.
+         * @type {number || null}
+         */
+        this.DiscountFixedPrice = null;
+
+        /**
+         * Original usage price, in USD/hr.
+         * @type {number || null}
+         */
+        this.OriginalUsagePrice = null;
+
+        /**
+         * Discounted usage price, in USD/hr.
+         * @type {number || null}
+         */
+        this.DiscountUsagePrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalFixedPrice = 'OriginalFixedPrice' in params ? params.OriginalFixedPrice : null;
+        this.DiscountFixedPrice = 'DiscountFixedPrice' in params ? params.DiscountFixedPrice : null;
+        this.OriginalUsagePrice = 'OriginalUsagePrice' in params ? params.OriginalUsagePrice : null;
+        this.DiscountUsagePrice = 'DiscountUsagePrice' in params ? params.DiscountUsagePrice : null;
 
     }
 }
@@ -2641,7 +2720,7 @@ class Placement extends  AbstractModel {
         this.HostIps = null;
 
         /**
-         * 
+         * The ID of the CDH to which the instance belongs, only used as an output parameter.
          * @type {string || null}
          */
         this.HostId = null;
@@ -2709,6 +2788,34 @@ class DescribeDisasterRecoverGroupsRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyKeyPairAttribute response structure.
+ * @class
+ */
+class ModifyKeyPairAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3514,6 +3621,49 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeReservedInstancesConfigInfos response structure.
+ * @class
+ */
+class DescribeReservedInstancesConfigInfosResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Static configurations of the reserved instance.
+         * @type {Array.<ReservedInstanceConfigInfoItem> || null}
+         */
+        this.ReservedInstanceConfigInfos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReservedInstanceConfigInfos) {
+            this.ReservedInstanceConfigInfos = new Array();
+            for (let z in params.ReservedInstanceConfigInfos) {
+                let obj = new ReservedInstanceConfigInfoItem();
+                obj.deserialize(params.ReservedInstanceConfigInfos[z]);
+                this.ReservedInstanceConfigInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeReservedInstances response structure.
  * @class
  */
@@ -3619,18 +3769,42 @@ class DescribeImportImageOsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyKeyPairAttribute response structure.
+ * InquirePricePurchaseReservedInstancesOffering request structure.
  * @class
  */
-class ModifyKeyPairAttributeResponse extends  AbstractModel {
+class InquirePricePurchaseReservedInstancesOfferingRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The number of the reserved instances you are purchasing.
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * The ID of the reserved instance offering.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ReservedInstancesOfferingId = null;
+
+        /**
+         * Dry run.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+         * @type {string || null}
+         */
+        this.ReservedInstanceName = null;
 
     }
 
@@ -3641,7 +3815,11 @@ class ModifyKeyPairAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.ReservedInstanceName = 'ReservedInstanceName' in params ? params.ReservedInstanceName : null;
 
     }
 }
@@ -3661,7 +3839,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * The type of the data disk. For more information regarding data disk types and limits, refer to [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for `ResizeInstanceDisk`.
+         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3834,6 +4012,63 @@ class OperationCountLimit extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.CurrentCount = 'CurrentCount' in params ? params.CurrentCount : null;
         this.LimitCount = 'LimitCount' in params ? params.LimitCount : null;
+
+    }
+}
+
+/**
+ * Static configurations of the reserved instance. Currently, RIs are only offered to beta users.
+ * @class
+ */
+class ReservedInstanceConfigInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Abbreviation name of the instance type.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Full name of the instance type.
+         * @type {string || null}
+         */
+        this.TypeName = null;
+
+        /**
+         * Priority.
+         * @type {number || null}
+         */
+        this.Order = null;
+
+        /**
+         * List of instance families.
+         * @type {Array.<ReservedInstanceFamilyItem> || null}
+         */
+        this.InstanceFamilies = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+        if (params.InstanceFamilies) {
+            this.InstanceFamilies = new Array();
+            for (let z in params.InstanceFamilies) {
+                let obj = new ReservedInstanceFamilyItem();
+                obj.deserialize(params.InstanceFamilies[z]);
+                this.InstanceFamilies.push(obj);
+            }
+        }
 
     }
 }
@@ -4272,25 +4507,25 @@ Valid values: <br><li>KEEP_CHARGING: billing continues after shutdown <br><li>ST
         this.StopChargingMode = null;
 
         /**
-         * 
+         * Globally unique ID of the instance.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * 
+         * Last operation of the instance, such as StopInstances or ResetInstance.
          * @type {string || null}
          */
         this.LatestOperation = null;
 
         /**
-         * 
+         * The latest operation status of the instance. Valid values:<br><li>SUCCESS: operation succeeded<br><li>OPERATING: operation in progress<br><li>FAILED: operation failed
          * @type {string || null}
          */
         this.LatestOperationState = null;
 
         /**
-         * 
+         * Unique request ID for the last operation of the instance.
          * @type {string || null}
          */
         this.LatestOperationRequestId = null;
@@ -4463,24 +4698,24 @@ class EnhancedService extends  AbstractModel {
 }
 
 /**
- * InquiryPriceResetInstancesType request structure.
+ * CreateKeyPair response structure.
  * @class
  */
-class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
+class CreateKeyPairResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API. The maximum number of instances in each request is 1.
-         * @type {Array.<string> || null}
+         * Key pair information.
+         * @type {KeyPair || null}
          */
-        this.InstanceIds = null;
+        this.KeyPair = null;
 
         /**
-         * Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types] (https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) or in the latest specifications via the [DescribeInstanceTypeConfigs] (https://intl.cloud.tencent.com/document/product/213/15749?from_cn_redirect=1) API.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceType = null;
+        this.RequestId = null;
 
     }
 
@@ -4491,8 +4726,13 @@ class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.KeyPair) {
+            let obj = new KeyPair();
+            obj.deserialize(params.KeyPair)
+            this.KeyPair = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4620,6 +4860,56 @@ Each request can have up to 10 `Filters` and 5 `Filter.Values`.
 }
 
 /**
+ * RI-related instance family. Currently, RIs are only offered to beta users.
+ * @class
+ */
+class ReservedInstanceFamilyItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance family.
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * Priority.
+         * @type {number || null}
+         */
+        this.Order = null;
+
+        /**
+         * List of instance types.
+         * @type {Array.<ReservedInstanceTypeItem> || null}
+         */
+        this.InstanceTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+        if (params.InstanceTypes) {
+            this.InstanceTypes = new Array();
+            for (let z in params.InstanceTypes) {
+                let obj = new ReservedInstanceTypeItem();
+                obj.deserialize(params.InstanceTypes[z]);
+                this.InstanceTypes.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeDisasterRecoverGroups response structure.
  * @class
  */
@@ -4740,6 +5030,59 @@ class ActionTimer extends  AbstractModel {
         }
         this.TimerAction = 'TimerAction' in params ? params.TimerAction : null;
         this.ActionTime = 'ActionTime' in params ? params.ActionTime : null;
+
+    }
+}
+
+/**
+ * DescribeReservedInstancesConfigInfos request structure.
+ * @class
+ */
+class DescribeReservedInstancesConfigInfosRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * zone
+Filters by the availability zones in which the reserved instance can be purchased, such as `ap-guangzhou-1`.
+Type: String
+Required: no
+Valid values: list of regions/availability zones
+
+product-description
+Filters by the platform description (operating system) of the reserved instance, such as `linux`.
+Type: String
+Required: no
+Valid value: linux
+
+duration
+Filters by the **validity** of the reserved instance, which is the purchased usage period. For example, `31536000`.
+Type: Integer
+Unit: second
+Required: no
+Valid values: 31536000 (1 year), 94608000 (3 years)
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5107,6 +5450,78 @@ class InstanceStatus extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+
+    }
+}
+
+/**
+ * Price information of the reserved instance based on the payment method. Currently, RIs are only offered to beta users.
+ * @class
+ */
+class ReservedInstancePriceItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Payment method. Valid values: All Upfront, Partial Upfront, and No Upfront.
+         * @type {string || null}
+         */
+        this.OfferingType = null;
+
+        /**
+         * Total upfront price, in USD.
+         * @type {number || null}
+         */
+        this.FixedPrice = null;
+
+        /**
+         * Total usage price, in USD/hr.
+         * @type {number || null}
+         */
+        this.UsagePrice = null;
+
+        /**
+         * The ID of the reserved instance offering.
+         * @type {string || null}
+         */
+        this.ReservedInstancesOfferingId = null;
+
+        /**
+         * The availability zone in which the reserved instance can be purchased.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * The **validity** of the reserved instance in seconds, which is the purchased usage period. For example, `31536000`.
+Unit: second
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * The operating system of the reserved instance, such as `linux`.
+Valid value: linux.
+         * @type {string || null}
+         */
+        this.ProductDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
+        this.FixedPrice = 'FixedPrice' in params ? params.FixedPrice : null;
+        this.UsagePrice = 'UsagePrice' in params ? params.UsagePrice : null;
+        this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
 
     }
 }
@@ -5533,20 +5948,23 @@ class DescribeReservedInstancesRequest extends  AbstractModel {
 
         /**
          * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">Filters by the **<strong>availability zones</strong>** in which reserved instances can be purchased. For example, "ap-guangzhou-1".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">list of availability zones</a></p>
+<p style="padding-left: 30px;">Filters by <strong>availability zone</strong> in which the reserved instances can be purchased, such as ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Availability Zones</a></p>
 <li><strong>duration</strong></li>
-<p style="padding-left: 30px;">Filters by reserved instance **<strong>validity</strong>** (in seconds). For example, 31536000.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years)</p>
+<p style="padding-left: 30px;">Filters by the <strong>validity</strong> of the reserved instance, in seconds. For example, `31536000`.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years)</p>
 <li><strong>instance-type</strong></li>
-<p style="padding-left: 30px;">Filters by **<strong>specifications of reserved instances</strong>**. For example, "S3.MEDIUM4".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">list of reserved instance specifiations</a></p>
+<p style="padding-left: 30px;">Filters by <strong>reserved instance specification</strong>, such as `S3.MEDIUM4`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Specifications</a></p>
+<li><strong>instance-family</strong></li>
+<p style="padding-left: 30px;">Filters by <strong>type of the reserved instance</strong>, such as `S3`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Types</a></p>
 <li><strong>offering-type</strong></li>
-<p style="padding-left: 30px;">Filters by **<strong>payment method</strong>**. For example, "All Upfront".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: All Upfront</p>
+<li><strong>offering-type</strong></li>
+<p style="padding-left: 30px;">Filters by <strong>payment method</strong>, such as `All Upfront`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: All Upfront</p>
 <li><strong>product-description</strong></li>
-<p style="padding-left: 30px;">Filters by the **<strong>operating system</strong>** of the reserved instance. For example, "linux".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
+<p style="padding-left: 30px;">Filters by the <strong>platform description</strong> (operating system) of the reserved instance, such as `linux`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
 <li><strong>reserved-instances-id</strong></li>
-<p style="padding-left: 30px;">Filters by **<strong>reserved instance ID</strong>. Reserved instance IDs take the form "650c138f-ae7e-4750-952a-96841d6e9fc1".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
+<p style="padding-left: 30px;">Filters by <strong>reserved instance ID</strong> in the form of 650c138f-ae7e-4750-952a-96841d6e9fc1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
 <li><strong>state</strong></li>
-<p style="padding-left: 30px;">Filters by **<strong>reserved instance status</strong>. For example, "active".</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required</p><p style="padding-left: 30px;">Valid values: "active" (created) | "pending" (waiting to be created) | "retired" (expired)</p>
-Each request can have up to 10 `Filters` and 5 `Filters.Values`.
+<p style="padding-left: 30px;">Filters by <strong>reserved instance status</strong>. For example, “active”.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required</p><p style="padding-left: 30px;">Valid values: active (created) | pending (waiting to be created) | retired (expired)</p>
+Each request can have up to 10 `Filters` and 5 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5903,25 +6321,25 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.SoldOutReason = null;
 
         /**
-         * 
+         * Private network bandwidth, in Gbps.
          * @type {number || null}
          */
         this.InstanceBandwidth = null;
 
         /**
-         * 
+         * The max packet sending and receiving capability (in 10k PPS).
          * @type {number || null}
          */
         this.InstancePps = null;
 
         /**
-         * 
+         * Number of local storage blocks.
          * @type {number || null}
          */
         this.StorageBlockAmount = null;
 
         /**
-         * 
+         * CPU type.
          * @type {string || null}
          */
         this.CpuType = null;
@@ -6028,6 +6446,138 @@ Note: This field may return null, indicating that no valid value is found.
         }
         this.Windows = 'Windows' in params ? params.Windows : null;
         this.Linux = 'Linux' in params ? params.Linux : null;
+
+    }
+}
+
+/**
+ * Reserved instance specification. Currently, RIs are only offered to beta users.
+ * @class
+ */
+class ReservedInstanceTypeItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance type.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Number of CPU cores.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory size.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Number of GPU cores.
+         * @type {number || null}
+         */
+        this.Gpu = null;
+
+        /**
+         * Number of FPGA cores.
+         * @type {number || null}
+         */
+        this.Fpga = null;
+
+        /**
+         * Number of storage blocks.
+         * @type {number || null}
+         */
+        this.StorageBlock = null;
+
+        /**
+         * Number of ENIs.
+         * @type {number || null}
+         */
+        this.NetworkCard = null;
+
+        /**
+         * Maximum bandwidth.
+         * @type {number || null}
+         */
+        this.MaxBandwidth = null;
+
+        /**
+         * CPU frequency.
+         * @type {string || null}
+         */
+        this.Frequency = null;
+
+        /**
+         * CPU type.
+         * @type {string || null}
+         */
+        this.CpuModelName = null;
+
+        /**
+         * Packet forwarding rate.
+         * @type {number || null}
+         */
+        this.Pps = null;
+
+        /**
+         * Other information.
+         * @type {Externals || null}
+         */
+        this.Externals = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Price information about the reserved instance.
+         * @type {Array.<ReservedInstancePriceItem> || null}
+         */
+        this.Prices = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Gpu = 'Gpu' in params ? params.Gpu : null;
+        this.Fpga = 'Fpga' in params ? params.Fpga : null;
+        this.StorageBlock = 'StorageBlock' in params ? params.StorageBlock : null;
+        this.NetworkCard = 'NetworkCard' in params ? params.NetworkCard : null;
+        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
+        this.Frequency = 'Frequency' in params ? params.Frequency : null;
+        this.CpuModelName = 'CpuModelName' in params ? params.CpuModelName : null;
+        this.Pps = 'Pps' in params ? params.Pps : null;
+
+        if (params.Externals) {
+            let obj = new Externals();
+            obj.deserialize(params.Externals)
+            this.Externals = obj;
+        }
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.Prices) {
+            this.Prices = new Array();
+            for (let z in params.Prices) {
+                let obj = new ReservedInstancePriceItem();
+                obj.deserialize(params.Prices[z]);
+                this.Prices.push(obj);
+            }
+        }
 
     }
 }
@@ -6292,8 +6842,8 @@ class ReservedInstances extends  AbstractModel {
         this.ReservedInstancesId = null;
 
         /**
-         * The type of the reserved instance. For example, S3.MEDIUM4.
-Returned value: <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">list of reserved instance types</a>
+         * Reserved instance specification, such as `S3.MEDIUM4`.
+Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Specifications</a>
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -6358,6 +6908,13 @@ Returned value: All Upfront.
          */
         this.OfferingType = null;
 
+        /**
+         * Reserved instance type, such as `S3`.
+Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Types</a>
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
     }
 
     /**
@@ -6378,6 +6935,7 @@ Returned value: All Upfront.
         this.State = 'State' in params ? params.State : null;
         this.CurrencyCode = 'CurrencyCode' in params ? params.CurrencyCode : null;
         this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
 
     }
 }
@@ -6497,6 +7055,27 @@ class RebootInstancesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSpotTypeConfig request structure.
+ * @class
+ */
+class DescribeSpotTypeConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -6937,6 +7516,46 @@ class ResizeInstanceDisksResponse extends  AbstractModel {
 }
 
 /**
+ * InquirePricePurchaseReservedInstancesOffering response structure.
+ * @class
+ */
+class InquirePricePurchaseReservedInstancesOfferingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Price of the reserved instance with specified configuration.
+         * @type {ReservedInstancePrice || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Price) {
+            let obj = new ReservedInstancePrice();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisassociateSecurityGroups request structure.
  * @class
  */
@@ -7256,7 +7875,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         super();
 
         /**
-         * 
+         * VPC ID in the format of `vpc-xxx`. To obtain valid VPC IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/vpc?rid=1) or call the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API and look for the `unVpcId` fields in the response. If you specify `DEFAULT` for both `VpcId` and `SubnetId` when creating an instance, the default VPC will be used.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -7280,7 +7899,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.PrivateIpAddresses = null;
 
         /**
-         * 
+         * Number of IPv6 addresses randomly generated for the ENI.
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
@@ -7888,13 +8507,15 @@ module.exports = {
     InternetChargeTypeConfig: InternetChargeTypeConfig,
     DescribeImagesResponse: DescribeImagesResponse,
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
-    CreateKeyPairResponse: CreateKeyPairResponse,
+    InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
+    DescribeSpotTypeConfigResponse: DescribeSpotTypeConfigResponse,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     ModifyImageSharePermissionRequest: ModifyImageSharePermissionRequest,
     DisassociateInstancesKeyPairsResponse: DisassociateInstancesKeyPairsResponse,
     InquiryPriceResizeInstanceDisksRequest: InquiryPriceResizeInstanceDisksRequest,
     RunInstancesResponse: RunInstancesResponse,
+    ReservedInstancePrice: ReservedInstancePrice,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     ModifyImageSharePermissionResponse: ModifyImageSharePermissionResponse,
     DescribeInstancesOperationLimitResponse: DescribeInstancesOperationLimitResponse,
@@ -7906,6 +8527,7 @@ module.exports = {
     Tag: Tag,
     Placement: Placement,
     DescribeDisasterRecoverGroupsRequest: DescribeDisasterRecoverGroupsRequest,
+    ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
     SyncImagesRequest: SyncImagesRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DescribeImageQuotaRequest: DescribeImageQuotaRequest,
@@ -7920,24 +8542,28 @@ module.exports = {
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
+    DescribeReservedInstancesConfigInfosResponse: DescribeReservedInstancesConfigInfosResponse,
     DescribeReservedInstancesResponse: DescribeReservedInstancesResponse,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
-    ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
+    InquirePricePurchaseReservedInstancesOfferingRequest: InquirePricePurchaseReservedInstancesOfferingRequest,
     DataDisk: DataDisk,
     DescribeKeyPairsRequest: DescribeKeyPairsRequest,
     OperationCountLimit: OperationCountLimit,
+    ReservedInstanceConfigInfoItem: ReservedInstanceConfigInfoItem,
     DeleteDisasterRecoverGroupsResponse: DeleteDisasterRecoverGroupsResponse,
     HostItem: HostItem,
     Externals: Externals,
     CreateImageRequest: CreateImageRequest,
     Instance: Instance,
     EnhancedService: EnhancedService,
-    InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
+    CreateKeyPairResponse: CreateKeyPairResponse,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     DescribeReservedInstancesOfferingsRequest: DescribeReservedInstancesOfferingsRequest,
+    ReservedInstanceFamilyItem: ReservedInstanceFamilyItem,
     DescribeDisasterRecoverGroupsResponse: DescribeDisasterRecoverGroupsResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ActionTimer: ActionTimer,
+    DescribeReservedInstancesConfigInfosRequest: DescribeReservedInstancesConfigInfosRequest,
     TagSpecification: TagSpecification,
     ResetInstancesInternetMaxBandwidthRequest: ResetInstancesInternetMaxBandwidthRequest,
     InstanceFamilyConfig: InstanceFamilyConfig,
@@ -7947,6 +8573,7 @@ module.exports = {
     DescribeImportImageOsRequest: DescribeImportImageOsRequest,
     CreateKeyPairRequest: CreateKeyPairRequest,
     InstanceStatus: InstanceStatus,
+    ReservedInstancePriceItem: ReservedInstancePriceItem,
     AllocateHostsResponse: AllocateHostsResponse,
     DescribeImageSharePermissionRequest: DescribeImageSharePermissionRequest,
     DisasterRecoverGroup: DisasterRecoverGroup,
@@ -7964,6 +8591,7 @@ module.exports = {
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     ImageOsList: ImageOsList,
+    ReservedInstanceTypeItem: ReservedInstanceTypeItem,
     InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
     DescribeHostsRequest: DescribeHostsRequest,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,
@@ -7975,6 +8603,7 @@ module.exports = {
     ImportImageResponse: ImportImageResponse,
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
     RebootInstancesResponse: RebootInstancesResponse,
+    DescribeSpotTypeConfigRequest: DescribeSpotTypeConfigRequest,
     InquiryPriceResetInstancesTypeResponse: InquiryPriceResetInstancesTypeResponse,
     OsVersion: OsVersion,
     ModifyImageAttributeResponse: ModifyImageAttributeResponse,
@@ -7985,6 +8614,7 @@ module.exports = {
     DescribeImagesRequest: DescribeImagesRequest,
     ModifyImageAttributeRequest: ModifyImageAttributeRequest,
     ResizeInstanceDisksResponse: ResizeInstanceDisksResponse,
+    InquirePricePurchaseReservedInstancesOfferingResponse: InquirePricePurchaseReservedInstancesOfferingResponse,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
     ImportKeyPairRequest: ImportKeyPairRequest,

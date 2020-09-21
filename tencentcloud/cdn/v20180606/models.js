@@ -651,7 +651,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SslStatus = null;
 
         /**
-         * 
+         * HSTS configuration
          * @type {Hsts || null}
          */
         this.Hsts = null;
@@ -3722,24 +3722,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Data structure of sorted data
+ * 
  * @class
  */
-class TopDetailData extends  AbstractModel {
+class Tag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Datatype name
+         * 
          * @type {string || null}
          */
-        this.Name = null;
+        this.TagKey = null;
 
         /**
-         * Data value
-         * @type {number || null}
+         * 
+         * @type {string || null}
          */
-        this.Value = null;
+        this.TagValue = null;
 
     }
 
@@ -3750,8 +3750,8 @@ class TopDetailData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -5373,25 +5373,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AwsPrivateAccess = null;
 
         /**
-         * 
+         * SCDN configuration
          * @type {SecurityConfig || null}
          */
         this.SecurityConfig = null;
 
         /**
-         * 
+         * Image Optimization configuration
          * @type {ImageOptimization || null}
          */
         this.ImageOptimization = null;
 
         /**
-         * 
+         * `UA` blocklist/allowlist configuration
          * @type {UserAgentFilter || null}
          */
         this.UserAgentFilter = null;
 
         /**
-         * 
+         * Access control
          * @type {AccessControl || null}
          */
         this.AccessControl = null;
@@ -5418,6 +5418,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {Array.<number> || null}
          */
         this.AccessPort = null;
+
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
 
     }
 
@@ -5640,6 +5646,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.UrlRedirect = obj;
         }
         this.AccessPort = 'AccessPort' in params ? params.AccessPort : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
 
     }
 }
@@ -8604,6 +8619,41 @@ class DescribePushQuotaRequest extends  AbstractModel {
 }
 
 /**
+ * Data structure of sorted data
+ * @class
+ */
+class TopDetailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Datatype name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Data value
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * Origin server header cache configuration. This is enabled by default and caches all the header information.
  * @class
  */
@@ -10624,7 +10674,7 @@ module.exports = {
     OverseaConfig: OverseaConfig,
     AddCdnDomainRequest: AddCdnDomainRequest,
     UserAgentFilterRule: UserAgentFilterRule,
-    TopDetailData: TopDetailData,
+    Tag: Tag,
     ErrorPage: ErrorPage,
     MaxAgeRule: MaxAgeRule,
     DescribePayTypeRequest: DescribePayTypeRequest,
@@ -10708,6 +10758,7 @@ module.exports = {
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,
     DescribePushQuotaRequest: DescribePushQuotaRequest,
+    TopDetailData: TopDetailData,
     ResponseHeaderCache: ResponseHeaderCache,
     ResourceBillingData: ResourceBillingData,
     Sort: Sort,

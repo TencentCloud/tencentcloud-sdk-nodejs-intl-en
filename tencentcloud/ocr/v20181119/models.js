@@ -35,7 +35,7 @@ Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are pr
         /**
          * URL address of image.
 The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
-We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
         this.ImageUrl = null;
@@ -76,13 +76,13 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         this.Language = null;
 
         /**
-         * Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>
+         * Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
          * @type {number || null}
          */
         this.Angel = null;
 
         /**
-         * Total number of PDF pages to be returned if the image is a PDF. Default value: 0
+         * Total number of PDF pages to be returned if the image is a PDF. Default value: 0.
          * @type {number || null}
          */
         this.PdfPageSize = null;
@@ -128,25 +128,25 @@ class TextTable extends  AbstractModel {
         super();
 
         /**
-         * Column index of the top-left corner of the cell
+         * Column index of the top-left corner of the cell.
          * @type {number || null}
          */
         this.ColTl = null;
 
         /**
-         * Row index of the top-left corner of the cell
+         * Row index of the top-left corner of the cell.
          * @type {number || null}
          */
         this.RowTl = null;
 
         /**
-         * Column index of the bottom-right corner of the cell
+         * Column index of the bottom-right corner of the cell.
          * @type {number || null}
          */
         this.ColBr = null;
 
         /**
-         * Row index of the bottom-right corner of the cell
+         * Row index of the bottom-right corner of the cell.
          * @type {number || null}
          */
         this.RowBr = null;
@@ -170,7 +170,7 @@ class TextTable extends  AbstractModel {
         this.Confidence = null;
 
         /**
-         * Text line coordinates, which are represented as 4 vertex coordinates
+         * Text line coordinates, which are represented as 4 vertex coordinates.
          * @type {Array.<Coord> || null}
          */
         this.Polygon = null;
@@ -280,7 +280,7 @@ Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are pr
          * URL address of image.
 Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
 Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-You are recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
@@ -533,7 +533,7 @@ class BankCardOCRResponse extends  AbstractModel {
 }
 
 /**
- * Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`
+ * Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`.
  * @class
  */
 class ItemCoord extends  AbstractModel {
@@ -541,13 +541,13 @@ class ItemCoord extends  AbstractModel {
         super();
 
         /**
-         * X-coordinate of top-left point
+         * X-coordinate of top-left point.
          * @type {number || null}
          */
         this.X = null;
 
         /**
-         * Y-coordinate of top-left point
+         * Y-coordinate of top-left point.
          * @type {number || null}
          */
         this.Y = null;
@@ -699,7 +699,7 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * Information of recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
+         * Information on recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
          * @type {Array.<TextDetection> || null}
          */
         this.TextDetections = null;
@@ -741,7 +741,7 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
 }
 
 /**
- * OCR result
+ * OCR result.
  * @class
  */
 class TextDetection extends  AbstractModel {
@@ -749,19 +749,19 @@ class TextDetection extends  AbstractModel {
         super();
 
         /**
-         * Recognized text line content
+         * Recognized text line content.
          * @type {string || null}
          */
         this.DetectedText = null;
 
         /**
-         * Confidence. Value range: 0-100
+         * Confidence. Value range: 0–100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Text line coordinates, which are represented as 4 vertex coordinates
+         * Text line coordinates, which are represented as 4 vertex coordinates.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Coord> || null}
          */
@@ -775,7 +775,7 @@ The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains
         this.AdvancedInfo = null;
 
         /**
-         * Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`
+         * Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`.
          * @type {ItemCoord || null}
          */
         this.ItemPolygon = null;
@@ -826,7 +826,7 @@ class MLIDPassportOCRRequest extends  AbstractModel {
         this.ImageBase64 = null;
 
         /**
-         * Whether to return an image. Default value: false
+         * Whether to return an image. Default value: false.
          * @type {boolean || null}
          */
         this.RetImage = null;
@@ -1051,7 +1051,7 @@ IKAD: Malaysia Temporary Employment Visit Pass
         this.Type = null;
 
         /**
-         * Date of birth (currently, this field is only supported for IKAD)
+         * Date of birth (currently, this field is only supported for IKAD).
          * @type {string || null}
          */
         this.Birthday = null;
@@ -1104,7 +1104,7 @@ Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are pr
         /**
          * URL address of image/PDF.
 The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
-We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
         this.ImageUrl = null;

@@ -142,6 +142,8 @@ const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const DescribeSafeAuthFlagCollResponse = models.DescribeSafeAuthFlagCollResponse;
+const DescribeSafeAuthFlagCollRequest = models.DescribeSafeAuthFlagCollRequest;
 const PutRolePermissionsBoundaryResponse = models.PutRolePermissionsBoundaryResponse;
 const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
@@ -581,6 +583,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query security settings.
+     * @param {DescribeSafeAuthFlagCollRequest} req
+     * @param {function(string, DescribeSafeAuthFlagCollResponse):void} cb
+     * @public
+     */
+    DescribeSafeAuthFlagColl(req, cb) {
+        let resp = new DescribeSafeAuthFlagCollResponse();
+        this.request("DescribeSafeAuthFlagColl", req, resp, cb);
+    }
+
+    /**
      * This API is used to update a policy.
 This API will update the default version of an existing policy instead of creating a new one. If no policy exists, a default version will be created.
      * @param {UpdatePolicyRequest} req
@@ -604,7 +617,7 @@ This API will update the default version of an existing policy instead of creati
     }
 
     /**
-     * This API is used to query the security settings.
+     * This API is used to query security settings.
      * @param {DescribeSafeAuthFlagRequest} req
      * @param {function(string, DescribeSafeAuthFlagResponse):void} cb
      * @public

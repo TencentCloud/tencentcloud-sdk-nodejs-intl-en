@@ -415,7 +415,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AiContentReviewTask = null;
 
         /**
-         * 
+         * Video content analysis task parameter.
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
@@ -705,7 +705,7 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Result type of ASR-based prohibited information detection in speech task in content audit
  * @class
  */
 class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
@@ -713,31 +713,34 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * 
+         * Input of ASR-based prohibited information detection in speech task in content audit
          * @type {AiReviewProhibitedAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * Output of ASR-based prohibited information detection in speech task in content audit
          * @type {AiReviewProhibitedAsrTaskOutput || null}
          */
         this.Output = null;
@@ -906,7 +909,7 @@ class DeleteAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Result type of OCR-based prohibited information detection in text task in content audit
  * @class
  */
 class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
@@ -914,31 +917,34 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * 
+         * Input of OCR-based prohibited information detection in text task in content audit
          * @type {AiReviewProhibitedOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * Output of OCR-based prohibited information detection in text task in content audit
          * @type {AiReviewProhibitedOcrTaskOutput || null}
          */
         this.Output = null;
@@ -1027,7 +1033,7 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
 }
 
 /**
- * 
+ * OCR-detected prohibited information in text
  * @class
  */
 class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
@@ -1035,19 +1041,22 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Score of OCR-detected prohibited information in text between 0 and 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Suggestion for OCR-detected prohibited information in text. Valid values:
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 
+         * List of video segments that contain the OCR-detected prohibited information in text.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -1279,7 +1288,10 @@ class ModifySampleSnapshotTemplateRequest extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -1313,7 +1325,12 @@ class ModifySampleSnapshotTemplateRequest extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * 
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+<li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+<li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+Default value: black.
          * @type {string || null}
          */
         this.FillType = null;
@@ -1454,7 +1471,7 @@ class CreateWorkflowRequest extends  AbstractModel {
         this.AiContentReviewTask = null;
 
         /**
-         * 
+         * Video content analysis task parameter.
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
@@ -1582,31 +1599,40 @@ class RawWatermarkParameter extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Watermark type. Valid values:
+<li>image: image watermark.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Origin position, which currently can only be:
+<li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.</li>
+Default value: TopLeft.
          * @type {string || null}
          */
         this.CoordinateOrigin = null;
 
         /**
-         * 
+         * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
+<li>If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
+<li>If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
+Default value: 0 px.
          * @type {string || null}
          */
         this.XPos = null;
 
         /**
-         * 
+         * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
+<li>If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
+<li>If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
+Default value: 0 px.
          * @type {string || null}
          */
         this.YPos = null;
 
         /**
-         * 
+         * Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
          * @type {RawImageWatermarkInput || null}
          */
         this.ImageTemplate = null;
@@ -1794,19 +1820,25 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
 
         /**
-         * 
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+Default value: black.
          * @type {string || null}
          */
         this.FillType = null;
 
         /**
-         * 
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -2080,7 +2112,7 @@ class DeleteAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Blur parameter type of video processing task
  * @class
  */
 class MosaicInput extends  AbstractModel {
@@ -2088,43 +2120,63 @@ class MosaicInput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Origin position, which currently can only be:
+<li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.</li>
+Default value: TopLeft.
          * @type {string || null}
          */
         this.CoordinateOrigin = null;
 
         /**
-         * 
+         * The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported:
+<li>If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
+<li>If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
+Default value: 0 px.
          * @type {string || null}
          */
         this.XPos = null;
 
         /**
-         * 
+         * Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported:
+<li>If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
+<li>If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
+Default value: 0 px.
          * @type {string || null}
          */
         this.YPos = null;
 
         /**
-         * 
+         * Blur width. % and px formats are supported:
+<li>If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.</li>
+Default value: 10%.
          * @type {string || null}
          */
         this.Width = null;
 
         /**
-         * 
+         * Blur height. % and px formats are supported:
+<li>If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.</li>
+Default value: 10%.
          * @type {string || null}
          */
         this.Height = null;
 
         /**
-         * 
+         * Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.
+<li>If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame;</li>
+<li>If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame;</li>
+<li>If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.</li>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * 
+         * End time offset of blur in seconds.
+<li>If this parameter is left empty or 0 is entered, the blur will exist till the last video frame;</li>
+<li>If this value is greater than 0 (e.g., n), the blur will exist till second n;</li>
+<li>If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.</li>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -2450,7 +2502,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AiReviewResultInfo = null;
 
         /**
-         * 
+         * Content recognition result, which is valid if `NotificationType` is `AiRecognitionResult`.
          * @type {LiveStreamAiRecognitionResultInfo || null}
          */
         this.AiRecognitionResultInfo = null;
@@ -3112,7 +3164,7 @@ class TextWatermarkTemplateInputForUpdate extends  AbstractModel {
 }
 
 /**
- * 
+ * Input parameter type of OCR-based terrorism information detection in text task in content audit
  * @class
  */
 class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
@@ -3120,7 +3172,7 @@ class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Terrorism information detection template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -3708,7 +3760,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Input of video editing task.
  * @class
  */
 class EditMediaTaskInput extends  AbstractModel {
@@ -3716,7 +3768,7 @@ class EditMediaTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Information of input video file.
          * @type {Array.<EditMediaFileInfo> || null}
          */
         this.FileInfoSet = null;
@@ -5027,7 +5079,7 @@ Default value: 0 px.
 }
 
 /**
- * 
+ * Result type of OCR-based terrorism information detection in text task in content audit
  * @class
  */
 class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
@@ -5035,31 +5087,34 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * 
+         * Input of OCR-based terrorism information detection in text task in content audit.
          * @type {AiReviewTerrorismOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * Output of OCR-based terrorism information detection in text task in content audit.
          * @type {AiReviewTerrorismOcrTaskOutput || null}
          */
         this.Output = null;
@@ -5204,7 +5259,7 @@ class PornAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Control parameter of prohibited information detection in speech task
  * @class
  */
 class ProhibitedAsrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -5212,19 +5267,21 @@ class ProhibitedAsrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switch of prohibited information detection in speech task. Valid values:
+<li>ON: enables prohibited information detection in speech task;</li>
+<li>OFF: disables prohibited information detection in speech task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * 
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -5949,7 +6006,7 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Control parameter of prohibited information detection task
  * @class
  */
 class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
@@ -5957,13 +6014,13 @@ class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Control parameter of prohibited information detection in speech.
          * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * 
+         * Control parameter of prohibited information detection in text.
          * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -6060,37 +6117,43 @@ class RawTranscodeParameter extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
          * @type {string || null}
          */
         this.Container = null;
 
         /**
-         * 
+         * Whether to remove video data. Valid values:
+<li>0: retain;</li>
+<li>1: remove.</li>
+Default value: 0.
          * @type {number || null}
          */
         this.RemoveVideo = null;
 
         /**
-         * 
+         * Whether to remove audio data. Valid values:
+<li>0: retain;</li>
+<li>1: remove.</li>
+Default value: 0.
          * @type {number || null}
          */
         this.RemoveAudio = null;
 
         /**
-         * 
+         * Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
          * @type {VideoTemplateInfo || null}
          */
         this.VideoTemplate = null;
 
         /**
-         * 
+         * Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
          * @type {AudioTemplateInfo || null}
          */
         this.AudioTemplate = null;
 
         /**
-         * 
+         * TESHD transcoding parameter.
          * @type {TEHDConfig || null}
          */
         this.TEHDConfig = null;
@@ -6241,7 +6304,8 @@ Default value: 0.
         this.Height = null;
 
         /**
-         * 
+         * Frame interval between I keyframes. Value range: 0 and [1,100000].
+If this parameter is 0 or left empty, the system will automatically set the GOP length.
          * @type {number || null}
          */
         this.Gop = null;
@@ -7150,7 +7214,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.AiContentReviewTask = null;
 
         /**
-         * 
+         * Video content analysis task parameter.
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
@@ -7679,7 +7743,9 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 
+         * List of screenshot time points in the format of `s` or `%`:
+<li>If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second;</li>
+<li>If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.</li>
          * @type {Array.<string> || null}
          */
         this.ExtTimeOffsetSet = null;
@@ -8444,7 +8510,7 @@ class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Content recognition result list.
          * @type {Array.<LiveStreamAiRecognitionResultItem> || null}
          */
         this.ResultSet = null;
@@ -8562,7 +8628,7 @@ and will be deleted after `PicUrlExpireTime`).
 }
 
 /**
- * 
+ * Control parameter of terrorism information detection in text task
  * @class
  */
 class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -8570,19 +8636,21 @@ class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switch of terrorism information detection in text task. Valid values:
+<li>ON: enables terrorism information detection in text task;</li>
+<li>OFF: disables terrorism information detection in text task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * 
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -8811,7 +8879,7 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
         this.ImgReviewInfo = null;
 
         /**
-         * 
+         * Control parameter of terrorism information detection in text task.
          * @type {TerrorismOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -9306,7 +9374,7 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
 }
 
 /**
- * 
+ * Control parameter of prohibited information detection task
  * @class
  */
 class ProhibitedConfigureInfo extends  AbstractModel {
@@ -9314,13 +9382,13 @@ class ProhibitedConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Control parameter of prohibited information detection in speech.
          * @type {ProhibitedAsrReviewTemplateInfo || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * 
+         * Control parameter of prohibited information detection in text.
          * @type {ProhibitedOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -9351,7 +9419,7 @@ class ProhibitedConfigureInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * OCR-detected terrorism information in text
  * @class
  */
 class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
@@ -9359,19 +9427,22 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Score of OCR-detected terrorism information in text between 0 and 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Suggestion for OCR-detected terrorism information in text. Valid values:
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 
+         * List of video segments that contain OCR-detected terrorism information in text.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -9409,31 +9480,36 @@ class AiAnalysisResult extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task type. Valid values:
+<li>Classification: intelligent categorization</li>
+<li>Cover: intelligent cover generating</li>
+<li>Tag: intelligent tagging</li>
+<li>FrameTag: intelligent frame-specific tagging</li>
+<li>Highlight: intelligent highlight generating</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
          * @type {AiAnalysisTaskClassificationResult || null}
          */
         this.ClassificationTask = null;
 
         /**
-         * 
+         * Query result of intelligent cover generating task in video content analysis, which is valid if task type is `Cover`.
          * @type {AiAnalysisTaskCoverResult || null}
          */
         this.CoverTask = null;
 
         /**
-         * 
+         * Query result of intelligent tagging task in video content analysis, which is valid if task type is `Tag`.
          * @type {AiAnalysisTaskTagResult || null}
          */
         this.TagTask = null;
 
         /**
-         * 
+         * Query result of intelligent frame-specific tagging task in video content analysis, which is valid if task type is `FrameTag`.
          * @type {AiAnalysisTaskFrameTagResult || null}
          */
         this.FrameTagTask = null;
@@ -9668,7 +9744,7 @@ class ResetWorkflowRequest extends  AbstractModel {
         this.AiContentReviewTask = null;
 
         /**
-         * 
+         * Video content analysis task parameter.
          * @type {AiAnalysisTaskInput || null}
          */
         this.AiAnalysisTask = null;
@@ -10155,7 +10231,10 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.PoliticalConfigure = null;
 
         /**
-         * 
+         * Control parameter of prohibited information detection. Prohibited information includes:
+<li>Abusive;</li>
+<li>Drug-related.</li>
+Note: this parameter is not supported yet.
          * @type {ProhibitedConfigureInfoForUpdate || null}
          */
         this.ProhibitedConfigure = null;
@@ -10359,7 +10438,7 @@ class AiAnalysisTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Video content analysis template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -10419,7 +10498,10 @@ class ImageSpriteTemplate extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -10470,7 +10552,7 @@ Default value: black.
         this.FillType = null;
 
         /**
-         * 
+         * Template description.
          * @type {string || null}
          */
         this.Comment = null;
@@ -10682,7 +10764,7 @@ class CreateSampleSnapshotTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Control parameter of prohibited information detection in speech task
  * @class
  */
 class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
@@ -10690,19 +10772,21 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switch of prohibited information detection in speech task. Valid values:
+<li>ON: enables prohibited information detection in speech task;</li>
+<li>OFF: disables prohibited information detection in speech task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * 
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -11137,7 +11221,7 @@ class PornConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * 
+ * Input parameter type of ASR-based prohibited information detection in speech task in content audit
  * @class
  */
 class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
@@ -11145,7 +11229,7 @@ class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Prohibited information detection template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -11239,7 +11323,7 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
 }
 
 /**
- * 
+ * Control parameter of terrorism information detection in text task
  * @class
  */
 class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
@@ -11247,19 +11331,21 @@ class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switch of terrorism information detection in text task. Valid values:
+<li>ON: enables terrorism information detection in text task;</li>
+<li>OFF: disables terrorism information detection in text task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * 
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -11350,7 +11436,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * ASR-detected prohibited information in speech
  * @class
  */
 class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
@@ -11358,19 +11444,22 @@ class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Score of ASR-detected prohibited information in speech between 0 and 100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 
+         * Suggestion for ASR-detected prohibited information in speech. Valid values:
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 
+         * List of video segments that contain the ASR-detected prohibited information in speech.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -11900,7 +11989,8 @@ class TranscodeTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 
+         * Custom video transcoding parameter, which is valid if `Definition` is 0.
+This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
          * @type {RawTranscodeParameter || null}
          */
         this.RawParameter = null;
@@ -11913,7 +12003,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.WatermarkSet = null;
 
         /**
-         * 
+         * List of blurs. Up to 10 ones can be supported.
          * @type {Array.<MosaicInput> || null}
          */
         this.MosaicSet = null;
@@ -12121,7 +12211,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.WorkflowTaskEvent = null;
 
         /**
-         * 
+         * Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
          * @type {EditMediaTask || null}
          */
         this.EditMediaTaskEvent = null;
@@ -13203,7 +13293,10 @@ Default value: 0.
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -13459,7 +13552,8 @@ class WatermarkInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 
+         * Custom watermark parameter, which is valid if `Definition` is 0.
+This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.
          * @type {RawWatermarkParameter || null}
          */
         this.RawParameter = null;
@@ -13638,7 +13732,7 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
 }
 
 /**
- * 
+ * Control parameter of prohibited information detection in text task
  * @class
  */
 class ProhibitedOcrReviewTemplateInfo extends  AbstractModel {
@@ -13646,19 +13740,21 @@ class ProhibitedOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switch of prohibited information detection in text task. Valid values:
+<li>ON: enables prohibited information detection in text task;</li>
+<li>OFF: disables prohibited information detection in text task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * 
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -13944,7 +14040,7 @@ If the value is 0, the bitrate of the video will be the same as that of the sour
         this.Height = null;
 
         /**
-         * 
+         * Frame interval between I keyframes. Value range: 0 and [1,100000]. If this parameter is 0, the system will automatically set the GOP length.
          * @type {number || null}
          */
         this.Gop = null;
@@ -14018,7 +14114,10 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.PoliticalConfigure = null;
 
         /**
-         * 
+         * Control parameter of prohibited information detection. Prohibited information includes:
+<li>Abusive;</li>
+<li>Drug-related.</li>
+Note: this parameter is not supported yet.
          * @type {ProhibitedConfigureInfo || null}
          */
         this.ProhibitedConfigure = null;
@@ -14538,7 +14637,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.WorkflowTask = null;
 
         /**
-         * 
+         * Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
          * @type {EditMediaTask || null}
          */
         this.EditMediaTask = null;
@@ -15182,7 +15281,10 @@ class ModifySnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -15200,7 +15302,12 @@ class ModifySnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * 
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+<li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+<li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+Default value: black.
          * @type {string || null}
          */
         this.FillType = null;
@@ -15634,7 +15741,7 @@ class DeleteSnapshotByTimeOffsetTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Control parameter of prohibited information detection in text task
  * @class
  */
 class ProhibitedOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -15642,19 +15749,21 @@ class ProhibitedOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switch of prohibited information detection in text task. Valid values:
+<li>ON: enables prohibited information detection in text task;</li>
+<li>OFF: disables prohibited information detection in text task.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * 
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -16174,7 +16283,7 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         this.AiContentReviewTask = null;
 
         /**
-         * 
+         * Type parameter of video content recognition task.
          * @type {AiRecognitionTaskInput || null}
          */
         this.AiRecognitionTask = null;
@@ -16265,7 +16374,10 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -16299,13 +16411,16 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.ColumnCount = null;
 
         /**
-         * 
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+Default value: black.
          * @type {string || null}
          */
         this.FillType = null;
 
         /**
-         * 
+         * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -16335,7 +16450,7 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Input parameter type of OCR-based prohibited information detection in text task in content audit
  * @class
  */
 class AiReviewProhibitedOcrTaskInput extends  AbstractModel {
@@ -16343,7 +16458,7 @@ class AiReviewProhibitedOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Prohibited information detection template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -16745,13 +16860,13 @@ class AiContentReviewResult extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * Sample rate, which indicates the number of video frames captured per second for audit
          * @type {number || null}
          */
         this.SampleRate = null;
 
         /**
-         * 
+         * Audited video duration in seconds.
          * @type {number || null}
          */
         this.Duration = null;
@@ -16806,19 +16921,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PoliticalOcrTask = null;
 
         /**
-         * 
+         * Query result of OCR-based terrorism information detection in text task in video content audit, which is valid if task type is `Terrorism.Ocr`.
          * @type {AiReviewTaskTerrorismOcrResult || null}
          */
         this.TerrorismOcrTask = null;
 
         /**
-         * 
+         * Query result of ASR-based prohibited information detection in speech task in video content audit, which is valid if task type is `Prohibited.Asr`.
          * @type {AiReviewTaskProhibitedAsrResult || null}
          */
         this.ProhibitedAsrTask = null;
 
         /**
-         * 
+         * Query result of OCR-based prohibited information detection in text task in video content audit, which is valid if task type is `Prohibited.Ocr`.
          * @type {AiReviewTaskProhibitedOcrResult || null}
          */
         this.ProhibitedOcrTask = null;
@@ -17199,7 +17314,10 @@ Default value: 0.
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -17678,7 +17796,10 @@ class CreateSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -17696,7 +17817,12 @@ class CreateSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * 
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+<li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+<li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+Default value: black.
          * @type {string || null}
          */
         this.FillType = null;
@@ -17859,7 +17985,10 @@ class CreateSampleSnapshotTemplateRequest extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -17877,7 +18006,12 @@ class CreateSampleSnapshotTemplateRequest extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * 
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+<li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+<li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+Default value: black.
          * @type {string || null}
          */
         this.FillType = null;
@@ -17965,7 +18099,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AiContentReviewResultSet = null;
 
         /**
-         * 
+         * Execution status and result of video content analysis task.
          * @type {Array.<AiAnalysisResult> || null}
          */
         this.AiAnalysisResultSet = null;
@@ -18313,7 +18447,7 @@ class PornImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * 
+ * Video editing task information
  * @class
  */
 class EditMediaTask extends  AbstractModel {
@@ -18321,37 +18455,41 @@ class EditMediaTask extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Task ID.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 
+         * Task status. Valid values:
+<li>PROCESSING: processing;</li>
+<li>FINISH: completed.</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Error code
+<li>0: success;</li>
+<li>Other values: failure.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 
+         * Error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * 
+         * Input of video editing task.
          * @type {EditMediaTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * 
+         * Output of video editing task.
          * @type {EditMediaTaskOutput || null}
          */
         this.Output = null;
@@ -18680,7 +18818,7 @@ class DescribeAnimatedGraphicsTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Result information of intelligent frame-specific tagging
  * @class
  */
 class MediaAiAnalysisFrameTagItem extends  AbstractModel {
@@ -18688,7 +18826,7 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Frame-specific tag name.
          * @type {string || null}
          */
         this.Tag = null;
@@ -18700,7 +18838,7 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         this.CategorySet = null;
 
         /**
-         * 
+         * Confidence of intelligently generated frame-specific tag between 0 and 100.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -18814,7 +18952,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ImgReviewInfo = null;
 
         /**
-         * 
+         * Control parameter of terrorism information detection in text task.
          * @type {TerrorismOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -19220,7 +19358,7 @@ class AiAnalysisTaskCoverInput extends  AbstractModel {
 }
 
 /**
- * 
+ * Output of video editing task
  * @class
  */
 class EditMediaTaskOutput extends  AbstractModel {
@@ -19228,13 +19366,13 @@ class EditMediaTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Target storage of edited file.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * 
+         * Path of edited video file.
          * @type {string || null}
          */
         this.Path = null;

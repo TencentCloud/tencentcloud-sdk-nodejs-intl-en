@@ -1377,7 +1377,7 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Unusual login location settings
+ * Suspicious login location settings
  * @class
  */
 class OffsiteFlag extends  AbstractModel {
@@ -1652,7 +1652,7 @@ class DescribeSafeAuthFlagResponse extends  AbstractModel {
         this.ActionFlag = null;
 
         /**
-         * Unusual login location protection settings
+         * Suspicious login location protection settings
          * @type {OffsiteFlag || null}
          */
         this.OffsiteFlag = null;
@@ -4988,6 +4988,13 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.RelatedType = null;
 
+        /**
+         * Policy association time
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AttachmentTime = null;
+
     }
 
     /**
@@ -5001,6 +5008,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.Name = 'Name' in params ? params.Name : null;
         this.Uin = 'Uin' in params ? params.Uin : null;
         this.RelatedType = 'RelatedType' in params ? params.RelatedType : null;
+        this.AttachmentTime = 'AttachmentTime' in params ? params.AttachmentTime : null;
 
     }
 }
@@ -5282,6 +5290,98 @@ class AttachUserPolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSafeAuthFlagColl response structure.
+ * @class
+ */
+class DescribeSafeAuthFlagCollResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Login protection settings
+         * @type {LoginActionFlag || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * Sensitive operation protection settings
+         * @type {LoginActionFlag || null}
+         */
+        this.ActionFlag = null;
+
+        /**
+         * Suspicious login location protection settings
+         * @type {OffsiteFlag || null}
+         */
+        this.OffsiteFlag = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LoginFlag) {
+            let obj = new LoginActionFlag();
+            obj.deserialize(params.LoginFlag)
+            this.LoginFlag = obj;
+        }
+
+        if (params.ActionFlag) {
+            let obj = new LoginActionFlag();
+            obj.deserialize(params.ActionFlag)
+            this.ActionFlag = obj;
+        }
+
+        if (params.OffsiteFlag) {
+            let obj = new OffsiteFlag();
+            obj.deserialize(params.OffsiteFlag)
+            this.OffsiteFlag = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSafeAuthFlagColl request structure.
+ * @class
+ */
+class DescribeSafeAuthFlagCollRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sub-account
+         * @type {number || null}
+         */
+        this.SubUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
 
     }
 }
@@ -5818,6 +5918,8 @@ module.exports = {
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    DescribeSafeAuthFlagCollResponse: DescribeSafeAuthFlagCollResponse,
+    DescribeSafeAuthFlagCollRequest: DescribeSafeAuthFlagCollRequest,
     PutRolePermissionsBoundaryResponse: PutRolePermissionsBoundaryResponse,
     SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,

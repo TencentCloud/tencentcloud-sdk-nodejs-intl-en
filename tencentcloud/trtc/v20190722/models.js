@@ -159,7 +159,7 @@ class DescribeAbnormalEventRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * MCU On-Cloud MixTranscoding layout parameters
  * @class
  */
 class LayoutParams extends  AbstractModel {
@@ -196,6 +196,12 @@ class LayoutParams extends  AbstractModel {
          */
         this.MainVideoRightAlign = null;
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.MixVideoUids = null;
+
     }
 
     /**
@@ -215,6 +221,7 @@ class LayoutParams extends  AbstractModel {
             this.SmallVideoLayoutParams = obj;
         }
         this.MainVideoRightAlign = 'MainVideoRightAlign' in params ? params.MainVideoRightAlign : null;
+        this.MixVideoUids = 'MixVideoUids' in params ? params.MixVideoUids : null;
 
     }
 }
@@ -495,6 +502,18 @@ bigvHeight: upstream/downstream resolution in height.
          */
         this.DataType = null;
 
+        /**
+         * Page index starting from 0. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default.
+         * @type {string || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of entries per page. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default. When `DataType` and all `UserId`s are not null, `PageSize` is up to 6. When `DataType` and all `UserId`s are null, `PageSize` is up to 100.
+         * @type {string || null}
+         */
+        this.PageSize = null;
+
     }
 
     /**
@@ -510,6 +529,8 @@ bigvHeight: upstream/downstream resolution in height.
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
         this.DataType = 'DataType' in params ? params.DataType : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -609,7 +630,7 @@ class EncodeParams extends  AbstractModel {
         super();
 
         /**
-         * Output stream audio sample rate for stream mix. Valid values: 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000.
+         * Output stream audio sample rate for stream mix in Hz. Valid values: 48000, 44100, 32000, 24000, 16000, 12000, 8000.
          * @type {number || null}
          */
         this.AudioSampleRate = null;
@@ -841,7 +862,7 @@ class StopMCUMixTranscodeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * User information, including when the user enters/exits a room
  * @class
  */
 class UserInformation extends  AbstractModel {
@@ -849,19 +870,19 @@ class UserInformation extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Room ID
          * @type {string || null}
          */
         this.RoomStr = null;
 
         /**
-         * 
+         * User ID
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * 
+         * The time when the user enters the room
          * @type {number || null}
          */
         this.JoinTs = null;
@@ -873,25 +894,25 @@ class UserInformation extends  AbstractModel {
         this.LeaveTs = null;
 
         /**
-         * 
+         * Device type
          * @type {string || null}
          */
         this.DeviceType = null;
 
         /**
-         * 
+         * SDK version number
          * @type {string || null}
          */
         this.SdkVersion = null;
 
         /**
-         * 
+         * Client IP
          * @type {string || null}
          */
         this.ClientIp = null;
 
         /**
-         * 
+         * Determine whether a user has left the room
          * @type {boolean || null}
          */
         this.Finished = null;

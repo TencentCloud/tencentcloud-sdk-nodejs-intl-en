@@ -654,46 +654,6 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
- * FetchMessageByOffset response structure.
- * @class
- */
-class FetchMessageByOffsetResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned results.
-         * @type {ConsumerRecord || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            let obj = new ConsumerRecord();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Internal topic object of `GroupInfo`
  * @class
  */
@@ -730,42 +690,26 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * FetchMessageListByOffset request structure.
+ * `TopicResponse` returned uniformly
  * @class
  */
-class FetchMessageListByOffsetRequest extends  AbstractModel {
+class TopicResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
-         * @type {string || null}
+         * List of returned topic information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Topic> || null}
          */
-        this.InstanceId = null;
+        this.TopicList = null;
 
         /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Partition ID.
+         * Number of eligible topics
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Partition = null;
-
-        /**
-         * Offset information.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number of records that can be queried. Default value: 20.
-         * @type {number || null}
-         */
-        this.SinglePartitionRecordNumber = null;
+        this.TotalCount = null;
 
     }
 
@@ -776,11 +720,16 @@ class FetchMessageListByOffsetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.SinglePartitionRecordNumber = 'SinglePartitionRecordNumber' in params ? params.SinglePartitionRecordNumber : null;
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new Topic();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
     }
 }
@@ -1037,62 +986,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * FetchMessageListByTimestamp request structure.
- * @class
- */
-class FetchMessageListByTimestampRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Partition ID.
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * Query start time. It is a 13-digit timestamp.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Maximum number of records that can be queried. Default value: 20.
-         * @type {number || null}
-         */
-        this.SinglePartitionRecordNumber = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.SinglePartitionRecordNumber = 'SinglePartitionRecordNumber' in params ? params.SinglePartitionRecordNumber : null;
-
-    }
-}
-
-/**
  * DescribeTopicAttributes response structure.
  * @class
  */
@@ -1126,49 +1019,6 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
             let obj = new TopicAttributesResponse();
             obj.deserialize(params.Result)
             this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * FetchMessageListByOffset response structure.
- * @class
- */
-class FetchMessageListByOffsetResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned results.
-         * @type {Array.<ConsumerRecord> || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            this.Result = new Array();
-            for (let z in params.Result) {
-                let obj = new ConsumerRecord();
-                obj.deserialize(params.Result[z]);
-                this.Result.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2114,55 +1964,6 @@ class DescribeRouteRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * FetchMessageByOffset request structure.
- * @class
- */
-class FetchMessageByOffsetRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Partition ID.
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * Offset information.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3486,7 +3287,8 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.InstanceType = null;
 
         /**
-         * 
+         * Features supported by the instance. `FEATURE_SUBNET_ACL` indicates that the ACL policy supports setting subnets. 
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Features = null;
@@ -4294,51 +4096,6 @@ class DescribeRouteResponse extends  AbstractModel {
 }
 
 /**
- * `TopicResponse` returned uniformly
- * @class
- */
-class TopicResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of returned topic information
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Topic> || null}
-         */
-        this.TopicList = null;
-
-        /**
-         * Number of eligible topics
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TopicList) {
-            this.TopicList = new Array();
-            for (let z in params.TopicList) {
-                let obj = new Topic();
-                obj.deserialize(params.TopicList[z]);
-                this.TopicList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-    }
-}
-
-/**
  * DescribeTopicDetail request structure.
  * @class
  */
@@ -4423,72 +4180,6 @@ class DescribeGroupOffsetsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Message record
- * @class
- */
-class ConsumerRecord extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Partition ID.
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * Offset.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Message key.
-Note: this field may return `null`, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * Message value.
-Note: this field may return `null`, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.Value = null;
-
-        /**
-         * Message timestamp.
-Note: this field may return `null`, indicating that no valid value was found.
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
 
     }
 }
@@ -4678,49 +4369,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
-
-    }
-}
-
-/**
- * FetchMessageListByTimestamp response structure.
- * @class
- */
-class FetchMessageListByTimestampResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned results.
-         * @type {Array.<ConsumerRecord> || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            this.Result = new Array();
-            for (let z in params.Result) {
-                let obj = new ConsumerRecord();
-                obj.deserialize(params.Result[z]);
-                this.Result.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5337,6 +4985,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.PartitionOffset = null;
 
+        /**
+         * ID of the subscribed topic. 
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
     }
 
     /**
@@ -5357,6 +5012,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.PartitionOffset.push(obj);
             }
         }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }
@@ -5375,18 +5031,15 @@ module.exports = {
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
     DeleteTopicRequest: DeleteTopicRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
-    FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
     GroupInfoTopics: GroupInfoTopics,
-    FetchMessageListByOffsetRequest: FetchMessageListByOffsetRequest,
+    TopicResult: TopicResult,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
     DescribeACLResponse: DescribeACLResponse,
     JgwOperateResponse: JgwOperateResponse,
     Topic: Topic,
     Tag: Tag,
     GroupResponse: GroupResponse,
-    FetchMessageListByTimestampRequest: FetchMessageListByTimestampRequest,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
-    FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
     RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
@@ -5407,7 +5060,6 @@ module.exports = {
     CreateTopicRequest: CreateTopicRequest,
     DeleteAclResponse: DeleteAclResponse,
     DescribeRouteRequest: DescribeRouteRequest,
-    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
@@ -5449,14 +5101,11 @@ module.exports = {
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
     DescribeRouteResponse: DescribeRouteResponse,
-    TopicResult: TopicResult,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
-    ConsumerRecord: ConsumerRecord,
     ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
     Route: Route,
-    FetchMessageListByTimestampResponse: FetchMessageListByTimestampResponse,
     Acl: Acl,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,

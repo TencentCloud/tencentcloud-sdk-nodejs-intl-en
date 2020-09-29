@@ -694,6 +694,68 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Path-based cache rule configuration
+The cache expiration time for all files is 30 days by default. 
+Static acceleration type domain names .php, .jsp, .asp, and .aspx are not cached by default.
+ * @class
+ */
+class RuleCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Content for each CacheType:
+For `all`, enter an asterisk (*).
+For `file`, enter the suffix, such as jpg, txt.
+For `directory`, enter the path, such as /xxx/test/.
+For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+For `index`, enter a backslash (/).
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * Rule types:
+`all`: effective for all files
+`file`: effective for specified file suffixes
+`directory`: effective for specified paths
+`path`: effective for specified absolute paths
+`index`: home page
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Cache configuration
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {RuleCacheConfig || null}
+         */
+        this.CacheConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+
+        if (params.CacheConfig) {
+            let obj = new RuleCacheConfig();
+            obj.deserialize(params.CacheConfig)
+            this.CacheConfig = obj;
+        }
+
+    }
+}
+
+/**
  * CDN report data
  * @class
  */
@@ -1218,6 +1280,48 @@ class DescribeIpStatusResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Path cache/no cache configuration.
+ * @class
+ */
+class CacheConfigNoCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * No cache configuration switch
+on: enable
+off: disable
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Always forwards to the origin server for verification
+on: enable
+off: disable
+This is disabled by default.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Revalidate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Revalidate = 'Revalidate' in params ? params.Revalidate : null;
 
     }
 }
@@ -2538,6 +2642,79 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Path cache configuration
+ * @class
+ */
+class CacheConfigCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cache configuration switch
+on: enable
+off: disable
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Cache expiration time settings
+Unit: second. The maximum value is 365 days.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.CacheTime = null;
+
+        /**
+         * Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node.
+on: enable
+off: disable
+This is disabled by default.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.CompareMaxAge = null;
+
+        /**
+         * Force cache
+on: enable
+off: disable
+This is disabled by default. If enabled, the `no-store` and `no-cache` resources returned from the origin server will be cached according to `CacheRules` rules.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.IgnoreCacheControl = null;
+
+        /**
+         * Ignore the Set-Cookie header of an origin server.
+on: enable
+off: disable
+This is disabled by default.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.IgnoreSetCookie = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+        this.CompareMaxAge = 'CompareMaxAge' in params ? params.CompareMaxAge : null;
+        this.IgnoreCacheControl = 'IgnoreCacheControl' in params ? params.IgnoreCacheControl : null;
+        this.IgnoreSetCookie = 'IgnoreSetCookie' in params ? params.IgnoreSetCookie : null;
+
+    }
+}
+
+/**
  * DescribeReportData response structure.
  * @class
  */
@@ -2633,6 +2810,66 @@ class DisableClsLogTopicRequest extends  AbstractModel {
         this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
+ * Path cache configuration, choose one from the following three cache modes.
+ * @class
+ */
+class RuleCacheConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cache configuration
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {CacheConfigCache || null}
+         */
+        this.Cache = null;
+
+        /**
+         * No cache configuration
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {CacheConfigNoCache || null}
+         */
+        this.NoCache = null;
+
+        /**
+         * Follows the origin server configuration
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {CacheConfigFollowOrigin || null}
+         */
+        this.FollowOrigin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Cache) {
+            let obj = new CacheConfigCache();
+            obj.deserialize(params.Cache)
+            this.Cache = obj;
+        }
+
+        if (params.NoCache) {
+            let obj = new CacheConfigNoCache();
+            obj.deserialize(params.NoCache)
+            this.NoCache = obj;
+        }
+
+        if (params.FollowOrigin) {
+            let obj = new CacheConfigFollowOrigin();
+            obj.deserialize(params.FollowOrigin)
+            this.FollowOrigin = obj;
+        }
 
     }
 }
@@ -3491,6 +3728,12 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
          */
         this.OriginPullTimeout = null;
 
+        /**
+         * Tag configuration
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -3661,6 +3904,15 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
             this.OriginPullTimeout = obj;
         }
 
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+
     }
 }
 
@@ -3722,7 +3974,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Domain name tag configuration
  * @class
  */
 class Tag extends  AbstractModel {
@@ -3730,13 +3982,15 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Tag key
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * 
+         * Tag value.
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.TagValue = null;
@@ -3757,28 +4011,20 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * Status code redirect configuration. This is disabled by default. (This feature is in beta and not generally available yet.)
+ * Path cache configuration follows the origin server configuration.
  * @class
  */
-class ErrorPage extends  AbstractModel {
+class CacheConfigFollowOrigin extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Status code redirect configuration switch
-on: enabled
-off: disabled
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Follow origin server switch configuration
+on: enable
+off: disable
          * @type {string || null}
          */
         this.Switch = null;
-
-        /**
-         * Status code redirect rules configuration
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ErrorPageRule> || null}
-         */
-        this.PageRules = null;
 
     }
 
@@ -3790,15 +4036,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.PageRules) {
-            this.PageRules = new Array();
-            for (let z in params.PageRules) {
-                let obj = new ErrorPageRule();
-                obj.deserialize(params.PageRules[z]);
-                this.PageRules.push(obj);
-            }
-        }
 
     }
 }
@@ -5420,7 +5657,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AccessPort = null;
 
         /**
-         * 
+         * Tag configuration
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {Array.<Tag> || null}
          */
         this.Tag = null;
@@ -5915,6 +6153,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.AdvancedCache = null;
 
+        /**
+         * Advanced path cache configuration
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<RuleCache> || null}
+         */
+        this.RuleCache = null;
+
     }
 
     /**
@@ -5935,6 +6180,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new AdvancedCache();
             obj.deserialize(params.AdvancedCache)
             this.AdvancedCache = obj;
+        }
+
+        if (params.RuleCache) {
+            this.RuleCache = new Array();
+            for (let z in params.RuleCache) {
+                let obj = new RuleCache();
+                obj.deserialize(params.RuleCache[z]);
+                this.RuleCache.push(obj);
+            }
         }
 
     }
@@ -7173,6 +7427,51 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Configuration to retain query strings for this path
+ * @class
+ */
+class RuleQueryString extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * `includeCustom` will retain partial query strings
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Array of included/excluded query strings (separated by ';')
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeIpVisit request structure.
  * @class
  */
@@ -7884,6 +8183,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Scheme = null;
 
+        /**
+         * Path-based cache key configuration
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<KeyRule> || null}
+         */
+        this.KeyRules = null;
+
     }
 
     /**
@@ -7924,6 +8230,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new SchemeKey();
             obj.deserialize(params.Scheme)
             this.Scheme = obj;
+        }
+
+        if (params.KeyRules) {
+            this.KeyRules = new Array();
+            for (let z in params.KeyRules) {
+                let obj = new KeyRule();
+                obj.deserialize(params.KeyRules[z]);
+                this.KeyRules.push(obj);
+            }
         }
 
     }
@@ -8008,6 +8323,90 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Path-based cache key configuration
+ * @class
+ */
+class KeyRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Content for each CacheType:
+For `file`, enter the suffix, such as jpg, txt.
+For `directory`, enter the path, such as /xxx/test/.
+For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+For `index`, enter a backslash (/).
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * Rule types:
+`file`: effective for specified file suffixes
+`directory`: effective for specified paths
+`path`: effective for specified absolute paths
+`index`: home page
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Whether to enable full-path cache
+on: enable full-path cache (i.e., disable parameter filter)
+off: disable full-path cache (i.e., enable parameter filter)
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.FullUrlCache = null;
+
+        /**
+         * Whether caches are case insensitive
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.IgnoreCase = null;
+
+        /**
+         * Request parameter contained in `CacheKey`
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {RuleQueryString || null}
+         */
+        this.QueryString = null;
+
+        /**
+         * Path cache key tag, the value "user" is passed.
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.RuleTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
+        this.IgnoreCase = 'IgnoreCase' in params ? params.IgnoreCase : null;
+
+        if (params.QueryString) {
+            let obj = new RuleQueryString();
+            obj.deserialize(params.QueryString)
+            this.QueryString = obj;
+        }
+        this.RuleTag = 'RuleTag' in params ? params.RuleTag : null;
 
     }
 }
@@ -8452,6 +8851,53 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.OptimizationType = 'OptimizationType' in params ? params.OptimizationType : null;
+
+    }
+}
+
+/**
+ * Status code redirect configuration. This is disabled by default. (This feature is in beta and not generally available yet.)
+ * @class
+ */
+class ErrorPage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status code redirect configuration switch
+on: enabled
+off: disabled
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Status code redirect rules configuration
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ErrorPageRule> || null}
+         */
+        this.PageRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.PageRules) {
+            this.PageRules = new Array();
+            for (let z in params.PageRules) {
+                let obj = new ErrorPageRule();
+                obj.deserialize(params.PageRules[z]);
+                this.PageRules.push(obj);
+            }
+        }
 
     }
 }
@@ -10628,6 +11074,7 @@ module.exports = {
     Authentication: Authentication,
     ImageOptimization: ImageOptimization,
     Https: Https,
+    RuleCache: RuleCache,
     ReportData: ReportData,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
@@ -10640,6 +11087,7 @@ module.exports = {
     UserAgentFilter: UserAgentFilter,
     AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
+    CacheConfigNoCache: CacheConfigNoCache,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
     ListTopDataRequest: ListTopDataRequest,
@@ -10662,8 +11110,10 @@ module.exports = {
     BriefDomain: BriefDomain,
     UpdatePayTypeRequest: UpdatePayTypeRequest,
     TpgAdapter: TpgAdapter,
+    CacheConfigCache: CacheConfigCache,
     DescribeReportDataResponse: DescribeReportDataResponse,
     DisableClsLogTopicRequest: DisableClsLogTopicRequest,
+    RuleCacheConfig: RuleCacheConfig,
     ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
     DescribeCdnIpRequest: DescribeCdnIpRequest,
     Ipv6: Ipv6,
@@ -10675,7 +11125,7 @@ module.exports = {
     AddCdnDomainRequest: AddCdnDomainRequest,
     UserAgentFilterRule: UserAgentFilterRule,
     Tag: Tag,
-    ErrorPage: ErrorPage,
+    CacheConfigFollowOrigin: CacheConfigFollowOrigin,
     MaxAgeRule: MaxAgeRule,
     DescribePayTypeRequest: DescribePayTypeRequest,
     DescribeCertDomainsRequest: DescribeCertDomainsRequest,
@@ -10727,6 +11177,7 @@ module.exports = {
     DescribeMapInfoResponse: DescribeMapInfoResponse,
     DescribeMapInfoRequest: DescribeMapInfoRequest,
     EnableCachesResponse: EnableCachesResponse,
+    RuleQueryString: RuleQueryString,
     DescribeIpVisitRequest: DescribeIpVisitRequest,
     StatusCodeCacheRule: StatusCodeCacheRule,
     ClientCert: ClientCert,
@@ -10744,6 +11195,7 @@ module.exports = {
     CacheKey: CacheKey,
     UrlRedirect: UrlRedirect,
     CookieKey: CookieKey,
+    KeyRule: KeyRule,
     CappingRule: CappingRule,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
@@ -10754,6 +11206,7 @@ module.exports = {
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     OriginPullOptimization: OriginPullOptimization,
+    ErrorPage: ErrorPage,
     PushTask: PushTask,
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,

@@ -71,6 +71,7 @@ const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
 const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
 const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
+const RenameRestoreDatabase = models.RenameRestoreDatabase;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;

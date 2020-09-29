@@ -133,7 +133,7 @@ class BillResourceSummary extends  AbstractModel {
         this.BusinessCodeName = null;
 
         /**
-         * Sub-product name: sub-categories of Tencent Cloud services, such as CVM-Standard S1; if no subproduct name is obtained, “-” is returned.
+         * Sub-product name: sub-categories of Tencent Cloud services, such as CVM-Standard S1; if no subproduct name is obtained, '-' is returned.
          * @type {string || null}
          */
         this.ProductCodeName = null;
@@ -296,16 +296,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PayerUin = null;
 
         /**
-         * Resource owner UIN; “-” is returned if no value is obtained
+         * Resource owner UIN; '-' is returned if no value is obtained
          * @type {string || null}
          */
         this.OwnerUin = null;
 
         /**
-         * Operator UIN; “-” is returned if no value is obtained
+         * Operator UIN; '-' is returned if no value is obtained
          * @type {string || null}
          */
         this.OperateUin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RegionId = null;
 
     }
 
@@ -354,6 +372,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
         this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
 
     }
 }
@@ -626,6 +647,12 @@ class DescribeBillDetailRequest extends  AbstractModel {
          */
         this.ResourceId = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
     }
 
     /**
@@ -645,6 +672,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
 
     }
 }
@@ -910,19 +938,19 @@ class BillDetailComponent extends  AbstractModel {
         this.IncentivePayAmount = null;
 
         /**
-         * 
+         * Component type/code (optional)
          * @type {string || null}
          */
         this.ItemCode = null;
 
         /**
-         * 
+         * Component name/code (optional)
          * @type {string || null}
          */
         this.ComponentCode = null;
 
         /**
-         * 
+         * Contract price
          * @type {string || null}
          */
         this.ContractPrice = null;
@@ -968,7 +996,7 @@ class DescribeBillSummaryByRegionRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries bill data user’s UIN
+         * Queries bill data user's UIN
          * @type {string || null}
          */
         this.PayerUin = null;
@@ -1010,7 +1038,7 @@ class DescribeBillSummaryByPayModeRequest extends  AbstractModel {
         super();
 
         /**
-         * Query bill data user’s UIN
+         * Query bill data user's UIN
          * @type {string || null}
          */
         this.PayerUin = null;
@@ -1180,7 +1208,7 @@ class DescribeBillSummaryByProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries bill data user’s UIN
+         * Queries bill data user's UIN
          * @type {string || null}
          */
         this.PayerUin = null;
@@ -1252,6 +1280,12 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
          */
         this.NeedRecordNum = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
     }
 
     /**
@@ -1266,6 +1300,7 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
         this.Month = 'Month' in params ? params.Month : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
 
     }
 }
@@ -1279,7 +1314,7 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries bill data user’s UIN
+         * Queries bill data user's UIN
          * @type {string || null}
          */
         this.PayerUin = null;
@@ -1411,13 +1446,13 @@ class BillDetail extends  AbstractModel {
         this.ComponentSet = null;
 
         /**
-         * Payer’s UIN
+         * Payer's UIN
          * @type {string || null}
          */
         this.PayerUin = null;
 
         /**
-         * User’s UIN
+         * User's UIN
          * @type {string || null}
          */
         this.OwnerUin = null;
@@ -1436,22 +1471,28 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Tags = null;
 
         /**
-         * 
+         * Product name/code (optional)
          * @type {string || null}
          */
         this.BusinessCode = null;
 
         /**
-         * 
+         * Subproduct name/code (optional)
          * @type {string || null}
          */
         this.ProductCode = null;
 
         /**
-         * 
+         * Transaction type/code (optional)
          * @type {string || null}
          */
         this.ActionType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RegionId = null;
 
     }
 
@@ -1500,6 +1541,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
 
     }
 }

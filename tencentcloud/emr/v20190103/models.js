@@ -975,7 +975,7 @@ class PodSpec extends  AbstractModel {
         this.Memory = null;
 
         /**
-         * Mount point of resource for host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
+         * Mount point of resources for the host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
          * @type {Array.<string> || null}
          */
         this.DataVolumes = null;
@@ -3310,6 +3310,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.DiskType = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DiskNum = null;
+
     }
 
     /**
@@ -3321,6 +3327,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
 
     }
 }

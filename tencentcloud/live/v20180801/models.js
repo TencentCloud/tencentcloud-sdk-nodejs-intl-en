@@ -2057,6 +2057,18 @@ class DescribeLiveTranscodeRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.TemplateIds = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DomainNames = null;
+
     }
 
     /**
@@ -2066,6 +2078,8 @@ class DescribeLiveTranscodeRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TemplateIds = 'TemplateIds' in params ? params.TemplateIds : null;
+        this.DomainNames = 'DomainNames' in params ? params.DomainNames : null;
 
     }
 }
@@ -9246,36 +9260,42 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Template name, such as 900 900p. This can be only a combination of letters and digits.
+         * Template name, such as “900p”. This can be only a combination of letters and digits.
+Length limit:
+  Standard transcoding: 1-10 characters
+  Top speed codec transcoding: 3-10 characters
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
-         * Video bitrate. Value range: 100-8,000.
-Note: The bitrate must be a multiple of 100.
+         * Video bitrate in Kbps. Value range: 100-8,000.
+Note: the transcoding template requires that bitrate should be unique, yet the final saved bitrate may be different from the input bitrate.
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * Video encoding format. Valid values: h264, h265. Default value: h264.
-         * @type {string || null}
-         */
-        this.Vcodec = null;
-
-        /**
-         * Audio encoding in ACC format. Default value: original audio format.
-Note: This parameter will take effect later.
+         * Audio codec: acc by default.
+Note: this parameter is unsupported now.
          * @type {string || null}
          */
         this.Acodec = null;
 
         /**
-         * Audio bitrate. Value range: 0-500. Default value: 0.
+         * Audio bitrate. Default value: 0.
+Value range: 0-500.
          * @type {number || null}
          */
         this.AudioBitrate = null;
+
+        /**
+         * Video codec: `h264/h265/origin`. Default value: `h264`.
+
+origin: original codec as the output codec
+         * @type {string || null}
+         */
+        this.Vcodec = null;
 
         /**
          * Template description.
@@ -9285,7 +9305,8 @@ Note: This parameter will take effect later.
 
         /**
          * Width. Default value: 0.
-Value range: [0-3000].
+Value range: 0-3,000
+It must be a multiple of 2. The original width is 0
          * @type {number || null}
          */
         this.Width = null;
@@ -9304,25 +9325,29 @@ Value range: [0-3000].
 
         /**
          * Height. Default value: 0.
-Value range: [0-3000].
+Value range: 0-3,000
+It must be a multiple of 2. The original height is 0
          * @type {number || null}
          */
         this.Height = null;
 
         /**
          * Frame rate. Default value: 0.
+Value range: 0-60
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Keyframe interval in seconds. Original interval by default
+         * Keyframe interval in seconds. Default value: original interval
+Value range: 2-6
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * Whether to rotate. 0: no; 1: yes. Default value: 0.
+         * Rotation angle. Default value: 0.
+Valid values: 0, 90, 180, 270
          * @type {number || null}
          */
         this.Rotate = null;
@@ -9367,6 +9392,12 @@ Value range: 0.0-0.5.
          */
         this.AdaptBitratePercent = null;
 
+        /**
+         * This parameter is used to define whether the short side is the video height. 0: no, 1: yes. The default value is 0.
+         * @type {number || null}
+         */
+        this.ShortEdgeAsHeight = null;
+
     }
 
     /**
@@ -9378,9 +9409,9 @@ Value range: 0.0-0.5.
         }
         this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
         this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
-        this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
         this.Acodec = 'Acodec' in params ? params.Acodec : null;
         this.AudioBitrate = 'AudioBitrate' in params ? params.AudioBitrate : null;
+        this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.NeedVideo = 'NeedVideo' in params ? params.NeedVideo : null;
@@ -9395,6 +9426,7 @@ Value range: 0.0-0.5.
         this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
         this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
         this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
+        this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
 
     }
 }
@@ -9684,15 +9716,16 @@ class ModifyLiveTranscodeTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * Video encoding format:
-h264/h265.
+         * Video codec: `h264/h265/origin`. Default value: `h264`.
+
+origin: original codec as the output codec
          * @type {string || null}
          */
         this.Vcodec = null;
 
         /**
-         * Audio encoding format:
-aac/mp3.
+         * Audio codec: acc by default.
+Note: this parameter is unsupported now.
          * @type {string || null}
          */
         this.Acodec = null;
@@ -9711,14 +9744,15 @@ Value range: 0-500.
         this.Description = null;
 
         /**
-         * Video bitrate. Value range: 100-8000 Kbps.
-Note: the bitrate value must be a multiple of 100.
+         * Video bitrate in Kbps. Value range: 100-8,000.
+Note: the transcoding template requires that the bitrate should be unique, yet the final saved bitrate may be different from the input bitrate.
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * Width. Value range: 0-3000.
+         * Width in pixels. Value range: 0-3,000.
+It must be a multiple of 2. The original width is 0
          * @type {number || null}
          */
         this.Width = null;
@@ -9736,26 +9770,29 @@ Note: the bitrate value must be a multiple of 100.
         this.NeedAudio = null;
 
         /**
-         * Height. Value range: 0-3000.
+         * Height in pixels. Value range: 0-3,000.
+It must be a multiple of 2. The original height is 0
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Frame rate. Value range: 0-200.
+         * Frame rate in fps. Default value: 0.
+Value range: 0-60
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Keyframe interval in seconds. Value range: 0-50.
+         * Keyframe interval in seconds.
+Value range: 2-6
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * Rotation angle.
-0, 90, 180, 270.
+         * Rotation angle. Default value: 0.
+Valid values: 0, 90, 180, 270
          * @type {number || null}
          */
         this.Rotate = null;
@@ -9794,6 +9831,12 @@ Value range: 0.0-0.5.
          */
         this.AdaptBitratePercent = null;
 
+        /**
+         * This parameter is used to define whether the short side is the video height. 0: no, 1: yes. The default value is 0.
+         * @type {number || null}
+         */
+        this.ShortEdgeAsHeight = null;
+
     }
 
     /**
@@ -9821,6 +9864,7 @@ Value range: 0.0-0.5.
         this.HeightToOrig = 'HeightToOrig' in params ? params.HeightToOrig : null;
         this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
         this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
+        this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
 
     }
 }
@@ -10007,13 +10051,13 @@ class CreateRecordTaskRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * Recording task end time in UNIX timestamp, which must be after `StartTime` and within 24 hours from the current time.
+         * The recording end time in UNIX timestamp format. The “EndTime” should be later than “StartTime”. Normally the duration between “EndTime” and “StartTime” is up to 24 hours.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Recording task start time in UNIX timestamp. If this parameter is left empty, it indicates to start recording immediately. It must be within 24 hours from the current time.
+         * The recording start time in UNIX timestamp format. If the “StartTime” is not entered, recording will start immediately after the API is successfully called. Normally the “StartTime” should be within 6 days from current time.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -10033,7 +10077,7 @@ class CreateRecordTaskRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * Extended field, which is empty by default.
+         * Extension field which is not defined now. It is empty by default.
          * @type {string || null}
          */
         this.Extension = null;
@@ -11775,7 +11819,7 @@ class CreateRecordTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID, which uniquely identifies the recording task globally.
+         * `TaskId`, which is a globally unique task ID. If the `TaskId` is returned, that means the recording task has been successfully created.
          * @type {string || null}
          */
         this.TaskId = null;

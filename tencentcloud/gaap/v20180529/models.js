@@ -905,6 +905,12 @@ class BandwidthPriceGradient extends  AbstractModel {
          */
         this.BandwidthUnitPrice = null;
 
+        /**
+         * Discounted bandwidth price in CNY/Mbps/day.
+         * @type {number || null}
+         */
+        this.DiscountBandwidthUnitPrice = null;
+
     }
 
     /**
@@ -916,6 +922,7 @@ class BandwidthPriceGradient extends  AbstractModel {
         }
         this.BandwidthRange = 'BandwidthRange' in params ? params.BandwidthRange : null;
         this.BandwidthUnitPrice = 'BandwidthUnitPrice' in params ? params.BandwidthUnitPrice : null;
+        this.DiscountBandwidthUnitPrice = 'DiscountBandwidthUnitPrice' in params ? params.DiscountBandwidthUnitPrice : null;
 
     }
 }
@@ -3184,16 +3191,34 @@ class DescribeRealServerStatisticsRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
+         * Layer-7 rule ID
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
          * Statistics duration. Unit: hours. It only supports querying statistics for the past 1, 3, 6, 12, and 24 hours.
          * @type {number || null}
          */
         this.WithinTime = null;
 
         /**
-         * Rule ID
+         * Statistics start time, such as 2020-08-19 00:00:00
          * @type {string || null}
          */
-        this.RuleId = null;
+        this.StartTime = null;
+
+        /**
+         * Statistics end time, such as 2020-08-19 23:59:59
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Statistics granularity in seconds. Only 1-minute (60-second) and 5-minute (300-second) granularities are supported
+         * @type {number || null}
+         */
+        this.Granularity = null;
 
     }
 
@@ -3206,8 +3231,11 @@ class DescribeRealServerStatisticsRequest extends  AbstractModel {
         }
         this.RealServerId = 'RealServerId' in params ? params.RealServerId : null;
         this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.WithinTime = 'WithinTime' in params ? params.WithinTime : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.WithinTime = 'WithinTime' in params ? params.WithinTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
 
     }
 }
@@ -5366,6 +5394,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.CreateTime = null;
 
+        /**
+         * Whether the connection group contains a Microsoft connection
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProxyType = null;
+
     }
 
     /**
@@ -5397,6 +5432,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Version = 'Version' in params ? params.Version : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
 
     }
 }
@@ -7244,10 +7280,16 @@ class DescribeRealServerStatisticsResponse extends  AbstractModel {
         super();
 
         /**
-         * Origin server status statistics
+         * Origin server status statistics of specified listener
          * @type {Array.<StatisticsDataInfo> || null}
          */
         this.StatisticsData = null;
+
+        /**
+         * Status statistics of multiple origin servers
+         * @type {Array.<MetricStatisticsInfo> || null}
+         */
+        this.RsStatisticsData = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7271,6 +7313,15 @@ class DescribeRealServerStatisticsResponse extends  AbstractModel {
                 let obj = new StatisticsDataInfo();
                 obj.deserialize(params.StatisticsData[z]);
                 this.StatisticsData.push(obj);
+            }
+        }
+
+        if (params.RsStatisticsData) {
+            this.RsStatisticsData = new Array();
+            for (let z in params.RsStatisticsData) {
+                let obj = new MetricStatisticsInfo();
+                obj.deserialize(params.RsStatisticsData[z]);
+                this.RsStatisticsData.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -10082,6 +10133,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ModifyConfigTime = null;
 
+        /**
+         * Connection type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProxyType = null;
+
     }
 
     /**
@@ -10134,6 +10192,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
         this.RelatedGlobalDomains = 'RelatedGlobalDomains' in params ? params.RelatedGlobalDomains : null;
         this.ModifyConfigTime = 'ModifyConfigTime' in params ? params.ModifyConfigTime : null;
+        this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
 
     }
 }

@@ -742,6 +742,30 @@ class DescribeBackupsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * Filter by backup name. If this parameter is left empty, backup name will not be used in filtering.
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+        /**
+         * Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
+         * @type {number || null}
+         */
+        this.BackupWay = null;
+
+        /**
+         * Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
     }
 
     /**
@@ -756,6 +780,10 @@ class DescribeBackupsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
 
     }
 }
@@ -858,6 +886,18 @@ class RestoreInstanceRequest extends  AbstractModel {
          */
         this.BackupId = null;
 
+        /**
+         * ID of the target instance to which the backup is restored. The target instance should be under the same `APPID`. If this parameter is left empty, ID of the source instance will be used.
+         * @type {string || null}
+         */
+        this.TargetInstanceId = null;
+
+        /**
+         * Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format.
+         * @type {Array.<RenameRestoreDatabase> || null}
+         */
+        this.RenameRestore = null;
+
     }
 
     /**
@@ -869,6 +909,16 @@ class RestoreInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.TargetInstanceId = 'TargetInstanceId' in params ? params.TargetInstanceId : null;
+
+        if (params.RenameRestore) {
+            this.RenameRestore = new Array();
+            for (let z in params.RenameRestore) {
+                let obj = new RenameRestoreDatabase();
+                obj.deserialize(params.RenameRestore[z]);
+                this.RenameRestore.push(obj);
+            }
+        }
 
     }
 }
@@ -1189,7 +1239,7 @@ class MigrateTask extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Migration task status (1: initializing, 4: migrating, 5: migration failed, 6: migration succeeded)
+         * Migration task status (1: initializing, 4: migrating, 5: migration failed, 6: migration succeeded, 7: suspended, 8: deleted, 9: suspending, 10: completing, 11: suspension failed, 12: completion failed)
          * @type {number || null}
          */
         this.Status = null;
@@ -2651,6 +2701,42 @@ class CreateDBRequest extends  AbstractModel {
 }
 
 /**
+ * It is used in the `RestoreInstance`, `RollbackInstance`, and `CreateMigration` APIs, and used to specify the databases to be restored and rename them after restoration.
+ * @class
+ */
+class RenameRestoreDatabase extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name. If the `OldName` database does not exist, a failure will be returned.
+It can be left empty in offline migration tasks.
+         * @type {string || null}
+         */
+        this.OldName = null;
+
+        /**
+         * New database name. If this parameter is left empty, the restored database will be renamed in the default format. If this parameter is left empty in offline migration tasks, the restored database will be named `OldName`. `OldName` and `NewName` cannot be both empty.
+         * @type {string || null}
+         */
+        this.NewName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OldName = 'OldName' in params ? params.OldName : null;
+        this.NewName = 'NewName' in params ? params.NewName : null;
+
+    }
+}
+
+/**
  * InquiryPriceUpgradeDBInstance request structure.
  * @class
  */
@@ -3416,6 +3502,12 @@ class CreateMigrationRequest extends  AbstractModel {
          */
         this.MigrateDBSet = null;
 
+        /**
+         * Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format. This parameter takes effect only when `SourceType=5`.
+         * @type {Array.<RenameRestoreDatabase> || null}
+         */
+        this.RenameRestore = null;
+
     }
 
     /**
@@ -3447,6 +3539,15 @@ class CreateMigrationRequest extends  AbstractModel {
                 let obj = new MigrateDB();
                 obj.deserialize(params.MigrateDBSet[z]);
                 this.MigrateDBSet.push(obj);
+            }
+        }
+
+        if (params.RenameRestore) {
+            this.RenameRestore = new Array();
+            for (let z in params.RenameRestore) {
+                let obj = new RenameRestoreDatabase();
+                obj.deserialize(params.RenameRestore[z]);
+                this.RenameRestore.push(obj);
             }
         }
 
@@ -3978,6 +4079,12 @@ class CreateBackupRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Backup name. If this parameter is left empty, a backup name in the format of "Instance ID_Backup start timestamp" will be automatically generated.
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
     }
 
     /**
@@ -3990,6 +4097,7 @@ class CreateBackupRequest extends  AbstractModel {
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.DBNames = 'DBNames' in params ? params.DBNames : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
 
     }
 }
@@ -4894,6 +5002,18 @@ class RollbackInstanceRequest extends  AbstractModel {
          */
         this.Time = null;
 
+        /**
+         * ID of the target instance to which the backup is restored. The target instance should be under the same `APPID`. If this parameter is left empty, ID of the source instance will be used.
+         * @type {string || null}
+         */
+        this.TargetInstanceId = null;
+
+        /**
+         * Rename the databases listed in `ReNameRestoreDatabase`. This parameter takes effect only when `Type = 1` which indicates that backup rollback supports renaming databases. If it is left empty, databases will be renamed in the default format and the `DBs` parameter specifies the databases to be restored.
+         * @type {Array.<RenameRestoreDatabase> || null}
+         */
+        this.RenameRestore = null;
+
     }
 
     /**
@@ -4907,6 +5027,16 @@ class RollbackInstanceRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.DBs = 'DBs' in params ? params.DBs : null;
         this.Time = 'Time' in params ? params.Time : null;
+        this.TargetInstanceId = 'TargetInstanceId' in params ? params.TargetInstanceId : null;
+
+        if (params.RenameRestore) {
+            this.RenameRestore = new Array();
+            for (let z in params.RenameRestore) {
+                let obj = new RenameRestoreDatabase();
+                obj.deserialize(params.RenameRestore[z]);
+                this.RenameRestore.push(obj);
+            }
+        }
 
     }
 }
@@ -5142,6 +5272,7 @@ module.exports = {
     DBPrivilegeModifyInfo: DBPrivilegeModifyInfo,
     TerminateDBInstanceRequest: TerminateDBInstanceRequest,
     CreateDBRequest: CreateDBRequest,
+    RenameRestoreDatabase: RenameRestoreDatabase,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
     ModifyDBRemarkRequest: ModifyDBRemarkRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,

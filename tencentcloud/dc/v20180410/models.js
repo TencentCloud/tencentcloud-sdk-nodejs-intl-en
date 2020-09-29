@@ -100,7 +100,7 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
         this.DirectConnectName = null;
 
         /**
-         * Circuit code of connection, which is provided by the ISP or connection provider.
+         * Circuit code of a connection, which is provided by the ISP or connection provider.
          * @type {string || null}
          */
         this.CircuitCode = null;
@@ -435,6 +435,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Connection activation time.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -1212,7 +1213,7 @@ You can call `DescribeAccessPoints` to get the region ID. The selected access po
         this.PortType = null;
 
         /**
-         * Circuit code of connection, which is provided by the ISP or connection provider.
+         * Circuit code of a connection, which is provided by the ISP or connection provider.
          * @type {string || null}
          */
         this.CircuitCode = null;
@@ -1453,7 +1454,7 @@ class AccessPoint extends  AbstractModel {
         this.AccessPointName = null;
 
         /**
-         * Unique ID of access point.
+         * Unique access point ID.
          * @type {string || null}
          */
         this.AccessPointId = null;
@@ -1471,13 +1472,13 @@ class AccessPoint extends  AbstractModel {
         this.Location = null;
 
         /**
-         * Supported ISP list of access pint.
+         * List of ISPs supported by access point.
          * @type {Array.<string> || null}
          */
         this.LineOperator = null;
 
         /**
-         * Region ID where the access point resides.
+         * ID of the region that manages the access point.
          * @type {string || null}
          */
         this.RegionId = null;

@@ -3311,7 +3311,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DiskType = null;
 
         /**
-         * 
+         * Number of disks
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DiskNum = null;
@@ -3650,6 +3651,24 @@ class ScaleOutInstanceRequest extends  AbstractModel {
          */
         this.PodSpec = null;
 
+        /**
+         * Machine group name selected for ClickHouse cluster scaling-out
+         * @type {string || null}
+         */
+        this.ClickHouseClusterName = null;
+
+        /**
+         * Machine group type selected for ClickHouse cluster scaling-out. new: creates a group; old: selects an existing group
+         * @type {string || null}
+         */
+        this.ClickHouseClusterType = null;
+
+        /**
+         * YARN node label specified for rule-based scaling-out
+         * @type {string || null}
+         */
+        this.YarnNodeLabel = null;
+
     }
 
     /**
@@ -3696,6 +3715,9 @@ class ScaleOutInstanceRequest extends  AbstractModel {
             obj.deserialize(params.PodSpec)
             this.PodSpec = obj;
         }
+        this.ClickHouseClusterName = 'ClickHouseClusterName' in params ? params.ClickHouseClusterName : null;
+        this.ClickHouseClusterType = 'ClickHouseClusterType' in params ? params.ClickHouseClusterType : null;
+        this.YarnNodeLabel = 'YarnNodeLabel' in params ? params.YarnNodeLabel : null;
 
     }
 }

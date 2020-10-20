@@ -589,12 +589,18 @@ class IKEOptionsSpecification extends  AbstractModel {
 }
 
 /**
- * TransformAddress response structure.
+ * CreateCcn response structure.
  * @class
  */
-class TransformAddressResponse extends  AbstractModel {
+class CreateCcnResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The CCN object.
+         * @type {CCN || null}
+         */
+        this.Ccn = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -610,6 +616,12 @@ class TransformAddressResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Ccn) {
+            let obj = new CCN();
+            obj.deserialize(params.Ccn)
+            this.Ccn = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1992,6 +2004,34 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.BandwidthPackageName = 'BandwidthPackageName' in params ? params.BandwidthPackageName : null;
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+
+    }
+}
+
+/**
+ * TransformAddress response structure.
+ * @class
+ */
+class TransformAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7027,24 +7067,38 @@ class DeleteVpnConnectionResponse extends  AbstractModel {
 }
 
 /**
- * CreateCcn response structure.
+ * DescribeBandwidthPackageResources request structure.
  * @class
  */
-class CreateCcnResponse extends  AbstractModel {
+class DescribeBandwidthPackageResourcesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The CCN object.
-         * @type {CCN || null}
-         */
-        this.Ccn = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Unique ID of the bandwidth package in the form of `bwp-11112222`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.BandwidthPackageId = null;
+
+        /**
+         * Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+<li>resource-id - String - Required: no -  (Filter condition) Filters by the unique ID of resources in a bandwidth package, such as `eip-11112222`.</li>
+<li>resource-type - String - Required: no - (Filter condition) Filters by the type of resources in a bandwidth package. It now supports only EIP (`Address`) and load balancer (`LoadBalance`).</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -7055,13 +7109,18 @@ class CreateCcnResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
-        if (params.Ccn) {
-            let obj = new CCN();
-            obj.deserialize(params.Ccn)
-            this.Ccn = obj;
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -7139,18 +7198,24 @@ Note: This field may return null, indicating no valid value.
 }
 
 /**
- * DescribeVpcPrivateIpAddresses response structure.
+ * DescribeCcnAttachedInstances response structure.
  * @class
  */
-class DescribeVpcPrivateIpAddressesResponse extends  AbstractModel {
+class DescribeCcnAttachedInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The list of private `IP` address information.
-         * @type {Array.<VpcPrivateIpAddress> || null}
+         * The number of objects meeting the condition.
+         * @type {number || null}
          */
-        this.VpcPrivateIpAddressSet = null;
+        this.TotalCount = null;
+
+        /**
+         * The list of associated instances.
+         * @type {Array.<CcnAttachedInstance> || null}
+         */
+        this.InstanceSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7167,13 +7232,14 @@ class DescribeVpcPrivateIpAddressesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.VpcPrivateIpAddressSet) {
-            this.VpcPrivateIpAddressSet = new Array();
-            for (let z in params.VpcPrivateIpAddressSet) {
-                let obj = new VpcPrivateIpAddress();
-                obj.deserialize(params.VpcPrivateIpAddressSet[z]);
-                this.VpcPrivateIpAddressSet.push(obj);
+        if (params.InstanceSet) {
+            this.InstanceSet = new Array();
+            for (let z in params.InstanceSet) {
+                let obj = new CcnAttachedInstance();
+                obj.deserialize(params.InstanceSet[z]);
+                this.InstanceSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -8537,24 +8603,18 @@ class ResourceDashboard extends  AbstractModel {
 }
 
 /**
- * DescribeCcnAttachedInstances response structure.
+ * DescribeVpcPrivateIpAddresses response structure.
  * @class
  */
-class DescribeCcnAttachedInstancesResponse extends  AbstractModel {
+class DescribeVpcPrivateIpAddressesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The number of objects meeting the condition.
-         * @type {number || null}
+         * The list of private `IP` address information.
+         * @type {Array.<VpcPrivateIpAddress> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * The list of associated instances.
-         * @type {Array.<CcnAttachedInstance> || null}
-         */
-        this.InstanceSet = null;
+        this.VpcPrivateIpAddressSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8571,14 +8631,13 @@ class DescribeCcnAttachedInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.InstanceSet) {
-            this.InstanceSet = new Array();
-            for (let z in params.InstanceSet) {
-                let obj = new CcnAttachedInstance();
-                obj.deserialize(params.InstanceSet[z]);
-                this.InstanceSet.push(obj);
+        if (params.VpcPrivateIpAddressSet) {
+            this.VpcPrivateIpAddressSet = new Array();
+            for (let z in params.VpcPrivateIpAddressSet) {
+                let obj = new VpcPrivateIpAddress();
+                obj.deserialize(params.VpcPrivateIpAddressSet[z]);
+                this.VpcPrivateIpAddressSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -8845,7 +8904,7 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         this.BandwidthPackageName = null;
 
         /**
-         * The number of bandwidth packages (enter 1 for bill-by-CVM accounts).
+         * The number of bandwidth packages (It can only be “1” for bill-by-CVM accounts)
          * @type {number || null}
          */
         this.BandwidthPackageCount = null;
@@ -9855,13 +9914,13 @@ class ModifyAddressesBandwidthRequest extends  AbstractModel {
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * The monthly bandwidth start time
+         * (Disused) The start time of the monthly bandwidth subscription
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * The monthly bandwidth end time
+         * (Disused) The end time of the monthly bandwidth subscription
          * @type {string || null}
          */
         this.EndTime = null;
@@ -10109,6 +10168,56 @@ class HaVipDisassociateAddressIpRequest extends  AbstractModel {
             return;
         }
         this.HaVipId = 'HaVipId' in params ? params.HaVipId : null;
+
+    }
+}
+
+/**
+ * DescribeBandwidthPackageResources response structure.
+ * @class
+ */
+class DescribeBandwidthPackageResourcesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of eligible resources in the bandwidth package.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The list of resources in the bandwidth package.
+         * @type {Array.<Resource> || null}
+         */
+        this.ResourceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ResourceSet) {
+            this.ResourceSet = new Array();
+            for (let z in params.ResourceSet) {
+                let obj = new Resource();
+                obj.deserialize(params.ResourceSet[z]);
+                this.ResourceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11981,23 +12090,31 @@ class AllocateAddressesRequest extends  AbstractModel {
 
         /**
          * The EIP billing method.
-<ul style="margin:0"><li>For a user who has activated bandwidth billing by IP allowlist, possible values are:<ul><li>BANDWIDTH_PACKAGE: paid by the [bandwidth package](https://intl.cloud.tencent.com/document/product/684/15255?from_cn_redirect=1) (The bandwidth sharing allowlist must be activated additionally.)</li>
-<li>BANDWIDTH_POSTPAID_BY_HOUR: bandwidth postpaid by hour</li>
-<li>TRAFFIC_POSTPAID_BY_HOUR: traffic postpaid by hour</li></ul>Default: TRAFFIC_POSTPAID_BY_HOUR</li>.
-<li>For users who do not use bill-by-bandwidth billing mode, InternetChargeType is consistent with that of the instance bound to the EIP. Therefore, it is unnecessary to pass in this parameter.</li></ul>
+<ul style="margin:0"><li>For bill-by-IP account beta users, valid values: <ul><li>BANDWIDTH_PACKAGE: paid by the [bandwidth package](https://intl.cloud.tencent.com/document/product/684/15255?from_cn_redirect=1)(who must also be bandwidth package beta users)</li>
+<li>BANDWIDTH_POSTPAID_BY_HOUR: billed by hourly bandwidth on a pay-as-you-go basis</li>
+<li>BANDWIDTH_PREPAID_BY_MONTH: monthly bandwidth subscription</li>
+<li>TRAFFIC_POSTPAID_BY_HOUR: billed by hourly traffic on a pay-as-you-go basis</li></ul>Default value: TRAFFIC_POSTPAID_BY_HOUR</li>
+<li>If you are not a bill-by-IP account beta user, the EIP billing is the same as that for the instance bound to the EIP. Therefore, you do not need to pass in this parameter.</li></ul>
          * @type {string || null}
          */
         this.InternetChargeType = null;
 
         /**
-         * The maximum EIP outbound bandwidth. Unit: Mbps.
-<ul style="margin:0"><li>For a user who has activated bandwidth billing by IP allowlist, the value range is determined by the EIP billing method:<ul><li>BANDWIDTH_PACKAGE: 1 Mbps to 1,000 Mbps</li>
+         * The EIP outbound bandwidth cap, in Mbps.
+<ul style="margin:0"><li>For bill-by-IP account beta users, valid values:<ul><li>BANDWIDTH_PACKAGE: 1 Mbps to 1000 Mbps</li>
 <li>BANDWIDTH_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps</li>
-<li>TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps</li></ul>Default: 1 Mbps</li>.
-<li>For a user who has not activated bandwidth billing by IP allowlist, InternetMaxBandwidthOut is consistent with that of the instance bound to the EIP. Therefore, it is unnecessary to pass in this parameter.</li></ul>
+<li>BANDWIDTH_PREPAID_BY_MONTH: 1 Mbps to 200 Mbps</li>
+<li>TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps</li></ul>Default value: 1 Mbps</li>
+<li>If you are not a bill-by-IP account beta user, the EIP outbound bandwidth cap is subject to that of the instance bound to the EIP. Therefore, you do not need to pass in this parameter.</li></ul>
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
+
+        /**
+         * A required billing parameter for an EIP billed by monthly bandwidth subscription. For EIPs using other billing modes, it can be ignored.
+         * @type {AddressChargePrepaid || null}
+         */
+        this.AddressChargePrepaid = null;
 
         /**
          * The EIP type. Default: EIP.
@@ -12047,6 +12164,12 @@ Whether the Anycast EIP can be bound to CLB instances.
         this.InternetServiceProvider = 'InternetServiceProvider' in params ? params.InternetServiceProvider : null;
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+
+        if (params.AddressChargePrepaid) {
+            let obj = new AddressChargePrepaid();
+            obj.deserialize(params.AddressChargePrepaid)
+            this.AddressChargePrepaid = obj;
+        }
         this.AddressType = 'AddressType' in params ? params.AddressType : null;
         this.AnycastZone = 'AnycastZone' in params ? params.AnycastZone : null;
         this.ApplicableForCLB = 'ApplicableForCLB' in params ? params.ApplicableForCLB : null;
@@ -13071,16 +13194,16 @@ class AddressChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * Purchase duration of instance
+         * Purchased usage period, in month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Whether auto-renewal is enabled
-         * @type {string || null}
+         * Setting of renewal. Valid values: 0: manual renewal; 1: auto-renewal; 2: no renewal after expiration. Default value: 0
+         * @type {number || null}
          */
-        this.RenewFlag = null;
+        this.AutoRenewFlag = null;
 
     }
 
@@ -13092,7 +13215,7 @@ class AddressChargePrepaid extends  AbstractModel {
             return;
         }
         this.Period = 'Period' in params ? params.Period : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -21382,7 +21505,7 @@ module.exports = {
     DeleteServiceTemplateResponse: DeleteServiceTemplateResponse,
     CreateServiceTemplateRequest: CreateServiceTemplateRequest,
     IKEOptionsSpecification: IKEOptionsSpecification,
-    TransformAddressResponse: TransformAddressResponse,
+    CreateCcnResponse: CreateCcnResponse,
     DescribeVpnConnectionsRequest: DescribeVpnConnectionsRequest,
     CreateAssistantCidrRequest: CreateAssistantCidrRequest,
     DescribeNetworkInterfacesRequest: DescribeNetworkInterfacesRequest,
@@ -21412,6 +21535,7 @@ module.exports = {
     AssociateNatGatewayAddressRequest: AssociateNatGatewayAddressRequest,
     CreateDirectConnectGatewayRequest: CreateDirectConnectGatewayRequest,
     ModifyBandwidthPackageAttributeRequest: ModifyBandwidthPackageAttributeRequest,
+    TransformAddressResponse: TransformAddressResponse,
     DisassociateNetworkInterfaceSecurityGroupsRequest: DisassociateNetworkInterfaceSecurityGroupsRequest,
     SecurityGroupPolicySet: SecurityGroupPolicySet,
     ModifyFlowLogAttributeRequest: ModifyFlowLogAttributeRequest,
@@ -21517,10 +21641,10 @@ module.exports = {
     DisassociateAddressRequest: DisassociateAddressRequest,
     NetworkAclEntrySet: NetworkAclEntrySet,
     DeleteVpnConnectionResponse: DeleteVpnConnectionResponse,
-    CreateCcnResponse: CreateCcnResponse,
+    DescribeBandwidthPackageResourcesRequest: DescribeBandwidthPackageResourcesRequest,
     EnableCcnRoutesRequest: EnableCcnRoutesRequest,
     Tag: Tag,
-    DescribeVpcPrivateIpAddressesResponse: DescribeVpcPrivateIpAddressesResponse,
+    DescribeCcnAttachedInstancesResponse: DescribeCcnAttachedInstancesResponse,
     DefaultVpcSubnet: DefaultVpcSubnet,
     CreateSubnetsResponse: CreateSubnetsResponse,
     DescribeGatewayFlowMonitorDetailRequest: DescribeGatewayFlowMonitorDetailRequest,
@@ -21542,7 +21666,7 @@ module.exports = {
     ReplaceSecurityGroupPolicyRequest: ReplaceSecurityGroupPolicyRequest,
     NatGateway: NatGateway,
     ResourceDashboard: ResourceDashboard,
-    DescribeCcnAttachedInstancesResponse: DescribeCcnAttachedInstancesResponse,
+    DescribeVpcPrivateIpAddressesResponse: DescribeVpcPrivateIpAddressesResponse,
     DeleteCustomerGatewayResponse: DeleteCustomerGatewayResponse,
     CreateNetDetectRequest: CreateNetDetectRequest,
     CreateAddressTemplateResponse: CreateAddressTemplateResponse,
@@ -21577,6 +21701,7 @@ module.exports = {
     DirectConnectGateway: DirectConnectGateway,
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
+    DescribeBandwidthPackageResourcesResponse: DescribeBandwidthPackageResourcesResponse,
     DescribeCrossBorderComplianceResponse: DescribeCrossBorderComplianceResponse,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
     AssociateDirectConnectGatewayNatGatewayResponse: AssociateDirectConnectGatewayNatGatewayResponse,

@@ -16,90 +16,92 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
 const Eye = models.Eye;
 const Candidate = models.Candidate;
-const ModifyGroupResponse = models.ModifyGroupResponse;
-const GetGroupInfoResponse = models.GetGroupInfoResponse;
-const DeletePersonRequest = models.DeletePersonRequest;
-const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
-const AnalyzeDenseLandmarksResponse = models.AnalyzeDenseLandmarksResponse;
-const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
-const DeleteFaceRequest = models.DeleteFaceRequest;
-const HeadPose = models.HeadPose;
-const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
-const GetGroupListResponse = models.GetGroupListResponse;
-const GroupInfo = models.GroupInfo;
-const GetPersonListResponse = models.GetPersonListResponse;
-const Hat = models.Hat;
-const FaceQualityCompleteness = models.FaceQualityCompleteness;
-const FaceAttributesInfo = models.FaceAttributesInfo;
-const DetectFaceAttributesRequest = models.DetectFaceAttributesRequest;
-const ModifyGroupRequest = models.ModifyGroupRequest;
-const CreatePersonRequest = models.CreatePersonRequest;
-const GetGroupListRequest = models.GetGroupListRequest;
-const DeleteGroupRequest = models.DeleteGroupRequest;
-const CreateFaceResponse = models.CreateFaceResponse;
-const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
 const DetectFaceAttributesResponse = models.DetectFaceAttributesResponse;
-const GroupCandidate = models.GroupCandidate;
-const SearchPersonsResponse = models.SearchPersonsResponse;
-const VerifyPersonRequest = models.VerifyPersonRequest;
-const CompareFaceResponse = models.CompareFaceResponse;
-const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
-const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
-const VerifyFaceResponse = models.VerifyFaceResponse;
-const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
-const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
+const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
+const Hat = models.Hat;
+const CreatePersonRequest = models.CreatePersonRequest;
+const CreateFaceResponse = models.CreateFaceResponse;
 const CreateFaceRequest = models.CreateFaceRequest;
-const Mouth = models.Mouth;
 const CreateGroupRequest = models.CreateGroupRequest;
-const PersonGroupInfo = models.PersonGroupInfo;
-const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const GetPersonGroupInfoRequest = models.GetPersonGroupInfoRequest;
-const Result = models.Result;
-const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const FaceInfo = models.FaceInfo;
-const DeleteGroupResponse = models.DeleteGroupResponse;
-const SearchPersonsRequest = models.SearchPersonsRequest;
-const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
-const FaceQualityInfo = models.FaceQualityInfo;
-const CompareFaceRequest = models.CompareFaceRequest;
-const PersonInfo = models.PersonInfo;
 const Eyebrow = models.Eyebrow;
 const AnalyzeDenseLandmarksRequest = models.AnalyzeDenseLandmarksRequest;
-const DetectFaceResponse = models.DetectFaceResponse;
+const GetGroupListRequest = models.GetGroupListRequest;
+const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
+const DetectLiveFaceAccurateResponse = models.DetectLiveFaceAccurateResponse;
+const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
+const CreatePersonResponse = models.CreatePersonResponse;
+const SearchFacesResponse = models.SearchFacesResponse;
+const CopyPersonResponse = models.CopyPersonResponse;
+const GroupCandidate = models.GroupCandidate;
+const DeleteFaceResponse = models.DeleteFaceResponse;
+const DeletePersonRequest = models.DeletePersonRequest;
+const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
+const DeleteFaceRequest = models.DeleteFaceRequest;
+const ModifyGroupRequest = models.ModifyGroupRequest;
+const DeleteGroupRequest = models.DeleteGroupRequest;
+const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
+const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
+const SearchPersonsResponse = models.SearchPersonsResponse;
+const GroupInfo = models.GroupInfo;
+const FaceQualityInfo = models.FaceQualityInfo;
+const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const CopyPersonRequest = models.CopyPersonRequest;
-const GetPersonListNumRequest = models.GetPersonListNumRequest;
 const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
 const DeletePersonFromGroupResponse = models.DeletePersonFromGroupResponse;
-const VerifyPersonResponse = models.VerifyPersonResponse;
-const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
-const GetGroupInfoRequest = models.GetGroupInfoRequest;
-const FaceShape = models.FaceShape;
-const FaceDetailInfo = models.FaceDetailInfo;
-const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
 const DenseFaceShape = models.DenseFaceShape;
-const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
+const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
 const Point = models.Point;
-const DetectFaceRequest = models.DetectFaceRequest;
-const CreatePersonResponse = models.CreatePersonResponse;
-const GetPersonBaseInfoRequest = models.GetPersonBaseInfoRequest;
-const SearchFacesResponse = models.SearchFacesResponse;
-const GroupExDescriptionInfo = models.GroupExDescriptionInfo;
-const VerifyFaceRequest = models.VerifyFaceRequest;
-const CopyPersonResponse = models.CopyPersonResponse;
-const Hair = models.Hair;
 const GetPersonListNumResponse = models.GetPersonListNumResponse;
+const DeletePersonFromGroupRequest = models.DeletePersonFromGroupRequest;
+const VerifyFaceRequest = models.VerifyFaceRequest;
+const GetPersonListResponse = models.GetPersonListResponse;
+const Hair = models.Hair;
+const Result = models.Result;
+const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
+const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
+const AnalyzeDenseLandmarksResponse = models.AnalyzeDenseLandmarksResponse;
+const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
+const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
+const FaceQualityCompleteness = models.FaceQualityCompleteness;
+const FaceAttributesInfo = models.FaceAttributesInfo;
+const VerifyPersonRequest = models.VerifyPersonRequest;
+const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
+const DetectLiveFaceAccurateRequest = models.DetectLiveFaceAccurateRequest;
+const VerifyFaceResponse = models.VerifyFaceResponse;
+const FaceDetailInfo = models.FaceDetailInfo;
+const SearchFacesRequest = models.SearchFacesRequest;
+const SearchPersonsRequest = models.SearchPersonsRequest;
+const PersonInfo = models.PersonInfo;
+const GroupExDescriptionInfo = models.GroupExDescriptionInfo;
+const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
+const DetectFaceRequest = models.DetectFaceRequest;
+const GetPersonBaseInfoRequest = models.GetPersonBaseInfoRequest;
+const DeletePersonResponse = models.DeletePersonResponse;
+const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
+const HeadPose = models.HeadPose;
+const GetGroupListResponse = models.GetGroupListResponse;
+const DetectFaceAttributesRequest = models.DetectFaceAttributesRequest;
+const GetGroupInfoResponse = models.GetGroupInfoResponse;
+const CompareFaceResponse = models.CompareFaceResponse;
+const Mouth = models.Mouth;
+const PersonGroupInfo = models.PersonGroupInfo;
+const DeleteGroupResponse = models.DeleteGroupResponse;
+const FaceShape = models.FaceShape;
+const CompareFaceRequest = models.CompareFaceRequest;
+const VerifyPersonResponse = models.VerifyPersonResponse;
+const DetectFaceResponse = models.DetectFaceResponse;
+const GetPersonListNumRequest = models.GetPersonListNumRequest;
+const GetGroupInfoRequest = models.GetGroupInfoRequest;
+const ModifyGroupResponse = models.ModifyGroupResponse;
 const GetPersonListRequest = models.GetPersonListRequest;
 const FaceDetailAttributesInfo = models.FaceDetailAttributesInfo;
-const DeleteFaceResponse = models.DeleteFaceResponse;
-const DeletePersonResponse = models.DeletePersonResponse;
 const AttributeItem = models.AttributeItem;
 const FaceRect = models.FaceRect;
 const ModifyPersonGroupInfoResponse = models.ModifyPersonGroupInfoResponse;
-const SearchFacesRequest = models.SearchFacesRequest;
-const DeletePersonFromGroupRequest = models.DeletePersonFromGroupRequest;
 const CreateGroupResponse = models.CreateGroupResponse;
 
 
@@ -440,21 +442,21 @@ This API fuses the features of all faces of a person; for example, if a person h
      * This API is used to detect the position, attributes, and quality information of a face in the given image. The position information includes (x, y, w, h); the face attributes include gender, age, expression, beauty, glass, hair, mask, and pose (pitch, roll, yaw); and the face quality information includes the overall quality score, sharpness, brightness, and completeness.
 
  
-The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, you are recommended to evaluate the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
+The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, we recommended evaluating the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
 
-1). [Creating](https://intl.cloud.tencent.com/document/product/867/32793?from_cn_redirect=1)/[Adding](https://intl.cloud.tencent.com/document/product/867/32795?from_cn_redirect=1) a person in a group: this is to ensure the quality of the face information to facilitate subsequent processing.
+1. [Creating](https://intl.cloud.tencent.com/document/product/867/32793?from_cn_redirect=1)/[Adding](https://intl.cloud.tencent.com/document/product/867/32795?from_cn_redirect=1) a person in a group: this is to ensure the quality of the face information to facilitate subsequent processing.
 
-2). [Face search](https://intl.cloud.tencent.com/document/product/867/32798?from_cn_redirect=1): this is to ensure the quality of the input image to quickly find the corresponding person.
+2. [Face search](https://intl.cloud.tencent.com/document/product/867/32798?from_cn_redirect=1): this is to ensure the quality of the input image to quickly find the corresponding person.
 
-3). [Face verification](https://intl.cloud.tencent.com/document/product/867/32806?from_cn_redirect=1): this is to ensure the quality of the face information to avoid cases where the verification incorrectly fails.
+3. [Face verification](https://intl.cloud.tencent.com/document/product/867/32806?from_cn_redirect=1): this is to ensure the quality of the face information to avoid cases where the verification incorrectly fails.
 
-4). [Face fusion](https://intl.cloud.tencent.com/product/facefusion?from_cn_redirect=1): this is to ensure the quality of the uploaded face images to improve the fusion effect.
+4. [Face fusion](https://intl.cloud.tencent.com/product/facefusion?from_cn_redirect=1): this is to ensure the quality of the uploaded face images to improve the fusion effect.
 
 >     
 - This API is an upgrade of [DetectFace](https://intl.cloud.tencent.com/document/product/867/44989?from_cn_redirect=1) in the following terms:
-1. This API can specify the face attributes that need to be computed and returned, which avoids ineffective computation and reduces the time consumption.
+1. This API can be used to specify the face attributes that need to be computed and returned, which avoids ineffective computation and reduces time consumption.
 2. This API supports more detailed attribute items and will continue providing new features in the future.
-Please use this API to satisfy your corresponding face detection and attribute analysis needs.
+Please use this API for corresponding face detection and attribute analysis.
 
 >     
 - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
@@ -465,6 +467,19 @@ Please use this API to satisfy your corresponding face detection and attribute a
     DetectFaceAttributes(req, cb) {
         let resp = new DetectFaceAttributesResponse();
         this.request("DetectFaceAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to detect the liveness of faces in images uploaded by users and determine whether these images are photographed.
+
+Compared with normal Image-based Liveness Detection services, this API enhances the defense capability against attacks from HD screens, printed photos, and 3D masks, as well as improves attack blocking four to five times the competing products, while maintaining high accuracy. It also supports face verification in different use cases, and satisfies the image-based liveness detection needs on mobile or PCs, making it ideal for liveness detection applications in various industries.
+     * @param {DetectLiveFaceAccurateRequest} req
+     * @param {function(string, DetectLiveFaceAccurateResponse):void} cb
+     * @public
+     */
+    DetectLiveFaceAccurate(req, cb) {
+        let resp = new DetectLiveFaceAccurateResponse();
+        this.request("DetectLiveFaceAccurate", req, resp, cb);
     }
 
     /**

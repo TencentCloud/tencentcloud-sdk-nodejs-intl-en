@@ -2662,6 +2662,41 @@ Default value: 2.
 }
 
 /**
+ * ExecuteFunction response structure.
+ * @class
+ */
+class ExecuteFunctionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Packed string, which will vary according to the custom API.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Control parameter of intelligent cover generating task
  * @class
  */
@@ -5528,7 +5563,7 @@ class EditMediaRequest extends  AbstractModel {
         this.TasksPriority = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -6259,7 +6294,7 @@ Currently, a resolution within 640*480p must be specified for H.265.
         this.Codec = null;
 
         /**
-         * Video frame rate in Hz. Value range: [0, 60].
+         * Video frame rate in Hz. Value range: [0, 100].
 If the value is 0, the frame rate will be the same as that of the source video.
          * @type {number || null}
          */
@@ -7238,7 +7273,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.TasksPriority = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -14002,7 +14037,7 @@ Currently, a resolution within 640*480p must be specified for H.265.
         this.Codec = null;
 
         /**
-         * Video frame rate in Hz. Value range: [0, 60].
+         * Video frame rate in Hz. Value range: [0, 100].
 If the value is 0, the frame rate will be the same as that of the source video.
          * @type {number || null}
          */
@@ -17398,6 +17433,41 @@ class FrameTagConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * ExecuteFunction request structure.
+ * @class
+ */
+class ExecuteFunctionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of called backend API.
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * API parameter. Parameter format will depend on the actual function definition.
+         * @type {string || null}
+         */
+        this.FunctionArg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionArg = 'FunctionArg' in params ? params.FunctionArg : null;
+
+    }
+}
+
+/**
  * ModifyPersonSample response structure.
  * @class
  */
@@ -19750,6 +19820,7 @@ module.exports = {
     ParseLiveStreamProcessNotificationResponse: ParseLiveStreamProcessNotificationResponse,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     AudioTemplateInfo: AudioTemplateInfo,
+    ExecuteFunctionResponse: ExecuteFunctionResponse,
     CoverConfigureInfo: CoverConfigureInfo,
     AIRecognitionTemplateItem: AIRecognitionTemplateItem,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
@@ -20016,6 +20087,7 @@ module.exports = {
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
     CreateAnimatedGraphicsTemplateRequest: CreateAnimatedGraphicsTemplateRequest,
     FrameTagConfigureInfo: FrameTagConfigureInfo,
+    ExecuteFunctionRequest: ExecuteFunctionRequest,
     ModifyPersonSampleResponse: ModifyPersonSampleResponse,
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     MediaTranscodeItem: MediaTranscodeItem,

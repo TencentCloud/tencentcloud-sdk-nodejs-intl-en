@@ -20,6 +20,7 @@ const DescribeClusterEndpointVipStatusRequest = models.DescribeClusterEndpointVi
 const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
 const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
+const DescribeClusterKubeconfigResponse = models.DescribeClusterKubeconfigResponse;
 const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
 const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
@@ -44,6 +45,7 @@ const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
 const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
 const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
+const ExtensionAddon = models.ExtensionAddon;
 const RegionInstance = models.RegionInstance;
 const Label = models.Label;
 const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
@@ -53,6 +55,7 @@ const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
+const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
 const ExistedInstance = models.ExistedInstance;
@@ -405,6 +408,17 @@ class TkeClient extends AbstractClient {
     DeleteClusterInstances(req, cb) {
         let resp = new DeleteClusterInstancesResponse();
         this.request("DeleteClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the cluster kubeconfig file. Different sub-accounts have their own kubeconfig files. The kubeconfig file contains the kube-apiserver client certificate of the corresponding sub-account. By default, the client certificate is created when this API is called for the first time, and the certificate is valid for 20 years with no permissions granted. For the cluster owner or primary account, the cluster-admin permission is granted by default.
+     * @param {DescribeClusterKubeconfigRequest} req
+     * @param {function(string, DescribeClusterKubeconfigResponse):void} cb
+     * @public
+     */
+    DescribeClusterKubeconfig(req, cb) {
+        let resp = new DescribeClusterKubeconfigResponse();
+        this.request("DescribeClusterKubeconfig", req, resp, cb);
     }
 
     /**

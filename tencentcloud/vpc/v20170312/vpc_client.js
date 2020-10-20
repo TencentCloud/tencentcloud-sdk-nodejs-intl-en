@@ -26,7 +26,7 @@ const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatis
 const DeleteServiceTemplateResponse = models.DeleteServiceTemplateResponse;
 const CreateServiceTemplateRequest = models.CreateServiceTemplateRequest;
 const IKEOptionsSpecification = models.IKEOptionsSpecification;
-const TransformAddressResponse = models.TransformAddressResponse;
+const CreateCcnResponse = models.CreateCcnResponse;
 const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
 const CreateAssistantCidrRequest = models.CreateAssistantCidrRequest;
 const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
@@ -56,6 +56,7 @@ const DescribeFlowLogsRequest = models.DescribeFlowLogsRequest;
 const AssociateNatGatewayAddressRequest = models.AssociateNatGatewayAddressRequest;
 const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
 const ModifyBandwidthPackageAttributeRequest = models.ModifyBandwidthPackageAttributeRequest;
+const TransformAddressResponse = models.TransformAddressResponse;
 const DisassociateNetworkInterfaceSecurityGroupsRequest = models.DisassociateNetworkInterfaceSecurityGroupsRequest;
 const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
 const ModifyFlowLogAttributeRequest = models.ModifyFlowLogAttributeRequest;
@@ -161,10 +162,10 @@ const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResp
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const NetworkAclEntrySet = models.NetworkAclEntrySet;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
-const CreateCcnResponse = models.CreateCcnResponse;
+const DescribeBandwidthPackageResourcesRequest = models.DescribeBandwidthPackageResourcesRequest;
 const EnableCcnRoutesRequest = models.EnableCcnRoutesRequest;
 const Tag = models.Tag;
-const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
+const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
 const DefaultVpcSubnet = models.DefaultVpcSubnet;
 const CreateSubnetsResponse = models.CreateSubnetsResponse;
 const DescribeGatewayFlowMonitorDetailRequest = models.DescribeGatewayFlowMonitorDetailRequest;
@@ -186,7 +187,7 @@ const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttribute
 const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
 const NatGateway = models.NatGateway;
 const ResourceDashboard = models.ResourceDashboard;
-const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
+const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
 const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const CreateNetDetectRequest = models.CreateNetDetectRequest;
 const CreateAddressTemplateResponse = models.CreateAddressTemplateResponse;
@@ -221,6 +222,7 @@ const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInterne
 const DirectConnectGateway = models.DirectConnectGateway;
 const Price = models.Price;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
+const DescribeBandwidthPackageResourcesResponse = models.DescribeBandwidthPackageResourcesResponse;
 const DescribeCrossBorderComplianceResponse = models.DescribeCrossBorderComplianceResponse;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
 const AssociateDirectConnectGatewayNatGatewayResponse = models.AssociateDirectConnectGatewayNatGatewayResponse;
@@ -1045,7 +1047,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API (ModifyAddressesBandwidth) is used to adjust [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) bandwidth, including the postpaid EIP, prepaid EIP and bandwidth package EIP.
+     * This API is used to adjust the bandwidth of [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1), including EIP billed on a pay-as-you-go, monthly subscription, and bandwidth package basis.
      * @param {ModifyAddressesBandwidthRequest} req
      * @param {function(string, ModifyAddressesBandwidthResponse):void} cb
      * @public
@@ -1516,6 +1518,18 @@ This API is completed asynchronously. If you need to query the async job executi
     DeleteAssistantCidr(req, cb) {
         let resp = new DeleteAssistantCidrResponse();
         this.request("DeleteAssistantCidr", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query resources in a bandwidth package based on the unique package ID. You can filter the result by specifying conditions and paginate the query results.
+
+     * @param {DescribeBandwidthPackageResourcesRequest} req
+     * @param {function(string, DescribeBandwidthPackageResourcesResponse):void} cb
+     * @public
+     */
+    DescribeBandwidthPackageResources(req, cb) {
+        let resp = new DescribeBandwidthPackageResourcesResponse();
+        this.request("DescribeBandwidthPackageResources", req, resp, cb);
     }
 
     /**

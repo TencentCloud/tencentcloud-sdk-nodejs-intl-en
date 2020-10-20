@@ -25,7 +25,7 @@ const DescribeDeliverBandwidthListResponse = models.DescribeDeliverBandwidthList
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateResponse;
-const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
+const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
 const TemplateInfo = models.TemplateInfo;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
@@ -39,6 +39,7 @@ const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
 const PushQualityData = models.PushQualityData;
+const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ModifyLivePlayAuthKeyRequest = models.ModifyLivePlayAuthKeyRequest;
 const DescribeLiveDelayInfoListRequest = models.DescribeLiveDelayInfoListRequest;
 const DomainCertInfo = models.DomainCertInfo;
@@ -75,13 +76,14 @@ const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
 const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
-const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
+const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
+const BillCountryInfo = models.BillCountryInfo;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeLiveWatermarkRequest = models.DescribeLiveWatermarkRequest;
-const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
+const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
 const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
 const CallBackTemplateInfo = models.CallBackTemplateInfo;
@@ -97,12 +99,13 @@ const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
+const BillAreaInfo = models.BillAreaInfo;
 const PlayDataInfoByStream = models.PlayDataInfoByStream;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
-const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
+const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
@@ -125,7 +128,7 @@ const DropLiveStreamRequest = models.DropLiveStreamRequest;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
 const PushDataInfo = models.PushDataInfo;
-const CommonMixLayoutParams = models.CommonMixLayoutParams;
+const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
 const DescribeGroupProIspPlayInfoListRequest = models.DescribeGroupProIspPlayInfoListRequest;
 const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoListRequest;
 const TranscodeDetailInfo = models.TranscodeDetailInfo;
@@ -182,7 +185,7 @@ const DescribeConcurrentRecordStreamNumRequest = models.DescribeConcurrentRecord
 const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const CommonMixControlParams = models.CommonMixControlParams;
-const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
+const DescribeAreaBillBandwidthAndFluxListResponse = models.DescribeAreaBillBandwidthAndFluxListResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
 const DescribePlayErrorCodeDetailInfoListResponse = models.DescribePlayErrorCodeDetailInfoListResponse;
@@ -213,14 +216,14 @@ const CreateRecordTaskRequest = models.CreateRecordTaskRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
 const DescribeLiveRecordTemplateResponse = models.DescribeLiveRecordTemplateResponse;
-const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
+const DescribeAreaBillBandwidthAndFluxListRequest = models.DescribeAreaBillBandwidthAndFluxListRequest;
 const BindLiveDomainCertResponse = models.BindLiveDomainCertResponse;
 const CallBackRuleInfo = models.CallBackRuleInfo;
 const PlaySumStatInfo = models.PlaySumStatInfo;
 const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTemplatesRequest;
 const HlsSpecialParam = models.HlsSpecialParam;
 const DescribeLiveRecordRulesResponse = models.DescribeLiveRecordRulesResponse;
-const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
+const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
 const DescribeLiveDomainPlayInfoListResponse = models.DescribeLiveDomainPlayInfoListResponse;
 const HttpCodeValue = models.HttpCodeValue;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
@@ -246,6 +249,7 @@ const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
 const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
+const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
@@ -533,6 +537,17 @@ Note: data can be queried one hour after it is generated. For example, data betw
     AddLiveWatermark(req, cb) {
         let resp = new AddLiveWatermarkResponse();
         this.request("AddLiveWatermark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the billable LVB bandwidth and traffic data outside Chinese mainland.
+     * @param {DescribeAreaBillBandwidthAndFluxListRequest} req
+     * @param {function(string, DescribeAreaBillBandwidthAndFluxListResponse):void} cb
+     * @public
+     */
+    DescribeAreaBillBandwidthAndFluxList(req, cb) {
+        let resp = new DescribeAreaBillBandwidthAndFluxListResponse();
+        this.request("DescribeAreaBillBandwidthAndFluxList", req, resp, cb);
     }
 
     /**
@@ -887,7 +902,7 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
     }
 
     /**
-     * This API is used to end a recording prematurely and terminate the running recording task. After the task is successfully terminated, it will no longer start.
+     * This API is used to end a recording prematurely and terminate an ongoing recording task. After the task is successfully terminated, it will not restart.
      * @param {StopRecordTaskRequest} req
      * @param {function(string, StopRecordTaskResponse):void} cb
      * @public
@@ -1318,12 +1333,13 @@ Note: only one screencapturing template can be associated with one domain name.
      * This API is used to create a recording task that starts and ends at specified times and records by using the configuration corresponding to a specified recording template ID.
 - Prerequisites
 1. Recording files are stored on the VOD platform, so if you need to use the recording feature, you must first activate the VOD service.
-2. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) will be charged according to the VOD billing mode. For more information, please see the corresponding document.
+2. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) are charged according to the VOD billing method. For details, see the [corresponding document](https://intl.cloud.tencent.com/document/product/266/2837?from_cn_redirect=1).
 - Precautions
-1. An interruption will end the current recording and generate a recording file. The task will still be valid before the end time expires, and as long as the stream is pushed normally during the period, it will record normally, regardless of whether the push is interrupted or restarted multiple times.
-2. Creating recording tasks with overlapping time periods must be avoided. If there are multiple tasks with overlapping time periods for the same stream, the system will start three recording tasks at most to avoid repeated recording.
+1. An interruption will end the current recording and generate a recording file. The task will still be valid before the end time expires, and the stream will be recorded within this period as long as it is pushed, regardless of whether the push is interrupted or restarted multiple times.
+2. Avoid creating recording tasks with overlapping time periods. If there are multiple tasks with overlapping time periods for the same stream, the system will start three recording tasks at most to avoid repeated recording.
 3. The record of a created recording task will be retained for 3 months on the platform.
-4. The current recording task management APIs (CreateRecordTask/StopRecordTask/DeleteRecordTask) are not compatible with the legacy APIs (CreateLiveRecord/StopLiveRecord/DeleteLiveRecord), and they cannot be mixed.
+4. The current recording task management APIs (CreateRecordTask/StopRecordTask/DeleteRecordTask) are not compatible with the legacy APIs (CreateLiveRecord/StopLiveRecord/DeleteLiveRecord), and they cannot be used together.
+5. Do not create recording tasks and push streams at the same time, or recording tasks might not take effect and be delayed. Wait at least 3 seconds between each action.
      * @param {CreateRecordTaskRequest} req
      * @param {function(string, CreateRecordTaskResponse):void} cb
      * @public

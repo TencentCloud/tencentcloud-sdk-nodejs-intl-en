@@ -2882,6 +2882,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.SniSwitch = null;
 
+        /**
+         * Whether to enable a persistent connection (This parameter can only be configured in HTTP/HTTPS listeners). Valid values: 0: no; 1: yes. Default value: 0
+         * @type {number || null}
+         */
+        this.KeepaliveEnable = null;
+
     }
 
     /**
@@ -2909,6 +2915,7 @@ They represent weighted round robin and least connections, respectively. Default
         }
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
 
     }
 }
@@ -5180,6 +5187,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.SessionType = null;
 
+        /**
+         * Whether to enable a persistent connection (This parameter can only be configured in HTTP/HTTPS listeners). Valid values: 0: no; 1: yes. Default value: 0
+         * @type {number || null}
+         */
+        this.KeepaliveEnable = null;
+
     }
 
     /**
@@ -5210,6 +5223,7 @@ They represent weighted round robin and least connections, respectively. Default
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
         this.SessionType = 'SessionType' in params ? params.SessionType : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
 
     }
 }

@@ -43,12 +43,14 @@ const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const UpdateInstanceRequest = models.UpdateInstanceRequest;
 const EsDictionaryInfo = models.EsDictionaryInfo;
 const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
+const RestartNodesRequest = models.RestartNodesRequest;
 const UpdatePluginsRequest = models.UpdatePluginsRequest;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const EsAcl = models.EsAcl;
 const MasterNodeInfo = models.MasterNodeInfo;
 const DeleteInstanceRequest = models.DeleteInstanceRequest;
 const SubTaskDetail = models.SubTaskDetail;
+const RestartNodesResponse = models.RestartNodesResponse;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
@@ -169,6 +171,17 @@ Only one of the parameters or parameter combinations above can be passed in at a
     RestartInstance(req, cb) {
         let resp = new RestartInstanceResponse();
         this.request("RestartInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restart cluster nodes.
+     * @param {RestartNodesRequest} req
+     * @param {function(string, RestartNodesResponse):void} cb
+     * @public
+     */
+    RestartNodes(req, cb) {
+        let resp = new RestartNodesResponse();
+        this.request("RestartNodes", req, resp, cb);
     }
 
     /**

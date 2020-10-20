@@ -197,7 +197,7 @@ class LayoutParams extends  AbstractModel {
         this.MainVideoRightAlign = null;
 
         /**
-         * 
+         * A user list, which takes effect for floating, grid, or screen sharing templates. When the user list has been set, the stream mix output for users in this user list will include both audio and video; the stream mix output for users not in the list will only include audio. Up to 16 users can be set.
          * @type {Array.<string> || null}
          */
         this.MixVideoUids = null;
@@ -472,7 +472,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * User `sdkappid`, such as 1400188366.
+         * User `SDKAppID`, such as 1400188366.
          * @type {string || null}
          */
         this.SdkAppId = null;
@@ -509,7 +509,7 @@ bigvHeight: upstream/downstream resolution in height.
         this.PageNumber = null;
 
         /**
-         * Number of entries per page. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default. When `DataType` and all `UserId`s are not null, `PageSize` is up to 6. When `DataType` and all `UserId`s are null, `PageSize` is up to 100.
+         * Number of entries per page. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default. When either `DataType` or `UserId` is not null, `PageSize` is up to 6. When `DataType` and `UserId` are null, `PageSize` is up to 100.
          * @type {string || null}
          */
         this.PageSize = null;

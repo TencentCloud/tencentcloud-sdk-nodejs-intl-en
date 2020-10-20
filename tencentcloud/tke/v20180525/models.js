@@ -216,6 +216,41 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterKubeconfig response structure.
+ * @class
+ */
+class DescribeClusterKubeconfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sub-account kubeconfig file, used to access the cluster kube-apiserver directly
+         * @type {string || null}
+         */
+        this.Kubeconfig = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Kubeconfig = 'Kubeconfig' in params ? params.Kubeconfig : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterEndpointVipStatus response structure.
  * @class
  */
@@ -1362,6 +1397,41 @@ all clusters under the account will be obtained)
 }
 
 /**
+ * Information of the add-on selected for installation during cluster creation
+ * @class
+ */
+class ExtensionAddon extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Add-on name
+         * @type {string || null}
+         */
+        this.AddonName = null;
+
+        /**
+         * Add-on information (description of the add-on resource object in JSON string format)
+         * @type {string || null}
+         */
+        this.AddonParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
+        this.AddonParam = 'AddonParam' in params ? params.AddonParam : null;
+
+    }
+}
+
+/**
  * Region information
  * @class
  */
@@ -1439,13 +1509,13 @@ class Label extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Name in map list
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Value in map list
          * @type {string || null}
          */
         this.Value = null;
@@ -1538,19 +1608,19 @@ class ClusterBasicSettings extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 
+         * Tag description list. This parameter is used to bind a tag to a resource instance. Currently, a tag can only be bound to cluster instances.
          * @type {Array.<TagSpecification> || null}
          */
         this.TagSpecification = null;
 
         /**
-         * 
+         * Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
          * @type {string || null}
          */
         this.OsCustomizeType = null;
 
         /**
-         * 
+         * Whether to enable the node’s default security group (default: `No`, Aphla feature)
          * @type {boolean || null}
          */
         this.NeedWorkSecurityGroup = null;
@@ -1664,7 +1734,7 @@ class DeleteClusterInstancesRequest extends  AbstractModel {
         this.InstanceDeleteMode = null;
 
         /**
-         * 
+         * Whether or not there is forced deletion (when a node is initialized, the parameters can be specified as TRUE)
          * @type {boolean || null}
          */
         this.ForceDelete = null;
@@ -1729,7 +1799,7 @@ class CreateClusterInstancesRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Pass-through parameter for CVM creation in the format of a JSON string. For more information, see the [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
+         * Pass-through parameter for CVM creation in the format of a JSON string. To ensure the idempotence of requests for adding cluster nodes, you need to add the ClientToken field in this parameter. For more information, see the documentation for [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.RunInstancePara = null;
@@ -1807,6 +1877,34 @@ class DescribeClusterRouteTablesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterKubeconfig request structure.
+ * @class
+ */
+class DescribeClusterKubeconfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -2108,13 +2206,13 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The type of resource that the tag is bound to. The type currently supported is `cluster`.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * 
+         * List of tag pairs
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -2746,6 +2844,12 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.InstanceDataDiskMountSettings = null;
 
+        /**
+         * Information of the add-on to be installed
+         * @type {Array.<ExtensionAddon> || null}
+         */
+        this.ExtensionAddons = null;
+
     }
 
     /**
@@ -2805,6 +2909,15 @@ class CreateClusterRequest extends  AbstractModel {
                 let obj = new InstanceDataDiskMountSetting();
                 obj.deserialize(params.InstanceDataDiskMountSettings[z]);
                 this.InstanceDataDiskMountSettings.push(obj);
+            }
+        }
+
+        if (params.ExtensionAddons) {
+            this.ExtensionAddons = new Array();
+            for (let z in params.ExtensionAddons) {
+                let obj = new ExtensionAddon();
+                obj.deserialize(params.ExtensionAddons[z]);
+                this.ExtensionAddons.push(obj);
             }
         }
 
@@ -2943,7 +3056,7 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 
+         * Node role. Valid values are MASTER, WORKER, ETCD, MASTER_ETCD, and ALL. Default value: WORKER.
          * @type {string || null}
          */
         this.InstanceRole = null;
@@ -3119,7 +3232,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.ContainerRuntime = null;
 
         /**
-         * 
+         * NodeName type for a node in a cluster (This includes the two forms of **hostname** and **lan-ip**, with the default as **lan-ip**. If **hostname** is used, you need to set the HostName parameter when creating a node, and the InstanceName needs to be the same as the HostName.)
          * @type {string || null}
          */
         this.NodeNameType = null;
@@ -3143,13 +3256,13 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.IsNonStaticIpMode = null;
 
         /**
-         * 
+         * Indicates whether to enable cluster deletion protection.
          * @type {boolean || null}
          */
         this.DeletionProtection = null;
 
         /**
-         * 
+         * Cluster network proxy model
          * @type {string || null}
          */
         this.KubeProxyMode = null;
@@ -3293,19 +3406,19 @@ class Cluster extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 
+         * Tag description list.
          * @type {Array.<TagSpecification> || null}
          */
         this.TagSpecification = null;
 
         /**
-         * 
+         * Cluster status (Running, Creating, or Abnormal)
          * @type {string || null}
          */
         this.ClusterStatus = null;
 
         /**
-         * 
+         * Cluster attributes (including a map of different cluster attributes, with attribute fields including NodeNameType (lan-ip mode and hostname mode, with lan-ip mode as default))
          * @type {string || null}
          */
         this.Property = null;
@@ -3677,7 +3790,7 @@ class AddExistedInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * 
+         * When reinstalling the system, you can specify the HostName of the modified instance (when the cluster is in HostName mode, this parameter is required, and the rule name is the same as the [Create CVM Instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API HostName except for uppercase letters not being supported.
          * @type {string || null}
          */
         this.HostName = null;
@@ -4291,7 +4404,7 @@ class ExistedInstancesPara extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * 
+         * When reinstalling the system, you can specify the HostName of the modified instance (when the cluster is in HostName mode, this parameter is required, and the rule name is the same as the [Create CVM Instance](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API HostName except for uppercase letters not being supported.
          * @type {string || null}
          */
         this.HostName = null;
@@ -4456,7 +4569,8 @@ class InstanceAdvancedSettings extends  AbstractModel {
 
         /**
          * Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
-Note: This field may return null, indicating that no valid value was found.
+Note: in multi-disk scenarios, use the DataDisks data structure below to set the corresponding information, such as cloud disk type, cloud disk size, mount path, and whether to perform formatting.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.MountTarget = null;
@@ -4489,8 +4603,8 @@ Note: This field may return null, indicating that no valid value was found.
         this.Labels = null;
 
         /**
-         * Data disk information
-Note: This field may return null, indicating that no valid value was found.
+         * Mounting information of multiple data disks. Ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks. If the purchase of multiple data disks is also set in DataDisks under RunInstancesPara of the CreateClusterInstances API for adding nodes, you can refer to the example of adding cluster nodes (multiple data disks) for the CreateClusterInstances API.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -4688,6 +4802,7 @@ module.exports = {
     DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
+    DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
     DescribeClusterEndpointVipStatusResponse: DescribeClusterEndpointVipStatusResponse,
     ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
@@ -4712,6 +4827,7 @@ module.exports = {
     CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
     DescribeClustersRequest: DescribeClustersRequest,
+    ExtensionAddon: ExtensionAddon,
     RegionInstance: RegionInstance,
     Label: Label,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
@@ -4721,6 +4837,7 @@ module.exports = {
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
+    DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
     ExistedInstance: ExistedInstance,

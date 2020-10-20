@@ -4531,6 +4531,15 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
          */
         this.FilterType = null;
 
+        /**
+         * Timestamp settings
+dec: decimal
+hex: hexadecimal
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
     }
 
     /**
@@ -4544,6 +4553,7 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
 
     }
 }
@@ -5293,6 +5303,15 @@ If this parameter is left empty, edge server information will be returned by def
          */
         this.Layer = null;
 
+        /**
+         * Region to be queried.
+mainland: domestic nodes
+overseas: overseas nodes
+global: global nodes
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -5304,6 +5323,7 @@ If this parameter is left empty, edge server information will be returned by def
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Layer = 'Layer' in params ? params.Layer : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }

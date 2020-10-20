@@ -926,6 +926,12 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
          */
         this.BasicSecurityType = null;
 
+        /**
+         * Scenario template type. 0: not enabled; 1: general; 2: log; 3: search
+         * @type {number || null}
+         */
+        this.SceneType = null;
+
     }
 
     /**
@@ -986,6 +992,7 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
             }
         }
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
 
     }
 }
@@ -1326,6 +1333,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SecurityType = null;
 
+        /**
+         * Scenario template type. 0: not enabled; 1: general scenario; 2: log scenario; 3: search scenario
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SceneType = null;
+
     }
 
     /**
@@ -1436,6 +1450,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
         this.SecurityType = 'SecurityType' in params ? params.SecurityType : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
 
     }
 }
@@ -1786,7 +1801,7 @@ Number of nodes (2-50)
         this.NodeNum = null;
 
         /**
-         * Configuration item (JSON string). Only the following items are supported currently: <li>action.destructive_requires_name</li><li>indices.fielddata.cache.size</li><li>indices.query.bool.max_clause_count</li>
+         * Configuration item (JSON string)
          * @type {string || null}
          */
         this.EsConfig = null;
@@ -1898,6 +1913,18 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
          */
         this.ScaleType = null;
 
+        /**
+         * Multi-AZ deployment
+         * @type {Array.<ZoneDetail> || null}
+         */
+        this.MultiZoneInfo = null;
+
+        /**
+         * Scenario template type. -1: not enabled; 1: general; 2: log; 3: search
+         * @type {number || null}
+         */
+        this.SceneType = null;
+
     }
 
     /**
@@ -1951,6 +1978,16 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
         this.KibanaPrivatePort = 'KibanaPrivatePort' in params ? params.KibanaPrivatePort : null;
         this.ScaleType = 'ScaleType' in params ? params.ScaleType : null;
+
+        if (params.MultiZoneInfo) {
+            this.MultiZoneInfo = new Array();
+            for (let z in params.MultiZoneInfo) {
+                let obj = new ZoneDetail();
+                obj.deserialize(params.MultiZoneInfo[z]);
+                this.MultiZoneInfo.push(obj);
+            }
+        }
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
 
     }
 }
@@ -2089,6 +2126,48 @@ class DescribeInstanceOperationsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestartNodes request structure.
+ * @class
+ */
+class RestartNodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Node name list
+         * @type {Array.<string> || null}
+         */
+        this.NodeNames = null;
+
+        /**
+         * Whether to force restart
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeNames = 'NodeNames' in params ? params.NodeNames : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -2381,6 +2460,34 @@ class SubTaskDetail extends  AbstractModel {
 }
 
 /**
+ * RestartNodes response structure.
+ * @class
+ */
+class RestartNodesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradeInstance response structure.
  * @class
  */
@@ -2474,6 +2581,12 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.BasicSecurityType = null;
 
+        /**
+         * Upgrade mode. <li>scale: blue/green deployment</li><li>restart: rolling restart</li>Default value: scale
+         * @type {string || null}
+         */
+        this.UpgradeMode = null;
+
     }
 
     /**
@@ -2488,6 +2601,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.CheckOnly = 'CheckOnly' in params ? params.CheckOnly : null;
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
 
     }
 }
@@ -2603,12 +2717,14 @@ module.exports = {
     UpdateInstanceRequest: UpdateInstanceRequest,
     EsDictionaryInfo: EsDictionaryInfo,
     DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
+    RestartNodesRequest: RestartNodesRequest,
     UpdatePluginsRequest: UpdatePluginsRequest,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,
     DeleteInstanceRequest: DeleteInstanceRequest,
     SubTaskDetail: SubTaskDetail,
+    RestartNodesResponse: RestartNodesResponse,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpdateInstanceResponse: UpdateInstanceResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,

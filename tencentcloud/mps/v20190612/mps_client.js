@@ -60,6 +60,7 @@ const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
+const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
 const CoverConfigureInfo = models.CoverConfigureInfo;
 const AIRecognitionTemplateItem = models.AIRecognitionTemplateItem;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
@@ -326,6 +327,7 @@ const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
 const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTemplateRequest;
 const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
+const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
@@ -886,6 +888,17 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     CreatePersonSample(req, cb) {
         let resp = new CreatePersonSampleResponse();
         this.request("CreatePersonSample", req, resp, cb);
+    }
+
+    /**
+     * This API is only used in unique custom development scenarios. Unless requested by Media Processing Service customer service, please do not call it.
+     * @param {ExecuteFunctionRequest} req
+     * @param {function(string, ExecuteFunctionResponse):void} cb
+     * @public
+     */
+    ExecuteFunction(req, cb) {
+        let resp = new ExecuteFunctionResponse();
+        this.request("ExecuteFunction", req, resp, cb);
     }
 
     /**

@@ -652,10 +652,16 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
         this.SnapshotName = null;
 
         /**
-         * The retention time of the snapshot. FALSE: non-permanent retention; TRUE: permanent retention. You can only modify non-permanent snapshots to permanent snapshots.
+         * Snapshot retention mode. Valid values: `FALSE`: non-permanent retention; `TRUE`: permanent retention.
          * @type {boolean || null}
          */
         this.IsPermanent = null;
+
+        /**
+         * Expiration time of the snapshot. Setting this parameter will set the snapshot retention mode to `FALSE` (non-permanent retention) and the snapshot will be automatically deleted upon expiration.
+         * @type {string || null}
+         */
+        this.Deadline = null;
 
     }
 
@@ -669,6 +675,7 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
         this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
 
     }
 }
@@ -1069,7 +1076,7 @@ class DescribeDiskConfigQuotaRequest extends  AbstractModel {
         this.DiskChargeType = null;
 
         /**
-         * Type of hard disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
          * @type {Array.<string> || null}
          */
         this.DiskTypes = null;
@@ -2295,7 +2302,7 @@ class CreateDisksRequest extends  AbstractModel {
         super();
 
         /**
-         * Type of hard disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
          * @type {string || null}
          */
         this.DiskType = null;
@@ -2761,6 +2768,12 @@ class CreateSnapshotRequest extends  AbstractModel {
          */
         this.SnapshotName = null;
 
+        /**
+         * Expiration time of the snapshot. The snapshot will be automatically deleted upon expiration.
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
     }
 
     /**
@@ -2772,6 +2785,7 @@ class CreateSnapshotRequest extends  AbstractModel {
         }
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
 
     }
 }

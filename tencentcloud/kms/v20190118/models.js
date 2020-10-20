@@ -215,7 +215,7 @@ class CreateKeyRequest extends  AbstractModel {
         this.Alias = null;
 
         /**
-         * 
+         * CMK description of up to 1,024 bytes in length
          * @type {string || null}
          */
         this.Description = null;
@@ -233,7 +233,7 @@ class CreateKeyRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * Tag list
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -370,7 +370,7 @@ class DescribeKeyRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * White-box key information
  * @class
  */
 class WhiteboxKeyInfo extends  AbstractModel {
@@ -378,67 +378,67 @@ class WhiteboxKeyInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Globally unique white-box key ID
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * 
+         * Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1 to 60 letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * 
+         * Creator
          * @type {number || null}
          */
         this.CreatorUin = null;
 
         /**
-         * 
+         * Key description information
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * 
+         * Key creation time in Unix timestamp
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * 
+         * White-box key status. Valid values: Enabled, Disabled
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Creator
          * @type {number || null}
          */
         this.OwnerUin = null;
 
         /**
-         * 
+         * Key algorithm type
          * @type {string || null}
          */
         this.Algorithm = null;
 
         /**
-         * 
+         * Base64-encoded white-box encryption key
          * @type {string || null}
          */
         this.EncryptKey = null;
 
         /**
-         * 
+         * Base64-encoded white-box decryption key
          * @type {string || null}
          */
         this.DecryptKey = null;
 
         /**
-         * 
+         * Resource ID in the format of `creatorUin/$creatorUin/$keyId`
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -791,7 +791,7 @@ class ListAlgorithmsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Tag key and tag value
  * @class
  */
 class Tag extends  AbstractModel {
@@ -799,13 +799,13 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Tag key
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * 
+         * Tag value
          * @type {string || null}
          */
         this.TagValue = null;
@@ -834,7 +834,7 @@ class ListKeyDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Total number of CMKs
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -885,7 +885,7 @@ class GenerateDataKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Globally unique CMK ID
          * @type {string || null}
          */
         this.KeyId = null;
@@ -903,7 +903,7 @@ class GenerateDataKeyRequest extends  AbstractModel {
         this.NumberOfBytes = null;
 
         /**
-         * 
+         * JSON string of key-value pair. If this field is used, the same string should be entered when the returned `DataKey` is decrypted.
          * @type {string || null}
          */
         this.EncryptionContext = null;
@@ -1316,13 +1316,13 @@ class CreateWhiteBoxKeyResponse extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * 
+         * Tag operation return code. 0: success; 1: internal error; 2: business processing error
          * @type {number || null}
          */
         this.TagCode = null;
 
         /**
-         * 
+         * Tag operation return message
          * @type {string || null}
          */
         this.TagMsg = null;
@@ -1784,7 +1784,7 @@ class ListKeyDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * This parameter has the same meaning of the `Offset` in an SQL query, indicating that this acquisition starts from the "No. Offset value" element of the array arranged in a certain order. The default value is 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -1796,13 +1796,13 @@ class ListKeyDetailRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 
+         * Filters by creator role. 0 (default value): the CMK is created by the user; 1: the CMK is created automatically by an authorized Tencent Cloud service.
          * @type {number || null}
          */
         this.Role = null;
 
         /**
-         * 
+         * Sorts by CMK creation time. 0: descending; 1: ascending
          * @type {number || null}
          */
         this.OrderType = null;
@@ -1814,7 +1814,7 @@ class ListKeyDetailRequest extends  AbstractModel {
         this.KeyState = null;
 
         /**
-         * 
+         * Performs a fuzzy query by `KeyId` or `Alias`
          * @type {string || null}
          */
         this.SearchKeyAlias = null;
@@ -1975,7 +1975,7 @@ class GenerateDataKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Globally unique CMK ID
          * @type {string || null}
          */
         this.KeyId = null;
@@ -2042,7 +2042,7 @@ class CreateWhiteBoxKeyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 
+         * Tag list
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -2353,7 +2353,7 @@ class EncryptResponse extends  AbstractModel {
         this.CiphertextBlob = null;
 
         /**
-         * 
+         * Globally unique ID of the CMK used for encryption
          * @type {string || null}
          */
         this.KeyId = null;
@@ -2761,25 +2761,25 @@ class KeyMetadata extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Globally unique CMK ID
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * 
+         * Alias that makes a key more recognizable and understandable
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * 
+         * Key creation time
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * 
+         * CMK description
          * @type {string || null}
          */
         this.Description = null;
@@ -2803,31 +2803,31 @@ class KeyMetadata extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * Creator
          * @type {number || null}
          */
         this.CreatorUin = null;
 
         /**
-         * 
+         * Whether key rotation is enabled
          * @type {boolean || null}
          */
         this.KeyRotationEnabled = null;
 
         /**
-         * 
+         * CMK creator. The value of this parameter is `user` if the CMK is created by the user, or the corresponding service name if it is created automatically by an authorized Tencent Cloud service.
          * @type {string || null}
          */
         this.Owner = null;
 
         /**
-         * 
+         * Time of next rotation if key rotation is enabled
          * @type {number || null}
          */
         this.NextRotateTime = null;
 
         /**
-         * 
+         * Scheduled deletion time
          * @type {number || null}
          */
         this.DeletionDate = null;
@@ -2923,7 +2923,7 @@ class DecryptRequest extends  AbstractModel {
         this.CiphertextBlob = null;
 
         /**
-         * 
+         * JSON string of key-value pair. If this parameter is specified for `Encrypt`, the same parameter needs to be provided when the `Decrypt` API is called. The maximum length is 1,024 bytes.
          * @type {string || null}
          */
         this.EncryptionContext = null;
@@ -3725,7 +3725,7 @@ class UpdateKeyDescriptionRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * New description of up to 1,024 bytes in length
          * @type {string || null}
          */
         this.Description = null;

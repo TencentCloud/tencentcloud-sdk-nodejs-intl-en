@@ -395,90 +395,54 @@ class DeleteLiveTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
- * CreateLiveSnapshotTemplate request structure.
+ * DescribeBillBandwidthAndFluxList response structure.
  * @class
  */
-class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
+class DescribeBillBandwidthAndFluxListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template name.
-Maximum length: 255 bytes.
-Only letters, digits, underscores, and hyphens can be contained.
+         * Time point of peak bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
-        this.TemplateName = null;
+        this.PeakBandwidthTime = null;
 
         /**
-         * COS application ID.
+         * Peak bandwidth in Mbps.
          * @type {number || null}
          */
-        this.CosAppId = null;
+        this.PeakBandwidth = null;
 
         /**
-         * COS bucket name.
-Note: the value of `CosBucket` cannot contain `-[appid]`.
+         * Time point of 95th percentile bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
-        this.CosBucket = null;
+        this.P95PeakBandwidthTime = null;
 
         /**
-         * COS region.
-         * @type {string || null}
-         */
-        this.CosRegion = null;
-
-        /**
-         * Description.
-Maximum length: 1,024 bytes.
-Only letters, digits, underscores, and hyphens can be contained.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Screencapturing interval in seconds. Default value: 10s.
-Value range: 5-300s.
+         * 95th percentile bandwidth in Mbps.
          * @type {number || null}
          */
-        this.SnapshotInterval = null;
+        this.P95PeakBandwidth = null;
 
         /**
-         * Screenshot width. Default value: 0 (original width).
+         * Total traffic in MB.
          * @type {number || null}
          */
-        this.Width = null;
+        this.SumFlux = null;
 
         /**
-         * Screenshot height. Default value: 0 (original height).
-         * @type {number || null}
+         * Detailed data information.
+         * @type {Array.<BillDataInfo> || null}
          */
-        this.Height = null;
+        this.DataInfoList = null;
 
         /**
-         * Whether to enable porn detection. 0: no, 1: yes. Default value: 0
-         * @type {number || null}
-         */
-        this.PornFlag = null;
-
-        /**
-         * COS Bucket folder prefix.
-If no value is entered, the default value
-`/{Year}-{Month}-{Day}`
-will be used.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.CosPrefix = null;
-
-        /**
-         * COS filename.
-If no value is entered, the default value 
-`{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}`
-will be used.
-         * @type {string || null}
-         */
-        this.CosFileName = null;
+        this.RequestId = null;
 
     }
 
@@ -489,17 +453,21 @@ will be used.
         if (!params) {
             return;
         }
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.CosAppId = 'CosAppId' in params ? params.CosAppId : null;
-        this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
-        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.SnapshotInterval = 'SnapshotInterval' in params ? params.SnapshotInterval : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.PornFlag = 'PornFlag' in params ? params.PornFlag : null;
-        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
-        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
+        this.PeakBandwidthTime = 'PeakBandwidthTime' in params ? params.PeakBandwidthTime : null;
+        this.PeakBandwidth = 'PeakBandwidth' in params ? params.PeakBandwidth : null;
+        this.P95PeakBandwidthTime = 'P95PeakBandwidthTime' in params ? params.P95PeakBandwidthTime : null;
+        this.P95PeakBandwidth = 'P95PeakBandwidth' in params ? params.P95PeakBandwidth : null;
+        this.SumFlux = 'SumFlux' in params ? params.SumFlux : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new BillDataInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -513,81 +481,100 @@ class TemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Video encoding format:
-h264/h265.
+         * Codec: h264/h265/origin. Default value: h264.
+
+origin: keep the original codec.
          * @type {string || null}
          */
         this.Vcodec = null;
 
         /**
-         * Video bitrate. Value range: 100-8000 Kbps.
+         * Video bitrate. Value range: 0–8,000 Kbps.
+If the value is 0, the original bitrate will be retained.
+Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * Audio codec. Valid values: aac, mp3.
+         * Audio codec: aac. Default value: aac.
+Note: This parameter will not take effect for now and will be supported soon.
          * @type {string || null}
          */
         this.Acodec = null;
 
         /**
-         * Audio bitrate. Value range: 0-500 Kbps.
+         * Audio bitrate. Value range: 0–500 Kbps.
+0 by default.
          * @type {number || null}
          */
         this.AudioBitrate = null;
 
         /**
-         * Width. Value range: 0-3000.
+         * Width. Default value: 0.
+Value range: [0-3,000].
+The value must be a multiple of 2. The original width is 0.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Height. Value range: 0-3000.
+         * Height. Default value: 0.
+Value range: [0-3,000].
+The value must be a multiple of 2. The original width is 0.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * Frame rate. Value range: 0-200 FPS.
+         * Frame rate. Default value: 0.
+Range: 0-60 Fps.
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Keyframe interval. Value range: 1-50s.
+         * Keyframe interval, unit: second.
+Original interval by default
+Range: 2-6
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * Rotation angle. Valid values: 0, 90, 180, 270.
+         * Rotation angle. Default value: 0.
+Value range: 0, 90, 180, 270
          * @type {number || null}
          */
         this.Rotate = null;
 
         /**
-         * Encoding quality. Valid values:
-baseline, main, high.
+         * Encoding quality:
+baseline/main/high. Default value: baseline.
          * @type {string || null}
          */
         this.Profile = null;
 
         /**
-         * Whether to not exceed the original bitrate. 0: no; 1: yes.
+         * Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.BitrateToOrig = null;
 
         /**
-         * Whether to not exceed the original height. 0: no; 1: yes.
+         * Whether to use the original height when the set height is higher than the original height.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.HeightToOrig = null;
 
         /**
-         * Whether to not exceed the original frame rate. 0: no; 1: yes.
+         * Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.FpsToOrig = null;
@@ -629,10 +616,20 @@ baseline, main, high.
         this.AiTransCode = null;
 
         /**
-         * `VideoBitrate` minus top speed codec bitrate. Value range: 0.1-0.5.
+         * Bitrate compression ratio of top speed code video.
+Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
+
+Value range: 0.0-0.5.
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
+
+        /**
+         * Whether to take the shorter side as height. 0: no, 1: yes. Default value: 0.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.ShortEdgeAsHeight = null;
 
     }
 
@@ -663,6 +660,7 @@ baseline, main, high.
         this.Description = 'Description' in params ? params.Description : null;
         this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
         this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
+        this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
 
     }
 }
@@ -1269,6 +1267,34 @@ class PushQualityData extends  AbstractModel {
         this.MetaVideoRate = 'MetaVideoRate' in params ? params.MetaVideoRate : null;
         this.MetaAudioRate = 'MetaAudioRate' in params ? params.MetaAudioRate : null;
         this.MateFps = 'MateFps' in params ? params.MateFps : null;
+
+    }
+}
+
+/**
+ * UnBindLiveDomainCert response structure.
+ * @class
+ */
+class UnBindLiveDomainCertResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2058,13 +2084,13 @@ class DescribeLiveTranscodeRulesRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * An array of template IDs to be filtered.
          * @type {Array.<number> || null}
          */
         this.TemplateIds = null;
 
         /**
-         * 
+         * An array of domain names to be filtered.
          * @type {Array.<string> || null}
          */
         this.DomainNames = null;
@@ -2208,7 +2234,7 @@ class DescribeBillBandwidthAndFluxListRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time point in the format of `yyyy-mm-dd HH:MM:SS`. The difference between the start time and end time cannot be greater than 31 days.
+         * End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 3 years can be queried.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2854,7 +2880,7 @@ class DescribeLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Template ID obtained through the `DescribeRecordTemplates` API.
+         * Template ID obtained by [DescribeLiveRecordTemplates](https://intl.cloud.tencent.com/document/product/267/32609?from_cn_redirect=1).
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -3095,24 +3121,49 @@ class PlayCodeTotalInfo extends  AbstractModel {
 }
 
 /**
- * DescribeConcurrentRecordStreamNum response structure.
+ * AddLiveWatermark request structure.
  * @class
  */
-class DescribeConcurrentRecordStreamNumResponse extends  AbstractModel {
+class AddLiveWatermarkRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Statistics list.
-         * @type {Array.<ConcurrentRecordStreamNum> || null}
-         */
-        this.DataInfoList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Watermark image URL.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PictureUrl = null;
+
+        /**
+         * Watermark name.
+Up to 16 bytes.
+         * @type {string || null}
+         */
+        this.WatermarkName = null;
+
+        /**
+         * Display position: X-axis offset in %. Default value: 0.
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Display position: Y-axis offset in %. Default value: 0.
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
+         * @type {number || null}
+         */
+        this.Height = null;
 
     }
 
@@ -3123,16 +3174,12 @@ class DescribeConcurrentRecordStreamNumResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new ConcurrentRecordStreamNum();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -3161,6 +3208,49 @@ class ModifyLiveTranscodeTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The bandwidth information of a country, `DescribeAreaBillBandwidthAndFluxList` output parameter
+ * @class
+ */
+class BillCountryInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Country
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Detailed bandwidth information
+         * @type {Array.<BillDataInfo> || null}
+         */
+        this.BandInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.BandInfoList) {
+            this.BandInfoList = new Array();
+            for (let z in params.BandInfoList) {
+                let obj = new BillDataInfo();
+                obj.deserialize(params.BandInfoList[z]);
+                this.BandInfoList.push(obj);
+            }
+        }
 
     }
 }
@@ -3285,45 +3375,94 @@ class DescribeLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * AddDelayLiveStream request structure.
+ * General stream mix layout parameter.
  * @class
  */
-class AddDelayLiveStreamRequest extends  AbstractModel {
+class CommonMixLayoutParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * Push domain name.
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * Stream name.
-         * @type {string || null}
-         */
-        this.StreamName = null;
-
-        /**
-         * Delay time in seconds, up to 600s.
+         * Input layer. Value range: [1,16].
+1) For `image_layer` of background stream (i.e., main host video image or canvas), enter 1.
+2) For audio stream mix, this parameter is also required.
          * @type {number || null}
          */
-        this.DelayTime = null;
+        this.ImageLayer = null;
 
         /**
-         * Expiration time of the configured delayed playback in UTC format, such as 2018-11-29T19:00:00Z.
-Notes:
-1. The configuration will expire after 7 days by default and can last up to 7 days.
-2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Input type. Value range: [0,5].
+If this parameter is left empty, 0 will be used by default.
+0: the input stream is audio/video.
+2: the input stream is image.
+3: the input stream is canvas. 
+4: the input stream is audio.
+5: the input stream is pure video.
+         * @type {number || null}
+         */
+        this.InputType = null;
+
+        /**
+         * Output width of input video image. Value range:
+Pixel: [0,2000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, the input stream width will be used by default.
+If percentage is used, the expected output is (percentage * background width).
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * Output height of input video image. Value range:
+Pixel: [0,2000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, the input stream height will be used by default.
+If percentage is used, the expected output is (percentage * background height).
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * X-axis offset of input in output video image. Value range:
+Pixel: [0,2000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, 0 will be used by default.
+Horizontal offset from the top-left corner of main host background video image. 
+If percentage is used, the expected output is (percentage * background width).
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * Y-axis offset of input in output video image. Value range:
+Pixel: [0,2000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, 0 will be used by default.
+Vertical offset from the top-left corner of main host background video image. 
+If percentage is used, the expected output is (percentage * background width)
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+        /**
+         * When `InputType` is 3 (canvas), this value indicates the canvas color.
+Commonly used colors include:
+Red: 0xcc0033.
+Yellow: 0xcc9900.
+Green: 0xcccc33.
+Blue: 0x99CCFF.
+Black: 0x000000.
+White: 0xFFFFFF.
+Gray: 0x999999
          * @type {string || null}
          */
-        this.ExpireTime = null;
+        this.Color = null;
+
+        /**
+         * When `InputType` is 2 (image), this value is the watermark ID.
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
 
     }
 
@@ -3334,11 +3473,14 @@ Notes:
         if (!params) {
             return;
         }
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ImageLayer = 'ImageLayer' in params ? params.ImageLayer : null;
+        this.InputType = 'InputType' in params ? params.InputType : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.Color = 'Color' in params ? params.Color : null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
 
     }
 }
@@ -4169,6 +4311,49 @@ class CreateLiveTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Region information, `DescribeAreaBillBandwidthAndFluxList` output parameter
+ * @class
+ */
+class BillAreaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Detailed country information
+         * @type {Array.<BillCountryInfo> || null}
+         */
+        this.Countrys = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Countrys) {
+            this.Countrys = new Array();
+            for (let z in params.Countrys) {
+                let obj = new BillCountryInfo();
+                obj.deserialize(params.Countrys[z]);
+                this.Countrys.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Playback information at the stream level.
  * @class
  */
@@ -4390,49 +4575,24 @@ class CancelCommonMixStreamResponse extends  AbstractModel {
 }
 
 /**
- * AddLiveWatermark request structure.
+ * DescribeConcurrentRecordStreamNum response structure.
  * @class
  */
-class AddLiveWatermarkRequest extends  AbstractModel {
+class DescribeConcurrentRecordStreamNumResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark image URL.
+         * Statistics list.
+         * @type {Array.<ConcurrentRecordStreamNum> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PictureUrl = null;
-
-        /**
-         * Watermark name.
-Up to 16 bytes.
-         * @type {string || null}
-         */
-        this.WatermarkName = null;
-
-        /**
-         * Display position: X-axis offset in %. Default value: 0.
-         * @type {number || null}
-         */
-        this.XPosition = null;
-
-        /**
-         * Display position: Y-axis offset in %. Default value: 0.
-         * @type {number || null}
-         */
-        this.YPosition = null;
-
-        /**
-         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
-         * @type {number || null}
-         */
-        this.Height = null;
+        this.RequestId = null;
 
     }
 
@@ -4443,12 +4603,16 @@ Up to 16 bytes.
         if (!params) {
             return;
         }
-        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
-        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new ConcurrentRecordStreamNum();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5561,94 +5725,45 @@ Example: H.264.
 }
 
 /**
- * General stream mix layout parameter.
+ * AddDelayLiveStream request structure.
  * @class
  */
-class CommonMixLayoutParams extends  AbstractModel {
+class AddDelayLiveStreamRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Input layer. Value range: [1,16].
-1) For `image_layer` of background stream (i.e., main host video image or canvas), enter 1.
-2) For audio stream mix, this parameter is also required.
-         * @type {number || null}
-         */
-        this.ImageLayer = null;
-
-        /**
-         * Input type. Value range: [0,5].
-If this parameter is left empty, 0 will be used by default.
-0: the input stream is audio/video.
-2: the input stream is image.
-3: the input stream is canvas. 
-4: the input stream is audio.
-5: the input stream is pure video.
-         * @type {number || null}
-         */
-        this.InputType = null;
-
-        /**
-         * Output width of input video image. Value range:
-Pixel: [0,2000]
-Percentage: [0.01,0.99]
-If this parameter is left empty, the input stream width will be used by default.
-If percentage is used, the expected output is (percentage * background width).
-         * @type {number || null}
-         */
-        this.ImageWidth = null;
-
-        /**
-         * Output height of input video image. Value range:
-Pixel: [0,2000]
-Percentage: [0.01,0.99]
-If this parameter is left empty, the input stream height will be used by default.
-If percentage is used, the expected output is (percentage * background height).
-         * @type {number || null}
-         */
-        this.ImageHeight = null;
-
-        /**
-         * X-axis offset of input in output video image. Value range:
-Pixel: [0,2000]
-Percentage: [0.01,0.99]
-If this parameter is left empty, 0 will be used by default.
-Horizontal offset from the top-left corner of main host background video image. 
-If percentage is used, the expected output is (percentage * background width).
-         * @type {number || null}
-         */
-        this.LocationX = null;
-
-        /**
-         * Y-axis offset of input in output video image. Value range:
-Pixel: [0,2000]
-Percentage: [0.01,0.99]
-If this parameter is left empty, 0 will be used by default.
-Vertical offset from the top-left corner of main host background video image. 
-If percentage is used, the expected output is (percentage * background width)
-         * @type {number || null}
-         */
-        this.LocationY = null;
-
-        /**
-         * When `InputType` is 3 (canvas), this value indicates the canvas color.
-Commonly used colors include:
-Red: 0xcc0033.
-Yellow: 0xcc9900.
-Green: 0xcccc33.
-Blue: 0x99CCFF.
-Black: 0x000000.
-White: 0xFFFFFF.
-Gray: 0x999999
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
          * @type {string || null}
          */
-        this.Color = null;
+        this.AppName = null;
 
         /**
-         * When `InputType` is 2 (image), this value is the watermark ID.
+         * Push domain name.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * Delay time in seconds, up to 600s.
          * @type {number || null}
          */
-        this.WatermarkId = null;
+        this.DelayTime = null;
+
+        /**
+         * Expiration time of the configured delayed playback in UTC format, such as 2018-11-29T19:00:00Z.
+Notes:
+1. The configuration will expire after 7 days by default and can last up to 7 days.
+2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
 
     }
 
@@ -5659,14 +5774,11 @@ Gray: 0x999999
         if (!params) {
             return;
         }
-        this.ImageLayer = 'ImageLayer' in params ? params.ImageLayer : null;
-        this.InputType = 'InputType' in params ? params.InputType : null;
-        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
-        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
-        this.LocationX = 'LocationX' in params ? params.LocationX : null;
-        this.LocationY = 'LocationY' in params ? params.LocationY : null;
-        this.Color = 'Color' in params ? params.Color : null;
-        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -5744,8 +5856,8 @@ class DescribeStreamDayPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Date in the format of `YYYY-mm-dd`.
-Data is available at 3 AM the next day. You are recommended to query the latest data after this time point.
+         * Date in the format of YYYY-mm-dd
+Data is available at 3am Beijing Time the next day. You are recommended to query the latest data after this time point. Data in the last 3 months can be queried.
          * @type {string || null}
          */
         this.DayTime = null;
@@ -8662,12 +8774,18 @@ If this parameter is set to 1, when both `InputStreamList` and `OutputParams.Out
 }
 
 /**
- * UnBindLiveDomainCert response structure.
+ * DescribeAreaBillBandwidthAndFluxList response structure.
  * @class
  */
-class UnBindLiveDomainCertResponse extends  AbstractModel {
+class DescribeAreaBillBandwidthAndFluxListResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Detailed data information.
+         * @type {Array.<BillAreaInfo> || null}
+         */
+        this.DataInfoList = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8683,6 +8801,15 @@ class UnBindLiveDomainCertResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new BillAreaInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -9198,15 +9325,14 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time (Beijing time) in the format of `yyyy-mm-dd HH:MM:SS`,
-The start time cannot be more than 30 days after the current time.
+         * Start time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time (Beijing time) in the format of `yyyy-mm-dd HH:MM:SS`.
-The end time and start time must be on the same day.
+         * End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
+The end time and start time must be on the same day. Data in the last 3 days can be queried.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -9269,8 +9395,9 @@ Length limit:
         this.TemplateName = null;
 
         /**
-         * Video bitrate in Kbps. Value range: 100-8,000.
-Note: the transcoding template requires that bitrate should be unique, yet the final saved bitrate may be different from the input bitrate.
+         * Video bitrate. Value range: 0–8,000 Kbps.
+If the value is 0, the original bitrate will be retained.
+Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
          * @type {number || null}
          */
         this.VideoBitrate = null;
@@ -9333,14 +9460,15 @@ It must be a multiple of 2. The original height is 0
 
         /**
          * Frame rate. Default value: 0.
-Value range: 0-60
+Range: 0-60 Fps.
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Keyframe interval in seconds. Default value: original interval
-Value range: 2-6
+         * Keyframe interval, unit: second.
+Original interval by default
+Range: 2-6
          * @type {number || null}
          */
         this.Gop = null;
@@ -9360,19 +9488,25 @@ baseline/main/high. Default value: baseline.
         this.Profile = null;
 
         /**
-         * Whether to not exceed the original bitrate. 0: no; 1: yes. Default value: 0.
+         * Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.BitrateToOrig = null;
 
         /**
-         * Whether to not exceed the original height. 0: no; 1: yes. Default value: 0.
+         * Whether to use the original height when the set height is higher than the original height.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.HeightToOrig = null;
 
         /**
-         * Whether to not exceed the original frame rate. 0: no; 1: yes. Default value: 0.
+         * Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.FpsToOrig = null;
@@ -9744,8 +9878,9 @@ Value range: 0-500.
         this.Description = null;
 
         /**
-         * Video bitrate in Kbps. Value range: 100-8,000.
-Note: the transcoding template requires that the bitrate should be unique, yet the final saved bitrate may be different from the input bitrate.
+         * Video bitrate. Value range: 0–8,000 Kbps.
+If the value is 0, the original bitrate will be retained.
+Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
          * @type {number || null}
          */
         this.VideoBitrate = null;
@@ -9805,19 +9940,25 @@ baseline/main/high.
         this.Profile = null;
 
         /**
-         * Whether to not exceed the original bitrate. 0: no; 1: yes. Default value: 0.
+         * Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.BitrateToOrig = null;
 
         /**
-         * Whether to not exceed the original height. 0: no; 1: yes. Default value: 0.
+         * Whether to use the original height when the set height is higher than the original height.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.HeightToOrig = null;
 
         /**
-         * Whether to not exceed the original frame rate. 0: no; 1: yes. Default value: 0.
+         * Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
+0: no, 1: yes
+Default value: 0.
          * @type {number || null}
          */
         this.FpsToOrig = null;
@@ -10200,63 +10341,30 @@ class DescribeLiveRecordTemplateResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVisitTopSumInfoList response structure.
+ * DescribeAreaBillBandwidthAndFluxList request structure.
  * @class
  */
-class DescribeVisitTopSumInfoListResponse extends  AbstractModel {
+class DescribeAreaBillBandwidthAndFluxListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Page number,
-Value range: [1,1000],
-Default value: 1.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Number of entries per page. Value range: [1,1000].
-Default value: 20.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Bandwidth metric. Valid values: "Domain", "StreamId".
+         * Start time point in the format of yyyy-mm-dd HH:MM:SS.
          * @type {string || null}
          */
-        this.TopIndex = null;
+        this.StartTime = null;
 
         /**
-         * Sorting metric. Valid values: AvgFluxPerSecond (sort by average traffic per second), TotalRequest (sort by total requests), TotalFlux (sort by total traffic). Default value: TotalRequest.
+         * End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 1 days.
          * @type {string || null}
          */
-        this.OrderParam = null;
+        this.EndTime = null;
 
         /**
-         * Total number of results.
-         * @type {number || null}
+         * LVB playback domain name. If it is left blank, the full data will be queried.
+         * @type {Array.<string> || null}
          */
-        this.TotalNum = null;
-
-        /**
-         * Total number of result pages.
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * Data content.
-         * @type {Array.<PlaySumStatInfo> || null}
-         */
-        this.DataInfoList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.PlayDomains = null;
 
     }
 
@@ -10267,22 +10375,9 @@ Default value: 20.
         if (!params) {
             return;
         }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TopIndex = 'TopIndex' in params ? params.TopIndex : null;
-        this.OrderParam = 'OrderParam' in params ? params.OrderParam : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new PlaySumStatInfo();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
 
     }
 }
@@ -10516,54 +10611,90 @@ class DescribeLiveRecordRulesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBillBandwidthAndFluxList response structure.
+ * CreateLiveSnapshotTemplate request structure.
  * @class
  */
-class DescribeBillBandwidthAndFluxListResponse extends  AbstractModel {
+class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Time point of peak bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
+         * Template name.
+Maximum length: 255 bytes.
+Only letters, digits, underscores, and hyphens can be contained.
          * @type {string || null}
          */
-        this.PeakBandwidthTime = null;
+        this.TemplateName = null;
 
         /**
-         * Peak bandwidth in Mbps.
+         * COS application ID.
          * @type {number || null}
          */
-        this.PeakBandwidth = null;
+        this.CosAppId = null;
 
         /**
-         * Time point of 95th percentile bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
+         * COS bucket name.
+Note: the value of `CosBucket` cannot contain `-[appid]`.
          * @type {string || null}
          */
-        this.P95PeakBandwidthTime = null;
+        this.CosBucket = null;
 
         /**
-         * 95th percentile bandwidth in Mbps.
-         * @type {number || null}
-         */
-        this.P95PeakBandwidth = null;
-
-        /**
-         * Total traffic in MB.
-         * @type {number || null}
-         */
-        this.SumFlux = null;
-
-        /**
-         * Detailed data information.
-         * @type {Array.<BillDataInfo> || null}
-         */
-        this.DataInfoList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * COS region.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CosRegion = null;
+
+        /**
+         * Description.
+Maximum length: 1,024 bytes.
+Only letters, digits, underscores, and hyphens can be contained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Screencapturing interval in seconds. Default value: 10s.
+Value range: 5-300s.
+         * @type {number || null}
+         */
+        this.SnapshotInterval = null;
+
+        /**
+         * Screenshot width. Default value: 0 (original width).
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Screenshot height. Default value: 0 (original height).
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Whether to enable porn detection. 0: no, 1: yes. Default value: 0
+         * @type {number || null}
+         */
+        this.PornFlag = null;
+
+        /**
+         * COS Bucket folder prefix.
+If no value is entered, the default value
+`/{Year}-{Month}-{Day}`
+will be used.
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * COS filename.
+If no value is entered, the default value 
+`{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}`
+will be used.
+         * @type {string || null}
+         */
+        this.CosFileName = null;
 
     }
 
@@ -10574,21 +10705,17 @@ class DescribeBillBandwidthAndFluxListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PeakBandwidthTime = 'PeakBandwidthTime' in params ? params.PeakBandwidthTime : null;
-        this.PeakBandwidth = 'PeakBandwidth' in params ? params.PeakBandwidth : null;
-        this.P95PeakBandwidthTime = 'P95PeakBandwidthTime' in params ? params.P95PeakBandwidthTime : null;
-        this.P95PeakBandwidth = 'P95PeakBandwidth' in params ? params.P95PeakBandwidth : null;
-        this.SumFlux = 'SumFlux' in params ? params.SumFlux : null;
-
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new BillDataInfo();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.CosAppId = 'CosAppId' in params ? params.CosAppId : null;
+        this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.SnapshotInterval = 'SnapshotInterval' in params ? params.SnapshotInterval : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.PornFlag = 'PornFlag' in params ? params.PornFlag : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
     }
 }
@@ -11434,6 +11561,7 @@ class DescribeLiveDomainResponse extends  AbstractModel {
 
         /**
          * Domain name information.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {DomainInfo || null}
          */
         this.DomainInfo = null;
@@ -11586,6 +11714,94 @@ class DescribeStreamDayPlayInfoListResponse extends  AbstractModel {
         this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVisitTopSumInfoList response structure.
+ * @class
+ */
+class DescribeVisitTopSumInfoListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Page number,
+Value range: [1,1000],
+Default value: 1.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of entries per page. Value range: [1,1000].
+Default value: 20.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Bandwidth metric. Valid values: "Domain", "StreamId".
+         * @type {string || null}
+         */
+        this.TopIndex = null;
+
+        /**
+         * Sorting metric. Valid values: AvgFluxPerSecond (sort by average traffic per second), TotalRequest (sort by total requests), TotalFlux (sort by total traffic). Default value: TotalRequest.
+         * @type {string || null}
+         */
+        this.OrderParam = null;
+
+        /**
+         * Total number of results.
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * Total number of result pages.
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * Data content.
+         * @type {Array.<PlaySumStatInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TopIndex = 'TopIndex' in params ? params.TopIndex : null;
+        this.OrderParam = 'OrderParam' in params ? params.OrderParam : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new PlaySumStatInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12366,7 +12582,7 @@ module.exports = {
     DeleteLiveRecordRuleRequest: DeleteLiveRecordRuleRequest,
     ResumeLiveStreamRequest: ResumeLiveStreamRequest,
     DeleteLiveTranscodeTemplateResponse: DeleteLiveTranscodeTemplateResponse,
-    CreateLiveSnapshotTemplateRequest: CreateLiveSnapshotTemplateRequest,
+    DescribeBillBandwidthAndFluxListResponse: DescribeBillBandwidthAndFluxListResponse,
     TemplateInfo: TemplateInfo,
     DeleteLiveCallbackRuleResponse: DeleteLiveCallbackRuleResponse,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
@@ -12380,6 +12596,7 @@ module.exports = {
     DeleteLiveCallbackTemplateResponse: DeleteLiveCallbackTemplateResponse,
     DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
     PushQualityData: PushQualityData,
+    UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,
     ModifyLivePlayAuthKeyRequest: ModifyLivePlayAuthKeyRequest,
     DescribeLiveDelayInfoListRequest: DescribeLiveDelayInfoListRequest,
     DomainCertInfo: DomainCertInfo,
@@ -12416,13 +12633,14 @@ module.exports = {
     DescribeProIspPlaySumInfoListRequest: DescribeProIspPlaySumInfoListRequest,
     DescribeDeliverBandwidthListRequest: DescribeDeliverBandwidthListRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
-    DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
+    AddLiveWatermarkRequest: AddLiveWatermarkRequest,
     ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
+    BillCountryInfo: BillCountryInfo,
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
     DescribeLiveWatermarkRequest: DescribeLiveWatermarkRequest,
-    AddDelayLiveStreamRequest: AddDelayLiveStreamRequest,
+    CommonMixLayoutParams: CommonMixLayoutParams,
     DescribeLiveDomainCertRequest: DescribeLiveDomainCertRequest,
     DescribeLiveStreamEventListRequest: DescribeLiveStreamEventListRequest,
     CallBackTemplateInfo: CallBackTemplateInfo,
@@ -12438,12 +12656,13 @@ module.exports = {
     RuleInfo: RuleInfo,
     UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
     CreateLiveTranscodeTemplateResponse: CreateLiveTranscodeTemplateResponse,
+    BillAreaInfo: BillAreaInfo,
     PlayDataInfoByStream: PlayDataInfoByStream,
     DescribeVisitTopSumInfoListRequest: DescribeVisitTopSumInfoListRequest,
     DayStreamPlayInfo: DayStreamPlayInfo,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
     CancelCommonMixStreamResponse: CancelCommonMixStreamResponse,
-    AddLiveWatermarkRequest: AddLiveWatermarkRequest,
+    DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     CommonMixInputParam: CommonMixInputParam,
     DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
@@ -12466,7 +12685,7 @@ module.exports = {
     CreateCommonMixStreamRequest: CreateCommonMixStreamRequest,
     CreateLiveCertResponse: CreateLiveCertResponse,
     PushDataInfo: PushDataInfo,
-    CommonMixLayoutParams: CommonMixLayoutParams,
+    AddDelayLiveStreamRequest: AddDelayLiveStreamRequest,
     DescribeGroupProIspPlayInfoListRequest: DescribeGroupProIspPlayInfoListRequest,
     DescribeStreamDayPlayInfoListRequest: DescribeStreamDayPlayInfoListRequest,
     TranscodeDetailInfo: TranscodeDetailInfo,
@@ -12523,7 +12742,7 @@ module.exports = {
     DescribePlayErrorCodeSumInfoListRequest: DescribePlayErrorCodeSumInfoListRequest,
     ModifyLiveCertRequest: ModifyLiveCertRequest,
     CommonMixControlParams: CommonMixControlParams,
-    UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,
+    DescribeAreaBillBandwidthAndFluxListResponse: DescribeAreaBillBandwidthAndFluxListResponse,
     ForbidLiveDomainRequest: ForbidLiveDomainRequest,
     DescribeLiveRecordRulesRequest: DescribeLiveRecordRulesRequest,
     DescribePlayErrorCodeDetailInfoListResponse: DescribePlayErrorCodeDetailInfoListResponse,
@@ -12554,14 +12773,14 @@ module.exports = {
     CreateLiveTranscodeRuleResponse: CreateLiveTranscodeRuleResponse,
     CreateLiveCallbackRuleResponse: CreateLiveCallbackRuleResponse,
     DescribeLiveRecordTemplateResponse: DescribeLiveRecordTemplateResponse,
-    DescribeVisitTopSumInfoListResponse: DescribeVisitTopSumInfoListResponse,
+    DescribeAreaBillBandwidthAndFluxListRequest: DescribeAreaBillBandwidthAndFluxListRequest,
     BindLiveDomainCertResponse: BindLiveDomainCertResponse,
     CallBackRuleInfo: CallBackRuleInfo,
     PlaySumStatInfo: PlaySumStatInfo,
     DescribeLiveTranscodeTemplatesRequest: DescribeLiveTranscodeTemplatesRequest,
     HlsSpecialParam: HlsSpecialParam,
     DescribeLiveRecordRulesResponse: DescribeLiveRecordRulesResponse,
-    DescribeBillBandwidthAndFluxListResponse: DescribeBillBandwidthAndFluxListResponse,
+    CreateLiveSnapshotTemplateRequest: CreateLiveSnapshotTemplateRequest,
     DescribeLiveDomainPlayInfoListResponse: DescribeLiveDomainPlayInfoListResponse,
     HttpCodeValue: HttpCodeValue,
     DescribeLiveStreamOnlineListRequest: DescribeLiveStreamOnlineListRequest,
@@ -12587,6 +12806,7 @@ module.exports = {
     DeleteRecordTaskRequest: DeleteRecordTaskRequest,
     StopLiveRecordResponse: StopLiveRecordResponse,
     DescribeStreamDayPlayInfoListResponse: DescribeStreamDayPlayInfoListResponse,
+    DescribeVisitTopSumInfoListResponse: DescribeVisitTopSumInfoListResponse,
     CreateLiveSnapshotRuleResponse: CreateLiveSnapshotRuleResponse,
     DelayInfo: DelayInfo,
     DescribeLiveStreamEventListResponse: DescribeLiveStreamEventListResponse,

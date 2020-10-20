@@ -129,6 +129,56 @@ class Trigger extends  AbstractModel {
 }
 
 /**
+ * ListTriggers response structure.
+ * @class
+ */
+class ListTriggersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of triggers
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Trigger list
+         * @type {Array.<TriggerInfo> || null}
+         */
+        this.Triggers = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Triggers) {
+            this.Triggers = new Array();
+            for (let z in params.Triggers) {
+                let obj = new TriggerInfo();
+                obj.deserialize(params.Triggers[z]);
+                this.Triggers.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListAliases response structure.
  * @class
  */
@@ -1652,30 +1702,24 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
 }
 
 /**
- * ListTriggers response structure.
+ * State reason description
  * @class
  */
-class ListTriggersResponse extends  AbstractModel {
+class StatusReason extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of triggers
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Trigger list
-         * @type {Array.<TriggerInfo> || null}
-         */
-        this.Triggers = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Error code
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ErrorCode = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
 
     }
 
@@ -1686,17 +1730,8 @@ class ListTriggersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Triggers) {
-            this.Triggers = new Array();
-            for (let z in params.Triggers) {
-                let obj = new TriggerInfo();
-                obj.deserialize(params.Triggers[z]);
-                this.Triggers.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
 
     }
 }
@@ -3611,6 +3646,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InitTimeout = null;
 
         /**
+         * Cause of function failure
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<StatusReason> || null}
+         */
+        this.StatusReasons = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3723,6 +3765,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
+
+        if (params.StatusReasons) {
+            this.StatusReasons = new Array();
+            for (let z in params.StatusReasons) {
+                let obj = new StatusReason();
+                obj.deserialize(params.StatusReasons[z]);
+                this.StatusReasons.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5141,6 +5192,7 @@ class UpdateFunctionCodeResponse extends  AbstractModel {
 module.exports = {
     AccessInfo: AccessInfo,
     Trigger: Trigger,
+    ListTriggersResponse: ListTriggersResponse,
     ListAliasesResponse: ListAliasesResponse,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
     GetAliasResponse: GetAliasResponse,
@@ -5170,7 +5222,7 @@ module.exports = {
     PublicNetConfigOut: PublicNetConfigOut,
     UpdateFunctionCodeRequest: UpdateFunctionCodeRequest,
     UpdateFunctionConfigurationRequest: UpdateFunctionConfigurationRequest,
-    ListTriggersResponse: ListTriggersResponse,
+    StatusReason: StatusReason,
     UpdateNamespaceResponse: UpdateNamespaceResponse,
     ListLayersRequest: ListLayersRequest,
     CopyFunctionRequest: CopyFunctionRequest,

@@ -3203,19 +3203,19 @@ class DescribeRealServerStatisticsRequest extends  AbstractModel {
         this.WithinTime = null;
 
         /**
-         * Statistics start time, such as 2020-08-19 00:00:00
+         * Statistics start time, such as `2020-08-19 00:00:00`
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Statistics end time, such as 2020-08-19 23:59:59
+         * Statistics end time, such as `2020-08-19 23:59:59`
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Statistics granularity in seconds. Only 1-minute (60-second) and 5-minute (300-second) granularities are supported
+         * Statistics granularity in seconds. Only 1-minute (60-second) and 5-minute (300-second) granularities are supported.
          * @type {number || null}
          */
         this.Granularity = null;

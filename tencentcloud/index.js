@@ -18,6 +18,7 @@ module.exports = {
     dbbrain: require("./dbbrain"),
     dc: require("./dc"),
     dcdb: require("./dcdb"),
+    dms: require("./dms"),
     dts: require("./dts"),
     ecdn: require("./ecdn"),
     emr: require("./emr"),

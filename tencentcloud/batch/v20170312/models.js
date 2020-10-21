@@ -628,8 +628,12 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
         this.TaskTemplateIds = null;
 
         /**
-         * Filter
-<li> task-template-name - String - Required: No - (Filter) Filter by task template name.</li>
+         * Filter.
+<li> `task-template-name` - String - Optional - Filter by task template name.</li>
+<li> `tag-key` - String - Optional - Filter by tag key.</li>
+<li> `tag-value` - String - Optional - Filter by tag value.</li>
+<li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
+It cannot be specified together with the `TaskTemplateIds` parameter.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -723,7 +727,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. For more information on system disk types and their limits, refer to [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
+         * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1386,6 +1390,43 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Information on tags
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeComputeEnv response structure.
  * @class
  */
@@ -1460,6 +1501,13 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.AttachedComputeNodeCount = null;
 
         /**
+         * Tag list bound to the compute environment.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1503,6 +1551,15 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.NextAction = 'NextAction' in params ? params.NextAction : null;
         this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2007,6 +2064,12 @@ class CreateTaskTemplateRequest extends  AbstractModel {
          */
         this.TaskTemplateDescription = null;
 
+        /**
+         * Tag list. By setting this parameter, you can bind tags to a task template. Each task template supports up to 10 tags.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2024,6 +2087,15 @@ class CreateTaskTemplateRequest extends  AbstractModel {
             this.TaskTemplateInfo = obj;
         }
         this.TaskTemplateDescription = 'TaskTemplateDescription' in params ? params.TaskTemplateDescription : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2084,6 +2156,12 @@ class Job extends  AbstractModel {
          */
         this.StateIfCreateCvmFailed = null;
 
+        /**
+         * Tag list. By setting this parameter, you can bind tags to a job. Each job supports up to 10 tags.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2125,6 +2203,15 @@ class Job extends  AbstractModel {
         }
         this.TaskExecutionDependOn = 'TaskExecutionDependOn' in params ? params.TaskExecutionDependOn : null;
         this.StateIfCreateCvmFailed = 'StateIfCreateCvmFailed' in params ? params.StateIfCreateCvmFailed : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2279,6 +2366,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DesiredComputeNodeCount = null;
 
         /**
+         * Tag list bound to the compute environment.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2340,6 +2434,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2447,6 +2550,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.DesiredComputeNodeCount = null;
 
+        /**
+         * Tag list of the compute environment.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2503,6 +2613,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2861,7 +2980,7 @@ class DescribeJobResponse extends  AbstractModel {
 
         /**
          * Task instance statistical metrics
-         * @type {TaskInstanceView || null}
+         * @type {TaskInstanceMetrics || null}
          */
         this.TaskInstanceMetrics = null;
 
@@ -2870,6 +2989,19 @@ class DescribeJobResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.StateReason = null;
+
+        /**
+         * Tag list bound to the job.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NextAction = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2919,11 +3051,21 @@ class DescribeJobResponse extends  AbstractModel {
         }
 
         if (params.TaskInstanceMetrics) {
-            let obj = new TaskInstanceView();
+            let obj = new TaskInstanceMetrics();
             obj.deserialize(params.TaskInstanceMetrics)
             this.TaskInstanceMetrics = obj;
         }
         this.StateReason = 'StateReason' in params ? params.StateReason : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.NextAction = 'NextAction' in params ? params.NextAction : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3175,6 +3317,12 @@ class NamedComputeEnv extends  AbstractModel {
          */
         this.ResourceMaxRetryCount = null;
 
+        /**
+         * Tag list. By setting this parameter, you can bind tags to a compute environment. Each compute environment supports up to 10 tags.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3235,6 +3383,15 @@ class NamedComputeEnv extends  AbstractModel {
         }
         this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
         this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -3594,6 +3751,13 @@ class DescribeJobSubmitInfoResponse extends  AbstractModel {
         this.Dependences = null;
 
         /**
+         * Tag list bound to the job.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3628,6 +3792,15 @@ class DescribeJobSubmitInfoResponse extends  AbstractModel {
                 let obj = new Dependence();
                 obj.deserialize(params.Dependences[z]);
                 this.Dependences.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -4747,11 +4920,15 @@ class DescribeJobsRequest extends  AbstractModel {
         this.JobIds = null;
 
         /**
-         * Filter
-<li> job-id - String - Required: No - (Filter) Filter by job ID.</li>
-<li> job-name - String - Required: No - (Filter) Filter by job name.</li>
-<li> job-state - String - Required: No - (Filter) Filter by job state.</li>
-<li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
+         * Filter.
+<li> `job-id` - String - Optional - Filter by job ID.</li>
+<li> `job-name` - String - Optional - Filter by job name.</li>
+<li> `job-state` - String - Optional - Filter by job state.</li>
+<li> `zone` - String - Optional - Filter by availability zone.</li>
+<li> `tag-key` - String - Optional - Filter by tag key.</li>
+<li> `tag-value` - String - Optional - Filter by tag value.</li>
+<li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
+It cannot be specified together with the `JobIds` parameter.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4831,6 +5008,13 @@ class TaskTemplateView extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * Tag list bound to the task template.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -4850,6 +5034,15 @@ class TaskTemplateView extends  AbstractModel {
             this.TaskTemplateInfo = obj;
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -5413,6 +5606,13 @@ class ComputeEnvView extends  AbstractModel {
          */
         this.AttachedComputeNodeCount = null;
 
+        /**
+         * Tag list bound to the compute environment.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -5442,6 +5642,15 @@ class ComputeEnvView extends  AbstractModel {
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.NextAction = 'NextAction' in params ? params.NextAction : null;
         this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -5619,10 +5828,15 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
         this.EnvIds = null;
 
         /**
-         * Filter
-<li> zone - String - Required: No - (Filter) Filter by availability zone.</li>
-<li> env-id - String - Required: No - (Filter) Filter by compute environment ID.</li>
-<li> env-name - String - Required: No - (Filter) Filter by compute environment name.</li>
+         * Filter.
+<li> `zone` - String - Optional - Filter by availability zone.</li>
+<li> `env-id` - String - Optional - Filter by compute environment ID.</li>
+<li> `env-name` - String - Optional - Filter by compute environment name.</li>
+<li> `resource-type` - String - Optional - Filter by compute resource type, which can be CVM or CPM (BM).</li>
+<li> `tag-key` - String - Optional - Filter by tag key.</li>
+</li>`tag-value` - String - Optional - Filter by tag value.</li>
+<li> `tag:tag-key` - String - Optional - Filter by tag key-value pair. The tag-key should be replaced by a specified tag key.</li>
+It cannot be specified together with the `EnvIds` parameter.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6189,6 +6403,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TaskMetrics = null;
 
+        /**
+         * Tag list bound to the job.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6215,6 +6436,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new TaskMetrics();
             obj.deserialize(params.TaskMetrics)
             this.TaskMetrics = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -6279,6 +6509,7 @@ module.exports = {
     TaskInstanceLog: TaskInstanceLog,
     MountDataDisk: MountDataDisk,
     TaskView: TaskView,
+    Tag: Tag,
     DescribeComputeEnvResponse: DescribeComputeEnvResponse,
     TerminateJobRequest: TerminateJobRequest,
     DetachInstancesResponse: DetachInstancesResponse,

@@ -39,6 +39,7 @@ const TaskInstanceMetrics = models.TaskInstanceMetrics;
 const TaskInstanceLog = models.TaskInstanceLog;
 const MountDataDisk = models.MountDataDisk;
 const TaskView = models.TaskView;
+const Tag = models.Tag;
 const DescribeComputeEnvResponse = models.DescribeComputeEnvResponse;
 const TerminateJobRequest = models.TerminateJobRequest;
 const DetachInstancesResponse = models.DetachInstancesResponse;

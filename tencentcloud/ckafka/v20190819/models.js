@@ -4234,6 +4234,12 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * List of partitions that need to be reset. If the topics parameter is not specified, reset partitions in the corresponding partition list of all topics. If the topics parameter is specified, reset partitions of the corresponding partition list of the specified topic list.
+         * @type {Array.<number> || null}
+         */
+        this.Partitions = null;
+
     }
 
     /**
@@ -4250,6 +4256,7 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
         this.Shift = 'Shift' in params ? params.Shift : null;
         this.ShiftTimestamp = 'ShiftTimestamp' in params ? params.ShiftTimestamp : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
 
     }
 }

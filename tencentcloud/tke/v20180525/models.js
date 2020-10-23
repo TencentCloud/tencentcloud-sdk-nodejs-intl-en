@@ -2954,6 +2954,34 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * AcquireClusterAdminRole request structure.
+ * @class
+ */
+class AcquireClusterAdminRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * CreateClusterAsGroup response structure.
  * @class
  */
@@ -3311,6 +3339,34 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.AuditEnabled = 'AuditEnabled' in params ? params.AuditEnabled : null;
         this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
         this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
+
+    }
+}
+
+/**
+ * AcquireClusterAdminRole response structure.
+ * @class
+ */
+class AcquireClusterAdminRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4858,6 +4914,7 @@ module.exports = {
     DeleteClusterRouteTableRequest: DeleteClusterRouteTableRequest,
     CreateClusterRequest: CreateClusterRequest,
     InstanceExtraArgs: InstanceExtraArgs,
+    AcquireClusterAdminRoleRequest: AcquireClusterAdminRoleRequest,
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
@@ -4865,6 +4922,7 @@ module.exports = {
     ImageInstance: ImageInstance,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
+    AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,

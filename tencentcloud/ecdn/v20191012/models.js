@@ -278,7 +278,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SslStatus = null;
 
         /**
-         * Hsts configuration.
+         * HSTS configuration
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Hsts || null}
          */
         this.Hsts = null;
@@ -407,10 +408,10 @@ class Cache extends  AbstractModel {
         this.CacheRules = null;
 
         /**
-         * Whether to follow origin server's `Cache-Control: max-age` configuration
-on: enable.
-off: disable.
-After this feature is enabled, resources that do not match the `CacheRules` rule will be cached on nodes according to the `max-age` value returned by the origin server, while resources that match the `CacheRules` rule will be cached on nodes according to the cache expiration time set in `CacheRules`.
+         * Whether to follow the `Cache-Control: max-age` configuration on the origin server (this feature is only available to users on the allowlist).
+on: enable
+off: disable
+If it is enabled, resources that do not match `CacheRules` will be cached on node according to the `max-age` value returned by the origin server, while resources that match `CacheRules` will be cached on node according to the cache expiration time set in `CacheRules`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -844,40 +845,24 @@ class DescribePurgeTasksRequest extends  AbstractModel {
 }
 
 /**
- * Filter for domain name query.
+ * DescribeEcdnStatistics response structure.
  * @class
  */
-class DomainFilter extends  AbstractModel {
+class DescribeEcdnStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter field name, which can be:
-- origin: primary origin server.
-- domain: domain name.
-- resourceId: domain name ID.
-- status: domain name status. Valid values: online, offline, processing.
-- disable: domain name blockage status. Valid values: normal, unlicensed.
-- projectId: project ID.
-- fullUrlCache: full path cache. Valid values: on, off.
-- https: whether to configure HTTPS. Valid values: on, off, processing.
-- originPullProtocol: origin-pull protocol type. Valid values: http, follow, https.
-- area: acceleration region. Valid values: mainland, overseas, global.
+         * Returned data details of the specified conditional query
+         * @type {Array.<ResourceData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Filter field value.
-         * @type {Array.<string> || null}
-         */
-        this.Value = null;
-
-        /**
-         * Whether to enable fuzzy query, which is supported only for filter fields `origin` and `domain`.
-         * @type {boolean || null}
-         */
-        this.Fuzzy = null;
+        this.RequestId = null;
 
     }
 
@@ -888,9 +873,16 @@ class DomainFilter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -953,12 +945,14 @@ class Hsts extends  AbstractModel {
 
         /**
          * `MaxAge` value.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxAge = null;
 
         /**
          * Whether to include subdomain names. Valid values: on, off.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IncludeSubDomains = null;
@@ -2119,6 +2113,64 @@ class AddEcdnDomainResponse extends  AbstractModel {
 }
 
 /**
+ * Node IP information
+ * @class
+ */
+class IpStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Node region
+         * @type {string || null}
+         */
+        this.District = null;
+
+        /**
+         * Node ISP
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * Node city
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * Node status
+online: the node is online and scheduling normally
+offline: the node is offline
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.District = 'District' in params ? params.District : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * Purge task log details.
  * @class
  */
@@ -2224,18 +2276,24 @@ class CacheRule extends  AbstractModel {
 }
 
 /**
- * DescribeEcdnStatistics response structure.
+ * DescribeIpStatus response structure.
  * @class
  */
-class DescribeEcdnStatisticsResponse extends  AbstractModel {
+class DescribeIpStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned data details of the specified conditional query
-         * @type {Array.<ResourceData> || null}
+         * Node list
+         * @type {Array.<IpStatus> || null}
          */
-        this.Data = null;
+        this.Ips = null;
+
+        /**
+         * Total number of nodes
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2253,14 +2311,15 @@ class DescribeEcdnStatisticsResponse extends  AbstractModel {
             return;
         }
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new IpStatus();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2437,6 +2496,58 @@ class CacheKey extends  AbstractModel {
             return;
         }
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
+
+    }
+}
+
+/**
+ * Filter for domain name query.
+ * @class
+ */
+class DomainFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter field name, which can be:
+- origin: primary origin server.
+- domain: domain name.
+- resourceId: domain name ID.
+- status: domain name status. Valid values: online, offline, processing.
+- disable: domain name blockage status. Valid values: normal, unlicensed.
+- projectId: project ID.
+- fullUrlCache: full path cache. Valid values: on, off.
+- https: whether to configure HTTPS. Valid values: on, off, processing.
+- originPullProtocol: origin-pull protocol type. Valid values: http, follow, https.
+- area: acceleration region. Valid values: mainland, overseas, global.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Filter field value.
+         * @type {Array.<string> || null}
+         */
+        this.Value = null;
+
+        /**
+         * Whether to enable fuzzy query, which is supported only for filter fields `origin` and `domain`.
+         * @type {boolean || null}
+         */
+        this.Fuzzy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
 
     }
 }
@@ -2827,6 +2938,44 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeIpStatus request structure.
+ * @class
+ */
+class DescribeIpStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Acceleration domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Target region of the query:
+mainland: nodes in Mainland China
+overseas: nodes outside Mainland China
+global: global nodes
+         * @type {string || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
  * DescribeDomains request structure.
  * @class
  */
@@ -2894,7 +3043,7 @@ module.exports = {
     Sort: Sort,
     IpFreqLimit: IpFreqLimit,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
-    DomainFilter: DomainFilter,
+    DescribeEcdnStatisticsResponse: DescribeEcdnStatisticsResponse,
     DomainLogs: DomainLogs,
     Hsts: Hsts,
     HttpHeaderPathRule: HttpHeaderPathRule,
@@ -2919,16 +3068,19 @@ module.exports = {
     DeleteEcdnDomainRequest: DeleteEcdnDomainRequest,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     AddEcdnDomainResponse: AddEcdnDomainResponse,
+    IpStatus: IpStatus,
     PurgeTask: PurgeTask,
     CacheRule: CacheRule,
-    DescribeEcdnStatisticsResponse: DescribeEcdnStatisticsResponse,
+    DescribeIpStatusResponse: DescribeIpStatusResponse,
     Origin: Origin,
     ServerCert: ServerCert,
     CacheKey: CacheKey,
+    DomainFilter: DomainFilter,
     DescribeEcdnDomainStatisticsRequest: DescribeEcdnDomainStatisticsRequest,
     Quota: Quota,
     DescribeEcdnDomainLogsRequest: DescribeEcdnDomainLogsRequest,
     DomainDetailInfo: DomainDetailInfo,
+    DescribeIpStatusRequest: DescribeIpStatusRequest,
     DescribeDomainsRequest: DescribeDomainsRequest,
 
 }

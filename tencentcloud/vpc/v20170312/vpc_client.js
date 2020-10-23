@@ -40,6 +40,7 @@ const FlowLog = models.FlowLog;
 const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const DescribeServiceTemplateGroupsResponse = models.DescribeServiceTemplateGroupsResponse;
 const DetachClassicLinkVpcRequest = models.DetachClassicLinkVpcRequest;
+const DescribeBandwidthPackageBillUsageResponse = models.DescribeBandwidthPackageBillUsageResponse;
 const DeleteBandwidthPackageResponse = models.DeleteBandwidthPackageResponse;
 const ModifyNatGatewayAttributeRequest = models.ModifyNatGatewayAttributeRequest;
 const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
@@ -51,6 +52,7 @@ const ModifyNetworkAclEntriesRequest = models.ModifyNetworkAclEntriesRequest;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const AddressTemplate = models.AddressTemplate;
 const VpnGatewayQuota = models.VpnGatewayQuota;
+const DescribeBandwidthPackageBillUsageRequest = models.DescribeBandwidthPackageBillUsageRequest;
 const UnassignIpv6AddressesResponse = models.UnassignIpv6AddressesResponse;
 const DescribeFlowLogsRequest = models.DescribeFlowLogsRequest;
 const AssociateNatGatewayAddressRequest = models.AssociateNatGatewayAddressRequest;
@@ -239,6 +241,7 @@ const CcnAttachedInstance = models.CcnAttachedInstance;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
 const Ipv6Address = models.Ipv6Address;
 const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
+const BandwidthPackageBillBandwidth = models.BandwidthPackageBillBandwidth;
 const DeleteHaVipResponse = models.DeleteHaVipResponse;
 const DescribeFlowLogsResponse = models.DescribeFlowLogsResponse;
 const VpcPrivateIpAddress = models.VpcPrivateIpAddress;
@@ -1141,10 +1144,10 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API (DisassociateAddress) is used to unbind [Elastic IPs](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1).
-* The unbinding of EIPs from CVM instances and ENIs is supported.
-* The unbinding of EIPs from NATs is not supported. For information about how to unbind an EIP from a NAT, see [EipUnBindNatGateway](https://intl.cloud.tencent.com/document/product/215/4092?from_cn_redirect=1).
-* You can only unbind EIPs in BIND or BIND_ENI status.
+     * This API is used to unbind an [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP for short).
+* This API supports unbinding an EIP from CVM instances and ENIs.
+* This API does not support unbinding an EIP from a NAT Gateway. To unbind an EIP from a NAT Gateway, use the [`DisassociateNatGatewayAddress`](https://intl.cloud.tencent.com/document/api/215/36716?from_cn_redirect=1) API.
+* Only EIPs in BIND or BIND_ENI status can be unbound.
 * Blocked EIPs cannot be unbound.
      * @param {DisassociateAddressRequest} req
      * @param {function(string, DisassociateAddressResponse):void} cb
@@ -1291,11 +1294,11 @@ The number of network instances that each CCN can be associated with is limited.
     }
 
     /**
-     * This API (AssociateAddress) is used to bind an [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP for short) to the specified private IP of an instance or ENI.
-* Essentially, binding an EIP to an instance (CVM) means binding an EIP to the primary private IP of the primary ENI on an instance.
-* When you bind an EIP to the primary private IP of the primary ENI, the previously bound public IP is automatically unbound and released.
-* To bind the EIP to the private IP of the specified ENI (not the primary private IP of the primary ENI), you must unbind the EIP before you can bind a new one.
-* To bind the EIP to a NAT gateway, use the API [EipBindNatGateway](https://intl.cloud.tencent.com/document/product/215/4093?from_cn_redirect=1)
+     * This API is used to bind an [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP for short) to the specified private IP of an instance or ENI.
+* The EIP is essentially bound to the primary private IP of the primary ENI on a CVM instance.
+* The EIP binding will automatically unbind and release the public IP previously bound to the CVM instance.
+* To bind another EIP to the private IP of the specified ENI (not the primary private IP of the primary ENI), you must first unbind the EIP.
+* To bind an EIP to a NAT Gateway, use the [`AssociateNatGatewayAddress`](https://intl.cloud.tencent.com/document/product/215/36722?from_cn_redirect=1) API.
 * EIP that is in arrears or blocked cannot be bound.
 * Only EIP in the UNBIND status can be bound.
      * @param {AssociateAddressRequest} req
@@ -1518,6 +1521,18 @@ This API is completed asynchronously. If you need to query the async job executi
     DeleteAssistantCidr(req, cb) {
         let resp = new DeleteAssistantCidrResponse();
         this.request("DeleteAssistantCidr", req, resp, cb);
+    }
+
+    /**
+     * This API (UnassignIpv6CidrBlock) is used to release IPv6 IP ranges.
+If the IP range still has occupied IPs that are not yet repossessed, the IP range cannot be released.
+     * @param {UnassignIpv6CidrBlockRequest} req
+     * @param {function(string, UnassignIpv6CidrBlockResponse):void} cb
+     * @public
+     */
+    UnassignIpv6CidrBlock(req, cb) {
+        let resp = new UnassignIpv6CidrBlockResponse();
+        this.request("UnassignIpv6CidrBlock", req, resp, cb);
     }
 
     /**
@@ -2119,15 +2134,14 @@ This API is completed asynchronously. If you need to query the async execution r
     }
 
     /**
-     * This API (UnassignIpv6CidrBlock) is used to release IPv6 IP ranges.
-If the IP range still has occupied IPs that are not yet repossessed, the IP range cannot be released.
-     * @param {UnassignIpv6CidrBlockRequest} req
-     * @param {function(string, UnassignIpv6CidrBlockResponse):void} cb
+     * This API is used to query the current billable usage of a pay-as-you-go bandwidth package.
+     * @param {DescribeBandwidthPackageBillUsageRequest} req
+     * @param {function(string, DescribeBandwidthPackageBillUsageResponse):void} cb
      * @public
      */
-    UnassignIpv6CidrBlock(req, cb) {
-        let resp = new UnassignIpv6CidrBlockResponse();
-        this.request("UnassignIpv6CidrBlock", req, resp, cb);
+    DescribeBandwidthPackageBillUsage(req, cb) {
+        let resp = new DescribeBandwidthPackageBillUsageResponse();
+        this.request("DescribeBandwidthPackageBillUsage", req, resp, cb);
     }
 
     /**

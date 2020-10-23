@@ -768,7 +768,7 @@ class GetFunctionLogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Service log related parameter. `Offset` on the first page is a null string. Enter other pages based on SearchContext in the response field.
+         * This field is disused.
          * @type {LogSearchContext || null}
          */
         this.SearchContext = null;
@@ -2160,6 +2160,12 @@ class CreateTriggerRequest extends  AbstractModel {
          */
         this.Enable = null;
 
+        /**
+         * Custom argument, supporting only the timer trigger.
+         * @type {string || null}
+         */
+        this.CustomArgument = null;
+
     }
 
     /**
@@ -2176,6 +2182,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
+        this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
 
     }
 }
@@ -2625,6 +2632,12 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.InitTimeout = null;
 
+        /**
+         * Tag parameter of the function. It is an array of key-value pairs.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2692,6 +2705,15 @@ class CreateFunctionRequest extends  AbstractModel {
             this.CfsConfig = obj;
         }
         this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -4866,7 +4888,7 @@ class GetFunctionLogsResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * Parameter on the log service page
+         * This field is disused.
          * @type {LogSearchContext || null}
          */
         this.SearchContext = null;

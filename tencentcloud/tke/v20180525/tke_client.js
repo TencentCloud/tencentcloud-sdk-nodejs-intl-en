@@ -76,6 +76,7 @@ const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DeleteClusterRouteTableRequest = models.DeleteClusterRouteTableRequest;
 const CreateClusterRequest = models.CreateClusterRequest;
 const InstanceExtraArgs = models.InstanceExtraArgs;
+const AcquireClusterAdminRoleRequest = models.AcquireClusterAdminRoleRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
@@ -83,6 +84,7 @@ const Filter = models.Filter;
 const ImageInstance = models.ImageInstance;
 const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
+const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
@@ -243,6 +245,17 @@ class TkeClient extends AbstractClient {
     CreateClusterAsGroup(req, cb) {
         let resp = new CreateClusterAsGroupResponse();
         this.request("CreateClusterAsGroup", req, resp, cb);
+    }
+
+    /**
+     * This API can be called to acquire the ClusterRole tke:admin. By setting a CAM policy, you can grant permission of this API to a sub-account that has higher permission in CAM. In this way, this sub-account can call this API directly to acquire the admin role of a Kubernetes cluster.
+     * @param {AcquireClusterAdminRoleRequest} req
+     * @param {function(string, AcquireClusterAdminRoleResponse):void} cb
+     * @public
+     */
+    AcquireClusterAdminRole(req, cb) {
+        let resp = new AcquireClusterAdminRoleResponse();
+        this.request("AcquireClusterAdminRole", req, resp, cb);
     }
 
     /**

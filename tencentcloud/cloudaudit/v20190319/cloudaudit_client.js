@@ -71,7 +71,7 @@ class CloudauditClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the value range of AttributeKey.
+     * This API is used to query the valid values range of `AttributeKey`.
      * @param {GetAttributeKeyRequest} req
      * @param {function(string, GetAttributeKeyResponse):void} cb
      * @public
@@ -82,7 +82,7 @@ class CloudauditClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the CloudAudit-enabled CMQ AZs.
+     * This API is used to query CloudAudit-enabled CMQ AZs.
      * @param {ListCmqEnableRegionRequest} req
      * @param {function(string, ListCmqEnableRegionResponse):void} cb
      * @public
@@ -115,7 +115,7 @@ class CloudauditClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the maximum number of tracking sets that can be created.
+     * This API is used to query the number of tracking sets that can be created.
      * @param {InquireAuditCreditRequest} req
      * @param {function(string, InquireAuditCreditResponse):void} cb
      * @public
@@ -127,9 +127,10 @@ class CloudauditClient extends AbstractClient {
 
     /**
      * Parameter requirements:
-1. If the value of IsCreateNewBucket exists, cosRegion and cosBucketName are required.
-2. If the value of IsEnableCmqNotify is 1, IsCreateNewQueue, CmqRegion, and CmqQueueName are required.
-3. If the value of IsEnableCmqNotify is 0, IsCreateNewQueue, CmqRegion, and CmqQueueName cannot be passed in.
+1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `cosBucketName` are required.
+2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
+3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
+4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
      * @param {UpdateAuditRequest} req
      * @param {function(string, UpdateAuditResponse):void} cb
      * @public
@@ -151,7 +152,11 @@ class CloudauditClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a tracking set.
+     * Parameter requirements:
+1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `cosBucketName` are required.
+2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
+3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
+4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
      * @param {CreateAuditRequest} req
      * @param {function(string, CreateAuditResponse):void} cb
      * @public
@@ -162,7 +167,7 @@ class CloudauditClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the CloudAudit-enabled COS AZs.
+     * This API is used to query CloudAudit-enabled COS AZs.
      * @param {ListCosEnableRegionRequest} req
      * @param {function(string, ListCosEnableRegionResponse):void} cb
      * @public

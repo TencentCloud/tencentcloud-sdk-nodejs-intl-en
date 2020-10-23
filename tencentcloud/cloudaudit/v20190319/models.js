@@ -17,7 +17,7 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * Return parameter structure of InquireAuditCredit
+ * `InquireAuditCredit` response parameters structure
  * @class
  */
 class InquireAuditCreditResponse extends  AbstractModel {
@@ -31,7 +31,7 @@ class InquireAuditCreditResponse extends  AbstractModel {
         this.AuditAmount = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -52,7 +52,7 @@ class InquireAuditCreditResponse extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of StopLogging
+ * `StopLogging` request parameters structure
  * @class
  */
 class StopLoggingRequest extends  AbstractModel {
@@ -115,7 +115,7 @@ class CmqRegionInfo extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of GetAttributeKey
+ * `GetAttributeKey` request parameters structure
  * @class
  */
 class GetAttributeKeyRequest extends  AbstractModel {
@@ -123,7 +123,7 @@ class GetAttributeKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Website type. Value range: zh, en. Default value: zh
+         * Website type. Valid values: zh, en. If this parameter is left empty, `zh` will be used by default
          * @type {string || null}
          */
         this.WebsiteType = null;
@@ -143,7 +143,7 @@ class GetAttributeKeyRequest extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of DeleteAudit
+ * `DeleteAudit` response parameters structure
  * @class
  */
 class DeleteAuditResponse extends  AbstractModel {
@@ -151,13 +151,13 @@ class DeleteAuditResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether deletion is successful
+         * Indicates if the deletion was successful
          * @type {number || null}
          */
         this.IsSuccess = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -178,7 +178,7 @@ class DeleteAuditResponse extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of UpdateAudit
+ * `UpdateAudit` request parameters structure
  * @class
  */
 class UpdateAuditRequest extends  AbstractModel {
@@ -192,55 +192,73 @@ class UpdateAuditRequest extends  AbstractModel {
         this.AuditName = null;
 
         /**
-         * Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of IsEnableCmqNotify is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
+         * Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
          * @type {string || null}
          */
         this.CmqQueueName = null;
 
         /**
-         * Region where the queue is located. Supported CMQ regions can be queried using the ListCmqEnableRegion API. This field is required if the value of IsEnableCmqNotify is 1.
+         * Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
          * @type {string || null}
          */
         this.CmqRegion = null;
 
         /**
-         * User-defined COS bucket name, which can only contain 1-40 lowercase letters (a-z), digits (0-9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
+         * User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
          * @type {string || null}
          */
         this.CosBucketName = null;
 
         /**
-         * COS region. Supported regions can be queried using the ListCosEnableRegion API.
+         * COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
          * @type {string || null}
          */
         this.CosRegion = null;
 
         /**
-         * Whether to create a COS bucket. 1: yes; 0: no.
+         * Whether to create a COS bucket. Valid values: 1: yes; 0: no.
          * @type {number || null}
          */
         this.IsCreateNewBucket = null;
 
         /**
-         * Whether to create a queue. 1: yes; 0: no. This field is required if the value of IsEnableCmqNotify is 1.
+         * Whether to create a queue. Valid values: 1: yes; 0: no. This field is required if the value of `IsEnableCmqNotify` is 1.
          * @type {number || null}
          */
         this.IsCreateNewQueue = null;
 
         /**
-         * Whether to enable CMQ message notification. 1: yes; 0: no. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
+         * Whether to enable CMQ message notification. Valid values: 1: yes; 0: no. Currently, only CMQ is supported for message queue services. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
          * @type {number || null}
          */
         this.IsEnableCmqNotify = null;
 
         /**
-         * Prefix of a log file, which can only contain 3-40 ASCII letters (a-z; A-Z) and digits (0-9).
+         * Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained via the `ListKeyAliasByRegion` API. CloudAudit will not verify the validity of the `KeyId`. Please enter it with caution to avoid consequent data loss.
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * KMS region. Currently supported regions can be obtained via the `ListKmsEnableRegion` API. This must be the same as the COS region.
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+        /**
+         * Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9).
          * @type {string || null}
          */
         this.LogFilePrefix = null;
 
         /**
-         * Manages the read/write attribute of an event. Value range: 1 (read-only), 2 (write-only), 3 (read/write).
+         * Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
          * @type {number || null}
          */
         this.ReadWriteAttribute = null;
@@ -262,6 +280,9 @@ class UpdateAuditRequest extends  AbstractModel {
         this.IsCreateNewBucket = 'IsCreateNewBucket' in params ? params.IsCreateNewBucket : null;
         this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
         this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
         this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
 
@@ -269,7 +290,7 @@ class UpdateAuditRequest extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of InquireAuditCredit
+ * `InquireAuditCredit` request parameters structure
  * @class
  */
 class InquireAuditCreditRequest extends  AbstractModel {
@@ -290,7 +311,7 @@ class InquireAuditCreditRequest extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of ListAudits
+ * `ListAudits` request parameters structure
  * @class
  */
 class ListAuditsRequest extends  AbstractModel {
@@ -311,7 +332,7 @@ class ListAuditsRequest extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of LookUpEvents
+ * `LookUpEvents` request parameters structure
  * @class
  */
 class LookUpEventsRequest extends  AbstractModel {
@@ -337,10 +358,16 @@ class LookUpEventsRequest extends  AbstractModel {
         this.LookupAttributes = null;
 
         /**
-         * Maximum number of logs that can be returned
+         * Maximum number of logs to be returned
          * @type {number || null}
          */
         this.MaxResults = null;
+
+        /**
+         * CloudAudit mode. Valid values: standard, quick. Default value: standard
+         * @type {string || null}
+         */
+        this.Mode = null;
 
         /**
          * Credential for viewing more logs
@@ -369,13 +396,14 @@ class LookUpEventsRequest extends  AbstractModel {
             }
         }
         this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
         this.NextToken = 'NextToken' in params ? params.NextToken : null;
 
     }
 }
 
 /**
- * Request parameter structure of StartLogging
+ * `StartLogging` request parameters structure
  * @class
  */
 class StartLoggingRequest extends  AbstractModel {
@@ -403,7 +431,7 @@ class StartLoggingRequest extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of CreateAudit
+ * `CreateAudit` response parameters structure
  * @class
  */
 class CreateAuditResponse extends  AbstractModel {
@@ -411,13 +439,13 @@ class CreateAuditResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether creation is successful.
+         * Indicates if the creation was successful
          * @type {number || null}
          */
         this.IsSuccess = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -438,7 +466,7 @@ class CreateAuditResponse extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of StartLogging
+ * `StartLogging` response parameters structure
  * @class
  */
 class StartLoggingResponse extends  AbstractModel {
@@ -446,13 +474,13 @@ class StartLoggingResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether it is successfully enabled
+         * Indicates if the tracking set was enabled successfully
          * @type {number || null}
          */
         this.IsSuccess = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -473,7 +501,7 @@ class StartLoggingResponse extends  AbstractModel {
 }
 
 /**
- * Details of AttributeKey value
+ * `AttributeKey` value details
  * @class
  */
 class AttributeKeyDetail extends  AbstractModel {
@@ -481,7 +509,7 @@ class AttributeKeyDetail extends  AbstractModel {
         super();
 
         /**
-         * Chinese label
+         * Tag
          * @type {string || null}
          */
         this.Label = null;
@@ -505,7 +533,7 @@ class AttributeKeyDetail extends  AbstractModel {
         this.Starter = null;
 
         /**
-         * AttributeKey value
+         * `AttributeKey` value
          * @type {string || null}
          */
         this.Value = null;
@@ -529,7 +557,7 @@ class AttributeKeyDetail extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of ListCosEnableRegion
+ * `ListCosEnableRegion` request parameters structure
  * @class
  */
 class ListCosEnableRegionRequest extends  AbstractModel {
@@ -537,7 +565,7 @@ class ListCosEnableRegionRequest extends  AbstractModel {
         super();
 
         /**
-         * Website type. zh: Mainland China (default); en: outside Mainland China.
+         * Website type. Valid values: zh (Chinese mainland); en (outside Chinese mainland). Default value: zh
          * @type {string || null}
          */
         this.WebsiteType = null;
@@ -592,7 +620,7 @@ class Resource extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of ListCosEnableRegion
+ * `ListCosEnableRegion` response parameters structure
  * @class
  */
 class ListCosEnableRegionResponse extends  AbstractModel {
@@ -606,7 +634,7 @@ class ListCosEnableRegionResponse extends  AbstractModel {
         this.EnableRegions = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -635,7 +663,7 @@ class ListCosEnableRegionResponse extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of StopLogging
+ * `StopLogging` response parameters structure
  * @class
  */
 class StopLoggingResponse extends  AbstractModel {
@@ -643,13 +671,13 @@ class StopLoggingResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether it is successfully disabled
+         * Indicates if the tracking set was disabled successfully
          * @type {number || null}
          */
         this.IsSuccess = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -678,7 +706,7 @@ class LookupAttribute extends  AbstractModel {
         super();
 
         /**
-         * AttributeKey value range: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, EventId
+         * Valid values of `AttributeKey`: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, EventId
          * @type {string || null}
          */
         this.AttributeKey = null;
@@ -705,7 +733,7 @@ class LookupAttribute extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of ListAudits
+ * `ListAudits` response parameters structure
  * @class
  */
 class ListAuditsResponse extends  AbstractModel {
@@ -713,13 +741,13 @@ class ListAuditsResponse extends  AbstractModel {
         super();
 
         /**
-         * Queries the summary set of tracking sets
+         * Set of queried tracking set summaries
          * @type {Array.<AuditSummary> || null}
          */
         this.AuditSummarys = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -748,7 +776,7 @@ class ListAuditsResponse extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of UpdateAudit
+ * `UpdateAudit` response parameters structure
  * @class
  */
 class UpdateAuditResponse extends  AbstractModel {
@@ -756,13 +784,13 @@ class UpdateAuditResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether update is successful
+         * Indicates if the update was completed successfully
          * @type {number || null}
          */
         this.IsSuccess = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -783,7 +811,7 @@ class UpdateAuditResponse extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of DescribeAudit
+ * `DescribeAudit` request parameters structure
  * @class
  */
 class DescribeAuditRequest extends  AbstractModel {
@@ -811,7 +839,7 @@ class DescribeAuditRequest extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of CreateAudit
+ * `CreateAudit` request parameters structure
  * @class
  */
 class CreateAuditRequest extends  AbstractModel {
@@ -819,61 +847,79 @@ class CreateAuditRequest extends  AbstractModel {
         super();
 
         /**
-         * Tracking set name, which can contain 3-128 ASCII letters (a-z; A-Z), digits (0-9), and underscores (_).
+         * Tracking set name, which can contain 3–128 ASCII letters (a–z; A–Z), digits (0–9), and underscores (_).
          * @type {string || null}
          */
         this.AuditName = null;
 
         /**
-         * User-defined COS bucket name, which can only contain 1-40 lowercase letters (a-z), digits (0-9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
+         * User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
          * @type {string || null}
          */
         this.CosBucketName = null;
 
         /**
-         * COS region. Supported regions can be queried using the ListCosEnableRegion API.
+         * COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
          * @type {string || null}
          */
         this.CosRegion = null;
 
         /**
-         * Whether to create a COS bucket. 1: yes; 0: no.
+         * Whether to create a COS bucket. Valid values: 1: yes; 0: no.
          * @type {number || null}
          */
         this.IsCreateNewBucket = null;
 
         /**
-         * Whether to enable CMQ message notification. 1: yes; 0: no. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
+         * Whether to enable CMQ message notification. Valid values: 1: yes; 0: no. Currently, only CMQ is supported for message queue services. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
          * @type {number || null}
          */
         this.IsEnableCmqNotify = null;
 
         /**
-         * Manages the read/write attribute of an event. Value range: 1 (read-only), 2 (write-only), 3 (read/write).
+         * Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
          * @type {number || null}
          */
         this.ReadWriteAttribute = null;
 
         /**
-         * Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of IsEnableCmqNotify is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
+         * Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Please enter the name with caution so as to avoid log delivery failure and consequent data loss.
          * @type {string || null}
          */
         this.CmqQueueName = null;
 
         /**
-         * Region where the queue is located. Supported CMQ regions can be queried using the ListCmqEnableRegion API. This field is required if the value of IsEnableCmqNotify is 1.
+         * Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
          * @type {string || null}
          */
         this.CmqRegion = null;
 
         /**
-         * Whether to create a queue. 1: yes; 0: no. This field is required if the value of IsEnableCmqNotify is 1.
+         * Whether to create a queue. Valid values: 1: yes; 0: no. This field is required if the value of `IsEnableCmqNotify` is 1.
          * @type {number || null}
          */
         this.IsCreateNewQueue = null;
 
         /**
-         * Prefix of a log file, which can only contain 3-40 ASCII letters (a-z; A-Z) and digits (0-9). It can be left empty and is the account ID by default.
+         * Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained via the `ListKeyAliasByRegion` API. CloudAudit will not verify the validity of the `KeyId`. Please enter it with caution to avoid consequent data loss.
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * KMS region. Currently supported regions can be obtained via the `ListKmsEnableRegion` API. This must be the same as the COS region.
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+        /**
+         * Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9). It can be left empty and is set to the account ID by default.
          * @type {string || null}
          */
         this.LogFilePrefix = null;
@@ -896,13 +942,16 @@ class CreateAuditRequest extends  AbstractModel {
         this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
         this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
         this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
 
     }
 }
 
 /**
- * Request parameter structure of DeleteAudit
+ * `DeleteAudit` request parameters structure
  * @class
  */
 class DeleteAuditRequest extends  AbstractModel {
@@ -930,7 +979,7 @@ class DeleteAuditRequest extends  AbstractModel {
 }
 
 /**
- * Request parameter structure of ListCmqEnableRegion
+ * `ListCmqEnableRegion` request parameters structure
  * @class
  */
 class ListCmqEnableRegionRequest extends  AbstractModel {
@@ -938,7 +987,7 @@ class ListCmqEnableRegionRequest extends  AbstractModel {
         super();
 
         /**
-         * Website type. zh: Mainland China (default); en: outside Mainland China.
+         * Website type. Valid values: zh (Chinese mainland); en (outside Chinese mainland). Default value: zh
          * @type {string || null}
          */
         this.WebsiteType = null;
@@ -958,7 +1007,7 @@ class ListCmqEnableRegionRequest extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of GetAttributeKey
+ * `GetAttributeKey` response parameters structure
  * @class
  */
 class GetAttributeKeyResponse extends  AbstractModel {
@@ -966,13 +1015,13 @@ class GetAttributeKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * AttributeKey value range
+         * Valid values range of `AttributeKey`
          * @type {Array.<AttributeKeyDetail> || null}
          */
         this.AttributeKeyDetails = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1001,7 +1050,7 @@ class GetAttributeKeyResponse extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of ListCmqEnableRegion
+ * `ListCmqEnableRegion` response parameters structure
  * @class
  */
 class ListCmqEnableRegionResponse extends  AbstractModel {
@@ -1015,7 +1064,7 @@ class ListCmqEnableRegionResponse extends  AbstractModel {
         this.EnableRegions = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1044,7 +1093,7 @@ class ListCmqEnableRegionResponse extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of LookUpEvents
+ * `LookUpEvents` response parameters structure
  * @class
  */
 class LookUpEventsResponse extends  AbstractModel {
@@ -1070,7 +1119,7 @@ class LookUpEventsResponse extends  AbstractModel {
         this.NextToken = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1101,7 +1150,7 @@ class LookUpEventsResponse extends  AbstractModel {
 }
 
 /**
- * CMQ region information
+ * COS region information
  * @class
  */
 class CosRegionInfo extends  AbstractModel {
@@ -1136,7 +1185,7 @@ class CosRegionInfo extends  AbstractModel {
 }
 
 /**
- * Return parameter structure of DescribeAudit
+ * `DescribeAudit` response parameters structure
  * @class
  */
 class DescribeAuditResponse extends  AbstractModel {
@@ -1150,7 +1199,7 @@ class DescribeAuditResponse extends  AbstractModel {
         this.AuditName = null;
 
         /**
-         * Tracking set status. Value range: 1 (enabled), 0 (disabled).
+         * Tracking set status. Valid values: 1: enabled, 0: disabled.
          * @type {number || null}
          */
         this.AuditStatus = null;
@@ -1162,7 +1211,7 @@ class DescribeAuditResponse extends  AbstractModel {
         this.CmqQueueName = null;
 
         /**
-         * Region where the queue is located.
+         * Queue region.
          * @type {string || null}
          */
         this.CmqRegion = null;
@@ -1174,16 +1223,40 @@ class DescribeAuditResponse extends  AbstractModel {
         this.CosBucketName = null;
 
         /**
-         * Region where the COS bucket is located.
+         * COS bucket region.
          * @type {string || null}
          */
         this.CosRegion = null;
 
         /**
-         * Whether to enable CMQ message notification. 1: yes; 0: no.
+         * Whether to enable CMQ message notification. Valid values: 1: yes; 0: no.
          * @type {number || null}
          */
         this.IsEnableCmqNotify = null;
+
+        /**
+         * Whether to enable KMS encryption. Valid values: 1: yes, 0: no. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * Globally unique CMK ID.
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * CMK alias.
+         * @type {string || null}
+         */
+        this.KmsAlias = null;
+
+        /**
+         * KMS region.
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
 
         /**
          * Log prefix.
@@ -1192,13 +1265,13 @@ class DescribeAuditResponse extends  AbstractModel {
         this.LogFilePrefix = null;
 
         /**
-         * Manages the read/write attribute of an event. Value range: 1 (read-only), 2 (write-only), 3 (read/write)
+         * Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write)
          * @type {number || null}
          */
         this.ReadWriteAttribute = null;
 
         /**
-         * Unique ID of the request. Each request returns a unique ID. The RequestId is required to troubleshoot issues.
+         * Unique ID of request. Each request returns a unique ID. The `RequestId` is required for troubleshooting.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1219,6 +1292,10 @@ class DescribeAuditResponse extends  AbstractModel {
         this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
         this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
         this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KmsAlias = 'KmsAlias' in params ? params.KmsAlias : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
         this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1271,7 +1348,7 @@ class Event extends  AbstractModel {
         this.EventName = null;
 
         /**
-         * Description of event name
+         * Chinese description of event name (please use this field as required; if you are using other languages, ignore this field)
          * @type {string || null}
          */
         this.EventNameCn = null;
@@ -1301,7 +1378,13 @@ class Event extends  AbstractModel {
         this.RequestID = null;
 
         /**
-         * Description of resource type
+         * Resource region
+         * @type {string || null}
+         */
+        this.ResourceRegion = null;
+
+        /**
+         * Chinese description of resource type (please use this field as required; if you are using other languages, ignore this field)
          * @type {string || null}
          */
         this.ResourceTypeCn = null;
@@ -1349,6 +1432,7 @@ class Event extends  AbstractModel {
         this.EventSource = 'EventSource' in params ? params.EventSource : null;
         this.EventTime = 'EventTime' in params ? params.EventTime : null;
         this.RequestID = 'RequestID' in params ? params.RequestID : null;
+        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
         this.ResourceTypeCn = 'ResourceTypeCn' in params ? params.ResourceTypeCn : null;
         this.SecretId = 'SecretId' in params ? params.SecretId : null;
         this.SourceIPAddress = 'SourceIPAddress' in params ? params.SourceIPAddress : null;
@@ -1372,7 +1456,7 @@ class AuditSummary extends  AbstractModel {
         this.AuditName = null;
 
         /**
-         * Tracking set status. Value range: 1 (enabled), 0 (disabled)
+         * Tracking set status. Valid values: 1: enabled, 0: disabled
          * @type {number || null}
          */
         this.AuditStatus = null;

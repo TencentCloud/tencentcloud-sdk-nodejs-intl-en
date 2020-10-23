@@ -1256,6 +1256,49 @@ class DetachClassicLinkVpcRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBandwidthPackageBillUsage response structure.
+ * @class
+ */
+class DescribeBandwidthPackageBillUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current billable usage.
+         * @type {Array.<BandwidthPackageBillBandwidth> || null}
+         */
+        this.BandwidthPackageBillBandwidthSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BandwidthPackageBillBandwidthSet) {
+            this.BandwidthPackageBillBandwidthSet = new Array();
+            for (let z in params.BandwidthPackageBillBandwidthSet) {
+                let obj = new BandwidthPackageBillBandwidth();
+                obj.deserialize(params.BandwidthPackageBillBandwidthSet[z]);
+                this.BandwidthPackageBillBandwidthSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteBandwidthPackage response structure.
  * @class
  */
@@ -1712,6 +1755,34 @@ class VpnGatewayQuota extends  AbstractModel {
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.Cname = 'Cname' in params ? params.Cname : null;
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DescribeBandwidthPackageBillUsage request structure.
+ * @class
+ */
+class DescribeBandwidthPackageBillUsageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the pay-as-you-go bandwidth package.
+         * @type {string || null}
+         */
+        this.BandwidthPackageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
     }
 }
@@ -9902,7 +9973,7 @@ class ModifyAddressesBandwidthRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique ID of the EIP, such as 'eip-xxxx'.
+         * List of EIP IDs, such as “eip-xxxx”.
          * @type {Array.<string> || null}
          */
         this.AddressIds = null;
@@ -11021,6 +11092,34 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Current billable usage of a pay-as-you-go bandwidth package
+ * @class
+ */
+class BandwidthPackageBillBandwidth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current billable usage, in Mbps
+         * @type {number || null}
+         */
+        this.BandwidthUsage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BandwidthUsage = 'BandwidthUsage' in params ? params.BandwidthUsage : null;
 
     }
 }
@@ -21519,6 +21618,7 @@ module.exports = {
     ResetAttachCcnInstancesResponse: ResetAttachCcnInstancesResponse,
     DescribeServiceTemplateGroupsResponse: DescribeServiceTemplateGroupsResponse,
     DetachClassicLinkVpcRequest: DetachClassicLinkVpcRequest,
+    DescribeBandwidthPackageBillUsageResponse: DescribeBandwidthPackageBillUsageResponse,
     DeleteBandwidthPackageResponse: DeleteBandwidthPackageResponse,
     ModifyNatGatewayAttributeRequest: ModifyNatGatewayAttributeRequest,
     ModifyDirectConnectGatewayAttributeRequest: ModifyDirectConnectGatewayAttributeRequest,
@@ -21530,6 +21630,7 @@ module.exports = {
     DescribeAddressQuotaRequest: DescribeAddressQuotaRequest,
     AddressTemplate: AddressTemplate,
     VpnGatewayQuota: VpnGatewayQuota,
+    DescribeBandwidthPackageBillUsageRequest: DescribeBandwidthPackageBillUsageRequest,
     UnassignIpv6AddressesResponse: UnassignIpv6AddressesResponse,
     DescribeFlowLogsRequest: DescribeFlowLogsRequest,
     AssociateNatGatewayAddressRequest: AssociateNatGatewayAddressRequest,
@@ -21718,6 +21819,7 @@ module.exports = {
     SecurityPolicyDatabase: SecurityPolicyDatabase,
     Ipv6Address: Ipv6Address,
     CreateNetworkInterfaceRequest: CreateNetworkInterfaceRequest,
+    BandwidthPackageBillBandwidth: BandwidthPackageBillBandwidth,
     DeleteHaVipResponse: DeleteHaVipResponse,
     DescribeFlowLogsResponse: DescribeFlowLogsResponse,
     VpcPrivateIpAddress: VpcPrivateIpAddress,

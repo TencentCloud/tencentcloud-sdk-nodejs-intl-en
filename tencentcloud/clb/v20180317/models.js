@@ -462,10 +462,28 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
         this.Tags = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Exclusive cluster information.
+         * @type {ExclusiveCluster || null}
+         */
+        this.ExclusiveCluster = null;
+
+        /**
          * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
          * @type {string || null}
          */
         this.ClientToken = null;
+
+        /**
+         * Tag for the STGW exclusive cluster.
+         * @type {string || null}
+         */
+        this.ClusterTag = null;
 
     }
 
@@ -502,7 +520,15 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
                 this.Tags.push(obj);
             }
         }
+        this.Vip = 'Vip' in params ? params.Vip : null;
+
+        if (params.ExclusiveCluster) {
+            let obj = new ExclusiveCluster();
+            obj.deserialize(params.ExclusiveCluster)
+            this.ExclusiveCluster = obj;
+        }
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
 
     }
 }

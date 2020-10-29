@@ -36,6 +36,7 @@ module.exports = {
     mongodb: require("./mongodb"),
     monitor: require("./monitor"),
     mps: require("./mps"),
+    msp: require("./msp"),
     ocr: require("./ocr"),
     organization: require("./organization"),
     postgres: require("./postgres"),

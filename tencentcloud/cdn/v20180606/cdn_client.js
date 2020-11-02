@@ -43,6 +43,7 @@ const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const CacheConfigNoCache = models.CacheConfigNoCache;
 const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
+const PathRule = models.PathRule;
 const ListTopDataRequest = models.ListTopDataRequest;
 const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
@@ -132,6 +133,7 @@ const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
 const EnableCachesResponse = models.EnableCachesResponse;
 const RuleQueryString = models.RuleQueryString;
 const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
+const HttpHeaderRule = models.HttpHeaderRule;
 const StatusCodeCacheRule = models.StatusCodeCacheRule;
 const ClientCert = models.ClientCert;
 const DomainLog = models.DomainLog;
@@ -197,6 +199,7 @@ const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const CacheTagKey = models.CacheTagKey;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
+const IpFilterPathRule = models.IpFilterPathRule;
 
 
 /**
@@ -439,8 +442,8 @@ Note: only data from the last 90 days will be queried.
     }
 
     /**
-     * This API is used to query the CDN IP ownership.
-(Note: the request rate limit of this API is subject to the limit in CDN, which is 200 calls/10 minutes).
+     * This API is used to query CDN IP ownership.
+(Note: the request rate limit of this API is subject to the limit in CDN, which is 200 calls/10 minutes).  
      * @param {DescribeCdnIpRequest} req
      * @param {function(string, DescribeCdnIpResponse):void} cb
      * @public

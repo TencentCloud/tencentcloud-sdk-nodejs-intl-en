@@ -59,6 +59,41 @@ class ModifyInstanceParamsResponse extends  AbstractModel {
 }
 
 /**
+ * EnableReplicaReadonly request structure.
+ * @class
+ */
+class EnableReplicaReadonlyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Serial ID of an instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Account routing policy. If `master` or `replication` is entered, it means to route to the primary or secondary node; if this is left blank, it means to write into the primary node and read from the secondary node by default
+         * @type {Array.<string> || null}
+         */
+        this.ReadonlyPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ReadonlyPolicy = 'ReadonlyPolicy' in params ? params.ReadonlyPolicy : null;
+
+    }
+}
+
+/**
  * Array of instance backups
  * @class
  */
@@ -448,31 +483,31 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * AZ ID of instance
+         * Availability zone ID of the instance. For more information, please see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * Instance type. Valid values: 2 (Redis 2.8 memory edition in standard architecture), 3 (Redis 3.2 memory edition in standard architecture), 4 (CKV 3.2 memory edition in standard architecture), 6 (Redis 4.0 memory edition in standard architecture), 7 (Redis 4.0 memory edition in cluster architecture), 8 (Redis 5.0 memory edition in standard architecture), 9 (Redis 5.0 memory edition in cluster architecture).
+         * Instance type. Valid values: 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
-         * Instance capacity in MB. The actual value is subject to the specifications returned by the purchasable specification querying API |
+         * Instance capacity in MB. The value should be a multiple of 1,024 and is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the purchasable specification querying API
+         * Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * Length of purchase in months, which is required when creating a monthly subscribed instances. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36]. For pay-as-you-go instances, enter 1
+         * Purchased usage period in months. which is required when creating an instance. For pay-as-you-go instances, the valid value is 1; for monthly subscription instances, the value range is [1,2,3,4,5,6,7,8,9,10,11,12,24,36].
          * @type {number || null}
          */
         this.Period = null;
@@ -490,25 +525,25 @@ class CreateInstancesRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * VPC ID such as vpc-sad23jfdfk. If this parameter is not passed in, the basic network will be selected by default. Please use the VPC list querying API to query.
+         * VPC ID, such as "vpc-sad23jfdfk". If this parameter is not passed in, the classic network will be selected by default. The parameter value can be queried by the `DescribeVpcs` API.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * In a basic network, subnetId is invalid. In a VPC subnet, the value is the subnet ID, such as subnet-fdj24n34j2
+         * In a classic network, `subnetId` is invalid. In a VPC subnet, the value can be queried by the `DescribeSubnets` API, such as "subnet-fdj24n34j2".
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Project ID. The value is subject to the projectId returned by user account > user account-related querying APIs > project list
+         * Project ID. The value is subject to the `projectId` returned by the `DescribeProject` API.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
+         * Auto-renewal flag. Valid values: 0 (default status, indicating manual renewal), 1 (auto-renewal enabled), 2 (auto-renewal disabled)
          * @type {number || null}
          */
         this.AutoRenew = null;
@@ -520,13 +555,13 @@ class CreateInstancesRequest extends  AbstractModel {
         this.SecurityGroupIdList = null;
 
         /**
-         * User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024,65535]
+         * User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024, 65535].
          * @type {number || null}
          */
         this.VPort = null;
 
         /**
-         * Number of shards in an instance. This parameter is required for cluster edition instances. Valid values: 3, 5, 8, 12, 16, 24, 32, 64, 96, 128.
+         * Number of shards in an instance. This parameter is required for instances in cluster architecture. Value range: [3,5,8,12,16,24,32,64,96,128].
          * @type {number || null}
          */
         this.RedisShardNum = null;
@@ -538,13 +573,13 @@ class CreateInstancesRequest extends  AbstractModel {
         this.RedisReplicasNum = null;
 
         /**
-         * Whether to support read-only replicas. Neither Redis 2.8 standard edition nor CKV standard edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the primary node and read requests will be distributed on secondary nodes. To enable read-only replicas, we recommend you create 2 or more replicas.
+         * Whether to support read-only replicas. Neither Redis 2.8 in standard architecture nor CKV in standard architecture supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed on the replica nodes. To enable read-only replicas, we recommend that you create 2 or more replicas.
          * @type {boolean || null}
          */
         this.ReplicasReadonly = null;
 
         /**
-         * Instance name. It contains only letters, digits, underscores, and dashes with a length of up to 60 characters.
+         * Instance name. It contains only letters, digits, and symbols (-_) with a length of up to 60 characters.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -967,6 +1002,41 @@ class ModifyInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Tendis node information
+ * @class
+ */
+class TendisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+
+    }
+}
+
+/**
  * RenewInstance response structure.
  * @class
  */
@@ -1321,6 +1391,62 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Privilege = 'Privilege' in params ? params.Privilege : null;
         this.ReadonlyPolicy = 'ReadonlyPolicy' in params ? params.ReadonlyPolicy : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Proxy slow query details
+ * @class
+ */
+class InstanceProxySlowlogDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Slow query duration
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Client address
+         * @type {string || null}
+         */
+        this.Client = null;
+
+        /**
+         * Command
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * Command line details
+         * @type {string || null}
+         */
+        this.CommandLine = null;
+
+        /**
+         * Execution duration
+         * @type {string || null}
+         */
+        this.ExecuteTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Client = 'Client' in params ? params.Client : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.CommandLine = 'CommandLine' in params ? params.CommandLine : null;
+        this.ExecuteTime = 'ExecuteTime' in params ? params.ExecuteTime : null;
 
     }
 }
@@ -1784,7 +1910,7 @@ class DescribeInstanceDealDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of order IDs
+         * Array of order IDs. It is the same as the response parameter `DealId` in the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.DealIds = null;
@@ -2182,6 +2308,35 @@ class ModifyInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Proxy node information
+ * @class
+ */
+class ProxyNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
 
     }
 }
@@ -2588,7 +2743,7 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+         * Database engine name. For this API, its value is `redis`.
          * @type {string || null}
          */
         this.Product = null;
@@ -3516,6 +3671,48 @@ class DescribeTaskInfoRequest extends  AbstractModel {
 }
 
 /**
+ * Redis node information
+ * @class
+ */
+class RedisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+        /**
+         * Shard ID
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceMonitorTopNCmd request structure.
  * @class
  */
@@ -3719,66 +3916,24 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
 }
 
 /**
- * Information list of instance shards
+ * CleanUpInstance response structure.
  * @class
  */
-class InstanceClusterShard extends  AbstractModel {
+class CleanUpInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Shard node name
+         * Task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ShardName = null;
-
-        /**
-         * Shard node ID
-         * @type {string || null}
-         */
-        this.ShardId = null;
-
-        /**
-         * Role
-         * @type {number || null}
-         */
-        this.Role = null;
-
-        /**
-         * Number of keys
-         * @type {number || null}
-         */
-        this.Keys = null;
-
-        /**
-         * Slot information
-         * @type {string || null}
-         */
-        this.Slots = null;
-
-        /**
-         * Storage capacity
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Capacity slope
-         * @type {number || null}
-         */
-        this.StorageSlope = null;
-
-        /**
-         * ID of the runtime node of an instance
-         * @type {string || null}
-         */
-        this.Runid = null;
-
-        /**
-         * Service status. 0: down; 1: on
-         * @type {number || null}
-         */
-        this.Connected = null;
+        this.RequestId = null;
 
     }
 
@@ -3789,15 +3944,8 @@ class InstanceClusterShard extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ShardName = 'ShardName' in params ? params.ShardName : null;
-        this.ShardId = 'ShardId' in params ? params.ShardId : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.Keys = 'Keys' in params ? params.Keys : null;
-        this.Slots = 'Slots' in params ? params.Slots : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.StorageSlope = 'StorageSlope' in params ? params.StorageSlope : null;
-        this.Runid = 'Runid' in params ? params.Runid : null;
-        this.Connected = 'Connected' in params ? params.Connected : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5500,7 +5648,7 @@ class InstanceSet extends  AbstractModel {
         this.SizeUsed = null;
 
         /**
-         * Instance type. 1: Redis 2.8 cluster edition; 2: Redis 2.8 primary-secondary edition; 3: CKV primary-secondary edition (Redis 3.2); 4: CKV cluster edition (Redis 3.2); 5: Redis 2.8 standalone edition; 6: Redis 4.0 primary-secondary edition; 7: Redis 4.0 cluster edition
+         * Instance type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
          * @type {number || null}
          */
         this.Type = null;
@@ -5524,7 +5672,7 @@ class InstanceSet extends  AbstractModel {
         this.Engine = null;
 
         /**
-         * Product type: Redis 2.8 cluster edition, Redis 2.8 primary-secondary edition, Redis 3.2 primary-secondary edition (CKV primary-secondary edition), Redis 3.2 cluster edition (CKV cluster edition), Redis 2.8 standalone edition, Redis 4.0 cluster edition
+         * Instance type. Valid values: standalone (standard edition), cluster (cluster edition)
          * @type {string || null}
          */
         this.ProductType = null;
@@ -6004,6 +6152,48 @@ class BigKeyTypeInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceNodeInfo request structure.
+ * @class
+ */
+class DescribeInstanceNodeInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List size
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeMaintenanceWindow request structure.
  * @class
  */
@@ -6144,24 +6334,48 @@ class InstanceClusterNode extends  AbstractModel {
 }
 
 /**
- * EnableReplicaReadonly request structure.
+ * DescribeProxySlowLog request structure.
  * @class
  */
-class EnableReplicaReadonlyRequest extends  AbstractModel {
+class DescribeProxySlowLogRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Serial ID of an instance
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Account routing policy. If `master` or `replication` is entered, it means to route to the primary or secondary node; if this is left blank, it means to write into the primary node and read from the secondary node by default
-         * @type {Array.<string> || null}
+         * Start time
+         * @type {string || null}
          */
-        this.ReadonlyPolicy = null;
+        this.BeginTime = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Slow query threshold in microseconds
+         * @type {number || null}
+         */
+        this.MinQueryTime = null;
+
+        /**
+         * Page size
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset, which is an integral multiple of `Limit`
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -6173,7 +6387,61 @@ class EnableReplicaReadonlyRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ReadonlyPolicy = 'ReadonlyPolicy' in params ? params.ReadonlyPolicy : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MinQueryTime = 'MinQueryTime' in params ? params.MinQueryTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeProxySlowLog response structure.
+ * @class
+ */
+class DescribeProxySlowLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of slow queries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Slow query details
+         * @type {Array.<InstanceProxySlowlogDetail> || null}
+         */
+        this.InstanceProxySlowLogDetail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceProxySlowLogDetail) {
+            this.InstanceProxySlowLogDetail = new Array();
+            for (let z in params.InstanceProxySlowLogDetail) {
+                let obj = new InstanceProxySlowlogDetail();
+                obj.deserialize(params.InstanceProxySlowLogDetail[z]);
+                this.InstanceProxySlowLogDetail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6187,7 +6455,7 @@ class UpgradeInstanceVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * Target instance type. Its value is the same as the `Type` parameter of the `CreateInstances` API.
+         * The target instance type to which the instance will change. It is the same as the `TypeId` parameter in the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.TargetInstanceType = null;
@@ -6853,24 +7121,66 @@ class DescribeInstanceMonitorSIPRequest extends  AbstractModel {
 }
 
 /**
- * CleanUpInstance response structure.
+ * Information list of instance shards
  * @class
  */
-class CleanUpInstanceResponse extends  AbstractModel {
+class InstanceClusterShard extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Shard node name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ShardName = null;
+
+        /**
+         * Shard node ID
+         * @type {string || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * Role
+         * @type {number || null}
+         */
+        this.Role = null;
+
+        /**
+         * Number of keys
+         * @type {number || null}
+         */
+        this.Keys = null;
+
+        /**
+         * Slot information
+         * @type {string || null}
+         */
+        this.Slots = null;
+
+        /**
+         * Storage capacity
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Capacity slope
+         * @type {number || null}
+         */
+        this.StorageSlope = null;
+
+        /**
+         * ID of the runtime node of an instance
+         * @type {string || null}
+         */
+        this.Runid = null;
+
+        /**
+         * Service status. 0: down; 1: on
+         * @type {number || null}
+         */
+        this.Connected = null;
 
     }
 
@@ -6881,8 +7191,15 @@ class CleanUpInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ShardName = 'ShardName' in params ? params.ShardName : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Keys = 'Keys' in params ? params.Keys : null;
+        this.Slots = 'Slots' in params ? params.Slots : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.StorageSlope = 'StorageSlope' in params ? params.StorageSlope : null;
+        this.Runid = 'Runid' in params ? params.Runid : null;
+        this.Connected = 'Connected' in params ? params.Connected : null;
 
     }
 }
@@ -7010,6 +7327,103 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
         this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
         this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceNodeInfo response structure.
+ * @class
+ */
+class DescribeInstanceNodeInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of proxy nodes
+         * @type {number || null}
+         */
+        this.ProxyCount = null;
+
+        /**
+         * Proxy node information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ProxyNodes> || null}
+         */
+        this.Proxy = null;
+
+        /**
+         * The number of redis nodes
+         * @type {number || null}
+         */
+        this.RedisCount = null;
+
+        /**
+         * Redis node information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RedisNodes> || null}
+         */
+        this.Redis = null;
+
+        /**
+         * The number of tendis nodes
+         * @type {number || null}
+         */
+        this.TendisCount = null;
+
+        /**
+         * Tendis node information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TendisNodes> || null}
+         */
+        this.Tendis = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
+
+        if (params.Proxy) {
+            this.Proxy = new Array();
+            for (let z in params.Proxy) {
+                let obj = new ProxyNodes();
+                obj.deserialize(params.Proxy[z]);
+                this.Proxy.push(obj);
+            }
+        }
+        this.RedisCount = 'RedisCount' in params ? params.RedisCount : null;
+
+        if (params.Redis) {
+            this.Redis = new Array();
+            for (let z in params.Redis) {
+                let obj = new RedisNodes();
+                obj.deserialize(params.Redis[z]);
+                this.Redis.push(obj);
+            }
+        }
+        this.TendisCount = 'TendisCount' in params ? params.TendisCount : null;
+
+        if (params.Tendis) {
+            this.Tendis = new Array();
+            for (let z in params.Tendis) {
+                let obj = new TendisNodes();
+                obj.deserialize(params.Tendis[z]);
+                this.Tendis.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7256,6 +7670,7 @@ class InstanceSlowlogDetail extends  AbstractModel {
 
 module.exports = {
     ModifyInstanceParamsResponse: ModifyInstanceParamsResponse,
+    EnableReplicaReadonlyRequest: EnableReplicaReadonlyRequest,
     RedisBackupSet: RedisBackupSet,
     DescribeInstanceMonitorTopNCmdResponse: DescribeInstanceMonitorTopNCmdResponse,
     ModifyAutoBackupConfigResponse: ModifyAutoBackupConfigResponse,
@@ -7271,6 +7686,7 @@ module.exports = {
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeTaskListResponse: DescribeTaskListResponse,
     ModifyInstanceRequest: ModifyInstanceRequest,
+    TendisNodes: TendisNodes,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
@@ -7278,6 +7694,7 @@ module.exports = {
     DescribeInstancesResponse: DescribeInstancesResponse,
     InstanceEnumParam: InstanceEnumParam,
     Account: Account,
+    InstanceProxySlowlogDetail: InstanceProxySlowlogDetail,
     SecurityGroupsInboundAndOutbound: SecurityGroupsInboundAndOutbound,
     ResetPasswordResponse: ResetPasswordResponse,
     ClearInstanceRequest: ClearInstanceRequest,
@@ -7297,6 +7714,7 @@ module.exports = {
     DescribeInstanceDTSInfoResponse: DescribeInstanceDTSInfoResponse,
     DestroyPostpaidInstanceResponse: DestroyPostpaidInstanceResponse,
     ModifyInstanceResponse: ModifyInstanceResponse,
+    ProxyNodes: ProxyNodes,
     TradeDealDetail: TradeDealDetail,
     SourceInfo: SourceInfo,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
@@ -7325,12 +7743,13 @@ module.exports = {
     DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
+    RedisNodes: RedisNodes,
     DescribeInstanceMonitorTopNCmdRequest: DescribeInstanceMonitorTopNCmdRequest,
     ModifyNetworkConfigRequest: ModifyNetworkConfigRequest,
     DescribeInstanceSecurityGroupRequest: DescribeInstanceSecurityGroupRequest,
     InstanceParamHistory: InstanceParamHistory,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
-    InstanceClusterShard: InstanceClusterShard,
+    CleanUpInstanceResponse: CleanUpInstanceResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeInstanceShardsRequest: DescribeInstanceShardsRequest,
     Outbound: Outbound,
@@ -7369,9 +7788,11 @@ module.exports = {
     DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
     ModifyInstanceParamsRequest: ModifyInstanceParamsRequest,
     BigKeyTypeInfo: BigKeyTypeInfo,
+    DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
     InstanceClusterNode: InstanceClusterNode,
-    EnableReplicaReadonlyRequest: EnableReplicaReadonlyRequest,
+    DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
+    DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,
     UpgradeInstanceVersionRequest: UpgradeInstanceVersionRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
@@ -7387,9 +7808,10 @@ module.exports = {
     SecurityGroupDetail: SecurityGroupDetail,
     DeleteInstanceAccountResponse: DeleteInstanceAccountResponse,
     DescribeInstanceMonitorSIPRequest: DescribeInstanceMonitorSIPRequest,
-    CleanUpInstanceResponse: CleanUpInstanceResponse,
+    InstanceClusterShard: InstanceClusterShard,
     ZoneCapacityConf: ZoneCapacityConf,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,
     DescribeProjectSecurityGroupResponse: DescribeProjectSecurityGroupResponse,
     DescribeInstanceMonitorHotKeyResponse: DescribeInstanceMonitorHotKeyResponse,
     InstanceParam: InstanceParam,

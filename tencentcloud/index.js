@@ -45,6 +45,7 @@ module.exports = {
     sms: require("./sms"),
     sqlserver: require("./sqlserver"),
     ssl: require("./ssl"),
+    ssm: require("./ssm"),
     sts: require("./sts"),
     tag: require("./tag"),
     tcaplusdb: require("./tcaplusdb"),

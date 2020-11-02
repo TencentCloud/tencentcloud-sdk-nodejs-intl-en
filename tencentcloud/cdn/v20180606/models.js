@@ -1433,6 +1433,91 @@ max: billed by the peak bandwidth (daily settlement)
 }
 
 /**
+ * Path-based origin-pull configuration rules
+ * @class
+ */
+class PathRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether regex match is used.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {boolean || null}
+         */
+        this.Regex = null;
+
+        /**
+         * URL path
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * Origin-pull server when the path matches.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Origin = null;
+
+        /**
+         * Origin-pull host when the path matches.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.ServerName = null;
+
+        /**
+         * The region of origin server. Valid values: `CN` (mainland China), `OV` (outside mainland China)
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.OriginArea = null;
+
+        /**
+         * Origin-pull URI path when the path matches.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.ForwardUri = null;
+
+        /**
+         * Origin-pull header setting when the path matches.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<HttpHeaderRule> || null}
+         */
+        this.RequestHeaders = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Regex = 'Regex' in params ? params.Regex : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
+        this.OriginArea = 'OriginArea' in params ? params.OriginArea : null;
+        this.ForwardUri = 'ForwardUri' in params ? params.ForwardUri : null;
+
+        if (params.RequestHeaders) {
+            this.RequestHeaders = new Array();
+            for (let z in params.RequestHeaders) {
+                let obj = new HttpHeaderRule();
+                obj.deserialize(params.RequestHeaders[z]);
+                this.RequestHeaders.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ListTopData request structure.
  * @class
  */
@@ -1891,6 +1976,19 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.BackupServerName = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BasePath = null;
+
+        /**
+         * Path-based origin-pull configuration rules
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<PathRule> || null}
+         */
+        this.PathRules = null;
+
     }
 
     /**
@@ -1908,6 +2006,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BackupOrigins = 'BackupOrigins' in params ? params.BackupOrigins : null;
         this.BackupOriginType = 'BackupOriginType' in params ? params.BackupOriginType : null;
         this.BackupServerName = 'BackupServerName' in params ? params.BackupServerName : null;
+        this.BasePath = 'BasePath' in params ? params.BasePath : null;
+
+        if (params.PathRules) {
+            this.PathRules = new Array();
+            for (let z in params.PathRules) {
+                let obj = new PathRule();
+                obj.deserialize(params.PathRules[z]);
+                this.PathRules.push(obj);
+            }
+        }
 
     }
 }
@@ -7553,6 +7661,48 @@ day: 1 day. If the query period is longer than 24 hours, `day` will be used by d
 }
 
 /**
+ * HTTP header setting rules.
+ * @class
+ */
+class HttpHeaderRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HTTP header setting method. Valid values: `add` (add header), `set` (set header) or `del` (delete header).
+         * @type {string || null}
+         */
+        this.HeaderMode = null;
+
+        /**
+         * HTTP header name
+         * @type {string || null}
+         */
+        this.HeaderName = null;
+
+        /**
+         * HTTP header value
+         * @type {string || null}
+         */
+        this.HeaderValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
+        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
+        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
+
+    }
+}
+
+/**
  * Status code cache expiration time rule configuration
  * @class
  */
@@ -10428,6 +10578,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Filters = null;
 
+        /**
+         * IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<IpFilterPathRule> || null}
+         */
+        this.FilterRules = null;
+
     }
 
     /**
@@ -10440,6 +10597,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
         this.Filters = 'Filters' in params ? params.Filters : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new IpFilterPathRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
 
     }
 }
@@ -10812,6 +10978,13 @@ unknown: service region unknown
          */
         this.Area = null;
 
+        /**
+         * City where the node resides
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.City = null;
+
     }
 
     /**
@@ -10834,6 +11007,7 @@ unknown: service region unknown
             }
         }
         this.Area = 'Area' in params ? params.Area : null;
+        this.City = 'City' in params ? params.City : null;
 
     }
 }
@@ -11082,6 +11256,71 @@ class DescribeDomainsRequest extends  AbstractModel {
     }
 }
 
+/**
+ * IP blocklist/allowlist path-based configuration
+ * @class
+ */
+class IpFilterPathRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP blocklist/allowlist type
+`whitelist`: allowlist IPs
+`blacklist`: blocklist IPs
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * IP blocklist/allowlist list
+Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
+Up to 50 allowlists or blocklists can be entered.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Rule types:
+`all`: effective for all files
+`file`: effective for specified file suffixes
+`directory`: effective for specified paths
+`path`: effective for specified absolute paths
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Content for each RuleType:
+For `all`, enter an asterisk (*).
+For `file`, enter the suffix, such as jpg, txt.
+For `directory`, enter the path, such as /xxx/test/.
+For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+
+    }
+}
+
 module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
     DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
@@ -11110,6 +11349,7 @@ module.exports = {
     CacheConfigNoCache: CacheConfigNoCache,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
+    PathRule: PathRule,
     ListTopDataRequest: ListTopDataRequest,
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
@@ -11199,6 +11439,7 @@ module.exports = {
     EnableCachesResponse: EnableCachesResponse,
     RuleQueryString: RuleQueryString,
     DescribeIpVisitRequest: DescribeIpVisitRequest,
+    HttpHeaderRule: HttpHeaderRule,
     StatusCodeCacheRule: StatusCodeCacheRule,
     ClientCert: ClientCert,
     DomainLog: DomainLog,
@@ -11264,5 +11505,6 @@ module.exports = {
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     CacheTagKey: CacheTagKey,
     DescribeDomainsRequest: DescribeDomainsRequest,
+    IpFilterPathRule: IpFilterPathRule,
 
 }

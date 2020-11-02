@@ -1387,6 +1387,13 @@ class DescribeDCDBShardsResponse extends  AbstractModel {
         this.Shards = null;
 
         /**
+         * Disaster recovery flag. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1411,6 +1418,7 @@ class DescribeDCDBShardsResponse extends  AbstractModel {
                 this.Shards.push(obj);
             }
         }
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2290,6 +2298,18 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
          */
         this.ExclusterIds = null;
 
+        /**
+         * Tag key used in queries
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+        /**
+         * Instance types used in filtering. Valid values: 1 (dedicated instance), 2 (primary instance), 3 (disaster recovery instance). Multiple values should be separated by commas.
+         * @type {string || null}
+         */
+        this.FilterInstanceType = null;
+
     }
 
     /**
@@ -2313,6 +2333,8 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
         this.IsFilterExcluster = 'IsFilterExcluster' in params ? params.IsFilterExcluster : null;
         this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.FilterInstanceType = 'FilterInstanceType' in params ? params.FilterInstanceType : null;
 
     }
 }
@@ -3168,7 +3190,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * AppID
+         * Application ID
          * @type {number || null}
          */
         this.AppId = null;
@@ -3270,7 +3292,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.IsolatedTimestamp = null;
 
         /**
-         * UIN
+         * Account ID
          * @type {string || null}
          */
         this.Uin = null;
@@ -3282,7 +3304,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.ShardDetail = null;
 
         /**
-         * Number of nodes. 2: one primary and one secondary; 3: one primary and two secondaries
+         * Number of nodes. 2: one master and one slave; 3: one master and two slaves
          * @type {number || null}
          */
         this.NodeCount = null;
@@ -3390,6 +3412,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Cpu = null;
 
+        /**
+         * IPv6 flag for an instance
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * Private network IPv6 address
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * Public network IPv6 address
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.WanVipv6 = null;
+
+        /**
+         * Public network IPv6 port
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WanPortIpv6 = null;
+
+        /**
+         * Public network IPv6 status
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WanStatusIpv6 = null;
+
+        /**
+         * DCN flag. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
+         * DCN status. Valid values: 0 (null), 1 (creating), 2 (syncing), 3 (disconnected)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DcnStatus = null;
+
+        /**
+         * The number of DCN disaster recovery instances
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DcnDstNum = null;
+
     }
 
     /**
@@ -3446,6 +3524,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
         this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.WanVipv6 = 'WanVipv6' in params ? params.WanVipv6 : null;
+        this.WanPortIpv6 = 'WanPortIpv6' in params ? params.WanPortIpv6 : null;
+        this.WanStatusIpv6 = 'WanStatusIpv6' in params ? params.WanStatusIpv6 : null;
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
+        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
+        this.DcnDstNum = 'DcnDstNum' in params ? params.DcnDstNum : null;
 
     }
 }

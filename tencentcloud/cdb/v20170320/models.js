@@ -108,6 +108,7 @@ class TaskDetail extends  AbstractModel {
 "KILLED" - terminated;
 "REMOVED" - deleted;
 "PAUSED" - paused.
+"WAITING" - waiting (which can be canceled)
          * @type {string || null}
          */
         this.TaskStatus = null;
@@ -210,6 +211,12 @@ class DeviceDiskInfo extends  AbstractModel {
          */
         this.Write = null;
 
+        /**
+         * Disk capacity. Each value is comprised of two data, with the first data representing the used capacity and the second one representing the total disk capacity.
+         * @type {Array.<number> || null}
+         */
+        this.CapacityRatio = null;
+
     }
 
     /**
@@ -223,6 +230,7 @@ class DeviceDiskInfo extends  AbstractModel {
         this.IoWaitTime = 'IoWaitTime' in params ? params.IoWaitTime : null;
         this.Read = 'Read' in params ? params.Read : null;
         this.Write = 'Write' in params ? params.Write : null;
+        this.CapacityRatio = 'CapacityRatio' in params ? params.CapacityRatio : null;
 
     }
 }
@@ -714,6 +722,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.KeyRegion = null;
 
         /**
+         * The default region of the KMS service currently used by the TencentDB backend service.
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.DefaultKmsRegion = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -733,6 +748,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Encryption = 'Encryption' in params ? params.Encryption : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
+        this.DefaultKmsRegion = 'DefaultKmsRegion' in params ? params.DefaultKmsRegion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3673,6 +3689,18 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.DeviceType = null;
 
+        /**
+         * Parameter template ID.
+         * @type {number || null}
+         */
+        this.ParamTemplateId = null;
+
+        /**
+         * The array of alarm policy IDs.
+         * @type {Array.<number> || null}
+         */
+        this.AlarmPolicyList = null;
+
     }
 
     /**
@@ -3729,6 +3757,8 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
 
     }
 }

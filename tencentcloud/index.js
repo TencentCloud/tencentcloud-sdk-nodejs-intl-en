@@ -31,6 +31,7 @@ module.exports = {
     kms: require("./kms"),
     live: require("./live"),
     mariadb: require("./mariadb"),
+    mdc: require("./mdc"),
     mdl: require("./mdl"),
     mdp: require("./mdp"),
     mongodb: require("./mongodb"),

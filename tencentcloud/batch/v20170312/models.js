@@ -727,7 +727,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default.
+         * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default. 
          * @type {string || null}
          */
         this.DiskType = null;
@@ -2998,7 +2998,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.Tags = null;
 
         /**
-         * 
+         * Next action
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.NextAction = null;

@@ -21,10 +21,12 @@ const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
 const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
 const DescribeClusterKubeconfigResponse = models.DescribeClusterKubeconfigResponse;
+const RemoveNodeFromNodePoolResponse = models.RemoveNodeFromNodePoolResponse;
 const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
 const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
 const DeleteClusterResponse = models.DeleteClusterResponse;
+const AutoscalingAdded = models.AutoscalingAdded;
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const RouteInfo = models.RouteInfo;
@@ -33,9 +35,12 @@ const RunInstancesForNode = models.RunInstancesForNode;
 const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
+const AddNodeToNodePoolRequest = models.AddNodeToNodePoolRequest;
+const NodePool = models.NodePool;
 const RouteTableInfo = models.RouteTableInfo;
 const ClusterAsGroup = models.ClusterAsGroup;
 const Instance = models.Instance;
+const CreateClusterNodePoolFromExistingAsgRequest = models.CreateClusterNodePoolFromExistingAsgRequest;
 const Tag = models.Tag;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const DescribeImagesResponse = models.DescribeImagesResponse;
@@ -54,23 +59,29 @@ const RouteTableConflict = models.RouteTableConflict;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
+const ManuallyAdded = models.ManuallyAdded;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
 const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
+const Taint = models.Taint;
 const ExistedInstance = models.ExistedInstance;
-const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
+const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
+const AddNodeToNodePoolResponse = models.AddNodeToNodePoolResponse;
 const TagSpecification = models.TagSpecification;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const ClusterExtraArgs = models.ClusterExtraArgs;
 const DataDisk = models.DataDisk;
+const ModifyClusterNodePoolResponse = models.ModifyClusterNodePoolResponse;
 const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
 const ResourceDeleteOption = models.ResourceDeleteOption;
 const LoginSettings = models.LoginSettings;
+const CreateClusterNodePoolFromExistingAsgResponse = models.CreateClusterNodePoolFromExistingAsgResponse;
 const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
 const EnhancedService = models.EnhancedService;
 const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
+const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
 const CreateClusterResponse = models.CreateClusterResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DeleteClusterRouteTableRequest = models.DeleteClusterRouteTableRequest;
@@ -80,11 +91,15 @@ const AcquireClusterAdminRoleRequest = models.AcquireClusterAdminRoleRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
+const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
 const Filter = models.Filter;
+const ModifyClusterNodePoolRequest = models.ModifyClusterNodePoolRequest;
 const ImageInstance = models.ImageInstance;
 const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
+const CreateClusterNodePoolRequest = models.CreateClusterNodePoolRequest;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
+const DeleteClusterNodePoolRequest = models.DeleteClusterNodePoolRequest;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
@@ -96,11 +111,13 @@ const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const ClusterAsGroupOption = models.ClusterAsGroupOption;
 const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
+const DescribeClusterNodePoolsRequest = models.DescribeClusterNodePoolsRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
 const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
 const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
+const DescribeClusterNodePoolDetailRequest = models.DescribeClusterNodePoolDetailRequest;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const DescribeClusterAsGroupsRequest = models.DescribeClusterAsGroupsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
@@ -109,11 +126,15 @@ const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsReq
 const ExistedInstancesPara = models.ExistedInstancesPara;
 const DescribeClusterAsGroupOptionResponse = models.DescribeClusterAsGroupOptionResponse;
 const ClusterAsGroupAttribute = models.ClusterAsGroupAttribute;
+const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
 const ModifyClusterAsGroupAttributeRequest = models.ModifyClusterAsGroupAttributeRequest;
 const InstanceDataDiskMountSetting = models.InstanceDataDiskMountSetting;
+const NodeCountSummary = models.NodeCountSummary;
 const DescribeClusterAsGroupsResponse = models.DescribeClusterAsGroupsResponse;
+const RemoveNodeFromNodePoolRequest = models.RemoveNodeFromNodePoolRequest;
+const DescribeClusterNodePoolDetailResponse = models.DescribeClusterNodePoolDetailResponse;
 
 
 /**
@@ -135,6 +156,17 @@ class TkeClient extends AbstractClient {
     CreateCluster(req, cb) {
         let resp = new CreateClusterResponse();
         this.request("CreateCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query detailed information of a node pool.
+     * @param {DescribeClusterNodePoolDetailRequest} req
+     * @param {function(string, DescribeClusterNodePoolDetailResponse):void} cb
+     * @public
+     */
+    DescribeClusterNodePoolDetail(req, cb) {
+        let resp = new DescribeClusterNodePoolDetailResponse();
+        this.request("DescribeClusterNodePoolDetail", req, resp, cb);
     }
 
     /**
@@ -215,6 +247,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to remove a node from a node pool but retain it in the cluster.
+     * @param {RemoveNodeFromNodePoolRequest} req
+     * @param {function(string, RemoveNodeFromNodePoolResponse):void} cb
+     * @public
+     */
+    RemoveNodeFromNodePool(req, cb) {
+        let resp = new RemoveNodeFromNodePoolResponse();
+        this.request("RemoveNodeFromNodePool", req, resp, cb);
+    }
+
+    /**
      * Query cluster open port process status (only supports external ports of the managed cluster)
      * @param {DescribeClusterEndpointVipStatusRequest} req
      * @param {function(string, DescribeClusterEndpointVipStatusResponse):void} cb
@@ -281,14 +324,36 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query one or more cluster route tables.
-     * @param {DescribeClusterRouteTablesRequest} req
-     * @param {function(string, DescribeClusterRouteTablesResponse):void} cb
+     * This API is used to edit a node pool.
+     * @param {ModifyClusterNodePoolRequest} req
+     * @param {function(string, ModifyClusterNodePoolResponse):void} cb
      * @public
      */
-    DescribeClusterRouteTables(req, cb) {
-        let resp = new DescribeClusterRouteTablesResponse();
-        this.request("DescribeClusterRouteTables", req, resp, cb);
+    ModifyClusterNodePool(req, cb) {
+        let resp = new ModifyClusterNodePoolResponse();
+        this.request("ModifyClusterNodePool", req, resp, cb);
+    }
+
+    /**
+     * Cluster auto scaling configuration
+     * @param {DescribeClusterAsGroupOptionRequest} req
+     * @param {function(string, DescribeClusterAsGroupOptionResponse):void} cb
+     * @public
+     */
+    DescribeClusterAsGroupOption(req, cb) {
+        let resp = new DescribeClusterAsGroupOptionResponse();
+        this.request("DescribeClusterAsGroupOption", req, resp, cb);
+    }
+
+    /**
+     * This API is used to move nodes in a cluster to a node pool.
+     * @param {AddNodeToNodePoolRequest} req
+     * @param {function(string, AddNodeToNodePoolResponse):void} cb
+     * @public
+     */
+    AddNodeToNodePool(req, cb) {
+        let resp = new AddNodeToNodePoolResponse();
+        this.request("AddNodeToNodePool", req, resp, cb);
     }
 
     /**
@@ -325,6 +390,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create a node pool.
+     * @param {CreateClusterNodePoolRequest} req
+     * @param {function(string, CreateClusterNodePoolResponse):void} cb
+     * @public
+     */
+    CreateClusterNodePool(req, cb) {
+        let resp = new CreateClusterNodePoolResponse();
+        this.request("CreateClusterNodePool", req, resp, cb);
+    }
+
+    /**
      * Create a cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
      * @param {CreateClusterEndpointRequest} req
      * @param {function(string, CreateClusterEndpointResponse):void} cb
@@ -336,14 +412,25 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * Cluster auto scaling configuration
-     * @param {DescribeClusterAsGroupOptionRequest} req
-     * @param {function(string, DescribeClusterAsGroupOptionResponse):void} cb
+     * This API is used to upgrade a scaling group to a node pool.
+     * @param {CreateClusterNodePoolFromExistingAsgRequest} req
+     * @param {function(string, CreateClusterNodePoolFromExistingAsgResponse):void} cb
      * @public
      */
-    DescribeClusterAsGroupOption(req, cb) {
-        let resp = new DescribeClusterAsGroupOptionResponse();
-        this.request("DescribeClusterAsGroupOption", req, resp, cb);
+    CreateClusterNodePoolFromExistingAsg(req, cb) {
+        let resp = new CreateClusterNodePoolFromExistingAsgResponse();
+        this.request("CreateClusterNodePoolFromExistingAsg", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query one or more cluster route tables.
+     * @param {DescribeClusterRouteTablesRequest} req
+     * @param {function(string, DescribeClusterRouteTablesResponse):void} cb
+     * @public
+     */
+    DescribeClusterRouteTables(req, cb) {
+        let resp = new DescribeClusterRouteTablesResponse();
+        this.request("DescribeClusterRouteTables", req, resp, cb);
     }
 
     /**
@@ -402,6 +489,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete a node pool.
+     * @param {DeleteClusterNodePoolRequest} req
+     * @param {function(string, DeleteClusterNodePoolResponse):void} cb
+     * @public
+     */
+    DeleteClusterNodePool(req, cb) {
+        let resp = new DeleteClusterNodePoolResponse();
+        this.request("DeleteClusterNodePool", req, resp, cb);
+    }
+
+    /**
      * Delete the external network access port of the managed cluster (the old way, only the external network port of the managed cluster is supported)
      * @param {DeleteClusterEndpointVipRequest} req
      * @param {function(string, DeleteClusterEndpointVipResponse):void} cb
@@ -421,6 +519,17 @@ class TkeClient extends AbstractClient {
     DeleteClusterInstances(req, cb) {
         let resp = new DeleteClusterInstancesResponse();
         this.request("DeleteClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the node pool list
+     * @param {DescribeClusterNodePoolsRequest} req
+     * @param {function(string, DescribeClusterNodePoolsResponse):void} cb
+     * @public
+     */
+    DescribeClusterNodePools(req, cb) {
+        let resp = new DescribeClusterNodePoolsResponse();
+        this.request("DescribeClusterNodePools", req, resp, cb);
     }
 
     /**

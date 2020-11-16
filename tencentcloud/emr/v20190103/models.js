@@ -1580,6 +1580,12 @@ class CreateInstanceRequest extends  AbstractModel {
          */
         this.MetaDBInfo = null;
 
+        /**
+         * Custom application role.
+         * @type {string || null}
+         */
+        this.ApplicationRole = null;
+
     }
 
     /**
@@ -1661,6 +1667,7 @@ class CreateInstanceRequest extends  AbstractModel {
             obj.deserialize(params.MetaDBInfo)
             this.MetaDBInfo = obj;
         }
+        this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
 
     }
 }

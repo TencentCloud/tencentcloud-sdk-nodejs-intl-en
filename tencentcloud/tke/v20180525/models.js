@@ -251,6 +251,34 @@ class DescribeClusterKubeconfigResponse extends  AbstractModel {
 }
 
 /**
+ * RemoveNodeFromNodePool response structure.
+ * @class
+ */
+class RemoveNodeFromNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterEndpointVipStatus response structure.
  * @class
  */
@@ -401,6 +429,55 @@ class DeleteClusterResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Nodes that are added in scale-out
+ * @class
+ */
+class AutoscalingAdded extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of nodes that are being added
+         * @type {number || null}
+         */
+        this.Joining = null;
+
+        /**
+         * Number of nodes that are being initialized
+         * @type {number || null}
+         */
+        this.Initializing = null;
+
+        /**
+         * Number of normal nodes
+         * @type {number || null}
+         */
+        this.Normal = null;
+
+        /**
+         * Total number of nodes
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Joining = 'Joining' in params ? params.Joining : null;
+        this.Initializing = 'Initializing' in params ? params.Initializing : null;
+        this.Normal = 'Normal' in params ? params.Normal : null;
+        this.Total = 'Total' in params ? params.Total : null;
 
     }
 }
@@ -776,6 +853,184 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * AddNodeToNodePool request structure.
+ * @class
+ */
+class AddNodeToNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Node ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Node pool description
+ * @class
+ */
+class NodePool extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Node pool name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Cluster instance ID
+         * @type {string || null}
+         */
+        this.ClusterInstanceId = null;
+
+        /**
+         * Status
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * Launch configuration ID
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * Auto-scaling group ID
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
+        /**
+         * Labels
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Array of taint
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * Node list
+         * @type {NodeCountSummary || null}
+         */
+        this.NodeCountSummary = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AutoscalingGroupStatus = null;
+
+        /**
+         * Maximum number of nodes
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.MaxNodesNum = null;
+
+        /**
+         * Minimum number of nodes
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.MinNodesNum = null;
+
+        /**
+         * Desired number of nodes
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.DesiredNodesNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ClusterInstanceId = 'ClusterInstanceId' in params ? params.ClusterInstanceId : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+
+        if (params.NodeCountSummary) {
+            let obj = new NodeCountSummary();
+            obj.deserialize(params.NodeCountSummary)
+            this.NodeCountSummary = obj;
+        }
+        this.AutoscalingGroupStatus = 'AutoscalingGroupStatus' in params ? params.AutoscalingGroupStatus : null;
+        this.MaxNodesNum = 'MaxNodesNum' in params ? params.MaxNodesNum : null;
+        this.MinNodesNum = 'MinNodesNum' in params ? params.MinNodesNum : null;
+        this.DesiredNodesNum = 'DesiredNodesNum' in params ? params.DesiredNodesNum : null;
+
+    }
+}
+
+/**
  * Object of cluster route table
  * @class
  */
@@ -979,6 +1234,41 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.LanIP = 'LanIP' in params ? params.LanIP : null;
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+
+    }
+}
+
+/**
+ * CreateClusterNodePoolFromExistingAsg request structure.
+ * @class
+ */
+class CreateClusterNodePoolFromExistingAsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Scaling group ID
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
 
     }
@@ -1832,6 +2122,55 @@ class CreateClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * Nodes that are manually added
+ * @class
+ */
+class ManuallyAdded extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of nodes that are being added
+         * @type {number || null}
+         */
+        this.Joining = null;
+
+        /**
+         * Number of nodes that are being initialized
+         * @type {number || null}
+         */
+        this.Initializing = null;
+
+        /**
+         * Number of normal nodes
+         * @type {number || null}
+         */
+        this.Normal = null;
+
+        /**
+         * Total number of nodes
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Joining = 'Joining' in params ? params.Joining : null;
+        this.Initializing = 'Initializing' in params ? params.Initializing : null;
+        this.Normal = 'Normal' in params ? params.Normal : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
  * DescribeClusterRouteTables response structure.
  * @class
  */
@@ -2015,6 +2354,48 @@ class CreateClusterEndpointVipRequest extends  AbstractModel {
 }
 
 /**
+ * Kubernetes Taint
+ * @class
+ */
+class Taint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key of the taint
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value of the taint
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Effect of the taint
+         * @type {string || null}
+         */
+        this.Effect = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Effect = 'Effect' in params ? params.Effect : null;
+
+    }
+}
+
+/**
  * Information of existing instances
  * @class
  */
@@ -2147,25 +2528,25 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * DescribeRouteTableConflicts response structure.
+ * DescribeClusterNodePools response structure.
  * @class
  */
-class DescribeRouteTableConflictsResponse extends  AbstractModel {
+class DescribeClusterNodePoolsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether there is a conflict in the route table.
-         * @type {boolean || null}
+         * NodePools (node pool list)
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<NodePool> || null}
          */
-        this.HasConflict = null;
+        this.NodePoolSet = null;
 
         /**
-         * Route table conflict list.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RouteTableConflict> || null}
+         * Total resources
+         * @type {number || null}
          */
-        this.RouteTableConflictSet = null;
+        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2182,15 +2563,43 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.HasConflict = 'HasConflict' in params ? params.HasConflict : null;
 
-        if (params.RouteTableConflictSet) {
-            this.RouteTableConflictSet = new Array();
-            for (let z in params.RouteTableConflictSet) {
-                let obj = new RouteTableConflict();
-                obj.deserialize(params.RouteTableConflictSet[z]);
-                this.RouteTableConflictSet.push(obj);
+        if (params.NodePoolSet) {
+            this.NodePoolSet = new Array();
+            for (let z in params.NodePoolSet) {
+                let obj = new NodePool();
+                obj.deserialize(params.NodePoolSet[z]);
+                this.NodePoolSet.push(obj);
             }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddNodeToNodePool response structure.
+ * @class
+ */
+class AddNodeToNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2418,6 +2827,34 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * ModifyClusterNodePool response structure.
+ * @class
+ */
+class ModifyClusterNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeExistedInstances response structure.
  * @class
  */
@@ -2544,6 +2981,41 @@ Note: This field may return null, indicating that no valid value is found.
         this.Password = 'Password' in params ? params.Password : null;
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
         this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
+
+    }
+}
+
+/**
+ * CreateClusterNodePoolFromExistingAsg response structure.
+ * @class
+ */
+class CreateClusterNodePoolFromExistingAsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2693,6 +3165,57 @@ class CreateClusterAsGroupRequest extends  AbstractModel {
                 this.Labels.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeRouteTableConflicts response structure.
+ * @class
+ */
+class DescribeRouteTableConflictsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether there is a conflict in the route table.
+         * @type {boolean || null}
+         */
+        this.HasConflict = null;
+
+        /**
+         * Route table conflict list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RouteTableConflict> || null}
+         */
+        this.RouteTableConflictSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HasConflict = 'HasConflict' in params ? params.HasConflict : null;
+
+        if (params.RouteTableConflictSet) {
+            this.RouteTableConflictSet = new Array();
+            for (let z in params.RouteTableConflictSet) {
+                let obj = new RouteTableConflict();
+                obj.deserialize(params.RouteTableConflictSet[z]);
+                this.RouteTableConflictSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3108,6 +3631,104 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * Describes K8s cluster configuration and related information.
+ * @class
+ */
+class InstanceAdvancedSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
+Note: in multi-disk scenarios, use the DataDisks data structure below to set the corresponding information, such as cloud disk type, cloud disk size, mount path, and whether to perform formatting.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.MountTarget = null;
+
+        /**
+         * Specified value of dockerd --graph. Default value: /var/lib/docker
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.DockerGraphPath = null;
+
+        /**
+         * Base64-encoded user script, which will be executed after the K8s component starts running. You need to ensure the reentrant and retry logic of the script. The script and its log files can be viewed at the node path: /data/ccs_userscript/. If you want to initialize nodes before adding them to the scheduling list, you can use this parameter together with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to enable the node for scheduling.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UserScript = null;
+
+        /**
+         * Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run kubectl uncordon nodename to enable this node for scheduling.
+         * @type {number || null}
+         */
+        this.Unschedulable = null;
+
+        /**
+         * Node label array
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Mounting information of multiple data disks. Ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks. If the purchase of multiple data disks is also set in DataDisks under RunInstancesPara of the CreateClusterInstances API for adding nodes, you can refer to the example of adding cluster nodes (multiple data disks) for the CreateClusterInstances API.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * Information about node custom parameters
+Note: This field may return null, indicating that no valid value was found.
+         * @type {InstanceExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
+        this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
+        this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.ExtraArgs) {
+            let obj = new InstanceExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
+
+    }
+}
+
+/**
  * > Key-value pair filters used for conditional queries, such as filtering results by ID, name, and state.
 > * If there are multiple `Filter` parameters, they are evaluated using the logical `AND` operator.
 > * If a `Filter` contains multiple `Values`, they are evaluated using the logical `OR` operator.
@@ -3148,6 +3769,99 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * ModifyClusterNodePool request structure.
+ * @class
+ */
+class ModifyClusterNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Maximum number of nodes
+         * @type {number || null}
+         */
+        this.MaxNodesNum = null;
+
+        /**
+         * Minimum number of nodes
+         * @type {number || null}
+         */
+        this.MinNodesNum = null;
+
+        /**
+         * Labels
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Taints
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * Indicates whether auto scaling is enabled.
+         * @type {boolean || null}
+         */
+        this.EnableAutoscale = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MaxNodesNum = 'MaxNodesNum' in params ? params.MaxNodesNum : null;
+        this.MinNodesNum = 'MinNodesNum' in params ? params.MinNodesNum : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+        this.EnableAutoscale = 'EnableAutoscale' in params ? params.EnableAutoscale : null;
 
     }
 }
@@ -3234,6 +3948,104 @@ class CreateClusterEndpointResponse extends  AbstractModel {
 }
 
 /**
+ * CreateClusterNodePool request structure.
+ * @class
+ */
+class CreateClusterNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * AS group parameters
+         * @type {string || null}
+         */
+        this.AutoScalingGroupPara = null;
+
+        /**
+         * Running parameters
+         * @type {string || null}
+         */
+        this.LaunchConfigurePara = null;
+
+        /**
+         * Sample parameters
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * Indicates whether to enable auto scaling
+         * @type {boolean || null}
+         */
+        this.EnableAutoscale = null;
+
+        /**
+         * Node pool name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Labels
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Taints
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AutoScalingGroupPara = 'AutoScalingGroupPara' in params ? params.AutoScalingGroupPara : null;
+        this.LaunchConfigurePara = 'LaunchConfigurePara' in params ? params.LaunchConfigurePara : null;
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+        this.EnableAutoscale = 'EnableAutoscale' in params ? params.EnableAutoscale : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Cluster advanced configurations
  * @class
  */
@@ -3313,6 +4125,12 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.AuditLogTopicId = null;
 
+        /**
+         * Specifies whether the VPC CNI type is multi-IP ENI or or independent ENI.
+         * @type {string || null}
+         */
+        this.VpcCniType = null;
+
     }
 
     /**
@@ -3339,6 +4157,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.AuditEnabled = 'AuditEnabled' in params ? params.AuditEnabled : null;
         this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
         this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
+        this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
 
     }
 }
@@ -3367,6 +4186,48 @@ class AcquireClusterAdminRoleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteClusterNodePool request structure.
+ * @class
+ */
+class DeleteClusterNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ClusterId of a node pool
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * IDs of node pools to delete
+         * @type {Array.<string> || null}
+         */
+        this.NodePoolIds = null;
+
+        /**
+         * Indicates whether nodes in a node pool are retained when the node pool is deleted. (The nodes are removed from the cluster. However, the corresponding instances will not be terminated.)
+         * @type {boolean || null}
+         */
+        this.KeepInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolIds = 'NodePoolIds' in params ? params.NodePoolIds : null;
+        this.KeepInstance = 'KeepInstance' in params ? params.KeepInstance : null;
 
     }
 }
@@ -3629,6 +4490,13 @@ Note: This field may return null, indicating that no valid value was found.
         this.TimeoutInstanceIds = null;
 
         /**
+         * Causes of the failure to add a node to a cluster
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FailedReasons = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3646,6 +4514,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
         this.SuccInstanceIds = 'SuccInstanceIds' in params ? params.SuccInstanceIds : null;
         this.TimeoutInstanceIds = 'TimeoutInstanceIds' in params ? params.TimeoutInstanceIds : null;
+        this.FailedReasons = 'FailedReasons' in params ? params.FailedReasons : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4047,6 +4916,34 @@ class CreateClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterNodePools request structure.
+ * @class
+ */
+class DescribeClusterNodePoolsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ClusterId (cluster ID)
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeClusterRouteTables request structure.
  * @class
  */
@@ -4235,6 +5132,41 @@ class DeleteClusterEndpointRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
+
+    }
+}
+
+/**
+ * DescribeClusterNodePoolDetail request structure.
+ * @class
+ */
+class DescribeClusterNodePoolDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
 
     }
 }
@@ -4588,6 +5520,34 @@ class ClusterAsGroupAttribute extends  AbstractModel {
 }
 
 /**
+ * DeleteClusterNodePool response structure.
+ * @class
+ */
+class DeleteClusterNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Describes information related to the Cloud Monitor service.
  * @class
  */
@@ -4616,61 +5576,24 @@ class RunMonitorServiceEnabled extends  AbstractModel {
 }
 
 /**
- * Describes K8s cluster configuration and related information.
+ * CreateClusterNodePool response structure.
  * @class
  */
-class InstanceAdvancedSettings extends  AbstractModel {
+class CreateClusterNodePoolResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
-Note: in multi-disk scenarios, use the DataDisks data structure below to set the corresponding information, such as cloud disk type, cloud disk size, mount path, and whether to perform formatting.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Node pool ID
          * @type {string || null}
          */
-        this.MountTarget = null;
+        this.NodePoolId = null;
 
         /**
-         * Specified value of dockerd --graph. Default value: /var/lib/docker
-Note: This field may return null, indicating that no valid value was found.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DockerGraphPath = null;
-
-        /**
-         * Base64-encoded user script, which will be executed after the K8s component starts running. You need to ensure the reentrant and retry logic of the script. The script and its log files can be viewed at the node path: /data/ccs_userscript/. If you want to initialize nodes before adding them to the scheduling list, you can use this parameter together with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to enable the node for scheduling.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.UserScript = null;
-
-        /**
-         * Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run kubectl uncordon nodename to enable this node for scheduling.
-         * @type {number || null}
-         */
-        this.Unschedulable = null;
-
-        /**
-         * Node label array
-Note: This field may return null, indicating that no valid value was found.
-         * @type {Array.<Label> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * Mounting information of multiple data disks. Ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks. If the purchase of multiple data disks is also set in DataDisks under RunInstancesPara of the CreateClusterInstances API for adding nodes, you can refer to the example of adding cluster nodes (multiple data disks) for the CreateClusterInstances API.
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {Array.<DataDisk> || null}
-         */
-        this.DataDisks = null;
-
-        /**
-         * Information about node custom parameters
-Note: This field may return null, indicating that no valid value was found.
-         * @type {InstanceExtraArgs || null}
-         */
-        this.ExtraArgs = null;
+        this.RequestId = null;
 
     }
 
@@ -4681,34 +5604,8 @@ Note: This field may return null, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
-        this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
-        this.UserScript = 'UserScript' in params ? params.UserScript : null;
-        this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Label();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-
-        if (params.DataDisks) {
-            this.DataDisks = new Array();
-            for (let z in params.DataDisks) {
-                let obj = new DataDisk();
-                obj.deserialize(params.DataDisks[z]);
-                this.DataDisks.push(obj);
-            }
-        }
-
-        if (params.ExtraArgs) {
-            let obj = new InstanceExtraArgs();
-            obj.deserialize(params.ExtraArgs)
-            this.ExtraArgs = obj;
-        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4804,6 +5701,53 @@ class InstanceDataDiskMountSetting extends  AbstractModel {
 }
 
 /**
+ * Node statistics list
+ * @class
+ */
+class NodeCountSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Nodes that are manually managed
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {ManuallyAdded || null}
+         */
+        this.ManuallyAdded = null;
+
+        /**
+         * Nodes that are automatically managed
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {AutoscalingAdded || null}
+         */
+        this.AutoscalingAdded = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ManuallyAdded) {
+            let obj = new ManuallyAdded();
+            obj.deserialize(params.ManuallyAdded)
+            this.ManuallyAdded = obj;
+        }
+
+        if (params.AutoscalingAdded) {
+            let obj = new AutoscalingAdded();
+            obj.deserialize(params.AutoscalingAdded)
+            this.AutoscalingAdded = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeClusterAsGroups response structure.
  * @class
  */
@@ -4853,16 +5797,100 @@ class DescribeClusterAsGroupsResponse extends  AbstractModel {
     }
 }
 
+/**
+ * RemoveNodeFromNodePool request structure.
+ * @class
+ */
+class RemoveNodeFromNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Node ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DescribeClusterNodePoolDetail response structure.
+ * @class
+ */
+class DescribeClusterNodePoolDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node pool details
+         * @type {NodePool || null}
+         */
+        this.NodePool = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NodePool) {
+            let obj = new NodePool();
+            obj.deserialize(params.NodePool)
+            this.NodePool = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
     DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
     DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
+    RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
     DescribeClusterEndpointVipStatusResponse: DescribeClusterEndpointVipStatusResponse,
     ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     DeleteClusterResponse: DeleteClusterResponse,
+    AutoscalingAdded: AutoscalingAdded,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
     RouteInfo: RouteInfo,
@@ -4871,9 +5899,12 @@ module.exports = {
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    AddNodeToNodePoolRequest: AddNodeToNodePoolRequest,
+    NodePool: NodePool,
     RouteTableInfo: RouteTableInfo,
     ClusterAsGroup: ClusterAsGroup,
     Instance: Instance,
+    CreateClusterNodePoolFromExistingAsgRequest: CreateClusterNodePoolFromExistingAsgRequest,
     Tag: Tag,
     ClusterNetworkSettings: ClusterNetworkSettings,
     DescribeImagesResponse: DescribeImagesResponse,
@@ -4892,23 +5923,29 @@ module.exports = {
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
+    ManuallyAdded: ManuallyAdded,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
+    Taint: Taint,
     ExistedInstance: ExistedInstance,
-    DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
+    DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
+    AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
     TagSpecification: TagSpecification,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
     ClusterExtraArgs: ClusterExtraArgs,
     DataDisk: DataDisk,
+    ModifyClusterNodePoolResponse: ModifyClusterNodePoolResponse,
     DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
     ResourceDeleteOption: ResourceDeleteOption,
     LoginSettings: LoginSettings,
+    CreateClusterNodePoolFromExistingAsgResponse: CreateClusterNodePoolFromExistingAsgResponse,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
     EnhancedService: EnhancedService,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
+    DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
     CreateClusterResponse: CreateClusterResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     DeleteClusterRouteTableRequest: DeleteClusterRouteTableRequest,
@@ -4918,11 +5955,15 @@ module.exports = {
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
+    InstanceAdvancedSettings: InstanceAdvancedSettings,
     Filter: Filter,
+    ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
     ImageInstance: ImageInstance,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
+    CreateClusterNodePoolRequest: CreateClusterNodePoolRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
+    DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
@@ -4934,11 +5975,13 @@ module.exports = {
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
     CreateClusterInstancesResponse: CreateClusterInstancesResponse,
+    DescribeClusterNodePoolsRequest: DescribeClusterNodePoolsRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
     ExistedInstancesForNode: ExistedInstancesForNode,
     DescribeClusterRoutesRequest: DescribeClusterRoutesRequest,
     DeleteClusterRouteRequest: DeleteClusterRouteRequest,
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
+    DescribeClusterNodePoolDetailRequest: DescribeClusterNodePoolDetailRequest,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,
     DescribeImagesRequest: DescribeImagesRequest,
@@ -4947,10 +5990,14 @@ module.exports = {
     ExistedInstancesPara: ExistedInstancesPara,
     DescribeClusterAsGroupOptionResponse: DescribeClusterAsGroupOptionResponse,
     ClusterAsGroupAttribute: ClusterAsGroupAttribute,
+    DeleteClusterNodePoolResponse: DeleteClusterNodePoolResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
-    InstanceAdvancedSettings: InstanceAdvancedSettings,
+    CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
+    NodeCountSummary: NodeCountSummary,
     DescribeClusterAsGroupsResponse: DescribeClusterAsGroupsResponse,
+    RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
+    DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
 
 }

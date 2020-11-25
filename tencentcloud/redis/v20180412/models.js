@@ -489,13 +489,14 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Instance type. Valid values: 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
+         * Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
-         * Instance capacity in MB. The value should be a multiple of 1,024 and is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
+         * Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
+If `TypeId` indicates the standard architecture, `MemSize` indicates the total memory capacity of an instance; if `TypeId` indicates the cluster architecture, `MemSize` indicates the memory capacity per shard.
          * @type {number || null}
          */
         this.MemSize = null;
@@ -519,7 +520,9 @@ class CreateInstancesRequest extends  AbstractModel {
         this.BillingMode = null;
 
         /**
-         * Instance password. It can contain 8-30 characters and must contain at least two of the following types of characters: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/). It cannot stat with the symbol (/).
+         * Instance password. If the input parameter `NoAuth` is `true` and a VPC is used, the `Password` is optional; otherwise, it is required.
+If the instance type parameter `TypeId` indicates Redis 2.8, 4.0, or 5.0, the password cannot start with "/" and must contain 8-30 characters which are comprised of at least two of the following: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
+If the instance type parameter `TypeId` indicates CKV 3.2, the password contains 8-30 characters which must be comprised of only letters and digits.
          * @type {string || null}
          */
         this.Password = null;
@@ -590,6 +593,12 @@ class CreateInstancesRequest extends  AbstractModel {
          */
         this.NoAuth = null;
 
+        /**
+         * 
+         * @type {Array.<RedisNodeInfo> || null}
+         */
+        this.NodeSet = null;
+
     }
 
     /**
@@ -617,6 +626,15 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ReplicasReadonly = 'ReplicasReadonly' in params ? params.ReplicasReadonly : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+
+        if (params.NodeSet) {
+            this.NodeSet = new Array();
+            for (let z in params.NodeSet) {
+                let obj = new RedisNodeInfo();
+                obj.deserialize(params.NodeSet[z]);
+                this.NodeSet.push(obj);
+            }
+        }
 
     }
 }
@@ -1122,6 +1140,118 @@ class DescribeSlowLogResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCommonDBInstances request structure.
+ * @class
+ */
+class DescribeCommonDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of instance VIPs
+         * @type {Array.<number> || null}
+         */
+        this.VpcIds = null;
+
+        /**
+         * List of subnet IDs
+         * @type {Array.<number> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * List of billing modes. Valid values: `0` (monthly subscription), `1` (pay-as-you-go)
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * List of instance IDs
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * List of instance names
+         * @type {Array.<string> || null}
+         */
+        this.InstanceNames = null;
+
+        /**
+         * List of instance status
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * Sort field
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sort order
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * List of instance VIPs
+         * @type {Array.<string> || null}
+         */
+        this.Vips = null;
+
+        /**
+         * List of unique VPC IDs
+         * @type {Array.<string> || null}
+         */
+        this.UniqVpcIds = null;
+
+        /**
+         * List of unique subnet IDs
+         * @type {Array.<string> || null}
+         */
+        this.UniqSubnetIds = null;
+
+        /**
+         * Quantity limit. The default value `100` is recommended.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Vips = 'Vips' in params ? params.Vips : null;
+        this.UniqVpcIds = 'UniqVpcIds' in params ? params.UniqVpcIds : null;
+        this.UniqSubnetIds = 'UniqSubnetIds' in params ? params.UniqSubnetIds : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeDBSecurityGroups response structure.
  * @class
  */
@@ -1160,6 +1290,48 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RedisNodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.NodeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
 
     }
 }
@@ -2442,6 +2614,125 @@ class TradeDealDetail extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.Price = 'Price' in params ? params.Price : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Information of an instance
+ * @class
+ */
+class RedisCommonInstanceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * User ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Project ID of the instance
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Instance region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Instance availability zone
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance network ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Instance status. Valid values: `0` (creating), `1` (running)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance network IP
+         * @type {Array.<string> || null}
+         */
+        this.Vips = null;
+
+        /**
+         * Instance network port
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Instance creation time
+         * @type {string || null}
+         */
+        this.Createtime = null;
+
+        /**
+         * Billing mode. Valid values: `0` (pay-as-you-go), `1` (monthly subscription)
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Network type. Valid values: `0` (classic network), `1` (VPC)
+         * @type {number || null}
+         */
+        this.NetType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Vips = 'Vips' in params ? params.Vips : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Createtime = 'Createtime' in params ? params.Createtime : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
 
     }
 }
@@ -5955,6 +6246,56 @@ class ModifyMaintenanceWindowResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCommonDBInstances response structure.
+ * @class
+ */
+class DescribeCommonDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance quantity
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance information
+         * @type {Array.<RedisCommonInstanceList> || null}
+         */
+        this.InstanceDetails = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceDetails) {
+            this.InstanceDetails = new Array();
+            for (let z in params.InstanceDetails) {
+                let obj = new RedisCommonInstanceList();
+                obj.deserialize(params.InstanceDetails[z]);
+                this.InstanceDetails.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceMonitorTopNCmdTook request structure.
  * @class
  */
@@ -7689,7 +8030,9 @@ module.exports = {
     TendisNodes: TendisNodes,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
+    DescribeCommonDBInstancesRequest: DescribeCommonDBInstancesRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
+    RedisNodeInfo: RedisNodeInfo,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     InstanceEnumParam: InstanceEnumParam,
@@ -7716,6 +8059,7 @@ module.exports = {
     ModifyInstanceResponse: ModifyInstanceResponse,
     ProxyNodes: ProxyNodes,
     TradeDealDetail: TradeDealDetail,
+    RedisCommonInstanceList: RedisCommonInstanceList,
     SourceInfo: SourceInfo,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
@@ -7783,6 +8127,7 @@ module.exports = {
     ModfiyInstancePasswordResponse: ModfiyInstancePasswordResponse,
     InstanceSet: InstanceSet,
     ModifyMaintenanceWindowResponse: ModifyMaintenanceWindowResponse,
+    DescribeCommonDBInstancesResponse: DescribeCommonDBInstancesResponse,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
     DestroyPrepaidInstanceResponse: DestroyPrepaidInstanceResponse,
     DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,

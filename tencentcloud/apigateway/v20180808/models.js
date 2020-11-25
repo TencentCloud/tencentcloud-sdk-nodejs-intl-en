@@ -200,7 +200,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TradeIsolateStatus = null;
 
         /**
-         * 
+         * Tags bound to a service.
+Note: this field may return null, indicating that no valid values found.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -1572,7 +1573,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SetId = null;
 
         /**
-         * 
+         * Tags bound to a service.
+Note: this field may return null, indicating that no valid values found.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -2806,7 +2808,7 @@ class ReqParameter extends  AbstractModel {
         this.Name = null;
 
         /**
-         * API frontend parameter position, such as `head`. Valid values: head, query, path.
+         * Position of the API frontend parameter, such as the header. Supported values: `header`, `query`, and `path`.
          * @type {string || null}
          */
         this.Position = null;
@@ -3317,6 +3319,12 @@ class CreateServiceRequest extends  AbstractModel {
          */
         this.AppIdType = null;
 
+        /**
+         * Tag information.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3334,6 +3342,15 @@ class CreateServiceRequest extends  AbstractModel {
         this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
         this.SetServerName = 'SetServerName' in params ? params.SetServerName : null;
         this.AppIdType = 'AppIdType' in params ? params.AppIdType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -8539,7 +8556,7 @@ class CreateServiceResponse extends  AbstractModel {
         this.InnerSubDomain = null;
 
         /**
-         * Service creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
+         * Service creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
          * @type {string || null}
          */
         this.CreatedTime = null;

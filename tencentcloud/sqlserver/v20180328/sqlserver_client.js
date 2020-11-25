@@ -39,6 +39,7 @@ const RunMigrationRequest = models.RunMigrationRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
+const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
 const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
@@ -94,6 +95,7 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DBPrivilege = models.DBPrivilege;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
+const RecycleDBInstanceResponse = models.RecycleDBInstanceResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const CreateBackupRequest = models.CreateBackupRequest;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
@@ -164,6 +166,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to reset the account password of an instance.
+     * @param {ResetAccountPasswordRequest} req
+     * @param {function(string, ResetAccountPasswordResponse):void} cb
+     * @public
+     */
+    ResetAccountPassword(req, cb) {
+        let resp = new ResetAccountPasswordResponse();
+        this.request("ResetAccountPassword", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of backups.
      * @param {DescribeBackupsRequest} req
      * @param {function(string, DescribeBackupsResponse):void} cb
@@ -186,14 +199,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to reset the account password of an instance.
-     * @param {ResetAccountPasswordRequest} req
-     * @param {function(string, ResetAccountPasswordResponse):void} cb
+     * This API is used to manually repossess a deactivated SQL Server instance.
+     * @param {RecycleDBInstanceRequest} req
+     * @param {function(string, RecycleDBInstanceResponse):void} cb
      * @public
      */
-    ResetAccountPassword(req, cb) {
-        let resp = new ResetAccountPasswordResponse();
-        this.request("ResetAccountPassword", req, resp, cb);
+    RecycleDBInstance(req, cb) {
+        let resp = new RecycleDBInstanceResponse();
+        this.request("RecycleDBInstance", req, resp, cb);
     }
 
     /**

@@ -1448,14 +1448,14 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.Regex = null;
 
         /**
-         * URL path
+         * The matched URL path
 Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Origin-pull server when the path matches.
+         * Origin-pull server when the path matches. COS source with private read/write is not supported.
 Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */

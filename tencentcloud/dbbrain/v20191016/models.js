@@ -431,16 +431,22 @@ class DescribeSlowLogTimeSeriesStatsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Start time.
+         * Start time, such as "2019-09-10 12:13:14".
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time.
+         * End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Product = null;
 
     }
 
@@ -454,6 +460,7 @@ class DescribeSlowLogTimeSeriesStatsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -676,10 +683,16 @@ class DescribeDBDiagHistoryRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time, such as "2019-09-11 12:13:14".
+         * End time, such as "2019-09-11 12:13:14". The interval between the end time and the start time can be up to 2 days.
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Product = null;
 
     }
 
@@ -693,6 +706,7 @@ class DescribeDBDiagHistoryRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -724,16 +738,22 @@ class DescribeTopSpaceTableTimeSeriesRequest extends  AbstractModel {
         this.SortBy = null;
 
         /**
-         * Start date. It can be as early as 6 days before the current date, and defaults to 6 days before the end date.
+         * Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
          * @type {string || null}
          */
         this.StartDate = null;
 
         /**
-         * End date. It can be as early as 6 days before the current date, and defaults to the current date.
+         * End date. It can be as early as 29 days before the current date, and defaults to the current date.
          * @type {string || null}
          */
         this.EndDate = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Product = null;
 
     }
 
@@ -749,6 +769,7 @@ class DescribeTopSpaceTableTimeSeriesRequest extends  AbstractModel {
         this.SortBy = 'SortBy' in params ? params.SortBy : null;
         this.StartDate = 'StartDate' in params ? params.StartDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -989,7 +1010,7 @@ class SlowLogTopSqlItem extends  AbstractModel {
         this.SqlText = null;
 
         /**
-         * Schema
+         * Database name
          * @type {string || null}
          */
         this.Schema = null;
@@ -1109,13 +1130,13 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Start time.
+         * Start time, such as "2019-09-10 12:13:14".
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time.
+         * End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1144,6 +1165,18 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * Database name array.
+         * @type {Array.<SchemaItem> || null}
+         */
+        this.SchemaList = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -1160,6 +1193,16 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.SchemaList) {
+            this.SchemaList = new Array();
+            for (let z in params.SchemaList) {
+                let obj = new SchemaItem();
+                obj.deserialize(params.SchemaList[z]);
+                this.SchemaList.push(obj);
+            }
+        }
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -1320,6 +1363,12 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
         this.TopSpaceTables = null;
 
         /**
+         * Timestamp (in seconds) identifying when the tablespace data is collected.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1343,7 +1392,36 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
                 this.TopSpaceTables.push(obj);
             }
         }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * `SchemaItem` array
+ * @class
+ */
+class SchemaItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Schema = 'Schema' in params ? params.Schema : null;
 
     }
 }
@@ -1372,5 +1450,6 @@ module.exports = {
     TableSpaceData: TableSpaceData,
     DescribeSlowLogTopSqlsResponse: DescribeSlowLogTopSqlsResponse,
     DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
+    SchemaItem: SchemaItem,
 
 }

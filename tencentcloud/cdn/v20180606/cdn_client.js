@@ -536,7 +536,7 @@ This API is in beta test and not fully available yet. Please stay tuned.
     }
 
     /**
-     * This API is used to create a log topic. Note: up to 10 log topics can be created under one logset.
+     * This API is used to create a log topic. Up to 10 log topics can be created under one logset.
      * @param {CreateClsLogTopicRequest} req
      * @param {function(string, CreateClsLogTopicResponse):void} cb
      * @public

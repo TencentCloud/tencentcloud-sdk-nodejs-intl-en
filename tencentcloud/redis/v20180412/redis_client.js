@@ -36,7 +36,9 @@ const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const TendisNodes = models.TendisNodes;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
+const DescribeCommonDBInstancesRequest = models.DescribeCommonDBInstancesRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const RedisNodeInfo = models.RedisNodeInfo;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InstanceEnumParam = models.InstanceEnumParam;
@@ -63,6 +65,7 @@ const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const ProxyNodes = models.ProxyNodes;
 const TradeDealDetail = models.TradeDealDetail;
+const RedisCommonInstanceList = models.RedisCommonInstanceList;
 const SourceInfo = models.SourceInfo;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
@@ -130,6 +133,7 @@ const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
 const InstanceSet = models.InstanceSet;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
+const DescribeCommonDBInstancesResponse = models.DescribeCommonDBInstancesResponse;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
 const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
@@ -263,6 +267,17 @@ class RedisClient extends AbstractClient {
     DescribeTaskList(req, cb) {
         let resp = new DescribeTaskListResponse();
         this.request("DescribeTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade an instance.
+     * @param {UpgradeInstanceRequest} req
+     * @param {function(string, UpgradeInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeInstance(req, cb) {
+        let resp = new UpgradeInstanceResponse();
+        this.request("UpgradeInstance", req, resp, cb);
     }
 
     /**
@@ -596,6 +611,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query information of the Redis instance list.
+     * @param {DescribeCommonDBInstancesRequest} req
+     * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeCommonDBInstances(req, cb) {
+        let resp = new DescribeCommonDBInstancesResponse();
+        this.request("DescribeCommonDBInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the purchasable capacity specifications of Redis instances in the specified AZ and instance type. If you are not in the allowlist for the AZ or instance type, you cannot view the details of the capacity specifications. To apply for the eligibility, please submit a ticket.
      * @param {DescribeProductInfoRequest} req
      * @param {function(string, DescribeProductInfoResponse):void} cb
@@ -604,17 +630,6 @@ class RedisClient extends AbstractClient {
     DescribeProductInfo(req, cb) {
         let resp = new DescribeProductInfoResponse();
         this.request("DescribeProductInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to upgrade an instance.
-     * @param {UpgradeInstanceRequest} req
-     * @param {function(string, UpgradeInstanceResponse):void} cb
-     * @public
-     */
-    UpgradeInstance(req, cb) {
-        let resp = new UpgradeInstanceResponse();
-        this.request("UpgradeInstance", req, resp, cb);
     }
 
     /**

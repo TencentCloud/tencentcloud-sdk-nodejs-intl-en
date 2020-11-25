@@ -1633,6 +1633,78 @@ class DeleteEcdnDomainResponse extends  AbstractModel {
 }
 
 /**
+ * Tag key and tag value.
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class WebSocket extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+
+    }
+}
+
+/**
  * StopEcdnDomain response structure.
  * @class
  */
@@ -1848,6 +1920,18 @@ class AddEcdnDomainRequest extends  AbstractModel {
          */
         this.ForceRedirect = null;
 
+        /**
+         * Tag bound to a domain name.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * 
+         * @type {WebSocket || null}
+         */
+        this.WebSocket = null;
+
     }
 
     /**
@@ -1907,6 +1991,21 @@ class AddEcdnDomainRequest extends  AbstractModel {
             let obj = new ForceRedirect();
             obj.deserialize(params.ForceRedirect)
             this.ForceRedirect = obj;
+        }
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+
+        if (params.WebSocket) {
+            let obj = new WebSocket();
+            obj.deserialize(params.WebSocket)
+            this.WebSocket = obj;
         }
 
     }
@@ -2865,6 +2964,19 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Readonly = null;
 
+        /**
+         * Domain name tag.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * 
+         * @type {WebSocket || null}
+         */
+        this.WebSocket = null;
+
     }
 
     /**
@@ -2933,6 +3045,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Area = 'Area' in params ? params.Area : null;
         this.Readonly = 'Readonly' in params ? params.Readonly : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+
+        if (params.WebSocket) {
+            let obj = new WebSocket();
+            obj.deserialize(params.WebSocket)
+            this.WebSocket = obj;
+        }
 
     }
 }
@@ -3058,6 +3185,8 @@ module.exports = {
     DomainBriefInfo: DomainBriefInfo,
     StartEcdnDomainResponse: StartEcdnDomainResponse,
     DeleteEcdnDomainResponse: DeleteEcdnDomainResponse,
+    Tag: Tag,
+    WebSocket: WebSocket,
     StopEcdnDomainResponse: StopEcdnDomainResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,

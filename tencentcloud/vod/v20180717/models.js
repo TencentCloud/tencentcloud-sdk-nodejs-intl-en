@@ -643,7 +643,10 @@ class AudioTrackItem extends  AbstractModel {
         super();
 
         /**
-         * Source of media file for audio material, which can be an ID of a VOD file or URL of another file.
+         * Source of media material for audio segment, which can be:
+<li>VOD media file ID;</li>
+<li>Download URL of other media files.</li>
+Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
          * @type {string || null}
          */
         this.SourceMedia = null;
@@ -2531,9 +2534,10 @@ In Hz.
 
         /**
          * Audio channel system. Valid values:
-<li>1: mono</li>
-<li>2: dual</li>
-<li>6: stereo</li>
+<li>1: Mono-channel</li>
+<li>2: Dual-channel</li>
+<li>6: Stereo</li>
+You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
          * @type {number || null}
          */
         this.AudioChannel = null;
@@ -2773,9 +2777,10 @@ In Hz.
 
         /**
          * Audio channel system. Valid values:
-<li>1: mono</li>
-<li>2: dual</li>
-<li>6: stereo</li>
+<li>1: Mono-channel</li>
+<li>2: Dual-channel</li>
+<li>6: Stereo</li>
+You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
 Default value: 2.
          * @type {number || null}
          */
@@ -2873,7 +2878,7 @@ class ComposeMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * List of input media tracks, i.e., information of multiple tracks composed of video, audio, image, and other materials. Multiple input tracks are aligned with the output media file on the time axis. The materials of each track at the same time point on the time axis will be superimposed. Specifically, videos or images will be superimposed for video image by track order, where a material with a higher track order will be more on top, while audio materials will be mixed.
+         * List of input media tracks, i.e., information of multiple tracks composed of video, audio, image, and other materials. <li>Multiple input tracks are aligned with the output media file on the time axis. </li><li>The materials of each track at the same time point on the time axis will be superimposed. Specifically, videos or images will be superimposed for video image by track order, where a material with a higher track order will be more on top, while audio materials will be mixed. </li><li>Up to 10 tracks are supported for each type (video, audio, or image).</li>
          * @type {Array.<MediaTrack> || null}
          */
         this.Tracks = null;
@@ -2897,7 +2902,7 @@ class ComposeMediaRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * This parameter is used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is null or an empty string, the above operation will not be performed.
+         * ID used for task deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -4054,8 +4059,13 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Type of video processing task to be queried. Valid value: Transcode. Default value: Transcode.
-<li>Transcode: transcoding</li>
+         * This API is used to query video processing task types. The following types are supported now:
+<li> Transcoding: Basic transcoding</li>
+<li> Transcoding-TESHD: TESHD transcoding</li>
+<li> Editing: Video editing</li>
+<li> AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
+<li> ContentAudit: content audit</li>
+<li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing (not recommended)</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -4591,6 +4601,41 @@ class FileDeleteTask extends  AbstractModel {
             return;
         }
         this.FileIdSet = 'FileIdSet' in params ? params.FileIdSet : null;
+
+    }
+}
+
+/**
+ * Tag key value. For details, see [Tags](https://intl.cloud.tencent.com/document/product/651?from_cn_redirect=1).
+ * @class
+ */
+class ResourceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -5331,7 +5376,7 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         super();
 
         /**
-         * Information of input video, including video's URL, name, and custom ID.
+         * This API is<font color='red'>disused</font>. We recommend using an alternative API. For more information, see API overview.
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
@@ -5379,7 +5424,7 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -5887,16 +5932,19 @@ class TaskStatData extends  AbstractModel {
         super();
 
         /**
-         * Task type
-<li>Transcode: transcoding</li>
-<li>Snapshot: screencapturing</li>
+         * Task type.
+<li> Transcoding: basic transcoding</li>
+<li> Transcoding-TESHD: TESHD transcoding</li>
+<li> Editing: Video editing</li>
+<li> AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
+<li> ContentAudit: content audit</li>
+<li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing (not recommended)</li>
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * Task statistics overview.
-<li>Transcode: usage in seconds</li>
+         * Task statistics overview (usage unit: second).
          * @type {Array.<TaskStatDataItem> || null}
          */
         this.Summary = null;
@@ -6042,7 +6090,7 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * ID used for deduplication. If there was a request with the same ID on the last day, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -7418,10 +7466,16 @@ class EditMediaRequest extends  AbstractModel {
         this.TasksPriority = null;
 
         /**
-         * ID used for task deduplication. If there was a request with the same ID in the last day, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * ID used for task deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
+
+        /**
+         * Reserved field for special purposes.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
         /**
          * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -7468,6 +7522,7 @@ class EditMediaRequest extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -8515,7 +8570,10 @@ class StickerTrackItem extends  AbstractModel {
         super();
 
         /**
-         * Source of media file for sticker material, which can be an ID of a VOD file or URL of another file.
+         * Source of media material for sticker segment, which can be:
+<li>VOD media file ID;</li>
+<li>Download URL of other media files.</li>
+Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
          * @type {string || null}
          */
         this.SourceMedia = null;
@@ -8635,7 +8693,7 @@ Currently, a resolution within 640x480 must be specified for H.265. and the `av1
         this.Codec = null;
 
         /**
-         * Video frame rate in Hz. Value range: [0, 60].
+         * Video frame rate in Hz. Value range: [0,100].
 If the value is 0, the frame rate will be the same as that of the source video.
          * @type {number || null}
          */
@@ -8683,14 +8741,23 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Height = null;
 
         /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+         * Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: stretch video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding;</li>
+<li>black: keep the image's aspect ratio unchanged and fill the uncovered area with black color.</li>
+<li>white: keep the image's aspect ratio unchanged and fill the uncovered area with white color.</li>
+<li>gauss: keep the image's aspect ratio unchanged and apply Gaussian blur to the uncovered area.</li>
 Default value: black.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FillType = null;
+
+        /**
+         * Video Constant Rate Factor (CRF). Value range: 1-51.
+If this parameter is specified, CRF will be used to control video bitrate for transcoding and the original video bitrate will not be used.
+We don’t recommend specifying this parameter if you have no special requirements.
+         * @type {number || null}
+         */
+        this.Vcrf = null;
 
     }
 
@@ -8708,6 +8775,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
 
     }
 }
@@ -10036,7 +10104,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -12775,9 +12843,11 @@ class ModifySubAppIdStatusRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * Subapplication status. Valid values:
-<li>On: enabled</li>
-<li>Off: disabled</li>
+         * Subapplication status. Valid strings include:
+<li>On: to enable the subapplication.</li>
+<li>Off: to disable the subapplication.</li>
+<li>Destroyed: to terminate the subapplication. </li>
+You cannot enable a subapplication when its status is “Destroying”. You can enable it after it was terminated.
          * @type {string || null}
          */
         this.Status = null;
@@ -15429,7 +15499,7 @@ For more information about supported extensions, please see [Media Types](https:
         this.SessionContext = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -16697,6 +16767,14 @@ class AdaptiveStreamTemplate extends  AbstractModel {
          */
         this.RemoveAudio = null;
 
+        /**
+         * Whether to remove a video stream. Valid values:
+<li>0: no,</li>
+<li>1: yes.</li>
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
     }
 
     /**
@@ -16719,6 +16797,7 @@ class AdaptiveStreamTemplate extends  AbstractModel {
             this.Audio = obj;
         }
         this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
 
     }
 }
@@ -16750,6 +16829,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.MosaicSet = null;
 
+        /**
+         * Start time offset of a transcoded video, in seconds.
+<li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
+<li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
+<li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a transcoded video, in seconds.
+<li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
+<li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
+<li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
     }
 
     /**
@@ -16778,6 +16875,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.MosaicSet.push(obj);
             }
         }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
     }
 }
@@ -19022,15 +19121,15 @@ class WatermarkInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Text content of up to 100 characters. This needs to be entered only when the watermark type is text.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Text content, which contains up to 100 characters. This field is required only when the watermark type is text.
+VOD does not support adding text watermarks on screenshots.
          * @type {string || null}
          */
         this.TextContent = null;
 
         /**
-         * SVG content of up to 2,000,000 characters. This needs to be entered only when the watermark type is `SVG`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * SVG content, which contains up to 2,000,000 characters. This field is required only when the watermark type is SVG.
+VOD does not support adding SVG watermarks on screenshots.
          * @type {string || null}
          */
         this.SvgContent = null;
@@ -19639,7 +19738,7 @@ Currently, a resolution within 640x480 must be specified for H.265. and the `av1
         this.Codec = null;
 
         /**
-         * Video frame rate in Hz. Value range: [0, 60].
+         * Video frame rate in Hz. Value range: [0,100].
 If the value is 0, the frame rate will be the same as that of the source video.
          * @type {number || null}
          */
@@ -19678,12 +19777,20 @@ If the value is 0, the bitrate of the video will be the same as that of the sour
 
         /**
          * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-Default value: black.
+<li> stretch: stretch video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding;</li>
+<li>black: keep the image's aspect ratio unchanged and fill the uncovered area with black color.</li>
+<li>white: keep the image's aspect ratio unchanged and fill the uncovered area with white color.</li>
+<li>gauss: keep the image's aspect ratio unchanged and apply Gaussian blur to the uncovered area.</li>
          * @type {string || null}
          */
         this.FillType = null;
+
+        /**
+         * Video Constant Rate Factor (CRF). Value range: 1-51. This parameter will be disabled if you enter 0.
+We don’t recommend specifying this parameter if you have no special requirements.
+         * @type {number || null}
+         */
+        this.Vcrf = null;
 
     }
 
@@ -19701,6 +19808,7 @@ Default value: black.
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
 
     }
 }
@@ -20799,6 +20907,12 @@ class DescribeSubAppIdsRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Tag information. You can query the list of subapplications with specified tags.
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -20807,6 +20921,15 @@ class DescribeSubAppIdsRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -22231,9 +22354,11 @@ class SubAppIdInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Subapplication status. Valid values:
+         * Subapplication status. Valid strings include:
 <li>On: enabled;</li>
 <li>Off: disabled.</li>
+<li>Destroying: terminating. </li>
+<li>Destroyed: terminated. </li>
          * @type {string || null}
          */
         this.Status = null;
@@ -23740,7 +23865,10 @@ class VideoTrackItem extends  AbstractModel {
         super();
 
         /**
-         * Source of media material for video segment, which can be an ID of a VOD file or URL of another file.
+         * Source of media material for video segment, which can be:
+<li>VOD media file ID;</li>
+<li>Download URL of other media files.</li>
+Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
          * @type {string || null}
          */
         this.SourceMedia = null;
@@ -27480,6 +27608,7 @@ module.exports = {
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
     FileDeleteTask: FileDeleteTask,
+    ResourceTag: ResourceTag,
     AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
     EditMediaTaskInput: EditMediaTaskInput,
     UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,

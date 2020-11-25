@@ -1134,6 +1134,34 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * RecycleDBInstance request structure.
+ * @class
+ */
+class RecycleDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * ModifyBackupStrategy request structure.
  * @class
  */
@@ -3067,6 +3095,12 @@ class AccountDetail extends  AbstractModel {
          */
         this.Dbs = null;
 
+        /**
+         * Whether it is an admin account
+         * @type {boolean || null}
+         */
+        this.IsAdmin = null;
+
     }
 
     /**
@@ -3092,6 +3126,7 @@ class AccountDetail extends  AbstractModel {
                 this.Dbs.push(obj);
             }
         }
+        this.IsAdmin = 'IsAdmin' in params ? params.IsAdmin : null;
 
     }
 }
@@ -3260,7 +3295,7 @@ class DBInstance extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * Instance high availability status. 1: dual-server high-availability, 2: single-server
+         * High-availability instance type. Valid values: 1 (dual-server high-availability), 2 (standalone), 3 (multi-AZ), 4 (multi-AZ cluster), 5 (cluster), 9 (used for Tencent’s business)
          * @type {number || null}
          */
         this.Model = null;
@@ -4014,6 +4049,41 @@ class DescribeOrdersRequest extends  AbstractModel {
             return;
         }
         this.DealNames = 'DealNames' in params ? params.DealNames : null;
+
+    }
+}
+
+/**
+ * RecycleDBInstance response structure.
+ * @class
+ */
+class RecycleDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5240,6 +5310,7 @@ module.exports = {
     RestoreInstanceResponse: RestoreInstanceResponse,
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
+    RecycleDBInstanceRequest: RecycleDBInstanceRequest,
     ModifyBackupStrategyRequest: ModifyBackupStrategyRequest,
     MigrateTask: MigrateTask,
     SpecInfo: SpecInfo,
@@ -5295,6 +5366,7 @@ module.exports = {
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DBPrivilege: DBPrivilege,
     DescribeOrdersRequest: DescribeOrdersRequest,
+    RecycleDBInstanceResponse: RecycleDBInstanceResponse,
     DeleteAccountRequest: DeleteAccountRequest,
     CreateBackupRequest: CreateBackupRequest,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,

@@ -5169,11 +5169,10 @@ class HttpHeaderPathRule extends  AbstractModel {
         super();
 
         /**
-         * HTTP header setting method
-add: add header. If a header exists, then there will be a duplicated header.
-set: only supports origin-pull header configuration. If a header exists, it will be overwritten. If one does not exist, then the header will be added.
-del: delete header
-Note: this field may return null, indicating that no valid values can be obtained.
+         * HTTP header setting methods
+`add`: add header. If a header already exists, then there will be a duplicated header.
+`del`: delete header.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HeaderMode = null;
@@ -8866,6 +8865,12 @@ class PurgePathCacheRequest extends  AbstractModel {
          */
         this.FlushType = null;
 
+        /**
+         * Whether to encode Chinese characters before purge.
+         * @type {boolean || null}
+         */
+        this.UrlEncode = null;
+
     }
 
     /**
@@ -8877,6 +8882,7 @@ class PurgePathCacheRequest extends  AbstractModel {
         }
         this.Paths = 'Paths' in params ? params.Paths : null;
         this.FlushType = 'FlushType' in params ? params.FlushType : null;
+        this.UrlEncode = 'UrlEncode' in params ? params.UrlEncode : null;
 
     }
 }
@@ -8970,6 +8976,12 @@ The specified purging region should match the domain name acceleration region
          */
         this.Area = null;
 
+        /**
+         * Whether to encode Chinese characters before purge.
+         * @type {boolean || null}
+         */
+        this.UrlEncode = null;
+
     }
 
     /**
@@ -8981,6 +8993,7 @@ The specified purging region should match the domain name acceleration region
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.UrlEncode = 'UrlEncode' in params ? params.UrlEncode : null;
 
     }
 }

@@ -165,15 +165,15 @@ class CreateDBInstancesRequest extends  AbstractModel {
 }
 
 /**
- * RestartDBInstance request structure.
+ * DestroyDBInstance request structure.
  * @class
  */
-class RestartDBInstanceRequest extends  AbstractModel {
+class DestroyDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of postgres-6r233v55
+         * ID of the instance to be deleted
          * @type {string || null}
          */
         this.DBInstanceId = null;
@@ -188,6 +188,91 @@ class RestartDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
+ * CreateServerlessDBInstance request structure.
+ * @class
+ */
+class CreateServerlessDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Availability zone ID. Only ap-shanghai-2, ap-beijing-1, and ap-guangzhou-2 are supported during the beta test.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance name. The value must be unique for the same account.
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
+
+        /**
+         * Kernel version of a PostgreSQL instance. Currently, only 10.4 is supported.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Database character set of a PostgreSQL instance. Currently, only UTF-8 is supported.
+         * @type {string || null}
+         */
+        this.DBCharset = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC subnet ID.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Array of tags to be bound with the instance
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.DBCharset = 'DBCharset' in params ? params.DBCharset : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -313,15 +398,21 @@ class DescribeOrdersResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDatabases request structure.
+ * DeleteServerlessDBInstance request structure.
  * @class
  */
-class DescribeDatabasesRequest extends  AbstractModel {
+class DeleteServerlessDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Instance name. Either instance name or instance ID (or both) must be passed in. If both are passed in, the instance ID will prevail.
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
+
+        /**
+         * Instance ID. Either instance name or instance ID (or both) must be passed in. If both are passed in, the instance ID will prevail.
          * @type {string || null}
          */
         this.DBInstanceId = null;
@@ -335,6 +426,7 @@ class DescribeDatabasesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
@@ -762,6 +854,125 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
 }
 
 /**
+ * Specification description
+ * @class
+ */
+class SpecItemInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specification ID
+         * @type {string || null}
+         */
+        this.SpecCode = null;
+
+        /**
+         * PostgreSQL kernel version number
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Full version name corresponding to kernel number
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory size in MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Maximum storage capacity in GB supported by this specification
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * Minimum storage capacity in GB supported by this specification
+         * @type {number || null}
+         */
+        this.MinStorage = null;
+
+        /**
+         * Estimated QPS for this specification
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * Billing ID for this specification
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Machine type
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * RestartDBInstance request structure.
+ * @class
+ */
+class RestartDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of postgres-6r233v55
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
  * InquiryPriceUpgradeDBInstance response structure.
  * @class
  */
@@ -917,18 +1128,117 @@ class ErrLogDetail extends  AbstractModel {
 }
 
 /**
- * DestroyDBInstance request structure.
+ * PostgreSQL for Serverless instance description
  * @class
  */
-class DestroyDBInstanceRequest extends  AbstractModel {
+class ServerlessDBInstance extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the instance to be deleted
+         * Instance ID, which is the unique identifier
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DBInstanceId = null;
+
+        /**
+         * Instance name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
+
+        /**
+         * Instance status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBInstanceStatus = null;
+
+        /**
+         * Region
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Availability zone
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Project ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * VPC ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Character set
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBCharset = null;
+
+        /**
+         * Database version
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Creation time
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Instance network information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ServerlessDBInstanceNetInfo> || null}
+         */
+        this.DBInstanceNetInfo = null;
+
+        /**
+         * Instance account information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ServerlessDBAccount> || null}
+         */
+        this.DBAccountSet = null;
+
+        /**
+         * Information of the databases in an instance
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DBDatabaseList = null;
+
+        /**
+         * The array of tags bound to an instance
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
 
     }
 
@@ -940,6 +1250,95 @@ class DestroyDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
+        this.DBInstanceStatus = 'DBInstanceStatus' in params ? params.DBInstanceStatus : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DBCharset = 'DBCharset' in params ? params.DBCharset : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.DBInstanceNetInfo) {
+            this.DBInstanceNetInfo = new Array();
+            for (let z in params.DBInstanceNetInfo) {
+                let obj = new ServerlessDBInstanceNetInfo();
+                obj.deserialize(params.DBInstanceNetInfo[z]);
+                this.DBInstanceNetInfo.push(obj);
+            }
+        }
+
+        if (params.DBAccountSet) {
+            this.DBAccountSet = new Array();
+            for (let z in params.DBAccountSet) {
+                let obj = new ServerlessDBAccount();
+                obj.deserialize(params.DBAccountSet[z]);
+                this.DBAccountSet.push(obj);
+            }
+        }
+        this.DBDatabaseList = 'DBDatabaseList' in params ? params.DBDatabaseList : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeServerlessDBInstances response structure.
+ * @class
+ */
+class DescribeServerlessDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of query results
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Query results
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ServerlessDBInstance> || null}
+         */
+        this.DBInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DBInstanceSet) {
+            this.DBInstanceSet = new Array();
+            for (let z in params.DBInstanceSet) {
+                let obj = new ServerlessDBInstance();
+                obj.deserialize(params.DBInstanceSet[z]);
+                this.DBInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1031,6 +1430,69 @@ class DescribeZonesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * UpgradeDBInstance request structure.
+ * @class
+ */
+class UpgradeDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance memory size in GB after upgrade
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance disk size in GB after upgrade
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Instance ID in the format of postgres-lnp6j617
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Whether to automatically use vouchers. 1: yes, 0: no. Default value: no
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list (only one voucher can be specified currently)
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Activity ID
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
     }
 }
@@ -1135,24 +1597,18 @@ class RegionInfo extends  AbstractModel {
 }
 
 /**
- * The information of tags associated with instances, including `TagKey` and `TagValue`
+ * DeleteServerlessDBInstance response structure.
  * @class
  */
-class Tag extends  AbstractModel {
+class DeleteServerlessDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TagKey = null;
-
-        /**
-         * Tag value
-         * @type {string || null}
-         */
-        this.TagValue = null;
+        this.RequestId = null;
 
     }
 
@@ -1163,8 +1619,7 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1607,6 +2062,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.TagList = null;
 
+        /**
+         * Primary instance information, which is returned only when the instance is read-only
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MasterDBInstanceId = null;
+
+        /**
+         * Number of read-only instances
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReadOnlyInstanceNum = null;
+
+        /**
+         * The status of a instance in a read-only group
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StatusInReadonlyGroup = null;
+
     }
 
     /**
@@ -1660,6 +2136,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.TagList.push(obj);
             }
         }
+        this.MasterDBInstanceId = 'MasterDBInstanceId' in params ? params.MasterDBInstanceId : null;
+        this.ReadOnlyInstanceNum = 'ReadOnlyInstanceNum' in params ? params.ReadOnlyInstanceNum : null;
+        this.StatusInReadonlyGroup = 'StatusInReadonlyGroup' in params ? params.StatusInReadonlyGroup : null;
 
     }
 }
@@ -1939,72 +2418,33 @@ class DescribeDBBackupsRequest extends  AbstractModel {
 }
 
 /**
- * Specification description
+ * PostgreSQL for Serverless instance account description
  * @class
  */
-class SpecItemInfo extends  AbstractModel {
+class ServerlessDBAccount extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specification ID
+         * Username
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.SpecCode = null;
+        this.DBUser = null;
 
         /**
-         * PostgreSQL kernel version number
+         * Password
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Version = null;
+        this.DBPassword = null;
 
         /**
-         * Full version name corresponding to kernel number
-         * @type {string || null}
-         */
-        this.VersionName = null;
-
-        /**
-         * Number of CPU cores
+         * The maximum number of connections
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Cpu = null;
-
-        /**
-         * Memory size in MB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Maximum storage capacity in GB supported by this specification
-         * @type {number || null}
-         */
-        this.MaxStorage = null;
-
-        /**
-         * Minimum storage capacity in GB supported by this specification
-         * @type {number || null}
-         */
-        this.MinStorage = null;
-
-        /**
-         * Estimated QPS for this specification
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * Billing ID for this specification
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
-         * Machine type
-         * @type {string || null}
-         */
-        this.Type = null;
+        this.DBConnLimit = null;
 
     }
 
@@ -2015,16 +2455,9 @@ class SpecItemInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.Version = 'Version' in params ? params.Version : null;
-        this.VersionName = 'VersionName' in params ? params.VersionName : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
-        this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.DBUser = 'DBUser' in params ? params.DBUser : null;
+        this.DBPassword = 'DBPassword' in params ? params.DBPassword : null;
+        this.DBConnLimit = 'DBConnLimit' in params ? params.DBConnLimit : null;
 
     }
 }
@@ -2151,6 +2584,41 @@ class RenewInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * The information of tags associated with instances, including `TagKey` and `TagValue`
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * Order details
  * @class
  */
@@ -2264,42 +2732,18 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
- * AZ information such as number and status
+ * DescribeDatabases request structure.
  * @class
  */
-class ZoneInfo extends  AbstractModel {
+class DescribeDatabasesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ abbreviation
+         * Instance ID
          * @type {string || null}
          */
-        this.Zone = null;
-
-        /**
-         * AZ name
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * AZ number
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Availability status. UNAVAILABLE: unavailable, AVAILABLE: available
-         * @type {string || null}
-         */
-        this.ZoneState = null;
-
-        /**
-         * Whether the AZ supports IPv6 address access
-         * @type {number || null}
-         */
-        this.ZoneSupportIpv6 = null;
+        this.DBInstanceId = null;
 
     }
 
@@ -2310,11 +2754,7 @@ class ZoneInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
-        this.ZoneSupportIpv6 = 'ZoneSupportIpv6' in params ? params.ZoneSupportIpv6 : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -2477,6 +2917,62 @@ class DescribeDBErrlogsRequest extends  AbstractModel {
         this.SearchKeys = 'SearchKeys' in params ? params.SearchKeys : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * AZ information such as number and status
+ * @class
+ */
+class ZoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ abbreviation
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * AZ number
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Availability status. UNAVAILABLE: unavailable, AVAILABLE: available
+         * @type {string || null}
+         */
+        this.ZoneState = null;
+
+        /**
+         * Whether the AZ supports IPv6 address access
+         * @type {number || null}
+         */
+        this.ZoneSupportIpv6 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
+        this.ZoneSupportIpv6 = 'ZoneSupportIpv6' in params ? params.ZoneSupportIpv6 : null;
 
     }
 }
@@ -2666,6 +3162,67 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
         }
         this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * PostgreSQL for Serverless instance network description
+ * @class
+ */
+class ServerlessDBInstanceNetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * IP address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Port number
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Network type
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
 
     }
 }
@@ -2874,6 +3431,70 @@ class DescribeDBSlowlogsRequest extends  AbstractModel {
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeServerlessDBInstances request structure.
+ * @class
+ */
+class DescribeServerlessDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query conditions
+         * @type {Array.<Filter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * The number of queries
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The offset value
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting metric. Currently, only "CreateTime" (instance creation time) is supported.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Ascending and descending are supported.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new Filter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -3161,48 +3782,24 @@ class NormalQueryItem extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance request structure.
+ * CreateServerlessDBInstance response structure.
  * @class
  */
-class UpgradeDBInstanceRequest extends  AbstractModel {
+class CreateServerlessDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance memory size in GB after upgrade
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Instance disk size in GB after upgrade
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Instance ID in the format of postgres-lnp6j617
+         * Instance ID, such as "postgres-xxxxx". The value must be globally unique.
          * @type {string || null}
          */
         this.DBInstanceId = null;
 
         /**
-         * Whether to automatically use vouchers. 1: yes, 0: no. Default value: no
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.AutoVoucher = null;
-
-        /**
-         * Voucher ID list (only one voucher can be specified currently)
-         * @type {Array.<string> || null}
-         */
-        this.VoucherIds = null;
-
-        /**
-         * Activity ID
-         * @type {number || null}
-         */
-        this.ActivityId = null;
+        this.RequestId = null;
 
     }
 
@@ -3213,12 +3810,8 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3595,11 +4188,12 @@ class Xlog extends  AbstractModel {
 
 module.exports = {
     CreateDBInstancesRequest: CreateDBInstancesRequest,
-    RestartDBInstanceRequest: RestartDBInstanceRequest,
+    DestroyDBInstanceRequest: DestroyDBInstanceRequest,
+    CreateServerlessDBInstanceRequest: CreateServerlessDBInstanceRequest,
     InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
     SetAutoRenewFlagRequest: SetAutoRenewFlagRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
-    DescribeDatabasesRequest: DescribeDatabasesRequest,
+    DeleteServerlessDBInstanceRequest: DeleteServerlessDBInstanceRequest,
     DescribeDBXlogsRequest: DescribeDBXlogsRequest,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
     AccountInfo: AccountInfo,
@@ -3608,16 +4202,20 @@ module.exports = {
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
+    SpecItemInfo: SpecItemInfo,
+    RestartDBInstanceRequest: RestartDBInstanceRequest,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     ErrLogDetail: ErrLogDetail,
-    DestroyDBInstanceRequest: DestroyDBInstanceRequest,
+    ServerlessDBInstance: ServerlessDBInstance,
+    DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeZonesRequest: DescribeZonesRequest,
+    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     SpecInfo: SpecInfo,
     RegionInfo: RegionInfo,
-    Tag: Tag,
+    DeleteServerlessDBInstanceResponse: DeleteServerlessDBInstanceResponse,
     SlowlogDetail: SlowlogDetail,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
@@ -3632,30 +4230,34 @@ module.exports = {
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     InitDBInstancesResponse: InitDBInstancesResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
-    SpecItemInfo: SpecItemInfo,
+    ServerlessDBAccount: ServerlessDBAccount,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     Filter: Filter,
     RenewInstanceRequest: RenewInstanceRequest,
+    Tag: Tag,
     PgDeal: PgDeal,
     DescribeRegionsResponse: DescribeRegionsResponse,
-    ZoneInfo: ZoneInfo,
+    DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,
+    ZoneInfo: ZoneInfo,
     DBBackup: DBBackup,
     DBInstanceNetInfo: DBInstanceNetInfo,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     DestroyDBInstanceResponse: DestroyDBInstanceResponse,
     DescribeDBInstanceAttributeResponse: DescribeDBInstanceAttributeResponse,
     DescribeDBSlowlogsRequest: DescribeDBSlowlogsRequest,
+    DescribeServerlessDBInstancesRequest: DescribeServerlessDBInstancesRequest,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     NormalQueryItem: NormalQueryItem,
-    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    CreateServerlessDBInstanceResponse: CreateServerlessDBInstanceResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
     DescribeDBInstanceAttributeRequest: DescribeDBInstanceAttributeRequest,

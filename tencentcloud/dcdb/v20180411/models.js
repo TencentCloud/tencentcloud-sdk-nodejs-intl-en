@@ -1387,7 +1387,7 @@ class DescribeDCDBShardsResponse extends  AbstractModel {
         this.Shards = null;
 
         /**
-         * Disaster recovery flag. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
+         * DCN type. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -3413,7 +3413,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Cpu = null;
 
         /**
-         * IPv6 flag for an instance
+         * Indicates whether the instance uses IPv6
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -3448,7 +3448,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.WanStatusIpv6 = null;
 
         /**
-         * DCN flag. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
+         * DCN type. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */

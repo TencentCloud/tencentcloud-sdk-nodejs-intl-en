@@ -17,11 +17,12 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
-const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
+const CreateServerlessDBInstanceRequest = models.CreateServerlessDBInstanceRequest;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const SetAutoRenewFlagRequest = models.SetAutoRenewFlagRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
-const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
+const DeleteServerlessDBInstanceRequest = models.DeleteServerlessDBInstanceRequest;
 const DescribeDBXlogsRequest = models.DescribeDBXlogsRequest;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
 const AccountInfo = models.AccountInfo;
@@ -30,16 +31,20 @@ const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const SpecItemInfo = models.SpecItemInfo;
+const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const ErrLogDetail = models.ErrLogDetail;
-const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
+const ServerlessDBInstance = models.ServerlessDBInstance;
+const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const SpecInfo = models.SpecInfo;
 const RegionInfo = models.RegionInfo;
-const Tag = models.Tag;
+const DeleteServerlessDBInstanceResponse = models.DeleteServerlessDBInstanceResponse;
 const SlowlogDetail = models.SlowlogDetail;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
@@ -54,30 +59,34 @@ const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
-const SpecItemInfo = models.SpecItemInfo;
+const ServerlessDBAccount = models.ServerlessDBAccount;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const Filter = models.Filter;
 const RenewInstanceRequest = models.RenewInstanceRequest;
+const Tag = models.Tag;
 const PgDeal = models.PgDeal;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
-const ZoneInfo = models.ZoneInfo;
+const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
+const ZoneInfo = models.ZoneInfo;
 const DBBackup = models.DBBackup;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
 const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
+const DescribeServerlessDBInstancesRequest = models.DescribeServerlessDBInstancesRequest;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const NormalQueryItem = models.NormalQueryItem;
-const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const CreateServerlessDBInstanceResponse = models.CreateServerlessDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
@@ -265,14 +274,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to renew an instance.
-     * @param {RenewInstanceRequest} req
-     * @param {function(string, RenewInstanceResponse):void} cb
+     * This API is used to create a PostgreSQL for Serverless instance. If the creation succeeds, the instance ID will be returned.
+     * @param {CreateServerlessDBInstanceRequest} req
+     * @param {function(string, CreateServerlessDBInstanceResponse):void} cb
      * @public
      */
-    RenewInstance(req, cb) {
-        let resp = new RenewInstanceResponse();
-        this.request("RenewInstance", req, resp, cb);
+    CreateServerlessDBInstance(req, cb) {
+        let resp = new CreateServerlessDBInstanceResponse();
+        this.request("CreateServerlessDBInstance", req, resp, cb);
     }
 
     /**
@@ -295,6 +304,17 @@ class PostgresClient extends AbstractClient {
     DescribeZones(req, cb) {
         let resp = new DescribeZonesResponse();
         this.request("DescribeZones", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a PostgreSQL for Serverless instance.
+     * @param {DeleteServerlessDBInstanceRequest} req
+     * @param {function(string, DeleteServerlessDBInstanceResponse):void} cb
+     * @public
+     */
+    DeleteServerlessDBInstance(req, cb) {
+        let resp = new DeleteServerlessDBInstanceResponse();
+        this.request("DeleteServerlessDBInstance", req, resp, cb);
     }
 
     /**
@@ -361,6 +381,28 @@ class PostgresClient extends AbstractClient {
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of one or more PostgreSQL for Serverless instances.
+     * @param {DescribeServerlessDBInstancesRequest} req
+     * @param {function(string, DescribeServerlessDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeServerlessDBInstances(req, cb) {
+        let resp = new DescribeServerlessDBInstancesResponse();
+        this.request("DescribeServerlessDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to renew an instance.
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
+     * @public
+     */
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
     }
 
     /**

@@ -31,7 +31,7 @@ class CreateMediaConnectFlowRequest extends  AbstractModel {
         this.FlowName = null;
 
         /**
-         * Maximum bandwidth in bps. Valid values: [10000000, 20000000, 50000000].
+         * Maximum bandwidth in bps. Valid values: 10000000, 20000000, 50000000.
          * @type {number || null}
          */
         this.MaxBandwidth = null;
@@ -257,7 +257,7 @@ class DescribeMediaConnectFlowsResponse extends  AbstractModel {
         super();
 
         /**
-         * Configuration information list of flow.
+         * Configuration information list of a flow.
          * @type {Array.<DescribeFlow> || null}
          */
         this.Infos = null;
@@ -664,7 +664,7 @@ class CreateMediaConnectOutputRequest extends  AbstractModel {
         this.FlowId = null;
 
         /**
-         * Output configuration of flow.
+         * Output configuration of a flow.
          * @type {CreateOutput || null}
          */
         this.Output = null;
@@ -698,7 +698,7 @@ class CreateInputSRTSettings extends  AbstractModel {
         super();
 
         /**
-         * Stream ID, which can contain 0–512 letters, digits, and special symbols (.#!:&,=_-).
+         * Stream ID, which can contain 0 to 512 letters, digits, and special characters (.#!:&,=_-).
          * @type {string || null}
          */
         this.StreamId = null;
@@ -710,7 +710,7 @@ class CreateInputSRTSettings extends  AbstractModel {
         this.Latency = null;
 
         /**
-         * Receipt latency in ms. Default value: 120. Value range: [0, 3000].
+         * Receive latency in ms. Default value: 120. Value range: [0, 3000].
          * @type {number || null}
          */
         this.RecvLatency = null;
@@ -734,7 +734,7 @@ class CreateInputSRTSettings extends  AbstractModel {
         this.Passphrase = null;
 
         /**
-         * Key length. Default value: 0. Valid values: [0|16|24|32].
+         * Key length. Default value: 0. Valid values: 0, 16, 24, 32.
          * @type {number || null}
          */
         this.PbKeyLen = null;
@@ -1050,7 +1050,7 @@ class ModifyOutput extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Output push protocol. Valid values: SRT|RTMP.
+         * Output push protocol. Valid values: SRT, RTMP.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -1117,13 +1117,13 @@ class CreateInput extends  AbstractModel {
         super();
 
         /**
-         * Input name, which can contain 1–32 letters, digits, and underscores.
+         * Input name, which can contain 1 to 32 letters, digits, and underscores.
          * @type {string || null}
          */
         this.InputName = null;
 
         /**
-         * Input protocol. Valid values: [SRT|RTP].
+         * Input protocol. Valid values: SRT, RTP.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -1190,7 +1190,7 @@ class CreateOutputRTMPSettings extends  AbstractModel {
         super();
 
         /**
-         * Push destination address. 1–2 addresses can be entered.
+         * Push destination address. You can enter one or two addresses.
          * @type {Array.<CreateOutputRtmpSettingsDestinations> || null}
          */
         this.Destinations = null;
@@ -1373,7 +1373,7 @@ class DescribeMediaConnectFlowResponse extends  AbstractModel {
         super();
 
         /**
-         * Configuration information of flow.
+         * Configuration information of a flow.
          * @type {DescribeFlow || null}
          */
         this.Info = null;
@@ -1434,7 +1434,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Latency = null;
 
         /**
-         * Receipt latency.
+         * Receive latency.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -1737,7 +1737,7 @@ class DescribeInputSRTSettings extends  AbstractModel {
         this.Latency = null;
 
         /**
-         * Receipt latency.
+         * Receive latency.
          * @type {number || null}
          */
         this.RecvLatency = null;
@@ -1795,7 +1795,7 @@ class CreateOutputRTPSettings extends  AbstractModel {
         super();
 
         /**
-         * Push destination address. 1–2 addresses can be entered.
+         * Push destination address. You can enter one or two addresses.
          * @type {CreateOutputRTPSettingsDestinations || null}
          */
         this.Destinations = null;
@@ -1985,7 +1985,7 @@ class CreateOutputSrtSettings extends  AbstractModel {
         super();
 
         /**
-         * Push destination address. Please configure 1–2 addresses.
+         * Push destination address. Please configure one or two addresses.
          * @type {Array.<CreateOutputSrtSettingsDestinations> || null}
          */
         this.Destinations = null;
@@ -2003,7 +2003,7 @@ class CreateOutputSrtSettings extends  AbstractModel {
         this.Latency = null;
 
         /**
-         * Receipt latency of SRT push.
+         * Receive latency of SRT push.
          * @type {number || null}
          */
         this.RecvLatency = null;

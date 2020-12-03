@@ -122,6 +122,12 @@ class DescribeDBSpaceStatusRequest extends  AbstractModel {
          */
         this.RangeDays = null;
 
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -133,6 +139,7 @@ class DescribeDBSpaceStatusRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RangeDays = 'RangeDays' in params ? params.RangeDays : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -400,6 +407,12 @@ class DescribeTopSpaceTablesRequest extends  AbstractModel {
          */
         this.SortBy = null;
 
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -412,6 +425,7 @@ class DescribeTopSpaceTablesRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -443,7 +457,7 @@ class DescribeSlowLogTimeSeriesStatsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
          * @type {string || null}
          */
         this.Product = null;
@@ -485,6 +499,12 @@ class DescribeDBDiagEventRequest extends  AbstractModel {
          */
         this.EventId = null;
 
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -496,6 +516,7 @@ class DescribeDBDiagEventRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.EventId = 'EventId' in params ? params.EventId : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -689,7 +710,7 @@ class DescribeDBDiagHistoryRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
          * @type {string || null}
          */
         this.Product = null;
@@ -750,7 +771,7 @@ class DescribeTopSpaceTableTimeSeriesRequest extends  AbstractModel {
         this.EndDate = null;
 
         /**
-         * 
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
          * @type {string || null}
          */
         this.Product = null;
@@ -1172,7 +1193,7 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
         this.SchemaList = null;
 
         /**
-         * 
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
          * @type {string || null}
          */
         this.Product = null;
@@ -1363,7 +1384,7 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
         this.TopSpaceTables = null;
 
         /**
-         * Timestamp (in seconds) identifying when the tablespace data is collected.
+         * Timestamp (in seconds) of tablespace data collect points
          * @type {number || null}
          */
         this.Timestamp = null;

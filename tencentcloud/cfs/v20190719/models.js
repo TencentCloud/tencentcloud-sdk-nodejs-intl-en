@@ -1601,6 +1601,12 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. This string is valid for 2 hours.
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
     }
 
     /**
@@ -1628,6 +1634,7 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
 
     }
 }

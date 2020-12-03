@@ -8544,13 +8544,13 @@ class CreateServiceResponse extends  AbstractModel {
         this.ServiceDesc = null;
 
         /**
-         * Default public network domain name.
+         * Default public domain name.
          * @type {string || null}
          */
         this.OuterSubDomain = null;
 
         /**
-         * Default private network domain name of VPC
+         * Default VPC domain name.
          * @type {string || null}
          */
         this.InnerSubDomain = null;

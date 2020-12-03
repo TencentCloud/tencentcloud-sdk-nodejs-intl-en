@@ -4102,7 +4102,13 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.DeletionProtection = null;
 
         /**
-         * Cluster network proxy model
+         * Cluster network proxy model, which is only used when ipvs-bpf mode is used. At present, TKE cluster supports three network proxy modes including `iptables`, `ipvs` and `ipvs-bpf` and their parameter setting relationships are as follows:
+`iptables`: do not set IPVS and KubeProxyMode.
+`ipvs` mode: set IPVS to `true` and do not set KubeProxyMode.
+`ipvs-bpf`: set KubeProxyMode to `kube-proxy-bpf`.
+The following conditions are required to use ipvs-bpf network mode:
+1. The cluster version must be v1.14 or later.
+2. The system image must be a TKE custom image such as Ubuntu TKE Optimized or Centos TKE Optimized.
          * @type {string || null}
          */
         this.KubeProxyMode = null;
@@ -4131,6 +4137,12 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.VpcCniType = null;
 
+        /**
+         * Runtime version
+         * @type {string || null}
+         */
+        this.RuntimeVersion = null;
+
     }
 
     /**
@@ -4158,6 +4170,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
         this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
         this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
 
     }
 }

@@ -2485,6 +2485,33 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.InvalidType = null;
 
         /**
+         * 0: Basic Edition, 1: Ultimate Edition
+         * @type {number || null}
+         */
+        this.UserLevel = null;
+
+        /**
+         * Ultimate Edition expiration time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProExpireTime = null;
+
+        /**
+         * Whether to automatically renew Ultimate Edition. 0: no, 1: yes
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProRenewFlag = null;
+
+        /**
+         * Unique ID of the Ultimate Edition purchase record. If the Ultimate Edition is not activated, the returned value will be null.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProResourceId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2501,6 +2528,10 @@ class GetServiceStatusResponse extends  AbstractModel {
         }
         this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
         this.InvalidType = 'InvalidType' in params ? params.InvalidType : null;
+        this.UserLevel = 'UserLevel' in params ? params.UserLevel : null;
+        this.ProExpireTime = 'ProExpireTime' in params ? params.ProExpireTime : null;
+        this.ProRenewFlag = 'ProRenewFlag' in params ? params.ProRenewFlag : null;
+        this.ProResourceId = 'ProResourceId' in params ? params.ProResourceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

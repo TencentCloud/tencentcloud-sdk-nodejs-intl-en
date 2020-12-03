@@ -1287,6 +1287,12 @@ class UpdateDomainConfigRequest extends  AbstractModel {
          */
         this.Area = null;
 
+        /**
+         * WebSocket configuration.
+         * @type {WebSocket || null}
+         */
+        this.WebSocket = null;
+
     }
 
     /**
@@ -1347,6 +1353,12 @@ class UpdateDomainConfigRequest extends  AbstractModel {
             this.ForceRedirect = obj;
         }
         this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.WebSocket) {
+            let obj = new WebSocket();
+            obj.deserialize(params.WebSocket)
+            this.WebSocket = obj;
+        }
 
     }
 }
@@ -1670,7 +1682,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
- * 
+ * WebSocket configuration.
  * @class
  */
 class WebSocket extends  AbstractModel {
@@ -1678,13 +1690,14 @@ class WebSocket extends  AbstractModel {
         super();
 
         /**
-         * 
+         * WebSocket configuration switch, which can be `on` or `off`.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Sets timeout period in seconds. Maximum value: 65
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Timeout = null;
@@ -1927,7 +1940,7 @@ class AddEcdnDomainRequest extends  AbstractModel {
         this.Tag = null;
 
         /**
-         * 
+         * WebSocket configuration.
          * @type {WebSocket || null}
          */
         this.WebSocket = null;
@@ -2965,14 +2978,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Readonly = null;
 
         /**
-         * Domain name tag.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Domain name tag
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.Tag = null;
 
         /**
-         * 
+         * WebSocket configuration.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {WebSocket || null}
          */
         this.WebSocket = null;

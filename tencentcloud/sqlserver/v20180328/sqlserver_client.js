@@ -199,7 +199,7 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to manually repossess a deactivated SQL Server instance.
+     * This API is used to return a deactivated SQL Server instance.
      * @param {RecycleDBInstanceRequest} req
      * @param {function(string, RecycleDBInstanceResponse):void} cb
      * @public
@@ -320,7 +320,7 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to manually terminate a pay-as-you-go instance.
+     * This API is used to isolate an instance to move it into a recycle bin.
      * @param {TerminateDBInstanceRequest} req
      * @param {function(string, TerminateDBInstanceResponse):void} cb
      * @public

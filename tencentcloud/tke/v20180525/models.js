@@ -1687,6 +1687,87 @@ all clusters under the account will be obtained)
 }
 
 /**
+ * UpgradeClusterInstances request structure.
+ * @class
+ */
+class UpgradeClusterInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * create: starting an upgrade task
+pause: pausing the task
+resume: continuing the task
+abort: stopping the task
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * Upgrade type. It’s only required when `Operation` is set as `create`.
+reset: the reinstallation and upgrade of major version
+hot: the hot upgrade of minor version
+major: in-place upgrade of major version
+         * @type {string || null}
+         */
+        this.UpgradeType = null;
+
+        /**
+         * List of nodes that need to upgrade
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * This parameter is used when the node joins the cluster again. Refer to the API of creating one or more cluster nodes.
+         * @type {UpgradeNodeResetParam || null}
+         */
+        this.ResetParam = null;
+
+        /**
+         * Whether to skip the pre-upgrade check of the node
+         * @type {boolean || null}
+         */
+        this.SkipPreCheck = null;
+
+        /**
+         * The maximum tolerable proportion of unavailable pods
+         * @type {number || null}
+         */
+        this.MaxNotReadyPercent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.ResetParam) {
+            let obj = new UpgradeNodeResetParam();
+            obj.deserialize(params.ResetParam)
+            this.ResetParam = obj;
+        }
+        this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
+        this.MaxNotReadyPercent = 'MaxNotReadyPercent' in params ? params.MaxNotReadyPercent : null;
+
+    }
+}
+
+/**
  * Information of the add-on selected for installation during cluster creation
  * @class
  */
@@ -2047,6 +2128,70 @@ class DeleteClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * Node upgrade and reinstallation parameters
+ * @class
+ */
+class UpgradeNodeResetParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Additional parameters set for the instance
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Security and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+        /**
+         * Node login information. For now, it only supports Password or a single KeyIds
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * Security group to which the instance belongs. This parameter can be obtained from the `sgId` field in the response of `DescribeSecurityGroups`. If this parameter is not specified, the default security group is bound. (Currently, you can only set a single sgId.)
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
  * ModifyClusterAsGroupAttribute response structure.
  * @class
  */
@@ -2396,6 +2541,77 @@ class Taint extends  AbstractModel {
 }
 
 /**
+ * CheckInstancesUpgradeAble request structure.
+ * @class
+ */
+class CheckInstancesUpgradeAbleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Specify the node list to check. If it’s not passed in, all nodes of the cluster will be checked.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Upgrade type
+         * @type {string || null}
+         */
+        this.UpgradeType = null;
+
+        /**
+         * Pagination offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filtering
+         * @type {Array.<Filter> || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new Filter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Information of existing instances
  * @class
  */
@@ -2574,6 +2790,49 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Upgradeable node information
+ * @class
+ */
+class UpgradeAbleInstancesItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The current version of the node
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * The latest minor version of the current version
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.LatestVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.LatestVersion = 'LatestVersion' in params ? params.LatestVersion : null;
 
     }
 }
@@ -4274,6 +4533,72 @@ class DeleteClusterEndpointVipRequest extends  AbstractModel {
 }
 
 /**
+ * CheckInstancesUpgradeAble response structure.
+ * @class
+ */
+class CheckInstancesUpgradeAbleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The current minor version of cluster Master
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * The latest minor version of cluster Master corresponding major version
+         * @type {string || null}
+         */
+        this.LatestVersion = null;
+
+        /**
+         * List of nodes that can be upgraded
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<UpgradeAbleInstancesItem> || null}
+         */
+        this.UpgradeAbleInstances = null;
+
+        /**
+         * Total number
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+        this.LatestVersion = 'LatestVersion' in params ? params.LatestVersion : null;
+
+        if (params.UpgradeAbleInstances) {
+            this.UpgradeAbleInstances = new Array();
+            for (let z in params.UpgradeAbleInstances) {
+                let obj = new UpgradeAbleInstancesItem();
+                obj.deserialize(params.UpgradeAbleInstances[z]);
+                this.UpgradeAbleInstances.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Cluster information struct
  * @class
  */
@@ -4468,6 +4793,34 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeClusterInstances response structure.
+ * @class
+ */
+class UpgradeClusterInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5927,6 +6280,7 @@ module.exports = {
     CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
     DescribeClustersRequest: DescribeClustersRequest,
+    UpgradeClusterInstancesRequest: UpgradeClusterInstancesRequest,
     ExtensionAddon: ExtensionAddon,
     RegionInstance: RegionInstance,
     Label: Label,
@@ -5934,6 +6288,7 @@ module.exports = {
     ClusterBasicSettings: ClusterBasicSettings,
     RouteTableConflict: RouteTableConflict,
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
+    UpgradeNodeResetParam: UpgradeNodeResetParam,
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     ManuallyAdded: ManuallyAdded,
@@ -5942,8 +6297,10 @@ module.exports = {
     ClusterCIDRSettings: ClusterCIDRSettings,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
     Taint: Taint,
+    CheckInstancesUpgradeAbleRequest: CheckInstancesUpgradeAbleRequest,
     ExistedInstance: ExistedInstance,
     DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
+    UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
     TagSpecification: TagSpecification,
     DescribeRegionsRequest: DescribeRegionsRequest,
@@ -5978,8 +6335,10 @@ module.exports = {
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
     DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
+    CheckInstancesUpgradeAbleResponse: CheckInstancesUpgradeAbleResponse,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
+    UpgradeClusterInstancesResponse: UpgradeClusterInstancesResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
     DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,

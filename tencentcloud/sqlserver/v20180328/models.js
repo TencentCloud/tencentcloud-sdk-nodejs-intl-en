@@ -499,6 +499,12 @@ class DescribeProductConfigRequest extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * The type of instances to be purchased. Valid values: HA (High-Availability Edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (Basic Edition)
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -509,6 +515,7 @@ class DescribeProductConfigRequest extends  AbstractModel {
             return;
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -1420,6 +1427,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.PayModeStatus = null;
 
+        /**
+         * Instance type. Valid values: HA (High-Availability Edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (Basic Edition)
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Whether multi-AZ deployment is supported. Valid values: MultiZones (only multi-AZ deployment is supported), SameZones (only single-AZ deployment is supported), ALL (both deployments are supported)
+         * @type {string || null}
+         */
+        this.MultiZonesStatus = null;
+
     }
 
     /**
@@ -1443,6 +1462,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.PostPid = 'PostPid' in params ? params.PostPid : null;
         this.PayModeStatus = 'PayModeStatus' in params ? params.PayModeStatus : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.MultiZonesStatus = 'MultiZonesStatus' in params ? params.MultiZonesStatus : null;
 
     }
 }
@@ -3538,7 +3559,7 @@ class CreateMigrationRequest extends  AbstractModel {
         this.MigrateDBSet = null;
 
         /**
-         * Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format. This parameter takes effect only when `SourceType=5`.
+         * Restore and rename the databases listed in `ReNameRestoreDatabase`. If this parameter is left empty, all restored databases will be renamed in the default format. This parameter takes effect only when `SourceType=5`.
          * @type {Array.<RenameRestoreDatabase> || null}
          */
         this.RenameRestore = null;
@@ -4150,7 +4171,7 @@ class CreateBackupRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Backup name. If this parameter is left empty, a backup name in the format of "Instance ID_Backup start timestamp" will be automatically generated.
+         * Backup name. If this parameter is left empty, a backup name in the format of "[Instance ID]_[Backup start timestamp]" will be automatically generated.
          * @type {string || null}
          */
         this.BackupName = null;

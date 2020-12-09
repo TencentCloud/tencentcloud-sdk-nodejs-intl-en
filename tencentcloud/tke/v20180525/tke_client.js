@@ -50,6 +50,7 @@ const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
 const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
 const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
+const UpgradeClusterInstancesRequest = models.UpgradeClusterInstancesRequest;
 const ExtensionAddon = models.ExtensionAddon;
 const RegionInstance = models.RegionInstance;
 const Label = models.Label;
@@ -57,6 +58,7 @@ const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse
 const ClusterBasicSettings = models.ClusterBasicSettings;
 const RouteTableConflict = models.RouteTableConflict;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
+const UpgradeNodeResetParam = models.UpgradeNodeResetParam;
 const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const ManuallyAdded = models.ManuallyAdded;
@@ -65,8 +67,10 @@ const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
 const Taint = models.Taint;
+const CheckInstancesUpgradeAbleRequest = models.CheckInstancesUpgradeAbleRequest;
 const ExistedInstance = models.ExistedInstance;
 const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
+const UpgradeAbleInstancesItem = models.UpgradeAbleInstancesItem;
 const AddNodeToNodePoolResponse = models.AddNodeToNodePoolResponse;
 const TagSpecification = models.TagSpecification;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
@@ -101,8 +105,10 @@ const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
 const DeleteClusterNodePoolRequest = models.DeleteClusterNodePoolRequest;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
+const CheckInstancesUpgradeAbleResponse = models.CheckInstancesUpgradeAbleResponse;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
+const UpgradeClusterInstancesResponse = models.UpgradeClusterInstancesResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
 const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionRequest;
@@ -147,6 +153,17 @@ class TkeClient extends AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", credential, region, profile);
     }
     
+    /**
+     * This API is used to check which nodes can be upgraded in the given node list. 
+     * @param {CheckInstancesUpgradeAbleRequest} req
+     * @param {function(string, CheckInstancesUpgradeAbleResponse):void} cb
+     * @public
+     */
+    CheckInstancesUpgradeAble(req, cb) {
+        let resp = new CheckInstancesUpgradeAbleResponse();
+        this.request("CheckInstancesUpgradeAble", req, resp, cb);
+    }
+
     /**
      * This API is used to create a cluster.
      * @param {CreateClusterRequest} req
@@ -398,6 +415,17 @@ class TkeClient extends AbstractClient {
     CreateClusterNodePool(req, cb) {
         let resp = new CreateClusterNodePoolResponse();
         this.request("CreateClusterNodePool", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade one or more work nodes in the cluster. 
+     * @param {UpgradeClusterInstancesRequest} req
+     * @param {function(string, UpgradeClusterInstancesResponse):void} cb
+     * @public
+     */
+    UpgradeClusterInstances(req, cb) {
+        let resp = new UpgradeClusterInstancesResponse();
+        this.request("UpgradeClusterInstances", req, resp, cb);
     }
 
     /**

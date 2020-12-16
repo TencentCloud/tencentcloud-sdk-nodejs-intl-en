@@ -463,6 +463,34 @@ class RestartInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * RestartKibana request structure.
+ * @class
+ */
+class RestartKibanaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * CreateInstance response structure.
  * @class
  */
@@ -1801,7 +1829,7 @@ Number of nodes (2-50)
         this.NodeNum = null;
 
         /**
-         * Configuration item (JSON string)
+         * ES configuration item (JSON string)
          * @type {string || null}
          */
         this.EsConfig = null;
@@ -1925,6 +1953,12 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
          */
         this.SceneType = null;
 
+        /**
+         * Kibana configuration item (JSON string)
+         * @type {string || null}
+         */
+        this.KibanaConfig = null;
+
     }
 
     /**
@@ -1988,6 +2022,7 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
             }
         }
         this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.KibanaConfig = 'KibanaConfig' in params ? params.KibanaConfig : null;
 
     }
 }
@@ -2607,6 +2642,34 @@ class UpgradeInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * RestartKibana response structure.
+ * @class
+ */
+class RestartKibanaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ES cluster operation details
  * @class
  */
@@ -2699,6 +2762,7 @@ module.exports = {
     EsPublicAcl: EsPublicAcl,
     DictInfo: DictInfo,
     RestartInstanceResponse: RestartInstanceResponse,
+    RestartKibanaRequest: RestartKibanaRequest,
     CreateInstanceResponse: CreateInstanceResponse,
     DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
     UpgradeLicenseRequest: UpgradeLicenseRequest,
@@ -2728,6 +2792,7 @@ module.exports = {
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpdateInstanceResponse: UpdateInstanceResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    RestartKibanaResponse: RestartKibanaResponse,
     Operation: Operation,
 
 }

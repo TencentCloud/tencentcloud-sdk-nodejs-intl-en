@@ -787,7 +787,7 @@ class DescribeErrorLogDataRequest extends  AbstractModel {
         this.KeyWords = null;
 
         /**
-         * Number of results to be returned per page. Maximum value: 400.
+         * The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
          * @type {number || null}
          */
         this.Limit = null;
@@ -3038,6 +3038,83 @@ class DeleteDeployGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * Clone task information.
+ * @class
+ */
+class CloneItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the original instance in a clone task
+         * @type {string || null}
+         */
+        this.SrcInstanceId = null;
+
+        /**
+         * ID of the cloned instance in a clone task
+         * @type {string || null}
+         */
+        this.DstInstanceId = null;
+
+        /**
+         * Clone task ID
+         * @type {number || null}
+         */
+        this.CloneJobId = null;
+
+        /**
+         * The policy used in a clone task. Valid values: `timepoint` (roll back to a specific point in time), `backupset` (roll back by using a specific backup file).
+         * @type {string || null}
+         */
+        this.RollbackStrategy = null;
+
+        /**
+         * The point in time to which the cloned instance will be rolled back
+         * @type {string || null}
+         */
+        this.RollbackTargetTime = null;
+
+        /**
+         * Task start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Task end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Task status. Valid values: `initial`, `running`, `wait_complete`, `success`, `failed`.
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcInstanceId = 'SrcInstanceId' in params ? params.SrcInstanceId : null;
+        this.DstInstanceId = 'DstInstanceId' in params ? params.DstInstanceId : null;
+        this.CloneJobId = 'CloneJobId' in params ? params.CloneJobId : null;
+        this.RollbackStrategy = 'RollbackStrategy' in params ? params.RollbackStrategy : null;
+        this.RollbackTargetTime = 'RollbackTargetTime' in params ? params.RollbackTargetTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+
+    }
+}
+
+/**
  * DescribeTasks request structure.
  * @class
  */
@@ -3236,43 +3313,43 @@ class AddTimeWindowRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Time period available for maintenance on Monday in the format of 10:00-12:00. Each period lasts from half an hour to three hours, with the start time and end time aligned by half-hour. Up to two time periods can be set. The same rule applies below.
+         * Maintenance window on Monday. The format should be 10:00-12:00. You can set multiple time windows on a day. Each time window lasts from half an hour to three hours, and must start and end on the hour or half hour. At least one time window is required in a week. The same rule applies to the following parameters.
          * @type {Array.<string> || null}
          */
         this.Monday = null;
 
         /**
-         * Maintenance time window on Tuesday
+         * Maintenance window on Tuesday. At least one time window is required in a week.
          * @type {Array.<string> || null}
          */
         this.Tuesday = null;
 
         /**
-         * Maintenance time window on Wednesday
+         * Maintenance window on Wednesday. At least one time window is required in a week.
          * @type {Array.<string> || null}
          */
         this.Wednesday = null;
 
         /**
-         * Maintenance time window on Thursday
+         * Maintenance window on Thursday. At least one time window is required in a week.
          * @type {Array.<string> || null}
          */
         this.Thursday = null;
 
         /**
-         * Maintenance time window on Friday
+         * Maintenance window on Friday. At least one time window is required in a week.
          * @type {Array.<string> || null}
          */
         this.Friday = null;
 
         /**
-         * Maintenance time window on Saturday
+         * Maintenance window on Saturday. At least one time window is required in a week.
          * @type {Array.<string> || null}
          */
         this.Saturday = null;
 
         /**
-         * Maintenance time window on Sunday
+         * Maintenance window on Sunday. At least one time window is required in a week.
          * @type {Array.<string> || null}
          */
         this.Sunday = null;
@@ -3406,6 +3483,34 @@ class ImportRecord extends  AbstractModel {
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.DbName = 'DbName' in params ? params.DbName : null;
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+
+    }
+}
+
+/**
+ * OfflineIsolatedInstances request structure.
+ * @class
+ */
+class OfflineIsolatedInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -3888,18 +3993,30 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeParamTemplateInfo request structure.
+ * DescribeCloneList request structure.
  * @class
  */
-class DescribeParamTemplateInfoRequest extends  AbstractModel {
+class DescribeCloneListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter template ID.
+         * ID of the original instance. This parameter is used to query the clone task list of a specific original instance.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Paginated query offset
          * @type {number || null}
          */
-        this.TemplateId = null;
+        this.Offset = null;
+
+        /**
+         * The number of results per page in paginated queries
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -3910,7 +4027,9 @@ class DescribeParamTemplateInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4058,6 +4177,148 @@ class CloseWanServiceResponse extends  AbstractModel {
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateCloneInstance request structure.
+ * @class
+ */
+class CreateCloneInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance to be cloned from
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * To roll back the cloned instance to a specific point in time, set this parameter to a value in the format of "yyyy-mm-dd hh:mm:ss".
+         * @type {string || null}
+         */
+        this.SpecifiedRollbackTime = null;
+
+        /**
+         * To roll back the cloned instance to a specific physical backup file, set this parameter to the ID of the physical backup file. The ID can be obtained by the [DescribeBackups](https://intl.cloud.tencent.com/document/api/236/15842?from_cn_redirect=1) API.
+         * @type {number || null}
+         */
+        this.SpecifiedBackupId = null;
+
+        /**
+         * VPC ID, which can be obtained by the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API. If this parameter is left empty, the classic network will be used by default.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * VPC subnet ID, which can be obtained by the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API. If `UniqVpcId` is set, `UniqSubnetId` will be required.
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Memory of the cloned instance in MB, which should be equal to (by default) or larger than that of the original instance
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Disk capacity of the cloned instance in GB, which should be equal to (by default) or larger than that of the original instance
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * Name of the cloned instance
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Security group parameter, which can be obtained by the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroup = null;
+
+        /**
+         * Information of the cloned instance tag
+         * @type {Array.<TagInfo> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * CPU core quantity of the cloned instance, which is equal to or larger than that of the original instance
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+         * @type {number || null}
+         */
+        this.ProtectMode = null;
+
+        /**
+         * Multi-AZ or single-AZ. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0.
+         * @type {number || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * Availability zone information of replica 1 of the cloned instance, which is the same as the value of `Zone` of the original instance by default
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * Availability zone information of replica 2 of the cloned instance, 
+which is left empty by default. Specify this parameter when cloning a strong sync source instance.
+         * @type {string || null}
+         */
+        this.BackupZone = null;
+
+        /**
+         * Type of the cloned instance. Valid values: `HA` (High-Availability Edition), `EXCLUSIVE` (dedicated). Default value: `HA`.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SpecifiedRollbackTime = 'SpecifiedRollbackTime' in params ? params.SpecifiedRollbackTime : null;
+        this.SpecifiedBackupId = 'SpecifiedBackupId' in params ? params.SpecifiedBackupId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -5225,6 +5486,41 @@ class DescribeInstanceParamRecordsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * StopRollback response structure.
+ * @class
+ */
+class StopRollbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6655,18 +6951,24 @@ class DescribeSupportedPrivilegesResponse extends  AbstractModel {
 }
 
 /**
- * OfflineIsolatedInstances request structure.
+ * CreateCloneInstance response structure.
  * @class
  */
-class OfflineIsolatedInstancesRequest extends  AbstractModel {
+class CreateCloneInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-         * @type {Array.<string> || null}
+         * LimitAsync task request ID, which can be used to query the execution result of an async task
+         * @type {string || null}
          */
-        this.InstanceIds = null;
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6677,7 +6979,8 @@ class OfflineIsolatedInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6839,6 +7142,48 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
             return;
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+
+    }
+}
+
+/**
+ * Table permission
+ * @class
+ */
+class TablePrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
 
     }
 }
@@ -8712,12 +9057,24 @@ class ModifyParamTemplateRequest extends  AbstractModel {
 }
 
 /**
- * AddTimeWindow response structure.
+ * DescribeCloneList response structure.
  * @class
  */
-class AddTimeWindowResponse extends  AbstractModel {
+class DescribeCloneListResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The number of results which meet the conditions
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Clone task list
+         * @type {Array.<CloneItem> || null}
+         */
+        this.Items = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8733,6 +9090,16 @@ class AddTimeWindowResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new CloneItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -10063,7 +10430,7 @@ class DescribeSlowLogDataRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of results to be returned at a time. Maximum value: 400.
+         * The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
          * @type {number || null}
          */
         this.Limit = null;
@@ -10521,30 +10888,18 @@ class DescribeDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * Table permission
+ * DescribeParamTemplateInfo request structure.
  * @class
  */
-class TablePrivilege extends  AbstractModel {
+class DescribeParamTemplateInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database name
-         * @type {string || null}
+         * Parameter template ID.
+         * @type {number || null}
          */
-        this.Database = null;
-
-        /**
-         * Table name
-         * @type {string || null}
-         */
-        this.Table = null;
-
-        /**
-         * Permission information
-         * @type {Array.<string> || null}
-         */
-        this.Privileges = null;
+        this.TemplateId = null;
 
     }
 
@@ -10555,9 +10910,7 @@ class TablePrivilege extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Database = 'Database' in params ? params.Database : null;
-        this.Table = 'Table' in params ? params.Table : null;
-        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -11148,6 +11501,34 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
 }
 
 /**
+ * AddTimeWindow response structure.
+ * @class
+ */
+class AddTimeWindowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAccounts response structure.
  * @class
  */
@@ -11230,6 +11611,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
         this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
+
+    }
+}
+
+/**
+ * StopRollback request structure.
+ * @class
+ */
+class StopRollbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance whose rollback task is canceled
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -12134,19 +12543,22 @@ module.exports = {
     ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     BinlogInfo: BinlogInfo,
     DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
+    CloneItem: CloneItem,
     DescribeTasksRequest: DescribeTasksRequest,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
     AddTimeWindowRequest: AddTimeWindowRequest,
     ImportRecord: ImportRecord,
+    OfflineIsolatedInstancesRequest: OfflineIsolatedInstancesRequest,
     DescribeRollbackTaskDetailResponse: DescribeRollbackTaskDetailResponse,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     DescribeDeployGroupListRequest: DescribeDeployGroupListRequest,
     RollbackInstancesInfo: RollbackInstancesInfo,
-    DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
+    DescribeCloneListRequest: DescribeCloneListRequest,
     BackupInfo: BackupInfo,
     CloseWanServiceResponse: CloseWanServiceResponse,
+    CreateCloneInstanceRequest: CreateCloneInstanceRequest,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
@@ -12172,6 +12584,7 @@ module.exports = {
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
+    StopRollbackResponse: StopRollbackResponse,
     ParamTemplateInfo: ParamTemplateInfo,
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
@@ -12204,12 +12617,13 @@ module.exports = {
     TagInfo: TagInfo,
     RollbackTimeRange: RollbackTimeRange,
     DescribeSupportedPrivilegesResponse: DescribeSupportedPrivilegesResponse,
-    OfflineIsolatedInstancesRequest: OfflineIsolatedInstancesRequest,
+    CreateCloneInstanceResponse: CreateCloneInstanceResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     TagInfoUnit: TagInfoUnit,
     OpenDBInstanceGTIDRequest: OpenDBInstanceGTIDRequest,
     UpgradeDBInstanceEngineVersionResponse: UpgradeDBInstanceEngineVersionResponse,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
+    TablePrivilege: TablePrivilege,
     BalanceRoGroupLoadRequest: BalanceRoGroupLoadRequest,
     DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     ColumnPrivilege: ColumnPrivilege,
@@ -12244,7 +12658,7 @@ module.exports = {
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
-    AddTimeWindowResponse: AddTimeWindowResponse,
+    DescribeCloneListResponse: DescribeCloneListResponse,
     DescribeRoGroupsResponse: DescribeRoGroupsResponse,
     ZoneSellConf: ZoneSellConf,
     DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
@@ -12279,7 +12693,7 @@ module.exports = {
     OpenWanServiceRequest: OpenWanServiceRequest,
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
-    TablePrivilege: TablePrivilege,
+    DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     SlowLogInfo: SlowLogInfo,
     DescribeDataBackupOverviewRequest: DescribeDataBackupOverviewRequest,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
@@ -12293,8 +12707,10 @@ module.exports = {
     DeleteAccountsRequest: DeleteAccountsRequest,
     SwitchForUpgradeResponse: SwitchForUpgradeResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
+    AddTimeWindowResponse: AddTimeWindowResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackDBName: RollbackDBName,
+    StopRollbackRequest: StopRollbackRequest,
     DeleteBackupRequest: DeleteBackupRequest,
     ModifyNameOrDescByDpIdRequest: ModifyNameOrDescByDpIdRequest,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,

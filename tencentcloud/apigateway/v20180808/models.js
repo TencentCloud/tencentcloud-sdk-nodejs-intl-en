@@ -3272,7 +3272,7 @@ class CreateServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * Custom service name. If this parameter is left empty, the system will automatically generate a unique name.
+         * Custom service name.
          * @type {string || null}
          */
         this.ServiceName = null;
@@ -4888,7 +4888,7 @@ class CreateApiRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * API backend service type. Valid values: HTTP, MOCK, TSF, CLB, SCF, WEBSOCKET, TARGET (in beta test).
+         * API backend service type. Valid values: HTTP, MOCK, TSF, SCF, WEBSOCKET, TARGET (in beta test).
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -4900,7 +4900,7 @@ class CreateApiRequest extends  AbstractModel {
         this.ServiceTimeout = null;
 
         /**
-         * API frontend request type, such as HTTP, HTTPS, or HTTP and HTTPS.
+         * API frontend request protocol. Valid values: HTTPS, WEBSOCKET.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -9593,6 +9593,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Tags = null;
 
+        /**
+         * Environment information published for API.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Environments = null;
+
     }
 
     /**
@@ -9722,6 +9729,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Tags.push(obj);
             }
         }
+        this.Environments = 'Environments' in params ? params.Environments : null;
 
     }
 }

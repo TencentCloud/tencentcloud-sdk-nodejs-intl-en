@@ -17,7 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeCdnDomainLogsResponse = models.DescribeCdnDomainLogsResponse;
-const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
+const AdvancedAuthentication = models.AdvancedAuthentication;
 const Compression = models.Compression;
 const Revalidate = models.Revalidate;
 const ResourceData = models.ResourceData;
@@ -28,18 +28,19 @@ const Authentication = models.Authentication;
 const ImageOptimization = models.ImageOptimization;
 const Https = models.Https;
 const RuleCache = models.RuleCache;
-const ReportData = models.ReportData;
+const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
 const CreateClsLogTopicResponse = models.CreateClsLogTopicResponse;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
 const DomainFilter = models.DomainFilter;
+const DescribeCdnOriginIpResponse = models.DescribeCdnOriginIpResponse;
 const SpecificConfig = models.SpecificConfig;
 const FollowRedirect = models.FollowRedirect;
 const RequestHeader = models.RequestHeader;
 const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
 const UserAgentFilter = models.UserAgentFilter;
-const AdvanceCacheRule = models.AdvanceCacheRule;
-const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
+const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
+const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
 const CacheConfigNoCache = models.CacheConfigNoCache;
 const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
@@ -47,10 +48,12 @@ const PathRule = models.PathRule;
 const ListTopDataRequest = models.ListTopDataRequest;
 const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
-const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
+const DescribePayTypeRequest = models.DescribePayTypeRequest;
+const AdvancedAuthenticationTypeD = models.AdvancedAuthenticationTypeD;
 const CompressionRule = models.CompressionRule;
 const GuetzliAdapter = models.GuetzliAdapter;
 const Origin = models.Origin;
+const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
 const TopData = models.TopData;
 const EnableCachesRequest = models.EnableCachesRequest;
 const Quota = models.Quota;
@@ -58,11 +61,12 @@ const HeaderKey = models.HeaderKey;
 const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
 const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
+const DescribeCdnOriginIpRequest = models.DescribeCdnOriginIpRequest;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
 const TopicInfo = models.TopicInfo;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
 const BriefDomain = models.BriefDomain;
-const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const TimestampData = models.TimestampData;
 const TpgAdapter = models.TpgAdapter;
 const CacheConfigCache = models.CacheConfigCache;
 const DescribeReportDataResponse = models.DescribeReportDataResponse;
@@ -81,10 +85,13 @@ const UserAgentFilterRule = models.UserAgentFilterRule;
 const Tag = models.Tag;
 const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
 const MaxAgeRule = models.MaxAgeRule;
-const DescribePayTypeRequest = models.DescribePayTypeRequest;
+const AdvancedAuthenticationTypeE = models.AdvancedAuthenticationTypeE;
 const DescribeCertDomainsRequest = models.DescribeCertDomainsRequest;
-const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
+const AdvancedAuthenticationTypeF = models.AdvancedAuthenticationTypeF;
+const AdvancedAuthenticationTypeA = models.AdvancedAuthenticationTypeA;
 const AdvancedCache = models.AdvancedCache;
+const AdvancedAuthenticationTypeC = models.AdvancedAuthenticationTypeC;
+const AdvancedAuthenticationTypeB = models.AdvancedAuthenticationTypeB;
 const WebpAdapter = models.WebpAdapter;
 const StartCdnDomainRequest = models.StartCdnDomainRequest;
 const MapInfo = models.MapInfo;
@@ -93,11 +100,12 @@ const AuthenticationTypeD = models.AuthenticationTypeD;
 const AuthenticationTypeC = models.AuthenticationTypeC;
 const AuthenticationTypeB = models.AuthenticationTypeB;
 const AuthenticationTypeA = models.AuthenticationTypeA;
+const OriginAuthenticationTypeA = models.OriginAuthenticationTypeA;
 const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
 const IpStatus = models.IpStatus;
 const AddCdnDomainResponse = models.AddCdnDomainResponse;
-const DownstreamCapping = models.DownstreamCapping;
+const DomainAreaConfig = models.DomainAreaConfig;
 const ServerCert = models.ServerCert;
 const AccessControlRule = models.AccessControlRule;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
@@ -112,6 +120,7 @@ const ResponseHeader = models.ResponseHeader;
 const CdnIpHistory = models.CdnIpHistory;
 const SummarizedData = models.SummarizedData;
 const ManageClsTopicDomainsRequest = models.ManageClsTopicDomainsRequest;
+const UrlRedirectRule = models.UrlRedirectRule;
 const Cache = models.Cache;
 const ForceRedirect = models.ForceRedirect;
 const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
@@ -125,7 +134,7 @@ const DescribePushTasksRequest = models.DescribePushTasksRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
 const IpFreqLimit = models.IpFreqLimit;
-const DomainAreaConfig = models.DomainAreaConfig;
+const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CacheOptResult = models.CacheOptResult;
 const StopCdnDomainRequest = models.StopCdnDomainRequest;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
@@ -144,11 +153,12 @@ const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const DisableCachesResponse = models.DisableCachesResponse;
 const SchemeKey = models.SchemeKey;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
-const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
-const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
+const AdvanceCacheRule = models.AdvanceCacheRule;
+const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const AccessControl = models.AccessControl;
 const CacheKey = models.CacheKey;
 const UrlRedirect = models.UrlRedirect;
+const DownstreamCapping = models.DownstreamCapping;
 const CookieKey = models.CookieKey;
 const KeyRule = models.KeyRule;
 const CappingRule = models.CappingRule;
@@ -163,7 +173,7 @@ const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
 const OriginPullOptimization = models.OriginPullOptimization;
 const ErrorPage = models.ErrorPage;
 const PushTask = models.PushTask;
-const TimestampData = models.TimestampData;
+const ReportData = models.ReportData;
 const StartCdnDomainResponse = models.StartCdnDomainResponse;
 const DescribePushQuotaRequest = models.DescribePushQuotaRequest;
 const TopDetailData = models.TopDetailData;
@@ -188,13 +198,15 @@ const Compatibility = models.Compatibility;
 const ClsSearchLogs = models.ClsSearchLogs;
 const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
 const IpFilter = models.IpFilter;
+const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
-const UrlRedirectRule = models.UrlRedirectRule;
+const OriginAuthentication = models.OriginAuthentication;
 const ErrorPageRule = models.ErrorPageRule;
 const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
 const PurgeTask = models.PurgeTask;
 const OriginPullTimeout = models.OriginPullTimeout;
 const DeleteCdnDomainResponse = models.DeleteCdnDomainResponse;
+const OriginIp = models.OriginIp;
 const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const CacheTagKey = models.CacheTagKey;
@@ -612,6 +624,17 @@ By default, a maximum of 1000 URLs can be prefetched per day either within or ou
     DeleteClsLogTopic(req, cb) {
         let resp = new DeleteClsLogTopicResponse();
         this.request("DeleteClsLogTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the IP information of CDN intermediate nodes. Note: the relevant allowlist needs to be enabled for this API.
+     * @param {DescribeCdnOriginIpRequest} req
+     * @param {function(string, DescribeCdnOriginIpResponse):void} cb
+     * @public
+     */
+    DescribeCdnOriginIp(req, cb) {
+        let resp = new DescribeCdnOriginIpResponse();
+        this.request("DescribeCdnOriginIp", req, resp, cb);
     }
 
     /**

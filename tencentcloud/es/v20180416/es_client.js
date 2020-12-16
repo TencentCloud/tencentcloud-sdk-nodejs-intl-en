@@ -25,6 +25,7 @@ const OperationDetail = models.OperationDetail;
 const EsPublicAcl = models.EsPublicAcl;
 const DictInfo = models.DictInfo;
 const RestartInstanceResponse = models.RestartInstanceResponse;
+const RestartKibanaRequest = models.RestartKibanaRequest;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
 const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
@@ -54,6 +55,7 @@ const RestartNodesResponse = models.RestartNodesResponse;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const RestartKibanaResponse = models.RestartKibanaResponse;
 const Operation = models.Operation;
 
 
@@ -193,6 +195,17 @@ Only one of the parameters or parameter combinations above can be passed in at a
     DescribeInstanceLogs(req, cb) {
         let resp = new DescribeInstanceLogsResponse();
         this.request("DescribeInstanceLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restart Kibana. 
+     * @param {RestartKibanaRequest} req
+     * @param {function(string, RestartKibanaResponse):void} cb
+     * @public
+     */
+    RestartKibana(req, cb) {
+        let resp = new RestartKibanaResponse();
+        this.request("RestartKibana", req, resp, cb);
     }
 
 

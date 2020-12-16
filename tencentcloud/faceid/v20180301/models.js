@@ -49,6 +49,12 @@ class LivenessCompareResponse extends  AbstractModel {
         this.Description = null;
 
         /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.BestFrameList = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -67,6 +73,7 @@ class LivenessCompareResponse extends  AbstractModel {
         this.Sim = 'Sim' in params ? params.Sim : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -81,15 +88,17 @@ class LivenessCompareRequest extends  AbstractModel {
         super();
 
         /**
-         * Base64 value of a photo for face comparison;
-Base64-encoded image data is up to 3 MB. Only JPG and PNG formats are supported.
+         * Base64 string of the image for face comparison.
+The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
+Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * Base64 value of a video for liveness detection;
-The size after Base64-encoding cannot exceed 5 MB. MP4, AVI, and FLV formats are supported.
+         * Base64 string of the video for liveness detection.
+The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
+Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
          * @type {string || null}
          */
         this.VideoBase64 = null;

@@ -67,59 +67,60 @@ class DescribeCdnDomainLogsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCdnDomainLogs request structure.
+ * Timestamp hotlink protection advanced configuration (allowlist feature)
  * @class
  */
-class DescribeCdnDomainLogsRequest extends  AbstractModel {
+class AdvancedAuthentication extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies a domain name for the query
+         * Hotlink protection configuration switch (which can be on or off). If it is enabled, only one mode can and must be configured, while other modes are null.
          * @type {string || null}
          */
-        this.Domain = null;
+        this.Switch = null;
 
         /**
-         * Starting time, such as `2019-09-04 00:00:00`
-         * @type {string || null}
+         * Timestamp hotlink protection advanced configuration mode A
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AdvancedAuthenticationTypeA || null}
          */
-        this.StartTime = null;
+        this.TypeA = null;
 
         /**
-         * End time, such as `2019-09-04 12:00:00`
-         * @type {string || null}
+         * Timestamp hotlink protection advanced configuration mode B
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AdvancedAuthenticationTypeB || null}
          */
-        this.EndTime = null;
+        this.TypeB = null;
 
         /**
-         * Offset for paginated queries. Default value: 0
-         * @type {number || null}
+         * Timestamp hotlink protection advanced configuration mode C
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AdvancedAuthenticationTypeC || null}
          */
-        this.Offset = null;
+        this.TypeC = null;
 
         /**
-         * Limit on paged queries. Default value: 100. Maximum value: 1,000
-         * @type {number || null}
+         * Timestamp hotlink protection advanced configuration mode D
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AdvancedAuthenticationTypeD || null}
          */
-        this.Limit = null;
+        this.TypeD = null;
 
         /**
-         * Specifies a region for the query.
-`mainland`: specifies to return the download link of logs on acceleration within Mainland China;
-`overseas`: specifies to return the download link of logs on acceleration outside Mainland China;
-`global`: specifies to return a download link of logs on acceleration within Mainland China and a link of logs on acceleration outside Mainland China.
-Default value: `mainland`.
-         * @type {string || null}
+         * Timestamp hotlink protection advanced configuration mode E
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AdvancedAuthenticationTypeE || null}
          */
-        this.Area = null;
+        this.TypeE = null;
 
         /**
-         * The type of log to be downloaded.
-access: access logs
-         * @type {string || null}
+         * Timestamp hotlink protection advanced configuration mode F
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AdvancedAuthenticationTypeF || null}
          */
-        this.LogType = null;
+        this.TypeF = null;
 
     }
 
@@ -130,13 +131,43 @@ access: access logs
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Area = 'Area' in params ? params.Area : null;
-        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.TypeA) {
+            let obj = new AdvancedAuthenticationTypeA();
+            obj.deserialize(params.TypeA)
+            this.TypeA = obj;
+        }
+
+        if (params.TypeB) {
+            let obj = new AdvancedAuthenticationTypeB();
+            obj.deserialize(params.TypeB)
+            this.TypeB = obj;
+        }
+
+        if (params.TypeC) {
+            let obj = new AdvancedAuthenticationTypeC();
+            obj.deserialize(params.TypeC)
+            this.TypeC = obj;
+        }
+
+        if (params.TypeD) {
+            let obj = new AdvancedAuthenticationTypeD();
+            obj.deserialize(params.TypeD)
+            this.TypeD = obj;
+        }
+
+        if (params.TypeE) {
+            let obj = new AdvancedAuthenticationTypeE();
+            obj.deserialize(params.TypeE)
+            this.TypeE = obj;
+        }
+
+        if (params.TypeF) {
+            let obj = new AdvancedAuthenticationTypeF();
+            obj.deserialize(params.TypeF)
+            this.TypeF = obj;
+        }
 
     }
 }
@@ -704,25 +735,27 @@ class RuleCache extends  AbstractModel {
         super();
 
         /**
-         * Content for each CacheType:
-For `all`, enter an asterisk (*).
-For `file`, enter the suffix, such as jpg, txt.
-For `directory`, enter the path, such as /xxx/test/.
-For `path`, enter the corresponding absolute path, such as /xxx/test.html.
-For `index`, enter a backslash (/).
-Note: this field may return null, indicating that no valid value is obtained.
+         * Content for each `CacheType`:
+For `all`, enter a wildcard `*`.
+For `file`, enter the suffix, e.g., `jpg` or `txt`.
+For `directory`, enter the path, e.g., `/xxx/test/`.
+For `path`, enter the absolute path, e.g., `/xxx/test.html`.
+For `index`, enter a forward slash `/`.
+For `default`, enter `no max-age`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
 
         /**
          * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
-`index`: home page
-Note: this field may return null, indicating that no valid value is obtained.
+`all`: effective for all files.
+`file`: effective for specified file suffixes.
+`directory`: effective for specified paths.
+`path`: effective for specified absolute paths.
+`index`: homepage.
+`default`: effective when the origin server does not have the `max-age` value.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleType = null;
@@ -756,48 +789,59 @@ Note: this field may return null, indicating that no valid value is obtained.
 }
 
 /**
- * CDN report data
+ * DescribeCdnDomainLogs request structure.
  * @class
  */
-class ReportData extends  AbstractModel {
+class DescribeCdnDomainLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Project ID/domain name ID.
+         * Specifies a domain name for the query
          * @type {string || null}
          */
-        this.ResourceId = null;
+        this.Domain = null;
 
         /**
-         * Project name/domain name.
+         * Starting time, such as `2019-09-04 00:00:00`
          * @type {string || null}
          */
-        this.Resource = null;
+        this.StartTime = null;
 
         /**
-         * Total traffic/max bandwidth in bytes and bps, respectively.
-         * @type {number || null}
+         * End time, such as `2019-09-04 12:00:00`
+         * @type {string || null}
          */
-        this.Value = null;
+        this.EndTime = null;
 
         /**
-         * Percentage of individual resource out of all resources.
+         * Offset for paginated queries. Default value: 0
          * @type {number || null}
          */
-        this.Percentage = null;
+        this.Offset = null;
 
         /**
-         * Total billable traffic/max billable bandwidth in bytes and bps, respectively.
+         * Limit on paged queries. Default value: 100. Maximum value: 1,000
          * @type {number || null}
          */
-        this.BillingValue = null;
+        this.Limit = null;
 
         /**
-         * Percentage of billable amount out of total amount.
-         * @type {number || null}
+         * Specifies a region for the query.
+`mainland`: specifies to return the download link of logs on acceleration within Mainland China;
+`overseas`: specifies to return the download link of logs on acceleration outside Mainland China;
+`global`: specifies to return a download link of logs on acceleration within Mainland China and a link of logs on acceleration outside Mainland China.
+Default value: `mainland`.
+         * @type {string || null}
          */
-        this.BillingPercentage = null;
+        this.Area = null;
+
+        /**
+         * The type of log to be downloaded.
+access: access logs
+         * @type {string || null}
+         */
+        this.LogType = null;
 
     }
 
@@ -808,12 +852,13 @@ class ReportData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.Resource = 'Resource' in params ? params.Resource : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Percentage = 'Percentage' in params ? params.Percentage : null;
-        this.BillingValue = 'BillingValue' in params ? params.BillingValue : null;
-        this.BillingPercentage = 'BillingPercentage' in params ? params.BillingPercentage : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
 
     }
 }
@@ -939,6 +984,56 @@ When fuzzy query is enabled, the maximum Value length is 1. When fuzzy query is 
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
+
+    }
+}
+
+/**
+ * DescribeCdnOriginIp response structure.
+ * @class
+ */
+class DescribeCdnOriginIpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Intermediate node IP details
+         * @type {Array.<OriginIp> || null}
+         */
+        this.Ips = null;
+
+        /**
+         * Number of intermediate node IPs
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new OriginIp();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1179,80 +1274,28 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Advanced cache configuration rules
+ * DescribeCdnData response structure.
  * @class
  */
-class AdvanceCacheRule extends  AbstractModel {
+class DescribeCdnDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
-`default`: the cache rules when the origin server has not returned max-age
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Time granularity of the returned data. Specify one of the following during querying:
+min: 1 minute
+5min: 5 minutes
+hour: 1 hour
+day: 1 day
          * @type {string || null}
          */
-        this.CacheType = null;
+        this.Interval = null;
 
         /**
-         * Content for each CacheType:
-For `all`, enter an asterisk (*).
-For `file`, enter the suffix, such as jpg, txt.
-For `directory`, enter the path, such as /xxx/test/.
-For `path`, enter the corresponding absolute path, such as /xxx/test.html.
-For `default`, enter "no max-age".
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * Returned data details of the specified conditional query
+         * @type {Array.<ResourceData> || null}
          */
-        this.CacheContents = null;
-
-        /**
-         * Cache expiration time
-Unit: second. The maximum value is 365 days.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CacheTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CacheType = 'CacheType' in params ? params.CacheType : null;
-        this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
-        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
-
-    }
-}
-
-/**
- * DescribeIpStatus response structure.
- * @class
- */
-class DescribeIpStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Node list
-         * @type {Array.<IpStatus> || null}
-         */
-        this.Ips = null;
-
-        /**
-         * Total number of nodes
-         * @type {number || null}
-         */
-        this.TotalCount = null;
+        this.Data = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1269,17 +1312,59 @@ class DescribeIpStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Interval = 'Interval' in params ? params.Interval : null;
 
-        if (params.Ips) {
-            this.Ips = new Array();
-            for (let z in params.Ips) {
-                let obj = new IpStatus();
-                obj.deserialize(params.Ips[z]);
-                this.Ips.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableClsLogTopic request structure.
+ * @class
+ */
+class EnableClsLogTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -1448,36 +1533,36 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.Regex = null;
 
         /**
-         * The matched URL path
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Matched URL. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * Origin-pull server when the path matches. COS source with private read/write is not supported.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Origin server when the path matches. COS origin with private read/write is not supported. The default origin server will be used by default when this field is left empty.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Origin = null;
 
         /**
-         * Origin-pull host when the path matches.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Origin server host header when the path matches. The default `ServerName` will be used by default when this field is left empty.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServerName = null;
 
         /**
-         * The region of origin server. Valid values: `CN` (mainland China), `OV` (outside mainland China)
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Origin server region. Valid values: CN (the Chinese mainland), OV (outside the Chinese mainland).
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginArea = null;
 
         /**
-         * Origin-pull URI path when the path matches.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Origin server URI path when the path matches, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ForwardUri = null;
@@ -1734,36 +1819,21 @@ Used for paginated queries
 }
 
 /**
- * CreateClsLogTopic request structure.
+ * DescribePayType request structure.
  * @class
  */
-class CreateClsLogTopicRequest extends  AbstractModel {
+class DescribePayTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log topic name
+         * Specifies a service region.
+`mainland`: queries billing methods within Mainland China;
+`overseas`: queries billing methods outside Mainland China.
+Default value: `mainland`.
          * @type {string || null}
          */
-        this.TopicName = null;
-
-        /**
-         * Logset ID
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * Connection channel. Default value: cdn
-         * @type {string || null}
-         */
-        this.Channel = null;
-
-        /**
-         * Domain name region information
-         * @type {Array.<DomainAreaConfig> || null}
-         */
-        this.DomainAreaConfigs = null;
+        this.Area = null;
 
     }
 
@@ -1774,18 +1844,70 @@ class CreateClsLogTopicRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
-        if (params.DomainAreaConfigs) {
-            this.DomainAreaConfigs = new Array();
-            for (let z in params.DomainAreaConfigs) {
-                let obj = new DomainAreaConfig();
-                obj.deserialize(params.DomainAreaConfigs[z]);
-                this.DomainAreaConfigs.push(obj);
-            }
+    }
+}
+
+/**
+ * Timestamp hotlink protection advanced configuration mode D
+ * @class
+ */
+class AdvancedAuthenticationTypeD extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * Alternative key used for authentication after the authentication key (`SecretKey`) failed
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
+
+        /**
+         * Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.SignParam = null;
+
+        /**
+         * Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.TimeParam = null;
+
+        /**
+         * Expiration time in seconds
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Time format. Valid values: dec (decimal), hex (hexadecimal).
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
+        this.SignParam = 'SignParam' in params ? params.SignParam : null;
+        this.TimeParam = 'TimeParam' in params ? params.TimeParam : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
 
     }
 }
@@ -2015,6 +2137,68 @@ Note: this field may return `null`, indicating that no valid value is obtained.
                 obj.deserialize(params.PathRules[z]);
                 this.PathRules.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * DescribeDomainsConfig request structure.
+ * @class
+ */
+class DescribeDomainsConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset for paginated queries. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit on paginated queries. Default value: 100. Maximum value: 1000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Query condition filter, complex type.
+         * @type {Array.<DomainFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sorting rules
+         * @type {Sort || null}
+         */
+        this.Sort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new DomainFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+        if (params.Sort) {
+            let obj = new Sort();
+            obj.deserialize(params.Sort)
+            this.Sort = obj;
         }
 
     }
@@ -2418,6 +2602,27 @@ class DeleteClsLogTopicRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCdnOriginIp request structure.
+ * @class
+ */
+class DescribeCdnOriginIpRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * UpdatePayType response structure.
  * @class
  */
@@ -2686,24 +2891,25 @@ global: locked globally
 }
 
 /**
- * UpdatePayType request structure.
+ * Timestamp and its corresponding value
  * @class
  */
-class UpdatePayTypeRequest extends  AbstractModel {
+class TimestampData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Billing region, which can be mainland or overseas.
+         * Statistical point in time in forward rounding mode
+Taking the 5-minute granularity as an example, 13:35:00 indicates that the statistical interval is between 13:35:00 and 13:39:59.
          * @type {string || null}
          */
-        this.Area = null;
+        this.Time = null;
 
         /**
-         * Billing mode, which can be flux or bandwidth.
-         * @type {string || null}
+         * Data value
+         * @type {number || null}
          */
-        this.PayType = null;
+        this.Value = null;
 
     }
 
@@ -2714,8 +2920,8 @@ class UpdatePayTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Area = 'Area' in params ? params.Area : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -4158,20 +4364,22 @@ class MaxAgeRule extends  AbstractModel {
 
         /**
          * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
+`all`: effective for all files.
+`file`: effective for specified file suffixes.
+`directory`: effective for specified paths.
+`path`: effective for specified absolute paths.
+`index`: effective for specified homepages.
          * @type {string || null}
          */
         this.MaxAgeType = null;
 
         /**
-         * Content for each MaxAgeType:
-For `all`, enter an asterisk (*).
-For `file`, enter the suffix, such as jpg, txt.
-For `directory`, enter the path, such as /xxx/test/.
-For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+         * Content for each `MaxAgeType`:
+For `all`, enter a wildcard `*`.
+For `file`, enter the suffix, e.g., `jpg` or `txt`.
+For `directory`, enter the path, e.g., `/xxx/test/`.
+For `path`, enter the absolute path, e.g., `/xxx/test.html`.
+For `index`, enter a forward slash `/`.
          * @type {Array.<string> || null}
          */
         this.MaxAgeContents = null;
@@ -4181,6 +4389,12 @@ For `path`, enter the corresponding absolute path, such as /xxx/test.html.
          * @type {number || null}
          */
         this.MaxAgeTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FollowOrigin = null;
 
     }
 
@@ -4194,26 +4408,60 @@ For `path`, enter the corresponding absolute path, such as /xxx/test.html.
         this.MaxAgeType = 'MaxAgeType' in params ? params.MaxAgeType : null;
         this.MaxAgeContents = 'MaxAgeContents' in params ? params.MaxAgeContents : null;
         this.MaxAgeTime = 'MaxAgeTime' in params ? params.MaxAgeTime : null;
+        this.FollowOrigin = 'FollowOrigin' in params ? params.FollowOrigin : null;
 
     }
 }
 
 /**
- * DescribePayType request structure.
+ * Timestamp hotlink protection advanced configuration mode E
  * @class
  */
-class DescribePayTypeRequest extends  AbstractModel {
+class AdvancedAuthenticationTypeE extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies a service region.
-`mainland`: queries billing methods within Mainland China;
-`overseas`: queries billing methods outside Mainland China.
-Default value: `mainland`.
+         * Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Area = null;
+        this.SecretKey = null;
+
+        /**
+         * Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SignParam = null;
+
+        /**
+         * ACL signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AclSignParam = null;
+
+        /**
+         * Start time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTimeParam = null;
+
+        /**
+         * Expiration time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpireTimeParam = null;
+
+        /**
+         * Time format (dec)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
 
     }
 
@@ -4224,7 +4472,12 @@ Default value: `mainland`.
         if (!params) {
             return;
         }
-        this.Area = 'Area' in params ? params.Area : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.SignParam = 'SignParam' in params ? params.SignParam : null;
+        this.AclSignParam = 'AclSignParam' in params ? params.AclSignParam : null;
+        this.StartTimeParam = 'StartTimeParam' in params ? params.StartTimeParam : null;
+        this.ExpireTimeParam = 'ExpireTimeParam' in params ? params.ExpireTimeParam : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
 
     }
 }
@@ -4258,36 +4511,47 @@ class DescribeCertDomainsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDomainsConfig request structure.
+ * Timestamp hotlink protection advanced authentication configuration mode F (TypeF)
  * @class
  */
-class DescribeDomainsConfigRequest extends  AbstractModel {
+class AdvancedAuthenticationTypeF extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Offset for paginated queries. Default value: 0
-         * @type {number || null}
+         * Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.SignParam = null;
 
         /**
-         * Limit on paginated queries. Default value: 100. Maximum value: 1000.
-         * @type {number || null}
+         * Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.TimeParam = null;
 
         /**
-         * Query condition filter, complex type.
-         * @type {Array.<DomainFilter> || null}
+         * Transaction field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.TransactionParam = null;
 
         /**
-         * Sorting rules
-         * @type {Sort || null}
+         * CMK used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Sort = null;
+        this.SecretKey = null;
+
+        /**
+         * Alternative key used for signature calculation, which is used after the CMK fails in authentication. It allows 6 to 32 bytes of letters and digits.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
 
     }
 
@@ -4298,23 +4562,109 @@ class DescribeDomainsConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SignParam = 'SignParam' in params ? params.SignParam : null;
+        this.TimeParam = 'TimeParam' in params ? params.TimeParam : null;
+        this.TransactionParam = 'TransactionParam' in params ? params.TransactionParam : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new DomainFilter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+    }
+}
 
-        if (params.Sort) {
-            let obj = new Sort();
-            obj.deserialize(params.Sort)
-            this.Sort = obj;
+/**
+ * Timestamp hotlink protection advanced configuration mode A
+ * @class
+ */
+class AdvancedAuthenticationTypeA extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.SignParam = null;
+
+        /**
+         * Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.TimeParam = null;
+
+        /**
+         * Expiration time in seconds
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Whether the expiration time parameter is required
+         * @type {boolean || null}
+         */
+        this.ExpireTimeRequired = null;
+
+        /**
+         * URL composition, e.g., `${private_key}${schema}${host}${full_uri}`.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Time format. Valid values: dec (decimal), hex (hexadecimal).
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+        /**
+         * Status code returned when the authentication failed
+         * @type {number || null}
+         */
+        this.FailCode = null;
+
+        /**
+         * Status code returned when the URL expired
+         * @type {number || null}
+         */
+        this.ExpireCode = null;
+
+        /**
+         * List of URLs to be authenticated
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * Reserved field
+         * @type {number || null}
+         */
+        this.Transformation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.SignParam = 'SignParam' in params ? params.SignParam : null;
+        this.TimeParam = 'TimeParam' in params ? params.TimeParam : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ExpireTimeRequired = 'ExpireTimeRequired' in params ? params.ExpireTimeRequired : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.FailCode = 'FailCode' in params ? params.FailCode : null;
+        this.ExpireCode = 'ExpireCode' in params ? params.ExpireCode : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.Transformation = 'Transformation' in params ? params.Transformation : null;
 
     }
 }
@@ -4376,6 +4726,132 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.IgnoreCacheControl = 'IgnoreCacheControl' in params ? params.IgnoreCacheControl : null;
         this.IgnoreSetCookie = 'IgnoreSetCookie' in params ? params.IgnoreSetCookie : null;
+
+    }
+}
+
+/**
+ * Timestamp hotlink protection advanced configuration mode C
+ * @class
+ */
+class AdvancedAuthenticationTypeC extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access key
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * Authentication key
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+
+    }
+}
+
+/**
+ * Timestamp hotlink protection advanced configuration mode B
+ * @class
+ */
+class AdvancedAuthenticationTypeB extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alpha key name
+         * @type {string || null}
+         */
+        this.KeyAlpha = null;
+
+        /**
+         * Beta key name
+         * @type {string || null}
+         */
+        this.KeyBeta = null;
+
+        /**
+         * Gamma key name
+         * @type {string || null}
+         */
+        this.KeyGamma = null;
+
+        /**
+         * Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.SignParam = null;
+
+        /**
+         * Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.TimeParam = null;
+
+        /**
+         * Expiration time in seconds
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Time format. Valid values: dec (decimal), hex (hexadecimal).
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+        /**
+         * Status code returned when the authentication failed
+         * @type {number || null}
+         */
+        this.FailCode = null;
+
+        /**
+         * Status code returned when the URL expired
+         * @type {number || null}
+         */
+        this.ExpireCode = null;
+
+        /**
+         * List of URLs to be authenticated
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyAlpha = 'KeyAlpha' in params ? params.KeyAlpha : null;
+        this.KeyBeta = 'KeyBeta' in params ? params.KeyBeta : null;
+        this.KeyGamma = 'KeyGamma' in params ? params.KeyGamma : null;
+        this.SignParam = 'SignParam' in params ? params.SignParam : null;
+        this.TimeParam = 'TimeParam' in params ? params.TimeParam : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.FailCode = 'FailCode' in params ? params.FailCode : null;
+        this.ExpireCode = 'ExpireCode' in params ? params.ExpireCode : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
     }
 }
@@ -4789,6 +5265,35 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
 }
 
 /**
+ * Origin-pull authentication advanced configuration TypeA
+ * @class
+ */
+class OriginAuthenticationTypeA extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+
+    }
+}
+
+/**
  * DescribePushTasks response structure.
  * @class
  */
@@ -4974,27 +5479,24 @@ class AddCdnDomainResponse extends  AbstractModel {
 }
 
 /**
- * Single link downstream speed limit configuration. This is disabled by default.
+ * Domain name region configuration
  * @class
  */
-class DownstreamCapping extends  AbstractModel {
+class DomainAreaConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Downstream speed configuration switch
-on: enabled
-off: disabled
+         * Domain name
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Domain = null;
 
         /**
-         * Downstream speed limiting rules
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CappingRule> || null}
+         * Region list, where the element can be `mainland/overseas`
+         * @type {Array.<string> || null}
          */
-        this.CappingRules = null;
+        this.Area = null;
 
     }
 
@@ -5005,16 +5507,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.CappingRules) {
-            this.CappingRules = new Array();
-            for (let z in params.CappingRules) {
-                let obj = new CappingRule();
-                obj.deserialize(params.CappingRules[z]);
-                this.CappingRules.push(obj);
-            }
-        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -5681,8 +6175,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MaxAge = null;
 
         /**
-         * IPv6 configuration (in beta)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * IPv6 origin-pull configuration (in beta)
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Ipv6 || null}
          */
         this.Ipv6 = null;
@@ -5789,6 +6283,20 @@ Note: this field may return null, indicating that no valid value is obtained.
          * @type {Array.<Tag> || null}
          */
         this.Tag = null;
+
+        /**
+         * Timestamp hotlink protection advanced configuration (allowlist feature)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AdvancedAuthentication || null}
+         */
+        this.AdvancedAuthentication = null;
+
+        /**
+         * Origin-pull authentication advanced configuration (allowlist feature)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {OriginAuthentication || null}
+         */
+        this.OriginAuthentication = null;
 
     }
 
@@ -6019,6 +6527,18 @@ Note: this field may return null, indicating that no valid value is obtained.
                 obj.deserialize(params.Tag[z]);
                 this.Tag.push(obj);
             }
+        }
+
+        if (params.AdvancedAuthentication) {
+            let obj = new AdvancedAuthentication();
+            obj.deserialize(params.AdvancedAuthentication)
+            this.AdvancedAuthentication = obj;
+        }
+
+        if (params.OriginAuthentication) {
+            let obj = new OriginAuthentication();
+            obj.deserialize(params.OriginAuthentication)
+            this.OriginAuthentication = obj;
         }
 
     }
@@ -6252,6 +6772,55 @@ class ManageClsTopicDomainsRequest extends  AbstractModel {
                 this.DomainAreaConfigs.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * URL redirect rule configuration
+ * @class
+ */
+class UrlRedirectRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Redirect status code. Valid values: 301, 302
+         * @type {number || null}
+         */
+        this.RedirectStatusCode = null;
+
+        /**
+         * URL to be matched. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * Target URL, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RedirectHost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.RedirectHost = 'RedirectHost' in params ? params.RedirectHost : null;
 
     }
 }
@@ -7307,24 +7876,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Domain name region configuration
+ * CreateClsLogTopic request structure.
  * @class
  */
-class DomainAreaConfig extends  AbstractModel {
+class CreateClsLogTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Domain name
+         * Log topic name
          * @type {string || null}
          */
-        this.Domain = null;
+        this.TopicName = null;
 
         /**
-         * Region list, where the element can be `mainland/overseas`
-         * @type {Array.<string> || null}
+         * Logset ID
+         * @type {string || null}
          */
-        this.Area = null;
+        this.LogsetId = null;
+
+        /**
+         * Connection channel. Default value: cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * Domain name region information
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
 
     }
 
@@ -7335,8 +7916,18 @@ class DomainAreaConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Area = 'Area' in params ? params.Area : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
+            }
+        }
 
     }
 }
@@ -8147,28 +8738,80 @@ class DescribeCdnIpResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCdnData response structure.
+ * Advanced cache configuration rules
  * @class
  */
-class DescribeCdnDataResponse extends  AbstractModel {
+class AdvanceCacheRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Time granularity of the returned data. Specify one of the following during querying:
-min: 1 minute
-5min: 5 minutes
-hour: 1 hour
-day: 1 day
+         * Rule types:
+`all`: effective for all files
+`file`: effective for specified file suffixes
+`directory`: effective for specified paths
+`path`: effective for specified absolute paths
+`default`: the cache rules when the origin server has not returned max-age
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Interval = null;
+        this.CacheType = null;
 
         /**
-         * Returned data details of the specified conditional query
-         * @type {Array.<ResourceData> || null}
+         * Content for each CacheType:
+For `all`, enter an asterisk (*).
+For `file`, enter the suffix, such as jpg, txt.
+For `directory`, enter the path, such as /xxx/test/.
+For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+For `default`, enter "no max-age".
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
          */
-        this.Data = null;
+        this.CacheContents = null;
+
+        /**
+         * Cache expiration time
+Unit: second. The maximum value is 365 days.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CacheTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CacheType = 'CacheType' in params ? params.CacheType : null;
+        this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
+        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+
+    }
+}
+
+/**
+ * DescribeIpStatus response structure.
+ * @class
+ */
+class DescribeIpStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node list
+         * @type {Array.<IpStatus> || null}
+         */
+        this.Ips = null;
+
+        /**
+         * Total number of nodes
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8185,59 +8828,17 @@ day: 1 day
         if (!params) {
             return;
         }
-        this.Interval = 'Interval' in params ? params.Interval : null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new IpStatus();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * EnableClsLogTopic request structure.
- * @class
- */
-class EnableClsLogTopicRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Logset ID
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Connection channel. Default value: cdn
-         * @type {string || null}
-         */
-        this.Channel = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -8453,6 +9054,52 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new UrlRedirectRule();
                 obj.deserialize(params.PathRules[z]);
                 this.PathRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Single link downstream speed limit configuration. This is disabled by default.
+ * @class
+ */
+class DownstreamCapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Downstream speed configuration switch
+on: enabled
+off: disabled
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Downstream speed limiting rules
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CappingRule> || null}
+         */
+        this.CappingRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.CappingRules) {
+            this.CappingRules = new Array();
+            for (let z in params.CappingRules) {
+                let obj = new CappingRule();
+                obj.deserialize(params.CappingRules[z]);
+                this.CappingRules.push(obj);
             }
         }
 
@@ -9163,25 +9810,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Timestamp and its corresponding value
+ * CDN report data
  * @class
  */
-class TimestampData extends  AbstractModel {
+class ReportData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Statistical point in time in forward rounding mode
-Taking the 5-minute granularity as an example, 13:35:00 indicates that the statistical interval is between 13:35:00 and 13:39:59.
+         * Project ID/domain name ID.
          * @type {string || null}
          */
-        this.Time = null;
+        this.ResourceId = null;
 
         /**
-         * Data value
+         * Project name/domain name.
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Total traffic/max bandwidth in bytes and bps, respectively.
          * @type {number || null}
          */
         this.Value = null;
+
+        /**
+         * Percentage of individual resource out of all resources.
+         * @type {number || null}
+         */
+        this.Percentage = null;
+
+        /**
+         * Total billable traffic/max billable bandwidth in bytes and bps, respectively.
+         * @type {number || null}
+         */
+        this.BillingValue = null;
+
+        /**
+         * Percentage of billable amount out of total amount.
+         * @type {number || null}
+         */
+        this.BillingPercentage = null;
 
     }
 
@@ -9192,8 +9862,12 @@ Taking the 5-minute granularity as an example, 13:35:00 indicates that the stati
         if (!params) {
             return;
         }
-        this.Time = 'Time' in params ? params.Time : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
         this.Value = 'Value' in params ? params.Value : null;
+        this.Percentage = 'Percentage' in params ? params.Percentage : null;
+        this.BillingValue = 'BillingValue' in params ? params.BillingValue : null;
+        this.BillingPercentage = 'BillingPercentage' in params ? params.BillingPercentage : null;
 
     }
 }
@@ -10133,6 +10807,18 @@ global: global acceleration
          */
         this.AccessPort = null;
 
+        /**
+         * Timestamp hotlink protection advanced configuration (allowlist feature)
+         * @type {AdvancedAuthentication || null}
+         */
+        this.AdvancedAuthentication = null;
+
+        /**
+         * Origin-pull authentication advanced configuration (allowlist feature)
+         * @type {OriginAuthentication || null}
+         */
+        this.OriginAuthentication = null;
+
     }
 
     /**
@@ -10321,6 +11007,18 @@ global: global acceleration
             this.UrlRedirect = obj;
         }
         this.AccessPort = 'AccessPort' in params ? params.AccessPort : null;
+
+        if (params.AdvancedAuthentication) {
+            let obj = new AdvancedAuthentication();
+            obj.deserialize(params.AdvancedAuthentication)
+            this.AdvancedAuthentication = obj;
+        }
+
+        if (params.OriginAuthentication) {
+            let obj = new OriginAuthentication();
+            obj.deserialize(params.OriginAuthentication)
+            this.OriginAuthentication = obj;
+        }
 
     }
 }
@@ -10624,6 +11322,41 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * UpdatePayType request structure.
+ * @class
+ */
+class UpdatePayTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Billing region, which can be mainland or overseas.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Billing mode, which can be flux or bandwidth.
+         * @type {string || null}
+         */
+        this.PayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Area = 'Area' in params ? params.Area : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+
+    }
+}
+
+/**
  * DescribePurgeTasks response structure.
  * @class
  */
@@ -10676,30 +11409,26 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * URL redirect rule configuration
+ * Origin-pull authentication advanced configuration
  * @class
  */
-class UrlRedirectRule extends  AbstractModel {
+class OriginAuthentication extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Redirect status code. Valid values: 301, 302
-         * @type {number || null}
-         */
-        this.RedirectStatusCode = null;
-
-        /**
-         * Pattern of the URL to be matched, which can contain up to 1,024 characters. Full-path match and regex match are supported.
+         * Authentication switch, which can be on or off.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Pattern = null;
+        this.Switch = null;
 
         /**
-         * Target URL, which must begin with `/` and can contain up to 1,024 characters.
-         * @type {string || null}
+         * Authentication type configuration A
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {OriginAuthenticationTypeA || null}
          */
-        this.RedirectUrl = null;
+        this.TypeA = null;
 
     }
 
@@ -10710,9 +11439,13 @@ class UrlRedirectRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
-        this.Pattern = 'Pattern' in params ? params.Pattern : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.TypeA) {
+            let obj = new OriginAuthenticationTypeA();
+            obj.deserialize(params.TypeA)
+            this.TypeA = obj;
+        }
 
     }
 }
@@ -10943,6 +11676,34 @@ class DeleteCdnDomainResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IP information of CDN intermediate nodes
+ * @class
+ */
+class OriginIp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Intermediate IP range/intermediate IP. The IP range information is returned by default.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
 
     }
 }
@@ -11336,7 +12097,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 
 module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
-    DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
+    AdvancedAuthentication: AdvancedAuthentication,
     Compression: Compression,
     Revalidate: Revalidate,
     ResourceData: ResourceData,
@@ -11347,18 +12108,19 @@ module.exports = {
     ImageOptimization: ImageOptimization,
     Https: Https,
     RuleCache: RuleCache,
-    ReportData: ReportData,
+    DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
+    DescribeCdnOriginIpResponse: DescribeCdnOriginIpResponse,
     SpecificConfig: SpecificConfig,
     FollowRedirect: FollowRedirect,
     RequestHeader: RequestHeader,
     DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     Referer: Referer,
     UserAgentFilter: UserAgentFilter,
-    AdvanceCacheRule: AdvanceCacheRule,
-    DescribeIpStatusResponse: DescribeIpStatusResponse,
+    DescribeCdnDataResponse: DescribeCdnDataResponse,
+    EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     CacheConfigNoCache: CacheConfigNoCache,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
@@ -11366,10 +12128,12 @@ module.exports = {
     ListTopDataRequest: ListTopDataRequest,
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
-    CreateClsLogTopicRequest: CreateClsLogTopicRequest,
+    DescribePayTypeRequest: DescribePayTypeRequest,
+    AdvancedAuthenticationTypeD: AdvancedAuthenticationTypeD,
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
+    DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     TopData: TopData,
     EnableCachesRequest: EnableCachesRequest,
     Quota: Quota,
@@ -11377,11 +12141,12 @@ module.exports = {
     DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
     DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
+    DescribeCdnOriginIpRequest: DescribeCdnOriginIpRequest,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     BriefDomain: BriefDomain,
-    UpdatePayTypeRequest: UpdatePayTypeRequest,
+    TimestampData: TimestampData,
     TpgAdapter: TpgAdapter,
     CacheConfigCache: CacheConfigCache,
     DescribeReportDataResponse: DescribeReportDataResponse,
@@ -11400,10 +12165,13 @@ module.exports = {
     Tag: Tag,
     CacheConfigFollowOrigin: CacheConfigFollowOrigin,
     MaxAgeRule: MaxAgeRule,
-    DescribePayTypeRequest: DescribePayTypeRequest,
+    AdvancedAuthenticationTypeE: AdvancedAuthenticationTypeE,
     DescribeCertDomainsRequest: DescribeCertDomainsRequest,
-    DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
+    AdvancedAuthenticationTypeF: AdvancedAuthenticationTypeF,
+    AdvancedAuthenticationTypeA: AdvancedAuthenticationTypeA,
     AdvancedCache: AdvancedCache,
+    AdvancedAuthenticationTypeC: AdvancedAuthenticationTypeC,
+    AdvancedAuthenticationTypeB: AdvancedAuthenticationTypeB,
     WebpAdapter: WebpAdapter,
     StartCdnDomainRequest: StartCdnDomainRequest,
     MapInfo: MapInfo,
@@ -11412,11 +12180,12 @@ module.exports = {
     AuthenticationTypeC: AuthenticationTypeC,
     AuthenticationTypeB: AuthenticationTypeB,
     AuthenticationTypeA: AuthenticationTypeA,
+    OriginAuthenticationTypeA: OriginAuthenticationTypeA,
     DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,
     IpStatus: IpStatus,
     AddCdnDomainResponse: AddCdnDomainResponse,
-    DownstreamCapping: DownstreamCapping,
+    DomainAreaConfig: DomainAreaConfig,
     ServerCert: ServerCert,
     AccessControlRule: AccessControlRule,
     HttpHeaderPathRule: HttpHeaderPathRule,
@@ -11431,6 +12200,7 @@ module.exports = {
     CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
     ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
+    UrlRedirectRule: UrlRedirectRule,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
@@ -11444,7 +12214,7 @@ module.exports = {
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,
     IpFreqLimit: IpFreqLimit,
-    DomainAreaConfig: DomainAreaConfig,
+    CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CacheOptResult: CacheOptResult,
     StopCdnDomainRequest: StopCdnDomainRequest,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
@@ -11463,11 +12233,12 @@ module.exports = {
     DisableCachesResponse: DisableCachesResponse,
     SchemeKey: SchemeKey,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
-    DescribeCdnDataResponse: DescribeCdnDataResponse,
-    EnableClsLogTopicRequest: EnableClsLogTopicRequest,
+    AdvanceCacheRule: AdvanceCacheRule,
+    DescribeIpStatusResponse: DescribeIpStatusResponse,
     AccessControl: AccessControl,
     CacheKey: CacheKey,
     UrlRedirect: UrlRedirect,
+    DownstreamCapping: DownstreamCapping,
     CookieKey: CookieKey,
     KeyRule: KeyRule,
     CappingRule: CappingRule,
@@ -11482,7 +12253,7 @@ module.exports = {
     OriginPullOptimization: OriginPullOptimization,
     ErrorPage: ErrorPage,
     PushTask: PushTask,
-    TimestampData: TimestampData,
+    ReportData: ReportData,
     StartCdnDomainResponse: StartCdnDomainResponse,
     DescribePushQuotaRequest: DescribePushQuotaRequest,
     TopDetailData: TopDetailData,
@@ -11507,13 +12278,15 @@ module.exports = {
     ClsSearchLogs: ClsSearchLogs,
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
+    UpdatePayTypeRequest: UpdatePayTypeRequest,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
-    UrlRedirectRule: UrlRedirectRule,
+    OriginAuthentication: OriginAuthentication,
     ErrorPageRule: ErrorPageRule,
     DescribeOriginDataResponse: DescribeOriginDataResponse,
     PurgeTask: PurgeTask,
     OriginPullTimeout: OriginPullTimeout,
     DeleteCdnDomainResponse: DeleteCdnDomainResponse,
+    OriginIp: OriginIp,
     CdnIp: CdnIp,
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     CacheTagKey: CacheTagKey,

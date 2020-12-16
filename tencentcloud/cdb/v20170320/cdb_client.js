@@ -77,19 +77,22 @@ const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const BinlogInfo = models.BinlogInfo;
 const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
+const CloneItem = models.CloneItem;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
+const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
 const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const DescribeDeployGroupListRequest = models.DescribeDeployGroupListRequest;
 const RollbackInstancesInfo = models.RollbackInstancesInfo;
-const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
+const DescribeCloneListRequest = models.DescribeCloneListRequest;
 const BackupInfo = models.BackupInfo;
 const CloseWanServiceResponse = models.CloseWanServiceResponse;
+const CreateCloneInstanceRequest = models.CreateCloneInstanceRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
@@ -115,6 +118,7 @@ const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
+const StopRollbackResponse = models.StopRollbackResponse;
 const ParamTemplateInfo = models.ParamTemplateInfo;
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
@@ -147,12 +151,13 @@ const SlaveInfo = models.SlaveInfo;
 const TagInfo = models.TagInfo;
 const RollbackTimeRange = models.RollbackTimeRange;
 const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
-const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
+const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
 const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
+const TablePrivilege = models.TablePrivilege;
 const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
@@ -187,7 +192,7 @@ const InstanceRebootTime = models.InstanceRebootTime;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
-const AddTimeWindowResponse = models.AddTimeWindowResponse;
+const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
 const ZoneSellConf = models.ZoneSellConf;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
@@ -222,7 +227,7 @@ const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest
 const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const TablePrivilege = models.TablePrivilege;
+const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const SlowLogInfo = models.SlowLogInfo;
 const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
@@ -236,8 +241,10 @@ const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsReque
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
+const AddTimeWindowResponse = models.AddTimeWindowResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackDBName = models.RollbackDBName;
+const StopRollbackRequest = models.StopRollbackRequest;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
@@ -375,6 +382,17 @@ class CdbClient extends AbstractClient {
     ModifyDBInstanceName(req, cb) {
         let resp = new ModifyDBInstanceNameResponse();
         this.request("ModifyDBInstanceName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel a rollback task in progress, and returns an async task ID. You can use the `DescribeAsyncRequestInfo` API to query the result of cancellation.
+     * @param {StopRollbackRequest} req
+     * @param {function(string, StopRollbackResponse):void} cb
+     * @public
+     */
+    StopRollback(req, cb) {
+        let resp = new StopRollbackResponse();
+        this.request("StopRollback", req, resp, cb);
     }
 
     /**
@@ -544,6 +562,17 @@ Note that once an instance is deactivated, its resources and data will not be re
     ReleaseIsolatedDBInstances(req, cb) {
         let resp = new ReleaseIsolatedDBInstancesResponse();
         this.request("ReleaseIsolatedDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a clone of a specific instance, and roll back the clone by using a physical backup file of the instance or roll back the clone to a point in time.
+     * @param {CreateCloneInstanceRequest} req
+     * @param {function(string, CreateCloneInstanceResponse):void} cb
+     * @public
+     */
+    CreateCloneInstance(req, cb) {
+        let resp = new CreateCloneInstanceResponse();
+        this.request("CreateCloneInstance", req, resp, cb);
     }
 
     /**
@@ -1216,6 +1245,17 @@ Note that before enabling public network access, you need to first [initialize t
     DescribeRoGroups(req, cb) {
         let resp = new DescribeRoGroupsResponse();
         this.request("DescribeRoGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the clone task list of an instance.
+     * @param {DescribeCloneListRequest} req
+     * @param {function(string, DescribeCloneListResponse):void} cb
+     * @public
+     */
+    DescribeCloneList(req, cb) {
+        let resp = new DescribeCloneListResponse();
+        this.request("DescribeCloneList", req, resp, cb);
     }
 
     /**

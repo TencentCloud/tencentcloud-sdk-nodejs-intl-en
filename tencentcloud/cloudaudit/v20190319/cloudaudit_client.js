@@ -16,37 +16,27 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const InquireAuditCreditResponse = models.InquireAuditCreditResponse;
-const StopLoggingRequest = models.StopLoggingRequest;
-const CmqRegionInfo = models.CmqRegionInfo;
-const GetAttributeKeyRequest = models.GetAttributeKeyRequest;
-const DeleteAuditResponse = models.DeleteAuditResponse;
-const UpdateAuditRequest = models.UpdateAuditRequest;
-const InquireAuditCreditRequest = models.InquireAuditCreditRequest;
-const ListAuditsRequest = models.ListAuditsRequest;
-const LookUpEventsRequest = models.LookUpEventsRequest;
-const StartLoggingRequest = models.StartLoggingRequest;
-const CreateAuditResponse = models.CreateAuditResponse;
-const StartLoggingResponse = models.StartLoggingResponse;
-const AttributeKeyDetail = models.AttributeKeyDetail;
-const ListCosEnableRegionRequest = models.ListCosEnableRegionRequest;
-const Resource = models.Resource;
-const ListCosEnableRegionResponse = models.ListCosEnableRegionResponse;
-const StopLoggingResponse = models.StopLoggingResponse;
-const LookupAttribute = models.LookupAttribute;
-const ListAuditsResponse = models.ListAuditsResponse;
-const UpdateAuditResponse = models.UpdateAuditResponse;
-const DescribeAuditRequest = models.DescribeAuditRequest;
-const CreateAuditRequest = models.CreateAuditRequest;
-const DeleteAuditRequest = models.DeleteAuditRequest;
-const ListCmqEnableRegionRequest = models.ListCmqEnableRegionRequest;
-const GetAttributeKeyResponse = models.GetAttributeKeyResponse;
-const ListCmqEnableRegionResponse = models.ListCmqEnableRegionResponse;
-const LookUpEventsResponse = models.LookUpEventsResponse;
-const CosRegionInfo = models.CosRegionInfo;
-const DescribeAuditResponse = models.DescribeAuditResponse;
-const Event = models.Event;
-const AuditSummary = models.AuditSummary;
+const DeleteRecorderResponse = models.DeleteRecorderResponse;
+const DescribeDiscoveredResourceResponse = models.DescribeDiscoveredResourceResponse;
+const ConfigurationItems = models.ConfigurationItems;
+const CreateRecorderResponse = models.CreateRecorderResponse;
+const SupportResourceType = models.SupportResourceType;
+const DescribeRecorderResponse = models.DescribeRecorderResponse;
+const UpdateRecorderRequest = models.UpdateRecorderRequest;
+const UpdateRecorderResponse = models.UpdateRecorderResponse;
+const DescribeDiscoveredResourceRequest = models.DescribeDiscoveredResourceRequest;
+const ListDiscoveredResourcesResponse = models.ListDiscoveredResourcesResponse;
+const ListSupportResourceTypesRequest = models.ListSupportResourceTypesRequest;
+const ListSupportResourceTypesResponse = models.ListSupportResourceTypesResponse;
+const ListDiscoveredResourcesRequest = models.ListDiscoveredResourcesRequest;
+const DescribeRecorderRequest = models.DescribeRecorderRequest;
+const CreateRecorderRequest = models.CreateRecorderRequest;
+const GetConfigurationItemsRequest = models.GetConfigurationItemsRequest;
+const GetConfigurationItemsResponse = models.GetConfigurationItemsResponse;
+const DeleteRecorderRequest = models.DeleteRecorderRequest;
+const RecordResourceType = models.RecordResourceType;
+const Resources = models.Resources;
+const RelatedEvent = models.RelatedEvent;
 
 
 /**
@@ -60,143 +50,91 @@ class CloudauditClient extends AbstractClient {
     }
     
     /**
-     * This API is used to enable a tracking set.
-     * @param {StartLoggingRequest} req
-     * @param {function(string, StartLoggingResponse):void} cb
+     * This API is used to create resource recorders to detect and record resource configuration changes.
+     * @param {CreateRecorderRequest} req
+     * @param {function(string, CreateRecorderResponse):void} cb
      * @public
      */
-    StartLogging(req, cb) {
-        let resp = new StartLoggingResponse();
-        this.request("StartLogging", req, resp, cb);
+    CreateRecorder(req, cb) {
+        let resp = new CreateRecorderResponse();
+        this.request("CreateRecorder", req, resp, cb);
     }
 
     /**
-     * This API is used to query the valid values range of `AttributeKey`.
-     * @param {GetAttributeKeyRequest} req
-     * @param {function(string, GetAttributeKeyResponse):void} cb
+     * This API is used to get the list of resource configuration items and display resource configuration changes in chronological order.
+     * @param {GetConfigurationItemsRequest} req
+     * @param {function(string, GetConfigurationItemsResponse):void} cb
      * @public
      */
-    GetAttributeKey(req, cb) {
-        let resp = new GetAttributeKeyResponse();
-        this.request("GetAttributeKey", req, resp, cb);
+    GetConfigurationItems(req, cb) {
+        let resp = new GetConfigurationItemsResponse();
+        this.request("GetConfigurationItems", req, resp, cb);
     }
 
     /**
-     * This API is used to query CloudAudit-enabled CMQ AZs.
-     * @param {ListCmqEnableRegionRequest} req
-     * @param {function(string, ListCmqEnableRegionResponse):void} cb
+     * This API is used to view the list of discovered resources.
+     * @param {ListDiscoveredResourcesRequest} req
+     * @param {function(string, ListDiscoveredResourcesResponse):void} cb
      * @public
      */
-    ListCmqEnableRegion(req, cb) {
-        let resp = new ListCmqEnableRegionResponse();
-        this.request("ListCmqEnableRegion", req, resp, cb);
+    ListDiscoveredResources(req, cb) {
+        let resp = new ListDiscoveredResourcesResponse();
+        this.request("ListDiscoveredResources", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a tracking set.
-     * @param {DeleteAuditRequest} req
-     * @param {function(string, DeleteAuditResponse):void} cb
+     * This API is used to view the basic information of discovered resources.
+     * @param {DescribeDiscoveredResourceRequest} req
+     * @param {function(string, DescribeDiscoveredResourceResponse):void} cb
      * @public
      */
-    DeleteAudit(req, cb) {
-        let resp = new DeleteAuditResponse();
-        this.request("DeleteAudit", req, resp, cb);
+    DescribeDiscoveredResource(req, cb) {
+        let resp = new DescribeDiscoveredResourceResponse();
+        this.request("DescribeDiscoveredResource", req, resp, cb);
     }
 
     /**
-     * This API is used to disable a tracking set.
-     * @param {StopLoggingRequest} req
-     * @param {function(string, StopLoggingResponse):void} cb
+     * This API is used to delete resource recorders. After deletion, resource configuration changes will not be recorded.
+     * @param {DeleteRecorderRequest} req
+     * @param {function(string, DeleteRecorderResponse):void} cb
      * @public
      */
-    StopLogging(req, cb) {
-        let resp = new StopLoggingResponse();
-        this.request("StopLogging", req, resp, cb);
+    DeleteRecorder(req, cb) {
+        let resp = new DeleteRecorderResponse();
+        this.request("DeleteRecorder", req, resp, cb);
     }
 
     /**
-     * This API is used to query the number of tracking sets that can be created.
-     * @param {InquireAuditCreditRequest} req
-     * @param {function(string, InquireAuditCreditResponse):void} cb
+     * This API is used to modify the resources to monitor, recorder name, and other recorder configurations.
+     * @param {UpdateRecorderRequest} req
+     * @param {function(string, UpdateRecorderResponse):void} cb
      * @public
      */
-    InquireAuditCredit(req, cb) {
-        let resp = new InquireAuditCreditResponse();
-        this.request("InquireAuditCredit", req, resp, cb);
+    UpdateRecorder(req, cb) {
+        let resp = new UpdateRecorderResponse();
+        this.request("UpdateRecorder", req, resp, cb);
     }
 
     /**
-     * Parameter requirements:
-1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `cosBucketName` are required.
-2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
-3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
-4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
-     * @param {UpdateAuditRequest} req
-     * @param {function(string, UpdateAuditResponse):void} cb
+     * This API is used to display current configurations and status of a recorder.
+     * @param {DescribeRecorderRequest} req
+     * @param {function(string, DescribeRecorderResponse):void} cb
      * @public
      */
-    UpdateAudit(req, cb) {
-        let resp = new UpdateAuditResponse();
-        this.request("UpdateAudit", req, resp, cb);
+    DescribeRecorder(req, cb) {
+        let resp = new DescribeRecorderResponse();
+        this.request("DescribeRecorder", req, resp, cb);
     }
 
     /**
-     * This API is used to query the details of a tracking set.
-     * @param {DescribeAuditRequest} req
-     * @param {function(string, DescribeAuditResponse):void} cb
+     * This API is used to query the list of all CFA supported resource types.
+     * @param {ListSupportResourceTypesRequest} req
+     * @param {function(string, ListSupportResourceTypesResponse):void} cb
      * @public
      */
-    DescribeAudit(req, cb) {
-        let resp = new DescribeAuditResponse();
-        this.request("DescribeAudit", req, resp, cb);
-    }
-
-    /**
-     * Parameter requirements:
-1. If the value of `IsCreateNewBucket` exists, `cosRegion` and `cosBucketName` are required.
-2. If the value of `IsEnableCmqNotify` is 1, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` are required.
-3. If the value of `IsEnableCmqNotify` is 0, `IsCreateNewQueue`, `CmqRegion`, and `CmqQueueName` cannot be passed in.
-4. If the value of `IsEnableKmsEncry` is 1, `KmsRegion` and `KeyId` are required.
-     * @param {CreateAuditRequest} req
-     * @param {function(string, CreateAuditResponse):void} cb
-     * @public
-     */
-    CreateAudit(req, cb) {
-        let resp = new CreateAuditResponse();
-        this.request("CreateAudit", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query CloudAudit-enabled COS AZs.
-     * @param {ListCosEnableRegionRequest} req
-     * @param {function(string, ListCosEnableRegionResponse):void} cb
-     * @public
-     */
-    ListCosEnableRegion(req, cb) {
-        let resp = new ListCosEnableRegionResponse();
-        this.request("ListCosEnableRegion", req, resp, cb);
-    }
-
-    /**
-     * This API is used to search for operation logs to help query relevant operation information.
-     * @param {LookUpEventsRequest} req
-     * @param {function(string, LookUpEventsResponse):void} cb
-     * @public
-     */
-    LookUpEvents(req, cb) {
-        let resp = new LookUpEventsResponse();
-        this.request("LookUpEvents", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the summary of tracking sets.
-     * @param {ListAuditsRequest} req
-     * @param {function(string, ListAuditsResponse):void} cb
-     * @public
-     */
-    ListAudits(req, cb) {
-        let resp = new ListAuditsResponse();
-        this.request("ListAudits", req, resp, cb);
+    ListSupportResourceTypes(req, cb) {
+        let resp = new ListSupportResourceTypesResponse();
+        this.request("ListSupportResourceTypes", req, resp, cb);
     }
 
 

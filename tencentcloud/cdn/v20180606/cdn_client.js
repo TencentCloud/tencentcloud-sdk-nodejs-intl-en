@@ -30,6 +30,7 @@ const Https = models.Https;
 const RuleCache = models.RuleCache;
 const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
 const CreateClsLogTopicResponse = models.CreateClsLogTopicResponse;
+const ScdnAclRule = models.ScdnAclRule;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
 const DomainFilter = models.DomainFilter;
 const DescribeCdnOriginIpResponse = models.DescribeCdnOriginIpResponse;
@@ -52,6 +53,7 @@ const DescribePayTypeRequest = models.DescribePayTypeRequest;
 const AdvancedAuthenticationTypeD = models.AdvancedAuthenticationTypeD;
 const CompressionRule = models.CompressionRule;
 const GuetzliAdapter = models.GuetzliAdapter;
+const UpdateScdnDomainResponse = models.UpdateScdnDomainResponse;
 const Origin = models.Origin;
 const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
 const TopData = models.TopData;
@@ -73,6 +75,7 @@ const DescribeReportDataResponse = models.DescribeReportDataResponse;
 const DisableClsLogTopicRequest = models.DisableClsLogTopicRequest;
 const RuleCacheConfig = models.RuleCacheConfig;
 const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
+const BotCookie = models.BotCookie;
 const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
 const Ipv6 = models.Ipv6;
 const StatusCodeCache = models.StatusCodeCache;
@@ -96,6 +99,7 @@ const WebpAdapter = models.WebpAdapter;
 const StartCdnDomainRequest = models.StartCdnDomainRequest;
 const MapInfo = models.MapInfo;
 const DescribeCertDomainsResponse = models.DescribeCertDomainsResponse;
+const ScdnBotConfig = models.ScdnBotConfig;
 const AuthenticationTypeD = models.AuthenticationTypeD;
 const AuthenticationTypeC = models.AuthenticationTypeC;
 const AuthenticationTypeB = models.AuthenticationTypeB;
@@ -119,8 +123,10 @@ const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
 const ResponseHeader = models.ResponseHeader;
 const CdnIpHistory = models.CdnIpHistory;
 const SummarizedData = models.SummarizedData;
+const UpdateScdnDomainRequest = models.UpdateScdnDomainRequest;
+const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
 const ManageClsTopicDomainsRequest = models.ManageClsTopicDomainsRequest;
-const UrlRedirectRule = models.UrlRedirectRule;
+const ScdnWafConfig = models.ScdnWafConfig;
 const Cache = models.Cache;
 const ForceRedirect = models.ForceRedirect;
 const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
@@ -133,6 +139,7 @@ const DescribeReportDataRequest = models.DescribeReportDataRequest;
 const DescribePushTasksRequest = models.DescribePushTasksRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
+const ScdnCCRules = models.ScdnCCRules;
 const IpFreqLimit = models.IpFreqLimit;
 const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CacheOptResult = models.CacheOptResult;
@@ -145,9 +152,11 @@ const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
 const HttpHeaderRule = models.HttpHeaderRule;
 const StatusCodeCacheRule = models.StatusCodeCacheRule;
 const ClientCert = models.ClientCert;
+const ScdnConfig = models.ScdnConfig;
 const DomainLog = models.DomainLog;
 const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
 const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
+const BotJavaScript = models.BotJavaScript;
 const DeleteClsLogTopicResponse = models.DeleteClsLogTopicResponse;
 const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const DisableCachesResponse = models.DisableCachesResponse;
@@ -156,6 +165,7 @@ const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const AdvanceCacheRule = models.AdvanceCacheRule;
 const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const AccessControl = models.AccessControl;
+const ScdnErrorPage = models.ScdnErrorPage;
 const CacheKey = models.CacheKey;
 const UrlRedirect = models.UrlRedirect;
 const DownstreamCapping = models.DownstreamCapping;
@@ -195,10 +205,13 @@ const AwsPrivateAccess = models.AwsPrivateAccess;
 const ManageClsTopicDomainsResponse = models.ManageClsTopicDomainsResponse;
 const VideoSeek = models.VideoSeek;
 const Compatibility = models.Compatibility;
+const ScdnAclGroup = models.ScdnAclGroup;
+const ScdnWafRule = models.ScdnWafRule;
 const ClsSearchLogs = models.ClsSearchLogs;
 const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
 const IpFilter = models.IpFilter;
-const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const ScdnAclConfig = models.ScdnAclConfig;
+const ScdnDdosConfig = models.ScdnDdosConfig;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const OriginAuthentication = models.OriginAuthentication;
 const ErrorPageRule = models.ErrorPageRule;
@@ -211,6 +224,7 @@ const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const CacheTagKey = models.CacheTagKey;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
+const UrlRedirectRule = models.UrlRedirectRule;
 const IpFilterPathRule = models.IpFilterPathRule;
 
 
@@ -400,6 +414,17 @@ Note: after the acceleration service has been suspended, requests to the cache n
     DescribePurgeQuota(req, cb) {
         let resp = new DescribePurgeQuotaResponse();
         this.request("DescribePurgeQuota", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify security configurations of SCDN acceleration domain names.
+     * @param {UpdateScdnDomainRequest} req
+     * @param {function(string, UpdateScdnDomainResponse):void} cb
+     * @public
+     */
+    UpdateScdnDomain(req, cb) {
+        let resp = new UpdateScdnDomainResponse();
+        this.request("UpdateScdnDomain", req, resp, cb);
     }
 
     /**

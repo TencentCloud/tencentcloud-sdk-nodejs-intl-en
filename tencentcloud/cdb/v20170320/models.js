@@ -568,24 +568,18 @@ class StopDBImportJobRequest extends  AbstractModel {
 }
 
 /**
- * RO instance weight value
+ * OfflineIsolatedInstances response structure.
  * @class
  */
-class RoWeightValue extends  AbstractModel {
+class OfflineIsolatedInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * RO instance ID.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Weight value. Value range: [0, 100].
-         * @type {number || null}
-         */
-        this.Weight = null;
+        this.RequestId = null;
 
     }
 
@@ -596,8 +590,7 @@ class RoWeightValue extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3110,6 +3103,42 @@ class CloneItem extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+
+    }
+}
+
+/**
+ * StartDelayReplication response structure.
+ * @class
+ */
+class StartDelayReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Delayed replication task ID. This parameter will be returned if `DelayReplicationType` is not `DEFAULT`. It can be used to view the status of the delayed replication task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6440,6 +6469,41 @@ class SlaveInstanceInfo extends  AbstractModel {
 }
 
 /**
+ * RO instance weight value
+ * @class
+ */
+class RoWeightValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Weight value. Value range: [0, 100].
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
  * ModifyParamTemplate response structure.
  * @class
  */
@@ -6519,6 +6583,41 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
             return;
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * ModifyRoReplicationDelay request structure.
+ * @class
+ */
+class ModifyRoReplicationDelayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Replication delay in seconds. Value range: 1 to 259200.
+         * @type {number || null}
+         */
+        this.ReplicationDelay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ReplicationDelay = 'ReplicationDelay' in params ? params.ReplicationDelay : null;
 
     }
 }
@@ -7212,6 +7311,34 @@ class BalanceRoGroupLoadRequest extends  AbstractModel {
             return;
         }
         this.RoGroupId = 'RoGroupId' in params ? params.RoGroupId : null;
+
+    }
+}
+
+/**
+ * ModifyRoType response structure.
+ * @class
+ */
+class ModifyRoTypeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8445,18 +8572,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * OfflineIsolatedInstances response structure.
+ * ModifyRoType request structure.
  * @class
  */
-class OfflineIsolatedInstancesResponse extends  AbstractModel {
+class ModifyRoTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * The original type of an RO replica. Valid values: `NORMAL` (do not support delayed replication), `DELAY_REPLICATION` (support delayed replication).
+         * @type {string || null}
+         */
+        this.SrcRoInstType = null;
+
+        /**
+         * The target type of an RO replica. Valid values: `NORMAL` (do not support delayed replication), `DELAY_REPLICATION` (support delayed replication).
+         * @type {string || null}
+         */
+        this.DstRoInstType = null;
+
+        /**
+         * Replication delay in seconds. This parameter is required when a regular RO replica is switched to a delayed one. Value range: 1 to 259200.
+         * @type {number || null}
+         */
+        this.ReplicationDelay = null;
 
     }
 
@@ -8467,7 +8612,10 @@ class OfflineIsolatedInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SrcRoInstType = 'SrcRoInstType' in params ? params.SrcRoInstType : null;
+        this.DstRoInstType = 'DstRoInstType' in params ? params.DstRoInstType : null;
+        this.ReplicationDelay = 'ReplicationDelay' in params ? params.ReplicationDelay : null;
 
     }
 }
@@ -10340,6 +10488,55 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
 }
 
 /**
+ * StartDelayReplication request structure.
+ * @class
+ */
+class StartDelayReplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Delayed replication mode. Valid values: `DEFAULT` (replicate according to the specified replication delay), `GTID` (replicate according to the specified GTID), `DUE_TIME` (replicate according to the specified point in time).
+         * @type {string || null}
+         */
+        this.DelayReplicationType = null;
+
+        /**
+         * Specified point in time. Default value: 0. The maximum value cannot be later than the current time.
+         * @type {number || null}
+         */
+        this.DueTime = null;
+
+        /**
+         * Specified GITD. This parameter is required when the delayed replication mode is `GTID`.
+         * @type {string || null}
+         */
+        this.Gtid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DelayReplicationType = 'DelayReplicationType' in params ? params.DelayReplicationType : null;
+        this.DueTime = 'DueTime' in params ? params.DueTime : null;
+        this.Gtid = 'Gtid' in params ? params.Gtid : null;
+
+    }
+}
+
+/**
  * DeleteDeployGroups request structure.
  * @class
  */
@@ -10777,6 +10974,34 @@ class DescribeTagsOfInstanceIdsRequest extends  AbstractModel {
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * StopDelayReplication response structure.
+ * @class
+ */
+class StopDelayReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12201,6 +12426,34 @@ class OpenWanServiceResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyRoReplicationDelay response structure.
+ * @class
+ */
+class ModifyRoReplicationDelayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyBackupConfig request structure.
  * @class
  */
@@ -12299,6 +12552,34 @@ class ModifyAccountPasswordResponse extends  AbstractModel {
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopDelayReplication request structure.
+ * @class
+ */
+class StopDelayReplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -12492,7 +12773,7 @@ module.exports = {
     DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
     DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobRequest: StopDBImportJobRequest,
-    RoWeightValue: RoWeightValue,
+    OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
     DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
     StopDBImportJobResponse: StopDBImportJobResponse,
     DescribeDBInstanceInfoResponse: DescribeDBInstanceInfoResponse,
@@ -12544,6 +12825,7 @@ module.exports = {
     BinlogInfo: BinlogInfo,
     DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
     CloneItem: CloneItem,
+    StartDelayReplicationResponse: StartDelayReplicationResponse,
     DescribeTasksRequest: DescribeTasksRequest,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
@@ -12605,9 +12887,11 @@ module.exports = {
     DescribeBackupTablesResponse: DescribeBackupTablesResponse,
     Outbound: Outbound,
     SlaveInstanceInfo: SlaveInstanceInfo,
+    RoWeightValue: RoWeightValue,
     ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
+    ModifyRoReplicationDelayRequest: ModifyRoReplicationDelayRequest,
     StartBatchRollbackRequest: StartBatchRollbackRequest,
     SecurityGroup: SecurityGroup,
     ZoneConf: ZoneConf,
@@ -12625,6 +12909,7 @@ module.exports = {
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     TablePrivilege: TablePrivilege,
     BalanceRoGroupLoadRequest: BalanceRoGroupLoadRequest,
+    ModifyRoTypeResponse: ModifyRoTypeResponse,
     DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     ColumnPrivilege: ColumnPrivilege,
     DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
@@ -12645,7 +12930,7 @@ module.exports = {
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
     DescribeBackupTablesRequest: DescribeBackupTablesRequest,
     InstanceInfo: InstanceInfo,
-    OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
+    ModifyRoTypeRequest: ModifyRoTypeRequest,
     DatabasePrivilege: DatabasePrivilege,
     RoGroupAttr: RoGroupAttr,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
@@ -12681,6 +12966,7 @@ module.exports = {
     DeviceMemInfo: DeviceMemInfo,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
+    StartDelayReplicationRequest: StartDelayReplicationRequest,
     DeleteDeployGroupsRequest: DeleteDeployGroupsRequest,
     DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
@@ -12690,6 +12976,7 @@ module.exports = {
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
+    StopDelayReplicationResponse: StopDelayReplicationResponse,
     OpenWanServiceRequest: OpenWanServiceRequest,
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
@@ -12722,8 +13009,10 @@ module.exports = {
     ReleaseResult: ReleaseResult,
     ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
     OpenWanServiceResponse: OpenWanServiceResponse,
+    ModifyRoReplicationDelayResponse: ModifyRoReplicationDelayResponse,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
+    StopDelayReplicationRequest: StopDelayReplicationRequest,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,

@@ -462,10 +462,16 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
         this.Tags = null;
 
         /**
-         * 
+         * Applies for CLB instances for a specified VIP
          * @type {string || null}
          */
         this.Vip = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BandwidthPackageId = null;
 
         /**
          * Exclusive cluster information.
@@ -478,6 +484,18 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
          * @type {string || null}
          */
         this.ClientToken = null;
+
+        /**
+         * Whether Binding IPs of other VPCs feature switch
+         * @type {boolean || null}
+         */
+        this.SnatPro = null;
+
+        /**
+         * Creates `SnatIp` when the binding IPs of other VPCs feature is enabled
+         * @type {Array.<SnatIp> || null}
+         */
+        this.SnatIps = null;
 
         /**
          * Tag for the STGW exclusive cluster.
@@ -521,6 +539,7 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
             }
         }
         this.Vip = 'Vip' in params ? params.Vip : null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
         if (params.ExclusiveCluster) {
             let obj = new ExclusiveCluster();
@@ -528,6 +547,16 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
             this.ExclusiveCluster = obj;
         }
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
+
+        if (params.SnatIps) {
+            this.SnatIps = new Array();
+            for (let z in params.SnatIps) {
+                let obj = new SnatIp();
+                obj.deserialize(params.SnatIps[z]);
+                this.SnatIps.push(obj);
+            }
+        }
         this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
 
     }
@@ -2301,7 +2330,8 @@ class Target extends  AbstractModel {
 
         /**
          * Listening port of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: this parameter is required when binding a CVM or ENI.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Port = null;
@@ -2314,9 +2344,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Type = null;
 
         /**
-         * Unique ID of a CVM instance, which needs to be passed in when binding a CVM instance and can be obtained from the InstanceId field in the return of the DescribeInstances API.
-Note: Either InstanceId or EniIp must be passed in.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Unique ID of a CVM instance, which is required when binding a CVM instance. It can be obtained from the `InstanceId` field in the response of the `DescribeInstances` API.
+Note: either `InstanceId` or `EniIp` must be passed in.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2328,8 +2358,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Weight = null;
 
         /**
-         * This parameter must be passed in when you bind an ENI, which represents the IP address of the ENI. The ENI has to be bound to a CVM instance first before it can be bound to a CLB instance. Note: Either InstanceId or EniIp must be passed in. To bind an ENI, you need to submit a ticket for application first.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * IP of an ENI, which is required when binding an ENI. To bind an ENI with a CLB, you must bind it with a CVM first.
+Note: either `InstanceId` or `EniIp` must be passed in. Binding ENI is now only available to beta users. Please submit a ticket to apply for it if necessary. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EniIp = null;
@@ -3893,7 +3924,7 @@ class Backend extends  AbstractModel {
         super();
 
         /**
-         * Real server type. Value range: CVM, ENI (coming soon)
+         * Real server type. Valid values: CVM, ENI.
          * @type {string || null}
          */
         this.Type = null;
@@ -8561,8 +8592,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExpireTime = null;
 
         /**
-         * CLB instance billing mode
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Billing mode of CLB instance. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay as you go).
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ChargeType = null;
@@ -8699,6 +8730,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.MixIpTarget = null;
 
+        /**
+         * Availability zone of a VPC-based private network CLB instance
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
     }
 
     /**
@@ -8809,6 +8847,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.LocalBgp = 'LocalBgp' in params ? params.LocalBgp : null;
         this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
         this.MixIpTarget = 'MixIpTarget' in params ? params.MixIpTarget : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
 
     }
 }

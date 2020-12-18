@@ -687,6 +687,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Hsts = null;
 
+        /**
+         * TLS version settings, which only support certain advanced domain names. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.TlsVersion = null;
+
     }
 
     /**
@@ -720,6 +727,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Hsts)
             this.Hsts = obj;
         }
+        this.TlsVersion = 'TlsVersion' in params ? params.TlsVersion : null;
 
     }
 }
@@ -895,6 +903,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Precise access control match rule
+ * @class
+ */
+class ScdnAclRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Match keywords. Valid values: `params`, `url`, `ip`, `referer`, and `user-agent`.
+         * @type {string || null}
+         */
+        this.MatchKey = null;
+
+        /**
+         * Logical operator. Valid values: `exclude`, `include`, `notequal`, `equal`, `len-less`, `len-equal`, and `len-more`.
+         * @type {string || null}
+         */
+        this.LogiOperator = null;
+
+        /**
+         * Match value
+         * @type {string || null}
+         */
+        this.MatchValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MatchKey = 'MatchKey' in params ? params.MatchKey : null;
+        this.LogiOperator = 'LogiOperator' in params ? params.LogiOperator : null;
+        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
 
     }
 }
@@ -1526,14 +1576,16 @@ class PathRule extends  AbstractModel {
         super();
 
         /**
-         * Whether regex match is used.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Whether to enable wildcard match (`*`).
+false: disable
+true: enable
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.Regex = null;
 
         /**
-         * Matched URL. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
+         * Matched URL. Only URLs are supported, while parameters are not. The exact match is used by default. If wildcard match is enabled, up to 5 wildcards are supported. The URL can contain up to 1,024 characters.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1554,14 +1606,17 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ServerName = null;
 
         /**
-         * Origin server region. Valid values: CN (the Chinese mainland), OV (outside the Chinese mainland).
+         * Origin server region. Valid values: `CN` and `OV`.
+CN: the Chinese mainland
+OV: outside the Chinese mainland
+Default value: `CN`.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginArea = null;
 
         /**
-         * Origin server URI path when the path matches, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
+         * Origin server URI path when the path matches, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the match path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2002,6 +2057,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * UpdateScdnDomain response structure.
+ * @class
+ */
+class UpdateScdnDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Result of the request. `Success` indicates that the configurations are updated.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3275,6 +3365,71 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Bot cookie policy
+ * @class
+ */
+class BotCookie extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: `on` and `off`.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Rule type, which can only be `all` currently.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Rule value. Valid value: `*`.
+         * @type {Array.<string> || null}
+         */
+        this.RuleValue = null;
+
+        /**
+         * Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Redirection target page
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+        /**
+         * Update time
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RuleValue = 'RuleValue' in params ? params.RuleValue : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * DescribeCdnIp request structure.
  * @class
  */
@@ -4376,22 +4531,25 @@ class MaxAgeRule extends  AbstractModel {
         /**
          * Content for each `MaxAgeType`:
 For `all`, enter a wildcard `*`.
-For `file`, enter the suffix, e.g., `jpg` or `txt`.
-For `directory`, enter the path, e.g., `/xxx/test/`.
-For `path`, enter the absolute path, e.g., `/xxx/test.html`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 For `index`, enter a forward slash `/`.
+Note: the rule `all` cannot be deleted. It follows origin by default and can be modified.
          * @type {Array.<string> || null}
          */
         this.MaxAgeContents = null;
 
         /**
          * MaxAge time (in seconds)
+Note: the value `0` means not to cache.
          * @type {number || null}
          */
         this.MaxAgeTime = null;
 
         /**
-         * 
+         * Whether to follow the origin server. Valid values: `on` and `off`. If it's on, `MaxAgeTime` is ignored.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FollowOrigin = null;
@@ -4989,6 +5147,66 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.CertifiedDomains = 'CertifiedDomains' in params ? params.CertifiedDomains : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Bot configuration
+ * @class
+ */
+class ScdnBotConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: `on` and `off`.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Bot cookie policy
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<BotCookie> || null}
+         */
+        this.BotCookie = null;
+
+        /**
+         * Bot JS policy
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<BotJavaScript> || null}
+         */
+        this.BotJavaScript = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.BotCookie) {
+            this.BotCookie = new Array();
+            for (let z in params.BotCookie) {
+                let obj = new BotCookie();
+                obj.deserialize(params.BotCookie[z]);
+                this.BotCookie.push(obj);
+            }
+        }
+
+        if (params.BotJavaScript) {
+            this.BotJavaScript = new Array();
+            for (let z in params.BotJavaScript) {
+                let obj = new BotJavaScript();
+                obj.deserialize(params.BotJavaScript[z]);
+                this.BotJavaScript.push(obj);
+            }
+        }
 
     }
 }
@@ -6720,6 +6938,129 @@ avg: average value
 }
 
 /**
+ * UpdateScdnDomain request structure.
+ * @class
+ */
+class UpdateScdnDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * WAF configuration
+         * @type {ScdnWafConfig || null}
+         */
+        this.Waf = null;
+
+        /**
+         * Custom defense policy configuration
+         * @type {ScdnAclConfig || null}
+         */
+        this.Acl = null;
+
+        /**
+         * CC attack defense configurations. CC attack defense is enabled by default.
+         * @type {ScdnConfig || null}
+         */
+        this.CC = null;
+
+        /**
+         * DDoS defense configuration. DDoS defense is enabled by default.
+         * @type {ScdnDdosConfig || null}
+         */
+        this.Ddos = null;
+
+        /**
+         * Bot defense configuration
+         * @type {ScdnBotConfig || null}
+         */
+        this.Bot = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.Waf) {
+            let obj = new ScdnWafConfig();
+            obj.deserialize(params.Waf)
+            this.Waf = obj;
+        }
+
+        if (params.Acl) {
+            let obj = new ScdnAclConfig();
+            obj.deserialize(params.Acl)
+            this.Acl = obj;
+        }
+
+        if (params.CC) {
+            let obj = new ScdnConfig();
+            obj.deserialize(params.CC)
+            this.CC = obj;
+        }
+
+        if (params.Ddos) {
+            let obj = new ScdnDdosConfig();
+            obj.deserialize(params.Ddos)
+            this.Ddos = obj;
+        }
+
+        if (params.Bot) {
+            let obj = new ScdnBotConfig();
+            obj.deserialize(params.Bot)
+            this.Bot = obj;
+        }
+
+    }
+}
+
+/**
+ * UpdatePayType request structure.
+ * @class
+ */
+class UpdatePayTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Billing region, which can be mainland or overseas.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Billing mode, which can be flux or bandwidth.
+         * @type {string || null}
+         */
+        this.PayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Area = 'Area' in params ? params.Area : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+
+    }
+}
+
+/**
  * ManageClsTopicDomains request structure.
  * @class
  */
@@ -6777,36 +7118,46 @@ class ManageClsTopicDomainsRequest extends  AbstractModel {
 }
 
 /**
- * URL redirect rule configuration
+ * WAF configuration
  * @class
  */
-class UrlRedirectRule extends  AbstractModel {
+class ScdnWafConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Redirect status code. Valid values: 301, 302
-         * @type {number || null}
-         */
-        this.RedirectStatusCode = null;
-
-        /**
-         * URL to be matched. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
+         * Whether to enable WAF. Valid values: `on` and `off`.
          * @type {string || null}
          */
-        this.Pattern = null;
+        this.Switch = null;
 
         /**
-         * Target URL, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
+         * WAF protection mode. Valid values: `intercept` and `observe`. Default value: `intercept`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RedirectUrl = null;
+        this.Mode = null;
 
         /**
-         * 
+         * Redirection error page
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {ScdnErrorPage || null}
+         */
+        this.ErrorPage = null;
+
+        /**
+         * Whether to enable Web shell blocking. Valid values: `on` and `off`. Default value: `off`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RedirectHost = null;
+        this.WebShellSwitch = null;
+
+        /**
+         * Attack blocking rules
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ScdnWafRule> || null}
+         */
+        this.Rules = null;
 
     }
 
@@ -6817,10 +7168,24 @@ class UrlRedirectRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
-        this.Pattern = 'Pattern' in params ? params.Pattern : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
-        this.RedirectHost = 'RedirectHost' in params ? params.RedirectHost : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+        if (params.ErrorPage) {
+            let obj = new ScdnErrorPage();
+            obj.deserialize(params.ErrorPage)
+            this.ErrorPage = obj;
+        }
+        this.WebShellSwitch = 'WebShellSwitch' in params ? params.WebShellSwitch : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new ScdnWafRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
 
     }
 }
@@ -7837,6 +8202,101 @@ false: do not allow empty referer
 }
 
 /**
+ * SCDN custom CC rules
+ * @class
+ */
+class ScdnCCRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule types:
+`all`: effective for all files.
+`file`: effective for specified file suffixes.
+`directory`: effective for specified paths.
+`path`: effective for specified absolute paths.
+`index`: effective for web homepages and root directories.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Rule value (blocking condition)
+         * @type {Array.<string> || null}
+         */
+        this.RuleValue = null;
+
+        /**
+         * IP access limit rule
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * Detection granularity
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DetectionTime = null;
+
+        /**
+         * Frequency threshold
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FrequencyLimit = null;
+
+        /**
+         * Whether to block or redirect requests from suspicious IPs. Valid values: `on` and `off`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PunishmentSwitch = null;
+
+        /**
+         * Suspicious IP restriction duration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PunishmentTime = null;
+
+        /**
+         * Action. Valid values: `intercept` and `redirect`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * The redirection target URL used when the `Action` is `redirect`
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RuleValue = 'RuleValue' in params ? params.RuleValue : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.DetectionTime = 'DetectionTime' in params ? params.DetectionTime : null;
+        this.FrequencyLimit = 'FrequencyLimit' in params ? params.FrequencyLimit : null;
+        this.PunishmentSwitch = 'PunishmentSwitch' in params ? params.PunishmentSwitch : null;
+        this.PunishmentTime = 'PunishmentTime' in params ? params.PunishmentTime : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+
+    }
+}
+
+/**
  * Access limit configuration for a single IP of a single node. This is disabled by default. 
  * @class
  */
@@ -8385,6 +8845,50 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CC attack defense configuration
+ * @class
+ */
+class ScdnConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: `on` and `off`.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Custom CC attack defense rule
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ScdnCCRules> || null}
+         */
+        this.Rules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new ScdnCCRules();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Details about a log package download link
  * @class
  */
@@ -8538,6 +9042,71 @@ class PurgeUrlsCacheResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Bot JS policy
+ * @class
+ */
+class BotJavaScript extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: `on` and `off`.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Rule type, which can only be `file` currently.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Rule value. Valid values: `html` and `htm`.
+         * @type {Array.<string> || null}
+         */
+        this.RuleValue = null;
+
+        /**
+         * Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Redirection target page
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+        /**
+         * Update time
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RuleValue = 'RuleValue' in params ? params.RuleValue : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -8891,6 +9460,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+
+    }
+}
+
+/**
+ * ACL error page
+ * @class
+ */
+class ScdnErrorPage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status code
+         * @type {number || null}
+         */
+        this.RedirectCode = null;
+
+        /**
+         * Redirection URL
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RedirectCode = 'RedirectCode' in params ? params.RedirectCode : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
 
     }
 }
@@ -11155,6 +11759,98 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * SCDN precise access control configuration
+ * @class
+ */
+class ScdnAclGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Specific configurations
+         * @type {Array.<ScdnAclRule> || null}
+         */
+        this.Configure = null;
+
+        /**
+         * Rule action, which is generally `refuse`.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * Whether the rule is effective. Valid values: `active` and `inactive`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+        if (params.Configure) {
+            this.Configure = new Array();
+            for (let z in params.Configure) {
+                let obj = new ScdnAclRule();
+                obj.deserialize(params.Configure[z]);
+                this.Configure.push(obj);
+            }
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * WAF rule information
+ * @class
+ */
+class ScdnWafRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Attack type
+         * @type {string || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * Defense action. Valid value: `observe`.
+         * @type {string || null}
+         */
+        this.Operate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
+
+    }
+}
+
+/**
  * CLS log search result
  * @class
  */
@@ -11322,24 +12018,32 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
- * UpdatePayType request structure.
+ * SCDN access control
  * @class
  */
-class UpdatePayTypeRequest extends  AbstractModel {
+class ScdnAclConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Billing region, which can be mainland or overseas.
+         * Whether to enable. Valid values: `on` and `off`.
          * @type {string || null}
          */
-        this.Area = null;
+        this.Switch = null;
 
         /**
-         * Billing mode, which can be flux or bandwidth.
-         * @type {string || null}
+         * ACL rule group, which is required when the access control is on.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ScdnAclGroup> || null}
          */
-        this.PayType = null;
+        this.ScriptData = null;
+
+        /**
+         * Error page configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {ScdnErrorPage || null}
+         */
+        this.ErrorPage = null;
 
     }
 
@@ -11350,8 +12054,50 @@ class UpdatePayTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Area = 'Area' in params ? params.Area : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.ScriptData) {
+            this.ScriptData = new Array();
+            for (let z in params.ScriptData) {
+                let obj = new ScdnAclGroup();
+                obj.deserialize(params.ScriptData[z]);
+                this.ScriptData.push(obj);
+            }
+        }
+
+        if (params.ErrorPage) {
+            let obj = new ScdnErrorPage();
+            obj.deserialize(params.ErrorPage)
+            this.ErrorPage = obj;
+        }
+
+    }
+}
+
+/**
+ * DDoS configuration
+ * @class
+ */
+class ScdnDdosConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable DDoS defense. Valid values: `on` and `off`.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -12031,6 +12777,56 @@ class DescribeDomainsRequest extends  AbstractModel {
 }
 
 /**
+ * URL redirect rule configuration
+ * @class
+ */
+class UrlRedirectRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Redirect status code. Valid values: 301, 302
+         * @type {number || null}
+         */
+        this.RedirectStatusCode = null;
+
+        /**
+         * URL to be matched. Only URLs are supported, while parameters are not. The exact match is used by default. In regex match, up to 5 wildcards `*` are supported. The URL can contain up to 1,024 characters.
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * Target URL, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+        /**
+         * Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, “http://[current domain name]” will be used by default.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RedirectHost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.RedirectHost = 'RedirectHost' in params ? params.RedirectHost : null;
+
+    }
+}
+
+/**
  * IP blocklist/allowlist path-based configuration
  * @class
  */
@@ -12110,6 +12906,7 @@ module.exports = {
     RuleCache: RuleCache,
     DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
+    ScdnAclRule: ScdnAclRule,
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
     DescribeCdnOriginIpResponse: DescribeCdnOriginIpResponse,
@@ -12132,6 +12929,7 @@ module.exports = {
     AdvancedAuthenticationTypeD: AdvancedAuthenticationTypeD,
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
+    UpdateScdnDomainResponse: UpdateScdnDomainResponse,
     Origin: Origin,
     DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     TopData: TopData,
@@ -12153,6 +12951,7 @@ module.exports = {
     DisableClsLogTopicRequest: DisableClsLogTopicRequest,
     RuleCacheConfig: RuleCacheConfig,
     ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
+    BotCookie: BotCookie,
     DescribeCdnIpRequest: DescribeCdnIpRequest,
     Ipv6: Ipv6,
     StatusCodeCache: StatusCodeCache,
@@ -12176,6 +12975,7 @@ module.exports = {
     StartCdnDomainRequest: StartCdnDomainRequest,
     MapInfo: MapInfo,
     DescribeCertDomainsResponse: DescribeCertDomainsResponse,
+    ScdnBotConfig: ScdnBotConfig,
     AuthenticationTypeD: AuthenticationTypeD,
     AuthenticationTypeC: AuthenticationTypeC,
     AuthenticationTypeB: AuthenticationTypeB,
@@ -12199,8 +12999,10 @@ module.exports = {
     ResponseHeader: ResponseHeader,
     CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
+    UpdateScdnDomainRequest: UpdateScdnDomainRequest,
+    UpdatePayTypeRequest: UpdatePayTypeRequest,
     ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
-    UrlRedirectRule: UrlRedirectRule,
+    ScdnWafConfig: ScdnWafConfig,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
@@ -12213,6 +13015,7 @@ module.exports = {
     DescribePushTasksRequest: DescribePushTasksRequest,
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,
+    ScdnCCRules: ScdnCCRules,
     IpFreqLimit: IpFreqLimit,
     CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CacheOptResult: CacheOptResult,
@@ -12225,9 +13028,11 @@ module.exports = {
     HttpHeaderRule: HttpHeaderRule,
     StatusCodeCacheRule: StatusCodeCacheRule,
     ClientCert: ClientCert,
+    ScdnConfig: ScdnConfig,
     DomainLog: DomainLog,
     GetDisableRecordsRequest: GetDisableRecordsRequest,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
+    BotJavaScript: BotJavaScript,
     DeleteClsLogTopicResponse: DeleteClsLogTopicResponse,
     DescribeBillingDataResponse: DescribeBillingDataResponse,
     DisableCachesResponse: DisableCachesResponse,
@@ -12236,6 +13041,7 @@ module.exports = {
     AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
     AccessControl: AccessControl,
+    ScdnErrorPage: ScdnErrorPage,
     CacheKey: CacheKey,
     UrlRedirect: UrlRedirect,
     DownstreamCapping: DownstreamCapping,
@@ -12275,10 +13081,13 @@ module.exports = {
     ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
+    ScdnAclGroup: ScdnAclGroup,
+    ScdnWafRule: ScdnWafRule,
     ClsSearchLogs: ClsSearchLogs,
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
-    UpdatePayTypeRequest: UpdatePayTypeRequest,
+    ScdnAclConfig: ScdnAclConfig,
+    ScdnDdosConfig: ScdnDdosConfig,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     OriginAuthentication: OriginAuthentication,
     ErrorPageRule: ErrorPageRule,
@@ -12291,6 +13100,7 @@ module.exports = {
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     CacheTagKey: CacheTagKey,
     DescribeDomainsRequest: DescribeDomainsRequest,
+    UrlRedirectRule: UrlRedirectRule,
     IpFilterPathRule: IpFilterPathRule,
 
 }

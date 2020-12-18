@@ -388,19 +388,13 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
         super();
 
         /**
-         * Payer UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * Currently the period to be queried must start from a time point in the current month, and the starting time and the end time must be in the same month. Example: 2018-09-01 00:00:00.
+         * The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * Currently the period to be queried must end at a time point in the current month, and the starting time and the end time must be in the same month. Example: 2018-09-30 23:59:59.
+         * The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -411,6 +405,12 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
          */
         this.TagKey = null;
 
+        /**
+         * Payer UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
     }
 
     /**
@@ -420,10 +420,10 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -996,22 +996,22 @@ class DescribeBillSummaryByRegionRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries bill data user's UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
+         * The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * Only ending in the current month is supported, and it must be the same month as the BeginTime. For example, 2018-09-30 23:59:59.
+         * The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * Queries bill data user's UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
     }
 
@@ -1022,9 +1022,9 @@ class DescribeBillSummaryByRegionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -1038,22 +1038,22 @@ class DescribeBillSummaryByPayModeRequest extends  AbstractModel {
         super();
 
         /**
-         * Query bill data user's UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
+         * The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * Only ending in the current month is supported, and it must be the same month as the BeginTime. For example, 2018-09-30 23:59:59.
+         * The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * Query bill data user's UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
     }
 
@@ -1064,9 +1064,9 @@ class DescribeBillSummaryByPayModeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -1208,22 +1208,22 @@ class DescribeBillSummaryByProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries bill data user's UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
+         * The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * Only ending in the current month is supported, and it must be the same month as the BeginTime. For example, 2018-09-30 23:59:59.
+         * The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * Queries bill data user's UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
     }
 
@@ -1234,9 +1234,9 @@ class DescribeBillSummaryByProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -1314,22 +1314,22 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries bill data user's UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * Only beginning in the current month is supported, and it must be the same month as the EndTime. For example, 2018-09-01 00:00:00.
+         * The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * Only ending in the current month is supported, and it must be the same month as the BeginTime. For example, 2018-09-30 23:59:59.
+         * The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * Queries bill data user's UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
     }
 
@@ -1340,9 +1340,9 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }

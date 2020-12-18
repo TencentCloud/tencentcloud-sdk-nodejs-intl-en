@@ -26,7 +26,7 @@ const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
-const RoWeightValue = models.RoWeightValue;
+const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
 const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
@@ -78,6 +78,7 @@ const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesReque
 const BinlogInfo = models.BinlogInfo;
 const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
 const CloneItem = models.CloneItem;
+const StartDelayReplicationResponse = models.StartDelayReplicationResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
@@ -139,9 +140,11 @@ const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
 const Outbound = models.Outbound;
 const SlaveInstanceInfo = models.SlaveInstanceInfo;
+const RoWeightValue = models.RoWeightValue;
 const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const ModifyRoReplicationDelayRequest = models.ModifyRoReplicationDelayRequest;
 const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
 const SecurityGroup = models.SecurityGroup;
 const ZoneConf = models.ZoneConf;
@@ -159,6 +162,7 @@ const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVer
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const TablePrivilege = models.TablePrivilege;
 const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
+const ModifyRoTypeResponse = models.ModifyRoTypeResponse;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
 const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
@@ -179,7 +183,7 @@ const DescribeDeployGroupListResponse = models.DescribeDeployGroupListResponse;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
 const InstanceInfo = models.InstanceInfo;
-const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
+const ModifyRoTypeRequest = models.ModifyRoTypeRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
 const RoGroupAttr = models.RoGroupAttr;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
@@ -215,6 +219,7 @@ const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
 const DeviceMemInfo = models.DeviceMemInfo;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
+const StartDelayReplicationRequest = models.StartDelayReplicationRequest;
 const DeleteDeployGroupsRequest = models.DeleteDeployGroupsRequest;
 const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
@@ -224,6 +229,7 @@ const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
+const StopDelayReplicationResponse = models.StopDelayReplicationResponse;
 const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
@@ -256,8 +262,10 @@ const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
 const ReleaseResult = models.ReleaseResult;
 const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
+const ModifyRoReplicationDelayResponse = models.ModifyRoReplicationDelayResponse;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
+const StopDelayReplicationRequest = models.StopDelayReplicationRequest;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
@@ -740,6 +748,17 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
+     * This API is used to stop delayed replication on a delayed RO replica.
+     * @param {StopDelayReplicationRequest} req
+     * @param {function(string, StopDelayReplicationResponse):void} cb
+     * @public
+     */
+    StopDelayReplication(req, cb) {
+        let resp = new StopDelayReplicationResponse();
+        this.request("StopDelayReplication", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyParamTemplate) is used to modify a parameter template.
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
@@ -1064,18 +1083,25 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (RestartDBInstances) is used to restart TencentDB instances.
-
-Note:
-1. This API only supports restarting primary instances.
-2. The instance status must be normal, and no other async tasks are in progress.
-     * @param {RestartDBInstancesRequest} req
-     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * This API (ModifyAccountDescription) is used to modify the remarks of a TencentDB instance account.
+     * @param {ModifyAccountDescriptionRequest} req
+     * @param {function(string, ModifyAccountDescriptionResponse):void} cb
      * @public
      */
-    RestartDBInstances(req, cb) {
-        let resp = new RestartDBInstancesResponse();
-        this.request("RestartDBInstances", req, resp, cb);
+    ModifyAccountDescription(req, cb) {
+        let resp = new ModifyAccountDescriptionResponse();
+        this.request("ModifyAccountDescription", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start delayed replication on a delayed RO replica.
+     * @param {StartDelayReplicationRequest} req
+     * @param {function(string, StartDelayReplicationResponse):void} cb
+     * @public
+     */
+    StartDelayReplication(req, cb) {
+        let resp = new StartDelayReplicationResponse();
+        this.request("StartDelayReplication", req, resp, cb);
     }
 
     /**
@@ -1101,14 +1127,14 @@ Note:
     }
 
     /**
-     * This API (ModifyAccountDescription) is used to modify the remarks of a TencentDB instance account.
-     * @param {ModifyAccountDescriptionRequest} req
-     * @param {function(string, ModifyAccountDescriptionResponse):void} cb
+     * This API is used to change a general RO replica to delayed RO replica.
+     * @param {ModifyRoTypeRequest} req
+     * @param {function(string, ModifyRoTypeResponse):void} cb
      * @public
      */
-    ModifyAccountDescription(req, cb) {
-        let resp = new ModifyAccountDescriptionResponse();
-        this.request("ModifyAccountDescription", req, resp, cb);
+    ModifyRoType(req, cb) {
+        let resp = new ModifyRoTypeResponse();
+        this.request("ModifyRoType", req, resp, cb);
     }
 
     /**
@@ -1169,6 +1195,21 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
+     * This API (RestartDBInstances) is used to restart TencentDB instances.
+
+Note:
+1. This API only supports restarting primary instances.
+2. The instance status must be normal, and no other async tasks are in progress.
+     * @param {RestartDBInstancesRequest} req
+     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * @public
+     */
+    RestartDBInstances(req, cb) {
+        let resp = new RestartDBInstancesResponse();
+        this.request("RestartDBInstances", req, resp, cb);
+    }
+
+    /**
      * This API (StartBatchRollback) is used to roll back the tables of a TencentDB instance in batches.
      * @param {StartBatchRollbackRequest} req
      * @param {function(string, StartBatchRollbackResponse):void} cb
@@ -1212,6 +1253,17 @@ Note that before enabling public network access, you need to first [initialize t
     DescribeSupportedPrivileges(req, cb) {
         let resp = new DescribeSupportedPrivilegesResponse();
         this.request("DescribeSupportedPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the replication delay of a delayed RO replica.
+     * @param {ModifyRoReplicationDelayRequest} req
+     * @param {function(string, ModifyRoReplicationDelayResponse):void} cb
+     * @public
+     */
+    ModifyRoReplicationDelay(req, cb) {
+        let resp = new ModifyRoReplicationDelayResponse();
+        this.request("ModifyRoReplicationDelay", req, resp, cb);
     }
 
     /**

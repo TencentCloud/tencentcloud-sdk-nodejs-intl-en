@@ -593,10 +593,16 @@ If the instance type parameter `TypeId` indicates CKV 3.2, the password contains
         this.NoAuth = null;
 
         /**
-         * 
+         * Node information of an instance. Currently, information about the node type (master or replica) and node availability zone can be passed in. This parameter is not required for instances deployed in a single availability zone.
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
+
+        /**
+         * The tag bound with the instance to be purchased
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
 
     }
 
@@ -634,6 +640,43 @@ If the instance type parameter `TypeId` indicates CKV 3.2, the password contains
                 this.NodeSet.push(obj);
             }
         }
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeInstanceZoneInfo request structure.
+ * @class
+ */
+class DescribeInstanceZoneInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as crs-6ubhgouj
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1294,7 +1337,7 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Redis master or replica node information
  * @class
  */
 class RedisNodeInfo extends  AbstractModel {
@@ -1302,19 +1345,19 @@ class RedisNodeInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Node type. Valid values: `0` (master node), `1` (replica node)
          * @type {number || null}
          */
         this.NodeType = null;
 
         /**
-         * 
+         * ID of the availability zone of the master or replica node
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * 
+         * ID of the master or replica node, which is not required when creating an instance
          * @type {number || null}
          */
         this.NodeId = null;
@@ -1421,60 +1464,30 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
- * Descriptions of enumeration parameters of the instance
+ * DescribeInstanceZoneInfo response structure.
  * @class
  */
-class InstanceEnumParam extends  AbstractModel {
+class DescribeInstanceZoneInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
-         * @type {string || null}
-         */
-        this.ParamName = null;
-
-        /**
-         * Parameter type: Enum
-         * @type {string || null}
-         */
-        this.ValueType = null;
-
-        /**
-         * Whether restart is required after a modification is made. Value range: true, false
-         * @type {string || null}
-         */
-        this.NeedRestart = null;
-
-        /**
-         * Default value of the parameter
-         * @type {string || null}
-         */
-        this.DefaultValue = null;
-
-        /**
-         * Current value of a parameter
-         * @type {string || null}
-         */
-        this.CurrentValue = null;
-
-        /**
-         * Parameter description
-         * @type {string || null}
-         */
-        this.Tips = null;
-
-        /**
-         * Value range of a parameter
-         * @type {Array.<string> || null}
-         */
-        this.EnumValue = null;
-
-        /**
-         * Parameter status. 1: modifying; 2: modified
+         * The number of instance node groups
          * @type {number || null}
          */
-        this.Status = null;
+        this.TotalCount = null;
+
+        /**
+         * The list of instance node groups
+         * @type {Array.<ReplicaGroup> || null}
+         */
+        this.ReplicaGroups = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1485,14 +1498,17 @@ class InstanceEnumParam extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.ValueType = 'ValueType' in params ? params.ValueType : null;
-        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
-        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
-        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
-        this.Tips = 'Tips' in params ? params.Tips : null;
-        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReplicaGroups) {
+            this.ReplicaGroups = new Array();
+            for (let z in params.ReplicaGroups) {
+                let obj = new ReplicaGroup();
+                obj.deserialize(params.ReplicaGroups[z]);
+                this.ReplicaGroups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2096,6 +2112,55 @@ class DescribeInstanceDealDetailRequest extends  AbstractModel {
             return;
         }
         this.DealIds = 'DealIds' in params ? params.DealIds : null;
+
+    }
+}
+
+/**
+ * The operation information of Redis nodes
+ * @class
+ */
+class RedisNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of keys on a node
+         * @type {number || null}
+         */
+        this.Keys = null;
+
+        /**
+         * Distribution of node slots
+         * @type {string || null}
+         */
+        this.Slot = null;
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node status
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keys = 'Keys' in params ? params.Keys : null;
+        this.Slot = 'Slot' in params ? params.Slot : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -3188,13 +3253,19 @@ class DelayDistribution extends  AbstractModel {
         super();
 
         /**
-         * Distribution ladder
+         * Delay distribution. The mapping between delay range and `Ladder` value is as follows:
+[0ms,1ms]: 1;
+[1ms,5ms]: 5;
+[5ms,10ms]: 10;
+[10ms,50ms]: 50;
+[50ms,200ms]: 200;
+[200ms,∞]: -1.
          * @type {number || null}
          */
         this.Ladder = null;
 
         /**
-         * Size
+         * The number of commands whose delay falls within the current delay range
          * @type {number || null}
          */
         this.Size = null;
@@ -4820,13 +4891,13 @@ class ProductConf extends  AbstractModel {
         super();
 
         /**
-         * Product type. 2: Redis primary-secondary edition; 3: CKV primary-secondary edition; 4: CKV cluster edition; 5: Redis standalone edition; 7: Redis cluster edition
+         * Product type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture), `10` (Redis 4.0 Hybrid Storage Edition (Tendis)).
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Product name: Redis primary-secondary edition, CKV primary-secondary edition, CKV cluster edition, Redis standalone edition, or Redis cluster edition
+         * Product name: Redis Master-Replica Edition, CKV Master-Replica Edition, CKV Cluster Edition, Redis Standalone Edition, Redis Cluster Edition, Tendis Hybrid Storage Edition
          * @type {string || null}
          */
         this.TypeName = null;
@@ -5110,6 +5181,70 @@ class AssociateSecurityGroupsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Instance node information
+ * @class
+ */
+class ReplicaGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node group ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Node group name
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Node availability zone ID, such as ap-guangzhou-1
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Node group type. Valid values: `master` (master node group), `replica` (replica node group)
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * The list of nodes in a node group
+         * @type {Array.<RedisNode> || null}
+         */
+        this.RedisNodes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+
+        if (params.RedisNodes) {
+            this.RedisNodes = new Array();
+            for (let z in params.RedisNodes) {
+                let obj = new RedisNode();
+                obj.deserialize(params.RedisNodes[z]);
+                this.RedisNodes.push(obj);
+            }
+        }
 
     }
 }
@@ -6210,6 +6345,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * The tag bound with the instance purchased via APIs
+ * @class
+ */
+class ResourceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * ModifyMaintenanceWindow response structure.
  * @class
  */
@@ -7214,6 +7384,83 @@ class HotKeyInfo extends  AbstractModel {
 }
 
 /**
+ * Descriptions of enumeration parameters of the instance
+ * @class
+ */
+class InstanceEnumParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Parameter type: Enum
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+        /**
+         * Whether restart is required after a modification is made. Value range: true, false
+         * @type {string || null}
+         */
+        this.NeedRestart = null;
+
+        /**
+         * Default value of the parameter
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Current value of a parameter
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Tips = null;
+
+        /**
+         * Value range of a parameter
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * Parameter status. 1: modifying; 2: modified
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * CreateInstanceAccount response structure.
  * @class
  */
@@ -8019,6 +8266,7 @@ module.exports = {
     SwitchInstanceVipRequest: SwitchInstanceVipRequest,
     UpgradeInstanceVersionResponse: UpgradeInstanceVersionResponse,
     CreateInstancesRequest: CreateInstancesRequest,
+    DescribeInstanceZoneInfoRequest: DescribeInstanceZoneInfoRequest,
     ModifyNetworkConfigResponse: ModifyNetworkConfigResponse,
     CommandTake: CommandTake,
     DescribeInstanceMonitorBigKeyResponse: DescribeInstanceMonitorBigKeyResponse,
@@ -8034,7 +8282,7 @@ module.exports = {
     RedisNodeInfo: RedisNodeInfo,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
-    InstanceEnumParam: InstanceEnumParam,
+    DescribeInstanceZoneInfoResponse: DescribeInstanceZoneInfoResponse,
     Account: Account,
     InstanceProxySlowlogDetail: InstanceProxySlowlogDetail,
     SecurityGroupsInboundAndOutbound: SecurityGroupsInboundAndOutbound,
@@ -8047,6 +8295,7 @@ module.exports = {
     ModifyAutoBackupConfigRequest: ModifyAutoBackupConfigRequest,
     InstanceMultiParam: InstanceMultiParam,
     DescribeInstanceDealDetailRequest: DescribeInstanceDealDetailRequest,
+    RedisNode: RedisNode,
     DescribeProjectSecurityGroupRequest: DescribeProjectSecurityGroupRequest,
     RestoreInstanceResponse: RestoreInstanceResponse,
     DescribeInstanceShardsResponse: DescribeInstanceShardsResponse,
@@ -8109,6 +8358,7 @@ module.exports = {
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
+    ReplicaGroup: ReplicaGroup,
     DescribeTaskInfoResponse: DescribeTaskInfoResponse,
     DescribeInstanceMonitorBigKeyTypeDistResponse: DescribeInstanceMonitorBigKeyTypeDistResponse,
     CleanUpInstanceRequest: CleanUpInstanceRequest,
@@ -8125,6 +8375,7 @@ module.exports = {
     ManualBackupInstanceRequest: ManualBackupInstanceRequest,
     ModfiyInstancePasswordResponse: ModfiyInstancePasswordResponse,
     InstanceSet: InstanceSet,
+    ResourceTag: ResourceTag,
     ModifyMaintenanceWindowResponse: ModifyMaintenanceWindowResponse,
     DescribeCommonDBInstancesResponse: DescribeCommonDBInstancesResponse,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
@@ -8147,6 +8398,7 @@ module.exports = {
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     StartupInstanceRequest: StartupInstanceRequest,
     HotKeyInfo: HotKeyInfo,
+    InstanceEnumParam: InstanceEnumParam,
     CreateInstanceAccountResponse: CreateInstanceAccountResponse,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,
     SecurityGroupDetail: SecurityGroupDetail,

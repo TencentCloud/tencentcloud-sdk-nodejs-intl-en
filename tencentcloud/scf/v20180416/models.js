@@ -107,6 +107,24 @@ class Trigger extends  AbstractModel {
          */
         this.AvailableStatus = null;
 
+        /**
+         * Minimum resource ID of trigger
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Trigger-Function binding status
+         * @type {string || null}
+         */
+        this.BindStatus = null;
+
+        /**
+         * Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
+         * @type {string || null}
+         */
+        this.TriggerAttribute = null;
+
     }
 
     /**
@@ -124,6 +142,9 @@ class Trigger extends  AbstractModel {
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
         this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
+        this.TriggerAttribute = 'TriggerAttribute' in params ? params.TriggerAttribute : null;
 
     }
 }
@@ -1487,7 +1508,7 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
         this.Code = null;
 
         /**
-         * Source mode of code. Valid values: `ZipFile`, `Cos`, `Inline`, `TempCos` and `Git`. This field must be specified if the source is Git
+         * Code source. Valid values: ZipFile, Cos, Inline
          * @type {string || null}
          */
         this.CodeSource = null;
@@ -1554,7 +1575,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.Timeout = null;
 
         /**
-         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Golang1 and Java8
+         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
          * @type {string || null}
          */
         this.Runtime = null;
@@ -1596,7 +1617,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.ClsTopicId = null;
 
         /**
-         * It specifies whether to synchronously release a new version during the update. The default value is `FALSE`, indicating not to release a new version.
+         * It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
          * @type {string || null}
          */
         this.Publish = null;
@@ -1626,7 +1647,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.PublicNetConfig = null;
 
         /**
-         * File system configuration input parameter, which is used for the function to bind the file system
+         * File system configuration input parameter, which is used for the function to bind the CFS file system
          * @type {CfsConfig || null}
          */
         this.CfsConfig = null;
@@ -2482,6 +2503,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ModTime = null;
 
+        /**
+         * Minimum resource ID of trigger
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Trigger-Function binding status
+         * @type {string || null}
+         */
+        this.BindStatus = null;
+
+        /**
+         * Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
+         * @type {string || null}
+         */
+        this.TriggerAttribute = null;
+
     }
 
     /**
@@ -2500,6 +2539,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
+        this.TriggerAttribute = 'TriggerAttribute' in params ? params.TriggerAttribute : null;
 
     }
 }
@@ -2519,13 +2561,13 @@ class CreateFunctionRequest extends  AbstractModel {
         this.FunctionName = null;
 
         /**
-         * Function code. Note: You cannot specify `Cos` and `ZipFile` at the same time.
+         * Function code. Note: `COS`, `ZipFile`, and `DemoId` cannot be specified at the same time.
          * @type {Code || null}
          */
         this.Code = null;
 
         /**
-         * Name of the handler, which is in the 'file name.handler name' form. Use periods (.) to separate a file name and function name. The file name and function name must start and end with a letter and can contain 2 to 60 characters, including letters, digits, hyphens (-), and underscores (_).
+         * Function handler name. It supports the format of "file name.handler name" where the file name and handler name are separated with a "." (for Java, it is in the format of "package name.class name::handler name"). File and handler names can contain 2–60 letters, digits, underscores, and dashes and must start and end with letters
          * @type {string || null}
          */
         this.Handler = null;
@@ -2555,7 +2597,7 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Environment = null;
 
         /**
-         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Golang1 and Java8. Default value: Python2.7
+         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime. Default value: Python2.7
          * @type {string || null}
          */
         this.Runtime = null;
@@ -2597,7 +2639,7 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Code source, including ZipFile, Cos, Demo, TempCos, and Git. This field is required if the source is Git.
+         * Code source. Valid values: ZipFile, Cos, Demo
          * @type {string || null}
          */
         this.CodeSource = null;
@@ -4346,7 +4388,7 @@ class Function extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Function status
+         * Function status. For valid values and status change process, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1)
          * @type {string || null}
          */
         this.Status = null;
@@ -4374,6 +4416,26 @@ class Function extends  AbstractModel {
          * @type {string || null}
          */
         this.Type = null;
+
+        /**
+         * Cause of function failure
+         * @type {Array.<StatusReason> || null}
+         */
+        this.StatusReasons = null;
+
+        /**
+         * Sum of provisioned concurrence memory for all function versions
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalProvisionedConcurrencyMem = null;
+
+        /**
+         * Reserved memory for function concurrence
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReservedConcurrencyMem = null;
 
     }
 
@@ -4403,6 +4465,17 @@ class Function extends  AbstractModel {
             }
         }
         this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.StatusReasons) {
+            this.StatusReasons = new Array();
+            for (let z in params.StatusReasons) {
+                let obj = new StatusReason();
+                obj.deserialize(params.StatusReasons[z]);
+                this.StatusReasons.push(obj);
+            }
+        }
+        this.TotalProvisionedConcurrencyMem = 'TotalProvisionedConcurrencyMem' in params ? params.TotalProvisionedConcurrencyMem : null;
+        this.ReservedConcurrencyMem = 'ReservedConcurrencyMem' in params ? params.ReservedConcurrencyMem : null;
 
     }
 }

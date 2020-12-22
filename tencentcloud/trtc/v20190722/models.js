@@ -167,7 +167,7 @@ class LayoutParams extends  AbstractModel {
         super();
 
         /**
-         * On-cloud stream mix layout template ID. 0: floating template (default value); 1: grid template; 2: screen sharing template; 3: picture-in-picture template.
+         * On-cloud stream mix layout template ID. 0: floating template (default value); 1: grid template; 2: screen sharing template; 3: picture-in-picture template; 4: custom template.
          * @type {number || null}
          */
         this.Template = null;
@@ -202,6 +202,12 @@ class LayoutParams extends  AbstractModel {
          */
         this.MixVideoUids = null;
 
+        /**
+         * Valid in custom template, used to specify the video image position of a user in mixed streams.
+         * @type {Array.<PresetLayoutConfig> || null}
+         */
+        this.PresetLayoutConfig = null;
+
     }
 
     /**
@@ -222,6 +228,15 @@ class LayoutParams extends  AbstractModel {
         }
         this.MainVideoRightAlign = 'MainVideoRightAlign' in params ? params.MainVideoRightAlign : null;
         this.MixVideoUids = 'MixVideoUids' in params ? params.MixVideoUids : null;
+
+        if (params.PresetLayoutConfig) {
+            this.PresetLayoutConfig = new Array();
+            for (let z in params.PresetLayoutConfig) {
+                let obj = new PresetLayoutConfig();
+                obj.deserialize(params.PresetLayoutConfig[z]);
+                this.PresetLayoutConfig.push(obj);
+            }
+        }
 
     }
 }
@@ -404,30 +419,54 @@ class DescribeRealtimeNetworkResponse extends  AbstractModel {
 }
 
 /**
- * RemoveUser request structure.
+ * DescribeUserInformation request structure.
  * @class
  */
-class RemoveUserRequest extends  AbstractModel {
+class DescribeUserInformationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * `SDKAppId` of TRTC.
+         * Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.CommId = null;
+
+        /**
+         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
          * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query end time in the format of UNIX timestamp (e.g. 1588031999s).
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * User `SDKAppID` (e.g. 1400188366).
+         * @type {string || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Room number.
-         * @type {number || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * List of up to 10 users to be removed.
+         * The array of user IDs for query. You can enter up to 6 user IDs. If it is left empty, data of 6 users will be returned.
          * @type {Array.<string> || null}
          */
         this.UserIds = null;
+
+        /**
+         * Page index starting from 0. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned.
+         * @type {string || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of entries per page. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned. `PageSize` is up to 100.
+         * @type {string || null}
+         */
+        this.PageSize = null;
 
     }
 
@@ -438,9 +477,13 @@ class RemoveUserRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CommId = 'CommId' in params ? params.CommId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -460,7 +503,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
+         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -587,24 +630,31 @@ recvLossRateRaw: downstream packet loss rate.
 }
 
 /**
- * DismissRoom request structure.
+ * DescribeUserInformation response structure.
  * @class
  */
-class DismissRoomRequest extends  AbstractModel {
+class DescribeUserInformationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * `SDKAppId` of TRTC.
+         * Total number of users whose information will be returned
          * @type {number || null}
          */
-        this.SdkAppId = null;
+        this.Total = null;
 
         /**
-         * Room number.
-         * @type {number || null}
+         * User information list
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {Array.<UserInformation> || null}
          */
-        this.RoomId = null;
+        this.UserList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -615,8 +665,17 @@ class DismissRoomRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.UserList) {
+            this.UserList = new Array();
+            for (let z in params.UserList) {
+                let obj = new UserInformation();
+                obj.deserialize(params.UserList[z]);
+                this.UserList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -630,7 +689,7 @@ class EncodeParams extends  AbstractModel {
         super();
 
         /**
-         * Output stream audio sample rate for stream mix in Hz. Valid values: 48000, 44100, 32000, 24000, 16000, 12000, 8000.
+         * Output stream audio sample rate for On-Cloud MixTranscoding in Hz. Valid values: 48000, 44100, 32000, 24000, 16000, 12000, 8000.
          * @type {number || null}
          */
         this.AudioSampleRate = null;
@@ -642,7 +701,7 @@ class EncodeParams extends  AbstractModel {
         this.AudioBitrate = null;
 
         /**
-         * Number of output stream audio sound channels for On-Cloud MixTranscoding. Value range: [1, 2].
+         * Number of sound channels of output stream for On-Cloud MixTranscoding. Valid values: 1, 2. 1 represents mono-channel, and 2 represents dual-channel.
          * @type {number || null}
          */
         this.AudioChannels = null;
@@ -666,7 +725,7 @@ class EncodeParams extends  AbstractModel {
         this.VideoBitrate = null;
 
         /**
-         * Output stream frame rate for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [6, 12, 15, 24, 30, 48, 60]. If the frame rate lies outside the valid value range, it will be automatically modified to a value within the range.
+         * Output stream frame rate for On-Cloud MixTranscoding in FPS. This parameter is required for audio/video outputs. Value range: [1, 60].
          * @type {number || null}
          */
         this.VideoFramerate = null;
@@ -1026,6 +1085,48 @@ class DescribeRoomInformationResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RemoveUser request structure.
+ * @class
+ */
+class RemoveUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `SDKAppId` of TRTC.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Room number.
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * List of up to 10 users to be removed.
+         * @type {Array.<string> || null}
+         */
+        this.UserIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.UserIds = 'UserIds' in params ? params.UserIds : null;
 
     }
 }
@@ -1494,6 +1595,41 @@ class EventList extends  AbstractModel {
 }
 
 /**
+ * DismissRoom request structure.
+ * @class
+ */
+class DismissRoomRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `SDKAppId` of TRTC.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Room number.
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
  * DescribeDetailEvent response structure.
  * @class
  */
@@ -1623,6 +1759,83 @@ class SmallVideoLayoutParams extends  AbstractModel {
         this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
         this.LocationX = 'LocationX' in params ? params.LocationX : null;
         this.LocationY = 'LocationY' in params ? params.LocationY : null;
+
+    }
+}
+
+/**
+ * Valid in custom template, used to specify the video image position of a user in mixed streams.
+ * @class
+ */
+class PresetLayoutConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Used to assign users to preset positions; if not assigned, users will occupy the positions set in `PresetLayoutConfig` in room entry sequence.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Stream type of the user when a specified user is assigned to the image. 0: camera; 1: screen sharing. Set this parameter to 0 when the small image is occupied by a web user.
+         * @type {number || null}
+         */
+        this.StreamType = null;
+
+        /**
+         * Width of the output image in pixels. If this parameter is not set, 0 is used by default.
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * Height of the output image in pixels. If this parameter is not set, 0 is used by default.
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * X offset of the output image in pixels. The sum of `LocationX` and `ImageWidth` cannot exceed the total width of the mixed stream. If this parameter is not set, 0 is used by default.
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * Y offset of the output image in pixels. The sum of `LocationY` and `ImageHeight` cannot exceed the total height of the mixed stream. If this parameter is not set, 0 is used by default.
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+        /**
+         * Z-order of the image in pixels. If this parameter is not set, 0 is used by default.
+         * @type {number || null}
+         */
+        this.ZOrder = null;
+
+        /**
+         * Render mode of the output image. 0: cropping; 1: scaling. If this parameter is not set, 0 is used by default.
+         * @type {number || null}
+         */
+        this.RenderMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.ZOrder = 'ZOrder' in params ? params.ZOrder : null;
+        this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
 
     }
 }
@@ -1758,7 +1971,7 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
+         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -1821,7 +2034,7 @@ class DescribeDetailEventRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
+         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -2077,10 +2290,10 @@ module.exports = {
     DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
     DismissRoomResponse: DismissRoomResponse,
     DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
-    RemoveUserRequest: RemoveUserRequest,
+    DescribeUserInformationRequest: DescribeUserInformationRequest,
     DescribeCallDetailRequest: DescribeCallDetailRequest,
     DescribeRealtimeNetworkRequest: DescribeRealtimeNetworkRequest,
-    DismissRoomRequest: DismissRoomRequest,
+    DescribeUserInformationResponse: DescribeUserInformationResponse,
     EncodeParams: EncodeParams,
     StartMCUMixTranscodeRequest: StartMCUMixTranscodeRequest,
     DescribeRealtimeQualityResponse: DescribeRealtimeQualityResponse,
@@ -2088,6 +2301,7 @@ module.exports = {
     UserInformation: UserInformation,
     DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
     DescribeRoomInformationResponse: DescribeRoomInformationResponse,
+    RemoveUserRequest: RemoveUserRequest,
     OutputParams: OutputParams,
     EventMessage: EventMessage,
     CreateTroubleInfoResponse: CreateTroubleInfoResponse,
@@ -2097,9 +2311,11 @@ module.exports = {
     ScaleInfomation: ScaleInfomation,
     CreateTroubleInfoRequest: CreateTroubleInfoRequest,
     EventList: EventList,
+    DismissRoomRequest: DismissRoomRequest,
     DescribeDetailEventResponse: DescribeDetailEventResponse,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
     SmallVideoLayoutParams: SmallVideoLayoutParams,
+    PresetLayoutConfig: PresetLayoutConfig,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,

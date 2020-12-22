@@ -26,6 +26,7 @@ const TaskInfoDetail = models.TaskInfoDetail;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const UpgradeInstanceVersionResponse = models.UpgradeInstanceVersionResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
+const DescribeInstanceZoneInfoRequest = models.DescribeInstanceZoneInfoRequest;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
@@ -41,7 +42,7 @@ const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse
 const RedisNodeInfo = models.RedisNodeInfo;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const InstanceEnumParam = models.InstanceEnumParam;
+const DescribeInstanceZoneInfoResponse = models.DescribeInstanceZoneInfoResponse;
 const Account = models.Account;
 const InstanceProxySlowlogDetail = models.InstanceProxySlowlogDetail;
 const SecurityGroupsInboundAndOutbound = models.SecurityGroupsInboundAndOutbound;
@@ -54,6 +55,7 @@ const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecords
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
 const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
+const RedisNode = models.RedisNode;
 const DescribeProjectSecurityGroupRequest = models.DescribeProjectSecurityGroupRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
@@ -116,6 +118,7 @@ const InstanceNode = models.InstanceNode;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const ReplicaGroup = models.ReplicaGroup;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
 const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
@@ -132,6 +135,7 @@ const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
 const InstanceSet = models.InstanceSet;
+const ResourceTag = models.ResourceTag;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
 const DescribeCommonDBInstancesResponse = models.DescribeCommonDBInstancesResponse;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
@@ -154,6 +158,7 @@ const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const StartupInstanceRequest = models.StartupInstanceRequest;
 const HotKeyInfo = models.HotKeyInfo;
+const InstanceEnumParam = models.InstanceEnumParam;
 const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
 const SecurityGroupDetail = models.SecurityGroupDetail;
@@ -718,6 +723,17 @@ class RedisClient extends AbstractClient {
     ClearInstance(req, cb) {
         let resp = new ClearInstanceResponse();
         this.request("ClearInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query Redis node information.
+     * @param {DescribeInstanceZoneInfoRequest} req
+     * @param {function(string, DescribeInstanceZoneInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceZoneInfo(req, cb) {
+        let resp = new DescribeInstanceZoneInfoResponse();
+        this.request("DescribeInstanceZoneInfo", req, resp, cb);
     }
 
     /**

@@ -1051,72 +1051,24 @@ class ModifyServiceTemplateAttributeRequest extends  AbstractModel {
 }
 
 /**
- * Flow Log
+ * DescribeIpGeolocationInfos request structure.
  * @class
  */
-class FlowLog extends  AbstractModel {
+class DescribeIpGeolocationInfosRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the VPC instance
-         * @type {string || null}
+         * IP addresses to be queried. Both IPv4 and IPv6 addresses are supported.
+         * @type {Array.<string> || null}
          */
-        this.VpcId = null;
+        this.AddressIps = null;
 
         /**
-         * The unique ID of the flow log.
-         * @type {string || null}
+         * Fields of the IP addresses to be queried, including `Country`, `Province`, `City`, `Region`, `Isp`, `AsName` and `AsId`
+         * @type {IpField || null}
          */
-        this.FlowLogId = null;
-
-        /**
-         * The name of the flow log instance.
-         * @type {string || null}
-         */
-        this.FlowLogName = null;
-
-        /**
-         * The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
-         * @type {string || null}
-         */
-        this.ResourceType = null;
-
-        /**
-         * The unique ID of the resource.
-         * @type {string || null}
-         */
-        this.ResourceId = null;
-
-        /**
-         * Type of flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
-         * @type {string || null}
-         */
-        this.TrafficType = null;
-
-        /**
-         * The storage ID of the flow log.
-         * @type {string || null}
-         */
-        this.CloudLogId = null;
-
-        /**
-         * The storage ID status of the flow log.
-         * @type {string || null}
-         */
-        this.CloudLogState = null;
-
-        /**
-         * The flow log description.
-         * @type {string || null}
-         */
-        this.FlowLogDescription = null;
-
-        /**
-         * The creation time of the flow log.
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
+        this.Fields = null;
 
     }
 
@@ -1127,16 +1079,13 @@ class FlowLog extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.FlowLogId = 'FlowLogId' in params ? params.FlowLogId : null;
-        this.FlowLogName = 'FlowLogName' in params ? params.FlowLogName : null;
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.TrafficType = 'TrafficType' in params ? params.TrafficType : null;
-        this.CloudLogId = 'CloudLogId' in params ? params.CloudLogId : null;
-        this.CloudLogState = 'CloudLogState' in params ? params.CloudLogState : null;
-        this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.AddressIps = 'AddressIps' in params ? params.AddressIps : null;
+
+        if (params.Fields) {
+            let obj = new IpField();
+            obj.deserialize(params.Fields)
+            this.Fields = obj;
+        }
 
     }
 }
@@ -1368,6 +1317,97 @@ class ModifyNatGatewayAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * Flow Log
+ * @class
+ */
+class FlowLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the VPC instance
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The unique ID of the flow log.
+         * @type {string || null}
+         */
+        this.FlowLogId = null;
+
+        /**
+         * The name of the flow log instance.
+         * @type {string || null}
+         */
+        this.FlowLogName = null;
+
+        /**
+         * The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * The unique ID of the resource.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Type of flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
+         * @type {string || null}
+         */
+        this.TrafficType = null;
+
+        /**
+         * The storage ID of the flow log.
+         * @type {string || null}
+         */
+        this.CloudLogId = null;
+
+        /**
+         * The storage ID status of the flow log.
+         * @type {string || null}
+         */
+        this.CloudLogState = null;
+
+        /**
+         * The flow log description.
+         * @type {string || null}
+         */
+        this.FlowLogDescription = null;
+
+        /**
+         * The creation time of the flow log.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.FlowLogId = 'FlowLogId' in params ? params.FlowLogId : null;
+        this.FlowLogName = 'FlowLogName' in params ? params.FlowLogName : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.TrafficType = 'TrafficType' in params ? params.TrafficType : null;
+        this.CloudLogId = 'CloudLogId' in params ? params.CloudLogId : null;
+        this.CloudLogState = 'CloudLogState' in params ? params.CloudLogState : null;
+        this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+    }
+}
+
+/**
  * ModifyDirectConnectGatewayAttribute request structure.
  * @class
  */
@@ -1393,6 +1433,12 @@ class ModifyDirectConnectGatewayAttributeRequest extends  AbstractModel {
          */
         this.CcnRouteType = null;
 
+        /**
+         * CCN route publishing method. Valid values: `standard` and `exquisite`. You can only modify `ModeType` for a CCN direct connect gateway.
+         * @type {string || null}
+         */
+        this.ModeType = null;
+
     }
 
     /**
@@ -1405,6 +1451,84 @@ class ModifyDirectConnectGatewayAttributeRequest extends  AbstractModel {
         this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
         this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
         this.CcnRouteType = 'CcnRouteType' in params ? params.CcnRouteType : null;
+        this.ModeType = 'ModeType' in params ? params.ModeType : null;
+
+    }
+}
+
+/**
+ * IP fields to be queried online
+ * @class
+ */
+class IpField extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Country/region field
+         * @type {boolean || null}
+         */
+        this.Country = null;
+
+        /**
+         * Province/municipality field
+         * @type {boolean || null}
+         */
+        this.Province = null;
+
+        /**
+         * City field
+         * @type {boolean || null}
+         */
+        this.City = null;
+
+        /**
+         * Urban area field
+         * @type {boolean || null}
+         */
+        this.Region = null;
+
+        /**
+         * Access ISP field
+         * @type {boolean || null}
+         */
+        this.Isp = null;
+
+        /**
+         * ISP backbone network’s AS field
+         * @type {boolean || null}
+         */
+        this.AsName = null;
+
+        /**
+         * AS ID
+         * @type {boolean || null}
+         */
+        this.AsId = null;
+
+        /**
+         * Comment
+         * @type {boolean || null}
+         */
+        this.Comment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Country = 'Country' in params ? params.Country : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.AsName = 'AsName' in params ? params.AsName : null;
+        this.AsId = 'AsId' in params ? params.AsId : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
@@ -2019,6 +2143,12 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
          */
         this.GatewayType = null;
 
+        /**
+         * CCN route publishing method. Valid values: `standard` and `exquisite`. This parameter is only valid for the CCN direct connect gateway.
+         * @type {string || null}
+         */
+        this.ModeType = null;
+
     }
 
     /**
@@ -2032,6 +2162,7 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.NetworkInstanceId = 'NetworkInstanceId' in params ? params.NetworkInstanceId : null;
         this.GatewayType = 'GatewayType' in params ? params.GatewayType : null;
+        this.ModeType = 'ModeType' in params ? params.ModeType : null;
 
     }
 }
@@ -2244,6 +2375,56 @@ class ModifyFlowLogAttributeRequest extends  AbstractModel {
         this.FlowLogId = 'FlowLogId' in params ? params.FlowLogId : null;
         this.FlowLogName = 'FlowLogName' in params ? params.FlowLogName : null;
         this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
+
+    }
+}
+
+/**
+ * DescribeIpGeolocationInfos response structure.
+ * @class
+ */
+class DescribeIpGeolocationInfosResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP address details
+         * @type {Array.<IpGeolocationInfo> || null}
+         */
+        this.AddressInfo = null;
+
+        /**
+         * Number of IP addresses
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AddressInfo) {
+            this.AddressInfo = new Array();
+            for (let z in params.AddressInfo) {
+                let obj = new IpGeolocationInfo();
+                obj.deserialize(params.AddressInfo[z]);
+                this.AddressInfo.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3118,6 +3299,99 @@ class DescribeGatewayFlowMonitorDetailResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IP location
+ * @class
+ */
+class IpGeolocationInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Country/region
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Country = null;
+
+        /**
+         * Province- or municipality-level administrative region
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Province = null;
+
+        /**
+         * Municipal administrative region
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * Urban area
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Access ISP
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * ISP backbone network’s AS name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsName = null;
+
+        /**
+         * ISP backbone network’s AS ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsId = null;
+
+        /**
+         * Comment. The APN value of mobile users is entered currently. If there is no APN attribute, this is `null`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * IP address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AddressIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Country = 'Country' in params ? params.Country : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.AsName = 'AsName' in params ? params.AsName : null;
+        this.AsId = 'AsId' in params ? params.AsId : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.AddressIp = 'AddressIp' in params ? params.AddressIp : null;
 
     }
 }
@@ -10225,6 +10499,20 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.NatGatewayId = null;
 
+        /**
+         * Whether the direct connect gateway supports the VXLAN architecture.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<boolean> || null}
+         */
+        this.VXLANSupport = null;
+
+        /**
+         * CCN route publishing mode. Valid values: `standard` and `exquisite`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ModeType = null;
+
     }
 
     /**
@@ -10247,6 +10535,8 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.EnableBGP = 'EnableBGP' in params ? params.EnableBGP : null;
         this.EnableBGPCommunity = 'EnableBGPCommunity' in params ? params.EnableBGPCommunity : null;
         this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.VXLANSupport = 'VXLANSupport' in params ? params.VXLANSupport : null;
+        this.ModeType = 'ModeType' in params ? params.ModeType : null;
 
     }
 }
@@ -14011,6 +14301,27 @@ class CreateFlowLogRequest extends  AbstractModel {
 }
 
 /**
+ * InquirePriceCreateDirectConnectGateway request structure.
+ * @class
+ */
+class InquirePriceCreateDirectConnectGatewayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * AttachNetworkInterface response structure.
  * @class
  */
@@ -16630,6 +16941,50 @@ Note: This field may return null, indicating no valid value.
             }
         }
         this.RoutePriorityFlag = 'RoutePriorityFlag' in params ? params.RoutePriorityFlag : null;
+
+    }
+}
+
+/**
+ * InquirePriceCreateDirectConnectGateway response structure.
+ * @class
+ */
+class InquirePriceCreateDirectConnectGatewayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Standard access fee for a direct connect gateway
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCost = null;
+
+        /**
+         * Actual access fee for a direct connect gateway
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -21695,14 +22050,16 @@ module.exports = {
     ModifyNetworkAclAttributeResponse: ModifyNetworkAclAttributeResponse,
     DescribeVpnGatewaysResponse: DescribeVpnGatewaysResponse,
     ModifyServiceTemplateAttributeRequest: ModifyServiceTemplateAttributeRequest,
-    FlowLog: FlowLog,
+    DescribeIpGeolocationInfosRequest: DescribeIpGeolocationInfosRequest,
     ResetAttachCcnInstancesResponse: ResetAttachCcnInstancesResponse,
     DescribeServiceTemplateGroupsResponse: DescribeServiceTemplateGroupsResponse,
     DetachClassicLinkVpcRequest: DetachClassicLinkVpcRequest,
     DescribeBandwidthPackageBillUsageResponse: DescribeBandwidthPackageBillUsageResponse,
     DeleteBandwidthPackageResponse: DeleteBandwidthPackageResponse,
     ModifyNatGatewayAttributeRequest: ModifyNatGatewayAttributeRequest,
+    FlowLog: FlowLog,
     ModifyDirectConnectGatewayAttributeRequest: ModifyDirectConnectGatewayAttributeRequest,
+    IpField: IpField,
     AddBandwidthPackageResourcesRequest: AddBandwidthPackageResourcesRequest,
     AssignIpv6SubnetCidrBlockRequest: AssignIpv6SubnetCidrBlockRequest,
     CreateVpcResponse: CreateVpcResponse,
@@ -21721,6 +22078,7 @@ module.exports = {
     DisassociateNetworkInterfaceSecurityGroupsRequest: DisassociateNetworkInterfaceSecurityGroupsRequest,
     SecurityGroupPolicySet: SecurityGroupPolicySet,
     ModifyFlowLogAttributeRequest: ModifyFlowLogAttributeRequest,
+    DescribeIpGeolocationInfosResponse: DescribeIpGeolocationInfosResponse,
     AssociateNetworkAclSubnetsResponse: AssociateNetworkAclSubnetsResponse,
     DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest: DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest,
     ResetRoutesRequest: ResetRoutesRequest,
@@ -21739,6 +22097,7 @@ module.exports = {
     DescribeVpcsRequest: DescribeVpcsRequest,
     AcceptAttachCcnInstancesRequest: AcceptAttachCcnInstancesRequest,
     DescribeGatewayFlowMonitorDetailResponse: DescribeGatewayFlowMonitorDetailResponse,
+    IpGeolocationInfo: IpGeolocationInfo,
     DeleteFlowLogRequest: DeleteFlowLogRequest,
     NetDetectState: NetDetectState,
     HaVipDisassociateAddressIpResponse: HaVipDisassociateAddressIpResponse,
@@ -21966,6 +22325,7 @@ module.exports = {
     DeleteDirectConnectGatewayCcnRoutesRequest: DeleteDirectConnectGatewayCcnRoutesRequest,
     CreateNatGatewayDestinationIpPortTranslationNatRuleRequest: CreateNatGatewayDestinationIpPortTranslationNatRuleRequest,
     CreateFlowLogRequest: CreateFlowLogRequest,
+    InquirePriceCreateDirectConnectGatewayRequest: InquirePriceCreateDirectConnectGatewayRequest,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
     DisassociateNatGatewayAddressRequest: DisassociateNatGatewayAddressRequest,
     DescribeServiceTemplatesResponse: DescribeServiceTemplatesResponse,
@@ -22023,6 +22383,7 @@ module.exports = {
     ModifyServiceTemplateGroupAttributeRequest: ModifyServiceTemplateGroupAttributeRequest,
     UnassignIpv6CidrBlockRequest: UnassignIpv6CidrBlockRequest,
     CCN: CCN,
+    InquirePriceCreateDirectConnectGatewayResponse: InquirePriceCreateDirectConnectGatewayResponse,
     DestinationIpPortTranslationNatRule: DestinationIpPortTranslationNatRule,
     CreateDefaultVpcRequest: CreateDefaultVpcRequest,
     DescribeSubnetsResponse: DescribeSubnetsResponse,

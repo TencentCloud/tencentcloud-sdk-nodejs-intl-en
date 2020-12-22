@@ -36,14 +36,16 @@ const ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse = models.Modif
 const ModifyNetworkAclAttributeResponse = models.ModifyNetworkAclAttributeResponse;
 const DescribeVpnGatewaysResponse = models.DescribeVpnGatewaysResponse;
 const ModifyServiceTemplateAttributeRequest = models.ModifyServiceTemplateAttributeRequest;
-const FlowLog = models.FlowLog;
+const DescribeIpGeolocationInfosRequest = models.DescribeIpGeolocationInfosRequest;
 const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const DescribeServiceTemplateGroupsResponse = models.DescribeServiceTemplateGroupsResponse;
 const DetachClassicLinkVpcRequest = models.DetachClassicLinkVpcRequest;
 const DescribeBandwidthPackageBillUsageResponse = models.DescribeBandwidthPackageBillUsageResponse;
 const DeleteBandwidthPackageResponse = models.DeleteBandwidthPackageResponse;
 const ModifyNatGatewayAttributeRequest = models.ModifyNatGatewayAttributeRequest;
+const FlowLog = models.FlowLog;
 const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
+const IpField = models.IpField;
 const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesRequest;
 const AssignIpv6SubnetCidrBlockRequest = models.AssignIpv6SubnetCidrBlockRequest;
 const CreateVpcResponse = models.CreateVpcResponse;
@@ -62,6 +64,7 @@ const TransformAddressResponse = models.TransformAddressResponse;
 const DisassociateNetworkInterfaceSecurityGroupsRequest = models.DisassociateNetworkInterfaceSecurityGroupsRequest;
 const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
 const ModifyFlowLogAttributeRequest = models.ModifyFlowLogAttributeRequest;
+const DescribeIpGeolocationInfosResponse = models.DescribeIpGeolocationInfosResponse;
 const AssociateNetworkAclSubnetsResponse = models.AssociateNetworkAclSubnetsResponse;
 const DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest = models.DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const ResetRoutesRequest = models.ResetRoutesRequest;
@@ -80,6 +83,7 @@ const DescribeIpGeolocationDatabaseUrlResponse = models.DescribeIpGeolocationDat
 const DescribeVpcsRequest = models.DescribeVpcsRequest;
 const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
 const DescribeGatewayFlowMonitorDetailResponse = models.DescribeGatewayFlowMonitorDetailResponse;
+const IpGeolocationInfo = models.IpGeolocationInfo;
 const DeleteFlowLogRequest = models.DeleteFlowLogRequest;
 const NetDetectState = models.NetDetectState;
 const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResponse;
@@ -307,6 +311,7 @@ const AccountAttribute = models.AccountAttribute;
 const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
 const CreateNatGatewayDestinationIpPortTranslationNatRuleRequest = models.CreateNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const CreateFlowLogRequest = models.CreateFlowLogRequest;
+const InquirePriceCreateDirectConnectGatewayRequest = models.InquirePriceCreateDirectConnectGatewayRequest;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const DisassociateNatGatewayAddressRequest = models.DisassociateNatGatewayAddressRequest;
 const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
@@ -364,6 +369,7 @@ const ModifyAddressTemplateGroupAttributeRequest = models.ModifyAddressTemplateG
 const ModifyServiceTemplateGroupAttributeRequest = models.ModifyServiceTemplateGroupAttributeRequest;
 const UnassignIpv6CidrBlockRequest = models.UnassignIpv6CidrBlockRequest;
 const CCN = models.CCN;
+const InquirePriceCreateDirectConnectGatewayResponse = models.InquirePriceCreateDirectConnectGatewayResponse;
 const DestinationIpPortTranslationNatRule = models.DestinationIpPortTranslationNatRule;
 const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
@@ -926,6 +932,17 @@ After unbinding the network instance, the corresponding routing policy will also
     AssignPrivateIpAddresses(req, cb) {
         let resp = new AssignPrivateIpAddressesResponse();
         this.request("AssignPrivateIpAddresses", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the price of creating a direct connect gateway.
+     * @param {InquirePriceCreateDirectConnectGatewayRequest} req
+     * @param {function(string, InquirePriceCreateDirectConnectGatewayResponse):void} cb
+     * @public
+     */
+    InquirePriceCreateDirectConnectGateway(req, cb) {
+        let resp = new InquirePriceCreateDirectConnectGatewayResponse();
+        this.request("InquirePriceCreateDirectConnectGateway", req, resp, cb);
     }
 
     /**
@@ -2122,6 +2139,17 @@ This API is completed asynchronously. If you need to query the async execution r
     MigratePrivateIpAddress(req, cb) {
         let resp = new MigratePrivateIpAddressResponse();
         this.request("MigratePrivateIpAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the IP addresses, including their geographical locations and networks.
+     * @param {DescribeIpGeolocationInfosRequest} req
+     * @param {function(string, DescribeIpGeolocationInfosResponse):void} cb
+     * @public
+     */
+    DescribeIpGeolocationInfos(req, cb) {
+        let resp = new DescribeIpGeolocationInfosResponse();
+        this.request("DescribeIpGeolocationInfos", req, resp, cb);
     }
 
     /**

@@ -16,30 +16,45 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeAllUserContactRequest = models.DescribeAllUserContactRequest;
 const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
+const ContactItem = models.ContactItem;
 const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
 const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
-const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
+const DescribeAllUserContactResponse = models.DescribeAllUserContactResponse;
 const TimeSlice = models.TimeSlice;
-const MonitorFloatMetric = models.MonitorFloatMetric;
+const ModifyDiagDBInstanceConfRequest = models.ModifyDiagDBInstanceConfRequest;
 const MonitorMetric = models.MonitorMetric;
+const CreateDBDiagReportTaskRequest = models.CreateDBDiagReportTaskRequest;
+const MonitorFloatMetric = models.MonitorFloatMetric;
 const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
+const DescribeAllUserGroupResponse = models.DescribeAllUserGroupResponse;
+const SchemaItem = models.SchemaItem;
+const CreateMailProfileResponse = models.CreateMailProfileResponse;
 const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
 const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
 const DescribeDBDiagEventRequest = models.DescribeDBDiagEventRequest;
 const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
 const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
 const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
+const GroupItem = models.GroupItem;
 const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
+const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
 const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
+const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
 const DiagHistoryEventItem = models.DiagHistoryEventItem;
 const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
+const CreateMailProfileRequest = models.CreateMailProfileRequest;
 const MonitorFloatMetricSeriesData = models.MonitorFloatMetricSeriesData;
+const MailConfiguration = models.MailConfiguration;
 const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
 const TableSpaceData = models.TableSpaceData;
 const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
+const InstanceConfs = models.InstanceConfs;
+const ProfileInfo = models.ProfileInfo;
+const DescribeAllUserGroupRequest = models.DescribeAllUserGroupRequest;
+const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
 const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
-const SchemaItem = models.SchemaItem;
 
 
 /**
@@ -53,17 +68,6 @@ class DbbrainClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query the daily space data of top tables consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
-     * @param {DescribeTopSpaceTableTimeSeriesRequest} req
-     * @param {function(string, DescribeTopSpaceTableTimeSeriesResponse):void} cb
-     * @public
-     */
-    DescribeTopSpaceTableTimeSeries(req, cb) {
-        let resp = new DescribeTopSpaceTableTimeSeriesResponse();
-        this.request("DescribeTopSpaceTableTimeSeries", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the slow log statistics histogram.
      * @param {DescribeSlowLogTimeSeriesStatsRequest} req
      * @param {function(string, DescribeSlowLogTimeSeriesStatsResponse):void} cb
@@ -72,6 +76,28 @@ class DbbrainClient extends AbstractClient {
     DescribeSlowLogTimeSeriesStats(req, cb) {
         let resp = new DescribeSlowLogTimeSeriesStatsResponse();
         this.request("DescribeSlowLogTimeSeriesStats", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the information of the contact in the email.
+     * @param {DescribeAllUserContactRequest} req
+     * @param {function(string, DescribeAllUserContactResponse):void} cb
+     * @public
+     */
+    DescribeAllUserContact(req, cb) {
+        let resp = new DescribeAllUserContactResponse();
+        this.request("DescribeAllUserContact", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the details of an instance exception diagnosis event.
+     * @param {DescribeDBDiagEventRequest} req
+     * @param {function(string, DescribeDBDiagEventResponse):void} cb
+     * @public
+     */
+    DescribeDBDiagEvent(req, cb) {
+        let resp = new DescribeDBDiagEventResponse();
+        this.request("DescribeDBDiagEvent", req, resp, cb);
     }
 
     /**
@@ -97,17 +123,6 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the details of an instance exception diagnosis event.
-     * @param {DescribeDBDiagEventRequest} req
-     * @param {function(string, DescribeDBDiagEventResponse):void} cb
-     * @public
-     */
-    DescribeDBDiagEvent(req, cb) {
-        let resp = new DescribeDBDiagEventResponse();
-        this.request("DescribeDBDiagEvent", req, resp, cb);
-    }
-
-    /**
      * This API is used to query real-time space statistics of top tables of an instance. The return results are sorted by size by default.
      * @param {DescribeTopSpaceTablesRequest} req
      * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
@@ -116,6 +131,61 @@ class DbbrainClient extends AbstractClient {
     DescribeTopSpaceTables(req, cb) {
         let resp = new DescribeTopSpaceTablesResponse();
         this.request("DescribeTopSpaceTables", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a health report and select whether to send an email.
+     * @param {CreateDBDiagReportTaskRequest} req
+     * @param {function(string, CreateDBDiagReportTaskResponse):void} cb
+     * @public
+     */
+    CreateDBDiagReportTask(req, cb) {
+        let resp = new CreateDBDiagReportTaskResponse();
+        this.request("CreateDBDiagReportTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create the email configuration. The input parameter “ProfileType” represents the type of the email configuration. Valid values: “dbScan_mail_configuration” (email configuration of database inspection report) and “scheduler_mail_configuration” (email configuration of scheduled task report).
+     * @param {CreateMailProfileRequest} req
+     * @param {function(string, CreateMailProfileResponse):void} cb
+     * @public
+     */
+    CreateMailProfile(req, cb) {
+        let resp = new CreateMailProfileResponse();
+        this.request("CreateMailProfile", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance inspection switch.
+     * @param {ModifyDiagDBInstanceConfRequest} req
+     * @param {function(string, ModifyDiagDBInstanceConfResponse):void} cb
+     * @public
+     */
+    ModifyDiagDBInstanceConf(req, cb) {
+        let resp = new ModifyDiagDBInstanceConfResponse();
+        this.request("ModifyDiagDBInstanceConf", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the daily space data of top tables consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
+     * @param {DescribeTopSpaceTableTimeSeriesRequest} req
+     * @param {function(string, DescribeTopSpaceTableTimeSeriesResponse):void} cb
+     * @public
+     */
+    DescribeTopSpaceTableTimeSeries(req, cb) {
+        let resp = new DescribeTopSpaceTableTimeSeriesResponse();
+        this.request("DescribeTopSpaceTableTimeSeries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the information of the contact group in the email.
+     * @param {DescribeAllUserGroupRequest} req
+     * @param {function(string, DescribeAllUserGroupResponse):void} cb
+     * @public
+     */
+    DescribeAllUserGroup(req, cb) {
+        let resp = new DescribeAllUserGroupResponse();
+        this.request("DescribeAllUserGroup", req, resp, cb);
     }
 
     /**

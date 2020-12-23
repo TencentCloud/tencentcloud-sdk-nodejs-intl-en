@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeAllUserContact request structure.
+ * @class
+ */
+class DescribeAllUserContactRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * An array of contact name. Fuzzy search is supported.
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Names = 'Names' in params ? params.Names : null;
+
+    }
+}
+
+/**
  * DescribeTopSpaceTableTimeSeries response structure.
  * @class
  */
@@ -55,6 +90,48 @@ class DescribeTopSpaceTableTimeSeriesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Contact description.
+ * @class
+ */
+class ContactItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Contact ID.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Contact name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The mailbox bound to the contact.
+         * @type {string || null}
+         */
+        this.Mail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Mail = 'Mail' in params ? params.Mail : null;
 
     }
 }
@@ -145,30 +222,25 @@ class DescribeDBSpaceStatusRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSlowLogTimeSeriesStats response structure.
+ * DescribeAllUserContact response structure.
  * @class
  */
-class DescribeSlowLogTimeSeriesStatsResponse extends  AbstractModel {
+class DescribeAllUserContactResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Time range in seconds in histogram.
+         * Total number of contacts.
          * @type {number || null}
          */
-        this.Period = null;
+        this.TotalCount = null;
 
         /**
-         * Number of slow logs in specified time range.
-         * @type {Array.<TimeSlice> || null}
+         * Contact information.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<ContactItem> || null}
          */
-        this.TimeSeries = null;
-
-        /**
-         * Instance CPU utilization monitoring data in specified time range.
-         * @type {MonitorMetricSeriesData || null}
-         */
-        this.SeriesData = null;
+        this.Contacts = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -185,21 +257,15 @@ class DescribeSlowLogTimeSeriesStatsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.TimeSeries) {
-            this.TimeSeries = new Array();
-            for (let z in params.TimeSeries) {
-                let obj = new TimeSlice();
-                obj.deserialize(params.TimeSeries[z]);
-                this.TimeSeries.push(obj);
+        if (params.Contacts) {
+            this.Contacts = new Array();
+            for (let z in params.Contacts) {
+                let obj = new ContactItem();
+                obj.deserialize(params.Contacts[z]);
+                this.Contacts.push(obj);
             }
-        }
-
-        if (params.SeriesData) {
-            let obj = new MonitorMetricSeriesData();
-            obj.deserialize(params.SeriesData)
-            this.SeriesData = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -242,10 +308,64 @@ class TimeSlice extends  AbstractModel {
 }
 
 /**
- * Monitoring data in float type
+ * ModifyDiagDBInstanceConf request structure.
  * @class
  */
-class MonitorFloatMetric extends  AbstractModel {
+class ModifyDiagDBInstanceConfRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Inspection switch.
+         * @type {InstanceConfs || null}
+         */
+        this.InstanceConfs = null;
+
+        /**
+         * The effective instance region. If the value is "All", it means it is effective for the whole region.
+         * @type {string || null}
+         */
+        this.Regions = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Specify the instance ID that needs to modify the inspection status.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceConfs) {
+            let obj = new InstanceConfs();
+            obj.deserialize(params.InstanceConfs)
+            this.InstanceConfs = obj;
+        }
+        this.Regions = 'Regions' in params ? params.Regions : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Monitoring data
+ * @class
+ */
+class MonitorMetric extends  AbstractModel {
     constructor(){
         super();
 
@@ -285,10 +405,80 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Monitoring data
+ * CreateDBDiagReportTask request structure.
  * @class
  */
-class MonitorMetric extends  AbstractModel {
+class CreateDBDiagReportTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time, such as `2020-11-08T14:00:00+08:00`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, such as `2020-11-09T14:00:00+08:00`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Whether to send an email. Valid values: 0 - Yes, 1 - No.
+         * @type {number || null}
+         */
+        this.SendMailFlag = null;
+
+        /**
+         * An array of contact IDs to receive the email.
+         * @type {Array.<number> || null}
+         */
+        this.ContactPerson = null;
+
+        /**
+         * An array of contact group IDs to receive the email.
+         * @type {Array.<number> || null}
+         */
+        this.ContactGroup = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SendMailFlag = 'SendMailFlag' in params ? params.SendMailFlag : null;
+        this.ContactPerson = 'ContactPerson' in params ? params.ContactPerson : null;
+        this.ContactGroup = 'ContactGroup' in params ? params.ContactGroup : null;
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * Monitoring data in float type
+ * @class
+ */
+class MonitorFloatMetric extends  AbstractModel {
     constructor(){
         super();
 
@@ -377,6 +567,113 @@ class TableSpaceTimeSeries extends  AbstractModel {
             obj.deserialize(params.SeriesData)
             this.SeriesData = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeAllUserGroup response structure.
+ * @class
+ */
+class DescribeAllUserGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of contact groups.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Contact group information.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<GroupItem> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new GroupItem();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * `SchemaItem` array
+ * @class
+ */
+class SchemaItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Schema = 'Schema' in params ? params.Schema : null;
+
+    }
+}
+
+/**
+ * CreateMailProfile response structure.
+ * @class
+ */
+class CreateMailProfileResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -733,6 +1030,48 @@ class DescribeDBDiagHistoryRequest extends  AbstractModel {
 }
 
 /**
+ * Describe the group information.
+ * @class
+ */
+class GroupItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group ID.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Group name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Number of group members.
+         * @type {number || null}
+         */
+        this.MemberCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MemberCount = 'MemberCount' in params ? params.MemberCount : null;
+
+    }
+}
+
+/**
  * DescribeTopSpaceTableTimeSeries request structure.
  * @class
  */
@@ -796,6 +1135,42 @@ class DescribeTopSpaceTableTimeSeriesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateDBDiagReportTask response structure.
+ * @class
+ */
+class CreateDBDiagReportTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of an async task request, which can be used to query the execution result of an async task.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Monitoring metric data in specified time range
  * @class
  */
@@ -834,6 +1209,34 @@ class MonitorMetricSeriesData extends  AbstractModel {
             }
         }
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+
+    }
+}
+
+/**
+ * ModifyDiagDBInstanceConf response structure.
+ * @class
+ */
+class ModifyDiagDBInstanceConfResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1094,6 +1497,74 @@ class SlowLogTopSqlItem extends  AbstractModel {
 }
 
 /**
+ * CreateMailProfile request structure.
+ * @class
+ */
+class CreateMailProfileRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The content of email configuration.
+         * @type {ProfileInfo || null}
+         */
+        this.ProfileInfo = null;
+
+        /**
+         * Configuration level. Valid values: "User" (user-level), "Instance" (instance-level). The email of database inspection report is configured as the user level, and the email of scheduled task report is configured as the instance level.
+         * @type {string || null}
+         */
+        this.ProfileLevel = null;
+
+        /**
+         * Name configuration, which needs to be unique. The email configuration name of database inspection report can be customize; the email configuration name of scheduled task report should in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
+         * @type {string || null}
+         */
+        this.ProfileName = null;
+
+        /**
+         * Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
+         * @type {string || null}
+         */
+        this.ProfileType = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Instance ID bound to the configuration, which is set when the configuration level is "Instance".
+         * @type {Array.<string> || null}
+         */
+        this.BindInstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ProfileInfo) {
+            let obj = new ProfileInfo();
+            obj.deserialize(params.ProfileInfo)
+            this.ProfileInfo = obj;
+        }
+        this.ProfileLevel = 'ProfileLevel' in params ? params.ProfileLevel : null;
+        this.ProfileName = 'ProfileName' in params ? params.ProfileName : null;
+        this.ProfileType = 'ProfileType' in params ? params.ProfileType : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.BindInstanceIds = 'BindInstanceIds' in params ? params.BindInstanceIds : null;
+
+    }
+}
+
+/**
  * Monitoring metric value in float type in a unit of time interval
  * @class
  */
@@ -1132,6 +1603,62 @@ class MonitorFloatMetricSeriesData extends  AbstractModel {
             }
         }
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+
+    }
+}
+
+/**
+ * Email sending configuration.
+ * @class
+ */
+class MailConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable email sending. Valid values: 0 (No), 1 (Yes).
+         * @type {number || null}
+         */
+        this.SendMail = null;
+
+        /**
+         * Region configuration, such as "ap-guangzhou", "ap-shanghai".
+         * @type {Array.<string> || null}
+         */
+        this.Region = null;
+
+        /**
+         * Sending a report with the specified health level, such as "HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK".
+         * @type {Array.<string> || null}
+         */
+        this.HealthStatus = null;
+
+        /**
+         * Contact ID. The contact/contact group cannot be empty.
+         * @type {Array.<number> || null}
+         */
+        this.ContactPerson = null;
+
+        /**
+         * Contact group ID. The contact/contact group cannot be empty.
+         * @type {Array.<number> || null}
+         */
+        this.ContactGroup = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SendMail = 'SendMail' in params ? params.SendMail : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
+        this.ContactPerson = 'ContactPerson' in params ? params.ContactPerson : null;
+        this.ContactGroup = 'ContactGroup' in params ? params.ContactGroup : null;
 
     }
 }
@@ -1370,6 +1897,171 @@ class DescribeSlowLogTopSqlsResponse extends  AbstractModel {
 }
 
 /**
+ * Instance configuration.
+ * @class
+ */
+class InstanceConfs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The switch of database inspection. Valid values: Yes/No.
+         * @type {string || null}
+         */
+        this.DailyInspection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DailyInspection = 'DailyInspection' in params ? params.DailyInspection : null;
+
+    }
+}
+
+/**
+ * Information configured by user.
+ * @class
+ */
+class ProfileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Language, such as “zh”.
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * The content of email template.
+         * @type {MailConfiguration || null}
+         */
+        this.MailConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Language = 'Language' in params ? params.Language : null;
+
+        if (params.MailConfiguration) {
+            let obj = new MailConfiguration();
+            obj.deserialize(params.MailConfiguration)
+            this.MailConfiguration = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeAllUserGroup request structure.
+ * @class
+ */
+class DescribeAllUserGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * An array of contact group name. Fuzzy search is supported.
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Names = 'Names' in params ? params.Names : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogTimeSeriesStats response structure.
+ * @class
+ */
+class DescribeSlowLogTimeSeriesStatsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time range in seconds in histogram.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Number of slow logs in specified time range.
+         * @type {Array.<TimeSlice> || null}
+         */
+        this.TimeSeries = null;
+
+        /**
+         * Instance CPU utilization monitoring data in specified time range.
+         * @type {MonitorMetricSeriesData || null}
+         */
+        this.SeriesData = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+
+        if (params.TimeSeries) {
+            this.TimeSeries = new Array();
+            for (let z in params.TimeSeries) {
+                let obj = new TimeSlice();
+                obj.deserialize(params.TimeSeries[z]);
+                this.TimeSeries.push(obj);
+            }
+        }
+
+        if (params.SeriesData) {
+            let obj = new MonitorMetricSeriesData();
+            obj.deserialize(params.SeriesData)
+            this.SeriesData = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTopSpaceTables response structure.
  * @class
  */
@@ -1419,58 +2111,45 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
     }
 }
 
-/**
- * `SchemaItem` array
- * @class
- */
-class SchemaItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Database name
-         * @type {string || null}
-         */
-        this.Schema = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Schema = 'Schema' in params ? params.Schema : null;
-
-    }
-}
-
 module.exports = {
+    DescribeAllUserContactRequest: DescribeAllUserContactRequest,
     DescribeTopSpaceTableTimeSeriesResponse: DescribeTopSpaceTableTimeSeriesResponse,
+    ContactItem: ContactItem,
     DescribeDBDiagHistoryResponse: DescribeDBDiagHistoryResponse,
     DescribeDBSpaceStatusRequest: DescribeDBSpaceStatusRequest,
-    DescribeSlowLogTimeSeriesStatsResponse: DescribeSlowLogTimeSeriesStatsResponse,
+    DescribeAllUserContactResponse: DescribeAllUserContactResponse,
     TimeSlice: TimeSlice,
-    MonitorFloatMetric: MonitorFloatMetric,
+    ModifyDiagDBInstanceConfRequest: ModifyDiagDBInstanceConfRequest,
     MonitorMetric: MonitorMetric,
+    CreateDBDiagReportTaskRequest: CreateDBDiagReportTaskRequest,
+    MonitorFloatMetric: MonitorFloatMetric,
     TableSpaceTimeSeries: TableSpaceTimeSeries,
+    DescribeAllUserGroupResponse: DescribeAllUserGroupResponse,
+    SchemaItem: SchemaItem,
+    CreateMailProfileResponse: CreateMailProfileResponse,
     DescribeTopSpaceTablesRequest: DescribeTopSpaceTablesRequest,
     DescribeSlowLogTimeSeriesStatsRequest: DescribeSlowLogTimeSeriesStatsRequest,
     DescribeDBDiagEventRequest: DescribeDBDiagEventRequest,
     DescribeDBSpaceStatusResponse: DescribeDBSpaceStatusResponse,
     DescribeDBDiagEventResponse: DescribeDBDiagEventResponse,
     DescribeDBDiagHistoryRequest: DescribeDBDiagHistoryRequest,
+    GroupItem: GroupItem,
     DescribeTopSpaceTableTimeSeriesRequest: DescribeTopSpaceTableTimeSeriesRequest,
+    CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
     MonitorMetricSeriesData: MonitorMetricSeriesData,
+    ModifyDiagDBInstanceConfResponse: ModifyDiagDBInstanceConfResponse,
     DiagHistoryEventItem: DiagHistoryEventItem,
     SlowLogTopSqlItem: SlowLogTopSqlItem,
+    CreateMailProfileRequest: CreateMailProfileRequest,
     MonitorFloatMetricSeriesData: MonitorFloatMetricSeriesData,
+    MailConfiguration: MailConfiguration,
     DescribeSlowLogTopSqlsRequest: DescribeSlowLogTopSqlsRequest,
     TableSpaceData: TableSpaceData,
     DescribeSlowLogTopSqlsResponse: DescribeSlowLogTopSqlsResponse,
+    InstanceConfs: InstanceConfs,
+    ProfileInfo: ProfileInfo,
+    DescribeAllUserGroupRequest: DescribeAllUserGroupRequest,
+    DescribeSlowLogTimeSeriesStatsResponse: DescribeSlowLogTimeSeriesStatsResponse,
     DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
-    SchemaItem: SchemaItem,
 
 }

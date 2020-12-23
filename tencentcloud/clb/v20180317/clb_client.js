@@ -30,11 +30,13 @@ const RuleHealth = models.RuleHealth;
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
+const DescribeLoadBalancerTrafficResponse = models.DescribeLoadBalancerTrafficResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
 const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
-const CreateRuleResponse = models.CreateRuleResponse;
+const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
+const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
 const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const RsWeightRule = models.RsWeightRule;
@@ -45,7 +47,7 @@ const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const TargetGroupInstance = models.TargetGroupInstance;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
-const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
+const CreateRuleResponse = models.CreateRuleResponse;
 const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
@@ -67,12 +69,13 @@ const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
 const Target = models.Target;
+const DescribeLoadBalancerTrafficRequest = models.DescribeLoadBalancerTrafficRequest;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
 const DescribeClsLogSetRequest = models.DescribeClsLogSetRequest;
 const Listener = models.Listener;
-const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
+const LoadBalancerTraffic = models.LoadBalancerTraffic;
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
 const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
 const ReplaceCertForLoadBalancersResponse = models.ReplaceCertForLoadBalancersResponse;
@@ -487,6 +490,17 @@ Note: This API can only be called in the Guangzhou region; for other regions, an
     }
 
     /**
+     * This API is used to get the information of servers bound to a target group.
+     * @param {DescribeTargetGroupInstancesRequest} req
+     * @param {function(string, DescribeTargetGroupInstancesResponse):void} cb
+     * @public
+     */
+    DescribeTargetGroupInstances(req, cb) {
+        let resp = new DescribeTargetGroupInstancesResponse();
+        this.request("DescribeTargetGroupInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind target groups to CLB listeners (layer-4 protocol) or forwarding rules (layer-7 protocol).
 This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
      * @param {AssociateTargetGroupsRequest} req
@@ -817,14 +831,14 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API is used to get the information of servers bound to a target group.
-     * @param {DescribeTargetGroupInstancesRequest} req
-     * @param {function(string, DescribeTargetGroupInstancesResponse):void} cb
+     * This API is used to query CLB instances with high traffic and return the top 10 results. For queries using a sub-account, only the result CLB instances authorized to the sub-account will be returned.
+     * @param {DescribeLoadBalancerTrafficRequest} req
+     * @param {function(string, DescribeLoadBalancerTrafficResponse):void} cb
      * @public
      */
-    DescribeTargetGroupInstances(req, cb) {
-        let resp = new DescribeTargetGroupInstancesResponse();
-        this.request("DescribeTargetGroupInstances", req, resp, cb);
+    DescribeLoadBalancerTraffic(req, cb) {
+        let resp = new DescribeLoadBalancerTrafficResponse();
+        this.request("DescribeLoadBalancerTraffic", req, resp, cb);
     }
 
     /**

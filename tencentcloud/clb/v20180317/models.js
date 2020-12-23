@@ -394,8 +394,8 @@ OPEN: public network; INTERNAL: private network.
         this.Forward = null;
 
         /**
-         * CLB instance name, which takes effect only when an instance is created. Rule: 1-50 letters, digits, dashes (-), or underscores (_).
-Note: If this name is the same as the name of an existing CLB instance in the system, the system will automatically generate a name for this newly created instance.
+         * CLB instance name, which takes effect only when an instance is created. It consists of 1 to 60 letters, digits, hyphens (-), or underscores (_).
+Note: If the name of the new CLB instance already exists in the system, the system will automatically generate a name for the new CLB instance.
          * @type {string || null}
          */
         this.LoadBalancerName = null;
@@ -468,7 +468,7 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
         this.Vip = null;
 
         /**
-         * 
+         * Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -591,8 +591,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Url = null;
 
         /**
-         * Health check status of the real server bound to this rule
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Health status of the real server bound to this rule
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<TargetHealth> || null}
          */
         this.Targets = null;
@@ -735,6 +735,50 @@ class SetLoadBalancerClsLogResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLoadBalancerTraffic response structure.
+ * @class
+ */
+class DescribeLoadBalancerTrafficResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of CLB instances descendingly sorted by outbound bandwidth
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<LoadBalancerTraffic> || null}
+         */
+        this.LoadBalancerTraffic = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LoadBalancerTraffic) {
+            this.LoadBalancerTraffic = new Array();
+            for (let z in params.LoadBalancerTraffic) {
+                let obj = new LoadBalancerTraffic();
+                obj.deserialize(params.LoadBalancerTraffic[z]);
+                this.LoadBalancerTraffic.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -981,18 +1025,19 @@ class DescribeRewriteRequest extends  AbstractModel {
 }
 
 /**
- * CreateRule response structure.
+ * ModifyLoadBalancerAttributes response structure.
  * @class
  */
-class CreateRuleResponse extends  AbstractModel {
+class ModifyLoadBalancerAttributesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of unique IDs of created forwarding rules
-         * @type {Array.<string> || null}
+         * This parameter can be used to query whether CLB billing mode switch is successful.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.LocationIds = null;
+        this.DealName = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1009,8 +1054,58 @@ class CreateRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTargetGroupInstances request structure.
+ * @class
+ */
+class DescribeTargetGroupInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter. Currently, only filtering by `TargetGroupId`, `BindIP`, or `InstanceId` is supported.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Number of displayed results. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Display offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1444,30 +1539,24 @@ class DescribeRewriteResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTargetGroupInstances request structure.
+ * CreateRule response structure.
  * @class
  */
-class DescribeTargetGroupInstancesRequest extends  AbstractModel {
+class CreateRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter. Currently, only filtering by `TargetGroupId`, `BindIP`, or `InstanceId` is supported.
-         * @type {Array.<Filter> || null}
+         * Array of unique IDs of created forwarding rules
+         * @type {Array.<string> || null}
          */
-        this.Filters = null;
+        this.LocationIds = null;
 
         /**
-         * Number of displayed results. Default value: 20
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * Display offset. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.RequestId = null;
 
     }
 
@@ -1478,17 +1567,8 @@ class DescribeTargetGroupInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2384,6 +2464,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DescribeLoadBalancerTraffic request structure.
+ * @class
+ */
+class DescribeLoadBalancerTrafficRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance region. If this parameter is not passed in, CLB instances in all regions will be returned.
+         * @type {string || null}
+         */
+        this.LoadBalancerRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerRegion = 'LoadBalancerRegion' in params ? params.LoadBalancerRegion : null;
+
+    }
+}
+
+/**
  * DescribeBlockIPList request structure.
  * @class
  */
@@ -2704,25 +2812,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyLoadBalancerAttributes response structure.
+ * CLB instance traffic data
  * @class
  */
-class ModifyLoadBalancerAttributesResponse extends  AbstractModel {
+class LoadBalancerTraffic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * This parameter can be used to query whether CLB billing mode switch is successful.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * CLB instance ID
          * @type {string || null}
          */
-        this.DealName = null;
+        this.LoadBalancerId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * CLB instance name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LoadBalancerName = null;
+
+        /**
+         * CLB instance region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * CLB instance VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Maximum outbound bandwidth in Mbps
+         * @type {number || null}
+         */
+        this.OutBandwidth = null;
 
     }
 
@@ -2733,8 +2858,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.DealName = 'DealName' in params ? params.DealName : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.OutBandwidth = 'OutBandwidth' in params ? params.OutBandwidth : null;
 
     }
 }
@@ -8867,11 +8995,13 @@ module.exports = {
     DeleteRuleRequest: DeleteRuleRequest,
     DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
+    DescribeLoadBalancerTrafficResponse: DescribeLoadBalancerTrafficResponse,
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     DescribeBlockIPListResponse: DescribeBlockIPListResponse,
     DescribeRewriteRequest: DescribeRewriteRequest,
-    CreateRuleResponse: CreateRuleResponse,
+    ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
+    DescribeTargetGroupInstancesRequest: DescribeTargetGroupInstancesRequest,
     AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
     ClassicalTarget: ClassicalTarget,
     RsWeightRule: RsWeightRule,
@@ -8882,7 +9012,7 @@ module.exports = {
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     TargetGroupInstance: TargetGroupInstance,
     DescribeRewriteResponse: DescribeRewriteResponse,
-    DescribeTargetGroupInstancesRequest: DescribeTargetGroupInstancesRequest,
+    CreateRuleResponse: CreateRuleResponse,
     RegisterTargetGroupInstancesResponse: RegisterTargetGroupInstancesResponse,
     ClassicalTargetInfo: ClassicalTargetInfo,
     DescribeTargetsRequest: DescribeTargetsRequest,
@@ -8904,12 +9034,13 @@ module.exports = {
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
     Target: Target,
+    DescribeLoadBalancerTrafficRequest: DescribeLoadBalancerTrafficRequest,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
     CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
     DescribeClsLogSetRequest: DescribeClsLogSetRequest,
     Listener: Listener,
-    ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
+    LoadBalancerTraffic: LoadBalancerTraffic,
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
     ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
     ReplaceCertForLoadBalancersResponse: ReplaceCertForLoadBalancersResponse,

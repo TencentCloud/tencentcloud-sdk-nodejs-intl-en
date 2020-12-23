@@ -1357,7 +1357,7 @@ class RedisNodeInfo extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * ID of the master or replica node, which is not required when creating an instance
+         * ID of the master or replica node, which is not required upon creation of the instance
          * @type {number || null}
          */
         this.NodeId = null;

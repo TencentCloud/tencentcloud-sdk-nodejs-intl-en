@@ -394,8 +394,8 @@ OPEN: public network; INTERNAL: private network.
         this.Forward = null;
 
         /**
-         * CLB instance name, which takes effect only when an instance is created. It consists of 1 to 60 letters, digits, hyphens (-), or underscores (_).
-Note: If the name of the new CLB instance already exists in the system, the system will automatically generate a name for the new CLB instance.
+         * CLB instance name, which takes effect only when only one instance is to be created in the request. It can consist 1 to 60 letters, digits, hyphens (-), or underscores (_).
+Note: if the name of the new CLB instance already exists, a default name will be generated automatically.
          * @type {string || null}
          */
         this.LoadBalancerName = null;
@@ -750,7 +750,7 @@ class DescribeLoadBalancerTrafficResponse extends  AbstractModel {
         super();
 
         /**
-         * Information of CLB instances descendingly sorted by outbound bandwidth
+         * Information of CLB instances sorted by outbound bandwidth from highest to lowest
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<LoadBalancerTraffic> || null}
          */

@@ -651,7 +651,7 @@ class ScanDetail extends  AbstractModel {
         super();
 
         /**
-         * Violation scenario. For more information, please see the definition of <a href="https://cloud.tencent.com/document/product/607/37622#Label_Value">Label</a>
+         * Violation scenario. For more information, please see the definition of <a href="https://intl.cloud.tencent.com/document/product/607/37622?from_cn_redirect=1#Label_Value">Label</a>
          * @type {string || null}
          */
         this.Label = null;

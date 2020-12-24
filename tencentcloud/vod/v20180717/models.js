@@ -2534,9 +2534,9 @@ In Hz.
 
         /**
          * Audio channel system. Valid values:
-<li>1: Mono-channel</li>
-<li>2: Dual-channel</li>
-<li>6: Stereo</li>
+<li>1: mono-channel</li>
+<li>2: dual-channel</li>
+<li>6: stereo</li>
 You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
          * @type {number || null}
          */
@@ -2777,11 +2777,11 @@ In Hz.
 
         /**
          * Audio channel system. Valid values:
-<li>1: Mono-channel</li>
-<li>2: Dual-channel</li>
-<li>6: Stereo</li>
+<li>1: mono-channel</li>
+<li>2: dual-channel</li>
+<li>6: stereo</li>
 You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
-Default value: 2.
+Default value: 2
          * @type {number || null}
          */
         this.AudioChannel = null;
@@ -4059,13 +4059,13 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * This API is used to query video processing task types. The following types are supported now:
-<li> Transcoding: Basic transcoding</li>
-<li> Transcoding-TESHD: TESHD transcoding</li>
-<li> Editing: Video editing</li>
-<li> AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
-<li> ContentAudit: content audit</li>
-<li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing (not recommended)</li>
+         * This API is used to query video processing task types. Valid values:
+<li>Transcoding: basic transcoding</li>
+<li>Transcoding-TESHD: TESHD transcoding</li>
+<li>Editing: video editing</li>
+<li>AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
+<li>ContentAudit: content moderation</li>
+<li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing. This value is not recommended.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -5376,7 +5376,7 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         super();
 
         /**
-         * This API is<font color='red'>disused</font>. We recommend using an alternative API. For more information, see API overview.
+         * This API is<font color='red'>disused</font>. You are advised to use an alternative API. For more information, see API overview.
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
@@ -5933,12 +5933,12 @@ class TaskStatData extends  AbstractModel {
 
         /**
          * Task type.
-<li> Transcoding: basic transcoding</li>
-<li> Transcoding-TESHD: TESHD transcoding</li>
-<li> Editing: Video editing</li>
-<li> AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
-<li> ContentAudit: content audit</li>
-<li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing (not recommended)</li>
+<li>Transcoding: basic transcoding</li>
+<li>Transcoding-TESHD: TESHD transcoding</li>
+<li>Editing: video editing</li>
+<li>AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
+<li>ContentAudit: content moderation</li>
+<li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing. This value is not recommended.</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -8741,12 +8741,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Height = null;
 
         /**
-         * Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding;</li>
-<li>black: keep the image's aspect ratio unchanged and fill the uncovered area with black color.</li>
-<li>white: keep the image's aspect ratio unchanged and fill the uncovered area with white color.</li>
-<li>gauss: keep the image's aspect ratio unchanged and apply Gaussian blur to the uncovered area.</li>
-Default value: black.
+         * Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:
+<li>stretch: stretches the video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding.</li>
+<li>black: fills the uncovered area with black color, without changing the image's aspect ratio.</li>
+<li>white: fills the uncovered area with white color, without changing the image's aspect ratio.</li>
+<li>gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.</li>
+Default value: black
          * @type {string || null}
          */
         this.FillType = null;
@@ -8754,10 +8754,16 @@ Default value: black.
         /**
          * Video Constant Rate Factor (CRF). Value range: 1-51.
 If this parameter is specified, CRF will be used to control video bitrate for transcoding and the original video bitrate will not be used.
-We don’t recommend specifying this parameter if you have no special requirements.
+We don’t recommend specifying this parameter unless you have special requirements.
          * @type {number || null}
          */
         this.Vcrf = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Gop = null;
 
     }
 
@@ -8776,6 +8782,7 @@ We don’t recommend specifying this parameter if you have no special requiremen
         this.Height = 'Height' in params ? params.Height : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
+        this.Gop = 'Gop' in params ? params.Gop : null;
 
     }
 }
@@ -12843,11 +12850,11 @@ class ModifySubAppIdStatusRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * Subapplication status. Valid strings include:
-<li>On: to enable the subapplication.</li>
-<li>Off: to disable the subapplication.</li>
-<li>Destroyed: to terminate the subapplication. </li>
-You cannot enable a subapplication when its status is “Destroying”. You can enable it after it was terminated.
+         * Subapplication status. Valid values:
+<li>On: enabled</li>
+<li>Off: disabled</li>
+<li>Destroyed: terminated</li>
+You cannot enable a subapplication whose status is “Destroying”. You can enable it after it was terminated.
          * @type {string || null}
          */
         this.Status = null;
@@ -16769,8 +16776,8 @@ class AdaptiveStreamTemplate extends  AbstractModel {
 
         /**
          * Whether to remove a video stream. Valid values:
-<li>0: no,</li>
-<li>1: yes.</li>
+<li>0: no</li>
+<li>1: yes</li>
          * @type {number || null}
          */
         this.RemoveVideo = null;
@@ -19121,14 +19128,14 @@ class WatermarkInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Text content, which contains up to 100 characters. This field is required only when the watermark type is text.
+         * Text content, which contains up to 100 characters. Set this parameter only when the watermark type is text.
 VOD does not support adding text watermarks on screenshots.
          * @type {string || null}
          */
         this.TextContent = null;
 
         /**
-         * SVG content, which contains up to 2,000,000 characters. This field is required only when the watermark type is SVG.
+         * SVG content, which contains up to 2,000,000 characters. Set this parameter only when the watermark type is SVG.
 VOD does not support adding SVG watermarks on screenshots.
          * @type {string || null}
          */
@@ -19776,21 +19783,27 @@ If the value is 0, the bitrate of the video will be the same as that of the sour
         this.Height = null;
 
         /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding;</li>
-<li>black: keep the image's aspect ratio unchanged and fill the uncovered area with black color.</li>
-<li>white: keep the image's aspect ratio unchanged and fill the uncovered area with white color.</li>
-<li>gauss: keep the image's aspect ratio unchanged and apply Gaussian blur to the uncovered area.</li>
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. Valid values:
+<li>stretch: stretches video image frame by frame to fill the screen. The video image may become "squashed" or "stretched" after transcoding.</li>
+<li>black: fills the uncovered area with black color, without changing the image's aspect ratio.</li>
+<li>white: fills the uncovered area with white color, without changing the image's aspect ratio.</li>
+<li>gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.</li>
          * @type {string || null}
          */
         this.FillType = null;
 
         /**
          * Video Constant Rate Factor (CRF). Value range: 1-51. This parameter will be disabled if you enter 0.
-We don’t recommend specifying this parameter if you have no special requirements.
+We don’t recommend specifying this parameter unless you have special requirements.
          * @type {number || null}
          */
         this.Vcrf = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Gop = null;
 
     }
 
@@ -19809,6 +19822,7 @@ We don’t recommend specifying this parameter if you have no special requiremen
         this.Height = 'Height' in params ? params.Height : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
+        this.Gop = 'Gop' in params ? params.Gop : null;
 
     }
 }
@@ -20908,6 +20922,18 @@ class DescribeSubAppIdsRequest extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
          * Tag information. You can query the list of subapplications with specified tags.
          * @type {Array.<ResourceTag> || null}
          */
@@ -20922,6 +20948,8 @@ class DescribeSubAppIdsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -22354,11 +22382,11 @@ class SubAppIdInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Subapplication status. Valid strings include:
-<li>On: enabled;</li>
-<li>Off: disabled.</li>
-<li>Destroying: terminating. </li>
-<li>Destroyed: terminated. </li>
+         * Subapplication status. Valid values:
+<li>On: enabled</li>
+<li>Off: disabled</li>
+<li>Destroying: terminating</li>
+<li>Destroyed: terminated</li>
          * @type {string || null}
          */
         this.Status = null;

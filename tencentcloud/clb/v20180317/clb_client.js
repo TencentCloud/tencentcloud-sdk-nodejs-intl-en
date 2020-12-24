@@ -831,7 +831,7 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API is used to query CLB instances with high traffic and return the top 10 results. For queries using a sub-account, only the result CLB instances authorized to the sub-account will be returned.
+     * This API is used to query CLB instances with high traffic under the current account, and return the top 10 results. For queries using a sub-account, only the CLB instances authorized to the sub-account will be returned.
      * @param {DescribeLoadBalancerTrafficRequest} req
      * @param {function(string, DescribeLoadBalancerTrafficResponse):void} cb
      * @public

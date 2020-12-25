@@ -39,6 +39,7 @@ const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse
 const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessionPlacementRequest;
 const PlacedPlayerSession = models.PlacedPlayerSession;
 const GameServerSessionPlacement = models.GameServerSessionPlacement;
+const JoinGameServerSessionBatchRequest = models.JoinGameServerSessionBatchRequest;
 const PlayerSession = models.PlayerSession;
 const CreateGameServerSessionRequest = models.CreateGameServerSessionRequest;
 const GetGameServerSessionLogUrlResponse = models.GetGameServerSessionLogUrlResponse;
@@ -47,6 +48,8 @@ const DescribeGameServerSessionDetailsRequest = models.DescribeGameServerSession
 const StartGameServerSessionPlacementRequest = models.StartGameServerSessionPlacementRequest;
 const GameServerSession = models.GameServerSession;
 const DescribeGameServerSessionPlacementResponse = models.DescribeGameServerSessionPlacementResponse;
+const JoinGameServerSessionBatchResponse = models.JoinGameServerSessionBatchResponse;
+const PlayerDataMap = models.PlayerDataMap;
 const SearchGameServerSessionsRequest = models.SearchGameServerSessionsRequest;
 const StopGameServerSessionPlacementResponse = models.StopGameServerSessionPlacementResponse;
 const InstanceAccess = models.InstanceAccess;
@@ -115,6 +118,17 @@ class GseClient extends AbstractClient {
     JoinGameServerSession(req, cb) {
         let resp = new JoinGameServerSessionResponse();
         this.request("JoinGameServerSession", req, resp, cb);
+    }
+
+    /**
+     * This API is used to join game server sessions in batch.
+     * @param {JoinGameServerSessionBatchRequest} req
+     * @param {function(string, JoinGameServerSessionBatchResponse):void} cb
+     * @public
+     */
+    JoinGameServerSessionBatch(req, cb) {
+        let resp = new JoinGameServerSessionBatchResponse();
+        this.request("JoinGameServerSessionBatch", req, resp, cb);
     }
 
     /**

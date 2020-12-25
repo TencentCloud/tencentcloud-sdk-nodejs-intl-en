@@ -21,6 +21,7 @@ const ModifySampleSnapshotTemplateResponse = models.ModifySampleSnapshotTemplate
 const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
+const OverrideTranscodeParameter = models.OverrideTranscodeParameter;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;
 const WorkflowInfo = models.WorkflowInfo;
@@ -126,6 +127,7 @@ const EditMediaRequest = models.EditMediaRequest;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
+const UrlInputInfo = models.UrlInputInfo;
 const DescribeAdaptiveDynamicStreamingTemplatesRequest = models.DescribeAdaptiveDynamicStreamingTemplatesRequest;
 const ImageWatermarkInput = models.ImageWatermarkInput;
 const AsrFullTextConfigureInfoForUpdate = models.AsrFullTextConfigureInfoForUpdate;
@@ -945,11 +947,12 @@ Note: Once successfully created, a workflow is disabled by default and needs to 
     }
 
     /**
-     * This API is used to initiate a processing task for a live streaming media file, including:
+     * This API is used to initiate tasks to process live streaming media files. Such tasks include:
 
-* Intelligent content audit (detection of porn, terrorism, and politically sensitive information in image and porn information in speech);
+* Intelligent content moderation (detecting porn, terrorism, and politically sensitive information in image and porn information in speech)
+* Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
 
-The live stream processing event notification is written into the specified CMQ queue in real time. You need to obtain the event notification result from CMQ. If a file is output during video processing, it will be written into the specified target bucket.
+Live stream processing event notifications are written into specified CMQ queues in real time. Users need to obtain event notification results from such CMQ queues. Output files of the processing tasks are written into destination buckets specified by users.
      * @param {ProcessLiveStreamRequest} req
      * @param {function(string, ProcessLiveStreamResponse):void} cb
      * @public

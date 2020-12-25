@@ -25,13 +25,13 @@ class GameProperty extends  AbstractModel {
         super();
 
         /**
-         * Attribute name
+         * Attribute name. Up to 32 ASCII characters are allowed.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Attribute value
+         * Attribute value. Up to 96 ASCII characters are allowed.
          * @type {string || null}
          */
         this.Value = null;
@@ -107,8 +107,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.GameServerSessions = null;
 
         /**
-         * Pagination offset, which is used for querying the next page
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.NextToken = null;
@@ -192,19 +192,19 @@ class JoinGameServerSessionRequest extends  AbstractModel {
         super();
 
         /**
-         * Game server session ID
+         * Game server session ID. It should contain 1 to 256 ASCII characters.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
 
         /**
-         * Player ID
+         * Player ID. Up to 1024 ASCII characters are allowed.
          * @type {string || null}
          */
         this.PlayerId = null;
 
         /**
-         * Custom player information
+         * Player custom data. Up to 2048 ASCII characters are allowed.
          * @type {string || null}
          */
         this.PlayerData = null;
@@ -241,8 +241,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.PlayerSessions = null;
 
         /**
-         * Pagination offset
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.NextToken = null;
@@ -358,7 +358,7 @@ class GetInstanceAccessRequest extends  AbstractModel {
         super();
 
         /**
-         * Service deployment ID
+         * Server fleet ID
          * @type {string || null}
          */
         this.FleetId = null;
@@ -405,7 +405,7 @@ class DescribeGameServerSessionsRequest extends  AbstractModel {
         this.FleetId = null;
 
         /**
-         * Game server session ID
+         * Game server session ID. It should contain 1 to 48 ASCII characters.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
@@ -417,7 +417,7 @@ class DescribeGameServerSessionsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Pagination offset, which is used for querying the next page
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
          * @type {string || null}
          */
         this.NextToken = null;
@@ -456,31 +456,31 @@ class UpdateGameServerSessionRequest extends  AbstractModel {
         super();
 
         /**
-         * Game server session ID
+         * Game server session ID. It should contain 1 to 256 ASCII characters.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
 
         /**
-         * Maximum number of players
+         * The maximum number of players, which cannot be less than 0.
          * @type {number || null}
          */
         this.MaximumPlayerSessionCount = null;
 
         /**
-         * Game server session name
+         * Name of the game server session. It should contain 1 to 1024 ASCII characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Player session creation policy. Valid values: ACCEPT_ALL, DENY_ALL
+         * Player session creation policy, which includes `ACCEPT_ALL` (allow all players) and `DENY_ALL` (reject all players).
          * @type {string || null}
          */
         this.PlayerSessionCreationPolicy = null;
 
         /**
-         * Protection policy. Valid values: NoProtection, TimeLimitProtection, FullProtection
+         * Protection policy, which includes `NoProtection`·(no protection), `TimeLimitProtection` (time-limited protection) and `FullProtection` (full protection)
          * @type {string || null}
          */
         this.ProtectionPolicy = null;
@@ -512,7 +512,7 @@ class DescribePlayerSessionsRequest extends  AbstractModel {
         super();
 
         /**
-         * Game server session ID
+         * Game server session ID. It should contain 1 to 48 ASCII characters.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
@@ -524,19 +524,19 @@ class DescribePlayerSessionsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Pagination offset, which is used for querying the next page
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
          * @type {string || null}
          */
         this.NextToken = null;
 
         /**
-         * Player ID
+         * Player ID. It should contain 1 to 1024 ASCII characters.
          * @type {string || null}
          */
         this.PlayerId = null;
 
         /**
-         * Player session ID
+         * Player session ID. It should contain 1 to 1024 ASCII characters.
          * @type {string || null}
          */
         this.PlayerSessionId = null;
@@ -650,7 +650,7 @@ class GetGameServerSessionLogUrlRequest extends  AbstractModel {
         super();
 
         /**
-         * Game server session ID
+         * Game server session ID. It should contain 1 to 48 ASCII characters.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
@@ -726,8 +726,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.GameServerSessionDetails = null;
 
         /**
-         * Pagination offset, which is used for querying the next page
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.NextToken = null;
@@ -854,8 +854,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.GameServerSessions = null;
 
         /**
-         * Pagination offset, which is used for querying the next page
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.NextToken = null;
@@ -1022,7 +1022,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.GameProperties = null;
 
         /**
-         * Maximum number of players
+         * The maximum number of players that can be connected simultaneously to the game session. It should a value between 1 to the maximum number of player sessions.
          * @type {number || null}
          */
         this.MaximumPlayerSessionCount = null;
@@ -1130,6 +1130,53 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * JoinGameServerSessionBatch request structure.
+ * @class
+ */
+class JoinGameServerSessionBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Game server session ID. It should contain 1 to 256 ASCII characters.
+         * @type {string || null}
+         */
+        this.GameServerSessionId = null;
+
+        /**
+         * Player ID list. At least 1 ID and up to 25 IDs.
+         * @type {Array.<string> || null}
+         */
+        this.PlayerIds = null;
+
+        /**
+         * Player custom data
+         * @type {PlayerDataMap || null}
+         */
+        this.PlayerDataMap = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+        this.PlayerIds = 'PlayerIds' in params ? params.PlayerIds : null;
+
+        if (params.PlayerDataMap) {
+            let obj = new PlayerDataMap();
+            obj.deserialize(params.PlayerDataMap)
+            this.PlayerDataMap = obj;
+        }
+
+    }
+}
+
+/**
  * Player session details
  * @class
  */
@@ -1157,7 +1204,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.FleetId = null;
 
         /**
-         * Game server session ID
+         * Game server session ID. It should contain 1 to 256 ASCII characters.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
@@ -1169,15 +1216,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IpAddress = null;
 
         /**
-         * Player information
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Player custom data. Up to 2048 ASCII characters are allowed.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.PlayerData = null;
 
         /**
-         * Player ID
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Player ID. Up to 1024 ASCII characters are allowed.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.PlayerId = null;
@@ -1189,13 +1236,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.PlayerSessionId = null;
 
         /**
-         * Port number
+         * Port number. It should be a value between 1 to 60000.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Player session status
+         * Player session status. Valid values: RESERVED = 1, ACTIVE = 2, COMPLETED =3, TIMEDOUT = 4
          * @type {string || null}
          */
         this.Status = null;
@@ -1240,55 +1287,55 @@ class CreateGameServerSessionRequest extends  AbstractModel {
         super();
 
         /**
-         * Maximum number of players
+         * The maximum number of players, which cannot be less than 0.
          * @type {number || null}
          */
         this.MaximumPlayerSessionCount = null;
 
         /**
-         * Alias ID
+         * Alias ID. You need to specify an alias ID or fleet ID for each request. If both of them are specified, the fleet ID shall prevail.
          * @type {string || null}
          */
         this.AliasId = null;
 
         /**
-         * Creator ID
+         * Creator ID. Up to 1024 ASCII characters are allowed.
          * @type {string || null}
          */
         this.CreatorId = null;
 
         /**
-         * Fleet ID
+         * Fleet ID. You need to specify an alias ID or fleet ID for each request. If both of them are specified, the fleet ID shall prevail.
          * @type {string || null}
          */
         this.FleetId = null;
 
         /**
-         * Game attributes
+         * Game attributes. Up to 16 groups of attributes are allowed.
          * @type {Array.<GameProperty> || null}
          */
         this.GameProperties = null;
 
         /**
-         * Game server session attribute details
+         * The attribute details of game server session. Up to 4096 ASCII characters are allowed.
          * @type {string || null}
          */
         this.GameServerSessionData = null;
 
         /**
-         * Custom ID of game server session
+         * The custom ID of game server session. Up to 4096 ASCII characters are allowed.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
 
         /**
-         * Idempotency token
+         * Idempotency token. Up to 48 ASCII characters are allowed.
          * @type {string || null}
          */
         this.IdempotencyToken = null;
 
         /**
-         * Game server session name
+         * The name of game server session. Up to 1024 ASCII characters are allowed.
          * @type {string || null}
          */
         this.Name = null;
@@ -1332,8 +1379,8 @@ class GetGameServerSessionLogUrlResponse extends  AbstractModel {
         super();
 
         /**
-         * Log download URL
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Log download URL. It should contain 1 to 1024 ASCII characters.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.PreSignedUrl = null;
@@ -1421,7 +1468,7 @@ class DescribeGameServerSessionDetailsRequest extends  AbstractModel {
         this.FleetId = null;
 
         /**
-         * Game server session ID
+         * Game server session ID. It should contain 1 to 48 ASCII characters.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
@@ -1433,7 +1480,7 @@ class DescribeGameServerSessionDetailsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Pagination offset, which is used for querying the next page
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
          * @type {string || null}
          */
         this.NextToken = null;
@@ -1472,7 +1519,7 @@ class StartGameServerSessionPlacementRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of starting game server session placement
+         * The unique ID of the game server session placement. It should contain up to 48 ASCII characters, supporting [a-zA-Z0-9-]+.
          * @type {string || null}
          */
         this.PlacementId = null;
@@ -1484,7 +1531,7 @@ class StartGameServerSessionPlacementRequest extends  AbstractModel {
         this.GameServerSessionQueueName = null;
 
         /**
-         * Maximum number of concurrent players allowed by the game server to connect to the game session
+         * The maximum number of players that can be connected simultaneously to the game session. It should a value between 1 to the maximum number of player sessions.
          * @type {number || null}
          */
         this.MaximumPlayerSessionCount = null;
@@ -1502,13 +1549,13 @@ class StartGameServerSessionPlacementRequest extends  AbstractModel {
         this.GameProperties = null;
 
         /**
-         * Game server session data
+         * Data of game server sessions. Up to 4096 ASCII characters are allowed.
          * @type {string || null}
          */
         this.GameServerSessionData = null;
 
         /**
-         * Game server session name
+         * Name of game server sessions. Up to 4096 ASCII characters are allowed.
          * @type {string || null}
          */
         this.GameServerSessionName = null;
@@ -1579,14 +1626,14 @@ class GameServerSession extends  AbstractModel {
         this.CreationTime = null;
 
         /**
-         * Creator ID
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Creator ID. Up to 1024 ASCII characters are allowed.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.CreatorId = null;
 
         /**
-         * Current number of players
+         * The current number of players, which cannot be less than 0.
          * @type {number || null}
          */
         this.CurrentPlayerSessionCount = null;
@@ -1605,21 +1652,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.FleetId = null;
 
         /**
-         * Game attributes
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Game attributes. Up to 16 groups of attributes are allowed.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {Array.<GameProperty> || null}
          */
         this.GameProperties = null;
 
         /**
-         * Game server session attribute details
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The attribute details of game server session. Up to 4096 ASCII characters are allowed.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.GameServerSessionData = null;
 
         /**
-         * Game server session ID
+         * Game server session ID. It should contain 1 to 48 ASCII characters.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
@@ -1631,40 +1678,40 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IpAddress = null;
 
         /**
-         * Battle progress details
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Battle progress details. Up to 400,000 ASCII characters are allowed.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.MatchmakerData = null;
 
         /**
-         * Maximum number of players
+         * The maximum number of players, which cannot be less than 0.
          * @type {number || null}
          */
         this.MaximumPlayerSessionCount = null;
 
         /**
-         * Game server session name
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The name of game server session. Up to 1024 ASCII characters are allowed.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Player session creation policy
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Player session creation policy. Valid values: ACCEPT_ALL, DENY_ALL
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.PlayerSessionCreationPolicy = null;
 
         /**
-         * Port number
+         * Port number. It should be a value between 1 to 60000.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Game server session status
+         * Game server session status. Valid values: ACTIVE, ACTIVATING, TERMINATED, TERMINATING, ERROR
          * @type {string || null}
          */
         this.Status = null;
@@ -1684,8 +1731,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TerminationTime = null;
 
         /**
-         * Instance type
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Instance type. Up to 128 ASCII characters are allowed.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -1712,8 +1759,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Weight = null;
 
         /**
-         * Session availability status, i.e., whether it is blocked
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Session availability status, i.e., whether it is blocked. Valid value: Enable, Disable
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.AvailabilityStatus = null;
@@ -1802,6 +1849,85 @@ class DescribeGameServerSessionPlacementResponse extends  AbstractModel {
 }
 
 /**
+ * JoinGameServerSessionBatch response structure.
+ * @class
+ */
+class JoinGameServerSessionBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Player session list. Up to 25 sessions.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<PlayerSession> || null}
+         */
+        this.PlayerSessions = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PlayerSessions) {
+            this.PlayerSessions = new Array();
+            for (let z in params.PlayerSessions) {
+                let obj = new PlayerSession();
+                obj.deserialize(params.PlayerSessions[z]);
+                this.PlayerSessions.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Player custom data
+ * @class
+ */
+class PlayerDataMap extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The key of player custom data. It should contain 1 to 1024 ASCII characters.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * The value of player custom data. It should contain 1 to 2048 ASCII characters.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * SearchGameServerSessions request structure.
  * @class
  */
@@ -1828,7 +1954,7 @@ class SearchGameServerSessionsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Pagination offset, which is used for querying the next page
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
          * @type {string || null}
          */
         this.NextToken = null;
@@ -1845,6 +1971,32 @@ gameServerSessionProperties: game session attributes in `String` type
 
 Expressions in `String` type support = and <> for judgment
 Expressions in `Number` type support =, <>, >, >=, <, and <= for judgment
+
+Example:
+If FilterExpression takes the value:
+playerSessionCount>=2 AND hasAvailablePlayerSessions=true"
+It means searching for game sessions that have at least two players and have player sessions available.
+If FilterExpression takes the value:
+gameServerSessionProperties.K1 = 'V1' AND gameServerSessionProperties.K2 = 'V2' OR gameServerSessionProperties.K3 = 'V3'
+
+it means
+searching for game sessions that meets the following game server session attributes
+{
+    "GameProperties":[
+        {
+            "Key":"K1",
+            "Value":"V1"
+        },
+        {
+            "Key":"K2",
+            "Value":"V2"
+        },
+        {
+            "Key":"K3",
+            "Value":"V3"
+        }
+    ]
+}
          * @type {string || null}
          */
         this.FilterExpression = null;
@@ -2005,6 +2157,7 @@ module.exports = {
     DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
     PlacedPlayerSession: PlacedPlayerSession,
     GameServerSessionPlacement: GameServerSessionPlacement,
+    JoinGameServerSessionBatchRequest: JoinGameServerSessionBatchRequest,
     PlayerSession: PlayerSession,
     CreateGameServerSessionRequest: CreateGameServerSessionRequest,
     GetGameServerSessionLogUrlResponse: GetGameServerSessionLogUrlResponse,
@@ -2013,6 +2166,8 @@ module.exports = {
     StartGameServerSessionPlacementRequest: StartGameServerSessionPlacementRequest,
     GameServerSession: GameServerSession,
     DescribeGameServerSessionPlacementResponse: DescribeGameServerSessionPlacementResponse,
+    JoinGameServerSessionBatchResponse: JoinGameServerSessionBatchResponse,
+    PlayerDataMap: PlayerDataMap,
     SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
     StopGameServerSessionPlacementResponse: StopGameServerSessionPlacementResponse,
     InstanceAccess: InstanceAccess,

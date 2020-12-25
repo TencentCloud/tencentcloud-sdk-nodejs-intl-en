@@ -2142,7 +2142,7 @@ This API is completed asynchronously. If you need to query the async execution r
     }
 
     /**
-     * This API is used to query the IP addresses, including their geographical locations and networks.
+     * This API is used to query the information of IP addresses, including their geographical locations and networks.
      * @param {DescribeIpGeolocationInfosRequest} req
      * @param {function(string, DescribeIpGeolocationInfosResponse):void} cb
      * @public

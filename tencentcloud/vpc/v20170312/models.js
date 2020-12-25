@@ -1457,7 +1457,7 @@ class ModifyDirectConnectGatewayAttributeRequest extends  AbstractModel {
 }
 
 /**
- * IP fields to be queried online
+ * IP information to be queried
  * @class
  */
 class IpField extends  AbstractModel {
@@ -1465,25 +1465,25 @@ class IpField extends  AbstractModel {
         super();
 
         /**
-         * Country/region field
+         * Country/region of the IP
          * @type {boolean || null}
          */
         this.Country = null;
 
         /**
-         * Province/municipality field
+         * Province/municipality/state of the IP
          * @type {boolean || null}
          */
         this.Province = null;
 
         /**
-         * City field
+         * City of the IP
          * @type {boolean || null}
          */
         this.City = null;
 
         /**
-         * Urban area field
+         * City district of the IP
          * @type {boolean || null}
          */
         this.Region = null;
@@ -1501,7 +1501,7 @@ class IpField extends  AbstractModel {
         this.AsName = null;
 
         /**
-         * AS ID
+         * Backbone AS ID
          * @type {boolean || null}
          */
         this.AsId = null;

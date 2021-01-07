@@ -115,7 +115,7 @@ class ContactItem extends  AbstractModel {
         this.Name = null;
 
         /**
-         * The mailbox bound to the contact.
+         * The email address of the contact.
          * @type {string || null}
          */
         this.Mail = null;
@@ -316,13 +316,13 @@ class ModifyDiagDBInstanceConfRequest extends  AbstractModel {
         super();
 
         /**
-         * Inspection switch.
+         * Whether to enable inspection
          * @type {InstanceConfs || null}
          */
         this.InstanceConfs = null;
 
         /**
-         * The effective instance region. If the value is "All", it means it is effective for the whole region.
+         * Target regions of the request. If the value is `All`, it is applied to all regions.
          * @type {string || null}
          */
         this.Regions = null;
@@ -334,7 +334,7 @@ class ModifyDiagDBInstanceConfRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * Specify the instance ID that needs to modify the inspection status.
+         * ID of the instance to modify.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1505,19 +1505,19 @@ class CreateMailProfileRequest extends  AbstractModel {
         super();
 
         /**
-         * The content of email configuration.
+         * Email configurations
          * @type {ProfileInfo || null}
          */
         this.ProfileInfo = null;
 
         /**
-         * Configuration level. Valid values: "User" (user-level), "Instance" (instance-level). The email of database inspection report is configured as the user level, and the email of scheduled task report is configured as the instance level.
+         * Configuration level. Valid values: "User" (user-level), "Instance" (instance-level). For database inspection report, it should be `User`; and for scheduled task reports, it should be `Instance`.
          * @type {string || null}
          */
         this.ProfileLevel = null;
 
         /**
-         * Name configuration, which needs to be unique. The email configuration name of database inspection report can be customize; the email configuration name of scheduled task report should in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
+         * Configuration name, which needs to be unique. For database inspection reports, this name can be customize as needed. For scheduled task reports, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
          * @type {string || null}
          */
         this.ProfileName = null;
@@ -1535,7 +1535,7 @@ class CreateMailProfileRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * Instance ID bound to the configuration, which is set when the configuration level is "Instance".
+         * Instance ID bound to the configuration, which is required when the configuration level is `Instance`.
          * @type {Array.<string> || null}
          */
         this.BindInstanceIds = null;
@@ -1634,13 +1634,13 @@ class MailConfiguration extends  AbstractModel {
         this.HealthStatus = null;
 
         /**
-         * Contact ID. The contact/contact group cannot be empty.
+         * Contact ID. Either `ContactGroup` or `ContactID` should be passed in.
          * @type {Array.<number> || null}
          */
         this.ContactPerson = null;
 
         /**
-         * Contact group ID. The contact/contact group cannot be empty.
+         * Contact group ID. Either `ContactGroup` or `ContactID` should be passed in.
          * @type {Array.<number> || null}
          */
         this.ContactGroup = null;
@@ -1905,7 +1905,7 @@ class InstanceConfs extends  AbstractModel {
         super();
 
         /**
-         * The switch of database inspection. Valid values: Yes/No.
+         * Whether to enable database inspection. Valid values: Yes/No.
          * @type {string || null}
          */
         this.DailyInspection = null;
@@ -1933,7 +1933,7 @@ class ProfileInfo extends  AbstractModel {
         super();
 
         /**
-         * Language, such as “zh”.
+         * Language of the email, such as `en`.
          * @type {string || null}
          */
         this.Language = null;

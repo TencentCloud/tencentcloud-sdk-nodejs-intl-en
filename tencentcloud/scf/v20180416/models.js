@@ -52,6 +52,74 @@ class AccessInfo extends  AbstractModel {
 }
 
 /**
+ * UpdateAlias request structure.
+ * @class
+ */
+class UpdateAliasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Alias name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Master version pointed to by the alias
+         * @type {string || null}
+         */
+        this.FunctionVersion = null;
+
+        /**
+         * Function namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Routing information of alias, which is required if you need to specify an additional version for the alias.
+         * @type {RoutingConfig || null}
+         */
+        this.RoutingConfig = null;
+
+        /**
+         * Alias description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+        if (params.RoutingConfig) {
+            let obj = new RoutingConfig();
+            obj.deserialize(params.RoutingConfig)
+            this.RoutingConfig = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * Trigger type
  * @class
  */
@@ -125,6 +193,12 @@ class Trigger extends  AbstractModel {
          */
         this.TriggerAttribute = null;
 
+        /**
+         * The alias or version bound with the trigger
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
     }
 
     /**
@@ -145,35 +219,36 @@ class Trigger extends  AbstractModel {
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
         this.TriggerAttribute = 'TriggerAttribute' in params ? params.TriggerAttribute : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
 
     }
 }
 
 /**
- * ListTriggers response structure.
+ * GetProvisionedConcurrencyConfig request structure.
  * @class
  */
-class ListTriggersResponse extends  AbstractModel {
+class GetProvisionedConcurrencyConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of triggers
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Trigger list
-         * @type {Array.<TriggerInfo> || null}
-         */
-        this.Triggers = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Name of the function for which to get the provisioned concurrency details.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FunctionName = null;
+
+        /**
+         * Function namespace. Default value: default.
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Function version number. If this parameter is left empty, the provisioned concurrency information of all function versions will be returned.
+         * @type {string || null}
+         */
+        this.Qualifier = null;
 
     }
 
@@ -184,17 +259,9 @@ class ListTriggersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Triggers) {
-            this.Triggers = new Array();
-            for (let z in params.Triggers) {
-                let obj = new TriggerInfo();
-                obj.deserialize(params.Triggers[z]);
-                this.Triggers.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
 
     }
 }
@@ -279,51 +346,19 @@ class DeleteLayerVersionResponse extends  AbstractModel {
 }
 
 /**
- * GetAlias response structure.
+ * GetReservedConcurrencyConfig response structure.
  * @class
  */
-class GetAliasResponse extends  AbstractModel {
+class GetReservedConcurrencyConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Master version pointed to by the alias
-         * @type {string || null}
-         */
-        this.FunctionVersion = null;
-
-        /**
-         * Alias name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Routing information of alias
-         * @type {RoutingConfig || null}
-         */
-        this.RoutingConfig = null;
-
-        /**
-         * Alias description
+         * Reserved concurrency memory of function.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.Description = null;
-
-        /**
-         * Creation time
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AddTime = null;
-
-        /**
-         * Update time
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ModTime = null;
+        this.ReservedMem = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -340,17 +375,86 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.ReservedMem = 'ReservedMem' in params ? params.ReservedMem : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.RoutingConfig) {
-            let obj = new RoutingConfig();
-            obj.deserialize(params.RoutingConfig)
-            this.RoutingConfig = obj;
+    }
+}
+
+/**
+ * Version routing configuration of alias
+ * @class
+ */
+class RoutingConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Additional version with random weight-based routing
+         * @type {Array.<VersionWeight> || null}
+         */
+        this.AdditionalVersionWeights = null;
+
+        /**
+         * Additional version with rule-based routing
+         * @type {Array.<VersionMatch> || null}
+         */
+        this.AddtionVersionMatchs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Description = 'Description' in params ? params.Description : null;
-        this.AddTime = 'AddTime' in params ? params.AddTime : null;
-        this.ModTime = 'ModTime' in params ? params.ModTime : null;
+
+        if (params.AdditionalVersionWeights) {
+            this.AdditionalVersionWeights = new Array();
+            for (let z in params.AdditionalVersionWeights) {
+                let obj = new VersionWeight();
+                obj.deserialize(params.AdditionalVersionWeights[z]);
+                this.AdditionalVersionWeights.push(obj);
+            }
+        }
+
+        if (params.AddtionVersionMatchs) {
+            this.AddtionVersionMatchs = new Array();
+            for (let z in params.AddtionVersionMatchs) {
+                let obj = new VersionMatch();
+                obj.deserialize(params.AddtionVersionMatchs[z]);
+                this.AddtionVersionMatchs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteProvisionedConcurrencyConfig response structure.
+ * @class
+ */
+class DeleteProvisionedConcurrencyConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -465,6 +569,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * PutProvisionedConcurrencyConfig response structure.
+ * @class
+ */
+class PutProvisionedConcurrencyConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateFunctionConfiguration response structure.
  * @class
  */
@@ -568,24 +700,40 @@ class PublicNetConfigIn extends  AbstractModel {
 }
 
 /**
- * UpdateAlias request structure.
+ * DeleteReservedConcurrencyConfig response structure.
  * @class
  */
-class UpdateAliasRequest extends  AbstractModel {
+class DeleteReservedConcurrencyConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Function name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FunctionName = null;
+        this.RequestId = null;
 
-        /**
-         * Alias name
-         * @type {string || null}
-         */
-        this.Name = null;
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAlias response structure.
+ * @class
+ */
+class GetAliasResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * Master version pointed to by the alias
@@ -594,22 +742,43 @@ class UpdateAliasRequest extends  AbstractModel {
         this.FunctionVersion = null;
 
         /**
-         * Function namespace
+         * Alias name
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.Name = null;
 
         /**
-         * Routing information of alias, which is required if you need to specify an additional version for the alias.
+         * Routing information of alias
          * @type {RoutingConfig || null}
          */
         this.RoutingConfig = null;
 
         /**
          * Alias description
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Description = null;
+
+        /**
+         * Creation time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * Update time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ModTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -620,10 +789,8 @@ class UpdateAliasRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-        this.Name = 'Name' in params ? params.Name : null;
         this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
         if (params.RoutingConfig) {
             let obj = new RoutingConfig();
@@ -631,57 +798,9 @@ class UpdateAliasRequest extends  AbstractModel {
             this.RoutingConfig = obj;
         }
         this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
- * Version routing configuration of alias
- * @class
- */
-class RoutingConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Additional version with random weight-based routing
-         * @type {Array.<VersionWeight> || null}
-         */
-        this.AdditionalVersionWeights = null;
-
-        /**
-         * Additional version with rule-based routing
-         * @type {Array.<VersionMatch> || null}
-         */
-        this.AddtionVersionMatchs = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.AdditionalVersionWeights) {
-            this.AdditionalVersionWeights = new Array();
-            for (let z in params.AdditionalVersionWeights) {
-                let obj = new VersionWeight();
-                obj.deserialize(params.AdditionalVersionWeights[z]);
-                this.AdditionalVersionWeights.push(obj);
-            }
-        }
-
-        if (params.AddtionVersionMatchs) {
-            this.AddtionVersionMatchs = new Array();
-            for (let z in params.AddtionVersionMatchs) {
-                let obj = new VersionMatch();
-                obj.deserialize(params.AddtionVersionMatchs[z]);
-                this.AddtionVersionMatchs.push(obj);
-            }
-        }
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -710,6 +829,62 @@ class UpdateAliasResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Provisioned concurrency information of function version, including the set provisioned concurrency amount, available provisioned concurrency amount, and provisioned concurrency setting task status.
+ * @class
+ */
+class VersionProvisionedConcurrencyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Set provisioned concurrency amount.
+         * @type {number || null}
+         */
+        this.AllocatedProvisionedConcurrencyNum = null;
+
+        /**
+         * Currently available provisioned concurrency amount.
+         * @type {number || null}
+         */
+        this.AvailableProvisionedConcurrencyNum = null;
+
+        /**
+         * Provisioned concurrency setting task status. Done: completed; InProgress: in progress; Failed: partially or completely failed.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Status description of provisioned concurrency setting task.
+         * @type {string || null}
+         */
+        this.StatusReason = null;
+
+        /**
+         * Function version number
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllocatedProvisionedConcurrencyNum = 'AllocatedProvisionedConcurrencyNum' in params ? params.AllocatedProvisionedConcurrencyNum : null;
+        this.AvailableProvisionedConcurrencyNum = 'AvailableProvisionedConcurrencyNum' in params ? params.AvailableProvisionedConcurrencyNum : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusReason = 'StatusReason' in params ? params.StatusReason : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
 
     }
 }
@@ -825,6 +1000,41 @@ class GetFunctionLogsRequest extends  AbstractModel {
             obj.deserialize(params.SearchContext)
             this.SearchContext = obj;
         }
+
+    }
+}
+
+/**
+ * State reason description
+ * @class
+ */
+class StatusReason extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Error code
+         * @type {string || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
 
     }
 }
@@ -1187,30 +1397,18 @@ class ListNamespacesRequest extends  AbstractModel {
 }
 
 /**
- * PublishVersion request structure.
+ * PutReservedConcurrencyConfig response structure.
  * @class
  */
-class PublishVersionRequest extends  AbstractModel {
+class PutReservedConcurrencyConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of the released function
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FunctionName = null;
-
-        /**
-         * Function description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Function namespace
-         * @type {string || null}
-         */
-        this.Namespace = null;
+        this.RequestId = null;
 
     }
 
@@ -1221,9 +1419,7 @@ class PublishVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1723,24 +1919,24 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
 }
 
 /**
- * State reason description
+ * DeleteReservedConcurrencyConfig request structure.
  * @class
  */
-class StatusReason extends  AbstractModel {
+class DeleteReservedConcurrencyConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Error code
+         * Name of the function for which to delete the provisioned concurrency
          * @type {string || null}
          */
-        this.ErrorCode = null;
+        this.FunctionName = null;
 
         /**
-         * Error message
+         * Function namespace. Default value: default
          * @type {string || null}
          */
-        this.ErrorMessage = null;
+        this.Namespace = null;
 
     }
 
@@ -1751,8 +1947,58 @@ class StatusReason extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
+ * ListTriggers response structure.
+ * @class
+ */
+class ListTriggersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of triggers
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Trigger list
+         * @type {Array.<TriggerInfo> || null}
+         */
+        this.Triggers = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Triggers) {
+            this.Triggers = new Array();
+            for (let z in params.Triggers) {
+                let obj = new TriggerInfo();
+                obj.deserialize(params.Triggers[z]);
+                this.Triggers.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2597,7 +2843,7 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Environment = null;
 
         /**
-         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime. Default value: Python2.7
+         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, Php5, Php7, Go1, Java8, CustomRuntime. Default value: Python2.7
          * @type {string || null}
          */
         this.Runtime = null;
@@ -2761,6 +3007,34 @@ class CreateFunctionRequest extends  AbstractModel {
 }
 
 /**
+ * PutTotalConcurrencyConfig response structure.
+ * @class
+ */
+class PutTotalConcurrencyConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteAlias response structure.
  * @class
  */
@@ -2868,6 +3142,48 @@ class PublishVersionResponse extends  AbstractModel {
         this.Runtime = 'Runtime' in params ? params.Runtime : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteProvisionedConcurrencyConfig request structure.
+ * @class
+ */
+class DeleteProvisionedConcurrencyConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the function for which to delete the provisioned concurrency
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function version number
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
+         * Function namespace. Default value: default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -3180,6 +3496,48 @@ Exact string match
         this.Key = 'Key' in params ? params.Key : null;
         this.Method = 'Method' in params ? params.Method : null;
         this.Expression = 'Expression' in params ? params.Expression : null;
+
+    }
+}
+
+/**
+ * PutReservedConcurrencyConfig request structure.
+ * @class
+ */
+class PutReservedConcurrencyConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the function for which to set the provisioned concurrency
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Reserved concurrency memory of function. Note: the upper limit for the total reserved concurrency memory of the function is the user's total concurrency memory minus 12800
+         * @type {number || null}
+         */
+        this.ReservedConcurrencyMem = null;
+
+        /**
+         * Function namespace. Default value: default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.ReservedConcurrencyMem = 'ReservedConcurrencyMem' in params ? params.ReservedConcurrencyMem : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -3963,6 +4321,41 @@ class Code extends  AbstractModel {
 }
 
 /**
+ * PutTotalConcurrencyConfig request structure.
+ * @class
+ */
+class PutTotalConcurrencyConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account concurrency memory quota. Note: the lower limit for the account concurrency memory quota is the user's total concurrency memory used + 12800
+         * @type {number || null}
+         */
+        this.TotalConcurrencyMem = null;
+
+        /**
+         * Namespace. Default value: default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalConcurrencyMem = 'TotalConcurrencyMem' in params ? params.TotalConcurrencyMem : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
  * UpdateNamespace request structure.
  * @class
  */
@@ -4093,6 +4486,48 @@ Deleted: deleted
 }
 
 /**
+ * PublishVersion request structure.
+ * @class
+ */
+class PublishVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the released function
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Function namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
  * Log information
  * @class
  */
@@ -4200,6 +4635,48 @@ class FunctionLog extends  AbstractModel {
         this.Level = 'Level' in params ? params.Level : null;
         this.Source = 'Source' in params ? params.Source : null;
         this.RetryNum = 'RetryNum' in params ? params.RetryNum : null;
+
+    }
+}
+
+/**
+ * GetFunctionAddress response structure.
+ * @class
+ */
+class GetFunctionAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cos address of the function
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * SHA256 code of the function
+         * @type {string || null}
+         */
+        this.CodeSha256 = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.CodeSha256 = 'CodeSha256' in params ? params.CodeSha256 : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4743,6 +5220,90 @@ class CreateFunctionResponse extends  AbstractModel {
 }
 
 /**
+ * GetReservedConcurrencyConfig request structure.
+ * @class
+ */
+class GetReservedConcurrencyConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the function for which to get the provisioned concurrency details.
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function namespace. Default value: default.
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
+ * PutProvisionedConcurrencyConfig request structure.
+ * @class
+ */
+class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the function for which to set the provisioned concurrency
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function version number. Note: the `$LATEST` version does not support provisioned concurrency
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
+         * Provisioned concurrency amount. Note: there is an upper limit for the sum of provisioned concurrency amounts of all versions, which currently is the function's maximum concurrency quota minus 100
+         * @type {number || null}
+         */
+        this.VersionProvisionedConcurrencyNum = null;
+
+        /**
+         * Function namespace. Default value: default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.VersionProvisionedConcurrencyNum = 'VersionProvisionedConcurrencyNum' in params ? params.VersionProvisionedConcurrencyNum : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
  * ListAliases request structure.
  * @class
  */
@@ -5129,24 +5690,24 @@ class VpcConfig extends  AbstractModel {
 }
 
 /**
- * GetFunctionAddress response structure.
+ * GetProvisionedConcurrencyConfig response structure.
  * @class
  */
-class GetFunctionAddressResponse extends  AbstractModel {
+class GetProvisionedConcurrencyConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cos address of the function
-         * @type {string || null}
+         * Unallocated provisioned concurrency amount of function.
+         * @type {number || null}
          */
-        this.Url = null;
+        this.UnallocatedConcurrencyNum = null;
 
         /**
-         * SHA256 code of the function
-         * @type {string || null}
+         * Allocated provisioned concurrency amount of function.
+         * @type {Array.<VersionProvisionedConcurrencyInfo> || null}
          */
-        this.CodeSha256 = null;
+        this.Allocated = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5163,8 +5724,16 @@ class GetFunctionAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.CodeSha256 = 'CodeSha256' in params ? params.CodeSha256 : null;
+        this.UnallocatedConcurrencyNum = 'UnallocatedConcurrencyNum' in params ? params.UnallocatedConcurrencyNum : null;
+
+        if (params.Allocated) {
+            this.Allocated = new Array();
+            for (let z in params.Allocated) {
+                let obj = new VersionProvisionedConcurrencyInfo();
+                obj.deserialize(params.Allocated[z]);
+                this.Allocated.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5286,20 +5855,26 @@ class UpdateFunctionCodeResponse extends  AbstractModel {
 
 module.exports = {
     AccessInfo: AccessInfo,
+    UpdateAliasRequest: UpdateAliasRequest,
     Trigger: Trigger,
-    ListTriggersResponse: ListTriggersResponse,
+    GetProvisionedConcurrencyConfigRequest: GetProvisionedConcurrencyConfigRequest,
     ListAliasesResponse: ListAliasesResponse,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
-    GetAliasResponse: GetAliasResponse,
+    GetReservedConcurrencyConfigResponse: GetReservedConcurrencyConfigResponse,
+    RoutingConfig: RoutingConfig,
+    DeleteProvisionedConcurrencyConfigResponse: DeleteProvisionedConcurrencyConfigResponse,
     VersionWeight: VersionWeight,
     LayerVersionInfo: LayerVersionInfo,
+    PutProvisionedConcurrencyConfigResponse: PutProvisionedConcurrencyConfigResponse,
     UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
     PublishLayerVersionResponse: PublishLayerVersionResponse,
     PublicNetConfigIn: PublicNetConfigIn,
-    UpdateAliasRequest: UpdateAliasRequest,
-    RoutingConfig: RoutingConfig,
+    DeleteReservedConcurrencyConfigResponse: DeleteReservedConcurrencyConfigResponse,
+    GetAliasResponse: GetAliasResponse,
     UpdateAliasResponse: UpdateAliasResponse,
+    VersionProvisionedConcurrencyInfo: VersionProvisionedConcurrencyInfo,
     GetFunctionLogsRequest: GetFunctionLogsRequest,
+    StatusReason: StatusReason,
     Tag: Tag,
     LogFilter: LogFilter,
     EipConfigIn: EipConfigIn,
@@ -5309,7 +5884,7 @@ module.exports = {
     Namespace: Namespace,
     GetFunctionRequest: GetFunctionRequest,
     ListNamespacesRequest: ListNamespacesRequest,
-    PublishVersionRequest: PublishVersionRequest,
+    PutReservedConcurrencyConfigResponse: PutReservedConcurrencyConfigResponse,
     DeleteAliasRequest: DeleteAliasRequest,
     ListVersionByFunctionResponse: ListVersionByFunctionResponse,
     GetAliasRequest: GetAliasRequest,
@@ -5317,7 +5892,8 @@ module.exports = {
     PublicNetConfigOut: PublicNetConfigOut,
     UpdateFunctionCodeRequest: UpdateFunctionCodeRequest,
     UpdateFunctionConfigurationRequest: UpdateFunctionConfigurationRequest,
-    StatusReason: StatusReason,
+    DeleteReservedConcurrencyConfigRequest: DeleteReservedConcurrencyConfigRequest,
+    ListTriggersResponse: ListTriggersResponse,
     UpdateNamespaceResponse: UpdateNamespaceResponse,
     ListLayersRequest: ListLayersRequest,
     CopyFunctionRequest: CopyFunctionRequest,
@@ -5334,14 +5910,17 @@ module.exports = {
     LogSearchContext: LogSearchContext,
     TriggerInfo: TriggerInfo,
     CreateFunctionRequest: CreateFunctionRequest,
+    PutTotalConcurrencyConfigResponse: PutTotalConcurrencyConfigResponse,
     DeleteAliasResponse: DeleteAliasResponse,
     PublishVersionResponse: PublishVersionResponse,
+    DeleteProvisionedConcurrencyConfigRequest: DeleteProvisionedConcurrencyConfigRequest,
     Environment: Environment,
     GetFunctionAddressRequest: GetFunctionAddressRequest,
     InvokeResponse: InvokeResponse,
     InvokeRequest: InvokeRequest,
     CreateAliasRequest: CreateAliasRequest,
     VersionMatch: VersionMatch,
+    PutReservedConcurrencyConfigRequest: PutReservedConcurrencyConfigRequest,
     ListLayerVersionsRequest: ListLayerVersionsRequest,
     CreateTriggerResponse: CreateTriggerResponse,
     PublishLayerVersionRequest: PublishLayerVersionRequest,
@@ -5351,9 +5930,12 @@ module.exports = {
     Variable: Variable,
     GetFunctionResponse: GetFunctionResponse,
     Code: Code,
+    PutTotalConcurrencyConfigRequest: PutTotalConcurrencyConfigRequest,
     UpdateNamespaceRequest: UpdateNamespaceRequest,
     GetLayerVersionResponse: GetLayerVersionResponse,
+    PublishVersionRequest: PublishVersionRequest,
     FunctionLog: FunctionLog,
+    GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,
     FunctionVersion: FunctionVersion,
     Function: Function,
@@ -5362,6 +5944,8 @@ module.exports = {
     ListFunctionsResponse: ListFunctionsResponse,
     ListTriggersRequest: ListTriggersRequest,
     CreateFunctionResponse: CreateFunctionResponse,
+    GetReservedConcurrencyConfigRequest: GetReservedConcurrencyConfigRequest,
+    PutProvisionedConcurrencyConfigRequest: PutProvisionedConcurrencyConfigRequest,
     ListAliasesRequest: ListAliasesRequest,
     EipOutConfig: EipOutConfig,
     Alias: Alias,
@@ -5370,7 +5954,7 @@ module.exports = {
     DeleteTriggerResponse: DeleteTriggerResponse,
     DeleteTriggerRequest: DeleteTriggerRequest,
     VpcConfig: VpcConfig,
-    GetFunctionAddressResponse: GetFunctionAddressResponse,
+    GetProvisionedConcurrencyConfigResponse: GetProvisionedConcurrencyConfigResponse,
     ListNamespacesResponse: ListNamespacesResponse,
     EipConfigOut: EipConfigOut,
     UpdateFunctionCodeResponse: UpdateFunctionCodeResponse,

@@ -114,11 +114,13 @@ const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
 const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionRequest;
 const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
+const ModifyClusterAsGroupOptionAttributeResponse = models.ModifyClusterAsGroupOptionAttributeResponse;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const ClusterAsGroupOption = models.ClusterAsGroupOption;
 const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 const DescribeClusterNodePoolsRequest = models.DescribeClusterNodePoolsRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
+const ModifyClusterAsGroupOptionAttributeRequest = models.ModifyClusterAsGroupOptionAttributeRequest;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
 const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
@@ -135,6 +137,7 @@ const ClusterAsGroupAttribute = models.ClusterAsGroupAttribute;
 const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
+const NodePoolOption = models.NodePoolOption;
 const ModifyClusterAsGroupAttributeRequest = models.ModifyClusterAsGroupAttributeRequest;
 const InstanceDataDiskMountSetting = models.InstanceDataDiskMountSetting;
 const NodeCountSummary = models.NodeCountSummary;
@@ -195,6 +198,17 @@ class TkeClient extends AbstractClient {
     DescribeImages(req, cb) {
         let resp = new DescribeImagesResponse();
         this.request("DescribeImages", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify cluster auto scaling attributes.
+     * @param {ModifyClusterAsGroupOptionAttributeRequest} req
+     * @param {function(string, ModifyClusterAsGroupOptionAttributeResponse):void} cb
+     * @public
+     */
+    ModifyClusterAsGroupOptionAttribute(req, cb) {
+        let resp = new ModifyClusterAsGroupOptionAttributeResponse();
+        this.request("ModifyClusterAsGroupOptionAttribute", req, resp, cb);
     }
 
     /**

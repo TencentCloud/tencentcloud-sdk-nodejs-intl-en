@@ -134,7 +134,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a health report and select whether to send an email.
+     * This API is used to create a health report and send it via email as configured.
      * @param {CreateDBDiagReportTaskRequest} req
      * @param {function(string, CreateDBDiagReportTaskResponse):void} cb
      * @public
@@ -145,7 +145,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create the email configuration. The input parameter “ProfileType” represents the type of the email configuration. Valid values: “dbScan_mail_configuration” (email configuration of database inspection report) and “scheduler_mail_configuration” (email configuration of scheduled task report).
+     * This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email configuration of scheduled task report).
      * @param {CreateMailProfileRequest} req
      * @param {function(string, CreateMailProfileResponse):void} cb
      * @public
@@ -156,7 +156,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify instance inspection switch.
+     * This API is used to enable/disable instance inspection.
      * @param {ModifyDiagDBInstanceConfRequest} req
      * @param {function(string, ModifyDiagDBInstanceConfResponse):void} cb
      * @public

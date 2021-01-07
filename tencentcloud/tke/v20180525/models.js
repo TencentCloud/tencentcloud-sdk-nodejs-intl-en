@@ -4088,6 +4088,18 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
          */
         this.EnableAutoscale = null;
 
+        /**
+         * Operating system name
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * Image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
     }
 
     /**
@@ -4121,6 +4133,8 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
             }
         }
         this.EnableAutoscale = 'EnableAutoscale' in params ? params.EnableAutoscale : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
 
     }
 }
@@ -5037,6 +5051,34 @@ class CreateClusterEndpointRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterAsGroupOptionAttribute response structure.
+ * @class
+ */
+class ModifyClusterAsGroupOptionAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AddExistedInstances request structure.
  * @class
  */
@@ -5051,7 +5093,7 @@ class AddExistedInstancesRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Instance list
+         * Instance list. Spot instance is not supported.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -5086,6 +5128,12 @@ class AddExistedInstancesRequest extends  AbstractModel {
          */
         this.HostName = null;
 
+        /**
+         * Node pool options
+         * @type {NodePoolOption || null}
+         */
+        this.NodePool = null;
+
     }
 
     /**
@@ -5117,6 +5165,12 @@ class AddExistedInstancesRequest extends  AbstractModel {
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
+
+        if (params.NodePool) {
+            let obj = new NodePoolOption();
+            obj.deserialize(params.NodePool)
+            this.NodePool = obj;
+        }
 
     }
 }
@@ -5325,6 +5379,46 @@ class DescribeClusterRouteTablesRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+    }
+}
+
+/**
+ * ModifyClusterAsGroupOptionAttribute request structure.
+ * @class
+ */
+class ModifyClusterAsGroupOptionAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster auto scaling attributes
+         * @type {ClusterAsGroupOption || null}
+         */
+        this.ClusterAsGroupOption = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ClusterAsGroupOption) {
+            let obj = new ClusterAsGroupOption();
+            obj.deserialize(params.ClusterAsGroupOption)
+            this.ClusterAsGroupOption = obj;
         }
 
     }
@@ -5977,6 +6071,48 @@ class CreateClusterNodePoolResponse extends  AbstractModel {
 }
 
 /**
+ * The options for adding the existing node to the node pool
+ * @class
+ */
+class NodePoolOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to add to the node pool.
+         * @type {boolean || null}
+         */
+        this.AddToNodePool = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Whether to inherit the node pool configuration.
+         * @type {boolean || null}
+         */
+        this.InheritConfigurationFromNodePool = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddToNodePool = 'AddToNodePool' in params ? params.AddToNodePool : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InheritConfigurationFromNodePool = 'InheritConfigurationFromNodePool' in params ? params.InheritConfigurationFromNodePool : null;
+
+    }
+}
+
+/**
  * ModifyClusterAsGroupAttribute request structure.
  * @class
  */
@@ -6344,11 +6480,13 @@ module.exports = {
     DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
     ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
+    ModifyClusterAsGroupOptionAttributeResponse: ModifyClusterAsGroupOptionAttributeResponse,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
     CreateClusterInstancesResponse: CreateClusterInstancesResponse,
     DescribeClusterNodePoolsRequest: DescribeClusterNodePoolsRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
+    ModifyClusterAsGroupOptionAttributeRequest: ModifyClusterAsGroupOptionAttributeRequest,
     ExistedInstancesForNode: ExistedInstancesForNode,
     DescribeClusterRoutesRequest: DescribeClusterRoutesRequest,
     DeleteClusterRouteRequest: DeleteClusterRouteRequest,
@@ -6365,6 +6503,7 @@ module.exports = {
     DeleteClusterNodePoolResponse: DeleteClusterNodePoolResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,
+    NodePoolOption: NodePoolOption,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
     NodeCountSummary: NodeCountSummary,

@@ -17,20 +17,26 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AccessInfo = models.AccessInfo;
+const UpdateAliasRequest = models.UpdateAliasRequest;
 const Trigger = models.Trigger;
-const ListTriggersResponse = models.ListTriggersResponse;
+const GetProvisionedConcurrencyConfigRequest = models.GetProvisionedConcurrencyConfigRequest;
 const ListAliasesResponse = models.ListAliasesResponse;
 const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
-const GetAliasResponse = models.GetAliasResponse;
+const GetReservedConcurrencyConfigResponse = models.GetReservedConcurrencyConfigResponse;
+const RoutingConfig = models.RoutingConfig;
+const DeleteProvisionedConcurrencyConfigResponse = models.DeleteProvisionedConcurrencyConfigResponse;
 const VersionWeight = models.VersionWeight;
 const LayerVersionInfo = models.LayerVersionInfo;
+const PutProvisionedConcurrencyConfigResponse = models.PutProvisionedConcurrencyConfigResponse;
 const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse;
 const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
 const PublicNetConfigIn = models.PublicNetConfigIn;
-const UpdateAliasRequest = models.UpdateAliasRequest;
-const RoutingConfig = models.RoutingConfig;
+const DeleteReservedConcurrencyConfigResponse = models.DeleteReservedConcurrencyConfigResponse;
+const GetAliasResponse = models.GetAliasResponse;
 const UpdateAliasResponse = models.UpdateAliasResponse;
+const VersionProvisionedConcurrencyInfo = models.VersionProvisionedConcurrencyInfo;
 const GetFunctionLogsRequest = models.GetFunctionLogsRequest;
+const StatusReason = models.StatusReason;
 const Tag = models.Tag;
 const LogFilter = models.LogFilter;
 const EipConfigIn = models.EipConfigIn;
@@ -40,7 +46,7 @@ const CopyFunctionResponse = models.CopyFunctionResponse;
 const Namespace = models.Namespace;
 const GetFunctionRequest = models.GetFunctionRequest;
 const ListNamespacesRequest = models.ListNamespacesRequest;
-const PublishVersionRequest = models.PublishVersionRequest;
+const PutReservedConcurrencyConfigResponse = models.PutReservedConcurrencyConfigResponse;
 const DeleteAliasRequest = models.DeleteAliasRequest;
 const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
 const GetAliasRequest = models.GetAliasRequest;
@@ -48,7 +54,8 @@ const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const PublicNetConfigOut = models.PublicNetConfigOut;
 const UpdateFunctionCodeRequest = models.UpdateFunctionCodeRequest;
 const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationRequest;
-const StatusReason = models.StatusReason;
+const DeleteReservedConcurrencyConfigRequest = models.DeleteReservedConcurrencyConfigRequest;
+const ListTriggersResponse = models.ListTriggersResponse;
 const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
 const ListLayersRequest = models.ListLayersRequest;
 const CopyFunctionRequest = models.CopyFunctionRequest;
@@ -65,14 +72,17 @@ const CreateAliasResponse = models.CreateAliasResponse;
 const LogSearchContext = models.LogSearchContext;
 const TriggerInfo = models.TriggerInfo;
 const CreateFunctionRequest = models.CreateFunctionRequest;
+const PutTotalConcurrencyConfigResponse = models.PutTotalConcurrencyConfigResponse;
 const DeleteAliasResponse = models.DeleteAliasResponse;
 const PublishVersionResponse = models.PublishVersionResponse;
+const DeleteProvisionedConcurrencyConfigRequest = models.DeleteProvisionedConcurrencyConfigRequest;
 const Environment = models.Environment;
 const GetFunctionAddressRequest = models.GetFunctionAddressRequest;
 const InvokeResponse = models.InvokeResponse;
 const InvokeRequest = models.InvokeRequest;
 const CreateAliasRequest = models.CreateAliasRequest;
 const VersionMatch = models.VersionMatch;
+const PutReservedConcurrencyConfigRequest = models.PutReservedConcurrencyConfigRequest;
 const ListLayerVersionsRequest = models.ListLayerVersionsRequest;
 const CreateTriggerResponse = models.CreateTriggerResponse;
 const PublishLayerVersionRequest = models.PublishLayerVersionRequest;
@@ -82,9 +92,12 @@ const Filter = models.Filter;
 const Variable = models.Variable;
 const GetFunctionResponse = models.GetFunctionResponse;
 const Code = models.Code;
+const PutTotalConcurrencyConfigRequest = models.PutTotalConcurrencyConfigRequest;
 const UpdateNamespaceRequest = models.UpdateNamespaceRequest;
 const GetLayerVersionResponse = models.GetLayerVersionResponse;
+const PublishVersionRequest = models.PublishVersionRequest;
 const FunctionLog = models.FunctionLog;
+const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
 const CfsInsInfo = models.CfsInsInfo;
 const FunctionVersion = models.FunctionVersion;
 const Function = models.Function;
@@ -93,6 +106,8 @@ const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
 const ListFunctionsResponse = models.ListFunctionsResponse;
 const ListTriggersRequest = models.ListTriggersRequest;
 const CreateFunctionResponse = models.CreateFunctionResponse;
+const GetReservedConcurrencyConfigRequest = models.GetReservedConcurrencyConfigRequest;
+const PutProvisionedConcurrencyConfigRequest = models.PutProvisionedConcurrencyConfigRequest;
 const ListAliasesRequest = models.ListAliasesRequest;
 const EipOutConfig = models.EipOutConfig;
 const Alias = models.Alias;
@@ -101,7 +116,7 @@ const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
 const DeleteTriggerRequest = models.DeleteTriggerRequest;
 const VpcConfig = models.VpcConfig;
-const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
+const GetProvisionedConcurrencyConfigResponse = models.GetProvisionedConcurrencyConfigResponse;
 const ListNamespacesResponse = models.ListNamespacesResponse;
 const EipConfigOut = models.EipConfigOut;
 const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
@@ -234,6 +249,17 @@ You can manually configure the function after replication as required.
     }
 
     /**
+     * This API is used to get the provisioned concurrency details of a function or its specified version.
+     * @param {GetProvisionedConcurrencyConfigRequest} req
+     * @param {function(string, GetProvisionedConcurrencyConfigResponse):void} cb
+     * @public
+     */
+    GetProvisionedConcurrencyConfig(req, cb) {
+        let resp = new GetProvisionedConcurrencyConfigResponse();
+        this.request("GetProvisionedConcurrencyConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to update a namespace.
      * @param {UpdateNamespaceRequest} req
      * @param {function(string, UpdateNamespaceResponse):void} cb
@@ -323,6 +349,17 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
+     * This API is used to set the provisioned concurrency of a non-$LATEST version of a function.
+     * @param {PutProvisionedConcurrencyConfigRequest} req
+     * @param {function(string, PutProvisionedConcurrencyConfigResponse):void} cb
+     * @public
+     */
+    PutProvisionedConcurrencyConfig(req, cb) {
+        let resp = new PutProvisionedConcurrencyConfigResponse();
+        this.request("PutProvisionedConcurrencyConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the function version based on the input parameters.
      * @param {ListVersionByFunctionRequest} req
      * @param {function(string, ListVersionByFunctionResponse):void} cb
@@ -356,6 +393,17 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
+     * This API is used to get the reserved concurrency details of a function.
+     * @param {GetReservedConcurrencyConfigRequest} req
+     * @param {function(string, GetReservedConcurrencyConfigResponse):void} cb
+     * @public
+     */
+    GetReservedConcurrencyConfig(req, cb) {
+        let resp = new GetReservedConcurrencyConfigResponse();
+        this.request("GetReservedConcurrencyConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to return relevant function information based on the input query parameters.
      * @param {ListFunctionsRequest} req
      * @param {function(string, ListFunctionsResponse):void} cb
@@ -378,6 +426,17 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
+     * This API is used to set the reserved concurrency of a function.
+     * @param {PutReservedConcurrencyConfigRequest} req
+     * @param {function(string, PutReservedConcurrencyConfigResponse):void} cb
+     * @public
+     */
+    PutReservedConcurrencyConfig(req, cb) {
+        let resp = new PutReservedConcurrencyConfigResponse();
+        this.request("PutReservedConcurrencyConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a version for a layer by using the given .zip file or COS object. Each time this API is called with the same layer name, a new version will be generated.
      * @param {PublishLayerVersionRequest} req
      * @param {function(string, PublishLayerVersionResponse):void} cb
@@ -386,6 +445,28 @@ An alias must point to a master version and can point to an additional version a
     PublishLayerVersion(req, cb) {
         let resp = new PublishLayerVersionResponse();
         this.request("PublishLayerVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the reserved concurrency configuration of a function.
+     * @param {DeleteReservedConcurrencyConfigRequest} req
+     * @param {function(string, DeleteReservedConcurrencyConfigResponse):void} cb
+     * @public
+     */
+    DeleteReservedConcurrencyConfig(req, cb) {
+        let resp = new DeleteReservedConcurrencyConfigResponse();
+        this.request("DeleteReservedConcurrencyConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the provisioned concurrency configuration of a function version.
+     * @param {DeleteProvisionedConcurrencyConfigRequest} req
+     * @param {function(string, DeleteProvisionedConcurrencyConfigResponse):void} cb
+     * @public
+     */
+    DeleteProvisionedConcurrencyConfig(req, cb) {
+        let resp = new DeleteProvisionedConcurrencyConfigResponse();
+        this.request("DeleteProvisionedConcurrencyConfig", req, resp, cb);
     }
 
     /**
@@ -408,6 +489,17 @@ An alias must point to a master version and can point to an additional version a
     GetAlias(req, cb) {
         let resp = new GetAliasResponse();
         this.request("GetAlias", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the account concurrency limit quota.
+     * @param {PutTotalConcurrencyConfigRequest} req
+     * @param {function(string, PutTotalConcurrencyConfigResponse):void} cb
+     * @public
+     */
+    PutTotalConcurrencyConfig(req, cb) {
+        let resp = new PutTotalConcurrencyConfigResponse();
+        this.request("PutTotalConcurrencyConfig", req, resp, cb);
     }
 
     /**

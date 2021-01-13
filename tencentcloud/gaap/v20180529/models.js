@@ -1941,6 +1941,18 @@ class DescribeRuleRealServersRequest extends  AbstractModel {
          */
         this.RuleId = null;
 
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of values to be returned. The default value is 20. Maximum is 1000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
     }
 
     /**
@@ -1951,6 +1963,8 @@ class DescribeRuleRealServersRequest extends  AbstractModel {
             return;
         }
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2079,6 +2093,12 @@ class CreateTCPListenersRequest extends  AbstractModel {
          */
         this.RealServerPorts = null;
 
+        /**
+         * Listener methods of getting client IPs. 0: TOA; 1: Proxy Protocol.
+         * @type {number || null}
+         */
+        this.ClientIPMethod = null;
+
     }
 
     /**
@@ -2098,6 +2118,7 @@ class CreateTCPListenersRequest extends  AbstractModel {
         this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
         this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
         this.RealServerPorts = 'RealServerPorts' in params ? params.RealServerPorts : null;
+        this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
 
     }
 }
@@ -4103,6 +4124,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CreateTime = null;
 
+        /**
+         * Describes how the listener obtains client IPs. 0: TOA; 1: Proxy Protocol.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ClientIPMethod = null;
+
     }
 
     /**
@@ -4134,6 +4162,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
 
     }
 }
@@ -6360,6 +6389,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TagSet = null;
 
+        /**
+         * Security policy ID. This field exists if security policies are set.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Connection group version
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ClientIPMethod = null;
+
     }
 
     /**
@@ -6395,6 +6445,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.TagSet.push(obj);
             }
         }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
 
     }
 }
@@ -7486,6 +7539,27 @@ You cannot modify this parameter when calling ModifyRuleAttribute API.
          */
         this.Domain = null;
 
+        /**
+         * Origin server failure check frequency
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FailedCountInter = null;
+
+        /**
+         * Origin server health check threshold. The service will be blocked once the threshold is exceeded.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FailedThreshold = null;
+
+        /**
+         * Time of a request is blocked after the origin server health check threshold is exceeded.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BlockInter = null;
+
     }
 
     /**
@@ -7501,6 +7575,9 @@ You cannot modify this parameter when calling ModifyRuleAttribute API.
         this.Method = 'Method' in params ? params.Method : null;
         this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
+        this.FailedCountInter = 'FailedCountInter' in params ? params.FailedCountInter : null;
+        this.FailedThreshold = 'FailedThreshold' in params ? params.FailedThreshold : null;
+        this.BlockInter = 'BlockInter' in params ? params.BlockInter : null;
 
     }
 }
@@ -8464,7 +8541,7 @@ class DescribeProxyStatisticsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Statistical metric name list. Values: InBandwidth (inbound bandwidth); OutBandwidth (outbound bandwidth); Concurrent (concurrence); InPackets (inbound packets); OutPackets (outbound packets); PacketLoss (packet loss rate); Latency (latency).
+         * Statistical metric name list. Valid values: `InBandwidth` (inbound bandwidth); `OutBandwidth` (outbound bandwidth); Concurrent (concurrence); `InPackets` (inbound packets); `OutPackets` (outbound packets); `PacketLoss` (packet loss rate); `Latency` (latency); `HttpQPS` (the number of HTTP requests); `HttpsQPS` (the number of HTTPS requests).
          * @type {Array.<string> || null}
          */
         this.MetricNames = null;
@@ -8634,6 +8711,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.PolyRealServerCertificateAliasInfo = null;
 
+        /**
+         * Domain name status.
+0: running;
+1: changing;
+2: deleting.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DomainStatus = null;
+
     }
 
     /**
@@ -8685,6 +8772,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.PolyRealServerCertificateAliasInfo.push(obj);
             }
         }
+        this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
 
     }
 }
@@ -10134,11 +10222,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ModifyConfigTime = null;
 
         /**
-         * Connection type
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Connection type. 104: SILVER connection.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ProxyType = null;
+
+        /**
+         * Describes how the connection obtains client IPs. 0: TOA; 1: Proxy Protocol.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ClientIPMethod = null;
 
     }
 
@@ -10193,6 +10288,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.RelatedGlobalDomains = 'RelatedGlobalDomains' in params ? params.RelatedGlobalDomains : null;
         this.ModifyConfigTime = 'ModifyConfigTime' in params ? params.ModifyConfigTime : null;
         this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
+        this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
 
     }
 }

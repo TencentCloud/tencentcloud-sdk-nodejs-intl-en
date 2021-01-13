@@ -2230,7 +2230,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.PathRules = null;
 
         /**
-         * 
+         * Path-based origin-pull configurations
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<PathBasedOriginRule> || null}
          */
         this.PathBasedOrigin = null;
@@ -4253,7 +4254,7 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
         this.Ipv6Access = null;
 
         /**
-         * 
+         * Offline cache
          * @type {OfflineCache || null}
          */
         this.OfflineCache = null;
@@ -4747,7 +4748,7 @@ global: global acceleration
         this.Ipv6Access = null;
 
         /**
-         * 
+         * Offline cache
          * @type {OfflineCache || null}
          */
         this.OfflineCache = null;
@@ -7069,7 +7070,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.AdvanceSet = null;
 
         /**
-         * 
+         * Offline cache
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {OfflineCache || null}
          */
         this.OfflineCache = null;
@@ -8173,7 +8175,7 @@ class SearchClsLogResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Path-based origin-pull rules
  * @class
  */
 class PathBasedOriginRule extends  AbstractModel {
@@ -8181,19 +8183,27 @@ class PathBasedOriginRule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Rule types:
+`file`: effective for files with specified suffixes.
+`directory`: effective for specified paths.
+`path`: effective for specified absolute paths.
+`index`: effective for specified homepages.
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * 
+         * Content for each `RuleType`:
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+For `index`, enter a forward slash `/`.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
 
         /**
-         * 
+         * Origin server list. Domain names and IPv4 addresses are supported.
          * @type {Array.<string> || null}
          */
         this.Origin = null;
@@ -13062,7 +13072,7 @@ class DescribeDomainsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Whether to enable offline cache
  * @class
  */
 class OfflineCache extends  AbstractModel {
@@ -13070,7 +13080,7 @@ class OfflineCache extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable offline cache. Valid values: `on` and `off`.
          * @type {string || null}
          */
         this.Switch = null;

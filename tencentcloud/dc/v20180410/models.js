@@ -826,6 +826,12 @@ Default value: Non-zero.
          */
         this.TencentBackupAddress = null;
 
+        /**
+         * Cloud Attached Connection Service ID
+         * @type {string || null}
+         */
+        this.CloudAttachId = null;
+
     }
 
     /**
@@ -863,6 +869,7 @@ Default value: Non-zero.
         this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
         this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
+        this.CloudAttachId = 'CloudAttachId' in params ? params.CloudAttachId : null;
 
     }
 }
@@ -1826,6 +1833,13 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.SignLaw = null;
 
+        /**
+         * Cloud Attached Connection Service ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CloudAttachId = null;
+
     }
 
     /**
@@ -1885,6 +1899,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
         this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+        this.CloudAttachId = 'CloudAttachId' in params ? params.CloudAttachId : null;
 
     }
 }

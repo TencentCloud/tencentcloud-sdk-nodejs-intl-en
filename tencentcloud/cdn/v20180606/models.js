@@ -1462,7 +1462,7 @@ Note: this field may return null, indicating that no valid value is obtained.
 }
 
 /**
- * 
+ * Merging pull requests configurations
  * @class
  */
 class OriginCombine extends  AbstractModel {
@@ -1470,7 +1470,7 @@ class OriginCombine extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable the merging pull requests feature. Valid values: `on` and `off`.
          * @type {string || null}
          */
         this.Switch = null;
@@ -4754,7 +4754,7 @@ global: global acceleration
         this.OfflineCache = null;
 
         /**
-         * 
+         * Merging pull requests
          * @type {OriginCombine || null}
          */
         this.OriginCombine = null;
@@ -7077,7 +7077,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.OfflineCache = null;
 
         /**
-         * 
+         * Merging pull requests
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {OriginCombine || null}
          */
         this.OriginCombine = null;

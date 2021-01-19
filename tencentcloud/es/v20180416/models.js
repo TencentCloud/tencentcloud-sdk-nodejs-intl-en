@@ -251,6 +251,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * GetRequestTargetNodeTypes request structure.
+ * @class
+ */
+class GetRequestTargetNodeTypesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceOperations request structure.
  * @class
  */
@@ -604,6 +632,41 @@ class DescribeInstanceLogsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * UpdateRequestTargetNodeTypes request structure.
+ * @class
+ */
+class UpdateRequestTargetNodeTypesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * A list of node types used to receive requests.
+         * @type {Array.<string> || null}
+         */
+        this.TargetNodeTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
 
     }
 }
@@ -1368,6 +1431,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SceneType = null;
 
+        /**
+         * Kibana configuration item.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KibanaConfig = null;
+
     }
 
     /**
@@ -1479,6 +1549,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
         this.SecurityType = 'SecurityType' in params ? params.SecurityType : null;
         this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.KibanaConfig = 'KibanaConfig' in params ? params.KibanaConfig : null;
 
     }
 }
@@ -2257,6 +2328,34 @@ class UpdatePluginsRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateRequestTargetNodeTypes response structure.
+ * @class
+ */
+class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradeLicense response structure.
  * @class
  */
@@ -2642,6 +2741,41 @@ class UpgradeInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * GetRequestTargetNodeTypes response structure.
+ * @class
+ */
+class GetRequestTargetNodeTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A list of node types used to receive requests.
+         * @type {Array.<string> || null}
+         */
+        this.TargetNodeTypes = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RestartKibana response structure.
  * @class
  */
@@ -2757,6 +2891,7 @@ module.exports = {
     LocalDiskInfo: LocalDiskInfo,
     TaskDetail: TaskDetail,
     NodeInfo: NodeInfo,
+    GetRequestTargetNodeTypesRequest: GetRequestTargetNodeTypesRequest,
     DescribeInstanceOperationsRequest: DescribeInstanceOperationsRequest,
     OperationDetail: OperationDetail,
     EsPublicAcl: EsPublicAcl,
@@ -2765,6 +2900,7 @@ module.exports = {
     RestartKibanaRequest: RestartKibanaRequest,
     CreateInstanceResponse: CreateInstanceResponse,
     DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
+    UpdateRequestTargetNodeTypesRequest: UpdateRequestTargetNodeTypesRequest,
     UpgradeLicenseRequest: UpgradeLicenseRequest,
     CosBackup: CosBackup,
     TagInfo: TagInfo,
@@ -2783,6 +2919,7 @@ module.exports = {
     DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
     RestartNodesRequest: RestartNodesRequest,
     UpdatePluginsRequest: UpdatePluginsRequest,
+    UpdateRequestTargetNodeTypesResponse: UpdateRequestTargetNodeTypesResponse,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,
@@ -2792,6 +2929,7 @@ module.exports = {
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpdateInstanceResponse: UpdateInstanceResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    GetRequestTargetNodeTypesResponse: GetRequestTargetNodeTypesResponse,
     RestartKibanaResponse: RestartKibanaResponse,
     Operation: Operation,
 

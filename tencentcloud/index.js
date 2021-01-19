@@ -43,6 +43,7 @@ module.exports = {
     postgres: require("./postgres"),
     redis: require("./redis"),
     scf: require("./scf"),
+    ses: require("./ses"),
     sms: require("./sms"),
     sqlserver: require("./sqlserver"),
     ssl: require("./ssl"),

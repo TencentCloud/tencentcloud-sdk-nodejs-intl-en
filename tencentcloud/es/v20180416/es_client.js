@@ -20,6 +20,7 @@ const InstanceLog = models.InstanceLog;
 const LocalDiskInfo = models.LocalDiskInfo;
 const TaskDetail = models.TaskDetail;
 const NodeInfo = models.NodeInfo;
+const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
 const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
 const OperationDetail = models.OperationDetail;
 const EsPublicAcl = models.EsPublicAcl;
@@ -28,6 +29,7 @@ const RestartInstanceResponse = models.RestartInstanceResponse;
 const RestartKibanaRequest = models.RestartKibanaRequest;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
+const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
 const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
 const CosBackup = models.CosBackup;
 const TagInfo = models.TagInfo;
@@ -46,6 +48,7 @@ const EsDictionaryInfo = models.EsDictionaryInfo;
 const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
 const RestartNodesRequest = models.RestartNodesRequest;
 const UpdatePluginsRequest = models.UpdatePluginsRequest;
+const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const EsAcl = models.EsAcl;
 const MasterNodeInfo = models.MasterNodeInfo;
@@ -55,6 +58,7 @@ const RestartNodesResponse = models.RestartNodesResponse;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const GetRequestTargetNodeTypesResponse = models.GetRequestTargetNodeTypesResponse;
 const RestartKibanaResponse = models.RestartKibanaResponse;
 const Operation = models.Operation;
 
@@ -69,6 +73,17 @@ class EsClient extends AbstractClient {
         super("es.tencentcloudapi.com", "2018-04-16", credential, region, profile);
     }
     
+    /**
+     * This API is used to update the node types used to receive client requests.
+     * @param {UpdateRequestTargetNodeTypesRequest} req
+     * @param {function(string, UpdateRequestTargetNodeTypesResponse):void} cb
+     * @public
+     */
+    UpdateRequestTargetNodeTypes(req, cb) {
+        let resp = new UpdateRequestTargetNodeTypesResponse();
+        this.request("UpdateRequestTargetNodeTypes", req, resp, cb);
+    }
+
     /**
      * This API is used to query the operation history of an instance by specified criteria.
      * @param {DescribeInstanceOperationsRequest} req
@@ -89,6 +104,17 @@ class EsClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the node types used to receive client requests.
+     * @param {GetRequestTargetNodeTypesRequest} req
+     * @param {function(string, GetRequestTargetNodeTypesResponse):void} cb
+     * @public
+     */
+    GetRequestTargetNodeTypes(req, cb) {
+        let resp = new GetRequestTargetNodeTypesResponse();
+        this.request("GetRequestTargetNodeTypes", req, resp, cb);
     }
 
     /**

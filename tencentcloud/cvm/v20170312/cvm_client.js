@@ -56,9 +56,8 @@ const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
-const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
-const DescribeSpotTypeConfigResponse = models.DescribeSpotTypeConfigResponse;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
@@ -105,7 +104,7 @@ const Externals = models.Externals;
 const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;
-const CreateKeyPairResponse = models.CreateKeyPairResponse;
+const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const DescribeReservedInstancesOfferingsRequest = models.DescribeReservedInstancesOfferingsRequest;
 const ReservedInstanceFamilyItem = models.ReservedInstanceFamilyItem;
@@ -152,7 +151,6 @@ const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
 const RebootInstancesResponse = models.RebootInstancesResponse;
-const DescribeSpotTypeConfigRequest = models.DescribeSpotTypeConfigRequest;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
 const OsVersion = models.OsVersion;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
@@ -999,17 +997,6 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query spot instances that are available for purchase.
-     * @param {DescribeSpotTypeConfigRequest} req
-     * @param {function(string, DescribeSpotTypeConfigResponse):void} cb
-     * @public
-     */
-    DescribeSpotTypeConfig(req, cb) {
-        let resp = new DescribeSpotTypeConfigResponse();
-        this.request("DescribeSpotTypeConfig", req, resp, cb);
     }
 
 

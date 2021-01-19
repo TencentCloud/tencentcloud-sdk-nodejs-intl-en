@@ -619,7 +619,7 @@ class ResetInstancesTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API. The maximum number of instances for each request is 1.
+         * Instance ID(s). To obtain the instance IDs, you can call the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API and find the value `InstanceId` in the response. The maximum number of instances in each request is 1.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -732,18 +732,6 @@ class RunInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH. You can specify a CDH for a CVM by creating the CVM on the CDH.
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images</li><br/>You can retrieve available image IDs in the following ways:<br/><li>For the IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information. For the IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
          * The instance [billing method](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). Valid values: <br><li>`POSTPAID_BY_HOUR`: hourly, pay-as-you-go<br><li>`CDHPAID`: you are only billed for CDH instances, not the CVMs running on the CDH instances.<br>Default value: POSTPAID_BY_HOUR.
          * @type {string || null}
          */
@@ -756,11 +744,23 @@ class RunInstancesRequest extends  AbstractModel {
         this.InstanceChargePrepaid = null;
 
         /**
+         * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH. You can specify a CDH for a CVM by creating the CVM on the CDH.
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
          * The instance model. Different resource specifications are specified for different instance models.
 <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, `S1.SMALL1` will be used by default.<br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
          * @type {string || null}
          */
         this.InstanceType = null;
+
+        /**
+         * The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images</li><br/>You can retrieve available image IDs in the following ways:<br/><li>For the IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information. For the IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
+         * @type {string || null}
+         */
+        this.ImageId = null;
 
         /**
          * System disk configuration of the instance. If this parameter is not specified, the default value will be used.
@@ -889,13 +889,6 @@ false (default value): send a normal request and create instance(s) if all the r
         if (!params) {
             return;
         }
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
         if (params.InstanceChargePrepaid) {
@@ -903,7 +896,14 @@ false (default value): send a normal request and create instance(s) if all the r
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
 
         if (params.SystemDisk) {
             let obj = new SystemDisk();
@@ -1746,6 +1746,7 @@ class ZoneInfo extends  AbstractModel {
 The following is a list of all availability zones:
 <li> ap-chongqing-1 </li>
 <li> ap-seoul-1 </li>
+<li> ap-seoul-2 </li>
 <li> ap-chengdu-1 </li>
 <li> ap-chengdu-2 </li>
 <li> ap-hongkong-1 </li>
@@ -1757,8 +1758,10 @@ The following is a list of all availability zones:
 <li> ap-guangzhou-2 (sold out)</li>
 <li> ap-guangzhou-3 </li>
 <li> ap-guangzhou-4 </li>
+<li> ap-guangzhou-6 </li>
 <li> ap-tokyo-1 </li>
 <li> ap-singapore-1 </li>
+<li> ap-singapore-2 </li>
 <li> ap-shanghai-fsi-1 </li>
 <li> ap-shanghai-fsi-2 </li>
 <li> ap-shanghai-fsi-3 </li>
@@ -1767,6 +1770,7 @@ The following is a list of all availability zones:
 <li> ap-shanghai-2 </li>
 <li> ap-shanghai-3 </li>
 <li> ap-shanghai-4 </li>
+<li> ap-shanghai-5 </li>
 <li> ap-mumbai-1 </li>
 <li> ap-mumbai-2 </li>
 <li> eu-moscow-1 </li>
@@ -1794,7 +1798,7 @@ The following is a list of all availability zones:
         this.ZoneName = null;
 
         /**
-         * Availability zone ID
+         * Availability zone ID.
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -2077,47 +2081,18 @@ class ModifyInstancesVpcAttributeResponse extends  AbstractModel {
 }
 
 /**
- * InquiryPriceResetInstancesType request structure.
+ * CreateKeyPair response structure.
  * @class
  */
-class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
+class CreateKeyPairResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API. The maximum number of instances in each request is 1.
-         * @type {Array.<string> || null}
+         * Key pair information.
+         * @type {KeyPair || null}
          */
-        this.InstanceIds = null;
-
-        /**
-         * Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types] (https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) or in the latest specifications via the [DescribeInstanceTypeConfigs] (https://intl.cloud.tencent.com/document/product/213/15749?from_cn_redirect=1) API.
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-
-    }
-}
-
-/**
- * DeleteKeyPairs response structure.
- * @class
- */
-class DeleteKeyPairsResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.KeyPair = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2134,16 +2109,22 @@ class DeleteKeyPairsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.KeyPair) {
+            let obj = new KeyPair();
+            obj.deserialize(params.KeyPair)
+            this.KeyPair = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeSpotTypeConfig response structure.
+ * DeleteKeyPairs response structure.
  * @class
  */
-class DescribeSpotTypeConfigResponse extends  AbstractModel {
+class DeleteKeyPairsResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2704,7 +2685,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * The ID of [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) where the instance locates. It can obtained in the `Zone` field returned by [DescribeZones](https://intl.cloud.tencent.com/document/213/15707?from_cn_redirect=1) API.
+         * ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain the ID in the returned `Zone` field.
          * @type {string || null}
          */
         this.Zone = null;
@@ -2978,7 +2959,7 @@ class CreateImageResponse extends  AbstractModel {
         super();
 
         /**
-         * Image ID
+         * Image ID.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
@@ -3847,7 +3828,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>LOCAL_NVME: local NVME disk, specified in the `InstanceType`<br><li>LOCAL_PRO: local HDD disk, specified in the `InstanceType`<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3896,6 +3877,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.KmsKeyId = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
     }
 
     /**
@@ -3912,6 +3899,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
 
     }
 }
@@ -4315,7 +4303,7 @@ class CreateImageRequest extends  AbstractModel {
         this.ForcePoweroff = null;
 
         /**
-         * Whether to enable Sysprep when creating a Windows image
+         * Whether to enable Sysprep when creating a Windows image. Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_redirect=1) to learn more about Sysprep.
          * @type {string || null}
          */
         this.Sysprep = null;
@@ -4706,24 +4694,24 @@ class EnhancedService extends  AbstractModel {
 }
 
 /**
- * CreateKeyPair response structure.
+ * InquiryPriceResetInstancesType request structure.
  * @class
  */
-class CreateKeyPairResponse extends  AbstractModel {
+class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Key pair information.
-         * @type {KeyPair || null}
+         * Instance ID(s). You can obtain the instance IDs from the value of `InstanceId` returned by the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API. The maximum number of instances in each request is 1.
+         * @type {Array.<string> || null}
          */
-        this.KeyPair = null;
+        this.InstanceIds = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance model. Resources vary with the instance model. Specific values can be found in the tables of [Instance Types] (https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) or in the latest specifications via the [DescribeInstanceTypeConfigs] (https://intl.cloud.tencent.com/document/product/213/15749?from_cn_redirect=1) API.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceType = null;
 
     }
 
@@ -4734,13 +4722,8 @@ class CreateKeyPairResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.KeyPair) {
-            let obj = new KeyPair();
-            obj.deserialize(params.KeyPair)
-            this.KeyPair = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -5068,7 +5051,7 @@ Filters by the **validity** of the reserved instance, which is the purchased usa
 Type: Integer
 Unit: second
 Required: no
-Valid values: 31536000 (1 year), 94608000 (3 years)
+Valid value: 31536000 (1 year)
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5104,7 +5087,7 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * Type of the resources associated with the tags. Currently only "instance" and "host" are supported.
+         * The type of resource that bound with the tag. Valid values: `instance` (for CVM) and `host` (for CDH).
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -6176,8 +6159,8 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.DiscountPrice = null;
 
         /**
-         * Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Discount. For example, 20.0 indicates 80% off.
+Note: this field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.Discount = null;
@@ -6217,6 +6200,78 @@ Note: this field may return null, indicating that no valid value is obtained.
          */
         this.UnitPriceDiscountThirdStep = null;
 
+        /**
+         * Original 3-year payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.OriginalPriceThreeYear = null;
+
+        /**
+         * Discounted 3-year upfront payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountPriceThreeYear = null;
+
+        /**
+         * Discount for 3-year upfront payment. For example, 20.0 indicates 80% off.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountThreeYear = null;
+
+        /**
+         * Original 5-year payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.OriginalPriceFiveYear = null;
+
+        /**
+         * Discounted 5-year upfront payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountPriceFiveYear = null;
+
+        /**
+         * Discount for 5-year upfront payment. For example, 20.0 indicates 80% off.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountFiveYear = null;
+
+        /**
+         * Original 1-year payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.OriginalPriceOneYear = null;
+
+        /**
+         * Discounted 1-year payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountPriceOneYear = null;
+
+        /**
+         * Discount for 1-year upfront payment. For example, 20.0 indicates 80% off.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountOneYear = null;
+
     }
 
     /**
@@ -6236,6 +6291,15 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.UnitPriceDiscountSecondStep = 'UnitPriceDiscountSecondStep' in params ? params.UnitPriceDiscountSecondStep : null;
         this.UnitPriceThirdStep = 'UnitPriceThirdStep' in params ? params.UnitPriceThirdStep : null;
         this.UnitPriceDiscountThirdStep = 'UnitPriceDiscountThirdStep' in params ? params.UnitPriceDiscountThirdStep : null;
+        this.OriginalPriceThreeYear = 'OriginalPriceThreeYear' in params ? params.OriginalPriceThreeYear : null;
+        this.DiscountPriceThreeYear = 'DiscountPriceThreeYear' in params ? params.DiscountPriceThreeYear : null;
+        this.DiscountThreeYear = 'DiscountThreeYear' in params ? params.DiscountThreeYear : null;
+        this.OriginalPriceFiveYear = 'OriginalPriceFiveYear' in params ? params.OriginalPriceFiveYear : null;
+        this.DiscountPriceFiveYear = 'DiscountPriceFiveYear' in params ? params.DiscountPriceFiveYear : null;
+        this.DiscountFiveYear = 'DiscountFiveYear' in params ? params.DiscountFiveYear : null;
+        this.OriginalPriceOneYear = 'OriginalPriceOneYear' in params ? params.OriginalPriceOneYear : null;
+        this.DiscountPriceOneYear = 'DiscountPriceOneYear' in params ? params.DiscountPriceOneYear : null;
+        this.DiscountOneYear = 'DiscountOneYear' in params ? params.DiscountOneYear : null;
 
     }
 }
@@ -6485,19 +6549,19 @@ class ReservedInstanceTypeItem extends  AbstractModel {
         this.Memory = null;
 
         /**
-         * Number of GPU cores.
+         * Number of GPUs.
          * @type {number || null}
          */
         this.Gpu = null;
 
         /**
-         * Number of FPGA cores.
+         * Number of FPGAs.
          * @type {number || null}
          */
         this.Fpga = null;
 
         /**
-         * Number of storage blocks.
+         * Number of local storage blocks.
          * @type {number || null}
          */
         this.StorageBlock = null;
@@ -7063,27 +7127,6 @@ class RebootInstancesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeSpotTypeConfig request structure.
- * @class
- */
-class DescribeSpotTypeConfigRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
 
     }
 }
@@ -8515,9 +8558,8 @@ module.exports = {
     InternetChargeTypeConfig: InternetChargeTypeConfig,
     DescribeImagesResponse: DescribeImagesResponse,
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
-    InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
+    CreateKeyPairResponse: CreateKeyPairResponse,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
-    DescribeSpotTypeConfigResponse: DescribeSpotTypeConfigResponse,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     ModifyImageSharePermissionRequest: ModifyImageSharePermissionRequest,
     DisassociateInstancesKeyPairsResponse: DisassociateInstancesKeyPairsResponse,
@@ -8564,7 +8606,7 @@ module.exports = {
     CreateImageRequest: CreateImageRequest,
     Instance: Instance,
     EnhancedService: EnhancedService,
-    CreateKeyPairResponse: CreateKeyPairResponse,
+    InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     DescribeReservedInstancesOfferingsRequest: DescribeReservedInstancesOfferingsRequest,
     ReservedInstanceFamilyItem: ReservedInstanceFamilyItem,
@@ -8611,7 +8653,6 @@ module.exports = {
     ImportImageResponse: ImportImageResponse,
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
     RebootInstancesResponse: RebootInstancesResponse,
-    DescribeSpotTypeConfigRequest: DescribeSpotTypeConfigRequest,
     InquiryPriceResetInstancesTypeResponse: InquiryPriceResetInstancesTypeResponse,
     OsVersion: OsVersion,
     ModifyImageAttributeResponse: ModifyImageAttributeResponse,

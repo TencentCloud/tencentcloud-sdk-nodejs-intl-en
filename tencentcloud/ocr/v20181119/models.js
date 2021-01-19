@@ -33,9 +33,9 @@ Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are pr
         this.ImageBase64 = null;
 
         /**
-         * URL address of image.
-The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
-We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+         * URL address of image. (This field is not supported outside Chinese mainland)
+The image cannot exceed 7 MB after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported.
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
         this.ImageUrl = null;
@@ -277,10 +277,10 @@ Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are pr
         this.ImageBase64 = null;
 
         /**
-         * URL address of image.
-Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
-Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+         * URL address of image. (This field is not supported outside Chinese mainland)
+Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+Supported image size: the downloaded image cannot exceed 3 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
@@ -310,7 +310,7 @@ class TableOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * Recognized text. For more information, please click the link on the left.
+         * Recognized text. For more information, please click the link on the left
          * @type {Array.<TextTable> || null}
          */
         this.TextDetections = null;
@@ -369,14 +369,44 @@ Either the `ImageUrl` or `ImageBase64` of the image must be provided; if both ar
         this.ImageBase64 = null;
 
         /**
-         * URL address of the image.
+         * URL address of image. (This field is not supported outside Chinese mainland)
 Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-Supported image size: the downloaded image cannot exceed 7 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-It is recommended to store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
         this.ImageUrl = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.RetBorderCutImage = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.RetCardNoImage = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.EnableCopyCheck = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.EnableReshootCheck = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.EnableBorderCheck = null;
 
     }
 
@@ -389,6 +419,11 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.RetBorderCutImage = 'RetBorderCutImage' in params ? params.RetBorderCutImage : null;
+        this.RetCardNoImage = 'RetCardNoImage' in params ? params.RetCardNoImage : null;
+        this.EnableCopyCheck = 'EnableCopyCheck' in params ? params.EnableCopyCheck : null;
+        this.EnableReshootCheck = 'EnableReshootCheck' in params ? params.EnableReshootCheck : null;
+        this.EnableBorderCheck = 'EnableBorderCheck' in params ? params.EnableBorderCheck : null;
 
     }
 }
@@ -457,10 +492,10 @@ Supported image size: the downloaded image cannot exceed 3 MB in size after bein
         this.ImageBase64 = null;
 
         /**
-         * URL of the image.
+         * URL address of image. (This field is not supported outside Chinese mainland)
 Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+Supported image size: the downloaded image cannot exceed 3 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
@@ -1095,16 +1130,15 @@ class GeneralBasicOCRRequest extends  AbstractModel {
 
         /**
          * Base64-encoded value of image/PDF.
-The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
-Either `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+The image/PDF cannot exceed 7 MB after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * URL address of image/PDF.
-The image/PDF cannot exceed 7 MB in size after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
-We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+         * URL address of image/PDF. (This field is not supported outside Chinese mainland)
+The image/PDF cannot exceed 7 MB after being Base64-encoded. A resolution above 600x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
         this.ImageUrl = null;

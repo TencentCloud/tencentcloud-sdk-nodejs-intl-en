@@ -801,13 +801,13 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1009,13 +1009,13 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1294,13 +1294,13 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1492,7 +1492,7 @@ class MediaInputInfo extends  AbstractModel {
         super();
 
         /**
-         * The type of video processing input object. COS and URL objects are supported.
+         * The type of video processing input object, which supports COS and URL.
          * @type {string || null}
          */
         this.Type = null;
@@ -1785,13 +1785,13 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1855,7 +1855,11 @@ class ManageTaskRequest extends  AbstractModel {
 
         /**
          * Operation type. Valid values:
-<li>Abort: terminates task.</li>
+<ul>
+<li>Abort: task termination. Description:
+<ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is waiting (`WAITING`) or processing (`PROCESSING`) can be terminated;</li>
+<li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is waiting can be terminated.</li></ul>
+</li></ul>
          * @type {string || null}
          */
         this.OperationType = null;
@@ -2491,7 +2495,7 @@ class DeletePersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Figure ID.
+         * Material ID
          * @type {string || null}
          */
         this.PersonId = null;
@@ -3008,13 +3012,13 @@ class AiRecognitionTaskFaceResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -3444,35 +3448,35 @@ class CreatePersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of a figure. Length limit: 20 characters.
+         * Name of a material. Length limit: 20 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Figure sample use case. Valid values:
-1. Recognition: It is used for content recognition, equivalent to `Recognition.Face`.
-2. Review: It is used for content audit, equivalent to `Review.Face`.
-3. All: It is used for content recognition and content audit, equivalent to 1+2 above.
+         * Material use case. Valid values:
+1. Recognition: used for content recognition, equivalent to `Recognition.Face`
+2. Review: used for detection of inappropriate content, equivalent to `Review.Face`
+3. All: all of the above, equivalent to 1 and 2 combined
          * @type {Array.<string> || null}
          */
         this.Usages = null;
 
         /**
-         * Figure description. Length limit: 1,024 characters.
+         * Material description. Length limit: 1,024 characters.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a face image. Only JPEG and PNG images are supported. Array length limit: 5 images.
-Note: The image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+         * [Base64](https://tools.ietf.org/html/rfc4648) string converted from an image. Only JPEG and PNG images are supported. Array length limit: 5 images.
+Note: the image must be a relatively clear facial feature photo of one person with a size of at least 200 x 200 pixels.
          * @type {Array.<string> || null}
          */
         this.FaceContents = null;
 
         /**
-         * Figure tag
+         * Material tag
 <li>Array length limit: 20 tags;</li>
 <li>Tag length limit: 128 characters.</li>
          * @type {Array.<string> || null}
@@ -4110,13 +4114,13 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -5066,12 +5070,12 @@ class CreateWordSamplesRequest extends  AbstractModel {
          * <b>Keyword use case. Valid values:</b>
 1. Recognition.Ocr: OCR-based content recognition;
 2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based content audit;
-4. Review.Asr: ASR-based content audit;
+3. Review.Ocr: OCR-based detection of inappropriate content;
+4. Review.Asr：ASR-based detection of inappropriate content;
 <b>These values can be merged as follows:</b>
-5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+5. Recognition: ASR- and OCR-based content recognition, equivalent to 1+2 above;
+6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3+4 above;
+7. All: ASR- and OCR-based content recognition and detection of inappropriate content, equivalent to 1+2+3+4 above;
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -5260,13 +5264,13 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -5333,13 +5337,13 @@ class AiRecognitionTaskOcrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -5770,13 +5774,13 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6071,6 +6075,15 @@ Default value: 0px, which means that `Height` will be proportionally scaled acco
          */
         this.Height = null;
 
+        /**
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -6083,6 +6096,7 @@ Default value: 0px, which means that `Height` will be proportionally scaled acco
         this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -6134,13 +6148,13 @@ class CreatePersonSampleResponse extends  AbstractModel {
         super();
 
         /**
-         * Figure information.
+         * Material information
          * @type {AiSamplePerson || null}
          */
         this.Person = null;
 
         /**
-         * Face information failing to be processed.
+         * Positioning information of facial features processed unsuccessfully
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
         this.FailFaceInfoSet = null;
@@ -6189,7 +6203,7 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a content audit template.
+         * Unique ID of an intelligent content recognition template
          * @type {number || null}
          */
         this.Definition = null;
@@ -6664,13 +6678,13 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7194,12 +7208,12 @@ class ModifyWordSampleRequest extends  AbstractModel {
          * <b>Keyword use case. Valid values:</b>
 1. Recognition.Ocr: OCR-based content recognition;
 2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based content audit;
-4. Review.Asr: ASR-based content audit;
+3. Review.Ocr: OCR-based detection of inappropriate content;
+4. Review.Asr：ASR-based detection of inappropriate content;
 <b>These values can be merged as follows:</b>
-5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+5. Recognition: ASR- and OCR-based content recognition, equivalent to 1 and 2 combined;
+6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3 and 4 combined.
+7. All: all of the above, equivalent to 1, 2, 3, and 4 combined.
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -7246,13 +7260,13 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7320,13 +7334,13 @@ class AiAnalysisTaskTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7562,13 +7576,13 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7636,13 +7650,13 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7923,13 +7937,13 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -8202,6 +8216,15 @@ class ImageWatermarkTemplate extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -8214,6 +8237,7 @@ class ImageWatermarkTemplate extends  AbstractModel {
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -9234,7 +9258,7 @@ class DeleteContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a content audit template.
+         * Unique ID of an intelligent content recognition template
          * @type {number || null}
          */
         this.Definition = null;
@@ -10095,13 +10119,13 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -10456,37 +10480,37 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a content audit template.
+         * Unique ID of an intelligent content recognition template
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Name of a content audit template. Length limit: 64 characters.
+         * Name of an intelligent content recognition template. Length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of a content audit template. Length limit: 256 characters.
+         * Description of an intelligent content recognition template. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Porn information detection control parameter.
+         * Control parameter for offensive content
          * @type {PornConfigureInfoForUpdate || null}
          */
         this.PornConfigure = null;
 
         /**
-         * Terrorism information detection control parameter.
+         * Control parameter for insecure content
          * @type {TerrorismConfigureInfoForUpdate || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Politically sensitive information detection control parameter.
+         * Control parameter for inappropriate content
          * @type {PoliticalConfigureInfoForUpdate || null}
          */
         this.PoliticalConfigure = null;
@@ -10501,7 +10525,7 @@ Note: this parameter is not supported yet.
         this.ProhibitedConfigure = null;
 
         /**
-         * Custom content audit control parameter.
+         * Control parameter for custom intelligent content recognition
          * @type {UserDefineConfigureInfoForUpdate || null}
          */
         this.UserDefineConfigure = null;
@@ -10583,6 +10607,15 @@ Default value: 0px, which means that `Height` will be proportionally scaled acco
          */
         this.Height = null;
 
+        /**
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -10595,6 +10628,7 @@ Default value: 0px, which means that `Height` will be proportionally scaled acco
         this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -11336,7 +11370,7 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -11649,13 +11683,13 @@ class AiReviewTaskPornResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -12292,6 +12326,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MosaicSet = null;
 
         /**
+         * Start time offset of a transcoded video, in seconds.
+<li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
+<li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
+<li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a transcoded video, in seconds.
+<li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
+<li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
+<li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
          * Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
@@ -12357,6 +12409,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.MosaicSet.push(obj);
             }
         }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
         if (params.OutputStorage) {
             let obj = new TaskOutputStorage();
@@ -12630,13 +12684,13 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -12895,7 +12949,7 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Figure ID.
+         * Material ID
          * @type {string || null}
          */
         this.PersonId = null;
@@ -12913,16 +12967,16 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Figure sample use case. Valid values:
-1. Recognition: It is used for content recognition, equivalent to `Recognition.Face`.
-2. Review: It is used for content audit, equivalent to `Review.Face`.
-3. All: It is used for content recognition and content audit, equivalent to 1+2 above.
+         * Material use case. Valid values:
+1. Recognition: used for content recognition, equivalent to `Recognition.Face`.
+2. Review: used for detection of inappropriate content, equivalent to `Review.Face`.
+3. All: used for content recognition and detection of inappropriate content, equivalent to 1 and 2 combined.
          * @type {Array.<string> || null}
          */
         this.Usages = null;
 
         /**
-         * Face operation information.
+         * Facial feature operation information
          * @type {AiSampleFaceOperation || null}
          */
         this.FaceOperationInfo = null;
@@ -13178,13 +13232,13 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -13350,13 +13404,13 @@ class AiRecognitionTaskAsrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -14402,31 +14456,31 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of a content audit template. Length limit: 64 characters.
+         * Name of an intelligent content recognition template. Length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of a content audit template. Length limit: 256 characters.
+         * Description of an intelligent content recognition template. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Porn information detection control parameter.
+         * Control parameter for offensive content
          * @type {PornConfigureInfo || null}
          */
         this.PornConfigure = null;
 
         /**
-         * Terrorism information detection control parameter.
+         * Control parameter for insecure content
          * @type {TerrorismConfigureInfo || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Politically sensitive information detection control parameter.
+         * Control parameter for inappropriate content
          * @type {PoliticalConfigureInfo || null}
          */
         this.PoliticalConfigure = null;
@@ -14441,7 +14495,7 @@ Note: this parameter is not supported yet.
         this.ProhibitedConfigure = null;
 
         /**
-         * Custom content audit control parameter.
+         * Control parameter for custom intelligent content recognition
          * @type {UserDefineConfigureInfo || null}
          */
         this.UserDefineConfigure = null;
@@ -14500,7 +14554,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID filter of content audit templates. Array length limit: 50.
+         * Unique ID of intelligent content recognition templates as the filter. Array length limit: 50.
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -14731,13 +14785,13 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -16839,24 +16893,24 @@ class DescribeWordSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>Keyword use case filter. Valid values:</b>
-1. Recognition.Ocr: OCR-based content recognition;
-2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based content audit;
-4. Review.Asr: ASR-based content audit;
-<b>These values can be merged as follows:</b>
-5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-Multiple elements can be selected, and the relationship between them is "or", i.e., any keyword use case that contains any element in this field set will be deemed eligible.
-         * @type {Array.<string> || null}
-         */
-        this.Usages = null;
-
-        /**
          * Keyword filter. Array length limit: 100 words.
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
+
+        /**
+         * <b>Keyword use case filter. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition;
+2. Recognition.Asr: ASR-based content recognition;
+3. Review.Ocr: OCR-based detection of inappropriate content;
+4. Review.Asr：ASR-based detection of inappropriate content;
+<b>These values can be merged as follows:</b>
+5. Recognition: ASR- and OCR-based content recognition, equivalent to 1 and 2 combined;
+6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3+4 above;
+Multiple elements can be selected, and the relationship between them is "or", i.e., any keyword use case that contains any element in this field set will be deemed eligible.
+         * @type {Array.<string> || null}
+         */
+        this.Usages = null;
 
         /**
          * Tag filter. Array length limit: 20 words.
@@ -16885,8 +16939,8 @@ Multiple elements can be selected, and the relationship between them is "or", i.
         if (!params) {
             return;
         }
-        this.Usages = 'Usages' in params ? params.Usages : null;
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Usages = 'Usages' in params ? params.Usages : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
@@ -17766,14 +17820,14 @@ class ModifyPersonSampleResponse extends  AbstractModel {
         super();
 
         /**
-         * Figure information.
+         * Material information
          * @type {AiSamplePerson || null}
          */
         this.Person = null;
 
         /**
-         * Face information failing to be processed.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Information of facial features processed unsuccessfully
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
         this.FailFaceInfoSet = null;
@@ -17984,7 +18038,7 @@ class DescribePersonSamplesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Figure information.
+         * Material information
          * @type {Array.<AiSamplePerson> || null}
          */
         this.PersonSet = null;
@@ -18250,13 +18304,13 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -18557,13 +18611,13 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -19450,13 +19504,13 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code, an empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * Error code, 0 suggests the task is successful; otherwise it is failed. This field is no longer recommended. Consider using the new error code ErrCodeExt.
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -19592,30 +19646,30 @@ class DescribePersonSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * Pulled figure type. Valid values:
-<li>UserDefine: Custom figure library;</li>
-<li>Default: Default figure library.</li>
+         * Type of the material pulled. Valid values:
+<li>UserDefine: custom material library;</li>
+<li>Default: default material library.</li>
 
-Default value: UserDefine (the custom figure library will be pulled.)
-Note: The default figure library can be pulled only through "figure name" or "figure ID + figure name", and only one face image will be returned.
+Default value: UserDefine (the materials of the custom material library are pulled.)
+Note: you can pull the default material library only using the material name or a combination of the material name and ID, and only one face image is returned.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Figure ID. Array length limit: 100.
+         * Material ID. Array length limit: 100.
          * @type {Array.<string> || null}
          */
         this.PersonIds = null;
 
         /**
-         * Figure name. Array length limit: 20.
+         * Material name. Array length limit: 20.
          * @type {Array.<string> || null}
          */
         this.Names = null;
 
         /**
-         * Figure tag. Array length limit: 20.
+         * Material tag. Array length limit: 20.
          * @type {Array.<string> || null}
          */
         this.Tags = null;

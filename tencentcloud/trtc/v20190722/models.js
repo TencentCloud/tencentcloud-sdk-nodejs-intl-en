@@ -208,6 +208,12 @@ class LayoutParams extends  AbstractModel {
          */
         this.PresetLayoutConfig = null;
 
+        /**
+         * Valid in custom templates. 1: the placeholding feature is enabled; 0 (default): the feature is disabled. When the feature is enabled, but a user for whom a position is reserved is not sending video data, the position will show the corresponding placeholder image.
+         * @type {number || null}
+         */
+        this.PlaceHolderMode = null;
+
     }
 
     /**
@@ -237,6 +243,7 @@ class LayoutParams extends  AbstractModel {
                 this.PresetLayoutConfig.push(obj);
             }
         }
+        this.PlaceHolderMode = 'PlaceHolderMode' in params ? params.PlaceHolderMode : null;
 
     }
 }
@@ -433,7 +440,7 @@ class DescribeUserInformationRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+         * Query start time in the format of UNIX timestamp (e.g. 1588031999s) in the last 5 days.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -809,6 +816,12 @@ class StartMCUMixTranscodeRequest extends  AbstractModel {
          */
         this.LayoutParams = null;
 
+        /**
+         * Relayed push parameters of a non-Tencent Cloud CDN
+         * @type {PublishCdnParams || null}
+         */
+        this.PublishCdnParams = null;
+
     }
 
     /**
@@ -837,6 +850,12 @@ class StartMCUMixTranscodeRequest extends  AbstractModel {
             let obj = new LayoutParams();
             obj.deserialize(params.LayoutParams)
             this.LayoutParams = obj;
+        }
+
+        if (params.PublishCdnParams) {
+            let obj = new PublishCdnParams();
+            obj.deserialize(params.PublishCdnParams)
+            this.PublishCdnParams = obj;
         }
 
     }
@@ -1048,7 +1067,7 @@ class DescribeRoomInformationResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of returned data entries.
+         * Total number of data entries displayed on the current page
          * @type {number || null}
          */
         this.Total = null;
@@ -1152,7 +1171,7 @@ class OutputParams extends  AbstractModel {
         this.PureAudioStream = null;
 
         /**
-         * Custom recording file name
+         * Custom recording file name. Please enable the recording feature in the TRTC console first. https://intl.cloud.tencent.com/document/product/647/50768?from_cn_redirect=1
          * @type {string || null}
          */
         this.RecordId = null;
@@ -1814,10 +1833,22 @@ class PresetLayoutConfig extends  AbstractModel {
         this.ZOrder = null;
 
         /**
-         * Render mode of the output image. 0: cropping; 1: scaling. If this parameter is not set, 0 is used by default.
+         * Render mode of the output image. 0: cropping; 1: scaling; 2: scaling on a black background. If this parameter is not set, 0 is used by default.
          * @type {number || null}
          */
         this.RenderMode = null;
+
+        /**
+         * Media type of the mixed stream of the user occupying the current position. 0 (default): audio and video; 1: audio; 2: video. You are advised to specify a user ID when using this parameter.
+         * @type {number || null}
+         */
+        this.MixInputType = null;
+
+        /**
+         * Reservation image ID. If the reservation feature is enabled, and a user for whom a image position is reserved is not generating upstream video data, the position will show the reservation image. Reservation images are uploaded and generated in the TRTC console. https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1
+         * @type {number || null}
+         */
+        this.PlaceImageId = null;
 
     }
 
@@ -1836,6 +1867,8 @@ class PresetLayoutConfig extends  AbstractModel {
         this.LocationY = 'LocationY' in params ? params.LocationY : null;
         this.ZOrder = 'ZOrder' in params ? params.ZOrder : null;
         this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
+        this.MixInputType = 'MixInputType' in params ? params.MixInputType : null;
+        this.PlaceImageId = 'PlaceImageId' in params ? params.PlaceImageId : null;
 
     }
 }
@@ -1957,6 +1990,41 @@ class DescribeCallDetailResponse extends  AbstractModel {
 }
 
 /**
+ * Relayed push parameters of a non-Tencent Cloud CDN
+ * @class
+ */
+class PublishCdnParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tencent Cloud LVB BizId
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * Destination of non-Tencent Cloud CDN relayed push. It is possible to push to only one non-Tencent Cloud CDN address at a time.
+         * @type {Array.<string> || null}
+         */
+        this.PublishCdnUrls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.PublishCdnUrls = 'PublishCdnUrls' in params ? params.PublishCdnUrls : null;
+
+    }
+}
+
+/**
  * DescribeRoomInformation request structure.
  * @class
  */
@@ -1983,7 +2051,7 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Room ID of uint type
+         * Room ID in string type
          * @type {string || null}
          */
         this.RoomId = null;
@@ -2318,6 +2386,7 @@ module.exports = {
     PresetLayoutConfig: PresetLayoutConfig,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
+    PublishCdnParams: PublishCdnParams,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,
     DescribeDetailEventRequest: DescribeDetailEventRequest,
     AbnormalExperience: AbnormalExperience,

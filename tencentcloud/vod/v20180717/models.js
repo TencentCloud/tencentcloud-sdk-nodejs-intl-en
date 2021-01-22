@@ -832,10 +832,13 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -869,6 +872,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -1047,10 +1051,13 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1084,6 +1091,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -1246,6 +1254,34 @@ class MediaMiniProgramReviewElem extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * ManageTask response structure.
+ * @class
+ */
+class ManageTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1671,11 +1707,13 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1710,6 +1748,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -1729,42 +1768,31 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * AI-based sample management - keyword output information.
+ * ManageTask request structure.
  * @class
  */
-class AiSampleWord extends  AbstractModel {
+class ManageTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Keyword.
+         * Video processing task ID.
          * @type {string || null}
          */
-        this.Keyword = null;
+        this.TaskId = null;
 
         /**
-         * Keyword tag.
-         * @type {Array.<string> || null}
-         */
-        this.TagSet = null;
-
-        /**
-         * Keyword use case.
-         * @type {Array.<string> || null}
-         */
-        this.UsageSet = null;
-
-        /**
-         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * Operation type. Valid value:
+<li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.OperationType = null;
 
         /**
-         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
          */
-        this.UpdateTime = null;
+        this.SubAppId = null;
 
     }
 
@@ -1775,11 +1803,9 @@ class AiSampleWord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Keyword = 'Keyword' in params ? params.Keyword : null;
-        this.TagSet = 'TagSet' in params ? params.TagSet : null;
-        this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -2175,7 +2201,7 @@ class DeleteContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of content audit template.
+         * Unique ID of an intelligent content recognition template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -2464,6 +2490,12 @@ class DescribeStorageDataResponse extends  AbstractModel {
         this.StandardStorage = null;
 
         /**
+         * Storage usage by billing region.
+         * @type {Array.<StorageStatData> || null}
+         */
+        this.StorageStat = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2482,6 +2514,15 @@ class DescribeStorageDataResponse extends  AbstractModel {
         this.TotalStorage = 'TotalStorage' in params ? params.TotalStorage : null;
         this.InfrequentStorage = 'InfrequentStorage' in params ? params.InfrequentStorage : null;
         this.StandardStorage = 'StandardStorage' in params ? params.StandardStorage : null;
+
+        if (params.StorageStat) {
+            this.StorageStat = new Array();
+            for (let z in params.StorageStat) {
+                let obj = new StorageStatData();
+                obj.deserialize(params.StorageStat[z]);
+                this.StorageStat.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2610,7 +2651,7 @@ class DeletePersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Figure ID.
+         * ID of a sample.
          * @type {string || null}
          */
         this.PersonId = null;
@@ -3160,7 +3201,13 @@ class AiRecognitionTaskFaceResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -3194,6 +3241,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -3378,11 +3426,13 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -3417,6 +3467,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -3619,7 +3670,13 @@ class AiAnalysisTaskHighlightResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -3653,6 +3710,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -3770,6 +3828,49 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new TempCertificate();
             obj.deserialize(params.TempCertificate)
             this.TempCertificate = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDailyPlayStatFileList response structure.
+ * @class
+ */
+class DescribeDailyPlayStatFileListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of playback statistics files.
+         * @type {Array.<PlayStatFileInfo> || null}
+         */
+        this.PlayStatFileSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PlayStatFileSet) {
+            this.PlayStatFileSet = new Array();
+            for (let z in params.PlayStatFileSet) {
+                let obj = new PlayStatFileInfo();
+                obj.deserialize(params.PlayStatFileSet[z]);
+                this.PlayStatFileSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4102,37 +4203,37 @@ class CreatePersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Figure name. Length limit: 20 characters.
+         * Name of a sample. Length limit: 20 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Figure use case. Valid values:
-1. Recognition: it is used for content recognition and equivalent to `Recognition.Face`.
-2. Review: it is used for content audit and equivalent to `Review.Face`.
-3. All: it is used for content recognition and content audit and equivalent to 1+2 above.
+         * Usage of a sample. Valid values:
+1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+3. All: equivalent to 1+2.
          * @type {Array.<string> || null}
          */
         this.Usages = null;
 
         /**
-         * Figure description. Length limit: 1,024 characters.
+         * Description of a sample. Length limit: 1024 characters.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) face image. Only JPEG and PNG images are supported. Array length limit: 5 images.
-Note: the image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+         * String generated after the sample image is encoded by [Base64](https://tools.ietf.org/html/rfc4648). Only JPEG and PNG images are supported. Array length limit: 5 images.
+Note: the image must be a relatively clear full-face photo of a person and has a resolution of no less than 200 x 200.
          * @type {Array.<string> || null}
          */
         this.FaceContents = null;
 
         /**
-         * Figure tag
-<li>Array length limit: 20 tags;</li>
-<li>Tag length limit: 128 characters.</li>
+         * Tags of a sample
+<li>Array length limit: 20 tags</li>
+<li>Length limit of a tag: 128 characters</li>
          * @type {Array.<string> || null}
          */
         this.Tags = null;
@@ -4475,6 +4576,56 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeCDNStatDetails response structure.
+ * @class
+ */
+class DescribeCDNStatDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time granularity of every piece of data in minutes.
+         * @type {number || null}
+         */
+        this.DataInterval = null;
+
+        /**
+         * CDN usage statistics.
+         * @type {Array.<StatDataItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataInterval = 'DataInterval' in params ? params.DataInterval : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new StatDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Result type of intelligent cover generating task
  * @class
  */
@@ -4489,7 +4640,13 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -4523,6 +4680,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -4888,10 +5046,13 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -4924,6 +5085,7 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -5368,6 +5530,46 @@ class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * Output media file information of a video processing task.
+ * @class
+ */
+class TaskOutputMediaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 
+         * @type {MediaBasicInfo || null}
+         */
+        this.MediaBasicInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.MediaBasicInfo) {
+            let obj = new MediaBasicInfo();
+            obj.deserialize(params.MediaBasicInfo)
+            this.MediaBasicInfo = obj;
+        }
+
+    }
+}
+
+/**
  * ProcessMediaByUrl request structure.
  * @class
  */
@@ -5479,6 +5681,51 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Information of a playback statistics file
+ * @class
+ */
+class PlayStatFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Date of playback statistics in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * URL of a playback statistics file, including the following contents:
+<li> date: playback date</li>
+<li> file_id: video file ID</li>
+<li> ip_count: number of client IPs after deduplication</li>
+<li> flux: playback traffic in bytes</li>
+<li> play_times: total playback times</li>
+<li> pc_play_times: playback times on PC clients</li>
+<li> mobile_play_times: playback times on mobile clients</li>
+<li> iphone_play_times: playback times on iPhone</li>
+<li> android_play_times: playback times on Android</li>
+<li> host_name: domain name</li>
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Date = 'Date' in params ? params.Date : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -6276,11 +6523,13 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6315,6 +6564,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -6463,15 +6713,15 @@ class CreateWordSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>Keyword use case. Valid values:</b>
-1. Recognition.Ocr: OCR-based content recognition;
-2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based content audit;
-4. Review.Asr: ASR-based content audit;
-<b>These values can be merged as follows:</b>
-5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+         * <b>Keyword usage. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition
+2. Recognition.Asr: ASR-based content recognition
+3. Review.Ocr: OCR-based inappropriate information recognition
+4. Review.Asr: ASR-based inappropriate information recognition
+<b>Valid values can also be:</b>
+5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+7. All: ASR- and OCR-based content recognition and inappropriate information recognition; equivalent to 1+2+3+4
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -6712,10 +6962,13 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6749,6 +7002,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -6782,7 +7036,13 @@ class AiRecognitionTaskOcrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6816,6 +7076,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -6893,7 +7154,13 @@ class AiRecognitionTaskSegmentResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6928,6 +7195,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -7273,6 +7541,59 @@ class EditMediaOutputConfig extends  AbstractModel {
 }
 
 /**
+ * Information of a video splitting task.
+ * @class
+ */
+class SplitMediaTaskSegmentInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input information of a video splitting task.
+         * @type {SplitMediaTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output information of a video splitting task.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {TaskOutputMediaInfo || null}
+         */
+        this.Output = null;
+
+        /**
+         * If a video processing flow is specified when a video splitting task is initiated, this field will be the task flow ID.
+         * @type {string || null}
+         */
+        this.ProcedureTaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Input) {
+            let obj = new SplitMediaTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new TaskOutputMediaInfo();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
+
+    }
+}
+
+/**
  * ASR-detected porn information in speech
  * @class
  */
@@ -7346,6 +7667,12 @@ class SimpleHlsClipResponse extends  AbstractModel {
         this.MetaData = null;
 
         /**
+         * Unique ID of a video clip for persistent storage.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -7367,6 +7694,7 @@ class SimpleHlsClipResponse extends  AbstractModel {
             obj.deserialize(params.MetaData)
             this.MetaData = obj;
         }
+        this.FileId = 'FileId' in params ? params.FileId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7606,11 +7934,13 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7645,6 +7975,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -7989,6 +8320,12 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
          */
         this.Height = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -8001,6 +8338,7 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
         this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -8099,7 +8437,13 @@ class AiRecognitionTaskHeadTailResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -8133,6 +8477,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -8254,13 +8599,13 @@ class CreatePersonSampleResponse extends  AbstractModel {
         super();
 
         /**
-         * Figure information.
+         * Information of a sample.
          * @type {AiSamplePerson || null}
          */
         this.Person = null;
 
         /**
-         * Face information failed to be processed.
+         * Information of samples that failed the verification by facial feature positioning.
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
         this.FailFaceInfoSet = null;
@@ -8309,7 +8654,7 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of content audit template.
+         * Unique ID of an intelligent recognition template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -8336,20 +8681,85 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of an intelligent highlight generating task
+ * ModifyAnimatedGraphicsTemplate request structure.
  * @class
  */
-class HighlightsConfigureInfo extends  AbstractModel {
+class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of an intelligent highlight generating task. Valid values:
-<li>ON: enable an intelligent highlight generating task;</li>
-<li>OFF: disable an intelligent highlight generating task.</li>
+         * Unique ID of an animated image generating template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Name of an animated image generating template. Length limit: 64 characters.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Name = null;
+
+        /**
+         * Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Maximum value of the height (or short side) of an animated image in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * Animated image format. Valid values: gif, webp.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Video frame rate in Hz. Value range: [1, 30].
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * Image quality. Value range: [1, 100]. Default value: 75.
+         * @type {number || null}
+         */
+        this.Quality = null;
+
+        /**
+         * Template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -8360,7 +8770,16 @@ class HighlightsConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Quality = 'Quality' in params ? params.Quality : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -8760,7 +9179,8 @@ We don’t recommend specifying this parameter unless you have special requireme
         this.Vcrf = null;
 
         /**
-         * 
+         * I-frame interval in frames. Valid values: 0 and 1-100000.
+When this parameter is set to 0 or left empty, `Gop` will be automatically set.
          * @type {number || null}
          */
         this.Gop = null;
@@ -8890,11 +9310,13 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -8929,6 +9351,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -9644,15 +10067,15 @@ class ModifyWordSampleRequest extends  AbstractModel {
         this.Keyword = null;
 
         /**
-         * <b>Keyword use case. Valid values:</b>
-1. Recognition.Ocr: OCR-based content recognition;
-2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based content audit;
-4. Review.Asr: ASR-based content audit;
-<b>These values can be merged as follows:</b>
-5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-7. All: ASR-based and OCR-based content recognition and audit, which is equivalent to 1+2+3+4 above;
+         * <b>Keyword usage. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition
+2. Recognition.Asr: ASR-based content recognition
+3. Review.Ocr: OCR-based inappropriate information recognition
+4. Review.Asr: ASR-based inappropriate information recognition
+<b>Valid values can also be:</b>
+5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+7. All: equivalent to 1+2+3+4
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -9811,7 +10234,13 @@ class AiRecognitionTaskObjectResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -9845,6 +10274,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -9878,7 +10308,13 @@ class AiAnalysisTaskTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -9912,6 +10348,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -10223,7 +10660,13 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -10257,6 +10700,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -10290,11 +10734,13 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -10329,6 +10775,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -10343,6 +10790,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * AI-based sample management - keyword output information.
+ * @class
+ */
+class AiSampleWord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Keyword.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * Keyword tag.
+         * @type {Array.<string> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * Keyword use case.
+         * @type {Array.<string> || null}
+         */
+        this.UsageSet = null;
+
+        /**
+         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.TagSet = 'TagSet' in params ? params.TagSet : null;
+        this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -10426,11 +10929,13 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -10455,6 +10960,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Output = null;
 
+        /**
+         * Transcoding progress. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
     }
 
     /**
@@ -10465,6 +10976,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -10479,6 +10991,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -10784,6 +11297,12 @@ class ImageWatermarkTemplate extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -10796,6 +11315,7 @@ class ImageWatermarkTemplate extends  AbstractModel {
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -10921,6 +11441,12 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
+         * Whether to store the video clip persistently. 0: no (default), 1: yes.
+         * @type {number || null}
+         */
+        this.IsPersistence = null;
+
+        /**
          * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
@@ -10938,6 +11464,7 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.IsPersistence = 'IsPersistence' in params ? params.IsPersistence : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -11105,6 +11632,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeDailyPlayStatFileList request structure.
+ * @class
+ */
+class DescribeDailyPlayStatFileListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * DescribeSuperPlayerConfigs response structure.
  * @class
  */
@@ -11263,7 +11832,7 @@ class DescribeContentReviewTemplatesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of content audit template details.
+         * List of intelligent content recognition template details.
          * @type {Array.<ContentReviewTemplateItem> || null}
          */
         this.ContentReviewTemplateSet = null;
@@ -11644,11 +12213,13 @@ class MediaProcessTaskCoverBySnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -11682,6 +12253,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -12107,6 +12679,93 @@ class TranscodePlayInfo2017 extends  AbstractModel {
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.Width = 'Width' in params ? params.Width : null;
+
+    }
+}
+
+/**
+ * Video splitting task information. This field has a value only when `TaskType` is `SplitMedia`.
+ * @class
+ */
+class SplitMediaTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task flow status. Valid values:
+<li>PROCESSING: processing</li>
+<li>FINISH: finished</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You're not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error information.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * List of video splitting task details.
+         * @type {Array.<SplitMediaTaskSegmentInfo> || null}
+         */
+        this.FileInfoSet = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or set to an empty string, no deduplication will be performed.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.FileInfoSet) {
+            this.FileInfoSet = new Array();
+            for (let z in params.FileInfoSet) {
+                let obj = new SplitMediaTaskSegmentInfo();
+                obj.deserialize(params.FileInfoSet[z]);
+                this.FileInfoSet.push(obj);
+            }
+        }
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -13642,7 +14301,7 @@ class DescribeStorageDetailsResponse extends  AbstractModel {
         super();
 
         /**
-         * Storage statistics. One data entry per minute/hour/day.
+         * Storage statistics with one piece of data for every 5 minutes or 1 day.
          * @type {Array.<StatDataItem> || null}
          */
         this.Data = null;
@@ -13973,11 +14632,13 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -14012,6 +14673,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -14379,37 +15041,37 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of content audit template.
+         * Unique ID of an intelligent content recognition template.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Content audit template name. Length limit: 64 characters.
+         * Name of an intelligent content recognition template. Length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of content audit template. Length limit: 256 characters.
+         * Description of an intelligent content recognition template. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Control parameter of porn detection.
-         * @type {PornConfigureInfoForUpdate || null}
-         */
-        this.PornConfigure = null;
-
-        /**
-         * Control parameter of terrorism information detection.
+         * Control parameter for terrorism information.
          * @type {TerrorismConfigureInfoForUpdate || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Control parameter of politically sensitive information detection.
+         * Control parameter for porn information.
+         * @type {PornConfigureInfoForUpdate || null}
+         */
+        this.PornConfigure = null;
+
+        /**
+         * Control parameter for politically sensitive information.
          * @type {PoliticalConfigureInfoForUpdate || null}
          */
         this.PoliticalConfigure = null;
@@ -14423,7 +15085,7 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.ProhibitedConfigure = null;
 
         /**
-         * Control parameter of custom content audit.
+         * Control parameter for custom intelligent content recognition tasks.
          * @type {UserDefineConfigureInfoForUpdate || null}
          */
         this.UserDefineConfigure = null;
@@ -14435,9 +15097,9 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.ScreenshotInterval = null;
 
         /**
-         * Switch controlling whether to add audit result to review list (for human review).
-<li>ON: yes;</li>
-<li>OFF: no.</li>
+         * Whether to allow the recognition result to enter the intelligent recognition platform (for human recognition).
+<li>ON: yes</li>
+<li>OFF: no</li>
          * @type {string || null}
          */
         this.ReviewWallSwitch = null;
@@ -14461,16 +15123,16 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
-        if (params.PornConfigure) {
-            let obj = new PornConfigureInfoForUpdate();
-            obj.deserialize(params.PornConfigure)
-            this.PornConfigure = obj;
-        }
-
         if (params.TerrorismConfigure) {
             let obj = new TerrorismConfigureInfoForUpdate();
             obj.deserialize(params.TerrorismConfigure)
             this.TerrorismConfigure = obj;
+        }
+
+        if (params.PornConfigure) {
+            let obj = new PornConfigureInfoForUpdate();
+            obj.deserialize(params.PornConfigure)
+            this.PornConfigure = obj;
         }
 
         if (params.PoliticalConfigure) {
@@ -14527,6 +15189,12 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -14539,6 +15207,7 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -15806,11 +16475,10 @@ class DescribeCDNUsageDataRequest extends  AbstractModel {
 
         /**
          * Time granularity of usage data in minutes. Valid values:
-<li>5: 5-minute granularity, which returns the details at the 5-minute granularity within the specified time range.</li>
-<li>60: 1-hour granularity, which returns the details at the 1-hour granularity within the specified time range.</li>
-<li>1440: 1-day granularity, which returns the details at the 1-day granularity within the specified time range.</li>
-Default value: 1440. Data at the 1-day granularity will be returned.
-When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
+<li>5: 5-minute granularity. The data at 5-minute granularity in the query period will be returned.</li>
+<li>60: 1-hour granularity. The data at 1-hour granularity in the query period will be returned.</li>
+<li>1440: 1-day granularity. The data at 1-day granularity in the query period will be returned.</li>
+Default value: 1440. Data at 1-day granularity will be returned.
          * @type {number || null}
          */
         this.DataInterval = null;
@@ -15906,11 +16574,13 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -15944,6 +16614,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -16271,11 +16942,13 @@ class AiReviewTaskPornResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -16310,6 +16983,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -16583,7 +17257,13 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -16617,6 +17297,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -17149,6 +17830,147 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeCDNStatDetails request structure.
+ * @class
+ */
+class DescribeCDNStatDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Metrics to query. Valid values:
+<li>Traffic: traffic in bytes.</li>
+<li>Bandwidth: bandwidth in bps.</li>
+         * @type {string || null}
+         */
+        this.Metric = null;
+
+        /**
+         * Start time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * List of domain names. The usage data of up to 20 domain names can be queried at a time. The usage data of all domain names is returned by default.
+         * @type {Array.<string> || null}
+         */
+        this.DomainNames = null;
+
+        /**
+         * Service region. Valid values:
+<li>Chinese Mainland</li>
+<li>Asia Pacific Region 1: Hong Kong (China), Macao (China), Singapore, Vietnam, and Thailand</li>
+<li>Asia Pacific Region 2: Taiwan (China), Japan, Malaysia, Indonesia, and South Korea</li>
+<li>Asia Pacific Region 3: Philippines, India, Australia, and other Asia Pacific countries and regions</li>
+<li>Middle East</li>
+<li>Europe</li>
+<li>North America</li>
+<li>South America</li>
+<li>Africa</li>
+Default value: Chinese Mainland
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * District where users are located. When `Area` is `Chinese Mainland`, valid values for `Districts` are as follows. Otherwise, `Districts` can be ignored.
+<li>Beijing</li>
+<li>Inner Mongolia</li>
+<li>Shanxi</li>
+<li>Hebei</li>
+<li>Tianjin</li>
+<li>Ningxia</li>
+<li>Shaanxi</li>
+<li>Gansu</li>
+<li>Qinghai</li>
+<li>Xinjiang</li>
+<li>Heilongjiang</li>
+<li>Jilin</li>
+<li>Liaoning</li>
+<li>Fujian</li>
+<li>Jiangsu</li>
+<li>Anhui</li>
+<li>Shandong</li>
+<li>Shanghai</li>
+<li>Zhejiang</li>
+<li>Henan</li>
+<li>Hubei</li>
+<li>Jiangxi</li>
+<li>Hunan</li>
+<li>Guizhou</li>
+<li>Yunnan</li>
+<li>Chongqing</li>
+<li>Sichuan</li>
+<li>Tibet</li>
+<li>Guangdong</li>
+<li>Guangxi</li>
+<li>Hainan</li>
+<li>Hong Kong, Macao and Taiwan</li>
+<li>Outside Chinese Mainland</li>
+<li>Other</li>
+         * @type {Array.<string> || null}
+         */
+        this.Districts = null;
+
+        /**
+         * ISP of users. When `Area` is `Chinese Mainland`, valid values for `Isps` are as follows. Otherwise, `Isps` can be ignored.
+<li>China Telecom</li>
+<li>China Unicom</li>
+<li>CERNET</li>
+<li>Great Wall Broadband Network</li>
+<li>China Mobile</li>
+<li>China Mobile Tietong</li>
+<li>ISPs outside Chinese Mainland</li>
+<li>Other ISPs</li>
+         * @type {Array.<string> || null}
+         */
+        this.Isps = null;
+
+        /**
+         * Time granularity of every piece of data in minutes. Valid values:
+<li>5: 5-minute granularity. The data at 5-minute granularity in the query period will be returned.</li>
+<li>1440: 1-day granularity. The data at 1-day granularity in the query period will be returned. If the query period is larger than 24 hours, only data at 1-day granularity can be queried.</li>
+If the difference between `StartTime` and `EndTime` is larger than 24 hours, the default value of `DataInterval` is 1440.
+         * @type {number || null}
+         */
+        this.DataInterval = null;
+
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.DomainNames = 'DomainNames' in params ? params.DomainNames : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.Districts = 'Districts' in params ? params.Districts : null;
+        this.Isps = 'Isps' in params ? params.Isps : null;
+        this.DataInterval = 'DataInterval' in params ? params.DataInterval : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Information of file generated by video clipping (v2017)
  * @class
  */
@@ -17452,21 +18274,22 @@ class EventContent extends  AbstractModel {
         this.EventHandle = null;
 
         /**
-         * <b>Supported event type:</b>
-<li>NewFileUpload: video upload completion;</li>
-<li>ProcedureStateChanged: task flow status change;</li>
-<li>FileDeleted: video deletion completion;</li>
-<li>PullComplete: video pull for upload completion;</li>
-<li>EditMediaComplete: video editing completion;</li>
-<li>WechatPublishComplete: release on WeChat completion;</li>
-<li>ComposeMediaComplete: media file composing completion;</li>
-<li>WechatMiniProgramPublishComplete: release on WeChat Mini Program completion.</li>
-<b>Event types compatible with v2017:</b>
-<li>TranscodeComplete: video transcoding completion;</li>
-<li>ConcatComplete: video splicing completion;</li>
-<li>ClipComplete: video clipping completion;</li>
-<li>CreateImageSpriteComplete: image sprite generating completion;</li>
-<li>CreateSnapshotByTimeOffsetComplete: time point screencapturing completion.</li>
+         * <b>Supported event types:</b>
+<li>NewFileUpload: finished video upload</li>
+<li>ProcedureStateChanged: task flow status changed</li>
+<li>FileDeleted: finished video deletion</li>
+<li>PullComplete: finished pulling for upload</li>
+<li>EditMediaComplete: finished video editing</li>
+<li>SplitMediaComplete: finished video splitting</li>
+<li>WechatPublishComplete: finished publishing on WeChat</li>
+<li>ComposeMediaComplete: finished producing the media file</li>
+<li>WechatMiniProgramPublishComplete: finished publishing on WeChat Mini Program</li>
+<b>Support v2017 task types:</b>
+<li>TranscodeComplete: finished video transcoding</li>
+<li>ConcatComplete: finished video splicing</li>
+<li>ClipComplete: finished video clipping</li>
+<li>CreateImageSpriteComplete: finished image sprite generation</li>
+<li>CreateSnapshotByTimeOffsetComplete: finished point-in-time screencapturing</li>
          * @type {string || null}
          */
         this.EventType = null;
@@ -17507,25 +18330,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.EditMediaCompleteEvent = null;
 
         /**
-         * Release on WeChat completion event, which is valid if the event type is `WechatPublishComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {WechatPublishTask || null}
+         * Video splitting completion event, which is valid if the event type is `EditMediaComplete`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {SplitMediaTask || null}
          */
-        this.WechatPublishCompleteEvent = null;
+        this.SplitMediaCompleteEvent = null;
 
         /**
-         * Video transcoding completion event, which is valid if the event type is `TranscodeComplete`.
+         * Media file composing task completion event, which is valid when the event type is `ComposeMediaComplete`.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {TranscodeTask2017 || null}
+         * @type {ComposeMediaTask || null}
          */
-        this.TranscodeCompleteEvent = null;
-
-        /**
-         * Video splicing completion event, which is valid if the event type is `ConcatComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {ConcatTask2017 || null}
-         */
-        this.ConcatCompleteEvent = null;
+        this.ComposeMediaCompleteEvent = null;
 
         /**
          * Video clipping completion event, which is valid if the event type is `ClipComplete`.
@@ -17535,11 +18351,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ClipCompleteEvent = null;
 
         /**
+         * Video transcoding completion event, which is valid if the event type is `TranscodeComplete`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {TranscodeTask2017 || null}
+         */
+        this.TranscodeCompleteEvent = null;
+
+        /**
          * Image sprite generating completion event, which is valid if the event type is `CreateImageSpriteComplete`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {CreateImageSpriteTask2017 || null}
          */
         this.CreateImageSpriteCompleteEvent = null;
+
+        /**
+         * Video splicing completion event, which is valid if the event type is `ConcatComplete`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ConcatTask2017 || null}
+         */
+        this.ConcatCompleteEvent = null;
 
         /**
          * Time point screencapturing completion event, which is valid when the event type is `CreateSnapshotByTimeOffsetComplete`.
@@ -17549,11 +18379,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SnapshotByTimeOffsetCompleteEvent = null;
 
         /**
-         * Media file composing task completion event, which is valid when the event type is `ComposeMediaComplete`.
+         * Release on WeChat completion event, which is valid if the event type is `WechatPublishComplete`.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {ComposeMediaTask || null}
+         * @type {WechatPublishTask || null}
          */
-        this.ComposeMediaCompleteEvent = null;
+        this.WechatPublishCompleteEvent = null;
 
         /**
          * Release on WeChat Mini Program task completion event, which is valid if the event type is `WechatMiniProgramPublishComplete`.
@@ -17604,22 +18434,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.EditMediaCompleteEvent = obj;
         }
 
-        if (params.WechatPublishCompleteEvent) {
-            let obj = new WechatPublishTask();
-            obj.deserialize(params.WechatPublishCompleteEvent)
-            this.WechatPublishCompleteEvent = obj;
+        if (params.SplitMediaCompleteEvent) {
+            let obj = new SplitMediaTask();
+            obj.deserialize(params.SplitMediaCompleteEvent)
+            this.SplitMediaCompleteEvent = obj;
         }
 
-        if (params.TranscodeCompleteEvent) {
-            let obj = new TranscodeTask2017();
-            obj.deserialize(params.TranscodeCompleteEvent)
-            this.TranscodeCompleteEvent = obj;
-        }
-
-        if (params.ConcatCompleteEvent) {
-            let obj = new ConcatTask2017();
-            obj.deserialize(params.ConcatCompleteEvent)
-            this.ConcatCompleteEvent = obj;
+        if (params.ComposeMediaCompleteEvent) {
+            let obj = new ComposeMediaTask();
+            obj.deserialize(params.ComposeMediaCompleteEvent)
+            this.ComposeMediaCompleteEvent = obj;
         }
 
         if (params.ClipCompleteEvent) {
@@ -17628,10 +18452,22 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.ClipCompleteEvent = obj;
         }
 
+        if (params.TranscodeCompleteEvent) {
+            let obj = new TranscodeTask2017();
+            obj.deserialize(params.TranscodeCompleteEvent)
+            this.TranscodeCompleteEvent = obj;
+        }
+
         if (params.CreateImageSpriteCompleteEvent) {
             let obj = new CreateImageSpriteTask2017();
             obj.deserialize(params.CreateImageSpriteCompleteEvent)
             this.CreateImageSpriteCompleteEvent = obj;
+        }
+
+        if (params.ConcatCompleteEvent) {
+            let obj = new ConcatTask2017();
+            obj.deserialize(params.ConcatCompleteEvent)
+            this.ConcatCompleteEvent = obj;
         }
 
         if (params.SnapshotByTimeOffsetCompleteEvent) {
@@ -17640,10 +18476,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.SnapshotByTimeOffsetCompleteEvent = obj;
         }
 
-        if (params.ComposeMediaCompleteEvent) {
-            let obj = new ComposeMediaTask();
-            obj.deserialize(params.ComposeMediaCompleteEvent)
-            this.ComposeMediaCompleteEvent = obj;
+        if (params.WechatPublishCompleteEvent) {
+            let obj = new WechatPublishTask();
+            obj.deserialize(params.WechatPublishCompleteEvent)
+            this.WechatPublishCompleteEvent = obj;
         }
 
         if (params.WechatMiniProgramPublishCompleteEvent) {
@@ -18095,7 +18931,7 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Figure ID.
+         * ID of a sample.
          * @type {string || null}
          */
         this.PersonId = null;
@@ -18113,16 +18949,16 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Figure use case. Valid values:
-1. Recognition: it is used for content recognition and equivalent to `Recognition.Face`.
-2. Review: it is used for content audit and equivalent to `Review.Face`.
-3. All: it is used for content recognition and content audit and equivalent to 1+2 above.
+         * Sample usage. Valid values:
+1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+3. All: used for content recognition and inappropriate information recognition; equivalent to 1+2
          * @type {Array.<string> || null}
          */
         this.Usages = null;
 
         /**
-         * Face operation information.
+         * Information of operations on facial features.
          * @type {AiSampleFaceOperation || null}
          */
         this.FaceOperationInfo = null;
@@ -18437,7 +19273,13 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -18471,6 +19313,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -18572,7 +19415,13 @@ class AiRecognitionTaskAsrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -18606,6 +19455,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -18772,85 +19622,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyAnimatedGraphicsTemplate request structure.
+ * Control parameter of an intelligent highlight generating task
  * @class
  */
-class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
+class HighlightsConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of an animated image generating template.
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * Name of an animated image generating template. Length limit: 64 characters.
+         * Switch of an intelligent highlight generating task. Valid values:
+<li>ON: enable an intelligent highlight generating task;</li>
+<li>OFF: disable an intelligent highlight generating task.</li>
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Maximum value of the height (or short side) of an animated image in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Resolution adaption. Valid values:
-<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
-Default value: open.
-         * @type {string || null}
-         */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * Animated image format. Valid values: gif, webp.
-         * @type {string || null}
-         */
-        this.Format = null;
-
-        /**
-         * Video frame rate in Hz. Value range: [1, 30].
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * Image quality. Value range: [1, 100]. Default value: 75.
-         * @type {number || null}
-         */
-        this.Quality = null;
-
-        /**
-         * Template description. Length limit: 256 characters.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
+        this.Switch = null;
 
     }
 
@@ -18861,16 +19646,7 @@ Default value: open.
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Format = 'Format' in params ? params.Format : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Quality = 'Quality' in params ? params.Quality : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -19540,6 +20316,12 @@ class DescribeSubAppIdsResponse extends  AbstractModel {
         this.SubAppIdInfoSet = null;
 
         /**
+         * Total number of subapplications.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -19563,6 +20345,7 @@ class DescribeSubAppIdsResponse extends  AbstractModel {
                 this.SubAppIdInfoSet.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -19793,14 +20576,15 @@ If the value is 0, the bitrate of the video will be the same as that of the sour
         this.FillType = null;
 
         /**
-         * Video Constant Rate Factor (CRF). Value range: 1-51. This parameter will be disabled if you enter 0.
+         * Video Constant Rate Factor (CRF). Value range: 0-51. This parameter will be disabled if you enter 0.
 We don’t recommend specifying this parameter unless you have special requirements.
          * @type {number || null}
          */
         this.Vcrf = null;
 
         /**
-         * 
+         * I-frame interval in frames. Valid values: 0 and 1-100000.
+When this parameter is set to 0 or left empty, `Gop` will be automatically set.
          * @type {number || null}
          */
         this.Gop = null;
@@ -19836,39 +20620,39 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Switch controlling whether to add audit result to review list (for human review).
-<li>ON: yes;</li>
-<li>OFF: no.</li>
+         * Whether to allow the recognition result to enter the intelligent recognition platform (for human recognition).
+<li>ON: yes</li>
+<li>OFF: no</li>
          * @type {string || null}
          */
         this.ReviewWallSwitch = null;
 
         /**
-         * Content audit template name. Length limit: 64 characters.
+         * Name of an intelligent content recognition template. Length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of content audit template. Length limit: 256 characters.
+         * Description of an intelligent content recognition template. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Control parameter of porn detection.
+         * Control parameter for porn information.
          * @type {PornConfigureInfo || null}
          */
         this.PornConfigure = null;
 
         /**
-         * Control parameter of terrorism information detection.
+         * Control parameter for terrorism information.
          * @type {TerrorismConfigureInfo || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Control parameter of politically sensitive information detection.
+         * Control parameter for politically sensitive information.
          * @type {PoliticalConfigureInfo || null}
          */
         this.PoliticalConfigure = null;
@@ -19882,7 +20666,7 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.ProhibitedConfigure = null;
 
         /**
-         * Control parameter of custom content audit.
+         * Control parameter for custom intelligent content recognition.
          * @type {UserDefineConfigureInfo || null}
          */
         this.UserDefineConfigure = null;
@@ -19956,7 +20740,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID filter of content audit templates. Array length limit: 100.
+         * Unique IDs for filters of an intelligent content recognition template. Array length limit: 100.
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -20256,19 +21040,20 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 
         /**
          * Task type. Valid values:
-<li>Procedure: video processing task;</li>
-<li>EditMedia: video editing task;</li>
-<li>WechatPublish: release on WeChat task;</li>
-<li>WechatMiniProgramPublish: release on WeChat Mini Program task;</li>
-<li>ComposeMedia: media file composing task;</li>
-<li>PullUpload: media file pulling for upload task.</li>
+<li>Procedure: video processing task</li>
+<li>EditMedia: video editing task</li>
+<li>SplitMedia: video splitting task</li>
+<li>ComposeMedia: media file producing task</li>
+<li>WechatPublish: WeChat publishing task</li>
+<li>WechatMiniProgramPublish: video publishing on WeChat Mini Program</li>
+<li>PullUpload: pulling media files for upload</li>
 
-Task types compatible with v2017:
-<li>Transcode: transcoding task;</li>
+Support v2017 task types:
+<li>Transcode: transcoding task</li>
 <li>SnapshotByTimeOffset: screencapturing task</li>
-<li>Concat: video splicing task;</li>
-<li>Clip: video clipping task;</li>
-<li>ImageSprites: image sprite generating task.</li>
+<li>Concat: video splicing task</li>
+<li>Clip: video clipping task</li>
+<li>ImageSprites: image sprite generating task</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -20329,6 +21114,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ComposeMediaTask = null;
 
         /**
+         * Video splitting task information. This field has a value only when `TaskType` is `EditMedia`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {SplitMediaTask || null}
+         */
+        this.SplitMediaTask = null;
+
+        /**
+         * Release on WeChat Mini Program task information. This field has a value only when `TaskType` is `WechatMiniProgramPublish`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {WechatMiniProgramPublishTask || null}
+         */
+        this.WechatMiniProgramPublishTask = null;
+
+        /**
          * Media file pulling for upload task information. This field has a value only when `TaskType` is `PullUpload`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {PullUploadTask || null}
@@ -20341,13 +21140,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {TranscodeTask2017 || null}
          */
         this.TranscodeTask = null;
-
-        /**
-         * Time point screencapturing task information. This field has a value only when `TaskType` is `SnapshotByTimeOffset`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {SnapshotByTimeOffsetTask2017 || null}
-         */
-        this.SnapshotByTimeOffsetTask = null;
 
         /**
          * Video splicing task information. This field has a value only when `TaskType` is `Concat`.
@@ -20371,11 +21163,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CreateImageSpriteTask = null;
 
         /**
-         * Release on WeChat Mini Program task information. This field has a value only when `TaskType` is `WechatMiniProgramPublish`.
+         * Time point screencapturing task information. This field has a value only when `TaskType` is `SnapshotByTimeOffset`.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {WechatMiniProgramPublishTask || null}
+         * @type {SnapshotByTimeOffsetTask2017 || null}
          */
-        this.WechatMiniProgramPublishTask = null;
+        this.SnapshotByTimeOffsetTask = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -20422,6 +21214,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.ComposeMediaTask = obj;
         }
 
+        if (params.SplitMediaTask) {
+            let obj = new SplitMediaTask();
+            obj.deserialize(params.SplitMediaTask)
+            this.SplitMediaTask = obj;
+        }
+
+        if (params.WechatMiniProgramPublishTask) {
+            let obj = new WechatMiniProgramPublishTask();
+            obj.deserialize(params.WechatMiniProgramPublishTask)
+            this.WechatMiniProgramPublishTask = obj;
+        }
+
         if (params.PullUploadTask) {
             let obj = new PullUploadTask();
             obj.deserialize(params.PullUploadTask)
@@ -20432,12 +21236,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new TranscodeTask2017();
             obj.deserialize(params.TranscodeTask)
             this.TranscodeTask = obj;
-        }
-
-        if (params.SnapshotByTimeOffsetTask) {
-            let obj = new SnapshotByTimeOffsetTask2017();
-            obj.deserialize(params.SnapshotByTimeOffsetTask)
-            this.SnapshotByTimeOffsetTask = obj;
         }
 
         if (params.ConcatTask) {
@@ -20458,10 +21256,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.CreateImageSpriteTask = obj;
         }
 
-        if (params.WechatMiniProgramPublishTask) {
-            let obj = new WechatMiniProgramPublishTask();
-            obj.deserialize(params.WechatMiniProgramPublishTask)
-            this.WechatMiniProgramPublishTask = obj;
+        if (params.SnapshotByTimeOffsetTask) {
+            let obj = new SnapshotByTimeOffsetTask2017();
+            obj.deserialize(params.SnapshotByTimeOffsetTask)
+            this.SnapshotByTimeOffsetTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -20836,6 +21634,56 @@ class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
 }
 
 /**
+ * Information of video splitting output files.
+ * @class
+ */
+class SplitMediaOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of an output file. This parameter can contain up to 64 characters, and will be generated by the system if it is left empty.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * Output file format. Valid values: mp4 (default), hls.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Category ID, which is used to categorize the media file for management. You can use [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+<li>Default value: 0, which means other categories.</li>
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * Expiration time of an output file. After passing the expiration time, the file will be deleted. There is no expiration time set for a file by default. The time is in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
  * Input of video splitting.
  * @class
  */
@@ -20922,22 +21770,28 @@ class DescribeSubAppIdsRequest extends  AbstractModel {
         super();
 
         /**
-         * 
-         * @type {number || null}
+         * Subapplication name.
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Name = null;
 
         /**
          * Tag information. You can query the list of subapplications with specified tags.
          * @type {Array.<ResourceTag> || null}
          */
         this.Tags = null;
+
+        /**
+         * Page number offset from the beginning of paginated queries. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum return results of pulling paginated queries. Default: 200; maximum: 200.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -20948,8 +21802,7 @@ class DescribeSubAppIdsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -20959,6 +21812,8 @@ class DescribeSubAppIdsRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -21073,11 +21928,13 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -21112,6 +21969,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -21979,19 +22837,19 @@ class DescribeReviewDetailsResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of initiated content audits.
+         * Times of initiating intelligent content recognition tasks.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Total content audit duration.
+         * Duration of intelligent recognition content.
          * @type {number || null}
          */
         this.TotalDuration = null;
 
         /**
-         * Data of content audit duration, which is collected once per day.
+         * Data of intelligent recognition content duration. One piece of data is collected every day.
          * @type {Array.<StatDataItem> || null}
          */
         this.Data = null;
@@ -22684,15 +23542,15 @@ class DescribeWordSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>Keyword use case filter. Valid values:</b>
-1. Recognition.Ocr: OCR-based content recognition;
-2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based content audit;
-4. Review.Asr: ASR-based content audit;
-<b>These values can be merged as follows:</b>
-5. Recognition: ASR-based and OCR-based content recognition, which is equivalent to 1+2 above;
-6. Review: ASR-based and OCR-based content audit, which is equivalent to 3+4 above;
-Multiple elements can be selected, and the relationship between them is "OR", i.e., any keyword use case that contains any element in this field set will be deemed eligible.
+         * <b>Keyword usage. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition
+2. Recognition.Asr: ASR-based content recognition
+3. Review.Ocr: OCR-based inappropriate information recognition
+4. Review.Asr: ASR-based inappropriate information recognition
+<b>Valid values can also be:</b>
+5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+You can select multiple elements, which are connected by OR logic. If a use case contains any element in this parameter, the keyword sample will be used.
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -23838,13 +24696,14 @@ class ModifyPersonSampleResponse extends  AbstractModel {
         super();
 
         /**
-         * Figure information.
+         * Information of a sample.
          * @type {AiSamplePerson || null}
          */
         this.Person = null;
 
         /**
-         * Face information failed to be processed.
+         * Information of samples that failed the verification by facial feature positioning.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
         this.FailFaceInfoSet = null;
@@ -24218,6 +25077,73 @@ class DescribePersonSamplesResponse extends  AbstractModel {
 }
 
 /**
+ * Input information of a video splitting task.
+ * @class
+ */
+class SplitMediaTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Offset of the video splitting start time in seconds.
+<li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
+<li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
+<li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * Offset of the video splitting end time in seconds.
+<li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
+<li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
+<li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * [Task flow template](https://intl.cloud.tencent.com/document/product/266/33931?lang=en&pg=) name, which should be entered if you want to perform a task flow on the generated new video.
+         * @type {string || null}
+         */
+        this.ProcedureName = null;
+
+        /**
+         * Output information of a video splitting task.
+         * @type {SplitMediaOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.ProcedureName = 'ProcedureName' in params ? params.ProcedureName : null;
+
+        if (params.OutputConfig) {
+            let obj = new SplitMediaOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+
+    }
+}
+
+/**
  * Control parameter of porn information detection task
  * @class
  */
@@ -24586,7 +25512,13 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -24620,6 +25552,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -25209,11 +26142,13 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -25248,6 +26183,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -26595,30 +27531,30 @@ class DescribePersonSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * Pulled figure type. Valid values:
-<li>UserDefine: custom figure library;</li>
-<li>Default: default figure library.</li>
+         * Type of samples to pull. Valid values:
+<li>UserDefine: custom sample library</li>
+<li>Default: default sample library</li>
 
-Default value: UserDefine (the custom figure library will be pulled.)
-Note: the default figure library can be pulled only through "figure name" or "figure ID + figure name", and only one face image will be returned.
+Default value: UserDefine. Samples in the custom sample library will be pulled.
+Note: samples from the default library can only be pulled by providing the name or both the ID and name of a sample. Only one face image will be returned.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Figure ID. Array length limit: 100.
+         * IDs of samples. Array length limit: 100.
          * @type {Array.<string> || null}
          */
         this.PersonIds = null;
 
         /**
-         * Figure name. Array length limit: 20.
+         * Names of samples. Array length limit: 20.
          * @type {Array.<string> || null}
          */
         this.Names = null;
 
         /**
-         * Figure tag. Array length limit: 20.
+         * Tags of a sample. Array length limit: 20.
          * @type {Array.<string> || null}
          */
         this.Tags = null;
@@ -26757,23 +27693,22 @@ class DescribeStorageDetailsRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time in ISO 8601 format. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Start time in ISO 8601 format. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time in ISO 8601 format, which must be after the start time. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * End time in ISO 8601 format, which should be larger than the start time. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Query time interval. Valid values:
-<li>Minute: once per minute.</li>
-<li>Hour: once per hour.</li>
-<li>Day: once per day.</li>
-The default value is determined by the time span. `Minute` will be used if the time span is less than 1 hour, `Hour` if less than or equal to 7 days, and `Day` if more than 7 days.
+         * Time granularity. Valid values:
+<li>Minute: 5-minute granularity</li>
+<li>Day: 1-day granularity</li>
+The value is set according to query period length by default. 5-minute granularity is set for periods no longer than 1 day, and 1-day granularity is set for periods longer than 1 day.
          * @type {string || null}
          */
         this.Interval = null;
@@ -26795,6 +27730,15 @@ When the value of this field is 1, the total usage of all subapplications (inclu
          */
         this.SubAppId = null;
 
+        /**
+         * Storage region to query. Valid values:
+<li>Chinese Mainland</li>
+<li>Outside Chinese Mainland</li>
+Default value: Chinese Mainland
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -26809,6 +27753,7 @@ When the value of this field is 1, the total usage of all subapplications (inclu
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.StorageType = 'StorageType' in params ? params.StorageType : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -26858,6 +27803,57 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.TrackItems.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * VOD storage usage by region.
+ * @class
+ */
+class StorageStatData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VOD storage billing region. Valid values:
+<li>Chinese Mainland</li>
+<li>Outside Chinese Mainland</li>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Current total storage capacity in bytes.
+         * @type {number || null}
+         */
+        this.TotalStorage = null;
+
+        /**
+         * Current STANDARD_IA storage capacity in bytes.
+         * @type {number || null}
+         */
+        this.InfrequentStorage = null;
+
+        /**
+         * Current STANDARD storage capacity in bytes.
+         * @type {number || null}
+         */
+        this.StandardStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Area = 'Area' in params ? params.Area : null;
+        this.TotalStorage = 'TotalStorage' in params ? params.TotalStorage : null;
+        this.InfrequentStorage = 'InfrequentStorage' in params ? params.InfrequentStorage : null;
+        this.StandardStorage = 'StandardStorage' in params ? params.StandardStorage : null;
 
     }
 }
@@ -27575,6 +28571,7 @@ module.exports = {
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
     AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
     MediaMiniProgramReviewElem: MediaMiniProgramReviewElem,
+    ManageTaskResponse: ManageTaskResponse,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -27583,7 +28580,7 @@ module.exports = {
     CreateImageSpriteTask2017: CreateImageSpriteTask2017,
     TempCertificate: TempCertificate,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
-    AiSampleWord: AiSampleWord,
+    ManageTaskRequest: ManageTaskRequest,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
@@ -27617,6 +28614,7 @@ module.exports = {
     AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
     ApplyUploadResponse: ApplyUploadResponse,
+    DescribeDailyPlayStatFileListResponse: DescribeDailyPlayStatFileListResponse,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     DeleteSuperPlayerConfigRequest: DeleteSuperPlayerConfigRequest,
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
@@ -27633,6 +28631,7 @@ module.exports = {
     ConcatTask2017: ConcatTask2017,
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
     FileUploadTask: FileUploadTask,
+    DescribeCDNStatDetailsResponse: DescribeCDNStatDetailsResponse,
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
     FileDeleteTask: FileDeleteTask,
@@ -27651,7 +28650,9 @@ module.exports = {
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
     EditMediaResponse: EditMediaResponse,
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
+    TaskOutputMediaInfo: TaskOutputMediaInfo,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
+    PlayStatFileInfo: PlayStatFileInfo,
     ModifyMediaInfoRequest: ModifyMediaInfoRequest,
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
@@ -27685,6 +28686,7 @@ module.exports = {
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     EditMediaOutputConfig: EditMediaOutputConfig,
+    SplitMediaTaskSegmentInfo: SplitMediaTaskSegmentInfo,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     SimpleHlsClipResponse: SimpleHlsClipResponse,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
@@ -27705,7 +28707,7 @@ module.exports = {
     TranscodeTask2017: TranscodeTask2017,
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
-    HighlightsConfigureInfo: HighlightsConfigureInfo,
+    ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
     ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
@@ -27742,6 +28744,7 @@ module.exports = {
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
+    AiSampleWord: AiSampleWord,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
@@ -27758,6 +28761,7 @@ module.exports = {
     MediaDeleteItem: MediaDeleteItem,
     AiSamplePerson: AiSamplePerson,
     MediaAdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo,
+    DescribeDailyPlayStatFileListRequest: DescribeDailyPlayStatFileListRequest,
     DescribeSuperPlayerConfigsResponse: DescribeSuperPlayerConfigsResponse,
     AsrWordsConfigureInfoForUpdate: AsrWordsConfigureInfoForUpdate,
     DescribeStorageDataRequest: DescribeStorageDataRequest,
@@ -27776,6 +28780,7 @@ module.exports = {
     ComposeMediaTask: ComposeMediaTask,
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
+    SplitMediaTask: SplitMediaTask,
     ComposeMediaTaskInput: ComposeMediaTaskInput,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     MosaicInput: MosaicInput,
@@ -27864,6 +28869,7 @@ module.exports = {
     TranscodeTaskInput: TranscodeTaskInput,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     WechatPublishTask: WechatPublishTask,
+    DescribeCDNStatDetailsRequest: DescribeCDNStatDetailsRequest,
     ClipFileInfo2017: ClipFileInfo2017,
     StatDataItem: StatDataItem,
     MediaSourceData: MediaSourceData,
@@ -27892,7 +28898,7 @@ module.exports = {
     ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     PoliticalConfigureInfo: PoliticalConfigureInfo,
-    ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
+    HighlightsConfigureInfo: HighlightsConfigureInfo,
     AiRecognitionTaskOcrWordsSegmentItem: AiRecognitionTaskOcrWordsSegmentItem,
     MediaProcessTaskResult: MediaProcessTaskResult,
     DeleteWordSamplesResponse: DeleteWordSamplesResponse,
@@ -27926,6 +28932,7 @@ module.exports = {
     DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
     DescribeSuperPlayerConfigsRequest: DescribeSuperPlayerConfigsRequest,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
+    SplitMediaOutputConfig: SplitMediaOutputConfig,
     AiRecognitionTaskSegmentResultInput: AiRecognitionTaskSegmentResultInput,
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeSubAppIdsRequest: DescribeSubAppIdsRequest,
@@ -27980,6 +28987,7 @@ module.exports = {
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     MediaTranscodeItem: MediaTranscodeItem,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
+    SplitMediaTaskInput: SplitMediaTaskInput,
     PornConfigureInfo: PornConfigureInfo,
     AiRecognitionTaskObjectSeqmentItem: AiRecognitionTaskObjectSeqmentItem,
     PullEventsRequest: PullEventsRequest,
@@ -28025,6 +29033,7 @@ module.exports = {
     AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
     DescribeStorageDetailsRequest: DescribeStorageDetailsRequest,
     MediaTrack: MediaTrack,
+    StorageStatData: StorageStatData,
     MediaOutputInfo: MediaOutputInfo,
     EditMediaTaskOutput: EditMediaTaskOutput,
     HighlightSegmentItem: HighlightSegmentItem,

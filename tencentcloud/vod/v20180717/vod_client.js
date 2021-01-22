@@ -37,6 +37,7 @@ const AiReviewTaskProhibitedOcrResult = models.AiReviewTaskProhibitedOcrResult;
 const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
 const AiReviewProhibitedOcrTaskOutput = models.AiReviewProhibitedOcrTaskOutput;
 const MediaMiniProgramReviewElem = models.MediaMiniProgramReviewElem;
+const ManageTaskResponse = models.ManageTaskResponse;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
@@ -45,7 +46,7 @@ const MediaInputInfo = models.MediaInputInfo;
 const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
 const TempCertificate = models.TempCertificate;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
-const AiSampleWord = models.AiSampleWord;
+const ManageTaskRequest = models.ManageTaskRequest;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
@@ -79,6 +80,7 @@ const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
 const AiAnalysisTaskHighlightResult = models.AiAnalysisTaskHighlightResult;
 const DeleteAIAnalysisTemplateResponse = models.DeleteAIAnalysisTemplateResponse;
 const ApplyUploadResponse = models.ApplyUploadResponse;
+const DescribeDailyPlayStatFileListResponse = models.DescribeDailyPlayStatFileListResponse;
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const DeleteSuperPlayerConfigRequest = models.DeleteSuperPlayerConfigRequest;
 const AiReviewTerrorismOcrTaskInput = models.AiReviewTerrorismOcrTaskInput;
@@ -95,6 +97,7 @@ const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsRe
 const ConcatTask2017 = models.ConcatTask2017;
 const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
 const FileUploadTask = models.FileUploadTask;
+const DescribeCDNStatDetailsResponse = models.DescribeCDNStatDetailsResponse;
 const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
 const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
 const FileDeleteTask = models.FileDeleteTask;
@@ -113,7 +116,9 @@ const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
 const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
+const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
+const PlayStatFileInfo = models.PlayStatFileInfo;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
@@ -147,6 +152,7 @@ const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
 const EditMediaOutputConfig = models.EditMediaOutputConfig;
+const SplitMediaTaskSegmentInfo = models.SplitMediaTaskSegmentInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
@@ -167,7 +173,7 @@ const AiRecognitionTaskHeadTailResult = models.AiRecognitionTaskHeadTailResult;
 const TranscodeTask2017 = models.TranscodeTask2017;
 const CreatePersonSampleResponse = models.CreatePersonSampleResponse;
 const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateResponse;
-const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
+const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const DescribeProcedureTemplatesRequest = models.DescribeProcedureTemplatesRequest;
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
@@ -204,6 +210,7 @@ const ProcessMediaRequest = models.ProcessMediaRequest;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
+const AiSampleWord = models.AiSampleWord;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
 const ModifyAdaptiveDynamicStreamingTemplateResponse = models.ModifyAdaptiveDynamicStreamingTemplateResponse;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
@@ -220,6 +227,7 @@ const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
 const MediaDeleteItem = models.MediaDeleteItem;
 const AiSamplePerson = models.AiSamplePerson;
 const MediaAdaptiveDynamicStreamingInfo = models.MediaAdaptiveDynamicStreamingInfo;
+const DescribeDailyPlayStatFileListRequest = models.DescribeDailyPlayStatFileListRequest;
 const DescribeSuperPlayerConfigsResponse = models.DescribeSuperPlayerConfigsResponse;
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
 const DescribeStorageDataRequest = models.DescribeStorageDataRequest;
@@ -238,6 +246,7 @@ const WechatMiniProgramPublishTask = models.WechatMiniProgramPublishTask;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
+const SplitMediaTask = models.SplitMediaTask;
 const ComposeMediaTaskInput = models.ComposeMediaTaskInput;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const MosaicInput = models.MosaicInput;
@@ -326,6 +335,7 @@ const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const WechatPublishTask = models.WechatPublishTask;
+const DescribeCDNStatDetailsRequest = models.DescribeCDNStatDetailsRequest;
 const ClipFileInfo2017 = models.ClipFileInfo2017;
 const StatDataItem = models.StatDataItem;
 const MediaSourceData = models.MediaSourceData;
@@ -354,7 +364,7 @@ const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextRe
 const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
-const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
+const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
@@ -388,6 +398,7 @@ const CreateProcedureTemplateResponse = models.CreateProcedureTemplateResponse;
 const DescribeMediaProcessUsageDataResponse = models.DescribeMediaProcessUsageDataResponse;
 const DescribeSuperPlayerConfigsRequest = models.DescribeSuperPlayerConfigsRequest;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
+const SplitMediaOutputConfig = models.SplitMediaOutputConfig;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
@@ -442,6 +453,7 @@ const VideoTrackItem = models.VideoTrackItem;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
 const DescribePersonSamplesResponse = models.DescribePersonSamplesResponse;
+const SplitMediaTaskInput = models.SplitMediaTaskInput;
 const PornConfigureInfo = models.PornConfigureInfo;
 const AiRecognitionTaskObjectSeqmentItem = models.AiRecognitionTaskObjectSeqmentItem;
 const PullEventsRequest = models.PullEventsRequest;
@@ -487,6 +499,7 @@ const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
 const AiAnalysisTaskCoverInput = models.AiAnalysisTaskCoverInput;
 const DescribeStorageDetailsRequest = models.DescribeStorageDetailsRequest;
 const MediaTrack = models.MediaTrack;
+const StorageStatData = models.StorageStatData;
 const MediaOutputInfo = models.MediaOutputInfo;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const HighlightSegmentItem = models.HighlightSegmentItem;
@@ -627,12 +640,12 @@ There are two ways to create a task flow template:
     }
 
     /**
-     * <b>This API is replaced by [DescribeMediaProcessUsageData](https://intl.cloud.tencent.com/document/product/266/41464?from_cn_redirect=1) and not recommended for use.</b>
+     * <b>This API is disused and replaced by [DescribeMediaProcessUsageData](https://intl.cloud.tencent.com/document/product/266/41464?from_cn_redirect=1).</b>
 
-This API returns the duration of reviewed video content in seconds per day within the queried period.
+This API returns the video content duration for intelligent recognition in seconds per day within the queried period.
 
-1. The API is used to query statistics on the duration of reviewed video content for the last 365 days.
-2. The queried period is up to 90 days.
+1. The API is used to query statistics on the video content duration for intelligent recognition in the last 365 days.
+2. The query period is up to 90 days.
      * @param {DescribeReviewDetailsRequest} req
      * @param {function(string, DescribeReviewDetailsResponse):void} cb
      * @public
@@ -808,6 +821,20 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * This API is used to query CDN bandwidth, traffic, and other data of VOD domain names.
+* The query period is up to 90 days.
+* You can query data of different service regions.
+* You can query data of Chinese mainland by region and ISP.
+     * @param {DescribeCDNStatDetailsRequest} req
+     * @param {function(string, DescribeCDNStatDetailsResponse):void} cb
+     * @public
+     */
+    DescribeCDNStatDetails(req, cb) {
+        let resp = new DescribeCDNStatDetailsResponse();
+        this.request("DescribeCDNStatDetails", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a custom image sprite generating template.
      * @param {ModifyImageSpriteTemplateRequest} req
      * @param {function(string, ModifyImageSpriteTemplateResponse):void} cb
@@ -881,7 +908,7 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to create a custom video content audit template. Up to 50 templates can be created.
+     * This API is used to create custom intelligent video content recognition templates. Up to 50 templates can be created.
      * @param {CreateContentReviewTemplateRequest} req
      * @param {function(string, CreateContentReviewTemplateResponse):void} cb
      * @public
@@ -1085,7 +1112,7 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to modify figure sample information based on figure ID, such as modifying the name and description and adding/deleting/resetting a face or tag. There should be at least one image left after the face deletion operation; otherwise, please use the reset operation.
+     * This API is used to modify sample information according to the sample ID. You can modify the name and description, add, delete, and reset facial features or tags. Leave at least one image after deleting facial features. To leave no image, please use the reset operation.
      * @param {ModifyPersonSampleRequest} req
      * @param {function(string, ModifyPersonSampleResponse):void} cb
      * @public
@@ -1096,7 +1123,7 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to delete a custom video content audit template.
+     * This API is used to delete custom intelligent video content recognition templates.
      * @param {DeleteContentReviewTemplateRequest} req
      * @param {function(string, DeleteContentReviewTemplateResponse):void} cb
      * @public
@@ -1153,7 +1180,7 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to get the list of video content audit templates based on unique template ID. The return result includes all eligible custom and [preset video content audit templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.AE.A1.E6.A0.B8.E6.A8.A1.E6.9D.BF).
+     * This API is used to get the list of intelligent video content recognition template details according to unique template IDs. The return result includes all eligible custom and [preset intelligent video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33932).
      * @param {DescribeContentReviewTemplatesRequest} req
      * @param {function(string, DescribeContentReviewTemplatesResponse):void} cb
      * @public
@@ -1175,11 +1202,10 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to query the used VOD storage capacity in bytes within the specified time range.
-   1. Only storage capacity usage data for the last 365 days can be queried.
-   2. The query time range cannot be more than 90 days;
-   3. The query time range at the minute granularity cannot be more than 5 days;
-   4. The query time range at the hour granularity cannot be more than 10 days.
+     * This API is used to query VOD storage usage in bytes within the query period.
+    1. You can only query storage usage for the last 365 days.
+    2. The query period is up to 90 days.
+    3. The query period at minute-level granularity is up to 7 days.
      * @param {DescribeStorageDetailsRequest} req
      * @param {function(string, DescribeStorageDetailsResponse):void} cb
      * @public
@@ -1223,7 +1249,7 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to query the information of figure samples and supports paginated queries by figure ID, name, and tag.
+     * This API is used to query the information of samples and supports paginated queries by sample ID, name, and tag.
      * @param {DescribePersonSamplesRequest} req
      * @param {function(string, DescribePersonSamplesResponse):void} cb
      * @public
@@ -1279,6 +1305,17 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
+     * This API is used to manage initiated tasks.
+     * @param {ManageTaskRequest} req
+     * @param {function(string, ManageTaskResponse):void} cb
+     * @public
+     */
+    ManageTask(req, cb) {
+        let resp = new ManageTaskResponse();
+        this.request("ManageTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a custom time point screencapturing template.
      * @param {ModifySnapshotByTimeOffsetTemplateRequest} req
      * @param {function(string, ModifySnapshotByTimeOffsetTemplateResponse):void} cb
@@ -1315,7 +1352,7 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to create keyword samples in batches for video processing operations such as content recognition and audit by using the OCR and ASR technologies.
+     * This API is used to create keyword samples in batches for using OCR and ASR technologies to perform video processing operations such as content recognition and inappropriate information recognition.
      * @param {CreateWordSamplesRequest} req
      * @param {function(string, CreateWordSamplesResponse):void} cb
      * @public
@@ -1514,7 +1551,7 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to delete a figure sample based on figure ID.
+     * This API is used to delete samples according to sample IDs.
      * @param {DeletePersonSampleRequest} req
      * @param {function(string, DeletePersonSampleResponse):void} cb
      * @public
@@ -1547,6 +1584,24 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
+     * This API is used to query the download links of playback statistics files.
+* You can query the download links of playback statistics files in last 30 days.
+* Every day, VOD will analyze CDN request logs of the previous day and then generate a playback statistics file.
+* A playback statistics file includes playback times and traffic of media files.
+* Notes on playback times:
+    1. HLS file: VOD counts playback times when accessing M3U8 files, but not when accessing TS files.
+    2. Other files (MP4 files for example): VOD does not count playback times when the playback request carries the `range` parameter and the `start` parameter in `range` is not 0. In other cases, VOD counts playback times.
+* Statistics on playback devices: VOD counts playback times on mobile clients when the playback request carries the `UserAgent` parameter which includes an identifier such as `Android` or `iPhone`. In other cases, VOD counts playback times on PC clients.
+     * @param {DescribeDailyPlayStatFileListRequest} req
+     * @param {function(string, DescribeDailyPlayStatFileListResponse):void} cb
+     * @public
+     */
+    DescribeDailyPlayStatFileList(req, cb) {
+        let resp = new DescribeDailyPlayStatFileListResponse();
+        this.request("DescribeDailyPlayStatFileList", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a custom sampled screencapturing template.
      * @param {DeleteSampleSnapshotTemplateRequest} req
      * @param {function(string, DeleteSampleSnapshotTemplateResponse):void} cb
@@ -1569,9 +1624,29 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to clip an HLS video by time period.
+     * This API is used to clip an HLS video by time period and then generate a new HLS video which developers can share right away or store persistently.
 
-Note: the clipped video shares the same ts segments with the source video, and only a new m3u8 file will be generated. Deleting the source video will also delete the clipped video.
+VOD supports two types of clipping:
+- Clipping for persistent storage: the video clip is saved as an independent video file with a `FileId`.
+- Clipping for temporary sharing: the video clip is affiliated to the input file and has no `FileId`.
+
+Notes:
+- Clipping is based on the input M3U8 file that contains the list of TS segments, so the smallest clipping unit is one TS segment instead of in seconds or less.
+
+
+### Clipping for Persistent Storage
+In this mode, a video clip is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the input video. Even if the source video is deleted, the video clip still exists. Moreover, the video clip can be transcoded, published on WeChat, and processed in other ways.
+
+Take the video of a two-hour long football match for example. The customer may only want to store the original two-hour video for two months to save costs, but want to store clipped highlights for a specified longer time and also to transcode and publish such highlights on WeChat. Clipping for persistent storage is suitable for this customer.
+
+The advantage of clipping for persistent storage is that the video clip has a lifecycle independent of the input video and can be managed independently and stored persistently.
+
+### Clipping for Temporary Sharing
+The video clip (an M3U8 file) shares the same TS segments with the input video instead of being an independent video. It only has a playback URL but has no `FileId`, and its validity period is the same as that of the input video. Once the input video is deleted, the video clip cannot be played back.
+
+As the video clip is not an independent video, it will not be managed as a VOD media asset. For example, it will not be counted in the total videos displayed on the VOD console, and also cannot be transcoded or published on WeChat.
+
+Clipping for temporary sharing is lightweight and incurs no additional storage fees. However, the video clip has the same lifecycle as the source recording video and cannot be transcoded or processed in other ways.
      * @param {SimpleHlsClipRequest} req
      * @param {function(string, SimpleHlsClipResponse):void} cb
      * @public
@@ -1582,7 +1657,7 @@ Note: the clipped video shares the same ts segments with the source video, and o
     }
 
     /**
-     * This API is used to create a figure sample for video processing operations such as content recognition and audit using the face recognition technology.
+     * This API is used to create samples for using facial features positioning and other technologies to perform video processing operations such as content recognition and inappropriate information recognition.
      * @param {CreatePersonSampleRequest} req
      * @param {function(string, CreatePersonSampleResponse):void} cb
      * @public
@@ -1604,7 +1679,7 @@ Note: the clipped video shares the same ts segments with the source video, and o
     }
 
     /**
-     * This API is used to modify a custom video content audit template.
+     * This API is used to modify custom intelligent video content recognition templates.
      * @param {ModifyContentReviewTemplateRequest} req
      * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
      * @public

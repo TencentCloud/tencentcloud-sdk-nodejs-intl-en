@@ -3878,7 +3878,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.KmsKeyId = null;
 
         /**
-         * 
+         * Cloud disk performance, in MB/s
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ThroughputPerformance = null;
@@ -6159,8 +6160,8 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.DiscountPrice = null;
 
         /**
-         * Discount. For example, 20.0 indicates 80% off.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Discount = null;

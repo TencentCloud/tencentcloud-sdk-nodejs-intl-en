@@ -27,44 +27,53 @@ const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesRespon
 const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const ParamDesc = models.ParamDesc;
+const SecurityGroupBound = models.SecurityGroupBound;
 const CloneAccountRequest = models.CloneAccountRequest;
-const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const LogFileInfo = models.LogFileInfo;
 const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
-const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ResourceUsageMonitorSet = models.ResourceUsageMonitorSet;
-const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const PerformanceMonitorSet = models.PerformanceMonitorSet;
 const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ConstraintRange = models.ConstraintRange;
 const DBInstance = models.DBInstance;
 const DescribeDBResourceUsageResponse = models.DescribeDBResourceUsageResponse;
-const LogFileInfo = models.LogFileInfo;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDetailsRequest;
 const Database = models.Database;
 const CreateAccountRequest = models.CreateAccountRequest;
-const InitDBInstancesResponse = models.InitDBInstancesResponse;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
 const DBAccount = models.DBAccount;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
+const SecurityGroup = models.SecurityGroup;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const ModifyLogFileRetentionPeriodRequest = models.ModifyLogFileRetentionPeriodRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
@@ -77,7 +86,9 @@ const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DescribeDBPerformanceDetailsRequest = models.DescribeDBPerformanceDetailsRequest;
 const DescribeBackupTimeResponse = models.DescribeBackupTimeResponse;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const SlowLogData = models.SlowLogData;
+const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const ModifyLogFileRetentionPeriodResponse = models.ModifyLogFileRetentionPeriodResponse;
 const DescribeDBResourceUsageRequest = models.DescribeDBResourceUsageRequest;
 const DBParamValue = models.DBParamValue;
@@ -88,6 +99,7 @@ const DescribeDBPerformanceRequest = models.DescribeDBPerformanceRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const DeleteAccountResponse = models.DeleteAccountResponse;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 
 
 /**
@@ -304,6 +316,28 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     }
 
     /**
+     * This API is used to query the security group details of a project.
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to associate security groups with Tencent Cloud resources in batches.
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a TencentDB account. Multiple accounts can be created for one instance. Accounts with the same username but different hosts are different accounts.
      * @param {CreateAccountRequest} req
      * @param {function(string, CreateAccountResponse):void} cb
@@ -334,6 +368,17 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     ModifyBackupTime(req, cb) {
         let resp = new ModifyBackupTimeResponse();
         this.request("ModifyBackupTime", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the security groups associated with TencentDB.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -382,6 +427,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to query the security group details of an instance.
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * This API is used to clone an instance account.
      * @param {CloneAccountRequest} req
      * @param {function(string, CloneAccountResponse):void} cb
@@ -423,6 +479,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDBResourceUsage(req, cb) {
         let resp = new DescribeDBResourceUsageResponse();
         this.request("DescribeDBResourceUsage", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unassociate security groups from instances in batches.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
     }
 
 

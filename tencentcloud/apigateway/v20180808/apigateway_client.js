@@ -189,6 +189,7 @@ const DescribeIPStrategysStatusResponse = models.DescribeIPStrategysStatusRespon
 const ApiInfo = models.ApiInfo;
 const EnvironmentStrategy = models.EnvironmentStrategy;
 const EnableApiKeyRequest = models.EnableApiKeyRequest;
+const Base64EncodedTriggerRule = models.Base64EncodedTriggerRule;
 const DescribeServicesStatusResponse = models.DescribeServicesStatusResponse;
 const CreateApiKeyRequest = models.CreateApiKeyRequest;
 

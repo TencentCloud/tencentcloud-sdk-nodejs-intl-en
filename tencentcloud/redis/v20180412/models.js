@@ -7901,6 +7901,12 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.RedisReplicasNum = null;
 
+        /**
+         * The information of the replica to be added to a multi-AZ instance, such as replica availability zone and replica type (`NodeType` should be `1`). This parameter is required only when multi-AZ instances add replicas.
+         * @type {Array.<RedisNodeInfo> || null}
+         */
+        this.NodeSet = null;
+
     }
 
     /**
@@ -7914,6 +7920,15 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
         this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
         this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
+
+        if (params.NodeSet) {
+            this.NodeSet = new Array();
+            for (let z in params.NodeSet) {
+                let obj = new RedisNodeInfo();
+                obj.deserialize(params.NodeSet[z]);
+                this.NodeSet.push(obj);
+            }
+        }
 
     }
 }

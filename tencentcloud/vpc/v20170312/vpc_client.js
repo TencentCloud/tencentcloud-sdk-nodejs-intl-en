@@ -57,6 +57,7 @@ const VpnGatewayQuota = models.VpnGatewayQuota;
 const DescribeBandwidthPackageBillUsageRequest = models.DescribeBandwidthPackageBillUsageRequest;
 const UnassignIpv6AddressesResponse = models.UnassignIpv6AddressesResponse;
 const DescribeFlowLogsRequest = models.DescribeFlowLogsRequest;
+const CloneSecurityGroupRequest = models.CloneSecurityGroupRequest;
 const AssociateNatGatewayAddressRequest = models.AssociateNatGatewayAddressRequest;
 const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
 const ModifyBandwidthPackageAttributeRequest = models.ModifyBandwidthPackageAttributeRequest;
@@ -125,6 +126,7 @@ const CreateNatGatewayResponse = models.CreateNatGatewayResponse;
 const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
 const ModifyNetDetectRequest = models.ModifyNetDetectRequest;
+const DescribeNetDetectStatesResponse = models.DescribeNetDetectStatesResponse;
 const DescribeVpcResourceDashboardResponse = models.DescribeVpcResourceDashboardResponse;
 const DescribeNetDetectStatesRequest = models.DescribeNetDetectStatesRequest;
 const DescribeFlowLogResponse = models.DescribeFlowLogResponse;
@@ -183,7 +185,7 @@ const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
 const ResetRoutesResponse = models.ResetRoutesResponse;
 const DeleteNetworkAclRequest = models.DeleteNetworkAclRequest;
 const NatGatewayDestinationIpPortTranslationNatRule = models.NatGatewayDestinationIpPortTranslationNatRule;
-const DescribeNetDetectStatesResponse = models.DescribeNetDetectStatesResponse;
+const CloneSecurityGroupResponse = models.CloneSecurityGroupResponse;
 const CreateVpnConnectionResponse = models.CreateVpnConnectionResponse;
 const AddressTemplateSpecification = models.AddressTemplateSpecification;
 const VpcIpv6Address = models.VpcIpv6Address;
@@ -762,8 +764,8 @@ Note: When this API is called, all routing policies in the current route table a
     }
 
     /**
-     * This API (DescribeGatewayFlowMonitorDetail) is used to query the monitoring details of the gateway traffic.
-* Only querying of a single gateway instance is supported. That is, only one of the `VpnId`, `DirectConnectGatewayId`, `PeeringConnectionId`, or `NatId` input parameters is supported, and one must be used.
+     * This API is used to query the traffic monitoring details of the gateway.
+* You can only use this API to query a single gateway instance, which means you must pass in only one of `VpnId`, `DirectConnectGatewayId`, `PeeringConnectionId`, or `NatId`.
 * If the gateway has traffic, but no data is returned when this API is called, please check whether gateway traffic monitoring has been enabled in the corresponding gateway details page in the console.
      * @param {DescribeGatewayFlowMonitorDetailRequest} req
      * @param {function(string, DescribeGatewayFlowMonitorDetailResponse):void} cb
@@ -910,14 +912,14 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API (InquiryPriceRenewVpnGateway) is used to query the price for VPN gateway renewal. Currently, only querying prices for IPSEC-type gateways is supported.
-     * @param {InquiryPriceRenewVpnGatewayRequest} req
-     * @param {function(string, InquiryPriceRenewVpnGatewayResponse):void} cb
+     * This API is used to create a security group with the same rule configurations as an existing security group. The cloning only copies the security group and its rules, but not the security group tags.
+     * @param {CloneSecurityGroupRequest} req
+     * @param {function(string, CloneSecurityGroupResponse):void} cb
      * @public
      */
-    InquiryPriceRenewVpnGateway(req, cb) {
-        let resp = new InquiryPriceRenewVpnGatewayResponse();
-        this.request("InquiryPriceRenewVpnGateway", req, resp, cb);
+    CloneSecurityGroup(req, cb) {
+        let resp = new CloneSecurityGroupResponse();
+        this.request("CloneSecurityGroup", req, resp, cb);
     }
 
     /**
@@ -1202,9 +1204,9 @@ After unbinding the network instance, the corresponding routing policy will also
 
     /**
      * This API is used to create a VPC instance.
-* The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses). For more information, see the corresponding documents about VPC IP address ranges.
-* The number of VPC instances that can be created in a region is limited. For more information, see <a href="https://intl.cloud.tencent.com/doc/product/215/537" title="VPC Use Limits">VPC Use Limits</a>. To request more resources, contact the online customer service.
-* You can bind a tag when creating a VPC instance. The tag list in the response indicates the tags that have been successfully added.
+* The subnet mask of the smallest IP address range that can be created is 28 (16 IP addresses), and that of the largest IP address range is 16 (65,536 IP addresses). For more information on how to plan VPC IP ranges, see [Network Planning](https://intl.cloud.tencent.com/document/product/215/30313?from_cn_redirect=1).
+* The number of VPC instances that can be created in a region is limited. For more information, see <a href="https://intl.cloud.tencent.com/doc/product/215/537?from_cn_redirect=1" title="VPC Use Limits">VPC Use Limits</a>. To request more resources, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+* You can bind tags when creating a VPC instance. The tag list in the response indicates the tags that have been successfully added.
      * @param {CreateVpcRequest} req
      * @param {function(string, CreateVpcResponse):void} cb
      * @public
@@ -1915,6 +1917,17 @@ You can also use the Force parameter to forcibly return a default VPC.
     DescribeNetworkInterfaces(req, cb) {
         let resp = new DescribeNetworkInterfacesResponse();
         this.request("DescribeNetworkInterfaces", req, resp, cb);
+    }
+
+    /**
+     * This API (InquiryPriceRenewVpnGateway) is used to query the price for VPN gateway renewal. Currently, only querying prices for IPSEC-type gateways is supported.
+     * @param {InquiryPriceRenewVpnGatewayRequest} req
+     * @param {function(string, InquiryPriceRenewVpnGatewayResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewVpnGateway(req, cb) {
+        let resp = new InquiryPriceRenewVpnGatewayResponse();
+        this.request("InquiryPriceRenewVpnGateway", req, resp, cb);
     }
 
     /**

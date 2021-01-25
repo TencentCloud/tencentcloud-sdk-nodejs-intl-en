@@ -356,7 +356,7 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
         this.CVM = null;
 
         /**
-         * Number of database instances.
+         * Number of TencentDB for MySQL instances
          * @type {number || null}
          */
         this.CDB = null;
@@ -1300,6 +1300,18 @@ class ModifyNatGatewayAttributeRequest extends  AbstractModel {
          */
         this.InternetMaxBandwidthOut = null;
 
+        /**
+         * Whether to modify the security group bound to the NAT Gateway
+         * @type {boolean || null}
+         */
+        this.ModifySecurityGroup = null;
+
+        /**
+         * The final security groups bound to the NAT Gateway, such as `['sg-1n232323', 'sg-o4242424']`. An empty list indicates that all the security groups have been deleted.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -1312,6 +1324,8 @@ class ModifyNatGatewayAttributeRequest extends  AbstractModel {
         this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
         this.NatGatewayName = 'NatGatewayName' in params ? params.NatGatewayName : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.ModifySecurityGroup = 'ModifySecurityGroup' in params ? params.ModifySecurityGroup : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -2053,6 +2067,62 @@ class DescribeFlowLogsRequest extends  AbstractModel {
             obj.deserialize(params.Filters)
             this.Filters = obj;
         }
+
+    }
+}
+
+/**
+ * CloneSecurityGroup request structure.
+ * @class
+ */
+class CloneSecurityGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the security group to be cloned, such as `sg-33ocnj9n`. This can be obtained through the `DescribeSecurityGroups` API.
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * The name of security group clone. You can enter any name within 60 characters. If this parameter is left empty, the security group clone will use the name of the source security group.
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Description of the security group clone. You can enter up to 100 characters. If this parameter is left empty, the security group clone will use the description of the source security group.
+         * @type {string || null}
+         */
+        this.GroupDescription = null;
+
+        /**
+         * Project ID of the security group clone. The default is 0. You can query it on the project management page of the Tencent Cloud console.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * The region of the source security group for a cross-region clone. For example, to clone the security group in Guangzhou to Shanghai, set it to `ap-guangzhou`.
+         * @type {string || null}
+         */
+        this.RemoteRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupDescription = 'GroupDescription' in params ? params.GroupDescription : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RemoteRegion = 'RemoteRegion' in params ? params.RemoteRegion : null;
 
     }
 }
@@ -3114,7 +3184,7 @@ class DescribeIpGeolocationDatabaseUrlResponse extends  AbstractModel {
         super();
 
         /**
-         * Download link of the IP location database.
+         * Download link of an IP location database
          * @type {string || null}
          */
         this.DownLoadUrl = null;
@@ -5238,6 +5308,58 @@ If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 add
         this.NextHopType = 'NextHopType' in params ? params.NextHopType : null;
         this.NextHopDestination = 'NextHopDestination' in params ? params.NextHopDestination : null;
         this.NetDetectDescription = 'NetDetectDescription' in params ? params.NetDetectDescription : null;
+
+    }
+}
+
+/**
+ * DescribeNetDetectStates response structure.
+ * @class
+ */
+class DescribeNetDetectStatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The array of network detection verification results that meet requirements.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<NetDetectState> || null}
+         */
+        this.NetDetectStateSet = null;
+
+        /**
+         * The number of network detection verification results that meet requirements.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NetDetectStateSet) {
+            this.NetDetectStateSet = new Array();
+            for (let z in params.NetDetectStateSet) {
+                let obj = new NetDetectState();
+                obj.deserialize(params.NetDetectStateSet[z]);
+                this.NetDetectStateSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8070,26 +8192,19 @@ Note: This field may return null, indicating no valid value.
 }
 
 /**
- * DescribeNetDetectStates response structure.
+ * CloneSecurityGroup response structure.
  * @class
  */
-class DescribeNetDetectStatesResponse extends  AbstractModel {
+class CloneSecurityGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The array of network detection verification results that meet requirements.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<NetDetectState> || null}
+         * Security group object
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {SecurityGroup || null}
          */
-        this.NetDetectStateSet = null;
-
-        /**
-         * The number of network detection verification results that meet requirements.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
+        this.SecurityGroup = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8107,15 +8222,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
 
-        if (params.NetDetectStateSet) {
-            this.NetDetectStateSet = new Array();
-            for (let z in params.NetDetectStateSet) {
-                let obj = new NetDetectState();
-                obj.deserialize(params.NetDetectStateSet[z]);
-                this.NetDetectStateSet.push(obj);
-            }
+        if (params.SecurityGroup) {
+            let obj = new SecurityGroup();
+            obj.deserialize(params.SecurityGroup)
+            this.SecurityGroup = obj;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8634,6 +8745,13 @@ class NatGateway extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * The list of the security groups bound to the NAT Gateway
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupSet = null;
+
     }
 
     /**
@@ -8681,6 +8799,7 @@ class NatGateway extends  AbstractModel {
                 this.TagSet.push(obj);
             }
         }
+        this.SecurityGroupSet = 'SecurityGroupSet' in params ? params.SecurityGroupSet : null;
 
     }
 }
@@ -12753,13 +12872,13 @@ class ModifyAssistantCidrRequest extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * Load CIDR blocks to add. CIDR block set; format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+         * Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
          * @type {Array.<string> || null}
          */
         this.NewCidrBlocks = null;
 
         /**
-         * Load CIDR blocks to delete. CIDR block set; Format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+         * Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
          * @type {Array.<string> || null}
          */
         this.OldCidrBlocks = null;
@@ -17061,7 +17180,7 @@ class CreateDefaultVpcRequest extends  AbstractModel {
         super();
 
         /**
-         * The ID of the availability zone in which the subnet resides. The availability zone will be randomly selected if not specified.
+         * The ID of the availability zone in which the subnet resides. This parameter can be obtained through the [`DescribeZones`](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API, such as `ap-guangzhou-1`. If it’s not specified, a random availability zone will be used.
          * @type {string || null}
          */
         this.Zone = null;
@@ -18001,7 +18120,7 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         super();
 
         /**
-         * The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+         * VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -21564,7 +21683,7 @@ class CreateVpcRequest extends  AbstractModel {
         this.VpcName = null;
 
         /**
-         * VPC CIDR, which must fall within the following private network IP ranges: 10.0.0.0/16, 172.16.0.0/16, and 192.168.0.0/16.
+         * VPC CIDR blocks, which must fall within the following three private network IP ranges: 10.0.0.0/16, 172.16.0.0/16 and 192.168.0.0/16.
          * @type {string || null}
          */
         this.CidrBlock = null;
@@ -21576,19 +21695,19 @@ class CreateVpcRequest extends  AbstractModel {
         this.EnableMulticast = null;
 
         /**
-         * The DNS address. A maximum of 4 addresses is supported.
+         * DNS address. A maximum of 4 addresses is supported.
          * @type {Array.<string> || null}
          */
         this.DnsServers = null;
 
         /**
-         * Domain name
+         * Domain name of DHCP
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
-         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -22071,6 +22190,7 @@ module.exports = {
     DescribeBandwidthPackageBillUsageRequest: DescribeBandwidthPackageBillUsageRequest,
     UnassignIpv6AddressesResponse: UnassignIpv6AddressesResponse,
     DescribeFlowLogsRequest: DescribeFlowLogsRequest,
+    CloneSecurityGroupRequest: CloneSecurityGroupRequest,
     AssociateNatGatewayAddressRequest: AssociateNatGatewayAddressRequest,
     CreateDirectConnectGatewayRequest: CreateDirectConnectGatewayRequest,
     ModifyBandwidthPackageAttributeRequest: ModifyBandwidthPackageAttributeRequest,
@@ -22139,6 +22259,7 @@ module.exports = {
     DescribeVpcsResponse: DescribeVpcsResponse,
     ModifySecurityGroupAttributeRequest: ModifySecurityGroupAttributeRequest,
     ModifyNetDetectRequest: ModifyNetDetectRequest,
+    DescribeNetDetectStatesResponse: DescribeNetDetectStatesResponse,
     DescribeVpcResourceDashboardResponse: DescribeVpcResourceDashboardResponse,
     DescribeNetDetectStatesRequest: DescribeNetDetectStatesRequest,
     DescribeFlowLogResponse: DescribeFlowLogResponse,
@@ -22197,7 +22318,7 @@ module.exports = {
     ResetRoutesResponse: ResetRoutesResponse,
     DeleteNetworkAclRequest: DeleteNetworkAclRequest,
     NatGatewayDestinationIpPortTranslationNatRule: NatGatewayDestinationIpPortTranslationNatRule,
-    DescribeNetDetectStatesResponse: DescribeNetDetectStatesResponse,
+    CloneSecurityGroupResponse: CloneSecurityGroupResponse,
     CreateVpnConnectionResponse: CreateVpnConnectionResponse,
     AddressTemplateSpecification: AddressTemplateSpecification,
     VpcIpv6Address: VpcIpv6Address,

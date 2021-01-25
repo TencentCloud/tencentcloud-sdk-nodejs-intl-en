@@ -779,6 +779,34 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.UnitPriceDiscount = null;
 
+        /**
+         * Highly-precise published unit price of a monthly-subscribed cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalPriceHigh = null;
+
+        /**
+         * Highly-precise discounted unit price of a monthly-subscribed cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiscountPriceHigh = null;
+
+        /**
+         * Highly-precise published unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceHigh = null;
+
+        /**
+         * Highly-precise discounted unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHigh = null;
+
     }
 
     /**
@@ -793,6 +821,10 @@ Note: This field may return null, indicating that no valid value was found.
         this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
         this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
         this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
+        this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
+        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
+        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
 
     }
 }
@@ -1499,6 +1531,53 @@ class PrepayPrice extends  AbstractModel {
          */
         this.DiscountPrice = null;
 
+        /**
+         * Highly-precise published unit price of a monthly-subscribed cloud disk or a snapshot, in USD.
+         * @type {string || null}
+         */
+        this.OriginalPriceHigh = null;
+
+        /**
+         * Highly-precise discounted unit price of a monthly-subscribed cloud disk or a snapshot, in USD.
+         * @type {string || null}
+         */
+        this.DiscountPriceHigh = null;
+
+        /**
+         * Published unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * Billing unit for pay-as-you-go cloud disks. Valid value: <br><li>HOUR: billed hourly.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+        /**
+         * Discount unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Highly-precise published unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceHigh = null;
+
+        /**
+         * Highly-precise discounted unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHigh = null;
+
     }
 
     /**
@@ -1510,6 +1589,13 @@ class PrepayPrice extends  AbstractModel {
         }
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
+        this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
+        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
 
     }
 }
@@ -1614,7 +1700,7 @@ class InquiryPriceCreateDisksRequest extends  AbstractModel {
         super();
 
         /**
-         * Type of cloud hard disk. Value range: <br><li>Ordinary cloud disk: CLOUD_BASIC <br><li>Premium cloud storage: CLOUD_PREMIUM <br><li>SSD cloud disk: CLOUD_SSD.
+         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1649,6 +1735,12 @@ class InquiryPriceCreateDisksRequest extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * Extra performance (in MB/sec) purchased for a cloud disk.<br>This parameter is only valid for Enhanced SSD (CLOUD_HSSD) and Tremendous SSD (CLOUD_TSSD).
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
     }
 
     /**
@@ -1669,6 +1761,7 @@ class InquiryPriceCreateDisksRequest extends  AbstractModel {
         }
         this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
 
     }
 }
@@ -1762,7 +1855,7 @@ class Snapshot extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * Status of the snapshot. Value range: <br><li>NORMAL: Normal <br><li>CREATING: Creating <br><li>ROLLBACKING: Rolling backing <br><li>COPYING_FROM_REMOTE: Copying snapshot across regions.
+         * Snapshot status. Valid values: <br><li>NORMAL: normal <br><li>CREATING: creating<br><li>ROLLBACKING: rolling back<br><li>COPYING_FROM_REMOTE: cross-region replicating<li>CHECKING_COPIED: verifying the cross-region replicated data<br><li>TORECYCLE: to be repossessed.
          * @type {string || null}
          */
         this.SnapshotState = null;
@@ -1839,6 +1932,12 @@ class Snapshot extends  AbstractModel {
          */
         this.ShareReference = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TimeStartShare = null;
+
     }
 
     /**
@@ -1879,6 +1978,7 @@ class Snapshot extends  AbstractModel {
         this.ImageCount = 'ImageCount' in params ? params.ImageCount : null;
         this.SnapshotType = 'SnapshotType' in params ? params.SnapshotType : null;
         this.ShareReference = 'ShareReference' in params ? params.ShareReference : null;
+        this.TimeStartShare = 'TimeStartShare' in params ? params.TimeStartShare : null;
 
     }
 }
@@ -2302,7 +2402,7 @@ class CreateDisksRequest extends  AbstractModel {
         super();
 
         /**
-         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD
+         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
          * @type {string || null}
          */
         this.DiskType = null;
@@ -2373,6 +2473,12 @@ class CreateDisksRequest extends  AbstractModel {
          */
         this.Shareable = null;
 
+        /**
+         * Extra performance purchased for a cloud disk.<br>This optional parameter is only valid for Tremendous SSD (CLOUD_TSSD) and Enhanced SSD (CLOUD_HSSD).
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
     }
 
     /**
@@ -2412,6 +2518,7 @@ class CreateDisksRequest extends  AbstractModel {
             }
         }
         this.Shareable = 'Shareable' in params ? params.Shareable : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
 
     }
 }

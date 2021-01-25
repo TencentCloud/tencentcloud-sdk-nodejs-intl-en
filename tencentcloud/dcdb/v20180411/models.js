@@ -631,6 +631,34 @@ class DescribeDatabaseTableRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceSecurityGroups response structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * OpenDBExtranetAccess response structure.
  * @class
  */
@@ -993,36 +1021,73 @@ class CloneAccountRequest extends  AbstractModel {
 }
 
 /**
- * ResetAccountPassword request structure.
+ * Information of a pulled log
  * @class
  */
-class ResetAccountPasswordRequest extends  AbstractModel {
+class LogFileInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of dcdbt-ow728lmc.
+         * Last modified time of a log
+         * @type {number || null}
+         */
+        this.Mtime = null;
+
+        /**
+         * File length
+         * @type {number || null}
+         */
+        this.Length = null;
+
+        /**
+         * Uniform resource identifier (URI) used during log download
+         * @type {string || null}
+         */
+        this.Uri = null;
+
+        /**
+         * Filename
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mtime = 'Mtime' in params ? params.Mtime : null;
+        this.Length = 'Length' in params ? params.Length : null;
+        this.Uri = 'Uri' in params ? params.Uri : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+
+    }
+}
+
+/**
+ * DescribeDatabaseObjects request structure.
+ * @class
+ */
+class DescribeDatabaseObjectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow7t8lmc.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Login username.
+         * Database name, which can be obtained through the `DescribeDatabases` API.
          * @type {string || null}
          */
-        this.UserName = null;
-
-        /**
-         * Access host allowed for a user. An account is uniquely identified by username and host.
-         * @type {string || null}
-         */
-        this.Host = null;
-
-        /**
-         * New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
-         * @type {string || null}
-         */
-        this.Password = null;
+        this.DbName = null;
 
     }
 
@@ -1034,9 +1099,7 @@ class ResetAccountPasswordRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.Password = 'Password' in params ? params.Password : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
 
     }
 }
@@ -1112,6 +1175,41 @@ class ParamModifyResult extends  AbstractModel {
 }
 
 /**
+ * DescribeDBSecurityGroups request structure.
+ * @class
+ */
+class DescribeDBSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name. Valid value: `dcdb`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DB parameter description
  * @class
  */
@@ -1176,6 +1274,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Constraint = obj;
         }
         this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
+
+    }
+}
+
+/**
+ * AssociateSecurityGroups request structure.
+ * @class
+ */
+class AssociateSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name. Valid value: `dcdb`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * ID of the security group to be associated in the format of sg-efil73jd.
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * ID(s) of the instance(s) to be associated in the format of tdsqlshard-lesecurk. You can specify multiple instances.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1272,6 +1412,55 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
+ * Security group inbound/outbound rule
+ * @class
+ */
+class SecurityGroupBound extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy, which can be `ACCEPT` or `DROP`
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Source IP or source IP range, such as 192.168.0.0/16
+         * @type {string || null}
+         */
+        this.CidrIp = null;
+
+        /**
+         * Port
+         * @type {string || null}
+         */
+        this.PortRange = null;
+
+        /**
+         * Network protocol. UDP and TCP are supported.
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+
+    }
+}
+
+/**
  * GrantAccountPrivileges response structure.
  * @class
  */
@@ -1344,6 +1533,77 @@ class DescribeDatabasesResponse extends  AbstractModel {
             }
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeProjectSecurityGroups response structure.
+ * @class
+ */
+class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security group details
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AssociateSecurityGroups response structure.
+ * @class
+ */
+class AssociateSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1549,36 +1809,24 @@ class DescribeDBSyncModeResponse extends  AbstractModel {
 }
 
 /**
- * Information of a pulled log
+ * DescribeProjectSecurityGroups request structure.
  * @class
  */
-class LogFileInfo extends  AbstractModel {
+class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Last modified time of a log
-         * @type {number || null}
-         */
-        this.Mtime = null;
-
-        /**
-         * File length
-         * @type {number || null}
-         */
-        this.Length = null;
-
-        /**
-         * Uniform resource identifier (URI) used during log download
+         * Database engine name. Valid value: `dcdb`.
          * @type {string || null}
          */
-        this.Uri = null;
+        this.Product = null;
 
         /**
-         * Filename
-         * @type {string || null}
+         * Project ID
+         * @type {number || null}
          */
-        this.FileName = null;
+        this.ProjectId = null;
 
     }
 
@@ -1589,33 +1837,31 @@ class LogFileInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Mtime = 'Mtime' in params ? params.Mtime : null;
-        this.Length = 'Length' in params ? params.Length : null;
-        this.Uri = 'Uri' in params ? params.Uri : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
 
 /**
- * DescribeDatabaseObjects request structure.
+ * DescribeDBSecurityGroups response structure.
  * @class
  */
-class DescribeDatabaseObjectsRequest extends  AbstractModel {
+class DescribeDBSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of dcdbt-ow7t8lmc.
-         * @type {string || null}
+         * Security group details
+         * @type {Array.<SecurityGroup> || null}
          */
-        this.InstanceId = null;
+        this.Groups = null;
 
         /**
-         * Database name, which can be obtained through the `DescribeDatabases` API.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DbName = null;
+        this.RequestId = null;
 
     }
 
@@ -1626,8 +1872,107 @@ class DescribeDatabaseObjectsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DbName = 'DbName' in params ? params.DbName : null;
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Shard information
+ * @class
+ */
+class ShardInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shard ID
+         * @type {string || null}
+         */
+        this.ShardInstanceId = null;
+
+        /**
+         * Shard set ID
+         * @type {string || null}
+         */
+        this.ShardSerialId = null;
+
+        /**
+         * Status. 0: creating; 1: processing; 2: running; 3: shard not initialized; -2: shard deleted
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.Createtime = null;
+
+        /**
+         * Memory size in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Storage capacity in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Numeric ID of a shard
+         * @type {number || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * Number of nodes. 2: one primary and one secondary; 3: one primary and two secondaries
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Product type ID (this field is obsolete and should not be depended on)
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShardInstanceId = 'ShardInstanceId' in params ? params.ShardInstanceId : null;
+        this.ShardSerialId = 'ShardSerialId' in params ? params.ShardSerialId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Createtime = 'Createtime' in params ? params.Createtime : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -1732,6 +2077,48 @@ It is recommended that this parameter be set to a value greater than 10. This pa
 }
 
 /**
+ * DisassociateSecurityGroups request structure.
+ * @class
+ */
+class DisassociateSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name. Valid value: `dcdb`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Security group ID
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Instance ID list, which is an array of one or more instance IDs.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * TencentDB account information
  * @class
  */
@@ -1798,6 +2185,55 @@ It is recommended that this parameter be set to a value greater than 10. This pa
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.DelayThresh = 'DelayThresh' in params ? params.DelayThresh : null;
+
+    }
+}
+
+/**
+ * ModifyAccountDescription request structure.
+ * @class
+ */
+class ModifyAccountDescriptionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow728lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Login username.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Access host allowed for a user. An account is uniquely identified by username and host.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * New account remarks, which can contain 0-256 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -1923,72 +2359,54 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
 }
 
 /**
- * Shard information
+ * Security group details
  * @class
  */
-class ShardInfo extends  AbstractModel {
+class SecurityGroup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Shard ID
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Creation time in the format of yyyy-mm-dd hh:mm:ss
          * @type {string || null}
          */
-        this.ShardInstanceId = null;
+        this.CreateTime = null;
 
         /**
-         * Shard set ID
+         * Security group ID
          * @type {string || null}
          */
-        this.ShardSerialId = null;
+        this.SecurityGroupId = null;
 
         /**
-         * Status. 0: creating; 1: processing; 2: running; 3: shard not initialized; -2: shard deleted
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Creation time
+         * Security group name
          * @type {string || null}
          */
-        this.Createtime = null;
+        this.SecurityGroupName = null;
 
         /**
-         * Memory size in GB
-         * @type {number || null}
+         * Security group remarks
+         * @type {string || null}
          */
-        this.Memory = null;
+        this.SecurityGroupRemark = null;
 
         /**
-         * Storage capacity in GB
-         * @type {number || null}
+         * Inbound rule
+         * @type {Array.<SecurityGroupBound> || null}
          */
-        this.Storage = null;
+        this.Inbound = null;
 
         /**
-         * Numeric ID of a shard
-         * @type {number || null}
+         * Outbound rule
+         * @type {Array.<SecurityGroupBound> || null}
          */
-        this.ShardId = null;
-
-        /**
-         * Number of nodes. 2: one primary and one secondary; 3: one primary and two secondaries
-         * @type {number || null}
-         */
-        this.NodeCount = null;
-
-        /**
-         * Product type ID (this field is obsolete and should not be depended on)
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
-         * Number of CPU cores
-         * @type {number || null}
-         */
-        this.Cpu = null;
+        this.Outbound = null;
 
     }
 
@@ -1999,16 +2417,29 @@ class ShardInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ShardInstanceId = 'ShardInstanceId' in params ? params.ShardInstanceId : null;
-        this.ShardSerialId = 'ShardSerialId' in params ? params.ShardSerialId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Createtime = 'Createtime' in params ? params.Createtime : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.ShardId = 'ShardId' in params ? params.ShardId : null;
-        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
+
+        if (params.Inbound) {
+            this.Inbound = new Array();
+            for (let z in params.Inbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Inbound[z]);
+                this.Inbound.push(obj);
+            }
+        }
+
+        if (params.Outbound) {
+            this.Outbound = new Array();
+            for (let z in params.Outbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Outbound[z]);
+                this.Outbound.push(obj);
+            }
+        }
 
     }
 }
@@ -2493,521 +2924,6 @@ class CloseDBExtranetAccessResponse extends  AbstractModel {
 }
 
 /**
- * Database view information
- * @class
- */
-class DatabaseView extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * View name
-         * @type {string || null}
-         */
-        this.View = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.View = 'View' in params ? params.View : null;
-
-    }
-}
-
-/**
- * ModifyAccountDescription response structure.
- * @class
- */
-class ModifyAccountDescriptionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GrantAccountPrivileges request structure.
- * @class
- */
-class GrantAccountPrivilegesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of dcdbt-ow728lmc.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Login username.
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * Access host allowed for a user. An account is uniquely identified by username and host.
-         * @type {string || null}
-         */
-        this.Host = null;
-
-        /**
-         * Database name. `\*` indicates that global permissions will be queried (i.e., `\*.\*`), in which case the `Type` and `Object ` parameters will be ignored
-         * @type {string || null}
-         */
-        this.DbName = null;
-
-        /**
-         * Global permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE TEMPORARY TABLES; LOCK TABLES; EXECUTE; CREATE VIEW; SHOW VIEW; CREATE ROUTINE; ALTER ROUTINE; EVENT; TRIGGER; SHOW DATABASES 
-Database permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE TEMPORARY TABLES; LOCK TABLES; EXECUTE; CREATE VIEW; SHOW VIEW; CREATE ROUTINE; ALTER ROUTINE; EVENT; TRIGGER 
-Table/view permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE VIEW; SHOW VIEW; TRIGGER 
-Stored procedure/function permission. Valid values: ALTER ROUTINE; EXECUTE 
-Field permission. Valid values: INSERT; REFERENCES; SELECT; UPDATE
-         * @type {Array.<string> || null}
-         */
-        this.Privileges = null;
-
-        /**
-         * Type. Valid values: table; view; proc; func; \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Type name. For example, if `Type` is table, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
-         * @type {string || null}
-         */
-        this.Object = null;
-
-        /**
-         * If `Type` = table and `ColName` is `\*`, the permissions will be granted to the table; if `ColName` is a specific field name, the permissions will be granted to the field
-         * @type {string || null}
-         */
-        this.ColName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.DbName = 'DbName' in params ? params.DbName : null;
-        this.Privileges = 'Privileges' in params ? params.Privileges : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Object = 'Object' in params ? params.Object : null;
-        this.ColName = 'ColName' in params ? params.ColName : null;
-
-    }
-}
-
-/**
- * DescribeDCDBShards request structure.
- * @class
- */
-class DescribeDCDBShardsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of dcdbt-ow728lmc.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Shard ID list.
-         * @type {Array.<string> || null}
-         */
-        this.ShardInstanceIds = null;
-
-        /**
-         * Offset. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Sort by field. Only `createtime` is supported currently
-         * @type {string || null}
-         */
-        this.OrderBy = null;
-
-        /**
-         * Sort by type. Valid values: desc; asc
-         * @type {string || null}
-         */
-        this.OrderByType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ShardInstanceIds = 'ShardInstanceIds' in params ? params.ShardInstanceIds : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
-
-    }
-}
-
-/**
- * DescribeDBParameters request structure.
- * @class
- */
-class DescribeDBParametersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of dcdbt-ow7t8lmc.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * TencentDB parameter information.
- * @class
- */
-class DBParamValue extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Parameter name
-         * @type {string || null}
-         */
-        this.Param = null;
-
-        /**
-         * Parameter value
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Param = 'Param' in params ? params.Param : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * Parameter constraint
- * @class
- */
-class ParamConstraint extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Constraint type, such as enum and section
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * List of valid values when constraint type is `enum`
-         * @type {string || null}
-         */
-        this.Enum = null;
-
-        /**
-         * Range when constraint type is `section`
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {ConstraintRange || null}
-         */
-        this.Range = null;
-
-        /**
-         * List of valid values when constraint type is `string`
-         * @type {string || null}
-         */
-        this.String = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Enum = 'Enum' in params ? params.Enum : null;
-
-        if (params.Range) {
-            let obj = new ConstraintRange();
-            obj.deserialize(params.Range)
-            this.Range = obj;
-        }
-        this.String = 'String' in params ? params.String : null;
-
-    }
-}
-
-/**
- * ModifyDBInstancesProject response structure.
- * @class
- */
-class ModifyDBInstancesProjectResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyAccountDescription request structure.
- * @class
- */
-class ModifyAccountDescriptionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of dcdbt-ow728lmc.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Login username.
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * Access host allowed for a user. An account is uniquely identified by username and host.
-         * @type {string || null}
-         */
-        this.Host = null;
-
-        /**
-         * New account remarks, which can contain 0-256 characters.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
- * DescribeDBLogFiles response structure.
- * @class
- */
-class DescribeDBLogFilesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of dcdbt-ow728lmc.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Requested log type. Valid values: 1 (binlog); 2 (cold backup); 3 (errlog); 4 (slowlog).
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Total number of requested logs
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * List of log files
-         * @type {Array.<LogFileInfo> || null}
-         */
-        this.Files = null;
-
-        /**
-         * For an instance in a VPC, this prefix plus URI can be used as the download address
-         * @type {string || null}
-         */
-        this.VpcPrefix = null;
-
-        /**
-         * For an instance in a common network, this prefix plus URI can be used as the download address
-         * @type {string || null}
-         */
-        this.NormalPrefix = null;
-
-        /**
-         * Shard ID in the format of shard-7noic7tv
-         * @type {string || null}
-         */
-        this.ShardId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.Files) {
-            this.Files = new Array();
-            for (let z in params.Files) {
-                let obj = new LogFileInfo();
-                obj.deserialize(params.Files[z]);
-                this.Files.push(obj);
-            }
-        }
-        this.VpcPrefix = 'VpcPrefix' in params ? params.VpcPrefix : null;
-        this.NormalPrefix = 'NormalPrefix' in params ? params.NormalPrefix : null;
-        this.ShardId = 'ShardId' in params ? params.ShardId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CloseDBExtranetAccess request structure.
- * @class
- */
-class CloseDBExtranetAccessRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of an instance for which to disable public network access. The ID is in the format of dcdbt-ow728lmc and can be obtained through the `DescribeDCDBInstances` API.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Whether IPv6 is used. Default value: 0
-         * @type {number || null}
-         */
-        this.Ipv6Flag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
-
-    }
-}
-
-/**
  * TDSQL instance information
  * @class
  */
@@ -3383,6 +3299,549 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * ModifyAccountDescription response structure.
+ * @class
+ */
+class ModifyAccountDescriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GrantAccountPrivileges request structure.
+ * @class
+ */
+class GrantAccountPrivilegesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow728lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Login username.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Access host allowed for a user. An account is uniquely identified by username and host.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Database name. `\*` indicates that global permissions will be queried (i.e., `\*.\*`), in which case the `Type` and `Object ` parameters will be ignored
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Global permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE TEMPORARY TABLES; LOCK TABLES; EXECUTE; CREATE VIEW; SHOW VIEW; CREATE ROUTINE; ALTER ROUTINE; EVENT; TRIGGER; SHOW DATABASES 
+Database permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE TEMPORARY TABLES; LOCK TABLES; EXECUTE; CREATE VIEW; SHOW VIEW; CREATE ROUTINE; ALTER ROUTINE; EVENT; TRIGGER 
+Table/view permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE VIEW; SHOW VIEW; TRIGGER 
+Stored procedure/function permission. Valid values: ALTER ROUTINE; EXECUTE 
+Field permission. Valid values: INSERT; REFERENCES; SELECT; UPDATE
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+        /**
+         * Type. Valid values: table; view; proc; func; \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type name. For example, if `Type` is table, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
+         * @type {string || null}
+         */
+        this.Object = null;
+
+        /**
+         * If `Type` = table and `ColName` is `\*`, the permissions will be granted to the table; if `ColName` is a specific field name, the permissions will be granted to the field
+         * @type {string || null}
+         */
+        this.ColName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Object = 'Object' in params ? params.Object : null;
+        this.ColName = 'ColName' in params ? params.ColName : null;
+
+    }
+}
+
+/**
+ * DescribeDCDBShards request structure.
+ * @class
+ */
+class DescribeDCDBShardsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow728lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Shard ID list.
+         * @type {Array.<string> || null}
+         */
+        this.ShardInstanceIds = null;
+
+        /**
+         * Offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sort by field. Only `createtime` is supported currently
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sort by type. Valid values: desc; asc
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ShardInstanceIds = 'ShardInstanceIds' in params ? params.ShardInstanceIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * DescribeDBParameters request structure.
+ * @class
+ */
+class DescribeDBParametersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow7t8lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * TencentDB parameter information.
+ * @class
+ */
+class DBParamValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.Param = null;
+
+        /**
+         * Parameter value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Param = 'Param' in params ? params.Param : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Parameter constraint
+ * @class
+ */
+class ParamConstraint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Constraint type, such as enum and section
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * List of valid values when constraint type is `enum`
+         * @type {string || null}
+         */
+        this.Enum = null;
+
+        /**
+         * Range when constraint type is `section`
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ConstraintRange || null}
+         */
+        this.Range = null;
+
+        /**
+         * List of valid values when constraint type is `string`
+         * @type {string || null}
+         */
+        this.String = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Enum = 'Enum' in params ? params.Enum : null;
+
+        if (params.Range) {
+            let obj = new ConstraintRange();
+            obj.deserialize(params.Range)
+            this.Range = obj;
+        }
+        this.String = 'String' in params ? params.String : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstancesProject response structure.
+ * @class
+ */
+class ModifyDBInstancesProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisassociateSecurityGroups response structure.
+ * @class
+ */
+class DisassociateSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ResetAccountPassword request structure.
+ * @class
+ */
+class ResetAccountPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow728lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Login username.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Access host allowed for a user. An account is uniquely identified by username and host.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * DescribeDBLogFiles response structure.
+ * @class
+ */
+class DescribeDBLogFilesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow728lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Requested log type. Valid values: 1 (binlog); 2 (cold backup); 3 (errlog); 4 (slowlog).
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Total number of requested logs
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of log files
+         * @type {Array.<LogFileInfo> || null}
+         */
+        this.Files = null;
+
+        /**
+         * For an instance in a VPC, this prefix plus URI can be used as the download address
+         * @type {string || null}
+         */
+        this.VpcPrefix = null;
+
+        /**
+         * For an instance in a common network, this prefix plus URI can be used as the download address
+         * @type {string || null}
+         */
+        this.NormalPrefix = null;
+
+        /**
+         * Shard ID in the format of shard-7noic7tv
+         * @type {string || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Files) {
+            this.Files = new Array();
+            for (let z in params.Files) {
+                let obj = new LogFileInfo();
+                obj.deserialize(params.Files[z]);
+                this.Files.push(obj);
+            }
+        }
+        this.VpcPrefix = 'VpcPrefix' in params ? params.VpcPrefix : null;
+        this.NormalPrefix = 'NormalPrefix' in params ? params.NormalPrefix : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloseDBExtranetAccess request structure.
+ * @class
+ */
+class CloseDBExtranetAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of an instance for which to disable public network access. The ID is in the format of dcdbt-ow728lmc and can be obtained through the `DescribeDCDBInstances` API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether IPv6 is used. Default value: 0
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+    }
+}
+
+/**
+ * Database view information
+ * @class
+ */
+class DatabaseView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * View name
+         * @type {string || null}
+         */
+        this.View = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.View = 'View' in params ? params.View : null;
+
+    }
+}
+
+/**
  * DeleteAccount response structure.
  * @class
  */
@@ -3410,6 +3869,48 @@ class DeleteAccountResponse extends  AbstractModel {
     }
 }
 
+/**
+ * ModifyDBInstanceSecurityGroups request structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name. Valid value: `dcdb`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List of IDs of security groups to be modified, which is an array of one or more security group IDs.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
 module.exports = {
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
     DeleteAccountRequest: DeleteAccountRequest,
@@ -3421,6 +3922,7 @@ module.exports = {
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
+    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     DatabaseProcedure: DatabaseProcedure,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
@@ -3429,27 +3931,36 @@ module.exports = {
     DescribeDatabaseObjectsResponse: DescribeDatabaseObjectsResponse,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     CloneAccountRequest: CloneAccountRequest,
-    ResetAccountPasswordRequest: ResetAccountPasswordRequest,
+    LogFileInfo: LogFileInfo,
+    DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
     TableColumn: TableColumn,
     ParamModifyResult: ParamModifyResult,
+    DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     ParamDesc: ParamDesc,
+    AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     CreateAccountResponse: CreateAccountResponse,
+    SecurityGroupBound: SecurityGroupBound,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
+    DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
+    AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     InitDCDBInstancesRequest: InitDCDBInstancesRequest,
     DescribeDCDBShardsResponse: DescribeDCDBShardsResponse,
     DatabaseFunction: DatabaseFunction,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDBSyncModeResponse: DescribeDBSyncModeResponse,
-    LogFileInfo: LogFileInfo,
-    DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
+    DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
+    DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
+    ShardInfo: ShardInfo,
     Database: Database,
     CreateAccountRequest: CreateAccountRequest,
+    DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DBAccount: DBAccount,
+    ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
-    ShardInfo: ShardInfo,
+    SecurityGroup: SecurityGroup,
     DescribeAccountsResponse: DescribeAccountsResponse,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
@@ -3460,7 +3971,7 @@ module.exports = {
     ConstraintRange: ConstraintRange,
     CloneAccountResponse: CloneAccountResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
-    DatabaseView: DatabaseView,
+    DCDBInstanceInfo: DCDBInstanceInfo,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     DescribeDCDBShardsRequest: DescribeDCDBShardsRequest,
@@ -3468,10 +3979,12 @@ module.exports = {
     DBParamValue: DBParamValue,
     ParamConstraint: ParamConstraint,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
-    ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
+    DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
+    ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
-    DCDBInstanceInfo: DCDBInstanceInfo,
+    DatabaseView: DatabaseView,
     DeleteAccountResponse: DeleteAccountResponse,
+    ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
 
 }

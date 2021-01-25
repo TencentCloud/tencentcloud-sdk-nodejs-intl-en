@@ -625,6 +625,34 @@ Field permission. Valid values: INSERT, REFERENCES, SELECT, UPDATE
 }
 
 /**
+ * ModifyDBInstanceSecurityGroups response structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * OpenDBExtranetAccess response structure.
  * @class
  */
@@ -744,6 +772,41 @@ class DescribeAccountsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceName request structure.
+ * @class
+ */
+class ModifyDBInstanceNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of instance to be modified, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * New name of instance, which can contain letters, digits, underscores, and hyphens.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+    }
+}
+
+/**
  * OpenDBExtranetAccess request structure.
  * @class
  */
@@ -848,6 +911,55 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Security group inbound/outbound rule
+ * @class
+ */
+class SecurityGroupBound extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy, which can be `ACCEPT` or `DROP`
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Source IP or source IP range, such as 192.168.0.0/16
+         * @type {string || null}
+         */
+        this.CidrIp = null;
+
+        /**
+         * Port
+         * @type {string || null}
+         */
+        this.PortRange = null;
+
+        /**
+         * Network protocol. UDP and TCP are supported.
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+
+    }
+}
+
+/**
  * CloneAccount request structure.
  * @class
  */
@@ -911,36 +1023,36 @@ class CloneAccountRequest extends  AbstractModel {
 }
 
 /**
- * ResetAccountPassword request structure.
+ * Pulled log information
  * @class
  */
-class ResetAccountPasswordRequest extends  AbstractModel {
+class LogFileInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-         * @type {string || null}
+         * Last modified time of log
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.Mtime = null;
 
         /**
-         * Login username.
-         * @type {string || null}
+         * File length
+         * @type {number || null}
          */
-        this.UserName = null;
+        this.Length = null;
 
         /**
-         * Access host allowed for user. An account is uniquely identified by username and host.
+         * Uniform resource identifier (URI) used during log download
          * @type {string || null}
          */
-        this.Host = null;
+        this.Uri = null;
 
         /**
-         * New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * Filename
          * @type {string || null}
          */
-        this.Password = null;
+        this.FileName = null;
 
     }
 
@@ -951,10 +1063,10 @@ class ResetAccountPasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.Password = 'Password' in params ? params.Password : null;
+        this.Mtime = 'Mtime' in params ? params.Mtime : null;
+        this.Length = 'Length' in params ? params.Length : null;
+        this.Uri = 'Uri' in params ? params.Uri : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
 
     }
 }
@@ -1177,24 +1289,24 @@ class DescribeDBInstancesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyBackupTime response structure.
+ * DescribeDBSecurityGroups request structure.
  * @class
  */
-class ModifyBackupTimeResponse extends  AbstractModel {
+class DescribeDBSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Setting status. 0: success
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Database engine name. Valid value: `mariadb`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Product = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
     }
 
@@ -1205,8 +1317,8 @@ class ModifyBackupTimeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1281,24 +1393,30 @@ class ResourceUsageMonitorSet extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceName request structure.
+ * AssociateSecurityGroups request structure.
  * @class
  */
-class ModifyDBInstanceNameRequest extends  AbstractModel {
+class AssociateSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of instance to be modified, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
+         * Database engine name. Valid value: `mariadb`.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Product = null;
 
         /**
-         * New name of instance, which can contain letters, digits, underscores, and hyphens.
+         * ID of the security group to be associated in the format of sg-efil73jd.
          * @type {string || null}
          */
-        this.InstanceName = null;
+        this.SecurityGroupId = null;
+
+        /**
+         * ID(s) of the instance(s) to be associated in the format of tdsql-lesecurk. You can specify multiple instances.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
 
     }
 
@@ -1309,8 +1427,9 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1689,6 +1808,49 @@ class DescribeDatabasesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeProjectSecurityGroups response structure.
+ * @class
+ */
+class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security group details
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InitDBInstances request structure.
  * @class
  */
@@ -1727,6 +1889,34 @@ class InitDBInstancesRequest extends  AbstractModel {
                 this.Params.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * AssociateSecurityGroups response structure.
+ * @class
+ */
+class AssociateSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2131,6 +2321,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.DcnDstNum = null;
 
+        /**
+         * Instance type. Valid values: `1` (dedicated primary instance), `2` (primary instance), `3` (disaster recovery instance), and `4` (dedicated disaster recovery instance).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -2189,6 +2386,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
         this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
         this.DcnDstNum = 'DcnDstNum' in params ? params.DcnDstNum : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -2270,36 +2468,24 @@ class DescribeDBResourceUsageResponse extends  AbstractModel {
 }
 
 /**
- * Pulled log information
+ * DescribeProjectSecurityGroups request structure.
  * @class
  */
-class LogFileInfo extends  AbstractModel {
+class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Last modified time of log
-         * @type {number || null}
-         */
-        this.Mtime = null;
-
-        /**
-         * File length
-         * @type {number || null}
-         */
-        this.Length = null;
-
-        /**
-         * Uniform resource identifier (URI) used during log download
+         * Database engine name. Valid value: `mariadb`.
          * @type {string || null}
          */
-        this.Uri = null;
+        this.Product = null;
 
         /**
-         * Filename
-         * @type {string || null}
+         * Project ID
+         * @type {number || null}
          */
-        this.FileName = null;
+        this.ProjectId = null;
 
     }
 
@@ -2310,10 +2496,51 @@ class LogFileInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Mtime = 'Mtime' in params ? params.Mtime : null;
-        this.Length = 'Length' in params ? params.Length : null;
-        this.Uri = 'Uri' in params ? params.Uri : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeDBSecurityGroups response structure.
+ * @class
+ */
+class DescribeDBSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security group details
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2466,24 +2693,54 @@ class CreateAccountRequest extends  AbstractModel {
 }
 
 /**
- * InitDBInstances response structure.
+ * DisassociateSecurityGroups request structure.
  * @class
  */
-class InitDBInstancesResponse extends  AbstractModel {
+class DisassociateSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID. The task status can be queried through the `DescribeFlow` API.
-         * @type {number || null}
+         * Database engine name. Valid value: `mariadb`.
+         * @type {string || null}
          */
-        this.FlowId = null;
+        this.Product = null;
 
         /**
-         * Passed through from the input parameters.
+         * Security group ID
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Instance ID list, which is an array of one or more instance IDs.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DisassociateSecurityGroups response structure.
+ * @class
+ */
+class DisassociateSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2500,8 +2757,6 @@ class InitDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2793,6 +3048,92 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Security group details
+ * @class
+ */
+class SecurityGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Creation time in the format of yyyy-mm-dd hh:mm:ss
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Security group ID
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Security group name
+         * @type {string || null}
+         */
+        this.SecurityGroupName = null;
+
+        /**
+         * Security group remarks
+         * @type {string || null}
+         */
+        this.SecurityGroupRemark = null;
+
+        /**
+         * Inbound rule
+         * @type {Array.<SecurityGroupBound> || null}
+         */
+        this.Inbound = null;
+
+        /**
+         * Outbound rule
+         * @type {Array.<SecurityGroupBound> || null}
+         */
+        this.Outbound = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
+
+        if (params.Inbound) {
+            this.Inbound = new Array();
+            for (let z in params.Inbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Inbound[z]);
+                this.Inbound.push(obj);
+            }
+        }
+
+        if (params.Outbound) {
+            this.Outbound = new Array();
+            for (let z in params.Outbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Outbound[z]);
+                this.Outbound.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeAccounts response structure.
  * @class
  */
@@ -2979,6 +3320,41 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * ModifyBackupTime response structure.
+ * @class
+ */
+class ModifyBackupTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Setting status. 0: success
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3466,6 +3842,55 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ResetAccountPassword request structure.
+ * @class
+ */
+class ResetAccountPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Login username.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Access host allowed for user. An account is uniquely identified by username and host.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
  * Slow query entry information
  * @class
  */
@@ -3609,6 +4034,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TsMin = 'TsMin' in params ? params.TsMin : null;
         this.User = 'User' in params ? params.User : null;
         this.ExampleSql = 'ExampleSql' in params ? params.ExampleSql : null;
+
+    }
+}
+
+/**
+ * InitDBInstances response structure.
+ * @class
+ */
+class InitDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID. The task status can be queried through the `DescribeFlow` API.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Passed through from the input parameters.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4047,6 +4514,48 @@ class DeleteAccountResponse extends  AbstractModel {
     }
 }
 
+/**
+ * ModifyDBInstanceSecurityGroups request structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name. Valid value: `mariadb`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List of IDs of security groups to be modified, which is an array of one or more security group IDs.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
 module.exports = {
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
@@ -4059,44 +4568,53 @@ module.exports = {
     DescribeDBPerformanceResponse: DescribeDBPerformanceResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
+    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
     DescribeAccountsRequest: DescribeAccountsRequest,
+    ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     ParamDesc: ParamDesc,
+    SecurityGroupBound: SecurityGroupBound,
     CloneAccountRequest: CloneAccountRequest,
-    ResetAccountPasswordRequest: ResetAccountPasswordRequest,
+    LogFileInfo: LogFileInfo,
     ModifyBackupTimeRequest: ModifyBackupTimeRequest,
     ParamModifyResult: ParamModifyResult,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
-    ModifyBackupTimeResponse: ModifyBackupTimeResponse,
+    DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     ResourceUsageMonitorSet: ResourceUsageMonitorSet,
-    ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
+    AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
     CreateAccountResponse: CreateAccountResponse,
     PerformanceMonitorSet: PerformanceMonitorSet,
     DescribeLogFileRetentionPeriodResponse: DescribeLogFileRetentionPeriodResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
+    DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,
+    AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     ConstraintRange: ConstraintRange,
     DBInstance: DBInstance,
     DescribeDBResourceUsageResponse: DescribeDBResourceUsageResponse,
-    LogFileInfo: LogFileInfo,
+    DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
+    DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     DescribeDBResourceUsageDetailsRequest: DescribeDBResourceUsageDetailsRequest,
     Database: Database,
     CreateAccountRequest: CreateAccountRequest,
-    InitDBInstancesResponse: InitDBInstancesResponse,
+    DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
+    DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DescribeBackupTimeRequest: DescribeBackupTimeRequest,
     DBAccount: DBAccount,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     DescribeDBPerformanceDetailsResponse: DescribeDBPerformanceDetailsResponse,
+    SecurityGroup: SecurityGroup,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
     ModifyLogFileRetentionPeriodRequest: ModifyLogFileRetentionPeriodRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    ModifyBackupTimeResponse: ModifyBackupTimeResponse,
     ModifyDBParametersRequest: ModifyDBParametersRequest,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
@@ -4109,7 +4627,9 @@ module.exports = {
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DescribeDBPerformanceDetailsRequest: DescribeDBPerformanceDetailsRequest,
     DescribeBackupTimeResponse: DescribeBackupTimeResponse,
+    ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     SlowLogData: SlowLogData,
+    InitDBInstancesResponse: InitDBInstancesResponse,
     ModifyLogFileRetentionPeriodResponse: ModifyLogFileRetentionPeriodResponse,
     DescribeDBResourceUsageRequest: DescribeDBResourceUsageRequest,
     DBParamValue: DBParamValue,
@@ -4120,5 +4640,6 @@ module.exports = {
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     DeleteAccountResponse: DeleteAccountResponse,
+    ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
 
 }

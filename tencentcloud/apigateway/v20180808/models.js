@@ -525,6 +525,12 @@ class ModifySubDomainRequest extends  AbstractModel {
          */
         this.NetType = null;
 
+        /**
+         * Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
+         * @type {boolean || null}
+         */
+        this.IsForcedHttps = null;
+
     }
 
     /**
@@ -549,6 +555,7 @@ class ModifySubDomainRequest extends  AbstractModel {
             }
         }
         this.NetType = 'NetType' in params ? params.NetType : null;
+        this.IsForcedHttps = 'IsForcedHttps' in params ? params.IsForcedHttps : null;
 
     }
 }
@@ -1734,6 +1741,13 @@ class BindSubDomainResponse extends  AbstractModel {
         super();
 
         /**
+         * Whether binding succeeded.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1748,6 +1762,7 @@ class BindSubDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5151,6 +5166,12 @@ class CreateApiRequest extends  AbstractModel {
          */
         this.UserType = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsBase64Encoded = null;
+
     }
 
     /**
@@ -5283,6 +5304,7 @@ class CreateApiRequest extends  AbstractModel {
         }
         this.TargetNamespaceId = 'TargetNamespaceId' in params ? params.TargetNamespaceId : null;
         this.UserType = 'UserType' in params ? params.UserType : null;
+        this.IsBase64Encoded = 'IsBase64Encoded' in params ? params.IsBase64Encoded : null;
 
     }
 }
@@ -7391,6 +7413,12 @@ class BindSubDomainRequest extends  AbstractModel {
          */
         this.PathMappingSet = null;
 
+        /**
+         * Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
+         * @type {boolean || null}
+         */
+        this.IsForcedHttps = null;
+
     }
 
     /**
@@ -7416,6 +7444,7 @@ class BindSubDomainRequest extends  AbstractModel {
                 this.PathMappingSet.push(obj);
             }
         }
+        this.IsForcedHttps = 'IsForcedHttps' in params ? params.IsForcedHttps : null;
 
     }
 }
@@ -9600,6 +9629,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Environments = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsBase64Encoded = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsBase64Trigger = null;
+
+        /**
+         * 
+         * @type {Array.<Base64EncodedTriggerRule> || null}
+         */
+        this.Base64EncodedTriggerRules = null;
+
     }
 
     /**
@@ -9730,6 +9777,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.Environments = 'Environments' in params ? params.Environments : null;
+        this.IsBase64Encoded = 'IsBase64Encoded' in params ? params.IsBase64Encoded : null;
+        this.IsBase64Trigger = 'IsBase64Trigger' in params ? params.IsBase64Trigger : null;
+
+        if (params.Base64EncodedTriggerRules) {
+            this.Base64EncodedTriggerRules = new Array();
+            for (let z in params.Base64EncodedTriggerRules) {
+                let obj = new Base64EncodedTriggerRule();
+                obj.deserialize(params.Base64EncodedTriggerRules[z]);
+                this.Base64EncodedTriggerRules.push(obj);
+            }
+        }
 
     }
 }
@@ -9793,6 +9851,41 @@ class EnableApiKeyRequest extends  AbstractModel {
             return;
         }
         this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class Base64EncodedTriggerRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -10061,6 +10154,7 @@ module.exports = {
     ApiInfo: ApiInfo,
     EnvironmentStrategy: EnvironmentStrategy,
     EnableApiKeyRequest: EnableApiKeyRequest,
+    Base64EncodedTriggerRule: Base64EncodedTriggerRule,
     DescribeServicesStatusResponse: DescribeServicesStatusResponse,
     CreateApiKeyRequest: CreateApiKeyRequest,
 

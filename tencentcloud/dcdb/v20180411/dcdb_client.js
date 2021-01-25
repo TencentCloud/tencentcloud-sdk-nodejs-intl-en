@@ -26,6 +26,7 @@ const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const DatabaseProcedure = models.DatabaseProcedure;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
@@ -34,27 +35,36 @@ const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
-const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const LogFileInfo = models.LogFileInfo;
+const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const TableColumn = models.TableColumn;
 const ParamModifyResult = models.ParamModifyResult;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ParamDesc = models.ParamDesc;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
+const SecurityGroupBound = models.SecurityGroupBound;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const DatabaseFunction = models.DatabaseFunction;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
-const LogFileInfo = models.LogFileInfo;
-const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const ShardInfo = models.ShardInfo;
 const Database = models.Database;
 const CreateAccountRequest = models.CreateAccountRequest;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DBAccount = models.DBAccount;
+const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
-const ShardInfo = models.ShardInfo;
+const SecurityGroup = models.SecurityGroup;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
@@ -65,7 +75,7 @@ const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const ConstraintRange = models.ConstraintRange;
 const CloneAccountResponse = models.CloneAccountResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
-const DatabaseView = models.DatabaseView;
+const DCDBInstanceInfo = models.DCDBInstanceInfo;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
@@ -73,11 +83,13 @@ const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DBParamValue = models.DBParamValue;
 const ParamConstraint = models.ParamConstraint;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
-const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
-const DCDBInstanceInfo = models.DCDBInstanceInfo;
+const DatabaseView = models.DatabaseView;
 const DeleteAccountResponse = models.DeleteAccountResponse;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 
 
 /**
@@ -249,6 +261,28 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to query the security group details of a project.
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to associate security groups with Tencent Cloud resources in batches.
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a TencentDB account. Multiple accounts can be created for one instance. Accounts with the same username but different hosts are different accounts.
      * @param {CreateAccountRequest} req
      * @param {function(string, CreateAccountResponse):void} cb
@@ -257,6 +291,17 @@ Note: accounts with the same username but different hosts are different accounts
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
         this.request("CreateAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the security groups associated with TencentDB.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -328,6 +373,17 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to query the security group details of an instance.
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the table information of a TencentDB instance.
      * @param {DescribeDatabaseTableRequest} req
      * @param {function(string, DescribeDatabaseTableResponse):void} cb
@@ -347,6 +403,17 @@ Note: Accounts with the same username but different hosts are different accounts
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
         this.request("CloneAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unassociate security groups from instances in batches.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
     }
 
 

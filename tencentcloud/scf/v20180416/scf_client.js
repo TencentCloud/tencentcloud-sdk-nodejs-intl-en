@@ -492,7 +492,7 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to modify the account concurrency limit quota.
+     * This API is used to modify the account concurrency quota.
      * @param {PutTotalConcurrencyConfigRequest} req
      * @param {function(string, PutTotalConcurrencyConfigResponse):void} cb
      * @public

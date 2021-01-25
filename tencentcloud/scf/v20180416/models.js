@@ -854,7 +854,7 @@ class VersionProvisionedConcurrencyInfo extends  AbstractModel {
         this.AvailableProvisionedConcurrencyNum = null;
 
         /**
-         * Provisioned concurrency setting task status. Done: completed; InProgress: in progress; Failed: partially or completely failed.
+         * Provisioned concurrency setting task status. `Done`: completed; `InProgress`: in progress; `Failed`: partially or completely failed.
          * @type {string || null}
          */
         this.Status = null;
@@ -1933,7 +1933,7 @@ class DeleteReservedConcurrencyConfigRequest extends  AbstractModel {
         this.FunctionName = null;
 
         /**
-         * Function namespace. Default value: default
+         * Function namespace. Default value: `default`
          * @type {string || null}
          */
         this.Namespace = null;
@@ -3167,7 +3167,7 @@ class DeleteProvisionedConcurrencyConfigRequest extends  AbstractModel {
         this.Qualifier = null;
 
         /**
-         * Function namespace. Default value: default
+         * Function namespace. Default value: `default`
          * @type {string || null}
          */
         this.Namespace = null;
@@ -3521,7 +3521,7 @@ class PutReservedConcurrencyConfigRequest extends  AbstractModel {
         this.ReservedConcurrencyMem = null;
 
         /**
-         * Function namespace. Default value: default
+         * Function namespace. Default value: `default`
          * @type {string || null}
          */
         this.Namespace = null;
@@ -4335,7 +4335,7 @@ class PutTotalConcurrencyConfigRequest extends  AbstractModel {
         this.TotalConcurrencyMem = null;
 
         /**
-         * Namespace. Default value: default
+         * Namespace. Default value: `default`
          * @type {string || null}
          */
         this.Namespace = null;
@@ -5281,7 +5281,7 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
         this.VersionProvisionedConcurrencyNum = null;
 
         /**
-         * Function namespace. Default value: default
+         * Function namespace. Default value: `default`
          * @type {string || null}
          */
         this.Namespace = null;

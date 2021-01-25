@@ -653,6 +653,12 @@ class DescribeBillDetailRequest extends  AbstractModel {
          */
         this.ActionType = null;
 
+        /**
+         * Project ID: ID of the project to which the resource belongs
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
     }
 
     /**
@@ -673,6 +679,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -938,13 +945,15 @@ class BillDetailComponent extends  AbstractModel {
         this.IncentivePayAmount = null;
 
         /**
-         * Component type/code (optional)
+         * Component type code
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ItemCode = null;
 
         /**
-         * Component name/code (optional)
+         * Component code
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ComponentCode = null;
@@ -1471,13 +1480,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Tags = null;
 
         /**
-         * Product name/code (optional)
+         * Product code
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BusinessCode = null;
 
         /**
-         * Subproduct name/code (optional)
+         * Subproduct code
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProductCode = null;
@@ -1493,6 +1504,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.RegionId = null;
+
+        /**
+         * Project ID: ID of the project to which the resource belongs
+         * @type {number || null}
+         */
+        this.ProjectId = null;
 
     }
 
@@ -1542,6 +1559,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }

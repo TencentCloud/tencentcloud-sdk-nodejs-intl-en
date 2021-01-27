@@ -2619,6 +2619,13 @@ class SubAccountInfo extends  AbstractModel {
          */
         this.Email = null;
 
+        /**
+         * Creation time
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -2636,6 +2643,7 @@ class SubAccountInfo extends  AbstractModel {
         this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }

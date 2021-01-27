@@ -116,6 +116,34 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * ModifyAlarmPolicyNotice response structure.
+ * @class
+ */
+class ModifyAlarmPolicyNoticeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAlarmPolicyInfo request structure.
  * @class
  */
@@ -499,7 +527,7 @@ class BindingPolicyObjectRequest extends  AbstractModel {
         super();
 
         /**
-         * Policy group ID.
+         * Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
          * @type {number || null}
          */
         this.GroupId = null;
@@ -522,6 +550,12 @@ class BindingPolicyObjectRequest extends  AbstractModel {
          */
         this.Dimensions = null;
 
+        /**
+         * Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
     }
 
     /**
@@ -543,6 +577,7 @@ class BindingPolicyObjectRequest extends  AbstractModel {
                 this.Dimensions.push(obj);
             }
         }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -1302,30 +1337,24 @@ class DescribeBaseMetricsResponse extends  AbstractModel {
 }
 
 /**
- * SendCustomAlarmMsg request structure.
+ * `DescribeMetricData` output parameters
  * @class
  */
-class SendCustomAlarmMsgRequest extends  AbstractModel {
+class MetricDataPoint extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API component name. The value for the current API is monitor.
-         * @type {string || null}
+         * Combination of instance object dimensions
+         * @type {Array.<Dimension> || null}
          */
-        this.Module = null;
+        this.Dimensions = null;
 
         /**
-         * Message policy ID, which is configured on the custom message page of Cloud Monitor.
-         * @type {string || null}
+         * Data point list
+         * @type {Array.<Point> || null}
          */
-        this.PolicyId = null;
-
-        /**
-         * Custom message content that a user wants to send.
-         * @type {string || null}
-         */
-        this.Msg = null;
+        this.Values = null;
 
     }
 
@@ -1336,9 +1365,24 @@ class SendCustomAlarmMsgRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new Dimension();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
+
+        if (params.Values) {
+            this.Values = new Array();
+            for (let z in params.Values) {
+                let obj = new Point();
+                obj.deserialize(params.Values[z]);
+                this.Values.push(obj);
+            }
+        }
 
     }
 }
@@ -1636,6 +1680,48 @@ class DescribeAlarmPoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAlarmPolicyStatus request structure.
+ * @class
+ */
+class ModifyAlarmPolicyStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Module name, which is fixed at "monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * Alarm policy ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Status. Valid values: 0 (disabled), 1 (enabled)
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+
+    }
+}
+
+/**
  * Alarm condition template
  * @class
  */
@@ -1686,6 +1772,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.EventCondition)
             this.EventCondition = obj;
         }
+
+    }
+}
+
+/**
+ * SendCustomAlarmMsg request structure.
+ * @class
+ */
+class SendCustomAlarmMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API component name. The value for the current API is monitor.
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * Message policy ID, which is configured on the custom message page of Cloud Monitor.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Custom message content that a user wants to send.
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
 
     }
 }
@@ -1749,7 +1877,7 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Policy group ID.
+         * Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
          * @type {number || null}
          */
         this.GroupId = null;
@@ -1766,6 +1894,12 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
          */
         this.InstanceGroupId = null;
 
+        /**
+         * Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
     }
 
     /**
@@ -1779,6 +1913,7 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
         this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -3177,6 +3312,42 @@ class DescribeBindingPolicyObjectListInstance extends  AbstractModel {
 }
 
 /**
+ * Monitoring data point
+ * @class
+ */
+class Point extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time point when this monitoring data point is generated
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Monitoring data point value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * Modification of the event alarm condition passed in by the alarm policy group.
  * @class
  */
@@ -3719,18 +3890,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyAlarmPolicyNotice response structure.
+ * ModifyAlarmPolicyCondition request structure.
  * @class
  */
-class ModifyAlarmPolicyNoticeResponse extends  AbstractModel {
+class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Module name, which is fixed at "monitor"
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Module = null;
+
+        /**
+         * Alarm policy ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Metric trigger condition
+         * @type {AlarmPolicyCondition || null}
+         */
+        this.Condition = null;
+
+        /**
+         * Event trigger condition
+         * @type {AlarmPolicyEventCondition || null}
+         */
+        this.EventCondition = null;
 
     }
 
@@ -3741,7 +3930,20 @@ class ModifyAlarmPolicyNoticeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+        if (params.Condition) {
+            let obj = new AlarmPolicyCondition();
+            obj.deserialize(params.Condition)
+            this.Condition = obj;
+        }
+
+        if (params.EventCondition) {
+            let obj = new AlarmPolicyEventCondition();
+            obj.deserialize(params.EventCondition)
+            this.EventCondition = obj;
+        }
 
     }
 }
@@ -5889,36 +6091,30 @@ class DescribeAlarmEventsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyAlarmPolicyCondition request structure.
+ * `DescribeMidDimensionValueList` query conditions
  * @class
  */
-class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
+class MidQueryCondition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Module name, which is fixed at "monitor"
+         * Dimension
          * @type {string || null}
          */
-        this.Module = null;
+        this.Key = null;
 
         /**
-         * Alarm policy ID
+         * Operator. Valid values: eq (equal to), ne (not equal to), in
          * @type {string || null}
          */
-        this.PolicyId = null;
+        this.Operator = null;
 
         /**
-         * Metric trigger condition
-         * @type {AlarmPolicyCondition || null}
+         * Dimension value. If `Operator` is `eq` or `ne`, only the first element will be used
+         * @type {Array.<string> || null}
          */
-        this.Condition = null;
-
-        /**
-         * Event trigger condition
-         * @type {AlarmPolicyEventCondition || null}
-         */
-        this.EventCondition = null;
+        this.Value = null;
 
     }
 
@@ -5929,20 +6125,9 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-
-        if (params.Condition) {
-            let obj = new AlarmPolicyCondition();
-            obj.deserialize(params.Condition)
-            this.Condition = obj;
-        }
-
-        if (params.EventCondition) {
-            let obj = new AlarmPolicyEventCondition();
-            obj.deserialize(params.EventCondition)
-            this.EventCondition = obj;
-        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -6343,6 +6528,49 @@ class MonitorTypeNamespace extends  AbstractModel {
 }
 
 /**
+ * `DescribeMetricData` output parameters
+ * @class
+ */
+class MetricData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Metric name
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * Monitoring data point
+         * @type {Array.<MetricDataPoint> || null}
+         */
+        this.Points = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+
+        if (params.Points) {
+            this.Points = new Array();
+            for (let z in params.Points) {
+                let obj = new MetricDataPoint();
+                obj.deserialize(params.Points[z]);
+                this.Points.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Cloud Monitor alarm notification template - callback notification details
  * @class
  */
@@ -6737,6 +6965,70 @@ Note: This field may return null, indicating that no valid value was found.
         this.SendFor = 'SendFor' in params ? params.SendFor : null;
         this.RecoverNotify = 'RecoverNotify' in params ? params.RecoverNotify : null;
         this.ReceiveLanguage = 'ReceiveLanguage' in params ? params.ReceiveLanguage : null;
+
+    }
+}
+
+/**
+ * DescribeStatisticData response structure.
+ * @class
+ */
+class DescribeStatisticDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Statistical period
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Monitoring data
+         * @type {Array.<MetricData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new MetricData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7630,30 +7922,60 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * ModifyAlarmPolicyStatus request structure.
+ * DescribeStatisticData request structure.
  * @class
  */
-class ModifyAlarmPolicyStatusRequest extends  AbstractModel {
+class DescribeStatisticDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Module name, which is fixed at "monitor"
+         * Module, whose value is fixed at `monitor`
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * Alarm policy ID
+         * Namespace. Valid values: QCE/TKE
          * @type {string || null}
          */
-        this.PolicyId = null;
+        this.Namespace = null;
 
         /**
-         * Status. Valid values: 0 (disabled), 1 (enabled)
+         * Metric name list
+         * @type {Array.<string> || null}
+         */
+        this.MetricNames = null;
+
+        /**
+         * Dimension condition. The `=` and `in` operators are supported
+         * @type {Array.<MidQueryCondition> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * Statistical granularity in s. Default value: 300
          * @type {number || null}
          */
-        this.Enable = null;
+        this.Period = null;
+
+        /**
+         * Start time, which is the current time by default, such as 2020-12-08T19:51:23+08:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, which is the current time by default, such as 2020-12-08T19:51:23+08:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * `groupBy` by the specified dimension
+         * @type {Array.<string> || null}
+         */
+        this.GroupBys = null;
 
     }
 
@@ -7665,8 +7987,21 @@ class ModifyAlarmPolicyStatusRequest extends  AbstractModel {
             return;
         }
         this.Module = 'Module' in params ? params.Module : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.MetricNames = 'MetricNames' in params ? params.MetricNames : null;
+
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new MidQueryCondition();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
+            }
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.GroupBys = 'GroupBys' in params ? params.GroupBys : null;
 
     }
 }
@@ -8081,10 +8416,16 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Policy group ID.
+         * Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
          * @type {number || null}
          */
         this.GroupId = null;
+
+        /**
+         * Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
 
     }
 
@@ -8097,6 +8438,7 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -8543,6 +8885,7 @@ class BindingPolicyObjectResponse extends  AbstractModel {
 
 module.exports = {
     DescribePolicyConditionListConfigManual: DescribePolicyConditionListConfigManual,
+    ModifyAlarmPolicyNoticeResponse: ModifyAlarmPolicyNoticeResponse,
     ModifyAlarmPolicyInfoRequest: ModifyAlarmPolicyInfoRequest,
     CreatePolicyGroupEventCondition: CreatePolicyGroupEventCondition,
     DescribeProductEventListRequest: DescribeProductEventListRequest,
@@ -8564,13 +8907,15 @@ module.exports = {
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
     ModifyAlarmPolicyTasksResponse: ModifyAlarmPolicyTasksResponse,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
-    SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
+    MetricDataPoint: MetricDataPoint,
     DescribePolicyConditionListConfigManualContinueTime: DescribePolicyConditionListConfigManualContinueTime,
     CommonNamespace: CommonNamespace,
     GetMonitorDataRequest: GetMonitorDataRequest,
     DataPoint: DataPoint,
     DescribeAlarmPoliciesResponse: DescribeAlarmPoliciesResponse,
+    ModifyAlarmPolicyStatusRequest: ModifyAlarmPolicyStatusRequest,
     ConditionsTemp: ConditionsTemp,
+    SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
     DescribePolicyConditionListConfigManualPeriod: DescribePolicyConditionListConfigManualPeriod,
     UnBindingPolicyObjectRequest: UnBindingPolicyObjectRequest,
     InstanceGroup: InstanceGroup,
@@ -8597,6 +8942,7 @@ module.exports = {
     ModifyAlarmPolicyConditionResponse: ModifyAlarmPolicyConditionResponse,
     Dimension: Dimension,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
+    Point: Point,
     ModifyPolicyGroupEventCondition: ModifyPolicyGroupEventCondition,
     Metric: Metric,
     ModifyPolicyGroupRequest: ModifyPolicyGroupRequest,
@@ -8606,7 +8952,7 @@ module.exports = {
     UserNotice: UserNotice,
     AlarmPolicyFilter: AlarmPolicyFilter,
     DescribeAlarmNoticeCallbacksResponse: DescribeAlarmNoticeCallbacksResponse,
-    ModifyAlarmPolicyNoticeResponse: ModifyAlarmPolicyNoticeResponse,
+    ModifyAlarmPolicyConditionRequest: ModifyAlarmPolicyConditionRequest,
     ModifyAlarmPolicyStatusResponse: ModifyAlarmPolicyStatusResponse,
     Instance: Instance,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
@@ -8639,17 +8985,19 @@ module.exports = {
     AlarmNotice: AlarmNotice,
     MetricConfig: MetricConfig,
     DescribeAlarmEventsRequest: DescribeAlarmEventsRequest,
-    ModifyAlarmPolicyConditionRequest: ModifyAlarmPolicyConditionRequest,
+    MidQueryCondition: MidQueryCondition,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,
     DescribeAccidentEventListAlarms: DescribeAccidentEventListAlarms,
     DescribeProductEventListResponse: DescribeProductEventListResponse,
     AlarmHistory: AlarmHistory,
     MonitorTypeNamespace: MonitorTypeNamespace,
+    MetricData: MetricData,
     URLNotice: URLNotice,
     DescribeAlarmPolicyRequest: DescribeAlarmPolicyRequest,
     CreatePolicyGroupRequest: CreatePolicyGroupRequest,
     CreatePolicyGroupCondition: CreatePolicyGroupCondition,
     DescribePolicyGroupInfoReceiverInfo: DescribePolicyGroupInfoReceiverInfo,
+    DescribeStatisticDataResponse: DescribeStatisticDataResponse,
     DescribePolicyConditionListEventMetric: DescribePolicyConditionListEventMetric,
     DescribePolicyGroupListRequest: DescribePolicyGroupListRequest,
     DescribeBasicAlarmListRequest: DescribeBasicAlarmListRequest,
@@ -8661,7 +9009,7 @@ module.exports = {
     DescribeAlarmNoticeResponse: DescribeAlarmNoticeResponse,
     DescribeBindingPolicyObjectListInstanceGroup: DescribeBindingPolicyObjectListInstanceGroup,
     DescribeProductEventListEventsGroupInfo: DescribeProductEventListEventsGroupInfo,
-    ModifyAlarmPolicyStatusRequest: ModifyAlarmPolicyStatusRequest,
+    DescribeStatisticDataRequest: DescribeStatisticDataRequest,
     DescribeAlarmNoticeRequest: DescribeAlarmNoticeRequest,
     DescribeBindingPolicyObjectListDimension: DescribeBindingPolicyObjectListDimension,
     CreateAlarmNoticeRequest: CreateAlarmNoticeRequest,

@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual;
+const ModifyAlarmPolicyNoticeResponse = models.ModifyAlarmPolicyNoticeResponse;
 const ModifyAlarmPolicyInfoRequest = models.ModifyAlarmPolicyInfoRequest;
 const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
 const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
@@ -38,13 +39,15 @@ const PutMonitorDataRequest = models.PutMonitorDataRequest;
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
 const ModifyAlarmPolicyTasksResponse = models.ModifyAlarmPolicyTasksResponse;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
-const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
+const MetricDataPoint = models.MetricDataPoint;
 const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
 const CommonNamespace = models.CommonNamespace;
 const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const DataPoint = models.DataPoint;
 const DescribeAlarmPoliciesResponse = models.DescribeAlarmPoliciesResponse;
+const ModifyAlarmPolicyStatusRequest = models.ModifyAlarmPolicyStatusRequest;
 const ConditionsTemp = models.ConditionsTemp;
+const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
 const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
 const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
 const InstanceGroup = models.InstanceGroup;
@@ -71,6 +74,7 @@ const DescribeProductEventListEventsDimensions = models.DescribeProductEventList
 const ModifyAlarmPolicyConditionResponse = models.ModifyAlarmPolicyConditionResponse;
 const Dimension = models.Dimension;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
+const Point = models.Point;
 const ModifyPolicyGroupEventCondition = models.ModifyPolicyGroupEventCondition;
 const Metric = models.Metric;
 const ModifyPolicyGroupRequest = models.ModifyPolicyGroupRequest;
@@ -80,7 +84,7 @@ const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
 const UserNotice = models.UserNotice;
 const AlarmPolicyFilter = models.AlarmPolicyFilter;
 const DescribeAlarmNoticeCallbacksResponse = models.DescribeAlarmNoticeCallbacksResponse;
-const ModifyAlarmPolicyNoticeResponse = models.ModifyAlarmPolicyNoticeResponse;
+const ModifyAlarmPolicyConditionRequest = models.ModifyAlarmPolicyConditionRequest;
 const ModifyAlarmPolicyStatusResponse = models.ModifyAlarmPolicyStatusResponse;
 const Instance = models.Instance;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
@@ -113,17 +117,19 @@ const ModifyAlarmPolicyInfoResponse = models.ModifyAlarmPolicyInfoResponse;
 const AlarmNotice = models.AlarmNotice;
 const MetricConfig = models.MetricConfig;
 const DescribeAlarmEventsRequest = models.DescribeAlarmEventsRequest;
-const ModifyAlarmPolicyConditionRequest = models.ModifyAlarmPolicyConditionRequest;
+const MidQueryCondition = models.MidQueryCondition;
 const ModifyAlarmNoticeResponse = models.ModifyAlarmNoticeResponse;
 const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
 const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
 const AlarmHistory = models.AlarmHistory;
 const MonitorTypeNamespace = models.MonitorTypeNamespace;
+const MetricData = models.MetricData;
 const URLNotice = models.URLNotice;
 const DescribeAlarmPolicyRequest = models.DescribeAlarmPolicyRequest;
 const CreatePolicyGroupRequest = models.CreatePolicyGroupRequest;
 const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
 const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
+const DescribeStatisticDataResponse = models.DescribeStatisticDataResponse;
 const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
 const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
 const DescribeBasicAlarmListRequest = models.DescribeBasicAlarmListRequest;
@@ -135,7 +141,7 @@ const MetricDatum = models.MetricDatum;
 const DescribeAlarmNoticeResponse = models.DescribeAlarmNoticeResponse;
 const DescribeBindingPolicyObjectListInstanceGroup = models.DescribeBindingPolicyObjectListInstanceGroup;
 const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
-const ModifyAlarmPolicyStatusRequest = models.ModifyAlarmPolicyStatusRequest;
+const DescribeStatisticDataRequest = models.DescribeStatisticDataRequest;
 const DescribeAlarmNoticeRequest = models.DescribeAlarmNoticeRequest;
 const DescribeBindingPolicyObjectListDimension = models.DescribeBindingPolicyObjectListDimension;
 const CreateAlarmNoticeRequest = models.CreateAlarmNoticeRequest;
@@ -369,6 +375,17 @@ This API may fail due to the rate limit if you need to call a lot of metrics and
     DescribeAllNamespaces(req, cb) {
         let resp = new DescribeAllNamespacesResponse();
         this.request("DescribeAllNamespaces", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query monitoring data by dimension conditions.
+     * @param {DescribeStatisticDataRequest} req
+     * @param {function(string, DescribeStatisticDataResponse):void} cb
+     * @public
+     */
+    DescribeStatisticData(req, cb) {
+        let resp = new DescribeStatisticDataResponse();
+        this.request("DescribeStatisticData", req, resp, cb);
     }
 
     /**

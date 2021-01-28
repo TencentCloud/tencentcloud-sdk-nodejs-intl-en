@@ -17,6 +17,27 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeInternetAddressQuota request structure.
+ * @class
+ */
+class DescribeInternetAddressQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * BGP parameter, including Asn and AuthKey.
  * @class
  */
@@ -497,6 +518,127 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * Internet tunnel’s IP address details
+ * @class
+ */
+class InternetAddressDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Internet tunnel’s IP address ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Internet tunnel’s network address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Subnet = null;
+
+        /**
+         * Mask length of a network address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaskLen = null;
+
+        /**
+         * Address type. Valid values: 0: BGP
+1: China Telecom
+2: China Mobile
+3: China Unicom
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AddrType = null;
+
+        /**
+         * Address status. Valid values: 0: in use
+1: disabled
+2: returned
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Applied at
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * Disabled at
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StopTime = null;
+
+        /**
+         * Returned at
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReleaseTime = null;
+
+        /**
+         * Region
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * User ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Address protocol. Valid values: 0: IPv4; 1: IPv6
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AddrProto = null;
+
+        /**
+         * Retention period of a released IP address, in days
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReserveTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Subnet = 'Subnet' in params ? params.Subnet : null;
+        this.MaskLen = 'MaskLen' in params ? params.MaskLen : null;
+        this.AddrType = 'AddrType' in params ? params.AddrType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.StopTime = 'StopTime' in params ? params.StopTime : null;
+        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AddrProto = 'AddrProto' in params ? params.AddrProto : null;
+        this.ReserveTime = 'ReserveTime' in params ? params.ReserveTime : null;
+
+    }
+}
+
+/**
  * DescribeAccessPoints response structure.
  * @class
  */
@@ -636,6 +778,34 @@ This parameter does not support specifying `DirectConnectTunnelIds` and `Filters
 }
 
 /**
+ * ReleaseInternetAddress request structure.
+ * @class
+ */
+class ReleaseInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the internet tunnel’s public IP address
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * ModifyDirectConnectTunnelAttribute response structure.
  * @class
  */
@@ -687,6 +857,42 @@ class RouteFilterPrefix extends  AbstractModel {
             return;
         }
         this.Cidr = 'Cidr' in params ? params.Cidr : null;
+
+    }
+}
+
+/**
+ * ApplyInternetAddress response structure.
+ * @class
+ */
+class ApplyInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the internet tunnel’s public IP address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -898,6 +1104,80 @@ class DeleteDirectConnectResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableInternetAddress response structure.
+ * @class
+ */
+class EnableInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ApplyInternetAddress request structure.
+ * @class
+ */
+class ApplyInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Mask length of a CIDR block
+         * @type {number || null}
+         */
+        this.MaskLen = null;
+
+        /**
+         * Address type. Valid values: 0: BGP
+1: China Telecom
+2: China Mobile
+3: China Unicom
+         * @type {number || null}
+         */
+        this.AddrType = null;
+
+        /**
+         * Address protocol. Valid values: 0: IPv4
+1: IPv6
+         * @type {number || null}
+         */
+        this.AddrProto = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaskLen = 'MaskLen' in params ? params.MaskLen : null;
+        this.AddrType = 'AddrType' in params ? params.AddrType : null;
+        this.AddrProto = 'AddrProto' in params ? params.AddrProto : null;
 
     }
 }
@@ -1152,6 +1432,57 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInternetAddress response structure.
+ * @class
+ */
+class DescribeInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of public IP addresses for internet tunnels
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of the public IP addresses for internet tunnels
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<InternetAddressDetail> || null}
+         */
+        this.Subnets = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Subnets) {
+            this.Subnets = new Array();
+            for (let z in params.Subnets) {
+                let obj = new InternetAddressDetail();
+                obj.deserialize(params.Subnets[z]);
+                this.Subnets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Used for conditional filtering queries.
  * @class
  */
@@ -1182,6 +1513,92 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DisableInternetAddress response structure.
+ * @class
+ */
+class DisableInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInternetAddressStatistics request structure.
+ * @class
+ */
+class DescribeInternetAddressStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * Public IP address statistics of internet tunnels
+ * @class
+ */
+class InternetAddressStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Number of public IP addresses for internet tunnels
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SubnetNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.SubnetNum = 'SubnetNum' in params ? params.SubnetNum : null;
 
     }
 }
@@ -1323,6 +1740,34 @@ You can call `DescribeAccessPoints` to get the region ID. The selected access po
         this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
         this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
         this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+
+    }
+}
+
+/**
+ * EnableInternetAddress request structure.
+ * @class
+ */
+class EnableInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the internet tunnel’s public IP address
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1596,6 +2041,57 @@ class DescribeDirectConnectTunnelsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeInternetAddressStatistics response structure.
+ * @class
+ */
+class DescribeInternetAddressStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of public IP address statistics for internet tunnels
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of the public IP address statistics for internet tunnels
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<InternetAddressStatistics> || null}
+         */
+        this.InternetAddressStatistics = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InternetAddressStatistics) {
+            this.InternetAddressStatistics = new Array();
+            for (let z in params.InternetAddressStatistics) {
+                let obj = new InternetAddressStatistics();
+                obj.deserialize(params.InternetAddressStatistics[z]);
+                this.InternetAddressStatistics.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Tag key-value pair
  * @class
  */
@@ -1628,6 +2124,157 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeInternetAddress request structure.
+ * @class
+ */
+class DescribeInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter conditions:
+<li>AddrType, address type. Valid values: 0: BGP; 1: China Telecom; 2: China Mobile; 3: China Unicom</li>
+<li>AddrProto, address protocol. Valid values: 0: IPv4; 1: IPv6</li>
+<li>Status, address status. Valid values: 0: in use; 1: disabled; 2: returned</li>
+<li>Subnet, public IP address array</li>
+<InstanceIds>Public IP address ID array</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeInternetAddressQuota response structure.
+ * @class
+ */
+class DescribeInternetAddressQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Minimum prefix length allowed for a public IPv6 address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Ipv6PrefixLen = null;
+
+        /**
+         * Quota of BGP IPv4 addresses
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Ipv4BgpQuota = null;
+
+        /**
+         * Quota of non-BGP IPv4 addresses
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Ipv4OtherQuota = null;
+
+        /**
+         * Used number of BGP IPv4 addresses
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Ipv4BgpNum = null;
+
+        /**
+         * Used number of non-BGP IPv4 addresses
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Ipv4OtherNum = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ipv6PrefixLen = 'Ipv6PrefixLen' in params ? params.Ipv6PrefixLen : null;
+        this.Ipv4BgpQuota = 'Ipv4BgpQuota' in params ? params.Ipv4BgpQuota : null;
+        this.Ipv4OtherQuota = 'Ipv4OtherQuota' in params ? params.Ipv4OtherQuota : null;
+        this.Ipv4BgpNum = 'Ipv4BgpNum' in params ? params.Ipv4BgpNum : null;
+        this.Ipv4OtherNum = 'Ipv4OtherNum' in params ? params.Ipv4OtherNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleaseInternetAddress response structure.
+ * @class
+ */
+class ReleaseInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1904,27 +2551,66 @@ Note: this field may return `null`, indicating that no valid values can be obtai
     }
 }
 
+/**
+ * DisableInternetAddress request structure.
+ * @class
+ */
+class DisableInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the internet tunnel’s public IP address
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
 module.exports = {
+    DescribeInternetAddressQuotaRequest: DescribeInternetAddressQuotaRequest,
     BgpPeer: BgpPeer,
     RejectDirectConnectTunnelRequest: RejectDirectConnectTunnelRequest,
     ModifyDirectConnectAttributeRequest: ModifyDirectConnectAttributeRequest,
     DeleteDirectConnectTunnelRequest: DeleteDirectConnectTunnelRequest,
     CreateDirectConnectResponse: CreateDirectConnectResponse,
     DirectConnect: DirectConnect,
+    InternetAddressDetail: InternetAddressDetail,
     DescribeAccessPointsResponse: DescribeAccessPointsResponse,
     AcceptDirectConnectTunnelResponse: AcceptDirectConnectTunnelResponse,
     DescribeDirectConnectTunnelsRequest: DescribeDirectConnectTunnelsRequest,
+    ReleaseInternetAddressRequest: ReleaseInternetAddressRequest,
     ModifyDirectConnectTunnelAttributeResponse: ModifyDirectConnectTunnelAttributeResponse,
     RouteFilterPrefix: RouteFilterPrefix,
+    ApplyInternetAddressResponse: ApplyInternetAddressResponse,
     AcceptDirectConnectTunnelRequest: AcceptDirectConnectTunnelRequest,
     CreateDirectConnectTunnelRequest: CreateDirectConnectTunnelRequest,
     DeleteDirectConnectResponse: DeleteDirectConnectResponse,
+    EnableInternetAddressResponse: EnableInternetAddressResponse,
+    ApplyInternetAddressRequest: ApplyInternetAddressRequest,
     DescribeDirectConnectsResponse: DescribeDirectConnectsResponse,
     DescribeAccessPointsRequest: DescribeAccessPointsRequest,
     DescribeDirectConnectsRequest: DescribeDirectConnectsRequest,
     ModifyDirectConnectTunnelAttributeRequest: ModifyDirectConnectTunnelAttributeRequest,
+    DescribeInternetAddressResponse: DescribeInternetAddressResponse,
     Filter: Filter,
+    DisableInternetAddressResponse: DisableInternetAddressResponse,
+    DescribeInternetAddressStatisticsRequest: DescribeInternetAddressStatisticsRequest,
+    InternetAddressStatistics: InternetAddressStatistics,
     CreateDirectConnectRequest: CreateDirectConnectRequest,
+    EnableInternetAddressRequest: EnableInternetAddressRequest,
     ModifyDirectConnectAttributeResponse: ModifyDirectConnectAttributeResponse,
     RejectDirectConnectTunnelResponse: RejectDirectConnectTunnelResponse,
     CreateDirectConnectTunnelResponse: CreateDirectConnectTunnelResponse,
@@ -1932,7 +2618,12 @@ module.exports = {
     AccessPoint: AccessPoint,
     DeleteDirectConnectRequest: DeleteDirectConnectRequest,
     DescribeDirectConnectTunnelsResponse: DescribeDirectConnectTunnelsResponse,
+    DescribeInternetAddressStatisticsResponse: DescribeInternetAddressStatisticsResponse,
     Tag: Tag,
+    DescribeInternetAddressRequest: DescribeInternetAddressRequest,
+    DescribeInternetAddressQuotaResponse: DescribeInternetAddressQuotaResponse,
+    ReleaseInternetAddressResponse: ReleaseInternetAddressResponse,
     DirectConnectTunnel: DirectConnectTunnel,
+    DisableInternetAddressRequest: DisableInternetAddressRequest,
 
 }

@@ -948,24 +948,24 @@ class PushAuthKeyInfo extends  AbstractModel {
 }
 
 /**
- * Multi-domain name information list
+ * DescribeUploadStreamNums response structure.
  * @class
  */
-class DomainInfoList extends  AbstractModel {
+class DescribeUploadStreamNumsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Domain name.
-         * @type {string || null}
+         * Detailed data.
+         * @type {Array.<ConcurrentRecordStreamNum> || null}
          */
-        this.Domain = null;
+        this.DataInfoList = null;
 
         /**
-         * Details.
-         * @type {Array.<DomainDetailInfo> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.DetailInfoList = null;
+        this.RequestId = null;
 
     }
 
@@ -976,16 +976,16 @@ class DomainInfoList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
 
-        if (params.DetailInfoList) {
-            this.DetailInfoList = new Array();
-            for (let z in params.DetailInfoList) {
-                let obj = new DomainDetailInfo();
-                obj.deserialize(params.DetailInfoList[z]);
-                this.DetailInfoList.push(obj);
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new ConcurrentRecordStreamNum();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2402,6 +2402,58 @@ If this parameter is left empty, the system will automatically determine.
 }
 
 /**
+ * DescribeUploadStreamNums request structure.
+ * @class
+ */
+class DescribeUploadStreamNumsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time point in the format of yyyy-mm-dd HH:MM:SS.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 31 days can be queried.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * LVB domain names. If this parameter is left empty, data of all domain names will be queried.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * Time granularity of the data. Valid values:
+5: 5-minute granularity (the query period is up to 1 day).
+1440: 1-day granularity (the query period is up to 1 month).
+Default value: 5.
+         * @type {number || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
  * DescribeLiveSnapshotRules response structure.
  * @class
  */
@@ -2590,7 +2642,7 @@ Default value: 1.
         /**
          * Number of entries per page.
 Maximum value: 100.
-Value range: any integer between 1 and 100.
+Valid values: integers between 10 and 100.
 Default value: 10.
          * @type {number || null}
          */
@@ -3741,7 +3793,7 @@ class DescribePlayErrorCodeSumInfoListResponse extends  AbstractModel {
         super();
 
         /**
-         * Information of 4xx or 5xx error codes by district and ISP.
+         * Information of error codes starting with 2, 3, 4, or 5 by district and ISP.
          * @type {Array.<ProIspPlayCodeDataInfo> || null}
          */
         this.ProIspInfoList = null;
@@ -6543,6 +6595,14 @@ Note: `EndTime` and `StartTime` only support querying data for the last day.
          */
         this.MainlandOrOversea = null;
 
+        /**
+         * IP type:
+"Ipv6": IPv6 data
+Data of all IPs will be returned if this parameter is left empty.
+         * @type {string || null}
+         */
+        this.IpType = null;
+
     }
 
     /**
@@ -6560,6 +6620,7 @@ Note: `EndTime` and `StartTime` only support querying data for the last day.
         this.ProvinceNames = 'ProvinceNames' in params ? params.ProvinceNames : null;
         this.IspNames = 'IspNames' in params ? params.IspNames : null;
         this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.IpType = 'IpType' in params ? params.IpType : null;
 
     }
 }
@@ -6715,6 +6776,49 @@ class DescribeStreamPushInfoListRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
         this.AppName = 'AppName' in params ? params.AppName : null;
+
+    }
+}
+
+/**
+ * Multi-domain name information list
+ * @class
+ */
+class DomainInfoList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Details.
+         * @type {Array.<DomainDetailInfo> || null}
+         */
+        this.DetailInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.DetailInfoList) {
+            this.DetailInfoList = new Array();
+            for (let z in params.DetailInfoList) {
+                let obj = new DomainDetailInfo();
+                obj.deserialize(params.DetailInfoList[z]);
+                this.DetailInfoList.push(obj);
+            }
+        }
 
     }
 }
@@ -8255,9 +8359,9 @@ class CertInfo extends  AbstractModel {
         this.HttpsCrt = null;
 
         /**
-         * Certificate type:
-0: Tencent Cloud-hosted certificate.
-1: user-added certificate.
+         * Certificate type.
+0: User-added certificate.
+1: Tencent Cloud-hosted certificate.
          * @type {number || null}
          */
         this.CertType = null;
@@ -9352,8 +9456,8 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
-The end time and start time must be on the same day. Data in the last 3 days can be queried.
+         * End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS.
+The difference between the start time and end time cannot be greater than 24 hours. Data in the last 30 days can be queried.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -9437,9 +9541,9 @@ Value range: 0-500.
         this.AudioBitrate = null;
 
         /**
-         * Video codec. Valid values: h264 (default), h265, origin
+         * Video codec. Valid values: h264, h265, origin (default).
 
-origin: original codec as the output codec
+origin: original codec as the output codec.
          * @type {string || null}
          */
         this.Vcodec = null;
@@ -9869,9 +9973,9 @@ class ModifyLiveTranscodeTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * Video codec. Valid values: h264 (default), h265, origin
+         * Video codec. Valid values: h264, h265, origin (default).
 
-origin: original codec as the output codec
+origin: original codec as the output codec.
          * @type {string || null}
          */
         this.Vcodec = null;
@@ -11550,7 +11654,7 @@ class DescribeAllStreamPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Query time accurate down to the minute in the format of `yyyy-mm-dd HH:MM:SS`. Data for the last month can be queried. The data has a delay of about 5 minutes; therefore, if you want to query real-time data, we recommend you pass in a point in time 5 minutes ago.
+         * Query time point accurate to the minute. You can query data within the last month. As there is a 5-minute delay in the data, you're advised to pass in a time point 5 minutes earlier than needed. Format: yyyy-mm-dd HH:MM:00. As the accuracy is to the minute, please set the value of second to `00`.
          * @type {string || null}
          */
         this.QueryTime = null;
@@ -12609,7 +12713,7 @@ module.exports = {
     DeleteLiveSnapshotTemplateRequest: DeleteLiveSnapshotTemplateRequest,
     DescribeGroupProIspPlayInfoListResponse: DescribeGroupProIspPlayInfoListResponse,
     PushAuthKeyInfo: PushAuthKeyInfo,
-    DomainInfoList: DomainInfoList,
+    DescribeUploadStreamNumsResponse: DescribeUploadStreamNumsResponse,
     DeleteLiveRecordTemplateRequest: DeleteLiveRecordTemplateRequest,
     DeleteLiveCallbackTemplateResponse: DeleteLiveCallbackTemplateResponse,
     DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
@@ -12635,6 +12739,7 @@ module.exports = {
     DescribePlayErrorCodeDetailInfoListRequest: DescribePlayErrorCodeDetailInfoListRequest,
     DescribeBillBandwidthAndFluxListRequest: DescribeBillBandwidthAndFluxListRequest,
     CommonMixOutputParams: CommonMixOutputParams,
+    DescribeUploadStreamNumsRequest: DescribeUploadStreamNumsRequest,
     DescribeLiveSnapshotRulesResponse: DescribeLiveSnapshotRulesResponse,
     DescribeLiveTranscodeDetailInfoResponse: DescribeLiveTranscodeDetailInfoResponse,
     DescribeLiveDomainRequest: DescribeLiveDomainRequest,
@@ -12720,6 +12825,7 @@ module.exports = {
     DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
     DescribeStreamPushInfoListRequest: DescribeStreamPushInfoListRequest,
+    DomainInfoList: DomainInfoList,
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,

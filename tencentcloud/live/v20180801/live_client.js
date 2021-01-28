@@ -34,7 +34,7 @@ const DescribeLiveCallbackTemplateResponse = models.DescribeLiveCallbackTemplate
 const DeleteLiveSnapshotTemplateRequest = models.DeleteLiveSnapshotTemplateRequest;
 const DescribeGroupProIspPlayInfoListResponse = models.DescribeGroupProIspPlayInfoListResponse;
 const PushAuthKeyInfo = models.PushAuthKeyInfo;
-const DomainInfoList = models.DomainInfoList;
+const DescribeUploadStreamNumsResponse = models.DescribeUploadStreamNumsResponse;
 const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
@@ -60,6 +60,7 @@ const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeDetailInfoListRequest;
 const DescribeBillBandwidthAndFluxListRequest = models.DescribeBillBandwidthAndFluxListRequest;
 const CommonMixOutputParams = models.CommonMixOutputParams;
+const DescribeUploadStreamNumsRequest = models.DescribeUploadStreamNumsRequest;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
 const DescribeLiveTranscodeDetailInfoResponse = models.DescribeLiveTranscodeDetailInfoResponse;
 const DescribeLiveDomainRequest = models.DescribeLiveDomainRequest;
@@ -145,6 +146,7 @@ const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInf
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListRequest;
+const DomainInfoList = models.DomainInfoList;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
@@ -664,6 +666,17 @@ Use case: for important live streams, you can set delayed playback in advance to
     AddDelayLiveStream(req, cb) {
         let resp = new AddDelayLiveStreamResponse();
         this.request("AddDelayLiveStream", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the number of LVB upstream channels.
+     * @param {DescribeUploadStreamNumsRequest} req
+     * @param {function(string, DescribeUploadStreamNumsResponse):void} cb
+     * @public
+     */
+    DescribeUploadStreamNums(req, cb) {
+        let resp = new DescribeUploadStreamNumsResponse();
+        this.request("DescribeUploadStreamNums", req, resp, cb);
     }
 
     /**

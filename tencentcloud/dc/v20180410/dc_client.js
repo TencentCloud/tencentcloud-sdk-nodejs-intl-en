@@ -16,26 +16,37 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeInternetAddressQuotaRequest = models.DescribeInternetAddressQuotaRequest;
 const BgpPeer = models.BgpPeer;
 const RejectDirectConnectTunnelRequest = models.RejectDirectConnectTunnelRequest;
 const ModifyDirectConnectAttributeRequest = models.ModifyDirectConnectAttributeRequest;
 const DeleteDirectConnectTunnelRequest = models.DeleteDirectConnectTunnelRequest;
 const CreateDirectConnectResponse = models.CreateDirectConnectResponse;
 const DirectConnect = models.DirectConnect;
+const InternetAddressDetail = models.InternetAddressDetail;
 const DescribeAccessPointsResponse = models.DescribeAccessPointsResponse;
 const AcceptDirectConnectTunnelResponse = models.AcceptDirectConnectTunnelResponse;
 const DescribeDirectConnectTunnelsRequest = models.DescribeDirectConnectTunnelsRequest;
+const ReleaseInternetAddressRequest = models.ReleaseInternetAddressRequest;
 const ModifyDirectConnectTunnelAttributeResponse = models.ModifyDirectConnectTunnelAttributeResponse;
 const RouteFilterPrefix = models.RouteFilterPrefix;
+const ApplyInternetAddressResponse = models.ApplyInternetAddressResponse;
 const AcceptDirectConnectTunnelRequest = models.AcceptDirectConnectTunnelRequest;
 const CreateDirectConnectTunnelRequest = models.CreateDirectConnectTunnelRequest;
 const DeleteDirectConnectResponse = models.DeleteDirectConnectResponse;
+const EnableInternetAddressResponse = models.EnableInternetAddressResponse;
+const ApplyInternetAddressRequest = models.ApplyInternetAddressRequest;
 const DescribeDirectConnectsResponse = models.DescribeDirectConnectsResponse;
 const DescribeAccessPointsRequest = models.DescribeAccessPointsRequest;
 const DescribeDirectConnectsRequest = models.DescribeDirectConnectsRequest;
 const ModifyDirectConnectTunnelAttributeRequest = models.ModifyDirectConnectTunnelAttributeRequest;
+const DescribeInternetAddressResponse = models.DescribeInternetAddressResponse;
 const Filter = models.Filter;
+const DisableInternetAddressResponse = models.DisableInternetAddressResponse;
+const DescribeInternetAddressStatisticsRequest = models.DescribeInternetAddressStatisticsRequest;
+const InternetAddressStatistics = models.InternetAddressStatistics;
 const CreateDirectConnectRequest = models.CreateDirectConnectRequest;
+const EnableInternetAddressRequest = models.EnableInternetAddressRequest;
 const ModifyDirectConnectAttributeResponse = models.ModifyDirectConnectAttributeResponse;
 const RejectDirectConnectTunnelResponse = models.RejectDirectConnectTunnelResponse;
 const CreateDirectConnectTunnelResponse = models.CreateDirectConnectTunnelResponse;
@@ -43,8 +54,13 @@ const DeleteDirectConnectTunnelResponse = models.DeleteDirectConnectTunnelRespon
 const AccessPoint = models.AccessPoint;
 const DeleteDirectConnectRequest = models.DeleteDirectConnectRequest;
 const DescribeDirectConnectTunnelsResponse = models.DescribeDirectConnectTunnelsResponse;
+const DescribeInternetAddressStatisticsResponse = models.DescribeInternetAddressStatisticsResponse;
 const Tag = models.Tag;
+const DescribeInternetAddressRequest = models.DescribeInternetAddressRequest;
+const DescribeInternetAddressQuotaResponse = models.DescribeInternetAddressQuotaResponse;
+const ReleaseInternetAddressResponse = models.ReleaseInternetAddressResponse;
 const DirectConnectTunnel = models.DirectConnectTunnel;
+const DisableInternetAddressRequest = models.DisableInternetAddressRequest;
 
 
 /**
@@ -57,6 +73,29 @@ class DcClient extends AbstractClient {
         super("dc.tencentcloudapi.com", "2018-04-10", credential, region, profile);
     }
     
+    /**
+     * This API is used to disable a public IP address of internet tunnels.
+     * @param {DisableInternetAddressRequest} req
+     * @param {function(string, DisableInternetAddressResponse):void} cb
+     * @public
+     */
+    DisableInternetAddress(req, cb) {
+        let resp = new DisableInternetAddressResponse();
+        this.request("DisableInternetAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query connection access points.
+
+     * @param {DescribeAccessPointsRequest} req
+     * @param {function(string, DescribeAccessPointsResponse):void} cb
+     * @public
+     */
+    DescribeAccessPoints(req, cb) {
+        let resp = new DescribeAccessPointsResponse();
+        this.request("DescribeAccessPoints", req, resp, cb);
+    }
+
     /**
      * This API is used to modify connection attributes.
      * @param {ModifyDirectConnectAttributeRequest} req
@@ -103,6 +142,17 @@ Only connected connections can be deleted.
     }
 
     /**
+     * This API is used to obtain the public IP address assignment statistics of internet tunnels.
+     * @param {DescribeInternetAddressStatisticsRequest} req
+     * @param {function(string, DescribeInternetAddressStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeInternetAddressStatistics(req, cb) {
+        let resp = new DescribeInternetAddressStatisticsResponse();
+        this.request("DescribeInternetAddressStatistics", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a dedicated tunnel.
      * @param {DeleteDirectConnectTunnelRequest} req
      * @param {function(string, DeleteDirectConnectTunnelResponse):void} cb
@@ -114,15 +164,47 @@ Only connected connections can be deleted.
     }
 
     /**
-     * This API is used to query connection access points.
-
-     * @param {DescribeAccessPointsRequest} req
-     * @param {function(string, DescribeAccessPointsResponse):void} cb
+     * This API is used to apply for an internet tunnel’s CIDR block.
+     * @param {ApplyInternetAddressRequest} req
+     * @param {function(string, ApplyInternetAddressResponse):void} cb
      * @public
      */
-    DescribeAccessPoints(req, cb) {
-        let resp = new DescribeAccessPointsResponse();
-        this.request("DescribeAccessPoints", req, resp, cb);
+    ApplyInternetAddress(req, cb) {
+        let resp = new ApplyInternetAddressResponse();
+        this.request("ApplyInternetAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable a public IP address for internet tunnels.
+     * @param {EnableInternetAddressRequest} req
+     * @param {function(string, EnableInternetAddressResponse):void} cb
+     * @public
+     */
+    EnableInternetAddress(req, cb) {
+        let resp = new EnableInternetAddressResponse();
+        this.request("EnableInternetAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the public IP quota of internet tunnels.
+     * @param {DescribeInternetAddressQuotaRequest} req
+     * @param {function(string, DescribeInternetAddressQuotaResponse):void} cb
+     * @public
+     */
+    DescribeInternetAddressQuota(req, cb) {
+        let resp = new DescribeInternetAddressQuotaResponse();
+        this.request("DescribeInternetAddressQuota", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the public IP address of an internet tunnel.
+     * @param {DescribeInternetAddressRequest} req
+     * @param {function(string, DescribeInternetAddressResponse):void} cb
+     * @public
+     */
+    DescribeInternetAddress(req, cb) {
+        let resp = new DescribeInternetAddressResponse();
+        this.request("DescribeInternetAddress", req, resp, cb);
     }
 
     /**
@@ -170,6 +252,17 @@ If there is any connection in arrears under your account, you cannot apply for m
     DescribeDirectConnects(req, cb) {
         let resp = new DescribeDirectConnectsResponse();
         this.request("DescribeDirectConnects", req, resp, cb);
+    }
+
+    /**
+     * This API is used to release an IP address of internet tunnels.
+     * @param {ReleaseInternetAddressRequest} req
+     * @param {function(string, ReleaseInternetAddressResponse):void} cb
+     * @public
+     */
+    ReleaseInternetAddress(req, cb) {
+        let resp = new ReleaseInternetAddressResponse();
+        this.request("ReleaseInternetAddress", req, resp, cb);
     }
 
     /**

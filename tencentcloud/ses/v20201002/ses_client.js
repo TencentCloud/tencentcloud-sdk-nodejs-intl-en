@@ -22,6 +22,7 @@ const GetEmailIdentityResponse = models.GetEmailIdentityResponse;
 const ListBlackEmailAddressRequest = models.ListBlackEmailAddressRequest;
 const Attachment = models.Attachment;
 const Template = models.Template;
+const GetSendEmailStatusResponse = models.GetSendEmailStatusResponse;
 const SendEmailRequest = models.SendEmailRequest;
 const EmailSender = models.EmailSender;
 const DeleteEmailIdentityRequest = models.DeleteEmailIdentityRequest;
@@ -36,11 +37,13 @@ const UpdateEmailTemplateRequest = models.UpdateEmailTemplateRequest;
 const UpdateEmailIdentityResponse = models.UpdateEmailIdentityResponse;
 const DeleteEmailTemplateRequest = models.DeleteEmailTemplateRequest;
 const DeleteBlackListResponse = models.DeleteBlackListResponse;
+const SendEmailStatus = models.SendEmailStatus;
 const ListEmailTemplatesRequest = models.ListEmailTemplatesRequest;
 const DeleteBlackListRequest = models.DeleteBlackListRequest;
 const ListEmailTemplatesResponse = models.ListEmailTemplatesResponse;
 const SendEmailResponse = models.SendEmailResponse;
 const ListBlackEmailAddressResponse = models.ListBlackEmailAddressResponse;
+const GetSendEmailStatusRequest = models.GetSendEmailStatusRequest;
 const TemplatesMetadata = models.TemplatesMetadata;
 const ListEmailIdentitiesResponse = models.ListEmailIdentitiesResponse;
 const ListEmailAddressResponse = models.ListEmailAddressResponse;
@@ -170,6 +173,17 @@ Note: only an approved template can be used to send emails.
     ListBlackEmailAddress(req, cb) {
         let resp = new ListBlackEmailAddressResponse();
         this.request("ListBlackEmailAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get email sending status. Only data within 90 days can be queried.
+     * @param {GetSendEmailStatusRequest} req
+     * @param {function(string, GetSendEmailStatusResponse):void} cb
+     * @public
+     */
+    GetSendEmailStatus(req, cb) {
+        let resp = new GetSendEmailStatusResponse();
+        this.request("GetSendEmailStatus", req, resp, cb);
     }
 
     /**

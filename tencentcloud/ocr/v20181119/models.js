@@ -360,10 +360,8 @@ class BankCardOCRRequest extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded value of image.
-Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-Supported image size: the downloaded image cannot exceed 7 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-Either the `ImageUrl` or `ImageBase64` of the image must be provided; if both are provided, only `ImageUrl` will be used.
+         * Base64-encoded value of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` will be used.
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -379,31 +377,31 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
         this.ImageUrl = null;
 
         /**
-         * 
+         * Whether to return the bank card image data after preprocessing (precise cropping and alignment). Default value: `false`
          * @type {boolean || null}
          */
         this.RetBorderCutImage = null;
 
         /**
-         * 
+         * Whether to return the card number image data after slicing. Default value: `false`
          * @type {boolean || null}
          */
         this.RetCardNoImage = null;
 
         /**
-         * 
+         * Whether to enable photocopy check. If the input image is a bank card photocopy, an alarm will be returned. Default value: `false`
          * @type {boolean || null}
          */
         this.EnableCopyCheck = null;
 
         /**
-         * 
+         * Whether to enable photograph check. If the input image is a bank card photograph, an alarm will be returned. Default value: `false`
          * @type {boolean || null}
          */
         this.EnableReshootCheck = null;
 
         /**
-         * 
+         * Whether to enable obscured border check. If the input image is a bank card with obscured border, an alarm will be returned. Default value: `false`
          * @type {boolean || null}
          */
         this.EnableBorderCheck = null;
@@ -539,10 +537,49 @@ class BankCardOCRResponse extends  AbstractModel {
         this.BankInfo = null;
 
         /**
-         * Expiration date
+         * Expiration date. Format: 07/2023
          * @type {string || null}
          */
         this.ValidDate = null;
+
+        /**
+         * Card type
+         * @type {string || null}
+         */
+        this.CardType = null;
+
+        /**
+         * Card name
+         * @type {string || null}
+         */
+        this.CardName = null;
+
+        /**
+         * Sliced image data
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BorderCutImage = null;
+
+        /**
+         * Card number image data
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CardNoImage = null;
+
+        /**
+         * Warning code:
+-9110: the bank card date is invalid. 
+-9111: the bank card border is incomplete. 
+-9112: the bank card image is reflective.
+-9113: the bank card image is a photocopy.
+-9114: the bank card image is a photograph.
+Multiple warning codes may be returned at a time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.WarningCode = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -562,6 +599,11 @@ class BankCardOCRResponse extends  AbstractModel {
         this.CardNo = 'CardNo' in params ? params.CardNo : null;
         this.BankInfo = 'BankInfo' in params ? params.BankInfo : null;
         this.ValidDate = 'ValidDate' in params ? params.ValidDate : null;
+        this.CardType = 'CardType' in params ? params.CardType : null;
+        this.CardName = 'CardName' in params ? params.CardName : null;
+        this.BorderCutImage = 'BorderCutImage' in params ? params.BorderCutImage : null;
+        this.CardNoImage = 'CardNoImage' in params ? params.CardNoImage : null;
+        this.WarningCode = 'WarningCode' in params ? params.WarningCode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

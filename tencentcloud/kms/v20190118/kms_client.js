@@ -25,6 +25,7 @@ const CreateKeyRequest = models.CreateKeyRequest;
 const DisableWhiteBoxKeyResponse = models.DisableWhiteBoxKeyResponse;
 const DisableKeyResponse = models.DisableKeyResponse;
 const DescribeWhiteBoxServiceStatusRequest = models.DescribeWhiteBoxServiceStatusRequest;
+const VerifyByAsymmetricKeyRequest = models.VerifyByAsymmetricKeyRequest;
 const DescribeKeyRequest = models.DescribeKeyRequest;
 const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
 const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
@@ -47,6 +48,7 @@ const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const EnableWhiteBoxKeysResponse = models.EnableWhiteBoxKeysResponse;
 const ArchiveKeyResponse = models.ArchiveKeyResponse;
+const VerifyByAsymmetricKeyResponse = models.VerifyByAsymmetricKeyResponse;
 const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
 const GetParametersForImportResponse = models.GetParametersForImportResponse;
 const DecryptResponse = models.DecryptResponse;
@@ -100,6 +102,7 @@ const OverwriteWhiteBoxDeviceFingerprintsRequest = models.OverwriteWhiteBoxDevic
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
 const BindCloudResourceResponse = models.BindCloudResourceResponse;
 const EnableKeysResponse = models.EnableKeysResponse;
+const SignByAsymmetricKeyRequest = models.SignByAsymmetricKeyRequest;
 const DescribeWhiteBoxDeviceFingerprintsRequest = models.DescribeWhiteBoxDeviceFingerprintsRequest;
 const GetRegionsRequest = models.GetRegionsRequest;
 const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
@@ -110,6 +113,7 @@ const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
 const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const BindCloudResourceRequest = models.BindCloudResourceRequest;
 const TagFilter = models.TagFilter;
+const SignByAsymmetricKeyResponse = models.SignByAsymmetricKeyResponse;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
@@ -238,6 +242,18 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     AsymmetricSm2Decrypt(req, cb) {
         let resp = new AsymmetricSm2DecryptResponse();
         this.request("AsymmetricSm2Decrypt", req, resp, cb);
+    }
+
+    /**
+     * This API is used to generate a signature with an asymmetric key.
+Note: only the keys with `KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2` can be used for signature generation.
+     * @param {SignByAsymmetricKeyRequest} req
+     * @param {function(string, SignByAsymmetricKeyResponse):void} cb
+     * @public
+     */
+    SignByAsymmetricKey(req, cb) {
+        let resp = new SignByAsymmetricKeyResponse();
+        this.request("SignByAsymmetricKey", req, resp, cb);
     }
 
     /**
@@ -645,6 +661,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     GetRegions(req, cb) {
         let resp = new GetRegionsResponse();
         this.request("GetRegions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to verify a signature with an asymmetric key.
+     * @param {VerifyByAsymmetricKeyRequest} req
+     * @param {function(string, VerifyByAsymmetricKeyResponse):void} cb
+     * @public
+     */
+    VerifyByAsymmetricKey(req, cb) {
+        let resp = new VerifyByAsymmetricKeyResponse();
+        this.request("VerifyByAsymmetricKey", req, resp, cb);
     }
 
 

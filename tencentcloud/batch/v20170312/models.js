@@ -3169,7 +3169,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>LOCAL_NVME: local NVME disk, specified in the `InstanceType`<br><li>LOCAL_PRO: local HDD disk, specified in the `InstanceType`<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3218,6 +3218,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.KmsKeyId = null;
 
+        /**
+         * Cloud disk performance, in MB/s
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
     }
 
     /**
@@ -3234,6 +3241,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
 
     }
 }
@@ -4391,7 +4399,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * The ID of [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) where the instance locates. It can obtained in the `Zone` field returned by [DescribeZones](https://intl.cloud.tencent.com/document/213/15707?from_cn_redirect=1) API.
+         * ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain the ID in the returned `Zone` field.
          * @type {string || null}
          */
         this.Zone = null;
@@ -4622,6 +4630,78 @@ Note: this field may return null, indicating that no valid value is obtained.
          */
         this.UnitPriceDiscountThirdStep = null;
 
+        /**
+         * Original 3-year payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.OriginalPriceThreeYear = null;
+
+        /**
+         * Discounted 3-year upfront payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountPriceThreeYear = null;
+
+        /**
+         * Discount for 3-year upfront payment. For example, 20.0 indicates 80% off.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountThreeYear = null;
+
+        /**
+         * Original 5-year payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.OriginalPriceFiveYear = null;
+
+        /**
+         * Discounted 5-year upfront payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountPriceFiveYear = null;
+
+        /**
+         * Discount for 5-year upfront payment. For example, 20.0 indicates 80% off.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountFiveYear = null;
+
+        /**
+         * Original 1-year payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.OriginalPriceOneYear = null;
+
+        /**
+         * Discounted 1-year payment, in USD. This parameter is only available to upfront payment mode.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountPriceOneYear = null;
+
+        /**
+         * Discount for 1-year upfront payment. For example, 20.0 indicates 80% off.
+Note: this field may return `null`, indicating that no valid value was found.
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DiscountOneYear = null;
+
     }
 
     /**
@@ -4641,6 +4721,15 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.UnitPriceDiscountSecondStep = 'UnitPriceDiscountSecondStep' in params ? params.UnitPriceDiscountSecondStep : null;
         this.UnitPriceThirdStep = 'UnitPriceThirdStep' in params ? params.UnitPriceThirdStep : null;
         this.UnitPriceDiscountThirdStep = 'UnitPriceDiscountThirdStep' in params ? params.UnitPriceDiscountThirdStep : null;
+        this.OriginalPriceThreeYear = 'OriginalPriceThreeYear' in params ? params.OriginalPriceThreeYear : null;
+        this.DiscountPriceThreeYear = 'DiscountPriceThreeYear' in params ? params.DiscountPriceThreeYear : null;
+        this.DiscountThreeYear = 'DiscountThreeYear' in params ? params.DiscountThreeYear : null;
+        this.OriginalPriceFiveYear = 'OriginalPriceFiveYear' in params ? params.OriginalPriceFiveYear : null;
+        this.DiscountPriceFiveYear = 'DiscountPriceFiveYear' in params ? params.DiscountPriceFiveYear : null;
+        this.DiscountFiveYear = 'DiscountFiveYear' in params ? params.DiscountFiveYear : null;
+        this.OriginalPriceOneYear = 'OriginalPriceOneYear' in params ? params.OriginalPriceOneYear : null;
+        this.DiscountPriceOneYear = 'DiscountPriceOneYear' in params ? params.DiscountPriceOneYear : null;
+        this.DiscountOneYear = 'DiscountOneYear' in params ? params.DiscountOneYear : null;
 
     }
 }

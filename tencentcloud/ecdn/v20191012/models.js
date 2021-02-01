@@ -2264,6 +2264,12 @@ offline: the node is offline
          */
         this.Status = null;
 
+        /**
+         * Node IP creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -2278,6 +2284,7 @@ offline: the node is offline
         this.Isp = 'Isp' in params ? params.Isp : null;
         this.City = 'City' in params ? params.City : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }

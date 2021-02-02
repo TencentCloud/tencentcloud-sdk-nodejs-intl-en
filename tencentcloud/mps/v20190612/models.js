@@ -807,7 +807,10 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1015,7 +1018,10 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1857,8 +1863,8 @@ class ManageTaskRequest extends  AbstractModel {
          * Operation type. Valid values:
 <ul>
 <li>Abort: task termination. Description:
-<ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is waiting (`WAITING`) or processing (`PROCESSING`) can be terminated;</li>
-<li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is waiting can be terminated.</li></ul>
+<ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` or `PROCESSING` can be terminated.</li>
+<li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` can be terminated.</li></ul>
 </li></ul>
          * @type {string || null}
          */
@@ -2495,7 +2501,7 @@ class DeletePersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Material ID
+         * Image ID
          * @type {string || null}
          */
         this.PersonId = null;
@@ -3448,37 +3454,37 @@ class CreatePersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of a material. Length limit: 20 characters.
+         * Name of an image. Length limit: 20 characters
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Material use case. Valid values:
-1. Recognition: used for content recognition, equivalent to `Recognition.Face`
-2. Review: used for detection of inappropriate content, equivalent to `Review.Face`
-3. All: all of the above, equivalent to 1 and 2 combined
+         * Image usage. Valid values:
+1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+3. All: equivalent to 1+2
          * @type {Array.<string> || null}
          */
         this.Usages = null;
 
         /**
-         * Material description. Length limit: 1,024 characters.
+         * Image description. Length limit: 1,024 characters
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * [Base64](https://tools.ietf.org/html/rfc4648) string converted from an image. Only JPEG and PNG images are supported. Array length limit: 5 images.
+         * [Base64](https://tools.ietf.org/html/rfc4648) string converted from an image. Only JPEG and PNG images are supported. Array length limit: 5 images
 Note: the image must be a relatively clear facial feature photo of one person with a size of at least 200 x 200 pixels.
          * @type {Array.<string> || null}
          */
         this.FaceContents = null;
 
         /**
-         * Material tag
-<li>Array length limit: 20 tags;</li>
-<li>Tag length limit: 128 characters.</li>
+         * Image tag
+<li>Array length limit: 20 tags</li>
+<li>Tag length limit: 128 characters</li>
          * @type {Array.<string> || null}
          */
         this.Tags = null;
@@ -5067,15 +5073,15 @@ class CreateWordSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>Keyword use case. Valid values:</b>
-1. Recognition.Ocr: OCR-based content recognition;
-2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based detection of inappropriate content;
-4. Review.Asr：ASR-based detection of inappropriate content;
-<b>These values can be merged as follows:</b>
-5. Recognition: ASR- and OCR-based content recognition, equivalent to 1+2 above;
-6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3+4 above;
-7. All: ASR- and OCR-based content recognition and detection of inappropriate content, equivalent to 1+2+3+4 above;
+         * <b>Keyword usage. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition
+2. Recognition.Asr: ASR-based content recognition
+3. Review.Ocr: OCR-based inappropriate information recognition
+4. Review.Asr: ASR-based inappropriate information recognition
+<b>Valid values can also be:</b>
+5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+7. All: ASR- and OCR-based content recognition and inappropriate information detection; equivalent to 1+2+3+4
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -5270,7 +5276,10 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.ErrCodeExt = null;
 
         /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6148,13 +6157,13 @@ class CreatePersonSampleResponse extends  AbstractModel {
         super();
 
         /**
-         * Material information
+         * Image information
          * @type {AiSamplePerson || null}
          */
         this.Person = null;
 
         /**
-         * Positioning information of facial features processed unsuccessfully
+         * Information of images that failed the verification by facial feature positioning
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
         this.FailFaceInfoSet = null;
@@ -7205,15 +7214,15 @@ class ModifyWordSampleRequest extends  AbstractModel {
         this.Keyword = null;
 
         /**
-         * <b>Keyword use case. Valid values:</b>
-1. Recognition.Ocr: OCR-based content recognition;
-2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based detection of inappropriate content;
-4. Review.Asr：ASR-based detection of inappropriate content;
-<b>These values can be merged as follows:</b>
-5. Recognition: ASR- and OCR-based content recognition, equivalent to 1 and 2 combined;
-6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3 and 4 combined.
-7. All: all of the above, equivalent to 1, 2, 3, and 4 combined.
+         * <b>Keyword usage. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition
+2. Recognition.Asr: ASR-based content recognition
+3. Review.Ocr: OCR-based inappropriate information recognition
+4. Review.Asr: ASR-based inappropriate information recognition
+<b>Valid values can also be:</b>
+5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+7. All: equivalent to 1+2+3+4
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -10486,31 +10495,31 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Name of an intelligent content recognition template. Length limit: 64 characters.
+         * Name of an intelligent content recognition template. Length limit: 64 characters
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of an intelligent content recognition template. Length limit: 256 characters.
+         * Description of an intelligent content recognition template. Length limit: 256 characters
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Control parameter for offensive content
+         * Control parameter for porn information
          * @type {PornConfigureInfoForUpdate || null}
          */
         this.PornConfigure = null;
 
         /**
-         * Control parameter for insecure content
+         * Control parameter for terrorism information
          * @type {TerrorismConfigureInfoForUpdate || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Control parameter for inappropriate content
+         * Control parameter for politically sensitive information
          * @type {PoliticalConfigureInfoForUpdate || null}
          */
         this.PoliticalConfigure = null;
@@ -10525,7 +10534,7 @@ Note: this parameter is not supported yet.
         this.ProhibitedConfigure = null;
 
         /**
-         * Control parameter for custom intelligent content recognition
+         * Control parameter for custom intelligent content recognition tasks
          * @type {UserDefineConfigureInfoForUpdate || null}
          */
         this.UserDefineConfigure = null;
@@ -12949,7 +12958,7 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * Material ID
+         * Image ID
          * @type {string || null}
          */
         this.PersonId = null;
@@ -12967,16 +12976,16 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Material use case. Valid values:
-1. Recognition: used for content recognition, equivalent to `Recognition.Face`.
-2. Review: used for detection of inappropriate content, equivalent to `Review.Face`.
-3. All: used for content recognition and detection of inappropriate content, equivalent to 1 and 2 combined.
+         * Image usage. Valid values:
+1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+3. All: used for content recognition and inappropriate information recognition; equivalent to 1+2
          * @type {Array.<string> || null}
          */
         this.Usages = null;
 
         /**
-         * Facial feature operation information
+         * Information of operations on facial features
          * @type {AiSampleFaceOperation || null}
          */
         this.FaceOperationInfo = null;
@@ -14456,31 +14465,31 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of an intelligent content recognition template. Length limit: 64 characters.
+         * Name of an intelligent content recognition template. Length limit: 64 characters
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of an intelligent content recognition template. Length limit: 256 characters.
+         * Description of an intelligent content recognition template. Length limit: 256 characters
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Control parameter for offensive content
+         * Control parameter for porn information
          * @type {PornConfigureInfo || null}
          */
         this.PornConfigure = null;
 
         /**
-         * Control parameter for insecure content
+         * Control parameter for terrorism information
          * @type {TerrorismConfigureInfo || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Control parameter for inappropriate content
+         * Control parameter for politically sensitive information
          * @type {PoliticalConfigureInfo || null}
          */
         this.PoliticalConfigure = null;
@@ -14495,7 +14504,7 @@ Note: this parameter is not supported yet.
         this.ProhibitedConfigure = null;
 
         /**
-         * Control parameter for custom intelligent content recognition
+         * Control parameter for custom intelligent content recognition tasks
          * @type {UserDefineConfigureInfo || null}
          */
         this.UserDefineConfigure = null;
@@ -14554,7 +14563,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of intelligent content recognition templates as the filter. Array length limit: 50.
+         * Unique ID of intelligent content recognition templates as the filter. Array length limit: 50
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -16899,15 +16908,15 @@ class DescribeWordSamplesRequest extends  AbstractModel {
         this.Keywords = null;
 
         /**
-         * <b>Keyword use case filter. Valid values:</b>
-1. Recognition.Ocr: OCR-based content recognition;
-2. Recognition.Asr: ASR-based content recognition;
-3. Review.Ocr: OCR-based detection of inappropriate content;
-4. Review.Asr：ASR-based detection of inappropriate content;
-<b>These values can be merged as follows:</b>
-5. Recognition: ASR- and OCR-based content recognition, equivalent to 1 and 2 combined;
-6. Review: ASR- and OCR-based detection of inappropriate content, equivalent to 3+4 above;
-Multiple elements can be selected, and the relationship between them is "or", i.e., any keyword use case that contains any element in this field set will be deemed eligible.
+         * <b>Keyword usage. Valid values:</b>
+1. Recognition.Ocr: OCR-based content recognition
+2. Recognition.Asr: ASR-based content recognition
+3. Review.Ocr: OCR-based inappropriate information recognition
+4. Review.Asr: ASR-based inappropriate information recognition
+<b>Valid values can also be:</b>
+5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+You can select multiple elements, which are connected by OR logic. If a usage contains any element in this parameter, the keyword sample will be used.
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -17820,13 +17829,13 @@ class ModifyPersonSampleResponse extends  AbstractModel {
         super();
 
         /**
-         * Material information
+         * Image information
          * @type {AiSamplePerson || null}
          */
         this.Person = null;
 
         /**
-         * Information of facial features processed unsuccessfully
+         * Information of images that failed the verification by facial feature positioning.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
@@ -18038,7 +18047,7 @@ class DescribePersonSamplesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Material information
+         * Image information
          * @type {Array.<AiSamplePerson> || null}
          */
         this.PersonSet = null;
@@ -19646,30 +19655,30 @@ class DescribePersonSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * Type of the material pulled. Valid values:
-<li>UserDefine: custom material library;</li>
-<li>Default: default material library.</li>
+         * Type of images to pull. Valid values:
+<li>UserDefine: custom image library</li>
+<li>Default: default image library</li>
 
-Default value: UserDefine (the materials of the custom material library are pulled.)
-Note: you can pull the default material library only using the material name or a combination of the material name and ID, and only one face image is returned.
+Default value: UserDefine. Samples in the custom image library will be pulled.
+Note: you can pull the default image library only using the image name or a combination of the image name and ID, and only one face image is returned.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Material ID. Array length limit: 100.
+         * Image ID. Array length limit: 100
          * @type {Array.<string> || null}
          */
         this.PersonIds = null;
 
         /**
-         * Material name. Array length limit: 20.
+         * Image name. Array length limit: 20
          * @type {Array.<string> || null}
          */
         this.Names = null;
 
         /**
-         * Material tag. Array length limit: 20.
+         * Image tag. Array length limit: 20
          * @type {Array.<string> || null}
          */
         this.Tags = null;

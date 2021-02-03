@@ -138,13 +138,13 @@ class ListBlackEmailAddressRequest extends  AbstractModel {
         super();
 
         /**
-         * Start date.
+         * Start date in the format of `YYYY-MM-DD`
          * @type {string || null}
          */
         this.StartDate = null;
 
         /**
-         * End date.
+         * End date in the format of `YYYY-MM-DD`
          * @type {string || null}
          */
         this.EndDate = null;
@@ -156,7 +156,7 @@ class ListBlackEmailAddressRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Common parameter. It must be used with `Limit`.
+         * Common parameter. It must be used with `Limit`. Maximum value of `Limit`: `100`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -193,7 +193,7 @@ class ListBlackEmailAddressRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Attachment structure, including attachment name and content after base64 encoding.
  * @class
  */
 class Attachment extends  AbstractModel {
@@ -201,13 +201,13 @@ class Attachment extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types](https://intl.cloud.tencent.com/document/product/1288/51951?from_cn_redirect=1).
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * 
+         * Attachment content after base64 encoding. A single attachment cannot exceed 5 MB. Note: Tencent Cloud APIs require that a request packet should not exceed 10 MB. If you are sending multiple attachments, the total size of these attachments cannot exceed 10 MB.
          * @type {string || null}
          */
         this.Content = null;
@@ -322,7 +322,7 @@ Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
         this.FromEmailAddress = null;
 
         /**
-         * Recipient email addresses. You can send an email to up to 50 recipients at a time.
+         * Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
          * @type {Array.<string> || null}
          */
         this.Destination = null;
@@ -334,7 +334,7 @@ Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
         this.Subject = null;
 
         /**
-         * Reply-to address. You can enter a valid personal email address that can receive emails. If this field is left empty, reply emails will be sent to Tencent Cloud. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
+         * Reply-to address. You can enter a valid personal email address that can receive emails. If this field is left empty, reply emails will be sent to Tencent Cloud.
          * @type {string || null}
          */
         this.ReplyToAddresses = null;
@@ -352,7 +352,7 @@ Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
         this.Simple = null;
 
         /**
-         * 
+         * Email attachments
          * @type {Array.<Attachment> || null}
          */
         this.Attachments = null;
@@ -860,7 +860,7 @@ class DeleteEmailTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Email template to be deleted.
+         * Template ID
          * @type {number || null}
          */
         this.TemplateID = null;
@@ -1161,7 +1161,7 @@ class SendEmailResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique ID generated when receiving the message.
+         * Unique ID generated when receiving the message
          * @type {string || null}
          */
         this.MessageId = null;
@@ -1781,7 +1781,7 @@ class CreateEmailAddressRequest extends  AbstractModel {
         super();
 
         /**
-         * Your sender address. You can create up to 10 sender addresses for each domain.
+         * Your sender address. (You can create up to 10 sender addresses for each domain.)
          * @type {string || null}
          */
         this.EmailAddress = null;

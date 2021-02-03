@@ -782,7 +782,7 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
         this.TextDetections = null;
 
         /**
-         * Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation.
+         * Image rotation angle in degrees. 0° indicates horizontal text. A positive value indicates clockwise rotation. A negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
          * @type {number || null}
          */
         this.Angel = null;

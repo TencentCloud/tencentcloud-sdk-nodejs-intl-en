@@ -2429,9 +2429,9 @@ class DescribeUploadStreamNumsRequest extends  AbstractModel {
 
         /**
          * Time granularity of the data. Valid values:
-5: 5-minute granularity (the query period is up to 1 day).
-1440: 1-day granularity (the query period is up to 1 month).
-Default value: 5.
+5: 5-minute granularity (the query period is up to 1 day)
+1440: 1-day granularity (the query period is up to 1 month)
+Default value: 5
          * @type {number || null}
          */
         this.Granularity = null;
@@ -2641,9 +2641,9 @@ Default value: 1.
 
         /**
          * Number of entries per page.
-Maximum value: 100.
-Valid values: integers between 10 and 100.
-Default value: 10.
+Maximum value: 100
+Valid values: integers between 10 and 100
+Default value: 10
          * @type {number || null}
          */
         this.PageSize = null;
@@ -8360,8 +8360,8 @@ class CertInfo extends  AbstractModel {
 
         /**
          * Certificate type.
-0: User-added certificate.
-1: Tencent Cloud-hosted certificate.
+0: user-added certificate
+1: Tencent Cloud-hosted certificate
          * @type {number || null}
          */
         this.CertType = null;
@@ -9484,6 +9484,12 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
          */
         this.AppName = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
     }
 
     /**
@@ -9498,6 +9504,7 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
         this.PlayDomain = 'PlayDomain' in params ? params.PlayDomain : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
         this.AppName = 'AppName' in params ? params.AppName : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
 
     }
 }
@@ -9541,9 +9548,9 @@ Value range: 0-500.
         this.AudioBitrate = null;
 
         /**
-         * Video codec. Valid values: h264, h265, origin (default).
+         * Video codec. Valid values: h264, h265, origin (default)
 
-origin: original codec as the output codec.
+origin: original codec as the output codec
          * @type {string || null}
          */
         this.Vcodec = null;
@@ -9973,9 +9980,9 @@ class ModifyLiveTranscodeTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * Video codec. Valid values: h264, h265, origin (default).
+         * Video codec. Valid values: h264, h265, origin (default)
 
-origin: original codec as the output codec.
+origin: original codec as the output codec
          * @type {string || null}
          */
         this.Vcodec = null;

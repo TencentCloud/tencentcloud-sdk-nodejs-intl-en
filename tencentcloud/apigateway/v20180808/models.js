@@ -4445,6 +4445,24 @@ class ModifyApiRequest extends  AbstractModel {
          */
         this.ResponseErrorCodes = null;
 
+        /**
+         * Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
+         * @type {boolean || null}
+         */
+        this.IsBase64Encoded = null;
+
+        /**
+         * Whether to trigger Base64 encoding by header. This parameter takes effect only when the backend is SCF.
+         * @type {boolean || null}
+         */
+        this.IsBase64Trigger = null;
+
+        /**
+         * Header trigger rules. The number of rules cannot exceed 10.
+         * @type {Array.<Base64EncodedTriggerRule> || null}
+         */
+        this.Base64EncodedTriggerRules = null;
+
     }
 
     /**
@@ -4572,6 +4590,17 @@ class ModifyApiRequest extends  AbstractModel {
                 let obj = new ResponseErrorCodeReq();
                 obj.deserialize(params.ResponseErrorCodes[z]);
                 this.ResponseErrorCodes.push(obj);
+            }
+        }
+        this.IsBase64Encoded = 'IsBase64Encoded' in params ? params.IsBase64Encoded : null;
+        this.IsBase64Trigger = 'IsBase64Trigger' in params ? params.IsBase64Trigger : null;
+
+        if (params.Base64EncodedTriggerRules) {
+            this.Base64EncodedTriggerRules = new Array();
+            for (let z in params.Base64EncodedTriggerRules) {
+                let obj = new Base64EncodedTriggerRule();
+                obj.deserialize(params.Base64EncodedTriggerRules[z]);
+                this.Base64EncodedTriggerRules.push(obj);
             }
         }
 
@@ -5167,7 +5196,7 @@ class CreateApiRequest extends  AbstractModel {
         this.UserType = null;
 
         /**
-         * 
+         * Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
          * @type {boolean || null}
          */
         this.IsBase64Encoded = null;
@@ -9630,19 +9659,22 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Environments = null;
 
         /**
-         * 
+         * Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsBase64Encoded = null;
 
         /**
-         * 
+         * Whether to trigger Base64 encoding by header. This parameter takes effect only when the backend is SCF.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsBase64Trigger = null;
 
         /**
-         * 
+         * Header trigger rules. The number of rules cannot exceed 10.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<Base64EncodedTriggerRule> || null}
          */
         this.Base64EncodedTriggerRules = null;
@@ -9856,7 +9888,7 @@ class EnableApiKeyRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Header trigger rule for Base64 encoding.
  * @class
  */
 class Base64EncodedTriggerRule extends  AbstractModel {
@@ -9864,13 +9896,20 @@ class Base64EncodedTriggerRule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Header for triggering encoding. Valid values are `Accept` and `Content_Type`, corresponding to the `Accept` and `Content-Type` headers in the data stream request, respectively.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Array of header values that can trigger the encoding. Each element in the array can be up to 40 characters, including digits, letters, and special characters (`.`, `+`, `*`, `-`, `/`, and `_`). 
+
+For example, [
+    "application/x-vpeg005",
+    "application/xhtml+xml",
+    "application/vnd.ms-project",
+    "application/vnd.rn-rn_music_package"
+] are valid.
          * @type {Array.<string> || null}
          */
         this.Value = null;

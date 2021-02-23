@@ -31,6 +31,7 @@ const DescribeCertificateResponse = models.DescribeCertificateResponse;
 const OperationLog = models.OperationLog;
 const UploadCertificateRequest = models.UploadCertificateRequest;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
+const Tags = models.Tags;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
 const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
 const DeleteCertificateResponse = models.DeleteCertificateResponse;
@@ -185,7 +186,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to submit certificate information.
+     * This API is used to submit certificate information. You can call this API to submit the information of a certificate for several times. However, please make sure the submitted information is complete.
      * @param {SubmitCertificateInformationRequest} req
      * @param {function(string, SubmitCertificateInformationResponse):void} cb
      * @public

@@ -19,9 +19,12 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeAbnormalEventResponse = models.DescribeAbnormalEventResponse;
 const RealtimeData = models.RealtimeData;
 const DescribeAbnormalEventRequest = models.DescribeAbnormalEventRequest;
+const StartMCUMixTranscodeByStrRoomIdRequest = models.StartMCUMixTranscodeByStrRoomIdRequest;
 const LayoutParams = models.LayoutParams;
 const TimeValue = models.TimeValue;
+const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
+const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
 const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
 const DismissRoomResponse = models.DismissRoomResponse;
 const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
@@ -30,6 +33,7 @@ const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
 const DescribeRealtimeNetworkRequest = models.DescribeRealtimeNetworkRequest;
 const DescribeUserInformationResponse = models.DescribeUserInformationResponse;
 const EncodeParams = models.EncodeParams;
+const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const StartMCUMixTranscodeRequest = models.StartMCUMixTranscodeRequest;
 const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
 const StopMCUMixTranscodeRequest = models.StopMCUMixTranscodeRequest;
@@ -40,8 +44,10 @@ const RemoveUserRequest = models.RemoveUserRequest;
 const OutputParams = models.OutputParams;
 const EventMessage = models.EventMessage;
 const CreateTroubleInfoResponse = models.CreateTroubleInfoResponse;
+const StopMCUMixTranscodeByStrRoomIdRequest = models.StopMCUMixTranscodeByStrRoomIdRequest;
 const QualityData = models.QualityData;
 const AbnormalEvent = models.AbnormalEvent;
+const StopMCUMixTranscodeByStrRoomIdResponse = models.StopMCUMixTranscodeByStrRoomIdResponse;
 const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
 const ScaleInfomation = models.ScaleInfomation;
 const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
@@ -50,6 +56,7 @@ const DismissRoomRequest = models.DismissRoomRequest;
 const DescribeDetailEventResponse = models.DescribeDetailEventResponse;
 const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
 const SmallVideoLayoutParams = models.SmallVideoLayoutParams;
+const RemoveUserResponse = models.RemoveUserResponse;
 const PresetLayoutConfig = models.PresetLayoutConfig;
 const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
 const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
@@ -58,8 +65,9 @@ const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
 const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
 const AbnormalExperience = models.AbnormalExperience;
 const RoomState = models.RoomState;
-const RemoveUserResponse = models.RemoveUserResponse;
+const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
+const StartMCUMixTranscodeByStrRoomIdResponse = models.StartMCUMixTranscodeByStrRoomIdResponse;
 
 
 /**
@@ -81,6 +89,17 @@ class TrtcClient extends AbstractClient {
     RemoveUser(req, cb) {
         let resp = new RemoveUserResponse();
         this.request("RemoveUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+     * @param {DismissRoomByStrRoomIdRequest} req
+     * @param {function(string, DismissRoomByStrRoomIdResponse):void} cb
+     * @public
+     */
+    DismissRoomByStrRoomId(req, cb) {
+        let resp = new DismissRoomByStrRoomIdResponse();
+        this.request("DismissRoomByStrRoomId", req, resp, cb);
     }
 
     /**
@@ -156,6 +175,17 @@ Note: only applications created on and after January 9, 2020 can call this API d
     }
 
     /**
+     * This API is used to stop On-Cloud MixTranscoding.
+     * @param {StopMCUMixTranscodeByStrRoomIdRequest} req
+     * @param {function(string, StopMCUMixTranscodeByStrRoomIdResponse):void} cb
+     * @public
+     */
+    StopMCUMixTranscodeByStrRoomId(req, cb) {
+        let resp = new StopMCUMixTranscodeByStrRoomIdResponse();
+        this.request("StopMCUMixTranscodeByStrRoomId", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the room list of an `SDKAppID` in the last 14 days. It returns 10 calls by default and can return up to 100 calls per query.
 Note: you are not advised to use the API for the processing of real-time business logic.
      * @param {DescribeRoomInformationRequest} req
@@ -202,7 +232,7 @@ Note: you are not advised to use the API for the processing of real-time busines
     }
 
     /**
-     * This API is used to query exception occurrences under a specified `SDKAppID` and return the exception ID and possible causes. It queries data in last 5 days, and the query period is up to 1 hour which can start and end on different days. For more information about exceptions, please see the exception ID mapping table: https://intl.cloud.tencent.com/document/product/647/37906
+     * This API is used to query exception occurrences under a specified `SDKAppID` and return the exception IDs and possible causes. It queries data in last 15 days, and the query period is up to 1 hour, which can start and end on different days. For more information about exceptions, please see the exception event ID mapping table: https://intl.cloud.tencent.com/document/product/647/37906.
      * @param {DescribeAbnormalEventRequest} req
      * @param {function(string, DescribeAbnormalEventResponse):void} cb
      * @public
@@ -221,6 +251,45 @@ Note: you are not advised to use the API for the processing of real-time busines
     DescribeRealtimeQuality(req, cb) {
         let resp = new DescribeRealtimeQualityResponse();
         this.request("DescribeRealtimeQuality", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable On-Cloud MixTranscoding and specify the position of each channel of image in stream mixing.
+
+There may be multiple channels of audio/video streams in a TRTC room. You can call this API to request the Tencent Cloud server to mix multiple channels of video images and audio into one channel and specify the position of each image so as to produce only one channel of audio/video stream for recording and live streaming.
+
+You can use this API to perform the following operations:
+- Set image and audio quality parameters of the mixed stream, including video resolution, bitrate, frame rate, and audio quality.
+- Set the layout, i.e., the position of each channel of image. You only need to set it once when enabling On-Cloud MixTranscoding, and the layout engine will automatically arrange images as configured.
+- Set the names of recording files for future playback.
+- Set the stream ID for CDN live streaming.
+
+Currently, On-Cloud MixTranscoding supports the following layout templates:
+- Floating: the entire screen is covered by the video image of the first user who enters the room, and the images of other users are displayed as small images in horizontal rows in the bottom-left corner in room entry sequence. The screen can accommodate up to 4 rows of 4 small images, which float over the big image. Up to 1 big image and 15 small images can be displayed. A user sending audio only will still occupy an image spot.
+- Grid: the images of all users split the screen evenly. The more the users, the smaller the image dimensions. Up to 16 images can be displayed. A user sending audio only will still occupy an image spot.
+- Screen sharing: this template is designed for video conferencing and online classes. The shared screen (or camera image of the anchor) is always displayed as the big image, which occupies the left half of the screen, and the images of other users occupy the right half in up to 2 columns of a maximum of 8 small images each. Up to 1 big image and 15 small images can be displayed. If the aspect ratio of upstream images does not match that of output images, the big image on the left will be scaled and displayed in whole, while the small images on the right will be cropped.
+- Picture-in-picture: this template mixes the big and small images or big image of a user with the audio of other users. The small image floats over the big image. You can specify the user whose big and small images are displayed and the position of the small image.
+- Custom: you can use custom templates to specify the image positions of users in mixed streams or preset image positions. If users are assigned to preset positions, the layout engine will reserve the positions for the users; if not, users will occupy the positions in room entry sequence. Once all preset positions are occupied, TRTC will stop mixing the audio and images of other users. If the placeholding feature is enabled for a custom template (`PlaceHolderMode` in `LayoutParams` is set to 1), but a user for whom a place is reserved is not sending video data, the position will show the corresponding placeholder image (`PlaceImageId`).
+
+Note: only applications created on and after January 9, 2020 can call this API directly. Those created before use the stream mixing service of CSS by default. If you want to switch to MCU On-Cloud MixTranscoding, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     * @param {StartMCUMixTranscodeByStrRoomIdRequest} req
+     * @param {function(string, StartMCUMixTranscodeByStrRoomIdResponse):void} cb
+     * @public
+     */
+    StartMCUMixTranscodeByStrRoomId(req, cb) {
+        let resp = new StartMCUMixTranscodeByStrRoomIdResponse();
+        this.request("StartMCUMixTranscodeByStrRoomId", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove a user from a room. It allows the anchor, room owner, or admin to kick out a user, and works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+     * @param {RemoveUserByStrRoomIdRequest} req
+     * @param {function(string, RemoveUserByStrRoomIdResponse):void} cb
+     * @public
+     */
+    RemoveUserByStrRoomId(req, cb) {
+        let resp = new RemoveUserByStrRoomIdResponse();
+        this.request("RemoveUserByStrRoomId", req, resp, cb);
     }
 
     /**

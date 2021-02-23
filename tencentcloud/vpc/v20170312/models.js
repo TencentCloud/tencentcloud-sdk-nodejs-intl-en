@@ -843,6 +843,94 @@ class DescribeVpcIpv6AddressesRequest extends  AbstractModel {
 }
 
 /**
+ * SNAT rule of a NAT Gateway
+ * @class
+ */
+class SourceIpTranslationNatRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Resource type. Valid values: SUBNET, NETWORKINTERFACE
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Source IP/IP range
+         * @type {string || null}
+         */
+        this.PrivateIpAddress = null;
+
+        /**
+         * Elastic IP address pool
+         * @type {Array.<string> || null}
+         */
+        this.PublicIpAddresses = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * SNAT rule ID
+         * @type {string || null}
+         */
+        this.NatGatewaySnatId = null;
+
+        /**
+         * NAT Gateway ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * VPC ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Creation time of a SNAT rule for a NAT Gateway
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.NatGatewaySnatId = 'NatGatewaySnatId' in params ? params.NatGatewaySnatId : null;
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+    }
+}
+
+/**
  * DescribeCustomerGateways request structure.
  * @class
  */
@@ -926,6 +1014,46 @@ class ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse extends  Abstr
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNatGatewaySourceIpTranslationNatRule request structure.
+ * @class
+ */
+class ModifyNatGatewaySourceIpTranslationNatRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the NAT Gateway, such as `nat-df453454`
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * The SNAT forwarding rule of the NAT Gateway
+         * @type {SourceIpTranslationNatRule || null}
+         */
+        this.SourceIpTranslationNatRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+
+        if (params.SourceIpTranslationNatRule) {
+            let obj = new SourceIpTranslationNatRule();
+            obj.deserialize(params.SourceIpTranslationNatRule)
+            this.SourceIpTranslationNatRule = obj;
+        }
 
     }
 }
@@ -1398,6 +1526,12 @@ class FlowLog extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * Tag list, such as [{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -1417,6 +1551,15 @@ class FlowLog extends  AbstractModel {
         this.CloudLogState = 'CloudLogState' in params ? params.CloudLogState : null;
         this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -2973,6 +3116,66 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeNatGatewaySourceIpTranslationNatRules request structure.
+ * @class
+ */
+class DescribeNatGatewaySourceIpTranslationNatRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the NAT Gateway, such as `nat-123xx454`.
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * Filter conditions:
+<li> resource-id, the subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
+<li> public-ip-address, the EIP, such as `139.199.232.238`</li>
+<li>description, the rule description</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Offset. Default is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DescribeNatGateways request structure.
  * @class
  */
@@ -3212,6 +3415,57 @@ class DescribeIpGeolocationDatabaseUrlResponse extends  AbstractModel {
         }
         this.DownLoadUrl = 'DownLoadUrl' in params ? params.DownLoadUrl : null;
         this.ExpiredAt = 'ExpiredAt' in params ? params.ExpiredAt : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNatGatewaySourceIpTranslationNatRules response structure.
+ * @class
+ */
+class DescribeNatGatewaySourceIpTranslationNatRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Object array of the SNAT rule for a NAT Gateway.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<SourceIpTranslationNatRule> || null}
+         */
+        this.SourceIpTranslationNatRuleSet = null;
+
+        /**
+         * The number of object arrays of eligible forwarding rules for a NAT Gateway
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceIpTranslationNatRuleSet) {
+            this.SourceIpTranslationNatRuleSet = new Array();
+            for (let z in params.SourceIpTranslationNatRuleSet) {
+                let obj = new SourceIpTranslationNatRule();
+                obj.deserialize(params.SourceIpTranslationNatRuleSet[z]);
+                this.SourceIpTranslationNatRuleSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3862,6 +4116,12 @@ class DeleteRoutesResponse extends  AbstractModel {
         super();
 
         /**
+         * Details of the routing policy that has been deleted.
+         * @type {Array.<Route> || null}
+         */
+        this.RouteSet = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3875,6 +4135,15 @@ class DeleteRoutesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.RouteSet) {
+            this.RouteSet = new Array();
+            for (let z in params.RouteSet) {
+                let obj = new Route();
+                obj.deserialize(params.RouteSet[z]);
+                this.RouteSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4097,6 +4366,43 @@ Note: This field may return null, indicating that no valid value was found.
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Publishes the routing policy of the VPC subnet to CCN
+ * @class
+ */
+class CidrForCcn extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Local CIDR block, including subnet CIDR block and secondary CIDR block
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Cidr = null;
+
+        /**
+         * Whether the routing policy of the VPC subnet is published to CCN.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.PublishedToVbc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cidr = 'Cidr' in params ? params.Cidr : null;
+        this.PublishedToVbc = 'PublishedToVbc' in params ? params.PublishedToVbc : null;
 
     }
 }
@@ -4782,6 +5088,49 @@ class DeleteAddressTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * CreateNatGatewaySourceIpTranslationNatRule request structure.
+ * @class
+ */
+class CreateNatGatewaySourceIpTranslationNatRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the NAT Gateway, such as `nat-df45454`
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * The SNAT forwarding rule of the NAT Gateway
+         * @type {Array.<SourceIpTranslationNatRule> || null}
+         */
+        this.SourceIpTranslationNatRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+
+        if (params.SourceIpTranslationNatRules) {
+            this.SourceIpTranslationNatRules = new Array();
+            for (let z in params.SourceIpTranslationNatRules) {
+                let obj = new SourceIpTranslationNatRule();
+                obj.deserialize(params.SourceIpTranslationNatRules[z]);
+                this.SourceIpTranslationNatRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ENI
  * @class
  */
@@ -4891,6 +5240,13 @@ Note: This field may return null, indicating no valid value.
          */
         this.EniType = null;
 
+        /**
+         * Type of the resource bound with an ENI. Valid values: cvm, eks.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Business = null;
+
     }
 
     /**
@@ -4945,6 +5301,7 @@ Note: This field may return null, indicating no valid value.
             }
         }
         this.EniType = 'EniType' in params ? params.EniType : null;
+        this.Business = 'Business' in params ? params.Business : null;
 
     }
 }
@@ -5723,7 +6080,7 @@ class CreateVpnConnectionRequest extends  AbstractModel {
         super();
 
         /**
-         * The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+         * VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -5776,6 +6133,24 @@ class CreateVpnConnectionRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Whether the tunnel health check is supported.
+         * @type {boolean || null}
+         */
+        this.EnableHealthCheck = null;
+
+        /**
+         * Local IP address for the health check
+         * @type {string || null}
+         */
+        this.HealthCheckLocalIp = null;
+
+        /**
+         * Peer IP address for the health check
+         * @type {string || null}
+         */
+        this.HealthCheckRemoteIp = null;
+
     }
 
     /**
@@ -5820,6 +6195,9 @@ class CreateVpnConnectionRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.EnableHealthCheck = 'EnableHealthCheck' in params ? params.EnableHealthCheck : null;
+        this.HealthCheckLocalIp = 'HealthCheckLocalIp' in params ? params.HealthCheckLocalIp : null;
+        this.HealthCheckRemoteIp = 'HealthCheckRemoteIp' in params ? params.HealthCheckRemoteIp : null;
 
     }
 }
@@ -6074,6 +6452,30 @@ class VpnConnection extends  AbstractModel {
          */
         this.IPSECOptionsSpecification = null;
 
+        /**
+         * Whether the health check is supported.
+         * @type {boolean || null}
+         */
+        this.EnableHealthCheck = null;
+
+        /**
+         * Local IP address for the health check
+         * @type {string || null}
+         */
+        this.HealthCheckLocalIp = null;
+
+        /**
+         * Peer IP address for the health check
+         * @type {string || null}
+         */
+        this.HealthCheckRemoteIp = null;
+
+        /**
+         * Tunnel health check status. Valid values: AVAILABLE: healthy; UNAVAILABLE: unhealthy. This parameter will be returned only after health check is enabled.
+         * @type {string || null}
+         */
+        this.HealthCheckStatus = null;
+
     }
 
     /**
@@ -6116,6 +6518,10 @@ class VpnConnection extends  AbstractModel {
             obj.deserialize(params.IPSECOptionsSpecification)
             this.IPSECOptionsSpecification = obj;
         }
+        this.EnableHealthCheck = 'EnableHealthCheck' in params ? params.EnableHealthCheck : null;
+        this.HealthCheckLocalIp = 'HealthCheckLocalIp' in params ? params.HealthCheckLocalIp : null;
+        this.HealthCheckRemoteIp = 'HealthCheckRemoteIp' in params ? params.HealthCheckRemoteIp : null;
+        this.HealthCheckStatus = 'HealthCheckStatus' in params ? params.HealthCheckStatus : null;
 
     }
 }
@@ -7065,6 +7471,41 @@ class SecurityGroupPolicy extends  AbstractModel {
 }
 
 /**
+ * NotifyRoutes request structure.
+ * @class
+ */
+class NotifyRoutesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the route table
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+        /**
+         * The unique ID of the routing policy
+         * @type {Array.<string> || null}
+         */
+        this.RouteItemIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteItemIds = 'RouteItemIds' in params ? params.RouteItemIds : null;
+
+    }
+}
+
+/**
  * DeleteVpc request structure.
  * @class
  */
@@ -7323,7 +7764,7 @@ class ModifySecurityGroupPoliciesRequest extends  AbstractModel {
         this.SecurityGroupPolicySet = null;
 
         /**
-         * Whether security group sorting is supported. True indicates that security group sorting is supported. If SortPolicys does not exist or is set to False, the security group policy can be modified.
+         * Whether the security group rule is sorted. Default value: False. If it is set to `True`, security group rules will be strictly sorted according to the sequence specified in the `SecurityGroupPolicySet` parameter. Manual entry may cause omission, so we recommend sorting security group rules in the console.
          * @type {boolean || null}
          */
         this.SortPolicys = null;
@@ -7428,6 +7869,41 @@ class CreateCustomerGatewayResponse extends  AbstractModel {
             this.CustomerGateway = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * WithdrawNotifyRoutes request structure.
+ * @class
+ */
+class WithdrawNotifyRoutesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the route table
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+        /**
+         * The unique ID of the routing policy
+         * @type {Array.<string> || null}
+         */
+        this.RouteItemIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteItemIds = 'RouteItemIds' in params ? params.RouteItemIds : null;
 
     }
 }
@@ -9403,7 +9879,7 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         super();
 
         /**
-         * The bandwidth package type. Valid values: 'BGP', 'SINGLEISP', and 'ANYCAST'.
+         * The type of the bandwidth package. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.
          * @type {string || null}
          */
         this.NetworkType = null;
@@ -9427,7 +9903,7 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         this.BandwidthPackageCount = null;
 
         /**
-         * The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit.
+         * The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit. This feature is currently in beta.
          * @type {number || null}
          */
         this.InternetMaxBandwidth = null;
@@ -10200,7 +10676,7 @@ class DescribeIpGeolocationDatabaseUrlRequest extends  AbstractModel {
         super();
 
         /**
-         * Protocol type of the IP location database. Valid values: `ipv4` and `ipv6`.
+         * Protocol type for an IP location database. Valid value: `ipv4`.
          * @type {string || null}
          */
         this.Type = null;
@@ -11277,6 +11753,62 @@ class GetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+
+    }
+}
+
+/**
+ * CreateNatGatewaySourceIpTranslationNatRule response structure.
+ * @class
+ */
+class CreateNatGatewaySourceIpTranslationNatRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteNatGatewaySourceIpTranslationNatRule response structure.
+ * @class
+ */
+class DeleteNatGatewaySourceIpTranslationNatRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12820,6 +13352,24 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
          */
         this.IPSECOptionsSpecification = null;
 
+        /**
+         * Whether to enable the tunnel health check.
+         * @type {boolean || null}
+         */
+        this.EnableHealthCheck = null;
+
+        /**
+         * Local IP address for the tunnel health check
+         * @type {string || null}
+         */
+        this.HealthCheckLocalIp = null;
+
+        /**
+         * Peer IP address for the tunnel health check
+         * @type {string || null}
+         */
+        this.HealthCheckRemoteIp = null;
+
     }
 
     /**
@@ -12853,6 +13403,9 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
             obj.deserialize(params.IPSECOptionsSpecification)
             this.IPSECOptionsSpecification = obj;
         }
+        this.EnableHealthCheck = 'EnableHealthCheck' in params ? params.EnableHealthCheck : null;
+        this.HealthCheckLocalIp = 'HealthCheckLocalIp' in params ? params.HealthCheckLocalIp : null;
+        this.HealthCheckRemoteIp = 'HealthCheckRemoteIp' in params ? params.HealthCheckRemoteIp : null;
 
     }
 }
@@ -14287,6 +14840,34 @@ class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
         }
         this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
         this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
+
+    }
+}
+
+/**
+ * ModifyNatGatewaySourceIpTranslationNatRule response structure.
+ * @class
+ */
+class ModifyNatGatewaySourceIpTranslationNatRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17750,6 +18331,13 @@ class RouteTable extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * Whether the local route is published to CCN.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<CidrForCcn> || null}
+         */
+        this.LocalCidrForCcn = null;
+
     }
 
     /**
@@ -17789,6 +18377,15 @@ class RouteTable extends  AbstractModel {
                 let obj = new Tag();
                 obj.deserialize(params.TagSet[z]);
                 this.TagSet.push(obj);
+            }
+        }
+
+        if (params.LocalCidrForCcn) {
+            this.LocalCidrForCcn = new Array();
+            for (let z in params.LocalCidrForCcn) {
+                let obj = new CidrForCcn();
+                obj.deserialize(params.LocalCidrForCcn[z]);
+                this.LocalCidrForCcn.push(obj);
             }
         }
 
@@ -18921,6 +19518,41 @@ class DescribeSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteNatGatewaySourceIpTranslationNatRule request structure.
+ * @class
+ */
+class DeleteNatGatewaySourceIpTranslationNatRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the NAT Gateway, such as `nat-df45454`
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * The list of SNAT rule IDs of a NAT Gateway, such as `snat-df43254`
+         * @type {Array.<string> || null}
+         */
+        this.NatGatewaySnatIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.NatGatewaySnatIds = 'NatGatewaySnatIds' in params ? params.NatGatewaySnatIds : null;
+
+    }
+}
+
+/**
  * ModifyVpnGatewayCcnRoutes request structure.
  * @class
  */
@@ -19679,7 +20311,7 @@ class DeleteRoutesRequest extends  AbstractModel {
         this.RouteTableId = null;
 
         /**
-         * Routing policy object.
+         * Routing policy object. Only the `RouteId` field is required when deleting a routing policy.
          * @type {Array.<Route> || null}
          */
         this.Routes = null;
@@ -21435,6 +22067,34 @@ class Quota extends  AbstractModel {
 }
 
 /**
+ * WithdrawNotifyRoutes response structure.
+ * @class
+ */
+class WithdrawNotifyRoutesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeNetworkInterfaces response structure.
  * @class
  */
@@ -21796,6 +22456,34 @@ class DescribeSecurityGroupAssociationStatisticsRequest extends  AbstractModel {
 }
 
 /**
+ * NotifyRoutes response structure.
+ * @class
+ */
+class NotifyRoutesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Routing policy object
  * @class
  */
@@ -21877,6 +22565,13 @@ Users can only add and operate USER-type routes.
          */
         this.RouteItemId = null;
 
+        /**
+         * Whether the routing policy is published to CCN.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.PublishedToVbc = null;
+
     }
 
     /**
@@ -21896,6 +22591,7 @@ Users can only add and operate USER-type routes.
         this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
         this.DestinationIpv6CidrBlock = 'DestinationIpv6CidrBlock' in params ? params.DestinationIpv6CidrBlock : null;
         this.RouteItemId = 'RouteItemId' in params ? params.RouteItemId : null;
+        this.PublishedToVbc = 'PublishedToVbc' in params ? params.PublishedToVbc : null;
 
     }
 }
@@ -22164,8 +22860,10 @@ module.exports = {
     CreateAssistantCidrRequest: CreateAssistantCidrRequest,
     DescribeNetworkInterfacesRequest: DescribeNetworkInterfacesRequest,
     DescribeVpcIpv6AddressesRequest: DescribeVpcIpv6AddressesRequest,
+    SourceIpTranslationNatRule: SourceIpTranslationNatRule,
     DescribeCustomerGatewaysRequest: DescribeCustomerGatewaysRequest,
     ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse: ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
+    ModifyNatGatewaySourceIpTranslationNatRuleRequest: ModifyNatGatewaySourceIpTranslationNatRuleRequest,
     ModifyNetworkAclAttributeResponse: ModifyNetworkAclAttributeResponse,
     DescribeVpnGatewaysResponse: DescribeVpnGatewaysResponse,
     ModifyServiceTemplateAttributeRequest: ModifyServiceTemplateAttributeRequest,
@@ -22209,11 +22907,13 @@ module.exports = {
     DeleteCcnResponse: DeleteCcnResponse,
     ServiceTemplate: ServiceTemplate,
     DescribeCcnAttachedInstancesRequest: DescribeCcnAttachedInstancesRequest,
+    DescribeNatGatewaySourceIpTranslationNatRulesRequest: DescribeNatGatewaySourceIpTranslationNatRulesRequest,
     DescribeNatGatewaysRequest: DescribeNatGatewaysRequest,
     ModifyFlowLogAttributeResponse: ModifyFlowLogAttributeResponse,
     DescribeBandwidthPackagesResponse: DescribeBandwidthPackagesResponse,
     DescribeDirectConnectGatewaysRequest: DescribeDirectConnectGatewaysRequest,
     DescribeIpGeolocationDatabaseUrlResponse: DescribeIpGeolocationDatabaseUrlResponse,
+    DescribeNatGatewaySourceIpTranslationNatRulesResponse: DescribeNatGatewaySourceIpTranslationNatRulesResponse,
     DescribeVpcsRequest: DescribeVpcsRequest,
     AcceptAttachCcnInstancesRequest: AcceptAttachCcnInstancesRequest,
     DescribeGatewayFlowMonitorDetailResponse: DescribeGatewayFlowMonitorDetailResponse,
@@ -22233,6 +22933,7 @@ module.exports = {
     DescribeCrossBorderComplianceRequest: DescribeCrossBorderComplianceRequest,
     DescribeSecurityGroupAssociationStatisticsResponse: DescribeSecurityGroupAssociationStatisticsResponse,
     ModifyAssistantCidrResponse: ModifyAssistantCidrResponse,
+    CidrForCcn: CidrForCcn,
     NatGatewayAddress: NatGatewayAddress,
     ModifyNetworkAclEntriesResponse: ModifyNetworkAclEntriesResponse,
     DescribeFlowLogRequest: DescribeFlowLogRequest,
@@ -22250,6 +22951,7 @@ module.exports = {
     ModifySubnetAttributeResponse: ModifySubnetAttributeResponse,
     ResetNatGatewayConnectionRequest: ResetNatGatewayConnectionRequest,
     DeleteAddressTemplateRequest: DeleteAddressTemplateRequest,
+    CreateNatGatewaySourceIpTranslationNatRuleRequest: CreateNatGatewaySourceIpTranslationNatRuleRequest,
     NetworkInterface: NetworkInterface,
     TransformAddressRequest: TransformAddressRequest,
     ReplaceDirectConnectGatewayCcnRoutesRequest: ReplaceDirectConnectGatewayCcnRoutesRequest,
@@ -22291,6 +22993,7 @@ module.exports = {
     CheckAssistantCidrRequest: CheckAssistantCidrRequest,
     RenewVpnGatewayRequest: RenewVpnGatewayRequest,
     SecurityGroupPolicy: SecurityGroupPolicy,
+    NotifyRoutesRequest: NotifyRoutesRequest,
     DeleteVpcRequest: DeleteVpcRequest,
     ModifyServiceTemplateAttributeResponse: ModifyServiceTemplateAttributeResponse,
     DescribeCcnsResponse: DescribeCcnsResponse,
@@ -22300,6 +23003,7 @@ module.exports = {
     ModifySecurityGroupPoliciesRequest: ModifySecurityGroupPoliciesRequest,
     ReplaceRoutesRequest: ReplaceRoutesRequest,
     CreateCustomerGatewayResponse: CreateCustomerGatewayResponse,
+    WithdrawNotifyRoutesRequest: WithdrawNotifyRoutesRequest,
     DeleteServiceTemplateGroupResponse: DeleteServiceTemplateGroupResponse,
     DisassociateAddressRequest: DisassociateAddressRequest,
     NetworkAclEntrySet: NetworkAclEntrySet,
@@ -22378,6 +23082,8 @@ module.exports = {
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
     CreateFlowLogResponse: CreateFlowLogResponse,
     GetCcnRegionBandwidthLimitsRequest: GetCcnRegionBandwidthLimitsRequest,
+    CreateNatGatewaySourceIpTranslationNatRuleResponse: CreateNatGatewaySourceIpTranslationNatRuleResponse,
+    DeleteNatGatewaySourceIpTranslationNatRuleResponse: DeleteNatGatewaySourceIpTranslationNatRuleResponse,
     CcnAttachedInstance: CcnAttachedInstance,
     SecurityPolicyDatabase: SecurityPolicyDatabase,
     Ipv6Address: Ipv6Address,
@@ -22444,6 +23150,7 @@ module.exports = {
     DescribeVpcInstancesResponse: DescribeVpcInstancesResponse,
     AccountAttribute: AccountAttribute,
     DeleteDirectConnectGatewayCcnRoutesRequest: DeleteDirectConnectGatewayCcnRoutesRequest,
+    ModifyNatGatewaySourceIpTranslationNatRuleResponse: ModifyNatGatewaySourceIpTranslationNatRuleResponse,
     CreateNatGatewayDestinationIpPortTranslationNatRuleRequest: CreateNatGatewayDestinationIpPortTranslationNatRuleRequest,
     CreateFlowLogRequest: CreateFlowLogRequest,
     InquirePriceCreateDirectConnectGatewayRequest: InquirePriceCreateDirectConnectGatewayRequest,
@@ -22550,6 +23257,7 @@ module.exports = {
     AssignIpv6AddressesResponse: AssignIpv6AddressesResponse,
     CreateRoutesResponse: CreateRoutesResponse,
     DescribeSecurityGroupsResponse: DescribeSecurityGroupsResponse,
+    DeleteNatGatewaySourceIpTranslationNatRuleRequest: DeleteNatGatewaySourceIpTranslationNatRuleRequest,
     ModifyVpnGatewayCcnRoutesRequest: ModifyVpnGatewayCcnRoutesRequest,
     DescribeGatewayFlowQosRequest: DescribeGatewayFlowQosRequest,
     ReplaceDirectConnectGatewayCcnRoutesResponse: ReplaceDirectConnectGatewayCcnRoutesResponse,
@@ -22606,6 +23314,7 @@ module.exports = {
     DeleteCustomerGatewayRequest: DeleteCustomerGatewayRequest,
     DescribeAddressTemplatesResponse: DescribeAddressTemplatesResponse,
     Quota: Quota,
+    WithdrawNotifyRoutesResponse: WithdrawNotifyRoutesResponse,
     DescribeNetworkInterfacesResponse: DescribeNetworkInterfacesResponse,
     DeleteNetworkAclResponse: DeleteNetworkAclResponse,
     AssignPrivateIpAddressesRequest: AssignPrivateIpAddressesRequest,
@@ -22614,6 +23323,7 @@ module.exports = {
     CreateVpcRequest: CreateVpcRequest,
     DeleteServiceTemplateRequest: DeleteServiceTemplateRequest,
     DescribeSecurityGroupAssociationStatisticsRequest: DescribeSecurityGroupAssociationStatisticsRequest,
+    NotifyRoutesResponse: NotifyRoutesResponse,
     Route: Route,
     ModifySubnetAttributeRequest: ModifySubnetAttributeRequest,
     DescribeBandwidthPackageQuotaRequest: DescribeBandwidthPackageQuotaRequest,

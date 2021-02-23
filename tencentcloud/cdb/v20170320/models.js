@@ -791,6 +791,12 @@ class DescribeErrorLogDataRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * This parameter is valid only for source or disaster recovery instances. Valid value: `slave`, which indicates pulling logs from the replica.
+         * @type {string || null}
+         */
+        this.InstType = null;
+
     }
 
     /**
@@ -806,6 +812,7 @@ class DescribeErrorLogDataRequest extends  AbstractModel {
         this.KeyWords = 'KeyWords' in params ? params.KeyWords : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.InstType = 'InstType' in params ? params.InstType : null;
 
     }
 }
@@ -2274,6 +2281,34 @@ class DescribeDBInstanceRebootTimeResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchDrInstanceToMaster request structure.
+ * @class
+ */
+class SwitchDrInstanceToMasterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Disaster recovery instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3770,7 +3805,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.SlaveZone = null;
 
         /**
-         * AZ information of secondary database 2, which is empty by default. This parameter can be specified when purchasing strong sync primary instances and is meaningless for other types of instances.
+         * Availability zone information of replica 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
          * @type {string || null}
          */
         this.BackupZone = null;
@@ -5428,6 +5463,34 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
 }
 
 /**
+ * SwitchForUpgrade response structure.
+ * @class
+ */
+class SwitchForUpgradeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBackupSummaries response structure.
  * @class
  */
@@ -6100,6 +6163,41 @@ class DatabaseName extends  AbstractModel {
             return;
         }
         this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+
+    }
+}
+
+/**
+ * SwitchDBInstanceMasterSlave response structure.
+ * @class
+ */
+class SwitchDBInstanceMasterSlaveResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7934,6 +8032,55 @@ class ModifyAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * SwitchDBInstanceMasterSlave request structure.
+ * @class
+ */
+class SwitchDBInstanceMasterSlaveRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Specifies the replica server to switched to. Valid values: `first` (the first replica server), `second` (the second replica server). Default value: `first`. `second` is valid only for a multi-AZ instance.
+         * @type {string || null}
+         */
+        this.DstSlave = null;
+
+        /**
+         * Whether to force the switch. Valid values: `True`, `False` (default). If this parameter is set to `True`, instance data may be lost during the switch.
+         * @type {boolean || null}
+         */
+        this.ForceSwitch = null;
+
+        /**
+         * Whether to perform the switch during a time window. Valid values: `True`, `False` (default). If `ForceSwitch` is set to `True`, this parameter is invalid.
+         * @type {boolean || null}
+         */
+        this.WaitSwitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DstSlave = 'DstSlave' in params ? params.DstSlave : null;
+        this.ForceSwitch = 'ForceSwitch' in params ? params.ForceSwitch : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+
+    }
+}
+
+/**
  * Configuration information of ECDB secondary database 2. This field is only applicable to ECDB instances
  * @class
  */
@@ -8363,7 +8510,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MasterInfo = null;
 
         /**
-         * Instance type. Value range: HA (High-Availability Edition), FE (Finance Edition), BASIC (Basic Edition)
+         * Instance type
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -10632,6 +10779,12 @@ class DescribeSlowLogDataRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * This parameter is valid only for source or disaster recovery instances. Valid value: `slave`, which indicates pulling logs from the replica.
+         * @type {string || null}
+         */
+        this.InstType = null;
+
     }
 
     /**
@@ -10651,6 +10804,7 @@ class DescribeSlowLogDataRequest extends  AbstractModel {
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.InstType = 'InstType' in params ? params.InstType : null;
 
     }
 }
@@ -11656,12 +11810,18 @@ class DeleteAccountsRequest extends  AbstractModel {
 }
 
 /**
- * SwitchForUpgrade response structure.
+ * SwitchDrInstanceToMaster response structure.
  * @class
  */
-class SwitchForUpgradeResponse extends  AbstractModel {
+class SwitchDrInstanceToMasterResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11678,6 +11838,7 @@ class SwitchForUpgradeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12811,6 +12972,7 @@ module.exports = {
     OpenDBInstanceGTIDResponse: OpenDBInstanceGTIDResponse,
     DescribeDBZoneConfigRequest: DescribeDBZoneConfigRequest,
     DescribeDBInstanceRebootTimeResponse: DescribeDBInstanceRebootTimeResponse,
+    SwitchDrInstanceToMasterRequest: SwitchDrInstanceToMasterRequest,
     DeleteParamTemplateRequest: DeleteParamTemplateRequest,
     DrInfo: DrInfo,
     RoGroup: RoGroup,
@@ -12864,6 +13026,7 @@ module.exports = {
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
+    SwitchForUpgradeResponse: SwitchForUpgradeResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     StopRollbackResponse: StopRollbackResponse,
@@ -12880,6 +13043,7 @@ module.exports = {
     DescribeTimeWindowResponse: DescribeTimeWindowResponse,
     BackupItem: BackupItem,
     DatabaseName: DatabaseName,
+    SwitchDBInstanceMasterSlaveResponse: SwitchDBInstanceMasterSlaveResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
@@ -12923,6 +13087,7 @@ module.exports = {
     DescribeDBInstanceConfigResponse: DescribeDBInstanceConfigResponse,
     DescribeDefaultParamsResponse: DescribeDefaultParamsResponse,
     ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
+    SwitchDBInstanceMasterSlaveRequest: SwitchDBInstanceMasterSlaveRequest,
     BackupConfig: BackupConfig,
     DeviceCpuInfo: DeviceCpuInfo,
     DescribeTagsOfInstanceIdsResponse: DescribeTagsOfInstanceIdsResponse,
@@ -12992,7 +13157,7 @@ module.exports = {
     CreateDeployGroupRequest: CreateDeployGroupRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DeleteAccountsRequest: DeleteAccountsRequest,
-    SwitchForUpgradeResponse: SwitchForUpgradeResponse,
+    SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     AddTimeWindowResponse: AddTimeWindowResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,

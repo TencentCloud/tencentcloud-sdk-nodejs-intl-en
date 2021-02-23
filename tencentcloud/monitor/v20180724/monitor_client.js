@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const TagInstance = models.TagInstance;
 const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual;
 const ModifyAlarmPolicyNoticeResponse = models.ModifyAlarmPolicyNoticeResponse;
 const ModifyAlarmPolicyInfoRequest = models.ModifyAlarmPolicyInfoRequest;

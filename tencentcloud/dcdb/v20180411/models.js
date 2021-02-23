@@ -397,6 +397,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Cpu = null;
 
+        /**
+         * The value range of shardkey, which includes 64 hash values, such as 0-31, 32-63.
+         * @type {string || null}
+         */
+        this.Range = null;
+
     }
 
     /**
@@ -430,6 +436,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ShardMasterZone = 'ShardMasterZone' in params ? params.ShardMasterZone : null;
         this.ShardSlaveZones = 'ShardSlaveZones' in params ? params.ShardSlaveZones : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Range = 'Range' in params ? params.Range : null;
 
     }
 }
@@ -1210,49 +1217,24 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * DB parameter description
+ * DescribeProjects response structure.
  * @class
  */
-class ParamDesc extends  AbstractModel {
+class DescribeProjectsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * Project list
+         * @type {Array.<Project> || null}
+         */
+        this.Projects = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Param = null;
-
-        /**
-         * Current parameter value
-         * @type {string || null}
-         */
-        this.Value = null;
-
-        /**
-         * Previously set value, which is the same as `value` after the parameter takes effect. If no value has been set, this field will not be returned.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SetValue = null;
-
-        /**
-         * Default value
-         * @type {string || null}
-         */
-        this.Default = null;
-
-        /**
-         * Parameter constraint
-         * @type {ParamConstraint || null}
-         */
-        this.Constraint = null;
-
-        /**
-         * Whether a value has been set. false: no, true: yes
-         * @type {boolean || null}
-         */
-        this.HaveSetValue = null;
+        this.RequestId = null;
 
     }
 
@@ -1263,17 +1245,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Param = 'Param' in params ? params.Param : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.SetValue = 'SetValue' in params ? params.SetValue : null;
-        this.Default = 'Default' in params ? params.Default : null;
 
-        if (params.Constraint) {
-            let obj = new ParamConstraint();
-            obj.deserialize(params.Constraint)
-            this.Constraint = obj;
+        if (params.Projects) {
+            this.Projects = new Array();
+            for (let z in params.Projects) {
+                let obj = new Project();
+                obj.deserialize(params.Projects[z]);
+                this.Projects.push(obj);
+            }
         }
-        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2496,6 +2477,104 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Project description
+ * @class
+ */
+class Project extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * The `uin` of the resource owner (root account)
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Project name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Creator `uin`
+         * @type {number || null}
+         */
+        this.CreatorUin = null;
+
+        /**
+         * Source platform
+         * @type {string || null}
+         */
+        this.SrcPlat = null;
+
+        /**
+         * Source `AppId`
+         * @type {number || null}
+         */
+        this.SrcAppId = null;
+
+        /**
+         * Project status. 0: normal; -1: disabled; 3: default project.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether it is the default project. 1: yes; 0: no.
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Info = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
+        this.SrcPlat = 'SrcPlat' in params ? params.SrcPlat : null;
+        this.SrcAppId = 'SrcAppId' in params ? params.SrcAppId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.Info = 'Info' in params ? params.Info : null;
+
+    }
+}
+
+/**
  * OpenDBExtranetAccess request structure.
  * @class
  */
@@ -3408,6 +3487,27 @@ Field permission. Valid values: INSERT; REFERENCES; SELECT; UPDATE
 }
 
 /**
+ * DescribeProjects request structure.
+ * @class
+ */
+class DescribeProjectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeDCDBShards request structure.
  * @class
  */
@@ -3466,6 +3566,75 @@ class DescribeDCDBShardsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * DB parameter description
+ * @class
+ */
+class ParamDesc extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.Param = null;
+
+        /**
+         * Current parameter value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Previously set value, which is the same as `value` after the parameter takes effect. If no value has been set, this field will not be returned.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SetValue = null;
+
+        /**
+         * Default value
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * Parameter constraint
+         * @type {ParamConstraint || null}
+         */
+        this.Constraint = null;
+
+        /**
+         * Whether a value has been set. false: no, true: yes
+         * @type {boolean || null}
+         */
+        this.HaveSetValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Param = 'Param' in params ? params.Param : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.SetValue = 'SetValue' in params ? params.SetValue : null;
+        this.Default = 'Default' in params ? params.Default : null;
+
+        if (params.Constraint) {
+            let obj = new ParamConstraint();
+            obj.deserialize(params.Constraint)
+            this.Constraint = obj;
+        }
+        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
 
     }
 }
@@ -3936,7 +4105,7 @@ module.exports = {
     TableColumn: TableColumn,
     ParamModifyResult: ParamModifyResult,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
-    ParamDesc: ParamDesc,
+    DescribeProjectsResponse: DescribeProjectsResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     CreateAccountResponse: CreateAccountResponse,
@@ -3962,6 +4131,7 @@ module.exports = {
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     SecurityGroup: SecurityGroup,
     DescribeAccountsResponse: DescribeAccountsResponse,
+    Project: Project,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
@@ -3974,7 +4144,9 @@ module.exports = {
     DCDBInstanceInfo: DCDBInstanceInfo,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
+    DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeDCDBShardsRequest: DescribeDCDBShardsRequest,
+    ParamDesc: ParamDesc,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DBParamValue: DBParamValue,
     ParamConstraint: ParamConstraint,

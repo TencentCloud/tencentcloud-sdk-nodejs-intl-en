@@ -1895,6 +1895,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DisableRestProxy request structure.
+ * @class
+ */
+class DisableRestProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value is the same as `appid`.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeTablesInRecycle response structure.
  * @class
  */
@@ -1990,6 +2018,34 @@ class ModifyTablesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableRestProxy request structure.
+ * @class
+ */
+class EnableRestProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value is the same as `appid`.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -3007,6 +3063,48 @@ class DescribeIdlFileInfosResponse extends  AbstractModel {
 }
 
 /**
+ * DisableRestProxy response structure.
+ * @class
+ */
+class DisableRestProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RestProxy status. Valid values: 0 (disabled), 1 (enabling), 2 (enabled), 3 (disabling).
+         * @type {number || null}
+         */
+        this.RestProxyStatus = null;
+
+        /**
+         * `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RestProxyStatus = 'RestProxyStatus' in params ? params.RestProxyStatus : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Tag information unit
  * @class
  */
@@ -3832,6 +3930,48 @@ class VerifyIdlFilesRequest extends  AbstractModel {
                 this.NewIdlFiles.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * EnableRestProxy response structure.
+ * @class
+ */
+class EnableRestProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RestProxy status. Valid values: 0 (disabled), 1 (enabling), 2 (enabled), 3 (disabling).
+         * @type {number || null}
+         */
+        this.RestProxyStatus = null;
+
+        /**
+         * `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RestProxyStatus = 'RestProxyStatus' in params ? params.RestProxyStatus : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5629,8 +5769,10 @@ module.exports = {
     ClearTablesResponse: ClearTablesResponse,
     DescribeIdlFileInfosRequest: DescribeIdlFileInfosRequest,
     ClusterInfo: ClusterInfo,
+    DisableRestProxyRequest: DisableRestProxyRequest,
     DescribeTablesInRecycleResponse: DescribeTablesInRecycleResponse,
     ModifyTablesResponse: ModifyTablesResponse,
+    EnableRestProxyRequest: EnableRestProxyRequest,
     ModifyTableGroupTagsResponse: ModifyTableGroupTagsResponse,
     ModifyClusterTagsRequest: ModifyClusterTagsRequest,
     DescribeTableGroupTagsResponse: DescribeTableGroupTagsResponse,
@@ -5652,6 +5794,7 @@ module.exports = {
     SetTableIndexResponse: SetTableIndexResponse,
     ClearTablesRequest: ClearTablesRequest,
     DescribeIdlFileInfosResponse: DescribeIdlFileInfosResponse,
+    DisableRestProxyResponse: DisableRestProxyResponse,
     TagInfoUnit: TagInfoUnit,
     CreateClusterResponse: CreateClusterResponse,
     DescribeClustersRequest: DescribeClustersRequest,
@@ -5664,6 +5807,7 @@ module.exports = {
     DescribeTableTagsResponse: DescribeTableTagsResponse,
     CreateTableGroupResponse: CreateTableGroupResponse,
     VerifyIdlFilesRequest: VerifyIdlFilesRequest,
+    EnableRestProxyResponse: EnableRestProxyResponse,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
     ModifyTablesRequest: ModifyTablesRequest,
     DescribeTableGroupTagsRequest: DescribeTableGroupTagsRequest,

@@ -17,11 +17,12 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
+const CloneDBResponse = models.CloneDBResponse;
 const DealInfo = models.DealInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
-const DeleteDBResponse = models.DeleteDBResponse;
+const RegionInfo = models.RegionInfo;
 const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
 const MigrateDetail = models.MigrateDetail;
 const RunMigrationResponse = models.RunMigrationResponse;
@@ -39,6 +40,7 @@ const RunMigrationRequest = models.RunMigrationRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
+const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
 const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
 const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const MigrateTask = models.MigrateTask;
@@ -80,6 +82,7 @@ const AccountPassword = models.AccountPassword;
 const DeleteMigrationResponse = models.DeleteMigrationResponse;
 const InstanceDBDetail = models.InstanceDBDetail;
 const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
+const ModifyDBInstanceNetworkResponse = models.ModifyDBInstanceNetworkResponse;
 const AccountDetail = models.AccountDetail;
 const CreateBackupResponse = models.CreateBackupResponse;
 const DBInstance = models.DBInstance;
@@ -95,15 +98,17 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DBPrivilege = models.DBPrivilege;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
+const ResourceTag = models.ResourceTag;
 const RecycleDBInstanceResponse = models.RecycleDBInstanceResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const CreateBackupRequest = models.CreateBackupRequest;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
+const CloneDBRequest = models.CloneDBRequest;
 const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
 const ModifyMigrationRequest = models.ModifyMigrationRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
-const RegionInfo = models.RegionInfo;
+const DeleteDBResponse = models.DeleteDBResponse;
 const CreateDBResponse = models.CreateDBResponse;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
@@ -229,6 +234,17 @@ class SqlserverClient extends AbstractClient {
     InquiryPriceCreateDBInstances(req, cb) {
         let resp = new InquiryPriceCreateDBInstancesResponse();
         this.request("InquiryPriceCreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to clone and rename databases of an instance. The clones are still in the instance from which they are cloned.
+     * @param {CloneDBRequest} req
+     * @param {function(string, CloneDBResponse):void} cb
+     * @public
+     */
+    CloneDB(req, cb) {
+        let resp = new CloneDBResponse();
+        this.request("CloneDB", req, resp, cb);
     }
 
     /**
@@ -427,6 +443,17 @@ class SqlserverClient extends AbstractClient {
     InquiryPriceUpgradeDBInstance(req, cb) {
         let resp = new InquiryPriceUpgradeDBInstanceResponse();
         this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to switch a running instance from a VPC to another.
+     * @param {ModifyDBInstanceNetworkRequest} req
+     * @param {function(string, ModifyDBInstanceNetworkResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceNetwork(req, cb) {
+        let resp = new ModifyDBInstanceNetworkResponse();
+        this.request("ModifyDBInstanceNetwork", req, resp, cb);
     }
 
     /**

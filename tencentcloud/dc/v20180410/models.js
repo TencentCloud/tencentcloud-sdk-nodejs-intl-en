@@ -101,84 +101,24 @@ class RejectDirectConnectTunnelRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDirectConnectAttribute request structure.
+ * Coordinate describing the longitude and latitude.
  * @class
  */
-class ModifyDirectConnectAttributeRequest extends  AbstractModel {
+class Coordinate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Connection ID.
-         * @type {string || null}
-         */
-        this.DirectConnectId = null;
-
-        /**
-         * Connection name.
-         * @type {string || null}
-         */
-        this.DirectConnectName = null;
-
-        /**
-         * Circuit code of a connection, which is provided by the ISP or connection provider.
-         * @type {string || null}
-         */
-        this.CircuitCode = null;
-
-        /**
-         * VLAN for connection debugging.
+         * Latitude
          * @type {number || null}
          */
-        this.Vlan = null;
+        this.Lat = null;
 
         /**
-         * Tencent-side IP address for connection debugging.
-         * @type {string || null}
+         * Longitude
+         * @type {number || null}
          */
-        this.TencentAddress = null;
-
-        /**
-         * User-side IP address for connection debugging.
-         * @type {string || null}
-         */
-        this.CustomerAddress = null;
-
-        /**
-         * Name of connection applicant, which is obtained from the account system by default.
-         * @type {string || null}
-         */
-        this.CustomerName = null;
-
-        /**
-         * Email address of connection applicant, which is obtained from the account system by default.
-         * @type {string || null}
-         */
-        this.CustomerContactMail = null;
-
-        /**
-         * Contact number of connection applicant, which is obtained from the account system by default.
-         * @type {string || null}
-         */
-        this.CustomerContactNumber = null;
-
-        /**
-         * Fault reporting contact person.
-         * @type {string || null}
-         */
-        this.FaultReportContactPerson = null;
-
-        /**
-         * Fault reporting contact number.
-         * @type {string || null}
-         */
-        this.FaultReportContactNumber = null;
-
-        /**
-         * Whether the connection applicant has signed the service agreement.
-         * @type {boolean || null}
-         */
-        this.SignLaw = null;
+        this.Lng = null;
 
     }
 
@@ -189,18 +129,8 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
-        this.DirectConnectName = 'DirectConnectName' in params ? params.DirectConnectName : null;
-        this.CircuitCode = 'CircuitCode' in params ? params.CircuitCode : null;
-        this.Vlan = 'Vlan' in params ? params.Vlan : null;
-        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
-        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
-        this.CustomerName = 'CustomerName' in params ? params.CustomerName : null;
-        this.CustomerContactMail = 'CustomerContactMail' in params ? params.CustomerContactMail : null;
-        this.CustomerContactNumber = 'CustomerContactNumber' in params ? params.CustomerContactNumber : null;
-        this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
-        this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
-        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+        this.Lat = 'Lat' in params ? params.Lat : null;
+        this.Lng = 'Lng' in params ? params.Lng : null;
 
     }
 }
@@ -1432,6 +1362,111 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDirectConnectAttribute request structure.
+ * @class
+ */
+class ModifyDirectConnectAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Connection ID.
+         * @type {string || null}
+         */
+        this.DirectConnectId = null;
+
+        /**
+         * Connection name.
+         * @type {string || null}
+         */
+        this.DirectConnectName = null;
+
+        /**
+         * Circuit code of a connection, which is provided by the ISP or connection provider.
+         * @type {string || null}
+         */
+        this.CircuitCode = null;
+
+        /**
+         * VLAN for connection debugging.
+         * @type {number || null}
+         */
+        this.Vlan = null;
+
+        /**
+         * Tencent-side IP address for connection debugging.
+         * @type {string || null}
+         */
+        this.TencentAddress = null;
+
+        /**
+         * User-side IP address for connection debugging.
+         * @type {string || null}
+         */
+        this.CustomerAddress = null;
+
+        /**
+         * Name of connection applicant, which is obtained from the account system by default.
+         * @type {string || null}
+         */
+        this.CustomerName = null;
+
+        /**
+         * Email address of connection applicant, which is obtained from the account system by default.
+         * @type {string || null}
+         */
+        this.CustomerContactMail = null;
+
+        /**
+         * Contact number of connection applicant, which is obtained from the account system by default.
+         * @type {string || null}
+         */
+        this.CustomerContactNumber = null;
+
+        /**
+         * Fault reporting contact person.
+         * @type {string || null}
+         */
+        this.FaultReportContactPerson = null;
+
+        /**
+         * Fault reporting contact number.
+         * @type {string || null}
+         */
+        this.FaultReportContactNumber = null;
+
+        /**
+         * Whether the connection applicant has signed the service agreement.
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
+        this.DirectConnectName = 'DirectConnectName' in params ? params.DirectConnectName : null;
+        this.CircuitCode = 'CircuitCode' in params ? params.CircuitCode : null;
+        this.Vlan = 'Vlan' in params ? params.Vlan : null;
+        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
+        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.CustomerName = 'CustomerName' in params ? params.CustomerName : null;
+        this.CustomerContactMail = 'CustomerContactMail' in params ? params.CustomerContactMail : null;
+        this.CustomerContactNumber = 'CustomerContactNumber' in params ? params.CustomerContactNumber : null;
+        this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
+        this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+
+    }
+}
+
+/**
  * DescribeInternetAddress response structure.
  * @class
  */
@@ -1942,6 +1977,20 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.AvailablePortType = null;
 
+        /**
+         * Latitude and longitude of the access point
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Coordinate || null}
+         */
+        this.Coordinate = null;
+
+        /**
+         * City where the access point is located
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.City = null;
+
     }
 
     /**
@@ -1958,6 +2007,13 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.LineOperator = 'LineOperator' in params ? params.LineOperator : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.AvailablePortType = 'AvailablePortType' in params ? params.AvailablePortType : null;
+
+        if (params.Coordinate) {
+            let obj = new Coordinate();
+            obj.deserialize(params.Coordinate)
+            this.Coordinate = obj;
+        }
+        this.City = 'City' in params ? params.City : null;
 
     }
 }
@@ -2583,7 +2639,7 @@ module.exports = {
     DescribeInternetAddressQuotaRequest: DescribeInternetAddressQuotaRequest,
     BgpPeer: BgpPeer,
     RejectDirectConnectTunnelRequest: RejectDirectConnectTunnelRequest,
-    ModifyDirectConnectAttributeRequest: ModifyDirectConnectAttributeRequest,
+    Coordinate: Coordinate,
     DeleteDirectConnectTunnelRequest: DeleteDirectConnectTunnelRequest,
     CreateDirectConnectResponse: CreateDirectConnectResponse,
     DirectConnect: DirectConnect,
@@ -2604,6 +2660,7 @@ module.exports = {
     DescribeAccessPointsRequest: DescribeAccessPointsRequest,
     DescribeDirectConnectsRequest: DescribeDirectConnectsRequest,
     ModifyDirectConnectTunnelAttributeRequest: ModifyDirectConnectTunnelAttributeRequest,
+    ModifyDirectConnectAttributeRequest: ModifyDirectConnectAttributeRequest,
     DescribeInternetAddressResponse: DescribeInternetAddressResponse,
     Filter: Filter,
     DisableInternetAddressResponse: DisableInternetAddressResponse,

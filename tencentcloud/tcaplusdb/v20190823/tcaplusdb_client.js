@@ -49,8 +49,10 @@ const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
 const ClearTablesResponse = models.ClearTablesResponse;
 const DescribeIdlFileInfosRequest = models.DescribeIdlFileInfosRequest;
 const ClusterInfo = models.ClusterInfo;
+const DisableRestProxyRequest = models.DisableRestProxyRequest;
 const DescribeTablesInRecycleResponse = models.DescribeTablesInRecycleResponse;
 const ModifyTablesResponse = models.ModifyTablesResponse;
+const EnableRestProxyRequest = models.EnableRestProxyRequest;
 const ModifyTableGroupTagsResponse = models.ModifyTableGroupTagsResponse;
 const ModifyClusterTagsRequest = models.ModifyClusterTagsRequest;
 const DescribeTableGroupTagsResponse = models.DescribeTableGroupTagsResponse;
@@ -72,6 +74,7 @@ const TagsInfoOfCluster = models.TagsInfoOfCluster;
 const SetTableIndexResponse = models.SetTableIndexResponse;
 const ClearTablesRequest = models.ClearTablesRequest;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
+const DisableRestProxyResponse = models.DisableRestProxyResponse;
 const TagInfoUnit = models.TagInfoUnit;
 const CreateClusterResponse = models.CreateClusterResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
@@ -84,6 +87,7 @@ const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
 const DescribeTableTagsResponse = models.DescribeTableTagsResponse;
 const CreateTableGroupResponse = models.CreateTableGroupResponse;
 const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
+const EnableRestProxyResponse = models.EnableRestProxyResponse;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const ModifyTablesRequest = models.ModifyTablesRequest;
 const DescribeTableGroupTagsRequest = models.DescribeTableGroupTagsRequest;
@@ -205,6 +209,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to disable the RESTful API.
+     * @param {DisableRestProxyRequest} req
+     * @param {function(string, DisableRestProxyResponse):void} cb
+     * @public
+     */
+    DisableRestProxy(req, cb) {
+        let resp = new DisableRestProxyResponse();
+        this.request("DisableRestProxy", req, resp, cb);
+    }
+
+    /**
      * This API is used to roll back table data.
      * @param {RollbackTablesRequest} req
      * @param {function(string, RollbackTablesResponse):void} cb
@@ -271,14 +286,14 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a global index for a table.
-     * @param {SetTableIndexRequest} req
-     * @param {function(string, SetTableIndexResponse):void} cb
+     * This API is used to enable the RESTful API.
+     * @param {EnableRestProxyRequest} req
+     * @param {function(string, EnableRestProxyResponse):void} cb
      * @public
      */
-    SetTableIndex(req, cb) {
-        let resp = new SetTableIndexResponse();
-        this.request("SetTableIndex", req, resp, cb);
+    EnableRestProxy(req, cb) {
+        let resp = new EnableRestProxyResponse();
+        this.request("EnableRestProxy", req, resp, cb);
     }
 
     /**
@@ -411,6 +426,17 @@ class TcaplusdbClient extends AbstractClient {
     ModifyTableGroupTags(req, cb) {
         let resp = new ModifyTableGroupTagsResponse();
         this.request("ModifyTableGroupTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a global index for a table.
+     * @param {SetTableIndexRequest} req
+     * @param {function(string, SetTableIndexResponse):void} cb
+     * @public
+     */
+    SetTableIndex(req, cb) {
+        let resp = new SetTableIndexResponse();
+        this.request("SetTableIndex", req, resp, cb);
     }
 
     /**

@@ -207,6 +207,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeApplicationData request structure.
+ * @class
+ */
+class DescribeApplicationDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * Data start date in the format of yyyy-mm-dd, such as 2018-07-13
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * Data end date in the format of yyyy-mm-dd, such as 2018-07-13
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+
+    }
+}
+
+/**
  * Voice messaging usage statistics
  * @class
  */
@@ -412,6 +454,190 @@ class VoiceMessageConf extends  AbstractModel {
 }
 
 /**
+ * Application statistics
+ * @class
+ */
+class ApplicationDataStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * DAU data
+         * @type {number || null}
+         */
+        this.DauDataNum = null;
+
+        /**
+         * DAU in Chinese mainland
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DauDataMainland = null;
+
+        /**
+         * DAU outside Chinese mainland
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DauDataOversea = null;
+
+        /**
+         * Total DAU
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DauDataSum = null;
+
+        /**
+         * Number of voice chat metrics
+         * @type {number || null}
+         */
+        this.DurationDataNum = null;
+
+        /**
+         * Duration of voice chat in Chinese mainland in minutes
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DurationDataMainland = null;
+
+        /**
+         * Duration of voice chat outside Chinese mainland in minutes
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DurationDataOversea = null;
+
+        /**
+         * Total duration of voice chat in minutes
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DurationDataSum = null;
+
+        /**
+         * PCU data
+         * @type {number || null}
+         */
+        this.PcuDataNum = null;
+
+        /**
+         * PCU in Chinese mainland
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.PcuDataMainland = null;
+
+        /**
+         * PCU outside Chinese mainland
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.PcuDataOversea = null;
+
+        /**
+         * Total PCU
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.PcuDataSum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.DauDataNum = 'DauDataNum' in params ? params.DauDataNum : null;
+
+        if (params.DauDataMainland) {
+            this.DauDataMainland = new Array();
+            for (let z in params.DauDataMainland) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DauDataMainland[z]);
+                this.DauDataMainland.push(obj);
+            }
+        }
+
+        if (params.DauDataOversea) {
+            this.DauDataOversea = new Array();
+            for (let z in params.DauDataOversea) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DauDataOversea[z]);
+                this.DauDataOversea.push(obj);
+            }
+        }
+
+        if (params.DauDataSum) {
+            this.DauDataSum = new Array();
+            for (let z in params.DauDataSum) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DauDataSum[z]);
+                this.DauDataSum.push(obj);
+            }
+        }
+        this.DurationDataNum = 'DurationDataNum' in params ? params.DurationDataNum : null;
+
+        if (params.DurationDataMainland) {
+            this.DurationDataMainland = new Array();
+            for (let z in params.DurationDataMainland) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DurationDataMainland[z]);
+                this.DurationDataMainland.push(obj);
+            }
+        }
+
+        if (params.DurationDataOversea) {
+            this.DurationDataOversea = new Array();
+            for (let z in params.DurationDataOversea) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DurationDataOversea[z]);
+                this.DurationDataOversea.push(obj);
+            }
+        }
+
+        if (params.DurationDataSum) {
+            this.DurationDataSum = new Array();
+            for (let z in params.DurationDataSum) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DurationDataSum[z]);
+                this.DurationDataSum.push(obj);
+            }
+        }
+        this.PcuDataNum = 'PcuDataNum' in params ? params.PcuDataNum : null;
+
+        if (params.PcuDataMainland) {
+            this.PcuDataMainland = new Array();
+            for (let z in params.PcuDataMainland) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.PcuDataMainland[z]);
+                this.PcuDataMainland.push(obj);
+            }
+        }
+
+        if (params.PcuDataOversea) {
+            this.PcuDataOversea = new Array();
+            for (let z in params.PcuDataOversea) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.PcuDataOversea[z]);
+                this.PcuDataOversea.push(obj);
+            }
+        }
+
+        if (params.PcuDataSum) {
+            this.PcuDataSum = new Array();
+            for (let z in params.PcuDataSum) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.PcuDataSum[z]);
+                this.PcuDataSum.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Gets application usage statistics output parameters
  * @class
  */
@@ -443,6 +669,46 @@ class DescribeAppStatisticsResponse extends  AbstractModel {
                 this.AppStatistics.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeApplicationData response structure.
+ * @class
+ */
+class DescribeApplicationDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application statistics
+         * @type {ApplicationDataStatistics || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new ApplicationDataStatistics();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -520,6 +786,41 @@ class VoiceFilterStatisticsItem extends  AbstractModel {
             return;
         }
         this.Duration = 'Duration' in params ? params.Duration : null;
+
+    }
+}
+
+/**
+ * Usage data
+ * @class
+ */
+class StatisticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Date in the format of yyyy-mm-dd, such as 2018-07-13
+         * @type {string || null}
+         */
+        this.StatDate = null;
+
+        /**
+         * Statistics
+         * @type {number || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StatDate = 'StatDate' in params ? params.StatDate : null;
+        this.Data = 'Data' in params ? params.Data : null;
 
     }
 }
@@ -1250,14 +1551,18 @@ module.exports = {
     AppStatisticsItem: AppStatisticsItem,
     ModifyAppStatusRequest: ModifyAppStatusRequest,
     DescribeScanResultListResponse: DescribeScanResultListResponse,
+    DescribeApplicationDataRequest: DescribeApplicationDataRequest,
     VoiceMessageStatisticsItem: VoiceMessageStatisticsItem,
     DescribeScanResultListRequest: DescribeScanResultListRequest,
     RealTimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem,
     Tag: Tag,
     VoiceMessageConf: VoiceMessageConf,
+    ApplicationDataStatistics: ApplicationDataStatistics,
     DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
+    DescribeApplicationDataResponse: DescribeApplicationDataResponse,
     Task: Task,
     VoiceFilterStatisticsItem: VoiceFilterStatisticsItem,
+    StatisticsItem: StatisticsItem,
     DescribeScanResult: DescribeScanResult,
     ScanDetail: ScanDetail,
     CreateAppRequest: CreateAppRequest,

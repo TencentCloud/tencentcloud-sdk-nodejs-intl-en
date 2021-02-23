@@ -8321,7 +8321,10 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
         this.Height = null;
 
         /**
-         * 
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
          * @type {string || null}
          */
         this.RepeatType = null;
@@ -11298,7 +11301,10 @@ class ImageWatermarkTemplate extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
          * @type {string || null}
          */
         this.RepeatType = null;
@@ -12846,13 +12852,19 @@ class AnimatedGraphicTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Start time of animated image in video in seconds.
+         * Start time offset of an animated image in the video, in seconds.
+<li>If this parameter is left empty or set to 0, the animated image will start at the same time as the video.</li>
+<li>If this parameter is set to a positive number (n for example), the animated image will start at the nth second of the video.</li>
+<li>If this parameter is set to a negative number (-n for example), the animated image will start at the nth second before the end of the video.</li>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time of animated image in video in seconds.
+         * End time offset of an animated image in the video, in seconds.
+<li>If this parameter is left empty or set to 0, the animated image will end at the same time as the video.</li>
+<li>If this parameter is set to a positive number (n for example), the animated image will end at the nth second of the video.</li>
+<li>If this parameter is set to a negative number (-n for example), the animated image will end at the nth second before the end of the video.</li>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -15190,7 +15202,10 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
          * @type {string || null}
          */
         this.RepeatType = null;

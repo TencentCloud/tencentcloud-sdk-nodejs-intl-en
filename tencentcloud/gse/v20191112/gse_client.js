@@ -17,40 +17,53 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const GameProperty = models.GameProperty;
+const FleetAttributes = models.FleetAttributes;
 const UpdateGameServerSessionResponse = models.UpdateGameServerSessionResponse;
+const InboundPermission = models.InboundPermission;
 const DescribeGameServerSessionsResponse = models.DescribeGameServerSessionsResponse;
 const GetInstanceAccessResponse = models.GetInstanceAccessResponse;
 const JoinGameServerSessionRequest = models.JoinGameServerSessionRequest;
 const DescribePlayerSessionsResponse = models.DescribePlayerSessionsResponse;
+const UpdateBucketCORSOptResponse = models.UpdateBucketCORSOptResponse;
 const PlayerLatency = models.PlayerLatency;
+const ServerProcesse = models.ServerProcesse;
 const StopGameServerSessionPlacementRequest = models.StopGameServerSessionPlacementRequest;
+const CopyFleetRequest = models.CopyFleetRequest;
+const CopyFleetResponse = models.CopyFleetResponse;
 const GetInstanceAccessRequest = models.GetInstanceAccessRequest;
 const DescribeGameServerSessionsRequest = models.DescribeGameServerSessionsRequest;
 const UpdateGameServerSessionRequest = models.UpdateGameServerSessionRequest;
-const DescribePlayerSessionsRequest = models.DescribePlayerSessionsRequest;
+const DiskInfo = models.DiskInfo;
 const StartGameServerSessionPlacementResponse = models.StartGameServerSessionPlacementResponse;
 const Credentials = models.Credentials;
 const GetGameServerSessionLogUrlRequest = models.GetGameServerSessionLogUrlRequest;
 const CreateGameServerSessionResponse = models.CreateGameServerSessionResponse;
-const DescribeGameServerSessionDetailsResponse = models.DescribeGameServerSessionDetailsResponse;
+const DescribePlayerSessionsRequest = models.DescribePlayerSessionsRequest;
+const UpdateBucketCORSOptRequest = models.UpdateBucketCORSOptRequest;
+const RuntimeConfiguration = models.RuntimeConfiguration;
 const JoinGameServerSessionResponse = models.JoinGameServerSessionResponse;
 const DesiredPlayerSession = models.DesiredPlayerSession;
 const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse;
 const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessionPlacementRequest;
+const SearchGameServerSessionsRequest = models.SearchGameServerSessionsRequest;
 const PlacedPlayerSession = models.PlacedPlayerSession;
 const GameServerSessionPlacement = models.GameServerSessionPlacement;
 const JoinGameServerSessionBatchRequest = models.JoinGameServerSessionBatchRequest;
 const PlayerSession = models.PlayerSession;
 const CreateGameServerSessionRequest = models.CreateGameServerSessionRequest;
 const GetGameServerSessionLogUrlResponse = models.GetGameServerSessionLogUrlResponse;
+const UpdateBucketAccelerateOptRequest = models.UpdateBucketAccelerateOptRequest;
 const GameServerSessionDetail = models.GameServerSessionDetail;
+const UpdateBucketAccelerateOptResponse = models.UpdateBucketAccelerateOptResponse;
 const DescribeGameServerSessionDetailsRequest = models.DescribeGameServerSessionDetailsRequest;
 const StartGameServerSessionPlacementRequest = models.StartGameServerSessionPlacementRequest;
 const GameServerSession = models.GameServerSession;
+const DescribeGameServerSessionDetailsResponse = models.DescribeGameServerSessionDetailsResponse;
 const DescribeGameServerSessionPlacementResponse = models.DescribeGameServerSessionPlacementResponse;
+const Tag = models.Tag;
 const JoinGameServerSessionBatchResponse = models.JoinGameServerSessionBatchResponse;
 const PlayerDataMap = models.PlayerDataMap;
-const SearchGameServerSessionsRequest = models.SearchGameServerSessionsRequest;
+const ResourceCreationLimitPolicy = models.ResourceCreationLimitPolicy;
 const StopGameServerSessionPlacementResponse = models.StopGameServerSessionPlacementResponse;
 const InstanceAccess = models.InstanceAccess;
 
@@ -66,6 +79,17 @@ class GseClient extends AbstractClient {
     }
     
     /**
+     * This API (UpdateBucketCORSOpt) is used to configure CORS for COS.
+     * @param {UpdateBucketCORSOptRequest} req
+     * @param {function(string, UpdateBucketCORSOptResponse):void} cb
+     * @public
+     */
+    UpdateBucketCORSOpt(req, cb) {
+        let resp = new UpdateBucketCORSOptResponse();
+        this.request("UpdateBucketCORSOpt", req, resp, cb);
+    }
+
+    /**
      * This API is used to update a game server session.
      * @param {UpdateGameServerSessionRequest} req
      * @param {function(string, UpdateGameServerSessionResponse):void} cb
@@ -77,14 +101,14 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * This API is used to stop placing a game server session.
-     * @param {StopGameServerSessionPlacementRequest} req
-     * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
+     * This API is used to replicate server fleet.
+     * @param {CopyFleetRequest} req
+     * @param {function(string, CopyFleetResponse):void} cb
      * @public
      */
-    StopGameServerSessionPlacement(req, cb) {
-        let resp = new StopGameServerSessionPlacementResponse();
-        this.request("StopGameServerSessionPlacement", req, resp, cb);
+    CopyFleet(req, cb) {
+        let resp = new CopyFleetResponse();
+        this.request("CopyFleet", req, resp, cb);
     }
 
     /**
@@ -195,6 +219,28 @@ class GseClient extends AbstractClient {
     SearchGameServerSessions(req, cb) {
         let resp = new SearchGameServerSessionsResponse();
         this.request("SearchGameServerSessions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop placing a game server session.
+     * @param {StopGameServerSessionPlacementRequest} req
+     * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
+     * @public
+     */
+    StopGameServerSessionPlacement(req, cb) {
+        let resp = new StopGameServerSessionPlacementResponse();
+        this.request("StopGameServerSessionPlacement", req, resp, cb);
+    }
+
+    /**
+     * This API (UpdateBucketAccelerateOpt) is used to enable COS global acceleration.
+     * @param {UpdateBucketAccelerateOptRequest} req
+     * @param {function(string, UpdateBucketAccelerateOptResponse):void} cb
+     * @public
+     */
+    UpdateBucketAccelerateOpt(req, cb) {
+        let resp = new UpdateBucketAccelerateOptResponse();
+        this.request("UpdateBucketAccelerateOpt", req, resp, cb);
     }
 
     /**

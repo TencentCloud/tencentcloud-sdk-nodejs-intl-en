@@ -20,14 +20,18 @@ const ScanVoiceResponse = models.ScanVoiceResponse;
 const AppStatisticsItem = models.AppStatisticsItem;
 const ModifyAppStatusRequest = models.ModifyAppStatusRequest;
 const DescribeScanResultListResponse = models.DescribeScanResultListResponse;
+const DescribeApplicationDataRequest = models.DescribeApplicationDataRequest;
 const VoiceMessageStatisticsItem = models.VoiceMessageStatisticsItem;
 const DescribeScanResultListRequest = models.DescribeScanResultListRequest;
 const RealTimeSpeechStatisticsItem = models.RealTimeSpeechStatisticsItem;
 const Tag = models.Tag;
 const VoiceMessageConf = models.VoiceMessageConf;
+const ApplicationDataStatistics = models.ApplicationDataStatistics;
 const DescribeAppStatisticsResponse = models.DescribeAppStatisticsResponse;
+const DescribeApplicationDataResponse = models.DescribeApplicationDataResponse;
 const Task = models.Task;
 const VoiceFilterStatisticsItem = models.VoiceFilterStatisticsItem;
+const StatisticsItem = models.StatisticsItem;
 const DescribeScanResult = models.DescribeScanResult;
 const ScanDetail = models.ScanDetail;
 const CreateAppRequest = models.CreateAppRequest;
@@ -63,28 +67,6 @@ class GmeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the status of an application's primary switch.
-     * @param {ModifyAppStatusRequest} req
-     * @param {function(string, ModifyAppStatusResponse):void} cb
-     * @public
-     */
-    ModifyAppStatus(req, cb) {
-        let resp = new ModifyAppStatusResponse();
-        this.request("ModifyAppStatus", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a GME application.
-     * @param {CreateAppRequest} req
-     * @param {function(string, CreateAppResponse):void} cb
-     * @public
-     */
-    CreateApp(req, cb) {
-        let resp = new CreateAppResponse();
-        this.request("CreateApp", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the speech detection result. Up to 100 tasks can be added in the task query list.
 <p style="color:red">If the `Callback` field is not set when a speech detection task is submitted, this API will be needed to get the detection result.</p>
      * @param {DescribeScanResultListRequest} req
@@ -94,6 +76,17 @@ class GmeClient extends AbstractClient {
     DescribeScanResultList(req, cb) {
         let resp = new DescribeScanResultListResponse();
         this.request("DescribeScanResultList", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeApplicationData) is used to query usage data details within 90 days.
+     * @param {DescribeApplicationDataRequest} req
+     * @param {function(string, DescribeApplicationDataResponse):void} cb
+     * @public
+     */
+    DescribeApplicationData(req, cb) {
+        let resp = new DescribeApplicationDataResponse();
+        this.request("DescribeApplicationData", req, resp, cb);
     }
 
     /**
@@ -241,6 +234,28 @@ class GmeClient extends AbstractClient {
     ScanVoice(req, cb) {
         let resp = new ScanVoiceResponse();
         this.request("ScanVoice", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a GME application.
+     * @param {CreateAppRequest} req
+     * @param {function(string, CreateAppResponse):void} cb
+     * @public
+     */
+    CreateApp(req, cb) {
+        let resp = new CreateAppResponse();
+        this.request("CreateApp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of an application's primary switch.
+     * @param {ModifyAppStatusRequest} req
+     * @param {function(string, ModifyAppStatusResponse):void} cb
+     * @public
+     */
+    ModifyAppStatus(req, cb) {
+        let resp = new ModifyAppStatusResponse();
+        this.request("ModifyAppStatus", req, resp, cb);
     }
 
 

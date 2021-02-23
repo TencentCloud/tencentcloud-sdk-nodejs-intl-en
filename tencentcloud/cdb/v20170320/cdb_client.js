@@ -64,6 +64,7 @@ const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
 const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
 const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
 const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
+const SwitchDrInstanceToMasterRequest = models.SwitchDrInstanceToMasterRequest;
 const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
 const DrInfo = models.DrInfo;
 const RoGroup = models.RoGroup;
@@ -117,6 +118,7 @@ const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
+const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const StopRollbackResponse = models.StopRollbackResponse;
@@ -133,6 +135,7 @@ const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const BackupItem = models.BackupItem;
 const DatabaseName = models.DatabaseName;
+const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
@@ -176,6 +179,7 @@ const CreateBackupResponse = models.CreateBackupResponse;
 const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
+const SwitchDBInstanceMasterSlaveRequest = models.SwitchDBInstanceMasterSlaveRequest;
 const BackupConfig = models.BackupConfig;
 const DeviceCpuInfo = models.DeviceCpuInfo;
 const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
@@ -245,7 +249,7 @@ const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
 const CreateDeployGroupRequest = models.CreateDeployGroupRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
-const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
+const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -507,7 +511,7 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API (DescribeDatabases) is used to query the information of databases of a TencentDB instance.
+     * This API is used to query the information of databases in a TencentDB instance which must be a source or disaster recovery instance.
      * @param {DescribeDatabasesRequest} req
      * @param {function(string, DescribeDatabasesResponse):void} cb
      * @public
@@ -529,6 +533,17 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
+     * This API is used for source-to-replica switch.
+     * @param {SwitchDBInstanceMasterSlaveRequest} req
+     * @param {function(string, SwitchDBInstanceMasterSlaveResponse):void} cb
+     * @public
+     */
+    SwitchDBInstanceMasterSlave(req, cb) {
+        let resp = new SwitchDBInstanceMasterSlaveResponse();
+        this.request("SwitchDBInstanceMasterSlave", req, resp, cb);
+    }
+
+    /**
      * This API (DisassociateSecurityGroups) is used to unbind security groups from instances in batches.
      * @param {DisassociateSecurityGroupsRequest} req
      * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
@@ -540,7 +555,7 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API (DescribeTables) is used to query the database tables of a TencentDB instance.
+     * This API is used to query the information of database tables in a TencentDB instance. It only supports source or disaster recovery instances.
      * @param {DescribeTablesRequest} req
      * @param {function(string, DescribeTablesResponse):void} cb
      * @public
@@ -866,6 +881,17 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     DescribeBinlogBackupOverview(req, cb) {
         let resp = new DescribeBinlogBackupOverviewResponse();
         this.request("DescribeBinlogBackupOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to promote a disaster recovery instance to source instance. The request parameter `Region` must be the region of the disaster recovery instance.
+     * @param {SwitchDrInstanceToMasterRequest} req
+     * @param {function(string, SwitchDrInstanceToMasterResponse):void} cb
+     * @public
+     */
+    SwitchDrInstanceToMaster(req, cb) {
+        let resp = new SwitchDrInstanceToMasterResponse();
+        this.request("SwitchDrInstanceToMaster", req, resp, cb);
     }
 
     /**

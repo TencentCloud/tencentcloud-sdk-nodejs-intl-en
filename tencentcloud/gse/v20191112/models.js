@@ -52,6 +52,202 @@ class GameProperty extends  AbstractModel {
 }
 
 /**
+ * Service deployment attributes
+ * @class
+ */
+class FleetAttributes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Asset package ID
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Server fleet creation time
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * Description
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Description of server fleet resource
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.FleetArn = null;
+
+        /**
+         * Server fleet ID
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * Server fleet type, which only supports ON_DEMAND now.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.FleetType = null;
+
+        /**
+         * Server type, such as S5.LARGE8
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Server fleet name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Game session protection policy
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.NewGameServerSessionProtectionPolicy = null;
+
+        /**
+         * Operating system type
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.OperatingSystem = null;
+
+        /**
+         * Limit policy of resource creation
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {ResourceCreationLimitPolicy || null}
+         */
+        this.ResourceCreationLimitPolicy = null;
+
+        /**
+         * Statuses: “Create”, “Downloading”, “Verifying”, “Generating”, “Activating”, “Active”, “Exception”, “Deleting”, and “End”.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The status of server fleet when it stopped. If this field is left empty, it means automatic scaling.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.StoppedActions = null;
+
+        /**
+         * Server fleet termination time
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.TerminationTime = null;
+
+        /**
+         * Timeout period of time-limited protection. Value range: 5-1440 minutes. Default value: 60 minutes.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.GameServerSessionProtectionTimeLimit = null;
+
+        /**
+         * Billing status: Unactivated, Activated, Exception, Isolated due to arrears, Terminated, and Unfrozen.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.BillingStatus = null;
+
+        /**
+         * Tag list. Up to 50 tags.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Data disk. It can be SSD disks (CLOUD_SSD) with 100-32000 GB capacity or Premium Cloud Storage disks (CLOUD_PREMIUM) with 10-32000 GB capacity. The increment is 10. 
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<DiskInfo> || null}
+         */
+        this.DataDiskInfo = null;
+
+        /**
+         * System disk. It can be a SSD (CLOUD_SSD) with 100-500 GB capacity or a Premium Cloud Storage disk (CLOUD_PREMIUM) with 50-500 GB capacity. The increment is 1.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {DiskInfo || null}
+         */
+        this.SystemDiskInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.FleetArn = 'FleetArn' in params ? params.FleetArn : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.FleetType = 'FleetType' in params ? params.FleetType : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NewGameServerSessionProtectionPolicy = 'NewGameServerSessionProtectionPolicy' in params ? params.NewGameServerSessionProtectionPolicy : null;
+        this.OperatingSystem = 'OperatingSystem' in params ? params.OperatingSystem : null;
+
+        if (params.ResourceCreationLimitPolicy) {
+            let obj = new ResourceCreationLimitPolicy();
+            obj.deserialize(params.ResourceCreationLimitPolicy)
+            this.ResourceCreationLimitPolicy = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StoppedActions = 'StoppedActions' in params ? params.StoppedActions : null;
+        this.TerminationTime = 'TerminationTime' in params ? params.TerminationTime : null;
+        this.GameServerSessionProtectionTimeLimit = 'GameServerSessionProtectionTimeLimit' in params ? params.GameServerSessionProtectionTimeLimit : null;
+        this.BillingStatus = 'BillingStatus' in params ? params.BillingStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.DataDiskInfo) {
+            this.DataDiskInfo = new Array();
+            for (let z in params.DataDiskInfo) {
+                let obj = new DiskInfo();
+                obj.deserialize(params.DataDiskInfo[z]);
+                this.DataDiskInfo.push(obj);
+            }
+        }
+
+        if (params.SystemDiskInfo) {
+            let obj = new DiskInfo();
+            obj.deserialize(params.SystemDiskInfo)
+            this.SystemDiskInfo = obj;
+        }
+
+    }
+}
+
+/**
  * UpdateGameServerSession response structure.
  * @class
  */
@@ -87,6 +283,55 @@ class UpdateGameServerSessionResponse extends  AbstractModel {
             this.GameServerSession = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Allowed network range.
+ * @class
+ */
+class InboundPermission extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start port number. Minimum value: 1025.
+         * @type {number || null}
+         */
+        this.FromPort = null;
+
+        /**
+         * IP range. Valid range of the input IPv4 addresses in CIDR format; for example, 0.0.0.0.0/0.
+         * @type {string || null}
+         */
+        this.IpRange = null;
+
+        /**
+         * Protocol type: TCP or UDP.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * End port number. Maximum value: 60000.
+         * @type {number || null}
+         */
+        this.ToPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FromPort = 'FromPort' in params ? params.FromPort : null;
+        this.IpRange = 'IpRange' in params ? params.IpRange : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.ToPort = 'ToPort' in params ? params.ToPort : null;
 
     }
 }
@@ -278,6 +523,34 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * UpdateBucketCORSOpt response structure.
+ * @class
+ */
+class UpdateBucketCORSOptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Player latency information
  * @class
  */
@@ -322,6 +595,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Game service process
+ * @class
+ */
+class ServerProcesse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of concurrent processes. Value range of total concurrent processes: 1-50.
+         * @type {number || null}
+         */
+        this.ConcurrentExecutions = null;
+
+        /**
+         * Launch Path. Linux: /local/game/ or Windows: C:\game\. The path length is 1-1024.
+         * @type {string || null}
+         */
+        this.LaunchPath = null;
+
+        /**
+         * Launch parameter. The length is 0-1024.
+         * @type {string || null}
+         */
+        this.Parameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConcurrentExecutions = 'ConcurrentExecutions' in params ? params.ConcurrentExecutions : null;
+        this.LaunchPath = 'LaunchPath' in params ? params.LaunchPath : null;
+        this.Parameters = 'Parameters' in params ? params.Parameters : null;
+
+    }
+}
+
+/**
  * StopGameServerSessionPlacement request structure.
  * @class
  */
@@ -345,6 +660,243 @@ class StopGameServerSessionPlacementRequest extends  AbstractModel {
             return;
         }
         this.PlacementId = 'PlacementId' in params ? params.PlacementId : null;
+
+    }
+}
+
+/**
+ * CopyFleet request structure.
+ * @class
+ */
+class CopyFleetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Server fleet ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * Replica number. It should a value between 1 to the number of the remaining quota. It can be obtained through [Obtaining User Quota](https://intl.cloud.tencent.com/document/product/1165/48732?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.CopyNumber = null;
+
+        /**
+         * Asset package ID
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * Description. The length is 0-100 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Network configuration
+         * @type {Array.<InboundPermission> || null}
+         */
+        this.InboundPermissions = null;
+
+        /**
+         * Server type. It can be obtained through [Obtaining Server Instance Type List](https://intl.cloud.tencent.com/document/product/1165/48732?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Server fleet type, which only supports “ON_DEMAND” type now.
+         * @type {string || null}
+         */
+        this.FleetType = null;
+
+        /**
+         * Server fleet name. The length is 1-50 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Protection policy. Valid values: NoProtection·(no protection), FullProtection (full protection), TimeLimitProtection (time-limited protection)
+         * @type {string || null}
+         */
+        this.NewGameServerSessionProtectionPolicy = null;
+
+        /**
+         * Limit policy of resource creation
+         * @type {ResourceCreationLimitPolicy || null}
+         */
+        this.ResourceCreationLimitPolicy = null;
+
+        /**
+         * Progress configuration
+         * @type {RuntimeConfiguration || null}
+         */
+        this.RuntimeConfiguration = null;
+
+        /**
+         * Timeout period of time-limited protection. Value range: 5-1440 minutes. Default value: 60 minutes. This parameter is valid only when NewGameSessionProtectionPolicy is set as TimeLimitProtection.
+         * @type {number || null}
+         */
+        this.GameServerSessionProtectionTimeLimit = null;
+
+        /**
+         * Whether to select scaling. Valid values: SCALING_SELECTED, SCALING_UNSELECTED. Default value: SCALING_UNSELECTED.
+         * @type {string || null}
+         */
+        this.SelectedScalingType = null;
+
+        /**
+         * Whether to select CCN. Valid values: CCN_SELECTED, CCN_UNSELECTED. Default value: CCN_UNSELECTED.
+         * @type {string || null}
+         */
+        this.SelectedCcnType = null;
+
+        /**
+         * Tag list. Up to 50 tags.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * System disk. It can be a SSD (CLOUD_SSD) with 100-500 GB capacity or a Premium Cloud Storage disk (CLOUD_PREMIUM) with 50-500 GB capacity. The increment is 1.
+         * @type {DiskInfo || null}
+         */
+        this.SystemDiskInfo = null;
+
+        /**
+         * Data disk. It can be SSD disks (CLOUD_SSD) with 100-32000 GB capacity or Premium Cloud Storage disks (CLOUD_PREMIUM) with 10-32000 GB capacity. The increment is 10. 
+         * @type {Array.<DiskInfo> || null}
+         */
+        this.DataDiskInfo = null;
+
+        /**
+         * Whether to select to replicate the timer policy: TIMER_SELECTED or TIMER_UNSELECTED. The default value is TIMER_UNSELECTED.
+         * @type {string || null}
+         */
+        this.SelectedTimerType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.CopyNumber = 'CopyNumber' in params ? params.CopyNumber : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.InboundPermissions) {
+            this.InboundPermissions = new Array();
+            for (let z in params.InboundPermissions) {
+                let obj = new InboundPermission();
+                obj.deserialize(params.InboundPermissions[z]);
+                this.InboundPermissions.push(obj);
+            }
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.FleetType = 'FleetType' in params ? params.FleetType : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NewGameServerSessionProtectionPolicy = 'NewGameServerSessionProtectionPolicy' in params ? params.NewGameServerSessionProtectionPolicy : null;
+
+        if (params.ResourceCreationLimitPolicy) {
+            let obj = new ResourceCreationLimitPolicy();
+            obj.deserialize(params.ResourceCreationLimitPolicy)
+            this.ResourceCreationLimitPolicy = obj;
+        }
+
+        if (params.RuntimeConfiguration) {
+            let obj = new RuntimeConfiguration();
+            obj.deserialize(params.RuntimeConfiguration)
+            this.RuntimeConfiguration = obj;
+        }
+        this.GameServerSessionProtectionTimeLimit = 'GameServerSessionProtectionTimeLimit' in params ? params.GameServerSessionProtectionTimeLimit : null;
+        this.SelectedScalingType = 'SelectedScalingType' in params ? params.SelectedScalingType : null;
+        this.SelectedCcnType = 'SelectedCcnType' in params ? params.SelectedCcnType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.SystemDiskInfo) {
+            let obj = new DiskInfo();
+            obj.deserialize(params.SystemDiskInfo)
+            this.SystemDiskInfo = obj;
+        }
+
+        if (params.DataDiskInfo) {
+            this.DataDiskInfo = new Array();
+            for (let z in params.DataDiskInfo) {
+                let obj = new DiskInfo();
+                obj.deserialize(params.DataDiskInfo[z]);
+                this.DataDiskInfo.push(obj);
+            }
+        }
+        this.SelectedTimerType = 'SelectedTimerType' in params ? params.SelectedTimerType : null;
+
+    }
+}
+
+/**
+ * CopyFleet response structure.
+ * @class
+ */
+class CopyFleetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Server fleet attributes
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<FleetAttributes> || null}
+         */
+        this.FleetAttributes = null;
+
+        /**
+         * The number of server fleets
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FleetAttributes) {
+            this.FleetAttributes = new Array();
+            for (let z in params.FleetAttributes) {
+                let obj = new FleetAttributes();
+                obj.deserialize(params.FleetAttributes[z]);
+                this.FleetAttributes.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -504,48 +1056,24 @@ class UpdateGameServerSessionRequest extends  AbstractModel {
 }
 
 /**
- * DescribePlayerSessions request structure.
+ * Disk storage information
  * @class
  */
-class DescribePlayerSessionsRequest extends  AbstractModel {
+class DiskInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Game server session ID. It should contain 1 to 48 ASCII characters.
+         * Disk type: Premium Cloud Storage (CLOUD_PREMIUM) or SSD (CLOUD_SSD)
          * @type {string || null}
          */
-        this.GameServerSessionId = null;
+        this.DiskType = null;
 
         /**
-         * Maximum number of entries in a single query
+         * System disk: the available disk capacity is 50-500 GB. Data disk: the available disk capacity is 100-32000 GB, and the value is a multiple of 10. When the disk type is SSD (CLOUD_SSD), the minimum capacity is 100 GB.
          * @type {number || null}
          */
-        this.Limit = null;
-
-        /**
-         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
-         * @type {string || null}
-         */
-        this.NextToken = null;
-
-        /**
-         * Player ID. It should contain 1 to 1024 ASCII characters.
-         * @type {string || null}
-         */
-        this.PlayerId = null;
-
-        /**
-         * Player session ID. It should contain 1 to 1024 ASCII characters.
-         * @type {string || null}
-         */
-        this.PlayerSessionId = null;
-
-        /**
-         * Player session status. Valid values: RESERVED, ACTIVE, COMPLETED, TIMEDOUT
-         * @type {string || null}
-         */
-        this.PlayerSessionStatusFilter = null;
+        this.DiskSize = null;
 
     }
 
@@ -556,12 +1084,8 @@ class DescribePlayerSessionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.NextToken = 'NextToken' in params ? params.NextToken : null;
-        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
-        this.PlayerSessionId = 'PlayerSessionId' in params ? params.PlayerSessionId : null;
-        this.PlayerSessionStatusFilter = 'PlayerSessionStatusFilter' in params ? params.PlayerSessionStatusFilter : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
 
     }
 }
@@ -711,32 +1235,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeGameServerSessionDetails response structure.
+ * DescribePlayerSessions request structure.
  * @class
  */
-class DescribeGameServerSessionDetailsResponse extends  AbstractModel {
+class DescribePlayerSessionsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of game server session details
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<GameServerSessionDetail> || null}
+         * Game server session ID. It should contain 1 to 48 ASCII characters.
+         * @type {string || null}
          */
-        this.GameServerSessionDetails = null;
+        this.GameServerSessionId = null;
+
+        /**
+         * Maximum number of entries in a single query
+         * @type {number || null}
+         */
+        this.Limit = null;
 
         /**
          * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
-Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.NextToken = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Player ID. It should contain 1 to 1024 ASCII characters.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PlayerId = null;
+
+        /**
+         * Player session ID. It should contain 1 to 1024 ASCII characters.
+         * @type {string || null}
+         */
+        this.PlayerSessionId = null;
+
+        /**
+         * Player session status. Valid values: RESERVED, ACTIVE, COMPLETED, TIMEDOUT
+         * @type {string || null}
+         */
+        this.PlayerSessionStatusFilter = null;
 
     }
 
@@ -747,17 +1287,118 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
+        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
+        this.PlayerSessionId = 'PlayerSessionId' in params ? params.PlayerSessionId : null;
+        this.PlayerSessionStatusFilter = 'PlayerSessionStatusFilter' in params ? params.PlayerSessionStatusFilter : null;
 
-        if (params.GameServerSessionDetails) {
-            this.GameServerSessionDetails = new Array();
-            for (let z in params.GameServerSessionDetails) {
-                let obj = new GameServerSessionDetail();
-                obj.deserialize(params.GameServerSessionDetails[z]);
-                this.GameServerSessionDetails.push(obj);
+    }
+}
+
+/**
+ * UpdateBucketCORSOpt request structure.
+ * @class
+ */
+class UpdateBucketCORSOptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Allowed access source. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+         * @type {Array.<string> || null}
+         */
+        this.AllowedOrigins = null;
+
+        /**
+         * Allowed HTTP method(s). Multiple methods are allowed, including PUT, GET, POST, and HEAD. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+         * @type {Array.<string> || null}
+         */
+        this.AllowedMethods = null;
+
+        /**
+         * Specifies the custom HTTP request headers that the browser is allowed to include in a CORS request. Wildcard (*) is supported, indicating allowing all headers (recommended). For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+         * @type {Array.<string> || null}
+         */
+        this.AllowedHeaders = null;
+
+        /**
+         * Sets the validity duration for the CORS configuration (in second). For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.MaxAgeSeconds = null;
+
+        /**
+         * CORS response header(s) that can be exposed to the browser, case-insensitive. If this parameter is not specified, the browser can access only simple response headers Cache-Control, Content-Type, Expires, and Last-Modified by default. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+         * @type {Array.<string> || null}
+         */
+        this.ExposeHeaders = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllowedOrigins = 'AllowedOrigins' in params ? params.AllowedOrigins : null;
+        this.AllowedMethods = 'AllowedMethods' in params ? params.AllowedMethods : null;
+        this.AllowedHeaders = 'AllowedHeaders' in params ? params.AllowedHeaders : null;
+        this.MaxAgeSeconds = 'MaxAgeSeconds' in params ? params.MaxAgeSeconds : null;
+        this.ExposeHeaders = 'ExposeHeaders' in params ? params.ExposeHeaders : null;
+
+    }
+}
+
+/**
+ * Runtime configuration
+ * @class
+ */
+class RuntimeConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Game session timeout. Value range: 1-600. Unit: second.
+         * @type {number || null}
+         */
+        this.GameServerSessionActivationTimeoutSeconds = null;
+
+        /**
+         * Maximum number of game sessions. Value range: 1-2,147,483,647.
+         * @type {number || null}
+         */
+        this.MaxConcurrentGameServerSessionActivations = null;
+
+        /**
+         * Service process configuration. There must be at least one service configuration.
+         * @type {Array.<ServerProcesse> || null}
+         */
+        this.ServerProcesses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GameServerSessionActivationTimeoutSeconds = 'GameServerSessionActivationTimeoutSeconds' in params ? params.GameServerSessionActivationTimeoutSeconds : null;
+        this.MaxConcurrentGameServerSessionActivations = 'MaxConcurrentGameServerSessionActivations' in params ? params.MaxConcurrentGameServerSessionActivations : null;
+
+        if (params.ServerProcesses) {
+            this.ServerProcesses = new Array();
+            for (let z in params.ServerProcesses) {
+                let obj = new ServerProcesse();
+                obj.deserialize(params.ServerProcesses[z]);
+                this.ServerProcesses.push(obj);
             }
         }
-        this.NextToken = 'NextToken' in params ? params.NextToken : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -914,6 +1555,111 @@ class DescribeGameServerSessionPlacementRequest extends  AbstractModel {
             return;
         }
         this.PlacementId = 'PlacementId' in params ? params.PlacementId : null;
+
+    }
+}
+
+/**
+ * SearchGameServerSessions request structure.
+ * @class
+ */
+class SearchGameServerSessionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alias ID
+         * @type {string || null}
+         */
+        this.AliasId = null;
+
+        /**
+         * Fleet ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * Maximum number of entries in a single query
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * Search filter expression. Valid values:
+gameServerSessionName: game session name in `String` type
+gameServerSessionId: game session ID in `String` type
+maximumSessions: maximum number of player sessions in `Number` type
+creationTimeMillis: creation time in milliseconds in `Number` type
+playerSessionCount: current number of player sessions in `Number` type
+hasAvailablePlayerSessions: whether there is available player session in `String` type. Valid values: true, false
+gameServerSessionProperties: game session attributes in `String` type
+
+Expressions in `String` type support = and <> for judgment
+Expressions in `Number` type support =, <>, >, >=, <, and <= for judgment
+
+Example:
+If FilterExpression takes the value:
+playerSessionCount>=2 AND hasAvailablePlayerSessions=true"
+It means searching for game sessions that have at least two players and have player sessions available.
+If FilterExpression takes the value:
+gameServerSessionProperties.K1 = 'V1' AND gameServerSessionProperties.K2 = 'V2' OR gameServerSessionProperties.K3 = 'V3'
+
+it means
+searching for game sessions that meets the following game server session attributes
+{
+    "GameProperties":[
+        {
+            "Key":"K1",
+            "Value":"V1"
+        },
+        {
+            "Key":"K2",
+            "Value":"V2"
+        },
+        {
+            "Key":"K3",
+            "Value":"V3"
+        }
+    ]
+}
+         * @type {string || null}
+         */
+        this.FilterExpression = null;
+
+        /**
+         * Sorting keyword
+Valid values:
+gameServerSessionName: game session name in `String` type
+gameServerSessionId: game session ID in `String` type
+maximumSessions: maximum number of player sessions in `Number` type
+creationTimeMillis: creation time in milliseconds in `Number` type
+playerSessionCount: current number of player sessions in `Number` type
+         * @type {string || null}
+         */
+        this.SortExpression = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AliasId = 'AliasId' in params ? params.AliasId : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.FilterExpression = 'FilterExpression' in params ? params.FilterExpression : null;
+        this.SortExpression = 'SortExpression' in params ? params.SortExpression : null;
 
     }
 }
@@ -1407,6 +2153,34 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * UpdateBucketAccelerateOpt request structure.
+ * @class
+ */
+class UpdateBucketAccelerateOptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `true`: enable global acceleration; `false`: disable global acceleration
+         * @type {boolean || null}
+         */
+        this.Allowed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Allowed = 'Allowed' in params ? params.Allowed : null;
+
+    }
+}
+
+/**
  * Game server session details (GameServerSessionDetail)
  * @class
  */
@@ -1443,6 +2217,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.GameServerSession = obj;
         }
         this.ProtectionPolicy = 'ProtectionPolicy' in params ? params.ProtectionPolicy : null;
+
+    }
+}
+
+/**
+ * UpdateBucketAccelerateOpt response structure.
+ * @class
+ */
+class UpdateBucketAccelerateOptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1809,6 +2611,58 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * DescribeGameServerSessionDetails response structure.
+ * @class
+ */
+class DescribeGameServerSessionDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of game server session details
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<GameServerSessionDetail> || null}
+         */
+        this.GameServerSessionDetails = null;
+
+        /**
+         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSessionDetails) {
+            this.GameServerSessionDetails = new Array();
+            for (let z in params.GameServerSessionDetails) {
+                let obj = new GameServerSessionDetail();
+                obj.deserialize(params.GameServerSessionDetails[z]);
+                this.GameServerSessionDetails.push(obj);
+            }
+        }
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeGameServerSessionPlacement response structure.
  * @class
  */
@@ -1844,6 +2698,41 @@ class DescribeGameServerSessionPlacementResponse extends  AbstractModel {
             this.GameServerSessionPlacement = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Tag structure
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key. Up to 127 bytes are allowed.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value. Up to 255 bytes are allowed.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1928,90 +2817,24 @@ class PlayerDataMap extends  AbstractModel {
 }
 
 /**
- * SearchGameServerSessions request structure.
+ * Resource creation policy
  * @class
  */
-class SearchGameServerSessionsRequest extends  AbstractModel {
+class ResourceCreationLimitPolicy extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Alias ID
-         * @type {string || null}
-         */
-        this.AliasId = null;
-
-        /**
-         * Fleet ID
-         * @type {string || null}
-         */
-        this.FleetId = null;
-
-        /**
-         * Maximum number of entries in a single query
+         * Creation quantity. Minimum value: 1. Default value: 2.
          * @type {number || null}
          */
-        this.Limit = null;
+        this.NewGameServerSessionsPerCreator = null;
 
         /**
-         * Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
-         * @type {string || null}
+         * Unit time. Minimum value: 1. Default value: 3. Unit: minute.
+         * @type {number || null}
          */
-        this.NextToken = null;
-
-        /**
-         * Search filter expression. Valid values:
-gameServerSessionName: game session name in `String` type
-gameServerSessionId: game session ID in `String` type
-maximumSessions: maximum number of player sessions in `Number` type
-creationTimeMillis: creation time in milliseconds in `Number` type
-playerSessionCount: current number of player sessions in `Number` type
-hasAvailablePlayerSessions: whether there is available player session in `String` type. Valid values: true, false
-gameServerSessionProperties: game session attributes in `String` type
-
-Expressions in `String` type support = and <> for judgment
-Expressions in `Number` type support =, <>, >, >=, <, and <= for judgment
-
-Example:
-If FilterExpression takes the value:
-playerSessionCount>=2 AND hasAvailablePlayerSessions=true"
-It means searching for game sessions that have at least two players and have player sessions available.
-If FilterExpression takes the value:
-gameServerSessionProperties.K1 = 'V1' AND gameServerSessionProperties.K2 = 'V2' OR gameServerSessionProperties.K3 = 'V3'
-
-it means
-searching for game sessions that meets the following game server session attributes
-{
-    "GameProperties":[
-        {
-            "Key":"K1",
-            "Value":"V1"
-        },
-        {
-            "Key":"K2",
-            "Value":"V2"
-        },
-        {
-            "Key":"K3",
-            "Value":"V3"
-        }
-    ]
-}
-         * @type {string || null}
-         */
-        this.FilterExpression = null;
-
-        /**
-         * Sorting keyword
-Valid values:
-gameServerSessionName: game session name in `String` type
-gameServerSessionId: game session ID in `String` type
-maximumSessions: maximum number of player sessions in `Number` type
-creationTimeMillis: creation time in milliseconds in `Number` type
-playerSessionCount: current number of player sessions in `Number` type
-         * @type {string || null}
-         */
-        this.SortExpression = null;
+        this.PolicyPeriodInMinutes = null;
 
     }
 
@@ -2022,12 +2845,8 @@ playerSessionCount: current number of player sessions in `Number` type
         if (!params) {
             return;
         }
-        this.AliasId = 'AliasId' in params ? params.AliasId : null;
-        this.FleetId = 'FleetId' in params ? params.FleetId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.NextToken = 'NextToken' in params ? params.NextToken : null;
-        this.FilterExpression = 'FilterExpression' in params ? params.FilterExpression : null;
-        this.SortExpression = 'SortExpression' in params ? params.SortExpression : null;
+        this.NewGameServerSessionsPerCreator = 'NewGameServerSessionsPerCreator' in params ? params.NewGameServerSessionsPerCreator : null;
+        this.PolicyPeriodInMinutes = 'PolicyPeriodInMinutes' in params ? params.PolicyPeriodInMinutes : null;
 
     }
 }
@@ -2135,40 +2954,53 @@ class InstanceAccess extends  AbstractModel {
 
 module.exports = {
     GameProperty: GameProperty,
+    FleetAttributes: FleetAttributes,
     UpdateGameServerSessionResponse: UpdateGameServerSessionResponse,
+    InboundPermission: InboundPermission,
     DescribeGameServerSessionsResponse: DescribeGameServerSessionsResponse,
     GetInstanceAccessResponse: GetInstanceAccessResponse,
     JoinGameServerSessionRequest: JoinGameServerSessionRequest,
     DescribePlayerSessionsResponse: DescribePlayerSessionsResponse,
+    UpdateBucketCORSOptResponse: UpdateBucketCORSOptResponse,
     PlayerLatency: PlayerLatency,
+    ServerProcesse: ServerProcesse,
     StopGameServerSessionPlacementRequest: StopGameServerSessionPlacementRequest,
+    CopyFleetRequest: CopyFleetRequest,
+    CopyFleetResponse: CopyFleetResponse,
     GetInstanceAccessRequest: GetInstanceAccessRequest,
     DescribeGameServerSessionsRequest: DescribeGameServerSessionsRequest,
     UpdateGameServerSessionRequest: UpdateGameServerSessionRequest,
-    DescribePlayerSessionsRequest: DescribePlayerSessionsRequest,
+    DiskInfo: DiskInfo,
     StartGameServerSessionPlacementResponse: StartGameServerSessionPlacementResponse,
     Credentials: Credentials,
     GetGameServerSessionLogUrlRequest: GetGameServerSessionLogUrlRequest,
     CreateGameServerSessionResponse: CreateGameServerSessionResponse,
-    DescribeGameServerSessionDetailsResponse: DescribeGameServerSessionDetailsResponse,
+    DescribePlayerSessionsRequest: DescribePlayerSessionsRequest,
+    UpdateBucketCORSOptRequest: UpdateBucketCORSOptRequest,
+    RuntimeConfiguration: RuntimeConfiguration,
     JoinGameServerSessionResponse: JoinGameServerSessionResponse,
     DesiredPlayerSession: DesiredPlayerSession,
     SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
     DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
+    SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
     PlacedPlayerSession: PlacedPlayerSession,
     GameServerSessionPlacement: GameServerSessionPlacement,
     JoinGameServerSessionBatchRequest: JoinGameServerSessionBatchRequest,
     PlayerSession: PlayerSession,
     CreateGameServerSessionRequest: CreateGameServerSessionRequest,
     GetGameServerSessionLogUrlResponse: GetGameServerSessionLogUrlResponse,
+    UpdateBucketAccelerateOptRequest: UpdateBucketAccelerateOptRequest,
     GameServerSessionDetail: GameServerSessionDetail,
+    UpdateBucketAccelerateOptResponse: UpdateBucketAccelerateOptResponse,
     DescribeGameServerSessionDetailsRequest: DescribeGameServerSessionDetailsRequest,
     StartGameServerSessionPlacementRequest: StartGameServerSessionPlacementRequest,
     GameServerSession: GameServerSession,
+    DescribeGameServerSessionDetailsResponse: DescribeGameServerSessionDetailsResponse,
     DescribeGameServerSessionPlacementResponse: DescribeGameServerSessionPlacementResponse,
+    Tag: Tag,
     JoinGameServerSessionBatchResponse: JoinGameServerSessionBatchResponse,
     PlayerDataMap: PlayerDataMap,
-    SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
+    ResourceCreationLimitPolicy: ResourceCreationLimitPolicy,
     StopGameServerSessionPlacementResponse: StopGameServerSessionPlacementResponse,
     InstanceAccess: InstanceAccess,
 

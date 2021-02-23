@@ -17,6 +17,83 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Instance tag information of the alarm policy
+ * @class
+ */
+class TagInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Number of instances
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InstanceSum = null;
+
+        /**
+         * Service type, for example, CVM
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * Region ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Binding status. 2: bound; 1: binding
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BindingStatus = null;
+
+        /**
+         * Tag status. 2: existent; 1: nonexistent
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TagStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.InstanceSum = 'InstanceSum' in params ? params.InstanceSum : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.BindingStatus = 'BindingStatus' in params ? params.BindingStatus : null;
+        this.TagStatus = 'TagStatus' in params ? params.TagStatus : null;
+
+    }
+}
+
+/**
  * DescribePolicyConditionList.ConfigManual
  * @class
  */
@@ -2626,6 +2703,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.OriginId = null;
 
+        /**
+         * Tag
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TagInstance> || null}
+         */
+        this.TagInstances = null;
+
     }
 
     /**
@@ -2694,6 +2778,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InstanceGroupName = 'InstanceGroupName' in params ? params.InstanceGroupName : null;
         this.RuleType = 'RuleType' in params ? params.RuleType : null;
         this.OriginId = 'OriginId' in params ? params.OriginId : null;
+
+        if (params.TagInstances) {
+            this.TagInstances = new Array();
+            for (let z in params.TagInstances) {
+                let obj = new TagInstance();
+                obj.deserialize(params.TagInstances[z]);
+                this.TagInstances.push(obj);
+            }
+        }
 
     }
 }
@@ -5300,6 +5393,13 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.GroupInfo = null;
 
+        /**
+         * Display name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
     }
 
     /**
@@ -5353,6 +5453,7 @@ Note: This field may return null, indicating that no valid value was found.
                 this.GroupInfo.push(obj);
             }
         }
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
 
     }
 }
@@ -5702,6 +5803,12 @@ class DescribeAlarmPoliciesRequest extends  AbstractModel {
          */
         this.Enable = null;
 
+        /**
+         * Indicates whether the notification rule is configured. 1: not configured; 0: configured
+         * @type {number || null}
+         */
+        this.NotBindingNoticeRule = null;
+
     }
 
     /**
@@ -5727,6 +5834,7 @@ class DescribeAlarmPoliciesRequest extends  AbstractModel {
         this.NoticeIds = 'NoticeIds' in params ? params.NoticeIds : null;
         this.RuleTypes = 'RuleTypes' in params ? params.RuleTypes : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
+        this.NotBindingNoticeRule = 'NotBindingNoticeRule' in params ? params.NotBindingNoticeRule : null;
 
     }
 }
@@ -8884,6 +8992,7 @@ class BindingPolicyObjectResponse extends  AbstractModel {
 }
 
 module.exports = {
+    TagInstance: TagInstance,
     DescribePolicyConditionListConfigManual: DescribePolicyConditionListConfigManual,
     ModifyAlarmPolicyNoticeResponse: ModifyAlarmPolicyNoticeResponse,
     ModifyAlarmPolicyInfoRequest: ModifyAlarmPolicyInfoRequest,

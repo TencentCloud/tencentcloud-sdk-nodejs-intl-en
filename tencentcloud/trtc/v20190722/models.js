@@ -159,6 +159,89 @@ class DescribeAbnormalEventRequest extends  AbstractModel {
 }
 
 /**
+ * StartMCUMixTranscodeByStrRoomId request structure.
+ * @class
+ */
+class StartMCUMixTranscodeByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `SDKAppId` of TRTC
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Room ID in string type
+         * @type {string || null}
+         */
+        this.StrRoomId = null;
+
+        /**
+         * On-Cloud MixTranscoding output parameters
+         * @type {OutputParams || null}
+         */
+        this.OutputParams = null;
+
+        /**
+         * On-Cloud MixTranscoding output encoding parameters
+         * @type {EncodeParams || null}
+         */
+        this.EncodeParams = null;
+
+        /**
+         * On-Cloud MixTranscoding output layout parameters
+         * @type {LayoutParams || null}
+         */
+        this.LayoutParams = null;
+
+        /**
+         * Relayed push parameters of a non-Tencent Cloud CDN
+         * @type {PublishCdnParams || null}
+         */
+        this.PublishCdnParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
+
+        if (params.OutputParams) {
+            let obj = new OutputParams();
+            obj.deserialize(params.OutputParams)
+            this.OutputParams = obj;
+        }
+
+        if (params.EncodeParams) {
+            let obj = new EncodeParams();
+            obj.deserialize(params.EncodeParams)
+            this.EncodeParams = obj;
+        }
+
+        if (params.LayoutParams) {
+            let obj = new LayoutParams();
+            obj.deserialize(params.LayoutParams)
+            this.LayoutParams = obj;
+        }
+
+        if (params.PublishCdnParams) {
+            let obj = new PublishCdnParams();
+            obj.deserialize(params.PublishCdnParams)
+            this.PublishCdnParams = obj;
+        }
+
+    }
+}
+
+/**
  * MCU On-Cloud MixTranscoding layout parameters
  * @class
  */
@@ -214,6 +297,12 @@ class LayoutParams extends  AbstractModel {
          */
         this.PlaceHolderMode = null;
 
+        /**
+         * Whether an audio-only stream occupies an image spot, which takes effect in a floating, grid, or screen sharing template. Valid values: 0 (default): when a floating or grid template is used, users sending audio only occupy image spots; when a screen sharing template is used, users (except the user whose screen is shared) sending audio only do not occupy image spots; 1: users sending audio only occupy image spots; 2: users sending audio only do not occupy image spots.
+         * @type {number || null}
+         */
+        this.PureAudioHoldPlaceMode = null;
+
     }
 
     /**
@@ -244,6 +333,7 @@ class LayoutParams extends  AbstractModel {
             }
         }
         this.PlaceHolderMode = 'PlaceHolderMode' in params ? params.PlaceHolderMode : null;
+        this.PureAudioHoldPlaceMode = 'PureAudioHoldPlaceMode' in params ? params.PureAudioHoldPlaceMode : null;
 
     }
 }
@@ -284,6 +374,41 @@ class TimeValue extends  AbstractModel {
 }
 
 /**
+ * DismissRoomByStrRoomId request structure.
+ * @class
+ */
+class DismissRoomByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `SDKAppId` of TRTC
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Room ID
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
  * StopMCUMixTranscode response structure.
  * @class
  */
@@ -307,6 +432,48 @@ class StopMCUMixTranscodeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RemoveUserByStrRoomId request structure.
+ * @class
+ */
+class RemoveUserByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `SDKAppId` of TRTC
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Room ID
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * List of up to 10 users to be removed
+         * @type {Array.<string> || null}
+         */
+        this.UserIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.UserIds = 'UserIds' in params ? params.UserIds : null;
 
     }
 }
@@ -774,6 +941,34 @@ class EncodeParams extends  AbstractModel {
         this.VideoGop = 'VideoGop' in params ? params.VideoGop : null;
         this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
         this.BackgroundImageId = 'BackgroundImageId' in params ? params.BackgroundImageId : null;
+
+    }
+}
+
+/**
+ * RemoveUserByStrRoomId response structure.
+ * @class
+ */
+class RemoveUserByStrRoomIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1288,6 +1483,41 @@ class CreateTroubleInfoResponse extends  AbstractModel {
 }
 
 /**
+ * StopMCUMixTranscodeByStrRoomId request structure.
+ * @class
+ */
+class StopMCUMixTranscodeByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `SDKAppId` of TRTC
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Room ID in string type
+         * @type {string || null}
+         */
+        this.StrRoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
+
+    }
+}
+
+/**
  * Quality data returned by ES
  * @class
  */
@@ -1376,6 +1606,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.AbnormalEventId = 'AbnormalEventId' in params ? params.AbnormalEventId : null;
         this.PeerId = 'PeerId' in params ? params.PeerId : null;
+
+    }
+}
+
+/**
+ * StopMCUMixTranscodeByStrRoomId response structure.
+ * @class
+ */
+class StopMCUMixTranscodeByStrRoomIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1778,6 +2036,34 @@ class SmallVideoLayoutParams extends  AbstractModel {
         this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
         this.LocationX = 'LocationX' in params ? params.LocationX : null;
         this.LocationY = 'LocationY' in params ? params.LocationY : null;
+
+    }
+}
+
+/**
+ * RemoveUser response structure.
+ * @class
+ */
+class RemoveUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2271,10 +2557,10 @@ class RoomState extends  AbstractModel {
 }
 
 /**
- * RemoveUser response structure.
+ * DismissRoomByStrRoomId response structure.
  * @class
  */
-class RemoveUserResponse extends  AbstractModel {
+class DismissRoomByStrRoomIdResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2348,13 +2634,44 @@ class DescribeHistoryScaleResponse extends  AbstractModel {
     }
 }
 
+/**
+ * StartMCUMixTranscodeByStrRoomId response structure.
+ * @class
+ */
+class StartMCUMixTranscodeByStrRoomIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DescribeAbnormalEventResponse: DescribeAbnormalEventResponse,
     RealtimeData: RealtimeData,
     DescribeAbnormalEventRequest: DescribeAbnormalEventRequest,
+    StartMCUMixTranscodeByStrRoomIdRequest: StartMCUMixTranscodeByStrRoomIdRequest,
     LayoutParams: LayoutParams,
     TimeValue: TimeValue,
+    DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
     StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
+    RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
     DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
     DismissRoomResponse: DismissRoomResponse,
     DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
@@ -2363,6 +2680,7 @@ module.exports = {
     DescribeRealtimeNetworkRequest: DescribeRealtimeNetworkRequest,
     DescribeUserInformationResponse: DescribeUserInformationResponse,
     EncodeParams: EncodeParams,
+    RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
     StartMCUMixTranscodeRequest: StartMCUMixTranscodeRequest,
     DescribeRealtimeQualityResponse: DescribeRealtimeQualityResponse,
     StopMCUMixTranscodeRequest: StopMCUMixTranscodeRequest,
@@ -2373,8 +2691,10 @@ module.exports = {
     OutputParams: OutputParams,
     EventMessage: EventMessage,
     CreateTroubleInfoResponse: CreateTroubleInfoResponse,
+    StopMCUMixTranscodeByStrRoomIdRequest: StopMCUMixTranscodeByStrRoomIdRequest,
     QualityData: QualityData,
     AbnormalEvent: AbnormalEvent,
+    StopMCUMixTranscodeByStrRoomIdResponse: StopMCUMixTranscodeByStrRoomIdResponse,
     DescribeRealtimeQualityRequest: DescribeRealtimeQualityRequest,
     ScaleInfomation: ScaleInfomation,
     CreateTroubleInfoRequest: CreateTroubleInfoRequest,
@@ -2383,6 +2703,7 @@ module.exports = {
     DescribeDetailEventResponse: DescribeDetailEventResponse,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
     SmallVideoLayoutParams: SmallVideoLayoutParams,
+    RemoveUserResponse: RemoveUserResponse,
     PresetLayoutConfig: PresetLayoutConfig,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
@@ -2391,7 +2712,8 @@ module.exports = {
     DescribeDetailEventRequest: DescribeDetailEventRequest,
     AbnormalExperience: AbnormalExperience,
     RoomState: RoomState,
-    RemoveUserResponse: RemoveUserResponse,
+    DismissRoomByStrRoomIdResponse: DismissRoomByStrRoomIdResponse,
     DescribeHistoryScaleResponse: DescribeHistoryScaleResponse,
+    StartMCUMixTranscodeByStrRoomIdResponse: StartMCUMixTranscodeByStrRoomIdResponse,
 
 }

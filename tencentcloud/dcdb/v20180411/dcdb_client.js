@@ -40,7 +40,7 @@ const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const TableColumn = models.TableColumn;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
-const ParamDesc = models.ParamDesc;
+const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
@@ -66,6 +66,7 @@ const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const Project = models.Project;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
@@ -78,7 +79,9 @@ const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const DCDBInstanceInfo = models.DCDBInstanceInfo;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
+const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DBParamValue = models.DBParamValue;
 const ParamConstraint = models.ParamConstraint;
@@ -123,6 +126,18 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDatabaseObjects(req, cb) {
         let resp = new DescribeDatabaseObjectsResponse();
         this.request("DescribeDatabaseObjects", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of TencentDB instances. It supports filtering instances by project ID, instance ID, private network address, and instance name.
+If no filter is specified, 10 instances will be returned by default. Up to 100 instances can be returned for a single request.
+     * @param {DescribeDCDBInstancesRequest} req
+     * @param {function(string, DescribeDCDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDCDBInstances(req, cb) {
+        let resp = new DescribeDCDBInstancesResponse();
+        this.request("DescribeDCDBInstances", req, resp, cb);
     }
 
     /**
@@ -180,17 +195,6 @@ Note: accounts with the same username but different hosts are different accounts
     InitDCDBInstances(req, cb) {
         let resp = new InitDCDBInstancesResponse();
         this.request("InitDCDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of accounts of a specified TencentDB instance.
-     * @param {DescribeAccountsRequest} req
-     * @param {function(string, DescribeAccountsResponse):void} cb
-     * @public
-     */
-    DescribeAccounts(req, cb) {
-        let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
     }
 
     /**
@@ -316,6 +320,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to query the project list.
+     * @param {DescribeProjectsRequest} req
+     * @param {function(string, DescribeProjectsResponse):void} cb
+     * @public
+     */
+    DescribeProjects(req, cb) {
+        let resp = new DescribeProjectsResponse();
+        this.request("DescribeProjects", req, resp, cb);
+    }
+
+    /**
      * This API is used to disable public network access for a TencentDB instance, which will make the public IP address inaccessible. The `DescribeDCDBInstances` API will not return the public domain name and port information of the corresponding instance.
      * @param {CloseDBExtranetAccessRequest} req
      * @param {function(string, CloseDBExtranetAccessResponse):void} cb
@@ -327,15 +342,14 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to query the list of TencentDB instances. It supports filtering instances by project ID, instance ID, private network address, and instance name.
-If no filter is specified, 10 instances will be returned by default. Up to 100 instances can be returned for a single request.
-     * @param {DescribeDCDBInstancesRequest} req
-     * @param {function(string, DescribeDCDBInstancesResponse):void} cb
+     * This API is used to query the list of accounts of a specified TencentDB instance.
+     * @param {DescribeAccountsRequest} req
+     * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
      */
-    DescribeDCDBInstances(req, cb) {
-        let resp = new DescribeDCDBInstancesResponse();
-        this.request("DescribeDCDBInstances", req, resp, cb);
+    DescribeAccounts(req, cb) {
+        let resp = new DescribeAccountsResponse();
+        this.request("DescribeAccounts", req, resp, cb);
     }
 
     /**

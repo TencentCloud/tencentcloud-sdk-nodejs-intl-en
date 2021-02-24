@@ -2119,6 +2119,18 @@ class AutoRewriteRequest extends  AbstractModel {
          */
         this.Domains = null;
 
+        /**
+         * Redirection status code. Valid values: 301, 302, and 307.
+         * @type {Array.<number> || null}
+         */
+        this.RewriteCodes = null;
+
+        /**
+         * Whether the matched URL is carried in redirection.
+         * @type {Array.<boolean> || null}
+         */
+        this.TakeUrls = null;
+
     }
 
     /**
@@ -2131,6 +2143,8 @@ class AutoRewriteRequest extends  AbstractModel {
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
+        this.RewriteCodes = 'RewriteCodes' in params ? params.RewriteCodes : null;
+        this.TakeUrls = 'TakeUrls' in params ? params.TakeUrls : null;
 
     }
 }
@@ -2760,11 +2774,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SessionType = null;
 
         /**
-         * Whether a persistent connection is enabled (This parameter can only be configured in HTTP/HTTPS listeners)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether a persistent connection is enabled (1: enabled; 0: disabled). This parameter can only be configured in HTTP/HTTPS listeners.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.KeepaliveEnable = null;
+
+        /**
+         * Only the NAT64 CLB TCP listeners are supported.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Toa = null;
 
     }
 
@@ -2814,6 +2835,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.SessionType = 'SessionType' in params ? params.SessionType : null;
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
+        this.Toa = 'Toa' in params ? params.Toa : null;
 
     }
 }
@@ -5883,6 +5905,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TargetLocationId = null;
 
+        /**
+         * Redirection status code
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RewriteCode = null;
+
+        /**
+         * Whether the matched URL is carried in redirection.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.TakeUrl = null;
+
+        /**
+         * Redirection type. Manual: manual redirection; Auto: automatic redirection.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RewriteType = null;
+
     }
 
     /**
@@ -5894,6 +5937,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.TargetListenerId = 'TargetListenerId' in params ? params.TargetListenerId : null;
         this.TargetLocationId = 'TargetLocationId' in params ? params.TargetLocationId : null;
+        this.RewriteCode = 'RewriteCode' in params ? params.RewriteCode : null;
+        this.TakeUrl = 'TakeUrl' in params ? params.TakeUrl : null;
+        this.RewriteType = 'RewriteType' in params ? params.RewriteType : null;
 
     }
 }
@@ -6245,6 +6291,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Isolation = null;
 
+        /**
+         * List of the security groups bound to the CLB instance.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroup = null;
+
+        /**
+         * Whether the CLB instance is billed by IP.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LoadBalancerPassToTarget = null;
+
     }
 
     /**
@@ -6307,6 +6367,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
         this.TargetWeight = 'TargetWeight' in params ? params.TargetWeight : null;
         this.Isolation = 'Isolation' in params ? params.Isolation : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
+        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
 
     }
 }
@@ -6403,19 +6465,19 @@ class BatchTarget extends  AbstractModel {
         this.Port = null;
 
         /**
-         * CVM instance ID
+         * CVM instance ID. Indicating binding the primary IP of the primary ENI.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * ENI IP
+         * ENI IP or other private IP. This parameter is required for binding a dual-stack IPv6 CVM instance.
          * @type {string || null}
          */
         this.EniIp = null;
 
         /**
-         * Weight of a CVM instance. Value range: [0, 100]. If it is not specified when binding the instance, 10 will be used by default.
+         * CVM instance weight. Value range: [0, 100]. If it is not specified when binding the instance, 10 will be used by default.
          * @type {number || null}
          */
         this.Weight = null;
@@ -7838,6 +7900,24 @@ class RewriteLocationMap extends  AbstractModel {
          */
         this.TargetLocationId = null;
 
+        /**
+         * Redirection status code. Valid values: 301, 302, and 307.
+         * @type {number || null}
+         */
+        this.RewriteCode = null;
+
+        /**
+         * Whether the matched URL is carried in redirection. It is required when configuring `RewriteCode`.
+         * @type {boolean || null}
+         */
+        this.TakeUrl = null;
+
+        /**
+         * Original domain name of redirection, which must be the corresponding domain name of `SourceLocationId`. It is required when configuring `RewriteCode`.
+         * @type {string || null}
+         */
+        this.SourceDomain = null;
+
     }
 
     /**
@@ -7849,6 +7929,9 @@ class RewriteLocationMap extends  AbstractModel {
         }
         this.SourceLocationId = 'SourceLocationId' in params ? params.SourceLocationId : null;
         this.TargetLocationId = 'TargetLocationId' in params ? params.TargetLocationId : null;
+        this.RewriteCode = 'RewriteCode' in params ? params.RewriteCode : null;
+        this.TakeUrl = 'TakeUrl' in params ? params.TakeUrl : null;
+        this.SourceDomain = 'SourceDomain' in params ? params.SourceDomain : null;
 
     }
 }
@@ -8872,6 +8955,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Zones = null;
 
+        /**
+         * Whether it is an NFV CLB instance. No returned information: no; l7nfv: yes.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NfvInfo = null;
+
     }
 
     /**
@@ -8983,6 +9073,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
         this.MixIpTarget = 'MixIpTarget' in params ? params.MixIpTarget : null;
         this.Zones = 'Zones' in params ? params.Zones : null;
+        this.NfvInfo = 'NfvInfo' in params ? params.NfvInfo : null;
 
     }
 }

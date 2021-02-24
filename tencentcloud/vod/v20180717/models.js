@@ -644,8 +644,8 @@ class AudioTrackItem extends  AbstractModel {
 
         /**
          * Source of media material for audio segment, which can be:
-<li>VOD media file ID;</li>
-<li>Download URL of other media files.</li>
+<li>ID of VOD media files</li>
+<li>Download URL of other media files</li>
 Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
          * @type {string || null}
          */
@@ -2937,13 +2937,13 @@ class ComposeMediaRequest extends  AbstractModel {
         this.Canvas = null;
 
         /**
-         * This parameter is used to pass through user request information. `ComposeMediaComplete` callback will return the value of this field. It contains up to 1,000 characters.
+         * Used to pass through user request information. `ComposeMediaComplete` callback will return the value of this parameter. It contains up to 1,000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * ID used for task deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -5626,7 +5626,7 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -6337,7 +6337,7 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -7794,7 +7794,7 @@ class EditMediaRequest extends  AbstractModel {
         this.TasksPriority = null;
 
         /**
-         * ID used for task deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -8993,8 +8993,8 @@ class StickerTrackItem extends  AbstractModel {
 
         /**
          * Source of media material for sticker segment, which can be:
-<li>VOD media file ID;</li>
-<li>Download URL of other media files.</li>
+<li>ID of VOD media files</li>
+<li>Download URL of other media files</li>
 Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
          * @type {string || null}
          */
@@ -10551,7 +10551,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -15543,8 +15543,8 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
 
         /**
          * The list of screenshot time points. “s” and “%” formats are supported:
-<li>When a time point string ends with “s”, its unit is second. For example, “3.5 s” means the 3.5th second of the video;</li>
-<li>When a time point string ends with “%”, it is marked with corresponding percentage of the video’s duration. For example, “10%” means that the time point is at the 10% of the video’s entire duration.</li>
+<li>When a time point string ends with “s”, its unit is second. For example, “3.5s” means the 3.5th second of the video.</li>
+<li>When a time point string ends with “%”, it represents the percentage of the video’s duration. For example, “10%” means that the time point is at the 10% of the video’s entire duration.</li>
          * @type {Array.<string> || null}
          */
         this.ExtTimeOffsetSet = null;
@@ -15812,7 +15812,7 @@ class ApplyUploadRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * Reserved field for special purposes.
+         * Reserved parameter for special purposes.
          * @type {string || null}
          */
         this.ExtInfo = null;
@@ -16190,7 +16190,7 @@ For more information about supported extensions, please see [Media Types](https:
         this.SessionContext = null;
 
         /**
-         * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -24768,7 +24768,7 @@ class VideoTrackItem extends  AbstractModel {
 
         /**
          * Source of media material for video segment, which can be:
-<li>VOD media file ID;</li>
+<li>ID of VOD media files</li>
 <li>Download URL of other media files.</li>
 Note: when a download URL of other media files is used as the material source and access control (such as hotlink protection) is enabled, the URL needs to carry access control parameters (such as hotlink protection signature).
          * @type {string || null}

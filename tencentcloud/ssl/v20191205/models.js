@@ -25,7 +25,7 @@ class ApplyCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -60,7 +60,7 @@ class DeleteCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -88,19 +88,19 @@ class DescribeCertificateOperateLogsResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of logs that meet query conditions.
+         * Total number of logs that meet query conditions
          * @type {number || null}
          */
         this.AllTotal = null;
 
         /**
-         * Number of logs returned for this request.
+         * Number of logs returned for this request
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Certificate operation log list.
+         * Certificate operation log list
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<OperationLog> || null}
          */
@@ -146,7 +146,7 @@ class CommitCertificateInformationRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -174,13 +174,13 @@ class CommitCertificateInformationResponse extends  AbstractModel {
         super();
 
         /**
-         * Order number at the certificate authority
+         * TrustAsia order ID
          * @type {string || null}
          */
         this.OrderId = null;
 
         /**
-         * Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload; `13`: pending information submission for the free certificate.
+         * Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload
          * @type {number || null}
          */
         this.Status = null;
@@ -216,7 +216,7 @@ class ReplaceCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -251,7 +251,7 @@ class DownloadCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -279,7 +279,7 @@ class CancelCertificateOrderRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -307,14 +307,14 @@ class ModifyCertificateProjectResponse extends  AbstractModel {
         super();
 
         /**
-         * List of certificates whose projects were modified successfully.
+         * List of certificates whose projects were modified successfully
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.SuccessCertificates = null;
 
         /**
-         * List of certificates whose projects failed to be modified.
+         * List of certificates whose projects failed to be modified
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -343,7 +343,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Content of the Certificates parameter returned by DescribeCertificates.
+ * Content of the `Certificates` parameter returned by `DescribeCertificates`
  * @class
  */
 class Certificates extends  AbstractModel {
@@ -351,189 +351,189 @@ class Certificates extends  AbstractModel {
         super();
 
         /**
-         * User UIN.
+         * User UIN
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OwnerUin = null;
 
         /**
-         * Project ID.
+         * Project ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * Certificate source.
+         * Certificate source
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.From = null;
 
         /**
-         * Certificate package type. 1: GeoTrust DV SSL CA - G3; 2: TrustAsia TLS RSA CA; 3: Secure Site EV Pro; 4: Secure Site EV; 5: Secure Site OV Pro; 6: Secure Site OV; 7: Secure Site OV wildcard SSL certificate; 8: GeoTrust EV; 9: GeoTrust OV; 10: GeoTrust OV wildcard SSL certificate; 11: TrustAsia DV multi-domain SSL certificate; 12: TrustAsia DV wildcard SSL certificate; 13: TrustAsia OV wildcard SSL certificate (D3); 14: TrustAsia OV SSL certificate (D3); 15: TrustAsia OV multi-domain SSL certificate (D3); 16: TrustAsia EV SSL certificate (D3); 17: TrustAsia EV multi-domain SSL certificate (D3); 18: GlobalSign OV SSL certificate; 19: GlobalSign OV wildcard SSL certificate; 20: GlobalSign EV SSL certificate; 21: TrustAsia OV multi-domain wildcard SSL certificate (D3); 22: GlobalSign OV multi-domain SSL certificate; 23: GlobalSign OV multi-domain wildcard SSL certificate; 24: GlobalSign EV multi-domain SSL certificate.
+         * Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PackageType = null;
 
         /**
-         * Certificate type. CA: client certificate; SVR: server certificate.
+         * Certificate type. `CA`: client certificate; `SVR`: server certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * Issuer.
+         * Issuer
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProductZhName = null;
 
         /**
-         * Primary domain name.
+         * Primary domain name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Alias.
+         * Alias
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * Status value. 0: being reviewed; 1: approved; 2: not approved; 3: expired; 4: DNS resolution record added; 5: OV/EV certificate, information to be submitted; 6: order being canceled; 7: cancelled; 8: information submitted, confirmation letter to be uploaded.
+         * Status value. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: OV/EV certificate, information to be submitted; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Extended information of the certificate.
+         * Extended information of the certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {CertificateExtra || null}
          */
         this.CertificateExtra = null;
 
         /**
-         * Vulnerability scanning status. INACTIVE: not activated; ACTIVE: activated.
+         * Vulnerability scanning status. `INACTIVE`: not activated; `ACTIVE`: activated
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VulnerabilityStatus = null;
 
         /**
-         * Status information.
+         * Status information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusMsg = null;
 
         /**
-         * Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file; EMAIL: verification by email.
+         * Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation; `EMAIL`: email validation
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VerifyType = null;
 
         /**
-         * Time when the certificate takes effect.
+         * Time when the certificate takes effect
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertBeginTime = null;
 
         /**
-         * Time when the certificate expires.
+         * Time when the certificate expires
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertEndTime = null;
 
         /**
-         * Validity period of the certificate (unit: month).
+         * Validity period of the certificate, in months
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ValidityPeriod = null;
 
         /**
-         * Creation time.
+         * Creation time
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InsertTime = null;
 
         /**
-         * Certificate ID.
+         * Certificate ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * Domain names associated with the certificate (including the primary domain name).
+         * Domain names associated with the certificate (including the primary domain name)
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.SubjectAltName = null;
 
         /**
-         * Certificate type name.
+         * Certificate type name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PackageTypeName = null;
 
         /**
-         * Status description.
+         * Status description
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusName = null;
 
         /**
-         * Whether the customer is a VIP customer.
+         * Whether the customer is a VIP customer
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsVip = null;
 
         /**
-         * Whether the certificate is a DV certificate.
+         * Whether the certificate is a DV certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsDv = null;
 
         /**
-         * Whether the certificate is a wildcard certificate.
+         * Whether the certificate is a wildcard certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsWildcard = null;
 
         /**
-         * Whether the vulnerability scanning feature is enabled.
+         * Whether the vulnerability scanning feature is enabled
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsVulnerability = null;
 
         /**
-         * Whether the certificate can be reissued.
+         * Whether the certificate can be reissued
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.RenewAble = null;
 
         /**
-         * Project information.
+         * Project information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {ProjectInfo || null}
          */
@@ -547,7 +547,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BoundResource = null;
 
         /**
-         * Whether the certificate can be deployed.
+         * Whether the certificate can be deployed
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -622,7 +622,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Content of the CertificateExtra parameter. CertificateExtra is an element of Certificates array which is returned by DescribeCertificates.
+ * Content of the `CertificateExtra` parameter. `CertificateExtra` is an element of `Certificates` array which is returned by `DescribeCertificates`.
  * @class
  */
 class CertificateExtra extends  AbstractModel {
@@ -630,35 +630,35 @@ class CertificateExtra extends  AbstractModel {
         super();
 
         /**
-         * Number of domain names which can be associated with the certificate.
+         * Number of domain names which can be associated with the certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DomainNumber = null;
 
         /**
-         * Original certificate ID.
+         * Original certificate ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginCertificateId = null;
 
         /**
-         * Original ID of the new certificate.
+         * Original ID of the new certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ReplacedBy = null;
 
         /**
-         * New ID of the new certificate.
+         * New ID of the new certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ReplacedFor = null;
 
         /**
-         * Certificate ID of the new order.
+         * Certificate ID of the new order
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -691,35 +691,35 @@ class DescribeCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * User UIN.
+         * User UIN
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OwnerUin = null;
 
         /**
-         * Project ID.
+         * Project ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * Certificate source. trustasia: TrustAsia; upload: certificate uploaded by users.
+         * Certificate source. `trustasia`: TrustAsia; `upload`: certificate uploaded by users
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.From = null;
 
         /**
-         * Certificate type. CA: client certificate; SVR: server certificate.
+         * Certificate type. `CA`: client certificate; `SVR`: server certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * Certificate package type. 1: GeoTrust DV SSL CA - G3; 2: TrustAsia TLS RSA CA; 3: Secure Site EV Pro; 4: Secure Site EV; 5: Secure Site OV Pro; 6: Secure Site OV; 7: Secure Site OV wildcard SSL certificate; 8: GeoTrust EV; 9: GeoTrust OV; 10: GeoTrust OV wildcard SSL certificate; 11: TrustAsia DV multi-domain SSL certificate; 12: TrustAsia DV wildcard SSL certificate; 13: TrustAsia OV wildcard SSL certificate (D3); 14: TrustAsia OV SSL certificate (D3); 15: TrustAsia OV multi-domain SSL certificate (D3); 16: TrustAsia EV SSL certificate (D3); 17: TrustAsia EV multi-domain SSL certificate (D3); 18: GlobalSign OV SSL certificate; 19: GlobalSign OV wildcard SSL certificate; 20: GlobalSign EV SSL certificate; 21: TrustAsia OV multi-domain wildcard SSL certificate (D3); 22: GlobalSign OV multi-domain SSL certificate; 23: GlobalSign OV multi-domain wildcard SSL certificate; 24: GlobalSign EV multi-domain SSL certificate.
+         * Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -727,181 +727,181 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Name of the certificate issuer
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProductZhName = null;
 
         /**
-         * Domain name.
+         * Domain name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Alias.
+         * Alias
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * Certificate status. 0: being reviewed; 1: approved; 2: not approved; 3: expired; 4: DNS record added; 5: OV certificate, to be submitted; 6: order being canceled; 7: cancelled; 8: information submitted, confirmation letter to be uploaded; 9: certificate being revoked; 10: revoked; 11: reissuing; 12: revocation confirmation letter to be uploaded.
+         * Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Status information.
+         * Status information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusMsg = null;
 
         /**
-         * Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file; EMAIL: verification by email.
+         * Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation; `EMAIL`: email validation
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VerifyType = null;
 
         /**
-         * Vulnerability scanning status.
+         * Vulnerability scanning status
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VulnerabilityStatus = null;
 
         /**
-         * Time when the certificate takes effect.
+         * Time when the certificate takes effect
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertBeginTime = null;
 
         /**
-         * Time when the certificate expires.
+         * Time when the certificate expires
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertEndTime = null;
 
         /**
-         * Validity period of the certificate (unit: month).
+         * Validity period of the certificate, in months
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ValidityPeriod = null;
 
         /**
-         * Application time.
+         * Application time
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InsertTime = null;
 
         /**
-         * Order ID.
+         * Order ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OrderId = null;
 
         /**
-         * Extended information of the certificate.
+         * Extended information of the certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {CertificateExtra || null}
          */
         this.CertificateExtra = null;
 
         /**
-         * DV authentication information.
+         * DV authentication information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {DvAuthDetail || null}
          */
         this.DvAuthDetail = null;
 
         /**
-         * Vulnerability scanning assessment report.
+         * Vulnerability scanning assessment report
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VulnerabilityReport = null;
 
         /**
-         * Certificate ID.
+         * Certificate ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * Certificate type name.
+         * Certificate type name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PackageTypeName = null;
 
         /**
-         * Status description.
+         * Status description
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusName = null;
 
         /**
-         * Domain names associated with the certificate (including the primary domain name).
+         * Domain names associated with the certificate (including the primary domain name)
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.SubjectAltName = null;
 
         /**
-         * Whether the customer is a VIP customer.
+         * Whether the customer is a VIP customer
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsVip = null;
 
         /**
-         * Whether the certificate is a wildcard certificate.
+         * Whether the certificate is a wildcard certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsWildcard = null;
 
         /**
-         * Whether the certificate is a DV certificate.
+         * Whether the certificate is a DV certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsDv = null;
 
         /**
-         * Whether the vulnerability scanning feature is enabled.
+         * Whether the vulnerability scanning feature is enabled
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsVulnerability = null;
 
         /**
-         * Whether the certificate can be reissued.
+         * Whether the certificate can be reissued
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.RenewAble = null;
 
         /**
-         * Submitted data.
+         * Submitted data
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {SubmittedData || null}
          */
         this.SubmittedData = null;
 
         /**
-         * Whether the certificate can be deployed.
+         * Whether the certificate can be deployed
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -990,7 +990,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Certificate operation logs.
+ * Certificate operation logs
  * @class
  */
 class OperationLog extends  AbstractModel {
@@ -998,13 +998,13 @@ class OperationLog extends  AbstractModel {
         super();
 
         /**
-         * Action performed on logs.
+         * Action performed on logs
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * Time when the action is performed.
+         * Time when the action is performed
          * @type {string || null}
          */
         this.CreatedOn = null;
@@ -1033,7 +1033,7 @@ class UploadCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate content
+         * Public key of the certificate
          * @type {string || null}
          */
         this.CertificatePublicKey = null;
@@ -1045,19 +1045,19 @@ class UploadCertificateRequest extends  AbstractModel {
         this.CertificatePrivateKey = null;
 
         /**
-         * Certificate type. CA: client certificate; SVR: server certificate. The default value is SVR.
+         * Certificate type. `CA`: client certificate; `SVR`: server certificate. The default value is SVR.
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * Alias.
+         * Alias
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * Project ID.
+         * Project ID
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1096,7 +1096,7 @@ class DescribeCertificateDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1159,19 +1159,19 @@ class ApplyCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file.
+         * Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation
          * @type {string || null}
          */
         this.DvAuthMethod = null;
 
         /**
-         * Domain name.
+         * Domain name
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
-         * Project ID.
+         * Project ID
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1183,13 +1183,13 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.PackageType = null;
 
         /**
-         * Email address.
+         * Email address
          * @type {string || null}
          */
         this.ContactEmail = null;
 
         /**
-         * Mobile number.
+         * Mobile number
          * @type {string || null}
          */
         this.ContactPhone = null;
@@ -1213,13 +1213,13 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.CsrKeyParameter = null;
 
         /**
-         * CSR encryption password.
+         * CSR encryption password
          * @type {string || null}
          */
         this.CsrKeyPassword = null;
 
         /**
-         * Alias.
+         * Alias
          * @type {string || null}
          */
         this.Alias = null;
@@ -1264,31 +1264,31 @@ class ReplaceCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * Validation type. `DNS_AUTO`: automatic DNS validation (only available for domains hosted in Tencent Cloud and when the DNS status is OK); `DNS`: manual DNS validation; `FILE`: file validation.
+         * Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation
          * @type {string || null}
          */
         this.ValidType = null;
 
         /**
-         * Type. Original: original certificate CSR; upload: uploaded manually; online: generated online. The default value is original.
+         * Type. `original`: original certificate CSR; `upload`: uploaded manually; `online`: generated online. The default value is original.
          * @type {string || null}
          */
         this.CsrType = null;
 
         /**
-         * CSR content.
+         * CSR content
          * @type {string || null}
          */
         this.CsrContent = null;
 
         /**
-         * Password of the key.
+         * Password of the key
          * @type {string || null}
          */
         this.CsrkeyPassword = null;
@@ -1327,7 +1327,7 @@ class DeleteCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * Deletion result (`true`: deleted successfully; `false`: failed to delete)
+         * Deletion result
          * @type {boolean || null}
          */
         this.DeleteResult = null;
@@ -1354,7 +1354,7 @@ class DeleteCertificateResponse extends  AbstractModel {
 }
 
 /**
- * Content of the DvAuthDetail parameter returned by DescribeCertificates.
+ * Content of the `DvAuthDetail` parameter returned by `DescribeCertificates`
  * @class
  */
 class DvAuthDetail extends  AbstractModel {
@@ -1362,42 +1362,42 @@ class DvAuthDetail extends  AbstractModel {
         super();
 
         /**
-         * DV authentication key.
+         * DV authentication key
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthKey = null;
 
         /**
-         * DV authentication value.
+         * DV authentication value
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthValue = null;
 
         /**
-         * Domain name of the DV authentication value.
+         * Domain name of the DV authentication value
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthDomain = null;
 
         /**
-         * Path of the DV authentication value.
+         * Path of the DV authentication value
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthPath = null;
 
         /**
-         * DV authentication sub-domain name.
+         * DV authentication sub-domain name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthKeySubDomain = null;
 
         /**
-         * DV authentication information.
+         * DV authentication information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DvAuths> || null}
          */
@@ -1439,13 +1439,13 @@ class ModifyCertificateProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * ID list of certificates whose projects need to be modified. A maximum 100 certificate IDs are supported.
+         * ID list of certificates whose projects need to be modified. A maximum of 100 certificate IDs are supported.
          * @type {Array.<string> || null}
          */
         this.CertificateIdList = null;
 
         /**
-         * Project ID.
+         * Project ID
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1466,7 +1466,7 @@ class ModifyCertificateProjectRequest extends  AbstractModel {
 }
 
 /**
- * Returns the content of the `DvAuths` parameter key.
+ * Content of the `DvAuths` parameter
  * @class
  */
 class DvAuths extends  AbstractModel {
@@ -1474,42 +1474,42 @@ class DvAuths extends  AbstractModel {
         super();
 
         /**
-         * DV authentication key.
+         * DV authentication key
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthKey = null;
 
         /**
-         * DV authentication value.
+         * DV authentication value
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthValue = null;
 
         /**
-         * Domain name of the DV authentication value.
+         * Domain name of the DV authentication value
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthDomain = null;
 
         /**
-         * Path of the DV authentication value.
+         * Path of the DV authentication value
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthPath = null;
 
         /**
-         * DV authentication sub-domain name.
+         * DV authentication sub-domain name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DvAuthSubDomain = null;
 
         /**
-         * DV authentication type.
+         * DV authentication type
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1543,13 +1543,13 @@ class ModifyCertificateAliasRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * Alias.
+         * Alias
          * @type {string || null}
          */
         this.Alias = null;
@@ -1578,7 +1578,7 @@ class DescribeCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1598,7 +1598,7 @@ class DescribeCertificateRequest extends  AbstractModel {
 }
 
 /**
- * Content of the ProjectInfo parameter. ProjectInfo is an element of Certificates array which is returned by DescribeCertificates.
+ * Content of the `ProjectInfo` parameter. `ProjectInfo` is an element of `Certificates` array which is returned by `DescribeCertificates`.
  * @class
  */
 class ProjectInfo extends  AbstractModel {
@@ -1606,42 +1606,42 @@ class ProjectInfo extends  AbstractModel {
         super();
 
         /**
-         * Project name.
+         * Project name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProjectName = null;
 
         /**
-         * UIN of the project creator.
+         * UIN of the project creator
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ProjectCreatorUin = null;
 
         /**
-         * Project creation time.
+         * Project creation time
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProjectCreateTime = null;
 
         /**
-         * Brief project information.
+         * Brief project information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProjectResume = null;
 
         /**
-         * User UIN.
+         * User UIN
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.OwnerUin = null;
 
         /**
-         * Project ID.
+         * Project ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1724,7 +1724,7 @@ class CancelCertificateOrderResponse extends  AbstractModel {
         super();
 
         /**
-         * ID of the certificate whose order has been successfully cancelled.
+         * ID of the certificate whose order has been successfully cancelled
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1759,7 +1759,7 @@ class SubmitCertificateInformationResponse extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1794,14 +1794,14 @@ class DescribeCertificatesResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number.
+         * Total number
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List.
+         * List
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Certificates> || null}
          */
@@ -1853,7 +1853,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Content = null;
 
         /**
-         * MIME type. application/zip: ZIP file.
+         * MIME type. `application/zip`: ZIP file
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1890,7 +1890,7 @@ class UploadCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1925,231 +1925,231 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * User UIN.
+         * User UIN
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OwnerUin = null;
 
         /**
-         * Project ID.
+         * Project ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * Certificate source. trustasia: TrustAsia; upload: certificate uploaded by users.
+         * Certificate source. `trustasia`: TrustAsia; `upload`: certificate uploaded by users
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.From = null;
 
         /**
-         * Certificate type. CA: client certificate; SVR: server certificate.
+         * Certificate type. `CA`: client certificate; `SVR`: server certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain; `25` WoTrus DV; `26`: WoTrus DV multi-domain; `27`: WoTrus DV wildcard; `28`: WoTrus OV; `29`: WoTrus OV multi-domain; `30`: WoTrus OV wildcard; `31`: WoTrus EV; `32`: WoTrus EV multi-domain; `33`: DNSPod Chinese Cryptographic DV; `34`: DNSPod Chinese Cryptographic DV multi-domain; `35`: DNSPod Chinese Cryptographic DV wildcard; `37`: DNSPod Chinese Cryptographic OV; `38`: DNSPod Chinese Cryptographic OV multi-domain; `39`: DNSPod Chinese Cryptographic OV wildcard: `40`: DNSPod Chinese Cryptographic EV; `41`: DNSPod Chinese Cryptographic EV multi-domain; `42`: TrustAsia DV wildcard multi-domain.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PackageType = null;
 
         /**
-         * Issuer.
+         * Issuer
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProductZhName = null;
 
         /**
-         * Domain name.
+         * Domain name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Alias.
+         * Alias
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload; `13`: pending information submission for the free certificate.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Certificate status. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: enterprise-grade certificate, pending submission; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload; `9`: revoking certificate; `10`: revoked; `11`: reissuing; `12`: pending revocation confirmation letter upload
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Status information.
+         * Status information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusMsg = null;
 
         /**
-         * Verification type. DNS_AUTO: automatic DNS verification; DNS: manual DNS verification; FILE: verification by file; EMAIL: verification by email.
+         * Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation; `EMAIL`: email validation
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VerifyType = null;
 
         /**
-         * Vulnerability scanning status.
+         * Vulnerability scanning status
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VulnerabilityStatus = null;
 
         /**
-         * Time when the certificate takes effect.
+         * Time when the certificate takes effect
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertBeginTime = null;
 
         /**
-         * Time when the certificate expires.
+         * Time when the certificate expires
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertEndTime = null;
 
         /**
-         * Validity period of the certificate (unit: month).
+         * Validity period of the certificate, in months
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ValidityPeriod = null;
 
         /**
-         * Application time.
+         * Application time
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InsertTime = null;
 
         /**
-         * Order ID.
+         * Order ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OrderId = null;
 
         /**
-         * Extended information of the certificate.
+         * Extended information of the certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {CertificateExtra || null}
          */
         this.CertificateExtra = null;
 
         /**
-         * Private key of the certificate.
+         * Private key of the certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificatePrivateKey = null;
 
         /**
-         * Certificate public key (i.e., certificate content)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Public key of the certificate
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificatePublicKey = null;
 
         /**
-         * DV authentication information.
+         * DV authentication information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {DvAuthDetail || null}
          */
         this.DvAuthDetail = null;
 
         /**
-         * Vulnerability scanning assessment report.
+         * Vulnerability scanning assessment report
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VulnerabilityReport = null;
 
         /**
-         * Certificate ID.
+         * Certificate ID
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * Certificate type name.
+         * Certificate type name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TypeName = null;
 
         /**
-         * Status description.
+         * Status description
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusName = null;
 
         /**
-         * Domain names associated with the certificate (including the primary domain name).
+         * Domain names associated with the certificate (including the primary domain name)
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.SubjectAltName = null;
 
         /**
-         * Whether the customer is a VIP customer.
+         * Whether the customer is a VIP customer
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsVip = null;
 
         /**
-         * Whether the certificate is a wildcard certificate.
+         * Whether the certificate is a wildcard certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsWildcard = null;
 
         /**
-         * Whether the certificate is a DV certificate.
+         * Whether the certificate is a DV certificate
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsDv = null;
 
         /**
-         * Whether the vulnerability scanning feature is enabled.
+         * Whether the vulnerability scanning feature is enabled
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsVulnerability = null;
 
         /**
-         * Submitted data.
+         * Submitted data
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {SubmittedData || null}
          */
         this.SubmittedData = null;
 
         /**
-         * Whether the certificate can be reissued.
+         * Whether the certificate can be reissued
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.RenewAble = null;
 
         /**
-         * Whether the certificate can be deployed.
+         * Whether the certificate can be deployed
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -2248,7 +2248,7 @@ class ModifyCertificateAliasResponse extends  AbstractModel {
         super();
 
         /**
-         * ID of the successfully modified certificate.
+         * ID of the successfully modified certificate
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -2283,157 +2283,157 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         super();
 
         /**
-         * Certificate ID.
+         * Certificate ID
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * CSR generation mode. Online: generated online; parse: uploaded manually.
+         * CSR generation mode. `online`: generated online; `parse`: uploaded manually
          * @type {string || null}
          */
         this.CsrType = null;
 
         /**
-         * Uploaded CSR content.
+         * Uploaded CSR content
          * @type {string || null}
          */
         this.CsrContent = null;
 
         /**
-         * Domain name bound with the certificate.
+         * Domain name bound with the certificate
          * @type {string || null}
          */
         this.CertificateDomain = null;
 
         /**
-         * Uploaded domain name array (can be uploaded for a multi-domain certificate).
+         * Uploaded domain name array (can be uploaded for a multi-domain certificate)
          * @type {Array.<string> || null}
          */
         this.DomainList = null;
 
         /**
-         * Private key password (optional)
+         * Password of the private key
          * @type {string || null}
          */
         this.KeyPassword = null;
 
         /**
-         * Organization name.
+         * Organization name
          * @type {string || null}
          */
         this.OrganizationName = null;
 
         /**
-         * Division name.
+         * Division name
          * @type {string || null}
          */
         this.OrganizationDivision = null;
 
         /**
-         * Detailed address of the organization.
+         * Detailed address of the organization
          * @type {string || null}
          */
         this.OrganizationAddress = null;
 
         /**
-         * Country where the organization is located. For example, CN (China).
+         * Country where the organization is located, for example, CN (China)
          * @type {string || null}
          */
         this.OrganizationCountry = null;
 
         /**
-         * City where the organization is located.
+         * City where the organization is located
          * @type {string || null}
          */
         this.OrganizationCity = null;
 
         /**
-         * Province where the organization is located.
+         * Province where the organization is located
          * @type {string || null}
          */
         this.OrganizationRegion = null;
 
         /**
-         * Postal code of the organization.
+         * Postal code of the organization
          * @type {string || null}
          */
         this.PostalCode = null;
 
         /**
-         * Area code of the fixed-line phone number of the organization.
+         * Area code of the fixed-line phone number of the organization
          * @type {string || null}
          */
         this.PhoneAreaCode = null;
 
         /**
-         * Fixed-line phone number of the organization.
+         * Fixed-line phone number of the organization
          * @type {string || null}
          */
         this.PhoneNumber = null;
 
         /**
-         * Validation type. `DNS_AUTO`: automatic DNS validation (only available for domains hosted in Tencent Cloud and when the DNS status is OK); `DNS`: manual DNS validation; `FILE`: file validation.
+         * Certificate validation method
          * @type {string || null}
          */
         this.VerifyType = null;
 
         /**
-         * First name of the administrator
+         * Last name of the administrator
          * @type {string || null}
          */
         this.AdminFirstName = null;
 
         /**
-         * Last name of the administrator
+         * First name of the administrator
          * @type {string || null}
          */
         this.AdminLastName = null;
 
         /**
-         * Mobile number of the admin.
+         * Mobile number of the administrator
          * @type {string || null}
          */
         this.AdminPhoneNum = null;
 
         /**
-         * Email of the admin.
+         * Email of the administrator
          * @type {string || null}
          */
         this.AdminEmail = null;
 
         /**
-         * Position of the admin.
+         * Position of the administrator
          * @type {string || null}
          */
         this.AdminPosition = null;
 
         /**
-         * First name of the contact
+         * Last name of the contact
          * @type {string || null}
          */
         this.ContactFirstName = null;
 
         /**
-         * Last name of the contact
+         * First name of the contact
          * @type {string || null}
          */
         this.ContactLastName = null;
 
         /**
-         * Email of the contact.
+         * Email of the contact
          * @type {string || null}
          */
         this.ContactEmail = null;
 
         /**
-         * Mobile number of the contact.
+         * Mobile number of the contact
          * @type {string || null}
          */
         this.ContactNumber = null;
 
         /**
-         * Position of the contact.
+         * Position of the contact
          * @type {string || null}
          */
         this.ContactPosition = null;
@@ -2478,7 +2478,7 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
 }
 
 /**
- * Content of the SubmittedData parameter returned by DescribeCertificates.
+ * Content of the `SubmittedData` parameter returned by `DescribeCertificates`
  * @class
  */
 class SubmittedData extends  AbstractModel {
@@ -2486,175 +2486,175 @@ class SubmittedData extends  AbstractModel {
         super();
 
         /**
-         * CSR type. Online: CSR generated online; parse: CSR pasted.
+         * CSR type. `online`: CSR generated online; `parse`: CSR pasted
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CsrType = null;
 
         /**
-         * CSR content.
+         * CSR content
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CsrContent = null;
 
         /**
-         * Domain name information.
+         * Domain name information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertificateDomain = null;
 
         /**
-         * DNS information.
+         * DNS information
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DomainList = null;
 
         /**
-         * Password of the private key.
+         * Password of the private key
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.KeyPassword = null;
 
         /**
-         * Enterprise or unit name.
+         * Enterprise or unit name
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OrganizationName = null;
 
         /**
-         * Division.
+         * Division
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OrganizationDivision = null;
 
         /**
-         * Address.
+         * Address
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OrganizationAddress = null;
 
         /**
-         * Country.
+         * Country
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OrganizationCountry = null;
 
         /**
-         * City.
+         * City
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OrganizationCity = null;
 
         /**
-         * Province.
+         * Province
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OrganizationRegion = null;
 
         /**
-         * Postal code.
+         * Postal code
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PostalCode = null;
 
         /**
-         * Area code of the fixed-line phone number.
+         * Area code of the fixed-line phone number
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PhoneAreaCode = null;
 
         /**
-         * Fixed-line phone number.
+         * Fixed-line phone number
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PhoneNumber = null;
 
         /**
-         * First name of the admin.
+         * First name of the administrator
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AdminFirstName = null;
 
         /**
-         * Last name of the admin.
+         * Last name of the administrator
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AdminLastName = null;
 
         /**
-         * Phone number of the admin.
+         * Phone number of the administrator
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AdminPhoneNum = null;
 
         /**
-         * Email of the admin.
+         * Email of the administrator
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AdminEmail = null;
 
         /**
-         * Position of the admin.
+         * Position of the administrator
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AdminPosition = null;
 
         /**
-         * First name of the contact.
+         * First name of the contact
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ContactFirstName = null;
 
         /**
-         * Last name of the contact.
+         * Last name of the contact
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ContactLastName = null;
 
         /**
-         * Phone number of the contact.
+         * Phone number of the contact
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ContactNumber = null;
 
         /**
-         * Email of the contact.
+         * Email of the contact
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ContactEmail = null;
 
         /**
-         * Position of the contact.
+         * Position of the contact
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ContactPosition = null;
 
         /**
-         * Verification type.
+         * Validation type
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2707,7 +2707,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Pagination offset, starting from 0.
+         * Pagination offset, starting from 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -2719,37 +2719,37 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Keyword for search, which can be a certificate ID, alias, or domain name. For example, a8xHcaIs.
+         * Keyword for search, which can be a certificate ID, alias, or domain name, for example, a8xHcaIs
          * @type {string || null}
          */
         this.SearchKey = null;
 
         /**
-         * Certificate type. CA: client certificate; SVR: server certificate.
+         * Certificate type. `CA`: client certificate; `SVR`: server certificate
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * Project ID.
+         * Project ID
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Sorting by expiration time. DESC: descending; ASC: ascending.
+         * Sorting by expiration time. `DESC`: descending; `ASC`: ascending
          * @type {string || null}
          */
         this.ExpirationSort = null;
 
         /**
-         * Certificate status.
+         * Certificate status
          * @type {Array.<number> || null}
          */
         this.CertificateStatus = null;
 
         /**
-         * Whether the certificate can be deployed. 1: yes; 0: no.
+         * Whether the certificate can be deployed. `1`: yes; `0`: no
          * @type {number || null}
          */
         this.Deployable = null;

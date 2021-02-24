@@ -65,7 +65,7 @@ class SslClient extends AbstractClient {
     }
     
     /**
-     * This API is used to obtain the certificate list.
+     * This API is used to get the certificate list.
      * @param {DescribeCertificatesRequest} req
      * @param {function(string, DescribeCertificatesResponse):void} cb
      * @public
@@ -131,7 +131,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify certificate alias by inputting the certificate ID and new alias.
+     * This API is used to modify a certificate alias by passing in the certificate ID and new alias.
      * @param {ModifyCertificateAliasRequest} req
      * @param {function(string, ModifyCertificateAliasResponse):void} cb
      * @public
@@ -175,7 +175,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain certificate operation logs in the current account.
+     * This API is used to get certificate operation logs in the current account.
      * @param {DescribeCertificateOperateLogsRequest} req
      * @param {function(string, DescribeCertificateOperateLogsResponse):void} cb
      * @public
@@ -186,7 +186,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to submit certificate information. You can call this API to submit the information of a certificate for several times. However, please make sure the submitted information is complete.
+     * This API is used to submit certificate information.
      * @param {SubmitCertificateInformationRequest} req
      * @param {function(string, SubmitCertificateInformationResponse):void} cb
      * @public
@@ -197,7 +197,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain certificate details.
+     * This API is used to get certificate details.
      * @param {DescribeCertificateDetailRequest} req
      * @param {function(string, DescribeCertificateDetailResponse):void} cb
      * @public
@@ -208,7 +208,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain certificate information.
+     * This API is used to get certificate information.
      * @param {DescribeCertificateRequest} req
      * @param {function(string, DescribeCertificateResponse):void} cb
      * @public

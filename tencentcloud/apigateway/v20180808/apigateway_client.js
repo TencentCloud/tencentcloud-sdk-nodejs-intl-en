@@ -821,7 +821,7 @@ Each service in API Gateway provides a default domain name for users to call. If
     }
 
     /**
-     * This API is used to query the details of an API deployed in API Gateway.
+     * This API (`DescribeApi`) is used to query the details of the APIs users manage via Tencent Cloud API Gateway.
      * @param {DescribeApiRequest} req
      * @param {function(string, DescribeApiResponse):void} cb
      * @public

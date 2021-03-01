@@ -165,6 +165,34 @@ class CreateDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * CloseServerlessDBExtranetAccess response structure.
+ * @class
+ */
+class CloseServerlessDBExtranetAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DestroyDBInstance request structure.
  * @class
  */
@@ -945,6 +973,83 @@ class SpecItemInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeProductConfig request structure.
+ * @class
+ */
+class DescribeProductConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * CreateDBInstances response structure.
+ * @class
+ */
+class CreateDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order number list. Each instance corresponds to an order number.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * Bill ID of frozen fees
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * ID set of instances which have been created successfully. The parameter value will be returned only when the billing mode is postpaid.
+         * @type {Array.<string> || null}
+         */
+        this.DBInstanceIdSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RestartDBInstance request structure.
  * @class
  */
@@ -968,48 +1073,6 @@ class RestartDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-
-    }
-}
-
-/**
- * InquiryPriceUpgradeDBInstance response structure.
- * @class
- */
-class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total cost before discount.
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * Actual amount payable
-         * @type {number || null}
-         */
-        this.Price = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.Price = 'Price' in params ? params.Price : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1498,30 +1561,24 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Purchasable specification details in an AZ in a region.
+ * OpenServerlessDBExtranetAccess request structure.
  * @class
  */
-class SpecInfo extends  AbstractModel {
+class OpenServerlessDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region abbreviation, which corresponds to the `Region` field of `RegionSet`
+         * Unique ID of an instance
          * @type {string || null}
          */
-        this.Region = null;
+        this.DBInstanceId = null;
 
         /**
-         * AZ abbreviate, which corresponds to the `Zone` field of `ZoneSet`
+         * Instance name
          * @type {string || null}
          */
-        this.Zone = null;
-
-        /**
-         * Specification details list
-         * @type {Array.<SpecItemInfo> || null}
-         */
-        this.SpecItemInfoList = null;
+        this.DBInstanceName = null;
 
     }
 
@@ -1532,17 +1589,8 @@ class SpecInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-
-        if (params.SpecItemInfoList) {
-            this.SpecItemInfoList = new Array();
-            for (let z in params.SpecItemInfoList) {
-                let obj = new SpecItemInfo();
-                obj.deserialize(params.SpecItemInfoList[z]);
-                this.SpecItemInfoList.push(obj);
-            }
-        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
 
     }
 }
@@ -1844,30 +1892,30 @@ class DescribeDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance response structure.
+ * Purchasable specification details in an AZ in a region.
  * @class
  */
-class UpgradeDBInstanceResponse extends  AbstractModel {
+class SpecInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Transaction name.
+         * Region abbreviation, which corresponds to the `Region` field of `RegionSet`
          * @type {string || null}
          */
-        this.DealName = null;
+        this.Region = null;
 
         /**
-         * Bill ID of frozen fees
+         * AZ abbreviate, which corresponds to the `Zone` field of `ZoneSet`
          * @type {string || null}
          */
-        this.BillId = null;
+        this.Zone = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Specification details list
+         * @type {Array.<SpecItemInfo> || null}
          */
-        this.RequestId = null;
+        this.SpecItemInfoList = null;
 
     }
 
@@ -1878,9 +1926,17 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealName = 'DealName' in params ? params.DealName : null;
-        this.BillId = 'BillId' in params ? params.BillId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.SpecItemInfoList) {
+            this.SpecItemInfoList = new Array();
+            for (let z in params.SpecItemInfoList) {
+                let obj = new SpecItemInfo();
+                obj.deserialize(params.SpecItemInfoList[z]);
+                this.SpecItemInfoList.push(obj);
+            }
+        }
 
     }
 }
@@ -2257,18 +2313,18 @@ class ResetAccountPasswordRequest extends  AbstractModel {
 }
 
 /**
- * DescribeProductConfig request structure.
+ * DescribeOrders request structure.
  * @class
  */
-class DescribeProductConfigRequest extends  AbstractModel {
+class DescribeOrdersRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ name
-         * @type {string || null}
+         * Order name set
+         * @type {Array.<string> || null}
          */
-        this.Zone = null;
+        this.DealNames = null;
 
     }
 
@@ -2279,30 +2335,36 @@ class DescribeProductConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
 
     }
 }
 
 /**
- * CloseDBExtranetAccess request structure.
+ * InquiryPriceUpgradeDBInstance response structure.
  * @class
  */
-class CloseDBExtranetAccessRequest extends  AbstractModel {
+class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of postgres-6r233v55
-         * @type {string || null}
-         */
-        this.DBInstanceId = null;
-
-        /**
-         * Whether to disable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+         * Total cost before discount.
          * @type {number || null}
          */
-        this.IsIpv6 = null;
+        this.OriginalPrice = null;
+
+        /**
+         * Actual amount payable
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2313,8 +2375,9 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3228,10 +3291,80 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * UpgradeDBInstance response structure.
+ * @class
+ */
+class UpgradeDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Transaction name.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * Bill ID of frozen fees
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceName response structure.
  * @class
  */
 class ModifyDBInstanceNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenServerlessDBExtranetAccess response structure.
+ * @class
+ */
+class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3930,18 +4063,24 @@ class DescribeDBInstanceAttributeRequest extends  AbstractModel {
 }
 
 /**
- * DescribeOrders request structure.
+ * CloseServerlessDBExtranetAccess request structure.
  * @class
  */
-class DescribeOrdersRequest extends  AbstractModel {
+class CloseServerlessDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Order name set
-         * @type {Array.<string> || null}
+         * Unique ID of an instance
+         * @type {string || null}
          */
-        this.DealNames = null;
+        this.DBInstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
 
     }
 
@@ -3952,7 +4091,8 @@ class DescribeOrdersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
 
     }
 }
@@ -4075,36 +4215,24 @@ class ModifyAccountRemarkRequest extends  AbstractModel {
 }
 
 /**
- * CreateDBInstances response structure.
+ * CloseDBExtranetAccess request structure.
  * @class
  */
-class CreateDBInstancesResponse extends  AbstractModel {
+class CloseDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Order number list. Each instance corresponds to an order number.
-         * @type {Array.<string> || null}
-         */
-        this.DealNames = null;
-
-        /**
-         * Bill ID of frozen fees
+         * Instance ID in the format of postgres-6r233v55
          * @type {string || null}
          */
-        this.BillId = null;
+        this.DBInstanceId = null;
 
         /**
-         * ID set of instances which have been created successfully. The parameter value will be returned only when the billing mode is postpaid.
-         * @type {Array.<string> || null}
+         * Whether to disable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+         * @type {number || null}
          */
-        this.DBInstanceIdSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.IsIpv6 = null;
 
     }
 
@@ -4115,10 +4243,8 @@ class CreateDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealNames = 'DealNames' in params ? params.DealNames : null;
-        this.BillId = 'BillId' in params ? params.BillId : null;
-        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
 
     }
 }
@@ -4188,6 +4314,7 @@ class Xlog extends  AbstractModel {
 
 module.exports = {
     CreateDBInstancesRequest: CreateDBInstancesRequest,
+    CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
     DestroyDBInstanceRequest: DestroyDBInstanceRequest,
     CreateServerlessDBInstanceRequest: CreateServerlessDBInstanceRequest,
     InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
@@ -4203,8 +4330,9 @@ module.exports = {
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     SpecItemInfo: SpecItemInfo,
+    DescribeProductConfigRequest: DescribeProductConfigRequest,
+    CreateDBInstancesResponse: CreateDBInstancesResponse,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
-    InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     ErrLogDetail: ErrLogDetail,
     ServerlessDBInstance: ServerlessDBInstance,
@@ -4213,7 +4341,7 @@ module.exports = {
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeZonesRequest: DescribeZonesRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
-    SpecInfo: SpecInfo,
+    OpenServerlessDBExtranetAccessRequest: OpenServerlessDBExtranetAccessRequest,
     RegionInfo: RegionInfo,
     DeleteServerlessDBInstanceResponse: DeleteServerlessDBInstanceResponse,
     SlowlogDetail: SlowlogDetail,
@@ -4221,13 +4349,13 @@ module.exports = {
     RestartDBInstanceResponse: RestartDBInstanceResponse,
     SetAutoRenewFlagResponse: SetAutoRenewFlagResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
-    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
+    SpecInfo: SpecInfo,
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
-    DescribeProductConfigRequest: DescribeProductConfigRequest,
-    CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
+    DescribeOrdersRequest: DescribeOrdersRequest,
+    InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     InitDBInstancesResponse: InitDBInstancesResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     ServerlessDBAccount: ServerlessDBAccount,
@@ -4246,7 +4374,9 @@ module.exports = {
     DBInstanceNetInfo: DBInstanceNetInfo,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
+    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
+    OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     DestroyDBInstanceResponse: DestroyDBInstanceResponse,
     DescribeDBInstanceAttributeResponse: DescribeDBInstanceAttributeResponse,
@@ -4261,11 +4391,11 @@ module.exports = {
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
     DescribeDBInstanceAttributeRequest: DescribeDBInstanceAttributeRequest,
-    DescribeOrdersRequest: DescribeOrdersRequest,
+    CloseServerlessDBExtranetAccessRequest: CloseServerlessDBExtranetAccessRequest,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
-    CreateDBInstancesResponse: CreateDBInstancesResponse,
+    CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     Xlog: Xlog,
 
 }

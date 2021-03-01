@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
+const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
 const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const CreateServerlessDBInstanceRequest = models.CreateServerlessDBInstanceRequest;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
@@ -32,8 +33,9 @@ const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const SpecItemInfo = models.SpecItemInfo;
+const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
+const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
-const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const ErrLogDetail = models.ErrLogDetail;
 const ServerlessDBInstance = models.ServerlessDBInstance;
@@ -42,7 +44,7 @@ const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
-const SpecInfo = models.SpecInfo;
+const OpenServerlessDBExtranetAccessRequest = models.OpenServerlessDBExtranetAccessRequest;
 const RegionInfo = models.RegionInfo;
 const DeleteServerlessDBInstanceResponse = models.DeleteServerlessDBInstanceResponse;
 const SlowlogDetail = models.SlowlogDetail;
@@ -50,13 +52,13 @@ const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
+const SpecInfo = models.SpecInfo;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
-const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
-const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
+const DescribeOrdersRequest = models.DescribeOrdersRequest;
+const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const ServerlessDBAccount = models.ServerlessDBAccount;
@@ -75,7 +77,9 @@ const DBBackup = models.DBBackup;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
@@ -90,11 +94,11 @@ const CreateServerlessDBInstanceResponse = models.CreateServerlessDBInstanceResp
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
-const DescribeOrdersRequest = models.DescribeOrdersRequest;
+const CloseServerlessDBExtranetAccessRequest = models.CloseServerlessDBExtranetAccessRequest;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
-const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
+const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const Xlog = models.Xlog;
 
 
@@ -194,6 +198,17 @@ class PostgresClient extends AbstractClient {
     OpenDBExtranetAccess(req, cb) {
         let resp = new OpenDBExtranetAccessResponse();
         this.request("OpenDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable public network access for a PostgreSQL for Serverless instance.
+     * @param {CloseServerlessDBExtranetAccessRequest} req
+     * @param {function(string, CloseServerlessDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    CloseServerlessDBExtranetAccess(req, cb) {
+        let resp = new CloseServerlessDBExtranetAccessResponse();
+        this.request("CloseServerlessDBExtranetAccess", req, resp, cb);
     }
 
     /**
@@ -381,6 +396,17 @@ class PostgresClient extends AbstractClient {
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable public network access for a PostgreSQL for Serverless instance.
+     * @param {OpenServerlessDBExtranetAccessRequest} req
+     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    OpenServerlessDBExtranetAccess(req, cb) {
+        let resp = new OpenServerlessDBExtranetAccessResponse();
+        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
     }
 
     /**

@@ -3976,7 +3976,7 @@ class CreateInstancesResponse extends  AbstractModel {
         this.DealId = null;
 
         /**
-         * Instance ID (this field is during beta test and is not displayed in some regions)
+         * Instance ID
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -6270,6 +6270,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.MonitorVersion = null;
 
+        /**
+         * The minimum value of the range of maximum connections to the client
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ClientLimitMin = null;
+
+        /**
+         * The maximum value of the range of maximum connections to the client
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ClientLimitMax = null;
+
+        /**
+         * Instance node details
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RedisNodeInfo> || null}
+         */
+        this.NodeSet = null;
+
+        /**
+         * Region where the instance is deployed
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
     }
 
     /**
@@ -6340,6 +6368,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.RemainBandwidthDuration = 'RemainBandwidthDuration' in params ? params.RemainBandwidthDuration : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
+        this.ClientLimitMin = 'ClientLimitMin' in params ? params.ClientLimitMin : null;
+        this.ClientLimitMax = 'ClientLimitMax' in params ? params.ClientLimitMax : null;
+
+        if (params.NodeSet) {
+            this.NodeSet = new Array();
+            for (let z in params.NodeSet) {
+                let obj = new RedisNodeInfo();
+                obj.deserialize(params.NodeSet[z]);
+                this.NodeSet.push(obj);
+            }
+        }
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }

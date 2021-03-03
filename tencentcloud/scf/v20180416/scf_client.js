@@ -26,11 +26,13 @@ const GetReservedConcurrencyConfigResponse = models.GetReservedConcurrencyConfig
 const RoutingConfig = models.RoutingConfig;
 const DeleteProvisionedConcurrencyConfigResponse = models.DeleteProvisionedConcurrencyConfigResponse;
 const VersionWeight = models.VersionWeight;
+const TimeInterval = models.TimeInterval;
 const LayerVersionInfo = models.LayerVersionInfo;
 const PutProvisionedConcurrencyConfigResponse = models.PutProvisionedConcurrencyConfigResponse;
 const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse;
 const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
 const PublicNetConfigIn = models.PublicNetConfigIn;
+const DeleteProvisionedConcurrencyConfigRequest = models.DeleteProvisionedConcurrencyConfigRequest;
 const DeleteReservedConcurrencyConfigResponse = models.DeleteReservedConcurrencyConfigResponse;
 const GetAliasResponse = models.GetAliasResponse;
 const UpdateAliasResponse = models.UpdateAliasResponse;
@@ -46,7 +48,7 @@ const CopyFunctionResponse = models.CopyFunctionResponse;
 const Namespace = models.Namespace;
 const GetFunctionRequest = models.GetFunctionRequest;
 const ListNamespacesRequest = models.ListNamespacesRequest;
-const PutReservedConcurrencyConfigResponse = models.PutReservedConcurrencyConfigResponse;
+const PublishVersionRequest = models.PublishVersionRequest;
 const DeleteAliasRequest = models.DeleteAliasRequest;
 const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
 const GetAliasRequest = models.GetAliasRequest;
@@ -56,7 +58,7 @@ const UpdateFunctionCodeRequest = models.UpdateFunctionCodeRequest;
 const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationRequest;
 const DeleteReservedConcurrencyConfigRequest = models.DeleteReservedConcurrencyConfigRequest;
 const ListTriggersResponse = models.ListTriggersResponse;
-const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
+const TerminateAsyncEventRequest = models.TerminateAsyncEventRequest;
 const ListLayersRequest = models.ListLayersRequest;
 const CopyFunctionRequest = models.CopyFunctionRequest;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
@@ -65,8 +67,10 @@ const CfsConfig = models.CfsConfig;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const ListFunctionsRequest = models.ListFunctionsRequest;
 const CreateTriggerRequest = models.CreateTriggerRequest;
+const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
 const ListLayersResponse = models.ListLayersResponse;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
+const ListAsyncEventsRequest = models.ListAsyncEventsRequest;
 const Result = models.Result;
 const CreateAliasResponse = models.CreateAliasResponse;
 const LogSearchContext = models.LogSearchContext;
@@ -75,8 +79,9 @@ const CreateFunctionRequest = models.CreateFunctionRequest;
 const PutTotalConcurrencyConfigResponse = models.PutTotalConcurrencyConfigResponse;
 const DeleteAliasResponse = models.DeleteAliasResponse;
 const PublishVersionResponse = models.PublishVersionResponse;
-const DeleteProvisionedConcurrencyConfigRequest = models.DeleteProvisionedConcurrencyConfigRequest;
+const AsyncEvent = models.AsyncEvent;
 const Environment = models.Environment;
+const TerminateAsyncEventResponse = models.TerminateAsyncEventResponse;
 const GetFunctionAddressRequest = models.GetFunctionAddressRequest;
 const InvokeResponse = models.InvokeResponse;
 const InvokeRequest = models.InvokeRequest;
@@ -95,7 +100,7 @@ const Code = models.Code;
 const PutTotalConcurrencyConfigRequest = models.PutTotalConcurrencyConfigRequest;
 const UpdateNamespaceRequest = models.UpdateNamespaceRequest;
 const GetLayerVersionResponse = models.GetLayerVersionResponse;
-const PublishVersionRequest = models.PublishVersionRequest;
+const PutReservedConcurrencyConfigResponse = models.PutReservedConcurrencyConfigResponse;
 const FunctionLog = models.FunctionLog;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
 const CfsInsInfo = models.CfsInsInfo;
@@ -117,6 +122,7 @@ const DeleteTriggerResponse = models.DeleteTriggerResponse;
 const DeleteTriggerRequest = models.DeleteTriggerRequest;
 const VpcConfig = models.VpcConfig;
 const GetProvisionedConcurrencyConfigResponse = models.GetProvisionedConcurrencyConfigResponse;
+const ListAsyncEventsResponse = models.ListAsyncEventsResponse;
 const ListNamespacesResponse = models.ListNamespacesResponse;
 const EipConfigOut = models.EipConfigOut;
 const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
@@ -133,6 +139,17 @@ class ScfClient extends AbstractClient {
     }
     
     /**
+     * This API is used to update the configuration of an alias.
+     * @param {UpdateAliasRequest} req
+     * @param {function(string, UpdateAliasResponse):void} cb
+     * @public
+     */
+    UpdateAlias(req, cb) {
+        let resp = new UpdateAliasResponse();
+        this.request("UpdateAlias", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a function based on the input parameters.
      * @param {DeleteFunctionRequest} req
      * @param {function(string, DeleteFunctionResponse):void} cb
@@ -144,14 +161,14 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update the configuration of an alias.
-     * @param {UpdateAliasRequest} req
-     * @param {function(string, UpdateAliasResponse):void} cb
+     * This API is used to terminate a running async function event.
+     * @param {TerminateAsyncEventRequest} req
+     * @param {function(string, TerminateAsyncEventResponse):void} cb
      * @public
      */
-    UpdateAlias(req, cb) {
-        let resp = new UpdateAliasResponse();
-        this.request("UpdateAlias", req, resp, cb);
+    TerminateAsyncEvent(req, cb) {
+        let resp = new TerminateAsyncEventResponse();
+        this.request("TerminateAsyncEvent", req, resp, cb);
     }
 
     /**
@@ -379,6 +396,17 @@ An alias must point to a master version and can point to an additional version a
     ListLayers(req, cb) {
         let resp = new ListLayersResponse();
         this.request("ListLayers", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pull the list of async function events.
+     * @param {ListAsyncEventsRequest} req
+     * @param {function(string, ListAsyncEventsResponse):void} cb
+     * @public
+     */
+    ListAsyncEvents(req, cb) {
+        let resp = new ListAsyncEventsResponse();
+        this.request("ListAsyncEvents", req, resp, cb);
     }
 
     /**

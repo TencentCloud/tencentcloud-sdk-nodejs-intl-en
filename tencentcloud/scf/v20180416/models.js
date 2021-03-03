@@ -496,6 +496,41 @@ class VersionWeight extends  AbstractModel {
 }
 
 /**
+ * Left-closed-right-open time range between the start time and end time in the format of "%Y-%m-%d %H:%M:%S"
+ * @class
+ */
+class TimeInterval extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time (inclusive) in the format of "%Y-%m-%d %H:%M:%S"
+         * @type {string || null}
+         */
+        this.Start = null;
+
+        /**
+         * End time (exclusive) in the format of "%Y-%m-%d %H:%M:%S"
+         * @type {string || null}
+         */
+        this.End = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Start = 'Start' in params ? params.Start : null;
+        this.End = 'End' in params ? params.End : null;
+
+    }
+}
+
+/**
  * Layer version information
  * @class
  */
@@ -700,6 +735,48 @@ class PublicNetConfigIn extends  AbstractModel {
 }
 
 /**
+ * DeleteProvisionedConcurrencyConfig request structure.
+ * @class
+ */
+class DeleteProvisionedConcurrencyConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the function for which to delete the provisioned concurrency
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function version number
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
+         * Function namespace. Default value: `default`
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
  * DeleteReservedConcurrencyConfig response structure.
  * @class
  */
@@ -898,7 +975,9 @@ class GetFunctionLogsRequest extends  AbstractModel {
         super();
 
         /**
-         * Function name
+         * Function name.
+- To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583?from_cn_redirect=1) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
+- After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875?from_cn_redirect=1) to get the best log retrieval experience.
          * @type {string || null}
          */
         this.FunctionName = null;
@@ -1397,18 +1476,30 @@ class ListNamespacesRequest extends  AbstractModel {
 }
 
 /**
- * PutReservedConcurrencyConfig response structure.
+ * PublishVersion request structure.
  * @class
  */
-class PutReservedConcurrencyConfigResponse extends  AbstractModel {
+class PublishVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Name of the released function
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FunctionName = null;
+
+        /**
+         * Function description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Function namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
 
     }
 
@@ -1419,7 +1510,9 @@ class PutReservedConcurrencyConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -2004,18 +2097,30 @@ class ListTriggersResponse extends  AbstractModel {
 }
 
 /**
- * UpdateNamespace response structure.
+ * TerminateAsyncEvent request structure.
  * @class
  */
-class UpdateNamespaceResponse extends  AbstractModel {
+class TerminateAsyncEventRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Function name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FunctionName = null;
+
+        /**
+         * Terminated invocation request ID
+         * @type {string || null}
+         */
+        this.InvokeRequestId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
 
     }
 
@@ -2026,7 +2131,9 @@ class UpdateNamespaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -2455,6 +2562,34 @@ class CreateTriggerRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateNamespace response structure.
+ * @class
+ */
+class UpdateNamespaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListLayers response structure.
  * @class
  */
@@ -2528,6 +2663,121 @@ class DeleteFunctionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListAsyncEvents request structure.
+ * @class
+ */
+class ListAsyncEventsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Filter (function version)
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
+         * Filter (invocation type list)
+         * @type {Array.<string> || null}
+         */
+        this.InvokeType = null;
+
+        /**
+         * Filter (event status list)
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * Filter (left-closed-right-open range of execution start time)
+         * @type {TimeInterval || null}
+         */
+        this.StartTimeInterval = null;
+
+        /**
+         * Filter (left-closed-right-open range of execution end time)
+         * @type {TimeInterval || null}
+         */
+        this.EndTimeInterval = null;
+
+        /**
+         * Valid values: ASC, DESC. Default value: DESC
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Valid values: StartTime, EndTime. Default value: StartTime
+         * @type {string || null}
+         */
+        this.Orderby = null;
+
+        /**
+         * Data offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned. Default value: 20. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter (event invocation request ID)
+         * @type {string || null}
+         */
+        this.InvokeRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.InvokeType = 'InvokeType' in params ? params.InvokeType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.StartTimeInterval) {
+            let obj = new TimeInterval();
+            obj.deserialize(params.StartTimeInterval)
+            this.StartTimeInterval = obj;
+        }
+
+        if (params.EndTimeInterval) {
+            let obj = new TimeInterval();
+            obj.deserialize(params.EndTimeInterval)
+            this.EndTimeInterval = obj;
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.Orderby = 'Orderby' in params ? params.Orderby : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
 
     }
 }
@@ -3147,30 +3397,48 @@ class PublishVersionResponse extends  AbstractModel {
 }
 
 /**
- * DeleteProvisionedConcurrencyConfig request structure.
+ * Async event
  * @class
  */
-class DeleteProvisionedConcurrencyConfigRequest extends  AbstractModel {
+class AsyncEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of the function for which to delete the provisioned concurrency
+         * Invocation request ID
          * @type {string || null}
          */
-        this.FunctionName = null;
+        this.InvokeRequestId = null;
 
         /**
-         * Function version number
+         * Invocation type
+         * @type {string || null}
+         */
+        this.InvokeType = null;
+
+        /**
+         * Function version
          * @type {string || null}
          */
         this.Qualifier = null;
 
         /**
-         * Function namespace. Default value: `default`
+         * Event status
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.Status = null;
+
+        /**
+         * Invocation start time in the format of "%Y-%m-%d %H:%M:%S.%f"
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Invocation end time in the format of "%Y-%m-%d %H:%M:%S.%f"
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -3181,9 +3449,12 @@ class DeleteProvisionedConcurrencyConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
+        this.InvokeType = 'InvokeType' in params ? params.InvokeType : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -3220,6 +3491,34 @@ class Environment extends  AbstractModel {
                 this.Variables.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * TerminateAsyncEvent response structure.
+ * @class
+ */
+class TerminateAsyncEventResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4210,7 +4509,7 @@ class Code extends  AbstractModel {
         super();
 
         /**
-         * COS bucket name
+         * Object bucket name (enter the custom part of the bucket name without `-appid`)
          * @type {string || null}
          */
         this.CosBucketName = null;
@@ -4486,30 +4785,18 @@ Deleted: deleted
 }
 
 /**
- * PublishVersion request structure.
+ * PutReservedConcurrencyConfig response structure.
  * @class
  */
-class PublishVersionRequest extends  AbstractModel {
+class PutReservedConcurrencyConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of the released function
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FunctionName = null;
-
-        /**
-         * Function description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Function namespace
-         * @type {string || null}
-         */
-        this.Namespace = null;
+        this.RequestId = null;
 
     }
 
@@ -4520,9 +4807,7 @@ class PublishVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5145,7 +5430,7 @@ class ListTriggersRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Indicates by which field to sort the returned results. Valid values: AddTime, ModTime. Default value: ModTime
+         * Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time
          * @type {string || null}
          */
         this.OrderBy = null;
@@ -5740,6 +6025,56 @@ class GetProvisionedConcurrencyConfigResponse extends  AbstractModel {
 }
 
 /**
+ * ListAsyncEvents response structure.
+ * @class
+ */
+class ListAsyncEventsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of events that meet the filter
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Async event list
+         * @type {Array.<AsyncEvent> || null}
+         */
+        this.EventList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.EventList) {
+            this.EventList = new Array();
+            for (let z in params.EventList) {
+                let obj = new AsyncEvent();
+                obj.deserialize(params.EventList[z]);
+                this.EventList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListNamespaces response structure.
  * @class
  */
@@ -5864,11 +6199,13 @@ module.exports = {
     RoutingConfig: RoutingConfig,
     DeleteProvisionedConcurrencyConfigResponse: DeleteProvisionedConcurrencyConfigResponse,
     VersionWeight: VersionWeight,
+    TimeInterval: TimeInterval,
     LayerVersionInfo: LayerVersionInfo,
     PutProvisionedConcurrencyConfigResponse: PutProvisionedConcurrencyConfigResponse,
     UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
     PublishLayerVersionResponse: PublishLayerVersionResponse,
     PublicNetConfigIn: PublicNetConfigIn,
+    DeleteProvisionedConcurrencyConfigRequest: DeleteProvisionedConcurrencyConfigRequest,
     DeleteReservedConcurrencyConfigResponse: DeleteReservedConcurrencyConfigResponse,
     GetAliasResponse: GetAliasResponse,
     UpdateAliasResponse: UpdateAliasResponse,
@@ -5884,7 +6221,7 @@ module.exports = {
     Namespace: Namespace,
     GetFunctionRequest: GetFunctionRequest,
     ListNamespacesRequest: ListNamespacesRequest,
-    PutReservedConcurrencyConfigResponse: PutReservedConcurrencyConfigResponse,
+    PublishVersionRequest: PublishVersionRequest,
     DeleteAliasRequest: DeleteAliasRequest,
     ListVersionByFunctionResponse: ListVersionByFunctionResponse,
     GetAliasRequest: GetAliasRequest,
@@ -5894,7 +6231,7 @@ module.exports = {
     UpdateFunctionConfigurationRequest: UpdateFunctionConfigurationRequest,
     DeleteReservedConcurrencyConfigRequest: DeleteReservedConcurrencyConfigRequest,
     ListTriggersResponse: ListTriggersResponse,
-    UpdateNamespaceResponse: UpdateNamespaceResponse,
+    TerminateAsyncEventRequest: TerminateAsyncEventRequest,
     ListLayersRequest: ListLayersRequest,
     CopyFunctionRequest: CopyFunctionRequest,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
@@ -5903,8 +6240,10 @@ module.exports = {
     DeleteNamespaceRequest: DeleteNamespaceRequest,
     ListFunctionsRequest: ListFunctionsRequest,
     CreateTriggerRequest: CreateTriggerRequest,
+    UpdateNamespaceResponse: UpdateNamespaceResponse,
     ListLayersResponse: ListLayersResponse,
     DeleteFunctionResponse: DeleteFunctionResponse,
+    ListAsyncEventsRequest: ListAsyncEventsRequest,
     Result: Result,
     CreateAliasResponse: CreateAliasResponse,
     LogSearchContext: LogSearchContext,
@@ -5913,8 +6252,9 @@ module.exports = {
     PutTotalConcurrencyConfigResponse: PutTotalConcurrencyConfigResponse,
     DeleteAliasResponse: DeleteAliasResponse,
     PublishVersionResponse: PublishVersionResponse,
-    DeleteProvisionedConcurrencyConfigRequest: DeleteProvisionedConcurrencyConfigRequest,
+    AsyncEvent: AsyncEvent,
     Environment: Environment,
+    TerminateAsyncEventResponse: TerminateAsyncEventResponse,
     GetFunctionAddressRequest: GetFunctionAddressRequest,
     InvokeResponse: InvokeResponse,
     InvokeRequest: InvokeRequest,
@@ -5933,7 +6273,7 @@ module.exports = {
     PutTotalConcurrencyConfigRequest: PutTotalConcurrencyConfigRequest,
     UpdateNamespaceRequest: UpdateNamespaceRequest,
     GetLayerVersionResponse: GetLayerVersionResponse,
-    PublishVersionRequest: PublishVersionRequest,
+    PutReservedConcurrencyConfigResponse: PutReservedConcurrencyConfigResponse,
     FunctionLog: FunctionLog,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,
@@ -5955,6 +6295,7 @@ module.exports = {
     DeleteTriggerRequest: DeleteTriggerRequest,
     VpcConfig: VpcConfig,
     GetProvisionedConcurrencyConfigResponse: GetProvisionedConcurrencyConfigResponse,
+    ListAsyncEventsResponse: ListAsyncEventsResponse,
     ListNamespacesResponse: ListNamespacesResponse,
     EipConfigOut: EipConfigOut,
     UpdateFunctionCodeResponse: UpdateFunctionCodeResponse,

@@ -797,6 +797,27 @@ class SubscribeInfo extends  AbstractModel {
          */
         this.SdkConsumedTime = null;
 
+        /**
+         * Tag
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether auto-renewal is enabled. 0: do not enable; 1: enable
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Subscription instance edition. ·`txdts`: legacy data subscription; `kafka`: data subscription in Kafka edition
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubscribeVersion = null;
+
     }
 
     /**
@@ -827,6 +848,17 @@ class SubscribeInfo extends  AbstractModel {
         this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.SdkConsumedTime = 'SdkConsumedTime' in params ? params.SdkConsumedTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.SubscribeVersion = 'SubscribeVersion' in params ? params.SubscribeVersion : null;
 
     }
 }
@@ -1263,6 +1295,20 @@ class DescribeSubscribeConfResponse extends  AbstractModel {
         this.Region = null;
 
         /**
+         * Tags of the subscription
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether auto-renewal is enabled. 0: do not enable, 1: enable
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1309,6 +1355,16 @@ class DescribeSubscribeConfResponse extends  AbstractModel {
         }
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1655,6 +1711,12 @@ class CreateSubscribeRequest extends  AbstractModel {
          */
         this.AutoRenew = null;
 
+        /**
+         * Instance resource tags
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1669,6 +1731,15 @@ class CreateSubscribeRequest extends  AbstractModel {
         this.Duration = 'Duration' in params ? params.Duration : null;
         this.Count = 'Count' in params ? params.Count : null;
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2102,6 +2173,18 @@ class DescribeSubscribesRequest extends  AbstractModel {
          */
         this.OrderDirection = null;
 
+        /**
+         * Tag filtering condition
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
+        /**
+         * Subscription instance edition. `txdts`: legacy data subscription; `kafka`: data subscription in Kafka edition
+         * @type {string || null}
+         */
+        this.SubscribeVersion = null;
+
     }
 
     /**
@@ -2122,6 +2205,16 @@ class DescribeSubscribesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
+        this.SubscribeVersion = 'SubscribeVersion' in params ? params.SubscribeVersion : null;
 
     }
 }
@@ -2537,6 +2630,77 @@ class ResetSubscribeRequest extends  AbstractModel {
             return;
         }
         this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+
+    }
+}
+
+/**
+ * Tag
+ * @class
+ */
+class TagItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key value
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * Tag filtering
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key value
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {Array.<string> || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -4017,6 +4181,8 @@ module.exports = {
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CompleteMigrateJobRequest: CompleteMigrateJobRequest,
     ResetSubscribeRequest: ResetSubscribeRequest,
+    TagItem: TagItem,
+    TagFilter: TagFilter,
     ModifySubscribeConsumeTimeRequest: ModifySubscribeConsumeTimeRequest,
     SwitchDrToMasterResponse: SwitchDrToMasterResponse,
     ModifyMigrateJobResponse: ModifyMigrateJobResponse,

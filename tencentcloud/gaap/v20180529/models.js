@@ -5108,6 +5108,34 @@ class ModifySecurityRuleRequest extends  AbstractModel {
          */
         this.PolicyId = null;
 
+        /**
+         * Security rule action
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * A CIDR IP address associated with the rule
+         * @type {string || null}
+         */
+        this.SourceCidr = null;
+
+        /**
+         * Protocol type
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Port range. Valid values:
+A single port: 80
+Multiple ports: 80 and 443
+Consecutive ports: 3306-20000
+All ports: ALL
+         * @type {string || null}
+         */
+        this.DestPortRange = null;
+
     }
 
     /**
@@ -5120,6 +5148,10 @@ class ModifySecurityRuleRequest extends  AbstractModel {
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.AliasName = 'AliasName' in params ? params.AliasName : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.SourceCidr = 'SourceCidr' in params ? params.SourceCidr : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.DestPortRange = 'DestPortRange' in params ? params.DestPortRange : null;
 
     }
 }
@@ -7547,14 +7579,14 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.FailedCountInter = null;
 
         /**
-         * Origin server health check threshold. The service will be blocked once the threshold is exceeded.
+         * Origin server health check threshold. All requests to the origin server will be blocked once the threshold is exceeded.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FailedThreshold = null;
 
         /**
-         * Time of a request is blocked after the origin server health check threshold is exceeded.
+         * Duration to block requests targeting the origin server after a failed health check
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */

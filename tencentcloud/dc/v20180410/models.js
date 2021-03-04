@@ -1991,6 +1991,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.City = null;
 
+        /**
+         * Access point region
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -2014,6 +2021,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.Coordinate = obj;
         }
         this.City = 'City' in params ? params.City : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }

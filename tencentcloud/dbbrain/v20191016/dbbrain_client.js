@@ -16,10 +16,14 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeAllUserContactRequest = models.DescribeAllUserContactRequest;
+const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
+const HealthScoreInfo = models.HealthScoreInfo;
 const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
+const CreateSchedulerMailProfileRequest = models.CreateSchedulerMailProfileRequest;
 const ContactItem = models.ContactItem;
+const DescribeHealthScoreResponse = models.DescribeHealthScoreResponse;
 const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
+const DescribeDiagDBInstancesRequest = models.DescribeDiagDBInstancesRequest;
 const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
 const DescribeAllUserContactResponse = models.DescribeAllUserContactResponse;
 const TimeSlice = models.TimeSlice;
@@ -27,30 +31,41 @@ const ModifyDiagDBInstanceConfRequest = models.ModifyDiagDBInstanceConfRequest;
 const MonitorMetric = models.MonitorMetric;
 const CreateDBDiagReportTaskRequest = models.CreateDBDiagReportTaskRequest;
 const MonitorFloatMetric = models.MonitorFloatMetric;
-const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
+const UserProfile = models.UserProfile;
+const AddUserContactRequest = models.AddUserContactRequest;
 const DescribeAllUserGroupResponse = models.DescribeAllUserGroupResponse;
 const SchemaItem = models.SchemaItem;
 const CreateMailProfileResponse = models.CreateMailProfileResponse;
 const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
-const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
+const DescribeAllUserContactRequest = models.DescribeAllUserContactRequest;
 const DescribeDBDiagEventRequest = models.DescribeDBDiagEventRequest;
 const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
 const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
 const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
 const GroupItem = models.GroupItem;
+const InstanceInfo = models.InstanceInfo;
 const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
+const AddUserContactResponse = models.AddUserContactResponse;
 const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
 const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
 const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
 const DiagHistoryEventItem = models.DiagHistoryEventItem;
+const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
+const CreateSchedulerMailProfileResponse = models.CreateSchedulerMailProfileResponse;
 const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
 const CreateMailProfileRequest = models.CreateMailProfileRequest;
 const MonitorFloatMetricSeriesData = models.MonitorFloatMetricSeriesData;
 const MailConfiguration = models.MailConfiguration;
 const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
+const DescribeMailProfileResponse = models.DescribeMailProfileResponse;
 const TableSpaceData = models.TableSpaceData;
 const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
+const EventInfo = models.EventInfo;
+const DescribeMailProfileRequest = models.DescribeMailProfileRequest;
+const DescribeHealthScoreRequest = models.DescribeHealthScoreRequest;
+const IssueTypeInfo = models.IssueTypeInfo;
 const InstanceConfs = models.InstanceConfs;
+const DescribeDiagDBInstancesResponse = models.DescribeDiagDBInstancesResponse;
 const ProfileInfo = models.ProfileInfo;
 const DescribeAllUserGroupRequest = models.DescribeAllUserGroupRequest;
 const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
@@ -90,14 +105,25 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the details of an instance exception diagnosis event.
-     * @param {DescribeDBDiagEventRequest} req
-     * @param {function(string, DescribeDBDiagEventResponse):void} cb
+     * This API is used to obtain the email sending configurations, including the email configuration for database inspection and the email sending configuration for regularly generated health reports. Select Guangzhou for Region.
+     * @param {DescribeMailProfileRequest} req
+     * @param {function(string, DescribeMailProfileResponse):void} cb
      * @public
      */
-    DescribeDBDiagEvent(req, cb) {
-        let resp = new DescribeDBDiagEventResponse();
-        this.request("DescribeDBDiagEvent", req, resp, cb);
+    DescribeMailProfile(req, cb) {
+        let resp = new DescribeMailProfileResponse();
+        this.request("DescribeMailProfile", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create the regular generation time of the health reports and the regular email sending configuration. Pass in the regular generation time of the health reports as a parameter (Monday to Sunday) to set the regular generation time of the health reports, and save the corresponding regular email sending configuration.
+     * @param {CreateSchedulerMailProfileRequest} req
+     * @param {function(string, CreateSchedulerMailProfileResponse):void} cb
+     * @public
+     */
+    CreateSchedulerMailProfile(req, cb) {
+        let resp = new CreateSchedulerMailProfileResponse();
+        this.request("CreateSchedulerMailProfile", req, resp, cb);
     }
 
     /**
@@ -123,14 +149,14 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query real-time space statistics of top tables of an instance. The return results are sorted by size by default.
-     * @param {DescribeTopSpaceTablesRequest} req
-     * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
+     * This API is used to get the details of an instance exception diagnosis event.
+     * @param {DescribeDBDiagEventRequest} req
+     * @param {function(string, DescribeDBDiagEventResponse):void} cb
      * @public
      */
-    DescribeTopSpaceTables(req, cb) {
-        let resp = new DescribeTopSpaceTablesResponse();
-        this.request("DescribeTopSpaceTables", req, resp, cb);
+    DescribeDBDiagEvent(req, cb) {
+        let resp = new DescribeDBDiagEventResponse();
+        this.request("DescribeDBDiagEvent", req, resp, cb);
     }
 
     /**
@@ -145,7 +171,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email configuration of scheduled task report).
+     * This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email sending configuration of regularly generated health report). Select Guangzhou for Region, regardless of the region where the instance belongs.
      * @param {CreateMailProfileRequest} req
      * @param {function(string, CreateMailProfileResponse):void} cb
      * @public
@@ -153,6 +179,39 @@ class DbbrainClient extends AbstractClient {
     CreateMailProfile(req, cb) {
         let resp = new CreateMailProfileResponse();
         this.request("CreateMailProfile", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the health score and deduction for exceptions in the specified time period (30 minutes) based on the instance ID.
+     * @param {DescribeHealthScoreRequest} req
+     * @param {function(string, DescribeHealthScoreResponse):void} cb
+     * @public
+     */
+    DescribeHealthScore(req, cb) {
+        let resp = new DescribeHealthScoreResponse();
+        this.request("DescribeHealthScore", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the instance information list. Select Guangzhou for Region.
+     * @param {DescribeDiagDBInstancesRequest} req
+     * @param {function(string, DescribeDiagDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDiagDBInstances(req, cb) {
+        let resp = new DescribeDiagDBInstancesResponse();
+        this.request("DescribeDiagDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query real-time space statistics of top tables of an instance. The return results are sorted by size by default.
+     * @param {DescribeTopSpaceTablesRequest} req
+     * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
+     * @public
+     */
+    DescribeTopSpaceTables(req, cb) {
+        let resp = new DescribeTopSpaceTablesResponse();
+        this.request("DescribeTopSpaceTables", req, resp, cb);
     }
 
     /**
@@ -175,6 +234,17 @@ class DbbrainClient extends AbstractClient {
     DescribeTopSpaceTableTimeSeries(req, cb) {
         let resp = new DescribeTopSpaceTableTimeSeriesResponse();
         this.request("DescribeTopSpaceTableTimeSeries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add the contact name and email.. The return value is the successfully added contact ID. Select Guangzhou for Region.
+     * @param {AddUserContactRequest} req
+     * @param {function(string, AddUserContactResponse):void} cb
+     * @public
+     */
+    AddUserContact(req, cb) {
+        let resp = new AddUserContactResponse();
+        this.request("AddUserContact", req, resp, cb);
     }
 
     /**

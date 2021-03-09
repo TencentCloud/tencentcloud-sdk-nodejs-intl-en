@@ -5407,6 +5407,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.KeepaliveEnable = null;
 
+        /**
+         * This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * @type {number || null}
+         */
+        this.EndPort = null;
+
     }
 
     /**
@@ -5438,6 +5444,7 @@ They represent weighted round robin and least connections, respectively. Default
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
         this.SessionType = 'SessionType' in params ? params.SessionType : null;
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
+        this.EndPort = 'EndPort' in params ? params.EndPort : null;
 
     }
 }

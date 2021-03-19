@@ -17,30 +17,41 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const GameProperty = models.GameProperty;
+const DeleteTimerScalingPolicyResponse = models.DeleteTimerScalingPolicyResponse;
+const DescribeTimerScalingPoliciesRequest = models.DescribeTimerScalingPoliciesRequest;
 const FleetAttributes = models.FleetAttributes;
-const UpdateGameServerSessionResponse = models.UpdateGameServerSessionResponse;
+const TargetConfiguration = models.TargetConfiguration;
 const InboundPermission = models.InboundPermission;
 const DescribeGameServerSessionsResponse = models.DescribeGameServerSessionsResponse;
 const GetInstanceAccessResponse = models.GetInstanceAccessResponse;
 const JoinGameServerSessionRequest = models.JoinGameServerSessionRequest;
 const DescribePlayerSessionsResponse = models.DescribePlayerSessionsResponse;
 const UpdateBucketCORSOptResponse = models.UpdateBucketCORSOptResponse;
-const PlayerLatency = models.PlayerLatency;
+const DescribeTimerScalingPoliciesResponse = models.DescribeTimerScalingPoliciesResponse;
+const SetServerReservedResponse = models.SetServerReservedResponse;
 const ServerProcesse = models.ServerProcesse;
 const StopGameServerSessionPlacementRequest = models.StopGameServerSessionPlacementRequest;
+const TimerScalingPolicy = models.TimerScalingPolicy;
+const TimerFleetCapacity = models.TimerFleetCapacity;
 const CopyFleetRequest = models.CopyFleetRequest;
+const TimerValue = models.TimerValue;
 const CopyFleetResponse = models.CopyFleetResponse;
 const GetInstanceAccessRequest = models.GetInstanceAccessRequest;
 const DescribeGameServerSessionsRequest = models.DescribeGameServerSessionsRequest;
 const UpdateGameServerSessionRequest = models.UpdateGameServerSessionRequest;
+const PutTimerScalingPolicyResponse = models.PutTimerScalingPolicyResponse;
+const PlayerLatency = models.PlayerLatency;
 const DiskInfo = models.DiskInfo;
 const StartGameServerSessionPlacementResponse = models.StartGameServerSessionPlacementResponse;
 const Credentials = models.Credentials;
 const GetGameServerSessionLogUrlRequest = models.GetGameServerSessionLogUrlRequest;
+const SetServerReservedRequest = models.SetServerReservedRequest;
 const CreateGameServerSessionResponse = models.CreateGameServerSessionResponse;
 const DescribePlayerSessionsRequest = models.DescribePlayerSessionsRequest;
 const UpdateBucketCORSOptRequest = models.UpdateBucketCORSOptRequest;
+const TimerConfiguration = models.TimerConfiguration;
 const RuntimeConfiguration = models.RuntimeConfiguration;
+const DeleteTimerScalingPolicyRequest = models.DeleteTimerScalingPolicyRequest;
 const JoinGameServerSessionResponse = models.JoinGameServerSessionResponse;
 const DesiredPlayerSession = models.DesiredPlayerSession;
 const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse;
@@ -49,6 +60,7 @@ const SearchGameServerSessionsRequest = models.SearchGameServerSessionsRequest;
 const PlacedPlayerSession = models.PlacedPlayerSession;
 const GameServerSessionPlacement = models.GameServerSessionPlacement;
 const JoinGameServerSessionBatchRequest = models.JoinGameServerSessionBatchRequest;
+const UpdateGameServerSessionResponse = models.UpdateGameServerSessionResponse;
 const PlayerSession = models.PlayerSession;
 const CreateGameServerSessionRequest = models.CreateGameServerSessionRequest;
 const GetGameServerSessionLogUrlResponse = models.GetGameServerSessionLogUrlResponse;
@@ -65,6 +77,7 @@ const JoinGameServerSessionBatchResponse = models.JoinGameServerSessionBatchResp
 const PlayerDataMap = models.PlayerDataMap;
 const ResourceCreationLimitPolicy = models.ResourceCreationLimitPolicy;
 const StopGameServerSessionPlacementResponse = models.StopGameServerSessionPlacementResponse;
+const PutTimerScalingPolicyRequest = models.PutTimerScalingPolicyRequest;
 const InstanceAccess = models.InstanceAccess;
 
 
@@ -78,6 +91,20 @@ class GseClient extends AbstractClient {
         super("gse.tencentcloudapi.com", "2019-11-12", credential, region, profile);
     }
     
+    /**
+     * This API (PutTimerScalingPolicy) is used to create or update a scheduled scaling policy for a fleet.
+
+If the field `timerID` is filled in, the specified policy will be updated, and if `timerID` is left empty, a new policy will be created.
+
+     * @param {PutTimerScalingPolicyRequest} req
+     * @param {function(string, PutTimerScalingPolicyResponse):void} cb
+     * @public
+     */
+    PutTimerScalingPolicy(req, cb) {
+        let resp = new PutTimerScalingPolicyResponse();
+        this.request("PutTimerScalingPolicy", req, resp, cb);
+    }
+
     /**
      * This API (UpdateBucketCORSOpt) is used to configure CORS for COS.
      * @param {UpdateBucketCORSOptRequest} req
@@ -134,6 +161,17 @@ class GseClient extends AbstractClient {
     }
 
     /**
+     * This API is used to start placing a game server session.
+     * @param {StartGameServerSessionPlacementRequest} req
+     * @param {function(string, StartGameServerSessionPlacementResponse):void} cb
+     * @public
+     */
+    StartGameServerSessionPlacement(req, cb) {
+        let resp = new StartGameServerSessionPlacementResponse();
+        this.request("StartGameServerSessionPlacement", req, resp, cb);
+    }
+
+    /**
      * This API is used to join a game server session.
      * @param {JoinGameServerSessionRequest} req
      * @param {function(string, JoinGameServerSessionResponse):void} cb
@@ -167,6 +205,18 @@ class GseClient extends AbstractClient {
     }
 
     /**
+     * This API (DeleteTimerScalingPolicy) is used to delete a scheduled scaling policy of a fleet.
+
+     * @param {DeleteTimerScalingPolicyRequest} req
+     * @param {function(string, DeleteTimerScalingPolicyResponse):void} cb
+     * @public
+     */
+    DeleteTimerScalingPolicy(req, cb) {
+        let resp = new DeleteTimerScalingPolicyResponse();
+        this.request("DeleteTimerScalingPolicy", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of game server session details.
      * @param {DescribeGameServerSessionDetailsRequest} req
      * @param {function(string, DescribeGameServerSessionDetailsResponse):void} cb
@@ -178,14 +228,17 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start placing a game server session.
-     * @param {StartGameServerSessionPlacementRequest} req
-     * @param {function(string, StartGameServerSessionPlacementResponse):void} cb
+     * This API (SetServerReserved) is used to mark the exceptional instances as retained for troubleshooting.
+
+`ReserveValue`: specifies whether to retain the instance. Valid values: `0` (do not retain), `1` (retain). Default value: `0`.
+
+     * @param {SetServerReservedRequest} req
+     * @param {function(string, SetServerReservedResponse):void} cb
      * @public
      */
-    StartGameServerSessionPlacement(req, cb) {
-        let resp = new StartGameServerSessionPlacementResponse();
-        this.request("StartGameServerSessionPlacement", req, resp, cb);
+    SetServerReserved(req, cb) {
+        let resp = new SetServerReservedResponse();
+        this.request("SetServerReserved", req, resp, cb);
     }
 
     /**
@@ -241,6 +294,18 @@ class GseClient extends AbstractClient {
     UpdateBucketAccelerateOpt(req, cb) {
         let resp = new UpdateBucketAccelerateOptResponse();
         this.request("UpdateBucketAccelerateOpt", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeTimerScalingPolicies) is used to query the scheduled scaling policies of a fleet. You can query the policies by `fleetID` or the fleet name. The returned results are paged. 
+
+     * @param {DescribeTimerScalingPoliciesRequest} req
+     * @param {function(string, DescribeTimerScalingPoliciesResponse):void} cb
+     * @public
+     */
+    DescribeTimerScalingPolicies(req, cb) {
+        let resp = new DescribeTimerScalingPoliciesResponse();
+        this.request("DescribeTimerScalingPolicies", req, resp, cb);
     }
 
     /**

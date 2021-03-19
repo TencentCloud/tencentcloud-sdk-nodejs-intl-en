@@ -284,30 +284,18 @@ class DealInfo extends  AbstractModel {
 }
 
 /**
- * DescribeAccounts request structure.
+ * DescribeFlowStatus request structure.
  * @class
  */
-class DescribeAccountsRequest extends  AbstractModel {
+class DescribeFlowStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Number of results per page. Value range: 1-100. Default value: 20
+         * Flow ID
          * @type {number || null}
          */
-        this.Limit = null;
-
-        /**
-         * Page number. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.FlowId = null;
 
     }
 
@@ -318,9 +306,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -361,6 +347,41 @@ class CreateMigrationResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteBackupMigration request structure.
+ * @class
+ */
+class DeleteBackupMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target instance ID, which is returned through the API DescribeBackupMigration.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API DescribeBackupMigration.
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+
+    }
+}
+
+/**
  * RestartDBInstance request structure.
  * @class
  */
@@ -384,6 +405,41 @@ class RestartDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * StartBackupMigration response structure.
+ * @class
+ */
+class StartBackupMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -480,6 +536,62 @@ class ModifyBackupStrategyResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyIncrementalMigration request structure.
+ * @class
+ */
+class ModifyIncrementalMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * Incremental import task ID
+         * @type {string || null}
+         */
+        this.IncrementalMigrationId = null;
+
+        /**
+         * Whether restoration is required. No: not required. Yes: required.
+         * @type {string || null}
+         */
+        this.IsRecovery = null;
+
+        /**
+         * If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+         * @type {Array.<string> || null}
+         */
+        this.BackupFiles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.IncrementalMigrationId = 'IncrementalMigrationId' in params ? params.IncrementalMigrationId : null;
+        this.IsRecovery = 'IsRecovery' in params ? params.IsRecovery : null;
+        this.BackupFiles = 'BackupFiles' in params ? params.BackupFiles : null;
+
+    }
+}
+
+/**
  * Migration progress details
  * @class
  */
@@ -510,6 +622,55 @@ class MigrateDetail extends  AbstractModel {
         }
         this.StepName = 'StepName' in params ? params.StepName : null;
         this.Progress = 'Progress' in params ? params.Progress : null;
+
+    }
+}
+
+/**
+ * CreateIncrementalMigration request structure.
+ * @class
+ */
+class CreateIncrementalMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration.
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * Incremental backup file. If the UploadType of a full backup file is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+         * @type {Array.<string> || null}
+         */
+        this.BackupFiles = null;
+
+        /**
+         * Whether restoration is required. No: not required. Yes: required. Not required by default.
+         * @type {string || null}
+         */
+        this.IsRecovery = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.BackupFiles = 'BackupFiles' in params ? params.BackupFiles : null;
+        this.IsRecovery = 'IsRecovery' in params ? params.IsRecovery : null;
 
     }
 }
@@ -663,6 +824,48 @@ class RollbackInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteIncrementalMigration request structure.
+ * @class
+ */
+class DeleteIncrementalMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * ID of an incremental backup import task
+         * @type {string || null}
+         */
+        this.IncrementalMigrationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.IncrementalMigrationId = 'IncrementalMigrationId' in params ? params.IncrementalMigrationId : null;
+
+    }
+}
+
+/**
  * Database remarks
  * @class
  */
@@ -776,72 +979,24 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackups request structure.
+ * DescribeDBCharsets response structure.
  * @class
  */
-class DescribeBackupsRequest extends  AbstractModel {
+class DescribeDBCharsetsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start name (yyyy-MM-dd HH:mm:ss)
+         * Database character set list
+         * @type {Array.<string> || null}
+         */
+        this.DatabaseCharsets = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * End time (yyyy-MM-dd HH:mm:ss)
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Instance ID in the format of mssql-njj2mtpl
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Number of results per page. Value range: 1-100. Default value: 20
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Page number. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Filter by backup name. If this parameter is left empty, backup name will not be used in filtering.
-         * @type {string || null}
-         */
-        this.BackupName = null;
-
-        /**
-         * Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
-         * @type {number || null}
-         */
-        this.Strategy = null;
-
-        /**
-         * Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
-         * @type {number || null}
-         */
-        this.BackupWay = null;
-
-        /**
-         * Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
-         * @type {number || null}
-         */
-        this.BackupId = null;
-
-        /**
-         * Filter backups by the database name. If the parameter is left empty, this filter criteria will not take effect.
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
+        this.RequestId = null;
 
     }
 
@@ -852,16 +1007,8 @@ class DescribeBackupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.BackupName = 'BackupName' in params ? params.BackupName : null;
-        this.Strategy = 'Strategy' in params ? params.Strategy : null;
-        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
-        this.BackupId = 'BackupId' in params ? params.BackupId : null;
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.DatabaseCharsets = 'DatabaseCharsets' in params ? params.DatabaseCharsets : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1002,6 +1149,90 @@ class RestoreInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeIncrementalMigration request structure.
+ * @class
+ */
+class DescribeIncrementalMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup file name
+         * @type {string || null}
+         */
+        this.BackupFileName = null;
+
+        /**
+         * Status set of import tasks
+         * @type {Array.<number> || null}
+         */
+        this.StatusSet = null;
+
+        /**
+         * Paging. Page size
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Paging. Number of pages
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Field for order: name,createTime,startTime,endTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Type of order: desc,asc
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * ID of an incremental backup import task
+         * @type {string || null}
+         */
+        this.IncrementalMigrationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupFileName = 'BackupFileName' in params ? params.BackupFileName : null;
+        this.StatusSet = 'StatusSet' in params ? params.StatusSet : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.IncrementalMigrationId = 'IncrementalMigrationId' in params ? params.IncrementalMigrationId : null;
+
+    }
+}
+
+/**
  * RunMigration request structure.
  * @class
  */
@@ -1025,6 +1256,34 @@ class RunMigrationRequest extends  AbstractModel {
             return;
         }
         this.MigrateId = 'MigrateId' in params ? params.MigrateId : null;
+
+    }
+}
+
+/**
+ * DescribeDBCharsets request structure.
+ * @class
+ */
+class DescribeDBCharsetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of mssql-j8kv137v
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1212,6 +1471,193 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * StartIncrementalMigration request structure.
+ * @class
+ */
+class StartIncrementalMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * ID of an incremental backup import task
+         * @type {string || null}
+         */
+        this.IncrementalMigrationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.IncrementalMigrationId = 'IncrementalMigrationId' in params ? params.IncrementalMigrationId : null;
+
+    }
+}
+
+/**
+ * Cold backup migration import
+ * @class
+ */
+class Migration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup import task ID or incremental import task ID
+         * @type {string || null}
+         */
+        this.MigrationId = null;
+
+        /**
+         * Backup import task name. For an incremental import task, this field will be left empty.
+Note: this field may return ‘null’, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MigrationName = null;
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * ID of migrated target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Migration task restoration type
+         * @type {string || null}
+         */
+        this.RecoveryType = null;
+
+        /**
+         * Backup user upload type. COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
+         * @type {string || null}
+         */
+        this.UploadType = null;
+
+        /**
+         * Backup file list, which is determined by UploadType. If the upload type is COS_URL, URL will be saved. If the upload type is COS_UPLOAD, the backup name will be saved.
+         * @type {Array.<string> || null}
+         */
+        this.BackupFiles = null;
+
+        /**
+         * Migration task status,
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Migration task creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Migration task start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Migration task end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * More information
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Migration detail
+         * @type {MigrationDetail || null}
+         */
+        this.Detail = null;
+
+        /**
+         * Operation allowed in the current status
+         * @type {MigrationAction || null}
+         */
+        this.Action = null;
+
+        /**
+         * Whether this is the final restoration. For a full import task, this field will be left empty.
+Note: this field may return ‘null’, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IsRecovery = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MigrationId = 'MigrationId' in params ? params.MigrationId : null;
+        this.MigrationName = 'MigrationName' in params ? params.MigrationName : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RecoveryType = 'RecoveryType' in params ? params.RecoveryType : null;
+        this.UploadType = 'UploadType' in params ? params.UploadType : null;
+        this.BackupFiles = 'BackupFiles' in params ? params.BackupFiles : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Detail) {
+            let obj = new MigrationDetail();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
+
+        if (params.Action) {
+            let obj = new MigrationAction();
+            obj.deserialize(params.Action)
+            this.Action = obj;
+        }
+        this.IsRecovery = 'IsRecovery' in params ? params.IsRecovery : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceNetwork request structure.
  * @class
  */
@@ -1261,6 +1707,64 @@ class ModifyDBInstanceNetworkRequest extends  AbstractModel {
 }
 
 /**
+ * Details of a cold backup import task
+ * @class
+ */
+class MigrationDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of steps
+         * @type {number || null}
+         */
+        this.StepAll = null;
+
+        /**
+         * Current step
+         * @type {number || null}
+         */
+        this.StepNow = null;
+
+        /**
+         * Overall progress. For example, “30” means 30%.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Step information. ‘null’ means the migration has not started
+Note: this field may return ‘null’, indicating that no valid values can be obtained.
+         * @type {Array.<MigrationStep> || null}
+         */
+        this.StepInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StepAll = 'StepAll' in params ? params.StepAll : null;
+        this.StepNow = 'StepNow' in params ? params.StepNow : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+        if (params.StepInfo) {
+            this.StepInfo = new Array();
+            for (let z in params.StepInfo) {
+                let obj = new MigrationStep();
+                obj.deserialize(params.StepInfo[z]);
+                this.StepInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * RecycleDBInstance request structure.
  * @class
  */
@@ -1289,36 +1793,30 @@ class RecycleDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * ModifyBackupStrategy request structure.
+ * DescribeAccounts request structure.
  * @class
  */
-class ModifyBackupStrategyRequest extends  AbstractModel {
+class DescribeAccountsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Backup mode, which supports daily backup only. Valid value: daily.
-         * @type {string || null}
-         */
-        this.BackupType = null;
-
-        /**
-         * Backup time. Value range: an integer from 0 to 23.
+         * Number of results per page. Value range: 1-100. Default value: 20
          * @type {number || null}
          */
-        this.BackupTime = null;
+        this.Limit = null;
 
         /**
-         * Backup interval in days when the `BackupType` is `daily`. Valid value: 1.
+         * Page number. Default value: 0
          * @type {number || null}
          */
-        this.BackupDay = null;
+        this.Offset = null;
 
     }
 
@@ -1330,9 +1828,8 @@ class ModifyBackupStrategyRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.BackupType = 'BackupType' in params ? params.BackupType : null;
-        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
-        this.BackupDay = 'BackupDay' in params ? params.BackupDay : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2244,6 +2741,55 @@ class DescribeMigrationsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupStrategy request structure.
+ * @class
+ */
+class ModifyBackupStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup mode, which supports daily backup only. Valid value: daily.
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * Backup time. Value range: an integer from 0 to 23.
+         * @type {number || null}
+         */
+        this.BackupTime = null;
+
+        /**
+         * Backup interval in days when the `BackupType` is `daily`. Valid value: 1.
+         * @type {number || null}
+         */
+        this.BackupDay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
+        this.BackupDay = 'BackupDay' in params ? params.BackupDay : null;
+
+    }
+}
+
+/**
  * DescribeZones request structure.
  * @class
  */
@@ -2426,6 +2972,41 @@ class ResetAccountPasswordResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupMigration response structure.
+ * @class
+ */
+class ModifyBackupMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup import task ID
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAccountPrivilege request structure.
  * @class
  */
@@ -2464,6 +3045,62 @@ class ModifyAccountPrivilegeRequest extends  AbstractModel {
                 this.Accounts.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * CreateBackupMigration request structure.
+ * @class
+ */
+class CreateBackupMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Migration task restoration type. FULL: full backup restoration, FULL_LOG: full backup and transaction log restoration, FULL_DIFF: full backup and differential backup restoration
+         * @type {string || null}
+         */
+        this.RecoveryType = null;
+
+        /**
+         * Backup upload type. COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
+         * @type {string || null}
+         */
+        this.UploadType = null;
+
+        /**
+         * Task name
+         * @type {string || null}
+         */
+        this.MigrationName = null;
+
+        /**
+         * If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+         * @type {Array.<string> || null}
+         */
+        this.BackupFiles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RecoveryType = 'RecoveryType' in params ? params.RecoveryType : null;
+        this.UploadType = 'UploadType' in params ? params.UploadType : null;
+        this.MigrationName = 'MigrationName' in params ? params.MigrationName : null;
+        this.BackupFiles = 'BackupFiles' in params ? params.BackupFiles : null;
 
     }
 }
@@ -2532,18 +3169,24 @@ class DescribeMigrationsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeFlowStatus request structure.
+ * DescribeBackupUploadSize response structure.
  * @class
  */
-class DescribeFlowStatusRequest extends  AbstractModel {
+class DescribeBackupUploadSizeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow ID
-         * @type {number || null}
+         * Information of uploaded backups
+         * @type {Array.<CosUploadBackupFile> || null}
          */
-        this.FlowId = null;
+        this.CosUploadBackupFileSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2554,7 +3197,16 @@ class DescribeFlowStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+        if (params.CosUploadBackupFileSet) {
+            this.CosUploadBackupFileSet = new Array();
+            for (let z in params.CosUploadBackupFileSet) {
+                let obj = new CosUploadBackupFile();
+                obj.deserialize(params.CosUploadBackupFileSet[z]);
+                this.CosUploadBackupFileSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3138,6 +3790,104 @@ class DeleteMigrationResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupMigration request structure.
+ * @class
+ */
+class DescribeBackupMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration.
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * Import task name
+         * @type {string || null}
+         */
+        this.MigrationName = null;
+
+        /**
+         * Backup file name
+         * @type {string || null}
+         */
+        this.BackupFileName = null;
+
+        /**
+         * Status set of import tasks
+         * @type {Array.<number> || null}
+         */
+        this.StatusSet = null;
+
+        /**
+         * Import task restoration type: FULL,FULL_LOG,FULL_DIFF
+         * @type {string || null}
+         */
+        this.RecoveryType = null;
+
+        /**
+         * COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
+         * @type {string || null}
+         */
+        this.UploadType = null;
+
+        /**
+         * Paging. Page size
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Paging. Number of pages
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Field for order: name,createTime,startTime,endTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Type of order: desc,asc
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.MigrationName = 'MigrationName' in params ? params.MigrationName : null;
+        this.BackupFileName = 'BackupFileName' in params ? params.BackupFileName : null;
+        this.StatusSet = 'StatusSet' in params ? params.StatusSet : null;
+        this.RecoveryType = 'RecoveryType' in params ? params.RecoveryType : null;
+        this.UploadType = 'UploadType' in params ? params.UploadType : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
  * Instance database information
  * @class
  */
@@ -3176,6 +3926,41 @@ class InstanceDBDetail extends  AbstractModel {
                 this.DBDetails.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * StartIncrementalMigration response structure.
+ * @class
+ */
+class StartIncrementalMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3728,6 +4513,125 @@ class DescribeProductConfigResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupCommand response structure.
+ * @class
+ */
+class DescribeBackupCommandResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Create a backup command
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Command = 'Command' in params ? params.Command : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeUploadBackupInfo response structure.
+ * @class
+ */
+class DescribeUploadBackupInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bucket name
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+        /**
+         * Bucket location information
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Storage path
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * Temporary key ID
+         * @type {string || null}
+         */
+        this.TmpSecretId = null;
+
+        /**
+         * Temporary key (Key)
+         * @type {string || null}
+         */
+        this.TmpSecretKey = null;
+
+        /**
+         * Temporary key (Token)
+         * @type {string || null}
+         */
+        this.XCosSecurityToken = null;
+
+        /**
+         * Temporary key start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Temporary key expiration time
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.TmpSecretId = 'TmpSecretId' in params ? params.TmpSecretId : null;
+        this.TmpSecretKey = 'TmpSecretKey' in params ? params.TmpSecretKey : null;
+        this.XCosSecurityToken = 'XCosSecurityToken' in params ? params.XCosSecurityToken : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateMigration request structure.
  * @class
  */
@@ -3824,6 +4728,41 @@ class CreateMigrationRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeUploadBackupInfo request structure.
+ * @class
+ */
+class DescribeUploadBackupInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+
+    }
+}
+
+/**
  * ModifyDBName response structure.
  * @class
  */
@@ -3854,6 +4793,76 @@ class ModifyDBNameResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Querying the size of uploaded backup files.
+ * @class
+ */
+class CosUploadBackupFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup name
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Backup size
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
+ * StartBackupMigration request structure.
+ * @class
+ */
+class StartBackupMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
 
     }
 }
@@ -3964,6 +4973,55 @@ class Backup extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupCommand request structure.
+ * @class
+ */
+class DescribeBackupCommandRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup file type. Full: full backup. FULL_LOG: full backup which needs log increments. FULL_DIFF: full backup which needs differential increments. LOG: log backup. DIFF: differential backup.
+         * @type {string || null}
+         */
+        this.BackupFileType = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.DataBaseName = null;
+
+        /**
+         * Whether restoration is required. No: not required. Yes: required.
+         * @type {string || null}
+         */
+        this.IsRecovery = null;
+
+        /**
+         * Storage path of backup files. If this parameter is left empty, the default storage path will be D:\\.
+         * @type {string || null}
+         */
+        this.LocalPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupFileType = 'BackupFileType' in params ? params.BackupFileType : null;
+        this.DataBaseName = 'DataBaseName' in params ? params.DataBaseName : null;
+        this.IsRecovery = 'IsRecovery' in params ? params.IsRecovery : null;
+        this.LocalPath = 'LocalPath' in params ? params.LocalPath : null;
+
+    }
+}
+
+/**
  * Account remarks
  * @class
  */
@@ -4027,6 +5085,41 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
 }
 
 /**
+ * CreateIncrementalMigration response structure.
+ * @class
+ */
+class CreateIncrementalMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of an incremental backup import task
+         * @type {string || null}
+         */
+        this.IncrementalMigrationId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IncrementalMigrationId = 'IncrementalMigrationId' in params ? params.IncrementalMigrationId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Database account permission change information
  * @class
  */
@@ -4070,30 +5163,30 @@ class AccountPrivilegeModifyInfo extends  AbstractModel {
 }
 
 /**
- * Target type of migration task
+ * DescribeBackupMigration response structure.
  * @class
  */
-class MigrateTarget extends  AbstractModel {
+class DescribeBackupMigrationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of target instance in the format of mssql-si2823jyl
-         * @type {string || null}
+         * Total number of tasks
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.TotalCount = null;
 
         /**
-         * Username of migration target instance
-         * @type {string || null}
+         * Migration task set
+         * @type {Array.<Migration> || null}
          */
-        this.UserName = null;
+        this.BackupMigrationSet = null;
 
         /**
-         * Password of migration target instance
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Password = null;
+        this.RequestId = null;
 
     }
 
@@ -4104,9 +5197,17 @@ class MigrateTarget extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Password = 'Password' in params ? params.Password : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BackupMigrationSet) {
+            this.BackupMigrationSet = new Array();
+            for (let z in params.BackupMigrationSet) {
+                let obj = new Migration();
+                obj.deserialize(params.BackupMigrationSet[z]);
+                this.BackupMigrationSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4309,6 +5410,34 @@ class DescribeOrdersRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteIncrementalMigration response structure.
+ * @class
+ */
+class DeleteIncrementalMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The information of tags associated with instances
  * @class
  */
@@ -4339,6 +5468,41 @@ class ResourceTag extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * CreateBackupMigration response structure.
+ * @class
+ */
+class CreateBackupMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup import task ID
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4409,6 +5573,34 @@ class DeleteAccountRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.UserNames = 'UserNames' in params ? params.UserNames : null;
+
+    }
+}
+
+/**
+ * DeleteBackupMigration response structure.
+ * @class
+ */
+class DeleteBackupMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4501,6 +5693,76 @@ class ModifyAccountRemarkRequest extends  AbstractModel {
                 this.Accounts.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyIncrementalMigration response structure.
+ * @class
+ */
+class ModifyIncrementalMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of an incremental backup import task
+         * @type {string || null}
+         */
+        this.IncrementalMigrationId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IncrementalMigrationId = 'IncrementalMigrationId' in params ? params.IncrementalMigrationId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Operation allowed by a cold backup import task
+ * @class
+ */
+class MigrationAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * All the allowed operations. Values include: view (viewing a task), modify (modifying a task), start (starting a task), incremental (creating an incremental task), delete (deleting a task), and upload (obtaining the upload permission).
+         * @type {Array.<string> || null}
+         */
+        this.AllAction = null;
+
+        /**
+         * Operation allowed in the current status. If the subset of AllAction is left empty, no operations will be allowed.
+         * @type {Array.<string> || null}
+         */
+        this.AllowedAction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllAction = 'AllAction' in params ? params.AllAction : null;
+        this.AllowedAction = 'AllowedAction' in params ? params.AllowedAction : null;
 
     }
 }
@@ -4853,6 +6115,48 @@ class CreateAccountResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBackupUploadSize request structure.
+ * @class
+ */
+class DescribeBackupUploadSizeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * Incremental import task ID
+         * @type {string || null}
+         */
+        this.IncrementalMigrationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.IncrementalMigrationId = 'IncrementalMigrationId' in params ? params.IncrementalMigrationId : null;
 
     }
 }
@@ -5275,6 +6579,55 @@ class ModifyDBInstanceProjectRequest extends  AbstractModel {
 }
 
 /**
+ * Migration steps of a cold backup import task
+ * @class
+ */
+class MigrationStep extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Step sequence
+         * @type {number || null}
+         */
+        this.StepNo = null;
+
+        /**
+         * Step name
+         * @type {string || null}
+         */
+        this.StepName = null;
+
+        /**
+         * Step ID in English
+         * @type {string || null}
+         */
+        this.StepId = null;
+
+        /**
+         * Step status: 0 (default value), 1 (succeeded), 2 (failed), 3 (in progress), 4 (not started)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StepNo = 'StepNo' in params ? params.StepNo : null;
+        this.StepName = 'StepName' in params ? params.StepName : null;
+        this.StepId = 'StepId' in params ? params.StepId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * TerminateDBInstance response structure.
  * @class
  */
@@ -5501,6 +6854,56 @@ class DescribeRollbackTimeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeIncrementalMigration response structure.
+ * @class
+ */
+class DescribeIncrementalMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of import tasks
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Incremental import task set
+         * @type {Array.<Migration> || null}
+         */
+        this.IncrementalMigrationSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.IncrementalMigrationSet) {
+            this.IncrementalMigrationSet = new Array();
+            for (let z in params.IncrementalMigrationSet) {
+                let obj = new Migration();
+                obj.deserialize(params.IncrementalMigrationSet[z]);
+                this.IncrementalMigrationSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBRemark response structure.
  * @class
  */
@@ -5524,6 +6927,48 @@ class ModifyDBRemarkResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Target type of migration task
+ * @class
+ */
+class MigrateTarget extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of target instance in the format of mssql-si2823jyl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Username of migration target instance
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Password of migration target instance
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -5571,6 +7016,69 @@ class CreateDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupMigration request structure.
+ * @class
+ */
+class ModifyBackupMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of imported target instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup import task ID, which is returned through the API CreateBackupMigration
+         * @type {string || null}
+         */
+        this.BackupMigrationId = null;
+
+        /**
+         * Task name
+         * @type {string || null}
+         */
+        this.MigrationName = null;
+
+        /**
+         * Migration task restoration type: FULL,FULL_LOG,FULL_DIFF
+         * @type {string || null}
+         */
+        this.RecoveryType = null;
+
+        /**
+         * COS_URL: the backup is stored in user’s Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the application’s Cloud Object Storage and needs to be uploaded by the user.
+         * @type {string || null}
+         */
+        this.UploadType = null;
+
+        /**
+         * If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
+         * @type {Array.<string> || null}
+         */
+        this.BackupFiles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMigrationId = 'BackupMigrationId' in params ? params.BackupMigrationId : null;
+        this.MigrationName = 'MigrationName' in params ? params.MigrationName : null;
+        this.RecoveryType = 'RecoveryType' in params ? params.RecoveryType : null;
+        this.UploadType = 'UploadType' in params ? params.UploadType : null;
+        this.BackupFiles = 'BackupFiles' in params ? params.BackupFiles : null;
+
+    }
+}
+
+/**
  * DeleteAccount response structure.
  * @class
  */
@@ -5605,34 +7113,135 @@ class DeleteAccountResponse extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeBackups request structure.
+ * @class
+ */
+class DescribeBackupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start name (yyyy-MM-dd HH:mm:ss)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time (yyyy-MM-dd HH:mm:ss)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Instance ID in the format of mssql-njj2mtpl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Number of results per page. Value range: 1-100. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter by backup name. If this parameter is left empty, backup name will not be used in filtering.
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+        /**
+         * Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
+         * @type {number || null}
+         */
+        this.BackupWay = null;
+
+        /**
+         * Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
+        /**
+         * Filter backups by the database name. If the parameter is left empty, this filter criteria will not take effect.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+
+    }
+}
+
 module.exports = {
     CreateDBInstancesRequest: CreateDBInstancesRequest,
     CloneDBResponse: CloneDBResponse,
     DealInfo: DealInfo,
-    DescribeAccountsRequest: DescribeAccountsRequest,
+    DescribeFlowStatusRequest: DescribeFlowStatusRequest,
     CreateMigrationResponse: CreateMigrationResponse,
+    DeleteBackupMigrationRequest: DeleteBackupMigrationRequest,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
+    StartBackupMigrationResponse: StartBackupMigrationResponse,
     RegionInfo: RegionInfo,
     ModifyBackupStrategyResponse: ModifyBackupStrategyResponse,
+    ModifyIncrementalMigrationRequest: ModifyIncrementalMigrationRequest,
     MigrateDetail: MigrateDetail,
+    CreateIncrementalMigrationRequest: CreateIncrementalMigrationRequest,
     RunMigrationResponse: RunMigrationResponse,
     DescribeProductConfigRequest: DescribeProductConfigRequest,
     CreateAccountRequest: CreateAccountRequest,
     RollbackInstanceResponse: RollbackInstanceResponse,
+    DeleteIncrementalMigrationRequest: DeleteIncrementalMigrationRequest,
     DBRemark: DBRemark,
     MigrateDB: MigrateDB,
     DescribeRegionsResponse: DescribeRegionsResponse,
-    DescribeBackupsRequest: DescribeBackupsRequest,
+    DescribeDBCharsetsResponse: DescribeDBCharsetsResponse,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeRollbackTimeResponse: DescribeRollbackTimeResponse,
     RestoreInstanceRequest: RestoreInstanceRequest,
+    DescribeIncrementalMigrationRequest: DescribeIncrementalMigrationRequest,
     RunMigrationRequest: RunMigrationRequest,
+    DescribeDBCharsetsRequest: DescribeDBCharsetsRequest,
     RestoreInstanceResponse: RestoreInstanceResponse,
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
+    StartIncrementalMigrationRequest: StartIncrementalMigrationRequest,
+    Migration: Migration,
     ModifyDBInstanceNetworkRequest: ModifyDBInstanceNetworkRequest,
+    MigrationDetail: MigrationDetail,
     RecycleDBInstanceRequest: RecycleDBInstanceRequest,
-    ModifyBackupStrategyRequest: ModifyBackupStrategyRequest,
+    DescribeAccountsRequest: DescribeAccountsRequest,
     MigrateTask: MigrateTask,
     SpecInfo: SpecInfo,
     DescribeOrdersResponse: DescribeOrdersResponse,
@@ -5647,13 +7256,16 @@ module.exports = {
     SlowlogInfo: SlowlogInfo,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     DescribeMigrationsResponse: DescribeMigrationsResponse,
+    ModifyBackupStrategyRequest: ModifyBackupStrategyRequest,
     DescribeZonesRequest: DescribeZonesRequest,
     DeleteDBRequest: DeleteDBRequest,
     MigrateSource: MigrateSource,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
+    ModifyBackupMigrationResponse: ModifyBackupMigrationResponse,
     ModifyAccountPrivilegeRequest: ModifyAccountPrivilegeRequest,
+    CreateBackupMigrationRequest: CreateBackupMigrationRequest,
     DescribeMigrationsRequest: DescribeMigrationsRequest,
-    DescribeFlowStatusRequest: DescribeFlowStatusRequest,
+    DescribeBackupUploadSizeResponse: DescribeBackupUploadSizeResponse,
     DescribeDBsRequest: DescribeDBsRequest,
     ModifyDBNameRequest: ModifyDBNameRequest,
     DescribeBackupsResponse: DescribeBackupsResponse,
@@ -5670,34 +7282,49 @@ module.exports = {
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     AccountPassword: AccountPassword,
     DeleteMigrationResponse: DeleteMigrationResponse,
+    DescribeBackupMigrationRequest: DescribeBackupMigrationRequest,
     InstanceDBDetail: InstanceDBDetail,
+    StartIncrementalMigrationResponse: StartIncrementalMigrationResponse,
     DbRollbackTimeInfo: DbRollbackTimeInfo,
     ModifyDBInstanceNetworkResponse: ModifyDBInstanceNetworkResponse,
     AccountDetail: AccountDetail,
     CreateBackupResponse: CreateBackupResponse,
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
+    DescribeBackupCommandResponse: DescribeBackupCommandResponse,
+    DescribeUploadBackupInfoResponse: DescribeUploadBackupInfoResponse,
     CreateMigrationRequest: CreateMigrationRequest,
+    DescribeUploadBackupInfoRequest: DescribeUploadBackupInfoRequest,
     ModifyDBNameResponse: ModifyDBNameResponse,
+    CosUploadBackupFile: CosUploadBackupFile,
+    StartBackupMigrationRequest: StartBackupMigrationRequest,
     Backup: Backup,
+    DescribeBackupCommandRequest: DescribeBackupCommandRequest,
     AccountRemark: AccountRemark,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
+    CreateIncrementalMigrationResponse: CreateIncrementalMigrationResponse,
     AccountPrivilegeModifyInfo: AccountPrivilegeModifyInfo,
-    MigrateTarget: MigrateTarget,
+    DescribeBackupMigrationResponse: DescribeBackupMigrationResponse,
     DescribeZonesResponse: DescribeZonesResponse,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DBPrivilege: DBPrivilege,
     DescribeOrdersRequest: DescribeOrdersRequest,
+    DeleteIncrementalMigrationResponse: DeleteIncrementalMigrationResponse,
     ResourceTag: ResourceTag,
+    CreateBackupMigrationResponse: CreateBackupMigrationResponse,
     RecycleDBInstanceResponse: RecycleDBInstanceResponse,
     DeleteAccountRequest: DeleteAccountRequest,
+    DeleteBackupMigrationResponse: DeleteBackupMigrationResponse,
     CreateBackupRequest: CreateBackupRequest,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
+    ModifyIncrementalMigrationResponse: ModifyIncrementalMigrationResponse,
+    MigrationAction: MigrationAction,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     CloneDBRequest: CloneDBRequest,
     DescribeMigrationDetailResponse: DescribeMigrationDetailResponse,
     ModifyMigrationRequest: ModifyMigrationRequest,
     CreateAccountResponse: CreateAccountResponse,
+    DescribeBackupUploadSizeRequest: DescribeBackupUploadSizeRequest,
     DeleteDBResponse: DeleteDBResponse,
     CreateDBResponse: CreateDBResponse,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
@@ -5707,13 +7334,18 @@ module.exports = {
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeSlowlogsRequest: DescribeSlowlogsRequest,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
+    MigrationStep: MigrationStep,
     TerminateDBInstanceResponse: TerminateDBInstanceResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackInstanceRequest: RollbackInstanceRequest,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     DescribeRollbackTimeRequest: DescribeRollbackTimeRequest,
+    DescribeIncrementalMigrationResponse: DescribeIncrementalMigrationResponse,
     ModifyDBRemarkResponse: ModifyDBRemarkResponse,
+    MigrateTarget: MigrateTarget,
     CreateDBInstancesResponse: CreateDBInstancesResponse,
+    ModifyBackupMigrationRequest: ModifyBackupMigrationRequest,
     DeleteAccountResponse: DeleteAccountResponse,
+    DescribeBackupsRequest: DescribeBackupsRequest,
 
 }

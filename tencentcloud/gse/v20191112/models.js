@@ -52,6 +52,97 @@ class GameProperty extends  AbstractModel {
 }
 
 /**
+ * DeleteTimerScalingPolicy response structure.
+ * @class
+ */
+class DeleteTimerScalingPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTimerScalingPolicies request structure.
+ * @class
+ */
+class DescribeTimerScalingPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the fleet to be bound with the policy
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * Scheduled scaling policy name
+         * @type {string || null}
+         */
+        this.TimerName = null;
+
+        /**
+         * Start time of the scheduled scaling policy
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * End time of the scheduled scaling policy
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Pagination offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.TimerName = 'TimerName' in params ? params.TimerName : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Service deployment attributes
  * @class
  */
@@ -248,24 +339,19 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
- * UpdateGameServerSession response structure.
+ * Configuration of target tracking scaling
  * @class
  */
-class UpdateGameServerSessionResponse extends  AbstractModel {
+class TargetConfiguration extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Updated game session
-         * @type {GameServerSession || null}
+         * Ratio of reserved server session resource 
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.GameServerSession = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.TargetValue = null;
 
     }
 
@@ -276,13 +362,7 @@ class UpdateGameServerSessionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.GameServerSession) {
-            let obj = new GameServerSession();
-            obj.deserialize(params.GameServerSession)
-            this.GameServerSession = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TargetValue = 'TargetValue' in params ? params.TargetValue : null;
 
     }
 }
@@ -551,32 +631,32 @@ class UpdateBucketCORSOptResponse extends  AbstractModel {
 }
 
 /**
- * Player latency information
+ * DescribeTimerScalingPolicies response structure.
  * @class
  */
-class PlayerLatency extends  AbstractModel {
+class DescribeTimerScalingPoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Player ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Configuration of the scheduled scaling policy
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<TimerScalingPolicy> || null}
          */
-        this.PlayerId = null;
+        this.TimerScalingPolicies = null;
 
         /**
-         * Name of region corresponding to latency
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RegionIdentifier = null;
-
-        /**
-         * Latency in milliseconds
+         * Total number of scheduled scaling policies
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.LatencyInMilliseconds = null;
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -587,9 +667,45 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
-        this.RegionIdentifier = 'RegionIdentifier' in params ? params.RegionIdentifier : null;
-        this.LatencyInMilliseconds = 'LatencyInMilliseconds' in params ? params.LatencyInMilliseconds : null;
+
+        if (params.TimerScalingPolicies) {
+            this.TimerScalingPolicies = new Array();
+            for (let z in params.TimerScalingPolicies) {
+                let obj = new TimerScalingPolicy();
+                obj.deserialize(params.TimerScalingPolicies[z]);
+                this.TimerScalingPolicies.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetServerReserved response structure.
+ * @class
+ */
+class SetServerReservedResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -660,6 +776,159 @@ class StopGameServerSessionPlacementRequest extends  AbstractModel {
             return;
         }
         this.PlacementId = 'PlacementId' in params ? params.PlacementId : null;
+
+    }
+}
+
+/**
+ * Configurations of a scheduled scaling policy
+ * @class
+ */
+class TimerScalingPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the policy. When it’s filled in, the policy will be updated.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimerId = null;
+
+        /**
+         * Scheduled scaling policy name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimerName = null;
+
+        /**
+         * Scheduled scaling policy status. `0`: Undefined, `1`: Not started, 2: Activated, `3`: Stopped, `4`: Expired
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TimerStatus = null;
+
+        /**
+         * The capacity configurations of the scheduled scaling policy
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {TimerFleetCapacity || null}
+         */
+        this.TimerFleetCapacity = null;
+
+        /**
+         * The recurrence pattern of auto-scaling
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {TimerConfiguration || null}
+         */
+        this.TimerConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimerId = 'TimerId' in params ? params.TimerId : null;
+        this.TimerName = 'TimerName' in params ? params.TimerName : null;
+        this.TimerStatus = 'TimerStatus' in params ? params.TimerStatus : null;
+
+        if (params.TimerFleetCapacity) {
+            let obj = new TimerFleetCapacity();
+            obj.deserialize(params.TimerFleetCapacity)
+            this.TimerFleetCapacity = obj;
+        }
+
+        if (params.TimerConfiguration) {
+            let obj = new TimerConfiguration();
+            obj.deserialize(params.TimerConfiguration)
+            this.TimerConfiguration = obj;
+        }
+
+    }
+}
+
+/**
+ * The capacity configurations of the scheduled scaling policy
+ * @class
+ */
+class TimerFleetCapacity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the fleet to be bound with the policy
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * Desired number of instances
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DesiredInstances = null;
+
+        /**
+         * Minimum number of instances
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * Maximum number of instances
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * Scaling cooldown period, in minutes
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScalingInterval = null;
+
+        /**
+         * Scaling type. `1`: manual, `2`: automatic, `0`: undefined
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScalingType = null;
+
+        /**
+         * Configuration of target tracking scaling
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {TargetConfiguration || null}
+         */
+        this.TargetConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.DesiredInstances = 'DesiredInstances' in params ? params.DesiredInstances : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.ScalingInterval = 'ScalingInterval' in params ? params.ScalingInterval : null;
+        this.ScalingType = 'ScalingType' in params ? params.ScalingType : null;
+
+        if (params.TargetConfiguration) {
+            let obj = new TargetConfiguration();
+            obj.deserialize(params.TargetConfiguration)
+            this.TargetConfiguration = obj;
+        }
 
     }
 }
@@ -846,6 +1115,59 @@ class CopyFleetRequest extends  AbstractModel {
             }
         }
         this.SelectedTimerType = 'SelectedTimerType' in params ? params.SelectedTimerType : null;
+
+    }
+}
+
+/**
+ * Details of the recurrence pattern of the scheduled scaling policy
+ * @class
+ */
+class TimerValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Execute once every X day(s)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Day = null;
+
+        /**
+         * Specify the first day to execute the scaling action in a month (execute once per day)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FromDay = null;
+
+        /**
+         * Specify the last day to execute the scaling action in a month
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ToDay = null;
+
+        /**
+         * Specify the week days to repeat the scaling action. Multiple values are supported. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday). 
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.WeekDays = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Day = 'Day' in params ? params.Day : null;
+        this.FromDay = 'FromDay' in params ? params.FromDay : null;
+        this.ToDay = 'ToDay' in params ? params.ToDay : null;
+        this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
 
     }
 }
@@ -1056,6 +1378,78 @@ class UpdateGameServerSessionRequest extends  AbstractModel {
 }
 
 /**
+ * PutTimerScalingPolicy response structure.
+ * @class
+ */
+class PutTimerScalingPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Player latency information
+ * @class
+ */
+class PlayerLatency extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Player ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PlayerId = null;
+
+        /**
+         * Name of region corresponding to latency
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionIdentifier = null;
+
+        /**
+         * Latency in milliseconds
+         * @type {number || null}
+         */
+        this.LatencyInMilliseconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
+        this.RegionIdentifier = 'RegionIdentifier' in params ? params.RegionIdentifier : null;
+        this.LatencyInMilliseconds = 'LatencyInMilliseconds' in params ? params.LatencyInMilliseconds : null;
+
+    }
+}
+
+/**
  * Disk storage information
  * @class
  */
@@ -1189,6 +1583,48 @@ class GetGameServerSessionLogUrlRequest extends  AbstractModel {
             return;
         }
         this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+
+    }
+}
+
+/**
+ * SetServerReserved request structure.
+ * @class
+ */
+class SetServerReservedRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the fleet to be bound with the policy
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether the instance is retained. Valid values: 1 (retained), 0 (not retained). Default value: 0.
+         * @type {number || null}
+         */
+        this.ReserveValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ReserveValue = 'ReserveValue' in params ? params.ReserveValue : null;
 
     }
 }
@@ -1354,6 +1790,64 @@ class UpdateBucketCORSOptRequest extends  AbstractModel {
 }
 
 /**
+ * The recurrence pattern of auto-scaling
+ * @class
+ */
+class TimerConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The recurrence pattern of auto-scaling. `0`: undefined, `1`: once, `2`: daily, `3`: monthly, `4`: weekly
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TimerType = null;
+
+        /**
+         * Details of the recurrence pattern of auto-scaling
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {TimerValue || null}
+         */
+        this.TimerValue = null;
+
+        /**
+         * Start time of the scheduled scaling policy
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * End time of the scheduled scaling policy
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimerType = 'TimerType' in params ? params.TimerType : null;
+
+        if (params.TimerValue) {
+            let obj = new TimerValue();
+            obj.deserialize(params.TimerValue)
+            this.TimerValue = obj;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * Runtime configuration
  * @class
  */
@@ -1399,6 +1893,48 @@ class RuntimeConfiguration extends  AbstractModel {
                 this.ServerProcesses.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteTimerScalingPolicy request structure.
+ * @class
+ */
+class DeleteTimerScalingPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the policy
+         * @type {string || null}
+         */
+        this.TimerId = null;
+
+        /**
+         * ID of the fleet to be bound with the policy
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * Scheduled scaling policy name
+         * @type {string || null}
+         */
+        this.TimerName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimerId = 'TimerId' in params ? params.TimerId : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.TimerName = 'TimerName' in params ? params.TimerName : null;
 
     }
 }
@@ -1918,6 +2454,46 @@ class JoinGameServerSessionBatchRequest extends  AbstractModel {
             obj.deserialize(params.PlayerDataMap)
             this.PlayerDataMap = obj;
         }
+
+    }
+}
+
+/**
+ * UpdateGameServerSession response structure.
+ * @class
+ */
+class UpdateGameServerSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Updated game session
+         * @type {GameServerSession || null}
+         */
+        this.GameServerSession = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSession) {
+            let obj = new GameServerSession();
+            obj.deserialize(params.GameServerSession)
+            this.GameServerSession = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2892,6 +3468,39 @@ class StopGameServerSessionPlacementResponse extends  AbstractModel {
 }
 
 /**
+ * PutTimerScalingPolicy request structure.
+ * @class
+ */
+class PutTimerScalingPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration of the scheduled scaling policy
+         * @type {TimerScalingPolicy || null}
+         */
+        this.TimerScalingPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TimerScalingPolicy) {
+            let obj = new TimerScalingPolicy();
+            obj.deserialize(params.TimerScalingPolicy)
+            this.TimerScalingPolicy = obj;
+        }
+
+    }
+}
+
+/**
  * Identity credentials for instance access
  * @class
  */
@@ -2954,30 +3563,41 @@ class InstanceAccess extends  AbstractModel {
 
 module.exports = {
     GameProperty: GameProperty,
+    DeleteTimerScalingPolicyResponse: DeleteTimerScalingPolicyResponse,
+    DescribeTimerScalingPoliciesRequest: DescribeTimerScalingPoliciesRequest,
     FleetAttributes: FleetAttributes,
-    UpdateGameServerSessionResponse: UpdateGameServerSessionResponse,
+    TargetConfiguration: TargetConfiguration,
     InboundPermission: InboundPermission,
     DescribeGameServerSessionsResponse: DescribeGameServerSessionsResponse,
     GetInstanceAccessResponse: GetInstanceAccessResponse,
     JoinGameServerSessionRequest: JoinGameServerSessionRequest,
     DescribePlayerSessionsResponse: DescribePlayerSessionsResponse,
     UpdateBucketCORSOptResponse: UpdateBucketCORSOptResponse,
-    PlayerLatency: PlayerLatency,
+    DescribeTimerScalingPoliciesResponse: DescribeTimerScalingPoliciesResponse,
+    SetServerReservedResponse: SetServerReservedResponse,
     ServerProcesse: ServerProcesse,
     StopGameServerSessionPlacementRequest: StopGameServerSessionPlacementRequest,
+    TimerScalingPolicy: TimerScalingPolicy,
+    TimerFleetCapacity: TimerFleetCapacity,
     CopyFleetRequest: CopyFleetRequest,
+    TimerValue: TimerValue,
     CopyFleetResponse: CopyFleetResponse,
     GetInstanceAccessRequest: GetInstanceAccessRequest,
     DescribeGameServerSessionsRequest: DescribeGameServerSessionsRequest,
     UpdateGameServerSessionRequest: UpdateGameServerSessionRequest,
+    PutTimerScalingPolicyResponse: PutTimerScalingPolicyResponse,
+    PlayerLatency: PlayerLatency,
     DiskInfo: DiskInfo,
     StartGameServerSessionPlacementResponse: StartGameServerSessionPlacementResponse,
     Credentials: Credentials,
     GetGameServerSessionLogUrlRequest: GetGameServerSessionLogUrlRequest,
+    SetServerReservedRequest: SetServerReservedRequest,
     CreateGameServerSessionResponse: CreateGameServerSessionResponse,
     DescribePlayerSessionsRequest: DescribePlayerSessionsRequest,
     UpdateBucketCORSOptRequest: UpdateBucketCORSOptRequest,
+    TimerConfiguration: TimerConfiguration,
     RuntimeConfiguration: RuntimeConfiguration,
+    DeleteTimerScalingPolicyRequest: DeleteTimerScalingPolicyRequest,
     JoinGameServerSessionResponse: JoinGameServerSessionResponse,
     DesiredPlayerSession: DesiredPlayerSession,
     SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
@@ -2986,6 +3606,7 @@ module.exports = {
     PlacedPlayerSession: PlacedPlayerSession,
     GameServerSessionPlacement: GameServerSessionPlacement,
     JoinGameServerSessionBatchRequest: JoinGameServerSessionBatchRequest,
+    UpdateGameServerSessionResponse: UpdateGameServerSessionResponse,
     PlayerSession: PlayerSession,
     CreateGameServerSessionRequest: CreateGameServerSessionRequest,
     GetGameServerSessionLogUrlResponse: GetGameServerSessionLogUrlResponse,
@@ -3002,6 +3623,7 @@ module.exports = {
     PlayerDataMap: PlayerDataMap,
     ResourceCreationLimitPolicy: ResourceCreationLimitPolicy,
     StopGameServerSessionPlacementResponse: StopGameServerSessionPlacementResponse,
+    PutTimerScalingPolicyRequest: PutTimerScalingPolicyRequest,
     InstanceAccess: InstanceAccess,
 
 }

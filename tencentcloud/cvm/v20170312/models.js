@@ -1160,6 +1160,12 @@ class SystemDisk extends  AbstractModel {
          */
         this.DiskSize = null;
 
+        /**
+         * ID of the dedicated cluster to which the instance belongs.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -1172,6 +1178,7 @@ class SystemDisk extends  AbstractModel {
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -1743,7 +1750,7 @@ class ZoneInfo extends  AbstractModel {
 
         /**
          * Availability zone name, such as `ap-guangzhou-3`.
-The following is a list of all availability zones:
+Check below for the list of all availability zones:
 <li> ap-chongqing-1 </li>
 <li> ap-seoul-1 </li>
 <li> ap-seoul-2 </li>
@@ -1779,6 +1786,8 @@ The following is a list of all availability zones:
 <li> ap-beijing-3 </li>
 <li> ap-beijing-4 </li>
 <li> ap-beijing-5 </li>
+<li> ap-beijing-6 </li>
+<li> ap-beijing-7 </li>
 <li> na-siliconvalley-1 </li>
 <li> na-siliconvalley-2 </li>
 <li> eu-frankfurt-1 </li>
@@ -2685,7 +2694,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain the ID in the returned `Zone` field.
+         * ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/35071) API and obtain the ID in the returned `Zone` field.
          * @type {string || null}
          */
         this.Zone = null;
@@ -3884,6 +3893,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ThroughputPerformance = null;
 
+        /**
+         * ID of the dedicated cluster to which the instance belongs.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -3901,6 +3917,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -8283,7 +8300,7 @@ Unit: this field uses the currency code specified in `currencyCode`, and only su
 
         /**
          * The instance model of the Reserved Instance, such as S3.MEDIUM4.
-Valid value: <a href="https://intl.cloud.tencent.com/product/cvm/instances?from_cn_redirect=1">Instance Models</a>
+Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518">Reserved Instance Types</a>
          * @type {string || null}
          */
         this.InstanceType = null;

@@ -39,7 +39,7 @@ const FollowRedirect = models.FollowRedirect;
 const RequestHeader = models.RequestHeader;
 const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
-const UserAgentFilter = models.UserAgentFilter;
+const PostSize = models.PostSize;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
 const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
 const CacheConfigNoCache = models.CacheConfigNoCache;
@@ -64,6 +64,7 @@ const HeaderKey = models.HeaderKey;
 const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
 const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
+const UserAgentFilter = models.UserAgentFilter;
 const DescribeCdnOriginIpRequest = models.DescribeCdnOriginIpRequest;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
 const TopicInfo = models.TopicInfo;
@@ -79,6 +80,7 @@ const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
 const BotCookie = models.BotCookie;
 const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
 const Ipv6 = models.Ipv6;
+const WafSubRuleStatus = models.WafSubRuleStatus;
 const StatusCodeCache = models.StatusCodeCache;
 const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
 const EnableClsLogTopicResponse = models.EnableClsLogTopicResponse;
@@ -130,6 +132,7 @@ const UpdateScdnDomainRequest = models.UpdateScdnDomainRequest;
 const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
 const ManageClsTopicDomainsRequest = models.ManageClsTopicDomainsRequest;
 const ScdnWafConfig = models.ScdnWafConfig;
+const CreateScdnFailedLogTaskRequest = models.CreateScdnFailedLogTaskRequest;
 const Cache = models.Cache;
 const ForceRedirect = models.ForceRedirect;
 const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
@@ -182,6 +185,7 @@ const BandwidthAlert = models.BandwidthAlert;
 const ClsLogObject = models.ClsLogObject;
 const RegionMapRelation = models.RegionMapRelation;
 const PurgePathCacheRequest = models.PurgePathCacheRequest;
+const CreateScdnFailedLogTaskResponse = models.CreateScdnFailedLogTaskResponse;
 const CdnData = models.CdnData;
 const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
 const OriginPullOptimization = models.OriginPullOptimization;
@@ -227,6 +231,7 @@ const OriginIp = models.OriginIp;
 const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const CacheTagKey = models.CacheTagKey;
+const Quic = models.Quic;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
 const OfflineCache = models.OfflineCache;
 const UrlRedirectRule = models.UrlRedirectRule;
@@ -355,7 +360,7 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * This API (DisableCaches) is used to block access to a specific URL on CDN. After a URL is blocked, error 403 will be returned for all access requests to it. (This API is during beta test and not fully available now.)
+     * This API is used to block access to a specific URL on CDN. After a URL is blocked, a 403 error will be returned for the arrived access requests initiated from the Chinese mainland. This API is in beta and not fully available now.
      * @param {DisableCachesRequest} req
      * @param {function(string, DisableCachesResponse):void} cb
      * @public
@@ -601,6 +606,17 @@ By default, a maximum of 1000 URLs can be prefetched per day either within or ou
     }
 
     /**
+     * This API is used to recreate a failed event log task.
+     * @param {CreateScdnFailedLogTaskRequest} req
+     * @param {function(string, CreateScdnFailedLogTaskResponse):void} cb
+     * @public
+     */
+    CreateScdnFailedLogTask(req, cb) {
+        let resp = new CreateScdnFailedLogTaskResponse();
+        this.request("CreateScdnFailedLogTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5-15 minutes.
 
      * @param {DisableClsLogTopicRequest} req
@@ -657,7 +673,7 @@ By default, a maximum of 1000 URLs can be prefetched per day either within or ou
     }
 
     /**
-     * This API is used to query the IP information of CDN intermediate nodes. Note: the relevant allowlist needs to be enabled for this API.
+     * This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon. Please call `DescribeIpStatus` instead.
      * @param {DescribeCdnOriginIpRequest} req
      * @param {function(string, DescribeCdnOriginIpResponse):void} cb
      * @public

@@ -1279,26 +1279,26 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * `UserAgent` blocklist/allowlist configuration
+ * Maximum size of the file uploaded for streaming via a POST request
  * @class
  */
-class UserAgentFilter extends  AbstractModel {
+class PostSize extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Limit the size of a POST request. The default value is 32 MB.
+off: Disable
+on: Enable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * UA blocklist/allowlist effect rule list
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<UserAgentFilterRule> || null}
+         * Maximum size. Value range: 1 MB to 200 MB.
+         * @type {number || null}
          */
-        this.FilterRules = null;
+        this.MaxSize = null;
 
     }
 
@@ -1310,15 +1310,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.FilterRules) {
-            this.FilterRules = new Array();
-            for (let z in params.FilterRules) {
-                let obj = new UserAgentFilterRule();
-                obj.deserialize(params.FilterRules[z]);
-                this.FilterRules.push(obj);
-            }
-        }
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
 
     }
 }
@@ -1713,12 +1705,11 @@ Data generated before or at 23:59:59 on the end date will be returned
 
         /**
          * Object representing the sort criteria. The following objects are supported:
-url: sorts by access URL (including the query string). Supported filters are `flux` and `request`
-path: sorts by access URL (excluding the query string). Supported filters are `flux` and `request` (allowlist-based feature)
-district: sorts by district. Supported filters are `flux` and `request`
-isp: sorts by ISP. Supported filters are `flux` and `request`
-host: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, 2XX, 3XX, 4XX, 5XX, and `statusCode`
-originHost: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, `origin_2XX`, `origin_3XX`, `origin_4XX`, `origin_5XX`, and `OriginStatusCode`
+`url`: sorts by access URL (URLs carrying no parameters). Supported filters are `flux` and `request`.
+`district`: sorts by province, country, or region. Supported filters are `flux` and `request`.
+`isp`: sorts by ISP. Supported filters are `flux` and `request`.
+`host`: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, and `statusCode` (2XX, 3XX, 4XX, 5XX).
+`originHost`: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, and `OriginStatusCode` (origin_2XX, origin_3XX, origin_4XX, origin_5XX).
          * @type {string || null}
          */
         this.Metric = null;
@@ -2736,6 +2727,51 @@ class DeleteClsLogTopicRequest extends  AbstractModel {
 }
 
 /**
+ * `UserAgent` blocklist/allowlist configuration
+ * @class
+ */
+class UserAgentFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch. Valid values: on, off
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * UA blocklist/allowlist effect rule list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<UserAgentFilterRule> || null}
+         */
+        this.FilterRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new UserAgentFilterRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeCdnOriginIp request structure.
  * @class
  */
@@ -3531,6 +3567,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * WAF sub-rule status
+ * @class
+ */
+class WafSubRuleStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sub-rule status. Valid values: `on` and `off`.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * List of rule IDs
+         * @type {Array.<number> || null}
+         */
+        this.SubIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.SubIds = 'SubIds' in params ? params.SubIds : null;
+
+    }
+}
+
+/**
  * Status code cache expiration configuration. 404 status codes are cached for 10 seconds by default
  * @class
  */
@@ -4259,6 +4330,12 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
          */
         this.OfflineCache = null;
 
+        /**
+         * QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
+         * @type {Quic || null}
+         */
+        this.Quic = null;
+
     }
 
     /**
@@ -4448,6 +4525,12 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
             let obj = new OfflineCache();
             obj.deserialize(params.OfflineCache)
             this.OfflineCache = obj;
+        }
+
+        if (params.Quic) {
+            let obj = new Quic();
+            obj.deserialize(params.Quic)
+            this.Quic = obj;
         }
 
     }
@@ -4759,6 +4842,12 @@ global: global acceleration
          */
         this.OriginCombine = null;
 
+        /**
+         * QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
+         * @type {Quic || null}
+         */
+        this.Quic = null;
+
     }
 
     /**
@@ -4976,6 +5065,12 @@ global: global acceleration
             let obj = new OriginCombine();
             obj.deserialize(params.OriginCombine)
             this.OriginCombine = obj;
+        }
+
+        if (params.Quic) {
+            let obj = new Quic();
+            obj.deserialize(params.Quic)
+            this.Quic = obj;
         }
 
     }
@@ -5394,11 +5489,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IgnoreCacheControl = null;
 
         /**
-         * Ignore the Set-Cookie header of an origin server
-on: enabled
-off: disabled
-This is disabled by default
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether to cache the header and body on cache nodes if the origin server returns the header `Set-Cookie`.
+on: Enable; do not cache the header and body.
+off: Disable; follow the custom cache rules of cache nodes.
+It is disabled by default.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IgnoreSetCookie = null;
@@ -6493,7 +6588,7 @@ class DisableCachesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of URLs to be blocked
+         * List of URLs to be blocked (URLs must contain `http://` or `https://`).
 Up to 100 entries can be submitted at a time and 3,000 entries per day.
          * @type {Array.<string> || null}
          */
@@ -7083,6 +7178,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.OriginCombine = null;
 
+        /**
+         * POST request configuration item
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {PostSize || null}
+         */
+        this.PostMaxSize = null;
+
+        /**
+         * QUIC configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Quic || null}
+         */
+        this.Quic = null;
+
     }
 
     /**
@@ -7351,6 +7460,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             let obj = new OriginCombine();
             obj.deserialize(params.OriginCombine)
             this.OriginCombine = obj;
+        }
+
+        if (params.PostMaxSize) {
+            let obj = new PostSize();
+            obj.deserialize(params.PostMaxSize)
+            this.PostMaxSize = obj;
+        }
+
+        if (params.Quic) {
+            let obj = new Quic();
+            obj.deserialize(params.Quic)
+            this.Quic = obj;
         }
 
     }
@@ -7782,6 +7903,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Rules = null;
 
+        /**
+         * WAF rule level. Valid values: 100, 200, and 300.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * WAF sub-rule switch
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<WafSubRuleStatus> || null}
+         */
+        this.SubRuleSwitch = null;
+
     }
 
     /**
@@ -7809,6 +7944,51 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.Rules.push(obj);
             }
         }
+        this.Level = 'Level' in params ? params.Level : null;
+
+        if (params.SubRuleSwitch) {
+            this.SubRuleSwitch = new Array();
+            for (let z in params.SubRuleSwitch) {
+                let obj = new WafSubRuleStatus();
+                obj.deserialize(params.SubRuleSwitch[z]);
+                this.SubRuleSwitch.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateScdnFailedLogTask request structure.
+ * @class
+ */
+class CreateScdnFailedLogTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the failed task to retry
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Region. Valid values: `mainland` and `overseas`.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -8633,13 +8813,19 @@ class DescribeReportDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Query start time in the format of `yyyy-MM-dd`
+         * Query the start time in the format of `yyyy-MM-dd`
+If the report type is `daily`, the start time and end time must be the same day.
+If the report type is `weekly`, the start time must be Monday and the end time must be the Sunday of the same week.
+If the report type is `monthly`, the start time must be the first day of the calendar month and the end time must be the last day of the same calendar month.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time in the format of `yyyy-MM-dd`
+         * Query the end time in the format of `yyyy-MM-dd`
+If the report type is `daily`, the start time and end time must be of the same day.
+If the report type is `weekly`, the start time must be Monday and the end time must be the Sunday of the same week.
+If the report type is `monthly`, the start time must be the first day of the calendar month and the end time must be the last day of the same calendar month.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -10826,6 +11012,42 @@ class PurgePathCacheRequest extends  AbstractModel {
         this.Paths = 'Paths' in params ? params.Paths : null;
         this.FlushType = 'FlushType' in params ? params.FlushType : null;
         this.UrlEncode = 'UrlEncode' in params ? params.UrlEncode : null;
+
+    }
+}
+
+/**
+ * CreateScdnFailedLogTask response structure.
+ * @class
+ */
+class CreateScdnFailedLogTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creation result. 
+0: Creation succeeded
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13023,6 +13245,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * QUIC configuration item
+ * @class
+ */
+class Quic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable QUIC
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * DescribeDomains request structure.
  * @class
  */
@@ -13239,7 +13489,7 @@ module.exports = {
     RequestHeader: RequestHeader,
     DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     Referer: Referer,
-    UserAgentFilter: UserAgentFilter,
+    PostSize: PostSize,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     CacheConfigNoCache: CacheConfigNoCache,
@@ -13264,6 +13514,7 @@ module.exports = {
     DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
     DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
+    UserAgentFilter: UserAgentFilter,
     DescribeCdnOriginIpRequest: DescribeCdnOriginIpRequest,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
@@ -13279,6 +13530,7 @@ module.exports = {
     BotCookie: BotCookie,
     DescribeCdnIpRequest: DescribeCdnIpRequest,
     Ipv6: Ipv6,
+    WafSubRuleStatus: WafSubRuleStatus,
     StatusCodeCache: StatusCodeCache,
     DescribeIpVisitResponse: DescribeIpVisitResponse,
     EnableClsLogTopicResponse: EnableClsLogTopicResponse,
@@ -13330,6 +13582,7 @@ module.exports = {
     UpdatePayTypeRequest: UpdatePayTypeRequest,
     ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
     ScdnWafConfig: ScdnWafConfig,
+    CreateScdnFailedLogTaskRequest: CreateScdnFailedLogTaskRequest,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
@@ -13382,6 +13635,7 @@ module.exports = {
     ClsLogObject: ClsLogObject,
     RegionMapRelation: RegionMapRelation,
     PurgePathCacheRequest: PurgePathCacheRequest,
+    CreateScdnFailedLogTaskResponse: CreateScdnFailedLogTaskResponse,
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     OriginPullOptimization: OriginPullOptimization,
@@ -13427,6 +13681,7 @@ module.exports = {
     CdnIp: CdnIp,
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     CacheTagKey: CacheTagKey,
+    Quic: Quic,
     DescribeDomainsRequest: DescribeDomainsRequest,
     OfflineCache: OfflineCache,
     UrlRedirectRule: UrlRedirectRule,

@@ -960,6 +960,12 @@ class Inbound extends  AbstractModel {
          */
         this.Dir = null;
 
+        /**
+         * Rule description
+         * @type {string || null}
+         */
+        this.Desc = null;
+
     }
 
     /**
@@ -974,6 +980,7 @@ class Inbound extends  AbstractModel {
         this.PortRange = 'PortRange' in params ? params.PortRange : null;
         this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
         this.Dir = 'Dir' in params ? params.Dir : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
 
     }
 }
@@ -998,6 +1005,12 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
          */
         this.InstanceIds = null;
 
+        /**
+         * This parameter takes effect only when the IDs of read-only replicas are passed in. If this parameter is set to `False` or left empty, the security group will be bound to the RO groups of these read-only replicas. If this parameter is set to `True`, the security group will be bound to the read-only replicas themselves.
+         * @type {boolean || null}
+         */
+        this.ForReadonlyInstance = null;
+
     }
 
     /**
@@ -1009,6 +1022,7 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         }
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ForReadonlyInstance = 'ForReadonlyInstance' in params ? params.ForReadonlyInstance : null;
 
     }
 }
@@ -3721,7 +3735,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Volume = null;
 
         /**
-         * MySQL version. Valid values: 5.5, 5.6, 5.7. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported instance versions.
+         * MySQL version. Valid values: `5.5`, `5.6`, `5.7`, `8.0`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported versions.
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -3853,7 +3867,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * Instance type. Valid values: HA (High-Availability Edition), BASIC (Basic Edition). If this parameter is not specified, High-Availability Edition will be used by default.
+         * Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -3869,6 +3883,24 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          * @type {Array.<number> || null}
          */
         this.AlarmPolicyList = null;
+
+        /**
+         * The number of nodes of the instance. To purchase a read-only replica or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
+         * @type {number || null}
+         */
+        this.InstanceNodes = null;
+
+        /**
+         * The number of CPU cores of the instance. If this parameter is left empty, the number of CPU cores depends on the `Memory` value.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.AutoSyncFlag = null;
 
     }
 
@@ -3928,6 +3960,9 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
         this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
         this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
+        this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.AutoSyncFlag = 'AutoSyncFlag' in params ? params.AutoSyncFlag : null;
 
     }
 }
@@ -4345,10 +4380,16 @@ which is left empty by default. Specify this parameter when cloning a strong syn
         this.BackupZone = null;
 
         /**
-         * Type of the cloned instance. Valid values: `HA` (High-Availability Edition), `EXCLUSIVE` (dedicated). Default value: `HA`.
+         * Resource isolation type of the clone. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance). Default value: `UNIVERSAL`.
          * @type {string || null}
          */
         this.DeviceType = null;
+
+        /**
+         * The number of nodes of the clone. If this parameter is set to `3` or the `BackupZone` parameter is specified, the clone will have three nodes. If this parameter is set to `2` or left empty, the clone will have two nodes.
+         * @type {number || null}
+         */
+        this.InstanceNodes = null;
 
     }
 
@@ -4383,6 +4424,7 @@ which is left empty by default. Specify this parameter when cloning a strong syn
         this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
         this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
 
     }
 }
@@ -4604,6 +4646,12 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * This parameter takes effect only when the ID of read-only replica is passed in. If this parameter is set to `False` or left empty, the security groups bound with the RO group of the read-only replica will be queried. If this parameter is set to `True`, the security groups bound with the read-only replica itself will be queried.
+         * @type {boolean || null}
+         */
+        this.ForReadonlyInstance = null;
+
     }
 
     /**
@@ -4614,6 +4662,7 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ForReadonlyInstance = 'ForReadonlyInstance' in params ? params.ForReadonlyInstance : null;
 
     }
 }
@@ -6346,6 +6395,12 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * This parameter takes effect only when the ID of read-only replica is passed in. If this parameter is set to `False` or left empty, the security groups bound with the RO group of the read-only replicas will be modified. If this parameter is set to `True`, the security groups bound with the read-only replica itself will be modified.
+         * @type {boolean || null}
+         */
+        this.ForReadonlyInstance = null;
+
     }
 
     /**
@@ -6357,6 +6412,7 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.ForReadonlyInstance = 'ForReadonlyInstance' in params ? params.ForReadonlyInstance : null;
 
     }
 }
@@ -6499,6 +6555,12 @@ class Outbound extends  AbstractModel {
          */
         this.Dir = null;
 
+        /**
+         * Rule description
+         * @type {string || null}
+         */
+        this.Desc = null;
+
     }
 
     /**
@@ -6513,6 +6575,7 @@ class Outbound extends  AbstractModel {
         this.PortRange = 'PortRange' in params ? params.PortRange : null;
         this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
         this.Dir = 'Dir' in params ? params.Dir : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
 
     }
 }
@@ -8633,6 +8696,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ZoneId = null;
 
+        /**
+         * The number of nodes
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InstanceNodes = null;
+
     }
 
     /**
@@ -8714,6 +8784,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
 
     }
 }
@@ -9797,7 +9868,7 @@ class RoInstanceInfo extends  AbstractModel {
         this.DeviceType = null;
 
         /**
-         * Database engine version of the RO instance. Value range: 5.1, 5.5, 5.6, 5.7
+         * Database engine version of the read-only replica. Valid values: `5.1`, `5.5`, `5.6`, `5.7`, `8.0`
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -11751,6 +11822,12 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
          */
         this.InstanceIds = null;
 
+        /**
+         * This parameter takes effect only when the IDs of read-only replicas are passed in. If this parameter is set to `False` or left empty, the security group will be unbound from the RO groups of these read-only replicas. If this parameter is set to `True`, the security group will be unbound from the read-only replicas themselves.
+         * @type {boolean || null}
+         */
+        this.ForReadonlyInstance = null;
+
     }
 
     /**
@@ -11762,6 +11839,7 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
         }
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ForReadonlyInstance = 'ForReadonlyInstance' in params ? params.ForReadonlyInstance : null;
 
     }
 }

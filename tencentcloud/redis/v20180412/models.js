@@ -3497,6 +3497,13 @@ class InstanceIntegerParam extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * Parameter unit
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Unit = null;
+
     }
 
     /**
@@ -3515,6 +3522,7 @@ class InstanceIntegerParam extends  AbstractModel {
         this.Min = 'Min' in params ? params.Min : null;
         this.Max = 'Max' in params ? params.Max : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
 
     }
 }
@@ -8292,6 +8300,12 @@ class InstanceSlowlogDetail extends  AbstractModel {
          */
         this.ExecuteTime = null;
 
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.Node = null;
+
     }
 
     /**
@@ -8306,6 +8320,7 @@ class InstanceSlowlogDetail extends  AbstractModel {
         this.Command = 'Command' in params ? params.Command : null;
         this.CommandLine = 'CommandLine' in params ? params.CommandLine : null;
         this.ExecuteTime = 'ExecuteTime' in params ? params.ExecuteTime : null;
+        this.Node = 'Node' in params ? params.Node : null;
 
     }
 }

@@ -3257,6 +3257,13 @@ Note: this field may return null, indicating that no valid value is obtained.
          */
         this.KubeScheduler = null;
 
+        /**
+         * etcd custom parameter, which is only effective for self-deployed cluster.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Etcd = null;
+
     }
 
     /**
@@ -3269,6 +3276,7 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.KubeAPIServer = 'KubeAPIServer' in params ? params.KubeAPIServer : null;
         this.KubeControllerManager = 'KubeControllerManager' in params ? params.KubeControllerManager : null;
         this.KubeScheduler = 'KubeScheduler' in params ? params.KubeScheduler : null;
+        this.Etcd = 'Etcd' in params ? params.Etcd : null;
 
     }
 }
@@ -4859,6 +4867,18 @@ The following conditions are required to use ipvs-bpf network mode:
          */
         this.RuntimeVersion = null;
 
+        /**
+         * Indicates whether to enable the custom mode for the node’s pod CIDR range
+         * @type {boolean || null}
+         */
+        this.EnableCustomizedPodCIDR = null;
+
+        /**
+         * The basic number of Pods in custom mode
+         * @type {number || null}
+         */
+        this.BasePodNumber = null;
+
     }
 
     /**
@@ -4887,6 +4907,8 @@ The following conditions are required to use ipvs-bpf network mode:
         this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
         this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
         this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.EnableCustomizedPodCIDR = 'EnableCustomizedPodCIDR' in params ? params.EnableCustomizedPodCIDR : null;
+        this.BasePodNumber = 'BasePodNumber' in params ? params.BasePodNumber : null;
 
     }
 }

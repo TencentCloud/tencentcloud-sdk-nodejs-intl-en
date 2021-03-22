@@ -10294,21 +10294,23 @@ class DescribeAddressesRequest extends  AbstractModel {
         super();
 
         /**
-         * The list of unique IDs of EIPs, such as `eip-11112222`. `AddressIds` and `Filters` cannot be specified at the same time.
+         * The list of unique IDs of EIPs in the format of `eip-11112222`. `AddressIds` and `Filters.address-id` cannot be specified at the same time.
          * @type {Array.<string> || null}
          */
         this.AddressIds = null;
 
         /**
-         * The upper limit for `Filters` in each request is 10 and 5 for `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. Detailed filter conditions are as follows:
-<li> address-id - String - Required: no - (Filter condition) The unique EIP ID, such as `eip-11112222`.</li>
-<li> address-name - String - Required: no - (Filter condition) The EIP name. Fuzzy filtering is not supported.</li>
-<li> address-ip - String - Required: no - (Filter condition) Filters by EIP.</li>
-<li> address-status - String - Required: no - (Filter condition) The EIP state. Possible EIP states are: 'CREATING', 'BINDING', 'BIND', 'UNBINDING', 'UNBIND', 'OFFLINING', and 'BIND_ENI'.</li>
-<li> instance-id - String - Required: no - (Filter condition) The ID of the instance bound to the EIP, such as `ins-11112222`.</li>
-<li> private-ip-address - String - Required: no - (Filter condition) The private IP address bound to the EIP.</li>
-<li> network-interface-id - String - Required: no - (Filter condition) The ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
-<li> is-arrears - String - Required: no - (Filter condition) Whether the EIP is in arrears. (TRUE: the EIP is in arrears | FALSE: the billing status of the EIP is normal)</li>
+         * Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+<li> `address-id` - String - Required: No - (Filter condition) Filter by the unique EIP ID in the format of `eip-11112222`.</li>
+<li> `address-name` - String - Required: No - (Filter condition) Filter by EIP name. Fuzzy filtering is not supported. </li>
+<li> `address-ip` - String - Required: No - (Filter condition) Filter by the IP address of EIP.</li>
+<li> address-status - String - Required: no - (Filter condition) Filter by the EIP state. Possible EIP states are: 'CREATING', 'BINDING', 'BIND', 'UNBINDING', 'UNBIND', 'OFFLINING', and 'BIND_ENI'.</li>
+<li> `instance-id` - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP in the format of `ins-11112222`.</li>
+<li> `private-ip-address` - String - Required: No - (Filter condition) Filter by the private IP bound to the EIP.</li>
+<li> `network-interface-id` - String - Required: No - (Filter condition) Filter by the ID of the ENI bound to the EIP in the format of `eni-11112222`.</li>
+<li> `is-arrears` - String - Required: No - (Filter condition) Filter by whether the EIP is overdue. (TRUE: The EIP is overdue | FALSE: The EIP billing status is normal)</li>
+<li> `address-type` - String - Required: No - (Filter condition) Filter by the IP type. Optional values: 'EIP'，'AnycastEIP'，'HighQualityEIP'</li>
+<li> `address-isp` - String - Required: No - (Filter condition) Filter by the ISP type. Optional values: 'BGP'，'CMCC'，'CUCC', 'CTCC'</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -14130,6 +14132,49 @@ class DeleteAssistantCidrResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCcnRegionBandwidthLimits response structure.
+ * @class
+ */
+class DescribeCcnRegionBandwidthLimitsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The outbound bandwidth caps of all regions connected with the specified CCN instance
+         * @type {Array.<CcnRegionBandwidthLimit> || null}
+         */
+        this.CcnRegionBandwidthLimitSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CcnRegionBandwidthLimitSet) {
+            this.CcnRegionBandwidthLimitSet = new Array();
+            for (let z in params.CcnRegionBandwidthLimitSet) {
+                let obj = new CcnRegionBandwidthLimit();
+                obj.deserialize(params.CcnRegionBandwidthLimitSet[z]);
+                this.CcnRegionBandwidthLimitSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -19477,6 +19522,7 @@ class DescribeSecurityGroupsResponse extends  AbstractModel {
 
         /**
          * Security group object.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<SecurityGroup> || null}
          */
         this.SecurityGroupSet = null;
@@ -21662,6 +21708,34 @@ class DisableCcnRoutesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCcnRegionBandwidthLimits request structure.
+ * @class
+ */
+class DescribeCcnRegionBandwidthLimitsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The CCN instance ID in the format of `ccn-f49l6u0z`.
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+
+    }
+}
+
+/**
  * InquiryPriceCreateVpnGateway request structure.
  * @class
  */
@@ -23131,6 +23205,7 @@ module.exports = {
     InquiryPriceRenewVpnGatewayResponse: InquiryPriceRenewVpnGatewayResponse,
     AssignIpv6SubnetCidrBlockResponse: AssignIpv6SubnetCidrBlockResponse,
     DeleteAssistantCidrResponse: DeleteAssistantCidrResponse,
+    DescribeCcnRegionBandwidthLimitsResponse: DescribeCcnRegionBandwidthLimitsResponse,
     DescribeAddressesResponse: DescribeAddressesResponse,
     GatewayQos: GatewayQos,
     ModifyIpv6AddressesAttributeRequest: ModifyIpv6AddressesAttributeRequest,
@@ -23305,6 +23380,7 @@ module.exports = {
     CreateServiceTemplateResponse: CreateServiceTemplateResponse,
     DeleteNetworkInterfaceResponse: DeleteNetworkInterfaceResponse,
     DisableCcnRoutesResponse: DisableCcnRoutesResponse,
+    DescribeCcnRegionBandwidthLimitsRequest: DescribeCcnRegionBandwidthLimitsRequest,
     InquiryPriceCreateVpnGatewayRequest: InquiryPriceCreateVpnGatewayRequest,
     CreateAssistantCidrResponse: CreateAssistantCidrResponse,
     CustomerGatewayVendor: CustomerGatewayVendor,

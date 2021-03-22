@@ -302,6 +302,7 @@ const ConflictItem = models.ConflictItem;
 const InquiryPriceRenewVpnGatewayResponse = models.InquiryPriceRenewVpnGatewayResponse;
 const AssignIpv6SubnetCidrBlockResponse = models.AssignIpv6SubnetCidrBlockResponse;
 const DeleteAssistantCidrResponse = models.DeleteAssistantCidrResponse;
+const DescribeCcnRegionBandwidthLimitsResponse = models.DescribeCcnRegionBandwidthLimitsResponse;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
 const GatewayQos = models.GatewayQos;
 const ModifyIpv6AddressesAttributeRequest = models.ModifyIpv6AddressesAttributeRequest;
@@ -476,6 +477,7 @@ const DescribeClassicLinkInstancesRequest = models.DescribeClassicLinkInstancesR
 const CreateServiceTemplateResponse = models.CreateServiceTemplateResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
 const DisableCcnRoutesResponse = models.DisableCcnRoutesResponse;
+const DescribeCcnRegionBandwidthLimitsRequest = models.DescribeCcnRegionBandwidthLimitsRequest;
 const InquiryPriceCreateVpnGatewayRequest = models.InquiryPriceCreateVpnGatewayRequest;
 const CreateAssistantCidrResponse = models.CreateAssistantCidrResponse;
 const CustomerGatewayVendor = models.CustomerGatewayVendor;
@@ -524,6 +526,17 @@ class VpcClient extends AbstractClient {
     DescribeVpcResourceDashboard(req, cb) {
         let resp = new DescribeVpcResourceDashboardResponse();
         this.request("DescribeVpcResourceDashboard", req, resp, cb);
+    }
+
+    /**
+     * This API (DownloadCustomerGatewayConfiguration) is used to download a VPN tunnel configuration.
+     * @param {DownloadCustomerGatewayConfigurationRequest} req
+     * @param {function(string, DownloadCustomerGatewayConfigurationResponse):void} cb
+     * @public
+     */
+    DownloadCustomerGatewayConfiguration(req, cb) {
+        let resp = new DownloadCustomerGatewayConfigurationResponse();
+        this.request("DownloadCustomerGatewayConfiguration", req, resp, cb);
     }
 
     /**
@@ -1678,14 +1691,14 @@ After the deletion of a NAT gateway, the system will automatically delete the ro
     }
 
     /**
-     * This API (DownloadCustomerGatewayConfiguration) is used to download a VPN tunnel configuration.
-     * @param {DownloadCustomerGatewayConfigurationRequest} req
-     * @param {function(string, DownloadCustomerGatewayConfigurationResponse):void} cb
+     * This API is used to query the outbound bandwidth caps of all regions connected with a CCN instance. The API only returns regions included in the associated network instances.
+     * @param {DescribeCcnRegionBandwidthLimitsRequest} req
+     * @param {function(string, DescribeCcnRegionBandwidthLimitsResponse):void} cb
      * @public
      */
-    DownloadCustomerGatewayConfiguration(req, cb) {
-        let resp = new DownloadCustomerGatewayConfigurationResponse();
-        this.request("DownloadCustomerGatewayConfiguration", req, resp, cb);
+    DescribeCcnRegionBandwidthLimits(req, cb) {
+        let resp = new DescribeCcnRegionBandwidthLimitsResponse();
+        this.request("DescribeCcnRegionBandwidthLimits", req, resp, cb);
     }
 
     /**

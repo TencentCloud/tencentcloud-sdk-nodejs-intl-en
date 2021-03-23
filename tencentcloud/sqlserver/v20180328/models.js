@@ -1570,7 +1570,7 @@ Note: this field may return ‘null’, indicating that no valid values can be o
         this.BackupFiles = null;
 
         /**
-         * Migration task status,
+         * Migration task status. Valid values: `2` (Creation completed), `7` (Importing full backups), `8` (Waiting for incremental backups), `9` (Import success), `10` (Import failure), `12` (Importing incremental backups).
          * @type {number || null}
          */
         this.Status = null;
@@ -2227,7 +2227,7 @@ class DBCreateInfo extends  AbstractModel {
         this.DBName = null;
 
         /**
-         * Character set. Valid values: Chinese_PRC_CI_AS, Chinese_PRC_CS_AS, Chinese_PRC_BIN, Chinese_Taiwan_Stroke_CI_AS, SQL_Latin1_General_CP1_CI_AS, and SQL_Latin1_General_CP1_CS_AS. If this parameter is left empty, `Chinese_PRC_CI_AS` will be used by default
+         * Character set, which can be queried by the `DescribeDBCharsets` API. Default value: `Chinese_PRC_CI_AS`.
          * @type {string || null}
          */
         this.Charset = null;

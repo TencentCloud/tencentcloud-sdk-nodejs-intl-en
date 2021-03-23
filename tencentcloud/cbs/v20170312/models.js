@@ -745,22 +745,22 @@ class Price extends  AbstractModel {
         super();
 
         /**
-         * Original price of the advanced payment for a prepaid cloud disk (in CNY).
-Note: This field may return null, indicating that no valid value was found.
+         * Original price of a monthly-subscribed cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Discount price of the advanced payment for a prepaid cloud disk (in CNY).
-Note: This field may return null, indicating that no valid value was found.
+         * Discounted price of a monthly-subscribed cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DiscountPrice = null;
 
         /**
-         * Original unit price of a postpaid cloud disk (in CNY).
-Note: This field may return null, indicating that no valid value was found.
+         * Original unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.UnitPrice = null;
@@ -773,35 +773,35 @@ Note: This field may return null, indicating that no valid value was found.
         this.ChargeUnit = null;
 
         /**
-         * Postpaid cloud disk discount price. Unit: CNY.
-Note: This field may return null, indicating that no valid value was found.
+         * Discount unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.UnitPriceDiscount = null;
 
         /**
-         * Highly-precise published unit price of a monthly-subscribed cloud disk, in USD.
+         * Original payment of a monthly-subscribed cloud disk, in USD, with six decimal places.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginalPriceHigh = null;
 
         /**
-         * Highly-precise discounted unit price of a monthly-subscribed cloud disk, in USD.
+         * Discounted payment price of a monthly-subscribed cloud disk, in USD, with six decimal places.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiscountPriceHigh = null;
 
         /**
-         * Highly-precise published unit price of a pay-as-you-go cloud disk, in USD.
+         * Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UnitPriceHigh = null;
 
         /**
-         * Highly-precise discounted unit price of a pay-as-you-go cloud disk, in USD.
+         * Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1520,33 +1520,33 @@ class PrepayPrice extends  AbstractModel {
         super();
 
         /**
-         * Original price of the advanced payment for a prepaid cloud disk or snapshot (in CNY).
+         * Original payment of a monthly-subscribed cloud disk or a snapshot, in USD.
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Discount price of the advanced payment for a prepaid cloud disk or snapshot (in CNY).
+         * Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD.
          * @type {number || null}
          */
         this.DiscountPrice = null;
 
         /**
-         * Highly-precise published unit price of a monthly-subscribed cloud disk or a snapshot, in USD.
+         * Original payment of a monthly-subscribed cloud disk or a snapshot, in USD, with six decimal places.
          * @type {string || null}
          */
         this.OriginalPriceHigh = null;
 
         /**
-         * Highly-precise discounted unit price of a monthly-subscribed cloud disk or a snapshot, in USD.
+         * Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD, with six decimal places.
          * @type {string || null}
          */
         this.DiscountPriceHigh = null;
 
         /**
-         * Published unit price of a pay-as-you-go cloud disk, in USD.
+         * Original unit price of a pay-as-you-go cloud disk, in USD.
 Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * @type {number || null}
          */
         this.UnitPrice = null;
 
@@ -1560,19 +1560,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         /**
          * Discount unit price of a pay-as-you-go cloud disk, in USD.
 Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * @type {number || null}
          */
         this.UnitPriceDiscount = null;
 
         /**
-         * Highly-precise published unit price of a pay-as-you-go cloud disk, in USD.
+         * Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UnitPriceHigh = null;
 
         /**
-         * Highly-precise discounted unit price of a pay-as-you-go cloud disk, in USD.
+         * Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1933,7 +1933,7 @@ class Snapshot extends  AbstractModel {
         this.ShareReference = null;
 
         /**
-         * 
+         * The time when the snapshot sharing starts
          * @type {string || null}
          */
         this.TimeStartShare = null;
@@ -3065,7 +3065,9 @@ class DescribeSnapshotsRequest extends  AbstractModel {
         this.SnapshotIds = null;
 
         /**
-         * Filter conditions. The specification of both the `SnapshotIds` and `Filters` parameters is not supported. <br><li>snapshot-id - Array of String - Required or not: No - (Filter condition) Filter by the snapshot ID. The format of the snapshot ID is as follows: `snap-11112222`. <br><li>snapshot-name - Array of String - Required or not: No - (Filter condition) Filter by the snapshot name. <br><li>snapshot-state - Array of String - Required or not: No - (Filter condition) Filter by the snapshot status (NORMAL: normal | CREATING: creating | ROLLBACKING: rolling back). <br><li>disk-usage - Array of String - Required or not: No - (Filter condition) Filter by the type of the cloud disk for which the snapshot is created (SYSTEM_DISK: system disk | DATA_DISK: data disk). <br><li>project-id - Array of String - Required or not: No - (Filter condition) Filter by ID of the project to which the cloud disk belongs. <br><li>disk-id - Array of String - Required or not: No - (Filter condition) Filter by the ID of the cloud disk for which the snapshot is created. <br><li>zone - Array of String - Required or not: No - (Filter condition) Filter by [Availability Zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo). <br><li>encrypt - Array of String - Required or not: No - (Filter condition) According to whether it is an encrypted disk snapshot. (TRUE: indicates an encrypted disk snapshot | FALSE: indicates that it is not an encrypted disk snapshot.)
+         * Filters. It cannot be specified together with `SnapshotIds`.<br><li>snapshot-id - Array of String - Optional - Filters by snapshot ID, such as `snap-11112222`.<br><li>snapshot-name - Array of String - Optional - Filters by snapshot name. <br><li>snapshot-state - Array of String - Optional - Filters by snapshot state (NORMAL: normal | CREATING: creating | ROLLBACKING: rolling back). <br><li>disk-usage - Array of String - Optional - Filters by the type of the cloud disk from which a snapshot is created (SYSTEM_DISK: system disk | DATA_DISK: data disk).<br><li>project-id - Array of String - Optional - Filters by the ID of the project to which a cloud disk belongs. <br><li>disk-id - Array of String - Optional - Filters by the ID of the cloud disk from which a snapshot is created.<br><li>zone - Array of String - Optional - Filters by [availability zone](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo).<br><li>encrypt - Array of String - Optional - Filters by whether a snapshot is created from an encrypted cloud disk. (TRUE: a snapshot of an encrypted cloud disk | FALSE: not a snapshot of an encrypted cloud disk.)
+<li>snapshot-type- Array of String - Optional - Filters by the snapshot type specified in `snapshot-type`.
+(SHARED_SNAPSHOT: a shared snapshot | PRIVATE_SNAPSHOT: a private snapshot.)
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3356,7 +3358,7 @@ class Disk extends  AbstractModel {
         this.DiskState = null;
 
         /**
-         * Type of cloud disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3510,6 +3512,13 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.BackupDisk = null;
 
+        /**
+         * Extra performance for a cloud disk, in MB/sec.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
     }
 
     /**
@@ -3565,6 +3574,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.SnapshotCount = 'SnapshotCount' in params ? params.SnapshotCount : null;
         this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
         this.BackupDisk = 'BackupDisk' in params ? params.BackupDisk : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
 
     }
 }

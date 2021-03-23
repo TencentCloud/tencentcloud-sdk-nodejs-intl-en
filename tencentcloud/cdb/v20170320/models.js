@@ -3819,7 +3819,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.SlaveZone = null;
 
         /**
-         * Availability zone information of replica 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
+         * The availability zone information of Replica 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
          * @type {string || null}
          */
         this.BackupZone = null;

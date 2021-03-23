@@ -1018,7 +1018,7 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Async request ID
+         * Async task ID, which is returned by APIs related to async tasks, such as `CreateBackupDBInstance`.
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -1131,6 +1131,12 @@ class DescribeSlowLogsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -1146,6 +1152,7 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }
@@ -1194,6 +1201,12 @@ class DescribeSlowLogPatternsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -1209,6 +1222,7 @@ class DescribeSlowLogPatternsRequest extends  AbstractModel {
         this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }
@@ -1742,7 +1756,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ClusterType = null;
 
         /**
-         * Instance status. Valid values: 0 (to be initialized), 1 (in process), 2 (valid), -2 (expired)
+         * Instance status. Valid values: `0` (to be initialized), `1` (executing task), `2` (running), `-2` (isolated monthly-subscribed instance), `-3` (isolated pay-as-you-go instance)
          * @type {Array.<number> || null}
          */
         this.Status = null;
@@ -1801,6 +1815,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.SearchKey = null;
 
+        /**
+         * Tag information
+         * @type {TagInfo || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1823,6 +1843,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
         this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+
+        if (params.Tags) {
+            let obj = new TagInfo();
+            obj.deserialize(params.Tags)
+            this.Tags = obj;
+        }
 
     }
 }
@@ -1953,6 +1979,24 @@ class DescribeDBBackupsRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Backup mode. Valid values: `0` (logical backup), `1` (physical backup), `2` (both modes). Default value: `0`.
+         * @type {number || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * Number of entries per page. Maximum value: `100`. If this parameter is left empty, all entries will be returned.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset, starting from `0`. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
     }
 
     /**
@@ -1963,6 +2007,9 @@ class DescribeDBBackupsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3067,18 +3114,20 @@ class InstanceChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * Purchased usage period (in month). Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. Default value: 1.
+         * Purchased usage period (in month). Valid values: `1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36`. Default value: `1`.
+(This parameter is required in `InquirePriceRenewDBInstances` and `RenewDBInstances` APIs.)
          * @type {number || null}
          */
         this.Period = null;
 
         /**
          * Auto-renewal flag. Valid values:
-NOTIFY_AND_AUTO_RENEW: notify expiration and renew automatically
-NOTIFY_AND_MANUAL_RENEW: notify expiration but not renew automatically
-DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify expiration nor renew automatically
+`NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically
+`NOTIFY_AND_MANUAL_RENEW`: notify expiration but not renew automatically
+`DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify expiration nor renew automatically
 
-Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis when the account balance is sufficient.
+Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis when the account balance is sufficient.
+(This parameter is required in `InquirePriceRenewDBInstances` and `RenewDBInstances` APIs.)
          * @type {string || null}
          */
         this.RenewFlag = null;

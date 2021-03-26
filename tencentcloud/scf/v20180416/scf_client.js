@@ -31,6 +31,7 @@ const LayerVersionInfo = models.LayerVersionInfo;
 const PutProvisionedConcurrencyConfigResponse = models.PutProvisionedConcurrencyConfigResponse;
 const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse;
 const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
+const UsageInfo = models.UsageInfo;
 const PublicNetConfigIn = models.PublicNetConfigIn;
 const DeleteProvisionedConcurrencyConfigRequest = models.DeleteProvisionedConcurrencyConfigRequest;
 const DeleteReservedConcurrencyConfigResponse = models.DeleteReservedConcurrencyConfigResponse;
@@ -63,12 +64,14 @@ const ListLayersRequest = models.ListLayersRequest;
 const CopyFunctionRequest = models.CopyFunctionRequest;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
 const LayerVersionSimple = models.LayerVersionSimple;
+const TriggerCount = models.TriggerCount;
+const NamespaceLimit = models.NamespaceLimit;
 const CfsConfig = models.CfsConfig;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const ListFunctionsRequest = models.ListFunctionsRequest;
 const CreateTriggerRequest = models.CreateTriggerRequest;
 const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
-const ListLayersResponse = models.ListLayersResponse;
+const GetAccountResponse = models.GetAccountResponse;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
 const ListAsyncEventsRequest = models.ListAsyncEventsRequest;
 const Result = models.Result;
@@ -76,6 +79,7 @@ const CreateAliasResponse = models.CreateAliasResponse;
 const LogSearchContext = models.LogSearchContext;
 const TriggerInfo = models.TriggerInfo;
 const CreateFunctionRequest = models.CreateFunctionRequest;
+const GetAccountRequest = models.GetAccountRequest;
 const PutTotalConcurrencyConfigResponse = models.PutTotalConcurrencyConfigResponse;
 const DeleteAliasResponse = models.DeleteAliasResponse;
 const PublishVersionResponse = models.PublishVersionResponse;
@@ -104,6 +108,8 @@ const PutReservedConcurrencyConfigResponse = models.PutReservedConcurrencyConfig
 const FunctionLog = models.FunctionLog;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
 const CfsInsInfo = models.CfsInsInfo;
+const LimitsInfo = models.LimitsInfo;
+const ListLayersResponse = models.ListLayersResponse;
 const FunctionVersion = models.FunctionVersion;
 const Function = models.Function;
 const DeadLetterConfig = models.DeadLetterConfig;
@@ -113,6 +119,7 @@ const ListTriggersRequest = models.ListTriggersRequest;
 const CreateFunctionResponse = models.CreateFunctionResponse;
 const GetReservedConcurrencyConfigRequest = models.GetReservedConcurrencyConfigRequest;
 const PutProvisionedConcurrencyConfigRequest = models.PutProvisionedConcurrencyConfigRequest;
+const NamespaceUsage = models.NamespaceUsage;
 const ListAliasesRequest = models.ListAliasesRequest;
 const EipOutConfig = models.EipOutConfig;
 const Alias = models.Alias;
@@ -147,6 +154,17 @@ class ScfClient extends AbstractClient {
     UpdateAlias(req, cb) {
         let resp = new UpdateAliasResponse();
         this.request("UpdateAlias", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a namespace.
+     * @param {UpdateNamespaceRequest} req
+     * @param {function(string, UpdateNamespaceResponse):void} cb
+     * @public
+     */
+    UpdateNamespace(req, cb) {
+        let resp = new UpdateNamespaceResponse();
+        this.request("UpdateNamespace", req, resp, cb);
     }
 
     /**
@@ -277,14 +295,14 @@ You can manually configure the function after replication as required.
     }
 
     /**
-     * This API is used to update a namespace.
-     * @param {UpdateNamespaceRequest} req
-     * @param {function(string, UpdateNamespaceResponse):void} cb
+     * This API is used to create a version for a layer by using the given .zip file or COS object. Each time this API is called with the same layer name, a new version will be generated.
+     * @param {PublishLayerVersionRequest} req
+     * @param {function(string, PublishLayerVersionResponse):void} cb
      * @public
      */
-    UpdateNamespace(req, cb) {
-        let resp = new UpdateNamespaceResponse();
-        this.request("UpdateNamespace", req, resp, cb);
+    PublishLayerVersion(req, cb) {
+        let resp = new PublishLayerVersionResponse();
+        this.request("PublishLayerVersion", req, resp, cb);
     }
 
     /**
@@ -465,14 +483,14 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to create a version for a layer by using the given .zip file or COS object. Each time this API is called with the same layer name, a new version will be generated.
-     * @param {PublishLayerVersionRequest} req
-     * @param {function(string, PublishLayerVersionResponse):void} cb
+     * This API is used to get the account information.
+     * @param {GetAccountRequest} req
+     * @param {function(string, GetAccountResponse):void} cb
      * @public
      */
-    PublishLayerVersion(req, cb) {
-        let resp = new PublishLayerVersionResponse();
-        this.request("PublishLayerVersion", req, resp, cb);
+    GetAccount(req, cb) {
+        let resp = new GetAccountResponse();
+        this.request("GetAccount", req, resp, cb);
     }
 
     /**

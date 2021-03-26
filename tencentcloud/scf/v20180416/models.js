@@ -695,6 +695,70 @@ class PublishLayerVersionResponse extends  AbstractModel {
 }
 
 /**
+ * Usage information
+ * @class
+ */
+class UsageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of namespaces
+         * @type {number || null}
+         */
+        this.NamespacesCount = null;
+
+        /**
+         * Namespace details
+         * @type {Array.<NamespaceUsage> || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Upper limit of user concurrency memory in the current region
+         * @type {number || null}
+         */
+        this.TotalConcurrencyMem = null;
+
+        /**
+         * Quota of configured user concurrency memory in the current region
+         * @type {number || null}
+         */
+        this.TotalAllocatedConcurrencyMem = null;
+
+        /**
+         * Quota of account concurrency actually configured by user
+         * @type {number || null}
+         */
+        this.UserConcurrencyMemLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NamespacesCount = 'NamespacesCount' in params ? params.NamespacesCount : null;
+
+        if (params.Namespace) {
+            this.Namespace = new Array();
+            for (let z in params.Namespace) {
+                let obj = new NamespaceUsage();
+                obj.deserialize(params.Namespace[z]);
+                this.Namespace.push(obj);
+            }
+        }
+        this.TotalConcurrencyMem = 'TotalConcurrencyMem' in params ? params.TotalConcurrencyMem : null;
+        this.TotalAllocatedConcurrencyMem = 'TotalAllocatedConcurrencyMem' in params ? params.TotalAllocatedConcurrencyMem : null;
+        this.UserConcurrencyMemLimit = 'UserConcurrencyMemLimit' in params ? params.UserConcurrencyMemLimit : null;
+
+    }
+}
+
+/**
  * Public network access configuration
  * @class
  */
@@ -2333,6 +2397,201 @@ class LayerVersionSimple extends  AbstractModel {
 }
 
 /**
+ * `TriggerCount` describes the numbers of triggers in different types
+ * @class
+ */
+class TriggerCount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of COS triggers
+         * @type {number || null}
+         */
+        this.Cos = null;
+
+        /**
+         * Number of timer triggers
+         * @type {number || null}
+         */
+        this.Timer = null;
+
+        /**
+         * Number of CMQ triggers
+         * @type {number || null}
+         */
+        this.Cmq = null;
+
+        /**
+         * Total number of triggers
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Number of CKafka triggers
+         * @type {number || null}
+         */
+        this.Ckafka = null;
+
+        /**
+         * Number of API Gateway triggers
+         * @type {number || null}
+         */
+        this.Apigw = null;
+
+        /**
+         * Number of CLS triggers
+         * @type {number || null}
+         */
+        this.Cls = null;
+
+        /**
+         * Number of CLB triggers
+         * @type {number || null}
+         */
+        this.Clb = null;
+
+        /**
+         * Number of MPS triggers
+         * @type {number || null}
+         */
+        this.Mps = null;
+
+        /**
+         * Number of CM triggers
+         * @type {number || null}
+         */
+        this.Cm = null;
+
+        /**
+         * Number of VOD triggers
+         * @type {number || null}
+         */
+        this.Vod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cos = 'Cos' in params ? params.Cos : null;
+        this.Timer = 'Timer' in params ? params.Timer : null;
+        this.Cmq = 'Cmq' in params ? params.Cmq : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Ckafka = 'Ckafka' in params ? params.Ckafka : null;
+        this.Apigw = 'Apigw' in params ? params.Apigw : null;
+        this.Cls = 'Cls' in params ? params.Cls : null;
+        this.Clb = 'Clb' in params ? params.Clb : null;
+        this.Mps = 'Mps' in params ? params.Mps : null;
+        this.Cm = 'Cm' in params ? params.Cm : null;
+        this.Vod = 'Vod' in params ? params.Vod : null;
+
+    }
+}
+
+/**
+ * Namespace limit
+ * @class
+ */
+class NamespaceLimit extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of functions
+         * @type {number || null}
+         */
+        this.FunctionsCount = null;
+
+        /**
+         * Trigger information
+         * @type {TriggerCount || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * Namespace name
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Concurrency
+         * @type {number || null}
+         */
+        this.ConcurrentExecutions = null;
+
+        /**
+         * Timeout limit
+         * @type {number || null}
+         */
+        this.TimeoutLimit = null;
+
+        /**
+         * Test event limit
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TestModelLimit = null;
+
+        /**
+         * Initialization timeout limit
+         * @type {number || null}
+         */
+        this.InitTimeoutLimit = null;
+
+        /**
+         * Limit of async retry attempt quantity
+         * @type {number || null}
+         */
+        this.RetryNumLimit = null;
+
+        /**
+         * Lower limit of message retention time for async retry
+         * @type {number || null}
+         */
+        this.MinMsgTTL = null;
+
+        /**
+         * Upper limit of message retention time for async retry
+         * @type {number || null}
+         */
+        this.MaxMsgTTL = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionsCount = 'FunctionsCount' in params ? params.FunctionsCount : null;
+
+        if (params.Trigger) {
+            let obj = new TriggerCount();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.ConcurrentExecutions = 'ConcurrentExecutions' in params ? params.ConcurrentExecutions : null;
+        this.TimeoutLimit = 'TimeoutLimit' in params ? params.TimeoutLimit : null;
+        this.TestModelLimit = 'TestModelLimit' in params ? params.TestModelLimit : null;
+        this.InitTimeoutLimit = 'InitTimeoutLimit' in params ? params.InitTimeoutLimit : null;
+        this.RetryNumLimit = 'RetryNumLimit' in params ? params.RetryNumLimit : null;
+        this.MinMsgTTL = 'MinMsgTTL' in params ? params.MinMsgTTL : null;
+        this.MaxMsgTTL = 'MaxMsgTTL' in params ? params.MaxMsgTTL : null;
+
+    }
+}
+
+/**
  * File system (CFS) configuration description
  * @class
  */
@@ -2590,24 +2849,24 @@ class UpdateNamespaceResponse extends  AbstractModel {
 }
 
 /**
- * ListLayers response structure.
+ * GetAccount response structure.
  * @class
  */
-class ListLayersResponse extends  AbstractModel {
+class GetAccountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Layer list
-         * @type {Array.<LayerVersionInfo> || null}
+         * Namespace usage information
+         * @type {UsageInfo || null}
          */
-        this.Layers = null;
+        this.AccountUsage = null;
 
         /**
-         * Total number of layers
-         * @type {number || null}
+         * Namespace limit information
+         * @type {LimitsInfo || null}
          */
-        this.TotalCount = null;
+        this.AccountLimit = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2625,15 +2884,17 @@ class ListLayersResponse extends  AbstractModel {
             return;
         }
 
-        if (params.Layers) {
-            this.Layers = new Array();
-            for (let z in params.Layers) {
-                let obj = new LayerVersionInfo();
-                obj.deserialize(params.Layers[z]);
-                this.Layers.push(obj);
-            }
+        if (params.AccountUsage) {
+            let obj = new UsageInfo();
+            obj.deserialize(params.AccountUsage)
+            this.AccountUsage = obj;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AccountLimit) {
+            let obj = new LimitsInfo();
+            obj.deserialize(params.AccountLimit)
+            this.AccountLimit = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3251,6 +3512,27 @@ class CreateFunctionRequest extends  AbstractModel {
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * GetAccount request structure.
+ * @class
+ */
+class GetAccountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
     }
@@ -5054,6 +5336,99 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Limit information
+ * @class
+ */
+class LimitsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Limit of namespace quantity
+         * @type {number || null}
+         */
+        this.NamespacesCount = null;
+
+        /**
+         * Namespace limit information
+         * @type {Array.<NamespaceLimit> || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NamespacesCount = 'NamespacesCount' in params ? params.NamespacesCount : null;
+
+        if (params.Namespace) {
+            this.Namespace = new Array();
+            for (let z in params.Namespace) {
+                let obj = new NamespaceLimit();
+                obj.deserialize(params.Namespace[z]);
+                this.Namespace.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ListLayers response structure.
+ * @class
+ */
+class ListLayersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Layer list
+         * @type {Array.<LayerVersionInfo> || null}
+         */
+        this.Layers = null;
+
+        /**
+         * Total number of layers
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Layers) {
+            this.Layers = new Array();
+            for (let z in params.Layers) {
+                let obj = new LayerVersionInfo();
+                obj.deserialize(params.Layers[z]);
+                this.Layers.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Function version information
  * @class
  */
@@ -5584,6 +5959,48 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.VersionProvisionedConcurrencyNum = 'VersionProvisionedConcurrencyNum' in params ? params.VersionProvisionedConcurrencyNum : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
+ * Namespace usage information
+ * @class
+ */
+class NamespaceUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function array
+         * @type {Array.<string> || null}
+         */
+        this.Functions = null;
+
+        /**
+         * Namespace name
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Number of functions in namespace
+         * @type {number || null}
+         */
+        this.FunctionsCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Functions = 'Functions' in params ? params.Functions : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.FunctionsCount = 'FunctionsCount' in params ? params.FunctionsCount : null;
 
     }
 }
@@ -6204,6 +6621,7 @@ module.exports = {
     PutProvisionedConcurrencyConfigResponse: PutProvisionedConcurrencyConfigResponse,
     UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
     PublishLayerVersionResponse: PublishLayerVersionResponse,
+    UsageInfo: UsageInfo,
     PublicNetConfigIn: PublicNetConfigIn,
     DeleteProvisionedConcurrencyConfigRequest: DeleteProvisionedConcurrencyConfigRequest,
     DeleteReservedConcurrencyConfigResponse: DeleteReservedConcurrencyConfigResponse,
@@ -6236,12 +6654,14 @@ module.exports = {
     CopyFunctionRequest: CopyFunctionRequest,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     LayerVersionSimple: LayerVersionSimple,
+    TriggerCount: TriggerCount,
+    NamespaceLimit: NamespaceLimit,
     CfsConfig: CfsConfig,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
     ListFunctionsRequest: ListFunctionsRequest,
     CreateTriggerRequest: CreateTriggerRequest,
     UpdateNamespaceResponse: UpdateNamespaceResponse,
-    ListLayersResponse: ListLayersResponse,
+    GetAccountResponse: GetAccountResponse,
     DeleteFunctionResponse: DeleteFunctionResponse,
     ListAsyncEventsRequest: ListAsyncEventsRequest,
     Result: Result,
@@ -6249,6 +6669,7 @@ module.exports = {
     LogSearchContext: LogSearchContext,
     TriggerInfo: TriggerInfo,
     CreateFunctionRequest: CreateFunctionRequest,
+    GetAccountRequest: GetAccountRequest,
     PutTotalConcurrencyConfigResponse: PutTotalConcurrencyConfigResponse,
     DeleteAliasResponse: DeleteAliasResponse,
     PublishVersionResponse: PublishVersionResponse,
@@ -6277,6 +6698,8 @@ module.exports = {
     FunctionLog: FunctionLog,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,
+    LimitsInfo: LimitsInfo,
+    ListLayersResponse: ListLayersResponse,
     FunctionVersion: FunctionVersion,
     Function: Function,
     DeadLetterConfig: DeadLetterConfig,
@@ -6286,6 +6709,7 @@ module.exports = {
     CreateFunctionResponse: CreateFunctionResponse,
     GetReservedConcurrencyConfigRequest: GetReservedConcurrencyConfigRequest,
     PutProvisionedConcurrencyConfigRequest: PutProvisionedConcurrencyConfigRequest,
+    NamespaceUsage: NamespaceUsage,
     ListAliasesRequest: ListAliasesRequest,
     EipOutConfig: EipOutConfig,
     Alias: Alias,

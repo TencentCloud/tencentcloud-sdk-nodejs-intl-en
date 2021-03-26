@@ -2310,6 +2310,12 @@ class UpdatePluginsRequest extends  AbstractModel {
          */
         this.ForceRestart = null;
 
+        /**
+         * Whether to reinstall
+         * @type {boolean || null}
+         */
+        this.ForceUpdate = null;
+
     }
 
     /**
@@ -2323,6 +2329,7 @@ class UpdatePluginsRequest extends  AbstractModel {
         this.InstallPluginList = 'InstallPluginList' in params ? params.InstallPluginList : null;
         this.RemovePluginList = 'RemovePluginList' in params ? params.RemovePluginList : null;
         this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+        this.ForceUpdate = 'ForceUpdate' in params ? params.ForceUpdate : null;
 
     }
 }

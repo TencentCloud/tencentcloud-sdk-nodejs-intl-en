@@ -3503,15 +3503,16 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Filter tag for terrorism information detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>guns: weapons and guns;</li>
-<li>crowd: crowd;</li>
-<li>bloody: bloody scenes;</li>
-<li>police: police force;</li>
-<li>banners: terrorism flags;</li>
-<li>militant: militants;</li>
-<li>explosion: explosions and fires;</li>
-<li>terrorists: terrorists.</li>
+         * Filter tags for terrorism information detection in images. If a moderation result contains a selected tag, it will be returned. If no filter tag is specified, all moderation results will be returned. Valid values:
+<li>`guns`: weapons and guns</li>
+<li>`crowd`: crowds</li>
+<li>`bloody`: bloody images</li>
+<li>`police`: police forces</li>
+<li>`banners`: terrorism flags</li>
+<li>`militant`: militants</li>
+<li>`explosion`: explosions and fires</li>
+<li>`terrorists`: terrorists</li>
+<li>`scenario`: terrorism images</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -8209,8 +8210,8 @@ class TimeRange extends  AbstractModel {
         this.After = null;
 
         /**
-         * <li>Before or at this time (end time).</li>
-<li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
+         * <li>Earlier than this time (end time).</li>
+<li>In ISO 8601 format. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
          * @type {string || null}
          */
         this.Before = null;
@@ -10386,8 +10387,7 @@ class SearchMediaResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Media file information list.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Media file information list
          * @type {Array.<MediaInfo> || null}
          */
         this.MediaInfoSet = null;
@@ -12574,6 +12574,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Output = null;
 
+        /**
+         * Metadata of a source video.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
     }
 
     /**
@@ -12599,6 +12618,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -13648,16 +13675,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Suggestion = null;
 
         /**
-         * Tag of detected terrorism information in a video. Valid values:
-<li>guns: weapons and guns.</li>
-<li>crowd: crowd.</li>
-<li>police: police force.</li>
-<li>bloody: bloody scenes.</li>
-<li>banners: terrorism flags.</li>
-<li>militant: militants.</li>
-<li>explosion: explosions and fires.</li>
-<li>terrorists: terrorists.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Tag of the detected terrorism information in a video. Valid values:
+<li>`guns`: weapons and guns</li>
+<li>`crowd`: crowds</li>
+<li>`police`: police forces</li>
+<li>`bloody`: bloody images</li>
+<li>`banners`: terrorism flags</li>
+<li>`militant`: militants</li>
+<li>`explosion`: explosions and fires</li>
+<li>`terrorists`: terrorists</li>
+<li>`scenario`: terrorism images</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -24106,15 +24133,16 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Filter tag for terrorism information detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>guns: weapons and guns;</li>
-<li>crowd: crowd;</li>
-<li>bloody: bloody scenes;</li>
-<li>police: police force;</li>
-<li>banners: terrorism flags;</li>
-<li>militant: militants;</li>
-<li>explosion: explosions and fires;</li>
-<li>terrorists: terrorists.</li>
+         * Filter tags for terrorism information detection in images. If a moderation result contains a selected tag, it will be returned. If no filter tag is specified, all moderation results will be returned. Valid values:
+<li>`guns`: weapons and guns</li>
+<li>`crowd`: crowds</li>
+<li>`bloody`: bloody images</li>
+<li>`police`: police forces</li>
+<li>`banners`: terrorism flags</li>
+<li>`militant`: militants</li>
+<li>`explosion`: explosions and fires</li>
+<li>`terrorists`: terrorists</li>
+<li>`scenario`: terrorism images</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -25680,58 +25708,6 @@ class SearchMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * Tag set, which matches any element in the set.
-<li>Tag length limit: 8 characters.</li>
-<li>Array length limit: 10.</li>
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
-<li>Array length limit: 10.</li>
-         * @type {Array.<number> || null}
-         */
-        this.ClassIds = null;
-
-        /**
-         * [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
-<li>Array length limit: 10.</li>
-         * @type {Array.<string> || null}
-         */
-        this.StreamIds = null;
-
-        /**
-         * Unique ID of LVB recording file. Any element in the set can be matched.
-<li>Array length limit: 10.</li>
-         * @type {Array.<string> || null}
-         */
-        this.Vids = null;
-
-        /**
-         * Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-<li>Array length limit: 10.</li>
-         * @type {Array.<string> || null}
-         */
-        this.SourceTypes = null;
-
-        /**
-         * File type. Any element in the set can be matched.
-<li>Video: video file</li>
-<li>Audio: audio file</li>
-<li>Image: image file</li>
-         * @type {Array.<string> || null}
-         */
-        this.Categories = null;
-
-        /**
-         * Matches files created within the time period.
-<li>Includes specified start and end points in time.</li>
-         * @type {TimeRange || null}
-         */
-        this.CreateTime = null;
-
-        /**
          * File ID set. Any element in the set can be matched.
 <li>Array length limit: 10.</li>
 <li>ID length limit: 40 characters.</li>
@@ -25756,12 +25732,64 @@ class SearchMediaRequest extends  AbstractModel {
         this.NamePrefixes = null;
 
         /**
-         * File description set. Any element in the set can be matched.
-<li>Description length limit: 100 characters.</li>
-<li>Array length limit: 10.</li>
+         * File description set. Media file descriptions are fuzzily matched. The higher the match rate, the higher-ranked the result.
+<li>Length limit for a single description: 100 characters</li>
+<li>Array length limit: 10</li>
          * @type {Array.<string> || null}
          */
         this.Descriptions = null;
+
+        /**
+         * Category ID set. The categories of the specified IDs and all subcategories in the set are matched.
+<li>Array length limit: 10.</li>
+         * @type {Array.<number> || null}
+         */
+        this.ClassIds = null;
+
+        /**
+         * Tag set, which matches any element in the set.
+<li>Tag length limit: 8 characters.</li>
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * File type. Any element in the set can be matched.
+<li>Video: video file</li>
+<li>Audio: audio file</li>
+<li>Image: image file</li>
+         * @type {Array.<string> || null}
+         */
+        this.Categories = null;
+
+        /**
+         * Media file source set. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
+         */
+        this.SourceTypes = null;
+
+        /**
+         * [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
+         */
+        this.StreamIds = null;
+
+        /**
+         * Unique ID of LVB recording file. Any element in the set can be matched.
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
+         */
+        this.Vids = null;
+
+        /**
+         * Matches files created within the time period.
+<li>Includes specified start and end points in time.</li>
+         * @type {TimeRange || null}
+         */
+        this.CreateTime = null;
 
         /**
          * Sorting order.
@@ -25808,6 +25836,20 @@ class SearchMediaRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
+         * (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
+Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * (This is not recommended. `SourceTypes` should be used instead)
+Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
          * (This is not recommended. `StreamIds` should be used instead)
 [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1).
          * @type {string || null}
@@ -25820,13 +25862,6 @@ Unique ID of LVB recording file.
          * @type {string || null}
          */
         this.Vid = null;
-
-        /**
-         * (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
-Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
-         * @type {string || null}
-         */
-        this.Text = null;
 
         /**
          * (This is not recommended. `CreateTime` should be used instead)
@@ -25848,13 +25883,6 @@ End time in the creation time range.
          */
         this.EndTime = null;
 
-        /**
-         * (This is not recommended. `SourceTypes` should be used instead)
-Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
-         * @type {string || null}
-         */
-        this.SourceType = null;
-
     }
 
     /**
@@ -25864,22 +25892,22 @@ Media file source. For valid values, please see [SourceType](https://intl.cloud.
         if (!params) {
             return;
         }
-        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.FileIds = 'FileIds' in params ? params.FileIds : null;
+        this.Names = 'Names' in params ? params.Names : null;
+        this.NamePrefixes = 'NamePrefixes' in params ? params.NamePrefixes : null;
+        this.Descriptions = 'Descriptions' in params ? params.Descriptions : null;
         this.ClassIds = 'ClassIds' in params ? params.ClassIds : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Categories = 'Categories' in params ? params.Categories : null;
+        this.SourceTypes = 'SourceTypes' in params ? params.SourceTypes : null;
         this.StreamIds = 'StreamIds' in params ? params.StreamIds : null;
         this.Vids = 'Vids' in params ? params.Vids : null;
-        this.SourceTypes = 'SourceTypes' in params ? params.SourceTypes : null;
-        this.Categories = 'Categories' in params ? params.Categories : null;
 
         if (params.CreateTime) {
             let obj = new TimeRange();
             obj.deserialize(params.CreateTime)
             this.CreateTime = obj;
         }
-        this.FileIds = 'FileIds' in params ? params.FileIds : null;
-        this.Names = 'Names' in params ? params.Names : null;
-        this.NamePrefixes = 'NamePrefixes' in params ? params.NamePrefixes : null;
-        this.Descriptions = 'Descriptions' in params ? params.Descriptions : null;
 
         if (params.Sort) {
             let obj = new SortBy();
@@ -25890,12 +25918,12 @@ Media file source. For valid values, please see [SourceType](https://intl.cloud.
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Filters = 'Filters' in params ? params.Filters : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.StreamId = 'StreamId' in params ? params.StreamId : null;
         this.Vid = 'Vid' in params ? params.Vid : null;
-        this.Text = 'Text' in params ? params.Text : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
 
     }
 }
@@ -26591,6 +26619,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SessionId = null;
 
+        /**
+         * Metadata of a source video
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
     }
 
     /**
@@ -26619,6 +26653,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
 
     }
 }
@@ -28209,6 +28249,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MediaBasicInfo = null;
 
         /**
+         * Metadata of a source video
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
          * Playback address generated after pull for upload is completed.
          * @type {string || null}
          */
@@ -28251,6 +28297,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new MediaBasicInfo();
             obj.deserialize(params.MediaBasicInfo)
             this.MediaBasicInfo = obj;
+        }
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
         }
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;

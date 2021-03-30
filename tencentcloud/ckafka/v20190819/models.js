@@ -99,6 +99,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Config = null;
 
+        /**
+         * Message retention time configuration (for recording the latest retention time)
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {TopicRetentionTimeConfigRsp || null}
+         */
+        this.RetentionTimeConfig = null;
+
     }
 
     /**
@@ -124,6 +131,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new Config();
             obj.deserialize(params.Config)
             this.Config = obj;
+        }
+
+        if (params.RetentionTimeConfig) {
+            let obj = new TopicRetentionTimeConfigRsp();
+            obj.deserialize(params.RetentionTimeConfig)
+            this.RetentionTimeConfig = obj;
         }
 
     }
@@ -1941,6 +1954,59 @@ class DeleteAclResponse extends  AbstractModel {
 }
 
 /**
+ * Dynamic message retention time configuration
+ * @class
+ */
+class DynamicRetentionTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the dynamic message retention time configuration is enabled. 0: disabled; 1: enabled
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Disk quota threshold (in percentage) for triggering the message retention time change event
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiskQuotaPercentage = null;
+
+        /**
+         * Percentage by which the message retention time is shortened each time
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StepForwardPercentage = null;
+
+        /**
+         * Minimum retention time, in minutes
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BottomRetention = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.DiskQuotaPercentage = 'DiskQuotaPercentage' in params ? params.DiskQuotaPercentage : null;
+        this.StepForwardPercentage = 'StepForwardPercentage' in params ? params.StepForwardPercentage : null;
+        this.BottomRetention = 'BottomRetention' in params ? params.BottomRetention : null;
+
+    }
+}
+
+/**
  * DescribeRoute request structure.
  * @class
  */
@@ -2705,6 +2771,18 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
          */
         this.Config = null;
 
+        /**
+         * Dynamic message retention policy configuration
+         * @type {DynamicRetentionTime || null}
+         */
+        this.DynamicRetentionConfig = null;
+
+        /**
+         * Modification of the rebalancing time after upgrade
+         * @type {number || null}
+         */
+        this.RebalanceTime = null;
+
     }
 
     /**
@@ -2723,6 +2801,13 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
             obj.deserialize(params.Config)
             this.Config = obj;
         }
+
+        if (params.DynamicRetentionConfig) {
+            let obj = new DynamicRetentionTime();
+            obj.deserialize(params.DynamicRetentionConfig)
+            this.DynamicRetentionConfig = obj;
+        }
+        this.RebalanceTime = 'RebalanceTime' in params ? params.RebalanceTime : null;
 
     }
 }
@@ -3273,8 +3358,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MaxGroupNum = null;
 
         /**
-         * Sale type
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Offering type. `0`: Standard Edition; `1`: Professional Edition
+Note: this field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.Cvm = null;
@@ -3292,6 +3377,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {Array.<string> || null}
          */
         this.Features = null;
+
+        /**
+         * Dynamic message retention policy
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {DynamicRetentionTime || null}
+         */
+        this.RetentionTimeConfig = null;
 
     }
 
@@ -3351,6 +3443,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Cvm = 'Cvm' in params ? params.Cvm : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.Features = 'Features' in params ? params.Features : null;
+
+        if (params.RetentionTimeConfig) {
+            let obj = new DynamicRetentionTime();
+            obj.deserialize(params.RetentionTimeConfig)
+            this.RetentionTimeConfig = obj;
+        }
 
     }
 }
@@ -4446,6 +4544,51 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Information returned for topic message retention time configuration
+ * @class
+ */
+class TopicRetentionTimeConfigRsp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Expected value, i.e., the topic message retention time (min) configured
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Expect = null;
+
+        /**
+         * Current value (min), i.e., the retention time currently in effect, which may be dynamically adjusted
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Current = null;
+
+        /**
+         * Last modified time
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ModTimeStamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Expect = 'Expect' in params ? params.Expect : null;
+        this.Current = 'Current' in params ? params.Current : null;
+        this.ModTimeStamp = 'ModTimeStamp' in params ? params.ModTimeStamp : null;
+
+    }
+}
+
+/**
  * ModifyTopicAttributes request structure.
  * @class
  */
@@ -4873,6 +5016,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Cvm = null;
 
+        /**
+         * CKafka instance type
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Disk type
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Maximum number of topics for the current instance
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxTopicNumber = null;
+
+        /**
+         * Maximum number of partitions for the current instance
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxPartitionNumber = null;
+
+        /**
+         * Time of scheduled upgrade
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RebalanceTime = null;
+
     }
 
     /**
@@ -4920,6 +5098,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Version = 'Version' in params ? params.Version : null;
         this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
         this.Cvm = 'Cvm' in params ? params.Cvm : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.MaxTopicNumber = 'MaxTopicNumber' in params ? params.MaxTopicNumber : null;
+        this.MaxPartitionNumber = 'MaxPartitionNumber' in params ? params.MaxPartitionNumber : null;
+        this.RebalanceTime = 'RebalanceTime' in params ? params.RebalanceTime : null;
 
     }
 }
@@ -5066,6 +5249,7 @@ module.exports = {
     CreateAclResponse: CreateAclResponse,
     CreateTopicRequest: CreateTopicRequest,
     DeleteAclResponse: DeleteAclResponse,
+    DynamicRetentionTime: DynamicRetentionTime,
     DescribeRouteRequest: DescribeRouteRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
@@ -5114,6 +5298,7 @@ module.exports = {
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
     Route: Route,
     Acl: Acl,
+    TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,

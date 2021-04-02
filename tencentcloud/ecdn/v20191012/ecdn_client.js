@@ -236,7 +236,6 @@ Note: if you need to update a complex configuration item, you must pass in all a
 + Traffic (in bytes)
 + Bandwidth (in bps)
 + Number of requests
-+ Response time (in ms)
 + Number of 2xx status codes and details of status codes starting with 2
 + Number of 3xx status codes and details of status codes starting with 3
 + Number of 4xx status codes and details of status codes starting with 4

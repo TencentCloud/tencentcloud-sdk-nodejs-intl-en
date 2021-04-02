@@ -58,6 +58,7 @@ const PublicNetConfigOut = models.PublicNetConfigOut;
 const UpdateFunctionCodeRequest = models.UpdateFunctionCodeRequest;
 const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationRequest;
 const DeleteReservedConcurrencyConfigRequest = models.DeleteReservedConcurrencyConfigRequest;
+const GetFunctionEventInvokeConfigResponse = models.GetFunctionEventInvokeConfigResponse;
 const ListTriggersResponse = models.ListTriggersResponse;
 const TerminateAsyncEventRequest = models.TerminateAsyncEventRequest;
 const ListLayersRequest = models.ListLayersRequest;
@@ -91,27 +92,31 @@ const InvokeResponse = models.InvokeResponse;
 const InvokeRequest = models.InvokeRequest;
 const CreateAliasRequest = models.CreateAliasRequest;
 const VersionMatch = models.VersionMatch;
+const UpdateFunctionEventInvokeConfigResponse = models.UpdateFunctionEventInvokeConfigResponse;
 const PutReservedConcurrencyConfigRequest = models.PutReservedConcurrencyConfigRequest;
 const ListLayerVersionsRequest = models.ListLayerVersionsRequest;
 const CreateTriggerResponse = models.CreateTriggerResponse;
 const PublishLayerVersionRequest = models.PublishLayerVersionRequest;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
+const UpdateFunctionEventInvokeConfigRequest = models.UpdateFunctionEventInvokeConfigRequest;
 const DeleteLayerVersionRequest = models.DeleteLayerVersionRequest;
 const Filter = models.Filter;
 const Variable = models.Variable;
 const GetFunctionResponse = models.GetFunctionResponse;
+const GetFunctionEventInvokeConfigRequest = models.GetFunctionEventInvokeConfigRequest;
 const Code = models.Code;
 const PutTotalConcurrencyConfigRequest = models.PutTotalConcurrencyConfigRequest;
 const UpdateNamespaceRequest = models.UpdateNamespaceRequest;
 const GetLayerVersionResponse = models.GetLayerVersionResponse;
 const PutReservedConcurrencyConfigResponse = models.PutReservedConcurrencyConfigResponse;
 const FunctionLog = models.FunctionLog;
+const RetryConfig = models.RetryConfig;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
 const CfsInsInfo = models.CfsInsInfo;
 const LimitsInfo = models.LimitsInfo;
 const ListLayersResponse = models.ListLayersResponse;
 const FunctionVersion = models.FunctionVersion;
-const Function = models.Function;
+const AsyncTriggerConfig = models.AsyncTriggerConfig;
 const DeadLetterConfig = models.DeadLetterConfig;
 const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
 const ListFunctionsResponse = models.ListFunctionsResponse;
@@ -119,6 +124,7 @@ const ListTriggersRequest = models.ListTriggersRequest;
 const CreateFunctionResponse = models.CreateFunctionResponse;
 const GetReservedConcurrencyConfigRequest = models.GetReservedConcurrencyConfigRequest;
 const PutProvisionedConcurrencyConfigRequest = models.PutProvisionedConcurrencyConfigRequest;
+const Function = models.Function;
 const NamespaceUsage = models.NamespaceUsage;
 const ListAliasesRequest = models.ListAliasesRequest;
 const EipOutConfig = models.EipOutConfig;
@@ -198,6 +204,17 @@ class ScfClient extends AbstractClient {
     ListTriggers(req, cb) {
         let resp = new ListTriggersResponse();
         this.request("ListTriggers", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the function version based on the input parameters.
+     * @param {ListVersionByFunctionRequest} req
+     * @param {function(string, ListVersionByFunctionResponse):void} cb
+     * @public
+     */
+    ListVersionByFunction(req, cb) {
+        let resp = new ListVersionByFunctionResponse();
+        this.request("ListVersionByFunction", req, resp, cb);
     }
 
     /**
@@ -395,14 +412,25 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to query the function version based on the input parameters.
-     * @param {ListVersionByFunctionRequest} req
-     * @param {function(string, ListVersionByFunctionResponse):void} cb
+     * This API is used to update the async retry configuration of a function, including the number of retry attempts and message retention period.
+     * @param {UpdateFunctionEventInvokeConfigRequest} req
+     * @param {function(string, UpdateFunctionEventInvokeConfigResponse):void} cb
      * @public
      */
-    ListVersionByFunction(req, cb) {
-        let resp = new ListVersionByFunctionResponse();
-        this.request("ListVersionByFunction", req, resp, cb);
+    UpdateFunctionEventInvokeConfig(req, cb) {
+        let resp = new UpdateFunctionEventInvokeConfigResponse();
+        this.request("UpdateFunctionEventInvokeConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the async retry configuration of a function, including the number of retry attempts and message retention period.
+     * @param {GetFunctionEventInvokeConfigRequest} req
+     * @param {function(string, GetFunctionEventInvokeConfigResponse):void} cb
+     * @public
+     */
+    GetFunctionEventInvokeConfig(req, cb) {
+        let resp = new GetFunctionEventInvokeConfigResponse();
+        this.request("GetFunctionEventInvokeConfig", req, resp, cb);
     }
 
     /**

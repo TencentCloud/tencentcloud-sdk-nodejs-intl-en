@@ -26,6 +26,7 @@ module.exports = {
     faceid: require("./faceid"),
     gaap: require("./gaap"),
     gme: require("./gme"),
+    gpm: require("./gpm"),
     gse: require("./gse"),
     iai: require("./iai"),
     kms: require("./kms"),

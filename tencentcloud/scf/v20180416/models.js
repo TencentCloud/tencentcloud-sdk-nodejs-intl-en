@@ -2111,6 +2111,46 @@ class DeleteReservedConcurrencyConfigRequest extends  AbstractModel {
 }
 
 /**
+ * GetFunctionEventInvokeConfig response structure.
+ * @class
+ */
+class GetFunctionEventInvokeConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async retry configuration information
+         * @type {AsyncTriggerConfig || null}
+         */
+        this.AsyncTriggerConfig = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsyncTriggerConfig) {
+            let obj = new AsyncTriggerConfig();
+            obj.deserialize(params.AsyncTriggerConfig)
+            this.AsyncTriggerConfig = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListTriggers response structure.
  * @class
  */
@@ -4082,6 +4122,34 @@ Exact string match
 }
 
 /**
+ * UpdateFunctionEventInvokeConfig response structure.
+ * @class
+ */
+class UpdateFunctionEventInvokeConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PutReservedConcurrencyConfig request structure.
  * @class
  */
@@ -4290,6 +4358,53 @@ class CreateNamespaceRequest extends  AbstractModel {
         }
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * UpdateFunctionEventInvokeConfig request structure.
+ * @class
+ */
+class UpdateFunctionEventInvokeConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async retry configuration information
+         * @type {AsyncTriggerConfig || null}
+         */
+        this.AsyncTriggerConfig = null;
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function namespace. Default value: default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsyncTriggerConfig) {
+            let obj = new AsyncTriggerConfig();
+            obj.deserialize(params.AsyncTriggerConfig)
+            this.AsyncTriggerConfig = obj;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -4783,6 +4898,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * GetFunctionEventInvokeConfig request structure.
+ * @class
+ */
+class GetFunctionEventInvokeConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function namespace. Default value: default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Function version. Default value: $LATEST
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+
+    }
+}
+
+/**
  * Function code
  * @class
  */
@@ -5207,6 +5364,34 @@ class FunctionLog extends  AbstractModel {
 }
 
 /**
+ * Async retry configuration
+ * @class
+ */
+class RetryConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of retry attempts
+         * @type {number || null}
+         */
+        this.RetryNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RetryNum = 'RetryNum' in params ? params.RetryNum : null;
+
+    }
+}
+
+/**
  * GetFunctionAddress response structure.
  * @class
  */
@@ -5481,98 +5666,24 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Function list
+ * Async retry configuration details of function
  * @class
  */
-class Function extends  AbstractModel {
+class AsyncTriggerConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Modification time
-         * @type {string || null}
+         * Async retry configuration of function upon user error
+         * @type {Array.<RetryConfig> || null}
          */
-        this.ModTime = null;
+        this.RetryConfig = null;
 
         /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.AddTime = null;
-
-        /**
-         * Running
-         * @type {string || null}
-         */
-        this.Runtime = null;
-
-        /**
-         * Function name
-         * @type {string || null}
-         */
-        this.FunctionName = null;
-
-        /**
-         * Function ID
-         * @type {string || null}
-         */
-        this.FunctionId = null;
-
-        /**
-         * Namespace
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-        /**
-         * Function status. For valid values and status change process, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1)
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Function status details
-         * @type {string || null}
-         */
-        this.StatusDesc = null;
-
-        /**
-         * Function description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Function tag
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Function type. The value is `HTTP` or `Event`.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Cause of function failure
-         * @type {Array.<StatusReason> || null}
-         */
-        this.StatusReasons = null;
-
-        /**
-         * Sum of provisioned concurrence memory for all function versions
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Message retention period
          * @type {number || null}
          */
-        this.TotalProvisionedConcurrencyMem = null;
-
-        /**
-         * Reserved memory for function concurrence
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ReservedConcurrencyMem = null;
+        this.MsgTTL = null;
 
     }
 
@@ -5583,36 +5694,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ModTime = 'ModTime' in params ? params.ModTime : null;
-        this.AddTime = 'AddTime' in params ? params.AddTime : null;
-        this.Runtime = 'Runtime' in params ? params.Runtime : null;
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
-        this.Description = 'Description' in params ? params.Description : null;
 
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
+        if (params.RetryConfig) {
+            this.RetryConfig = new Array();
+            for (let z in params.RetryConfig) {
+                let obj = new RetryConfig();
+                obj.deserialize(params.RetryConfig[z]);
+                this.RetryConfig.push(obj);
             }
         }
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.StatusReasons) {
-            this.StatusReasons = new Array();
-            for (let z in params.StatusReasons) {
-                let obj = new StatusReason();
-                obj.deserialize(params.StatusReasons[z]);
-                this.StatusReasons.push(obj);
-            }
-        }
-        this.TotalProvisionedConcurrencyMem = 'TotalProvisionedConcurrencyMem' in params ? params.TotalProvisionedConcurrencyMem : null;
-        this.ReservedConcurrencyMem = 'ReservedConcurrencyMem' in params ? params.ReservedConcurrencyMem : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
 
     }
 }
@@ -5959,6 +6050,143 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.VersionProvisionedConcurrencyNum = 'VersionProvisionedConcurrencyNum' in params ? params.VersionProvisionedConcurrencyNum : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
+ * Function list
+ * @class
+ */
+class Function extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModTime = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * Running
+         * @type {string || null}
+         */
+        this.Runtime = null;
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function ID
+         * @type {string || null}
+         */
+        this.FunctionId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Function status. For valid values and status change process, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Function status details
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Function description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Function tag
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Function type. The value is `HTTP` or `Event`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Cause of function failure
+         * @type {Array.<StatusReason> || null}
+         */
+        this.StatusReasons = null;
+
+        /**
+         * Sum of provisioned concurrence memory for all function versions
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalProvisionedConcurrencyMem = null;
+
+        /**
+         * Reserved memory for function concurrence
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReservedConcurrencyMem = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.StatusReasons) {
+            this.StatusReasons = new Array();
+            for (let z in params.StatusReasons) {
+                let obj = new StatusReason();
+                obj.deserialize(params.StatusReasons[z]);
+                this.StatusReasons.push(obj);
+            }
+        }
+        this.TotalProvisionedConcurrencyMem = 'TotalProvisionedConcurrencyMem' in params ? params.TotalProvisionedConcurrencyMem : null;
+        this.ReservedConcurrencyMem = 'ReservedConcurrencyMem' in params ? params.ReservedConcurrencyMem : null;
 
     }
 }
@@ -6648,6 +6876,7 @@ module.exports = {
     UpdateFunctionCodeRequest: UpdateFunctionCodeRequest,
     UpdateFunctionConfigurationRequest: UpdateFunctionConfigurationRequest,
     DeleteReservedConcurrencyConfigRequest: DeleteReservedConcurrencyConfigRequest,
+    GetFunctionEventInvokeConfigResponse: GetFunctionEventInvokeConfigResponse,
     ListTriggersResponse: ListTriggersResponse,
     TerminateAsyncEventRequest: TerminateAsyncEventRequest,
     ListLayersRequest: ListLayersRequest,
@@ -6681,27 +6910,31 @@ module.exports = {
     InvokeRequest: InvokeRequest,
     CreateAliasRequest: CreateAliasRequest,
     VersionMatch: VersionMatch,
+    UpdateFunctionEventInvokeConfigResponse: UpdateFunctionEventInvokeConfigResponse,
     PutReservedConcurrencyConfigRequest: PutReservedConcurrencyConfigRequest,
     ListLayerVersionsRequest: ListLayerVersionsRequest,
     CreateTriggerResponse: CreateTriggerResponse,
     PublishLayerVersionRequest: PublishLayerVersionRequest,
     CreateNamespaceRequest: CreateNamespaceRequest,
+    UpdateFunctionEventInvokeConfigRequest: UpdateFunctionEventInvokeConfigRequest,
     DeleteLayerVersionRequest: DeleteLayerVersionRequest,
     Filter: Filter,
     Variable: Variable,
     GetFunctionResponse: GetFunctionResponse,
+    GetFunctionEventInvokeConfigRequest: GetFunctionEventInvokeConfigRequest,
     Code: Code,
     PutTotalConcurrencyConfigRequest: PutTotalConcurrencyConfigRequest,
     UpdateNamespaceRequest: UpdateNamespaceRequest,
     GetLayerVersionResponse: GetLayerVersionResponse,
     PutReservedConcurrencyConfigResponse: PutReservedConcurrencyConfigResponse,
     FunctionLog: FunctionLog,
+    RetryConfig: RetryConfig,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,
     LimitsInfo: LimitsInfo,
     ListLayersResponse: ListLayersResponse,
     FunctionVersion: FunctionVersion,
-    Function: Function,
+    AsyncTriggerConfig: AsyncTriggerConfig,
     DeadLetterConfig: DeadLetterConfig,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
     ListFunctionsResponse: ListFunctionsResponse,
@@ -6709,6 +6942,7 @@ module.exports = {
     CreateFunctionResponse: CreateFunctionResponse,
     GetReservedConcurrencyConfigRequest: GetReservedConcurrencyConfigRequest,
     PutProvisionedConcurrencyConfigRequest: PutProvisionedConcurrencyConfigRequest,
+    Function: Function,
     NamespaceUsage: NamespaceUsage,
     ListAliasesRequest: ListAliasesRequest,
     EipOutConfig: EipOutConfig,

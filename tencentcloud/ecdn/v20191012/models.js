@@ -73,20 +73,13 @@ class DescribeEcdnStatisticsRequest extends  AbstractModel {
 
         /**
          * Specifies the query metric, which can be:
-flux: traffic in bytes
-bandwidth: bandwidth in bps
+flux: traffic (in bytes)
+bandwidth: bandwidth (in bps)
 request: number of requests
-delay: response time in ms
 2xx: returns the number of 2xx status codes or details of status codes starting with 2
 3xx: returns the number of 3xx status codes or details of status codes starting with 3
 4xx: returns the number of 4xx status codes or details of status codes starting with 4
 5xx: returns the number of 5xx status codes or details of status codes starting with 5
-static_request: number of static requests
-static_flux: static traffic in bytes
-static_bandwidth: static bandwidth in bps
-dynamic_request: number of dynamic requests
-dynamic_flux: dynamic traffic in bytes
-dynamic_bandwidth: dynamic bandwidth in bps
          * @type {Array.<string> || null}
          */
         this.Metrics = null;
@@ -116,6 +109,16 @@ If no domain name is entered, the specified project will be queried; otherwise, 
          */
         this.Projects = null;
 
+        /**
+         * Statistical areas:
+mainland: Chinese mainland
+oversea: outside the Chinese mainland
+global: global
+Default value: global
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -131,6 +134,7 @@ If no domain name is entered, the specified project will be queried; otherwise, 
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.Projects = 'Projects' in params ? params.Projects : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -2453,8 +2457,7 @@ class Origin extends  AbstractModel {
         super();
 
         /**
-         * Primary origin server list. The default format is ["ip1:port1", "ip2:port2"].
-Weights can be configured in the origin server list. The weight format of IP origin servers is ["ip1:port1:weight1", "ip2:port2:weight2"].
+         * Primary origin server list. IP and the domain name of the origin server cannot be entered at the same time. Configure origin server port in the format of ["origin1:port1", "origin2:port2"]. Configure origin-pull weight in the format of ["origin1::weight1", "origin2::weight2"]. Configure both port and weight in the format of ["origin1:port1:weight1", "origin2:port2:weight2"]. Valid range of weight value: 0 - 100.
          * @type {Array.<string> || null}
          */
         this.Origins = null;
@@ -2476,7 +2479,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Origin-pull protocol type. Valid values: http (forced HTTP origin-pull), follow (protocol follow), https (HTTPS origin-pull).
-Note: this field may return null, indicating that no valid values can be obtained.
+If this parameter is left empty, HTTP origin-pull will be used by default.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.OriginPullProtocol = null;
@@ -2694,16 +2698,10 @@ The time span cannot exceed 90 days.
         this.EndTime = null;
 
         /**
-         * Statistical metric name. flux: traffic in bytes
-bandwidth: bandwidth in bps
+         * Statistical metric names:
+flux: traffic (in bytes)
+bandwidth: bandwidth (in bps)
 request: number of requests
-delay: response time in ms
-static_request: number of static requests
-static_flux: static traffic in bytes
-static_bandwidth: static bandwidth in bps
-dynamic_request: number of dynamic requests
-dynamic_flux: dynamic traffic in bytes
-dynamic_bandwidth: dynamic bandwidth in bps
          * @type {Array.<string> || null}
          */
         this.Metrics = null;
@@ -2733,6 +2731,16 @@ If no domain name is entered, the specified project will be queried; otherwise, 
          */
         this.Limit = null;
 
+        /**
+         * Statistical areas:
+mainland: Chinese mainland
+oversea: outside the Chinese mainland
+global: global
+Default value: global
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -2749,6 +2757,7 @@ If no domain name is entered, the specified project will be queried; otherwise, 
         this.Projects = 'Projects' in params ? params.Projects : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }

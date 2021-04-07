@@ -15188,22 +15188,23 @@ class DescribeRouteTablesRequest extends  AbstractModel {
         super();
 
         /**
-         * The route table instance ID, such as `rtb-azd4dt1c`.
-         * @type {Array.<string> || null}
-         */
-        this.RouteTableIds = null;
-
-        /**
-         * Filter condition. `RouteTableIds` and `Filters` cannot be speified at the same time.
+         * Filter condition. `RouteTableIds` and `Filters` cannot be specified at the same time.
 <li>route-table-id - String - (Filter condition) Route table instance ID.</li>
 <li>route-table-name - String - (Filter condition) Route table name.</li>
 <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 <li>association.main - String - (Filter condition) Whether it is the main route table.</li>
-<li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-<li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
+<li>tag-key - String - Required: no - (Filter condition) Filter by tag key.</li>
+<li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
+<li>is-need-router-info - String - (Filter condition) Whether to obtain routing policies. It defaults to `false`. To obtain routing policies, change the parameter value to `true`.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
+
+        /**
+         * The route table instance ID, such as `rtb-azd4dt1c`.
+         * @type {Array.<string> || null}
+         */
+        this.RouteTableIds = null;
 
         /**
          * Offset.
@@ -15226,7 +15227,6 @@ class DescribeRouteTablesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableIds = 'RouteTableIds' in params ? params.RouteTableIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -15236,6 +15236,7 @@ class DescribeRouteTablesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.RouteTableIds = 'RouteTableIds' in params ? params.RouteTableIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -22646,6 +22647,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.PublishedToVbc = null;
 
+        /**
+         * Creation time of the routing policy
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
     }
 
     /**
@@ -22666,6 +22673,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DestinationIpv6CidrBlock = 'DestinationIpv6CidrBlock' in params ? params.DestinationIpv6CidrBlock : null;
         this.RouteItemId = 'RouteItemId' in params ? params.RouteItemId : null;
         this.PublishedToVbc = 'PublishedToVbc' in params ? params.PublishedToVbc : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }

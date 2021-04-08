@@ -159,7 +159,7 @@ class DescribeTargetGroupListRequest extends  AbstractModel {
         this.TargetGroupIds = null;
 
         /**
-         * Filter array, which is exclusive of `TargetGroupIds`. Valid values: TargetGroupVpcId, TargetGroupName. Target group ID will be used first.
+         * Filter array, which is exclusive of `TargetGroupIds`. Valid values: `TargetGroupVpcId` and `TargetGroupName`. Target group ID will be used first.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -171,7 +171,7 @@ class DescribeTargetGroupListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Limit of the number of displayed results. Default value: 20
+         * Limit of the number of displayed results. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -388,7 +388,7 @@ OPEN: public network; INTERNAL: private network.
         this.LoadBalancerType = null;
 
         /**
-         * CLB instance type. 1: generic CLB instance. Currently, only 1 can be passed in
+         * CLB instance type. Valid value: 1 (generic CLB instance).
          * @type {number || null}
          */
         this.Forward = null;
@@ -438,7 +438,7 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
         this.MasterZoneId = null;
 
         /**
-         * Specifies an AZ ID for creating a CLB instance, such as ap-guangzhou-1, which is applicable only to public network CLB.
+         * Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -474,7 +474,7 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
         this.BandwidthPackageId = null;
 
         /**
-         * Exclusive cluster information.
+         * Dedicated cluster information
          * @type {ExclusiveCluster || null}
          */
         this.ExclusiveCluster = null;
@@ -502,6 +502,13 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
          * @type {string || null}
          */
         this.ClusterTag = null;
+
+        /**
+         * Sets the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB instances.
+Note: A secondary AZ will load traffic if the primary AZ has failures. The API `DescribeMasterZones` is used to query the primary and secondary AZ list of a region.
+         * @type {string || null}
+         */
+        this.SlaveZoneId = null;
 
         /**
          * Unique ID of an EIP, which can only be used when binding the EIP of a private network CLB instance. E.g., `eip-11112222`.
@@ -564,6 +571,7 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
             }
         }
         this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
+        this.SlaveZoneId = 'SlaveZoneId' in params ? params.SlaveZoneId : null;
         this.EipAddressId = 'EipAddressId' in params ? params.EipAddressId : null;
 
     }
@@ -656,13 +664,13 @@ class DeleteRuleRequest extends  AbstractModel {
         this.LocationIds = null;
 
         /**
-         * Domain name of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified
+         * Domain name of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified
+         * Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
          * @type {string || null}
          */
         this.Url = null;
@@ -758,7 +766,7 @@ class DescribeLoadBalancerTrafficResponse extends  AbstractModel {
 
         /**
          * Information of CLB instances sorted by outbound bandwidth from highest to lowest
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<LoadBalancerTraffic> || null}
          */
         this.LoadBalancerTraffic = null;
@@ -819,7 +827,7 @@ class ModifyRuleRequest extends  AbstractModel {
         this.LocationId = null;
 
         /**
-         * New forwarding path of the forwarding rule. This parameter is not required if the URL does not need to be modified
+         * New forwarding path of the forwarding rule. This parameter is not required if the URL does not need to be modified.
          * @type {string || null}
          */
         this.Url = null;
@@ -844,19 +852,19 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.SessionExpireTime = null;
 
         /**
-         * Forwarding protocol between CLB instance and real server. Default value: HTTP. Valid values: HTTP, HTTPS, TRPC.
+         * Forwarding protocol between CLB instance and real server. Default value: HTTP. Valid values: HTTP, HTTPS, and TRPC.
          * @type {string || null}
          */
         this.ForwardType = null;
 
         /**
-         * TRPC callee server route, which is required when `ForwardType` is `TRPC`.
+         * TRPC callee server route, which is required when `ForwardType` is "TRPC".
          * @type {string || null}
          */
         this.TrpcCallee = null;
 
         /**
-         * TRPC calling service API, which is required when `ForwardType` is `TRPC`.
+         * TRPC calling service API, which is required when `ForwardType` is "TRPC".
          * @type {string || null}
          */
         this.TrpcFunc = null;
@@ -1010,7 +1018,7 @@ class DescribeRewriteRequest extends  AbstractModel {
         this.SourceListenerIds = null;
 
         /**
-         * Array of CLB forwarding rules
+         * Array of CLB forwarding rule IDs
          * @type {Array.<string> || null}
          */
         this.SourceLocationIds = null;
@@ -1314,7 +1322,7 @@ class DeregisterTargetsFromClassicalLBRequest extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * List of real server instance IDs
+         * List of real server IDs
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1434,7 +1442,7 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Request ID, i.e., the RequestId parameter returned by the API
+         * Request ID, i.e., the RequestId parameter returned by the API.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -1511,7 +1519,7 @@ class DescribeRewriteResponse extends  AbstractModel {
         super();
 
         /**
-         * Array of redirection forwarding rules. If there are no redirection rules, an empty array will be returned
+         * Array of redirection forwarding rules. If there are no redirection rules, an empty array will be returned.
          * @type {Array.<RuleOutput> || null}
          */
         this.RewriteSet = null;
@@ -1658,7 +1666,7 @@ class DescribeTargetsRequest extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * List of listener IDs
+         * Listener ID list
          * @type {Array.<string> || null}
          */
         this.ListenerIds = null;
@@ -1721,6 +1729,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ZoneName = null;
 
+        /**
+         * AZ region, e.g., ap-guangzhou.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ZoneRegion = null;
+
+        /**
+         * Whether the AZ is the `LocalZone`, e.g., false.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.LocalZone = null;
+
     }
 
     /**
@@ -1733,6 +1755,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneRegion = 'ZoneRegion' in params ? params.ZoneRegion : null;
+        this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
 
     }
 }
@@ -2051,14 +2075,14 @@ class DescribeListenersResponse extends  AbstractModel {
         super();
 
         /**
-         * List of listeners
+         * Listener list
          * @type {Array.<Listener> || null}
          */
         this.Listeners = null;
 
         /**
-         * Total number of listeners
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Total number of listeners (with filters of port, protocol, and listener ID applied).
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -2235,7 +2259,7 @@ class DescribeTargetGroupsRequest extends  AbstractModel {
         this.TargetGroupIds = null;
 
         /**
-         * Limit of the number of displayed results. Default value: 20
+         * Limit of the number of displayed results. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2247,7 +2271,7 @@ class DescribeTargetGroupsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter array, which is exclusive of `TargetGroupIds`. Valid values: TargetGroupVpcId, TargetGroupName
+         * Filter array, which is exclusive of `TargetGroupIds`. Valid values: `TargetGroupVpcId` and `TargetGroupName`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2608,7 +2632,7 @@ class DescribeClassicalLBHealthStatusResponse extends  AbstractModel {
 
         /**
          * List of real server health statuses
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<ClassicalHealth> || null}
          */
         this.HealthList = null;
@@ -3005,7 +3029,7 @@ class DescribeTargetsResponse extends  AbstractModel {
 
         /**
          * Information of real servers bound to the listener
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<ListenerBackend> || null}
          */
         this.Listeners = null;
@@ -3072,13 +3096,13 @@ class ModifyListenerRequest extends  AbstractModel {
         this.SessionExpireTime = null;
 
         /**
-         * Health check parameter, which is applicable only to TCP/UDP/TCP_SSL listeners.
+         * Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Certificate information. This parameter is applicable only to HTTPS/TCP_SSL listeners.
+         * Certificate information. This parameter is applicable only to HTTPS and TCP_SSL listeners.
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
@@ -3097,7 +3121,7 @@ They represent weighted round robin and least connections, respectively. Default
         this.SniSwitch = null;
 
         /**
-         * Whether to enable a persistent connection (This parameter can only be configured in HTTP/HTTPS listeners). Valid values: 0: no; 1: yes. Default value: 0
+         * Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners.
          * @type {number || null}
          */
         this.KeepaliveEnable = null;
@@ -3183,25 +3207,25 @@ class RegisterTargetsRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * List of real servers to be bound. Array length limit: 20
+         * List of real servers to be bound. Array length limit: 20.
          * @type {Array.<Target> || null}
          */
         this.Targets = null;
 
         /**
-         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
          * @type {string || null}
          */
         this.LocationId = null;
 
         /**
-         * Target forwarding rule domain name. This parameter does not take effect if LocationId is specified
+         * Target forwarding rule domain name. This parameter does not take effect if LocationId is specified.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Target forwarding rule URL. This parameter does not take effect if LocationId is specified
+         * Target forwarding rule URL. This parameter does not take effect if LocationId is specified.
          * @type {string || null}
          */
         this.Url = null;
@@ -3572,7 +3596,7 @@ class DescribeLoadBalancersDetailRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Starting offset of the CLB instance list returned. Default value: 0
+         * Starting offset of the CLB instance list returned. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -3704,6 +3728,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.EniId = null;
 
+        /**
+         * AZ ID of the real server
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
     }
 
     /**
@@ -3723,6 +3754,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
         this.EniId = 'EniId' in params ? params.EniId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -3736,7 +3768,7 @@ class DescribeClassicalLBByInstanceIdRequest extends  AbstractModel {
         super();
 
         /**
-         * List of real server IDs.
+         * List of real server IDs
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -4354,7 +4386,7 @@ class DeleteLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of IDs of the CLB instances to be deleted. Array length limit: 20
+         * Array of IDs of the CLB instances to be deleted. Array length limit: 20.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -4968,7 +5000,7 @@ class BatchDeregisterTargetsRequest extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * Unbound targets
+         * Unbinding targets
          * @type {Array.<BatchTarget> || null}
          */
         this.Targets = null;
@@ -5133,8 +5165,8 @@ class DescribeTargetHealthResponse extends  AbstractModel {
         super();
 
         /**
-         * List of CLB instances
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CLB instance list
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<LoadBalancerHealth> || null}
          */
         this.LoadBalancers = null;
@@ -5341,13 +5373,13 @@ class CreateListenerRequest extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * Specifies for which ports to create listeners. Each port corresponds to a new listener
+         * Specifies for which ports to create listeners. Each port corresponds to a new listener.
          * @type {Array.<number> || null}
          */
         this.Ports = null;
 
         /**
-         * Listener protocol: TCP, UDP, HTTP, HTTPS, or TCP_SSL (which is currently in beta test. If you want to use it, please submit a ticket for application)
+         * Listener protocol: TCP, UDP, HTTP, HTTPS, or TCP_SSL (which is currently in beta test. If you want to use it, please submit a ticket for application).
          * @type {string || null}
          */
         this.Protocol = null;
@@ -5359,7 +5391,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.ListenerNames = null;
 
         /**
-         * Health check parameter, which is applicable only to TCP/UDP/TCP_SSL listeners
+         * Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
@@ -5402,7 +5434,7 @@ They represent weighted round robin and least connections, respectively. Default
         this.SessionType = null;
 
         /**
-         * Whether to enable a persistent connection (This parameter can only be configured in HTTP/HTTPS listeners). Valid values: 0: no; 1: yes. Default value: 0
+         * Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
          * @type {number || null}
          */
         this.KeepaliveEnable = null;
@@ -5972,25 +6004,25 @@ class ModifyTargetWeightRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
          * @type {string || null}
          */
         this.LocationId = null;
 
         /**
-         * Target rule domain name. This parameter does not take effect if LocationId is specified
+         * Target rule domain name. This parameter does not take effect if LocationId is specified.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Target rule URL. This parameter does not take effect if LocationId is specified
+         * Target rule URL. This parameter does not take effect if LocationId is specified.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * List of real servers for which to modify the weight
+         * List of real servers for which to modify the weights
          * @type {Array.<Target> || null}
          */
         this.Targets = null;
@@ -6841,37 +6873,37 @@ class DeregisterTargetsRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID in the format of lb-12345678
+         * CLB instance ID in the format of "lb-12345678"
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Listener ID in the format of lbl-12345678
+         * Listener ID in the format of "lbl-12345678"
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * List of real servers to be unbound. Array length limit: 20
+         * List of real servers to be unbound. Array length limit: 20.
          * @type {Array.<Target> || null}
          */
         this.Targets = null;
 
         /**
-         * Forwarding rule ID in the format of loc-12345678. When unbinding a server from a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+         * Forwarding rule ID in the format of "loc-12345678". When unbinding a server from a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
          * @type {string || null}
          */
         this.LocationId = null;
 
         /**
-         * Target rule domain name. This parameter does not take effect if LocationId is specified
+         * Target rule domain name. This parameter does not take effect if LocationId is specified.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Target rule URL. This parameter does not take effect if LocationId is specified
+         * Target rule URL. This parameter does not take effect if LocationId is specified.
          * @type {string || null}
          */
         this.Url = null;
@@ -6956,7 +6988,7 @@ class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique CLB instance ID, such as lb-12345678
+         * Unique ID of a CLB instance, e.g., lb-12345678.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -7005,7 +7037,7 @@ class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
         this.TargetGroupId = null;
 
         /**
-         * Array of servers for which to modify weight
+         * Array of servers for which to modify weights
          * @type {Array.<TargetGroupInstance> || null}
          */
         this.TargetGroupInstances = null;
@@ -7054,19 +7086,19 @@ class DescribeClassicalLBListenersRequest extends  AbstractModel {
         this.ListenerIds = null;
 
         /**
-         * CLB listening protocol. Value range: TCP, UDP, HTTP, HTTPS
+         * CLB listening protocol. Valid values: TCP, UDP, HTTP, and HTTPS.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * CLB listening port. Value range: [1-65535]
+         * CLB listening port. Value range: 1 - 65535.
          * @type {number || null}
          */
         this.ListenerPort = null;
 
         /**
-         * Listener status. Value range: 0 (creating), 1 (running)
+         * Listener status. Valid values: 0 (creating) and 1 (running).
          * @type {number || null}
          */
         this.Status = null;
@@ -7132,7 +7164,7 @@ class ModifyTargetGroupInstancesPortRequest extends  AbstractModel {
         this.TargetGroupId = null;
 
         /**
-         * Array of servers for which to modify port
+         * Array of servers for which to modify ports
          * @type {Array.<TargetGroupInstance> || null}
          */
         this.TargetGroupInstances = null;
@@ -7522,8 +7554,8 @@ class DescribeClassicalLBListenersResponse extends  AbstractModel {
         super();
 
         /**
-         * List of listeners
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Listener list
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<ClassicalListener> || null}
          */
         this.Listeners = null;
@@ -7745,13 +7777,13 @@ class DescribeListenersRequest extends  AbstractModel {
         this.ListenerIds = null;
 
         /**
-         * Type of the listener protocol to be queried. Value range: TCP, UDP, HTTP, HTTPS, TCP_SSL
+         * Type of the listener protocols to be queried. Valid values: TCP, UDP, HTTP, HTTPS, and TCP_SSL.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Port of the listener to be queried
+         * Port of the listeners to be queried
          * @type {number || null}
          */
         this.Port = null;
@@ -7782,7 +7814,7 @@ class DeleteLoadBalancerSnatIpsRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique CLB instance ID, such as lb-12345678
+         * Unique ID of a CLB instance, e.g., lb-12345678.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -7852,8 +7884,8 @@ class DescribeClassicalLBTargetsResponse extends  AbstractModel {
         super();
 
         /**
-         * List of real servers
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Real server list
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<ClassicalTarget> || null}
          */
         this.Targets = null;
@@ -7976,19 +8008,19 @@ class ModifyTargetPortRequest extends  AbstractModel {
         this.NewPort = null;
 
         /**
-         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url
+         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
          * @type {string || null}
          */
         this.LocationId = null;
 
         /**
-         * Target rule domain name. This parameter does not take effect if LocationId is specified
+         * Target rule domain name. This parameter does not take effect if LocationId is specified.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Target rule URL. This parameter does not take effect if LocationId is specified
+         * Target rule URL. This parameter does not take effect if LocationId is specified.
          * @type {string || null}
          */
         this.Url = null;

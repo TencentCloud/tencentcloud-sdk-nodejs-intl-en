@@ -863,13 +863,13 @@ class EncodeParams extends  AbstractModel {
         super();
 
         /**
-         * Output stream audio sample rate for On-Cloud MixTranscoding in Hz. Valid values: 48000, 44100, 32000, 24000, 16000, 12000, 8000.
+         * Output audio sample rate (Hz) for On-Cloud MixTranscoding. Valid values: 48000, 44100, 32000, 24000, 16000, 8000
          * @type {number || null}
          */
         this.AudioSampleRate = null;
 
         /**
-         * Output stream audio bitrate in Kbps for On-Cloud MixTranscoding. Value range: [8, 500].
+         * Output audio bitrate (Kbps) for On-Cloud MixTranscoding. Value range: 8-500
          * @type {number || null}
          */
         this.AudioBitrate = null;
@@ -893,7 +893,7 @@ class EncodeParams extends  AbstractModel {
         this.VideoHeight = null;
 
         /**
-         * Output stream bitrate in Kbps for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [1, 10000].
+         * Output bitrate (Kbps) for On-Cloud MixTranscoding, which is required for audio-video output. Value range: 1-10000
          * @type {number || null}
          */
         this.VideoBitrate = null;
@@ -911,7 +911,14 @@ class EncodeParams extends  AbstractModel {
         this.VideoGop = null;
 
         /**
-         * Output stream background color for On-Cloud MixTranscoding.
+         * Output background color for On-Cloud MixTranscoding. Valid values: decimal integers. Commonly used colors include:
+Red: 0xff0000, whose decimal number is 16724736
+Yellow: 0xffff00, whose decimal number is 16776960
+Green: 0x33cc00, whose decimal number is 3394560
+Blue: 0x0066ff, whose decimal number is 26367
+Black: 0x000000, whose decimal number is 0
+White: 0xFFFFFF, whose decimal number is 16777215
+Grey: 0x999999, whose decimal number is 10066329
          * @type {number || null}
          */
         this.BackgroundColor = null;
@@ -921,6 +928,12 @@ class EncodeParams extends  AbstractModel {
          * @type {number || null}
          */
         this.BackgroundImageId = null;
+
+        /**
+         * Output audio codec for On-Cloud MixTranscoding. Valid values: 0, 1, 2. 0 (default): LC-AAC; 1: HE-AAC; 2: HE-AACv2. If this parameter is set to 2 (HE-AACv2), On-Cloud MixTranscoding can produce only dual-channel streams. If it is set to 1 (HE-AAC) or 2 (HE-AACv2), the valid values for the audio sample rate of output streams are 48000, 44100, 32000, 24000, and 16000.
+         * @type {number || null}
+         */
+        this.AudioCodec = null;
 
     }
 
@@ -941,6 +954,7 @@ class EncodeParams extends  AbstractModel {
         this.VideoGop = 'VideoGop' in params ? params.VideoGop : null;
         this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
         this.BackgroundImageId = 'BackgroundImageId' in params ? params.BackgroundImageId : null;
+        this.AudioCodec = 'AudioCodec' in params ? params.AudioCodec : null;
 
     }
 }
@@ -1366,7 +1380,7 @@ class OutputParams extends  AbstractModel {
         this.PureAudioStream = null;
 
         /**
-         * Custom recording file name. Please enable the recording feature in the TRTC console first. https://intl.cloud.tencent.com/document/product/647/50768?from_cn_redirect=1
+         * Prefix of custom recording file names. Please enable the recording feature in the TRTC console first. https://intl.cloud.tencent.com/document/product/647/50768?from_cn_redirect=1
          * @type {string || null}
          */
         this.RecordId = null;

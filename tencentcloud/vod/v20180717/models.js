@@ -6054,6 +6054,18 @@ such as 2018120101-test.vod2.mqcloud.com.
          */
         this.Url = null;
 
+        /**
+         * Log start time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Log end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -6066,6 +6078,8 @@ such as 2018120101-test.vod2.mqcloud.com.
         this.Date = 'Date' in params ? params.Date : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -14473,6 +14487,18 @@ class DescribeCdnLogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
+         * Maximum return results of pulling paginated queries. Default value: 100; maximum value: 1000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number offset from the beginning of paginated queries. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
          * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
@@ -14490,6 +14516,8 @@ class DescribeCdnLogsRequest extends  AbstractModel {
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -14839,11 +14867,11 @@ class DescribeCdnLogsResponse extends  AbstractModel {
         super();
 
         /**
-         * Log download list for CDN nodes in Mainland China.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CdnLogInfo> || null}
+         * Total number of log download links
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
          */
-        this.DomesticCdnLogs = null;
+        this.TotalCount = null;
 
         /**
          * Log download list for CDN nodes outside Mainland China. If global acceleration is not enabled for the domain name, ignore this parameter.
@@ -14851,6 +14879,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {Array.<CdnLogInfo> || null}
          */
         this.OverseaCdnLogs = null;
+
+        /**
+         * Log download list for CDN nodes in Mainland China.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CdnLogInfo> || null}
+         */
+        this.DomesticCdnLogs = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -14867,15 +14902,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.DomesticCdnLogs) {
-            this.DomesticCdnLogs = new Array();
-            for (let z in params.DomesticCdnLogs) {
-                let obj = new CdnLogInfo();
-                obj.deserialize(params.DomesticCdnLogs[z]);
-                this.DomesticCdnLogs.push(obj);
-            }
-        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.OverseaCdnLogs) {
             this.OverseaCdnLogs = new Array();
@@ -14883,6 +14910,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new CdnLogInfo();
                 obj.deserialize(params.OverseaCdnLogs[z]);
                 this.OverseaCdnLogs.push(obj);
+            }
+        }
+
+        if (params.DomesticCdnLogs) {
+            this.DomesticCdnLogs = new Array();
+            for (let z in params.DomesticCdnLogs) {
+                let obj = new CdnLogInfo();
+                obj.deserialize(params.DomesticCdnLogs[z]);
+                this.DomesticCdnLogs.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;

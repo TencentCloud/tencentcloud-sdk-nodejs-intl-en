@@ -2517,6 +2517,20 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
+         * Instance VIP
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VIP = null;
+
+        /**
+         * Instance port
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VPort = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2540,6 +2554,8 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
+        this.VIP = 'VIP' in params ? params.VIP : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

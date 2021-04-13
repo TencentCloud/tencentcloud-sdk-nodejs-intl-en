@@ -2099,6 +2099,12 @@ class CreateTCPListenersRequest extends  AbstractModel {
          */
         this.ClientIPMethod = null;
 
+        /**
+         * Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
     }
 
     /**
@@ -2119,6 +2125,7 @@ class CreateTCPListenersRequest extends  AbstractModel {
         this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
         this.RealServerPorts = 'RealServerPorts' in params ? params.RealServerPorts : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
 
     }
 }
@@ -2491,6 +2498,12 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
          */
         this.HealthCheck = null;
 
+        /**
+         * Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
     }
 
     /**
@@ -2508,6 +2521,7 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
         this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
         this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
         this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
 
     }
 }
@@ -10382,7 +10396,7 @@ class DescribeRulesByRuleIdsRequest extends  AbstractModel {
 }
 
 /**
- * RealServerBindSetReq
+ * Information of the bound origin server
  * @class
  */
 class RealServerBindSetReq extends  AbstractModel {
@@ -10413,6 +10427,12 @@ class RealServerBindSetReq extends  AbstractModel {
          */
         this.RealServerWeight = null;
 
+        /**
+         * Origin server role: master (primary origin server); slave (secondary origin server). This parameter is applicable when the primary/secondary origin server mode is enabled for a TCP listener.
+         * @type {string || null}
+         */
+        this.RealServerFailoverRole = null;
+
     }
 
     /**
@@ -10426,6 +10446,7 @@ class RealServerBindSetReq extends  AbstractModel {
         this.RealServerPort = 'RealServerPort' in params ? params.RealServerPort : null;
         this.RealServerIP = 'RealServerIP' in params ? params.RealServerIP : null;
         this.RealServerWeight = 'RealServerWeight' in params ? params.RealServerWeight : null;
+        this.RealServerFailoverRole = 'RealServerFailoverRole' in params ? params.RealServerFailoverRole : null;
 
     }
 }

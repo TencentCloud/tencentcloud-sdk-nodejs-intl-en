@@ -130,6 +130,26 @@ To modify it or even its subfield, you should specify all the subfields again.
          */
         this.InstanceMarketOptions = null;
 
+        /**
+         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+<br><li>ORIGINAL: uses the configured cloud disk type
+<br><li>AUTOMATIC: automatically chooses an available cloud disk type
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
+        /**
+         * 
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * 
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
     }
 
     /**
@@ -164,6 +184,22 @@ To modify it or even its subfield, you should specify all the subfields again.
             let obj = new InstanceMarketOptionsRequest();
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
+        }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
         }
 
     }
@@ -2033,6 +2069,14 @@ If a model in InstanceTypes does not exist or has been discontinued, a verificat
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+<br><li>ORIGINAL: uses the configured cloud disk type
+<br><li>AUTOMATIC: automatically chooses an available cloud disk type
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
     }
 
     /**
@@ -2118,6 +2162,7 @@ If a model in InstanceTypes does not exist or has been discontinued, a verificat
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
 
     }
 }
@@ -3581,6 +3626,14 @@ If a model in InstanceTypes does not exist or has been deactivated, a verificati
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+<br><li>ORIGINAL: uses the configured cloud disk type
+<br><li>AUTOMATIC: automatically chooses an available cloud disk type
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
     }
 
     /**
@@ -3666,6 +3719,7 @@ If a model in InstanceTypes does not exist or has been deactivated, a verificati
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
 
     }
 }

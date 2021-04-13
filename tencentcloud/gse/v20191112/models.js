@@ -143,6 +143,48 @@ class DescribeTimerScalingPoliciesRequest extends  AbstractModel {
 }
 
 /**
+ * CCN information description
+ * @class
+ */
+class RelatedCcnInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CCN account
+         * @type {string || null}
+         */
+        this.AccountId = null;
+
+        /**
+         * CCN ID
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * Status of associated CCN
+         * @type {string || null}
+         */
+        this.AttachType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountId = 'AccountId' in params ? params.AccountId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.AttachType = 'AttachType' in params ? params.AttachType : null;
+
+    }
+}
+
+/**
  * Service deployment attributes
  * @class
  */
@@ -280,6 +322,13 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.SystemDiskInfo = null;
 
+        /**
+         * CCN information
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<RelatedCcnInfo> || null}
+         */
+        this.RelatedCcnInfos = null;
+
     }
 
     /**
@@ -333,6 +382,15 @@ Note: this field may return `null`, indicating that no valid value is obtained.
             let obj = new DiskInfo();
             obj.deserialize(params.SystemDiskInfo)
             this.SystemDiskInfo = obj;
+        }
+
+        if (params.RelatedCcnInfos) {
+            this.RelatedCcnInfos = new Array();
+            for (let z in params.RelatedCcnInfos) {
+                let obj = new RelatedCcnInfo();
+                obj.deserialize(params.RelatedCcnInfos[z]);
+                this.RelatedCcnInfos.push(obj);
+            }
         }
 
     }
@@ -1020,7 +1078,7 @@ class CopyFleetRequest extends  AbstractModel {
         this.SelectedScalingType = null;
 
         /**
-         * Whether to select CCN. Valid values: CCN_SELECTED, CCN_UNSELECTED. Default value: CCN_UNSELECTED.
+         * Whether to select CCN: CCN_SELECTED_BEFORE_CREATE (associated before creation), CCN_SELECTED_AFTER_CREATE (associated after creation), or CCN_UNSELECTED (not associated); CCN_UNSELECTED by default
          * @type {string || null}
          */
         this.SelectedCcnType = null;
@@ -1048,6 +1106,12 @@ class CopyFleetRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.SelectedTimerType = null;
+
+        /**
+         * CCN information, including the corresponding CCN account and ID.
+         * @type {Array.<CcnInfo> || null}
+         */
+        this.CcnInfos = null;
 
     }
 
@@ -1115,6 +1179,15 @@ class CopyFleetRequest extends  AbstractModel {
             }
         }
         this.SelectedTimerType = 'SelectedTimerType' in params ? params.SelectedTimerType : null;
+
+        if (params.CcnInfos) {
+            this.CcnInfos = new Array();
+            for (let z in params.CcnInfos) {
+                let obj = new CcnInfo();
+                obj.deserialize(params.CcnInfos[z]);
+                this.CcnInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -1588,6 +1661,41 @@ class GetGameServerSessionLogUrlRequest extends  AbstractModel {
 }
 
 /**
+ * Tag structure
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key. Up to 127 bytes are allowed.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value. Up to 255 bytes are allowed.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * SetServerReserved request structure.
  * @class
  */
@@ -1981,24 +2089,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Player game session information
+ * CCN information
  * @class
  */
-class DesiredPlayerSession extends  AbstractModel {
+class CcnInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique player ID associated with player session
+         * CCN account
          * @type {string || null}
          */
-        this.PlayerId = null;
+        this.AccountId = null;
 
         /**
-         * Developer-defined player data
+         * CCN ID
          * @type {string || null}
          */
-        this.PlayerData = null;
+        this.CcnId = null;
 
     }
 
@@ -2009,8 +2117,8 @@ class DesiredPlayerSession extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
-        this.PlayerData = 'PlayerData' in params ? params.PlayerData : null;
+        this.AccountId = 'AccountId' in params ? params.AccountId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
     }
 }
@@ -3279,24 +3387,24 @@ class DescribeGameServerSessionPlacementResponse extends  AbstractModel {
 }
 
 /**
- * Tag structure
+ * Player game session information
  * @class
  */
-class Tag extends  AbstractModel {
+class DesiredPlayerSession extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key. Up to 127 bytes are allowed.
+         * Unique player ID associated with player session
          * @type {string || null}
          */
-        this.Key = null;
+        this.PlayerId = null;
 
         /**
-         * Tag value. Up to 255 bytes are allowed.
+         * Developer-defined player data
          * @type {string || null}
          */
-        this.Value = null;
+        this.PlayerData = null;
 
     }
 
@@ -3307,8 +3415,8 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
+        this.PlayerData = 'PlayerData' in params ? params.PlayerData : null;
 
     }
 }
@@ -3565,6 +3673,7 @@ module.exports = {
     GameProperty: GameProperty,
     DeleteTimerScalingPolicyResponse: DeleteTimerScalingPolicyResponse,
     DescribeTimerScalingPoliciesRequest: DescribeTimerScalingPoliciesRequest,
+    RelatedCcnInfo: RelatedCcnInfo,
     FleetAttributes: FleetAttributes,
     TargetConfiguration: TargetConfiguration,
     InboundPermission: InboundPermission,
@@ -3591,6 +3700,7 @@ module.exports = {
     StartGameServerSessionPlacementResponse: StartGameServerSessionPlacementResponse,
     Credentials: Credentials,
     GetGameServerSessionLogUrlRequest: GetGameServerSessionLogUrlRequest,
+    Tag: Tag,
     SetServerReservedRequest: SetServerReservedRequest,
     CreateGameServerSessionResponse: CreateGameServerSessionResponse,
     DescribePlayerSessionsRequest: DescribePlayerSessionsRequest,
@@ -3599,7 +3709,7 @@ module.exports = {
     RuntimeConfiguration: RuntimeConfiguration,
     DeleteTimerScalingPolicyRequest: DeleteTimerScalingPolicyRequest,
     JoinGameServerSessionResponse: JoinGameServerSessionResponse,
-    DesiredPlayerSession: DesiredPlayerSession,
+    CcnInfo: CcnInfo,
     SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
     DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
     SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
@@ -3618,7 +3728,7 @@ module.exports = {
     GameServerSession: GameServerSession,
     DescribeGameServerSessionDetailsResponse: DescribeGameServerSessionDetailsResponse,
     DescribeGameServerSessionPlacementResponse: DescribeGameServerSessionPlacementResponse,
-    Tag: Tag,
+    DesiredPlayerSession: DesiredPlayerSession,
     JoinGameServerSessionBatchResponse: JoinGameServerSessionBatchResponse,
     PlayerDataMap: PlayerDataMap,
     ResourceCreationLimitPolicy: ResourceCreationLimitPolicy,

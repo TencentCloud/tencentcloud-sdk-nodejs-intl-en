@@ -1768,6 +1768,12 @@ class DescribeDBSyncModeResponse extends  AbstractModel {
         this.IsModifying = null;
 
         /**
+         * Current sync mode. Valid values: `0` (async), `1` (sync).
+         * @type {number || null}
+         */
+        this.CurrentSyncMode = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1784,6 +1790,7 @@ class DescribeDBSyncModeResponse extends  AbstractModel {
         }
         this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
         this.IsModifying = 'IsModifying' in params ? params.IsModifying : null;
+        this.CurrentSyncMode = 'CurrentSyncMode' in params ? params.CurrentSyncMode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1839,6 +1846,20 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
+         * Instance VIP
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VIP = null;
+
+        /**
+         * Instance port
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VPort = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1862,6 +1883,8 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
+        this.VIP = 'VIP' in params ? params.VIP : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2491,7 +2514,7 @@ class Project extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * The `uin` of the resource owner (root account)
+         * The UIN of the resource owner (root account)
          * @type {number || null}
          */
         this.OwnerUin = null;
@@ -2509,7 +2532,7 @@ class Project extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Creator `uin`
+         * Creator UIN
          * @type {number || null}
          */
         this.CreatorUin = null;
@@ -2521,13 +2544,13 @@ class Project extends  AbstractModel {
         this.SrcPlat = null;
 
         /**
-         * Source `AppId`
+         * Source APPID
          * @type {number || null}
          */
         this.SrcAppId = null;
 
         /**
-         * Project status. 0: normal; -1: disabled; 3: default project.
+         * Project status. Valid values: `0` (normal), `-1` (disabled), `3` (default project).
          * @type {number || null}
          */
         this.Status = null;
@@ -2539,7 +2562,7 @@ class Project extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Whether it is the default project. 1: yes; 0: no.
+         * Whether it is the default project. Valid values: `1` (yes), `0` (no).
          * @type {number || null}
          */
         this.IsDefault = null;

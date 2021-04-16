@@ -992,6 +992,19 @@ class PodSpec extends  AbstractModel {
          */
         this.PodVolumes = null;
 
+        /**
+         * Whether floating specification is used. `1`: yes; `0`: no
+         * @type {number || null}
+         */
+        this.IsDynamicSpec = null;
+
+        /**
+         * Floating specification
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {DynamicPodSpec || null}
+         */
+        this.DynamicPodSpec = null;
+
     }
 
     /**
@@ -1016,6 +1029,13 @@ class PodSpec extends  AbstractModel {
                 obj.deserialize(params.PodVolumes[z]);
                 this.PodVolumes.push(obj);
             }
+        }
+        this.IsDynamicSpec = 'IsDynamicSpec' in params ? params.IsDynamicSpec : null;
+
+        if (params.DynamicPodSpec) {
+            let obj = new DynamicPodSpec();
+            obj.deserialize(params.DynamicPodSpec)
+            this.DynamicPodSpec = obj;
         }
 
     }
@@ -1889,6 +1909,55 @@ class Placement extends  AbstractModel {
 }
 
 /**
+ * Pod floating specification
+ * @class
+ */
+class DynamicPodSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Minimum number of CPU cores
+         * @type {number || null}
+         */
+        this.RequestCpu = null;
+
+        /**
+         * Maximum number of CPU cores
+         * @type {number || null}
+         */
+        this.LimitCpu = null;
+
+        /**
+         * Minimum memory in MB
+         * @type {number || null}
+         */
+        this.RequestMemory = null;
+
+        /**
+         * Maximum memory in MB
+         * @type {number || null}
+         */
+        this.LimitMemory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestCpu = 'RequestCpu' in params ? params.RequestCpu : null;
+        this.LimitCpu = 'LimitCpu' in params ? params.LimitCpu : null;
+        this.RequestMemory = 'RequestMemory' in params ? params.RequestMemory : null;
+        this.LimitMemory = 'LimitMemory' in params ? params.LimitMemory : null;
+
+    }
+}
+
+/**
  * DescribeInstances request structure.
  * @class
  */
@@ -2004,6 +2073,48 @@ class CustomMetaInfo extends  AbstractModel {
         this.MetaDataJdbcUrl = 'MetaDataJdbcUrl' in params ? params.MetaDataJdbcUrl : null;
         this.MetaDataUser = 'MetaDataUser' in params ? params.MetaDataUser : null;
         this.MetaDataPass = 'MetaDataPass' in params ? params.MetaDataPass : null;
+
+    }
+}
+
+/**
+ * Custom pod permission and parameter
+ * @class
+ */
+class PodParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TKE or EKS cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Custom permission
+         * @type {string || null}
+         */
+        this.Config = null;
+
+        /**
+         * Custom parameter
+         * @type {string || null}
+         */
+        this.Parameter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Config = 'Config' in params ? params.Config : null;
+        this.Parameter = 'Parameter' in params ? params.Parameter : null;
 
     }
 }
@@ -3066,6 +3177,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.HardwareResourceType = null;
 
+        /**
+         * Whether floating specification is used. `1`: yes; `0`: no
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsDynamicSpec = null;
+
+        /**
+         * Floating specification in JSON string
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DynamicPodSpec = null;
+
     }
 
     /**
@@ -3133,6 +3258,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.AutoFlag = 'AutoFlag' in params ? params.AutoFlag : null;
         this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
+        this.IsDynamicSpec = 'IsDynamicSpec' in params ? params.IsDynamicSpec : null;
+        this.DynamicPodSpec = 'DynamicPodSpec' in params ? params.DynamicPodSpec : null;
 
     }
 }
@@ -3676,6 +3803,18 @@ class ScaleOutInstanceRequest extends  AbstractModel {
          */
         this.YarnNodeLabel = null;
 
+        /**
+         * Custom pod permission and parameter
+         * @type {PodParameter || null}
+         */
+        this.PodParameter = null;
+
+        /**
+         * Number of master nodes to be added
+         * @type {number || null}
+         */
+        this.MasterCount = null;
+
     }
 
     /**
@@ -3726,6 +3865,13 @@ class ScaleOutInstanceRequest extends  AbstractModel {
         this.ClickHouseClusterType = 'ClickHouseClusterType' in params ? params.ClickHouseClusterType : null;
         this.YarnNodeLabel = 'YarnNodeLabel' in params ? params.YarnNodeLabel : null;
 
+        if (params.PodParameter) {
+            let obj = new PodParameter();
+            obj.deserialize(params.PodParameter)
+            this.PodParameter = obj;
+        }
+        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+
     }
 }
 
@@ -3754,8 +3900,10 @@ module.exports = {
     InquiryPriceScaleOutInstanceRequest: InquiryPriceScaleOutInstanceRequest,
     Tag: Tag,
     Placement: Placement,
+    DynamicPodSpec: DynamicPodSpec,
     DescribeInstancesRequest: DescribeInstancesRequest,
     CustomMetaInfo: CustomMetaInfo,
+    PodParameter: PodParameter,
     InquiryPriceUpdateInstanceRequest: InquiryPriceUpdateInstanceRequest,
     COSSettings: COSSettings,
     ClusterInstancesInfo: ClusterInstancesInfo,

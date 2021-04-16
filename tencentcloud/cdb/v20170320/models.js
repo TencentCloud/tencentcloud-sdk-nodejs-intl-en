@@ -1337,19 +1337,19 @@ class SellConfig extends  AbstractModel {
         super();
 
         /**
-         * Device type
+         * (Disused) Device type
          * @type {string || null}
          */
         this.Device = null;
 
         /**
-         * Purchasable specification description
+         * (Disused) Purchasable specification description 
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Instance type
+         * (Disused) Instance type 
          * @type {string || null}
          */
         this.CdbType = null;
@@ -1409,16 +1409,30 @@ class SellConfig extends  AbstractModel {
         this.Info = null;
 
         /**
-         * Status value
+         * Status. Value `0` indicates that this specification is purchasable.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Tag value
+         * (Disused) Tag value
          * @type {number || null}
          */
         this.Tag = null;
+
+        /**
+         * Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeviceTypeName = null;
 
     }
 
@@ -1443,6 +1457,8 @@ class SellConfig extends  AbstractModel {
         this.Info = 'Info' in params ? params.Info : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Tag = 'Tag' in params ? params.Tag : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.DeviceTypeName = 'DeviceTypeName' in params ? params.DeviceTypeName : null;
 
     }
 }
@@ -4106,13 +4122,13 @@ class DescribeCloneListRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Paginated query offset
+         * Paginated query offset. Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The number of results per page in paginated queries
+         * Number of results per page. Default value: `20`.
          * @type {number || null}
          */
         this.Limit = null;
@@ -4349,7 +4365,7 @@ class CreateCloneInstanceRequest extends  AbstractModel {
         this.ResourceTags = null;
 
         /**
-         * CPU core quantity of the cloned instance, which is equal to or larger than that of the original instance
+         * The number of CPU cores of the cloned instance. It should be equal to (by default) or larger than that of the original instance.
          * @type {number || null}
          */
         this.Cpu = null;
@@ -4918,6 +4934,12 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
+         * Number of security group rules
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4941,6 +4963,7 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5970,7 +5993,7 @@ class CreateRoInstanceIpRequest extends  AbstractModel {
         this.UniqSubnetId = null;
 
         /**
-         * VPC descriptor, such as "vpc-xxx". If this field is passed in, `UniqSubnetId` will be required.
+         * VPC descriptor, such as "vpc-a23yt67j". If this field is passed in, `UniqSubnetId` will be required.
          * @type {string || null}
          */
         this.UniqVpcId = null;
@@ -7963,16 +7986,24 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Configuration information of the secondary database.
+         * Configurations of the replica node
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {SlaveConfig || null}
          */
         this.SlaveConfig = null;
 
         /**
-         * Configuration information of secondary database 2 of a strong sync instance.
+         * Configurations of the second replica node of a strong-sync instance
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {BackupConfig || null}
          */
         this.BackupConfig = null;
+
+        /**
+         * This parameter is only available for multi-AZ instances. It indicates whether the source AZ is the same as the one specified upon purchase. `true`: not the same, `false`: the same.
+         * @type {boolean || null}
+         */
+        this.Switched = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8004,6 +8035,7 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
             obj.deserialize(params.BackupConfig)
             this.BackupConfig = obj;
         }
+        this.Switched = 'Switched' in params ? params.Switched : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8697,8 +8729,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ZoneId = null;
 
         /**
-         * The number of nodes
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Number of nodes
          * @type {number || null}
          */
         this.InstanceNodes = null;
@@ -9344,6 +9375,12 @@ class DescribeDatabasesResponse extends  AbstractModel {
         this.Items = null;
 
         /**
+         * Database name and character set
+         * @type {Array.<DatabasesWithCharacterLists> || null}
+         */
+        this.DatabaseList = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -9360,6 +9397,15 @@ class DescribeDatabasesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.Items = 'Items' in params ? params.Items : null;
+
+        if (params.DatabaseList) {
+            this.DatabaseList = new Array();
+            for (let z in params.DatabaseList) {
+                let obj = new DatabasesWithCharacterLists();
+                obj.deserialize(params.DatabaseList[z]);
+                this.DatabaseList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10881,24 +10927,24 @@ class DescribeSlowLogDataRequest extends  AbstractModel {
 }
 
 /**
- * ModifyAccountDescription response structure.
+ * Database name and character set
  * @class
  */
-class ModifyAccountDescriptionResponse extends  AbstractModel {
+class DatabasesWithCharacterLists extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task request ID, which can be used to query the execution result of an async task.
+         * Database name
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.DatabaseName = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Character set
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CharacterSet = null;
 
     }
 
@@ -10909,8 +10955,8 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.CharacterSet = 'CharacterSet' in params ? params.CharacterSet : null;
 
     }
 }
@@ -11477,7 +11523,7 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Parameter template description
+         * Database engine version specified in the parameter template
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -11493,6 +11539,12 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
          * @type {Array.<ParameterDetail> || null}
          */
         this.Items = null;
+
+        /**
+         * Parameter template description
+         * @type {string || null}
+         */
+        this.Description = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11522,6 +11574,7 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
+        this.Description = 'Description' in params ? params.Description : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11897,6 +11950,41 @@ class SwitchDrInstanceToMasterResponse extends  AbstractModel {
 
         /**
          * Async task request ID, which can be used to query the execution result of an async task
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountDescription response structure.
+ * @class
+ */
+class ModifyAccountDescriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task.
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -12509,7 +12597,7 @@ class ModifyRoGroupInfoRequest extends  AbstractModel {
         this.RoWeightValues = null;
 
         /**
-         * Whether to rebalance the loads of RO instances in the RO group. Supported values include `1` (yes) and `0` (no). The default value is `0`. Please note that if this value is set to `1`, connections to the RO instances in the RO group will be interrupted transiently; therefore, you should ensure that your application can reconnect to the databases.
+         * Whether to rebalance the loads of read-only replicas in the RO group. Valid values: `1` (yes), `0` (no). Default value: `0`. If this parameter is set to `1`, connections to the read-only replicas in the RO group will be interrupted transiently. Please ensure that your application has a reconnection mechanism.
          * @type {number || null}
          */
         this.IsBalanceRoLoad = null;
@@ -13212,7 +13300,7 @@ module.exports = {
     StartDelayReplicationRequest: StartDelayReplicationRequest,
     DeleteDeployGroupsRequest: DeleteDeployGroupsRequest,
     DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
-    ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
+    DatabasesWithCharacterLists: DatabasesWithCharacterLists,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
     DescribeSlowLogsResponse: DescribeSlowLogsResponse,
@@ -13236,6 +13324,7 @@ module.exports = {
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DeleteAccountsRequest: DeleteAccountsRequest,
     SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
+    ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     AddTimeWindowResponse: AddTimeWindowResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,

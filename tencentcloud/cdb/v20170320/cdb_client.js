@@ -226,7 +226,7 @@ const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVers
 const StartDelayReplicationRequest = models.StartDelayReplicationRequest;
 const DeleteDeployGroupsRequest = models.DeleteDeployGroupsRequest;
 const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
-const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
+const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
@@ -250,6 +250,7 @@ const CreateDeployGroupRequest = models.CreateDeployGroupRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
+const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -673,7 +674,7 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
 2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months;
 3. MySQL v5.5, v5.6, v5.7, and v8.0 are supported;
 4. Source instances, disaster recovery instances, and read-only replicas can be created;
-5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance will be initialized.
+5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance (excluding basic instances) will be initialized.
      * @param {CreateDBInstanceHourRequest} req
      * @param {function(string, CreateDBInstanceHourResponse):void} cb
      * @public

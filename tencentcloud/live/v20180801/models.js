@@ -1239,6 +1239,12 @@ class PushQualityData extends  AbstractModel {
          */
         this.MateFps = null;
 
+        /**
+         * Push parameter
+         * @type {string || null}
+         */
+        this.StreamParam = null;
+
     }
 
     /**
@@ -1267,6 +1273,7 @@ class PushQualityData extends  AbstractModel {
         this.MetaVideoRate = 'MetaVideoRate' in params ? params.MetaVideoRate : null;
         this.MetaAudioRate = 'MetaAudioRate' in params ? params.MetaAudioRate : null;
         this.MateFps = 'MateFps' in params ? params.MateFps : null;
+        this.StreamParam = 'StreamParam' in params ? params.StreamParam : null;
 
     }
 }

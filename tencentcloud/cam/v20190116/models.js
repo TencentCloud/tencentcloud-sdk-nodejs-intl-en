@@ -17,6 +17,84 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Sub-user information
+ * @class
+ */
+class SubAccountUser extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sub-user ID
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Sub-user name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Sub-user UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * Sub-user remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Creation time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * User type (1: root account; 2: sub-user; 3: WeCom sub-user; 4: collaborator; 5: message recipient)
+         * @type {number || null}
+         */
+        this.UserType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LastLoginIp = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LastLoginTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UserType = 'UserType' in params ? params.UserType : null;
+        this.LastLoginIp = 'LastLoginIp' in params ? params.LastLoginIp : null;
+        this.LastLoginTime = 'LastLoginTime' in params ? params.LastLoginTime : null;
+
+    }
+}
+
+/**
  * GetUser response structure.
  * @class
  */
@@ -938,6 +1016,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
         this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
         this.IsDefaultVersion = 'IsDefaultVersion' in params ? params.IsDefaultVersion : null;
+
+    }
+}
+
+/**
+ * DescribeSubAccounts request structure.
+ * @class
+ */
+class DescribeSubAccountsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of sub-user UINs. Up to 50 UINs are supported.
+         * @type {Array.<number> || null}
+         */
+        this.FilterSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterSubAccountUin = 'FilterSubAccountUin' in params ? params.FilterSubAccountUin : null;
 
     }
 }
@@ -5195,6 +5301,49 @@ class AddUserResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSubAccounts response structure.
+ * @class
+ */
+class DescribeSubAccountsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sub-user list
+         * @type {Array.<SubAccountUser> || null}
+         */
+        this.SubAccounts = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SubAccounts) {
+            this.SubAccounts = new Array();
+            for (let z in params.SubAccounts) {
+                let obj = new SubAccountUser();
+                obj.deserialize(params.SubAccounts[z]);
+                this.SubAccounts.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListEntitiesForPolicy response structure.
  * @class
  */
@@ -5800,6 +5949,7 @@ class CreateGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
+    SubAccountUser: SubAccountUser,
     GetUserResponse: GetUserResponse,
     ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
@@ -5824,6 +5974,7 @@ module.exports = {
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
     PolicyVersionItem: PolicyVersionItem,
+    DescribeSubAccountsRequest: DescribeSubAccountsRequest,
     DeleteUserPermissionsBoundaryRequest: DeleteUserPermissionsBoundaryRequest,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
     ListGroupsRequest: ListGroupsRequest,
@@ -5923,6 +6074,7 @@ module.exports = {
     ListUsersForGroupResponse: ListUsersForGroupResponse,
     PolicyVersionDetail: PolicyVersionDetail,
     AddUserResponse: AddUserResponse,
+    DescribeSubAccountsResponse: DescribeSubAccountsResponse,
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,

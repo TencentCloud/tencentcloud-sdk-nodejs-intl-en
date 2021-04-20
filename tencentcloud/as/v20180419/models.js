@@ -139,13 +139,13 @@ To modify it or even its subfield, you should specify all the subfields again.
         this.DiskTypePolicy = null;
 
         /**
-         * 
+         * Instance system disk configurations
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
 
         /**
-         * 
+         * Instance data disk configurations. Up to 11 data disks can be specified and will be collectively modified. Please provide all the new values for the modification.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -778,6 +778,34 @@ class CreateLifecycleHookResponse extends  AbstractModel {
             return;
         }
         this.LifecycleHookId = 'LifecycleHookId' in params ? params.LifecycleHookId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ClearLaunchConfigurationAttributes response structure.
+ * @class
+ */
+class ClearLaunchConfigurationAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5991,6 +6019,42 @@ class ForwardLoadBalancer extends  AbstractModel {
 }
 
 /**
+ * ClearLaunchConfigurationAttributes request structure.
+ * @class
+ */
+class ClearLaunchConfigurationAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Launch configuration ID
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * Whether to clear data disk information. This parameter is optional and the default value is `false`.
+Setting it to `true` will clear data disks, which means that CVM newly created on this launch configuration will have no data disk.
+         * @type {boolean || null}
+         */
+        this.ClearDataDisks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.ClearDataDisks = 'ClearDataDisks' in params ? params.ClearDataDisks : null;
+
+    }
+}
+
+/**
  * PreviewPaiDomainName response structure.
  * @class
  */
@@ -6763,6 +6827,7 @@ module.exports = {
     CreatePaiInstanceResponse: CreatePaiInstanceResponse,
     CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
     CreateLifecycleHookResponse: CreateLifecycleHookResponse,
+    ClearLaunchConfigurationAttributesResponse: ClearLaunchConfigurationAttributesResponse,
     DescribeAutoScalingGroupsResponse: DescribeAutoScalingGroupsResponse,
     CreatePaiInstanceRequest: CreatePaiInstanceRequest,
     SystemDisk: SystemDisk,
@@ -6856,6 +6921,7 @@ module.exports = {
     DescribeNotificationConfigurationsRequest: DescribeNotificationConfigurationsRequest,
     LifecycleHook: LifecycleHook,
     ForwardLoadBalancer: ForwardLoadBalancer,
+    ClearLaunchConfigurationAttributesRequest: ClearLaunchConfigurationAttributesRequest,
     PreviewPaiDomainNameResponse: PreviewPaiDomainNameResponse,
     DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
     RemoveInstancesRequest: RemoveInstancesRequest,

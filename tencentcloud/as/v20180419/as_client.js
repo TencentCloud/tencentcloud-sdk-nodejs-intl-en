@@ -28,6 +28,7 @@ const DescribeAccountLimitsResponse = models.DescribeAccountLimitsResponse;
 const CreatePaiInstanceResponse = models.CreatePaiInstanceResponse;
 const CreateLaunchConfigurationResponse = models.CreateLaunchConfigurationResponse;
 const CreateLifecycleHookResponse = models.CreateLifecycleHookResponse;
+const ClearLaunchConfigurationAttributesResponse = models.ClearLaunchConfigurationAttributesResponse;
 const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
 const CreatePaiInstanceRequest = models.CreatePaiInstanceRequest;
 const SystemDisk = models.SystemDisk;
@@ -121,6 +122,7 @@ const MetricAlarm = models.MetricAlarm;
 const DescribeNotificationConfigurationsRequest = models.DescribeNotificationConfigurationsRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
+const ClearLaunchConfigurationAttributesRequest = models.ClearLaunchConfigurationAttributesRequest;
 const PreviewPaiDomainNameResponse = models.PreviewPaiDomainNameResponse;
 const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
@@ -186,6 +188,17 @@ class AsClient extends AbstractClient {
     PreviewPaiDomainName(req, cb) {
         let resp = new PreviewPaiDomainNameResponse();
         this.request("PreviewPaiDomainName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to clear specific attributes of the launch configuration.
+     * @param {ClearLaunchConfigurationAttributesRequest} req
+     * @param {function(string, ClearLaunchConfigurationAttributesResponse):void} cb
+     * @public
+     */
+    ClearLaunchConfigurationAttributes(req, cb) {
+        let resp = new ClearLaunchConfigurationAttributesResponse();
+        this.request("ClearLaunchConfigurationAttributes", req, resp, cb);
     }
 
     /**

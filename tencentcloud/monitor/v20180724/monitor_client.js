@@ -30,6 +30,7 @@ const DescribeAlarmNoticeCallbacksRequest = models.DescribeAlarmNoticeCallbacksR
 const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
 const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
+const AlarmHistoryMetric = models.AlarmHistoryMetric;
 const CreateAlarmPolicyRequest = models.CreateAlarmPolicyRequest;
 const DescribeAlarmEventsResponse = models.DescribeAlarmEventsResponse;
 const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
@@ -302,7 +303,7 @@ This API may fail due to the rate limit if you need to call a lot of metrics and
     }
 
     /**
-     * This API is used to edit the trigger condition of an alarm policy.
+     * This API is used to modify the trigger condition of an alarm policy.
      * @param {ModifyAlarmPolicyConditionRequest} req
      * @param {function(string, ModifyAlarmPolicyConditionResponse):void} cb
      * @public
@@ -545,7 +546,7 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
-     * This API is used to get the details of basic metrics.
+     * This API is used to get the attributes of basic metrics.
      * @param {DescribeBaseMetricsRequest} req
      * @param {function(string, DescribeBaseMetricsResponse):void} cb
      * @public

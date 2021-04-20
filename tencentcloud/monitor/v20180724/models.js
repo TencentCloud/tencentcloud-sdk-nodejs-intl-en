@@ -345,7 +345,7 @@ class DescribeProductEventListRequest extends  AbstractModel {
         this.EventName = null;
 
         /**
-         * Affected object, such as ins-19708ino.
+         * Affected object, such as "ins-19708ino"
          * @type {Array.<string> || null}
          */
         this.InstanceId = null;
@@ -357,7 +357,7 @@ class DescribeProductEventListRequest extends  AbstractModel {
         this.Dimensions = null;
 
         /**
-         * Filter by region, such as by gz.
+         * Region filter parameter for service events, such as `gz`. For region abbreviations, please see [Region List](https://intl.cloud.tencent.com/document/product/248/50863?from_cn_redirect=1)
          * @type {Array.<string> || null}
          */
         this.RegionList = null;
@@ -604,7 +604,7 @@ class BindingPolicyObjectRequest extends  AbstractModel {
         super();
 
         /**
-         * Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
+         * Policy group ID. If `PolicyId` is used, this parameter will be ignored, and any value, e.g., 0, can be passed in.
          * @type {number || null}
          */
         this.GroupId = null;
@@ -628,7 +628,7 @@ class BindingPolicyObjectRequest extends  AbstractModel {
         this.Dimensions = null;
 
         /**
-         * Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+         * Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
          * @type {string || null}
          */
         this.PolicyId = null;
@@ -793,6 +793,62 @@ class DescribePolicyGroupInfoCallback extends  AbstractModel {
 }
 
 /**
+ * Metric information of alarm records
+ * @class
+ */
+class AlarmHistoryMetric extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Namespace used to query data by Tencent Cloud service monitoring type
+         * @type {string || null}
+         */
+        this.QceNamespace = null;
+
+        /**
+         * Metric name
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * Statistical period
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Value triggering alarm
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Metric display name
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QceNamespace = 'QceNamespace' in params ? params.QceNamespace : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * CreateAlarmPolicy request structure.
  * @class
  */
@@ -819,7 +875,7 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
         this.MonitorType = null;
 
         /**
-         * Alarm policy type such as cvm_device, which is obtained through the `DescribeAllNamespaces` API
+         * Type of alarm policy, which can be obtained via [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1). An example value is `cvm_device`.
          * @type {string || null}
          */
         this.Namespace = null;
@@ -837,25 +893,31 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
         this.Enable = null;
 
         /**
-         * Project ID. Valid values: -1 (no project), 0 (default project). Default value: -1. This parameter can be left empty
+         * Project ID. For products with different projects, a value other than `-1` must be passed in. `-1`: no project; `0`: default project. If no value is passed in, `-1` will be used. The supported project IDs can be viewed on the [**Account Center** > **Project Management**](https://console.cloud.tencent.com/project) page of the console.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Metric trigger condition
+         * ID of trigger condition template. This parameter can be left empty.
+         * @type {number || null}
+         */
+        this.ConditionTemplateId = null;
+
+        /**
+         * Metric trigger condition. The supported metrics can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
          * @type {AlarmPolicyCondition || null}
          */
         this.Condition = null;
 
         /**
-         * Event trigger condition
+         * Event trigger condition. The supported events can be queried via [DescribeAlarmEvents](https://intl.cloud.tencent.com/document/product/248/51284?from_cn_redirect=1).
          * @type {AlarmPolicyEventCondition || null}
          */
         this.EventCondition = null;
 
         /**
-         * List of notification rule IDs, which is obtained through the `DescribeAlarmNotices` API
+         * List of notification rule IDs, which can be obtained via [DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1)
          * @type {Array.<string> || null}
          */
         this.NoticeIds = null;
@@ -882,6 +944,7 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ConditionTemplateId = 'ConditionTemplateId' in params ? params.ConditionTemplateId : null;
 
         if (params.Condition) {
             let obj = new AlarmPolicyCondition();
@@ -1954,7 +2017,7 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
+         * Policy group ID. If `PolicyId` is used, this parameter will be ignored, and any value, e.g., `0`, can be passed in.
          * @type {number || null}
          */
         this.GroupId = null;
@@ -1966,13 +2029,13 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
         this.UniqueId = null;
 
         /**
-         * Instance group ID. The UniqueId parameter is invalid if object instances are deleted by instance group.
+         * Instance group ID. The `UniqueId` parameter is invalid if object instances are deleted by instance group.
          * @type {number || null}
          */
         this.InstanceGroupId = null;
 
         /**
-         * Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+         * Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
          * @type {string || null}
          */
         this.PolicyId = null;
@@ -2806,7 +2869,7 @@ class CreateAlarmPolicyResponse extends  AbstractModel {
         this.PolicyId = null;
 
         /**
-         * Policy ID for instance/instance group binding and unbinding APIs (BindingPolicyObject, UnBindingAllPolicyObject, UnBindingPolicyObject)
+         * Alarm policy ID, which can be used when you call APIs ([BindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40421?from_cn_redirect=1), [UnBindingAllPolicyObject](https://intl.cloud.tencent.com/document/product/248/40568?from_cn_redirect=1), [UnBindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40567?from_cn_redirect=1)) to bind/unbind instances or instance groups to/from an alarm policy
          * @type {string || null}
          */
         this.OriginId = null;
@@ -3125,15 +3188,15 @@ class AlarmPolicyRule extends  AbstractModel {
         super();
 
         /**
-         * Metric name
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Metric name or event name. The supported metrics can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1) and the supported events via [DescribeAlarmEvents](https://intl.cloud.tencent.com/document/product/248/51284?from_cn_redirect=1).
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.MetricName = null;
 
         /**
-         * Statistical period in seconds
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Statistical period in seconds. The valid values can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {number || null}
          */
         this.Period = null;
@@ -3147,31 +3210,32 @@ gt = greater than
 le = less than or equal to
 lt = less than
 ne = not equal to
-day_increase = daily increase
-day_decrease = daily decrease
-day_wave = daily fluctuation
-week_increase = weekly increase
-week_decrease = weekly decrease
-week_wave = weekly fluctuation
-cycle_increase = periodical increase
-cycle_decrease = periodical decrease
-cycle_wave = periodical fluctuation
+day_increase = day-on-day increase
+day_decrease = day-on-day decrease
+day_wave = day-on-day fluctuation
+week_increase = week-on-week increase
+week_decrease = week-on-week decrease
+week_wave = week-on-week fluctuation
+cycle_increase = cyclical increase
+cycle_decrease = cyclical decrease
+cycle_wave = cyclical fluctuation
 re = regex match
-Note: this field may return null, indicating that no valid values can be obtained.
+The valid values can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.Operator = null;
 
         /**
-         * Threshold
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Threshold. The valid value range can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.Value = null;
 
         /**
-         * Number of cycles for continuous notification. Valid values: 1 (1 cycle), 2 (2 cycles), and so on.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Number of periods. `1`: continue for one period; `2`: continue for two periods; and so on. The valid values can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {number || null}
          */
         this.ContinuePeriod = null;
@@ -3212,8 +3276,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Unit = null;
 
         /**
-         * Trigger condition type. Valid values: STATIC (static threshold), DYNAMIC (dynamic threshold)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Trigger condition type. `STATIC`: static threshold; `dynamic`: dynamic threshold. If you do not specify this parameter when creating or editing a policy, `STATIC` is used by default.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.RuleType = null;
@@ -4003,6 +4067,12 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
         this.PolicyId = null;
 
         /**
+         * ID of trigger condition template. This parameter can be left empty.
+         * @type {number || null}
+         */
+        this.ConditionTemplateId = null;
+
+        /**
          * Metric trigger condition
          * @type {AlarmPolicyCondition || null}
          */
@@ -4025,6 +4095,7 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.ConditionTemplateId = 'ConditionTemplateId' in params ? params.ConditionTemplateId : null;
 
         if (params.Condition) {
             let obj = new AlarmPolicyCondition();
@@ -4126,7 +4197,9 @@ class BindingPolicyObjectDimension extends  AbstractModel {
         this.RegionId = null;
 
         /**
-         * Dimensions.
+         * Instance dimension information in the following format:
+{"unInstanceId":"ins-00jvv9mo"}. The dimension information varies by Tencent Cloud services. For more information, please see:
+[Dimension List](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1)
          * @type {string || null}
          */
         this.Dimensions = null;
@@ -4599,13 +4672,13 @@ class DescribeAlarmHistoriesRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * Start time, which is the timestamp exactly one day ago
+         * Start time, which corresponds to `FirstOccurTime` (time when an alarm first occurred). The default value is the timestamp of a day earlier.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * End time, which is the current timestamp by default
+         * End time, which corresponds to `FirstOccurTime` (time when an alarm first occurred). The default value is the current timestamp.
          * @type {number || null}
          */
         this.EndTime = null;
@@ -5738,25 +5811,36 @@ class DescribeAlarmPoliciesRequest extends  AbstractModel {
         this.MonitorTypes = null;
 
         /**
-         * Filter by namespace
+         * Filter by namespace. For the values of different policy types, please see:
+[Policy Type List](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1)
          * @type {Array.<string> || null}
          */
         this.Namespaces = null;
 
         /**
-         * Alarm object list
+         * Alarm object list. The outer array corresponds to multiple instances.
+Each inner array corresponds to one instance, where `object` corresponds to the dimension information of the instance. The format is as follows:
+[
+	[{"name":"unInstanceId","value":"ins-qr888845g"}],
+	[{"name":"unInstanceId","value":"ins-qr8d555g"}]
+	...
+]
+For the samples for different Tencent Cloud services, please see:
+[Dimension List](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1)
          * @type {string || null}
          */
         this.Dimensions = null;
 
         /**
-         * Search by recipient
+         * Search by recipient `uid`, which should be queried by calling the CAM API. For more information, please see:
+[ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1)
          * @type {Array.<number> || null}
          */
         this.ReceiverUids = null;
 
         /**
-         * Search by recipient group
+         * Search by recipient group `uid`, which should be queried by calling the CAM API. For more information, please see:
+[ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1)
          * @type {Array.<number> || null}
          */
         this.ReceiverGroups = null;
@@ -5768,7 +5852,7 @@ class DescribeAlarmPoliciesRequest extends  AbstractModel {
         this.PolicyType = null;
 
         /**
-         * Sort by field
+         * Sort by field. For example, to sort by the last modification time, use Field: "UpdateTime".
          * @type {string || null}
          */
         this.Field = null;
@@ -5780,13 +5864,15 @@ class DescribeAlarmPoliciesRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * Project ID array
+         * ID array of the policy project, which can be viewed on the following page:
+[Project Management](https://console.cloud.tencent.com/project)
          * @type {Array.<number> || null}
          */
         this.ProjectIds = null;
 
         /**
-         * Alarm notification ID list
+         * ID list of the notification template, which can be obtained by querying the notification template list.
+[DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1)
          * @type {Array.<string> || null}
          */
         this.NoticeIds = null;
@@ -5798,13 +5884,13 @@ class DescribeAlarmPoliciesRequest extends  AbstractModel {
         this.RuleTypes = null;
 
         /**
-         * Status. Valid values: 1 (enabled), 0 (disabled)
+         * Filter by alarm status. Valid values: [1]: enabled; [0]: disabled; [0, 1]: all
          * @type {Array.<number> || null}
          */
         this.Enable = null;
 
         /**
-         * Indicates whether the notification rule is configured. 1: not configured; 0: configured
+         * If `1` is passed in, alarm policies with no notification rules configured are queried. If it is left empty or other values are passed in, all alarm policies are queried.
          * @type {number || null}
          */
         this.NotBindingNoticeRule = null;
@@ -6528,7 +6614,7 @@ class AlarmHistory extends  AbstractModel {
         this.NoticeWays = null;
 
         /**
-         * Compatible Alarm 1.0 policy group ID
+         * Alarm policy ID, which can be used when you call APIs ([BindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40421?from_cn_redirect=1), [UnBindingAllPolicyObject](https://intl.cloud.tencent.com/document/product/248/40568?from_cn_redirect=1), [UnBindingPolicyObject](https://intl.cloud.tencent.com/document/product/248/40567?from_cn_redirect=1)) to bind/unbind instances or instance groups to/from an alarm policy
          * @type {string || null}
          */
         this.OriginId = null;
@@ -6556,6 +6642,13 @@ class AlarmHistory extends  AbstractModel {
          * @type {number || null}
          */
         this.PolicyExists = null;
+
+        /**
+         * Metric information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<AlarmHistoryMetric> || null}
+         */
+        this.MetricsInfo = null;
 
     }
 
@@ -6596,6 +6689,15 @@ class AlarmHistory extends  AbstractModel {
         this.EventId = 'EventId' in params ? params.EventId : null;
         this.Region = 'Region' in params ? params.Region : null;
         this.PolicyExists = 'PolicyExists' in params ? params.PolicyExists : null;
+
+        if (params.MetricsInfo) {
+            this.MetricsInfo = new Array();
+            for (let z in params.MetricsInfo) {
+                let obj = new AlarmHistoryMetric();
+                obj.deserialize(params.MetricsInfo[z]);
+                this.MetricsInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -8524,13 +8626,13 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Policy group ID. If `PolicyId` is specified, you can pass any value to this field.
+         * Policy group ID. If `PolicyId` is used, this parameter will be ignored, and any value, e.g., `0`, can be passed in.
          * @type {number || null}
          */
         this.GroupId = null;
 
         /**
-         * Alarm policy ID. If this field is used, you can pass any value to `GroupId`.
+         * Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
          * @type {string || null}
          */
         this.PolicyId = null;
@@ -9006,6 +9108,7 @@ module.exports = {
     PutMonitorDataResponse: PutMonitorDataResponse,
     DescribePolicyGroupInfoRequest: DescribePolicyGroupInfoRequest,
     DescribePolicyGroupInfoCallback: DescribePolicyGroupInfoCallback,
+    AlarmHistoryMetric: AlarmHistoryMetric,
     CreateAlarmPolicyRequest: CreateAlarmPolicyRequest,
     DescribeAlarmEventsResponse: DescribeAlarmEventsResponse,
     DescribeProductEventListDimensions: DescribeProductEventListDimensions,

@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const SubAccountUser = models.SubAccountUser;
 const GetUserResponse = models.GetUserResponse;
 const ListAccessKeysRequest = models.ListAccessKeysRequest;
 const SetMfaFlagResponse = models.SetMfaFlagResponse;
@@ -40,6 +41,7 @@ const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const DeleteRoleResponse = models.DeleteRoleResponse;
 const PolicyVersionItem = models.PolicyVersionItem;
+const DescribeSubAccountsRequest = models.DescribeSubAccountsRequest;
 const DeleteUserPermissionsBoundaryRequest = models.DeleteUserPermissionsBoundaryRequest;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
 const ListGroupsRequest = models.ListGroupsRequest;
@@ -139,6 +141,7 @@ const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
 const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
 const PolicyVersionDetail = models.PolicyVersionDetail;
 const AddUserResponse = models.AddUserResponse;
+const DescribeSubAccountsResponse = models.DescribeSubAccountsResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
@@ -702,6 +705,17 @@ This API will update the default version of an existing policy instead of creati
     DetachGroupPolicy(req, cb) {
         let resp = new DetachGroupPolicyResponse();
         this.request("DetachGroupPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query sub-users through the sub-user UIN list.
+     * @param {DescribeSubAccountsRequest} req
+     * @param {function(string, DescribeSubAccountsResponse):void} cb
+     * @public
+     */
+    DescribeSubAccounts(req, cb) {
+        let resp = new DescribeSubAccountsResponse();
+        this.request("DescribeSubAccounts", req, resp, cb);
     }
 
     /**

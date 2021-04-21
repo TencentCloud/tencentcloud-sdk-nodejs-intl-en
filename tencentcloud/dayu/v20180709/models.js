@@ -1558,7 +1558,7 @@ class CreateDDoSPolicyRequest extends  AbstractModel {
         this.PortLimits = null;
 
         /**
-         * IP blocklist/allowlist. Enter an empty array if there is no IP blocklist/allowlist
+         * Request source IP blocklist/allowlist, which should be an empty array if there are no blocked or allowed IPs.
          * @type {Array.<IpBlackWhite> || null}
          */
         this.IpAllowDenys = null;
@@ -3105,13 +3105,13 @@ class BoundIpInfo extends  AbstractModel {
         super();
 
         /**
-         * IP
+         * IP address
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * Bound product type. Valid values: [public (CVM), bm (BM), eni (ENI), vpngw (VPN Gateway), natgw (NAT Gateway), waf (WAF), fpc (finance product), gaap (GAAP), other (hosted IP)]
+         * Category of product that can be bound. Valid values: public (CVM and CLB), bm (BM), eni (ENI), vpngw (VPN gateway), natgw (NAT gateway), waf (WAF), fpc (financial products), gaap (GAAP), and other (Hosted IP).
          * @type {string || null}
          */
         this.BizType = null;
@@ -4378,6 +4378,49 @@ class ModifyDDoSLevelResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDDoSWaterKey response structure.
+ * @class
+ */
+class ModifyDDoSWaterKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark key list
+         * @type {Array.<WaterPrintKey> || null}
+         */
+        this.KeyList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.KeyList) {
+            this.KeyList = new Array();
+            for (let z in params.KeyList) {
+                let obj = new WaterPrintKey();
+                obj.deserialize(params.KeyList[z]);
+                this.KeyList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCCIpAllowDeny response structure.
  * @class
  */
@@ -4822,24 +4865,72 @@ class DescribeDDoSDefendStatusRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDDoSWaterKey response structure.
+ * Aggregated data on the HTTP status codes of business traffic
  * @class
  */
-class ModifyDDoSWaterKeyResponse extends  AbstractModel {
+class HttpStatusMap extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark key list
-         * @type {Array.<WaterPrintKey> || null}
+         * HTTP 2xx Status code
+         * @type {Array.<number> || null}
          */
-        this.KeyList = null;
+        this.Http2xx = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * HTTP 3xx Status code
+         * @type {Array.<number> || null}
          */
-        this.RequestId = null;
+        this.Http3xx = null;
+
+        /**
+         * HTTP 404 Status code
+         * @type {Array.<number> || null}
+         */
+        this.Http404 = null;
+
+        /**
+         * HTTP 4xx Status code
+         * @type {Array.<number> || null}
+         */
+        this.Http4xx = null;
+
+        /**
+         * HTTP 5xx Status code
+         * @type {Array.<number> || null}
+         */
+        this.Http5xx = null;
+
+        /**
+         * HTTP 2xx Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp2xx = null;
+
+        /**
+         * HTTP 3xx Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp3xx = null;
+
+        /**
+         * HTTP 404 Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp404 = null;
+
+        /**
+         * HTTP 4xx Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp4xx = null;
+
+        /**
+         * HTTP 5xx Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp5xx = null;
 
     }
 
@@ -4850,16 +4941,16 @@ class ModifyDDoSWaterKeyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.KeyList) {
-            this.KeyList = new Array();
-            for (let z in params.KeyList) {
-                let obj = new WaterPrintKey();
-                obj.deserialize(params.KeyList[z]);
-                this.KeyList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Http2xx = 'Http2xx' in params ? params.Http2xx : null;
+        this.Http3xx = 'Http3xx' in params ? params.Http3xx : null;
+        this.Http404 = 'Http404' in params ? params.Http404 : null;
+        this.Http4xx = 'Http4xx' in params ? params.Http4xx : null;
+        this.Http5xx = 'Http5xx' in params ? params.Http5xx : null;
+        this.SourceHttp2xx = 'SourceHttp2xx' in params ? params.SourceHttp2xx : null;
+        this.SourceHttp3xx = 'SourceHttp3xx' in params ? params.SourceHttp3xx : null;
+        this.SourceHttp404 = 'SourceHttp404' in params ? params.SourceHttp404 : null;
+        this.SourceHttp4xx = 'SourceHttp4xx' in params ? params.SourceHttp4xx : null;
+        this.SourceHttp5xx = 'SourceHttp5xx' in params ? params.SourceHttp5xx : null;
 
     }
 }
@@ -5574,6 +5665,46 @@ class CreateL7CCRuleResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyCCFrequencyRulesStatus response structure.
+ * @class
+ */
+class ModifyCCFrequencyRulesStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Success code
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyNetReturnSwitch request structure.
  * @class
  */
@@ -5737,30 +5868,24 @@ class CreateL7RulesRequest extends  AbstractModel {
 }
 
 /**
- * CreateL4Rules request structure.
+ * DescribeBizHttpStatus response structure.
  * @class
  */
-class CreateL4RulesRequest extends  AbstractModel {
+class DescribeBizHttpStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
-         * @type {string || null}
+         * Statistics on the HTTP status codes of business traffic
+         * @type {HttpStatusMap || null}
          */
-        this.Business = null;
+        this.HttpStatusMap = null;
 
         /**
-         * Anti-DDoS instance ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Id = null;
-
-        /**
-         * Rule list
-         * @type {Array.<L4RuleEntry> || null}
-         */
-        this.Rules = null;
+        this.RequestId = null;
 
     }
 
@@ -5771,17 +5896,13 @@ class CreateL4RulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
 
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new L4RuleEntry();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
+        if (params.HttpStatusMap) {
+            let obj = new HttpStatusMap();
+            obj.deserialize(params.HttpStatusMap)
+            this.HttpStatusMap = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5865,24 +5986,30 @@ class DescribeDDoSNetEvListResponse extends  AbstractModel {
 }
 
 /**
- * ModifyCCFrequencyRulesStatus response structure.
+ * CreateL4Rules request structure.
  * @class
  */
-class ModifyCCFrequencyRulesStatusResponse extends  AbstractModel {
+class CreateL4RulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Success code
-         * @type {SuccessCode || null}
-         */
-        this.Success = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Business = null;
+
+        /**
+         * Anti-DDoS instance ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Rule list
+         * @type {Array.<L4RuleEntry> || null}
+         */
+        this.Rules = null;
 
     }
 
@@ -5893,13 +6020,17 @@ class ModifyCCFrequencyRulesStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
-        if (params.Success) {
-            let obj = new SuccessCode();
-            obj.deserialize(params.Success)
-            this.Success = obj;
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new L4RuleEntry();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8225,6 +8356,56 @@ class ModifyDDoSAIStatusRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDDoSAttackSource response structure.
+ * @class
+ */
+class DescribeDDoSAttackSourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of attack sources
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Attack source list
+         * @type {Array.<DDoSAttackSourceRecord> || null}
+         */
+        this.AttackSourceList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.AttackSourceList) {
+            this.AttackSourceList = new Array();
+            for (let z in params.AttackSourceList) {
+                let obj = new DDoSAttackSourceRecord();
+                obj.deserialize(params.AttackSourceList[z]);
+                this.AttackSourceList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeResourceList response structure.
  * @class
  */
@@ -8239,34 +8420,37 @@ class DescribeResourceListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * Resource record list. Valid values of `key`:
-"Key": "CreateTime" - resource instance purchase time
-"Key": "Region" - resource instance region
-"Key": "BoundIP" - IP bound to single IP instance
-"Key": "Id" - resource instance ID
-"Key": "CCEnabled" - CC protection status of resource instance
-"Key": "DDoSThreshold" - DDoS cleansing threshold of resource instance	
-"Key": "BoundStatus" - IP binding status of single IP instance or multi-IP instance (binding or bound)
-"Key": "Type" - this field has been disused
-"Key": "ElasticLimit" - elastic protection value of resource instance
-"Key": "DDoSAI" - DDoS AI protection status of resource instance
-"Key": "Bandwidth" - base protection value of resource instance
-"Key": "OverloadCount" - number of attacks to the resource instance that exceed the elastic protection value
-"Key": "Status" - resource instance status (idle: running, attacking: attacking, blocking: blocking, isolate: isolating)
-"Key": "Lbid" - this field has been disused
-"Key": "ShowFlag" - this field has been disused
-"Key": "Expire" - resource instance expiration time
-"Key": "CCThreshold" - CC protection triggering threshold of resource instance
-"Key": "AutoRenewFlag" - auto-renewal flag of resource instance
-"Key": "IspCode" - line of single IP instance or multi-IP instance (0: China Telecom, 1: China Unicom, 2: China Mobile, 5: BGP)
-"Key": "PackType" - package type
-"Key": "PackId" - package ID
-"Key": "Name" - resource instance name
-"Key": "Locked" - this field has been disused
-"Key": "IpDDoSLevel" - protection level of resource instance (low: loose, middle: normal, high: strict)
-"Key": "DefendStatus" - DDoS protection status of resource (enabled or temporarily disabled)
-"Key": "UndefendExpire" - end time of temporary disablement of DDoS protection for resource instance
-"Key": "Tgw" - whether the resource instance is a new resource
+         * Resource record list. The description of key values is as follows:
+"Key": "CreateTime" (Instance purchase time)
+"Key": "Region" (Instance region)
+"Key": "BoundIP" (IP bound to the single-IP instance)
+"Key": "Id" (Instance ID)
+"Key": "CCEnabled" (CC protection switch status of the instance)
+"Key": "DDoSThreshold" (Anti-DDoS cleansing threshold of the instance)	
+"Key": "BoundStatus" (IP binding status of the single-IP/multi-IP instance; binding or bound)
+"Key": "Type" (Disused field)
+"Key": "ElasticLimit" (Elastic protection value of the instance)
+"Key": "DDoSAI" (Anti-DDoS AI protection switch of the instance)
+"Key": "OverloadCount" (The number of attacks exceeding the elastic protection value to the instance)
+"Key": "Status" (Instance status; idle: running; attacking: under attacks; blocking: being blocked; isolate: being isolated)
+"Key": "Lbid" (Disused field)
+"Key": "ShowFlag" (Disused field)
+"Key": "Expire" (Instance expiry time)
+"Key": "CCThreshold" (CC protection trigger value of the instance)
+"Key": "AutoRenewFlag" (Whether the instance is on auto-renewal)
+"Key": "IspCode" (Line of the single-IP/multi-IP instance; 0: China Telecom; 1: China Unicom; 2: China Mobile; 5: BGP)
+"Key": "PackType" (Package type)
+"Key": "PackId" (Package ID)
+"Key": "Name" (Instance name)
+"Key": "Locked" (Disused field)
+"Key": "IpDDoSLevel" (Protection level of the instance; low: loose; middle: normal; high: strict)
+"Key": "DefendStatus" (DDoS protection status of the instance; enabled or temporarily disabled)
+"Key": "UndefendExpire" (End time of the temporary disabling on DDoS protection for the instance)
+"Key": "Tgw" (Whether it is a new instance)
+"Key": "Bandwidth" (Base protection value of the Anti-DDoS Pro/Advanced instance)
+"Key": "DdosMax" (Base protection value of the Anti-DDoS Ultimate instance)
+"Key": "GFBandwidth" (Base business application bandwidth of the Anti-DDoS Advanced instance)
+"Key": "ServiceBandwidth" (Base business application bandwidth of the Anti-DDoS Ultimate instance)
          * @type {Array.<KeyValueRecord> || null}
          */
         this.ServicePacks = null;
@@ -10020,30 +10204,60 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeDDoSAttackSource response structure.
+ * DescribeBizHttpStatus request structure.
  * @class
  */
-class DescribeDDoSAttackSourceResponse extends  AbstractModel {
+class DescribeBizHttpStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of attack sources
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * Attack source list
-         * @type {Array.<DDoSAttackSourceRecord> || null}
-         */
-        this.AttackSourceList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Business = null;
+
+        /**
+         * Resource ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Statistical period in seconds. Valid values: 300, 1800, 3600, 21600, and 86400.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Statistics start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Statistics end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Statistical mode, which only supports sum.
+         * @type {string || null}
+         */
+        this.Statistics = null;
+
+        /**
+         * Protocol and port list, which is valid when the statistical dimension is the number of connections. Valid protocols: TCP, UDP, HTTP, and HTTPS.
+         * @type {Array.<ProtocolPort> || null}
+         */
+        this.ProtoInfo = null;
+
+        /**
+         * Specific domain name query
+         * @type {string || null}
+         */
+        this.Domain = null;
 
     }
 
@@ -10054,17 +10268,22 @@ class DescribeDDoSAttackSourceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Statistics = 'Statistics' in params ? params.Statistics : null;
 
-        if (params.AttackSourceList) {
-            this.AttackSourceList = new Array();
-            for (let z in params.AttackSourceList) {
-                let obj = new DDoSAttackSourceRecord();
-                obj.deserialize(params.AttackSourceList[z]);
-                this.AttackSourceList.push(obj);
+        if (params.ProtoInfo) {
+            this.ProtoInfo = new Array();
+            for (let z in params.ProtoInfo) {
+                let obj = new ProtocolPort();
+                obj.deserialize(params.ProtoInfo[z]);
+                this.ProtoInfo.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -10598,40 +10817,24 @@ class DescribeInsurePacksResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCCUrlAllow response structure.
+ * CreateUnblockIp request structure.
  * @class
  */
-class DescribeCCUrlAllowResponse extends  AbstractModel {
+class CreateUnblockIpRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * This field has been replaced by `RecordList` and should not be used
-         * @type {Array.<KeyValue> || null}
-         */
-        this.Data = null;
-
-        /**
-         * Total number of records
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * Returned Blocklist/allowlist record,
-If "Key":"url", "Value": URL;
-If "Key":"domain", "Value": domain name.
-If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
-If "Key":"protocol", "Value": CC protection type (HTTP protection or HTTPS domain name protection);
-         * @type {Array.<KeyValueRecord> || null}
-         */
-        this.RecordList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * IP
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Ip = null;
+
+        /**
+         * Type of the unblocking action (`user`: self-service unblocking, `auto`: automatic unblocking, `update`: unblocking by service upgrading, `bind`: unblocking by binding Anti-DDoS Pro instance)
+         * @type {string || null}
+         */
+        this.ActionType = null;
 
     }
 
@@ -10642,26 +10845,8 @@ If "Key":"protocol", "Value": CC protection type (HTTP protection or HTTPS domai
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new KeyValue();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.RecordList) {
-            this.RecordList = new Array();
-            for (let z in params.RecordList) {
-                let obj = new KeyValueRecord();
-                obj.deserialize(params.RecordList[z]);
-                this.RecordList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
 
     }
 }
@@ -10927,24 +11112,40 @@ class ModifyDDoSPolicyCaseResponse extends  AbstractModel {
 }
 
 /**
- * CreateUnblockIp request structure.
+ * DescribeCCUrlAllow response structure.
  * @class
  */
-class CreateUnblockIpRequest extends  AbstractModel {
+class DescribeCCUrlAllowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * IP
-         * @type {string || null}
+         * This field has been replaced by `RecordList` and should not be used
+         * @type {Array.<KeyValue> || null}
          */
-        this.Ip = null;
+        this.Data = null;
 
         /**
-         * Type of the unblocking action (`user`: self-service unblocking, `auto`: automatic unblocking, `update`: unblocking by service upgrading, `bind`: unblocking by binding Anti-DDoS Pro instance)
+         * Total number of records
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Returned Blocklist/allowlist record,
+If "Key":"url", "Value": URL;
+If "Key":"domain", "Value": domain name.
+If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
+If "Key":"protocol", "Value": CC protection type (HTTP protection or HTTPS domain name protection);
+         * @type {Array.<KeyValueRecord> || null}
+         */
+        this.RecordList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ActionType = null;
+        this.RequestId = null;
 
     }
 
@@ -10955,8 +11156,26 @@ class CreateUnblockIpRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new KeyValue();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.RecordList) {
+            this.RecordList = new Array();
+            for (let z in params.RecordList) {
+                let obj = new KeyValueRecord();
+                obj.deserialize(params.RecordList[z]);
+                this.RecordList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11453,7 +11672,7 @@ class DescribeResourceListRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * IP search list, which is optional. If this field is not empty, it means to search for resources by IP;
+         * IP query list, which is optional. Resources will be queried by IP if the list is not empty.
          * @type {Array.<string> || null}
          */
         this.IpList = null;
@@ -13796,6 +14015,7 @@ module.exports = {
     ModifyCCUrlAllowRequest: ModifyCCUrlAllowRequest,
     ModifyDDoSAlarmThresholdResponse: ModifyDDoSAlarmThresholdResponse,
     ModifyDDoSLevelResponse: ModifyDDoSLevelResponse,
+    ModifyDDoSWaterKeyResponse: ModifyDDoSWaterKeyResponse,
     DescribeCCIpAllowDenyResponse: DescribeCCIpAllowDenyResponse,
     DescribeDDoSIpLogResponse: DescribeDDoSIpLogResponse,
     CCRule: CCRule,
@@ -13803,7 +14023,7 @@ module.exports = {
     ModifyCCIpAllowDenyRequest: ModifyCCIpAllowDenyRequest,
     CreateInstanceNameResponse: CreateInstanceNameResponse,
     DescribeDDoSDefendStatusRequest: DescribeDDoSDefendStatusRequest,
-    ModifyDDoSWaterKeyResponse: ModifyDDoSWaterKeyResponse,
+    HttpStatusMap: HttpStatusMap,
     ModifyL4HealthRequest: ModifyL4HealthRequest,
     ModifyCCHostProtectionResponse: ModifyCCHostProtectionResponse,
     CreateL4RulesResponse: CreateL4RulesResponse,
@@ -13818,12 +14038,13 @@ module.exports = {
     L4RuleEntry: L4RuleEntry,
     DescribeL4HealthConfigRequest: DescribeL4HealthConfigRequest,
     CreateL7CCRuleResponse: CreateL7CCRuleResponse,
+    ModifyCCFrequencyRulesStatusResponse: ModifyCCFrequencyRulesStatusResponse,
     ModifyNetReturnSwitchRequest: ModifyNetReturnSwitchRequest,
     CreateL7CCRuleRequest: CreateL7CCRuleRequest,
     CreateL7RulesRequest: CreateL7RulesRequest,
-    CreateL4RulesRequest: CreateL4RulesRequest,
+    DescribeBizHttpStatusResponse: DescribeBizHttpStatusResponse,
     DescribeDDoSNetEvListResponse: DescribeDDoSNetEvListResponse,
-    ModifyCCFrequencyRulesStatusResponse: ModifyCCFrequencyRulesStatusResponse,
+    CreateL4RulesRequest: CreateL4RulesRequest,
     ModifyNewL4RuleRequest: ModifyNewL4RuleRequest,
     DescribeL4RulesErrHealthRequest: DescribeL4RulesErrHealthRequest,
     L4RuleSource: L4RuleSource,
@@ -13866,6 +14087,7 @@ module.exports = {
     ModifyDDoSSwitchRequest: ModifyDDoSSwitchRequest,
     CreateNetReturnRequest: CreateNetReturnRequest,
     ModifyDDoSAIStatusRequest: ModifyDDoSAIStatusRequest,
+    DescribeDDoSAttackSourceResponse: DescribeDDoSAttackSourceResponse,
     DescribeResourceListResponse: DescribeResourceListResponse,
     ModifyCCThresholdRequest: ModifyCCThresholdRequest,
     ModifyDDoSDefendStatusResponse: ModifyDDoSDefendStatusResponse,
@@ -13897,7 +14119,7 @@ module.exports = {
     CCFrequencyRule: CCFrequencyRule,
     CreateCCSelfDefinePolicyResponse: CreateCCSelfDefinePolicyResponse,
     NewL7RuleEntry: NewL7RuleEntry,
-    DescribeDDoSAttackSourceResponse: DescribeDDoSAttackSourceResponse,
+    DescribeBizHttpStatusRequest: DescribeBizHttpStatusRequest,
     CreateBoundIPResponse: CreateBoundIPResponse,
     DescribeDDoSUsedStatisRequest: DescribeDDoSUsedStatisRequest,
     DDoSPolicyDropOption: DDoSPolicyDropOption,
@@ -13906,13 +14128,13 @@ module.exports = {
     CCEventRecord: CCEventRecord,
     DescribeTransmitStatisRequest: DescribeTransmitStatisRequest,
     DescribeInsurePacksResponse: DescribeInsurePacksResponse,
-    DescribeCCUrlAllowResponse: DescribeCCUrlAllowResponse,
+    CreateUnblockIpRequest: CreateUnblockIpRequest,
     ModifyResourceRenewFlagResponse: ModifyResourceRenewFlagResponse,
     OrderBy: OrderBy,
     DescribeActionLogResponse: DescribeActionLogResponse,
     DescribeCCTrendResponse: DescribeCCTrendResponse,
     ModifyDDoSPolicyCaseResponse: ModifyDDoSPolicyCaseResponse,
-    CreateUnblockIpRequest: CreateUnblockIpRequest,
+    DescribeCCUrlAllowResponse: DescribeCCUrlAllowResponse,
     DescribeSecIndexRequest: DescribeSecIndexRequest,
     ModifyCCFrequencyRulesStatusRequest: ModifyCCFrequencyRulesStatusRequest,
     DescribeDDoSCountResponse: DescribeDDoSCountResponse,

@@ -97,6 +97,7 @@ const DescribeCCAlarmThresholdRequest = models.DescribeCCAlarmThresholdRequest;
 const ModifyCCUrlAllowRequest = models.ModifyCCUrlAllowRequest;
 const ModifyDDoSAlarmThresholdResponse = models.ModifyDDoSAlarmThresholdResponse;
 const ModifyDDoSLevelResponse = models.ModifyDDoSLevelResponse;
+const ModifyDDoSWaterKeyResponse = models.ModifyDDoSWaterKeyResponse;
 const DescribeCCIpAllowDenyResponse = models.DescribeCCIpAllowDenyResponse;
 const DescribeDDoSIpLogResponse = models.DescribeDDoSIpLogResponse;
 const CCRule = models.CCRule;
@@ -104,7 +105,7 @@ const DescribeResIpListResponse = models.DescribeResIpListResponse;
 const ModifyCCIpAllowDenyRequest = models.ModifyCCIpAllowDenyRequest;
 const CreateInstanceNameResponse = models.CreateInstanceNameResponse;
 const DescribeDDoSDefendStatusRequest = models.DescribeDDoSDefendStatusRequest;
-const ModifyDDoSWaterKeyResponse = models.ModifyDDoSWaterKeyResponse;
+const HttpStatusMap = models.HttpStatusMap;
 const ModifyL4HealthRequest = models.ModifyL4HealthRequest;
 const ModifyCCHostProtectionResponse = models.ModifyCCHostProtectionResponse;
 const CreateL4RulesResponse = models.CreateL4RulesResponse;
@@ -119,12 +120,13 @@ const DescribleL4RulesRequest = models.DescribleL4RulesRequest;
 const L4RuleEntry = models.L4RuleEntry;
 const DescribeL4HealthConfigRequest = models.DescribeL4HealthConfigRequest;
 const CreateL7CCRuleResponse = models.CreateL7CCRuleResponse;
+const ModifyCCFrequencyRulesStatusResponse = models.ModifyCCFrequencyRulesStatusResponse;
 const ModifyNetReturnSwitchRequest = models.ModifyNetReturnSwitchRequest;
 const CreateL7CCRuleRequest = models.CreateL7CCRuleRequest;
 const CreateL7RulesRequest = models.CreateL7RulesRequest;
-const CreateL4RulesRequest = models.CreateL4RulesRequest;
+const DescribeBizHttpStatusResponse = models.DescribeBizHttpStatusResponse;
 const DescribeDDoSNetEvListResponse = models.DescribeDDoSNetEvListResponse;
-const ModifyCCFrequencyRulesStatusResponse = models.ModifyCCFrequencyRulesStatusResponse;
+const CreateL4RulesRequest = models.CreateL4RulesRequest;
 const ModifyNewL4RuleRequest = models.ModifyNewL4RuleRequest;
 const DescribeL4RulesErrHealthRequest = models.DescribeL4RulesErrHealthRequest;
 const L4RuleSource = models.L4RuleSource;
@@ -167,6 +169,7 @@ const BaradData = models.BaradData;
 const ModifyDDoSSwitchRequest = models.ModifyDDoSSwitchRequest;
 const CreateNetReturnRequest = models.CreateNetReturnRequest;
 const ModifyDDoSAIStatusRequest = models.ModifyDDoSAIStatusRequest;
+const DescribeDDoSAttackSourceResponse = models.DescribeDDoSAttackSourceResponse;
 const DescribeResourceListResponse = models.DescribeResourceListResponse;
 const ModifyCCThresholdRequest = models.ModifyCCThresholdRequest;
 const ModifyDDoSDefendStatusResponse = models.ModifyDDoSDefendStatusResponse;
@@ -198,7 +201,7 @@ const DescribeL7HealthConfigResponse = models.DescribeL7HealthConfigResponse;
 const CCFrequencyRule = models.CCFrequencyRule;
 const CreateCCSelfDefinePolicyResponse = models.CreateCCSelfDefinePolicyResponse;
 const NewL7RuleEntry = models.NewL7RuleEntry;
-const DescribeDDoSAttackSourceResponse = models.DescribeDDoSAttackSourceResponse;
+const DescribeBizHttpStatusRequest = models.DescribeBizHttpStatusRequest;
 const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const DescribeDDoSUsedStatisRequest = models.DescribeDDoSUsedStatisRequest;
 const DDoSPolicyDropOption = models.DDoSPolicyDropOption;
@@ -207,13 +210,13 @@ const ModifyL4HealthResponse = models.ModifyL4HealthResponse;
 const CCEventRecord = models.CCEventRecord;
 const DescribeTransmitStatisRequest = models.DescribeTransmitStatisRequest;
 const DescribeInsurePacksResponse = models.DescribeInsurePacksResponse;
-const DescribeCCUrlAllowResponse = models.DescribeCCUrlAllowResponse;
+const CreateUnblockIpRequest = models.CreateUnblockIpRequest;
 const ModifyResourceRenewFlagResponse = models.ModifyResourceRenewFlagResponse;
 const OrderBy = models.OrderBy;
 const DescribeActionLogResponse = models.DescribeActionLogResponse;
 const DescribeCCTrendResponse = models.DescribeCCTrendResponse;
 const ModifyDDoSPolicyCaseResponse = models.ModifyDDoSPolicyCaseResponse;
-const CreateUnblockIpRequest = models.CreateUnblockIpRequest;
+const DescribeCCUrlAllowResponse = models.DescribeCCUrlAllowResponse;
 const DescribeSecIndexRequest = models.DescribeSecIndexRequest;
 const ModifyCCFrequencyRulesStatusRequest = models.ModifyCCFrequencyRulesStatusRequest;
 const DescribeDDoSCountResponse = models.DescribeDDoSCountResponse;
@@ -710,6 +713,17 @@ class DayuClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get the statistics on the status codes of business traffic.
+     * @param {DescribeBizHttpStatusRequest} req
+     * @param {function(string, DescribeBizHttpStatusResponse):void} cb
+     * @public
+     */
+    DescribeBizHttpStatus(req, cb) {
+        let resp = new DescribeBizHttpStatusResponse();
+        this.request("DescribeBizHttpStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a custom CC policy.
      * @param {DeleteCCSelfDefinePolicyRequest} req
      * @param {function(string, DeleteCCSelfDefinePolicyResponse):void} cb
@@ -963,14 +977,14 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the geographical distribution map of DDoS attack source IPs. It supports display by global regions and Chinese provinces.
-     * @param {DescribeDDoSAttackIPRegionMapRequest} req
-     * @param {function(string, DescribeDDoSAttackIPRegionMapResponse):void} cb
+     * This API is used to get an advanced DDoS policy.
+     * @param {DescribeDDoSPolicyRequest} req
+     * @param {function(string, DescribeDDoSPolicyResponse):void} cb
      * @public
      */
-    DescribeDDoSAttackIPRegionMap(req, cb) {
-        let resp = new DescribeDDoSAttackIPRegionMapResponse();
-        this.request("DescribeDDoSAttackIPRegionMap", req, resp, cb);
+    DescribeDDoSPolicy(req, cb) {
+        let resp = new DescribeDDoSPolicyResponse();
+        this.request("DescribeDDoSPolicy", req, resp, cb);
     }
 
     /**
@@ -1382,14 +1396,14 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get an advanced DDoS policy.
-     * @param {DescribeDDoSPolicyRequest} req
-     * @param {function(string, DescribeDDoSPolicyResponse):void} cb
+     * This API is used to get the geographical distribution map of DDoS attack source IPs. It supports display by global regions and Chinese provinces.
+     * @param {DescribeDDoSAttackIPRegionMapRequest} req
+     * @param {function(string, DescribeDDoSAttackIPRegionMapResponse):void} cb
      * @public
      */
-    DescribeDDoSPolicy(req, cb) {
-        let resp = new DescribeDDoSPolicyResponse();
-        this.request("DescribeDDoSPolicy", req, resp, cb);
+    DescribeDDoSAttackIPRegionMap(req, cb) {
+        let resp = new DescribeDDoSAttackIPRegionMapResponse();
+        this.request("DescribeDDoSAttackIPRegionMap", req, resp, cb);
     }
 
 

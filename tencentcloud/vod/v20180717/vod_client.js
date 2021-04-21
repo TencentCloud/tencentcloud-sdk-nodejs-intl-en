@@ -98,6 +98,7 @@ const ConcatTask2017 = models.ConcatTask2017;
 const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
 const FileUploadTask = models.FileUploadTask;
 const DescribeCDNStatDetailsResponse = models.DescribeCDNStatDetailsResponse;
+const AttachMediaSubtitlesRequest = models.AttachMediaSubtitlesRequest;
 const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
 const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
 const FileDeleteTask = models.FileDeleteTask;
@@ -145,6 +146,7 @@ const AiReviewTaskTerrorismOcrResult = models.AiReviewTaskTerrorismOcrResult;
 const AiRecognitionTaskOcrWordsResult = models.AiRecognitionTaskOcrWordsResult;
 const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const AiRecognitionTaskSegmentResult = models.AiRecognitionTaskSegmentResult;
+const MediaSubtitleItem = models.MediaSubtitleItem;
 const ProhibitedAsrReviewTemplateInfoForUpdate = models.ProhibitedAsrReviewTemplateInfoForUpdate;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
 const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse;
@@ -206,6 +208,7 @@ const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
+const MediaSubtitleInput = models.MediaSubtitleInput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
@@ -268,6 +271,7 @@ const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const DrmStreamingsInfo = models.DrmStreamingsInfo;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
 const AiAnalysisResult = models.AiAnalysisResult;
+const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const MediaTranscodeInfo = models.MediaTranscodeInfo;
 const ResolutionNameInfo = models.ResolutionNameInfo;
@@ -290,7 +294,7 @@ const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPolitica
 const DeletePersonSampleResponse = models.DeletePersonSampleResponse;
 const CreateSnapshotByTimeOffsetTemplateResponse = models.CreateSnapshotByTimeOffsetTemplateResponse;
 const ModifyContentReviewTemplateRequest = models.ModifyContentReviewTemplateRequest;
-const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
+const AttachMediaSubtitlesResponse = models.AttachMediaSubtitlesResponse;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
 const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
@@ -1585,6 +1589,17 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
+     * This API is used to associate/disassociate subtitles with/from a media file of a specific adaptive bitrate streaming template ID.
+     * @param {AttachMediaSubtitlesRequest} req
+     * @param {function(string, AttachMediaSubtitlesResponse):void} cb
+     * @public
+     */
+    AttachMediaSubtitles(req, cb) {
+        let resp = new AttachMediaSubtitlesResponse();
+        this.request("AttachMediaSubtitles", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the download links of playback statistics files.
 * You can query the download links of playback statistics files in last 30 days.
 * Every day, VOD will analyze CDN request logs of the previous day and then generate a playback statistics file.
@@ -1723,7 +1738,7 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
     }
 
     /**
-     * This API is used to modify the attributes of a media file, including category, name, description, tag, expiration time, timestamp information, and video cover.
+     * This API is used to modify the attributes of a media file, including category, name, description, tag, expiration time, timestamp information, video thumbnail, and subtitle information.
      * @param {ModifyMediaInfoRequest} req
      * @param {function(string, ModifyMediaInfoResponse):void} cb
      * @public

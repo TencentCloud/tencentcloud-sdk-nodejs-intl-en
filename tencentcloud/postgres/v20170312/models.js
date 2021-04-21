@@ -126,6 +126,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.TagList = null;
 
+        /**
+         * Security group ID
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -160,6 +166,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
                 this.TagList.push(obj);
             }
         }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -2780,6 +2787,12 @@ class CreateReadOnlyGroupRequest extends  AbstractModel {
          */
         this.MinDelayEliminateReserve = null;
 
+        /**
+         * Security group ID
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -2799,6 +2812,7 @@ class CreateReadOnlyGroupRequest extends  AbstractModel {
         this.MaxReplayLag = 'MaxReplayLag' in params ? params.MaxReplayLag : null;
         this.MaxReplayLatency = 'MaxReplayLatency' in params ? params.MaxReplayLatency : null;
         this.MinDelayEliminateReserve = 'MinDelayEliminateReserve' in params ? params.MinDelayEliminateReserve : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -3395,6 +3409,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.StatusInReadonlyGroup = null;
 
+        /**
+         * Elimination time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
+
     }
 
     /**
@@ -3451,6 +3472,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MasterDBInstanceId = 'MasterDBInstanceId' in params ? params.MasterDBInstanceId : null;
         this.ReadOnlyInstanceNum = 'ReadOnlyInstanceNum' in params ? params.ReadOnlyInstanceNum : null;
         this.StatusInReadonlyGroup = 'StatusInReadonlyGroup' in params ? params.StatusInReadonlyGroup : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
 
     }
 }
@@ -3931,6 +3953,12 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
          */
         this.TagList = null;
 
+        /**
+         * Security group ID
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -3964,6 +3992,7 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
             obj.deserialize(params.TagList)
             this.TagList = obj;
         }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }

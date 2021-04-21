@@ -4627,6 +4627,57 @@ class DescribeCDNStatDetailsResponse extends  AbstractModel {
 }
 
 /**
+ * AttachMediaSubtitles request structure.
+ * @class
+ */
+class AttachMediaSubtitlesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the media file
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Operation. Valid values:
+<li>`Attach`: associates subtitles.</li>
+<li>`Detach`: disassociates subtitles.</li>
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * [Adaptive bitrate streaming template ID](https://intl.cloud.tencent.com/document/product/266/34071?from_cn_redirect=1#zsy)
+         * @type {number || null}
+         */
+        this.AdaptiveDynamicStreamingDefinition = null;
+
+        /**
+         * Unique IDs of the subtitles
+         * @type {Array.<string> || null}
+         */
+        this.SubtitleIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
+        this.SubtitleIds = 'SubtitleIds' in params ? params.SubtitleIds : null;
+
+    }
+}
+
+/**
  * Result type of intelligent cover generating task
  * @class
  */
@@ -5814,6 +5865,25 @@ In the same request, `ClearTags` and `AddTags` cannot be present at the same tim
         this.ClearTags = null;
 
         /**
+         * Information of multiple subtitles to be added. A single media file can have up to 16 subtitles. In the same request, the subtitle IDs specified in `AddSubtitles` must be different from those in `DeleteSubtitleIds`.
+         * @type {Array.<MediaSubtitleInput> || null}
+         */
+        this.AddSubtitles = null;
+
+        /**
+         * Unique IDs of the subtitles to be deleted. In the same request, the subtitle IDs specified in `AddSubtitles` must be different from those in `DeleteSubtitleIds`.
+         * @type {Array.<string> || null}
+         */
+        this.DeleteSubtitleIds = null;
+
+        /**
+         * The value `1` indicates to delete all subtitle information of the media file. Other values are meaningless.
+`ClearSubtitles` and `AddSubtitles` cannot co-exist in the same request.
+         * @type {number || null}
+         */
+        this.ClearSubtitles = null;
+
+        /**
          * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
@@ -5848,6 +5918,17 @@ In the same request, `ClearTags` and `AddTags` cannot be present at the same tim
         this.AddTags = 'AddTags' in params ? params.AddTags : null;
         this.DeleteTags = 'DeleteTags' in params ? params.DeleteTags : null;
         this.ClearTags = 'ClearTags' in params ? params.ClearTags : null;
+
+        if (params.AddSubtitles) {
+            this.AddSubtitles = new Array();
+            for (let z in params.AddSubtitles) {
+                let obj = new MediaSubtitleInput();
+                obj.deserialize(params.AddSubtitles[z]);
+                this.AddSubtitles.push(obj);
+            }
+        }
+        this.DeleteSubtitleIds = 'DeleteSubtitleIds' in params ? params.DeleteSubtitleIds : null;
+        this.ClearSubtitles = 'ClearSubtitles' in params ? params.ClearSubtitles : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -7225,6 +7306,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class MediaSubtitleItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Language = 'Language' in params ? params.Language : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -10509,6 +10646,67 @@ class AiAnalysisTaskHighlightOutput extends  AbstractModel {
 }
 
 /**
+ * Input parameters of subtile information
+ * @class
+ */
+class MediaSubtitleInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subtitle name. Length limit: 64 characters
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Subtitle language. Common values:
+<li>`cn`: Chinese</li>
+<li>`ja`: Japanese</li>
+<li>`en-US`: English</li>
+For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * Subtitle format. Valid value:
+<li>vtt</li>
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Subtitle content, which is [Base64-encoded](https://tools.ietf.org/html/rfc4648) strings
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Subtitle ID. Its length cannot exceed 16 characters. Uppercase and lowercase letters, numbers, underscores (_), and hyphens (-) are supported. It cannot be the same as the IDs of the existing subtitles in the media file.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Language = 'Language' in params ? params.Language : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * ProcessMedia request structure.
  * @class
  */
@@ -10642,6 +10840,12 @@ class ModifyMediaInfoResponse extends  AbstractModel {
         this.CoverUrl = null;
 
         /**
+         * Added subtitle information
+         * @type {Array.<MediaSubtitleItem> || null}
+         */
+        this.AddedSubtitleSet = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -10657,6 +10861,15 @@ class ModifyMediaInfoResponse extends  AbstractModel {
             return;
         }
         this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+
+        if (params.AddedSubtitleSet) {
+            this.AddedSubtitleSet = new Array();
+            for (let z in params.AddedSubtitleSet) {
+                let obj = new MediaSubtitleItem();
+                obj.deserialize(params.AddedSubtitleSet[z]);
+                this.AddedSubtitleSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13990,6 +14203,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Input parameter of image watermarking template
+ * @class
+ */
+class ImageWatermarkInputForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
+         * @type {string || null}
+         */
+        this.ImageContent = null;
+
+        /**
+         * Watermark width. % and px formats are supported:
+<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height. % and px formats are supported:
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
+         * @type {string || null}
+         */
+        this.Height = null;
+
+        /**
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
+
+    }
+}
+
+/**
  * DescribeAIAnalysisTemplates request structure.
  * @class
  */
@@ -15235,43 +15504,18 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Input parameter of image watermarking template
+ * AttachMediaSubtitles response structure.
  * @class
  */
-class ImageWatermarkInputForUpdate extends  AbstractModel {
+class AttachMediaSubtitlesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ImageContent = null;
-
-        /**
-         * Watermark width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
-         * @type {string || null}
-         */
-        this.Width = null;
-
-        /**
-         * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
-         * @type {string || null}
-         */
-        this.Height = null;
-
-        /**
-         * Repeat type of an animated watermark. Valid values:
-<li>once: no longer appears after watermark playback ends.</li>
-<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
-<li>repeat (default): repeats the playback until the video ends.</li>
-         * @type {string || null}
-         */
-        this.RepeatType = null;
+        this.RequestId = null;
 
     }
 
@@ -15282,10 +15526,7 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -25866,6 +26107,14 @@ class SearchMediaRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
+         * Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
+<li>Length limit for a single region: 20 characters</li>
+<li>Array length limit: 20</li>
+         * @type {Array.<string> || null}
+         */
+        this.StorageRegions = null;
+
+        /**
          * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
@@ -25953,6 +26202,7 @@ End time in the creation time range.
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Filters = 'Filters' in params ? params.Filters : null;
+        this.StorageRegions = 'StorageRegions' in params ? params.StorageRegions : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Text = 'Text' in params ? params.Text : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
@@ -28735,6 +28985,7 @@ module.exports = {
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
     FileUploadTask: FileUploadTask,
     DescribeCDNStatDetailsResponse: DescribeCDNStatDetailsResponse,
+    AttachMediaSubtitlesRequest: AttachMediaSubtitlesRequest,
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
     FileDeleteTask: FileDeleteTask,
@@ -28782,6 +29033,7 @@ module.exports = {
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
     AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
+    MediaSubtitleItem: MediaSubtitleItem,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
@@ -28843,6 +29095,7 @@ module.exports = {
     SearchMediaResponse: SearchMediaResponse,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
+    MediaSubtitleInput: MediaSubtitleInput,
     ProcessMediaRequest: ProcessMediaRequest,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
@@ -28905,6 +29158,7 @@ module.exports = {
     DrmStreamingsInfo: DrmStreamingsInfo,
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
     AiAnalysisResult: AiAnalysisResult,
+    ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     MediaTranscodeInfo: MediaTranscodeInfo,
     ResolutionNameInfo: ResolutionNameInfo,
@@ -28927,7 +29181,7 @@ module.exports = {
     DeletePersonSampleResponse: DeletePersonSampleResponse,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
-    ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
+    AttachMediaSubtitlesResponse: AttachMediaSubtitlesResponse,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
     ClassificationConfigureInfo: ClassificationConfigureInfo,

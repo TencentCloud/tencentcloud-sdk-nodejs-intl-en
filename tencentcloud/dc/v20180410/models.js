@@ -1441,6 +1441,12 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
          */
         this.SignLaw = null;
 
+        /**
+         * Connection’s bandwidth
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
     }
 
     /**
@@ -1462,6 +1468,7 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
         this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
         this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
         this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
 
     }
 }

@@ -1917,6 +1917,12 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
          */
         this.LogTopicId = null;
 
+        /**
+         * Log type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
+         * @type {string || null}
+         */
+        this.LogType = null;
+
     }
 
     /**
@@ -1929,6 +1935,7 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
         this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
 
     }
 }
@@ -3447,6 +3454,12 @@ class CreateTopicRequest extends  AbstractModel {
          */
         this.PartitionCount = null;
 
+        /**
+         * Log type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
+         * @type {string || null}
+         */
+        this.TopicType = null;
+
     }
 
     /**
@@ -3458,6 +3471,7 @@ class CreateTopicRequest extends  AbstractModel {
         }
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
 
     }
 }
@@ -5501,6 +5515,12 @@ class CreateClsLogSetRequest extends  AbstractModel {
          */
         this.LogsetName = null;
 
+        /**
+         * Logset type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
+         * @type {string || null}
+         */
+        this.LogsetType = null;
+
     }
 
     /**
@@ -5512,6 +5532,7 @@ class CreateClsLogSetRequest extends  AbstractModel {
         }
         this.Period = 'Period' in params ? params.Period : null;
         this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+        this.LogsetType = 'LogsetType' in params ? params.LogsetType : null;
 
     }
 }
@@ -6720,6 +6741,12 @@ class DescribeClsLogSetResponse extends  AbstractModel {
         this.LogsetId = null;
 
         /**
+         * Health check logset ID
+         * @type {string || null}
+         */
+        this.HealthLogsetId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -6735,6 +6762,7 @@ class DescribeClsLogSetResponse extends  AbstractModel {
             return;
         }
         this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.HealthLogsetId = 'HealthLogsetId' in params ? params.HealthLogsetId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9001,6 +9029,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.NfvInfo = null;
 
+        /**
+         * Health check logset ID of CLB CLS
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HealthLogSetId = null;
+
+        /**
+         * Health check log topic ID of CLB CLS
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HealthLogTopicId = null;
+
     }
 
     /**
@@ -9113,6 +9155,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.MixIpTarget = 'MixIpTarget' in params ? params.MixIpTarget : null;
         this.Zones = 'Zones' in params ? params.Zones : null;
         this.NfvInfo = 'NfvInfo' in params ? params.NfvInfo : null;
+        this.HealthLogSetId = 'HealthLogSetId' in params ? params.HealthLogSetId : null;
+        this.HealthLogTopicId = 'HealthLogTopicId' in params ? params.HealthLogTopicId : null;
 
     }
 }

@@ -1124,6 +1124,20 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.ImageId = null;
 
+        /**
+         * This parameter is required when the custom PodCIDR mode is enabled for the cluster.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.DesiredPodNum = null;
+
+        /**
+         * Custom script
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.UserScript = null;
+
     }
 
     /**
@@ -1170,6 +1184,8 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.NodePoolOs = 'NodePoolOs' in params ? params.NodePoolOs : null;
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.DesiredPodNum = 'DesiredPodNum' in params ? params.DesiredPodNum : null;
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
 
     }
 }
@@ -6809,6 +6825,12 @@ class UpdateClusterVersionRequest extends  AbstractModel {
         this.DstVersion = null;
 
         /**
+         * Cluster custom parameter
+         * @type {ClusterExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+        /**
          * The maximum tolerable number of unavailable pods
          * @type {number || null}
          */
@@ -6831,6 +6853,12 @@ class UpdateClusterVersionRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.DstVersion = 'DstVersion' in params ? params.DstVersion : null;
+
+        if (params.ExtraArgs) {
+            let obj = new ClusterExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
         this.MaxNotReadyPercent = 'MaxNotReadyPercent' in params ? params.MaxNotReadyPercent : null;
         this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
 

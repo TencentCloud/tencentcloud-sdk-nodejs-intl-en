@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ImportSnapshotsResponse = models.ImportSnapshotsResponse;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const ModifyTableGroupNameResponse = models.ModifyTableGroupNameResponse;
 const DescribeTableTagsRequest = models.DescribeTableTagsRequest;
@@ -25,6 +26,7 @@ const DeleteTableIndexResponse = models.DeleteTableIndexResponse;
 const TableRollbackResultNew = models.TableRollbackResultNew;
 const ServerMachineInfo = models.ServerMachineInfo;
 const DescribeTablesResponse = models.DescribeTablesResponse;
+const ModifySnapshotsResponse = models.ModifySnapshotsResponse;
 const DeleteClusterRequest = models.DeleteClusterRequest;
 const SelectedTableWithField = models.SelectedTableWithField;
 const DeleteTableIndexRequest = models.DeleteTableIndexRequest;
@@ -36,6 +38,7 @@ const SelectedTableInfoNew = models.SelectedTableInfoNew;
 const ModifyClusterPasswordRequest = models.ModifyClusterPasswordRequest;
 const DescribeMachineResponse = models.DescribeMachineResponse;
 const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
+const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TagsInfoOfTableGroup = models.TagsInfoOfTableGroup;
 const CreateTableGroupRequest = models.CreateTableGroupRequest;
 const ModifyClusterMachineResponse = models.ModifyClusterMachineResponse;
@@ -45,24 +48,30 @@ const FieldInfo = models.FieldInfo;
 const ModifyTableTagsRequest = models.ModifyTableTagsRequest;
 const IdlFileInfo = models.IdlFileInfo;
 const DescribeTasksRequest = models.DescribeTasksRequest;
+const SnapshotInfoNew = models.SnapshotInfoNew;
 const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
 const ClearTablesResponse = models.ClearTablesResponse;
 const DescribeIdlFileInfosRequest = models.DescribeIdlFileInfosRequest;
+const SnapshotResult = models.SnapshotResult;
 const ClusterInfo = models.ClusterInfo;
 const DisableRestProxyRequest = models.DisableRestProxyRequest;
 const DescribeTablesInRecycleResponse = models.DescribeTablesInRecycleResponse;
 const ModifyTablesResponse = models.ModifyTablesResponse;
-const EnableRestProxyRequest = models.EnableRestProxyRequest;
+const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
 const ModifyTableGroupTagsResponse = models.ModifyTableGroupTagsResponse;
 const ModifyClusterTagsRequest = models.ModifyClusterTagsRequest;
+const CreateSnapshotsRequest = models.CreateSnapshotsRequest;
 const DescribeTableGroupTagsResponse = models.DescribeTableGroupTagsResponse;
 const SetTableIndexRequest = models.SetTableIndexRequest;
 const ModifyTableQuotasResponse = models.ModifyTableQuotasResponse;
 const RecoverRecycleTablesRequest = models.RecoverRecycleTablesRequest;
+const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
+const DeleteTablesResponse = models.DeleteTablesResponse;
 const ModifyTableGroupNameRequest = models.ModifyTableGroupNameRequest;
 const DescribeTableGroupsRequest = models.DescribeTableGroupsRequest;
 const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
 const ModifyTableGroupTagsRequest = models.ModifyTableGroupTagsRequest;
+const EnableRestProxyRequest = models.EnableRestProxyRequest;
 const ModifyTableQuotasRequest = models.ModifyTableQuotasRequest;
 const CompareIdlFilesResponse = models.CompareIdlFilesResponse;
 const CreateTablesResponse = models.CreateTablesResponse;
@@ -74,6 +83,7 @@ const TagsInfoOfCluster = models.TagsInfoOfCluster;
 const SetTableIndexResponse = models.SetTableIndexResponse;
 const ClearTablesRequest = models.ClearTablesRequest;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
+const CreateSnapshotsResponse = models.CreateSnapshotsResponse;
 const DisableRestProxyResponse = models.DisableRestProxyResponse;
 const TagInfoUnit = models.TagInfoUnit;
 const CreateClusterResponse = models.CreateClusterResponse;
@@ -83,9 +93,11 @@ const TableInfoNew = models.TableInfoNew;
 const TaskInfoNew = models.TaskInfoNew;
 const DeleteIdlFilesRequest = models.DeleteIdlFilesRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
+const KeyFile = models.KeyFile;
 const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
 const DescribeTableTagsResponse = models.DescribeTableTagsResponse;
 const CreateTableGroupResponse = models.CreateTableGroupResponse;
+const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
 const EnableRestProxyResponse = models.EnableRestProxyResponse;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
@@ -95,6 +107,7 @@ const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
 const DescribeUinInWhitelistResponse = models.DescribeUinInWhitelistResponse;
+const SnapshotInfo = models.SnapshotInfo;
 const ParsedTableInfoNew = models.ParsedTableInfoNew;
 const RollbackTablesResponse = models.RollbackTablesResponse;
 const MachineInfo = models.MachineInfo;
@@ -116,7 +129,8 @@ const IdlFileInfoWithoutContent = models.IdlFileInfoWithoutContent;
 const ModifyTableMemosResponse = models.ModifyTableMemosResponse;
 const ModifyClusterMachineRequest = models.ModifyClusterMachineRequest;
 const Filter = models.Filter;
-const DeleteTablesResponse = models.DeleteTablesResponse;
+const ModifySnapshotsRequest = models.ModifySnapshotsRequest;
+const ImportSnapshotsRequest = models.ImportSnapshotsRequest;
 const ErrorInfo = models.ErrorInfo;
 const TableGroupInfo = models.TableGroupInfo;
 
@@ -275,14 +289,14 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to recover a dropped table from the recycle bin. It will not work for tables to be released due to arrears.
-     * @param {RecoverRecycleTablesRequest} req
-     * @param {function(string, RecoverRecycleTablesResponse):void} cb
+     * This API is used to create one or more table snapshots at specific points in time in the past.
+     * @param {CreateSnapshotsRequest} req
+     * @param {function(string, CreateSnapshotsResponse):void} cb
      * @public
      */
-    RecoverRecycleTables(req, cb) {
-        let resp = new RecoverRecycleTablesResponse();
-        this.request("RecoverRecycleTables", req, resp, cb);
+    CreateSnapshots(req, cb) {
+        let resp = new CreateSnapshotsResponse();
+        this.request("CreateSnapshots", req, resp, cb);
     }
 
     /**
@@ -374,6 +388,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete one or more table snapshots.
+     * @param {DeleteSnapshotsRequest} req
+     * @param {function(string, DeleteSnapshotsResponse):void} cb
+     * @public
+     */
+    DeleteSnapshots(req, cb) {
+        let resp = new DeleteSnapshotsResponse();
+        this.request("DeleteSnapshots", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a table group in a TcaplusDB cluster.
      * @param {CreateTableGroupRequest} req
      * @param {function(string, CreateTableGroupResponse):void} cb
@@ -382,6 +407,17 @@ class TcaplusdbClient extends AbstractClient {
     CreateTableGroup(req, cb) {
         let resp = new CreateTableGroupResponse();
         this.request("CreateTableGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recover a dropped table from the recycle bin. It will not work for tables to be released due to arrears.
+     * @param {RecoverRecycleTablesRequest} req
+     * @param {function(string, RecoverRecycleTablesResponse):void} cb
+     * @public
+     */
+    RecoverRecycleTables(req, cb) {
+        let resp = new RecoverRecycleTablesResponse();
+        this.request("RecoverRecycleTables", req, resp, cb);
     }
 
     /**
@@ -404,6 +440,17 @@ class TcaplusdbClient extends AbstractClient {
     DescribeTasks(req, cb) {
         let resp = new DescribeTasksResponse();
         this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of table snapshots.
+     * @param {DescribeSnapshotsRequest} req
+     * @param {function(string, DescribeSnapshotsResponse):void} cb
+     * @public
+     */
+    DescribeSnapshots(req, cb) {
+        let resp = new DescribeSnapshotsResponse();
+        this.request("DescribeSnapshots", req, resp, cb);
     }
 
     /**
@@ -448,6 +495,17 @@ class TcaplusdbClient extends AbstractClient {
     DescribeTableGroupTags(req, cb) {
         let resp = new DescribeTableGroupTagsResponse();
         this.request("DescribeTableGroupTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to import a snapshot into a new table or the original table from which the snapshot was created.
+     * @param {ImportSnapshotsRequest} req
+     * @param {function(string, ImportSnapshotsResponse):void} cb
+     * @public
+     */
+    ImportSnapshots(req, cb) {
+        let resp = new ImportSnapshotsResponse();
+        this.request("ImportSnapshots", req, resp, cb);
     }
 
     /**
@@ -503,6 +561,17 @@ class TcaplusdbClient extends AbstractClient {
     ModifyTableMemos(req, cb) {
         let resp = new ModifyTableMemosResponse();
         this.request("ModifyTableMemos", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the expiration time of one or more table snapshots.
+     * @param {ModifySnapshotsRequest} req
+     * @param {function(string, ModifySnapshotsResponse):void} cb
+     * @public
+     */
+    ModifySnapshots(req, cb) {
+        let resp = new ModifySnapshotsResponse();
+        this.request("ModifySnapshots", req, resp, cb);
     }
 
     /**

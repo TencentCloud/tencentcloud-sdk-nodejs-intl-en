@@ -17,6 +17,42 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ImportSnapshots response structure.
+ * @class
+ */
+class ImportSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyClusterName request structure.
  * @class
  */
@@ -427,6 +463,56 @@ class DescribeTablesResponse extends  AbstractModel {
                 let obj = new TableInfoNew();
                 obj.deserialize(params.TableInfos[z]);
                 this.TableInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySnapshots response structure.
+ * @class
+ */
+class ModifySnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of snapshots modified in batches
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The result list of snapshots modified in batches
+         * @type {Array.<SnapshotResult> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new SnapshotResult();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1015,6 +1101,55 @@ class DeleteTableGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSnapshots request structure.
+ * @class
+ */
+class DescribeSnapshotsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the cluster where the table resides
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The ID of the table group where the table resides
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Snapshot name
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+
+    }
+}
+
+/**
  * Table group tag information
  * @class
  */
@@ -1539,6 +1674,55 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
+ * New expiration time of a snapshot
+ * @class
+ */
+class SnapshotInfoNew extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the table group where the table resides
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Snapshot name
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * Snapshot expiration time
+         * @type {string || null}
+         */
+        this.SnapshotDeadTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.SnapshotDeadTime = 'SnapshotDeadTime' in params ? params.SnapshotDeadTime : null;
+
+    }
+}
+
+/**
  * RecoverRecycleTables response structure.
  * @class
  */
@@ -1690,6 +1874,112 @@ class DescribeIdlFileInfosRequest extends  AbstractModel {
         this.IdlFileIds = 'IdlFileIds' in params ? params.IdlFileIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * The result of snapshot creation
+ * @class
+ */
+class SnapshotResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the table group where the table resides
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * Table name
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Task ID, which is valid for the API that creates one task at a time
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Error information
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {ErrorInfo || null}
+         */
+        this.Error = null;
+
+        /**
+         * Snapshot name
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * The time of the data from which the snapshot was created
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SnapshotTime = null;
+
+        /**
+         * When the snapshot expires
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SnapshotDeadTime = null;
+
+        /**
+         * When the snapshot was created
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SnapshotCreateTime = null;
+
+        /**
+         * Snapshot size
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SnapshotSize = null;
+
+        /**
+         * Snapshot status. Valid values: `0` (creating), `1` (normal), `2` (deleting), `3` (expired), `4` (rolling back).
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SnapshotStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.SnapshotTime = 'SnapshotTime' in params ? params.SnapshotTime : null;
+        this.SnapshotDeadTime = 'SnapshotDeadTime' in params ? params.SnapshotDeadTime : null;
+        this.SnapshotCreateTime = 'SnapshotCreateTime' in params ? params.SnapshotCreateTime : null;
+        this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
+        this.SnapshotStatus = 'SnapshotStatus' in params ? params.SnapshotStatus : null;
 
     }
 }
@@ -2023,18 +2313,24 @@ class ModifyTablesResponse extends  AbstractModel {
 }
 
 /**
- * EnableRestProxy request structure.
+ * DeleteSnapshots request structure.
  * @class
  */
-class EnableRestProxyRequest extends  AbstractModel {
+class DeleteSnapshotsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The value is the same as `appid`.
+         * The ID of the cluster where the table resides
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * The list of snapshots to delete
+         * @type {Array.<SnapshotInfoNew> || null}
+         */
+        this.SelectedTables = null;
 
     }
 
@@ -2046,6 +2342,15 @@ class EnableRestProxyRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SnapshotInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
+            }
+        }
 
     }
 }
@@ -2137,6 +2442,49 @@ class ModifyClusterTagsRequest extends  AbstractModel {
                 let obj = new TagInfoUnit();
                 obj.deserialize(params.DeleteTags[z]);
                 this.DeleteTags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateSnapshots request structure.
+ * @class
+ */
+class CreateSnapshotsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the cluster where the table resides
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Snapshot list
+         * @type {Array.<SnapshotInfo> || null}
+         */
+        this.SelectedTables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SnapshotInfo();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
             }
         }
 
@@ -2325,6 +2673,106 @@ class RecoverRecycleTablesRequest extends  AbstractModel {
                 this.SelectedTables.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteSnapshots response structure.
+ * @class
+ */
+class DeleteSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of snapshots deleted in batches
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The result list of snapshots deleted in batches
+         * @type {Array.<SnapshotResult> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new SnapshotResult();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteTables response structure.
+ * @class
+ */
+class DeleteTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of dropped tables
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of details of dropped tables
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2546,6 +2994,34 @@ class ModifyTableGroupTagsRequest extends  AbstractModel {
                 this.DeleteTags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * EnableRestProxy request structure.
+ * @class
+ */
+class EnableRestProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value is the same as `appid`.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -3055,6 +3531,56 @@ class DescribeIdlFileInfosResponse extends  AbstractModel {
                 let obj = new IdlFileInfo();
                 obj.deserialize(params.IdlFileInfos[z]);
                 this.IdlFileInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSnapshots response structure.
+ * @class
+ */
+class CreateSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of snapshots created in batches
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The result list of snapshots created in batches
+         * @type {Array.<SnapshotResult> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new SnapshotResult();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -3720,6 +4246,55 @@ class CreateBackupResponse extends  AbstractModel {
 }
 
 /**
+ * The file of keys used to import partial snapshot data
+ * @class
+ */
+class KeyFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key file name
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Key file extension
+         * @type {string || null}
+         */
+        this.FileExtType = null;
+
+        /**
+         * Key file content
+         * @type {string || null}
+         */
+        this.FileContent = null;
+
+        /**
+         * Key file size
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileExtType = 'FileExtType' in params ? params.FileExtType : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+
+    }
+}
+
+/**
  * VerifyIdlFiles response structure.
  * @class
  */
@@ -3864,6 +4439,56 @@ class CreateTableGroupResponse extends  AbstractModel {
             return;
         }
         this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSnapshots response structure.
+ * @class
+ */
+class DescribeSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of snapshots
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The result list of snapshots
+         * @type {Array.<SnapshotResult> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new SnapshotResult();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4314,6 +4939,62 @@ class DescribeUinInWhitelistResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Snapshot list
+ * @class
+ */
+class SnapshotInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the table group where the table resides
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Snapshot name
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * The time of the data from which the snapshot was created
+         * @type {string || null}
+         */
+        this.SnapshotTime = null;
+
+        /**
+         * Snapshot expiration time
+         * @type {string || null}
+         */
+        this.SnapshotDeadTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.SnapshotTime = 'SnapshotTime' in params ? params.SnapshotTime : null;
+        this.SnapshotDeadTime = 'SnapshotDeadTime' in params ? params.SnapshotDeadTime : null;
 
     }
 }
@@ -5144,7 +5825,7 @@ class DescribeMachineRequest extends  AbstractModel {
         super();
 
         /**
-         * Whether to filter the resources supporting IPv6 access
+         * If this parameter is not `0`, machines supporting IPv6 will be queried.
          * @type {number || null}
          */
         this.Ipv6Enable = null;
@@ -5595,30 +6276,24 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * DeleteTables response structure.
+ * ModifySnapshots request structure.
  * @class
  */
-class DeleteTablesResponse extends  AbstractModel {
+class ModifySnapshotsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of dropped tables
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of details of dropped tables
-         * @type {Array.<TableResultNew> || null}
-         */
-        this.TableResults = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The ID of the cluster where the table resides
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterId = null;
+
+        /**
+         * Snapshot list
+         * @type {Array.<SnapshotInfoNew> || null}
+         */
+        this.SelectedTables = null;
 
     }
 
@@ -5629,17 +6304,96 @@ class DeleteTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
-        if (params.TableResults) {
-            this.TableResults = new Array();
-            for (let z in params.TableResults) {
-                let obj = new TableResultNew();
-                obj.deserialize(params.TableResults[z]);
-                this.TableResults.push(obj);
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SnapshotInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImportSnapshots request structure.
+ * @class
+ */
+class ImportSnapshotsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the cluster where the original table (from which the snapshot was created) resides
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The information of the snapshot to import
+         * @type {SnapshotInfo || null}
+         */
+        this.Snapshots = null;
+
+        /**
+         * Whether to import partial data of the snapshot. Valid values: `TRUE` (import partial data), `FALSE` (import all data).
+         * @type {string || null}
+         */
+        this.ImportSpecialKey = null;
+
+        /**
+         * Whether to import to the original table. Valid values: `TRUE` (import to the original table), `FALSE` (import to a new table).
+         * @type {string || null}
+         */
+        this.ImportOriginTable = null;
+
+        /**
+         * The file of the keys of the partial data
+         * @type {KeyFile || null}
+         */
+        this.KeyFile = null;
+
+        /**
+         * The ID of the table group where the new table resides, which is valid only when `ImportOriginTable` is set to `FALSE`
+         * @type {string || null}
+         */
+        this.NewTableGroupId = null;
+
+        /**
+         * The name of the new table, which is valid only when `ImportOriginTable` is set to `FALSE`. TcaplusDB will automatically create a table named `NewTableName` of the same structure as that of the original table.
+         * @type {string || null}
+         */
+        this.NewTableName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Snapshots) {
+            let obj = new SnapshotInfo();
+            obj.deserialize(params.Snapshots)
+            this.Snapshots = obj;
+        }
+        this.ImportSpecialKey = 'ImportSpecialKey' in params ? params.ImportSpecialKey : null;
+        this.ImportOriginTable = 'ImportOriginTable' in params ? params.ImportOriginTable : null;
+
+        if (params.KeyFile) {
+            let obj = new KeyFile();
+            obj.deserialize(params.KeyFile)
+            this.KeyFile = obj;
+        }
+        this.NewTableGroupId = 'NewTableGroupId' in params ? params.NewTableGroupId : null;
+        this.NewTableName = 'NewTableName' in params ? params.NewTableName : null;
 
     }
 }
@@ -5736,6 +6490,7 @@ class TableGroupInfo extends  AbstractModel {
 }
 
 module.exports = {
+    ImportSnapshotsResponse: ImportSnapshotsResponse,
     ModifyClusterNameRequest: ModifyClusterNameRequest,
     ModifyTableGroupNameResponse: ModifyTableGroupNameResponse,
     DescribeTableTagsRequest: DescribeTableTagsRequest,
@@ -5745,6 +6500,7 @@ module.exports = {
     TableRollbackResultNew: TableRollbackResultNew,
     ServerMachineInfo: ServerMachineInfo,
     DescribeTablesResponse: DescribeTablesResponse,
+    ModifySnapshotsResponse: ModifySnapshotsResponse,
     DeleteClusterRequest: DeleteClusterRequest,
     SelectedTableWithField: SelectedTableWithField,
     DeleteTableIndexRequest: DeleteTableIndexRequest,
@@ -5756,6 +6512,7 @@ module.exports = {
     ModifyClusterPasswordRequest: ModifyClusterPasswordRequest,
     DescribeMachineResponse: DescribeMachineResponse,
     DeleteTableGroupRequest: DeleteTableGroupRequest,
+    DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TagsInfoOfTableGroup: TagsInfoOfTableGroup,
     CreateTableGroupRequest: CreateTableGroupRequest,
     ModifyClusterMachineResponse: ModifyClusterMachineResponse,
@@ -5765,24 +6522,30 @@ module.exports = {
     ModifyTableTagsRequest: ModifyTableTagsRequest,
     IdlFileInfo: IdlFileInfo,
     DescribeTasksRequest: DescribeTasksRequest,
+    SnapshotInfoNew: SnapshotInfoNew,
     RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
     ClearTablesResponse: ClearTablesResponse,
     DescribeIdlFileInfosRequest: DescribeIdlFileInfosRequest,
+    SnapshotResult: SnapshotResult,
     ClusterInfo: ClusterInfo,
     DisableRestProxyRequest: DisableRestProxyRequest,
     DescribeTablesInRecycleResponse: DescribeTablesInRecycleResponse,
     ModifyTablesResponse: ModifyTablesResponse,
-    EnableRestProxyRequest: EnableRestProxyRequest,
+    DeleteSnapshotsRequest: DeleteSnapshotsRequest,
     ModifyTableGroupTagsResponse: ModifyTableGroupTagsResponse,
     ModifyClusterTagsRequest: ModifyClusterTagsRequest,
+    CreateSnapshotsRequest: CreateSnapshotsRequest,
     DescribeTableGroupTagsResponse: DescribeTableGroupTagsResponse,
     SetTableIndexRequest: SetTableIndexRequest,
     ModifyTableQuotasResponse: ModifyTableQuotasResponse,
     RecoverRecycleTablesRequest: RecoverRecycleTablesRequest,
+    DeleteSnapshotsResponse: DeleteSnapshotsResponse,
+    DeleteTablesResponse: DeleteTablesResponse,
     ModifyTableGroupNameRequest: ModifyTableGroupNameRequest,
     DescribeTableGroupsRequest: DescribeTableGroupsRequest,
     ModifyTableTagsResponse: ModifyTableTagsResponse,
     ModifyTableGroupTagsRequest: ModifyTableGroupTagsRequest,
+    EnableRestProxyRequest: EnableRestProxyRequest,
     ModifyTableQuotasRequest: ModifyTableQuotasRequest,
     CompareIdlFilesResponse: CompareIdlFilesResponse,
     CreateTablesResponse: CreateTablesResponse,
@@ -5794,6 +6557,7 @@ module.exports = {
     SetTableIndexResponse: SetTableIndexResponse,
     ClearTablesRequest: ClearTablesRequest,
     DescribeIdlFileInfosResponse: DescribeIdlFileInfosResponse,
+    CreateSnapshotsResponse: CreateSnapshotsResponse,
     DisableRestProxyResponse: DisableRestProxyResponse,
     TagInfoUnit: TagInfoUnit,
     CreateClusterResponse: CreateClusterResponse,
@@ -5803,9 +6567,11 @@ module.exports = {
     TaskInfoNew: TaskInfoNew,
     DeleteIdlFilesRequest: DeleteIdlFilesRequest,
     CreateBackupResponse: CreateBackupResponse,
+    KeyFile: KeyFile,
     VerifyIdlFilesResponse: VerifyIdlFilesResponse,
     DescribeTableTagsResponse: DescribeTableTagsResponse,
     CreateTableGroupResponse: CreateTableGroupResponse,
+    DescribeSnapshotsResponse: DescribeSnapshotsResponse,
     VerifyIdlFilesRequest: VerifyIdlFilesRequest,
     EnableRestProxyResponse: EnableRestProxyResponse,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
@@ -5815,6 +6581,7 @@ module.exports = {
     DescribeTablesRequest: DescribeTablesRequest,
     ModifyTableMemosRequest: ModifyTableMemosRequest,
     DescribeUinInWhitelistResponse: DescribeUinInWhitelistResponse,
+    SnapshotInfo: SnapshotInfo,
     ParsedTableInfoNew: ParsedTableInfoNew,
     RollbackTablesResponse: RollbackTablesResponse,
     MachineInfo: MachineInfo,
@@ -5836,7 +6603,8 @@ module.exports = {
     ModifyTableMemosResponse: ModifyTableMemosResponse,
     ModifyClusterMachineRequest: ModifyClusterMachineRequest,
     Filter: Filter,
-    DeleteTablesResponse: DeleteTablesResponse,
+    ModifySnapshotsRequest: ModifySnapshotsRequest,
+    ImportSnapshotsRequest: ImportSnapshotsRequest,
     ErrorInfo: ErrorInfo,
     TableGroupInfo: TableGroupInfo,
 

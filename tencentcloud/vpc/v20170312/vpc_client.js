@@ -121,6 +121,7 @@ const CreateSecurityGroupWithPoliciesResponse = models.CreateSecurityGroupWithPo
 const DeleteAddressTemplateResponse = models.DeleteAddressTemplateResponse;
 const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
 const ResetNatGatewayConnectionRequest = models.ResetNatGatewayConnectionRequest;
+const ModifyCcnAttachedInstancesAttributeRequest = models.ModifyCcnAttachedInstancesAttributeRequest;
 const DeleteAddressTemplateRequest = models.DeleteAddressTemplateRequest;
 const CreateNatGatewaySourceIpTranslationNatRuleRequest = models.CreateNatGatewaySourceIpTranslationNatRuleRequest;
 const NetworkInterface = models.NetworkInterface;
@@ -218,7 +219,7 @@ const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
 const NetDetectIpState = models.NetDetectIpState;
 const CreateSubnetsRequest = models.CreateSubnetsRequest;
 const AssociateAddressResponse = models.AssociateAddressResponse;
-const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
+const ModifyCcnAttachedInstancesAttributeResponse = models.ModifyCcnAttachedInstancesAttributeResponse;
 const CreateNetworkAclRequest = models.CreateNetworkAclRequest;
 const DescribeAddressesRequest = models.DescribeAddressesRequest;
 const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
@@ -257,6 +258,7 @@ const CreateNatGatewaySourceIpTranslationNatRuleResponse = models.CreateNatGatew
 const DeleteNatGatewaySourceIpTranslationNatRuleResponse = models.DeleteNatGatewaySourceIpTranslationNatRuleResponse;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
+const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
 const Ipv6Address = models.Ipv6Address;
 const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
 const BandwidthPackageBillBandwidth = models.BandwidthPackageBillBandwidth;
@@ -1593,6 +1595,17 @@ If the IP range still has occupied IPs that are not yet repossessed, the IP rang
     DescribeBandwidthPackageResources(req, cb) {
         let resp = new DescribeBandwidthPackageResourcesResponse();
         this.request("DescribeBandwidthPackageResources", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify CCN-associated instance attributes. Currently, only the `description` can be modified.
+     * @param {ModifyCcnAttachedInstancesAttributeRequest} req
+     * @param {function(string, ModifyCcnAttachedInstancesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyCcnAttachedInstancesAttribute(req, cb) {
+        let resp = new ModifyCcnAttachedInstancesAttributeResponse();
+        this.request("ModifyCcnAttachedInstancesAttribute", req, resp, cb);
     }
 
     /**

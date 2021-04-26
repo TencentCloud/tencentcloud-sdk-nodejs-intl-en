@@ -5060,6 +5060,49 @@ class ResetNatGatewayConnectionRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyCcnAttachedInstancesAttribute request structure.
+ * @class
+ */
+class ModifyCcnAttachedInstancesAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CCN instance ID in the format of `ccn-f49l6u0z`
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * List of associated network instances
+         * @type {Array.<CcnInstance> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new CcnInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteAddressTemplate request structure.
  * @class
  */
@@ -5247,6 +5290,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Business = null;
 
+        /**
+         * ID of the CDC instance associated with the ENI
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -5302,6 +5352,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.EniType = 'EniType' in params ? params.EniType : null;
         this.Business = 'Business' in params ? params.Business : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -10155,6 +10206,12 @@ class CreateSubnetsRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * ID of the CDC instance to which the subnets will be created
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -10183,6 +10240,7 @@ class CreateSubnetsRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -10223,10 +10281,10 @@ class AssociateAddressResponse extends  AbstractModel {
 }
 
 /**
- * ResetVpnConnection response structure.
+ * ModifyCcnAttachedInstancesAttribute response structure.
  * @class
  */
-class ResetVpnConnectionResponse extends  AbstractModel {
+class ModifyCcnAttachedInstancesAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -11901,6 +11959,12 @@ class CcnAttachedInstance extends  AbstractModel {
          */
         this.InstanceArea = null;
 
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -11921,6 +11985,7 @@ class CcnAttachedInstance extends  AbstractModel {
         this.AttachedTime = 'AttachedTime' in params ? params.AttachedTime : null;
         this.CcnUin = 'CcnUin' in params ? params.CcnUin : null;
         this.InstanceArea = 'InstanceArea' in params ? params.InstanceArea : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -11956,6 +12021,34 @@ class SecurityPolicyDatabase extends  AbstractModel {
         }
         this.LocalCidrBlock = 'LocalCidrBlock' in params ? params.LocalCidrBlock : null;
         this.RemoteCidrBlock = 'RemoteCidrBlock' in params ? params.RemoteCidrBlock : null;
+
+    }
+}
+
+/**
+ * ResetVpnConnection response structure.
+ * @class
+ */
+class ResetVpnConnectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12544,6 +12637,12 @@ class CreateSubnetRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * CDC instance ID
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -12566,6 +12665,7 @@ class CreateSubnetRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -13920,6 +14020,12 @@ class CcnInstance extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -13932,6 +14038,7 @@ class CcnInstance extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceRegion = 'InstanceRegion' in params ? params.InstanceRegion : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -18543,6 +18650,18 @@ class ReplaceRoutesResponse extends  AbstractModel {
         super();
 
         /**
+         * Old routing policy
+         * @type {Array.<Route> || null}
+         */
+        this.OldRouteSet = null;
+
+        /**
+         * New routing policy
+         * @type {Array.<Route> || null}
+         */
+        this.NewRouteSet = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -18556,6 +18675,24 @@ class ReplaceRoutesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.OldRouteSet) {
+            this.OldRouteSet = new Array();
+            for (let z in params.OldRouteSet) {
+                let obj = new Route();
+                obj.deserialize(params.OldRouteSet[z]);
+                this.OldRouteSet.push(obj);
+            }
+        }
+
+        if (params.NewRouteSet) {
+            this.NewRouteSet = new Array();
+            for (let z in params.NewRouteSet) {
+                let obj = new Route();
+                obj.deserialize(params.NewRouteSet[z]);
+                this.NewRouteSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -20031,6 +20168,20 @@ class Subnet extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * CDC instance ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * Whether it is a CDC subnet. Valid values: 0: no; 1: yes
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCdcSubnet = null;
+
     }
 
     /**
@@ -20063,6 +20214,8 @@ class Subnet extends  AbstractModel {
                 this.TagSet.push(obj);
             }
         }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.IsCdcSubnet = 'IsCdcSubnet' in params ? params.IsCdcSubnet : null;
 
     }
 }
@@ -22573,16 +22726,17 @@ class Route extends  AbstractModel {
         this.DestinationCidrBlock = null;
 
         /**
-         * Type of the next hop. Currently supported types are:
-CVM: CVM of the public gateway type;
+         * Type of the next hop. Valid values:
+CVM: public gateway CVM;
 VPN: VPN gateway;
 DIRECTCONNECT: direct connect gateway;
 PEERCONNECTION: peering connection;
-SSLVPN: sslvpn gateway;
-NAT: NAT gateway; 
+SSLVPN: SSL VPN gateway;
+NAT: NAT Gateway; 
 NORMAL_CVM: normal CVM;
 EIP: public IP address of the CVM;
-CCN: Cloud Connect Network.
+CCN: Cloud Connect Network;
+LOCAL_GATEWAY: local gateway.
          * @type {string || null}
          */
         this.GatewayType = null;
@@ -23032,6 +23186,7 @@ module.exports = {
     DeleteAddressTemplateResponse: DeleteAddressTemplateResponse,
     ModifySubnetAttributeResponse: ModifySubnetAttributeResponse,
     ResetNatGatewayConnectionRequest: ResetNatGatewayConnectionRequest,
+    ModifyCcnAttachedInstancesAttributeRequest: ModifyCcnAttachedInstancesAttributeRequest,
     DeleteAddressTemplateRequest: DeleteAddressTemplateRequest,
     CreateNatGatewaySourceIpTranslationNatRuleRequest: CreateNatGatewaySourceIpTranslationNatRuleRequest,
     NetworkInterface: NetworkInterface,
@@ -23129,7 +23284,7 @@ module.exports = {
     NetDetectIpState: NetDetectIpState,
     CreateSubnetsRequest: CreateSubnetsRequest,
     AssociateAddressResponse: AssociateAddressResponse,
-    ResetVpnConnectionResponse: ResetVpnConnectionResponse,
+    ModifyCcnAttachedInstancesAttributeResponse: ModifyCcnAttachedInstancesAttributeResponse,
     CreateNetworkAclRequest: CreateNetworkAclRequest,
     DescribeAddressesRequest: DescribeAddressesRequest,
     DescribeSecurityGroupPoliciesRequest: DescribeSecurityGroupPoliciesRequest,
@@ -23168,6 +23323,7 @@ module.exports = {
     DeleteNatGatewaySourceIpTranslationNatRuleResponse: DeleteNatGatewaySourceIpTranslationNatRuleResponse,
     CcnAttachedInstance: CcnAttachedInstance,
     SecurityPolicyDatabase: SecurityPolicyDatabase,
+    ResetVpnConnectionResponse: ResetVpnConnectionResponse,
     Ipv6Address: Ipv6Address,
     CreateNetworkInterfaceRequest: CreateNetworkInterfaceRequest,
     BandwidthPackageBillBandwidth: BandwidthPackageBillBandwidth,

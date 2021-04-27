@@ -47,6 +47,7 @@ const AddDBInstanceToReadOnlyGroupResponse = models.AddDBInstanceToReadOnlyGroup
 const CreateReadOnlyDBInstanceResponse = models.CreateReadOnlyDBInstanceResponse;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const DisIsolateDBInstancesRequest = models.DisIsolateDBInstancesRequest;
 const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
@@ -70,8 +71,10 @@ const ServerlessDBInstance = models.ServerlessDBInstance;
 const CreateReadOnlyGroupRequest = models.CreateReadOnlyGroupRequest;
 const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const IsolateDBInstancesResponse = models.IsolateDBInstancesResponse;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
+const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const ErrLogDetail = models.ErrLogDetail;
@@ -83,6 +86,7 @@ const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const DeleteReadOnlyGroupRequest = models.DeleteReadOnlyGroupRequest;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const Filter = models.Filter;
+const DisIsolateDBInstancesResponse = models.DisIsolateDBInstancesResponse;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const SlowlogDetail = models.SlowlogDetail;
 const RemoveDBInstanceFromReadOnlyGroupRequest = models.RemoveDBInstanceFromReadOnlyGroupRequest;
@@ -154,7 +158,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to terminate a pay-as-you-go instance by specifying the `DBInstanceId` parameter.
+     * This API is used to eliminate an isolated instance by specifying the `DBInstanceId` parameter. The data of an eliminated instance will be deleted and cannot be recovered.
      * @param {DestroyDBInstanceRequest} req
      * @param {function(string, DestroyDBInstanceResponse):void} cb
      * @public
@@ -363,6 +367,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to isolate one or more instances.
+     * @param {IsolateDBInstancesRequest} req
+     * @param {function(string, IsolateDBInstancesResponse):void} cb
+     * @public
+     */
+    IsolateDBInstances(req, cb) {
+        let resp = new IsolateDBInstancesResponse();
+        this.request("IsolateDBInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a PostgreSQL for Serverless instance.
      * @param {DeleteServerlessDBInstanceRequest} req
      * @param {function(string, DeleteServerlessDBInstanceResponse):void} cb
@@ -473,14 +488,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable public network access for a PostgreSQL for Serverless instance.
-     * @param {OpenServerlessDBExtranetAccessRequest} req
-     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
+     * This API is used to remove one or more instances from isolation.
+     * @param {DisIsolateDBInstancesRequest} req
+     * @param {function(string, DisIsolateDBInstancesResponse):void} cb
      * @public
      */
-    OpenServerlessDBExtranetAccess(req, cb) {
-        let resp = new OpenServerlessDBExtranetAccessResponse();
-        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
+    DisIsolateDBInstances(req, cb) {
+        let resp = new DisIsolateDBInstancesResponse();
+        this.request("DisIsolateDBInstances", req, resp, cb);
     }
 
     /**
@@ -591,6 +606,17 @@ class PostgresClient extends AbstractClient {
     DescribeDBSlowlogs(req, cb) {
         let resp = new DescribeDBSlowlogsResponse();
         this.request("DescribeDBSlowlogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable public network access for a PostgreSQL for Serverless instance.
+     * @param {OpenServerlessDBExtranetAccessRequest} req
+     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    OpenServerlessDBExtranetAccess(req, cb) {
+        let resp = new OpenServerlessDBExtranetAccessResponse();
+        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
     }
 
 

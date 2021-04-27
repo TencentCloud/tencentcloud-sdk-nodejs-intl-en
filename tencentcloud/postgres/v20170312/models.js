@@ -1578,6 +1578,55 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DisIsolateDBInstances request structure.
+ * @class
+ */
+class DisIsolateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource ID list
+         * @type {Array.<string> || null}
+         */
+        this.DBInstanceIdSet = null;
+
+        /**
+         * Specify the valid period (in months) of the monthly-subscribed instance when removing it from isolation
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Whether to use vouchers
+         * @type {boolean || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+
+    }
+}
+
+/**
  * PostgreSQL for Serverless instance network description
  * @class
  */
@@ -2309,7 +2358,7 @@ class DestroyDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the instance to be deleted
+         * The ID of the instance to be eliminated
          * @type {string || null}
          */
         this.DBInstanceId = null;
@@ -2874,6 +2923,34 @@ class RestartDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * IsolateDBInstances response structure.
+ * @class
+ */
+class IsolateDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * OpenDBExtranetAccess response structure.
  * @class
  */
@@ -2953,6 +3030,34 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+    }
+}
+
+/**
+ * IsolateDBInstances request structure.
+ * @class
+ */
+class IsolateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID set
+         * @type {Array.<string> || null}
+         */
+        this.DBInstanceIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
 
     }
 }
@@ -3644,6 +3749,34 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DisIsolateDBInstances response structure.
+ * @class
+ */
+class DisIsolateDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5434,6 +5567,7 @@ module.exports = {
     CreateReadOnlyDBInstanceResponse: CreateReadOnlyDBInstanceResponse,
     DescribeOrdersResponse: DescribeOrdersResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
+    DisIsolateDBInstancesRequest: DisIsolateDBInstancesRequest,
     ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
@@ -5457,8 +5591,10 @@ module.exports = {
     CreateReadOnlyGroupRequest: CreateReadOnlyGroupRequest,
     CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
+    IsolateDBInstancesResponse: IsolateDBInstancesResponse,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
+    IsolateDBInstancesRequest: IsolateDBInstancesRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     ErrLogDetail: ErrLogDetail,
@@ -5470,6 +5606,7 @@ module.exports = {
     DeleteReadOnlyGroupRequest: DeleteReadOnlyGroupRequest,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     Filter: Filter,
+    DisIsolateDBInstancesResponse: DisIsolateDBInstancesResponse,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     SlowlogDetail: SlowlogDetail,
     RemoveDBInstanceFromReadOnlyGroupRequest: RemoveDBInstanceFromReadOnlyGroupRequest,

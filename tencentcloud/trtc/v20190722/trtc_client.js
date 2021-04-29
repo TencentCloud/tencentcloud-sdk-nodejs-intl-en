@@ -19,10 +19,11 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeAbnormalEventResponse = models.DescribeAbnormalEventResponse;
 const RealtimeData = models.RealtimeData;
 const DescribeAbnormalEventRequest = models.DescribeAbnormalEventRequest;
+const ModifyPictureResponse = models.ModifyPictureResponse;
 const StartMCUMixTranscodeByStrRoomIdRequest = models.StartMCUMixTranscodeByStrRoomIdRequest;
 const LayoutParams = models.LayoutParams;
 const TimeValue = models.TimeValue;
-const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
+const CreatePictureRequest = models.CreatePictureRequest;
 const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
 const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
@@ -39,32 +40,40 @@ const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
 const StopMCUMixTranscodeRequest = models.StopMCUMixTranscodeRequest;
 const UserInformation = models.UserInformation;
 const DescribeHistoryScaleRequest = models.DescribeHistoryScaleRequest;
+const DeletePictureRequest = models.DeletePictureRequest;
 const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
 const RemoveUserRequest = models.RemoveUserRequest;
 const OutputParams = models.OutputParams;
 const EventMessage = models.EventMessage;
+const ModifyPictureRequest = models.ModifyPictureRequest;
 const CreateTroubleInfoResponse = models.CreateTroubleInfoResponse;
 const StopMCUMixTranscodeByStrRoomIdRequest = models.StopMCUMixTranscodeByStrRoomIdRequest;
 const QualityData = models.QualityData;
 const AbnormalEvent = models.AbnormalEvent;
 const StopMCUMixTranscodeByStrRoomIdResponse = models.StopMCUMixTranscodeByStrRoomIdResponse;
 const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
-const ScaleInfomation = models.ScaleInfomation;
+const DeletePictureResponse = models.DeletePictureResponse;
 const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
 const EventList = models.EventList;
 const DismissRoomRequest = models.DismissRoomRequest;
 const DescribeDetailEventResponse = models.DescribeDetailEventResponse;
+const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
+const PictureInfo = models.PictureInfo;
+const DescribePictureRequest = models.DescribePictureRequest;
 const SmallVideoLayoutParams = models.SmallVideoLayoutParams;
 const RemoveUserResponse = models.RemoveUserResponse;
 const PresetLayoutConfig = models.PresetLayoutConfig;
 const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
 const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
+const DescribePictureResponse = models.DescribePictureResponse;
 const PublishCdnParams = models.PublishCdnParams;
 const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
+const ScaleInfomation = models.ScaleInfomation;
 const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
 const AbnormalExperience = models.AbnormalExperience;
 const RoomState = models.RoomState;
+const CreatePictureResponse = models.CreatePictureResponse;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
 const StartMCUMixTranscodeByStrRoomIdResponse = models.StartMCUMixTranscodeByStrRoomIdResponse;
@@ -80,50 +89,6 @@ class TrtcClient extends AbstractClient {
         super("trtc.tencentcloudapi.com", "2019-07-22", credential, region, profile);
     }
     
-    /**
-     * This API is used to remove a user from a room. It is applicable to scenarios where the anchor, room owner, or admin wants to kick out a user. It supports all platforms. For Android, iOS, Windows, and macOS, the TRTC SDK needs to be upgraded to v6.6 or above.
-     * @param {RemoveUserRequest} req
-     * @param {function(string, RemoveUserResponse):void} cb
-     * @public
-     */
-    RemoveUser(req, cb) {
-        let resp = new RemoveUserResponse();
-        this.request("RemoveUser", req, resp, cb);
-    }
-
-    /**
-     * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
-     * @param {DismissRoomByStrRoomIdRequest} req
-     * @param {function(string, DismissRoomByStrRoomIdResponse):void} cb
-     * @public
-     */
-    DismissRoomByStrRoomId(req, cb) {
-        let resp = new DismissRoomByStrRoomIdResponse();
-        this.request("DismissRoomByStrRoomId", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create exception information.
-     * @param {CreateTroubleInfoRequest} req
-     * @param {function(string, CreateTroubleInfoResponse):void} cb
-     * @public
-     */
-    CreateTroubleInfo(req, cb) {
-        let resp = new CreateTroubleInfoResponse();
-        this.request("CreateTroubleInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the daily numbers of rooms and users under a specified `SDKAppID`. It can query data once per minute for the last 14 days. If a day has not ended, the numbers of rooms and users on the day cannot be queried.
-     * @param {DescribeHistoryScaleRequest} req
-     * @param {function(string, DescribeHistoryScaleResponse):void} cb
-     * @public
-     */
-    DescribeHistoryScale(req, cb) {
-        let resp = new DescribeHistoryScaleResponse();
-        this.request("DescribeHistoryScale", req, resp, cb);
-    }
-
     /**
      * This API is used to enable On-Cloud MixTranscoding and specify the position of each channel of image in stream mixing.
 
@@ -150,6 +115,107 @@ Note: only applications created on and after January 9, 2020 can call this API d
     StartMCUMixTranscode(req, cb) {
         let resp = new StartMCUMixTranscodeResponse();
         this.request("StartMCUMixTranscode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the room list of an `SDKAppID` in the last 14 days. It returns 10 calls by default and can return up to 100 calls per query.
+Note: you are not advised to use the API for the processing of real-time business logic.
+     * @param {DescribeRoomInformationRequest} req
+     * @param {function(string, DescribeRoomInformationResponse):void} cb
+     * @public
+     */
+    DescribeRoomInformation(req, cb) {
+        let resp = new DescribeRoomInformationResponse();
+        this.request("DescribeRoomInformation", req, resp, cb);
+    }
+
+    /**
+     * This API is used to end On-Cloud MixTranscoding.
+     * @param {StopMCUMixTranscodeRequest} req
+     * @param {function(string, StopMCUMixTranscodeResponse):void} cb
+     * @public
+     */
+    StopMCUMixTranscode(req, cb) {
+        let resp = new StopMCUMixTranscodeResponse();
+        this.request("StopMCUMixTranscode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create exception information.
+     * @param {CreateTroubleInfoRequest} req
+     * @param {function(string, CreateTroubleInfoResponse):void} cb
+     * @public
+     */
+    CreateTroubleInfo(req, cb) {
+        let resp = new CreateTroubleInfoResponse();
+        this.request("CreateTroubleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the daily numbers of rooms and users under a specified `SDKAppID`. It can query data once per minute for the last 14 days. If a day has not ended, the numbers of rooms and users on the day cannot be queried.
+     * @param {DescribeHistoryScaleRequest} req
+     * @param {function(string, DescribeHistoryScaleResponse):void} cb
+     * @public
+     */
+    DescribeHistoryScale(req, cb) {
+        let resp = new DescribeHistoryScaleResponse();
+        this.request("DescribeHistoryScale", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an image.
+     * @param {DeletePictureRequest} req
+     * @param {function(string, DeletePictureResponse):void} cb
+     * @public
+     */
+    DeletePicture(req, cb) {
+        let resp = new DeletePictureResponse();
+        this.request("DeletePicture", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upload an image.
+     * @param {CreatePictureRequest} req
+     * @param {function(string, CreatePictureResponse):void} cb
+     * @public
+     */
+    CreatePicture(req, cb) {
+        let resp = new CreatePictureResponse();
+        this.request("CreatePicture", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove a user from a room. It is applicable to scenarios where the anchor, room owner, or admin wants to kick out a user. It supports all platforms. For Android, iOS, Windows, and macOS, the TRTC SDK needs to be upgraded to v6.6 or above.
+     * @param {RemoveUserRequest} req
+     * @param {function(string, RemoveUserResponse):void} cb
+     * @public
+     */
+    RemoveUser(req, cb) {
+        let resp = new RemoveUserResponse();
+        this.request("RemoveUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the user list and call quality data of a specified time range in the last 14 days. When `DataType` is not null, data of up to 6 users during a period of up to 1 hour can be queried each time, and the period can start on one day and end on the next. When `DataType` and `UserIds` are null, 6 users are queried by default, and data of up to 100 users can be displayed on each page (`PageSize` set to 100 or lower). This API is used to query call quality and is not recommended for billing.
+Note: you are not advised to use the API for the processing of real-time business logic.
+     * @param {DescribeCallDetailRequest} req
+     * @param {function(string, DescribeCallDetailResponse):void} cb
+     * @public
+     */
+    DescribeCallDetail(req, cb) {
+        let resp = new DescribeCallDetailResponse();
+        this.request("DescribeCallDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the quality metrics of an `SDKAppID` in the last 24 hours on a per-minute basis, including room entry success rate, instant playback rate of the first frame, and audio/video lag rate. The query period must be 1-60 minutes.
+     * @param {DescribeRealtimeQualityRequest} req
+     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
+     * @public
+     */
+    DescribeRealtimeQuality(req, cb) {
+        let resp = new DescribeRealtimeQualityResponse();
+        this.request("DescribeRealtimeQuality", req, resp, cb);
     }
 
     /**
@@ -186,49 +252,14 @@ Note: only applications created on and after January 9, 2020 can call this API d
     }
 
     /**
-     * This API is used to query the room list of an `SDKAppID` in the last 14 days. It returns 10 calls by default and can return up to 100 calls per query.
-Note: you are not advised to use the API for the processing of real-time business logic.
-     * @param {DescribeRoomInformationRequest} req
-     * @param {function(string, DescribeRoomInformationResponse):void} cb
+     * This API is used to modify the parameters of an image.
+     * @param {ModifyPictureRequest} req
+     * @param {function(string, ModifyPictureResponse):void} cb
      * @public
      */
-    DescribeRoomInformation(req, cb) {
-        let resp = new DescribeRoomInformationResponse();
-        this.request("DescribeRoomInformation", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query a user’s activity details such as room entry/exit and video enablement/disablement during a call. It can query data for the last 14 days.
-     * @param {DescribeDetailEventRequest} req
-     * @param {function(string, DescribeDetailEventResponse):void} cb
-     * @public
-     */
-    DescribeDetailEvent(req, cb) {
-        let resp = new DescribeDetailEventResponse();
-        this.request("DescribeDetailEvent", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the user list and call quality data of a specified time range in the last 14 days. When `DataType` is not null, data of up to 6 users during a period of up to 1 hour can be queried each time, and the period can start on one day and end on the next. When `DataType` and `UserIds` are null, 6 users are queried by default, and data of up to 100 users can be displayed on each page (`PageSize` set to 100 or lower). This API is used to query call quality and is not recommended for billing.
-Note: you are not advised to use the API for the processing of real-time business logic.
-     * @param {DescribeCallDetailRequest} req
-     * @param {function(string, DescribeCallDetailResponse):void} cb
-     * @public
-     */
-    DescribeCallDetail(req, cb) {
-        let resp = new DescribeCallDetailResponse();
-        this.request("DescribeCallDetail", req, resp, cb);
-    }
-
-    /**
-     * This API is used to end On-Cloud MixTranscoding.
-     * @param {StopMCUMixTranscodeRequest} req
-     * @param {function(string, StopMCUMixTranscodeResponse):void} cb
-     * @public
-     */
-    StopMCUMixTranscode(req, cb) {
-        let resp = new StopMCUMixTranscodeResponse();
-        this.request("StopMCUMixTranscode", req, resp, cb);
+    ModifyPicture(req, cb) {
+        let resp = new ModifyPictureResponse();
+        this.request("ModifyPicture", req, resp, cb);
     }
 
     /**
@@ -240,17 +271,6 @@ Note: you are not advised to use the API for the processing of real-time busines
     DescribeAbnormalEvent(req, cb) {
         let resp = new DescribeAbnormalEventResponse();
         this.request("DescribeAbnormalEvent", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the quality metrics of an `SDKAppID` in the last 24 hours on a per-minute basis, including room entry success rate, instant playback rate of the first frame, and audio/video lag rate. The query period must be 1-60 minutes.
-     * @param {DescribeRealtimeQualityRequest} req
-     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
-     * @public
-     */
-    DescribeRealtimeQuality(req, cb) {
-        let resp = new DescribeRealtimeQualityResponse();
-        this.request("DescribeRealtimeQuality", req, resp, cb);
     }
 
     /**
@@ -301,6 +321,39 @@ Note: only applications created on and after January 9, 2020 can call this API d
     DismissRoom(req, cb) {
         let resp = new DismissRoomResponse();
         this.request("DismissRoom", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+     * @param {DismissRoomByStrRoomIdRequest} req
+     * @param {function(string, DismissRoomByStrRoomIdResponse):void} cb
+     * @public
+     */
+    DismissRoomByStrRoomId(req, cb) {
+        let resp = new DismissRoomByStrRoomIdResponse();
+        this.request("DismissRoomByStrRoomId", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the parameters of an image.
+     * @param {DescribePictureRequest} req
+     * @param {function(string, DescribePictureResponse):void} cb
+     * @public
+     */
+    DescribePicture(req, cb) {
+        let resp = new DescribePictureResponse();
+        this.request("DescribePicture", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a user’s activity details such as room entry/exit and video enablement/disablement during a call. It can query data for the last 14 days.
+     * @param {DescribeDetailEventRequest} req
+     * @param {function(string, DescribeDetailEventResponse):void} cb
+     * @public
+     */
+    DescribeDetailEvent(req, cb) {
+        let resp = new DescribeDetailEventResponse();
+        this.request("DescribeDetailEvent", req, resp, cb);
     }
 
     /**

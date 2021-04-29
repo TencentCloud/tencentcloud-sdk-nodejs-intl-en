@@ -1041,7 +1041,7 @@ class NodePool extends  AbstractModel {
         this.ClusterInstanceId = null;
 
         /**
-         * Status
+         * The lifecycle state of the current node pool. Valid values: `creating`, `normal`, `updating`, `deleting`, and `deleted`.
          * @type {string || null}
          */
         this.LifeState = null;

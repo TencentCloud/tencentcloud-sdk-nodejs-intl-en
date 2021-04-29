@@ -159,6 +159,34 @@ class DescribeAbnormalEventRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyPicture response structure.
+ * @class
+ */
+class ModifyPictureResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StartMCUMixTranscodeByStrRoomId request structure.
  * @class
  */
@@ -374,24 +402,54 @@ class TimeValue extends  AbstractModel {
 }
 
 /**
- * DismissRoomByStrRoomId request structure.
+ * CreatePicture request structure.
  * @class
  */
-class DismissRoomByStrRoomIdRequest extends  AbstractModel {
+class CreatePictureRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * `SDKAppId` of TRTC
+         * Application ID
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Room ID
+         * Base64-encoded image content
          * @type {string || null}
          */
-        this.RoomId = null;
+        this.Content = null;
+
+        /**
+         * Image file extension
+         * @type {string || null}
+         */
+        this.Suffix = null;
+
+        /**
+         * Image height
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Image width
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * X-axis value of the image’s position
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Y-axis value of the image’s position
+         * @type {number || null}
+         */
+        this.YPosition = null;
 
     }
 
@@ -403,7 +461,12 @@ class DismissRoomByStrRoomIdRequest extends  AbstractModel {
             return;
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Suffix = 'Suffix' in params ? params.Suffix : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
 
     }
 }
@@ -1268,6 +1331,41 @@ class DescribeHistoryScaleRequest extends  AbstractModel {
 }
 
 /**
+ * DeletePicture request structure.
+ * @class
+ */
+class DeletePictureRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image ID
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
  * DescribeRoomInformation response structure.
  * @class
  */
@@ -1386,7 +1484,7 @@ class OutputParams extends  AbstractModel {
         this.RecordId = null;
 
         /**
-         * Value range: [0, 1]. If it is 0, the recording template configured in the console will be used; if it is 1, streams are recorded as .mp3 files.
+         * Whether to record audio only. Valid values: 0, 1. `0`: no meaning; `1`: records into MP3 files. This parameter is not recommended. Instead, you are advised to create an audio-only recording template in the TRTC console.
          * @type {number || null}
          */
         this.RecordAudioOnly = null;
@@ -1464,6 +1562,69 @@ class EventMessage extends  AbstractModel {
         this.EventId = 'EventId' in params ? params.EventId : null;
         this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
         this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
+
+    }
+}
+
+/**
+ * ModifyPicture request structure.
+ * @class
+ */
+class ModifyPictureRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image ID
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Image height
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Image width
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * X-axis value of the image’s position
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Y-axis value of the image’s position
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
 
     }
 }
@@ -1706,39 +1867,18 @@ audioBlockPercent: audio lag rate.
 }
 
 /**
- * Historical scale information
+ * DeletePicture response structure.
  * @class
  */
-class ScaleInfomation extends  AbstractModel {
+class DeletePictureResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time for each day
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Time = null;
-
-        /**
-         * Number of users in room. If a user enters the room for multiple times, the user will be counted as one user.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UserNumber = null;
-
-        /**
-         * Number of room entries. Every time when a user enters the room, it will be counted as one room entry.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UserCount = null;
-
-        /**
-         * Number of rooms under `sdkappid` on a day
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RoomNumbers = null;
+        this.RequestId = null;
 
     }
 
@@ -1749,10 +1889,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
-        this.UserCount = 'UserCount' in params ? params.UserCount : null;
-        this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1964,6 +2101,41 @@ class DescribeDetailEventResponse extends  AbstractModel {
 }
 
 /**
+ * DismissRoomByStrRoomId request structure.
+ * @class
+ */
+class DismissRoomByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `SDKAppId` of TRTC
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Room ID
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
  * StartMCUMixTranscode response structure.
  * @class
  */
@@ -1987,6 +2159,118 @@ class StartMCUMixTranscodeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Image information list
+ * @class
+ */
+class PictureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image height
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Image width
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * X-axis value of the image’s position
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Y-axis value of the image’s position
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Image ID
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+
+    }
+}
+
+/**
+ * DescribePicture request structure.
+ * @class
+ */
+class DescribePictureRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Image ID. If it is not passed in, the IDs of all images under the application are returned.
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+        /**
+         * Number of records per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.PageNo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNo = 'PageNo' in params ? params.PageNo : null;
 
     }
 }
@@ -2290,6 +2574,56 @@ class DescribeCallDetailResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePicture response structure.
+ * @class
+ */
+class DescribePictureResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of records returned
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Image information list
+         * @type {Array.<PictureInfo> || null}
+         */
+        this.PictureInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.PictureInfo) {
+            this.PictureInfo = new Array();
+            for (let z in params.PictureInfo) {
+                let obj = new PictureInfo();
+                obj.deserialize(params.PictureInfo[z]);
+                this.PictureInfo.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Relayed push parameters of a non-Tencent Cloud CDN
  * @class
  */
@@ -2383,6 +2717,58 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
         this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * Historical scale information
+ * @class
+ */
+class ScaleInfomation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time for each day
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * Number of users in room. If a user enters the room for multiple times, the user will be counted as one user.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UserNumber = null;
+
+        /**
+         * Number of room entries. Every time when a user enters the room, it will be counted as one room entry.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UserCount = null;
+
+        /**
+         * Number of rooms under `sdkappid` on a day
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RoomNumbers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
+        this.UserCount = 'UserCount' in params ? params.UserCount : null;
+        this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
 
     }
 }
@@ -2571,6 +2957,41 @@ class RoomState extends  AbstractModel {
 }
 
 /**
+ * CreatePicture response structure.
+ * @class
+ */
+class CreatePictureResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image ID
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DismissRoomByStrRoomId response structure.
  * @class
  */
@@ -2680,10 +3101,11 @@ module.exports = {
     DescribeAbnormalEventResponse: DescribeAbnormalEventResponse,
     RealtimeData: RealtimeData,
     DescribeAbnormalEventRequest: DescribeAbnormalEventRequest,
+    ModifyPictureResponse: ModifyPictureResponse,
     StartMCUMixTranscodeByStrRoomIdRequest: StartMCUMixTranscodeByStrRoomIdRequest,
     LayoutParams: LayoutParams,
     TimeValue: TimeValue,
-    DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
+    CreatePictureRequest: CreatePictureRequest,
     StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
     DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
@@ -2700,32 +3122,40 @@ module.exports = {
     StopMCUMixTranscodeRequest: StopMCUMixTranscodeRequest,
     UserInformation: UserInformation,
     DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
+    DeletePictureRequest: DeletePictureRequest,
     DescribeRoomInformationResponse: DescribeRoomInformationResponse,
     RemoveUserRequest: RemoveUserRequest,
     OutputParams: OutputParams,
     EventMessage: EventMessage,
+    ModifyPictureRequest: ModifyPictureRequest,
     CreateTroubleInfoResponse: CreateTroubleInfoResponse,
     StopMCUMixTranscodeByStrRoomIdRequest: StopMCUMixTranscodeByStrRoomIdRequest,
     QualityData: QualityData,
     AbnormalEvent: AbnormalEvent,
     StopMCUMixTranscodeByStrRoomIdResponse: StopMCUMixTranscodeByStrRoomIdResponse,
     DescribeRealtimeQualityRequest: DescribeRealtimeQualityRequest,
-    ScaleInfomation: ScaleInfomation,
+    DeletePictureResponse: DeletePictureResponse,
     CreateTroubleInfoRequest: CreateTroubleInfoRequest,
     EventList: EventList,
     DismissRoomRequest: DismissRoomRequest,
     DescribeDetailEventResponse: DescribeDetailEventResponse,
+    DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
+    PictureInfo: PictureInfo,
+    DescribePictureRequest: DescribePictureRequest,
     SmallVideoLayoutParams: SmallVideoLayoutParams,
     RemoveUserResponse: RemoveUserResponse,
     PresetLayoutConfig: PresetLayoutConfig,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
+    DescribePictureResponse: DescribePictureResponse,
     PublishCdnParams: PublishCdnParams,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,
+    ScaleInfomation: ScaleInfomation,
     DescribeDetailEventRequest: DescribeDetailEventRequest,
     AbnormalExperience: AbnormalExperience,
     RoomState: RoomState,
+    CreatePictureResponse: CreatePictureResponse,
     DismissRoomByStrRoomIdResponse: DismissRoomByStrRoomIdResponse,
     DescribeHistoryScaleResponse: DescribeHistoryScaleResponse,
     StartMCUMixTranscodeByStrRoomIdResponse: StartMCUMixTranscodeByStrRoomIdResponse,

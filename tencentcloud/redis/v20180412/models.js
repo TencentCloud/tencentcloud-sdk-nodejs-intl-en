@@ -1913,6 +1913,41 @@ class RenewInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * UpgradeVersionToMultiAvailabilityZones response structure.
+ * @class
+ */
+class UpgradeVersionToMultiAvailabilityZonesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParamRecords response structure.
  * @class
  */
@@ -3523,6 +3558,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Max = 'Max' in params ? params.Max : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Unit = 'Unit' in params ? params.Unit : null;
+
+    }
+}
+
+/**
+ * UpgradeVersionToMultiAvailabilityZones request structure.
+ * @class
+ */
+class UpgradeVersionToMultiAvailabilityZonesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -8361,6 +8424,7 @@ module.exports = {
     RegionConf: RegionConf,
     BigKeyInfo: BigKeyInfo,
     RenewInstanceRequest: RenewInstanceRequest,
+    UpgradeVersionToMultiAvailabilityZonesResponse: UpgradeVersionToMultiAvailabilityZonesResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
     ModifyAutoBackupConfigRequest: ModifyAutoBackupConfigRequest,
     InstanceMultiParam: InstanceMultiParam,
@@ -8394,6 +8458,7 @@ module.exports = {
     DescribeInstanceMonitorTookDistResponse: DescribeInstanceMonitorTookDistResponse,
     DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
     InstanceIntegerParam: InstanceIntegerParam,
+    UpgradeVersionToMultiAvailabilityZonesRequest: UpgradeVersionToMultiAvailabilityZonesRequest,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
     ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
     InstanceTextParam: InstanceTextParam,

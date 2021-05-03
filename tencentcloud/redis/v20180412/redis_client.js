@@ -51,6 +51,7 @@ const ClearInstanceRequest = models.ClearInstanceRequest;
 const RegionConf = models.RegionConf;
 const BigKeyInfo = models.BigKeyInfo;
 const RenewInstanceRequest = models.RenewInstanceRequest;
+const UpgradeVersionToMultiAvailabilityZonesResponse = models.UpgradeVersionToMultiAvailabilityZonesResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
@@ -84,6 +85,7 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTookDistResponse;
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const InstanceIntegerParam = models.InstanceIntegerParam;
+const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMultiAvailabilityZonesRequest;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
 const InstanceTextParam = models.InstanceTextParam;
@@ -616,7 +618,18 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query information of the Redis instance list.
+     * This API is used to upgrade an instance to support multi-AZ deployment.
+     * @param {UpgradeVersionToMultiAvailabilityZonesRequest} req
+     * @param {function(string, UpgradeVersionToMultiAvailabilityZonesResponse):void} cb
+     * @public
+     */
+    UpgradeVersionToMultiAvailabilityZones(req, cb) {
+        let resp = new UpgradeVersionToMultiAvailabilityZonesResponse();
+        this.request("UpgradeVersionToMultiAvailabilityZones", req, resp, cb);
+    }
+
+    /**
+     * (Disused) Queries the list of instances
      * @param {DescribeCommonDBInstancesRequest} req
      * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
      * @public

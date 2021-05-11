@@ -398,6 +398,34 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.SignLaw = null;
 
+        /**
+         * Whether the connection is an edge zone.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {boolean || null}
+         */
+        this.LocalZone = null;
+
+        /**
+         * Number of dedicated tunnels with disabled VLAN in the connection
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VlanZeroDirectConnectTunnelCount = null;
+
+        /**
+         * Number of dedicated tunnels with enabled VLAN in the connection
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OtherVlanDirectConnectTunnelCount = null;
+
+        /**
+         * Minimum bandwidth of the connection
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MinBandwidth = null;
+
     }
 
     /**
@@ -443,6 +471,10 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.ChargeState = 'ChargeState' in params ? params.ChargeState : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+        this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
+        this.VlanZeroDirectConnectTunnelCount = 'VlanZeroDirectConnectTunnelCount' in params ? params.VlanZeroDirectConnectTunnelCount : null;
+        this.OtherVlanDirectConnectTunnelCount = 'OtherVlanDirectConnectTunnelCount' in params ? params.OtherVlanDirectConnectTunnelCount : null;
+        this.MinBandwidth = 'MinBandwidth' in params ? params.MinBandwidth : null;
 
     }
 }

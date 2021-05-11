@@ -2423,6 +2423,43 @@ class ComposeMediaResponse extends  AbstractModel {
 }
 
 /**
+ * Key hotlink protection information for generating the signature
+ * @class
+ */
+class UrlSignatureAuthPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986) status. Valid values:
+<li>Enabled</li>
+<li>Disabled</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The key for generating the signature of [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986)
+         * @type {string || null}
+         */
+        this.EncryptedKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EncryptedKey = 'EncryptedKey' in params ? params.EncryptedKey : null;
+
+    }
+}
+
+/**
  * DeleteSampleSnapshotTemplate request structure.
  * @class
  */
@@ -6166,6 +6203,42 @@ such as 2018120101-test.vod2.mqcloud.com.
 }
 
 /**
+ * Subtitle information
+ * @class
+ */
+class MediaSubtitleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subtitle information list
+         * @type {Array.<MediaSubtitleItem> || null}
+         */
+        this.SubtitleSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SubtitleSet) {
+            this.SubtitleSet = new Array();
+            for (let z in params.SubtitleSet) {
+                let obj = new MediaSubtitleItem();
+                obj.deserialize(params.SubtitleSet[z]);
+                this.SubtitleSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Input of full speech recognition.
  * @class
  */
@@ -7311,7 +7384,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Subtitle information
  * @class
  */
 class MediaSubtitleItem extends  AbstractModel {
@@ -7319,31 +7392,36 @@ class MediaSubtitleItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Unique subtitle ID
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * 
+         * Subtitle name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Subtitle language. Common values:
+<li>`cn`: Chinese</li>
+<li>`ja`: Japanese</li>
+<li>`en-US`: English</li>
+For other values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
          * @type {string || null}
          */
         this.Language = null;
 
         /**
-         * 
+         * Subtitle format. Valid value:
+<li>vtt</li>
          * @type {string || null}
          */
         this.Format = null;
 
         /**
-         * 
+         * Subtitle URL
          * @type {string || null}
          */
         this.Url = null;
@@ -11227,6 +11305,107 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Domain name information
+ * @class
+ */
+class DomainDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Acceleration region information
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<AccelerateAreaInfo> || null}
+         */
+        this.AccelerateAreaInfos = null;
+
+        /**
+         * Deployment status. Valid values:
+<li>Online</li>
+<li>Deploying</li>
+<li>Locked: you cannot change the deployment status of locked domain names</li>
+         * @type {string || null}
+         */
+        this.DeployStatus = null;
+
+        /**
+         * HTTPS configuration information
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {DomainHTTPSConfig || null}
+         */
+        this.HTTPSConfig = null;
+
+        /**
+         * [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986) configuration
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {UrlSignatureAuthPolicy || null}
+         */
+        this.UrlSignatureAuthPolicy = null;
+
+        /**
+         * [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/33985) configuration
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {RefererAuthPolicy || null}
+         */
+        this.RefererAuthPolicy = null;
+
+        /**
+         * The time when the domain name was added in the VOD system
+<li>The time is in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732).</li>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.AccelerateAreaInfos) {
+            this.AccelerateAreaInfos = new Array();
+            for (let z in params.AccelerateAreaInfos) {
+                let obj = new AccelerateAreaInfo();
+                obj.deserialize(params.AccelerateAreaInfos[z]);
+                this.AccelerateAreaInfos.push(obj);
+            }
+        }
+        this.DeployStatus = 'DeployStatus' in params ? params.DeployStatus : null;
+
+        if (params.HTTPSConfig) {
+            let obj = new DomainHTTPSConfig();
+            obj.deserialize(params.HTTPSConfig)
+            this.HTTPSConfig = obj;
+        }
+
+        if (params.UrlSignatureAuthPolicy) {
+            let obj = new UrlSignatureAuthPolicy();
+            obj.deserialize(params.UrlSignatureAuthPolicy)
+            this.UrlSignatureAuthPolicy = obj;
+        }
+
+        if (params.RefererAuthPolicy) {
+            let obj = new RefererAuthPolicy();
+            obj.deserialize(params.RefererAuthPolicy)
+            this.RefererAuthPolicy = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
  * Output of video splitting.
  * @class
  */
@@ -12809,13 +12988,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.MetaData = null;
 
         /**
-         * 
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
-         * 
+         * ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -15923,6 +16102,61 @@ class SegmentConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * Referer hotlink protection configuration
+ * @class
+ */
+class RefererAuthPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/33985) status. Valid values:
+<li>Enabled</li>
+<li>Disabled</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Referer authentication method. Valid values:
+<li>`Black`: blocklist</li>
+<li>`White`: allowlist</li>
+         * @type {string || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * List for referer authentication
+         * @type {Array.<string> || null}
+         */
+        this.Referers = null;
+
+        /**
+         * Whether to allow requests with empty referer to access this domain name. Valid values:
+<li>Yes</li>
+<li>No</li>
+         * @type {string || null}
+         */
+        this.BlankRefererAllowed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.Referers = 'Referers' in params ? params.Referers : null;
+        this.BlankRefererAllowed = 'BlankRefererAllowed' in params ? params.BlankRefererAllowed : null;
+
+    }
+}
+
+/**
  * Task statistics, including number of tasks and usage.
  * @class
  */
@@ -16335,8 +16569,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SourceInfo = null;
 
         /**
-         * Storage region of media file, such as ap-guangzhou. For more information, please see [Region List](https://intl.cloud.tencent.com/document/api/213/15692?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Region](https://intl.cloud.tencent.com/document/product/266/9760).
          * @type {string || null}
          */
         this.StorageRegion = null;
@@ -16371,6 +16604,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Status = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StorageClass = null;
+
     }
 
     /**
@@ -16402,6 +16641,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Vid = 'Vid' in params ? params.Vid : null;
         this.Category = 'Category' in params ? params.Category : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.StorageClass = 'StorageClass' in params ? params.StorageClass : null;
 
     }
 }
@@ -17747,6 +17987,56 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * DescribeVodDomains response structure.
+ * @class
+ */
+class DescribeVodDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of domain names
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Domain name information list
+         * @type {Array.<DomainDetailInfo> || null}
+         */
+        this.DomainSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DomainSet) {
+            this.DomainSet = new Array();
+            for (let z in params.DomainSet) {
+                let obj = new DomainDetailInfo();
+                obj.deserialize(params.DomainSet[z]);
+                this.DomainSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Adaptive bitrate streaming parameter template
  * @class
  */
@@ -18389,6 +18679,52 @@ class StatDataItem extends  AbstractModel {
         }
         this.Time = 'Time' in params ? params.Time : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Acceleration region information of the domain name
+ * @class
+ */
+class AccelerateAreaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Acceleration region. Valid values:
+<li>Chinese Mainland</li>
+<li>Outside Chinese Mainland</li>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Reason why acceleration is disabled by Tencent Cloud. Valid values:
+<li>ForLegalReasons: legal reasons</li>
+<li>ForOverdueBills: overdue payment</li>
+         * @type {string || null}
+         */
+        this.TencentDisableReason = null;
+
+        /**
+         * CNAME of the acceleration domain name
+         * @type {string || null}
+         */
+        this.TencentEdgeDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Area = 'Area' in params ? params.Area : null;
+        this.TencentDisableReason = 'TencentDisableReason' in params ? params.TencentDisableReason : null;
+        this.TencentEdgeDomain = 'TencentEdgeDomain' in params ? params.TencentEdgeDomain : null;
 
     }
 }
@@ -20749,6 +21085,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MiniProgramReviewInfo = null;
 
         /**
+         * Subtitle information
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {MediaSubtitleInfo || null}
+         */
+        this.SubtitleInfo = null;
+
+        /**
          * Unique ID of media file.
          * @type {string || null}
          */
@@ -20822,6 +21165,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new MediaMiniProgramReviewInfo();
             obj.deserialize(params.MiniProgramReviewInfo)
             this.MiniProgramReviewInfo = obj;
+        }
+
+        if (params.SubtitleInfo) {
+            let obj = new MediaSubtitleInfo();
+            obj.deserialize(params.SubtitleInfo)
+            this.SubtitleInfo = obj;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
 
@@ -21120,6 +21469,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.WatermarkSet = null;
 
+        /**
+         * List of subtitle IDs (maximum: 10)
+         * @type {Array.<string> || null}
+         */
+        this.SubtitleSet = null;
+
     }
 
     /**
@@ -21139,6 +21494,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.WatermarkSet.push(obj);
             }
         }
+        this.SubtitleSet = 'SubtitleSet' in params ? params.SubtitleSet : null;
 
     }
 }
@@ -21819,6 +22175,35 @@ class CreateProcedureTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * HTTPS configuration information of the domain name
+ * @class
+ */
+class DomainHTTPSConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time when the certificate expires
+<li>The time is in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732).</li>
+         * @type {string || null}
+         */
+        this.CertExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertExpireTime = 'CertExpireTime' in params ? params.CertExpireTime : null;
 
     }
 }
@@ -23087,6 +23472,56 @@ class ProhibitedOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * DescribeVodDomains request structure.
+ * @class
+ */
+class DescribeVodDomainsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of domain names. If this parameter is left empty, all domain names will be listed.
+<li>Maximum number of domain names listed: 20</li>
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * Maximum results to return for pulling paginated queries. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number offset from the beginning of paginated queries. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -28944,6 +29379,7 @@ module.exports = {
     AudioTransform: AudioTransform,
     ResetProcedureTemplateRequest: ResetProcedureTemplateRequest,
     ComposeMediaResponse: ComposeMediaResponse,
+    UrlSignatureAuthPolicy: UrlSignatureAuthPolicy,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
     DescribeStorageDataResponse: DescribeStorageDataResponse,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
@@ -29013,6 +29449,7 @@ module.exports = {
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
     CdnLogInfo: CdnLogInfo,
+    MediaSubtitleInfo: MediaSubtitleInfo,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     TaskStatData: TaskStatData,
@@ -29104,6 +29541,7 @@ module.exports = {
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
+    DomainDetailInfo: DomainDetailInfo,
     AiRecognitionTaskSegmentResultOutput: AiRecognitionTaskSegmentResultOutput,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
     ObjectConfigureInfoForUpdate: ObjectConfigureInfoForUpdate,
@@ -29190,6 +29628,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     SegmentConfigureInfo: SegmentConfigureInfo,
+    RefererAuthPolicy: RefererAuthPolicy,
     TaskStatDataItem: TaskStatDataItem,
     ParseStreamingManifestResponse: ParseStreamingManifestResponse,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
@@ -29222,6 +29661,7 @@ module.exports = {
     AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
     PoliticalImgReviewTemplateInfoForUpdate: PoliticalImgReviewTemplateInfoForUpdate,
     UserDefineOcrTextReviewTemplateInfo: UserDefineOcrTextReviewTemplateInfo,
+    DescribeVodDomainsResponse: DescribeVodDomainsResponse,
     AdaptiveStreamTemplate: AdaptiveStreamTemplate,
     TranscodeTaskInput: TranscodeTaskInput,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
@@ -29229,6 +29669,7 @@ module.exports = {
     DescribeCDNStatDetailsRequest: DescribeCDNStatDetailsRequest,
     ClipFileInfo2017: ClipFileInfo2017,
     StatDataItem: StatDataItem,
+    AccelerateAreaInfo: AccelerateAreaInfo,
     MediaSourceData: MediaSourceData,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     PushUrlCacheRequest: PushUrlCacheRequest,
@@ -29286,6 +29727,7 @@ module.exports = {
     AiSampleFailFaceInfo: AiSampleFailFaceInfo,
     UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
     CreateProcedureTemplateResponse: CreateProcedureTemplateResponse,
+    DomainHTTPSConfig: DomainHTTPSConfig,
     DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
     DescribeSuperPlayerConfigsRequest: DescribeSuperPlayerConfigsRequest,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
@@ -29305,6 +29747,7 @@ module.exports = {
     SnapshotByTimeOffsetTemplate: SnapshotByTimeOffsetTemplate,
     DeleteSnapshotByTimeOffsetTemplateResponse: DeleteSnapshotByTimeOffsetTemplateResponse,
     ProhibitedOcrReviewTemplateInfoForUpdate: ProhibitedOcrReviewTemplateInfoForUpdate,
+    DescribeVodDomainsRequest: DescribeVodDomainsRequest,
     DescribeTasksRequest: DescribeTasksRequest,
     DescribeReviewDetailsResponse: DescribeReviewDetailsResponse,
     CreateTranscodeTemplateResponse: CreateTranscodeTemplateResponse,

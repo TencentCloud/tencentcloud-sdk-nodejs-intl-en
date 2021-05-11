@@ -5273,6 +5273,13 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
         this.Status = null;
 
         /**
+         * Details of the error occurred while opening the access port
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -5288,6 +5295,7 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

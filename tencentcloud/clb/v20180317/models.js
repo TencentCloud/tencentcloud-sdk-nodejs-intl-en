@@ -5701,7 +5701,7 @@ class DescribeLoadBalancersRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID.
+         * CLB instance ID
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -5799,13 +5799,13 @@ Basic network does not support queries by VpcId.
         this.VpcId = null;
 
         /**
-         * Security group ID, such as sg-m1cc9123
+         * Security group ID, e.g., `sg-m1cc****`.
          * @type {string || null}
          */
         this.SecurityGroup = null;
 
         /**
-         * Master AZ, such as "100001" (Guangzhou Zone 1)
+         * Primary AZ ID, e.g., `100001` (Guangzhou Zone 1).
          * @type {string || null}
          */
         this.MasterZone = null;

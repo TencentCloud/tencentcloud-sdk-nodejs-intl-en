@@ -7264,6 +7264,12 @@ Default value: 10.
          */
         this.PageSize = null;
 
+        /**
+         * The stream name to search for
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
     }
 
     /**
@@ -7275,6 +7281,7 @@ Default value: 10.
         }
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -8890,6 +8897,13 @@ If this parameter is set to 1, when both `InputStreamList` and `OutputParams.Out
          */
         this.AllowCopy = null;
 
+        /**
+         * Valid values: 0, 1
+If you set this parameter to 1, SEI (Supplemental Enhanced Information) of the input streams will be passed through.
+         * @type {number || null}
+         */
+        this.PassInputSei = null;
+
     }
 
     /**
@@ -8901,6 +8915,7 @@ If this parameter is set to 1, when both `InputStreamList` and `OutputParams.Out
         }
         this.UseMixCropCenter = 'UseMixCropCenter' in params ? params.UseMixCropCenter : null;
         this.AllowCopy = 'AllowCopy' in params ? params.AllowCopy : null;
+        this.PassInputSei = 'PassInputSei' in params ? params.PassInputSei : null;
 
     }
 }

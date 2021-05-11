@@ -19,9 +19,10 @@ const AbstractClient = require('../../common/abstract_client')
 const DetachDisksRequest = models.DetachDisksRequest;
 const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
-const TerminateDisksResponse = models.TerminateDisksResponse;
+const Price = models.Price;
 const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
 const SharePermission = models.SharePermission;
+const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
 const DescribeDisksRequest = models.DescribeDisksRequest;
@@ -29,12 +30,13 @@ const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
 const Policy = models.Policy;
 const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
 const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
 const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
-const Price = models.Price;
+const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
 const DiskConfig = models.DiskConfig;
@@ -46,6 +48,7 @@ const DeleteAutoSnapshotPoliciesRequest = models.DeleteAutoSnapshotPoliciesReque
 const DiskChargePrepaid = models.DiskChargePrepaid;
 const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
 const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
+const TerminateDisksResponse = models.TerminateDisksResponse;
 const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const ApplySnapshotResponse = models.ApplySnapshotResponse;
 const DeleteAutoSnapshotPoliciesResponse = models.DeleteAutoSnapshotPoliciesResponse;
@@ -66,6 +69,7 @@ const ModifySnapshotsSharePermissionRequest = models.ModifySnapshotsSharePermiss
 const DiskOperationLog = models.DiskOperationLog;
 const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
 const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
+const InquirePriceModifyDiskExtraPerformanceResponse = models.InquirePriceModifyDiskExtraPerformanceResponse;
 const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
 const CreateDisksRequest = models.CreateDisksRequest;
 const AttachDisksRequest = models.AttachDisksRequest;
@@ -101,6 +105,19 @@ class CbsClient extends AbstractClient {
     }
     
     /**
+     * This API is used to adjust the cloud disk’s extra performance.
+
+* Currently, only Tremendous SSD (CLOUD_TSSD) and Enhanced SSD (CLOUD_HSSD) support extra performance adjustment.
+     * @param {ModifyDiskExtraPerformanceRequest} req
+     * @param {function(string, ModifyDiskExtraPerformanceResponse):void} cb
+     * @public
+     */
+    ModifyDiskExtraPerformance(req, cb) {
+        let resp = new ModifyDiskExtraPerformanceResponse();
+        this.request("ModifyDiskExtraPerformance", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeInstancesDiskNum) is used to query the number of cloud disks mounted in the instance.
 
 * Batch operations are supported. If multiple CVM instance IDs are specified, the returned results will list the number of cloud disks mounted on each CVM.
@@ -125,6 +142,17 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the price for adjusting the cloud disk’s extra performance.
+     * @param {InquirePriceModifyDiskExtraPerformanceRequest} req
+     * @param {function(string, InquirePriceModifyDiskExtraPerformanceResponse):void} cb
+     * @public
+     */
+    InquirePriceModifyDiskExtraPerformance(req, cb) {
+        let resp = new InquirePriceModifyDiskExtraPerformanceResponse();
+        this.request("InquirePriceModifyDiskExtraPerformance", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeAutoSnapshotPolicies) is used to query scheduled snapshot policies.
 
 * You can query the detailed information of scheduled snapshot policies by ID, name, or status. Insert `AND` between different values. For details on filtering information, see `Filter`.
@@ -140,10 +168,10 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * This API (AttachDisks) is used to mount cloud disks.
+     * This API is used to mount one or more cloud disks.
  
-* Batch operations are supported. Multiple cloud disks can be mounted to a CVM. If there is a cloud disk that does not allow this operation, the operation is not performed and a specific error code is returned.
-* This API is an asynchronous API. If the request for mounting the cloud disk successfully returns results, the operation of mounting cloud disk has been initiated at the background. You can use the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) to query the cloud disk status. If the status changes from "ATTACHING" to "ATTACHED", the cloud disk is mounted.
+* Batch operation is supported. You can mount multiple cloud disks to one CVM in a single request. If any of these cloud disks cannot be mounted, the operation fails and a specific error code returns.
+* This is an async API. A successful request indicates that the mounting is initiated. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query the status of cloud disks. If the status changes from `ATTACHING` to `ATTACHED`, the mounting is successful.
      * @param {AttachDisksRequest} req
      * @param {function(string, AttachDisksResponse):void} cb
      * @public
@@ -466,10 +494,10 @@ After snapshots are shared, the accounts they are shared to can use the snapshot
     }
 
     /**
-     * This API (DetachDisks) is used to unmount cloud disks.
+     * This API is used to unmount one or more cloud disks.
 
-* Batch operations are supported. Multiple cloud disks mounted to the same CVM can be unmounted in batch. If there is a cloud disk that does not allow this operation, the operation is not performed and a specific error code is returned.
-* This API is an asynchronous API. When the request successfully returns results, the cloud disk is not unmounted from the CVM immediately. You can use the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) to query the cloud disk status. If the status changes from "ATTACHED" to "UNATTACHED", the cloud disk is unmounted.
+* Batch operation is supported. You can unmount multiple cloud disks from the same CVM in a single request. If any of these cloud disks cannot be unmounted, the operation fails and a specific error code returns.
+* This is an async API. A successful request does not mean that the cloud disks have been unmounted successfully. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query the status of cloud disks. When the status changes from `ATTACHED` to `UNATTACHED`, the unmounting is successful.
      * @param {DetachDisksRequest} req
      * @param {function(string, DetachDisksResponse):void} cb
      * @public

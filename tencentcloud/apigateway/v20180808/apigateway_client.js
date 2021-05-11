@@ -19,17 +19,21 @@ const AbstractClient = require('../../common/abstract_client')
 const UnBindSubDomainResponse = models.UnBindSubDomainResponse;
 const UpdateApiKeyRequest = models.UpdateApiKeyRequest;
 const Service = models.Service;
-const ServiceReleaseVersion = models.ServiceReleaseVersion;
+const DeleteAPIDocRequest = models.DeleteAPIDocRequest;
 const ApiUsagePlanSet = models.ApiUsagePlanSet;
+const DemoteServiceUsagePlanRequest = models.DemoteServiceUsagePlanRequest;
+const DescribeAPIDocDetailRequest = models.DescribeAPIDocDetailRequest;
+const ModifyAPIDocResponse = models.ModifyAPIDocResponse;
 const DescribeUsagePlanRequest = models.DescribeUsagePlanRequest;
 const DeleteUsagePlanResponse = models.DeleteUsagePlanResponse;
 const DisableApiKeyResponse = models.DisableApiKeyResponse;
 const UnReleaseServiceRequest = models.UnReleaseServiceRequest;
 const ModifySubDomainRequest = models.ModifySubDomainRequest;
+const DescribeServiceUsagePlanRequest = models.DescribeServiceUsagePlanRequest;
 const DescribeServiceEnvironmentListResponse = models.DescribeServiceEnvironmentListResponse;
 const ModifyApiResponse = models.ModifyApiResponse;
 const ServiceEnvironmentStrategy = models.ServiceEnvironmentStrategy;
-const DemoteServiceUsagePlanRequest = models.DemoteServiceUsagePlanRequest;
+const DescribeApiResponse = models.DescribeApiResponse;
 const TargetServicesReq = models.TargetServicesReq;
 const TsfLoadBalanceConfResp = models.TsfLoadBalanceConfResp;
 const CreateIPStrategyRequest = models.CreateIPStrategyRequest;
@@ -38,6 +42,7 @@ const DescribeUsagePlansStatusResponse = models.DescribeUsagePlansStatusResponse
 const HealthCheckConf = models.HealthCheckConf;
 const DescribeApiUsagePlanResponse = models.DescribeApiUsagePlanResponse;
 const DeleteIPStrategyRequest = models.DeleteIPStrategyRequest;
+const ModifyAPIDocRequest = models.ModifyAPIDocRequest;
 const DomainSets = models.DomainSets;
 const DeleteUsagePlanRequest = models.DeleteUsagePlanRequest;
 const DeleteServiceRequest = models.DeleteServiceRequest;
@@ -54,7 +59,7 @@ const Tag = models.Tag;
 const DescribeServiceEnvironmentStrategyResponse = models.DescribeServiceEnvironmentStrategyResponse;
 const ConstantParameter = models.ConstantParameter;
 const UsagePlansStatus = models.UsagePlansStatus;
-const ModifySubDomainResponse = models.ModifySubDomainResponse;
+const APIDocs = models.APIDocs;
 const LogQuery = models.LogQuery;
 const ServiceParameter = models.ServiceParameter;
 const ModifyServiceResponse = models.ModifyServiceResponse;
@@ -64,7 +69,9 @@ const UnBindIPStrategyResponse = models.UnBindIPStrategyResponse;
 const BindIPStrategyResponse = models.BindIPStrategyResponse;
 const DescribeApisStatusRequest = models.DescribeApisStatusRequest;
 const DeleteServiceSubDomainMappingRequest = models.DeleteServiceSubDomainMappingRequest;
+const IPStrategyApi = models.IPStrategyApi;
 const DescribeIPStrategyResponse = models.DescribeIPStrategyResponse;
+const DocumentSDK = models.DocumentSDK;
 const DeleteApiResponse = models.DeleteApiResponse;
 const CreateApiResponse = models.CreateApiResponse;
 const DescribeIPStrategyApisStatusRequest = models.DescribeIPStrategyApisStatusRequest;
@@ -74,13 +81,14 @@ const ModifyApiEnvironmentStrategyRequest = models.ModifyApiEnvironmentStrategyR
 const ModifyUsagePlanResponse = models.ModifyUsagePlanResponse;
 const CreateUsagePlanResponse = models.CreateUsagePlanResponse;
 const ReqParameter = models.ReqParameter;
-const DescribeServicesStatusRequest = models.DescribeServicesStatusRequest;
+const Base64EncodedTriggerRule = models.Base64EncodedTriggerRule;
 const RequestConfig = models.RequestConfig;
 const DeleteApiKeyResponse = models.DeleteApiKeyResponse;
 const UsagePlan = models.UsagePlan;
 const DescribeServiceReleaseVersionRequest = models.DescribeServiceReleaseVersionRequest;
 const DescribeUsagePlanSecretIdsRequest = models.DescribeUsagePlanSecretIdsRequest;
 const DescribeLogSearchResponse = models.DescribeLogSearchResponse;
+const UnBindIPStrategyRequest = models.UnBindIPStrategyRequest;
 const ResponseErrorCodeReq = models.ResponseErrorCodeReq;
 const CreateServiceRequest = models.CreateServiceRequest;
 const DescribeIPStrategysStatusRequest = models.DescribeIPStrategysStatusRequest;
@@ -88,11 +96,13 @@ const DemoteServiceUsagePlanResponse = models.DemoteServiceUsagePlanResponse;
 const EnableApiKeyResponse = models.EnableApiKeyResponse;
 const ServiceReleaseHistory = models.ServiceReleaseHistory;
 const UnReleaseServiceResponse = models.UnReleaseServiceResponse;
+const CreateAPIDocResponse = models.CreateAPIDocResponse;
 const DescribeServiceRequest = models.DescribeServiceRequest;
 const CreateUsagePlanRequest = models.CreateUsagePlanRequest;
 const DescribeUsagePlanSecretIdsResponse = models.DescribeUsagePlanSecretIdsResponse;
 const UpdateServiceRequest = models.UpdateServiceRequest;
-const ReleaseService = models.ReleaseService;
+const MicroServiceReq = models.MicroServiceReq;
+const ModifySubDomainResponse = models.ModifySubDomainResponse;
 const DescribeServiceSubDomainMappingsResponse = models.DescribeServiceSubDomainMappingsResponse;
 const BindSecretIdsRequest = models.BindSecretIdsRequest;
 const UnBindEnvironmentResponse = models.UnBindEnvironmentResponse;
@@ -114,9 +124,10 @@ const ReleaseServiceRequest = models.ReleaseServiceRequest;
 const DeleteServiceResponse = models.DeleteServiceResponse;
 const DescribeServiceEnvironmentReleaseHistoryResponse = models.DescribeServiceEnvironmentReleaseHistoryResponse;
 const Environment = models.Environment;
+const DescribeAPIDocsRequest = models.DescribeAPIDocsRequest;
 const ServiceReleaseHistoryInfo = models.ServiceReleaseHistoryInfo;
 const ReleaseServiceResponse = models.ReleaseServiceResponse;
-const UnBindIPStrategyRequest = models.UnBindIPStrategyRequest;
+const APIDocInfo = models.APIDocInfo;
 const ModifyApiIncrementRequest = models.ModifyApiIncrementRequest;
 const GenerateApiDocumentRequest = models.GenerateApiDocumentRequest;
 const ServiceUsagePlanSet = models.ServiceUsagePlanSet;
@@ -125,7 +136,7 @@ const ModifyServiceEnvironmentStrategyResponse = models.ModifyServiceEnvironment
 const UpdateApiKeyResponse = models.UpdateApiKeyResponse;
 const DescribeApisStatusResponse = models.DescribeApisStatusResponse;
 const DescribeApiKeysStatusRequest = models.DescribeApiKeysStatusRequest;
-const DescribeApiResponse = models.DescribeApiResponse;
+const ApiInfo = models.ApiInfo;
 const BindSecretIdsResponse = models.BindSecretIdsResponse;
 const CreateApiRsp = models.CreateApiRsp;
 const UsagePlanBindEnvironment = models.UsagePlanBindEnvironment;
@@ -134,21 +145,23 @@ const DescribeServiceSubDomainMappingsRequest = models.DescribeServiceSubDomainM
 const DescribeServiceEnvironmentListRequest = models.DescribeServiceEnvironmentListRequest;
 const ServiceSubDomainMappings = models.ServiceSubDomainMappings;
 const DescribeApiKeyRequest = models.DescribeApiKeyRequest;
-const DescribeUsagePlanResponse = models.DescribeUsagePlanResponse;
+const DescribeAPIDocDetailResponse = models.DescribeAPIDocDetailResponse;
 const Filter = models.Filter;
 const UsagePlanBindSecretStatus = models.UsagePlanBindSecretStatus;
 const DeleteServiceSubDomainMappingResponse = models.DeleteServiceSubDomainMappingResponse;
-const DescribeServiceUsagePlanRequest = models.DescribeServiceUsagePlanRequest;
+const CreateApiKeyResponse = models.CreateApiKeyResponse;
 const DescribeUsagePlansStatusRequest = models.DescribeUsagePlansStatusRequest;
 const UsagePlanEnvironment = models.UsagePlanEnvironment;
 const ModifyIPStrategyRequest = models.ModifyIPStrategyRequest;
 const UnBindSecretIdsRequest = models.UnBindSecretIdsRequest;
 const ApiEnvironmentStrategy = models.ApiEnvironmentStrategy;
 const UnBindSecretIdsResponse = models.UnBindSecretIdsResponse;
+const ResetAPIDocPasswordRequest = models.ResetAPIDocPasswordRequest;
 const ApiUsagePlan = models.ApiUsagePlan;
-const IPStrategyApi = models.IPStrategyApi;
-const DocumentSDK = models.DocumentSDK;
+const BuildAPIDocRequest = models.BuildAPIDocRequest;
+const DescribeAPIDocsResponse = models.DescribeAPIDocsResponse;
 const ModifyServiceEnvironmentStrategyRequest = models.ModifyServiceEnvironmentStrategyRequest;
+const CreateAPIDocRequest = models.CreateAPIDocRequest;
 const DescribeServiceSubDomainsRequest = models.DescribeServiceSubDomainsRequest;
 const GenerateApiDocumentResponse = models.GenerateApiDocumentResponse;
 const DescribeUsagePlanEnvironmentsResponse = models.DescribeUsagePlanEnvironmentsResponse;
@@ -157,7 +170,7 @@ const BindSubDomainRequest = models.BindSubDomainRequest;
 const IPStrategyApiStatus = models.IPStrategyApiStatus;
 const CreateIPStrategyResponse = models.CreateIPStrategyResponse;
 const BindIPStrategyRequest = models.BindIPStrategyRequest;
-const MicroServiceReq = models.MicroServiceReq;
+const BuildAPIDocResponse = models.BuildAPIDocResponse;
 const ErrorCodes = models.ErrorCodes;
 const ServiceEnvironmentStrategyStatus = models.ServiceEnvironmentStrategyStatus;
 const DescribeApiEnvironmentStrategyResponse = models.DescribeApiEnvironmentStrategyResponse;
@@ -165,31 +178,35 @@ const MicroService = models.MicroService;
 const ApiEnvironmentStrategyStataus = models.ApiEnvironmentStrategyStataus;
 const DeleteIPStrategyResponse = models.DeleteIPStrategyResponse;
 const ApiKey = models.ApiKey;
+const DescribeUsagePlanResponse = models.DescribeUsagePlanResponse;
 const BindEnvironmentRequest = models.BindEnvironmentRequest;
 const DescribeIPStrategyRequest = models.DescribeIPStrategyRequest;
 const DescribeUsagePlanEnvironmentsRequest = models.DescribeUsagePlanEnvironmentsRequest;
-const CreateApiKeyResponse = models.CreateApiKeyResponse;
 const DescribeServiceReleaseVersionResponse = models.DescribeServiceReleaseVersionResponse;
 const RequestParameter = models.RequestParameter;
 const UsagePlanInfo = models.UsagePlanInfo;
 const DescribeServiceEnvironmentReleaseHistoryRequest = models.DescribeServiceEnvironmentReleaseHistoryRequest;
 const UsagePlanStatusInfo = models.UsagePlanStatusInfo;
+const ReleaseService = models.ReleaseService;
 const CreateServiceResponse = models.CreateServiceResponse;
+const DeleteAPIDocResponse = models.DeleteAPIDocResponse;
 const DesApisStatus = models.DesApisStatus;
 const DescribeApiKeysStatusResponse = models.DescribeApiKeysStatusResponse;
 const ServicesStatus = models.ServicesStatus;
 const DescribeLogSearchRequest = models.DescribeLogSearchRequest;
 const ApisStatus = models.ApisStatus;
 const ApiKeysStatus = models.ApiKeysStatus;
+const APIDoc = models.APIDoc;
 const DescribeServiceUsagePlanResponse = models.DescribeServiceUsagePlanResponse;
 const DescribeApiUsagePlanRequest = models.DescribeApiUsagePlanRequest;
 const UnBindSubDomainRequest = models.UnBindSubDomainRequest;
 const DescribeApiRequest = models.DescribeApiRequest;
 const DescribeIPStrategysStatusResponse = models.DescribeIPStrategysStatusResponse;
-const ApiInfo = models.ApiInfo;
 const EnvironmentStrategy = models.EnvironmentStrategy;
 const EnableApiKeyRequest = models.EnableApiKeyRequest;
-const Base64EncodedTriggerRule = models.Base64EncodedTriggerRule;
+const ResetAPIDocPasswordResponse = models.ResetAPIDocPasswordResponse;
+const DescribeServicesStatusRequest = models.DescribeServicesStatusRequest;
+const ServiceReleaseVersion = models.ServiceReleaseVersion;
 const DescribeServicesStatusResponse = models.DescribeServicesStatusResponse;
 const CreateApiKeyRequest = models.CreateApiKeyRequest;
 
@@ -217,6 +234,17 @@ The maximum unit in API Gateway is service. Multiple APIs can be created in one 
     }
 
     /**
+     * This API is used to build an API document.
+     * @param {BuildAPIDocRequest} req
+     * @param {function(string, BuildAPIDocResponse):void} cb
+     * @public
+     */
+    BuildAPIDoc(req, cb) {
+        let resp = new BuildAPIDocResponse();
+        this.request("BuildAPIDoc", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of usage plans.
      * @param {DescribeUsagePlansStatusRequest} req
      * @param {function(string, DescribeUsagePlansStatusResponse):void} cb
@@ -236,6 +264,17 @@ The maximum unit in API Gateway is service. Multiple APIs can be created in one 
     DeleteUsagePlan(req, cb) {
         let resp = new DeleteUsagePlanResponse();
         this.request("DeleteUsagePlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an API document.
+     * @param {DescribeAPIDocDetailRequest} req
+     * @param {function(string, DescribeAPIDocDetailResponse):void} cb
+     * @public
+     */
+    DescribeAPIDocDetail(req, cb) {
+        let resp = new DescribeAPIDocDetailResponse();
+        this.request("DescribeAPIDocDetail", req, resp, cb);
     }
 
     /**
@@ -272,6 +311,17 @@ If you have created multiple API key pairs, you can use this API to query the in
     DescribeApiKeysStatus(req, cb) {
         let resp = new DescribeApiKeysStatusResponse();
         this.request("DescribeApiKeysStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the path mapping in the custom domain name settings of a service. The path mapping rule can be modified before it is bound to the custom domain name.
+     * @param {ModifySubDomainRequest} req
+     * @param {function(string, ModifySubDomainResponse):void} cb
+     * @public
+     */
+    ModifySubDomain(req, cb) {
+        let resp = new ModifySubDomainResponse();
+        this.request("ModifySubDomain", req, resp, cb);
     }
 
     /**
@@ -365,6 +415,17 @@ In API Gateway, you can bind custom domain names to a service for service call. 
     }
 
     /**
+     * This API is used to create an API document.
+     * @param {CreateAPIDocRequest} req
+     * @param {function(string, CreateAPIDocResponse):void} cb
+     * @public
+     */
+    CreateAPIDoc(req, cb) {
+        let resp = new CreateAPIDocResponse();
+        this.request("CreateAPIDoc", req, resp, cb);
+    }
+
+    /**
      * This API is used to switch the running version of a service published in an environment to a specified version. After you create a service by using API Gateway and publish it to an environment, multiple versions will be generated during development. In this case, you can call this API to switch versions.
      * @param {UpdateServiceRequest} req
      * @param {function(string, UpdateServiceResponse):void} cb
@@ -442,6 +503,17 @@ To make authentication and throttling for a service take effect, you need to bin
     DeleteApi(req, cb) {
         let resp = new DeleteApiResponse();
         this.request("DeleteApi", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of API documents.
+     * @param {DescribeAPIDocsRequest} req
+     * @param {function(string, DescribeAPIDocsResponse):void} cb
+     * @public
+     */
+    DescribeAPIDocs(req, cb) {
+        let resp = new DescribeAPIDocsResponse();
+        this.request("DescribeAPIDocs", req, resp, cb);
     }
 
     /**
@@ -538,6 +610,17 @@ Currently, a usage plan can be bound to an API; however, under the same service,
     }
 
     /**
+     * This API is used to modify an API document.
+     * @param {ModifyAPIDocRequest} req
+     * @param {function(string, ModifyAPIDocResponse):void} cb
+     * @public
+     */
+    ModifyAPIDoc(req, cb) {
+        let resp = new ModifyAPIDocResponse();
+        this.request("ModifyAPIDoc", req, resp, cb);
+    }
+
+    /**
      * This API is used to unbind a key from a usage plan.
      * @param {UnBindSecretIdsRequest} req
      * @param {function(string, UnBindSecretIdsResponse):void} cb
@@ -605,6 +688,17 @@ After binding a usage plan to environments, you can use this API to query all se
     }
 
     /**
+     * This API is used to reset the password of an API document.
+     * @param {ResetAPIDocPasswordRequest} req
+     * @param {function(string, ResetAPIDocPasswordResponse):void} cb
+     * @public
+     */
+    ResetAPIDocPassword(req, cb) {
+        let resp = new ResetAPIDocPasswordResponse();
+        this.request("ResetAPIDocPassword", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a service IP policy.
      * @param {CreateIPStrategyRequest} req
      * @param {function(string, CreateIPStrategyResponse):void} cb
@@ -650,14 +744,14 @@ A service is generally published on several versions. This API can be used to qu
     }
 
     /**
-     * This API is used to modify the path mapping in the custom domain name settings of a service. The path mapping rule can be modified before it is bound to the custom domain name.
-     * @param {ModifySubDomainRequest} req
-     * @param {function(string, ModifySubDomainResponse):void} cb
+     * This API is used to delete an API document.
+     * @param {DeleteAPIDocRequest} req
+     * @param {function(string, DeleteAPIDocResponse):void} cb
      * @public
      */
-    ModifySubDomain(req, cb) {
-        let resp = new ModifySubDomainResponse();
-        this.request("ModifySubDomain", req, resp, cb);
+    DeleteAPIDoc(req, cb) {
+        let resp = new DeleteAPIDocResponse();
+        this.request("DeleteAPIDoc", req, resp, cb);
     }
 
     /**

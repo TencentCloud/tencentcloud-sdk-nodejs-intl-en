@@ -25,13 +25,13 @@ class DetachDisksRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the cloud disk to be unmounted, which can be queried through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1). A maximum of 10 elastic cloud disks can be unmounted in a single request.
+         * IDs of the cloud disks to be unmounted, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API. Up to 10 elastic cloud disks can be unmounted in a single request.
          * @type {Array.<string> || null}
          */
         this.DiskIds = null;
 
         /**
-         * For a cloud disk that is not shared, this parameter is ignored. For a shared cloud disk, this parameter indicates which CVM instance the cloud disk is to be unmounted from.
+         * Indicates the CVM from which you want to unmount the disks. This parameter is only available for shared cloud disks.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -130,18 +130,75 @@ class ResizeDiskRequest extends  AbstractModel {
 }
 
 /**
- * TerminateDisks response structure.
+ * Describes the prepaid or postpaid price for the cloud disk.
  * @class
  */
-class TerminateDisksResponse extends  AbstractModel {
+class Price extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Original price of a monthly-subscribed cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discounted price of a monthly-subscribed cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * Original unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * Billing unit of a postpaid cloud disk. Value range: <br><li>HOUR: Billed by hour.
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ChargeUnit = null;
+
+        /**
+         * Discount unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Original payment of a monthly-subscribed cloud disk, in USD, with six decimal places.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalPriceHigh = null;
+
+        /**
+         * Discounted payment price of a monthly-subscribed cloud disk, in USD, with six decimal places.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiscountPriceHigh = null;
+
+        /**
+         * Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceHigh = null;
+
+        /**
+         * Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHigh = null;
 
     }
 
@@ -152,7 +209,15 @@ class TerminateDisksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
+        this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
+        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
+        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
 
     }
 }
@@ -231,6 +296,41 @@ class SharePermission extends  AbstractModel {
         }
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.AccountId = 'AccountId' in params ? params.AccountId : null;
+
+    }
+}
+
+/**
+ * ModifyDiskExtraPerformance request structure.
+ * @class
+ */
+class ModifyDiskExtraPerformanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the cloud disk to create a snapshot, which can be obtained via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * The extra throughput to purchase, in MB/s
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
 
     }
 }
@@ -560,6 +660,41 @@ class ModifySnapshotsSharePermissionResponse extends  AbstractModel {
 }
 
 /**
+ * InquirePriceModifyDiskExtraPerformance request structure.
+ * @class
+ */
+class InquirePriceModifyDiskExtraPerformanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk ID, which can be queried via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * The extra throughput to purchase, in MB/s
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+
+    }
+}
+
+/**
  * GetSnapOverview request structure.
  * @class
  */
@@ -737,75 +872,18 @@ class ModifyAutoSnapshotPolicyAttributeResponse extends  AbstractModel {
 }
 
 /**
- * Describes the prepaid or postpaid price for the cloud disk.
+ * ModifyDiskExtraPerformance response structure.
  * @class
  */
-class Price extends  AbstractModel {
+class ModifyDiskExtraPerformanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Original price of a monthly-subscribed cloud disk, in USD.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * Discounted price of a monthly-subscribed cloud disk, in USD.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DiscountPrice = null;
-
-        /**
-         * Original unit price of a pay-as-you-go cloud disk, in USD.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UnitPrice = null;
-
-        /**
-         * Billing unit of a postpaid cloud disk. Value range: <br><li>HOUR: Billed by hour.
-Note: This field may return null, indicating that no valid value was found.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ChargeUnit = null;
-
-        /**
-         * Discount unit price of a pay-as-you-go cloud disk, in USD.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UnitPriceDiscount = null;
-
-        /**
-         * Original payment of a monthly-subscribed cloud disk, in USD, with six decimal places.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OriginalPriceHigh = null;
-
-        /**
-         * Discounted payment price of a monthly-subscribed cloud disk, in USD, with six decimal places.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DiscountPriceHigh = null;
-
-        /**
-         * Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UnitPriceHigh = null;
-
-        /**
-         * Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UnitPriceDiscountHigh = null;
+        this.RequestId = null;
 
     }
 
@@ -816,15 +894,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
-        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
-        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
-        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
-        this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
-        this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
-        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
-        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1315,6 +1385,34 @@ class DescribeDiskAssociatedAutoSnapshotPolicyResponse extends  AbstractModel {
                 obj.deserialize(params.AutoSnapshotPolicySet[z]);
                 this.AutoSnapshotPolicySet.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TerminateDisks response structure.
+ * @class
+ */
+class TerminateDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2361,6 +2459,46 @@ class DescribeDiskOperationLogsRequest extends  AbstractModel {
         }
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * InquirePriceModifyDiskExtraPerformance response structure.
+ * @class
+ */
+class InquirePriceModifyDiskExtraPerformanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Price for purchasing the extra performance
+         * @type {Price || null}
+         */
+        this.DiskPrice = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskPrice) {
+            let obj = new Price();
+            obj.deserialize(params.DiskPrice)
+            this.DiskPrice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3507,7 +3645,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.SnapshotSize = null;
 
         /**
-         * Indicates whether a snapshot should be created for backup when the cloud disk is terminated due to arrears or expiration. `True`: create a snapshot to backup the disk upon termination. `False`: terminate the disk without backup
+         * Specifies whether to create a snapshot when the cloud disk is terminated due to overdue payment or expiration. `true`: create snapshot; `false`: do not create snapshot.
          * @type {boolean || null}
          */
         this.BackupDisk = null;
@@ -3724,9 +3862,10 @@ module.exports = {
     DetachDisksRequest: DetachDisksRequest,
     DescribeDiskOperationLogsResponse: DescribeDiskOperationLogsResponse,
     ResizeDiskRequest: ResizeDiskRequest,
-    TerminateDisksResponse: TerminateDisksResponse,
+    Price: Price,
     DescribeSnapshotSharePermissionResponse: DescribeSnapshotSharePermissionResponse,
     SharePermission: SharePermission,
+    ModifyDiskExtraPerformanceRequest: ModifyDiskExtraPerformanceRequest,
     ModifyDiskAttributesResponse: ModifyDiskAttributesResponse,
     TerminateDisksRequest: TerminateDisksRequest,
     DescribeDisksRequest: DescribeDisksRequest,
@@ -3734,12 +3873,13 @@ module.exports = {
     AutoSnapshotPolicy: AutoSnapshotPolicy,
     Policy: Policy,
     ModifySnapshotsSharePermissionResponse: ModifySnapshotsSharePermissionResponse,
+    InquirePriceModifyDiskExtraPerformanceRequest: InquirePriceModifyDiskExtraPerformanceRequest,
     GetSnapOverviewRequest: GetSnapOverviewRequest,
     DescribeSnapshotOperationLogsRequest: DescribeSnapshotOperationLogsRequest,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
     DescribeSnapshotSharePermissionRequest: DescribeSnapshotSharePermissionRequest,
     ModifyAutoSnapshotPolicyAttributeResponse: ModifyAutoSnapshotPolicyAttributeResponse,
-    Price: Price,
+    ModifyDiskExtraPerformanceResponse: ModifyDiskExtraPerformanceResponse,
     UnbindAutoSnapshotPolicyResponse: UnbindAutoSnapshotPolicyResponse,
     InquiryPriceCreateDisksResponse: InquiryPriceCreateDisksResponse,
     DiskConfig: DiskConfig,
@@ -3751,6 +3891,7 @@ module.exports = {
     DiskChargePrepaid: DiskChargePrepaid,
     DescribeSnapshotOperationLogsResponse: DescribeSnapshotOperationLogsResponse,
     DescribeDiskAssociatedAutoSnapshotPolicyResponse: DescribeDiskAssociatedAutoSnapshotPolicyResponse,
+    TerminateDisksResponse: TerminateDisksResponse,
     GetSnapOverviewResponse: GetSnapOverviewResponse,
     ApplySnapshotResponse: ApplySnapshotResponse,
     DeleteAutoSnapshotPoliciesResponse: DeleteAutoSnapshotPoliciesResponse,
@@ -3771,6 +3912,7 @@ module.exports = {
     DiskOperationLog: DiskOperationLog,
     UnbindAutoSnapshotPolicyRequest: UnbindAutoSnapshotPolicyRequest,
     DescribeDiskOperationLogsRequest: DescribeDiskOperationLogsRequest,
+    InquirePriceModifyDiskExtraPerformanceResponse: InquirePriceModifyDiskExtraPerformanceResponse,
     BindAutoSnapshotPolicyResponse: BindAutoSnapshotPolicyResponse,
     CreateDisksRequest: CreateDisksRequest,
     AttachDisksRequest: AttachDisksRequest,

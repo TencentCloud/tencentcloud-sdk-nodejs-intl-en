@@ -143,7 +143,7 @@ class DescribeTimerScalingPoliciesRequest extends  AbstractModel {
 }
 
 /**
- * CCN information description
+ * Information of the associated CCN instance
  * @class
  */
 class RelatedCcnInfo extends  AbstractModel {
@@ -151,19 +151,19 @@ class RelatedCcnInfo extends  AbstractModel {
         super();
 
         /**
-         * CCN account
+         * Account of the CCN instance owner
          * @type {string || null}
          */
         this.AccountId = null;
 
         /**
-         * CCN ID
+         * CCN instance ID
          * @type {string || null}
          */
         this.CcnId = null;
 
         /**
-         * Status of associated CCN
+         * Status of associated CCN instance
          * @type {string || null}
          */
         this.AttachType = null;
@@ -323,11 +323,17 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.SystemDiskInfo = null;
 
         /**
-         * CCN information
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * CCN instance information
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {Array.<RelatedCcnInfo> || null}
          */
         this.RelatedCcnInfos = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
 
     }
 
@@ -392,6 +398,7 @@ Note: `null` may be returned for this field, indicating that no valid values can
                 this.RelatedCcnInfos.push(obj);
             }
         }
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
 
     }
 }
@@ -1078,7 +1085,7 @@ class CopyFleetRequest extends  AbstractModel {
         this.SelectedScalingType = null;
 
         /**
-         * Whether to select CCN: CCN_SELECTED_BEFORE_CREATE (associated before creation), CCN_SELECTED_AFTER_CREATE (associated after creation), or CCN_UNSELECTED (not associated); CCN_UNSELECTED by default
+         * Whether to associate the fleet with a CCN instance: CCN_SELECTED_BEFORE_CREATE (associate before creation), CCN_SELECTED_AFTER_CREATE (associated after creation), or CCN_UNSELECTED (do not associate); CCN_UNSELECTED by default
          * @type {string || null}
          */
         this.SelectedCcnType = null;
@@ -1108,10 +1115,16 @@ class CopyFleetRequest extends  AbstractModel {
         this.SelectedTimerType = null;
 
         /**
-         * CCN information, including the corresponding CCN account and ID.
+         * Information of the CCN instance, including the owner account and the instance ID.
          * @type {Array.<CcnInfo> || null}
          */
         this.CcnInfos = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
 
     }
 
@@ -1188,6 +1201,7 @@ class CopyFleetRequest extends  AbstractModel {
                 this.CcnInfos.push(obj);
             }
         }
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
 
     }
 }
@@ -2097,7 +2111,7 @@ class CcnInfo extends  AbstractModel {
         super();
 
         /**
-         * CCN account
+         * Account of the CCN instance owner
          * @type {string || null}
          */
         this.AccountId = null;

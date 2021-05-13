@@ -57,6 +57,7 @@ const UpgradeClusterInstancesRequest = models.UpgradeClusterInstancesRequest;
 const ExtensionAddon = models.ExtensionAddon;
 const RegionInstance = models.RegionInstance;
 const Label = models.Label;
+const SetNodePoolNodeProtectionResponse = models.SetNodePoolNodeProtectionResponse;
 const UpdateClusterVersionResponse = models.UpdateClusterVersionResponse;
 const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
 const ClusterBasicSettings = models.ClusterBasicSettings;
@@ -135,6 +136,7 @@ const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
 const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
 const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
 const DescribeClusterNodePoolDetailRequest = models.DescribeClusterNodePoolDetailRequest;
+const SetNodePoolNodeProtectionRequest = models.SetNodePoolNodeProtectionRequest;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const RemoveNodeFromNodePoolRequest = models.RemoveNodeFromNodePoolRequest;
 const DescribeClusterAsGroupsRequest = models.DescribeClusterAsGroupsRequest;
@@ -298,6 +300,17 @@ class TkeClient extends AbstractClient {
     RemoveNodeFromNodePool(req, cb) {
         let resp = new RemoveNodeFromNodePoolResponse();
         this.request("RemoveNodeFromNodePool", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable removal protection for the nodes automatically created by the scaling group in a node pool.
+     * @param {SetNodePoolNodeProtectionRequest} req
+     * @param {function(string, SetNodePoolNodeProtectionResponse):void} cb
+     * @public
+     */
+    SetNodePoolNodeProtection(req, cb) {
+        let resp = new SetNodePoolNodeProtectionResponse();
+        this.request("SetNodePoolNodeProtection", req, resp, cb);
     }
 
     /**

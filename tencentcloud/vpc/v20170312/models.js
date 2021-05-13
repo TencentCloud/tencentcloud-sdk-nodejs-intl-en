@@ -14230,8 +14230,9 @@ class AllocateAddressesRequest extends  AbstractModel {
         this.AddressChargePrepaid = null;
 
         /**
-         * The EIP type. Default: EIP.
-<ul style="margin:0"><li>For a user who has activated the AIA allowlist, possible values are:<ul><li>AnycastEIP: an Anycast EIP address. For more information, see [Anycast Internet Acceleration](https://intl.cloud.tencent.com/document/product/644?from_cn_redirect=1).</li></ul>Note: Only certain regions support Anycast EIPs.</li></ul>
+         * The EIP type. Default: `EIP`.
+<ul style="margin:0"><li>For AIA beta users, the value should be:<ul><li>`AnycastEIP`: an AIA IP address. For more information, see [Anycast Internet Acceleration](https://intl.cloud.tencent.com/document/product/644?from_cn_redirect=1).</li></ul>Note: Anycast EIPs are only supported in some of the regions.</li></ul>
+<ul style="margin:0"><li>For high-quality IP beta users, the value should be: <ul><li>`HighQualityEIP`: high-quality IP</li></ul>Note: High-quality IPs are only supported in some of the regions.</li></ul>
          * @type {string || null}
          */
         this.AddressType = null;
@@ -14263,6 +14264,12 @@ Whether the Anycast EIP can be bound to CLB instances.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
+
+        /**
+         * EIP name, which is the custom EIP name given by the user when applying for the EIP. Default: not named
+         * @type {string || null}
+         */
+        this.AddressName = null;
 
     }
 
@@ -14296,6 +14303,7 @@ Whether the Anycast EIP can be bound to CLB instances.
             }
         }
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.AddressName = 'AddressName' in params ? params.AddressName : null;
 
     }
 }

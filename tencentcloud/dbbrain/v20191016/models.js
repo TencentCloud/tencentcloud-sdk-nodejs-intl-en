@@ -17,6 +17,95 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Time series of database space data
+ * @class
+ */
+class SchemaSpaceTimeSeries extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.TableSchema = null;
+
+        /**
+         * Monitoring metric data in a unit of time interval.
+         * @type {MonitorMetricSeriesData || null}
+         */
+        this.SeriesData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableSchema = 'TableSchema' in params ? params.TableSchema : null;
+
+        if (params.SeriesData) {
+            let obj = new MonitorMetricSeriesData();
+            obj.deserialize(params.SeriesData)
+            this.SeriesData = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeSlowLogUserHostStats request structure.
+ * @class
+ */
+class DescribeSlowLogUserHostStatsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time of the time range in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the time range in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
  * DescribeSlowLogTimeSeriesStats request structure.
  * @class
  */
@@ -61,6 +150,91 @@ class DescribeSlowLogTimeSeriesStatsRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * DescribeTopSpaceSchemas response structure.
+ * @class
+ */
+class DescribeTopSpaceSchemasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of the returned space statistics of top databases.
+         * @type {Array.<SchemaSpaceData> || null}
+         */
+        this.TopSpaceSchemas = null;
+
+        /**
+         * Timestamp (in seconds) of database space data collect points
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopSpaceSchemas) {
+            this.TopSpaceSchemas = new Array();
+            for (let z in params.TopSpaceSchemas) {
+                let obj = new SchemaSpaceData();
+                obj.deserialize(params.TopSpaceSchemas[z]);
+                this.TopSpaceSchemas.push(obj);
+            }
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Slow log statistics in specified time range
+ * @class
+ */
+class TimeSlice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Statistics start time
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
 
     }
 }
@@ -515,24 +689,36 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
- * Slow log statistics in specified time range
+ * DescribeTopSpaceSchemas request structure.
  * @class
  */
-class TimeSlice extends  AbstractModel {
+class DescribeTopSpaceSchemasRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number
-         * @type {number || null}
+         * Instance ID.
+         * @type {string || null}
          */
-        this.Count = null;
+        this.InstanceId = null;
 
         /**
-         * Statistics start time
+         * Number of returned top databases. Maximum value: 100. Default value: 20.
          * @type {number || null}
          */
-        this.Timestamp = null;
+        this.Limit = null;
+
+        /**
+         * Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (supported only by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`; for other database instances, the default value is `TotalLength`.
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
 
     }
 
@@ -543,8 +729,10 @@ class TimeSlice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -760,46 +948,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Information configured by user, including email configuration.
+ * Diagnosis deduction item.
  * @class
  */
-class UserProfile extends  AbstractModel {
+class ScoreItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Configured ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Exception diagnosis item name.
          * @type {string || null}
          */
-        this.ProfileId = null;
+        this.DiagItem = null;
 
         /**
-         * Configuration type
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Diagnosis item types. Valid values: availability, maintainability, performance, and reliability.
          * @type {string || null}
          */
-        this.ProfileType = null;
+        this.IssueType = null;
 
         /**
-         * Configuration level. Valid values: “User” or “Instance”
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Health level. Valid values: information, reminder, alarm, serious, fatal.
          * @type {string || null}
          */
-        this.ProfileLevel = null;
+        this.TopSeverity = null;
 
         /**
-         * Configuration name
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Number of occurrences of this exception diagnosis item.
+         * @type {number || null}
          */
-        this.ProfileName = null;
+        this.Count = null;
 
         /**
-         * Configuration details
-         * @type {ProfileInfo || null}
+         * Scores deducted.
+         * @type {number || null}
          */
-        this.ProfileInfo = null;
+        this.ScoreLost = null;
 
     }
 
@@ -810,16 +994,11 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.ProfileId = 'ProfileId' in params ? params.ProfileId : null;
-        this.ProfileType = 'ProfileType' in params ? params.ProfileType : null;
-        this.ProfileLevel = 'ProfileLevel' in params ? params.ProfileLevel : null;
-        this.ProfileName = 'ProfileName' in params ? params.ProfileName : null;
-
-        if (params.ProfileInfo) {
-            let obj = new ProfileInfo();
-            obj.deserialize(params.ProfileInfo)
-            this.ProfileInfo = obj;
-        }
+        this.DiagItem = 'DiagItem' in params ? params.DiagItem : null;
+        this.IssueType = 'IssueType' in params ? params.IssueType : null;
+        this.TopSeverity = 'TopSeverity' in params ? params.TopSeverity : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.ScoreLost = 'ScoreLost' in params ? params.ScoreLost : null;
 
     }
 }
@@ -918,6 +1097,69 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * Basic information of instance.
+ * @class
+ */
+class InstanceBasicInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Private IP of the instance.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Private network port of the instance.
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Instance product.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Instance engine version.
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+
+    }
+}
+
+/**
  * `SchemaItem` array
  * @class
  */
@@ -988,13 +1230,13 @@ class DescribeTopSpaceTablesRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Number of returned top tables. Default value: 20. Maximum value: 20.
+         * Number of returned top tables. Maximum value: 100. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
+         * Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (only supported by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is PhysicalFileSize; for other database instances, the default value is `TotalLength`.
          * @type {string || null}
          */
         this.SortBy = null;
@@ -1018,6 +1260,46 @@ class DescribeTopSpaceTablesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SortBy = 'SortBy' in params ? params.SortBy : null;
         this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * Information configured by user.
+ * @class
+ */
+class ProfileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Language of the email, such as `en`.
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * The content of email template.
+         * @type {MailConfiguration || null}
+         */
+        this.MailConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Language = 'Language' in params ? params.Language : null;
+
+        if (params.MailConfiguration) {
+            let obj = new MailConfiguration();
+            obj.deserialize(params.MailConfiguration)
+            this.MailConfiguration = obj;
+        }
 
     }
 }
@@ -1100,6 +1382,83 @@ class DescribeDBDiagEventRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeUserSqlAdvice response structure.
+ * @class
+ */
+class DescribeUserSqlAdviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SQL statement optimization suggestions, which can be parsed into JSON arrays.
+         * @type {string || null}
+         */
+        this.Advices = null;
+
+        /**
+         * Notes of SQL statement optimization suggestions, which can be parsed into String arrays.
+         * @type {string || null}
+         */
+        this.Comments = null;
+
+        /**
+         * SQL statement.
+         * @type {string || null}
+         */
+        this.SqlText = null;
+
+        /**
+         * Database name.
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+        /**
+         * DDL information of related tables, which can be parsed into JSON arrays.
+         * @type {string || null}
+         */
+        this.Tables = null;
+
+        /**
+         * SQL execution plan, which can be parsed into JSON.
+         * @type {string || null}
+         */
+        this.SqlPlan = null;
+
+        /**
+         * Cost saving details after SQL statement optimization, which can be parsed into JSON.
+         * @type {string || null}
+         */
+        this.Cost = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Advices = 'Advices' in params ? params.Advices : null;
+        this.Comments = 'Comments' in params ? params.Comments : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.Schema = 'Schema' in params ? params.Schema : null;
+        this.Tables = 'Tables' in params ? params.Tables : null;
+        this.SqlPlan = 'SqlPlan' in params ? params.SqlPlan : null;
+        this.Cost = 'Cost' in params ? params.Cost : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBSpaceStatus response structure.
  * @class
  */
@@ -1151,6 +1510,100 @@ class DescribeDBSpaceStatusResponse extends  AbstractModel {
         this.Total = 'Total' in params ? params.Total : null;
         this.AvailableDays = 'AvailableDays' in params ? params.AvailableDays : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Instance diagnosis event
+ * @class
+ */
+class DiagHistoryEventItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Diagnosis type.
+         * @type {string || null}
+         */
+        this.DiagType = null;
+
+        /**
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Event ID.
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
+         * @type {number || null}
+         */
+        this.Severity = null;
+
+        /**
+         * Summary.
+         * @type {string || null}
+         */
+        this.Outline = null;
+
+        /**
+         * Diagnosis item.
+         * @type {string || null}
+         */
+        this.DiagItem = null;
+
+        /**
+         * Instance ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Reserved field
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Metric = null;
+
+        /**
+         * Region
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiagType = 'DiagType' in params ? params.DiagType : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.Severity = 'Severity' in params ? params.Severity : null;
+        this.Outline = 'Outline' in params ? params.Outline : null;
+        this.DiagItem = 'DiagItem' in params ? params.DiagItem : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -1575,48 +2028,30 @@ class InstanceInfo extends  AbstractModel {
 }
 
 /**
- * DescribeTopSpaceTableTimeSeries request structure.
+ * DescribeSlowLogUserHostStats response structure.
  * @class
  */
-class DescribeTopSpaceTableTimeSeriesRequest extends  AbstractModel {
+class DescribeSlowLogUserHostStatsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Number of returned top tables. Default value: 20. Maximum value: 20.
+         * Total number of source addresses.
          * @type {number || null}
          */
-        this.Limit = null;
+        this.TotalCount = null;
 
         /**
-         * Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
-         * @type {string || null}
+         * Detailed list of the proportion of slow logs from each source address.
+         * @type {Array.<SlowLogHost> || null}
          */
-        this.SortBy = null;
+        this.Items = null;
 
         /**
-         * Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartDate = null;
-
-        /**
-         * End date. It can be as early as 29 days before the current date, and defaults to the current date.
-         * @type {string || null}
-         */
-        this.EndDate = null;
-
-        /**
-         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-         * @type {string || null}
-         */
-        this.Product = null;
+        this.RequestId = null;
 
     }
 
@@ -1627,12 +2062,67 @@ class DescribeTopSpaceTableTimeSeriesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SortBy = 'SortBy' in params ? params.SortBy : null;
-        this.StartDate = 'StartDate' in params ? params.StartDate : null;
-        this.EndDate = 'EndDate' in params ? params.EndDate : null;
-        this.Product = 'Product' in params ? params.Product : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SlowLogHost();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDBDiagReportTasks response structure.
+ * @class
+ */
+class DescribeDBDiagReportTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of tasks.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Task list.
+         * @type {Array.<HealthReportTask> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new HealthReportTask();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1668,6 +2158,177 @@ class AddUserContactResponse extends  AbstractModel {
         }
         this.Id = 'Id' in params ? params.Id : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Details of health report tasks.
+ * @class
+ */
+class HealthReportTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID.
+         * @type {number || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * Source that triggers the task. Valid values: `DAILY_INSPECTION` (instance inspection), `SCHEDULED` (timed generation), and `MANUAL` (manual trigger).
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Task progress in %.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Task creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Task start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Task end time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Basic information about the instance to which the task belongs.
+         * @type {InstanceBasicInfo || null}
+         */
+        this.InstanceInfo = null;
+
+        /**
+         * Health information in a health report.
+         * @type {HealthStatus || null}
+         */
+        this.HealthStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.InstanceInfo) {
+            let obj = new InstanceBasicInfo();
+            obj.deserialize(params.InstanceInfo)
+            this.InstanceInfo = obj;
+        }
+
+        if (params.HealthStatus) {
+            let obj = new HealthStatus();
+            obj.deserialize(params.HealthStatus)
+            this.HealthStatus = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeDBDiagReportTasks request structure.
+ * @class
+ */
+class DescribeDBDiagReportTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time of the first task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the last task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Instance ID array, which is used to filter the task list of a specified instance.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Source that triggers the task. Valid values: `DAILY_INSPECTION` (instance inspection), `SCHEDULED` (timed generation), and `MANUAL` (manual trigger).
+         * @type {Array.<string> || null}
+         */
+        this.Sources = null;
+
+        /**
+         * Health level. Valid values: `HEALTH` (healthy), `SUB_HEALTH` (suboptimal), `RISK` (risky), and `HIGH_RISK` (critical).
+         * @type {string || null}
+         */
+        this.HealthLevels = null;
+
+        /**
+         * The task status. Valid values: `created` (create), `chosen` (to be executed), `running` (being executed), `failed` (failed), and `finished` (completed).
+         * @type {string || null}
+         */
+        this.TaskStatuses = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Sources = 'Sources' in params ? params.Sources : null;
+        this.HealthLevels = 'HealthLevels' in params ? params.HealthLevels : null;
+        this.TaskStatuses = 'TaskStatuses' in params ? params.TaskStatuses : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -1780,75 +2441,30 @@ class ModifyDiagDBInstanceConfResponse extends  AbstractModel {
 }
 
 /**
- * Instance diagnosis event
+ * CreateDBDiagReportUrl response structure.
  * @class
  */
-class DiagHistoryEventItem extends  AbstractModel {
+class CreateDBDiagReportUrlResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Diagnosis type.
+         * The URL of the health report.
          * @type {string || null}
          */
-        this.DiagType = null;
+        this.ReportUrl = null;
 
         /**
-         * End time.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Start time.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Event ID.
+         * The expiration timestamp of the health report URL (in seconds).
          * @type {number || null}
          */
-        this.EventId = null;
+        this.ExpireTime = null;
 
         /**
-         * Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
-         * @type {number || null}
-         */
-        this.Severity = null;
-
-        /**
-         * Summary.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Outline = null;
-
-        /**
-         * Diagnosis item.
-         * @type {string || null}
-         */
-        this.DiagItem = null;
-
-        /**
-         * Instance ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Reserved field
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Metric = null;
-
-        /**
-         * Region
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Region = null;
+        this.RequestId = null;
 
     }
 
@@ -1859,16 +2475,52 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.DiagType = 'DiagType' in params ? params.DiagType : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.Severity = 'Severity' in params ? params.Severity : null;
-        this.Outline = 'Outline' in params ? params.Outline : null;
-        this.DiagItem = 'DiagItem' in params ? params.DiagItem : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Metric = 'Metric' in params ? params.Metric : null;
-        this.Region = 'Region' in params ? params.Region : null;
+        this.ReportUrl = 'ReportUrl' in params ? params.ReportUrl : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTopSpaceSchemaTimeSeries response structure.
+ * @class
+ */
+class DescribeTopSpaceSchemaTimeSeriesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time series list of the returned space statistics of top databases.
+         * @type {Array.<SchemaSpaceTimeSeries> || null}
+         */
+        this.TopSpaceSchemaTimeSeries = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopSpaceSchemaTimeSeries) {
+            this.TopSpaceSchemaTimeSeries = new Array();
+            for (let z in params.TopSpaceSchemaTimeSeries) {
+                let obj = new SchemaSpaceTimeSeries();
+                obj.deserialize(params.TopSpaceSchemaTimeSeries[z]);
+                this.TopSpaceSchemaTimeSeries.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2083,6 +2735,30 @@ class SlowLogTopSqlItem extends  AbstractModel {
          */
         this.RowsSentRatio = null;
 
+        /**
+         * Average execution time
+         * @type {number || null}
+         */
+        this.QueryTimeAvg = null;
+
+        /**
+         * Average number of rows returned
+         * @type {number || null}
+         */
+        this.RowsSentAvg = null;
+
+        /**
+         * Average lock wait time
+         * @type {number || null}
+         */
+        this.LockTimeAvg = null;
+
+        /**
+         * Average number of rows scanned
+         * @type {number || null}
+         */
+        this.RowsExaminedAvg = null;
+
     }
 
     /**
@@ -2112,6 +2788,52 @@ class SlowLogTopSqlItem extends  AbstractModel {
         this.LockTimeRatio = 'LockTimeRatio' in params ? params.LockTimeRatio : null;
         this.RowsExaminedRatio = 'RowsExaminedRatio' in params ? params.RowsExaminedRatio : null;
         this.RowsSentRatio = 'RowsSentRatio' in params ? params.RowsSentRatio : null;
+        this.QueryTimeAvg = 'QueryTimeAvg' in params ? params.QueryTimeAvg : null;
+        this.RowsSentAvg = 'RowsSentAvg' in params ? params.RowsSentAvg : null;
+        this.LockTimeAvg = 'LockTimeAvg' in params ? params.LockTimeAvg : null;
+        this.RowsExaminedAvg = 'RowsExaminedAvg' in params ? params.RowsExaminedAvg : null;
+
+    }
+}
+
+/**
+ * Details of slow log source addresses.
+ * @class
+ */
+class SlowLogHost extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Source addresses.
+         * @type {string || null}
+         */
+        this.UserHost = null;
+
+        /**
+         * The proportion (in %) of slow logs from this source address to the total number of slow logs
+         * @type {number || null}
+         */
+        this.Ratio = null;
+
+        /**
+         * Number of slow logs from this source address.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserHost = 'UserHost' in params ? params.UserHost : null;
+        this.Ratio = 'Ratio' in params ? params.Ratio : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -2155,7 +2877,7 @@ class CreateMailProfileRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * Instance ID bound to the configuration, which is set when the configuration level is "Instance". Only one instance can be bound at a time.
+         * Instance ID bound with the configuration, which is set when the configuration level is "Instance". Only one instance can be bound at a time. When the configuration level is “User”, leave this parameter empty.
          * @type {Array.<string> || null}
          */
         this.BindInstanceIds = null;
@@ -2180,6 +2902,69 @@ class CreateMailProfileRequest extends  AbstractModel {
         this.ProfileType = 'ProfileType' in params ? params.ProfileType : null;
         this.Product = 'Product' in params ? params.Product : null;
         this.BindInstanceIds = 'BindInstanceIds' in params ? params.BindInstanceIds : null;
+
+    }
+}
+
+/**
+ * DescribeTopSpaceSchemaTimeSeries request structure.
+ * @class
+ */
+class DescribeTopSpaceSchemaTimeSeriesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Number of returned top databases. Maximum value: 100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (supported only by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`; for other database instances, the default value is `TotalLength`.
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * End date. It can be as early as 29 days before the current date, and defaults to the current date.
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -2279,6 +3064,69 @@ class MailConfiguration extends  AbstractModel {
         this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
         this.ContactPerson = 'ContactPerson' in params ? params.ContactPerson : null;
         this.ContactGroup = 'ContactGroup' in params ? params.ContactGroup : null;
+
+    }
+}
+
+/**
+ * DescribeTopSpaceTableTimeSeries request structure.
+ * @class
+ */
+class DescribeTopSpaceTableTimeSeriesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Number of returned top tables. Maximum value: 100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * End date. It can be as early as 29 days before the current date, and defaults to the current date.
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -2893,24 +3741,37 @@ class DescribeDiagDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * Information configured by user.
+ * Instance health status.
  * @class
  */
-class ProfileInfo extends  AbstractModel {
+class HealthStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Language of the email, such as `en`.
-         * @type {string || null}
+         * Health score out of 100 points.
+         * @type {number || null}
          */
-        this.Language = null;
+        this.HealthScore = null;
 
         /**
-         * The content of email template.
-         * @type {MailConfiguration || null}
+         * Health level. Valid values: `HEALTH` (healthy), `SUB_HEALTH` (suboptimal), `RISK` (risky), and `HIGH_RISK` (critical).
+         * @type {string || null}
          */
-        this.MailConfiguration = null;
+        this.HealthLevel = null;
+
+        /**
+         * Total scores deducted.
+         * @type {number || null}
+         */
+        this.ScoreLost = null;
+
+        /**
+         * Deduction details.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<ScoreDetail> || null}
+         */
+        this.ScoreDetails = null;
 
     }
 
@@ -2921,13 +3782,60 @@ class ProfileInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Language = 'Language' in params ? params.Language : null;
+        this.HealthScore = 'HealthScore' in params ? params.HealthScore : null;
+        this.HealthLevel = 'HealthLevel' in params ? params.HealthLevel : null;
+        this.ScoreLost = 'ScoreLost' in params ? params.ScoreLost : null;
 
-        if (params.MailConfiguration) {
-            let obj = new MailConfiguration();
-            obj.deserialize(params.MailConfiguration)
-            this.MailConfiguration = obj;
+        if (params.ScoreDetails) {
+            this.ScoreDetails = new Array();
+            for (let z in params.ScoreDetails) {
+                let obj = new ScoreDetail();
+                obj.deserialize(params.ScoreDetails[z]);
+                this.ScoreDetails.push(obj);
+            }
         }
+
+    }
+}
+
+/**
+ * DescribeUserSqlAdvice request structure.
+ * @class
+ */
+class DescribeUserSqlAdviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * SQL statement.
+         * @type {string || null}
+         */
+        this.SqlText = null;
+
+        /**
+         * Database name.
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.Schema = 'Schema' in params ? params.Schema : null;
 
     }
 }
@@ -2963,6 +3871,48 @@ class DescribeAllUserGroupRequest extends  AbstractModel {
         }
         this.Product = 'Product' in params ? params.Product : null;
         this.Names = 'Names' in params ? params.Names : null;
+
+    }
+}
+
+/**
+ * CreateDBDiagReportUrl request structure.
+ * @class
+ */
+class CreateDBDiagReportUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The health report task ID, which can be queried through `DescribeDBDiagReportTasks`.
+         * @type {number || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -3030,6 +3980,207 @@ class DescribeSlowLogTimeSeriesStatsResponse extends  AbstractModel {
 }
 
 /**
+ * Deduction details.
+ * @class
+ */
+class ScoreDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deduction item types. Valid values: availability, maintainability, performance, and reliability.
+         * @type {string || null}
+         */
+        this.IssueType = null;
+
+        /**
+         * Total scores deducted.
+         * @type {number || null}
+         */
+        this.ScoreLost = null;
+
+        /**
+         * Upper limit of the deducted scores.
+         * @type {number || null}
+         */
+        this.ScoreLostMax = null;
+
+        /**
+         * Deduction item list.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<ScoreItem> || null}
+         */
+        this.Items = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IssueType = 'IssueType' in params ? params.IssueType : null;
+        this.ScoreLost = 'ScoreLost' in params ? params.ScoreLost : null;
+        this.ScoreLostMax = 'ScoreLostMax' in params ? params.ScoreLostMax : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ScoreItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Information configured by user, including email configuration.
+ * @class
+ */
+class UserProfile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configured ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProfileId = null;
+
+        /**
+         * Configuration type
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProfileType = null;
+
+        /**
+         * Configuration level. Valid values: “User” or “Instance”
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProfileLevel = null;
+
+        /**
+         * Configuration name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProfileName = null;
+
+        /**
+         * Configuration details
+         * @type {ProfileInfo || null}
+         */
+        this.ProfileInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProfileId = 'ProfileId' in params ? params.ProfileId : null;
+        this.ProfileType = 'ProfileType' in params ? params.ProfileType : null;
+        this.ProfileLevel = 'ProfileLevel' in params ? params.ProfileLevel : null;
+        this.ProfileName = 'ProfileName' in params ? params.ProfileName : null;
+
+        if (params.ProfileInfo) {
+            let obj = new ProfileInfo();
+            obj.deserialize(params.ProfileInfo)
+            this.ProfileInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * Database space statistics.
+ * @class
+ */
+class SchemaSpaceData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name.
+         * @type {string || null}
+         */
+        this.TableSchema = null;
+
+        /**
+         * Data space in MB.
+         * @type {number || null}
+         */
+        this.DataLength = null;
+
+        /**
+         * Index space in MB.
+         * @type {number || null}
+         */
+        this.IndexLength = null;
+
+        /**
+         * Fragmented space in MB.
+         * @type {number || null}
+         */
+        this.DataFree = null;
+
+        /**
+         * Total space usage in MB.
+         * @type {number || null}
+         */
+        this.TotalLength = null;
+
+        /**
+         * Fragmented rate (%).
+         * @type {number || null}
+         */
+        this.FragRatio = null;
+
+        /**
+         * Number of rows.
+         * @type {number || null}
+         */
+        this.TableRows = null;
+
+        /**
+         * The total size of the independent physical files corresponding to all the database tables (MB).
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PhysicalFileSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableSchema = 'TableSchema' in params ? params.TableSchema : null;
+        this.DataLength = 'DataLength' in params ? params.DataLength : null;
+        this.IndexLength = 'IndexLength' in params ? params.IndexLength : null;
+        this.DataFree = 'DataFree' in params ? params.DataFree : null;
+        this.TotalLength = 'TotalLength' in params ? params.TotalLength : null;
+        this.FragRatio = 'FragRatio' in params ? params.FragRatio : null;
+        this.TableRows = 'TableRows' in params ? params.TableRows : null;
+        this.PhysicalFileSize = 'PhysicalFileSize' in params ? params.PhysicalFileSize : null;
+
+    }
+}
+
+/**
  * DescribeTopSpaceTables response structure.
  * @class
  */
@@ -3080,7 +4231,11 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
 }
 
 module.exports = {
+    SchemaSpaceTimeSeries: SchemaSpaceTimeSeries,
+    DescribeSlowLogUserHostStatsRequest: DescribeSlowLogUserHostStatsRequest,
     DescribeSlowLogTimeSeriesStatsRequest: DescribeSlowLogTimeSeriesStatsRequest,
+    DescribeTopSpaceSchemasResponse: DescribeTopSpaceSchemasResponse,
+    TimeSlice: TimeSlice,
     HealthScoreInfo: HealthScoreInfo,
     DescribeTopSpaceTableTimeSeriesResponse: DescribeTopSpaceTableTimeSeriesResponse,
     CreateSchedulerMailProfileRequest: CreateSchedulerMailProfileRequest,
@@ -3090,36 +4245,47 @@ module.exports = {
     DescribeDiagDBInstancesRequest: DescribeDiagDBInstancesRequest,
     DescribeDBSpaceStatusRequest: DescribeDBSpaceStatusRequest,
     DescribeAllUserContactResponse: DescribeAllUserContactResponse,
-    TimeSlice: TimeSlice,
+    DescribeTopSpaceSchemasRequest: DescribeTopSpaceSchemasRequest,
     ModifyDiagDBInstanceConfRequest: ModifyDiagDBInstanceConfRequest,
     MonitorMetric: MonitorMetric,
     CreateDBDiagReportTaskRequest: CreateDBDiagReportTaskRequest,
     MonitorFloatMetric: MonitorFloatMetric,
-    UserProfile: UserProfile,
+    ScoreItem: ScoreItem,
     AddUserContactRequest: AddUserContactRequest,
     DescribeAllUserGroupResponse: DescribeAllUserGroupResponse,
+    InstanceBasicInfo: InstanceBasicInfo,
     SchemaItem: SchemaItem,
     CreateMailProfileResponse: CreateMailProfileResponse,
     DescribeTopSpaceTablesRequest: DescribeTopSpaceTablesRequest,
+    ProfileInfo: ProfileInfo,
     DescribeAllUserContactRequest: DescribeAllUserContactRequest,
     DescribeDBDiagEventRequest: DescribeDBDiagEventRequest,
+    DescribeUserSqlAdviceResponse: DescribeUserSqlAdviceResponse,
     DescribeDBSpaceStatusResponse: DescribeDBSpaceStatusResponse,
+    DiagHistoryEventItem: DiagHistoryEventItem,
     DescribeDBDiagEventResponse: DescribeDBDiagEventResponse,
     DescribeDBDiagHistoryRequest: DescribeDBDiagHistoryRequest,
     GroupItem: GroupItem,
     InstanceInfo: InstanceInfo,
-    DescribeTopSpaceTableTimeSeriesRequest: DescribeTopSpaceTableTimeSeriesRequest,
+    DescribeSlowLogUserHostStatsResponse: DescribeSlowLogUserHostStatsResponse,
+    DescribeDBDiagReportTasksResponse: DescribeDBDiagReportTasksResponse,
     AddUserContactResponse: AddUserContactResponse,
+    HealthReportTask: HealthReportTask,
+    DescribeDBDiagReportTasksRequest: DescribeDBDiagReportTasksRequest,
     CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
     MonitorMetricSeriesData: MonitorMetricSeriesData,
     ModifyDiagDBInstanceConfResponse: ModifyDiagDBInstanceConfResponse,
-    DiagHistoryEventItem: DiagHistoryEventItem,
+    CreateDBDiagReportUrlResponse: CreateDBDiagReportUrlResponse,
+    DescribeTopSpaceSchemaTimeSeriesResponse: DescribeTopSpaceSchemaTimeSeriesResponse,
     TableSpaceTimeSeries: TableSpaceTimeSeries,
     CreateSchedulerMailProfileResponse: CreateSchedulerMailProfileResponse,
     SlowLogTopSqlItem: SlowLogTopSqlItem,
+    SlowLogHost: SlowLogHost,
     CreateMailProfileRequest: CreateMailProfileRequest,
+    DescribeTopSpaceSchemaTimeSeriesRequest: DescribeTopSpaceSchemaTimeSeriesRequest,
     MonitorFloatMetricSeriesData: MonitorFloatMetricSeriesData,
     MailConfiguration: MailConfiguration,
+    DescribeTopSpaceTableTimeSeriesRequest: DescribeTopSpaceTableTimeSeriesRequest,
     DescribeSlowLogTopSqlsRequest: DescribeSlowLogTopSqlsRequest,
     DescribeMailProfileResponse: DescribeMailProfileResponse,
     TableSpaceData: TableSpaceData,
@@ -3130,9 +4296,14 @@ module.exports = {
     IssueTypeInfo: IssueTypeInfo,
     InstanceConfs: InstanceConfs,
     DescribeDiagDBInstancesResponse: DescribeDiagDBInstancesResponse,
-    ProfileInfo: ProfileInfo,
+    HealthStatus: HealthStatus,
+    DescribeUserSqlAdviceRequest: DescribeUserSqlAdviceRequest,
     DescribeAllUserGroupRequest: DescribeAllUserGroupRequest,
+    CreateDBDiagReportUrlRequest: CreateDBDiagReportUrlRequest,
     DescribeSlowLogTimeSeriesStatsResponse: DescribeSlowLogTimeSeriesStatsResponse,
+    ScoreDetail: ScoreDetail,
+    UserProfile: UserProfile,
+    SchemaSpaceData: SchemaSpaceData,
     DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
 
 }

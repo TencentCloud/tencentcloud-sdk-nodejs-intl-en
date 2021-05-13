@@ -5958,6 +5958,21 @@ Data is available at 3am Beijing Time the next day. You are recommended to query
          */
         this.PageSize = null;
 
+        /**
+         * Valid values:
+Mainland: query data for Mainland China,
+Oversea: query data for regions outside Mainland China,
+Default: query data for all regions.
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+        /**
+         * Service name. Valid values: LVB, LEB. If this parameter is left empty, all data of LVB and LEB will be queried.
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
     }
 
     /**
@@ -5971,6 +5986,8 @@ Data is available at 3am Beijing Time the next day. You are recommended to query
         this.PlayDomain = 'PlayDomain' in params ? params.PlayDomain : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
 
     }
 }
@@ -9507,7 +9524,7 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
         this.AppName = null;
 
         /**
-         * 
+         * Service name. Valid values: LVB, LEB. If this parameter is left empty, all data of LVB and LEB will be queried.
          * @type {string || null}
          */
         this.ServiceName = null;
@@ -9584,18 +9601,18 @@ origin: original codec as the output codec
         this.Description = null;
 
         /**
+         * Whether to keep the video. 0: no; 1: yes. Default value: 1.
+         * @type {number || null}
+         */
+        this.NeedVideo = null;
+
+        /**
          * Width. Default value: 0.
 Value range: 0-3000
 It must be a multiple of 2. The original width is 0.
          * @type {number || null}
          */
         this.Width = null;
-
-        /**
-         * Whether to keep the video. 0: no; 1: yes. Default value: 1.
-         * @type {number || null}
-         */
-        this.NeedVideo = null;
 
         /**
          * Whether to keep the audio. 0: no; 1: yes. Default value: 1.
@@ -9605,8 +9622,8 @@ It must be a multiple of 2. The original width is 0.
 
         /**
          * Height. Default value: 0.
-Value range: 0-3000
-It must be a multiple of 2. The original height is 0.
+Value range: [0,3000]
+The value must be a multiple of 2, and 0 is the original height.
          * @type {number || null}
          */
         this.Height = null;
@@ -9699,8 +9716,8 @@ Value range: 0.0-0.5.
         this.AudioBitrate = 'AudioBitrate' in params ? params.AudioBitrate : null;
         this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
         this.Description = 'Description' in params ? params.Description : null;
-        this.Width = 'Width' in params ? params.Width : null;
         this.NeedVideo = 'NeedVideo' in params ? params.NeedVideo : null;
+        this.Width = 'Width' in params ? params.Width : null;
         this.NeedAudio = 'NeedAudio' in params ? params.NeedAudio : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
@@ -11688,6 +11705,12 @@ class DescribeAllStreamPlayInfoListRequest extends  AbstractModel {
          */
         this.QueryTime = null;
 
+        /**
+         * Playback domain name list. If this parameter is left empty, full data will be queried.
+         * @type {Array.<string> || null}
+         */
+        this.PlayDomains = null;
+
     }
 
     /**
@@ -11698,6 +11721,7 @@ class DescribeAllStreamPlayInfoListRequest extends  AbstractModel {
             return;
         }
         this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
 
     }
 }

@@ -6180,7 +6180,7 @@ class APIDocInfo extends  AbstractModel {
         this.ApiDocStatus = null;
 
         /**
-         * Number of API documents
+         * Number of APIs with API documents
          * @type {number || null}
          */
         this.ApiCount = null;

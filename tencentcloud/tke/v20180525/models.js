@@ -892,6 +892,12 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Filter by multiple instance IPs
+         * @type {Array.<string> || null}
+         */
+        this.IpAddresses = null;
+
     }
 
     /**
@@ -916,6 +922,7 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
         this.VagueInstanceName = 'VagueInstanceName' in params ? params.VagueInstanceName : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.IpAddresses = 'IpAddresses' in params ? params.IpAddresses : null;
 
     }
 }
@@ -2090,6 +2097,34 @@ class Label extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * SetNodePoolNodeProtection response structure.
+ * @class
+ */
+class SetNodePoolNodeProtectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5588,7 +5623,7 @@ class AddExistedInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Additional parameter to be set for the instance
+         * Detailed information of the instance
          * @type {InstanceAdvancedSettings || null}
          */
         this.InstanceAdvancedSettings = null;
@@ -6158,6 +6193,27 @@ class DescribeClusterNodePoolDetailRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+
+    }
+}
+
+/**
+ * SetNodePoolNodeProtection request structure.
+ * @class
+ */
+class SetNodePoolNodeProtectionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -7152,6 +7208,7 @@ module.exports = {
     ExtensionAddon: ExtensionAddon,
     RegionInstance: RegionInstance,
     Label: Label,
+    SetNodePoolNodeProtectionResponse: SetNodePoolNodeProtectionResponse,
     UpdateClusterVersionResponse: UpdateClusterVersionResponse,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     ClusterBasicSettings: ClusterBasicSettings,
@@ -7230,6 +7287,7 @@ module.exports = {
     DeleteClusterRouteRequest: DeleteClusterRouteRequest,
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
     DescribeClusterNodePoolDetailRequest: DescribeClusterNodePoolDetailRequest,
+    SetNodePoolNodeProtectionRequest: SetNodePoolNodeProtectionRequest,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,

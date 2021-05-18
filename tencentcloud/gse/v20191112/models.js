@@ -330,7 +330,8 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.RelatedCcnInfos = null;
 
         /**
-         * 
+         * Maximum outbound public network bandwidth of the server fleet. Value range: 1 - 200 Mbps. Default value: 100 Mbps.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
@@ -1121,7 +1122,7 @@ class CopyFleetRequest extends  AbstractModel {
         this.CcnInfos = null;
 
         /**
-         * 
+         * Maximum outbound public network bandwidth of the server fleet. Value range: 1 - 200 Mbps. Default value: 100 Mbps.
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;

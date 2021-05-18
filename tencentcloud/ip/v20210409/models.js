@@ -25,53 +25,53 @@ class CreateAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * The account type identification of the newly created customer. The value of this interface is: business
+         * Account type of a new customer. Valid value: `business`.
          * @type {string || null}
          */
         this.AccountType = null;
 
         /**
-         * Registered email address. The caller needs to ensure the validity and correctness of the email address.
-The email format must be met. For example: account@qq.com
+         * Registered email address, which should be valid and correct.
+For example, account@qq.com.
          * @type {string || null}
          */
         this.Mail = null;
 
         /**
-         * Account password.
-Length limit: [8,20].
-It must also contain numbers, letters and special symbols (!@#$%^&*() and other non-spaces)
+         * Account password
+Length limit: 8-20 characters
+A password must contain numbers, letters, and special symbols [!@#$%^&*()]. Spaces are not allowed.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Reconfirm the password. It must be the same as the Password value
+         * Confirm the password. It must be the same as the `Password` field.
          * @type {string || null}
          */
         this.ConfirmPassword = null;
 
         /**
-         * Customer's mobile phone number. The caller is required to ensure the validity and correctness of the mobile phone number.
-Length limit: [1,32]. Global mobile phone numbers are supported. For example, 18888888888
+         * Customer mobile number, which should be valid and correct.
+A global mobile number within 1-32 digits is allowed, such as 18888888888.
          * @type {string || null}
          */
         this.PhoneNum = null;
 
         /**
-         * The country code of the customer. For the value, please refer to the GetCountryCodes interface GetCountryCodes. Such as 86
+         * Country code, which can be obtained via the `GetCountryCodes` API, such as `86`.
          * @type {string || null}
          */
         this.CountryCode = null;
 
         /**
-         * Customer's IOS2 standard country code. Refer to the GetCountryCodes interface for obtaining country codes. It needs to correspond to the CountryCode value. Such as CN
+         * ISO2 standard country code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field.
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * Extension field, default is empty
+         * Expanded field, which is left empty by default.
          * @type {string || null}
          */
         this.Extended = null;
@@ -127,7 +127,7 @@ class GetCountryCodesResponse extends  AbstractModel {
         super();
 
         /**
-         * List of Country Codes
+         * List of country/region codes
          * @type {Array.<CountryCodeItem> || null}
          */
         this.Data = null;
@@ -170,7 +170,7 @@ class CreateAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * The uin of the account
+         * Account UIN
          * @type {string || null}
          */
         this.Uin = null;
@@ -197,7 +197,7 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
- * Get an element type of the country code interface
+ * Country/region code list
  * @class
  */
 class CountryCodeItem extends  AbstractModel {
@@ -205,13 +205,13 @@ class CountryCodeItem extends  AbstractModel {
         super();
 
         /**
-         * Country English Name
+         * Country/region name in English
          * @type {string || null}
          */
         this.EnName = null;
 
         /**
-         * Country Chinese Name
+         * Country/region name in Chinese
          * @type {string || null}
          */
         this.Name = null;
@@ -229,7 +229,7 @@ class CountryCodeItem extends  AbstractModel {
         this.IOS3 = null;
 
         /**
-         * Phone Code
+         * Phone code
          * @type {string || null}
          */
         this.Code = null;

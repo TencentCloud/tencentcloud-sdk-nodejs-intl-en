@@ -49,6 +49,7 @@ const DeleteMatchResponse = models.DeleteMatchResponse;
 const CancelMatchingRequest = models.CancelMatchingRequest;
 const AttributeMap = models.AttributeMap;
 const StringKV = models.StringKV;
+const StartMatchingBackfillRequest = models.StartMatchingBackfillRequest;
 const CancelMatchingResponse = models.CancelMatchingResponse;
 const DescribeMatchCodesResponse = models.DescribeMatchCodesResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
@@ -56,6 +57,7 @@ const DescribeRulesResponse = models.DescribeRulesResponse;
 const MTicket = models.MTicket;
 const RuleInfo = models.RuleInfo;
 const ModifyTokenRequest = models.ModifyTokenRequest;
+const StartMatchingBackfillResponse = models.StartMatchingBackfillResponse;
 const DescribeMatchesResponse = models.DescribeMatchesResponse;
 const Player = models.Player;
 const StartMatchingRequest = models.StartMatchingRequest;
@@ -151,6 +153,17 @@ class GpmClient extends AbstractClient {
     DescribeRule(req, cb) {
         let resp = new DescribeRuleResponse();
         this.request("DescribeRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to send a match backfill request, for which a MatchTicket will be searched to start a new match.
+     * @param {StartMatchingBackfillRequest} req
+     * @param {function(string, StartMatchingBackfillResponse):void} cb
+     * @public
+     */
+    StartMatchingBackfill(req, cb) {
+        let resp = new StartMatchingBackfillResponse();
+        this.request("StartMatchingBackfill", req, resp, cb);
     }
 
     /**

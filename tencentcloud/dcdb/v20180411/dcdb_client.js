@@ -27,7 +27,7 @@ const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesRespon
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
+const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
 const DatabaseProcedure = models.DatabaseProcedure;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
@@ -52,6 +52,8 @@ const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const DatabaseFunction = models.DatabaseFunction;
+const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
+const ParamConstraint = models.ParamConstraint;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
@@ -66,6 +68,7 @@ const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const Project = models.Project;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
@@ -84,7 +87,7 @@ const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
 const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DBParamValue = models.DBParamValue;
-const ParamConstraint = models.ParamConstraint;
+const BriefNodeInfo = models.BriefNodeInfo;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
@@ -306,6 +309,17 @@ Note: accounts with the same username but different hosts are different accounts
     ModifyDBInstanceSecurityGroups(req, cb) {
         let resp = new ModifyDBInstanceSecurityGroupsResponse();
         this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of instance nodes.
+     * @param {DescribeDCDBInstanceNodeInfoRequest} req
+     * @param {function(string, DescribeDCDBInstanceNodeInfoResponse):void} cb
+     * @public
+     */
+    DescribeDCDBInstanceNodeInfo(req, cb) {
+        let resp = new DescribeDCDBInstanceNodeInfoResponse();
+        this.request("DescribeDCDBInstanceNodeInfo", req, resp, cb);
     }
 
     /**

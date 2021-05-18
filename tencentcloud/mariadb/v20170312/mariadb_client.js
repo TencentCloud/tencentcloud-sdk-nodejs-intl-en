@@ -16,90 +16,93 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
-const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
-const MonitorData = models.MonitorData;
-const DeleteAccountRequest = models.DeleteAccountRequest;
-const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
-const DescribeFlowRequest = models.DescribeFlowRequest;
-const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
-const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
-const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
-const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
-const ParamDesc = models.ParamDesc;
-const SecurityGroupBound = models.SecurityGroupBound;
-const CloneAccountRequest = models.CloneAccountRequest;
-const LogFileInfo = models.LogFileInfo;
-const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
-const ParamModifyResult = models.ParamModifyResult;
-const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
-const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
-const ResourceUsageMonitorSet = models.ResourceUsageMonitorSet;
-const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
-const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
-const PerformanceMonitorSet = models.PerformanceMonitorSet;
-const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
-const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
-const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
-const InitDBInstancesRequest = models.InitDBInstancesRequest;
-const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
-const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const ConstraintRange = models.ConstraintRange;
-const DBInstance = models.DBInstance;
-const DescribeDBResourceUsageResponse = models.DescribeDBResourceUsageResponse;
-const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
-const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDetailsRequest;
-const Database = models.Database;
-const CreateAccountRequest = models.CreateAccountRequest;
-const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
-const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
-const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
-const DBAccount = models.DBAccount;
-const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
-const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
-const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
-const SecurityGroup = models.SecurityGroup;
-const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
-const ModifyLogFileRetentionPeriodRequest = models.ModifyLogFileRetentionPeriodRequest;
-const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
-const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
-const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
-const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
-const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
-const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
-const DescribeFlowResponse = models.DescribeFlowResponse;
 const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
-const CloneAccountResponse = models.CloneAccountResponse;
-const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
-const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
-const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
-const DescribeDBPerformanceDetailsRequest = models.DescribeDBPerformanceDetailsRequest;
-const DescribeBackupTimeResponse = models.DescribeBackupTimeResponse;
-const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
-const SlowLogData = models.SlowLogData;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
+const CreateAccountRequest = models.CreateAccountRequest;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
-const ModifyLogFileRetentionPeriodResponse = models.ModifyLogFileRetentionPeriodResponse;
+const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const ResourceUsageMonitorSet = models.ResourceUsageMonitorSet;
+const ModifyLogFileRetentionPeriodRequest = models.ModifyLogFileRetentionPeriodRequest;
+const PerformanceMonitorSet = models.PerformanceMonitorSet;
+const DescribeFlowResponse = models.DescribeFlowResponse;
+const CloneAccountResponse = models.CloneAccountResponse;
+const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DescribeDBResourceUsageRequest = models.DescribeDBResourceUsageRequest;
-const DBParamValue = models.DBParamValue;
 const ParamConstraint = models.ParamConstraint;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const DBBackupTimeConfig = models.DBBackupTimeConfig;
-const DescribeDBPerformanceRequest = models.DescribeDBPerformanceRequest;
+const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
+const NodeInfo = models.NodeInfo;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
+const CloneAccountRequest = models.CloneAccountRequest;
+const ParamModifyResult = models.ParamModifyResult;
+const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
+const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
+const DBParamValue = models.DBParamValue;
+const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
+const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
+const SecurityGroup = models.SecurityGroup;
+const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
+const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
+const SecurityGroupBound = models.SecurityGroupBound;
+const InitDBInstancesRequest = models.InitDBInstancesRequest;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const DBInstance = models.DBInstance;
+const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
+const Database = models.Database;
+const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
+const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
+const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const DescribeDBPerformanceDetailsRequest = models.DescribeDBPerformanceDetailsRequest;
+const DescribeBackupTimeResponse = models.DescribeBackupTimeResponse;
+const SlowLogData = models.SlowLogData;
+const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
+const DeleteAccountRequest = models.DeleteAccountRequest;
+const DescribeFlowRequest = models.DescribeFlowRequest;
+const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
+const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
+const ParamDesc = models.ParamDesc;
+const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const ConstraintRange = models.ConstraintRange;
+const DescribeDBResourceUsageResponse = models.DescribeDBResourceUsageResponse;
+const LogFileInfo = models.LogFileInfo;
+const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDetailsRequest;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const DBAccount = models.DBAccount;
+const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
+const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
+const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
+const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
+const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const MonitorData = models.MonitorData;
+const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
+const ModifyLogFileRetentionPeriodResponse = models.ModifyLogFileRetentionPeriodResponse;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const DescribeDBPerformanceRequest = models.DescribeDBPerformanceRequest;
 const DeleteAccountResponse = models.DeleteAccountResponse;
-const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 
 
 /**
@@ -122,6 +125,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeAccountPrivileges(req, cb) {
         let resp = new DescribeAccountPrivilegesResponse();
         this.request("DescribeAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of primary and replica nodes of an instance.
+     * @param {DescribeInstanceNodeInfoRequest} req
+     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceNodeInfo(req, cb) {
+        let resp = new DescribeInstanceNodeInfoResponse();
+        this.request("DescribeInstanceNodeInfo", req, resp, cb);
     }
 
     /**

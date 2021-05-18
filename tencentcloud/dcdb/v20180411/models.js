@@ -666,18 +666,24 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * OpenDBExtranetAccess response structure.
+ * DescribeDCDBInstanceNodeInfo response structure.
  * @class
  */
-class OpenDBExtranetAccessResponse extends  AbstractModel {
+class DescribeDCDBInstanceNodeInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID. The task status can be queried through the `DescribeFlow` API.
+         * Total number of nodes
          * @type {number || null}
          */
-        this.FlowId = null;
+        this.TotalCount = null;
+
+        /**
+         * Node information
+         * @type {Array.<BriefNodeInfo> || null}
+         */
+        this.NodesInfo = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -694,7 +700,16 @@ class OpenDBExtranetAccessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.NodesInfo) {
+            this.NodesInfo = new Array();
+            for (let z in params.NodesInfo) {
+                let obj = new BriefNodeInfo();
+                obj.deserialize(params.NodesInfo[z]);
+                this.NodesInfo.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1720,6 +1735,96 @@ class DatabaseFunction extends  AbstractModel {
 }
 
 /**
+ * OpenDBExtranetAccess response structure.
+ * @class
+ */
+class OpenDBExtranetAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID. The task status can be queried through the `DescribeFlow` API.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Parameter constraint
+ * @class
+ */
+class ParamConstraint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Constraint type, such as enum and section
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * List of valid values when constraint type is `enum`
+         * @type {string || null}
+         */
+        this.Enum = null;
+
+        /**
+         * Range when constraint type is `section`
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ConstraintRange || null}
+         */
+        this.Range = null;
+
+        /**
+         * List of valid values when constraint type is `string`
+         * @type {string || null}
+         */
+        this.String = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Enum = 'Enum' in params ? params.Enum : null;
+
+        if (params.Range) {
+            let obj = new ConstraintRange();
+            obj.deserialize(params.Range)
+            this.Range = obj;
+        }
+        this.String = 'String' in params ? params.String : null;
+
+    }
+}
+
+/**
  * ResetAccountPassword response structure.
  * @class
  */
@@ -2495,6 +2600,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDCDBInstanceNodeInfo request structure.
+ * @class
+ */
+class DescribeDCDBInstanceNodeInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The maximum number of results returned at a time. Value range: `(0-100]`. Default value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset of the returned results. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3726,37 +3873,30 @@ class DBParamValue extends  AbstractModel {
 }
 
 /**
- * Parameter constraint
+ * Node information of a sharded database
  * @class
  */
-class ParamConstraint extends  AbstractModel {
+class BriefNodeInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Constraint type, such as enum and section
+         * Node ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.NodeId = null;
 
         /**
-         * List of valid values when constraint type is `enum`
+         * Node role. Valid values: `master`, `slave`
          * @type {string || null}
          */
-        this.Enum = null;
+        this.Role = null;
 
         /**
-         * Range when constraint type is `section`
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {ConstraintRange || null}
-         */
-        this.Range = null;
-
-        /**
-         * List of valid values when constraint type is `string`
+         * The ID of the shard where the node resides
          * @type {string || null}
          */
-        this.String = null;
+        this.ShardId = null;
 
     }
 
@@ -3767,15 +3907,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Enum = 'Enum' in params ? params.Enum : null;
-
-        if (params.Range) {
-            let obj = new ConstraintRange();
-            obj.deserialize(params.Range)
-            this.Range = obj;
-        }
-        this.String = 'String' in params ? params.String : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
 
     }
 }
@@ -4115,7 +4249,7 @@ module.exports = {
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
-    OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
+    DescribeDCDBInstanceNodeInfoResponse: DescribeDCDBInstanceNodeInfoResponse,
     DatabaseProcedure: DatabaseProcedure,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
     DescribeAccountsRequest: DescribeAccountsRequest,
@@ -4140,6 +4274,8 @@ module.exports = {
     InitDCDBInstancesRequest: InitDCDBInstancesRequest,
     DescribeDCDBShardsResponse: DescribeDCDBShardsResponse,
     DatabaseFunction: DatabaseFunction,
+    OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
+    ParamConstraint: ParamConstraint,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDBSyncModeResponse: DescribeDBSyncModeResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
@@ -4154,6 +4290,7 @@ module.exports = {
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     SecurityGroup: SecurityGroup,
     DescribeAccountsResponse: DescribeAccountsResponse,
+    DescribeDCDBInstanceNodeInfoRequest: DescribeDCDBInstanceNodeInfoRequest,
     Project: Project,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
@@ -4172,7 +4309,7 @@ module.exports = {
     ParamDesc: ParamDesc,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DBParamValue: DBParamValue,
-    ParamConstraint: ParamConstraint,
+    BriefNodeInfo: BriefNodeInfo,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,

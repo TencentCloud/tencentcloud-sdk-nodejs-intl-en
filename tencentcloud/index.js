@@ -29,6 +29,7 @@ module.exports = {
     gpm: require("./gpm"),
     gse: require("./gse"),
     iai: require("./iai"),
+    ip: require("./ip"),
     kms: require("./kms"),
     live: require("./live"),
     mariadb: require("./mariadb"),

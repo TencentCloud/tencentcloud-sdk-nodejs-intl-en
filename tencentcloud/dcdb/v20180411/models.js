@@ -2619,7 +2619,7 @@ class DescribeDCDBInstanceNodeInfoRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * The maximum number of results returned at a time. Value range: `(0-100]`. Default value: `100`.
+         * The maximum number of results returned at a time. Value range: (0-100]. Default value: `100`.
          * @type {number || null}
          */
         this.Limit = null;

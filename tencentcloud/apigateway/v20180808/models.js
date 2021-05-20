@@ -1451,6 +1451,12 @@ class DeleteServiceRequest extends  AbstractModel {
          */
         this.ServiceId = null;
 
+        /**
+         * A parameter which is specified to skip the deletion precondition verification (only supported for services on dedicated instances).
+         * @type {number || null}
+         */
+        this.SkipVerification = null;
+
     }
 
     /**
@@ -1461,6 +1467,7 @@ class DeleteServiceRequest extends  AbstractModel {
             return;
         }
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.SkipVerification = 'SkipVerification' in params ? params.SkipVerification : null;
 
     }
 }

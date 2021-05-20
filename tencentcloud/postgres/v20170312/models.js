@@ -1592,7 +1592,7 @@ class DisIsolateDBInstancesRequest extends  AbstractModel {
         this.DBInstanceIdSet = null;
 
         /**
-         * Specify the valid period (in months) of the monthly-subscribed instance when removing it from isolation
+         * The valid period (in months) of the monthly-subscribed instance when removing it from isolation
          * @type {number || null}
          */
         this.Period = null;

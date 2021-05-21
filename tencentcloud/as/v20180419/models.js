@@ -1152,12 +1152,12 @@ class InstanceNameSettings extends  AbstractModel {
         super();
 
         /**
-         * CVM instance name.
+         * CVM instance name
 
-The InstanceName cannot start or end with a period (.) or hyphen (-), and cannot contain consecutive periods and hyphens.
+The `InstanceName` cannot start or end with a period (.) or hyphen (-), and cannot contain consecutive periods and hyphens.
 
-Other types (such as Linux) of instances: The name should be a combination of 2 to 40 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-).
-Note: this field may return null, indicating that no valid values can be obtained.
+Other types of instances (such as Linux): the name contains 2 to 40 characters, and supports multiple periods (.). The string between two periods can consist of letters (case insensitive), numbers, and hyphens (-), and cannot be all numbers.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -2086,7 +2086,8 @@ If a model in InstanceTypes does not exist or has been discontinued, a verificat
         this.HostNameSettings = null;
 
         /**
-         * Settings of CVM instance names.
+         * Settings of CVM instance names
+If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
          * @type {InstanceNameSettings || null}
          */
         this.InstanceNameSettings = null;
@@ -2553,7 +2554,7 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         this.DefaultResult = null;
 
         /**
-         * The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-3,600. Default value: 300
+         * The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7,200. Default value: 300
          * @type {number || null}
          */
         this.HeartbeatTimeout = null;
@@ -2721,11 +2722,11 @@ class HostNameSettings extends  AbstractModel {
         super();
 
         /**
-         * Host name of a CVM.
-<br><li> A period (.) and hyphen (-) cannot be used as the first and the last characters of HostName, and multiple consecutive hyphens (-) or periods (.) are not allowed.
-<br><li> No support for Windows instances.
-<br><li> Other types of instances (such as Linux): the name should be a combination of 2 to 40 characters, supports multiple periods (.). The string between two periods can be composed of letters (case insensitive), numbers, and hyphens (-).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Hostname of a CVM
+<br><li>The `HostName` cannot start or end with a period (.) or hyphen (-), and cannot contain consecutive periods and hyphens.
+<br><li>This field is unavailable to CVM instances.
+<br><li>Other types of instances (such as Linux): the name contains 2 to 40 characters, and supports multiple periods (.). The string between two periods can consist of letters (case insensitive), numbers, and hyphens (-), and cannot be all numbers.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.HostName = null;
@@ -4638,7 +4639,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.DefaultResult = null;
 
         /**
-         * The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-3,600. Default value: 300
+         * The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7,200. Default value: 300
          * @type {number || null}
          */
         this.HeartbeatTimeout = null;
@@ -5114,6 +5115,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+<br><li>ORIGINAL: uses the configured cloud disk type
+<br><li>AUTOMATIC: automatically chooses an available cloud disk type in the current availability zone
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
     }
 
     /**
@@ -5213,6 +5222,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
 
     }
 }

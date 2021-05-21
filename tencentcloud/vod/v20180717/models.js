@@ -4697,6 +4697,12 @@ class AttachMediaSubtitlesRequest extends  AbstractModel {
          */
         this.SubtitleIds = null;
 
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access the resources in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
     }
 
     /**
@@ -4710,6 +4716,7 @@ class AttachMediaSubtitlesRequest extends  AbstractModel {
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
         this.SubtitleIds = 'SubtitleIds' in params ? params.SubtitleIds : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -16605,7 +16612,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Status = null;
 
         /**
-         * 
+         * Storage class of a media file:
+<li>STANDARD</li>
+<li>STANDARD_IA</li>
          * @type {string || null}
          */
         this.StorageClass = null;
@@ -21470,7 +21479,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.WatermarkSet = null;
 
         /**
-         * List of subtitle IDs (maximum: 10)
+         * List of subtitle IDs (maximum: 16)
          * @type {Array.<string> || null}
          */
         this.SubtitleSet = null;
@@ -23111,6 +23120,18 @@ class TaskSimpleInfo extends  AbstractModel {
         this.TaskId = null;
 
         /**
+         * Task status. Valid values: `WAITING` (waiting), `PROCESSING` (processing), `FINISH` (completed)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Video ID
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
          * Task type. Valid values:
 <li>Procedure: video processing task;</li>
 <li>EditMedia: video editing task</li>
@@ -23165,6 +23186,8 @@ Task types compatible with v2017:
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
@@ -23547,6 +23570,26 @@ class DescribeTasksRequest extends  AbstractModel {
         this.FileId = null;
 
         /**
+         * Filter: task creation time.
+         * @type {TimeRange || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Filter: task end time.
+         * @type {TimeRange || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * Sort field. Valid values:
+<li> CreateTime: task creation time</li>
+<li>FinishTime: task end time</li>
+         * @type {SortBy || null}
+         */
+        this.Sort = null;
+
+        /**
          * Number of entries to be returned. Default value: 10. Maximum value: 100.
          * @type {number || null}
          */
@@ -23575,6 +23618,24 @@ class DescribeTasksRequest extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.CreateTime) {
+            let obj = new TimeRange();
+            obj.deserialize(params.CreateTime)
+            this.CreateTime = obj;
+        }
+
+        if (params.FinishTime) {
+            let obj = new TimeRange();
+            obj.deserialize(params.FinishTime)
+            this.FinishTime = obj;
+        }
+
+        if (params.Sort) {
+            let obj = new SortBy();
+            obj.deserialize(params.Sort)
+            this.Sort = obj;
+        }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;

@@ -748,6 +748,88 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Region entity object
+ * @class
+ */
+class Region extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Area name
+         * @type {string || null}
+         */
+        this.AreaName = null;
+
+        /**
+         * Region code
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * Region code (V3)
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionCodeV3 = null;
+
+        /**
+         * NONE: no special models are supported by default.\nCVM: the CVM type is supported.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Support = null;
+
+        /**
+         * Whether ipv6 is supported. `0` indicates no, and `1` indicates yes.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Ipv6 = null;
+
+        /**
+         * Whether multi-zone clusters are supported.`0` indicates no, and `1` indicates yes.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MultiZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.AreaName = 'AreaName' in params ? params.AreaName : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.RegionCodeV3 = 'RegionCodeV3' in params ? params.RegionCodeV3 : null;
+        this.Support = 'Support' in params ? params.Support : null;
+        this.Ipv6 = 'Ipv6' in params ? params.Ipv6 : null;
+        this.MultiZone = 'MultiZone' in params ? params.MultiZone : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDetail response structure.
  * @class
  */
@@ -870,6 +952,104 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new OperateResponseData();
             obj.deserialize(params.Data)
             this.Data = obj;
+        }
+
+    }
+}
+
+/**
+ * Zone information entity
+ * @class
+ */
+class ZoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Whether it is an internal App.
+         * @type {number || null}
+         */
+        this.IsInternalApp = null;
+
+        /**
+         * app id
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Identifier
+         * @type {boolean || null}
+         */
+        this.Flag = null;
+
+        /**
+         * Zone name
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * Zone status
+         * @type {number || null}
+         */
+        this.ZoneStatus = null;
+
+        /**
+         * Extra identifier
+         * @type {string || null}
+         */
+        this.Exflag = null;
+
+        /**
+         * JSON object. The key is the model. The value `true` means “sold out”, and `false` means “not sold out”.
+         * @type {string || null}
+         */
+        this.SoldOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.IsInternalApp = 'IsInternalApp' in params ? params.IsInternalApp : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneStatus = 'ZoneStatus' in params ? params.ZoneStatus : null;
+        this.Exflag = 'Exflag' in params ? params.Exflag : null;
+        this.SoldOut = 'SoldOut' in params ? params.SoldOut : null;
+
+    }
+}
+
+/**
+ * DescribeCkafkaZone request structure.
+ * @class
+ */
+class DescribeCkafkaZoneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
     }
@@ -1302,6 +1482,89 @@ class CreatePartitionResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Cluster information entity
+ * @class
+ */
+class ClusterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * The cluster’s maximum disk capacity in GB
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxDiskSize = null;
+
+        /**
+         * The cluster’s maximum bandwidth in MB/s
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * The cluster’s available disk capacity in GB
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AvailableDiskSize = null;
+
+        /**
+         * The cluster’s available bandwidth in MB/s
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AvailableBandWidth = null;
+
+        /**
+         * The AZ which the cluster belongs to
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The AZ which the cluster nodes belong to. If the cluster is a multi-AZ cluster, this field means multiple AZs which the cluster nodes belong to.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.AvailableDiskSize = 'AvailableDiskSize' in params ? params.AvailableDiskSize : null;
+        this.AvailableBandWidth = 'AvailableBandWidth' in params ? params.AvailableBandWidth : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
 
     }
 }
@@ -2035,6 +2298,48 @@ class DescribeRouteRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRegion request structure.
+ * @class
+ */
+class DescribeRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The offset value
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The maximum number of results returned
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Business field, which can be ignored.
+         * @type {string || null}
+         */
+        this.Business = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Business = 'Business' in params ? params.Business : null;
+
+    }
+}
+
+/**
  * Instance configuration entity
  * @class
  */
@@ -2193,6 +2498,46 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.Result[z]);
                 this.Result.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyTopicAttributes response structure.
+ * @class
+ */
+class ModifyTopicAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result set
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2474,6 +2819,128 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.AclList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * The entity returned for the query of Kafka’s zone information
+ * @class
+ */
+class ZoneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone list
+         * @type {Array.<ZoneInfo> || null}
+         */
+        this.ZoneList = null;
+
+        /**
+         * Maximum number of instances to be purchased
+         * @type {number || null}
+         */
+        this.MaxBuyInstanceNum = null;
+
+        /**
+         * Maximum bandwidth in MB/S
+         * @type {number || null}
+         */
+        this.MaxBandwidth = null;
+
+        /**
+         * Pay-as-you-go unit price
+         * @type {Price || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * Pay-as-you-go unit message price
+         * @type {Price || null}
+         */
+        this.MessagePrice = null;
+
+        /**
+         * Cluster information dedicated to a user
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<ClusterInfo> || null}
+         */
+        this.ClusterInfo = null;
+
+        /**
+         * Purchase of Standard Edition configurations
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Standard = null;
+
+        /**
+         * Purchase of Standard S2 Edition configurations
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StandardS2 = null;
+
+        /**
+         * Purchase of Pro Edition configurations
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Profession = null;
+
+        /**
+         * Purchase of Physical Dedicated Edition configurations
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Physical = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ZoneList) {
+            this.ZoneList = new Array();
+            for (let z in params.ZoneList) {
+                let obj = new ZoneInfo();
+                obj.deserialize(params.ZoneList[z]);
+                this.ZoneList.push(obj);
+            }
+        }
+        this.MaxBuyInstanceNum = 'MaxBuyInstanceNum' in params ? params.MaxBuyInstanceNum : null;
+        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
+
+        if (params.UnitPrice) {
+            let obj = new Price();
+            obj.deserialize(params.UnitPrice)
+            this.UnitPrice = obj;
+        }
+
+        if (params.MessagePrice) {
+            let obj = new Price();
+            obj.deserialize(params.MessagePrice)
+            this.MessagePrice = obj;
+        }
+
+        if (params.ClusterInfo) {
+            this.ClusterInfo = new Array();
+            for (let z in params.ClusterInfo) {
+                let obj = new ClusterInfo();
+                obj.deserialize(params.ClusterInfo[z]);
+                this.ClusterInfo.push(obj);
+            }
+        }
+        this.Standard = 'Standard' in params ? params.Standard : null;
+        this.StandardS2 = 'StandardS2' in params ? params.StandardS2 : null;
+        this.Profession = 'Profession' in params ? params.Profession : null;
+        this.Physical = 'Physical' in params ? params.Physical : null;
 
     }
 }
@@ -2813,16 +3280,17 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTopicAttributes response structure.
+ * DescribeRegion response structure.
  * @class
  */
-class ModifyTopicAttributesResponse extends  AbstractModel {
+class DescribeRegionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned result set
-         * @type {JgwOperateResponse || null}
+         * List of the returned results of enumerated regions
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<Region> || null}
          */
         this.Result = null;
 
@@ -2843,9 +3311,12 @@ class ModifyTopicAttributesResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new Region();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3454,36 +3925,24 @@ Note: `null` may be returned for this field, indicating that no valid values can
 }
 
 /**
- * DescribeGroup request structure.
+ * DescribeCkafkaZone response structure.
  * @class
  */
-class DescribeGroupRequest extends  AbstractModel {
+class DescribeCkafkaZoneResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * The entity of query result complex objects
+         * @type {ZoneResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Search keyword
-         * @type {string || null}
-         */
-        this.SearchWord = null;
-
-        /**
-         * Offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number of results to be returned
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -3494,10 +3953,13 @@ class DescribeGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Result) {
+            let obj = new ZoneResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4720,6 +5182,55 @@ class CreateTopicResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeGroup request structure.
+ * @class
+ */
+class DescribeGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Search keyword
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of results to be returned
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DeleteTopicIpWhiteList request structure.
  * @class
  */
@@ -5207,6 +5718,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
     }
 }
 
+/**
+ * Message price entity
+ * @class
+ */
+class Price extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Discounted price
+         * @type {number || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Original price
+         * @type {number || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
 module.exports = {
     TopicDetail: TopicDetail,
     DeleteAclRequest: DeleteAclRequest,
@@ -5223,9 +5769,12 @@ module.exports = {
     DescribeInstancesResponse: DescribeInstancesResponse,
     GroupInfoTopics: GroupInfoTopics,
     TopicResult: TopicResult,
+    Region: Region,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
     DescribeACLResponse: DescribeACLResponse,
     JgwOperateResponse: JgwOperateResponse,
+    ZoneInfo: ZoneInfo,
+    DescribeCkafkaZoneRequest: DescribeCkafkaZoneRequest,
     Topic: Topic,
     Tag: Tag,
     GroupResponse: GroupResponse,
@@ -5237,6 +5786,7 @@ module.exports = {
     CreateUserResponse: CreateUserResponse,
     ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     CreatePartitionResponse: CreatePartitionResponse,
+    ClusterInfo: ClusterInfo,
     DeleteUserResponse: DeleteUserResponse,
     CreateAclRequest: CreateAclRequest,
     DescribeAppInfoRequest: DescribeAppInfoRequest,
@@ -5251,10 +5801,12 @@ module.exports = {
     DeleteAclResponse: DeleteAclResponse,
     DynamicRetentionTime: DynamicRetentionTime,
     DescribeRouteRequest: DescribeRouteRequest,
+    DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
     DescribeGroupInfoResponse: DescribeGroupInfoResponse,
+    ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
     DescribeUserResponse: DescribeUserResponse,
     AppIdResponse: AppIdResponse,
     DescribeTopicRequest: DescribeTopicRequest,
@@ -5262,13 +5814,14 @@ module.exports = {
     Group: Group,
     DescribeAppInfoResponse: DescribeAppInfoResponse,
     AclResponse: AclResponse,
+    ZoneResponse: ZoneResponse,
     Instance: Instance,
     DescribeInstanceAttributesResponse: DescribeInstanceAttributesResponse,
     TopicDetailResponse: TopicDetailResponse,
     Config: Config,
     ModifyPasswordRequest: ModifyPasswordRequest,
     ModifyInstanceAttributesRequest: ModifyInstanceAttributesRequest,
-    ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
+    DescribeRegionResponse: DescribeRegionResponse,
     DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
     VipEntity: VipEntity,
     ConsumerGroupTopic: ConsumerGroupTopic,
@@ -5277,7 +5830,7 @@ module.exports = {
     DeleteTopicResponse: DeleteTopicResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
-    DescribeGroupRequest: DescribeGroupRequest,
+    DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     Filter: Filter,
     GroupOffsetResponse: GroupOffsetResponse,
     CreateUserRequest: CreateUserRequest,
@@ -5301,11 +5854,13 @@ module.exports = {
     TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,
+    DescribeGroupRequest: DescribeGroupRequest,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
     DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DescribeUserRequest: DescribeUserRequest,
     InstanceDetail: InstanceDetail,
     DescribeTopicDetailResponse: DescribeTopicDetailResponse,
     SubscribedInfo: SubscribedInfo,
+    Price: Price,
 
 }

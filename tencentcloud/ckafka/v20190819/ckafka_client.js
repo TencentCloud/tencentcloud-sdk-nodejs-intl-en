@@ -31,9 +31,12 @@ const DeleteTopicRequest = models.DeleteTopicRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const GroupInfoTopics = models.GroupInfoTopics;
 const TopicResult = models.TopicResult;
+const Region = models.Region;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const DescribeACLResponse = models.DescribeACLResponse;
 const JgwOperateResponse = models.JgwOperateResponse;
+const ZoneInfo = models.ZoneInfo;
+const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
 const Topic = models.Topic;
 const Tag = models.Tag;
 const GroupResponse = models.GroupResponse;
@@ -45,6 +48,7 @@ const OperateResponseData = models.OperateResponseData;
 const CreateUserResponse = models.CreateUserResponse;
 const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
 const CreatePartitionResponse = models.CreatePartitionResponse;
+const ClusterInfo = models.ClusterInfo;
 const DeleteUserResponse = models.DeleteUserResponse;
 const CreateAclRequest = models.CreateAclRequest;
 const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
@@ -59,10 +63,12 @@ const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeRouteRequest = models.DescribeRouteRequest;
+const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
 const UserResponse = models.UserResponse;
 const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
 const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
+const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
 const DescribeUserResponse = models.DescribeUserResponse;
 const AppIdResponse = models.AppIdResponse;
 const DescribeTopicRequest = models.DescribeTopicRequest;
@@ -70,13 +76,14 @@ const CreatePartitionRequest = models.CreatePartitionRequest;
 const Group = models.Group;
 const DescribeAppInfoResponse = models.DescribeAppInfoResponse;
 const AclResponse = models.AclResponse;
+const ZoneResponse = models.ZoneResponse;
 const Instance = models.Instance;
 const DescribeInstanceAttributesResponse = models.DescribeInstanceAttributesResponse;
 const TopicDetailResponse = models.TopicDetailResponse;
 const Config = models.Config;
 const ModifyPasswordRequest = models.ModifyPasswordRequest;
 const ModifyInstanceAttributesRequest = models.ModifyInstanceAttributesRequest;
-const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
+const DescribeRegionResponse = models.DescribeRegionResponse;
 const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
 const VipEntity = models.VipEntity;
 const ConsumerGroupTopic = models.ConsumerGroupTopic;
@@ -85,7 +92,7 @@ const GroupOffsetPartition = models.GroupOffsetPartition;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
-const DescribeGroupRequest = models.DescribeGroupRequest;
+const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
 const CreateUserRequest = models.CreateUserRequest;
@@ -109,12 +116,14 @@ const Acl = models.Acl;
 const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
+const DescribeGroupRequest = models.DescribeGroupRequest;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
 const InstanceDetail = models.InstanceDetail;
 const DescribeTopicDetailResponse = models.DescribeTopicDetailResponse;
 const SubscribedInfo = models.SubscribedInfo;
+const Price = models.Price;
 
 
 /**
@@ -402,6 +411,28 @@ This API is used to get the list of topics in a CKafka instance of a user.
     DescribeTopic(req, cb) {
         let resp = new DescribeTopicResponse();
         this.request("DescribeTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view the availability zone (AZ) list of Ckafka.
+     * @param {DescribeCkafkaZoneRequest} req
+     * @param {function(string, DescribeCkafkaZoneResponse):void} cb
+     * @public
+     */
+    DescribeCkafkaZone(req, cb) {
+        let resp = new DescribeCkafkaZoneResponse();
+        this.request("DescribeCkafkaZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enumerate regions, only including Guangzhou.
+     * @param {DescribeRegionRequest} req
+     * @param {function(string, DescribeRegionResponse):void} cb
+     * @public
+     */
+    DescribeRegion(req, cb) {
+        let resp = new DescribeRegionResponse();
+        this.request("DescribeRegion", req, resp, cb);
     }
 
     /**

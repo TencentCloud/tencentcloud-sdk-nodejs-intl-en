@@ -492,13 +492,13 @@ class IKEOptionsSpecification extends  AbstractModel {
         super();
 
         /**
-         * Encryption algorithm. Available values: '3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', and 'DES-CBC'. Default is 3DES-CBC.
+         * Encryption algorithm. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBS-192`, `AES-CBC-256`, `DES-CBC`, and `SM4`; default value: `3DES-CBC`.
          * @type {string || null}
          */
         this.PropoEncryAlgorithm = null;
 
         /**
-         * Verification algorithm. Available value: 'MD5' and 'SHA1'. Default is MD5.
+         * Authentication algorithm. Valid values: `MD5`, `SHA1` and `SHA-256`; default value: `MD5`.
          * @type {string || null}
          */
         this.PropoAuthenAlgorithm = null;
@@ -2514,6 +2514,12 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
          */
         this.ModeType = null;
 
+        /**
+         * Availability zone where the direct connect gateway resides.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
     }
 
     /**
@@ -2528,6 +2534,7 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
         this.NetworkInstanceId = 'NetworkInstanceId' in params ? params.NetworkInstanceId : null;
         this.GatewayType = 'GatewayType' in params ? params.GatewayType : null;
         this.ModeType = 'ModeType' in params ? params.ModeType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -9974,7 +9981,7 @@ class ResourceDashboard extends  AbstractModel {
         super();
 
         /**
-         * Vpc instance ID, e.g. vpc-f1xjkw1b.
+         * VPC instance ID, such as `vpc-bq4bzxpj`.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -10004,7 +10011,7 @@ class ResourceDashboard extends  AbstractModel {
         this.Pcx = null;
 
         /**
-         * The total number of used IP addresses.
+         * Total number of used IPs except for CVM IP, EIP and network probe IP. The three IP types will be independently counted.
          * @type {number || null}
          */
         this.Ip = null;
@@ -12047,6 +12054,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ModeType = null;
 
+        /**
+         * Whether the direct connect gateway is for an edge zone.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.LocalZone = null;
+
+        /**
+         * Availability zone where the direct connect gateway resides.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
     }
 
     /**
@@ -12071,6 +12092,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
         this.VXLANSupport = 'VXLANSupport' in params ? params.VXLANSupport : null;
         this.ModeType = 'ModeType' in params ? params.ModeType : null;
+        this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -16380,8 +16403,7 @@ class DescribeRouteTablesRequest extends  AbstractModel {
 <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 <li>association.main - String - (Filter condition) Whether it is the main route table.</li>
 <li>tag-key - String - Required: no - (Filter condition) Filter by tag key.</li>
-<li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
-<li>is-need-router-info - String - (Filter condition) Whether to obtain routing policies. It defaults to `false`. To obtain routing policies, change the parameter value to `true`.</li>
+<li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;

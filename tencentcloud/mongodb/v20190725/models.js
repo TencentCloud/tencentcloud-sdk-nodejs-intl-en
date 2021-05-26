@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ResetDBInstancePassword response structure.
+ * @class
+ */
+class ResetDBInstancePasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async request ID, which is used to query the running status of the process.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeSpecInfo request structure.
  * @class
  */
@@ -131,7 +166,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance password. If this parameter is not set, you need to set an instance password through the `SetPassword` API after creating an instance. The password can only contain 8-16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()`.
+         * Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
          * @type {string || null}
          */
         this.Password = null;
@@ -214,6 +249,49 @@ class CreateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroup response structure.
+ * @class
+ */
+class DescribeSecurityGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security groups associated with the instance
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * IsolateDBInstance request structure.
  * @class
  */
@@ -242,15 +320,15 @@ class IsolateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * ResetDBInstancePassword response structure.
+ * IsolateDBInstance response structure.
  * @class
  */
-class ResetDBInstancePasswordResponse extends  AbstractModel {
+class IsolateDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async request ID, which is used to query the running status of the process.
+         * Async task request ID, which can be used to query the execution result of an async task.
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -272,6 +350,41 @@ class ResetDBInstancePasswordResponse extends  AbstractModel {
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The result of the created backup download task
+ * @class
+ */
+class BackupDownloadTaskStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shard name
+         * @type {string || null}
+         */
+        this.ReplicaSetId = null;
+
+        /**
+         * Task status. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -355,24 +468,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Storage information of a backup file
+ * DescribeBackupAccess response structure.
  * @class
  */
-class BackupFile extends  AbstractModel {
+class DescribeBackupAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the replica set/shard to which a backup file belongs
+         * Instance region
          * @type {string || null}
          */
-        this.ReplicateSetId = null;
+        this.Region = null;
 
         /**
-         * Path to a backup file
+         * The bucket where a backup file is located
          * @type {string || null}
          */
-        this.File = null;
+        this.Bucket = null;
+
+        /**
+         * Storage information of a backup file
+         * @type {Array.<BackupFile> || null}
+         */
+        this.Files = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -383,8 +508,18 @@ class BackupFile extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
-        this.File = 'File' in params ? params.File : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+
+        if (params.Files) {
+            this.Files = new Array();
+            for (let z in params.Files) {
+                let obj = new BackupFile();
+                obj.deserialize(params.Files[z]);
+                this.Files.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -531,36 +666,18 @@ class DescribeSlowLogPatternsResponse extends  AbstractModel {
 }
 
 /**
- * Slow log statistics of MongoDB database
+ * Shard information
  * @class
  */
-class SlowLogPattern extends  AbstractModel {
+class ReplicaSetInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Slow log pattern
+         * Shard name
          * @type {string || null}
          */
-        this.Pattern = null;
-
-        /**
-         * Maximum execution time
-         * @type {number || null}
-         */
-        this.MaxTime = null;
-
-        /**
-         * Average execution time
-         * @type {number || null}
-         */
-        this.AverageTime = null;
-
-        /**
-         * Number of slow logs in this pattern
-         * @type {number || null}
-         */
-        this.Total = null;
+        this.ReplicaSetId = null;
 
     }
 
@@ -571,10 +688,7 @@ class SlowLogPattern extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pattern = 'Pattern' in params ? params.Pattern : null;
-        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
-        this.AverageTime = 'AverageTime' in params ? params.AverageTime : null;
-        this.Total = 'Total' in params ? params.Total : null;
+        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
 
     }
 }
@@ -654,7 +768,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance password. If this parameter is not set, you need to set an instance password through the password setting API after creating an instance. The password can only contain 8-16 characters and must contain at least two of the following types of characters: letters, digits, and special characters `!@#%^*()` |
+         * Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
          * @type {string || null}
          */
         this.Password = null;
@@ -763,24 +877,67 @@ class AssignProjectRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSlowLogs response structure.
+ * Security group rule
  * @class
  */
-class DescribeSlowLogsResponse extends  AbstractModel {
+class SecurityGroupBound extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of slow logs
-         * @type {number || null}
+         * Policy. Valid values: `ACCEPT`, `DROP`
+         * @type {string || null}
          */
-        this.Count = null;
+        this.Action = null;
 
         /**
-         * Slow log details
-         * @type {Array.<string> || null}
+         * IP range
+         * @type {string || null}
          */
-        this.SlowLogs = null;
+        this.CidrIp = null;
+
+        /**
+         * Port range
+         * @type {string || null}
+         */
+        this.PortRange = null;
+
+        /**
+         * Transport layer protocol. Valid values: `tcp`, `udp`, `ALL`
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+
+    }
+}
+
+/**
+ * CreateBackupDownloadTask response structure.
+ * @class
+ */
+class CreateBackupDownloadTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Download task status
+         * @type {Array.<BackupDownloadTaskStatus> || null}
+         */
+        this.Tasks = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -797,8 +954,15 @@ class DescribeSlowLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.SlowLogs = 'SlowLogs' in params ? params.SlowLogs : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new BackupDownloadTaskStatus();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1088,54 +1252,30 @@ class SpecificationInfo extends  AbstractModel {
 }
 
 /**
- * DescribeSlowLogs request structure.
+ * CreateBackupDownloadTask request structure.
  * @class
  */
-class DescribeSlowLogsRequest extends  AbstractModel {
+class CreateBackupDownloadTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
+         * Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Start time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-01 10:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+         * The name of the backup file to be downloaded, which can be obtained by the `DescribeDBBackups` API
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.BackupName = null;
 
         /**
-         * End time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-02 12:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
-         * @type {string || null}
+         * The list of shards whose backups will be downloaded
+         * @type {Array.<ReplicaSetInfo> || null}
          */
-        this.EndTime = null;
-
-        /**
-         * Threshold of slow log execution time in milliseconds. Minimum value: 100. Slow logs whose execution time exceeds the threshold will be returned.
-         * @type {number || null}
-         */
-        this.SlowMS = null;
-
-        /**
-         * Offset. Minimum value: 0. Maximum value: 10000. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
-         * @type {string || null}
-         */
-        this.Format = null;
+        this.BackupSets = null;
 
     }
 
@@ -1147,12 +1287,16 @@ class DescribeSlowLogsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Format = 'Format' in params ? params.Format : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+
+        if (params.BackupSets) {
+            this.BackupSets = new Array();
+            for (let z in params.BackupSets) {
+                let obj = new ReplicaSetInfo();
+                obj.deserialize(params.BackupSets[z]);
+                this.BackupSets.push(obj);
+            }
+        }
 
     }
 }
@@ -1223,6 +1367,48 @@ class DescribeSlowLogPatternsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Format = 'Format' in params ? params.Format : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogs response structure.
+ * @class
+ */
+class DescribeSlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of slow logs
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Slow log details
+         * @type {Array.<string> || null}
+         */
+        this.SlowLogs = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.SlowLogs = 'SlowLogs' in params ? params.SlowLogs : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1316,7 +1502,7 @@ class SpecItem extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Specification purchasable flag. Valid values: 0 (not purchasable), 1 (purchasable)
+         * Computing resource specification in terms of CPU core
          * @type {number || null}
          */
         this.Cpu = null;
@@ -1966,6 +2152,83 @@ class AssignProjectResponse extends  AbstractModel {
 }
 
 /**
+ * Backup download task information
+ * @class
+ */
+class BackupDownloadTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Backup name
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+        /**
+         * Shard name
+         * @type {string || null}
+         */
+        this.ReplicaSetId = null;
+
+        /**
+         * Backup size in bytes
+         * @type {number || null}
+         */
+        this.BackupSize = null;
+
+        /**
+         * Task status. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Task progress in terms of percentage
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * Task duration in seconds
+         * @type {number || null}
+         */
+        this.TimeSpend = null;
+
+        /**
+         * Backup download address
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
+        this.BackupSize = 'BackupSize' in params ? params.BackupSize : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.TimeSpend = 'TimeSpend' in params ? params.TimeSpend : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * DescribeDBBackups request structure.
  * @class
  */
@@ -2148,60 +2411,54 @@ class ModifyDBInstanceSpecResponse extends  AbstractModel {
 }
 
 /**
- * Details of an instance shard
+ * Security group information
  * @class
  */
-class ShardInfo extends  AbstractModel {
+class SecurityGroup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Used shard capacity
+         * Project ID
          * @type {number || null}
          */
-        this.UsedVolume = null;
+        this.ProjectId = null;
 
         /**
-         * Shard ID
+         * Creation time
          * @type {string || null}
          */
-        this.ReplicaSetId = null;
+        this.CreateTime = null;
 
         /**
-         * Shard name
+         * Inbound rule
+         * @type {Array.<SecurityGroupBound> || null}
+         */
+        this.Inbound = null;
+
+        /**
+         * Outbound rule
+         * @type {Array.<SecurityGroupBound> || null}
+         */
+        this.Outbound = null;
+
+        /**
+         * Security group ID
          * @type {string || null}
          */
-        this.ReplicaSetName = null;
+        this.SecurityGroupId = null;
 
         /**
-         * Shard memory size in MB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Shard disk size in MB
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * Shard oplog size in MB
-         * @type {number || null}
-         */
-        this.OplogSize = null;
-
-        /**
-         * Number of secondary nodes of a shard
-         * @type {number || null}
-         */
-        this.SecondaryNum = null;
-
-        /**
-         * Shard physical ID
+         * Security group name
          * @type {string || null}
          */
-        this.RealReplicaSetId = null;
+        this.SecurityGroupName = null;
+
+        /**
+         * Security group remarks
+         * @type {string || null}
+         */
+        this.SecurityGroupRemark = null;
 
     }
 
@@ -2212,14 +2469,29 @@ class ShardInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UsedVolume = 'UsedVolume' in params ? params.UsedVolume : null;
-        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
-        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
-        this.SecondaryNum = 'SecondaryNum' in params ? params.SecondaryNum : null;
-        this.RealReplicaSetId = 'RealReplicaSetId' in params ? params.RealReplicaSetId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Inbound) {
+            this.Inbound = new Array();
+            for (let z in params.Inbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Inbound[z]);
+                this.Inbound.push(obj);
+            }
+        }
+
+        if (params.Outbound) {
+            this.Outbound = new Array();
+            for (let z in params.Outbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Outbound[z]);
+                this.Outbound.push(obj);
+            }
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
 
     }
 }
@@ -2260,24 +2532,66 @@ class OfflineIsolatedDBInstanceResponse extends  AbstractModel {
 }
 
 /**
- * IsolateDBInstance response structure.
+ * DescribeBackupDownloadTask request structure.
  * @class
  */
-class IsolateDBInstanceResponse extends  AbstractModel {
+class DescribeBackupDownloadTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task request ID, which can be used to query the execution result of an async task.
+         * Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.InstanceId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The name of a backup file whose download tasks will be queried
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.BackupName = null;
+
+        /**
+         * The start time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the start time can be any time earlier than the end time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the end time can be any time later than the start time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The maximum number of results returned per page. Value range: 1-100. Default value: `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset for pagination. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The field used to sort the results. Valid values: `createTime` (default), `finishTime`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sort order. Valid values: `asc`, `desc` (default).
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * The status of the tasks to be queried. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry). If it is left empty, tasks in any status will be returned.
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
 
     }
 
@@ -2288,8 +2602,15 @@ class IsolateDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2365,6 +2686,34 @@ class RenameInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroup request structure.
+ * @class
+ */
+class DescribeSecurityGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of "cmgo-p8vnipr5"
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * RenewDBInstances response structure.
  * @class
  */
@@ -2386,6 +2735,56 @@ class RenewDBInstancesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBackupDownloadTask response structure.
+ * @class
+ */
+class DescribeBackupDownloadTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of results
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The list of download tasks
+         * @type {Array.<BackupDownloadTask> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new BackupDownloadTask();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2534,36 +2933,54 @@ class DBInstanceInfo extends  AbstractModel {
 }
 
 /**
- * DescribeBackupAccess response structure.
+ * DescribeSlowLogs request structure.
  * @class
  */
-class DescribeBackupAccessResponse extends  AbstractModel {
+class DescribeSlowLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance region
+         * Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
          * @type {string || null}
          */
-        this.Region = null;
+        this.InstanceId = null;
 
         /**
-         * The bucket where a backup file is located
+         * Start time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-01 10:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
          * @type {string || null}
          */
-        this.Bucket = null;
+        this.StartTime = null;
 
         /**
-         * Storage information of a backup file
-         * @type {Array.<BackupFile> || null}
-         */
-        this.Files = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * End time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-02 12:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EndTime = null;
+
+        /**
+         * Threshold of slow log execution time in milliseconds. Minimum value: 100. Slow logs whose execution time exceeds the threshold will be returned.
+         * @type {number || null}
+         */
+        this.SlowMS = null;
+
+        /**
+         * Offset. Minimum value: 0. Maximum value: 10000. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
+         * @type {string || null}
+         */
+        this.Format = null;
 
     }
 
@@ -2574,18 +2991,48 @@ class DescribeBackupAccessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
-        if (params.Files) {
-            this.Files = new Array();
-            for (let z in params.Files) {
-                let obj = new BackupFile();
-                obj.deserialize(params.Files[z]);
-                this.Files.push(obj);
-            }
+    }
+}
+
+/**
+ * Storage information of a backup file
+ * @class
+ */
+class BackupFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the replica set/shard to which a backup file belongs
+         * @type {string || null}
+         */
+        this.ReplicateSetId = null;
+
+        /**
+         * Path to a backup file
+         * @type {string || null}
+         */
+        this.File = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
+        this.File = 'File' in params ? params.File : null;
 
     }
 }
@@ -3022,6 +3469,55 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
 }
 
 /**
+ * Slow log statistics of MongoDB database
+ * @class
+ */
+class SlowLogPattern extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Slow log pattern
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * Maximum execution time
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * Average execution time
+         * @type {number || null}
+         */
+        this.AverageTime = null;
+
+        /**
+         * Number of slow logs in this pattern
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.AverageTime = 'AverageTime' in params ? params.AverageTime : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
  * CreateDBInstanceHour response structure.
  * @class
  */
@@ -3227,28 +3723,110 @@ class RenewDBInstancesRequest extends  AbstractModel {
     }
 }
 
+/**
+ * Details of an instance shard
+ * @class
+ */
+class ShardInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Used shard capacity
+         * @type {number || null}
+         */
+        this.UsedVolume = null;
+
+        /**
+         * Shard ID
+         * @type {string || null}
+         */
+        this.ReplicaSetId = null;
+
+        /**
+         * Shard name
+         * @type {string || null}
+         */
+        this.ReplicaSetName = null;
+
+        /**
+         * Shard memory size in MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Shard disk size in MB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * Shard oplog size in MB
+         * @type {number || null}
+         */
+        this.OplogSize = null;
+
+        /**
+         * Number of secondary nodes of a shard
+         * @type {number || null}
+         */
+        this.SecondaryNum = null;
+
+        /**
+         * Shard physical ID
+         * @type {string || null}
+         */
+        this.RealReplicaSetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedVolume = 'UsedVolume' in params ? params.UsedVolume : null;
+        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
+        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
+        this.SecondaryNum = 'SecondaryNum' in params ? params.SecondaryNum : null;
+        this.RealReplicaSetId = 'RealReplicaSetId' in params ? params.RealReplicaSetId : null;
+
+    }
+}
+
 module.exports = {
+    ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
+    DescribeSecurityGroupResponse: DescribeSecurityGroupResponse,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
-    ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
+    IsolateDBInstanceResponse: IsolateDBInstanceResponse,
+    BackupDownloadTaskStatus: BackupDownloadTaskStatus,
     CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
     DBInstancePrice: DBInstancePrice,
-    BackupFile: BackupFile,
+    DescribeBackupAccessResponse: DescribeBackupAccessResponse,
     InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
     DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
-    SlowLogPattern: SlowLogPattern,
+    ReplicaSetInfo: ReplicaSetInfo,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     AssignProjectRequest: AssignProjectRequest,
-    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
+    SecurityGroupBound: SecurityGroupBound,
+    CreateBackupDownloadTaskResponse: CreateBackupDownloadTaskResponse,
     ClientConnection: ClientConnection,
     InquirePriceModifyDBInstanceSpecRequest: InquirePriceModifyDBInstanceSpecRequest,
     BackupInfo: BackupInfo,
     InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     SpecificationInfo: SpecificationInfo,
-    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
+    CreateBackupDownloadTaskRequest: CreateBackupDownloadTaskRequest,
     DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
+    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     FlushInstanceRouterConfigResponse: FlushInstanceRouterConfigResponse,
     InquirePriceModifyDBInstanceSpecResponse: InquirePriceModifyDBInstanceSpecResponse,
     SpecItem: SpecItem,
@@ -3263,28 +3841,34 @@ module.exports = {
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     AssignProjectResponse: AssignProjectResponse,
+    BackupDownloadTask: BackupDownloadTask,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
     DescribeDBInstanceDealResponse: DescribeDBInstanceDealResponse,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
-    ShardInfo: ShardInfo,
+    SecurityGroup: SecurityGroup,
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
-    IsolateDBInstanceResponse: IsolateDBInstanceResponse,
+    DescribeBackupDownloadTaskRequest: DescribeBackupDownloadTaskRequest,
     DescribeBackupAccessRequest: DescribeBackupAccessRequest,
     RenameInstanceRequest: RenameInstanceRequest,
+    DescribeSecurityGroupRequest: DescribeSecurityGroupRequest,
     RenewDBInstancesResponse: RenewDBInstancesResponse,
+    DescribeBackupDownloadTaskResponse: DescribeBackupDownloadTaskResponse,
     RenameInstanceResponse: RenameInstanceResponse,
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
     FlushInstanceRouterConfigRequest: FlushInstanceRouterConfigRequest,
     DBInstanceInfo: DBInstanceInfo,
-    DescribeBackupAccessResponse: DescribeBackupAccessResponse,
+    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
+    BackupFile: BackupFile,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     InstanceDetail: InstanceDetail,
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
+    SlowLogPattern: SlowLogPattern,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
     InstanceChargePrepaid: InstanceChargePrepaid,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     RenewDBInstancesRequest: RenewDBInstancesRequest,
+    ShardInfo: ShardInfo,
 
 }

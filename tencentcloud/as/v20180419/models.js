@@ -2554,7 +2554,7 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         this.DefaultResult = null;
 
         /**
-         * The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7,200. Default value: 300
+         * The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7200. Default value: 300
          * @type {number || null}
          */
         this.HeartbeatTimeout = null;
@@ -4639,7 +4639,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.DefaultResult = null;
 
         /**
-         * The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7,200. Default value: 300
+         * The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7200. Default value: 300
          * @type {number || null}
          */
         this.HeartbeatTimeout = null;
@@ -5116,7 +5116,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceChargePrepaid = null;
 
         /**
-         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+         * Specifies how to select the cloud disk type. 
 <br><li>ORIGINAL: uses the configured cloud disk type
 <br><li>AUTOMATIC: automatically chooses an available cloud disk type in the current availability zone
          * @type {string || null}

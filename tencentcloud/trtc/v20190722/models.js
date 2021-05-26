@@ -2241,19 +2241,19 @@ class DescribePictureRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Image ID. If it is not passed in, the IDs of all images under the application are returned.
+         * Image ID. If it is left empty, the IDs of all images under the application are returned.
          * @type {number || null}
          */
         this.PictureId = null;
 
         /**
-         * Number of records per page
+         * Number of records per page. `10` is used if it is left empty.
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * Page number
+         * Page number. `1` is used if it is left empty.
          * @type {number || null}
          */
         this.PageNo = null;
@@ -2411,7 +2411,7 @@ class PresetLayoutConfig extends  AbstractModel {
         this.LocationY = null;
 
         /**
-         * Z-order of the image in pixels. If this parameter is not set, 0 is used by default.
+         * Output order of the image. `0` is used if it is left empty.
          * @type {number || null}
          */
         this.ZOrder = null;

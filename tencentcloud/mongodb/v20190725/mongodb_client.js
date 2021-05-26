@@ -16,27 +16,32 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
+const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
-const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DBInstancePrice = models.DBInstancePrice;
-const BackupFile = models.BackupFile;
+const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
 const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
 const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
-const SlowLogPattern = models.SlowLogPattern;
+const ReplicaSetInfo = models.ReplicaSetInfo;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
-const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
+const SecurityGroupBound = models.SecurityGroupBound;
+const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
 const ClientConnection = models.ClientConnection;
 const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
 const BackupInfo = models.BackupInfo;
 const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const SpecificationInfo = models.SpecificationInfo;
-const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
+const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
 const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
 const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
 const SpecItem = models.SpecItem;
@@ -51,29 +56,35 @@ const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const AssignProjectResponse = models.AssignProjectResponse;
+const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
-const ShardInfo = models.ShardInfo;
+const SecurityGroup = models.SecurityGroup;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
-const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
 const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
+const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
 const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
+const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
 const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DBInstanceInfo = models.DBInstanceInfo;
-const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
+const BackupFile = models.BackupFile;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
+const SlowLogPattern = models.SlowLogPattern;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
 const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
+const ShardInfo = models.ShardInfo;
 
 
 /**
@@ -131,6 +142,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the security groups associated with an instance.
+     * @param {DescribeSecurityGroupRequest} req
+     * @param {function(string, DescribeSecurityGroupResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroup(req, cb) {
+        let resp = new DescribeSecurityGroupResponse();
+        this.request("DescribeSecurityGroup", req, resp, cb);
+    }
+
+    /**
      * This API is used to run the `FlushRouterConfig` command on all mongos instances.
      * @param {FlushInstanceRouterConfigRequest} req
      * @param {function(string, FlushInstanceRouterConfigResponse):void} cb
@@ -164,7 +186,11 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the permission to download a backup file. The specific backup file information can be obtained through the DescribeDBBackups API.
+     * 备份下载功能已调整，此接口即将下线
+
+TencentDB will soon stop supporting this API, as the backup download feature has been modified.
+
+This API is used to get the permission to download a backup file. The detailed backup file information can be obtained through the `DescribeDBBackups` API.
      * @param {DescribeBackupAccessRequest} req
      * @param {function(string, DescribeBackupAccessResponse):void} cb
      * @public
@@ -205,6 +231,17 @@ class MongodbClient extends AbstractClient {
     CreateDBInstanceHour(req, cb) {
         let resp = new CreateDBInstanceHourResponse();
         this.request("CreateDBInstanceHour", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a backup download task.
+     * @param {CreateBackupDownloadTaskRequest} req
+     * @param {function(string, CreateBackupDownloadTaskResponse):void} cb
+     * @public
+     */
+    CreateBackupDownloadTask(req, cb) {
+        let resp = new CreateBackupDownloadTaskResponse();
+        this.request("CreateBackupDownloadTask", req, resp, cb);
     }
 
     /**
@@ -271,6 +308,17 @@ class MongodbClient extends AbstractClient {
     DescribeSpecInfo(req, cb) {
         let resp = new DescribeSpecInfoResponse();
         this.request("DescribeSpecInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query backup download task information.
+     * @param {DescribeBackupDownloadTaskRequest} req
+     * @param {function(string, DescribeBackupDownloadTaskResponse):void} cb
+     * @public
+     */
+    DescribeBackupDownloadTask(req, cb) {
+        let resp = new DescribeBackupDownloadTaskResponse();
+        this.request("DescribeBackupDownloadTask", req, resp, cb);
     }
 
     /**

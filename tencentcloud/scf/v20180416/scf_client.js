@@ -378,7 +378,7 @@ You can manually configure the function after replication as required.
     }
 
     /**
-     * This API is used to create a namespace based on the input parameters.
+     * This API is used to delete the specific namespace according to the parameters passed in.
      * @param {DeleteNamespaceRequest} req
      * @param {function(string, DeleteNamespaceResponse):void} cb
      * @public

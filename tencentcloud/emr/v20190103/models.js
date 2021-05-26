@@ -1816,6 +1816,12 @@ class InquiryPriceScaleOutInstanceRequest extends  AbstractModel {
          */
         this.RouterCount = null;
 
+        /**
+         * Number of master nodes to add
+         * @type {number || null}
+         */
+        this.MasterCount = null;
+
     }
 
     /**
@@ -1834,6 +1840,7 @@ class InquiryPriceScaleOutInstanceRequest extends  AbstractModel {
         this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
         this.Currency = 'Currency' in params ? params.Currency : null;
         this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
+        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
 
     }
 }

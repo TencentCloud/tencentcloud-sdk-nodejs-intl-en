@@ -3477,6 +3477,18 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Whether to enable the async attribute. TRUE: yes; FALSE: no
+         * @type {string || null}
+         */
+        this.AsyncRunEnable = null;
+
+        /**
+         * Whether to enable event tracking. TRUE: yes; FALSE: no
+         * @type {string || null}
+         */
+        this.TraceEnable = null;
+
     }
 
     /**
@@ -3553,6 +3565,8 @@ class CreateFunctionRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
+        this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
 
     }
 }
@@ -3948,7 +3962,7 @@ class InvokeRequest extends  AbstractModel {
         this.InvocationType = null;
 
         /**
-         * Version number of the triggered function
+         * Version number or name of the triggered function
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -3960,7 +3974,7 @@ class InvokeRequest extends  AbstractModel {
         this.ClientContext = null;
 
         /**
-         * If this field is specified for a synchronous invocation, the return value will contain a 4-KB log. The value is `None` (default) or `Tail`. If the value is `Tail`, `logMsg` in the return parameter will contain the corresponding function execution log.
+         * If this field is specified during sync invocation, the returned value will contain 4 KB of logs. Valid values: None, Tail. Default value: None. If the value is `Tail`, the `Log` field in the returned parameter will contain the corresponding function execution log
          * @type {string || null}
          */
         this.LogType = null;
@@ -4960,7 +4974,7 @@ class Code extends  AbstractModel {
         this.CosObjectName = null;
 
         /**
-         * It contains a function code file and its dependencies in the ZIP format. When you use this API, the ZIP file needs to be encoded with Base64. Up to 20 MB is supported.
+         * This parameter contains a .zip file (up to 50 MB) of the function code file and its dependencies. When this API is used, the content of the .zip file needs to be Base64-encoded
          * @type {string || null}
          */
         this.ZipFile = null;

@@ -405,6 +405,49 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DescribeInstanceTypes response structure.
+ * @class
+ */
+class DescribeInstanceTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of server types
+         * @type {Array.<InstanceTypeInfo> || null}
+         */
+        this.InstanceTypeList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceTypeList) {
+            this.InstanceTypeList = new Array();
+            for (let z in params.InstanceTypeList) {
+                let obj = new InstanceTypeInfo();
+                obj.deserialize(params.InstanceTypeList[z]);
+                this.InstanceTypeList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Configuration of target tracking scaling
  * @class
  */
@@ -692,6 +735,27 @@ class UpdateBucketCORSOptResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceTypes request structure.
+ * @class
+ */
+class DescribeInstanceTypesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -2104,24 +2168,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * CCN information
+ * Player game session information
  * @class
  */
-class CcnInfo extends  AbstractModel {
+class DesiredPlayerSession extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Account of the CCN instance owner
+         * Unique player ID associated with player session
          * @type {string || null}
          */
-        this.AccountId = null;
+        this.PlayerId = null;
 
         /**
-         * CCN ID
+         * Developer-defined player data
          * @type {string || null}
          */
-        this.CcnId = null;
+        this.PlayerData = null;
 
     }
 
@@ -2132,8 +2196,8 @@ class CcnInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountId = 'AccountId' in params ? params.AccountId : null;
-        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
+        this.PlayerData = 'PlayerData' in params ? params.PlayerData : null;
 
     }
 }
@@ -3310,6 +3374,62 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * The server instance type information
+ * @class
+ */
+class InstanceTypeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the server type, such as `Standard SA1`
+         * @type {string || null}
+         */
+        this.TypeName = null;
+
+        /**
+         * Specification of the server type, such as `SA1.SMALL1`
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * CPU, in core
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory, in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * The packet sending and receiving capability, in 10k PPS. 
+         * @type {number || null}
+         */
+        this.NetworkCard = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.NetworkCard = 'NetworkCard' in params ? params.NetworkCard : null;
+
+    }
+}
+
+/**
  * DescribeGameServerSessionDetails response structure.
  * @class
  */
@@ -3402,24 +3522,24 @@ class DescribeGameServerSessionPlacementResponse extends  AbstractModel {
 }
 
 /**
- * Player game session information
+ * CCN information
  * @class
  */
-class DesiredPlayerSession extends  AbstractModel {
+class CcnInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique player ID associated with player session
+         * Account of the CCN instance owner
          * @type {string || null}
          */
-        this.PlayerId = null;
+        this.AccountId = null;
 
         /**
-         * Developer-defined player data
+         * CCN ID
          * @type {string || null}
          */
-        this.PlayerData = null;
+        this.CcnId = null;
 
     }
 
@@ -3430,8 +3550,8 @@ class DesiredPlayerSession extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
-        this.PlayerData = 'PlayerData' in params ? params.PlayerData : null;
+        this.AccountId = 'AccountId' in params ? params.AccountId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
     }
 }
@@ -3690,6 +3810,7 @@ module.exports = {
     DescribeTimerScalingPoliciesRequest: DescribeTimerScalingPoliciesRequest,
     RelatedCcnInfo: RelatedCcnInfo,
     FleetAttributes: FleetAttributes,
+    DescribeInstanceTypesResponse: DescribeInstanceTypesResponse,
     TargetConfiguration: TargetConfiguration,
     InboundPermission: InboundPermission,
     DescribeGameServerSessionsResponse: DescribeGameServerSessionsResponse,
@@ -3697,6 +3818,7 @@ module.exports = {
     JoinGameServerSessionRequest: JoinGameServerSessionRequest,
     DescribePlayerSessionsResponse: DescribePlayerSessionsResponse,
     UpdateBucketCORSOptResponse: UpdateBucketCORSOptResponse,
+    DescribeInstanceTypesRequest: DescribeInstanceTypesRequest,
     DescribeTimerScalingPoliciesResponse: DescribeTimerScalingPoliciesResponse,
     SetServerReservedResponse: SetServerReservedResponse,
     ServerProcesse: ServerProcesse,
@@ -3724,7 +3846,7 @@ module.exports = {
     RuntimeConfiguration: RuntimeConfiguration,
     DeleteTimerScalingPolicyRequest: DeleteTimerScalingPolicyRequest,
     JoinGameServerSessionResponse: JoinGameServerSessionResponse,
-    CcnInfo: CcnInfo,
+    DesiredPlayerSession: DesiredPlayerSession,
     SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
     DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
     SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
@@ -3741,9 +3863,10 @@ module.exports = {
     DescribeGameServerSessionDetailsRequest: DescribeGameServerSessionDetailsRequest,
     StartGameServerSessionPlacementRequest: StartGameServerSessionPlacementRequest,
     GameServerSession: GameServerSession,
+    InstanceTypeInfo: InstanceTypeInfo,
     DescribeGameServerSessionDetailsResponse: DescribeGameServerSessionDetailsResponse,
     DescribeGameServerSessionPlacementResponse: DescribeGameServerSessionPlacementResponse,
-    DesiredPlayerSession: DesiredPlayerSession,
+    CcnInfo: CcnInfo,
     JoinGameServerSessionBatchResponse: JoinGameServerSessionBatchResponse,
     PlayerDataMap: PlayerDataMap,
     ResourceCreationLimitPolicy: ResourceCreationLimitPolicy,

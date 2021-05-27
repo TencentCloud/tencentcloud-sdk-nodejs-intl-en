@@ -21,6 +21,7 @@ const DeleteTimerScalingPolicyResponse = models.DeleteTimerScalingPolicyResponse
 const DescribeTimerScalingPoliciesRequest = models.DescribeTimerScalingPoliciesRequest;
 const RelatedCcnInfo = models.RelatedCcnInfo;
 const FleetAttributes = models.FleetAttributes;
+const DescribeInstanceTypesResponse = models.DescribeInstanceTypesResponse;
 const TargetConfiguration = models.TargetConfiguration;
 const InboundPermission = models.InboundPermission;
 const DescribeGameServerSessionsResponse = models.DescribeGameServerSessionsResponse;
@@ -28,6 +29,7 @@ const GetInstanceAccessResponse = models.GetInstanceAccessResponse;
 const JoinGameServerSessionRequest = models.JoinGameServerSessionRequest;
 const DescribePlayerSessionsResponse = models.DescribePlayerSessionsResponse;
 const UpdateBucketCORSOptResponse = models.UpdateBucketCORSOptResponse;
+const DescribeInstanceTypesRequest = models.DescribeInstanceTypesRequest;
 const DescribeTimerScalingPoliciesResponse = models.DescribeTimerScalingPoliciesResponse;
 const SetServerReservedResponse = models.SetServerReservedResponse;
 const ServerProcesse = models.ServerProcesse;
@@ -55,7 +57,7 @@ const TimerConfiguration = models.TimerConfiguration;
 const RuntimeConfiguration = models.RuntimeConfiguration;
 const DeleteTimerScalingPolicyRequest = models.DeleteTimerScalingPolicyRequest;
 const JoinGameServerSessionResponse = models.JoinGameServerSessionResponse;
-const CcnInfo = models.CcnInfo;
+const DesiredPlayerSession = models.DesiredPlayerSession;
 const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse;
 const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessionPlacementRequest;
 const SearchGameServerSessionsRequest = models.SearchGameServerSessionsRequest;
@@ -72,9 +74,10 @@ const UpdateBucketAccelerateOptResponse = models.UpdateBucketAccelerateOptRespon
 const DescribeGameServerSessionDetailsRequest = models.DescribeGameServerSessionDetailsRequest;
 const StartGameServerSessionPlacementRequest = models.StartGameServerSessionPlacementRequest;
 const GameServerSession = models.GameServerSession;
+const InstanceTypeInfo = models.InstanceTypeInfo;
 const DescribeGameServerSessionDetailsResponse = models.DescribeGameServerSessionDetailsResponse;
 const DescribeGameServerSessionPlacementResponse = models.DescribeGameServerSessionPlacementResponse;
-const DesiredPlayerSession = models.DesiredPlayerSession;
+const CcnInfo = models.CcnInfo;
 const JoinGameServerSessionBatchResponse = models.JoinGameServerSessionBatchResponse;
 const PlayerDataMap = models.PlayerDataMap;
 const ResourceCreationLimitPolicy = models.ResourceCreationLimitPolicy;
@@ -227,6 +230,17 @@ If the field `timerID` is filled in, the specified policy will be updated, and i
     DescribeGameServerSessionDetails(req, cb) {
         let resp = new DescribeGameServerSessionDetailsResponse();
         this.request("DescribeGameServerSessionDetails", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of CVM types in the specified region.
+     * @param {DescribeInstanceTypesRequest} req
+     * @param {function(string, DescribeInstanceTypesResponse):void} cb
+     * @public
+     */
+    DescribeInstanceTypes(req, cb) {
+        let resp = new DescribeInstanceTypesResponse();
+        this.request("DescribeInstanceTypes", req, resp, cb);
     }
 
     /**

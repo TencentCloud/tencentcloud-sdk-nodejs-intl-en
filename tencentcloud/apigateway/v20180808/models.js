@@ -1452,7 +1452,7 @@ class DeleteServiceRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * A parameter which is specified to skip the deletion precondition verification (only supported for services on dedicated instances).
+         * A parameter used to set to skip the deletion precondition verification (only supported for services on dedicated instances).
          * @type {number || null}
          */
         this.SkipVerification = null;

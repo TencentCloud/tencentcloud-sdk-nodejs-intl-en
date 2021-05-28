@@ -781,7 +781,7 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.RegionCode = null;
 
         /**
-         * Region code (V3)
+         * Region code (v3)
 Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -795,14 +795,14 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.Support = null;
 
         /**
-         * Whether ipv6 is supported. `0` indicates no, and `1` indicates yes.
+         * Whether IPv6 is supported. `0` indicates no, and `1` indicates yes.
 Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Ipv6 = null;
 
         /**
-         * Whether multi-zone clusters are supported.`0` indicates no, and `1` indicates yes.
+         * Whether cross-AZ clusters are supported.`0` indicates no, and `1` indicates yes.
 Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -972,19 +972,19 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Whether it is an internal App.
+         * Whether it is an internal application.
          * @type {number || null}
          */
         this.IsInternalApp = null;
 
         /**
-         * app id
+         * Application ID
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * Identifier
+         * Flag
          * @type {boolean || null}
          */
         this.Flag = null;
@@ -1002,7 +1002,7 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneStatus = null;
 
         /**
-         * Extra identifier
+         * Extra flag
          * @type {string || null}
          */
         this.Exflag = null;
@@ -1535,14 +1535,14 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.AvailableBandWidth = null;
 
         /**
-         * The AZ which the cluster belongs to
+         * The AZ where the cluster resides
 Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * The AZ which the cluster nodes belong to. If the cluster is a multi-AZ cluster, this field means multiple AZs which the cluster nodes belong to.
+         * The AZ where the cluster nodes reside. If the cluster is a multi-AZ cluster, this field means multiple AZs where the cluster nodes reside.
 Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
@@ -3933,7 +3933,7 @@ class DescribeCkafkaZoneResponse extends  AbstractModel {
         super();
 
         /**
-         * The entity of query result complex objects
+         * Returned results for the query
          * @type {ZoneResponse || null}
          */
         this.Result = null;

@@ -885,7 +885,7 @@ class SecurityGroupBound extends  AbstractModel {
         super();
 
         /**
-         * Policy. Valid values: `ACCEPT`, `DROP`
+         * Execution rule. Valid values: `ACCEPT`, `DROP`
          * @type {string || null}
          */
         this.Action = null;
@@ -908,6 +908,30 @@ class SecurityGroupBound extends  AbstractModel {
          */
         this.IpProtocol = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AddressModule = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ServiceModule = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Desc = null;
+
     }
 
     /**
@@ -921,6 +945,10 @@ class SecurityGroupBound extends  AbstractModel {
         this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
         this.PortRange = 'PortRange' in params ? params.PortRange : null;
         this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
+        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
 
     }
 }
@@ -1272,7 +1300,7 @@ class CreateBackupDownloadTaskRequest extends  AbstractModel {
         this.BackupName = null;
 
         /**
-         * The list of shards whose backups will be downloaded
+         * The list of shards with backups to be downloaded
          * @type {Array.<ReplicaSetInfo> || null}
          */
         this.BackupSets = null;
@@ -2190,7 +2218,7 @@ class BackupDownloadTask extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Task progress in terms of percentage
+         * Task progress in percentage
          * @type {number || null}
          */
         this.Percent = null;
@@ -2546,7 +2574,7 @@ class DescribeBackupDownloadTaskRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * The name of a backup file whose download tasks will be queried
+         * The name of a backup file with download tasks to be queried
          * @type {string || null}
          */
         this.BackupName = null;

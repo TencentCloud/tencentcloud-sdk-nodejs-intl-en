@@ -414,7 +414,7 @@ This API is used to get the list of topics in a CKafka instance of a user.
     }
 
     /**
-     * This API is used to view the availability zone (AZ) list of Ckafka.
+     * This API is used to view the AZ list of Ckafka.
      * @param {DescribeCkafkaZoneRequest} req
      * @param {function(string, DescribeCkafkaZoneResponse):void} cb
      * @public
@@ -425,7 +425,7 @@ This API is used to get the list of topics in a CKafka instance of a user.
     }
 
     /**
-     * This API is used to enumerate regions, only including Guangzhou.
+     * This API is used to enumerate regions, and can be called only in Guangzhou.
      * @param {DescribeRegionRequest} req
      * @param {function(string, DescribeRegionResponse):void} cb
      * @public

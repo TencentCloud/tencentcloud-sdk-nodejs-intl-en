@@ -2670,22 +2670,28 @@ class AttachDisksRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the elastic cloud disk to be mounted, which can be queried through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1). A maximum of 10 elastic cloud disks can be mounted in a single request.
-         * @type {Array.<string> || null}
-         */
-        this.DiskIds = null;
-
-        /**
          * ID of the CVM instance on which the cloud disk will be mounted. It can be queried via the API [DescribeInstances](https://intl.cloud.tencent.com/document/product/213/15728?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
+         * ID of the elastic cloud disk to be mounted, which can be queried through the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1). A maximum of 10 elastic cloud disks can be mounted in a single request.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
          * Optional parameter. If this is not passed only the mount operation is executed. If `True` is passed, the cloud disk will be configured to be terminated when the server it is mounted to is terminated. This is only valid for pay-as-you-go cloud disks.
          * @type {boolean || null}
          */
         this.DeleteWithInstance = null;
+
+        /**
+         * (Optional) Specifies the cloud disk mounting method. It’s only valid for BM models. Valid values: <br><li>PF<br><li>VF
+         * @type {string || null}
+         */
+        this.AttachMode = null;
 
     }
 
@@ -2696,9 +2702,10 @@ class AttachDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.AttachMode = 'AttachMode' in params ? params.AttachMode : null;
 
     }
 }

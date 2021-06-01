@@ -2818,6 +2818,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Toa = null;
 
+        /**
+         * Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.DeregisterTargetRst = null;
+
     }
 
     /**
@@ -2867,6 +2874,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.SessionType = 'SessionType' in params ? params.SessionType : null;
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.Toa = 'Toa' in params ? params.Toa : null;
+        this.DeregisterTargetRst = 'DeregisterTargetRst' in params ? params.DeregisterTargetRst : null;
 
     }
 }
@@ -3133,6 +3141,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.KeepaliveEnable = null;
 
+        /**
+         * Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+         * @type {boolean || null}
+         */
+        this.DeregisterTargetRst = null;
+
     }
 
     /**
@@ -3161,6 +3175,7 @@ They represent weighted round robin and least connections, respectively. Default
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
+        this.DeregisterTargetRst = 'DeregisterTargetRst' in params ? params.DeregisterTargetRst : null;
 
     }
 }
@@ -5459,6 +5474,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.EndPort = null;
 
+        /**
+         * Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+         * @type {boolean || null}
+         */
+        this.DeregisterTargetRst = null;
+
     }
 
     /**
@@ -5491,6 +5512,7 @@ They represent weighted round robin and least connections, respectively. Default
         this.SessionType = 'SessionType' in params ? params.SessionType : null;
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.EndPort = 'EndPort' in params ? params.EndPort : null;
+        this.DeregisterTargetRst = 'DeregisterTargetRst' in params ? params.DeregisterTargetRst : null;
 
     }
 }

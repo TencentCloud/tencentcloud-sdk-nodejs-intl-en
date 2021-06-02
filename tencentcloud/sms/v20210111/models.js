@@ -17,12 +17,18 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * SmsPackagesStatistics request structure.
+ * PullSmsReplyStatus request structure.
  * @class
  */
-class SmsPackagesStatisticsRequest extends  AbstractModel {
+class PullSmsReplyStatusRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Maximum number of pulled entries. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
         /**
          * The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
@@ -30,32 +36,6 @@ class SmsPackagesStatisticsRequest extends  AbstractModel {
          */
         this.SmsSdkAppId = null;
 
-        /**
-         * Upper limit (number of packages to be pulled)
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).
-Note: the creation time of a pulled package should not be earlier than the start time.
-         * @type {string || null}
-         */
-        this.BeginTime = null;
-
-        /**
-         * End time in the format of `yyyymmddhh` accurate to the hour, such as 2021050118 (18:00 on May 1, 2021).
-Note: `EndTime` must be later than `BeginTime`. The creation time of a pulled package should not be later than the end time.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
     }
 
     /**
@@ -65,98 +45,25 @@ Note: `EndTime` must be later than `BeginTime`. The creation time of a pulled pa
         if (!params) {
             return;
         }
-        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
 
     }
 }
 
 /**
- * Package message statistics response body
+ * DeleteSmsTemplate response structure.
  * @class
  */
-class SmsPackagesStatistics extends  AbstractModel {
+class DeleteSmsTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The creation time of the package in seconds in the format of UNIX timestamp.
-         * @type {number || null}
+         * Template deletion response
+         * @type {DeleteTemplateStatus || null}
          */
-        this.PackageCreateTime = null;
-
-        /**
-         * The effective time of the package in seconds in the format of UNIX timestamp.
-         * @type {number || null}
-         */
-        this.PackageEffectiveTime = null;
-
-        /**
-         * The expiration time of the package in seconds in the format of UNIX timestamp.
-         * @type {number || null}
-         */
-        this.PackageExpiredTime = null;
-
-        /**
-         * Number of SMS messages in the package
-         * @type {number || null}
-         */
-        this.PackageAmount = null;
-
-        /**
-         * Package type. 0: gifted package; 1: purchased package.
-         * @type {number || null}
-         */
-        this.PackageType = null;
-
-        /**
-         * Package ID.
-         * @type {number || null}
-         */
-        this.PackageId = null;
-
-        /**
-         * Current number of used messages in the package.
-         * @type {number || null}
-         */
-        this.CurrentUsage = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PackageCreateTime = 'PackageCreateTime' in params ? params.PackageCreateTime : null;
-        this.PackageEffectiveTime = 'PackageEffectiveTime' in params ? params.PackageEffectiveTime : null;
-        this.PackageExpiredTime = 'PackageExpiredTime' in params ? params.PackageExpiredTime : null;
-        this.PackageAmount = 'PackageAmount' in params ? params.PackageAmount : null;
-        this.PackageType = 'PackageType' in params ? params.PackageType : null;
-        this.PackageId = 'PackageId' in params ? params.PackageId : null;
-        this.CurrentUsage = 'CurrentUsage' in params ? params.CurrentUsage : null;
-
-    }
-}
-
-/**
- * SmsPackagesStatistics response structure.
- * @class
- */
-class SmsPackagesStatisticsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Delivery statistics response packet body.
-         * @type {Array.<SmsPackagesStatistics> || null}
-         */
-        this.SmsPackagesStatisticsSet = null;
+        this.DeleteTemplateStatus = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -174,12 +81,2065 @@ class SmsPackagesStatisticsResponse extends  AbstractModel {
             return;
         }
 
-        if (params.SmsPackagesStatisticsSet) {
-            this.SmsPackagesStatisticsSet = new Array();
-            for (let z in params.SmsPackagesStatisticsSet) {
-                let obj = new SmsPackagesStatistics();
-                obj.deserialize(params.SmsPackagesStatisticsSet[z]);
-                this.SmsPackagesStatisticsSet.push(obj);
+        if (params.DeleteTemplateStatus) {
+            let obj = new DeleteTemplateStatus();
+            obj.deserialize(params.DeleteTemplateStatus)
+            this.DeleteTemplateStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySmsTemplate response structure.
+ * @class
+ */
+class ModifySmsTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template parameter modification response
+         * @type {ModifyTemplateStatus || null}
+         */
+        this.ModifyTemplateStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ModifyTemplateStatus) {
+            let obj = new ModifyTemplateStatus();
+            obj.deserialize(params.ModifyTemplateStatus)
+            this.ModifyTemplateStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySmsSign request structure.
+ * @class
+ */
+class ModifySmsSignRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the signature to be modified.
+         * @type {number || null}
+         */
+        this.SignId = null;
+
+        /**
+         * Signature name.
+         * @type {string || null}
+         */
+        this.SignName = null;
+
+        /**
+         * Signature type. Each of these types is followed by their `DocumentType` (identity certificate type) option:
+0: company. Valid values of `DocumentType` include 0, 1, 2, and 3.
+1: app. Valid values of `DocumentType` include 0, 1, 2, 3, and 4.
+2: website. Valid values of `DocumentType` include 0, 1, 2, 3, and 5.
+3: WeChat Official Account or WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
+4: trademark. Valid values of `DocumentType` include 7.
+5: government/public institution/other. Valid values of `DocumentType` include 2 and 3.
+Note: the identity certificate type must be selected according to the correspondence; otherwise, the review will fail.
+         * @type {number || null}
+         */
+        this.SignType = null;
+
+        /**
+         * Identity certificate type:
+0: three-in-one.
+1: business license.
+2: organization code certificate.
+3: social credit code certificate.
+4: screenshot of application backend management (for personal app).
+5: screenshot of website ICP filing backend (for personal website).
+6: screenshot of WeChat Mini Program settings page (for personal WeChat Mini Program).
+7: trademark registration certificate.
+Note: the corresponding `DocumentType` must be selected according to `SignType`.
+         * @type {number || null}
+         */
+        this.DocumentType = null;
+
+        /**
+         * Whether it is Global SMS:
+0: Mainland China SMS.
+1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * Signature purpose:
+0: for personal use.
+1: for others.
+         * @type {number || null}
+         */
+        this.SignPurpose = null;
+
+        /**
+         * You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix `data:image/jpeg;base64,` from the resulted string, and then use it as the value of this parameter.
+         * @type {string || null}
+         */
+        this.ProofImage = null;
+
+        /**
+         * Power of attorney, which should be submitted if `SignPurpose` is for use by others.
+You should Base64-encode the image first, remove the prefix `data:image/jpeg;base64,` from the resulted string, and then use it as the value of this parameter.
+Note: this field will take effect only when `SignPurpose` is 1 (for user by others).
+         * @type {string || null}
+         */
+        this.CommissionImage = null;
+
+        /**
+         * Signature application remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignId = 'SignId' in params ? params.SignId : null;
+        this.SignName = 'SignName' in params ? params.SignName : null;
+        this.SignType = 'SignType' in params ? params.SignType : null;
+        this.DocumentType = 'DocumentType' in params ? params.DocumentType : null;
+        this.International = 'International' in params ? params.International : null;
+        this.SignPurpose = 'SignPurpose' in params ? params.SignPurpose : null;
+        this.ProofImage = 'ProofImage' in params ? params.ProofImage : null;
+        this.CommissionImage = 'CommissionImage' in params ? params.CommissionImage : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * AddSmsSign request structure.
+ * @class
+ */
+class AddSmsSignRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signature name.
+         * @type {string || null}
+         */
+        this.SignName = null;
+
+        /**
+         * Signature type. Each of these types is followed by their `DocumentType` (identity certificate type) option:
+0: company. Valid values of `DocumentType` include 0, 1, 2, and 3.
+1: app. Valid values of `DocumentType` include 0, 1, 2, 3, and 4.
+2: website. Valid values of `DocumentType` include 0, 1, 2, 3, and 5.
+3: WeChat Official Account or WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
+4: trademark. Valid values of `DocumentType` include 7.
+5: government/public institution/other. Valid values of `DocumentType` include 2 and 3.
+Note: the identity certificate type must be selected according to the correspondence; otherwise, the review will fail.
+         * @type {number || null}
+         */
+        this.SignType = null;
+
+        /**
+         * Identity certificate type:
+0: three-in-one.
+1: business license.
+2: organization code certificate.
+3: social credit code certificate.
+4: screenshot of application backend management (for personal app).
+5: screenshot of website ICP filing backend (for personal website).
+6: screenshot of WeChat Mini Program settings page (for personal WeChat Mini Program).
+7: trademark registration certificate.
+Note: the corresponding `DocumentType` must be selected according to `SignType`.
+         * @type {number || null}
+         */
+        this.DocumentType = null;
+
+        /**
+         * Whether it is Global SMS:
+0: Mainland China SMS.
+1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * Signature purpose:
+0: for personal use.
+1: for others.
+         * @type {number || null}
+         */
+        this.SignPurpose = null;
+
+        /**
+         * You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix `data:image/jpeg;base64,` from the resulted string, and then use it as the value of this parameter.
+         * @type {string || null}
+         */
+        this.ProofImage = null;
+
+        /**
+         * Power of attorney, which should be submitted if `SignPurpose` is for use by others.
+You should Base64-encode the image first, remove the prefix `data:image/jpeg;base64,` from the resulted string, and then use it as the value of this parameter.
+Note: this field will take effect only when `SignPurpose` is 1 (for user by others).
+         * @type {string || null}
+         */
+        this.CommissionImage = null;
+
+        /**
+         * Signature application remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignName = 'SignName' in params ? params.SignName : null;
+        this.SignType = 'SignType' in params ? params.SignType : null;
+        this.DocumentType = 'DocumentType' in params ? params.DocumentType : null;
+        this.International = 'International' in params ? params.International : null;
+        this.SignPurpose = 'SignPurpose' in params ? params.SignPurpose : null;
+        this.ProofImage = 'ProofImage' in params ? params.ProofImage : null;
+        this.CommissionImage = 'CommissionImage' in params ? params.CommissionImage : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * Template parameter addition response 
+ * @class
+ */
+class AddTemplateStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * DescribeSmsTemplateList response structure.
+ * @class
+ */
+class DescribeSmsTemplateListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response for getting SMS template information
+         * @type {Array.<DescribeTemplateListStatus> || null}
+         */
+        this.DescribeTemplateStatusSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DescribeTemplateStatusSet) {
+            this.DescribeTemplateStatusSet = new Array();
+            for (let z in params.DescribeTemplateStatusSet) {
+                let obj = new DescribeTemplateListStatus();
+                obj.deserialize(params.DescribeTemplateStatusSet[z]);
+                this.DescribeTemplateStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PullSmsSendStatusByPhoneNumber request structure.
+ * @class
+ */
+class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pull start time in seconds in the format of UNIX timestamp.
+Note: the data for the last 7 days can be pulled at most.
+         * @type {number || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * Offset.
+Note: this parameter is currently fixed at 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of pulled entries. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Target mobile number in the E.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+        /**
+         * Pull end time in seconds in the format of UNIX timestamp.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * AddSmsTemplate request structure.
+ * @class
+ */
+class AddSmsTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Template content.
+         * @type {string || null}
+         */
+        this.TemplateContent = null;
+
+        /**
+         * SMS type. 0: regular SMS, 1: marketing SMS.
+         * @type {number || null}
+         */
+        this.SmsType = null;
+
+        /**
+         * Whether it is Global SMS:
+0: Mainland China SMS.
+1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * Template remarks, such as reason for application and use case.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateContent = 'TemplateContent' in params ? params.TemplateContent : null;
+        this.SmsType = 'SmsType' in params ? params.SmsType : null;
+        this.International = 'International' in params ? params.International : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * ModifySmsTemplate request structure.
+ * @class
+ */
+class ModifySmsTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the template to be modified.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * New template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * New template content.
+         * @type {string || null}
+         */
+        this.TemplateContent = null;
+
+        /**
+         * SMS type. 0: regular SMS, 1: marketing SMS.
+         * @type {number || null}
+         */
+        this.SmsType = null;
+
+        /**
+         * Whether it is Global SMS:
+0: Mainland China SMS.
+1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * Template remarks, such as reason for application and use case.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateContent = 'TemplateContent' in params ? params.TemplateContent : null;
+        this.SmsType = 'SmsType' in params ? params.SmsType : null;
+        this.International = 'International' in params ? params.International : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * SMS reply status
+ * @class
+ */
+class PullSmsReplyStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+         * @type {string || null}
+         */
+        this.ExtendCode = null;
+
+        /**
+         * Country (or region) code.
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * Mobile number in the E.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * SMS signature name.
+         * @type {string || null}
+         */
+        this.SignName = null;
+
+        /**
+         * User reply.
+         * @type {string || null}
+         */
+        this.ReplyContent = null;
+
+        /**
+         * Reply time in seconds in the format of UNIX timestamp.
+         * @type {number || null}
+         */
+        this.ReplyTime = null;
+
+        /**
+         * User's mobile number in a common format such as 13711112222.
+         * @type {string || null}
+         */
+        this.SubscriberNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExtendCode = 'ExtendCode' in params ? params.ExtendCode : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.SignName = 'SignName' in params ? params.SignName : null;
+        this.ReplyContent = 'ReplyContent' in params ? params.ReplyContent : null;
+        this.ReplyTime = 'ReplyTime' in params ? params.ReplyTime : null;
+        this.SubscriberNumber = 'SubscriberNumber' in params ? params.SubscriberNumber : null;
+
+    }
+}
+
+/**
+ * CallbackStatusStatistics response structure.
+ * @class
+ */
+class CallbackStatusStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Receipt statistics response body.
+         * @type {CallbackStatusStatistics || null}
+         */
+        this.CallbackStatusStatistics = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CallbackStatusStatistics) {
+            let obj = new CallbackStatusStatistics();
+            obj.deserialize(params.CallbackStatusStatistics)
+            this.CallbackStatusStatistics = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PullSmsSendStatus request structure.
+ * @class
+ */
+class PullSmsSendStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maximum number of pulled entries. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+
+    }
+}
+
+/**
+ * PullSmsSendStatusByPhoneNumber response structure.
+ * @class
+ */
+class PullSmsSendStatusByPhoneNumberResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Delivery status response set.
+         * @type {Array.<PullSmsSendStatus> || null}
+         */
+        this.PullSmsSendStatusSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PullSmsSendStatusSet) {
+            this.PullSmsSendStatusSet = new Array();
+            for (let z in params.PullSmsSendStatusSet) {
+                let obj = new PullSmsSendStatus();
+                obj.deserialize(params.PullSmsSendStatusSet[z]);
+                this.PullSmsSendStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Signature modification response 
+ * @class
+ */
+class ModifySignStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signature ID.
+         * @type {number || null}
+         */
+        this.SignId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignId = 'SignId' in params ? params.SignId : null;
+
+    }
+}
+
+/**
+ * Response for getting SMS signature information
+ * @class
+ */
+class DescribeSignListStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signature ID.
+         * @type {number || null}
+         */
+        this.SignId = null;
+
+        /**
+         * Whether it is Global SMS. 0: Mainland China SMS; 1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * Signature application status. Valid values: 0: approved; 1: under review.
+-1: application rejected or failed.
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * Review reply, i.e., response given by the reviewer, which is usually the reason for rejection.
+         * @type {string || null}
+         */
+        this.ReviewReply = null;
+
+        /**
+         * Signature name.
+         * @type {string || null}
+         */
+        this.SignName = null;
+
+        /**
+         * Application submission time in the format of UNIX timestamp in seconds.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignId = 'SignId' in params ? params.SignId : null;
+        this.International = 'International' in params ? params.International : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.ReviewReply = 'ReviewReply' in params ? params.ReviewReply : null;
+        this.SignName = 'SignName' in params ? params.SignName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
+ * SendSms response structure.
+ * @class
+ */
+class SendSmsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SMS delivery status.
+         * @type {Array.<SendStatus> || null}
+         */
+        this.SendStatusSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SendStatusSet) {
+            this.SendStatusSet = new Array();
+            for (let z in params.SendStatusSet) {
+                let obj = new SendStatus();
+                obj.deserialize(params.SendStatusSet[z]);
+                this.SendStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendStatusStatistics response structure.
+ * @class
+ */
+class SendStatusStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Delivery statistics response body.
+         * @type {SendStatusStatistics || null}
+         */
+        this.SendStatusStatistics = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SendStatusStatistics) {
+            let obj = new SendStatusStatistics();
+            obj.deserialize(params.SendStatusStatistics)
+            this.SendStatusStatistics = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendSms request structure.
+ * @class
+ */
+class SendSmsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Mainland China mobile numbers or all global mobile numbers).
+Example: +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+         * @type {Array.<string> || null}
+         */
+        this.PhoneNumberSet = null;
+
+        /**
+         * The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+        /**
+         * Template ID. You must enter the ID of an approved template, which can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2). If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Content of the SMS signature, which should be encoded in UTF-8. You must enter an approved signature, such as Tencent Cloud. The signature information can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2).
+Note: this parameter is required for Mainland China SMS.
+         * @type {string || null}
+         */
+        this.SignName = null;
+
+        /**
+         * Template parameter. If there is no template parameter, leave this parameter blank.
+         * @type {Array.<string> || null}
+         */
+        this.TemplateParamSet = null;
+
+        /**
+         * SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+         * @type {string || null}
+         */
+        this.ExtendCode = null;
+
+        /**
+         * User session content, which can carry context information such as user-side ID and will be returned as-is by the server.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * This parameter is not required for Mainland China SMS. For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
+Note: if your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+         * @type {string || null}
+         */
+        this.SenderId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PhoneNumberSet = 'PhoneNumberSet' in params ? params.PhoneNumberSet : null;
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.SignName = 'SignName' in params ? params.SignName : null;
+        this.TemplateParamSet = 'TemplateParamSet' in params ? params.TemplateParamSet : null;
+        this.ExtendCode = 'ExtendCode' in params ? params.ExtendCode : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SenderId = 'SenderId' in params ? params.SenderId : null;
+
+    }
+}
+
+/**
+ * Delivery statistics response body
+ * @class
+ */
+class SendStatusStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Billable SMS message quantity; for example, in 100 successfully submitted SMS messages, if 20 ones are long messages (over 80 characters) and split into two messages each, then the billable quantity will be 80 * 1 + 20 * 2 = 120.
+         * @type {number || null}
+         */
+        this.FeeCount = null;
+
+        /**
+         * Submitted SMS messages.
+         * @type {number || null}
+         */
+        this.RequestCount = null;
+
+        /**
+         * Successfully submitted SMS messages.
+         * @type {number || null}
+         */
+        this.RequestSuccessCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FeeCount = 'FeeCount' in params ? params.FeeCount : null;
+        this.RequestCount = 'RequestCount' in params ? params.RequestCount : null;
+        this.RequestSuccessCount = 'RequestSuccessCount' in params ? params.RequestSuccessCount : null;
+
+    }
+}
+
+/**
+ * CallbackStatusStatistics request structure.
+ * @class
+ */
+class CallbackStatusStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * End time in the format of `yyyymmddhh` accurate to the hour, such as 2021050118 (18:00 on May 1, 2021).
+Note: `EndTime` must be after `BeginTime`, and the difference should not exceed 32 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+        /**
+         * Upper limit.
+Note: this parameter is currently fixed at 0.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset.
+Note: this parameter is currently fixed at 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * Template deletion response
+ * @class
+ */
+class DeleteTemplateStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deletion status information.
+         * @type {string || null}
+         */
+        this.DeleteStatus = null;
+
+        /**
+         * Deleted time in seconds in the format of UNIX timestamp.
+         * @type {number || null}
+         */
+        this.DeleteTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeleteStatus = 'DeleteStatus' in params ? params.DeleteStatus : null;
+        this.DeleteTime = 'DeleteTime' in params ? params.DeleteTime : null;
+
+    }
+}
+
+/**
+ * DescribeSmsSignList request structure.
+ * @class
+ */
+class DescribeSmsSignListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signature ID array.
+Note: the maximum length of the array is 100 by default.
+         * @type {Array.<number> || null}
+         */
+        this.SignIdSet = null;
+
+        /**
+         * Whether it is Global SMS:
+0: Mainland China SMS.
+1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignIdSet = 'SignIdSet' in params ? params.SignIdSet : null;
+        this.International = 'International' in params ? params.International : null;
+
+    }
+}
+
+/**
+ * Response for getting SMS template information
+ * @class
+ */
+class DescribeTemplateListStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Whether it is Global SMS. 0: Mainland China SMS; 1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * Template application status. Valid values: 0: approved; 1: under review; -1: application rejected or failed.
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * Review reply, i.e., response given by the reviewer, which is usually the reason for rejection.
+         * @type {string || null}
+         */
+        this.ReviewReply = null;
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Application submission time in the format of UNIX timestamp in seconds.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Template content.
+         * @type {string || null}
+         */
+        this.TemplateContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.International = 'International' in params ? params.International : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.ReviewReply = 'ReviewReply' in params ? params.ReviewReply : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TemplateContent = 'TemplateContent' in params ? params.TemplateContent : null;
+
+    }
+}
+
+/**
+ * AddSmsTemplate response structure.
+ * @class
+ */
+class AddSmsTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SMS template addition response body
+         * @type {AddTemplateStatus || null}
+         */
+        this.AddTemplateStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AddTemplateStatus) {
+            let obj = new AddTemplateStatus();
+            obj.deserialize(params.AddTemplateStatus)
+            this.AddTemplateStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SMS delivery status details
+ * @class
+ */
+class PullSmsSendStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Actual time of SMS receipt by user in seconds in the format of UNIX timestamp.
+         * @type {number || null}
+         */
+        this.UserReceiveTime = null;
+
+        /**
+         * Country (or region) code.
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * User's mobile number in a common format such as 13711112222.
+         * @type {string || null}
+         */
+        this.SubscriberNumber = null;
+
+        /**
+         * Mobile number in the E.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * ID of the current delivery.
+         * @type {string || null}
+         */
+        this.SerialNo = null;
+
+        /**
+         * Whether the SMS message is actually received. Valid values: SUCCESS (success), FAIL (failure).
+         * @type {string || null}
+         */
+        this.ReportStatus = null;
+
+        /**
+         * Description of SMS receipt by user.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserReceiveTime = 'UserReceiveTime' in params ? params.UserReceiveTime : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.SubscriberNumber = 'SubscriberNumber' in params ? params.SubscriberNumber : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.ReportStatus = 'ReportStatus' in params ? params.ReportStatus : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeSmsSignList response structure.
+ * @class
+ */
+class DescribeSmsSignListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response for getting signature information
+         * @type {Array.<DescribeSignListStatus> || null}
+         */
+        this.DescribeSignListStatusSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DescribeSignListStatusSet) {
+            this.DescribeSignListStatusSet = new Array();
+            for (let z in params.DescribeSignListStatusSet) {
+                let obj = new DescribeSignListStatus();
+                obj.deserialize(params.DescribeSignListStatusSet[z]);
+                this.DescribeSignListStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSmsTemplateList request structure.
+ * @class
+ */
+class DescribeSmsTemplateListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID array.
+Note: the maximum length of the array is 100 by default.
+         * @type {Array.<number> || null}
+         */
+        this.TemplateIdSet = null;
+
+        /**
+         * Whether it is Global SMS:
+0: Mainland China SMS.
+1: Global SMS.
+         * @type {number || null}
+         */
+        this.International = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateIdSet = 'TemplateIdSet' in params ? params.TemplateIdSet : null;
+        this.International = 'International' in params ? params.International : null;
+
+    }
+}
+
+/**
+ * Receipt statistics response body
+ * @class
+ */
+class CallbackStatusStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Messages with receipt.
+         * @type {number || null}
+         */
+        this.CallbackCount = null;
+
+        /**
+         * Successfully submitted SMS messages.
+         * @type {number || null}
+         */
+        this.RequestSuccessCount = null;
+
+        /**
+         * Failed receipts.
+         * @type {number || null}
+         */
+        this.CallbackFailCount = null;
+
+        /**
+         * Successful receipts.
+         * @type {number || null}
+         */
+        this.CallbackSuccessCount = null;
+
+        /**
+         * Carrier's internal error.
+         * @type {number || null}
+         */
+        this.InternalErrorCount = null;
+
+        /**
+         * Invalid numbers.
+         * @type {number || null}
+         */
+        this.InvalidNumberCount = null;
+
+        /**
+         * Errors such as out-of-service or power-off.
+         * @type {number || null}
+         */
+        this.ShutdownErrorCount = null;
+
+        /**
+         * Blocked mobile numbers.
+         * @type {number || null}
+         */
+        this.BlackListCount = null;
+
+        /**
+         * Carrier rate limit hits.
+         * @type {number || null}
+         */
+        this.FrequencyLimitCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CallbackCount = 'CallbackCount' in params ? params.CallbackCount : null;
+        this.RequestSuccessCount = 'RequestSuccessCount' in params ? params.RequestSuccessCount : null;
+        this.CallbackFailCount = 'CallbackFailCount' in params ? params.CallbackFailCount : null;
+        this.CallbackSuccessCount = 'CallbackSuccessCount' in params ? params.CallbackSuccessCount : null;
+        this.InternalErrorCount = 'InternalErrorCount' in params ? params.InternalErrorCount : null;
+        this.InvalidNumberCount = 'InvalidNumberCount' in params ? params.InvalidNumberCount : null;
+        this.ShutdownErrorCount = 'ShutdownErrorCount' in params ? params.ShutdownErrorCount : null;
+        this.BlackListCount = 'BlackListCount' in params ? params.BlackListCount : null;
+        this.FrequencyLimitCount = 'FrequencyLimitCount' in params ? params.FrequencyLimitCount : null;
+
+    }
+}
+
+/**
+ * SendStatusStatistics request structure.
+ * @class
+ */
+class SendStatusStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * End time in the format of `yyyymmddhh` accurate to the hour, such as 2021050118 (18:00 on May 1, 2021).
+Note: `EndTime` must be after `BeginTime`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+        /**
+         * Upper limit.
+Note: this parameter is currently fixed at 0.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset.
+Note: this parameter is currently fixed at 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DeleteSmsTemplate request structure.
+ * @class
+ */
+class DeleteSmsTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the template to be deleted.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * PullSmsReplyStatusByPhoneNumber response structure.
+ * @class
+ */
+class PullSmsReplyStatusByPhoneNumberResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Reply status response set.
+         * @type {Array.<PullSmsReplyStatus> || null}
+         */
+        this.PullSmsReplyStatusSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PullSmsReplyStatusSet) {
+            this.PullSmsReplyStatusSet = new Array();
+            for (let z in params.PullSmsReplyStatusSet) {
+                let obj = new PullSmsReplyStatus();
+                obj.deserialize(params.PullSmsReplyStatusSet[z]);
+                this.PullSmsReplyStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SMS delivery status
+ * @class
+ */
+class SendStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Delivery serial number.
+         * @type {string || null}
+         */
+        this.SerialNo = null;
+
+        /**
+         * Mobile number in the E.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * Number of billable SMS messages. For billing rules, please see [Billing Policy](https://intl.cloud.tencent.com/document/product/382/36135?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Fee = null;
+
+        /**
+         * User session content.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * SMS request error code. For specific meanings, please see [Error Codes](https://intl.cloud.tencent.com/document/product/382/49316?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * SMS request error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Country/Region code, such as CN and US. For unrecognized country/region codes, `DEF` is returned by default. For the specific list of supported values, please see [Global SMS Price Overview](https://intl.cloud.tencent.com/document/product/382/18051?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.IsoCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.Fee = 'Fee' in params ? params.Fee : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.IsoCode = 'IsoCode' in params ? params.IsoCode : null;
+
+    }
+}
+
+/**
+ * DeleteSmsSign response structure.
+ * @class
+ */
+class DeleteSmsSignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signature deletion response
+         * @type {DeleteSignStatus || null}
+         */
+        this.DeleteSignStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DeleteSignStatus) {
+            let obj = new DeleteSignStatus();
+            obj.deserialize(params.DeleteSignStatus)
+            this.DeleteSignStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddSmsSign response structure.
+ * @class
+ */
+class AddSmsSignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signature addition response
+         * @type {AddSignStatus || null}
+         */
+        this.AddSignStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AddSignStatus) {
+            let obj = new AddSignStatus();
+            obj.deserialize(params.AddSignStatus)
+            this.AddSignStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteSmsSign request structure.
+ * @class
+ */
+class DeleteSmsSignRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the signature to be deleted.
+         * @type {number || null}
+         */
+        this.SignId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignId = 'SignId' in params ? params.SignId : null;
+
+    }
+}
+
+/**
+ * PullSmsReplyStatusByPhoneNumber request structure.
+ * @class
+ */
+class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pull start time in seconds in the format of UNIX timestamp.
+Note: the data for the last 7 days can be pulled at most.
+         * @type {number || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * Offset.
+Note: this parameter is currently fixed at 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of pulled entries. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Target mobile number in the E.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+        /**
+         * Pull end time in seconds in the format of UNIX timestamp.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * ModifySmsSign response structure.
+ * @class
+ */
+class ModifySmsSignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signature modification response
+         * @type {ModifySignStatus || null}
+         */
+        this.ModifySignStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ModifySignStatus) {
+            let obj = new ModifySignStatus();
+            obj.deserialize(params.ModifySignStatus)
+            this.ModifySignStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Signature addition response 
+ * @class
+ */
+class AddSignStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signature ID.
+         * @type {number || null}
+         */
+        this.SignId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignId = 'SignId' in params ? params.SignId : null;
+
+    }
+}
+
+/**
+ * Template parameter modification response 
+ * @class
+ */
+class ModifyTemplateStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * PullSmsSendStatus response structure.
+ * @class
+ */
+class PullSmsSendStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Delivery status response set.
+         * @type {Array.<PullSmsSendStatus> || null}
+         */
+        this.PullSmsSendStatusSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PullSmsSendStatusSet) {
+            this.PullSmsSendStatusSet = new Array();
+            for (let z in params.PullSmsSendStatusSet) {
+                let obj = new PullSmsSendStatus();
+                obj.deserialize(params.PullSmsSendStatusSet[z]);
+                this.PullSmsSendStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Signature deletion response
+ * @class
+ */
+class DeleteSignStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deletion status information.
+         * @type {string || null}
+         */
+        this.DeleteStatus = null;
+
+        /**
+         * Deleted time in seconds in the format of UNIX timestamp.
+         * @type {number || null}
+         */
+        this.DeleteTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeleteStatus = 'DeleteStatus' in params ? params.DeleteStatus : null;
+        this.DeleteTime = 'DeleteTime' in params ? params.DeleteTime : null;
+
+    }
+}
+
+/**
+ * PullSmsReplyStatus response structure.
+ * @class
+ */
+class PullSmsReplyStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Reply status response set.
+         * @type {Array.<PullSmsReplyStatus> || null}
+         */
+        this.PullSmsReplyStatusSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PullSmsReplyStatusSet) {
+            this.PullSmsReplyStatusSet = new Array();
+            for (let z in params.PullSmsReplyStatusSet) {
+                let obj = new PullSmsReplyStatus();
+                obj.deserialize(params.PullSmsReplyStatusSet[z]);
+                this.PullSmsReplyStatusSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -188,8 +2148,48 @@ class SmsPackagesStatisticsResponse extends  AbstractModel {
 }
 
 module.exports = {
-    SmsPackagesStatisticsRequest: SmsPackagesStatisticsRequest,
-    SmsPackagesStatistics: SmsPackagesStatistics,
-    SmsPackagesStatisticsResponse: SmsPackagesStatisticsResponse,
+    PullSmsReplyStatusRequest: PullSmsReplyStatusRequest,
+    DeleteSmsTemplateResponse: DeleteSmsTemplateResponse,
+    ModifySmsTemplateResponse: ModifySmsTemplateResponse,
+    ModifySmsSignRequest: ModifySmsSignRequest,
+    AddSmsSignRequest: AddSmsSignRequest,
+    AddTemplateStatus: AddTemplateStatus,
+    DescribeSmsTemplateListResponse: DescribeSmsTemplateListResponse,
+    PullSmsSendStatusByPhoneNumberRequest: PullSmsSendStatusByPhoneNumberRequest,
+    AddSmsTemplateRequest: AddSmsTemplateRequest,
+    ModifySmsTemplateRequest: ModifySmsTemplateRequest,
+    PullSmsReplyStatus: PullSmsReplyStatus,
+    CallbackStatusStatisticsResponse: CallbackStatusStatisticsResponse,
+    PullSmsSendStatusRequest: PullSmsSendStatusRequest,
+    PullSmsSendStatusByPhoneNumberResponse: PullSmsSendStatusByPhoneNumberResponse,
+    ModifySignStatus: ModifySignStatus,
+    DescribeSignListStatus: DescribeSignListStatus,
+    SendSmsResponse: SendSmsResponse,
+    SendStatusStatisticsResponse: SendStatusStatisticsResponse,
+    SendSmsRequest: SendSmsRequest,
+    SendStatusStatistics: SendStatusStatistics,
+    CallbackStatusStatisticsRequest: CallbackStatusStatisticsRequest,
+    DeleteTemplateStatus: DeleteTemplateStatus,
+    DescribeSmsSignListRequest: DescribeSmsSignListRequest,
+    DescribeTemplateListStatus: DescribeTemplateListStatus,
+    AddSmsTemplateResponse: AddSmsTemplateResponse,
+    PullSmsSendStatus: PullSmsSendStatus,
+    DescribeSmsSignListResponse: DescribeSmsSignListResponse,
+    DescribeSmsTemplateListRequest: DescribeSmsTemplateListRequest,
+    CallbackStatusStatistics: CallbackStatusStatistics,
+    SendStatusStatisticsRequest: SendStatusStatisticsRequest,
+    DeleteSmsTemplateRequest: DeleteSmsTemplateRequest,
+    PullSmsReplyStatusByPhoneNumberResponse: PullSmsReplyStatusByPhoneNumberResponse,
+    SendStatus: SendStatus,
+    DeleteSmsSignResponse: DeleteSmsSignResponse,
+    AddSmsSignResponse: AddSmsSignResponse,
+    DeleteSmsSignRequest: DeleteSmsSignRequest,
+    PullSmsReplyStatusByPhoneNumberRequest: PullSmsReplyStatusByPhoneNumberRequest,
+    ModifySmsSignResponse: ModifySmsSignResponse,
+    AddSignStatus: AddSignStatus,
+    ModifyTemplateStatus: ModifyTemplateStatus,
+    PullSmsSendStatusResponse: PullSmsSendStatusResponse,
+    DeleteSignStatus: DeleteSignStatus,
+    PullSmsReplyStatusResponse: PullSmsReplyStatusResponse,
 
 }

@@ -22,6 +22,7 @@ const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeDBXlogsRequest = models.DescribeDBXlogsRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DeleteReadOnlyGroupResponse = models.DeleteReadOnlyGroupResponse;
+const CreateInstancesRequest = models.CreateInstancesRequest;
 const SpecItemInfo = models.SpecItemInfo;
 const ModifyDBInstanceReadOnlyGroupResponse = models.ModifyDBInstanceReadOnlyGroupResponse;
 const OpenServerlessDBExtranetAccessRequest = models.OpenServerlessDBExtranetAccessRequest;
@@ -45,6 +46,7 @@ const ServerlessDBAccount = models.ServerlessDBAccount;
 const ModifyDBInstanceReadOnlyGroupRequest = models.ModifyDBInstanceReadOnlyGroupRequest;
 const AddDBInstanceToReadOnlyGroupResponse = models.AddDBInstanceToReadOnlyGroupResponse;
 const CreateReadOnlyDBInstanceResponse = models.CreateReadOnlyDBInstanceResponse;
+const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
 const DisIsolateDBInstancesRequest = models.DisIsolateDBInstancesRequest;
@@ -74,12 +76,12 @@ const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
 const IsolateDBInstancesResponse = models.IsolateDBInstancesResponse;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
-const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
+const RebalanceReadOnlyGroupResponse = models.RebalanceReadOnlyGroupResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const ErrLogDetail = models.ErrLogDetail;
 const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
-const RebalanceReadOnlyGroupResponse = models.RebalanceReadOnlyGroupResponse;
+const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
@@ -323,7 +325,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create one or more TencentDB for PostgreSQL instances.
+     * This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances.
      * @param {CreateDBInstancesRequest} req
      * @param {function(string, CreateDBInstancesResponse):void} cb
      * @public
@@ -408,6 +410,17 @@ class PostgresClient extends AbstractClient {
     InquiryPriceUpgradeDBInstance(req, cb) {
         let resp = new InquiryPriceUpgradeDBInstanceResponse();
         this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove a read-only replica from an RO group.
+     * @param {RemoveDBInstanceFromReadOnlyGroupRequest} req
+     * @param {function(string, RemoveDBInstanceFromReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    RemoveDBInstanceFromReadOnlyGroup(req, cb) {
+        let resp = new RemoveDBInstanceFromReadOnlyGroupResponse();
+        this.request("RemoveDBInstanceFromReadOnlyGroup", req, resp, cb);
     }
 
     /**
@@ -576,14 +589,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to remove a read-only replica from an RO group.
-     * @param {RemoveDBInstanceFromReadOnlyGroupRequest} req
-     * @param {function(string, RemoveDBInstanceFromReadOnlyGroupResponse):void} cb
+     * This API is used to create and initialize one or more TencentDB for PostgreSQL instances.
+     * @param {CreateInstancesRequest} req
+     * @param {function(string, CreateInstancesResponse):void} cb
      * @public
      */
-    RemoveDBInstanceFromReadOnlyGroup(req, cb) {
-        let resp = new RemoveDBInstanceFromReadOnlyGroupResponse();
-        this.request("RemoveDBInstanceFromReadOnlyGroup", req, resp, cb);
+    CreateInstances(req, cb) {
+        let resp = new CreateInstancesResponse();
+        this.request("CreateInstances", req, resp, cb);
     }
 
     /**

@@ -31,7 +31,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.SpecCode = null;
 
         /**
-         * PostgreSQL kernel version. Currently, only two versions are supported: 9.3.5 and 9.5.4.
+         * PostgreSQL kernel version. Valid values: `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -378,6 +378,182 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateInstances request structure.
+ * @class
+ */
+class CreateInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * @type {string || null}
+         */
+        this.SpecCode = null;
+
+        /**
+         * PostgreSQL kernel version. Valid values: `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Instance storage capacity in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * The number of instances purchased at a time. Value range: 1-10.
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance character set. Valid values: `UTF8`, `LATIN1`.
+         * @type {string || null}
+         */
+        this.Charset = null;
+
+        /**
+         * Instance root account name
+         * @type {string || null}
+         */
+        this.AdminName = null;
+
+        /**
+         * Instance root account password
+         * @type {string || null}
+         */
+        this.AdminPassword = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list. Currently, you can specify only one voucher.
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ID of a subnet in the VPC specified by `VpcId`
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Campaign ID
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
+         * @type {number || null}
+         */
+        this.NeedSupportIpv6 = null;
+
+        /**
+         * The information of tags to be associated with instances. This parameter is left empty by default.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * Security group IDs
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Charset = 'Charset' in params ? params.Charset : null;
+        this.AdminName = 'AdminName' in params ? params.AdminName : null;
+        this.AdminPassword = 'AdminPassword' in params ? params.AdminPassword : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -1486,6 +1662,55 @@ class CreateReadOnlyDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * CreateInstances response structure.
+ * @class
+ */
+class CreateInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order number list. Each instance corresponds to an order number.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * Bill ID of frozen fees
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
+         * @type {Array.<string> || null}
+         */
+        this.DBInstanceIdSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeOrders response structure.
  * @class
  */
@@ -1598,7 +1823,7 @@ class DisIsolateDBInstancesRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * Whether to use vouchers
+         * Whether to use vouchers. Valid values: `true` (yes), `false` (no). Default value: `false`.
          * @type {boolean || null}
          */
         this.AutoVoucher = null;
@@ -3035,18 +3260,18 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * IsolateDBInstances request structure.
+ * RebalanceReadOnlyGroup response structure.
  * @class
  */
-class IsolateDBInstancesRequest extends  AbstractModel {
+class RebalanceReadOnlyGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID set
-         * @type {Array.<string> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.DBInstanceIdSet = null;
+        this.RequestId = null;
 
     }
 
@@ -3057,7 +3282,7 @@ class IsolateDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3240,18 +3465,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * RebalanceReadOnlyGroup response structure.
+ * IsolateDBInstances request structure.
  * @class
  */
-class RebalanceReadOnlyGroupResponse extends  AbstractModel {
+class IsolateDBInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Instance ID set
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.DBInstanceIdSet = null;
 
     }
 
@@ -3262,7 +3487,7 @@ class RebalanceReadOnlyGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
 
     }
 }
@@ -5542,6 +5767,7 @@ module.exports = {
     DescribeDBXlogsRequest: DescribeDBXlogsRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DeleteReadOnlyGroupResponse: DeleteReadOnlyGroupResponse,
+    CreateInstancesRequest: CreateInstancesRequest,
     SpecItemInfo: SpecItemInfo,
     ModifyDBInstanceReadOnlyGroupResponse: ModifyDBInstanceReadOnlyGroupResponse,
     OpenServerlessDBExtranetAccessRequest: OpenServerlessDBExtranetAccessRequest,
@@ -5565,6 +5791,7 @@ module.exports = {
     ModifyDBInstanceReadOnlyGroupRequest: ModifyDBInstanceReadOnlyGroupRequest,
     AddDBInstanceToReadOnlyGroupResponse: AddDBInstanceToReadOnlyGroupResponse,
     CreateReadOnlyDBInstanceResponse: CreateReadOnlyDBInstanceResponse,
+    CreateInstancesResponse: CreateInstancesResponse,
     DescribeOrdersResponse: DescribeOrdersResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
     DisIsolateDBInstancesRequest: DisIsolateDBInstancesRequest,
@@ -5594,12 +5821,12 @@ module.exports = {
     IsolateDBInstancesResponse: IsolateDBInstancesResponse,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
-    IsolateDBInstancesRequest: IsolateDBInstancesRequest,
+    RebalanceReadOnlyGroupResponse: RebalanceReadOnlyGroupResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     ErrLogDetail: ErrLogDetail,
     DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
-    RebalanceReadOnlyGroupResponse: RebalanceReadOnlyGroupResponse,
+    IsolateDBInstancesRequest: IsolateDBInstancesRequest,
     InitDBInstancesRequest: InitDBInstancesRequest,
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,

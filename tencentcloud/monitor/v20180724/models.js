@@ -1663,7 +1663,7 @@ class GetMonitorDataRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Metric name, such as `CPUUsage`. For more information on the metrics of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The corresponding metric name is the `MetricName`
+         * Metric name, such as `CPUUsage`. Only one monitoring metric can be pulled at a time. For more information on the metrics of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The corresponding metric name is `MetricName`.
          * @type {string || null}
          */
         this.MetricName = null;
@@ -4672,19 +4672,19 @@ class DescribeAlarmHistoriesRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * Start time, which corresponds to `FirstOccurTime` (time when an alarm first occurred). The default value is the timestamp of a day earlier.
+         * Start time, which is the timestamp one day ago by default and the time when the alarm `FirstOccurTime` first occurs. An alarm record can be searched only if its `FirstOccurTime` is later than the `StartTime`.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * End time, which corresponds to `FirstOccurTime` (time when an alarm first occurred). The default value is the current timestamp.
+         * End time, which is the current timestamp and the time when the alarm `FirstOccurTime` first occurs. An alarm record can be searched only if its `FirstOccurTime` is earlier than the `EndTime`.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default
+         * Filter by monitoring type. Valid value: `MT_QCE` (Tencent Cloud service monitoring). If this parameter is left empty, all types will be queried by default.
          * @type {Array.<string> || null}
          */
         this.MonitorTypes = null;
@@ -4702,7 +4702,8 @@ class DescribeAlarmHistoriesRequest extends  AbstractModel {
         this.AlarmStatus = null;
 
         /**
-         * Filter by project ID. Valid values: -1 (no project), 0 (default project)
+         * Filter by project ID. Valid values: `-1` (no project), `0` (default project)
+You can query [Project Management](https://console.cloud.tencent.com/project) on this page.
          * @type {Array.<number> || null}
          */
         this.ProjectIds = null;
@@ -4714,7 +4715,8 @@ class DescribeAlarmHistoriesRequest extends  AbstractModel {
         this.InstanceGroupIds = null;
 
         /**
-         * Filter by policy type
+         * Filter by policy type. Monitoring type and policy type are first-level and second-level filters respectively and both need to be passed in. For example, `[{"MonitorType": "MT_QCE", "Namespace": "cvm_device"}]`
+This parameter can be queried with the API [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1).
          * @type {Array.<MonitorTypeNamespace> || null}
          */
         this.Namespaces = null;
@@ -4738,13 +4740,13 @@ class DescribeAlarmHistoriesRequest extends  AbstractModel {
         this.Content = null;
 
         /**
-         * Search by recipient
+         * Search by recipient. You can get the user list with the API [ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1) in “Cloud Access Management” or query the sub-user information with the API [GetUser](https://intl.cloud.tencent.com/document/product/598/34590?from_cn_redirect=1). The `Uid` field in the returned result should be entered here.
          * @type {Array.<number> || null}
          */
         this.ReceiverUids = null;
 
         /**
-         * Search by recipient group
+         * Search by recipient group. You can get the user group list with the API [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) in “Cloud Access Management” or query the user group list where a sub-user is in with the API [ListGroupsForUser](https://intl.cloud.tencent.com/document/product/598/34588?from_cn_redirect=1). The `GroupId` field in the returned result should be entered here.
          * @type {Array.<number> || null}
          */
         this.ReceiverGroups = null;
@@ -5818,29 +5820,23 @@ class DescribeAlarmPoliciesRequest extends  AbstractModel {
         this.Namespaces = null;
 
         /**
-         * Alarm object list. The outer array corresponds to multiple instances.
-Each inner array corresponds to one instance, where `object` corresponds to the dimension information of the instance. The format is as follows:
-[
-	[{"name":"unInstanceId","value":"ins-qr888845g"}],
-	[{"name":"unInstanceId","value":"ins-qr8d555g"}]
-	...
-]
-For the samples for different Tencent Cloud services, please see:
-[Dimension List](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1)
+         * The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object. For example, “CVM - Basic Monitor” can be written as:
+`[ {"Dimensions": {"unInstanceId": "ins-qr8d555g"}}, {"Dimensions": {"unInstanceId": "ins-qr8d555h"}} ]`
+You can also refer to the “Example 2” below.
+
+For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Dimensions = null;
 
         /**
-         * Search by recipient `uid`, which should be queried by calling the CAM API. For more information, please see:
-[ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1)
+         * Search by recipient. You can get the user list with the API [ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1) in “Cloud Access Management” or query the sub-user information with the API [GetUser](https://intl.cloud.tencent.com/document/product/598/34590?from_cn_redirect=1). The `Uid` field in the returned result should be entered here.
          * @type {Array.<number> || null}
          */
         this.ReceiverUids = null;
 
         /**
-         * Search by recipient group `uid`, which should be queried by calling the CAM API. For more information, please see:
-[ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1)
+         * Search by recipient group. You can get the user group list with the API [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) in “Cloud Access Management” or query the user group list where a sub-user is in with the API [ListGroupsForUser](https://intl.cloud.tencent.com/document/product/598/34588?from_cn_redirect=1). The `GroupId` field in the returned result should be entered here.
          * @type {Array.<number> || null}
          */
         this.ReceiverGroups = null;
@@ -5872,7 +5868,7 @@ For the samples for different Tencent Cloud services, please see:
 
         /**
          * ID list of the notification template, which can be obtained by querying the notification template list.
-[DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1)
+It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.NoticeIds = null;

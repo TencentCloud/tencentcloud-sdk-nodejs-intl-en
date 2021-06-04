@@ -1028,6 +1028,43 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * Tag information
+ * @class
+ */
+class TagInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * CreateAccounts response structure.
  * @class
  */
@@ -2963,6 +3000,56 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAccountMaxUserConnections request structure.
+ * @class
+ */
+class ModifyAccountMaxUserConnectionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of TencentDB accounts
+         * @type {Array.<Account> || null}
+         */
+        this.Accounts = null;
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The maximum number of instance connections supported by an account
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new Account();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
+            }
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
+
+    }
+}
+
+/**
  * ReleaseIsolatedDBInstances request structure.
  * @class
  */
@@ -4609,6 +4696,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.DeployGroupIds = null;
 
+        /**
+         * Whether to use the tag key as a filter condition
+         * @type {Array.<string> || null}
+         */
+        this.TagKeysForSearch = null;
+
     }
 
     /**
@@ -4644,6 +4737,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.WithRo = 'WithRo' in params ? params.WithRo : null;
         this.WithMaster = 'WithMaster' in params ? params.WithMaster : null;
         this.DeployGroupIds = 'DeployGroupIds' in params ? params.DeployGroupIds : null;
+        this.TagKeysForSearch = 'TagKeysForSearch' in params ? params.TagKeysForSearch : null;
 
     }
 }
@@ -5557,6 +5651,41 @@ class SwitchForUpgradeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountMaxUserConnections response structure.
+ * @class
+ */
+class ModifyAccountMaxUserConnectionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8734,6 +8863,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.InstanceNodes = null;
 
+        /**
+         * List of tags
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TagInfoItem> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -8816,6 +8952,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new TagInfoItem();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -9999,6 +10144,12 @@ class CreateAccountsRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * The maximum number of instance connections supported by the new account
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
     }
 
     /**
@@ -10020,6 +10171,7 @@ class CreateAccountsRequest extends  AbstractModel {
         }
         this.Password = 'Password' in params ? params.Password : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -10177,6 +10329,12 @@ Note: if this parameter is not passed in, it means to clear the permission.
          */
         this.ColumnPrivileges = null;
 
+        /**
+         * If this parameter is specified, permissions are modified in batches. Valid values: `grant`, `revoke`.
+         * @type {string || null}
+         */
+        this.ModifyAction = null;
+
     }
 
     /**
@@ -10224,6 +10382,7 @@ Note: if this parameter is not passed in, it means to clear the permission.
                 this.ColumnPrivileges.push(obj);
             }
         }
+        this.ModifyAction = 'ModifyAction' in params ? params.ModifyAction : null;
 
     }
 }
@@ -10451,10 +10610,16 @@ class AccountInfo extends  AbstractModel {
         this.ModifyPasswordTime = null;
 
         /**
-         * Account creation time
+         * This parameter is no longer supported.
          * @type {string || null}
          */
         this.CreateTime = null;
+
+        /**
+         * The maximum number of instance connections supported by an account
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
 
     }
 
@@ -10471,6 +10636,7 @@ class AccountInfo extends  AbstractModel {
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.ModifyPasswordTime = 'ModifyPasswordTime' in params ? params.ModifyPasswordTime : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -12101,6 +12267,12 @@ class DescribeAccountsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
+         * The maximum number of instance connections (set by the MySQL parameter `max_connections`)
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -12125,6 +12297,7 @@ class DescribeAccountsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13110,6 +13283,7 @@ module.exports = {
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     Inbound: Inbound,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
+    TagInfoItem: TagInfoItem,
     CreateAccountsResponse: CreateAccountsResponse,
     RegionSellConf: RegionSellConf,
     InstanceRollbackRangeTime: InstanceRollbackRangeTime,
@@ -13149,6 +13323,7 @@ module.exports = {
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    ModifyAccountMaxUserConnectionsRequest: ModifyAccountMaxUserConnectionsRequest,
     ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     BinlogInfo: BinlogInfo,
     DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
@@ -13193,6 +13368,7 @@ module.exports = {
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
     SwitchForUpgradeResponse: SwitchForUpgradeResponse,
+    ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     StopRollbackResponse: StopRollbackResponse,

@@ -407,7 +407,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 
         /**
          * Number of dedicated tunnels with disabled VLAN in the connection
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid value can be found.
          * @type {number || null}
          */
         this.VlanZeroDirectConnectTunnelCount = null;

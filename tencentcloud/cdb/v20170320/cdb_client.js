@@ -36,6 +36,7 @@ const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeR
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const TagInfoItem = models.TagInfoItem;
 const CreateAccountsResponse = models.CreateAccountsResponse;
 const RegionSellConf = models.RegionSellConf;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
@@ -75,6 +76,7 @@ const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
 const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const BinlogInfo = models.BinlogInfo;
 const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
@@ -119,6 +121,7 @@ const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
 const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
+const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const StopRollbackResponse = models.StopRollbackResponse;
@@ -567,6 +570,17 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
+     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
+     * @param {DeleteTimeWindowRequest} req
+     * @param {function(string, DeleteTimeWindowResponse):void} cb
+     * @public
+     */
+    DeleteTimeWindow(req, cb) {
+        let resp = new DeleteTimeWindowResponse();
+        this.request("DeleteTimeWindow", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeAccountPrivileges) is used to query the information of TencentDB account permissions.
      * @param {DescribeAccountPrivilegesRequest} req
      * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
@@ -655,14 +669,14 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API (CreateParamTemplate) is used to create a parameter template.
-     * @param {CreateParamTemplateRequest} req
-     * @param {function(string, CreateParamTemplateResponse):void} cb
+     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
+     * @param {ModifyAccountMaxUserConnectionsRequest} req
+     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
      * @public
      */
-    CreateParamTemplate(req, cb) {
-        let resp = new CreateParamTemplateResponse();
-        this.request("CreateParamTemplate", req, resp, cb);
+    ModifyAccountMaxUserConnections(req, cb) {
+        let resp = new ModifyAccountMaxUserConnectionsResponse();
+        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
     }
 
     /**
@@ -819,7 +833,7 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
-     * This API (CreateAccounts) is used to create TencentDB accounts. The new account names, domain names, and passwords need to be specified, and account remarks can also be added.
+     * This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
      * @param {CreateAccountsRequest} req
      * @param {function(string, CreateAccountsResponse):void} cb
      * @public
@@ -1371,14 +1385,14 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
-     * @param {DeleteTimeWindowRequest} req
-     * @param {function(string, DeleteTimeWindowResponse):void} cb
+     * This API (CreateParamTemplate) is used to create a parameter template.
+     * @param {CreateParamTemplateRequest} req
+     * @param {function(string, CreateParamTemplateResponse):void} cb
      * @public
      */
-    DeleteTimeWindow(req, cb) {
-        let resp = new DeleteTimeWindowResponse();
-        this.request("DeleteTimeWindow", req, resp, cb);
+    CreateParamTemplate(req, cb) {
+        let resp = new CreateParamTemplateResponse();
+        this.request("CreateParamTemplate", req, resp, cb);
     }
 
 

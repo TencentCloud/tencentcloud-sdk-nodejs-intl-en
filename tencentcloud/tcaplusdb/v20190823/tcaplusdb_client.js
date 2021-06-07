@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ImportSnapshotsResponse = models.ImportSnapshotsResponse;
+const CompareTablesInfo = models.CompareTablesInfo;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const ModifyTableGroupNameResponse = models.ModifyTableGroupNameResponse;
 const DescribeTableTagsRequest = models.DescribeTableTagsRequest;
@@ -24,9 +25,11 @@ const ModifyClusterPasswordResponse = models.ModifyClusterPasswordResponse;
 const DeleteClusterResponse = models.DeleteClusterResponse;
 const DeleteTableIndexResponse = models.DeleteTableIndexResponse;
 const TableRollbackResultNew = models.TableRollbackResultNew;
-const ServerMachineInfo = models.ServerMachineInfo;
+const ApplyStatus = models.ApplyStatus;
+const RegionInfo = models.RegionInfo;
 const DescribeTablesResponse = models.DescribeTablesResponse;
 const ModifySnapshotsResponse = models.ModifySnapshotsResponse;
+const UpdateApplyResponse = models.UpdateApplyResponse;
 const DeleteClusterRequest = models.DeleteClusterRequest;
 const SelectedTableWithField = models.SelectedTableWithField;
 const DeleteTableIndexRequest = models.DeleteTableIndexRequest;
@@ -40,19 +43,23 @@ const DescribeMachineResponse = models.DescribeMachineResponse;
 const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TagsInfoOfTableGroup = models.TagsInfoOfTableGroup;
+const DescribeApplicationsResponse = models.DescribeApplicationsResponse;
 const CreateTableGroupRequest = models.CreateTableGroupRequest;
 const ModifyClusterMachineResponse = models.ModifyClusterMachineResponse;
 const TagsInfoOfTable = models.TagsInfoOfTable;
 const DeleteIdlFilesResponse = models.DeleteIdlFilesResponse;
 const FieldInfo = models.FieldInfo;
 const ModifyTableTagsRequest = models.ModifyTableTagsRequest;
-const IdlFileInfo = models.IdlFileInfo;
+const MergeTableResult = models.MergeTableResult;
+const ApplyResult = models.ApplyResult;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const SnapshotInfoNew = models.SnapshotInfoNew;
-const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
+const Application = models.Application;
 const ClearTablesResponse = models.ClearTablesResponse;
 const DescribeIdlFileInfosRequest = models.DescribeIdlFileInfosRequest;
+const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
 const SnapshotResult = models.SnapshotResult;
+const ModifyCensorshipRequest = models.ModifyCensorshipRequest;
 const ClusterInfo = models.ClusterInfo;
 const DisableRestProxyRequest = models.DisableRestProxyRequest;
 const DescribeTablesInRecycleResponse = models.DescribeTablesInRecycleResponse;
@@ -69,7 +76,9 @@ const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const DeleteTablesResponse = models.DeleteTablesResponse;
 const ModifyTableGroupNameRequest = models.ModifyTableGroupNameRequest;
 const DescribeTableGroupsRequest = models.DescribeTableGroupsRequest;
-const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
+const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
+const MergeTablesDataRequest = models.MergeTablesDataRequest;
+const CreateClusterRequest = models.CreateClusterRequest;
 const ModifyTableGroupTagsRequest = models.ModifyTableGroupTagsRequest;
 const EnableRestProxyRequest = models.EnableRestProxyRequest;
 const ModifyTableQuotasRequest = models.ModifyTableQuotasRequest;
@@ -77,13 +86,16 @@ const CompareIdlFilesResponse = models.CompareIdlFilesResponse;
 const CreateTablesResponse = models.CreateTablesResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
+const MergeTablesInfo = models.MergeTablesInfo;
 const ModifyClusterTagsResponse = models.ModifyClusterTagsResponse;
 const DescribeClusterTagsResponse = models.DescribeClusterTagsResponse;
 const TagsInfoOfCluster = models.TagsInfoOfCluster;
 const SetTableIndexResponse = models.SetTableIndexResponse;
 const ClearTablesRequest = models.ClearTablesRequest;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
+const ServerMachineInfo = models.ServerMachineInfo;
 const CreateSnapshotsResponse = models.CreateSnapshotsResponse;
+const IdlFileInfo = models.IdlFileInfo;
 const DisableRestProxyResponse = models.DisableRestProxyResponse;
 const TagInfoUnit = models.TagInfoUnit;
 const CreateClusterResponse = models.CreateClusterResponse;
@@ -105,6 +117,7 @@ const ModifyTablesRequest = models.ModifyTablesRequest;
 const DescribeTableGroupTagsRequest = models.DescribeTableGroupTagsRequest;
 const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
+const UpdateApplyRequest = models.UpdateApplyRequest;
 const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
 const DescribeUinInWhitelistResponse = models.DescribeUinInWhitelistResponse;
 const SnapshotInfo = models.SnapshotInfo;
@@ -112,17 +125,18 @@ const ParsedTableInfoNew = models.ParsedTableInfoNew;
 const RollbackTablesResponse = models.RollbackTablesResponse;
 const MachineInfo = models.MachineInfo;
 const CreateBackupRequest = models.CreateBackupRequest;
-const CreateClusterRequest = models.CreateClusterRequest;
 const TableResultNew = models.TableResultNew;
 const CreateTablesRequest = models.CreateTablesRequest;
 const DescribeClusterTagsRequest = models.DescribeClusterTagsRequest;
-const RegionInfo = models.RegionInfo;
+const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
+const MergeTablesDataResponse = models.MergeTablesDataResponse;
+const DescribeApplicationsRequest = models.DescribeApplicationsRequest;
 const DescribeTableGroupsResponse = models.DescribeTableGroupsResponse;
 const DeleteTableGroupResponse = models.DeleteTableGroupResponse;
 const PoolInfo = models.PoolInfo;
 const DescribeMachineRequest = models.DescribeMachineRequest;
 const RollbackTablesRequest = models.RollbackTablesRequest;
-const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
+const ModifyCensorshipResponse = models.ModifyCensorshipResponse;
 const CompareIdlFilesRequest = models.CompareIdlFilesRequest;
 const ProxyDetailInfo = models.ProxyDetailInfo;
 const IdlFileInfoWithoutContent = models.IdlFileInfoWithoutContent;
@@ -168,6 +182,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to update the application status.
+     * @param {UpdateApplyRequest} req
+     * @param {function(string, UpdateApplyResponse):void} cb
+     * @public
+     */
+    UpdateApply(req, cb) {
+        let resp = new UpdateApplyResponse();
+        this.request("UpdateApply", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify table tags.
      * @param {ModifyTableTagsRequest} req
      * @param {function(string, ModifyTableTagsResponse):void} cb
@@ -198,6 +223,17 @@ class TcaplusdbClient extends AbstractClient {
     DescribeMachine(req, cb) {
         let resp = new DescribeMachineResponse();
         this.request("DescribeMachine", req, resp, cb);
+    }
+
+    /**
+     * This API is used to merge tables.
+     * @param {MergeTablesDataRequest} req
+     * @param {function(string, MergeTablesDataResponse):void} cb
+     * @public
+     */
+    MergeTablesData(req, cb) {
+        let resp = new MergeTablesDataResponse();
+        this.request("MergeTablesData", req, resp, cb);
     }
 
     /**
@@ -278,6 +314,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create a global index for a table.
+     * @param {SetTableIndexRequest} req
+     * @param {function(string, SetTableIndexResponse):void} cb
+     * @public
+     */
+    SetTableIndex(req, cb) {
+        let resp = new SetTableIndexResponse();
+        this.request("SetTableIndex", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a target IDL file by specifying the cluster ID and information of the file to be deleted. If the file is associated with a table, deletion will fail.
      * @param {DeleteIdlFilesRequest} req
      * @param {function(string, DeleteIdlFilesResponse):void} cb
@@ -319,6 +366,17 @@ class TcaplusdbClient extends AbstractClient {
     CreateBackup(req, cb) {
         let resp = new CreateBackupResponse();
         this.request("CreateBackup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable the cluster operation approval feature.
+     * @param {ModifyCensorshipRequest} req
+     * @param {function(string, ModifyCensorshipResponse):void} cb
+     * @public
+     */
+    ModifyCensorship(req, cb) {
+        let resp = new ModifyCensorshipResponse();
+        this.request("ModifyCensorship", req, resp, cb);
     }
 
     /**
@@ -476,14 +534,14 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a global index for a table.
-     * @param {SetTableIndexRequest} req
-     * @param {function(string, SetTableIndexResponse):void} cb
+     * This API is used to query the list of cluster operation applications.
+     * @param {DescribeApplicationsRequest} req
+     * @param {function(string, DescribeApplicationsResponse):void} cb
      * @public
      */
-    SetTableIndex(req, cb) {
-        let resp = new SetTableIndexResponse();
-        this.request("SetTableIndex", req, resp, cb);
+    DescribeApplications(req, cb) {
+        let resp = new DescribeApplicationsResponse();
+        this.request("DescribeApplications", req, resp, cb);
     }
 
     /**

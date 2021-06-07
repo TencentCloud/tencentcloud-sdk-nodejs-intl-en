@@ -3174,15 +3174,16 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Filter tag for terrorism information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>guns: Weapons and guns;</li>
-<li>crowd: Crowd;</li>
-<li>bloody: Bloody scenes;</li>
-<li>police: Police force;</li>
-<li>banners: Terrorism flags;</li>
-<li>militant: Militants;</li>
-<li>explosion: Explosions and fires;</li>
-<li>terrorists: Terrorists.</li>
+         * Filter tags for terrorism information detection in images. If a specified tag is detected, the tag is returned. If no filter tag is specified, all detected tags are returned. Valid values:
+<li>`guns`: weapons and guns</li>
+<li>`crowd`: crowds</li>
+<li>`bloody`: bloodiness</li>
+<li>`police`: police forces</li>
+<li>`banners`: terrorism flags</li>
+<li>`militant`: militants</li>
+<li>`explosion`: explosions and fires</li>
+<li>`terrorists`: terrorists</li>
+<li>`scenario`: terrorism images</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -9422,6 +9423,15 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
          */
         this.Height = null;
 
+        /**
+         * Repeat type of an animated watermark. Valid values:
+<li>`once`: no longer appears after watermark playback ends.</li>
+<li>`repeat_last_frame`: stays on the last frame after watermark playback ends.</li>
+<li>`repeat` (default): repeats the playback until the video ends.</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -9439,6 +9449,7 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
         }
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -9616,15 +9627,16 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Tag of the detected terrorism information in a video. Valid values:
-<li>guns: Weapons and guns.</li>
-<li>crowd: Crowd.</li>
-<li>police: Police force.</li>
-<li>bloody: Bloody scenes.</li>
-<li>banners: Terrorism flags.</li>
-<li>militant: Militants.</li>
-<li>explosion: Explosions and fires.</li>
-<li>terrorists: Terrorists.</li>
+         * Tags for detected terrorism information in a video. Valid values:
+<li>`guns`: weapons and guns</li>
+<li>`crowd`: crowds</li>
+<li>`police`: police forces</li>
+<li>`bloody`: bloodiness</li>
+<li>`banners`: terrorism flags</li>
+<li>`militant`: militants</li>
+<li>`explosion`: explosions and fires</li>
+<li>`terrorists`: terrorists</li>
+<li>`scenario`: terrorism images</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -17419,15 +17431,16 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Filter tag for terrorism information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>guns: Weapons and guns;</li>
-<li>crowd: Crowd;</li>
-<li>bloody: Bloody scenes;</li>
-<li>police: Police force;</li>
-<li>banners: Terrorism flags;</li>
-<li>militant: Militants;</li>
-<li>explosion: Explosions and fires;</li>
-<li>terrorists: Terrorists.</li>
+         * Filter tags for terrorism information detection in images. If a specified tag is detected, the tag is returned. If no filter tag is specified, all detected tags are returned. Valid values:
+<li>`guns`: weapons and guns</li>
+<li>`crowd`: crowds</li>
+<li>`bloody`: bloodiness</li>
+<li>`police`: police forces</li>
+<li>`banners`: terrorism flags</li>
+<li>`militant`: militants</li>
+<li>`explosion`: explosions and fires</li>
+<li>`terrorists`: terrorists</li>
+<li>`scenario`: terrorism images</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;

@@ -3453,6 +3453,76 @@ class DescribeLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
+ * Playback error code information
+ * @class
+ */
+class ProIspPlayCodeDataInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Country or region.
+         * @type {string || null}
+         */
+        this.CountryAreaName = null;
+
+        /**
+         * District.
+         * @type {string || null}
+         */
+        this.ProvinceName = null;
+
+        /**
+         * ISP.
+         * @type {string || null}
+         */
+        this.IspName = null;
+
+        /**
+         * Occurrences of 2xx error codes.
+         * @type {number || null}
+         */
+        this.Code2xx = null;
+
+        /**
+         * Occurrences of 3xx error codes.
+         * @type {number || null}
+         */
+        this.Code3xx = null;
+
+        /**
+         * Occurrences of 4xx error codes.
+         * @type {number || null}
+         */
+        this.Code4xx = null;
+
+        /**
+         * Occurrences of 5xx error codes.
+         * @type {number || null}
+         */
+        this.Code5xx = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CountryAreaName = 'CountryAreaName' in params ? params.CountryAreaName : null;
+        this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
+        this.IspName = 'IspName' in params ? params.IspName : null;
+        this.Code2xx = 'Code2xx' in params ? params.Code2xx : null;
+        this.Code3xx = 'Code3xx' in params ? params.Code3xx : null;
+        this.Code4xx = 'Code4xx' in params ? params.Code4xx : null;
+        this.Code5xx = 'Code5xx' in params ? params.Code5xx : null;
+
+    }
+}
+
+/**
  * General stream mix layout parameter.
  * @class
  */
@@ -5626,6 +5696,62 @@ For six input sources, 610 is supported.
 }
 
 /**
+ * Referer allowlist/blocklist configuration of a live streaming domain name
+ * @class
+ */
+class RefererAuthConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Whether to enable referer. Valid values: `0` (no), `1` (yes)
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * List type. Valid values: `0` (blocklist), `1` (allowlist)
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Whether to allow empty referer. Valid values: `0` (no), `1` (yes)
+         * @type {number || null}
+         */
+        this.AllowEmpty = null;
+
+        /**
+         * Referer list. Separate items in it with semicolons (;).
+         * @type {string || null}
+         */
+        this.Rules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AllowEmpty = 'AllowEmpty' in params ? params.AllowEmpty : null;
+        this.Rules = 'Rules' in params ? params.Rules : null;
+
+    }
+}
+
+/**
  * CreateLiveCert response structure.
  * @class
  */
@@ -6159,6 +6285,46 @@ class DescribeLiveTranscodeRulesResponse extends  AbstractModel {
                 obj.deserialize(params.Rules[z]);
                 this.Rules.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLiveDomainReferer response structure.
+ * @class
+ */
+class DescribeLiveDomainRefererResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Referer allowlist/blocklist configuration of a domain name
+         * @type {RefererAuthConfig || null}
+         */
+        this.RefererAuthConfig = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RefererAuthConfig) {
+            let obj = new RefererAuthConfig();
+            obj.deserialize(params.RefererAuthConfig)
+            this.RefererAuthConfig = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7727,54 +7893,18 @@ Note: detailed data for the last month can be queried. Either `DayTime` or `(Sta
 }
 
 /**
- * Playback error code information
+ * ModifyLiveDomainReferer response structure.
  * @class
  */
-class ProIspPlayCodeDataInfo extends  AbstractModel {
+class ModifyLiveDomainRefererResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Country or region.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.CountryAreaName = null;
-
-        /**
-         * District.
-         * @type {string || null}
-         */
-        this.ProvinceName = null;
-
-        /**
-         * ISP.
-         * @type {string || null}
-         */
-        this.IspName = null;
-
-        /**
-         * Occurrences of 2xx error codes.
-         * @type {number || null}
-         */
-        this.Code2xx = null;
-
-        /**
-         * Occurrences of 3xx error codes.
-         * @type {number || null}
-         */
-        this.Code3xx = null;
-
-        /**
-         * Occurrences of 4xx error codes.
-         * @type {number || null}
-         */
-        this.Code4xx = null;
-
-        /**
-         * Occurrences of 5xx error codes.
-         * @type {number || null}
-         */
-        this.Code5xx = null;
+        this.RequestId = null;
 
     }
 
@@ -7785,13 +7915,7 @@ class ProIspPlayCodeDataInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CountryAreaName = 'CountryAreaName' in params ? params.CountryAreaName : null;
-        this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
-        this.IspName = 'IspName' in params ? params.IspName : null;
-        this.Code2xx = 'Code2xx' in params ? params.Code2xx : null;
-        this.Code3xx = 'Code3xx' in params ? params.Code3xx : null;
-        this.Code4xx = 'Code4xx' in params ? params.Code4xx : null;
-        this.Code5xx = 'Code5xx' in params ? params.Code5xx : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9388,6 +9512,34 @@ class StopRecordTaskRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeLiveDomainReferer request structure.
+ * @class
+ */
+class DescribeLiveDomainRefererRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Playback domain name
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -11180,6 +11332,62 @@ class CreateCommonMixStreamResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyLiveDomainReferer request structure.
+ * @class
+ */
+class ModifyLiveDomainRefererRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Playback domain name
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Whether to enable referer allowlist/blocklist authentication for the current domain name
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * List type. Valid values: `0` (blocklist), `1` (allowlist)
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Whether to allow empty referer. Valid values: `0` (no), `1` (yes)
+         * @type {number || null}
+         */
+        this.AllowEmpty = null;
+
+        /**
+         * Referer list. Separate items in it with semicolons (;).
+         * @type {string || null}
+         */
+        this.Rules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AllowEmpty = 'AllowEmpty' in params ? params.AllowEmpty : null;
+        this.Rules = 'Rules' in params ? params.Rules : null;
+
+    }
+}
+
+/**
  * CreateLiveCallbackTemplate response structure.
  * @class
  */
@@ -12816,6 +13024,7 @@ module.exports = {
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
     DescribeLiveWatermarkRequest: DescribeLiveWatermarkRequest,
+    ProIspPlayCodeDataInfo: ProIspPlayCodeDataInfo,
     CommonMixLayoutParams: CommonMixLayoutParams,
     DescribeLiveDomainCertRequest: DescribeLiveDomainCertRequest,
     DescribeLiveStreamEventListRequest: DescribeLiveStreamEventListRequest,
@@ -12859,6 +13068,7 @@ module.exports = {
     DescribeLiveWatermarkRulesRequest: DescribeLiveWatermarkRulesRequest,
     DropLiveStreamRequest: DropLiveStreamRequest,
     CreateCommonMixStreamRequest: CreateCommonMixStreamRequest,
+    RefererAuthConfig: RefererAuthConfig,
     CreateLiveCertResponse: CreateLiveCertResponse,
     PushDataInfo: PushDataInfo,
     AddDelayLiveStreamRequest: AddDelayLiveStreamRequest,
@@ -12867,6 +13077,7 @@ module.exports = {
     TranscodeDetailInfo: TranscodeDetailInfo,
     DescribeLiveSnapshotTemplateResponse: DescribeLiveSnapshotTemplateResponse,
     DescribeLiveTranscodeRulesResponse: DescribeLiveTranscodeRulesResponse,
+    DescribeLiveDomainRefererResponse: DescribeLiveDomainRefererResponse,
     AddLiveDomainRequest: AddLiveDomainRequest,
     StreamName: StreamName,
     DescribeLiveCertsRequest: DescribeLiveCertsRequest,
@@ -12896,7 +13107,7 @@ module.exports = {
     ModifyLiveCertResponse: ModifyLiveCertResponse,
     MonitorStreamPlayInfo: MonitorStreamPlayInfo,
     DescribeLiveTranscodeDetailInfoRequest: DescribeLiveTranscodeDetailInfoRequest,
-    ProIspPlayCodeDataInfo: ProIspPlayCodeDataInfo,
+    ModifyLiveDomainRefererResponse: ModifyLiveDomainRefererResponse,
     DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
     DescribeLiveDomainsRequest: DescribeLiveDomainsRequest,
     ProIspPlaySumInfo: ProIspPlaySumInfo,
@@ -12930,6 +13141,7 @@ module.exports = {
     DeleteLiveRecordRequest: DeleteLiveRecordRequest,
     DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,
     StopRecordTaskRequest: StopRecordTaskRequest,
+    DescribeLiveDomainRefererRequest: DescribeLiveDomainRefererRequest,
     HttpStatusData: HttpStatusData,
     HttpCodeInfo: HttpCodeInfo,
     DescribeStreamPlayInfoListRequest: DescribeStreamPlayInfoListRequest,
@@ -12965,6 +13177,7 @@ module.exports = {
     DescribeLiveSnapshotTemplateRequest: DescribeLiveSnapshotTemplateRequest,
     DeleteLiveCertResponse: DeleteLiveCertResponse,
     CreateCommonMixStreamResponse: CreateCommonMixStreamResponse,
+    ModifyLiveDomainRefererRequest: ModifyLiveDomainRefererRequest,
     CreateLiveCallbackTemplateResponse: CreateLiveCallbackTemplateResponse,
     DescribeLivePushAuthKeyRequest: DescribeLivePushAuthKeyRequest,
     PlayStatInfo: PlayStatInfo,

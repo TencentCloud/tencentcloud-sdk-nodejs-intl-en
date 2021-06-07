@@ -18136,6 +18136,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MosaicSet = null;
 
         /**
+         * List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+         * @type {Array.<HeadTailTaskInput> || null}
+         */
+        this.HeadTailSet = null;
+
+        /**
          * Start time offset of a transcoded video, in seconds.
 <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
 <li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
@@ -18179,6 +18185,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new MosaicInput();
                 obj.deserialize(params.MosaicSet[z]);
                 this.MosaicSet.push(obj);
+            }
+        }
+
+        if (params.HeadTailSet) {
+            this.HeadTailSet = new Array();
+            for (let z in params.HeadTailSet) {
+                let obj = new HeadTailTaskInput();
+                obj.deserialize(params.HeadTailSet[z]);
+                this.HeadTailSet.push(obj);
             }
         }
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
@@ -18584,6 +18599,34 @@ If the difference between `StartTime` and `EndTime` is larger than 24 hours, the
         this.Isps = 'Isps' in params ? params.Isps : null;
         this.DataInterval = 'DataInterval' in params ? params.DataInterval : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Input of full text recognition.
+ * @class
+ */
+class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full text recognition template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -22319,15 +22362,15 @@ class DescribeSuperPlayerConfigsRequest extends  AbstractModel {
 }
 
 /**
- * Input of full text recognition.
+ * Input parameters for a video opening/closing credits generation task
  * @class
  */
-class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
+class HeadTailTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Full text recognition template ID.
+         * Video opening/closing credits configuration template ID
          * @type {number || null}
          */
         this.Definition = null;
@@ -23582,9 +23625,10 @@ class DescribeTasksRequest extends  AbstractModel {
         this.FinishTime = null;
 
         /**
-         * Sort field. Valid values:
-<li> CreateTime: task creation time</li>
-<li>FinishTime: task end time</li>
+         * (Not supported now)
+Sort field. Valid values:
+<li>`CreateTime`: task creation time</li>
+<li>`FinishTime`: task end time</li>
          * @type {SortBy || null}
          */
         this.Sort = null;
@@ -29728,6 +29772,7 @@ module.exports = {
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     WechatPublishTask: WechatPublishTask,
     DescribeCDNStatDetailsRequest: DescribeCDNStatDetailsRequest,
+    AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
     ClipFileInfo2017: ClipFileInfo2017,
     StatDataItem: StatDataItem,
     AccelerateAreaInfo: AccelerateAreaInfo,
@@ -29791,7 +29836,7 @@ module.exports = {
     DomainHTTPSConfig: DomainHTTPSConfig,
     DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
     DescribeSuperPlayerConfigsRequest: DescribeSuperPlayerConfigsRequest,
-    AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
+    HeadTailTaskInput: HeadTailTaskInput,
     SplitMediaOutputConfig: SplitMediaOutputConfig,
     AiRecognitionTaskSegmentResultInput: AiRecognitionTaskSegmentResultInput,
     DescribeTasksResponse: DescribeTasksResponse,

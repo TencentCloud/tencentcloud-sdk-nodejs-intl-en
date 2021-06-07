@@ -84,6 +84,7 @@ const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeLiveWatermarkRequest = models.DescribeLiveWatermarkRequest;
+const ProIspPlayCodeDataInfo = models.ProIspPlayCodeDataInfo;
 const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
 const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
@@ -127,6 +128,7 @@ const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
 const DropLiveStreamRequest = models.DropLiveStreamRequest;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
+const RefererAuthConfig = models.RefererAuthConfig;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
 const PushDataInfo = models.PushDataInfo;
 const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
@@ -135,6 +137,7 @@ const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoLis
 const TranscodeDetailInfo = models.TranscodeDetailInfo;
 const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplateResponse;
 const DescribeLiveTranscodeRulesResponse = models.DescribeLiveTranscodeRulesResponse;
+const DescribeLiveDomainRefererResponse = models.DescribeLiveDomainRefererResponse;
 const AddLiveDomainRequest = models.AddLiveDomainRequest;
 const StreamName = models.StreamName;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
@@ -164,7 +167,7 @@ const PublishTime = models.PublishTime;
 const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
 const MonitorStreamPlayInfo = models.MonitorStreamPlayInfo;
 const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
-const ProIspPlayCodeDataInfo = models.ProIspPlayCodeDataInfo;
+const ModifyLiveDomainRefererResponse = models.ModifyLiveDomainRefererResponse;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
 const DescribeLiveDomainsRequest = models.DescribeLiveDomainsRequest;
 const ProIspPlaySumInfo = models.ProIspPlaySumInfo;
@@ -198,6 +201,7 @@ const HttpStatusInfo = models.HttpStatusInfo;
 const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
 const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
 const StopRecordTaskRequest = models.StopRecordTaskRequest;
+const DescribeLiveDomainRefererRequest = models.DescribeLiveDomainRefererRequest;
 const HttpStatusData = models.HttpStatusData;
 const HttpCodeInfo = models.HttpCodeInfo;
 const DescribeStreamPlayInfoListRequest = models.DescribeStreamPlayInfoListRequest;
@@ -233,6 +237,7 @@ const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResp
 const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateRequest;
 const DeleteLiveCertResponse = models.DeleteLiveCertResponse;
 const CreateCommonMixStreamResponse = models.CreateCommonMixStreamResponse;
+const ModifyLiveDomainRefererRequest = models.ModifyLiveDomainRefererRequest;
 const CreateLiveCallbackTemplateResponse = models.CreateLiveCallbackTemplateResponse;
 const DescribeLivePushAuthKeyRequest = models.DescribeLivePushAuthKeyRequest;
 const PlayStatInfo = models.PlayStatInfo;
@@ -473,6 +478,18 @@ Note: data can be queried one hour after it is generated. For example, data betw
     DeleteLiveTranscodeTemplate(req, cb) {
         let resp = new DeleteLiveTranscodeTemplateResponse();
         this.request("DeleteLiveTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query referer allowlist/blocklist configuration of a live streaming domain name.
+Referer information is included in HTTP requests. After you enable referer configuration, live streams using RTMP or WebRTC for playback will not authenticate the referer and can be played back normally. To make the referer configuration effective, the HTTP-FLV or HLS protocol is recommended for playback.
+     * @param {DescribeLiveDomainRefererRequest} req
+     * @param {function(string, DescribeLiveDomainRefererResponse):void} cb
+     * @public
+     */
+    DescribeLiveDomainReferer(req, cb) {
+        let resp = new DescribeLiveDomainRefererResponse();
+        this.request("DescribeLiveDomainReferer", req, resp, cb);
     }
 
     /**
@@ -1319,6 +1336,18 @@ Note: only one screencapturing template can be associated with one domain name.
     DescribeLiveStreamState(req, cb) {
         let resp = new DescribeLiveStreamStateResponse();
         this.request("DescribeLiveStreamState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to configure referer allowlist/blocklist of a live streaming domain name.
+Referer information is included in HTTP requests. After you enable referer configuration, live streams using RTMP or WebRTC for playback will not authenticate the referer and can be played back normally. To make the referer configuration effective, the HTTP-FLV or HLS protocol is recommended for playback.
+     * @param {ModifyLiveDomainRefererRequest} req
+     * @param {function(string, ModifyLiveDomainRefererResponse):void} cb
+     * @public
+     */
+    ModifyLiveDomainReferer(req, cb) {
+        let resp = new ModifyLiveDomainRefererResponse();
+        this.request("ModifyLiveDomainReferer", req, resp, cb);
     }
 
     /**

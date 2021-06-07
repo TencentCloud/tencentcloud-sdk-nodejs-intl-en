@@ -53,6 +53,83 @@ Note: `null` may be returned for this field, indicating that no valid values can
 }
 
 /**
+ * Compare the meta information of two tables
+ * @class
+ */
+class CompareTablesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID of the source table
+         * @type {string || null}
+         */
+        this.SrcTableClusterId = null;
+
+        /**
+         * Table group ID of the source table
+         * @type {string || null}
+         */
+        this.SrcTableGroupId = null;
+
+        /**
+         * Source table name
+         * @type {string || null}
+         */
+        this.SrcTableName = null;
+
+        /**
+         * Cluster ID of the target table
+         * @type {string || null}
+         */
+        this.DstTableClusterId = null;
+
+        /**
+         * Table group ID of the target table
+         * @type {string || null}
+         */
+        this.DstTableGroupId = null;
+
+        /**
+         * Target table name
+         * @type {string || null}
+         */
+        this.DstTableName = null;
+
+        /**
+         * Source table ID
+         * @type {string || null}
+         */
+        this.SrcTableInstanceId = null;
+
+        /**
+         * Target table ID
+         * @type {string || null}
+         */
+        this.DstTableInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcTableClusterId = 'SrcTableClusterId' in params ? params.SrcTableClusterId : null;
+        this.SrcTableGroupId = 'SrcTableGroupId' in params ? params.SrcTableGroupId : null;
+        this.SrcTableName = 'SrcTableName' in params ? params.SrcTableName : null;
+        this.DstTableClusterId = 'DstTableClusterId' in params ? params.DstTableClusterId : null;
+        this.DstTableGroupId = 'DstTableGroupId' in params ? params.DstTableGroupId : null;
+        this.DstTableName = 'DstTableName' in params ? params.DstTableName : null;
+        this.SrcTableInstanceId = 'SrcTableInstanceId' in params ? params.SrcTableInstanceId : null;
+        this.DstTableInstanceId = 'DstTableInstanceId' in params ? params.DstTableInstanceId : null;
+
+    }
+}
+
+/**
  * ModifyClusterName request structure.
  * @class
  */
@@ -386,24 +463,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * `ServerList`, the list of machines at the storage layer (tcapsvr)
+ * Application ID and status
  * @class
  */
-class ServerMachineInfo extends  AbstractModel {
+class ApplyStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique ID of the machine
+         * Value format: cluster ID-application ID
          * @type {string || null}
          */
-        this.ServerUid = null;
+        this.ApplicationId = null;
 
         /**
-         * Machine type
+         * Status. Valid values: `-1` (canceled), `0` (pending approval), `1` (application approved and task submitted), `2` (rejected). Only applications in the pending approval status can be updated.
+         * @type {number || null}
+         */
+        this.ApplicationStatus = null;
+
+        /**
+         * Application type
+         * @type {number || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * Cluster ID
          * @type {string || null}
          */
-        this.MachineType = null;
+        this.ClusterId = null;
 
     }
 
@@ -414,8 +503,59 @@ class ServerMachineInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServerUid = 'ServerUid' in params ? params.ServerUid : null;
-        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationStatus = 'ApplicationStatus' in params ? params.ApplicationStatus : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * TcaplusDB service region details
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region `Ap-code`
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Region abbreviation
+         * @type {string || null}
+         */
+        this.RegionAbbr = null;
+
+        /**
+         * Region ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Whether to support IPv6 address access. Valid values: 0 (support), 1 (not support)
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
@@ -515,6 +655,57 @@ class ModifySnapshotsResponse extends  AbstractModel {
                 this.TableResults.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateApply response structure.
+ * @class
+ */
+class UpdateApplyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of updated applications
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<ApplyResult> || null}
+         */
+        this.ApplyResults = null;
+
+        /**
+         * Total number of updated applications
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ApplyResults) {
+            this.ApplyResults = new Array();
+            for (let z in params.ApplyResults) {
+                let obj = new ApplyResult();
+                obj.deserialize(params.ApplyResults[z]);
+                this.ApplyResults.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1212,6 +1403,56 @@ class TagsInfoOfTableGroup extends  AbstractModel {
 }
 
 /**
+ * DescribeApplications response structure.
+ * @class
+ */
+class DescribeApplicationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application list
+         * @type {Array.<Application> || null}
+         */
+        this.Applications = null;
+
+        /**
+         * Total number of applications
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Applications) {
+            this.Applications = new Array();
+            for (let z in params.Applications) {
+                let obj = new Application();
+                obj.deserialize(params.Applications[z]);
+                this.Applications.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateTableGroup request structure.
  * @class
  */
@@ -1545,50 +1786,39 @@ class ModifyTableTagsRequest extends  AbstractModel {
 }
 
 /**
- * Table definition file details, including file content
+ * Table merging results
  * @class
  */
-class IdlFileInfo extends  AbstractModel {
+class MergeTableResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filename excluding extension
+         * Task ID
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.FileName = null;
+        this.TaskId = null;
 
         /**
-         * Data interface description language (IDL) type
+         * If table merging is successful, `null` will be returned
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {ErrorInfo || null}
+         */
+        this.Error = null;
+
+        /**
+         * Comparison results of tables
+         * @type {CompareTablesInfo || null}
+         */
+        this.Table = null;
+
+        /**
+         * Application ID
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.FileType = null;
-
-        /**
-         * File extension
-         * @type {string || null}
-         */
-        this.FileExtType = null;
-
-        /**
-         * File size in bytes
-         * @type {number || null}
-         */
-        this.FileSize = null;
-
-        /**
-         * File ID, which is meaningful for files already uploaded
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.FileId = null;
-
-        /**
-         * File content, which is meaningful for files to be uploaded in this request
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FileContent = null;
+        this.ApplicationId = null;
 
     }
 
@@ -1599,12 +1829,84 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FileType = 'FileType' in params ? params.FileType : null;
-        this.FileExtType = 'FileExtType' in params ? params.FileExtType : null;
-        this.FileSize = 'FileSize' in params ? params.FileSize : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
+
+        if (params.Table) {
+            let obj = new CompareTablesInfo();
+            obj.deserialize(params.Table)
+            this.Table = obj;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+
+    }
+}
+
+/**
+ * Application update results
+ * @class
+ */
+class ApplyResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Application type
+         * @type {number || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * Status. Valid values: `0` (pending approval), `1` (application approved and task submitted), `2` (rejected)
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ApplicationStatus = null;
+
+        /**
+         * ID of the submitted task
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Error information
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {ErrorInfo || null}
+         */
+        this.Error = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ApplicationStatus = 'ApplicationStatus' in params ? params.ApplicationStatus : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
 
     }
 }
@@ -1723,30 +2025,121 @@ class SnapshotInfoNew extends  AbstractModel {
 }
 
 /**
- * RecoverRecycleTables response structure.
+ * Cluster operation application
  * @class
  */
-class RecoverRecycleTablesResponse extends  AbstractModel {
+class Application extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of recovered tables
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of information of recovered tables
-         * @type {Array.<TableResultNew> || null}
-         */
-        this.TableResults = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Application ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ApplicationId = null;
+
+        /**
+         * Application type
+         * @type {number || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Table group name
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TableGroupName = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Applicant
+         * @type {string || null}
+         */
+        this.Applicant = null;
+
+        /**
+         * The creation time of the application
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Status. Valid values: `-1` (canceled), `0` (pending approval), `1` (application approved and task submitted), `2` (rejected)
+         * @type {number || null}
+         */
+        this.ApplicationStatus = null;
+
+        /**
+         * Table group ID
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * ID of the submitted task (if the application is not approved, this parameter is `0`)
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Globally unique table ID
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TableInstanceId = null;
+
+        /**
+         * Update time
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Approver
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecuteUser = null;
+
+        /**
+         * Execution status
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecuteStatus = null;
+
+        /**
+         * Whether the application can be approved by the API caller
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.CanCensor = null;
+
+        /**
+         * Whether the application can be canceled by the API caller
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.CanWithdrawal = null;
 
     }
 
@@ -1757,17 +2150,23 @@ class RecoverRecycleTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.TableResults) {
-            this.TableResults = new Array();
-            for (let z in params.TableResults) {
-                let obj = new TableResultNew();
-                obj.deserialize(params.TableResults[z]);
-                this.TableResults.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.TableGroupName = 'TableGroupName' in params ? params.TableGroupName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.Applicant = 'Applicant' in params ? params.Applicant : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ApplicationStatus = 'ApplicationStatus' in params ? params.ApplicationStatus : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TableInstanceId = 'TableInstanceId' in params ? params.TableInstanceId : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ExecuteUser = 'ExecuteUser' in params ? params.ExecuteUser : null;
+        this.ExecuteStatus = 'ExecuteStatus' in params ? params.ExecuteStatus : null;
+        this.CanCensor = 'CanCensor' in params ? params.CanCensor : null;
+        this.CanWithdrawal = 'CanWithdrawal' in params ? params.CanWithdrawal : null;
 
     }
 }
@@ -1879,6 +2278,56 @@ class DescribeIdlFileInfosRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyTableTags response structure.
+ * @class
+ */
+class ModifyTableTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of returned results
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Returned results
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The result of snapshot creation
  * @class
  */
@@ -1980,6 +2429,48 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.SnapshotCreateTime = 'SnapshotCreateTime' in params ? params.SnapshotCreateTime : null;
         this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
         this.SnapshotStatus = 'SnapshotStatus' in params ? params.SnapshotStatus : null;
+
+    }
+}
+
+/**
+ * ModifyCensorship request structure.
+ * @class
+ */
+class ModifyCensorshipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Whether to enable the operation approval feature for this cluster. Valid values: `0` (disable), `1` (enable)
+         * @type {number || null}
+         */
+        this.Censorship = null;
+
+        /**
+         * Approver UIN list
+         * @type {Array.<string> || null}
+         */
+        this.Uins = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Censorship = 'Censorship' in params ? params.Censorship : null;
+        this.Uins = 'Uins' in params ? params.Uins : null;
 
     }
 }
@@ -2133,6 +2624,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ProxyList = null;
 
+        /**
+         * Whether the cluster operation approval feature is enabled. Valid values: `0` (disabled), `1` (enabled)
+         * @type {number || null}
+         */
+        this.Censorship = null;
+
+        /**
+         * Approver UIN list
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DbaUins = null;
+
     }
 
     /**
@@ -2180,6 +2684,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.ProxyList.push(obj);
             }
         }
+        this.Censorship = 'Censorship' in params ? params.Censorship : null;
+        this.DbaUins = 'DbaUins' in params ? params.DbaUins : null;
 
     }
 }
@@ -2884,30 +3390,12 @@ class DescribeTableGroupsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTableTags response structure.
+ * DescribeUinInWhitelist request structure.
  * @class
  */
-class ModifyTableTagsResponse extends  AbstractModel {
+class DescribeUinInWhitelistRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * The total number of returned results
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Returned results
-         * @type {Array.<TableResultNew> || null}
-         */
-        this.TableResults = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -2918,17 +3406,164 @@ class ModifyTableTagsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.TableResults) {
-            this.TableResults = new Array();
-            for (let z in params.TableResults) {
-                let obj = new TableResultNew();
-                obj.deserialize(params.TableResults[z]);
-                this.TableResults.push(obj);
+    }
+}
+
+/**
+ * MergeTablesData request structure.
+ * @class
+ */
+class MergeTablesDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tables to be merged
+         * @type {Array.<MergeTablesInfo> || null}
+         */
+        this.SelectedTables = null;
+
+        /**
+         * Valid values: `true` (only compare), `false` (compare and merge)
+         * @type {boolean || null}
+         */
+        this.IsOnlyCompare = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new MergeTablesInfo();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.IsOnlyCompare = 'IsOnlyCompare' in params ? params.IsOnlyCompare : null;
+
+    }
+}
+
+/**
+ * CreateCluster request structure.
+ * @class
+ */
+class CreateClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster data description language type, such as `PROTO`, `TDR`, or `MIX`
+         * @type {string || null}
+         */
+        this.IdlType = null;
+
+        /**
+         * Cluster name, which can contain up to 32 letters and digits
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * ID of the VPC instance bound to a cluster in the format of `vpc-f49l6u0z`
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ID of the subnet instance bound to a cluster in the format of `subnet-pxir56ns`
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Cluster access password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Cluster tag list
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * Whether to enable IPv6 address access for clusters
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
+        /**
+         * Information of the machine at the storage layer (tcapsvr) in a dedicated cluster
+         * @type {Array.<MachineInfo> || null}
+         */
+        this.ServerList = null;
+
+        /**
+         * Information of the machine at the access layer (tcaproxy) in a dedicated cluster
+         * @type {Array.<MachineInfo> || null}
+         */
+        this.ProxyList = null;
+
+        /**
+         * Cluster type. Valid values: `1` (standard), `2` (dedicated)
+         * @type {number || null}
+         */
+        this.ClusterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdlType = 'IdlType' in params ? params.IdlType : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+
+        if (params.ServerList) {
+            this.ServerList = new Array();
+            for (let z in params.ServerList) {
+                let obj = new MachineInfo();
+                obj.deserialize(params.ServerList[z]);
+                this.ServerList.push(obj);
+            }
+        }
+
+        if (params.ProxyList) {
+            this.ProxyList = new Array();
+            for (let z in params.ProxyList) {
+                let obj = new MachineInfo();
+                obj.deserialize(params.ProxyList[z]);
+                this.ProxyList.push(obj);
+            }
+        }
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
 
     }
 }
@@ -3256,6 +3891,46 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
+ * Request parameters used to merge tables
+ * @class
+ */
+class MergeTablesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of tables to be merged
+         * @type {CompareTablesInfo || null}
+         */
+        this.MergeTables = null;
+
+        /**
+         * Whether to check indexes
+         * @type {boolean || null}
+         */
+        this.CheckIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MergeTables) {
+            let obj = new CompareTablesInfo();
+            obj.deserialize(params.MergeTables)
+            this.MergeTables = obj;
+        }
+        this.CheckIndex = 'CheckIndex' in params ? params.CheckIndex : null;
+
+    }
+}
+
+/**
  * ModifyClusterTags response structure.
  * @class
  */
@@ -3539,6 +4214,41 @@ class DescribeIdlFileInfosResponse extends  AbstractModel {
 }
 
 /**
+ * `ServerList`, the list of machines at the storage layer (tcapsvr)
+ * @class
+ */
+class ServerMachineInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the machine
+         * @type {string || null}
+         */
+        this.ServerUid = null;
+
+        /**
+         * Machine type
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServerUid = 'ServerUid' in params ? params.ServerUid : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+
+    }
+}
+
+/**
  * CreateSnapshots response structure.
  * @class
  */
@@ -3584,6 +4294,71 @@ class CreateSnapshotsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Table definition file details, including file content
+ * @class
+ */
+class IdlFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filename excluding extension
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Data interface description language (IDL) type
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * File extension
+         * @type {string || null}
+         */
+        this.FileExtType = null;
+
+        /**
+         * File size in bytes
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * File ID, which is meaningful for files already uploaded
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FileId = null;
+
+        /**
+         * File content, which is meaningful for files to be uploaded in this request
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileExtType = 'FileExtType' in params ? params.FileExtType : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
 
     }
 }
@@ -4219,10 +4994,18 @@ class CreateBackupResponse extends  AbstractModel {
         super();
 
         /**
-         * List of IDs of created backup tasks
+         * List of backup creation task IDs
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.TaskIds = null;
+
+        /**
+         * List of backup creation application IDs
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ApplicationIds = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4240,6 +5023,7 @@ class CreateBackupResponse extends  AbstractModel {
             return;
         }
         this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.ApplicationIds = 'ApplicationIds' in params ? params.ApplicationIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4866,6 +5650,42 @@ class DescribeTablesRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateApply request structure.
+ * @class
+ */
+class UpdateApplyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application status
+         * @type {Array.<ApplyStatus> || null}
+         */
+        this.ApplyStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ApplyStatus) {
+            this.ApplyStatus = new Array();
+            for (let z in params.ApplyStatus) {
+                let obj = new ApplyStatus();
+                obj.deserialize(params.ApplyStatus[z]);
+                this.ApplyStatus.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyTableMemos request structure.
  * @class
  */
@@ -5305,121 +6125,6 @@ class CreateBackupRequest extends  AbstractModel {
 }
 
 /**
- * CreateCluster request structure.
- * @class
- */
-class CreateClusterRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster data description language type, such as `PROTO`, `TDR`, or `MIX`
-         * @type {string || null}
-         */
-        this.IdlType = null;
-
-        /**
-         * Cluster name, which can contain up to 32 letters and digits
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * ID of the VPC instance bound to a cluster in the format of `vpc-f49l6u0z`
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * ID of the subnet instance bound to a cluster in the format of `subnet-pxir56ns`
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Cluster access password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Cluster tag list
-         * @type {Array.<TagInfoUnit> || null}
-         */
-        this.ResourceTags = null;
-
-        /**
-         * Whether to enable IPv6 address access for clusters
-         * @type {number || null}
-         */
-        this.Ipv6Enable = null;
-
-        /**
-         * Information of the machine at the storage layer (tcapsvr) in a dedicated cluster
-         * @type {Array.<MachineInfo> || null}
-         */
-        this.ServerList = null;
-
-        /**
-         * Information of the machine at the access layer (tcaproxy) in a dedicated cluster
-         * @type {Array.<MachineInfo> || null}
-         */
-        this.ProxyList = null;
-
-        /**
-         * Cluster type. Valid values: `1` (standard), `2` (dedicated)
-         * @type {number || null}
-         */
-        this.ClusterType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdlType = 'IdlType' in params ? params.IdlType : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.Password = 'Password' in params ? params.Password : null;
-
-        if (params.ResourceTags) {
-            this.ResourceTags = new Array();
-            for (let z in params.ResourceTags) {
-                let obj = new TagInfoUnit();
-                obj.deserialize(params.ResourceTags[z]);
-                this.ResourceTags.push(obj);
-            }
-        }
-        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
-
-        if (params.ServerList) {
-            this.ServerList = new Array();
-            for (let z in params.ServerList) {
-                let obj = new MachineInfo();
-                obj.deserialize(params.ServerList[z]);
-                this.ServerList.push(obj);
-            }
-        }
-
-        if (params.ProxyList) {
-            this.ProxyList = new Array();
-            for (let z in params.ProxyList) {
-                let obj = new MachineInfo();
-                obj.deserialize(params.ProxyList[z]);
-                this.ProxyList.push(obj);
-            }
-        }
-        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
-
-    }
-}
-
-/**
  * Table processing result information
  * @class
  */
@@ -5483,6 +6188,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.TaskIds = null;
 
+        /**
+         * Cluster operation application ID
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
     }
 
     /**
@@ -5505,6 +6217,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Error = obj;
         }
         this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
 
     }
 }
@@ -5611,36 +6324,30 @@ class DescribeClusterTagsRequest extends  AbstractModel {
 }
 
 /**
- * TcaplusDB service region details
+ * RecoverRecycleTables response structure.
  * @class
  */
-class RegionInfo extends  AbstractModel {
+class RecoverRecycleTablesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region `Ap-code`
-         * @type {string || null}
-         */
-        this.RegionName = null;
-
-        /**
-         * Region abbreviation
-         * @type {string || null}
-         */
-        this.RegionAbbr = null;
-
-        /**
-         * Region ID
+         * Number of recovered tables
          * @type {number || null}
          */
-        this.RegionId = null;
+        this.TotalCount = null;
 
         /**
-         * Whether to support IPv6 address access. Valid values: 0 (support), 1 (not support)
-         * @type {number || null}
+         * List of information of recovered tables
+         * @type {Array.<TableResultNew> || null}
          */
-        this.Ipv6Enable = null;
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5651,10 +6358,137 @@ class RegionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MergeTablesData response structure.
+ * @class
+ */
+class MergeTablesDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Table merging results
+         * @type {Array.<MergeTableResult> || null}
+         */
+        this.Results = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new MergeTableResult();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeApplications request structure.
+ * @class
+ */
+class DescribeApplicationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the cluster whose applications will be queried
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The maximum number of results returned per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Application status used as a filter condition
+         * @type {number || null}
+         */
+        this.CensorStatus = null;
+
+        /**
+         * Table group ID used as a filter condition
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * Table name used as a filter condition
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Applicant UIN used as a filter condition
+         * @type {string || null}
+         */
+        this.Applicant = null;
+
+        /**
+         * Application type used as a filter condition
+         * @type {number || null}
+         */
+        this.ApplyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.CensorStatus = 'CensorStatus' in params ? params.CensorStatus : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.Applicant = 'Applicant' in params ? params.Applicant : null;
+        this.ApplyType = 'ApplyType' in params ? params.ApplyType : null;
 
     }
 }
@@ -5902,12 +6736,37 @@ class RollbackTablesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUinInWhitelist request structure.
+ * ModifyCensorship response structure.
  * @class
  */
-class DescribeUinInWhitelistRequest extends  AbstractModel {
+class ModifyCensorshipResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Approver UIN list
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Uins = null;
+
+        /**
+         * Whether the operation approval feature is enabled for this cluster. Valid values: `0` (disabled), `1` (enabled)
+         * @type {number || null}
+         */
+        this.Censorship = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5918,6 +6777,10 @@ class DescribeUinInWhitelistRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Uins = 'Uins' in params ? params.Uins : null;
+        this.Censorship = 'Censorship' in params ? params.Censorship : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6260,6 +7123,12 @@ class Filter extends  AbstractModel {
          */
         this.Value = null;
 
+        /**
+         * Filter field value
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
     }
 
     /**
@@ -6271,6 +7140,7 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -6491,6 +7361,7 @@ class TableGroupInfo extends  AbstractModel {
 
 module.exports = {
     ImportSnapshotsResponse: ImportSnapshotsResponse,
+    CompareTablesInfo: CompareTablesInfo,
     ModifyClusterNameRequest: ModifyClusterNameRequest,
     ModifyTableGroupNameResponse: ModifyTableGroupNameResponse,
     DescribeTableTagsRequest: DescribeTableTagsRequest,
@@ -6498,9 +7369,11 @@ module.exports = {
     DeleteClusterResponse: DeleteClusterResponse,
     DeleteTableIndexResponse: DeleteTableIndexResponse,
     TableRollbackResultNew: TableRollbackResultNew,
-    ServerMachineInfo: ServerMachineInfo,
+    ApplyStatus: ApplyStatus,
+    RegionInfo: RegionInfo,
     DescribeTablesResponse: DescribeTablesResponse,
     ModifySnapshotsResponse: ModifySnapshotsResponse,
+    UpdateApplyResponse: UpdateApplyResponse,
     DeleteClusterRequest: DeleteClusterRequest,
     SelectedTableWithField: SelectedTableWithField,
     DeleteTableIndexRequest: DeleteTableIndexRequest,
@@ -6514,19 +7387,23 @@ module.exports = {
     DeleteTableGroupRequest: DeleteTableGroupRequest,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TagsInfoOfTableGroup: TagsInfoOfTableGroup,
+    DescribeApplicationsResponse: DescribeApplicationsResponse,
     CreateTableGroupRequest: CreateTableGroupRequest,
     ModifyClusterMachineResponse: ModifyClusterMachineResponse,
     TagsInfoOfTable: TagsInfoOfTable,
     DeleteIdlFilesResponse: DeleteIdlFilesResponse,
     FieldInfo: FieldInfo,
     ModifyTableTagsRequest: ModifyTableTagsRequest,
-    IdlFileInfo: IdlFileInfo,
+    MergeTableResult: MergeTableResult,
+    ApplyResult: ApplyResult,
     DescribeTasksRequest: DescribeTasksRequest,
     SnapshotInfoNew: SnapshotInfoNew,
-    RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
+    Application: Application,
     ClearTablesResponse: ClearTablesResponse,
     DescribeIdlFileInfosRequest: DescribeIdlFileInfosRequest,
+    ModifyTableTagsResponse: ModifyTableTagsResponse,
     SnapshotResult: SnapshotResult,
+    ModifyCensorshipRequest: ModifyCensorshipRequest,
     ClusterInfo: ClusterInfo,
     DisableRestProxyRequest: DisableRestProxyRequest,
     DescribeTablesInRecycleResponse: DescribeTablesInRecycleResponse,
@@ -6543,7 +7420,9 @@ module.exports = {
     DeleteTablesResponse: DeleteTablesResponse,
     ModifyTableGroupNameRequest: ModifyTableGroupNameRequest,
     DescribeTableGroupsRequest: DescribeTableGroupsRequest,
-    ModifyTableTagsResponse: ModifyTableTagsResponse,
+    DescribeUinInWhitelistRequest: DescribeUinInWhitelistRequest,
+    MergeTablesDataRequest: MergeTablesDataRequest,
+    CreateClusterRequest: CreateClusterRequest,
     ModifyTableGroupTagsRequest: ModifyTableGroupTagsRequest,
     EnableRestProxyRequest: EnableRestProxyRequest,
     ModifyTableQuotasRequest: ModifyTableQuotasRequest,
@@ -6551,13 +7430,16 @@ module.exports = {
     CreateTablesResponse: CreateTablesResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
+    MergeTablesInfo: MergeTablesInfo,
     ModifyClusterTagsResponse: ModifyClusterTagsResponse,
     DescribeClusterTagsResponse: DescribeClusterTagsResponse,
     TagsInfoOfCluster: TagsInfoOfCluster,
     SetTableIndexResponse: SetTableIndexResponse,
     ClearTablesRequest: ClearTablesRequest,
     DescribeIdlFileInfosResponse: DescribeIdlFileInfosResponse,
+    ServerMachineInfo: ServerMachineInfo,
     CreateSnapshotsResponse: CreateSnapshotsResponse,
+    IdlFileInfo: IdlFileInfo,
     DisableRestProxyResponse: DisableRestProxyResponse,
     TagInfoUnit: TagInfoUnit,
     CreateClusterResponse: CreateClusterResponse,
@@ -6579,6 +7461,7 @@ module.exports = {
     DescribeTableGroupTagsRequest: DescribeTableGroupTagsRequest,
     DescribeTablesInRecycleRequest: DescribeTablesInRecycleRequest,
     DescribeTablesRequest: DescribeTablesRequest,
+    UpdateApplyRequest: UpdateApplyRequest,
     ModifyTableMemosRequest: ModifyTableMemosRequest,
     DescribeUinInWhitelistResponse: DescribeUinInWhitelistResponse,
     SnapshotInfo: SnapshotInfo,
@@ -6586,17 +7469,18 @@ module.exports = {
     RollbackTablesResponse: RollbackTablesResponse,
     MachineInfo: MachineInfo,
     CreateBackupRequest: CreateBackupRequest,
-    CreateClusterRequest: CreateClusterRequest,
     TableResultNew: TableResultNew,
     CreateTablesRequest: CreateTablesRequest,
     DescribeClusterTagsRequest: DescribeClusterTagsRequest,
-    RegionInfo: RegionInfo,
+    RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
+    MergeTablesDataResponse: MergeTablesDataResponse,
+    DescribeApplicationsRequest: DescribeApplicationsRequest,
     DescribeTableGroupsResponse: DescribeTableGroupsResponse,
     DeleteTableGroupResponse: DeleteTableGroupResponse,
     PoolInfo: PoolInfo,
     DescribeMachineRequest: DescribeMachineRequest,
     RollbackTablesRequest: RollbackTablesRequest,
-    DescribeUinInWhitelistRequest: DescribeUinInWhitelistRequest,
+    ModifyCensorshipResponse: ModifyCensorshipResponse,
     CompareIdlFilesRequest: CompareIdlFilesRequest,
     ProxyDetailInfo: ProxyDetailInfo,
     IdlFileInfoWithoutContent: IdlFileInfoWithoutContent,

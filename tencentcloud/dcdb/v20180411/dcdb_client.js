@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
+const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
 const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
@@ -26,11 +27,12 @@ const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const DcnDetailItem = models.DcnDetailItem;
 const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
 const DatabaseProcedure = models.DatabaseProcedure;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
@@ -77,6 +79,7 @@ const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const DatabaseTable = models.DatabaseTable;
 const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const ConstraintRange = models.ConstraintRange;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const DCDBInstanceInfo = models.DCDBInstanceInfo;
@@ -364,6 +367,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the disaster recovery details of an instance.
+     * @param {DescribeDcnDetailRequest} req
+     * @param {function(string, DescribeDcnDetailResponse):void} cb
+     * @public
+     */
+    DescribeDcnDetail(req, cb) {
+        let resp = new DescribeDcnDetailResponse();
+        this.request("DescribeDcnDetail", req, resp, cb);
     }
 
     /**

@@ -5332,6 +5332,12 @@ class SetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
          */
         this.CcnRegionBandwidthLimits = null;
 
+        /**
+         * Whether to restore the region outbound bandwidth limit or inter-region bandwidth limit to default 1Gbps. Valid values: `false` (no); `true` (yes). Default value: `false`. When the parameter is set to `true`, the CCN instance created will not be displayed in the console.
+         * @type {boolean || null}
+         */
+        this.SetDefaultLimitFlag = null;
+
     }
 
     /**
@@ -5351,6 +5357,7 @@ class SetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
                 this.CcnRegionBandwidthLimits.push(obj);
             }
         }
+        this.SetDefaultLimitFlag = 'SetDefaultLimitFlag' in params ? params.SetDefaultLimitFlag : null;
 
     }
 }
@@ -5870,6 +5877,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.CdcId = null;
 
+        /**
+         * ENI type. Valid values: `0` (standard); `1` (extension). Default value: `0`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AttachType = null;
+
     }
 
     /**
@@ -5926,6 +5940,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.EniType = 'EniType' in params ? params.EniType : null;
         this.Business = 'Business' in params ? params.Business : null;
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.AttachType = 'AttachType' in params ? params.AttachType : null;
 
     }
 }
@@ -6577,11 +6592,14 @@ class DescribeBandwidthPackagesRequest extends  AbstractModel {
          * Each request can have up to 10 `Filters`. `BandwidthPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
 <li> bandwidth-package_id - String - Required: No - (Filter condition) Filter by the unique ID of the bandwidth package.</li>
 <li> bandwidth-package-name - String - Required: No - (Filter condition) Filter by the bandwidth package name. Fuzzy filtering is not supported.</li>
-<li> network-type - String - Required: No - (Filter condition) Filter by the bandwidth package type. Types include 'BGP', 'SINGLEISP', and 'ANYCAST'.</li>
-<li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing mode. Billing modes include 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'.</li>
-<li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Resource types include 'Address' and 'LoadBalance'.</li>
-<li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as 'eip-xxxx' and 'lb-xxxx'.</li>
+<li> network-type - String - Required: No - (Filter condition) Filter by the bandwidth package type. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.</li>
+<li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing mode. Valid values: `TOP5_POSTPAID_BY_MONTH` and `PERCENT95_POSTPAID_BY_MONTH`.</li>
+<li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Valid values: `Address` and `LoadBalance`.</li>
+<li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as `eip-xxxx` and `lb-xxxx`.</li>
 <li> resource.address-ip - String - Required: No - (Filter condition) Filter by the bandwidth package resource IP.</li>
+<li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+<li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
+<li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -9796,23 +9814,25 @@ class NetDetect extends  AbstractModel {
         this.DetectSourceIp = null;
 
         /**
-         * Type of the next hop. Currently supported types are:
+         * Type of the next hop. Valid values:
 VPN: VPN gateway;
 DIRECTCONNECT: direct connect gateway;
 PEERCONNECTION: peering connection;
 NAT: NAT gateway;
 NORMAL_CVM: normal CVM.
+CCN: CCN gateway.
          * @type {string || null}
          */
         this.NextHopType = null;
 
         /**
-         * Next-hop destination gateway. The value is related to NextHopType.
-If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
-If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.
-If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.
-If NextHopType is set to NAT, the value of this parameter is the NAT gateway ID, such as nat-12345678.
-If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
+         * Next-hop destination gateway. Its value is determined by `NextHopType`.
+If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
+If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
+If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
+If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
+If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
+If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
          * @type {string || null}
          */
         this.NextHopDestination = null;
@@ -10419,23 +10439,25 @@ class CreateNetDetectRequest extends  AbstractModel {
         this.DetectDestinationIp = null;
 
         /**
-         * The type of the next hop. Currently supported types are:
-VPN: VPN gateway;
-DIRECTCONNECT: direct connect gateway;
-PEERCONNECTION: peering connection;
-NAT: NAT gateway;
-NORMAL_CVM: normal CVM.
+         * Type of the next hop. Valid values:
+`VPN`: VPN gateway;
+`DIRECTCONNECT`: direct connect gateway;
+`PEERCONNECTION`: peering connection;
+`NAT`: NAT gateway;
+`NORMAL_CVM`: normal CVM;
+`CCN`: CCN gateway.
          * @type {string || null}
          */
         this.NextHopType = null;
 
         /**
-         * The next-hop destination gateway. The value is related to NextHopType.
-If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
-If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.
-If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.
-If NextHopType is set to NAT, the value of this parameter is the NAT gateway ID, such as nat-12345678.
-If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
+         * Next-hop destination gateway. Its value is determined by `NextHopType`.
+If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
+If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
+If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
+If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
+If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
+If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
          * @type {string || null}
          */
         this.NextHopDestination = null;
@@ -11088,17 +11110,20 @@ class DescribeAddressesRequest extends  AbstractModel {
 
         /**
          * Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-<li> address-id - String - Required: No - (Filter condition) Filter by the unique EIP ID in the format of `eip-11112222`.</li>
+<li> address-id - String - Required: No - (Filter condition) Filter by the unique EIP ID, such as `eip-11112222`.</li>
 <li> address-name - String - Required: No - (Filter condition) Filter by the EIP name. Fuzzy filtering is not supported.</li>
 <li> address-ip - String - Required: No - (Filter condition) Filter by EIP.</li>
 <li> address-status - String - Required: No - (Filter condition) Filter by the EIP state. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
-<li> instance-id - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP in the format of `ins-11112222`.</li>
+<li> instance-id - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
 <li> private-ip-address - String - Required: No - (Filter condition) Filter by the private IP address bound to the EIP.</li>
-<li> network-interface-id - String - Required: No - (Filter condition) Filter by the ID of the ENI bound to the EIP in the format of `eni-11112222`.</li>
+<li> network-interface-id - String - Required: No - (Filter condition) Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
 <li> is-arrears - String - Required: No - (Filter condition) Whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
 <li> address-type - String - Required: No - (Filter condition) Filter by the IP type. Valid values: `EIP`, `AnycastEIP`, and `HighQualityEIP`.</li>
 <li> address-isp - String - Required: No - (Filter condition) Filter by the ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
-<li> dedicated-cluster-id - String - Required: No - (Filter condition) Filter by the unique CDC ID in the format of `cluster-11112222`.</li>
+<li> dedicated-cluster-id - String - Required: No - (Filter condition) Filter by the unique CDC ID, such as `cluster-11112222`.</li>
+<li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+<li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
+<li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -11318,16 +11343,30 @@ class DescribeNetworkInterfaceLimitResponse extends  AbstractModel {
         super();
 
         /**
-         * ENI quota
+         * Quota of ENIs mounted to a CVM instance in a standard way
          * @type {number || null}
          */
         this.EniQuantity = null;
 
         /**
-         * Quota of IP addresses that can be allocated to each ENI.
+         * Quota of IP addresses that can be allocated to each standard-mounted ENI
          * @type {number || null}
          */
         this.EniPrivateIpAddressQuantity = null;
+
+        /**
+         * Quota of ENIs mounted to a CVM instance as an extension
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ExtendEniQuantity = null;
+
+        /**
+         * Quota of IP addresses that can be allocated to each extension-mounted ENI.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ExtendEniPrivateIpAddressQuantity = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11346,6 +11385,8 @@ class DescribeNetworkInterfaceLimitResponse extends  AbstractModel {
         }
         this.EniQuantity = 'EniQuantity' in params ? params.EniQuantity : null;
         this.EniPrivateIpAddressQuantity = 'EniPrivateIpAddressQuantity' in params ? params.EniPrivateIpAddressQuantity : null;
+        this.ExtendEniQuantity = 'ExtendEniQuantity' in params ? params.ExtendEniQuantity : null;
+        this.ExtendEniPrivateIpAddressQuantity = 'ExtendEniPrivateIpAddressQuantity' in params ? params.ExtendEniPrivateIpAddressQuantity : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13436,13 +13477,15 @@ class DescribeSubnetsRequest extends  AbstractModel {
          * Filter condition. `SubnetIds` and `Filters` cannot be specified at the same time.
 <li>subnet-id - String - (Filter condition) Subnet instance name.</li>
 <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
-<li>cidr-block - String - (Filter condition) The subnet IP range, such as 192.168.1.0.</li>
+<li>cidr-block - String - (Filter condition) Subnet IP range, such as `192.168.1.0`.</li>
 <li>is-default - Boolean - (Filter condition) Whether it is the default subnet.</li>
 <li>is-remote-vpc-snat - Boolean - (Filter condition) Whether it is a VPC SNAT address pool subnet.</li>
 <li>subnet-name - String - (Filter condition) Subnet name.</li>
 <li>zone - String - (Filter condition) Availability zone.</li>
-<li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-<li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
+<li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+<li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`. For its usage, see example 2.</li>
+<li>cdc-id - String - Required: No - (Filter condition) Filter by CDC ID to obtain subnets in the specified CDC.</li>
+<li>is-cdc-subnet - String - Required: No - (Filter condition) Whether it is a CDC subnet. Valid values: `0` (no); `1` (yes).</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -14107,6 +14150,12 @@ class CreateAndAttachNetworkInterfaceRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * ENI mounting type. Valid values: `0` (standard); `1` (extension); default value: `0`
+         * @type {number || null}
+         */
+        this.AttachType = null;
+
     }
 
     /**
@@ -14141,6 +14190,7 @@ class CreateAndAttachNetworkInterfaceRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.AttachType = 'AttachType' in params ? params.AttachType : null;
 
     }
 }
@@ -16876,6 +16926,12 @@ class MigrateNetworkInterfaceRequest extends  AbstractModel {
          */
         this.DestinationInstanceId = null;
 
+        /**
+         * ENI mount method. Valid values: 0: standard; 1: extension; default value: 0
+         * @type {number || null}
+         */
+        this.AttachType = null;
+
     }
 
     /**
@@ -16888,6 +16944,7 @@ class MigrateNetworkInterfaceRequest extends  AbstractModel {
         this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
         this.SourceInstanceId = 'SourceInstanceId' in params ? params.SourceInstanceId : null;
         this.DestinationInstanceId = 'DestinationInstanceId' in params ? params.DestinationInstanceId : null;
+        this.AttachType = 'AttachType' in params ? params.AttachType : null;
 
     }
 }
@@ -17930,6 +17987,13 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.InternetChargeType = null;
 
+        /**
+         * List of tags associated with the EIP
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -17962,6 +18026,15 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.LocalBgp = 'LocalBgp' in params ? params.LocalBgp : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -21856,6 +21929,12 @@ class AttachNetworkInterfaceRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * ENI mounting type. Valid values: `0` (standard); `1` (extension); default value: `0`
+         * @type {number || null}
+         */
+        this.AttachType = null;
+
     }
 
     /**
@@ -21867,6 +21946,7 @@ class AttachNetworkInterfaceRequest extends  AbstractModel {
         }
         this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AttachType = 'AttachType' in params ? params.AttachType : null;
 
     }
 }

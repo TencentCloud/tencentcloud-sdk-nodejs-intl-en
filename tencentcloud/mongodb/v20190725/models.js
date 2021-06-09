@@ -909,25 +909,25 @@ class SecurityGroupBound extends  AbstractModel {
         this.IpProtocol = null;
 
         /**
-         * 
+         * All the addresses that the security group ID represents
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * 
+         * All the addresses that the address group ID represents
          * @type {string || null}
          */
         this.AddressModule = null;
 
         /**
-         * 
+         * All the protocols and ports that the service group ID represents
          * @type {string || null}
          */
         this.ServiceModule = null;
 
         /**
-         * 
+         * Description
          * @type {string || null}
          */
         this.Desc = null;

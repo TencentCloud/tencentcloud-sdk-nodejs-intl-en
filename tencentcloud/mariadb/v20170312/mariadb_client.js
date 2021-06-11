@@ -55,10 +55,12 @@ const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DBParamValue = models.DBParamValue;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
 const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
+const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
 const SecurityGroupBound = models.SecurityGroupBound;
@@ -69,6 +71,7 @@ const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const DcnDetailItem = models.DcnDetailItem;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
@@ -415,6 +418,17 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the disaster recovery details of an instance.
+     * @param {DescribeDcnDetailRequest} req
+     * @param {function(string, DescribeDcnDetailResponse):void} cb
+     * @public
+     */
+    DescribeDcnDetail(req, cb) {
+        let resp = new DescribeDcnDetailResponse();
+        this.request("DescribeDcnDetail", req, resp, cb);
     }
 
     /**

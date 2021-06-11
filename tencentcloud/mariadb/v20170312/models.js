@@ -1560,6 +1560,18 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.FilterInstanceType = null;
 
+        /**
+         * Use this filter to include instances in specific statuses
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
+
+        /**
+         * Use this filter to exclude instances in specific statuses
+         * @type {Array.<number> || null}
+         */
+        this.ExcludeStatus = null;
+
     }
 
     /**
@@ -1586,6 +1598,8 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
         this.FilterInstanceType = 'FilterInstanceType' in params ? params.FilterInstanceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ExcludeStatus = 'ExcludeStatus' in params ? params.ExcludeStatus : null;
 
     }
 }
@@ -1926,6 +1940,34 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDcnDetail request structure.
+ * @class
+ */
+class DescribeDcnDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * ModifyDBParameters response structure.
  * @class
  */
@@ -2161,6 +2203,49 @@ class OpenDBExtranetAccessResponse extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDcnDetail response structure.
+ * @class
+ */
+class DescribeDcnDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DCN synchronization details
+         * @type {Array.<DcnDetailItem> || null}
+         */
+        this.DcnDetails = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DcnDetails) {
+            this.DcnDetails = new Array();
+            for (let z in params.DcnDetails) {
+                let obj = new DcnDetailItem();
+                obj.deserialize(params.DcnDetails[z]);
+                this.DcnDetails.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2420,7 +2505,7 @@ class DBInstance extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance status. 0: creating, 1: processing, 2: running, 3: instance not initialized, -1: instance isolated, -2: instance deleted
+         * Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated), `-2` (eliminated), `4` (initializing), `5` (eliminating), `6` (restarting), `7` (migrating data)
          * @type {number || null}
          */
         this.Status = null;
@@ -2870,6 +2955,104 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+    }
+}
+
+/**
+ * DCN details
+ * @class
+ */
+class DcnDetailItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Region where the instance resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Availability zone where the instance resides
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance IP address
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Instance IPv6 address
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * Instance port
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Instance status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance status description
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * DCN flag. Valid values: `1` (primary), `2` (replica)
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
+         * DCN status. Valid values: `0` (null), `1` (creating), `2` (syncing), `3` (disconnected)
+         * @type {number || null}
+         */
+        this.DcnStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
+        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
 
     }
 }
@@ -4739,10 +4922,12 @@ module.exports = {
     DBParamValue: DBParamValue,
     ModifyDBParametersRequest: ModifyDBParametersRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
+    DescribeDcnDetailRequest: DescribeDcnDetailRequest,
     ModifyDBParametersResponse: ModifyDBParametersResponse,
     CopyAccountPrivilegesRequest: CopyAccountPrivilegesRequest,
     SecurityGroup: SecurityGroup,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
+    DescribeDcnDetailResponse: DescribeDcnDetailResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     ModifyBackupTimeRequest: ModifyBackupTimeRequest,
     SecurityGroupBound: SecurityGroupBound,
@@ -4753,6 +4938,7 @@ module.exports = {
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
+    DcnDetailItem: DcnDetailItem,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,

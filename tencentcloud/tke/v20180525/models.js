@@ -1526,6 +1526,27 @@ class ClusterNetworkSettings extends  AbstractModel {
          */
         this.Cni = null;
 
+        /**
+         * The network mode of service. This parameter is only applicable to ipvs+bpf mode.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.KubeProxyMode = null;
+
+        /**
+         * The IP range for service assignment. It cannot conflict with the VPC’s CIDR block nor the CIDR blocks of other clusters in the same VPC.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceCIDR = null;
+
+        /**
+         * The container subnet associated with the cluster
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Subnets = null;
+
     }
 
     /**
@@ -1542,6 +1563,9 @@ class ClusterNetworkSettings extends  AbstractModel {
         this.Ipvs = 'Ipvs' in params ? params.Ipvs : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Cni = 'Cni' in params ? params.Cni : null;
+        this.KubeProxyMode = 'KubeProxyMode' in params ? params.KubeProxyMode : null;
+        this.ServiceCIDR = 'ServiceCIDR' in params ? params.ServiceCIDR : null;
+        this.Subnets = 'Subnets' in params ? params.Subnets : null;
 
     }
 }
@@ -2130,18 +2154,24 @@ class SetNodePoolNodeProtectionResponse extends  AbstractModel {
 }
 
 /**
- * UpdateClusterVersion response structure.
+ * DescribeRouteTableConflicts request structure.
  * @class
  */
-class UpdateClusterVersionResponse extends  AbstractModel {
+class DescribeRouteTableConflictsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Route table CIDR
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RouteTableCidrBlock = null;
+
+        /**
+         * VPC bound to the route table
+         * @type {string || null}
+         */
+        this.VpcId = null;
 
     }
 
@@ -2152,7 +2182,8 @@ class UpdateClusterVersionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
 }
@@ -5453,6 +5484,41 @@ class DeleteClusterRouteTableResponse extends  AbstractModel {
 }
 
 /**
+ * CreateClusterInstances response structure.
+ * @class
+ */
+class CreateClusterInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterAsGroupOption request structure.
  * @class
  */
@@ -5832,18 +5898,12 @@ Note: this field may return null, indicating that no valid value was found.
 }
 
 /**
- * CreateClusterInstances response structure.
+ * AddVpcCniSubnets response structure.
  * @class
  */
-class CreateClusterInstancesResponse extends  AbstractModel {
+class AddVpcCniSubnetsResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Instance ID
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIdSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5860,7 +5920,6 @@ class CreateClusterInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6432,21 +6491,27 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
- * DescribeRouteTableConflicts request structure.
+ * AddVpcCniSubnets request structure.
  * @class
  */
-class DescribeRouteTableConflictsRequest extends  AbstractModel {
+class AddVpcCniSubnetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Route table CIDR
+         * Cluster ID
          * @type {string || null}
          */
-        this.RouteTableCidrBlock = null;
+        this.ClusterId = null;
 
         /**
-         * VPC bound to the route table
+         * The subnets added for the cluster container network
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * ID of the VPC where the cluster resides
          * @type {string || null}
          */
         this.VpcId = null;
@@ -6460,7 +6525,8 @@ class DescribeRouteTableConflictsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
@@ -6747,6 +6813,34 @@ class RunMonitorServiceEnabled extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * UpdateClusterVersion response structure.
+ * @class
+ */
+class UpdateClusterVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7209,7 +7303,7 @@ module.exports = {
     RegionInstance: RegionInstance,
     Label: Label,
     SetNodePoolNodeProtectionResponse: SetNodePoolNodeProtectionResponse,
-    UpdateClusterVersionResponse: UpdateClusterVersionResponse,
+    DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     ClusterBasicSettings: ClusterBasicSettings,
     RouteTableConflict: RouteTableConflict,
@@ -7271,13 +7365,14 @@ module.exports = {
     UpgradeClusterInstancesResponse: UpgradeClusterInstancesResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
+    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
     DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
     ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     ModifyClusterAsGroupOptionAttributeResponse: ModifyClusterAsGroupOptionAttributeResponse,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
-    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
+    AddVpcCniSubnetsResponse: AddVpcCniSubnetsResponse,
     DescribeClusterNodePoolsRequest: DescribeClusterNodePoolsRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
     ModifyClusterAsGroupOptionAttributeRequest: ModifyClusterAsGroupOptionAttributeRequest,
@@ -7293,13 +7388,14 @@ module.exports = {
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,
     DescribeImagesRequest: DescribeImagesRequest,
     DescribeAvailableClusterVersionResponse: DescribeAvailableClusterVersionResponse,
-    DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
+    AddVpcCniSubnetsRequest: AddVpcCniSubnetsRequest,
     InstanceUpgradePreCheckResultItem: InstanceUpgradePreCheckResultItem,
     ExistedInstancesPara: ExistedInstancesPara,
     DescribeClusterAsGroupOptionResponse: DescribeClusterAsGroupOptionResponse,
     ClusterAsGroupAttribute: ClusterAsGroupAttribute,
     DeleteClusterNodePoolResponse: DeleteClusterNodePoolResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    UpdateClusterVersionResponse: UpdateClusterVersionResponse,
     CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,
     NodePoolOption: NodePoolOption,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,

@@ -58,7 +58,7 @@ const ExtensionAddon = models.ExtensionAddon;
 const RegionInstance = models.RegionInstance;
 const Label = models.Label;
 const SetNodePoolNodeProtectionResponse = models.SetNodePoolNodeProtectionResponse;
-const UpdateClusterVersionResponse = models.UpdateClusterVersionResponse;
+const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
 const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
 const ClusterBasicSettings = models.ClusterBasicSettings;
 const RouteTableConflict = models.RouteTableConflict;
@@ -120,13 +120,14 @@ const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStat
 const UpgradeClusterInstancesResponse = models.UpgradeClusterInstancesResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
+const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionRequest;
 const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const ModifyClusterAsGroupOptionAttributeResponse = models.ModifyClusterAsGroupOptionAttributeResponse;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const ClusterAsGroupOption = models.ClusterAsGroupOption;
-const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
+const AddVpcCniSubnetsResponse = models.AddVpcCniSubnetsResponse;
 const DescribeClusterNodePoolsRequest = models.DescribeClusterNodePoolsRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
 const ModifyClusterAsGroupOptionAttributeRequest = models.ModifyClusterAsGroupOptionAttributeRequest;
@@ -142,13 +143,14 @@ const RemoveNodeFromNodePoolRequest = models.RemoveNodeFromNodePoolRequest;
 const DescribeClusterAsGroupsRequest = models.DescribeClusterAsGroupsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
 const DescribeAvailableClusterVersionResponse = models.DescribeAvailableClusterVersionResponse;
-const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
+const AddVpcCniSubnetsRequest = models.AddVpcCniSubnetsRequest;
 const InstanceUpgradePreCheckResultItem = models.InstanceUpgradePreCheckResultItem;
 const ExistedInstancesPara = models.ExistedInstancesPara;
 const DescribeClusterAsGroupOptionResponse = models.DescribeClusterAsGroupOptionResponse;
 const ClusterAsGroupAttribute = models.ClusterAsGroupAttribute;
 const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const UpdateClusterVersionResponse = models.UpdateClusterVersionResponse;
 const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
 const NodePoolOption = models.NodePoolOption;
 const ModifyClusterAsGroupAttributeRequest = models.ModifyClusterAsGroupAttributeRequest;
@@ -322,6 +324,17 @@ class TkeClient extends AbstractClient {
     DescribeClusterEndpointVipStatus(req, cb) {
         let resp = new DescribeClusterEndpointVipStatusResponse();
         this.request("DescribeClusterEndpointVipStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add subnets in the container network for a VPC-CNI cluster.
+     * @param {AddVpcCniSubnetsRequest} req
+     * @param {function(string, AddVpcCniSubnetsResponse):void} cb
+     * @public
+     */
+    AddVpcCniSubnets(req, cb) {
+        let resp = new AddVpcCniSubnetsResponse();
+        this.request("AddVpcCniSubnets", req, resp, cb);
     }
 
     /**

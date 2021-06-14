@@ -728,13 +728,13 @@ class DcnDetailItem extends  AbstractModel {
         this.StatusDesc = null;
 
         /**
-         * DCN flag. Valid values: `1` (primary), `2` (secondary)
+         * DCN flag. Valid values: `1` (primary), `2` (disaster recovery)
          * @type {number || null}
          */
         this.DcnFlag = null;
 
         /**
-         * DCN status. Valid values: `0` (null), `1` (creating), `2` (syncing), `3` (disconnected)
+         * DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected)
          * @type {number || null}
          */
         this.DcnStatus = null;

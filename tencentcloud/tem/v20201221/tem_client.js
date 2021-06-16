@@ -16,22 +16,28 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const MountedSettingConf = models.MountedSettingConf;
+const ModifyServiceInfoResponse = models.ModifyServiceInfoResponse;
+const StorageMountConf = models.StorageMountConf;
 const CreateResourceRequest = models.CreateResourceRequest;
 const CreateServiceV2Response = models.CreateServiceV2Response;
 const CreateCosTokenV2Request = models.CreateCosTokenV2Request;
 const DeployServiceV2Response = models.DeployServiceV2Response;
 const IngressTls = models.IngressTls;
 const DescribeNamespacesResponse = models.DescribeNamespacesResponse;
+const PortMapping = models.PortMapping;
+const RestartServiceRunPodRequest = models.RestartServiceRunPodRequest;
 const ModifyIngressResponse = models.ModifyIngressResponse;
 const DeleteIngressRequest = models.DeleteIngressRequest;
+const ModifyServiceInfoRequest = models.ModifyServiceInfoRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
-const StorageMountConf = models.StorageMountConf;
+const DescribeRelatedIngressesRequest = models.DescribeRelatedIngressesRequest;
 const CosToken = models.CosToken;
 const DescribeNamespacesRequest = models.DescribeNamespacesRequest;
 const IngressInfo = models.IngressInfo;
 const DeployServiceV2Request = models.DeployServiceV2Request;
 const ModifyIngressRequest = models.ModifyIngressRequest;
-const Pair = models.Pair;
+const DescribeRelatedIngressesResponse = models.DescribeRelatedIngressesResponse;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const DescribeIngressesRequest = models.DescribeIngressesRequest;
 const DescribeRunPodPage = models.DescribeRunPodPage;
@@ -39,6 +45,7 @@ const DescribeServiceRunPodListV2Request = models.DescribeServiceRunPodListV2Req
 const LogOutputConf = models.LogOutputConf;
 const DescribeIngressesResponse = models.DescribeIngressesResponse;
 const DeleteIngressResponse = models.DeleteIngressResponse;
+const RestartServiceRunPodResponse = models.RestartServiceRunPodResponse;
 const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
 const IngressRuleBackend = models.IngressRuleBackend;
 const DescribeIngressResponse = models.DescribeIngressResponse;
@@ -56,6 +63,8 @@ const CreateCosTokenV2Response = models.CreateCosTokenV2Response;
 const EsInfo = models.EsInfo;
 const DescribeIngressRequest = models.DescribeIngressRequest;
 const CreateServiceV2Request = models.CreateServiceV2Request;
+const EksService = models.EksService;
+const Pair = models.Pair;
 
 
 /**
@@ -143,6 +152,39 @@ class TemClient extends AbstractClient {
     CreateServiceV2(req, cb) {
         let resp = new CreateServiceV2Response();
         this.request("CreateServiceV2", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of ingress rules associated with the service.
+     * @param {DescribeRelatedIngressesRequest} req
+     * @param {function(string, DescribeRelatedIngressesResponse):void} cb
+     * @public
+     */
+    DescribeRelatedIngresses(req, cb) {
+        let resp = new DescribeRelatedIngressesResponse();
+        this.request("DescribeRelatedIngresses", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a service’s basic information.
+     * @param {ModifyServiceInfoRequest} req
+     * @param {function(string, ModifyServiceInfoResponse):void} cb
+     * @public
+     */
+    ModifyServiceInfo(req, cb) {
+        let resp = new ModifyServiceInfoResponse();
+        this.request("ModifyServiceInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restart an instance.
+     * @param {RestartServiceRunPodRequest} req
+     * @param {function(string, RestartServiceRunPodResponse):void} cb
+     * @public
+     */
+    RestartServiceRunPod(req, cb) {
+        let resp = new RestartServiceRunPodResponse();
+        this.request("RestartServiceRunPod", req, resp, cb);
     }
 
     /**

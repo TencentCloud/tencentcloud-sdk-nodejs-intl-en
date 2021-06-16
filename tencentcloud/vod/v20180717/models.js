@@ -18472,8 +18472,9 @@ class DescribeCDNStatDetailsRequest extends  AbstractModel {
 
         /**
          * Metrics to query. Valid values:
-<li>Traffic: traffic in bytes.</li>
-<li>Bandwidth: bandwidth in bps.</li>
+<li>`Traffic`: traffic in bytes</li>
+<li>`Bandwidth`: bandwidth in bps</li>
+<li>`Requests`: the number of requests</li>
          * @type {string || null}
          */
         this.Metric = null;
@@ -23625,8 +23626,7 @@ class DescribeTasksRequest extends  AbstractModel {
         this.FinishTime = null;
 
         /**
-         * (Not supported now)
-Sort field. Valid values:
+         * Sort field. Valid values:
 <li>`CreateTime`: task creation time</li>
 <li>`FinishTime`: task end time</li>
          * @type {SortBy || null}
@@ -28595,11 +28595,20 @@ The value is set according to query period length by default. 5-minute granulari
         this.Interval = null;
 
         /**
-         * Storage class to be queried. Valid values:
-<li>TotalStorage: total storage capacity.</li>
-<li>StandardStorage: Standard storage.</li>
-<li>InfrequentStorage: Standard_IA storage.</li>
-Default value: TotalStorage.
+         * Storage class to query. Valid values:
+<li>`TotalStorage`: total storage usage in classes of STANDARD, STANDARD_IA, ARCHIVE, and DEEP ARCHIVE, excluding the storage usage for data deleted in advance.</li>
+<li>`StandardStorage`: STANDARD</li>
+<li>`InfrequentStorage`: STANDARD_IA</li>
+<li>`ArchiveStorage`: ARCHIVE</li>
+<li>`DeepArchiveStorage`: DEEP ARCHIVE</li>
+<li>`DeletedArchiveStorage`: ARCHIVE data deleted in advance</li>
+<li>`DeletedDeepArchiveStorage`: DEEP ARCHIVE data deleted in advance</li>
+<li>`ArchiveStandardRetrieval`: ARCHIVE data retrieved using standard retrievals</li>
+<li>`ArchiveExpeditedRetrieval`: ARCHIVE data retrieved using expedited retrievals</li>
+<li>`ArchiveBulkRetrieval`: ARCHIVE data retrieved using bulk retrievals</li>
+<li>`DeepArchiveStandardRetrieval`: DEEP ARCHIVE data retrieved using standard retrievals</li>
+<li>`DeepArchiveBulkRetrieval`: DEEP ARCHIVE data retrieved using bulk retrievals</li>
+Default value: `TotalStorage`
          * @type {string || null}
          */
         this.StorageType = null;
@@ -28722,6 +28731,18 @@ class StorageStatData extends  AbstractModel {
          */
         this.StandardStorage = null;
 
+        /**
+         * Current ARCHIVE storage usage in bytes
+         * @type {number || null}
+         */
+        this.ArchiveStorage = null;
+
+        /**
+         * Current DEEP ARCHIVE storage usage in bytes
+         * @type {number || null}
+         */
+        this.DeepArchiveStorage = null;
+
     }
 
     /**
@@ -28735,6 +28756,8 @@ class StorageStatData extends  AbstractModel {
         this.TotalStorage = 'TotalStorage' in params ? params.TotalStorage : null;
         this.InfrequentStorage = 'InfrequentStorage' in params ? params.InfrequentStorage : null;
         this.StandardStorage = 'StandardStorage' in params ? params.StandardStorage : null;
+        this.ArchiveStorage = 'ArchiveStorage' in params ? params.ArchiveStorage : null;
+        this.DeepArchiveStorage = 'DeepArchiveStorage' in params ? params.DeepArchiveStorage : null;
 
     }
 }

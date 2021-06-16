@@ -17,6 +17,127 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 
+ * @class
+ */
+class MountedSettingConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ConfigDataName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MountedPath = null;
+
+        /**
+         * 
+         * @type {Array.<Pair> || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigDataName = 'ConfigDataName' in params ? params.ConfigDataName : null;
+        this.MountedPath = 'MountedPath' in params ? params.MountedPath : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new Pair();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ModifyServiceInfo response structure.
+ * @class
+ */
+class ModifyServiceInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Results.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Data volume mount information
+ * @class
+ */
+class StorageMountConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data volume name
+         * @type {string || null}
+         */
+        this.VolumeName = null;
+
+        /**
+         * Data volume binding path
+         * @type {string || null}
+         */
+        this.MountPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VolumeName = 'VolumeName' in params ? params.VolumeName : null;
+        this.MountPath = 'MountPath' in params ? params.MountPath : null;
+
+    }
+}
+
+/**
  * CreateResource request structure.
  * @class
  */
@@ -193,16 +314,22 @@ class IngressTls extends  AbstractModel {
         super();
 
         /**
-         * Host array
+         * Host array. An empty array indicates the default certificate for all domain names.
          * @type {Array.<string> || null}
          */
         this.Hosts = null;
 
         /**
-         * secret name
+         * Secret name. If a certificate is used, this field is left empty.
          * @type {string || null}
          */
         this.SecretName = null;
+
+        /**
+         * SSL Certificate Id
+         * @type {string || null}
+         */
+        this.CertificateId = null;
 
     }
 
@@ -215,6 +342,7 @@ class IngressTls extends  AbstractModel {
         }
         this.Hosts = 'Hosts' in params ? params.Hosts : null;
         this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
 
     }
 }
@@ -255,6 +383,118 @@ class DescribeNamespacesResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Service port mapping
+ * @class
+ */
+class PortMapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Port.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Mapped port.
+         * @type {number || null}
+         */
+        this.TargetPort = null;
+
+        /**
+         * TCP/UDP protocol stack.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Port = 'Port' in params ? params.Port : null;
+        this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+    }
+}
+
+/**
+ * RestartServiceRunPod request structure.
+ * @class
+ */
+class RestartServiceRunPodRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment ID.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Service ID.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Pod name.
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Number of items per page.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pod status.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Source channel.
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
 
     }
 }
@@ -345,6 +585,48 @@ class DeleteIngressRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyServiceInfo request structure.
+ * @class
+ */
+class ModifyServiceInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service ID.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Source channel.
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+
+    }
+}
+
+/**
  * CreateNamespace response structure.
  * @class
  */
@@ -381,24 +663,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Data volume mount information
+ * DescribeRelatedIngresses request structure.
  * @class
  */
-class StorageMountConf extends  AbstractModel {
+class DescribeRelatedIngressesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data volume name
+         * Environment ID.
          * @type {string || null}
          */
-        this.VolumeName = null;
+        this.NamespaceId = null;
 
         /**
-         * Data volume binding path
+         * EKS namespace.
          * @type {string || null}
          */
-        this.MountPath = null;
+        this.EksNamespace = null;
+
+        /**
+         * Source channel.
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Service ID.
+         * @type {string || null}
+         */
+        this.ServiceId = null;
 
     }
 
@@ -409,8 +703,10 @@ class StorageMountConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VolumeName = 'VolumeName' in params ? params.VolumeName : null;
-        this.MountPath = 'MountPath' in params ? params.MountPath : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.EksNamespace = 'EksNamespace' in params ? params.EksNamespace : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
 
     }
 }
@@ -608,6 +904,19 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Vip = null;
 
+        /**
+         * Creation time.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether to listen on both the HTTP Port 80 and HTTPS Port 443. The default value is `false`. The optional value `true` means listening on both the HTTP Port 80 and HTTPS Port 443.
+         * @type {boolean || null}
+         */
+        this.Mixed = null;
+
     }
 
     /**
@@ -642,6 +951,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Mixed = 'Mixed' in params ? params.Mixed : null;
 
     }
 }
@@ -804,6 +1115,30 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
          */
         this.ImageArgs = null;
 
+        /**
+         * Service port mapping.
+         * @type {Array.<PortMapping> || null}
+         */
+        this.PortMappings = null;
+
+        /**
+         * Whether to add the registry’s default configurations.
+         * @type {boolean || null}
+         */
+        this.UseRegistryDefaultConfig = null;
+
+        /**
+         * 
+         * @type {Array.<MountedSettingConf> || null}
+         */
+        this.SettingConfs = null;
+
+        /**
+         * 
+         * @type {EksService || null}
+         */
+        this.EksService = null;
+
     }
 
     /**
@@ -872,6 +1207,31 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
         this.ImageCommand = 'ImageCommand' in params ? params.ImageCommand : null;
         this.ImageArgs = 'ImageArgs' in params ? params.ImageArgs : null;
 
+        if (params.PortMappings) {
+            this.PortMappings = new Array();
+            for (let z in params.PortMappings) {
+                let obj = new PortMapping();
+                obj.deserialize(params.PortMappings[z]);
+                this.PortMappings.push(obj);
+            }
+        }
+        this.UseRegistryDefaultConfig = 'UseRegistryDefaultConfig' in params ? params.UseRegistryDefaultConfig : null;
+
+        if (params.SettingConfs) {
+            this.SettingConfs = new Array();
+            for (let z in params.SettingConfs) {
+                let obj = new MountedSettingConf();
+                obj.deserialize(params.SettingConfs[z]);
+                this.SettingConfs.push(obj);
+            }
+        }
+
+        if (params.EksService) {
+            let obj = new EksService();
+            obj.deserialize(params.EksService)
+            this.EksService = obj;
+        }
+
     }
 }
 
@@ -916,24 +1276,25 @@ class ModifyIngressRequest extends  AbstractModel {
 }
 
 /**
- * Key-Value pair
+ * DescribeRelatedIngresses response structure.
  * @class
  */
-class Pair extends  AbstractModel {
+class DescribeRelatedIngressesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Key
-         * @type {string || null}
+         * Ingress array.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<IngressInfo> || null}
          */
-        this.Key = null;
+        this.Result = null;
 
         /**
-         * Value
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Value = null;
+        this.RequestId = null;
 
     }
 
@@ -944,8 +1305,16 @@ class Pair extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new IngressInfo();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -994,6 +1363,12 @@ class CreateNamespaceRequest extends  AbstractModel {
          */
         this.SourceChannel = null;
 
+        /**
+         * Whether to enable the TSW service.
+         * @type {boolean || null}
+         */
+        this.EnableTswTraceService = null;
+
     }
 
     /**
@@ -1009,6 +1384,7 @@ class CreateNamespaceRequest extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.K8sVersion = 'K8sVersion' in params ? params.K8sVersion : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.EnableTswTraceService = 'EnableTswTraceService' in params ? params.EnableTswTraceService : null;
 
     }
 }
@@ -1039,6 +1415,12 @@ class DescribeIngressesRequest extends  AbstractModel {
          */
         this.SourceChannel = null;
 
+        /**
+         * Ingress rule name list.
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
     }
 
     /**
@@ -1051,6 +1433,7 @@ class DescribeIngressesRequest extends  AbstractModel {
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.EksNamespace = 'EksNamespace' in params ? params.EksNamespace : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.Names = 'Names' in params ? params.Names : null;
 
     }
 }
@@ -1328,6 +1711,42 @@ class DeleteIngressResponse extends  AbstractModel {
 }
 
 /**
+ * RestartServiceRunPod response structure.
+ * @class
+ */
+class RestartServiceRunPodResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned results.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyNamespace request structure.
  * @class
  */
@@ -1486,6 +1905,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Host = null;
 
+        /**
+         * Protocol. Options include HTTP and HTTPS. The default option is HTTP.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
     }
 
     /**
@@ -1502,6 +1927,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Http = obj;
         }
         this.Host = 'Host' in params ? params.Host : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
 
     }
 }
@@ -1658,10 +2084,24 @@ class RunVersionPod extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Pod IP
+         * Pod IP.
          * @type {string || null}
          */
         this.PodIp = null;
+
+        /**
+         * Availability zone.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Deployed version.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.DeployVersion = null;
 
     }
 
@@ -1677,6 +2117,8 @@ class RunVersionPod extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.PodIp = 'PodIp' in params ? params.PodIp : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DeployVersion = 'DeployVersion' in params ? params.DeployVersion : null;
 
     }
 }
@@ -2240,23 +2682,170 @@ class CreateServiceV2Request extends  AbstractModel {
     }
 }
 
+/**
+ * eks service info
+ * @class
+ */
+class EksService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * service name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.Ports = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIp = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ExternalIp = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LoadBalanceId = null;
+
+        /**
+         * 
+         * @type {Array.<PortMapping> || null}
+         */
+        this.PortMappings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Ports = 'Ports' in params ? params.Ports : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.ClusterIp = 'ClusterIp' in params ? params.ClusterIp : null;
+        this.ExternalIp = 'ExternalIp' in params ? params.ExternalIp : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.LoadBalanceId = 'LoadBalanceId' in params ? params.LoadBalanceId : null;
+
+        if (params.PortMappings) {
+            this.PortMappings = new Array();
+            for (let z in params.PortMappings) {
+                let obj = new PortMapping();
+                obj.deserialize(params.PortMappings[z]);
+                this.PortMappings.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Key-Value pair
+ * @class
+ */
+class Pair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
 module.exports = {
+    MountedSettingConf: MountedSettingConf,
+    ModifyServiceInfoResponse: ModifyServiceInfoResponse,
+    StorageMountConf: StorageMountConf,
     CreateResourceRequest: CreateResourceRequest,
     CreateServiceV2Response: CreateServiceV2Response,
     CreateCosTokenV2Request: CreateCosTokenV2Request,
     DeployServiceV2Response: DeployServiceV2Response,
     IngressTls: IngressTls,
     DescribeNamespacesResponse: DescribeNamespacesResponse,
+    PortMapping: PortMapping,
+    RestartServiceRunPodRequest: RestartServiceRunPodRequest,
     ModifyIngressResponse: ModifyIngressResponse,
     DeleteIngressRequest: DeleteIngressRequest,
+    ModifyServiceInfoRequest: ModifyServiceInfoRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
-    StorageMountConf: StorageMountConf,
+    DescribeRelatedIngressesRequest: DescribeRelatedIngressesRequest,
     CosToken: CosToken,
     DescribeNamespacesRequest: DescribeNamespacesRequest,
     IngressInfo: IngressInfo,
     DeployServiceV2Request: DeployServiceV2Request,
     ModifyIngressRequest: ModifyIngressRequest,
-    Pair: Pair,
+    DescribeRelatedIngressesResponse: DescribeRelatedIngressesResponse,
     CreateNamespaceRequest: CreateNamespaceRequest,
     DescribeIngressesRequest: DescribeIngressesRequest,
     DescribeRunPodPage: DescribeRunPodPage,
@@ -2264,6 +2853,7 @@ module.exports = {
     LogOutputConf: LogOutputConf,
     DescribeIngressesResponse: DescribeIngressesResponse,
     DeleteIngressResponse: DeleteIngressResponse,
+    RestartServiceRunPodResponse: RestartServiceRunPodResponse,
     ModifyNamespaceRequest: ModifyNamespaceRequest,
     IngressRuleBackend: IngressRuleBackend,
     DescribeIngressResponse: DescribeIngressResponse,
@@ -2281,5 +2871,7 @@ module.exports = {
     EsInfo: EsInfo,
     DescribeIngressRequest: DescribeIngressRequest,
     CreateServiceV2Request: CreateServiceV2Request,
+    EksService: EksService,
+    Pair: Pair,
 
 }

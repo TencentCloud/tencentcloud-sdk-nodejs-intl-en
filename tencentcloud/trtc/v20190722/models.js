@@ -331,6 +331,12 @@ class LayoutParams extends  AbstractModel {
          */
         this.PureAudioHoldPlaceMode = null;
 
+        /**
+         * Watermark parameters
+         * @type {WaterMarkParams || null}
+         */
+        this.WaterMarkParams = null;
+
     }
 
     /**
@@ -362,6 +368,12 @@ class LayoutParams extends  AbstractModel {
         }
         this.PlaceHolderMode = 'PlaceHolderMode' in params ? params.PlaceHolderMode : null;
         this.PureAudioHoldPlaceMode = 'PureAudioHoldPlaceMode' in params ? params.PureAudioHoldPlaceMode : null;
+
+        if (params.WaterMarkParams) {
+            let obj = new WaterMarkParams();
+            obj.deserialize(params.WaterMarkParams)
+            this.WaterMarkParams = obj;
+        }
 
     }
 }
@@ -2992,6 +3004,62 @@ class CreatePictureResponse extends  AbstractModel {
 }
 
 /**
+ * Watermark parameters for On-Cloud MixTranscoding
+ * @class
+ */
+class WaterMarkParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image ID of the watermark, which is generated after the image is uploaded to the TRTC console
+         * @type {number || null}
+         */
+        this.WaterMarkId = null;
+
+        /**
+         * Width (px) of the watermark for On-Cloud MixTranscoding
+         * @type {number || null}
+         */
+        this.WaterMarkWidth = null;
+
+        /**
+         * Height (px) of the watermark for On-Cloud MixTranscoding
+         * @type {number || null}
+         */
+        this.WaterMarkHeight = null;
+
+        /**
+         * Horizontal offset (px) of the watermark
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * Vertical offset (px) of the watermark
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WaterMarkId = 'WaterMarkId' in params ? params.WaterMarkId : null;
+        this.WaterMarkWidth = 'WaterMarkWidth' in params ? params.WaterMarkWidth : null;
+        this.WaterMarkHeight = 'WaterMarkHeight' in params ? params.WaterMarkHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+
+    }
+}
+
+/**
  * DismissRoomByStrRoomId response structure.
  * @class
  */
@@ -3156,6 +3224,7 @@ module.exports = {
     AbnormalExperience: AbnormalExperience,
     RoomState: RoomState,
     CreatePictureResponse: CreatePictureResponse,
+    WaterMarkParams: WaterMarkParams,
     DismissRoomByStrRoomIdResponse: DismissRoomByStrRoomIdResponse,
     DescribeHistoryScaleResponse: DescribeHistoryScaleResponse,
     StartMCUMixTranscodeByStrRoomIdResponse: StartMCUMixTranscodeByStrRoomIdResponse,

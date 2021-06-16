@@ -74,6 +74,7 @@ const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
 const AbnormalExperience = models.AbnormalExperience;
 const RoomState = models.RoomState;
 const CreatePictureResponse = models.CreatePictureResponse;
+const WaterMarkParams = models.WaterMarkParams;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
 const StartMCUMixTranscodeByStrRoomIdResponse = models.StartMCUMixTranscodeByStrRoomIdResponse;
@@ -163,7 +164,7 @@ Note: you are not advised to use the API for the processing of real-time busines
     }
 
     /**
-     * This API is used to delete an image.
+     * This API is no longer used, and an error will occur if you call it. To use the feature provided by this API, please see [Console Guide > Application Management > Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1).
      * @param {DeletePictureRequest} req
      * @param {function(string, DeletePictureResponse):void} cb
      * @public
@@ -174,7 +175,7 @@ Note: you are not advised to use the API for the processing of real-time busines
     }
 
     /**
-     * This API is used to upload an image.
+     * This API is no longer used, and an error will occur if you call it. To use the feature provided by this API, please see [Console Guide > Application Management > Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1).
      * @param {CreatePictureRequest} req
      * @param {function(string, CreatePictureResponse):void} cb
      * @public
@@ -252,7 +253,7 @@ Note: you are not advised to use the API for the processing of real-time busines
     }
 
     /**
-     * This API is used to modify the parameters of an image.
+     * This API is no longer used, and an error will occur if you call it. To use the feature provided by this API, please see [Console Guide > Application Management > Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1).
      * @param {ModifyPictureRequest} req
      * @param {function(string, ModifyPictureResponse):void} cb
      * @public
@@ -335,7 +336,7 @@ Note: only applications created on and after January 9, 2020 can call this API d
     }
 
     /**
-     * This API is used to query the parameters of an image.
+     * This API is no longer used, and an error will occur if you call it. To use the feature provided by this API, please see [Console Guide > Application Management > Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1).
      * @param {DescribePictureRequest} req
      * @param {function(string, DescribePictureResponse):void} cb
      * @public

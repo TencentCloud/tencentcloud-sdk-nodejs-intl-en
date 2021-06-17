@@ -397,6 +397,41 @@ Notes about this policy:
 }
 
 /**
+ * ScaleOutInstances request structure.
+ * @class
+ */
+class ScaleOutInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling group ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * Number of instances to be added
+         * @type {number || null}
+         */
+        this.ScaleOutNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScaleOutNumber = 'ScaleOutNumber' in params ? params.ScaleOutNumber : null;
+
+    }
+}
+
+/**
  * AS event notification
  * @class
  */
@@ -4808,6 +4843,41 @@ class CompleteLifecycleActionResponse extends  AbstractModel {
 }
 
 /**
+ * ScaleOutInstances response structure.
+ * @class
+ */
+class ScaleOutInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling activity ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * > Describes key-value pair filters used for conditional queries, such as filtering results by ID, name and state.
 > * If there are multiple `Filter` parameters, the relationship among them will be logical `AND`.
 > * If there are multiple `Values` for the same `Filter`, the relationship among the `Values` for the same `Filter` will be logical `OR`.
@@ -5466,6 +5536,41 @@ class CreateScalingPolicyRequest extends  AbstractModel {
 }
 
 /**
+ * ScaleInInstances response structure.
+ * @class
+ */
+class ScaleInInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling activity ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteNotificationConfiguration request structure.
  * @class
  */
@@ -5864,6 +5969,41 @@ The maximum number of `Filters` per request is 10. The upper limit for `Filter.V
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * ScaleInInstances request structure.
+ * @class
+ */
+class ScaleInInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling group ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * Number of instances to be reduced
+         * @type {number || null}
+         */
+        this.ScaleInNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScaleInNumber = 'ScaleInNumber' in params ? params.ScaleInNumber : null;
 
     }
 }
@@ -6829,6 +6969,7 @@ module.exports = {
     ModifyLaunchConfigurationAttributesRequest: ModifyLaunchConfigurationAttributesRequest,
     DisableAutoScalingGroupRequest: DisableAutoScalingGroupRequest,
     ModifyAutoScalingGroupRequest: ModifyAutoScalingGroupRequest,
+    ScaleOutInstancesRequest: ScaleOutInstancesRequest,
     AutoScalingNotification: AutoScalingNotification,
     ModifyScheduledActionRequest: ModifyScheduledActionRequest,
     DescribeAutoScalingGroupsRequest: DescribeAutoScalingGroupsRequest,
@@ -6911,6 +7052,7 @@ module.exports = {
     CreateLifecycleHookRequest: CreateLifecycleHookRequest,
     ScheduledAction: ScheduledAction,
     CompleteLifecycleActionResponse: CompleteLifecycleActionResponse,
+    ScaleOutInstancesResponse: ScaleOutInstancesResponse,
     Filter: Filter,
     DescribeLifecycleHooksRequest: DescribeLifecycleHooksRequest,
     ServiceSettings: ServiceSettings,
@@ -6920,6 +7062,7 @@ module.exports = {
     DescribeAutoScalingInstancesResponse: DescribeAutoScalingInstancesResponse,
     DescribeLifecycleHooksResponse: DescribeLifecycleHooksResponse,
     CreateScalingPolicyRequest: CreateScalingPolicyRequest,
+    ScaleInInstancesResponse: ScaleInInstancesResponse,
     DeleteNotificationConfigurationRequest: DeleteNotificationConfigurationRequest,
     DescribeLaunchConfigurationsRequest: DescribeLaunchConfigurationsRequest,
     NotificationTarget: NotificationTarget,
@@ -6929,6 +7072,7 @@ module.exports = {
     EnableAutoScalingGroupRequest: EnableAutoScalingGroupRequest,
     MetricAlarm: MetricAlarm,
     DescribeNotificationConfigurationsRequest: DescribeNotificationConfigurationsRequest,
+    ScaleInInstancesRequest: ScaleInInstancesRequest,
     LifecycleHook: LifecycleHook,
     ForwardLoadBalancer: ForwardLoadBalancer,
     ClearLaunchConfigurationAttributesRequest: ClearLaunchConfigurationAttributesRequest,

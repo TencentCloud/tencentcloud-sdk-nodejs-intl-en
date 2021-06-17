@@ -20,6 +20,7 @@ const DisableAutoScalingGroupResponse = models.DisableAutoScalingGroupResponse;
 const ModifyLaunchConfigurationAttributesRequest = models.ModifyLaunchConfigurationAttributesRequest;
 const DisableAutoScalingGroupRequest = models.DisableAutoScalingGroupRequest;
 const ModifyAutoScalingGroupRequest = models.ModifyAutoScalingGroupRequest;
+const ScaleOutInstancesRequest = models.ScaleOutInstancesRequest;
 const AutoScalingNotification = models.AutoScalingNotification;
 const ModifyScheduledActionRequest = models.ModifyScheduledActionRequest;
 const DescribeAutoScalingGroupsRequest = models.DescribeAutoScalingGroupsRequest;
@@ -102,6 +103,7 @@ const CreateScheduledActionResponse = models.CreateScheduledActionResponse;
 const CreateLifecycleHookRequest = models.CreateLifecycleHookRequest;
 const ScheduledAction = models.ScheduledAction;
 const CompleteLifecycleActionResponse = models.CompleteLifecycleActionResponse;
+const ScaleOutInstancesResponse = models.ScaleOutInstancesResponse;
 const Filter = models.Filter;
 const DescribeLifecycleHooksRequest = models.DescribeLifecycleHooksRequest;
 const ServiceSettings = models.ServiceSettings;
@@ -111,6 +113,7 @@ const ModifyNotificationConfigurationResponse = models.ModifyNotificationConfigu
 const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
 const DescribeLifecycleHooksResponse = models.DescribeLifecycleHooksResponse;
 const CreateScalingPolicyRequest = models.CreateScalingPolicyRequest;
+const ScaleInInstancesResponse = models.ScaleInInstancesResponse;
 const DeleteNotificationConfigurationRequest = models.DeleteNotificationConfigurationRequest;
 const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
 const NotificationTarget = models.NotificationTarget;
@@ -120,6 +123,7 @@ const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
 const EnableAutoScalingGroupRequest = models.EnableAutoScalingGroupRequest;
 const MetricAlarm = models.MetricAlarm;
 const DescribeNotificationConfigurationsRequest = models.DescribeNotificationConfigurationsRequest;
+const ScaleInInstancesRequest = models.ScaleInInstancesRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const ClearLaunchConfigurationAttributesRequest = models.ClearLaunchConfigurationAttributesRequest;
@@ -238,6 +242,20 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
+     * This API is used to add the specified number of instances to the scaling group, which returns the scaling activity ID `ActivityId`.
+* The scaling group is not active.
+* The desired capacity will be increased accordingly. The new desired capacity should be no more than the maximum capacity.
+* If the scale-out activity failed or partially succeeded, the final desired capacity only includes the instances that have been added successfully.
+     * @param {ScaleOutInstancesRequest} req
+     * @param {function(string, ScaleOutInstancesResponse):void} cb
+     * @public
+     */
+    ScaleOutInstances(req, cb) {
+        let resp = new ScaleOutInstancesResponse();
+        this.request("ScaleOutInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to start up CVM instances in a scaling group.
 * After startup, the instance will be in the `IN_SERVICE` status, which will increase the desired capacity. Please note that the desired capacity cannot exceed the maximum value.
 * This API supports batch operation. Up to 100 instances can be started up in each request.
@@ -313,9 +331,7 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
      * This API is used to remove CVM instances from a scaling group. Instances removed via this API will not be terminated.
 * If the number of remaining `IN_SERVICE` instances in the scaling group is less than the minimum capacity, this API will return an error.
 * However, if the scaling group is in `DISABLED` status, the removal will not verify the relationship between the number of `IN_SERVICE` instances and the minimum capacity.
-
-The CVM will be associated from the CLB instance (if any).
- 
+* This removal will unassociate the CVM from the CLB instance that has been configured for the scaling group.
      * @param {DetachInstancesRequest} req
      * @param {function(string, DetachInstancesResponse):void} cb
      * @public
@@ -323,6 +339,22 @@ The CVM will be associated from the CLB instance (if any).
     DetachInstances(req, cb) {
         let resp = new DetachInstancesResponse();
         this.request("DetachInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reduce the specified number of instances from the scaling group, which returns the scaling activity ID `ActivityId`.
+* The scaling group is not active.
+* The scale-in instances will be selected according to the `TerminationPolicies` policy as described in [Reducing Capacity](https://intl.cloud.tencent.com/document/product/377/8563?from_cn_redirect=1).
+* Only the `IN_SERVICE` instances will be reduced. To reduce instances in other statues, use the [`DetachInstances`](https://intl.cloud.tencent.com/document/api/377/20436?from_cn_redirect=1) or [`RemoveInstances`](https://intl.cloud.tencent.com/document/api/377/20431?from_cn_redirect=1) API.
+* The desired capacity will be reduced accordingly. The new desired capacity should be no less than the minimum capacity.
+* If the scale-in activity failed or partially succeeded, the final desired capacity only deducts the instances that have been reduced successfully.
+     * @param {ScaleInInstancesRequest} req
+     * @param {function(string, ScaleInInstancesResponse):void} cb
+     * @public
+     */
+    ScaleInInstances(req, cb) {
+        let resp = new ScaleInInstancesResponse();
+        this.request("ScaleInInstances", req, resp, cb);
     }
 
     /**
@@ -340,9 +372,7 @@ The CVM will be associated from the CLB instance (if any).
      * This API is used to delete CVM instances from a scaling group. Instances that are automatically created through AS will be terminated, while those manually added to the scaling group will be removed and retained.
 * If the number of remaining `IN_SERVICE` instances in the scaling group is less than the minimum capacity, this API will return an error.
 * However, if the scaling group is in `DISABLED` status, the removal will not verify the relationship between the number of `IN_SERVICE` instances and the minimum capacity.
-
-This removal will unassociate the CVM from the CLB instance that has been configured for the scaling group.
- 
+* This removal will unassociate the CVM from the CLB instance that has been configured for the scaling group.
      * @param {RemoveInstancesRequest} req
      * @param {function(string, RemoveInstancesResponse):void} cb
      * @public

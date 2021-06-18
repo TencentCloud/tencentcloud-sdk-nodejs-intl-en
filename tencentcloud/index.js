@@ -14,6 +14,7 @@ module.exports = {
     cmq: require("./cmq"),
     common: require("./common"),
     cvm: require("./cvm"),
+    cynosdb: require("./cynosdb"),
     dayu: require("./dayu"),
     dbbrain: require("./dbbrain"),
     dc: require("./dc"),

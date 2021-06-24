@@ -16,89 +16,95 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
-const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
-const DeleteAccountRequest = models.DeleteAccountRequest;
-const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
-const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const InitDCDBInstancesResponse = models.InitDCDBInstancesResponse;
-const DCDBShardInfo = models.DCDBShardInfo;
-const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
-const DcnDetailItem = models.DcnDetailItem;
-const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
-const DatabaseProcedure = models.DatabaseProcedure;
-const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
-const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
-const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
-const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
-const CloneAccountRequest = models.CloneAccountRequest;
-const LogFileInfo = models.LogFileInfo;
-const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
-const TableColumn = models.TableColumn;
-const ParamModifyResult = models.ParamModifyResult;
-const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
-const DescribeProjectsResponse = models.DescribeProjectsResponse;
-const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
-const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
-const CreateAccountResponse = models.CreateAccountResponse;
-const SecurityGroupBound = models.SecurityGroupBound;
-const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
-const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
-const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
-const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
-const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
-const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
-const DatabaseFunction = models.DatabaseFunction;
-const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
-const ParamConstraint = models.ParamConstraint;
-const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
-const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
-const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
-const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
-const ShardInfo = models.ShardInfo;
-const Database = models.Database;
-const CreateAccountRequest = models.CreateAccountRequest;
-const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
-const DBAccount = models.DBAccount;
-const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
-const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
-const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
-const SecurityGroup = models.SecurityGroup;
-const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
-const Project = models.Project;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
-const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
-const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
-const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
-const DatabaseTable = models.DatabaseTable;
-const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
-const ConstraintRange = models.ConstraintRange;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const CloneAccountResponse = models.CloneAccountResponse;
-const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
-const DCDBInstanceInfo = models.DCDBInstanceInfo;
-const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
-const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
-const DescribeProjectsRequest = models.DescribeProjectsRequest;
-const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
 const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
-const DBParamValue = models.DBParamValue;
-const BriefNodeInfo = models.BriefNodeInfo;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const CreateAccountRequest = models.CreateAccountRequest;
+const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const DescribeFlowResponse = models.DescribeFlowResponse;
+const CloneAccountResponse = models.CloneAccountResponse;
+const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
+const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
+const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
+const ParamConstraint = models.ParamConstraint;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
-const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
-const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
-const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
-const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
+const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const DatabaseView = models.DatabaseView;
-const DeleteAccountResponse = models.DeleteAccountResponse;
+const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
+const DcnDetailItem = models.DcnDetailItem;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
+const CloneAccountRequest = models.CloneAccountRequest;
+const ParamModifyResult = models.ParamModifyResult;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const DatabaseFunction = models.DatabaseFunction;
+const BriefNodeInfo = models.BriefNodeInfo;
+const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
+const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
+const DatabaseTable = models.DatabaseTable;
+const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
+const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
+const DBParamValue = models.DBParamValue;
+const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
+const DCDBInstanceInfo = models.DCDBInstanceInfo;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
+const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
+const DCDBShardInfo = models.DCDBShardInfo;
+const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
+const SecurityGroup = models.SecurityGroup;
+const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
+const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
+const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
+const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
+const TableColumn = models.TableColumn;
+const SecurityGroupBound = models.SecurityGroupBound;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
+const Database = models.Database;
+const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
+const ShardInfo = models.ShardInfo;
+const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
+const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
+const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
+const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
+const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
+const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
+const DeleteAccountRequest = models.DeleteAccountRequest;
+const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
+const DescribeFlowRequest = models.DescribeFlowRequest;
+const DatabaseProcedure = models.DatabaseProcedure;
+const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
+const DescribeProjectsResponse = models.DescribeProjectsResponse;
+const CreateAccountResponse = models.CreateAccountResponse;
+const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
+const ConstraintRange = models.ConstraintRange;
+const LogFileInfo = models.LogFileInfo;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const DBAccount = models.DBAccount;
+const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
+const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
+const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
+const Project = models.Project;
+const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const DeleteAccountResponse = models.DeleteAccountResponse;
 
 
 /**
@@ -182,14 +188,14 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to enable public network access for a TencentDB instance. After that, you can access the instance with the public domain name and port obtained through the `DescribeDCDBInstances` API.
-     * @param {OpenDBExtranetAccessRequest} req
-     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
+     * This API is used to query task status.
+     * @param {DescribeFlowRequest} req
+     * @param {function(string, DescribeFlowResponse):void} cb
      * @public
      */
-    OpenDBExtranetAccess(req, cb) {
-        let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
+    DescribeFlow(req, cb) {
+        let resp = new DescribeFlowResponse();
+        this.request("DescribeFlow", req, resp, cb);
     }
 
     /**
@@ -304,14 +310,25 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to modify the security groups associated with TencentDB.
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * This API is used to enable public network access for a TencentDB instance. After that, you can access the instance with the public domain name and port obtained through the `DescribeDCDBInstances` API.
+     * @param {OpenDBExtranetAccessRequest} req
+     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
      * @public
      */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    OpenDBExtranetAccess(req, cb) {
+        let resp = new OpenDBExtranetAccessResponse();
+        this.request("OpenDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate an isolated monthly-subscribed instance.
+     * @param {DestroyDCDBInstanceRequest} req
+     * @param {function(string, DestroyDCDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyDCDBInstance(req, cb) {
+        let resp = new DestroyDCDBInstanceResponse();
+        this.request("DestroyDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -415,6 +432,17 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to terminate a pay-as-you-go instance.
+     * @param {DestroyHourDCDBInstanceRequest} req
+     * @param {function(string, DestroyHourDCDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyHourDCDBInstance(req, cb) {
+        let resp = new DestroyHourDCDBInstanceResponse();
+        this.request("DestroyHourDCDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the security group details of an instance.
      * @param {DescribeDBSecurityGroupsRequest} req
      * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
@@ -456,6 +484,17 @@ Note: Accounts with the same username but different hosts are different accounts
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the security groups associated with TencentDB.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
 

@@ -3283,10 +3283,24 @@ class Placement extends  AbstractModel {
         this.Zone = null;
 
         /**
+         * Cage ID. When it is an input parameter, the specified CageID resource is operated, and it can be left blank. When it is an output parameter, it is the ID of the cage the resource belongs to, and it can be left blank.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.CageId = null;
+
+        /**
          * ID of the project to which the instance belongs. This parameter can be obtained from the projectId field in the returned values of [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1). If this is left empty, default project is used.
          * @type {number || null}
          */
         this.ProjectId = null;
+
+        /**
+         * Dedicated cluster name. When it is an input parameter, it is ignored.  When it is an output parameter, it is the name of the dedicated cluster the cloud disk belongs to, and it can be left blank.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.CdcName = null;
 
         /**
          * ID of dedicated cluster which the instance belongs to. When it is an input parameter, the specified CdcId dedicated cluster resource is operated, and it can be left blank. When it is an output parameter, it is the ID of the dedicated cluster which the resource belongs to, and it can be left blank.
@@ -3296,18 +3310,10 @@ Note: This field may return null, indicating that no valid value was found.
         this.CdcId = null;
 
         /**
-         * Cage ID. When it is an input parameter, the specified CageID resource is operated, and it can be left blank. When it is an output parameter, it is the ID of the cage the resource belongs to, and it can be left blank.
-Note: This field may return null, indicating that no valid value was found.
+         * Dedicated cluster ID
          * @type {string || null}
          */
-        this.CageId = null;
-
-        /**
-         * Dedicated cluster name. When it is an input parameter, it is ignored.  When it is an output parameter, it is the name of the dedicated cluster the cloud disk belongs to, and it can be left blank.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.CdcName = null;
+        this.DedicatedClusterId = null;
 
     }
 
@@ -3319,10 +3325,11 @@ Note: This field may return null, indicating that no valid value was found.
             return;
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.CdcId = 'CdcId' in params ? params.CdcId : null;
         this.CageId = 'CageId' in params ? params.CageId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.CdcName = 'CdcName' in params ? params.CdcName : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
 
     }
 }
@@ -3449,10 +3456,164 @@ class Disk extends  AbstractModel {
         super();
 
         /**
+         * Whether the cloud disk terminates along with the instance mounted to it. <br><li>true: Cloud disk will also be terminated when instance terminates, so only hourly postpaid cloud disk are supported.<br><li>false: Cloud disk does not terminate when instance terminates.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
+        /**
+         * Auto renewal flag. Supported values:<br><li>NOTIFY_AND_AUTO_RENEW: Notify expiry and renew automatically<br><li>NOTIFY_AND_MANUAL_RENEW: Notify expiry but not renew automatically<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify expiry nor renew automatically.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * The state of the cloud disk. Value range: <br><li>UNATTACHED: Not mounted <br><li>ATTACHING: Mounting <br><li>ATTACHED: Mounted <br><li>DETACHING: Un-mounting <br><li>EXPANDING: Expanding <br><li>ROLLBACKING: Rolling back <br><li>TORECYCE: Pending recycling. <br><li>DUMPING: Copying the hard drive.
+         * @type {string || null}
+         */
+        this.DiskState = null;
+
+        /**
+         * The total number of snapshots of the cloud disk.
+         * @type {number || null}
+         */
+        this.SnapshotCount = null;
+
+        /**
+         * Cloud disk already mounted to CVM, and both CVM and cloud disk use monthly subscription.<br><li>true: CVM has auto-renewal flag set up, but cloud disk does not.<br><li>false: Cloud disk auto-renewal flag set up normally.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {boolean || null}
+         */
+        this.AutoRenewFlagError = null;
+
+        /**
+         * Whether the cloud disk is in the status of snapshot rollback. Value range: <br><li>false: No <br><li>true: Yes
+         * @type {boolean || null}
+         */
+        this.Rollbacking = null;
+
+        /**
+         * For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk's Instance IDs currently mounted to the CVM.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
+
+        /**
+         * Whether the cloud disk is encrypted. Value range: <br><li>false: Not encrypted <br><li>true: Encrypted.
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
+        /**
+         * Cloud disk name.
+         * @type {string || null}
+         */
+        this.DiskName = null;
+
+        /**
+         * Specifies whether to create a snapshot when the cloud disk is terminated due to overdue payment or expiration. `true`: create snapshot; `false`: do not create snapshot.
+         * @type {boolean || null}
+         */
+        this.BackupDisk = null;
+
+        /**
+         * The tag bound to the cloud disk. The value Null is used when no tag is bound to the cloud disk.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * ID of the CVM to which the cloud disk is mounted.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Cloud disk mount method. Valid values: <br><li>PF: mount as a PF (Physical Function)<br><li>VF: mount as a VF (Virtual Function)
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.AttachMode = null;
+
+        /**
+         * ID of the periodic snapshot associated to the cloud disk. This parameter is returned only if the value of parameter ReturnBindAutoSnapshotPolicy is TRUE when the API DescribeDisks is called.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.AutoSnapshotPolicyIds = null;
+
+        /**
+         * Extra performance for a cloud disk, in MB/sec.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
+        /**
+         * Whether cloud disk is in process of type change. Value range: <br><li>false: Cloud disk not in process of type change. <br><li>true: Cloud disk type change has been launched, and migration is in process.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {boolean || null}
+         */
+        this.Migrating = null;
+
+        /**
          * Cloud disk ID.
          * @type {string || null}
          */
         this.DiskId = null;
+
+        /**
+         * The total capacity of the snapshots of the cloud disk. Unit: MB.
+         * @type {number || null}
+         */
+        this.SnapshotSize = null;
+
+        /**
+         * Location of the cloud disk.
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * Determines whether or not prepaid cloud disk supports active return. <br><li>true: Active return supported.<br><li>false: Active return not supported.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {boolean || null}
+         */
+        this.IsReturnable = null;
+
+        /**
+         * Expiration time of the cloud disk.
+         * @type {string || null}
+         */
+        this.DeadlineTime = null;
+
+        /**
+         * Whether the cloud disk is mounted to the CVM. Value range: <br><li>false: Unmounted <br><li>true: Mounted.
+         * @type {boolean || null}
+         */
+        this.Attached = null;
+
+        /**
+         * Cloud disk size (in GB).
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Migration progress of cloud disk type change, from 0 to 100.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.MigratePercent = null;
 
         /**
          * Cloud disk type. Value range:<br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
@@ -3473,96 +3634,10 @@ class Disk extends  AbstractModel {
         this.Portable = null;
 
         /**
-         * Location of the cloud disk.
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
          * Whether the cloud disk has the capability to create snapshots. Value range: <br><li>false: Cannot create snapshots. true: Can create snapshots.
          * @type {boolean || null}
          */
         this.SnapshotAbility = null;
-
-        /**
-         * Cloud disk name.
-         * @type {string || null}
-         */
-        this.DiskName = null;
-
-        /**
-         * Cloud disk size (in GB).
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * The state of the cloud disk. Value range: <br><li>UNATTACHED: Not mounted <br><li>ATTACHING: Mounting <br><li>ATTACHED: Mounted <br><li>DETACHING: Un-mounting <br><li>EXPANDING: Expanding <br><li>ROLLBACKING: Rolling back <br><li>TORECYCE: Pending recycling. <br><li>DUMPING: Copying the hard drive.
-         * @type {string || null}
-         */
-        this.DiskState = null;
-
-        /**
-         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * Whether the cloud disk is mounted to the CVM. Value range: <br><li>false: Unmounted <br><li>true: Mounted.
-         * @type {boolean || null}
-         */
-        this.Attached = null;
-
-        /**
-         * ID of the CVM to which the cloud disk is mounted.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Creation time of the cloud disk.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Expiration time of the cloud disk.
-         * @type {string || null}
-         */
-        this.DeadlineTime = null;
-
-        /**
-         * Whether the cloud disk is in the status of snapshot rollback. Value range: <br><li>false: No <br><li>true: Yes
-         * @type {boolean || null}
-         */
-        this.Rollbacking = null;
-
-        /**
-         * Rollback progress of a cloud disk snapshot.
-         * @type {number || null}
-         */
-        this.RollbackPercent = null;
-
-        /**
-         * Whether the cloud disk is encrypted. Value range: <br><li>false: Not encrypted <br><li>true: Encrypted.
-         * @type {boolean || null}
-         */
-        this.Encrypt = null;
-
-        /**
-         * Cloud disk already mounted to CVM, and both CVM and cloud disk use monthly subscription.<br><li>true: CVM has auto-renewal flag set up, but cloud disk does not.<br><li>false: Cloud disk auto-renewal flag set up normally.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {boolean || null}
-         */
-        this.AutoRenewFlagError = null;
-
-        /**
-         * Auto renewal flag. Supported values:<br><li>NOTIFY_AND_AUTO_RENEW: Notify expiry and renew automatically<br><li>NOTIFY_AND_MANUAL_RENEW: Notify expiry but not renew automatically<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify expiry nor renew automatically.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.RenewFlag = null;
 
         /**
          * This field is only applicable when the instance is already mounted to the cloud disk, and both the instance and the cloud disk use monthly subscription. <br><li>true: Expiration time of cloud disk is earlier than that of the instance.<br><li>false:Expiration time of cloud disk is later than that of the instance.
@@ -3572,39 +3647,10 @@ Note: This field may return null, indicating that no valid value was found.
         this.DeadlineError = null;
 
         /**
-         * Determines whether or not prepaid cloud disk supports active return. <br><li>true: Active return supported.<br><li>false: Active return not supported.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {boolean || null}
-         */
-        this.IsReturnable = null;
-
-        /**
-         * In circumstances where the prepaid cloud disk does not support active return, this parameter indicates the reason that return is not supported. Value range: <br><li>1: The cloud disk has already been returned. <br><li>2: The cloud disk has already expired. <br><li>3: The cloud disk does not support return. <br><li> 8: The limit on the number of returns is exceeded.
-Note: This field may return null, indicating that no valid value was found.
+         * Rollback progress of a cloud disk snapshot.
          * @type {number || null}
          */
-        this.ReturnFailCode = null;
-
-        /**
-         * ID of the periodic snapshot associated to the cloud disk. This parameter is returned only if the value of parameter ReturnBindAutoSnapshotPolicy is TRUE when the API DescribeDisks is called.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {Array.<string> || null}
-         */
-        this.AutoSnapshotPolicyIds = null;
-
-        /**
-         * The tag bound to the cloud disk. The value Null is used when no tag is bound to the cloud disk.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Whether the cloud disk terminates along with the instance mounted to it. <br><li>true: Cloud disk will also be terminated when instance terminates, so only hourly postpaid cloud disk are supported.<br><li>false: Cloud disk does not terminate when instance terminates.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {boolean || null}
-         */
-        this.DeleteWithInstance = null;
+        this.RollbackPercent = null;
 
         /**
          * Number of days from current time until disk expiration (only applicable for prepaid disks).
@@ -3614,18 +3660,11 @@ Note: This field may return null, indicating that no valid value was found.
         this.DifferDaysOfDeadline = null;
 
         /**
-         * Whether cloud disk is in process of type change. Value range: <br><li>false: Cloud disk not in process of type change. <br><li>true: Cloud disk type change has been launched, and migration is in process.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {boolean || null}
-         */
-        this.Migrating = null;
-
-        /**
-         * Migration progress of cloud disk type change, from 0 to 100.
+         * In circumstances where the prepaid cloud disk does not support active return, this parameter indicates the reason that return is not supported. Value range: <br><li>1: The cloud disk has already been returned. <br><li>2: The cloud disk has already expired. <br><li>3: The cloud disk does not support return. <br><li> 8: The limit on the number of returns is exceeded.
 Note: This field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
-        this.MigratePercent = null;
+        this.ReturnFailCode = null;
 
         /**
          * Whether or not cloud disk is shareable cloud disk.
@@ -3634,35 +3673,10 @@ Note: This field may return null, indicating that no valid value was found.
         this.Shareable = null;
 
         /**
-         * For non-shareable cloud disks, this parameter is null. For shareable cloud disks, this parameters indicates this cloud disk's Instance IDs currently mounted to the CVM.
-         * @type {Array.<string> || null}
+         * Creation time of the cloud disk.
+         * @type {string || null}
          */
-        this.InstanceIdList = null;
-
-        /**
-         * The total number of snapshots of the cloud disk.
-         * @type {number || null}
-         */
-        this.SnapshotCount = null;
-
-        /**
-         * The total capacity of the snapshots of the cloud disk. Unit: MB.
-         * @type {number || null}
-         */
-        this.SnapshotSize = null;
-
-        /**
-         * Specifies whether to create a snapshot when the cloud disk is terminated due to overdue payment or expiration. `true`: create snapshot; `false`: do not create snapshot.
-         * @type {boolean || null}
-         */
-        this.BackupDisk = null;
-
-        /**
-         * Extra performance for a cloud disk, in MB/sec.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ThroughputPerformance = null;
+        this.CreateTime = null;
 
     }
 
@@ -3673,34 +3687,17 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
-        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
-        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
-        this.Portable = 'Portable' in params ? params.Portable : null;
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.SnapshotAbility = 'SnapshotAbility' in params ? params.SnapshotAbility : null;
-        this.DiskName = 'DiskName' in params ? params.DiskName : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskState = 'DiskState' in params ? params.DiskState : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.Attached = 'Attached' in params ? params.Attached : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
-        this.Rollbacking = 'Rollbacking' in params ? params.Rollbacking : null;
-        this.RollbackPercent = 'RollbackPercent' in params ? params.RollbackPercent : null;
-        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
-        this.AutoRenewFlagError = 'AutoRenewFlagError' in params ? params.AutoRenewFlagError : null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
-        this.DeadlineError = 'DeadlineError' in params ? params.DeadlineError : null;
-        this.IsReturnable = 'IsReturnable' in params ? params.IsReturnable : null;
-        this.ReturnFailCode = 'ReturnFailCode' in params ? params.ReturnFailCode : null;
-        this.AutoSnapshotPolicyIds = 'AutoSnapshotPolicyIds' in params ? params.AutoSnapshotPolicyIds : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskState = 'DiskState' in params ? params.DiskState : null;
+        this.SnapshotCount = 'SnapshotCount' in params ? params.SnapshotCount : null;
+        this.AutoRenewFlagError = 'AutoRenewFlagError' in params ? params.AutoRenewFlagError : null;
+        this.Rollbacking = 'Rollbacking' in params ? params.Rollbacking : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
+        this.BackupDisk = 'BackupDisk' in params ? params.BackupDisk : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -3710,16 +3707,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.Tags.push(obj);
             }
         }
-        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
-        this.DifferDaysOfDeadline = 'DifferDaysOfDeadline' in params ? params.DifferDaysOfDeadline : null;
-        this.Migrating = 'Migrating' in params ? params.Migrating : null;
-        this.MigratePercent = 'MigratePercent' in params ? params.MigratePercent : null;
-        this.Shareable = 'Shareable' in params ? params.Shareable : null;
-        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
-        this.SnapshotCount = 'SnapshotCount' in params ? params.SnapshotCount : null;
-        this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
-        this.BackupDisk = 'BackupDisk' in params ? params.BackupDisk : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AttachMode = 'AttachMode' in params ? params.AttachMode : null;
+        this.AutoSnapshotPolicyIds = 'AutoSnapshotPolicyIds' in params ? params.AutoSnapshotPolicyIds : null;
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.Migrating = 'Migrating' in params ? params.Migrating : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.IsReturnable = 'IsReturnable' in params ? params.IsReturnable : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.Attached = 'Attached' in params ? params.Attached : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.MigratePercent = 'MigratePercent' in params ? params.MigratePercent : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
+        this.Portable = 'Portable' in params ? params.Portable : null;
+        this.SnapshotAbility = 'SnapshotAbility' in params ? params.SnapshotAbility : null;
+        this.DeadlineError = 'DeadlineError' in params ? params.DeadlineError : null;
+        this.RollbackPercent = 'RollbackPercent' in params ? params.RollbackPercent : null;
+        this.DifferDaysOfDeadline = 'DifferDaysOfDeadline' in params ? params.DifferDaysOfDeadline : null;
+        this.ReturnFailCode = 'ReturnFailCode' in params ? params.ReturnFailCode : null;
+        this.Shareable = 'Shareable' in params ? params.Shareable : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }

@@ -23,16 +23,17 @@ const RelatedCcnInfo = models.RelatedCcnInfo;
 const FleetAttributes = models.FleetAttributes;
 const DescribeInstanceTypesResponse = models.DescribeInstanceTypesResponse;
 const TargetConfiguration = models.TargetConfiguration;
-const InboundPermission = models.InboundPermission;
+const EndGameServerSessionAndProcessResponse = models.EndGameServerSessionAndProcessResponse;
 const DescribeGameServerSessionsResponse = models.DescribeGameServerSessionsResponse;
+const UpdateGameServerSessionResponse = models.UpdateGameServerSessionResponse;
 const GetInstanceAccessResponse = models.GetInstanceAccessResponse;
-const JoinGameServerSessionRequest = models.JoinGameServerSessionRequest;
+const EndGameServerSessionAndProcessRequest = models.EndGameServerSessionAndProcessRequest;
 const DescribePlayerSessionsResponse = models.DescribePlayerSessionsResponse;
 const UpdateBucketCORSOptResponse = models.UpdateBucketCORSOptResponse;
 const DescribeInstanceTypesRequest = models.DescribeInstanceTypesRequest;
 const DescribeTimerScalingPoliciesResponse = models.DescribeTimerScalingPoliciesResponse;
 const SetServerReservedResponse = models.SetServerReservedResponse;
-const ServerProcesse = models.ServerProcesse;
+const JoinGameServerSessionBatchRequest = models.JoinGameServerSessionBatchRequest;
 const StopGameServerSessionPlacementRequest = models.StopGameServerSessionPlacementRequest;
 const TimerScalingPolicy = models.TimerScalingPolicy;
 const TimerFleetCapacity = models.TimerFleetCapacity;
@@ -47,6 +48,7 @@ const PlayerLatency = models.PlayerLatency;
 const DiskInfo = models.DiskInfo;
 const StartGameServerSessionPlacementResponse = models.StartGameServerSessionPlacementResponse;
 const Credentials = models.Credentials;
+const ResourceCreationLimitPolicy = models.ResourceCreationLimitPolicy;
 const GetGameServerSessionLogUrlRequest = models.GetGameServerSessionLogUrlRequest;
 const Tag = models.Tag;
 const SetServerReservedRequest = models.SetServerReservedRequest;
@@ -63,8 +65,8 @@ const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessi
 const SearchGameServerSessionsRequest = models.SearchGameServerSessionsRequest;
 const PlacedPlayerSession = models.PlacedPlayerSession;
 const GameServerSessionPlacement = models.GameServerSessionPlacement;
-const JoinGameServerSessionBatchRequest = models.JoinGameServerSessionBatchRequest;
-const UpdateGameServerSessionResponse = models.UpdateGameServerSessionResponse;
+const InboundPermission = models.InboundPermission;
+const ServerProcesse = models.ServerProcesse;
 const PlayerSession = models.PlayerSession;
 const CreateGameServerSessionRequest = models.CreateGameServerSessionRequest;
 const GetGameServerSessionLogUrlResponse = models.GetGameServerSessionLogUrlResponse;
@@ -80,7 +82,7 @@ const DescribeGameServerSessionPlacementResponse = models.DescribeGameServerSess
 const CcnInfo = models.CcnInfo;
 const JoinGameServerSessionBatchResponse = models.JoinGameServerSessionBatchResponse;
 const PlayerDataMap = models.PlayerDataMap;
-const ResourceCreationLimitPolicy = models.ResourceCreationLimitPolicy;
+const JoinGameServerSessionRequest = models.JoinGameServerSessionRequest;
 const StopGameServerSessionPlacementResponse = models.StopGameServerSessionPlacementResponse;
 const PutTimerScalingPolicyRequest = models.PutTimerScalingPolicyRequest;
 const InstanceAccess = models.InstanceAccess;
@@ -97,20 +99,6 @@ class GseClient extends AbstractClient {
     }
     
     /**
-     * This API (PutTimerScalingPolicy) is used to create or update a scheduled scaling policy for a fleet.
-
-If the field `timerID` is filled in, the specified policy will be updated, and if `timerID` is left empty, a new policy will be created.
-
-     * @param {PutTimerScalingPolicyRequest} req
-     * @param {function(string, PutTimerScalingPolicyResponse):void} cb
-     * @public
-     */
-    PutTimerScalingPolicy(req, cb) {
-        let resp = new PutTimerScalingPolicyResponse();
-        this.request("PutTimerScalingPolicy", req, resp, cb);
-    }
-
-    /**
      * This API (UpdateBucketCORSOpt) is used to configure CORS for COS.
      * @param {UpdateBucketCORSOptRequest} req
      * @param {function(string, UpdateBucketCORSOptResponse):void} cb
@@ -119,83 +107,6 @@ If the field `timerID` is filled in, the specified policy will be updated, and i
     UpdateBucketCORSOpt(req, cb) {
         let resp = new UpdateBucketCORSOptResponse();
         this.request("UpdateBucketCORSOpt", req, resp, cb);
-    }
-
-    /**
-     * This API is used to update a game server session.
-     * @param {UpdateGameServerSessionRequest} req
-     * @param {function(string, UpdateGameServerSessionResponse):void} cb
-     * @public
-     */
-    UpdateGameServerSession(req, cb) {
-        let resp = new UpdateGameServerSessionResponse();
-        this.request("UpdateGameServerSession", req, resp, cb);
-    }
-
-    /**
-     * This API is used to replicate server fleet.
-     * @param {CopyFleetRequest} req
-     * @param {function(string, CopyFleetResponse):void} cb
-     * @public
-     */
-    CopyFleet(req, cb) {
-        let resp = new CopyFleetResponse();
-        this.request("CopyFleet", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of game server sessions.
-     * @param {DescribeGameServerSessionsRequest} req
-     * @param {function(string, DescribeGameServerSessionsResponse):void} cb
-     * @public
-     */
-    DescribeGameServerSessions(req, cb) {
-        let resp = new DescribeGameServerSessionsResponse();
-        this.request("DescribeGameServerSessions", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the credentials required for instance login.
-     * @param {GetInstanceAccessRequest} req
-     * @param {function(string, GetInstanceAccessResponse):void} cb
-     * @public
-     */
-    GetInstanceAccess(req, cb) {
-        let resp = new GetInstanceAccessResponse();
-        this.request("GetInstanceAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to start placing a game server session.
-     * @param {StartGameServerSessionPlacementRequest} req
-     * @param {function(string, StartGameServerSessionPlacementResponse):void} cb
-     * @public
-     */
-    StartGameServerSessionPlacement(req, cb) {
-        let resp = new StartGameServerSessionPlacementResponse();
-        this.request("StartGameServerSessionPlacement", req, resp, cb);
-    }
-
-    /**
-     * This API is used to join a game server session.
-     * @param {JoinGameServerSessionRequest} req
-     * @param {function(string, JoinGameServerSessionResponse):void} cb
-     * @public
-     */
-    JoinGameServerSession(req, cb) {
-        let resp = new JoinGameServerSessionResponse();
-        this.request("JoinGameServerSession", req, resp, cb);
-    }
-
-    /**
-     * This API is used to join game server sessions in batch.
-     * @param {JoinGameServerSessionBatchRequest} req
-     * @param {function(string, JoinGameServerSessionBatchResponse):void} cb
-     * @public
-     */
-    JoinGameServerSessionBatch(req, cb) {
-        let resp = new JoinGameServerSessionBatchResponse();
-        this.request("JoinGameServerSessionBatch", req, resp, cb);
     }
 
     /**
@@ -210,18 +121,6 @@ If the field `timerID` is filled in, the specified policy will be updated, and i
     }
 
     /**
-     * This API (DeleteTimerScalingPolicy) is used to delete a scheduled scaling policy of a fleet.
-
-     * @param {DeleteTimerScalingPolicyRequest} req
-     * @param {function(string, DeleteTimerScalingPolicyResponse):void} cb
-     * @public
-     */
-    DeleteTimerScalingPolicy(req, cb) {
-        let resp = new DeleteTimerScalingPolicyResponse();
-        this.request("DeleteTimerScalingPolicy", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the list of game server session details.
      * @param {DescribeGameServerSessionDetailsRequest} req
      * @param {function(string, DescribeGameServerSessionDetailsResponse):void} cb
@@ -230,53 +129,6 @@ If the field `timerID` is filled in, the specified policy will be updated, and i
     DescribeGameServerSessionDetails(req, cb) {
         let resp = new DescribeGameServerSessionDetailsResponse();
         this.request("DescribeGameServerSessionDetails", req, resp, cb);
-    }
-
-    /**
-     * This API is used to obtain the list of CVM types in the specified region.
-     * @param {DescribeInstanceTypesRequest} req
-     * @param {function(string, DescribeInstanceTypesResponse):void} cb
-     * @public
-     */
-    DescribeInstanceTypes(req, cb) {
-        let resp = new DescribeInstanceTypesResponse();
-        this.request("DescribeInstanceTypes", req, resp, cb);
-    }
-
-    /**
-     * This API (SetServerReserved) is used to mark the exceptional instances as retained for troubleshooting.
-
-`ReserveValue`: specifies whether to retain the instance. Valid values: `0` (do not retain), `1` (retain). Default value: `0`.
-
-     * @param {SetServerReservedRequest} req
-     * @param {function(string, SetServerReservedResponse):void} cb
-     * @public
-     */
-    SetServerReserved(req, cb) {
-        let resp = new SetServerReservedResponse();
-        this.request("SetServerReserved", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of player sessions.
-     * @param {DescribePlayerSessionsRequest} req
-     * @param {function(string, DescribePlayerSessionsResponse):void} cb
-     * @public
-     */
-    DescribePlayerSessions(req, cb) {
-        let resp = new DescribePlayerSessionsResponse();
-        this.request("DescribePlayerSessions", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the log URL of a game server session.
-     * @param {GetGameServerSessionLogUrlRequest} req
-     * @param {function(string, GetGameServerSessionLogUrlResponse):void} cb
-     * @public
-     */
-    GetGameServerSessionLogUrl(req, cb) {
-        let resp = new GetGameServerSessionLogUrlResponse();
-        this.request("GetGameServerSessionLogUrl", req, resp, cb);
     }
 
     /**
@@ -291,14 +143,25 @@ If the field `timerID` is filled in, the specified policy will be updated, and i
     }
 
     /**
-     * This API is used to stop placing a game server session.
-     * @param {StopGameServerSessionPlacementRequest} req
-     * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
+     * This API is used to terminate the game server session and the corresponding process, which is applicable to time-limited protection and no protection.
+     * @param {EndGameServerSessionAndProcessRequest} req
+     * @param {function(string, EndGameServerSessionAndProcessResponse):void} cb
      * @public
      */
-    StopGameServerSessionPlacement(req, cb) {
-        let resp = new StopGameServerSessionPlacementResponse();
-        this.request("StopGameServerSessionPlacement", req, resp, cb);
+    EndGameServerSessionAndProcess(req, cb) {
+        let resp = new EndGameServerSessionAndProcessResponse();
+        this.request("EndGameServerSessionAndProcess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the log URL of a game server session.
+     * @param {GetGameServerSessionLogUrlRequest} req
+     * @param {function(string, GetGameServerSessionLogUrlResponse):void} cb
+     * @public
+     */
+    GetGameServerSessionLogUrl(req, cb) {
+        let resp = new GetGameServerSessionLogUrlResponse();
+        this.request("GetGameServerSessionLogUrl", req, resp, cb);
     }
 
     /**
@@ -325,6 +188,84 @@ If the field `timerID` is filled in, the specified policy will be updated, and i
     }
 
     /**
+     * This API is used to replicate server fleet.
+     * @param {CopyFleetRequest} req
+     * @param {function(string, CopyFleetResponse):void} cb
+     * @public
+     */
+    CopyFleet(req, cb) {
+        let resp = new CopyFleetResponse();
+        this.request("CopyFleet", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of game server sessions.
+     * @param {DescribeGameServerSessionsRequest} req
+     * @param {function(string, DescribeGameServerSessionsResponse):void} cb
+     * @public
+     */
+    DescribeGameServerSessions(req, cb) {
+        let resp = new DescribeGameServerSessionsResponse();
+        this.request("DescribeGameServerSessions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to join a game server session.
+     * @param {JoinGameServerSessionRequest} req
+     * @param {function(string, JoinGameServerSessionResponse):void} cb
+     * @public
+     */
+    JoinGameServerSession(req, cb) {
+        let resp = new JoinGameServerSessionResponse();
+        this.request("JoinGameServerSession", req, resp, cb);
+    }
+
+    /**
+     * This API is used to join game server sessions in batch.
+     * @param {JoinGameServerSessionBatchRequest} req
+     * @param {function(string, JoinGameServerSessionBatchResponse):void} cb
+     * @public
+     */
+    JoinGameServerSessionBatch(req, cb) {
+        let resp = new JoinGameServerSessionBatchResponse();
+        this.request("JoinGameServerSessionBatch", req, resp, cb);
+    }
+
+    /**
+     * This API (DeleteTimerScalingPolicy) is used to delete a scheduled scaling policy of a fleet.
+
+     * @param {DeleteTimerScalingPolicyRequest} req
+     * @param {function(string, DeleteTimerScalingPolicyResponse):void} cb
+     * @public
+     */
+    DeleteTimerScalingPolicy(req, cb) {
+        let resp = new DeleteTimerScalingPolicyResponse();
+        this.request("DeleteTimerScalingPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start placing a game server session.
+     * @param {StartGameServerSessionPlacementRequest} req
+     * @param {function(string, StartGameServerSessionPlacementResponse):void} cb
+     * @public
+     */
+    StartGameServerSessionPlacement(req, cb) {
+        let resp = new StartGameServerSessionPlacementResponse();
+        this.request("StartGameServerSessionPlacement", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of player sessions.
+     * @param {DescribePlayerSessionsRequest} req
+     * @param {function(string, DescribePlayerSessionsResponse):void} cb
+     * @public
+     */
+    DescribePlayerSessions(req, cb) {
+        let resp = new DescribePlayerSessionsResponse();
+        this.request("DescribePlayerSessions", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a game server session.
      * @param {CreateGameServerSessionRequest} req
      * @param {function(string, CreateGameServerSessionResponse):void} cb
@@ -333,6 +274,78 @@ If the field `timerID` is filled in, the specified policy will be updated, and i
     CreateGameServerSession(req, cb) {
         let resp = new CreateGameServerSessionResponse();
         this.request("CreateGameServerSession", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop placing a game server session.
+     * @param {StopGameServerSessionPlacementRequest} req
+     * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
+     * @public
+     */
+    StopGameServerSessionPlacement(req, cb) {
+        let resp = new StopGameServerSessionPlacementResponse();
+        this.request("StopGameServerSessionPlacement", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the credentials required for instance login.
+     * @param {GetInstanceAccessRequest} req
+     * @param {function(string, GetInstanceAccessResponse):void} cb
+     * @public
+     */
+    GetInstanceAccess(req, cb) {
+        let resp = new GetInstanceAccessResponse();
+        this.request("GetInstanceAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a game server session.
+     * @param {UpdateGameServerSessionRequest} req
+     * @param {function(string, UpdateGameServerSessionResponse):void} cb
+     * @public
+     */
+    UpdateGameServerSession(req, cb) {
+        let resp = new UpdateGameServerSessionResponse();
+        this.request("UpdateGameServerSession", req, resp, cb);
+    }
+
+    /**
+     * This API (SetServerReserved) is used to mark the exceptional instances as retained for troubleshooting.
+
+`ReserveValue`: specifies whether to retain the instance. Valid values: `0` (do not retain), `1` (retain). Default value: `0`.
+
+     * @param {SetServerReservedRequest} req
+     * @param {function(string, SetServerReservedResponse):void} cb
+     * @public
+     */
+    SetServerReserved(req, cb) {
+        let resp = new SetServerReservedResponse();
+        this.request("SetServerReserved", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of CVM types in the specified region.
+     * @param {DescribeInstanceTypesRequest} req
+     * @param {function(string, DescribeInstanceTypesResponse):void} cb
+     * @public
+     */
+    DescribeInstanceTypes(req, cb) {
+        let resp = new DescribeInstanceTypesResponse();
+        this.request("DescribeInstanceTypes", req, resp, cb);
+    }
+
+    /**
+     * This API (PutTimerScalingPolicy) is used to create or update a scheduled scaling policy for a fleet.
+
+If the field `timerID` is filled in, the specified policy will be updated, and if `timerID` is left empty, a new policy will be created.
+
+     * @param {PutTimerScalingPolicyRequest} req
+     * @param {function(string, PutTimerScalingPolicyResponse):void} cb
+     * @public
+     */
+    PutTimerScalingPolicy(req, cb) {
+        let resp = new PutTimerScalingPolicyResponse();
+        this.request("PutTimerScalingPolicy", req, resp, cb);
     }
 
 

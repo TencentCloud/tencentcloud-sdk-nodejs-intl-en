@@ -477,36 +477,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Allowed network range.
+ * EndGameServerSessionAndProcess response structure.
  * @class
  */
-class InboundPermission extends  AbstractModel {
+class EndGameServerSessionAndProcessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start port number. Minimum value: 1025.
-         * @type {number || null}
-         */
-        this.FromPort = null;
-
-        /**
-         * IP range. Valid range of the input IPv4 addresses in CIDR format; for example, 0.0.0.0.0/0.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.IpRange = null;
-
-        /**
-         * Protocol type: TCP or UDP.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * End port number. Maximum value: 60000.
-         * @type {number || null}
-         */
-        this.ToPort = null;
+        this.RequestId = null;
 
     }
 
@@ -517,10 +499,7 @@ class InboundPermission extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FromPort = 'FromPort' in params ? params.FromPort : null;
-        this.IpRange = 'IpRange' in params ? params.IpRange : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.ToPort = 'ToPort' in params ? params.ToPort : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -578,6 +557,46 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * UpdateGameServerSession response structure.
+ * @class
+ */
+class UpdateGameServerSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Updated game session
+         * @type {GameServerSession || null}
+         */
+        this.GameServerSession = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSession) {
+            let obj = new GameServerSession();
+            obj.deserialize(params.GameServerSession)
+            this.GameServerSession = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetInstanceAccess response structure.
  * @class
  */
@@ -618,30 +637,30 @@ class GetInstanceAccessResponse extends  AbstractModel {
 }
 
 /**
- * JoinGameServerSession request structure.
+ * EndGameServerSessionAndProcess request structure.
  * @class
  */
-class JoinGameServerSessionRequest extends  AbstractModel {
+class EndGameServerSessionAndProcessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Game server session ID. It should contain 1 to 256 ASCII characters.
+         * Game server session ID. If a game server session ID is passed in, its corresponding processes, game server sessions, and player sessions will be terminated.
          * @type {string || null}
          */
         this.GameServerSessionId = null;
 
         /**
-         * Player ID. Up to 1024 ASCII characters are allowed.
+         * The public IP of the CVM. You need to pass in `IpAddress` and `Port` at the same time to terminate the matched processes, game server sessions and player sessions (if any exists). It does not take effect in case only the `IpAddress` passed in.
          * @type {string || null}
          */
-        this.PlayerId = null;
+        this.IpAddress = null;
 
         /**
-         * Player custom data. Up to 2048 ASCII characters are allowed.
-         * @type {string || null}
+         * Port number. Value range: 1025 - 60000. You need to pass in `IpAddress` and `Port` at the same time to terminate the matched processes, game server sessions (if any exists) and player sessions (if any exists). It does not take effect in case only the `IpAddress` passed in.
+         * @type {number || null}
          */
-        this.PlayerData = null;
+        this.Port = null;
 
     }
 
@@ -653,8 +672,8 @@ class JoinGameServerSessionRequest extends  AbstractModel {
             return;
         }
         this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
-        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
-        this.PlayerData = 'PlayerData' in params ? params.PlayerData : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -841,30 +860,30 @@ class SetServerReservedResponse extends  AbstractModel {
 }
 
 /**
- * Game service process
+ * JoinGameServerSessionBatch request structure.
  * @class
  */
-class ServerProcesse extends  AbstractModel {
+class JoinGameServerSessionBatchRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of concurrent processes. Value range of total concurrent processes: 1-50.
-         * @type {number || null}
-         */
-        this.ConcurrentExecutions = null;
-
-        /**
-         * Launch Path. Linux: /local/game/ or Windows: C:\game\. The path length is 1-1024.
+         * Game server session ID. It should contain 1 to 256 ASCII characters.
          * @type {string || null}
          */
-        this.LaunchPath = null;
+        this.GameServerSessionId = null;
 
         /**
-         * Launch parameter. The length is 0-1024.
-         * @type {string || null}
+         * Player ID list. At least 1 ID and up to 25 IDs.
+         * @type {Array.<string> || null}
          */
-        this.Parameters = null;
+        this.PlayerIds = null;
+
+        /**
+         * Player custom data
+         * @type {PlayerDataMap || null}
+         */
+        this.PlayerDataMap = null;
 
     }
 
@@ -875,9 +894,14 @@ class ServerProcesse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConcurrentExecutions = 'ConcurrentExecutions' in params ? params.ConcurrentExecutions : null;
-        this.LaunchPath = 'LaunchPath' in params ? params.LaunchPath : null;
-        this.Parameters = 'Parameters' in params ? params.Parameters : null;
+        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+        this.PlayerIds = 'PlayerIds' in params ? params.PlayerIds : null;
+
+        if (params.PlayerDataMap) {
+            let obj = new PlayerDataMap();
+            obj.deserialize(params.PlayerDataMap)
+            this.PlayerDataMap = obj;
+        }
 
     }
 }
@@ -1707,6 +1731,41 @@ class Credentials extends  AbstractModel {
         }
         this.Secret = 'Secret' in params ? params.Secret : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
+
+    }
+}
+
+/**
+ * Resource creation policy
+ * @class
+ */
+class ResourceCreationLimitPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creation quantity. Minimum value: 1. Default value: 2.
+         * @type {number || null}
+         */
+        this.NewGameServerSessionsPerCreator = null;
+
+        /**
+         * Unit time. Minimum value: 1. Default value: 3. Unit: minute.
+         * @type {number || null}
+         */
+        this.PolicyPeriodInMinutes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NewGameServerSessionsPerCreator = 'NewGameServerSessionsPerCreator' in params ? params.NewGameServerSessionsPerCreator : null;
+        this.PolicyPeriodInMinutes = 'PolicyPeriodInMinutes' in params ? params.PolicyPeriodInMinutes : null;
 
     }
 }
@@ -2599,30 +2658,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * JoinGameServerSessionBatch request structure.
+ * Allowed network range.
  * @class
  */
-class JoinGameServerSessionBatchRequest extends  AbstractModel {
+class InboundPermission extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Game server session ID. It should contain 1 to 256 ASCII characters.
+         * Start port number. Minimum value: 1025.
+         * @type {number || null}
+         */
+        this.FromPort = null;
+
+        /**
+         * IP range. Valid range of the input IPv4 addresses in CIDR format; for example, 0.0.0.0.0/0.
          * @type {string || null}
          */
-        this.GameServerSessionId = null;
+        this.IpRange = null;
 
         /**
-         * Player ID list. At least 1 ID and up to 25 IDs.
-         * @type {Array.<string> || null}
+         * Protocol type: TCP or UDP.
+         * @type {string || null}
          */
-        this.PlayerIds = null;
+        this.Protocol = null;
 
         /**
-         * Player custom data
-         * @type {PlayerDataMap || null}
+         * End port number. Maximum value: 60000.
+         * @type {number || null}
          */
-        this.PlayerDataMap = null;
+        this.ToPort = null;
 
     }
 
@@ -2633,37 +2698,39 @@ class JoinGameServerSessionBatchRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
-        this.PlayerIds = 'PlayerIds' in params ? params.PlayerIds : null;
-
-        if (params.PlayerDataMap) {
-            let obj = new PlayerDataMap();
-            obj.deserialize(params.PlayerDataMap)
-            this.PlayerDataMap = obj;
-        }
+        this.FromPort = 'FromPort' in params ? params.FromPort : null;
+        this.IpRange = 'IpRange' in params ? params.IpRange : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.ToPort = 'ToPort' in params ? params.ToPort : null;
 
     }
 }
 
 /**
- * UpdateGameServerSession response structure.
+ * Game service process
  * @class
  */
-class UpdateGameServerSessionResponse extends  AbstractModel {
+class ServerProcesse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Updated game session
-         * @type {GameServerSession || null}
+         * Number of concurrent processes. Value range of total concurrent processes: 1-50.
+         * @type {number || null}
          */
-        this.GameServerSession = null;
+        this.ConcurrentExecutions = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Launch Path. Linux: /local/game/ or Windows: C:\game\. The path length is 1-1024.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LaunchPath = null;
+
+        /**
+         * Launch parameter. The length is 0-1024.
+         * @type {string || null}
+         */
+        this.Parameters = null;
 
     }
 
@@ -2674,13 +2741,9 @@ class UpdateGameServerSessionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.GameServerSession) {
-            let obj = new GameServerSession();
-            obj.deserialize(params.GameServerSession)
-            this.GameServerSession = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ConcurrentExecutions = 'ConcurrentExecutions' in params ? params.ConcurrentExecutions : null;
+        this.LaunchPath = 'LaunchPath' in params ? params.LaunchPath : null;
+        this.Parameters = 'Parameters' in params ? params.Parameters : null;
 
     }
 }
@@ -3636,24 +3699,30 @@ class PlayerDataMap extends  AbstractModel {
 }
 
 /**
- * Resource creation policy
+ * JoinGameServerSession request structure.
  * @class
  */
-class ResourceCreationLimitPolicy extends  AbstractModel {
+class JoinGameServerSessionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Creation quantity. Minimum value: 1. Default value: 2.
-         * @type {number || null}
+         * Game server session ID. It should contain 1 to 256 ASCII characters.
+         * @type {string || null}
          */
-        this.NewGameServerSessionsPerCreator = null;
+        this.GameServerSessionId = null;
 
         /**
-         * Unit time. Minimum value: 1. Default value: 3. Unit: minute.
-         * @type {number || null}
+         * Player ID. Up to 1024 ASCII characters are allowed.
+         * @type {string || null}
          */
-        this.PolicyPeriodInMinutes = null;
+        this.PlayerId = null;
+
+        /**
+         * Player custom data. Up to 2048 ASCII characters are allowed.
+         * @type {string || null}
+         */
+        this.PlayerData = null;
 
     }
 
@@ -3664,8 +3733,9 @@ class ResourceCreationLimitPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NewGameServerSessionsPerCreator = 'NewGameServerSessionsPerCreator' in params ? params.NewGameServerSessionsPerCreator : null;
-        this.PolicyPeriodInMinutes = 'PolicyPeriodInMinutes' in params ? params.PolicyPeriodInMinutes : null;
+        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
+        this.PlayerData = 'PlayerData' in params ? params.PlayerData : null;
 
     }
 }
@@ -3812,16 +3882,17 @@ module.exports = {
     FleetAttributes: FleetAttributes,
     DescribeInstanceTypesResponse: DescribeInstanceTypesResponse,
     TargetConfiguration: TargetConfiguration,
-    InboundPermission: InboundPermission,
+    EndGameServerSessionAndProcessResponse: EndGameServerSessionAndProcessResponse,
     DescribeGameServerSessionsResponse: DescribeGameServerSessionsResponse,
+    UpdateGameServerSessionResponse: UpdateGameServerSessionResponse,
     GetInstanceAccessResponse: GetInstanceAccessResponse,
-    JoinGameServerSessionRequest: JoinGameServerSessionRequest,
+    EndGameServerSessionAndProcessRequest: EndGameServerSessionAndProcessRequest,
     DescribePlayerSessionsResponse: DescribePlayerSessionsResponse,
     UpdateBucketCORSOptResponse: UpdateBucketCORSOptResponse,
     DescribeInstanceTypesRequest: DescribeInstanceTypesRequest,
     DescribeTimerScalingPoliciesResponse: DescribeTimerScalingPoliciesResponse,
     SetServerReservedResponse: SetServerReservedResponse,
-    ServerProcesse: ServerProcesse,
+    JoinGameServerSessionBatchRequest: JoinGameServerSessionBatchRequest,
     StopGameServerSessionPlacementRequest: StopGameServerSessionPlacementRequest,
     TimerScalingPolicy: TimerScalingPolicy,
     TimerFleetCapacity: TimerFleetCapacity,
@@ -3836,6 +3907,7 @@ module.exports = {
     DiskInfo: DiskInfo,
     StartGameServerSessionPlacementResponse: StartGameServerSessionPlacementResponse,
     Credentials: Credentials,
+    ResourceCreationLimitPolicy: ResourceCreationLimitPolicy,
     GetGameServerSessionLogUrlRequest: GetGameServerSessionLogUrlRequest,
     Tag: Tag,
     SetServerReservedRequest: SetServerReservedRequest,
@@ -3852,8 +3924,8 @@ module.exports = {
     SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
     PlacedPlayerSession: PlacedPlayerSession,
     GameServerSessionPlacement: GameServerSessionPlacement,
-    JoinGameServerSessionBatchRequest: JoinGameServerSessionBatchRequest,
-    UpdateGameServerSessionResponse: UpdateGameServerSessionResponse,
+    InboundPermission: InboundPermission,
+    ServerProcesse: ServerProcesse,
     PlayerSession: PlayerSession,
     CreateGameServerSessionRequest: CreateGameServerSessionRequest,
     GetGameServerSessionLogUrlResponse: GetGameServerSessionLogUrlResponse,
@@ -3869,7 +3941,7 @@ module.exports = {
     CcnInfo: CcnInfo,
     JoinGameServerSessionBatchResponse: JoinGameServerSessionBatchResponse,
     PlayerDataMap: PlayerDataMap,
-    ResourceCreationLimitPolicy: ResourceCreationLimitPolicy,
+    JoinGameServerSessionRequest: JoinGameServerSessionRequest,
     StopGameServerSessionPlacementResponse: StopGameServerSessionPlacementResponse,
     PutTimerScalingPolicyRequest: PutTimerScalingPolicyRequest,
     InstanceAccess: InstanceAccess,

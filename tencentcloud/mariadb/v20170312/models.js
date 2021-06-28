@@ -101,42 +101,49 @@ class DescribeDatabasesRequest extends  AbstractModel {
 }
 
 /**
- * CreateAccount response structure.
+ * Database parameter description
  * @class
  */
-class CreateAccountResponse extends  AbstractModel {
+class ParamDesc extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID, which is passed through from the input parameters.
+         * Parameter name
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Param = null;
 
         /**
-         * Username, which is passed through from the input parameters.
+         * Current parameter value
          * @type {string || null}
          */
-        this.UserName = null;
+        this.Value = null;
 
         /**
-         * Host allowed for access, which is passed through from the input parameters.
+         * Previously set value, which is the same as `value` after the parameter takes effect.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Host = null;
+        this.SetValue = null;
 
         /**
-         * Passed through from the input parameters.
-         * @type {number || null}
-         */
-        this.ReadOnly = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Default value
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Default = null;
+
+        /**
+         * Parameter constraint
+         * @type {ParamConstraint || null}
+         */
+        this.Constraint = null;
+
+        /**
+         * Whether a value has been set. false: no, true: yes
+         * @type {boolean || null}
+         */
+        this.HaveSetValue = null;
 
     }
 
@@ -147,11 +154,17 @@ class CreateAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Param = 'Param' in params ? params.Param : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.SetValue = 'SetValue' in params ? params.SetValue : null;
+        this.Default = 'Default' in params ? params.Default : null;
+
+        if (params.Constraint) {
+            let obj = new ParamConstraint();
+            obj.deserialize(params.Constraint)
+            this.Constraint = obj;
+        }
+        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
 
     }
 }
@@ -194,6 +207,76 @@ class DescribeAccountsRequest extends  AbstractModel {
 
         /**
          * Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Stored procedure permission information
+ * @class
+ */
+class ProcedurePrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Stored procedure name
+         * @type {string || null}
+         */
+        this.Procedure = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Procedure = 'Procedure' in params ? params.Procedure : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
+ * DestroyHourDBInstance request structure.
+ * @class
+ */
+class DestroyHourDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of tdsql-avw0207d. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -375,6 +458,83 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Slave2 = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DestroyHourDBInstance response structure.
+ * @class
+ */
+class DestroyHourDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/237/16177?from_cn_redirect=1) API to query the async task result.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Instance ID, which is the same as the request parameter `InstanceId`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TencentDB account information
+ * @class
+ */
+class Account extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account name
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Host address
+         * @type {string || null}
+         */
+        this.Host = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.User = 'User' in params ? params.User : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -1640,6 +1800,48 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * Table permission
+ * @class
+ */
+class TablePrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
  * DescribeProjectSecurityGroups response structure.
  * @class
  */
@@ -2378,6 +2580,55 @@ class SecurityGroupBound extends  AbstractModel {
 }
 
 /**
+ * Column permission information
+ * @class
+ */
+class ColumnPrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Column name
+         * @type {string || null}
+         */
+        this.Column = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Column = 'Column' in params ? params.Column : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
  * InitDBInstances request structure.
  * @class
  */
@@ -2834,6 +3085,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyAccountPrivileges response structure.
+ * @class
+ */
+class ModifyAccountPrivilegesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/237/16177?from_cn_redirect=1) API to query the async task result.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyBackupTime response structure.
  * @class
  */
@@ -2955,6 +3241,41 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+    }
+}
+
+/**
+ * Database permission
+ * @class
+ */
+class DatabasePrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+        this.Database = 'Database' in params ? params.Database : null;
 
     }
 }
@@ -3123,6 +3444,48 @@ class CloseDBExtranetAccessResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Function permission information
+ * @class
+ */
+class FunctionPrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
 
     }
 }
@@ -3475,6 +3838,48 @@ class DescribeDatabasesResponse extends  AbstractModel {
 }
 
 /**
+ * View permission information
+ * @class
+ */
+class ViewPrivileges extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * View name
+         * @type {string || null}
+         */
+        this.View = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.View = 'View' in params ? params.View : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
  * DescribeDBLogFiles response structure.
  * @class
  */
@@ -3653,6 +4058,153 @@ class DescribeFlowRequest extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountPrivileges request structure.
+ * @class
+ */
+class ModifyAccountPrivilegesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of tdsql-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Database account, including username and host address.
+         * @type {Array.<Account> || null}
+         */
+        this.Accounts = null;
+
+        /**
+         * Global permission. Valid values of `GlobalPrivileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"PROCESS"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"SHOW DATABASES"`, `"CREATE TEMPORARY TABLES"`, `"LOCK TABLES"`, `"EXECUTE"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"CREATE ROUTINE"`, `"ALTER ROUTINE"`, `"EVENT"`, `"TRIGGER"`.
+Note: if the parameter is left empty, no change will be made to the granted global permissions. To clear the granted global permissions, set the parameter to an empty array.
+         * @type {Array.<string> || null}
+         */
+        this.GlobalPrivileges = null;
+
+        /**
+         * Database permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"CREATE TEMPORARY TABLES"`, `"LOCK TABLES"`, `"EXECUTE"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"CREATE ROUTINE"`, `"ALTER ROUTINE"`, `"EVENT"`, `"TRIGGER"`.
+Note: if the parameter is left empty, no change will be made to the granted database permissions. To clear the granted database permissions, set `Privileges` to an empty array.
+         * @type {Array.<DatabasePrivilege> || null}
+         */
+        this.DatabasePrivileges = null;
+
+        /**
+         * Table permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"TRIGGER"`.
+Note: if the parameter is left empty, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+         * @type {Array.<TablePrivilege> || null}
+         */
+        this.TablePrivileges = null;
+
+        /**
+         * Column permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"REFERENCES"`.
+Note: if the parameter is left empty, no change will be made to the granted column permissions. To clear the granted column permissions, set `Privileges` to an empty array.
+         * @type {Array.<ColumnPrivilege> || null}
+         */
+        this.ColumnPrivileges = null;
+
+        /**
+         * View permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"TRIGGER"`.
+Note: if the parameter is left empty, no change will be made to the granted view permissions. To clear the granted view permissions, set `Privileges` to an empty array.
+         * @type {Array.<ViewPrivileges> || null}
+         */
+        this.ViewPrivileges = null;
+
+        /**
+         * Function permissions. Valid values of `Privileges`: `"ALTER ROUTINE"`, `"EXECUTE"`.
+Note: if the parameter is left empty, no change will be made to the granted function permissions. To clear the granted function permissions, set `Privileges` to an empty array.
+         * @type {Array.<FunctionPrivilege> || null}
+         */
+        this.FunctionPrivileges = null;
+
+        /**
+         * Stored procedure permission. Valid values of `Privileges`: `"ALTER ROUTINE"`, `"EXECUTE"`.
+Note: if the parameter is left empty, no change will be made to the granted stored procedure permissions. To clear the granted stored procedure permissions, set `Privileges` to an empty array.
+         * @type {Array.<ProcedurePrivilege> || null}
+         */
+        this.ProcedurePrivileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new Account();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
+            }
+        }
+        this.GlobalPrivileges = 'GlobalPrivileges' in params ? params.GlobalPrivileges : null;
+
+        if (params.DatabasePrivileges) {
+            this.DatabasePrivileges = new Array();
+            for (let z in params.DatabasePrivileges) {
+                let obj = new DatabasePrivilege();
+                obj.deserialize(params.DatabasePrivileges[z]);
+                this.DatabasePrivileges.push(obj);
+            }
+        }
+
+        if (params.TablePrivileges) {
+            this.TablePrivileges = new Array();
+            for (let z in params.TablePrivileges) {
+                let obj = new TablePrivilege();
+                obj.deserialize(params.TablePrivileges[z]);
+                this.TablePrivileges.push(obj);
+            }
+        }
+
+        if (params.ColumnPrivileges) {
+            this.ColumnPrivileges = new Array();
+            for (let z in params.ColumnPrivileges) {
+                let obj = new ColumnPrivilege();
+                obj.deserialize(params.ColumnPrivileges[z]);
+                this.ColumnPrivileges.push(obj);
+            }
+        }
+
+        if (params.ViewPrivileges) {
+            this.ViewPrivileges = new Array();
+            for (let z in params.ViewPrivileges) {
+                let obj = new ViewPrivileges();
+                obj.deserialize(params.ViewPrivileges[z]);
+                this.ViewPrivileges.push(obj);
+            }
+        }
+
+        if (params.FunctionPrivileges) {
+            this.FunctionPrivileges = new Array();
+            for (let z in params.FunctionPrivileges) {
+                let obj = new FunctionPrivilege();
+                obj.deserialize(params.FunctionPrivileges[z]);
+                this.FunctionPrivileges.push(obj);
+            }
+        }
+
+        if (params.ProcedurePrivileges) {
+            this.ProcedurePrivileges = new Array();
+            for (let z in params.ProcedurePrivileges) {
+                let obj = new ProcedurePrivilege();
+                obj.deserialize(params.ProcedurePrivileges[z]);
+                this.ProcedurePrivileges.push(obj);
+            }
+        }
 
     }
 }
@@ -3848,49 +4400,42 @@ class DescribeInstanceNodeInfoRequest extends  AbstractModel {
 }
 
 /**
- * Database parameter description
+ * CreateAccount response structure.
  * @class
  */
-class ParamDesc extends  AbstractModel {
+class CreateAccountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * Instance ID, which is passed through from the input parameters.
          * @type {string || null}
          */
-        this.Param = null;
+        this.InstanceId = null;
 
         /**
-         * Current parameter value
+         * Username, which is passed through from the input parameters.
          * @type {string || null}
          */
-        this.Value = null;
+        this.UserName = null;
 
         /**
-         * Previously set value, which is the same as `value` after the parameter takes effect.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Host allowed for access, which is passed through from the input parameters.
          * @type {string || null}
          */
-        this.SetValue = null;
+        this.Host = null;
 
         /**
-         * Default value
+         * Passed through from the input parameters.
+         * @type {number || null}
+         */
+        this.ReadOnly = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Default = null;
-
-        /**
-         * Parameter constraint
-         * @type {ParamConstraint || null}
-         */
-        this.Constraint = null;
-
-        /**
-         * Whether a value has been set. false: no, true: yes
-         * @type {boolean || null}
-         */
-        this.HaveSetValue = null;
+        this.RequestId = null;
 
     }
 
@@ -3901,17 +4446,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Param = 'Param' in params ? params.Param : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.SetValue = 'SetValue' in params ? params.SetValue : null;
-        this.Default = 'Default' in params ? params.Default : null;
-
-        if (params.Constraint) {
-            let obj = new ParamConstraint();
-            obj.deserialize(params.Constraint)
-            this.Constraint = obj;
-        }
-        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4885,12 +5424,16 @@ class DeleteAccountResponse extends  AbstractModel {
 module.exports = {
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
-    CreateAccountResponse: CreateAccountResponse,
+    ParamDesc: ParamDesc,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
+    ProcedurePrivilege: ProcedurePrivilege,
+    DestroyHourDBInstanceRequest: DestroyHourDBInstanceRequest,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     DescribeDBResourceUsageDetailsResponse: DescribeDBResourceUsageDetailsResponse,
+    DestroyHourDBInstanceResponse: DestroyHourDBInstanceResponse,
+    Account: Account,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
     CreateAccountRequest: CreateAccountRequest,
@@ -4915,6 +5458,7 @@ module.exports = {
     ParamModifyResult: ParamModifyResult,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    TablePrivilege: TablePrivilege,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeBackupTimeRequest: DescribeBackupTimeRequest,
@@ -4931,28 +5475,34 @@ module.exports = {
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     ModifyBackupTimeRequest: ModifyBackupTimeRequest,
     SecurityGroupBound: SecurityGroupBound,
+    ColumnPrivilege: ColumnPrivilege,
     InitDBInstancesRequest: InitDBInstancesRequest,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DBInstance: DBInstance,
+    ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
     ModifyBackupTimeResponse: ModifyBackupTimeResponse,
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
+    DatabasePrivilege: DatabasePrivilege,
     DcnDetailItem: DcnDetailItem,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
+    FunctionPrivilege: FunctionPrivilege,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     DescribeDBPerformanceDetailsRequest: DescribeDBPerformanceDetailsRequest,
     DescribeBackupTimeResponse: DescribeBackupTimeResponse,
     SlowLogData: SlowLogData,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
+    ViewPrivileges: ViewPrivileges,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeFlowRequest: DescribeFlowRequest,
+    ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     DescribeDBPerformanceResponse: DescribeDBPerformanceResponse,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
-    ParamDesc: ParamDesc,
+    CreateAccountResponse: CreateAccountResponse,
     DescribeLogFileRetentionPeriodResponse: DescribeLogFileRetentionPeriodResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     ConstraintRange: ConstraintRange,

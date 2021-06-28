@@ -18,12 +18,16 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const CreateAccountResponse = models.CreateAccountResponse;
+const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const ProcedurePrivilege = models.ProcedurePrivilege;
+const DestroyHourDBInstanceRequest = models.DestroyHourDBInstanceRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
+const DestroyHourDBInstanceResponse = models.DestroyHourDBInstanceResponse;
+const Account = models.Account;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
@@ -48,6 +52,7 @@ const CloneAccountRequest = models.CloneAccountRequest;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
@@ -64,28 +69,34 @@ const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
 const SecurityGroupBound = models.SecurityGroupBound;
+const ColumnPrivilege = models.ColumnPrivilege;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DBInstance = models.DBInstance;
+const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const DatabasePrivilege = models.DatabasePrivilege;
 const DcnDetailItem = models.DcnDetailItem;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
+const FunctionPrivilege = models.FunctionPrivilege;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const DescribeDBPerformanceDetailsRequest = models.DescribeDBPerformanceDetailsRequest;
 const DescribeBackupTimeResponse = models.DescribeBackupTimeResponse;
 const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const ViewPrivileges = models.ViewPrivileges;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeFlowRequest = models.DescribeFlowRequest;
+const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
-const ParamDesc = models.ParamDesc;
+const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ConstraintRange = models.ConstraintRange;
@@ -310,6 +321,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to terminate a pay-as-you-go instance.
+     * @param {DestroyHourDBInstanceRequest} req
+     * @param {function(string, DestroyHourDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyHourDBInstance(req, cb) {
+        let resp = new DestroyHourDBInstanceResponse();
+        this.request("DestroyHourDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to enable public network access for a TencentDB instance. After that, you can access the instance with the public domain name and port obtained through the `DescribeDCDBInstances` API.
      * @param {OpenDBExtranetAccessRequest} req
      * @param {function(string, OpenDBExtranetAccessResponse):void} cb
@@ -385,6 +407,22 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     ModifyBackupTime(req, cb) {
         let resp = new ModifyBackupTimeResponse();
         this.request("ModifyBackupTime", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the permissions of a TencentDB instance account.
+
+**Notes**
+- Only the SELECT permission (that is, set the permission parameter to `["SELECT"]`) of the system database `mysql` can be granted.
+- An error will be reported if read-write permissions are granted to a read-only account.
+- If the parameter of permissions at a level is left empty, no change will be made to the permissions at the level that have been granted. To clear granted permissions at a level, set `GlobalPrivileges.N` or `Privileges` to an empty array.
+     * @param {ModifyAccountPrivilegesRequest} req
+     * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    ModifyAccountPrivileges(req, cb) {
+        let resp = new ModifyAccountPrivilegesResponse();
+        this.request("ModifyAccountPrivileges", req, resp, cb);
     }
 
     /**

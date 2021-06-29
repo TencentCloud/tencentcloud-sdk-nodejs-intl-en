@@ -749,8 +749,7 @@ For `file`, enter the suffix, e.g., `jpg` or `txt`.
 For `directory`, enter the path, e.g., `/xxx/test/`.
 For `path`, enter the absolute path, e.g., `/xxx/test.html`.
 For `index`, enter a forward slash `/`.
-For `default`, enter `no max-age`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -762,8 +761,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 `directory`: effective for specified paths.
 `path`: effective for specified absolute paths.
 `index`: homepage.
-`default`: effective when the origin server does not have the `max-age` value.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleType = null;
@@ -2390,6 +2388,12 @@ class EnableCachesRequest extends  AbstractModel {
          */
         this.Urls = null;
 
+        /**
+         * URL blocking date
+         * @type {string || null}
+         */
+        this.Date = null;
+
     }
 
     /**
@@ -2400,6 +2404,7 @@ class EnableCachesRequest extends  AbstractModel {
             return;
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
+        this.Date = 'Date' in params ? params.Date : null;
 
     }
 }
@@ -3171,11 +3176,11 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.IgnoreCacheControl = null;
 
         /**
-         * Ignore the Set-Cookie header of an origin server.
-on: enable
-off: disable
-This is disabled by default.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Whether to ignore the header and body on cache nodes if the origin server returns the header `Set-Cookie`.
+`on`: Ignore; do not cache the header and body.
+`off`: Do not ignore; follow the custom cache rules of cache nodes.
+It is disabled by default.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IgnoreSetCookie = null;
@@ -3567,7 +3572,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * WAF sub-rule status
+ * WAF sub-rule switch status
  * @class
  */
 class WafSubRuleStatus extends  AbstractModel {
@@ -5866,7 +5871,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Signature expiration time
-Unit: second. The maximum value is 31536000.
+Unit: second. The maximum value is 630720000.
          * @type {number || null}
          */
         this.ExpireTime = null;
@@ -5948,7 +5953,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Signature expiration time
-Unit: second. The maximum value is 31536000.
+Unit: second. The maximum value is 630720000.
          * @type {number || null}
          */
         this.ExpireTime = null;
@@ -6012,7 +6017,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Signature expiration time
-Unit: second. The maximum value is 31536000.
+Unit: second. The maximum value is 630720000.
          * @type {number || null}
          */
         this.ExpireTime = null;
@@ -6079,7 +6084,7 @@ Only upper and lower-case letters, digits, and underscores (_) are allowed. It c
 
         /**
          * Signature expiration time
-Unit: second. The maximum value is 31536000.
+Unit: second. The maximum value is 630720000.
          * @type {number || null}
          */
         this.ExpireTime = null;
@@ -6516,8 +6521,9 @@ class HttpHeaderPathRule extends  AbstractModel {
 
         /**
          * HTTP header setting methods
-`add`: add header. If a header already exists, then there will be a duplicated header.
-`del`: delete header.
+`set`: sets a value for an existing header parameter, a new header parameter, or multiple header parameters. Multiple header parameters will be merged into one.
+`del`: deletes a header parameter.
+`add`: adds a header parameter. By default, you can repeat the same action to add the same header parameter, which may affect browser response. Please consider the set operation first.
 Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6765,6 +6771,12 @@ global: global nodes
          */
         this.Area = null;
 
+        /**
+         * Whether to return a value as an IP range
+         * @type {boolean || null}
+         */
+        this.Segment = null;
+
     }
 
     /**
@@ -6777,6 +6789,7 @@ global: global nodes
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Layer = 'Layer' in params ? params.Layer : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.Segment = 'Segment' in params ? params.Segment : null;
 
     }
 }
@@ -13076,15 +13089,18 @@ The gap between the start time and end time should be less than or equal to 90 d
 
         /**
          * Specifies the query metric, which can be:
-flux: traffic (in bytes)
-bandwidth: bandwidth (in bps)
-request: number of requests
-fluxHitRate: traffic hit rate (in %)
-statusCode: status code. The aggregate data for 2xx, 3xx, 4xx, and 5xx status codes will be returned (in entries)
-2xx: Returns the aggregate list of 2xx status codes and the data for status codes starting with 2 (in entries)
-3xx: Returns the aggregate list of 3xx status codes and the data for status codes starting with 3 (in entries)
-4xx: Returns the aggregate list of 4xx status codes and the data for status codes starting with 4 (in entries)
-5xx: Returns the aggregate list of 5xx status codes and the data for status codes starting with 5 (in entries)
+`flux`: traffic (in bytes)
+`bandwidth`: bandwidth (in bps)
+`request`: number of requests
+`hitRequest`: number of hit requests
+`requestHitRate`: request hit rate (in % with two decimal digits)
+`hitFlux`: hit traffic (in bytes)
+`fluxHitRate`: traffic hit rate (in % with two decimal digits)
+`statusCode`: status code. Number of 2xx, 3xx, 4xx, and 5xx status codes returned during the queried period.
+`2xx`: lists the number of all status codes starting with **2** returned during the queried period based on the specified interval (if any)
+`3xx`: lists the number of all status codes starting with **3** returned during the queried period based on the specified interval (if any)
+`4xx`: lists the number of all status codes starting with **4** returned during the queried period based on the specified interval (if any)
+`5xx`: lists the number of all status codes starting with **5** returned during the queried period based on the specified interval (if any)
 It is supported to specify a status code for query. The return will be empty if the status code has never been generated.
          * @type {string || null}
          */

@@ -2592,6 +2592,12 @@ class CompleteMigrateJobRequest extends  AbstractModel {
          */
         this.JobId = null;
 
+        /**
+         * The way to complete the task, which is supported only for legacy MySQL migration task. waitForSync: wait for the source-replica lag to become 0 before stopping; immediately: complete immediately without waiting for source-replica sync. Default value: waitForSync
+         * @type {string || null}
+         */
+        this.CompleteMode = null;
+
     }
 
     /**
@@ -2602,6 +2608,7 @@ class CompleteMigrateJobRequest extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
+        this.CompleteMode = 'CompleteMode' in params ? params.CompleteMode : null;
 
     }
 }

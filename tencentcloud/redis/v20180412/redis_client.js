@@ -62,10 +62,11 @@ const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
 const DestroyPrepaidInstanceRequest = models.DestroyPrepaidInstanceRequest;
 const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
+const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
 const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
-const ModifyInstanceResponse = models.ModifyInstanceResponse;
+const ChangeReplicaToMasterRequest = models.ChangeReplicaToMasterRequest;
 const ProxyNodes = models.ProxyNodes;
 const TradeDealDetail = models.TradeDealDetail;
 const RedisCommonInstanceList = models.RedisCommonInstanceList;
@@ -94,7 +95,7 @@ const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMoni
 const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
-const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
+const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const RedisNodes = models.RedisNodes;
@@ -148,6 +149,7 @@ const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
+const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
 const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
 const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
@@ -329,6 +331,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorTopNCmdTook(req, cb) {
         let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
         this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
+    }
+
+    /**
+     * This API is used to promote a replica node group of a multi-AZ deployed instance to master node group.
+     * @param {ChangeReplicaToMasterRequest} req
+     * @param {function(string, ChangeReplicaToMasterResponse):void} cb
+     * @public
+     */
+    ChangeReplicaToMaster(req, cb) {
+        let resp = new ChangeReplicaToMasterResponse();
+        this.request("ChangeReplicaToMaster", req, resp, cb);
     }
 
     /**

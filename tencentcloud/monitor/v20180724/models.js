@@ -928,6 +928,18 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
          */
         this.TriggerTasks = null;
 
+        /**
+         * Global filter.
+         * @type {AlarmPolicyFilter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Aggregation dimension list, which is used to specify which dimension keys data is grouped by.
+         * @type {Array.<string> || null}
+         */
+        this.GroupBy = null;
+
     }
 
     /**
@@ -967,6 +979,13 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
                 this.TriggerTasks.push(obj);
             }
         }
+
+        if (params.Filter) {
+            let obj = new AlarmPolicyFilter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.GroupBy = 'GroupBy' in params ? params.GroupBy : null;
 
     }
 }
@@ -1669,13 +1688,13 @@ class GetMonitorDataRequest extends  AbstractModel {
         this.MetricName = null;
 
         /**
-         * Dimension combination of instance object in the format of `key-value` pair, such as [{"Name":"InstanceId","Value":"ins-j0hk02zo"}]. For more information on the dimensions of each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The value in the dimension column is the `key` in the dimension combination, and the value corresponding to the `key` is the `value` in the combination
+         * The dimension combination for instance objects, which is in the form of a set of key-value pairs. The dimension fields for instances of different Tencent Cloud services are completely different. For example, the field is [{"Name":"InstanceId","Value":"ins-j0hk02zo"}] for CVM instances, [{"Name":"instanceId","Value":"ckafka-l49k54dd"}] for CKafka instances, and [{"Name":"appid","Value":"1258344699"},{"Name":"bucket","Value":"rig-1258344699"}] for COS instances. For more information on the dimensions of various Tencent Cloud services, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). In each document, the dimension column displays a dimension combination’s key, which has a corresponding value. A single request can get the data of up to 10 instances.
          * @type {Array.<Instance> || null}
          */
         this.Instances = null;
 
         /**
-         * Monitoring statistical period in seconds, such as 60. Default value: 300. The statistical period varies by metric. For more information on the statistical periods supported by each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The values in the statistical period column are the supported statistical periods
+         * Monitoring statistical period in seconds, such as 60. Default value: 300. The statistical period varies by metric. For more information on the statistical periods supported by each Tencent Cloud service, please see [Tencent Cloud Service Metrics](https://intl.cloud.tencent.com/document/product/248/6140?from_cn_redirect=1). The values in the statistical period column are the supported statistical periods. A single request can get data at up to 1,440 data points.
          * @type {number || null}
          */
         this.Period = null;
@@ -4084,6 +4103,18 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
          */
         this.EventCondition = null;
 
+        /**
+         * Global filter.
+         * @type {AlarmPolicyFilter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Aggregation dimension list, which is used to specify which dimension keys data is grouped by.
+         * @type {Array.<string> || null}
+         */
+        this.GroupBy = null;
+
     }
 
     /**
@@ -4108,6 +4139,13 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
             obj.deserialize(params.EventCondition)
             this.EventCondition = obj;
         }
+
+        if (params.Filter) {
+            let obj = new AlarmPolicyFilter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.GroupBy = 'GroupBy' in params ? params.GroupBy : null;
 
     }
 }
@@ -6265,6 +6303,12 @@ class DescribeAlarmEventsRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * Monitoring type, such as `MT_QCE`, which is set to default.
+         * @type {string || null}
+         */
+        this.MonitorType = null;
+
     }
 
     /**
@@ -6276,6 +6320,7 @@ class DescribeAlarmEventsRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.MonitorType = 'MonitorType' in params ? params.MonitorType : null;
 
     }
 }

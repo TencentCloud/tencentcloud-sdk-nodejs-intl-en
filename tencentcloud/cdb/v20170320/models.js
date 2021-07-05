@@ -9476,6 +9476,18 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
          */
         this.InstanceRole = null;
 
+        /**
+         * The resource isolation type after the instance is upgraded. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). If this parameter is left empty, the resource isolation type will be the same as the original one.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -9495,6 +9507,8 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
         this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }

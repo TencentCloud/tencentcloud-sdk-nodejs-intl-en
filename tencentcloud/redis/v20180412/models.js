@@ -2183,6 +2183,12 @@ class RedisNode extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.Role = null;
+
     }
 
     /**
@@ -2196,6 +2202,7 @@ class RedisNode extends  AbstractModel {
         this.Slot = 'Slot' in params ? params.Slot : null;
         this.NodeId = 'NodeId' in params ? params.NodeId : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Role = 'Role' in params ? params.Role : null;
 
     }
 }
@@ -2384,6 +2391,41 @@ class ManualBackupInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DisableReplicaReadonly response structure.
+ * @class
+ */
+class DisableReplicaReadonlyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ERROR: failure; OK: success
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Instance tag information
  * @class
  */
@@ -2556,18 +2598,24 @@ class DestroyPostpaidInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstance response structure.
+ * ChangeReplicaToMaster request structure.
  * @class
  */
-class ModifyInstanceResponse extends  AbstractModel {
+class ChangeReplicaToMasterRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Replica ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
 
     }
 
@@ -2578,7 +2626,8 @@ class ModifyInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -3998,18 +4047,18 @@ class DescribeTaskListRequest extends  AbstractModel {
 }
 
 /**
- * DisableReplicaReadonly response structure.
+ * ChangeReplicaToMaster response structure.
  * @class
  */
-class DisableReplicaReadonlyResponse extends  AbstractModel {
+class ChangeReplicaToMasterResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ERROR: failure; OK: success
-         * @type {string || null}
+         * Async task ID
+         * @type {number || null}
          */
-        this.Status = null;
+        this.TaskId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4026,7 +4075,7 @@ class DisableReplicaReadonlyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4128,6 +4177,12 @@ class RedisNodes extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * AZ ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
     }
 
     /**
@@ -4140,6 +4195,7 @@ class RedisNodes extends  AbstractModel {
         this.NodeId = 'NodeId' in params ? params.NodeId : null;
         this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -6955,6 +7011,34 @@ class InstanceClusterNode extends  AbstractModel {
 }
 
 /**
+ * ModifyInstance response structure.
+ * @class
+ */
+class ModifyInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProxySlowLog request structure.
  * @class
  */
@@ -8435,10 +8519,11 @@ module.exports = {
     DescribeInstanceShardsResponse: DescribeInstanceShardsResponse,
     DestroyPrepaidInstanceRequest: DestroyPrepaidInstanceRequest,
     ManualBackupInstanceResponse: ManualBackupInstanceResponse,
+    DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
     InstanceTagInfo: InstanceTagInfo,
     DescribeInstanceDTSInfoResponse: DescribeInstanceDTSInfoResponse,
     DestroyPostpaidInstanceResponse: DestroyPostpaidInstanceResponse,
-    ModifyInstanceResponse: ModifyInstanceResponse,
+    ChangeReplicaToMasterRequest: ChangeReplicaToMasterRequest,
     ProxyNodes: ProxyNodes,
     TradeDealDetail: TradeDealDetail,
     RedisCommonInstanceList: RedisCommonInstanceList,
@@ -8467,7 +8552,7 @@ module.exports = {
     DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     DescribeTaskListRequest: DescribeTaskListRequest,
-    DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
+    ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
     RedisNodes: RedisNodes,
@@ -8521,6 +8606,7 @@ module.exports = {
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
     InstanceClusterNode: InstanceClusterNode,
+    ModifyInstanceResponse: ModifyInstanceResponse,
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
     DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,
     UpgradeInstanceVersionRequest: UpgradeInstanceVersionRequest,

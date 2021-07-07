@@ -4961,6 +4961,12 @@ The following conditions are required to use ipvs-bpf network mode:
          */
         this.BasePodNumber = null;
 
+        /**
+         * Specifies whether to enable Cilium. If it’s left empty, Cilium is not enabled. If `clusterIP` is passed in, it means to enable Cilium to support the clusterIP service type.
+         * @type {string || null}
+         */
+        this.CiliumMode = null;
+
     }
 
     /**
@@ -4991,6 +4997,7 @@ The following conditions are required to use ipvs-bpf network mode:
         this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
         this.EnableCustomizedPodCIDR = 'EnableCustomizedPodCIDR' in params ? params.EnableCustomizedPodCIDR : null;
         this.BasePodNumber = 'BasePodNumber' in params ? params.BasePodNumber : null;
+        this.CiliumMode = 'CiliumMode' in params ? params.CiliumMode : null;
 
     }
 }
@@ -5280,6 +5287,13 @@ Note: this field may return null, indicating that no valid value is obtained.
          */
         this.DeletionProtection = null;
 
+        /**
+         * Specifies whether the cluster supports external nodes.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.EnableExternalNode = null;
+
     }
 
     /**
@@ -5320,6 +5334,7 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
+        this.EnableExternalNode = 'EnableExternalNode' in params ? params.EnableExternalNode : null;
 
     }
 }

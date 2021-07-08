@@ -40,6 +40,12 @@ We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can gu
          */
         this.ImageUrl = null;
 
+        /**
+         * Whether to return the character information. Default value: `false`
+         * @type {boolean || null}
+         */
+        this.IsWords = null;
+
     }
 
     /**
@@ -51,6 +57,7 @@ We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can gu
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.IsWords = 'IsWords' in params ? params.IsWords : null;
 
     }
 }
@@ -115,6 +122,41 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         this.Angel = 'Angel' in params ? params.Angel : null;
         this.PdfPageSize = 'PdfPageSize' in params ? params.PdfPageSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information about a character detected, including the character itself and its confidence
+ * @class
+ */
+class DetectedWords extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Confidence. Value range: 0–100
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * A possible character
+         * @type {string || null}
+         */
+        this.Character = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Character = 'Character' in params ? params.Character : null;
 
     }
 }
@@ -352,6 +394,42 @@ class TableOCRResponse extends  AbstractModel {
 }
 
 /**
+ * Coordinates of a word’s four corners in a clockwise order on the input image, starting from the upper-left corner
+ * @class
+ */
+class DetectedWordCoordPoint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Coordinates of a word’s four corners in a clockwise order on the input image, starting from the upper-left corner
+         * @type {Array.<Coord> || null}
+         */
+        this.WordCoordinate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WordCoordinate) {
+            this.WordCoordinate = new Array();
+            for (let z in params.WordCoordinate) {
+                let obj = new Coord();
+                obj.deserialize(params.WordCoordinate[z]);
+                this.WordCoordinate.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * BankCardOCR request structure.
  * @class
  */
@@ -406,6 +484,12 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
          */
         this.EnableBorderCheck = null;
 
+        /**
+         * Whether to return the image quality value, which measures how clear an image is. Default value: `false`
+         * @type {boolean || null}
+         */
+        this.EnableQualityValue = null;
+
     }
 
     /**
@@ -422,6 +506,7 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
         this.EnableCopyCheck = 'EnableCopyCheck' in params ? params.EnableCopyCheck : null;
         this.EnableReshootCheck = 'EnableReshootCheck' in params ? params.EnableReshootCheck : null;
         this.EnableBorderCheck = 'EnableBorderCheck' in params ? params.EnableBorderCheck : null;
+        this.EnableQualityValue = 'EnableQualityValue' in params ? params.EnableQualityValue : null;
 
     }
 }
@@ -582,6 +667,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.WarningCode = null;
 
         /**
+         * Image quality value, which is returned when `EnableQualityValue` is set to `true`. The smaller the value, the less clear the image is. Value range: 0−100 (a threshold greater than or equal to 50 is recommended.)
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.QualityValue = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -604,6 +696,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.BorderCutImage = 'BorderCutImage' in params ? params.BorderCutImage : null;
         this.CardNoImage = 'CardNoImage' in params ? params.CardNoImage : null;
         this.WarningCode = 'WarningCode' in params ? params.WarningCode : null;
+        this.QualityValue = 'QualityValue' in params ? params.QualityValue : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -857,6 +950,18 @@ The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains
          */
         this.ItemPolygon = null;
 
+        /**
+         * Information about a character, including the character itself and its confidence. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
+         * @type {Array.<DetectedWords> || null}
+         */
+        this.Words = null;
+
+        /**
+         * Coordinates of a word’s four corners on the input image. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
+         * @type {Array.<DetectedWordCoordPoint> || null}
+         */
+        this.WordCoordPoint = null;
+
     }
 
     /**
@@ -883,6 +988,24 @@ The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains
             let obj = new ItemCoord();
             obj.deserialize(params.ItemPolygon)
             this.ItemPolygon = obj;
+        }
+
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new DetectedWords();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
+        }
+
+        if (params.WordCoordPoint) {
+            this.WordCoordPoint = new Array();
+            for (let z in params.WordCoordPoint) {
+                let obj = new DetectedWordCoordPoint();
+                obj.deserialize(params.WordCoordPoint[z]);
+                this.WordCoordPoint.push(obj);
+            }
         }
 
     }
@@ -1224,6 +1347,12 @@ Arabic.
          */
         this.PdfPageNumber = null;
 
+        /**
+         * Whether to return the character information. Default value: `false`
+         * @type {boolean || null}
+         */
+        this.IsWords = null;
+
     }
 
     /**
@@ -1239,6 +1368,7 @@ Arabic.
         this.LanguageType = 'LanguageType' in params ? params.LanguageType : null;
         this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
         this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
+        this.IsWords = 'IsWords' in params ? params.IsWords : null;
 
     }
 }
@@ -1246,10 +1376,12 @@ Arabic.
 module.exports = {
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
+    DetectedWords: DetectedWords,
     TextTable: TextTable,
     MLIDCardOCRRequest: MLIDCardOCRRequest,
     TableOCRRequest: TableOCRRequest,
     TableOCRResponse: TableOCRResponse,
+    DetectedWordCoordPoint: DetectedWordCoordPoint,
     BankCardOCRRequest: BankCardOCRRequest,
     Coord: Coord,
     HKIDCardOCRRequest: HKIDCardOCRRequest,

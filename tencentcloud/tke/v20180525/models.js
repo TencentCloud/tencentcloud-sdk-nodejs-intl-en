@@ -3406,6 +3406,13 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.MountTarget = null;
 
+        /**
+         * The name of the device or partition to mount
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.DiskPartition = null;
+
     }
 
     /**
@@ -3420,6 +3427,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.AutoFormatAndMount = 'AutoFormatAndMount' in params ? params.AutoFormatAndMount : null;
         this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
+        this.DiskPartition = 'DiskPartition' in params ? params.DiskPartition : null;
 
     }
 }
@@ -4452,7 +4460,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.Labels = null;
 
         /**
-         * Mounting information of multiple data disks. Ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks, for example `DataDisks` under `RunInstancesPara` of the `CreateClusterInstances` API. You can refer to the example of adding a cluster node with multiple data disks in the CreateClusterInstances API. This parameter does not take effect when the AddExistedInstances API is called.
+         * Mounting information of multiple data disks. When you create a node, ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks. For example, the `DataDisks` under `RunInstancesPara` of the `CreateClusterInstances` API should be configured accordingly (Referto document of CreateClusterInstances API). When you add an existing node, ensure that the specified partition exists in the node.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<DataDisk> || null}
          */
@@ -4464,6 +4472,12 @@ Note: This field may return null, indicating that no valid value was found.
          * @type {InstanceExtraArgs || null}
          */
         this.ExtraArgs = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DesiredPodNumber = null;
 
     }
 
@@ -4502,6 +4516,7 @@ Note: This field may return null, indicating that no valid value was found.
             obj.deserialize(params.ExtraArgs)
             this.ExtraArgs = obj;
         }
+        this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
 
     }
 }

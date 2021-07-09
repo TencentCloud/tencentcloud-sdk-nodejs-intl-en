@@ -17,7 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SubAccountUser = models.SubAccountUser;
-const GetUserResponse = models.GetUserResponse;
+const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
 const ListAccessKeysRequest = models.ListAccessKeysRequest;
 const SetMfaFlagResponse = models.SetMfaFlagResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
@@ -30,6 +30,7 @@ const ListAttachedGroupPoliciesRequest = models.ListAttachedGroupPoliciesRequest
 const ListGroupsForUserRequest = models.ListGroupsForUserRequest;
 const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
 const GetServiceLinkedRoleDeletionStatusResponse = models.GetServiceLinkedRoleDeletionStatusResponse;
+const GetSecurityLastUsedRequest = models.GetSecurityLastUsedRequest;
 const DeleteUserPermissionsBoundaryResponse = models.DeleteUserPermissionsBoundaryResponse;
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
@@ -60,8 +61,9 @@ const DeleteGroupResponse = models.DeleteGroupResponse;
 const RoleInfo = models.RoleInfo;
 const DescribeSafeAuthFlagResponse = models.DescribeSafeAuthFlagResponse;
 const CreatePolicyVersionRequest = models.CreatePolicyVersionRequest;
+const SecretIdLastUsed = models.SecretIdLastUsed;
 const DeleteGroupRequest = models.DeleteGroupRequest;
-const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const GetUserResponse = models.GetUserResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
 const DetachRolePolicyRequest = models.DetachRolePolicyRequest;
 const DeleteRolePermissionsBoundaryRequest = models.DeleteRolePermissionsBoundaryRequest;
@@ -151,6 +153,7 @@ const PutRolePermissionsBoundaryResponse = models.PutRolePermissionsBoundaryResp
 const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const ListAccessKeysResponse = models.ListAccessKeysResponse;
+const GetSecurityLastUsedResponse = models.GetSecurityLastUsedResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const UpdatePolicyRequest = models.UpdatePolicyRequest;
 const GroupMemberInfo = models.GroupMemberInfo;
@@ -597,15 +600,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a policy.
-This API will update the default version of an existing policy instead of creating a new one. If no policy exists, a default version will be created.
-     * @param {UpdatePolicyRequest} req
-     * @param {function(string, UpdatePolicyResponse):void} cb
+     * This API is used to get a key’s recent usage details.
+     * @param {GetSecurityLastUsedRequest} req
+     * @param {function(string, GetSecurityLastUsedResponse):void} cb
      * @public
      */
-    UpdatePolicy(req, cb) {
-        let resp = new UpdatePolicyResponse();
-        this.request("UpdatePolicy", req, resp, cb);
+    GetSecurityLastUsed(req, cb) {
+        let resp = new GetSecurityLastUsedResponse();
+        this.request("GetSecurityLastUsed", req, resp, cb);
     }
 
     /**
@@ -837,6 +839,18 @@ This API will update the default version of an existing policy instead of creati
     ListGroupsForUser(req, cb) {
         let resp = new ListGroupsForUserResponse();
         this.request("ListGroupsForUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a policy.
+This API will update the default version of an existing policy instead of creating a new one. If no policy exists, a default version will be created.
+     * @param {UpdatePolicyRequest} req
+     * @param {function(string, UpdatePolicyResponse):void} cb
+     * @public
+     */
+    UpdatePolicy(req, cb) {
+        let resp = new UpdatePolicyResponse();
+        this.request("UpdatePolicy", req, resp, cb);
     }
 
 

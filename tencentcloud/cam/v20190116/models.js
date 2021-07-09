@@ -95,60 +95,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetUser response structure.
+ * ListAttachedRolePolicies response structure.
  * @class
  */
-class GetUserResponse extends  AbstractModel {
+class ListAttachedRolePoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sub-user UIN
+         * List of policies associated with the role
+         * @type {Array.<AttachedPolicyOfRole> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number of policies associated with the role
          * @type {number || null}
          */
-        this.Uin = null;
-
-        /**
-         * Sub-user username
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Sub-user UID
-         * @type {number || null}
-         */
-        this.Uid = null;
-
-        /**
-         * Sub-user remarks
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * If sub-user can log in to the Console
-         * @type {number || null}
-         */
-        this.ConsoleLogin = null;
-
-        /**
-         * Mobile number
-         * @type {string || null}
-         */
-        this.PhoneNum = null;
-
-        /**
-         * Country/Area code
-         * @type {string || null}
-         */
-        this.CountryCode = null;
-
-        /**
-         * Email
-         * @type {string || null}
-         */
-        this.Email = null;
+        this.TotalNum = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -165,14 +129,16 @@ class GetUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Uid = 'Uid' in params ? params.Uid : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
-        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
-        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
-        this.Email = 'Email' in params ? params.Email : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AttachedPolicyOfRole();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -640,6 +606,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
         this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetSecurityLastUsed request structure.
+ * @class
+ */
+class GetSecurityLastUsedRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A parameter used to query the key ID list.
+         * @type {Array.<string> || null}
+         */
+        this.SecretIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretIdList = 'SecretIdList' in params ? params.SecretIdList : null;
 
     }
 }
@@ -1844,6 +1838,42 @@ class CreatePolicyVersionRequest extends  AbstractModel {
 }
 
 /**
+ * The last time the key was used.
+ * @class
+ */
+class SecretIdLastUsed extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key ID.
+         * @type {string || null}
+         */
+        this.SecretId = null;
+
+        /**
+         * The date when the key ID was last used (the value is obtained one day later).
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.LastUsedDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.LastUsedDate = 'LastUsedDate' in params ? params.LastUsedDate : null;
+
+    }
+}
+
+/**
  * DeleteGroup request structure.
  * @class
  */
@@ -1872,24 +1902,60 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
- * ListAttachedRolePolicies response structure.
+ * GetUser response structure.
  * @class
  */
-class ListAttachedRolePoliciesResponse extends  AbstractModel {
+class GetUserResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of policies associated with the role
-         * @type {Array.<AttachedPolicyOfRole> || null}
-         */
-        this.List = null;
-
-        /**
-         * Total number of policies associated with the role
+         * Sub-user UIN
          * @type {number || null}
          */
-        this.TotalNum = null;
+        this.Uin = null;
+
+        /**
+         * Sub-user username
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Sub-user UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * Sub-user remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * If sub-user can log in to the Console
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * Mobile number
+         * @type {string || null}
+         */
+        this.PhoneNum = null;
+
+        /**
+         * Country/Area code
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * Email
+         * @type {string || null}
+         */
+        this.Email = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1906,16 +1972,14 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new AttachedPolicyOfRole();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.Email = 'Email' in params ? params.Email : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5718,6 +5782,49 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * GetSecurityLastUsed response structure.
+ * @class
+ */
+class GetSecurityLastUsedResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of key ID’s recent usage records.
+         * @type {Array.<SecretIdLastUsed> || null}
+         */
+        this.SecretIdLastUsedRows = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecretIdLastUsedRows) {
+            this.SecretIdLastUsedRows = new Array();
+            for (let z in params.SecretIdLastUsedRows) {
+                let obj = new SecretIdLastUsed();
+                obj.deserialize(params.SecretIdLastUsedRows[z]);
+                this.SecretIdLastUsedRows.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListAttachedUserPolicies request structure.
  * @class
  */
@@ -5950,7 +6057,7 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     SubAccountUser: SubAccountUser,
-    GetUserResponse: GetUserResponse,
+    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
     ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
@@ -5963,6 +6070,7 @@ module.exports = {
     ListGroupsForUserRequest: ListGroupsForUserRequest,
     AttachRolePolicyResponse: AttachRolePolicyResponse,
     GetServiceLinkedRoleDeletionStatusResponse: GetServiceLinkedRoleDeletionStatusResponse,
+    GetSecurityLastUsedRequest: GetSecurityLastUsedRequest,
     DeleteUserPermissionsBoundaryResponse: DeleteUserPermissionsBoundaryResponse,
     ListUsersResponse: ListUsersResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
@@ -5993,8 +6101,9 @@ module.exports = {
     RoleInfo: RoleInfo,
     DescribeSafeAuthFlagResponse: DescribeSafeAuthFlagResponse,
     CreatePolicyVersionRequest: CreatePolicyVersionRequest,
+    SecretIdLastUsed: SecretIdLastUsed,
     DeleteGroupRequest: DeleteGroupRequest,
-    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    GetUserResponse: GetUserResponse,
     DeleteUserResponse: DeleteUserResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
     DeleteRolePermissionsBoundaryRequest: DeleteRolePermissionsBoundaryRequest,
@@ -6084,6 +6193,7 @@ module.exports = {
     SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,
     ListAccessKeysResponse: ListAccessKeysResponse,
+    GetSecurityLastUsedResponse: GetSecurityLastUsedResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     UpdatePolicyRequest: UpdatePolicyRequest,
     GroupMemberInfo: GroupMemberInfo,

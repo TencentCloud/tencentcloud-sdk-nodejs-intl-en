@@ -2105,6 +2105,18 @@ class CreateTCPListenersRequest extends  AbstractModel {
          */
         this.FailoverSwitch = null;
 
+        /**
+         * Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
+
     }
 
     /**
@@ -2126,6 +2138,8 @@ class CreateTCPListenersRequest extends  AbstractModel {
         this.RealServerPorts = 'RealServerPorts' in params ? params.RealServerPorts : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
         this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
 
     }
 }
@@ -2504,6 +2518,18 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
          */
         this.FailoverSwitch = null;
 
+        /**
+         * Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 -10.
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
+
     }
 
     /**
@@ -2522,6 +2548,8 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
         this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
         this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
         this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
 
     }
 }
@@ -2809,6 +2837,12 @@ class CreateProxyGroupRequest extends  AbstractModel {
          */
         this.AccessRegionSet = null;
 
+        /**
+         * IP version. Valid values: `IPv4` (default), `IPv6`.
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
     }
 
     /**
@@ -2839,6 +2873,7 @@ class CreateProxyGroupRequest extends  AbstractModel {
                 this.AccessRegionSet.push(obj);
             }
         }
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
 
     }
 }
@@ -3616,12 +3651,13 @@ class DescribeProxiesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter conditions.   
-The upper limit on Filters for each request is 10, and the upper limit on Filter.Values is 5. This parameter does not support specifying InstanceIds and Filters at the same time. 
-ProjectId - String - Required: No - Filter by a project ID.    
-AccessRegion - String - Required: No - Filter by an access region.    
-RealServerRegion - String - Required: No - Filter by an origin server region.
-GroupId - String - Required: No - Filter by a connection group ID.
+         * Filter condition   
+The upper limit for `Filters` in each request is 10 and 5 for `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` with this parameter. 
+ProjectId - String - Required: No - Filter by project ID.   
+AccessRegion - String - Required: No - Filter by access region.    
+RealServerRegion - String - Required: No - Filter by origin server region.
+GroupId - String - Required: No - Filter by connection group ID.
+IPAddressVersion - String - Required: No - Filter by IP version.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4145,6 +4181,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ClientIPMethod = null;
 
+        /**
+         * Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
+
     }
 
     /**
@@ -4177,6 +4227,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
 
     }
 }
@@ -5219,6 +5271,12 @@ class DescribeAccessRegionsByDestRegionRequest extends  AbstractModel {
          */
         this.DestRegion = null;
 
+        /**
+         * IP version. Valid values: `IPv4` (default), `IPv6`.
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
     }
 
     /**
@@ -5229,6 +5287,7 @@ class DescribeAccessRegionsByDestRegionRequest extends  AbstractModel {
             return;
         }
         this.DestRegion = 'DestRegion' in params ? params.DestRegion : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
 
     }
 }
@@ -5940,6 +5999,12 @@ The connection is to be replicated if this parameter is set.
          */
         this.BillingType = null;
 
+        /**
+         * IP version. Valid values: `IPv4` (default), `IPv6`.
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
     }
 
     /**
@@ -5968,6 +6033,7 @@ The connection is to be replicated if this parameter is set.
         }
         this.ClonedProxyId = 'ClonedProxyId' in params ? params.ClonedProxyId : null;
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
 
     }
 }
@@ -6456,6 +6522,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ClientIPMethod = null;
 
+        /**
+         * IP version. Valid values: `IPv4` (default), `IPv6`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
     }
 
     /**
@@ -6494,6 +6567,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.Version = 'Version' in params ? params.Version : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
 
     }
 }
@@ -9262,6 +9336,12 @@ class CheckProxyCreateRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * IP version. Valid values: `IPv4` (default), `IPv6`.
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
     }
 
     /**
@@ -9276,6 +9356,7 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
 
     }
 }
@@ -9288,6 +9369,12 @@ class DescribeRegionAndPriceRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * IP version. Valid values: `IPv4` (default), `IPv6`.
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
     }
 
     /**
@@ -9297,6 +9384,7 @@ class DescribeRegionAndPriceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
 
     }
 }
@@ -9888,6 +9976,12 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
          */
         this.BillingType = null;
 
+        /**
+         * IP version. Valid values: `IPv4` (default), `IPv6`.
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
     }
 
     /**
@@ -9904,6 +9998,7 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.RealServerRegion = 'RealServerRegion' in params ? params.RealServerRegion : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
 
     }
 }
@@ -10281,6 +10376,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ClientIPMethod = null;
 
+        /**
+         * IP version. Valid values: `IPv4`, `IPv6`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IPAddressVersion = null;
+
     }
 
     /**
@@ -10335,6 +10437,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ModifyConfigTime = 'ModifyConfigTime' in params ? params.ModifyConfigTime : null;
         this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
+        this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
 
     }
 }

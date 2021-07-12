@@ -26,12 +26,10 @@ const ModifyScheduledActionRequest = models.ModifyScheduledActionRequest;
 const DescribeAutoScalingGroupsRequest = models.DescribeAutoScalingGroupsRequest;
 const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
 const DescribeAccountLimitsResponse = models.DescribeAccountLimitsResponse;
-const CreatePaiInstanceResponse = models.CreatePaiInstanceResponse;
 const CreateLaunchConfigurationResponse = models.CreateLaunchConfigurationResponse;
 const CreateLifecycleHookResponse = models.CreateLifecycleHookResponse;
 const ClearLaunchConfigurationAttributesResponse = models.ClearLaunchConfigurationAttributesResponse;
 const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
-const CreatePaiInstanceRequest = models.CreatePaiInstanceRequest;
 const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
 const StopAutoScalingInstancesResponse = models.StopAutoScalingInstancesResponse;
@@ -67,10 +65,8 @@ const ScalingPolicy = models.ScalingPolicy;
 const DescribeAutoScalingGroupLastActivitiesRequest = models.DescribeAutoScalingGroupLastActivitiesRequest;
 const HostNameSettings = models.HostNameSettings;
 const ModifyLoadBalancersResponse = models.ModifyLoadBalancersResponse;
-const DescribePaiInstancesRequest = models.DescribePaiInstancesRequest;
 const CreateNotificationConfigurationRequest = models.CreateNotificationConfigurationRequest;
 const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
-const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const DeleteLifecycleHookRequest = models.DeleteLifecycleHookRequest;
 const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
 const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
@@ -78,14 +74,12 @@ const ModifyScalingPolicyRequest = models.ModifyScalingPolicyRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const UpgradeLifecycleHookResponse = models.UpgradeLifecycleHookResponse;
 const InstanceTag = models.InstanceTag;
-const PaiInstance = models.PaiInstance;
 const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
 const UpgradeLaunchConfigurationRequest = models.UpgradeLaunchConfigurationRequest;
 const DescribeAutoScalingActivitiesResponse = models.DescribeAutoScalingActivitiesResponse;
 const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
 const DataDisk = models.DataDisk;
-const PreviewPaiDomainNameRequest = models.PreviewPaiDomainNameRequest;
 const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
 const LoginSettings = models.LoginSettings;
 const CreateAutoScalingGroupFromInstanceResponse = models.CreateAutoScalingGroupFromInstanceResponse;
@@ -127,7 +121,6 @@ const ScaleInInstancesRequest = models.ScaleInInstancesRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const ClearLaunchConfigurationAttributesRequest = models.ClearLaunchConfigurationAttributesRequest;
-const PreviewPaiDomainNameResponse = models.PreviewPaiDomainNameResponse;
 const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const StartAutoScalingInstancesRequest = models.StartAutoScalingInstancesRequest;
@@ -137,13 +130,13 @@ const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
 const StopAutoScalingInstancesRequest = models.StopAutoScalingInstancesRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
+const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
 const InternetAccessible = models.InternetAccessible;
 const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
 const UpgradeLaunchConfigurationResponse = models.UpgradeLaunchConfigurationResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
-const DescribePaiInstancesResponse = models.DescribePaiInstancesResponse;
+const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
 const ExecuteScalingPolicyRequest = models.ExecuteScalingPolicyRequest;
 
 
@@ -180,18 +173,6 @@ class AsClient extends AbstractClient {
     CreateAutoScalingGroup(req, cb) {
         let resp = new CreateAutoScalingGroupResponse();
         this.request("CreateAutoScalingGroup", req, resp, cb);
-    }
-
-    /**
-     * This API (PreviewPaiDomainName) is used to preview a PAI domain name.
-
-     * @param {PreviewPaiDomainNameRequest} req
-     * @param {function(string, PreviewPaiDomainNameResponse):void} cb
-     * @public
-     */
-    PreviewPaiDomainName(req, cb) {
-        let resp = new PreviewPaiDomainNameResponse();
-        this.request("PreviewPaiDomainName", req, resp, cb);
     }
 
     /**
@@ -266,17 +247,6 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     StartAutoScalingInstances(req, cb) {
         let resp = new StartAutoScalingInstancesResponse();
         this.request("StartAutoScalingInstances", req, resp, cb);
-    }
-
-    /**
-     * This API (CreatePaiInstance) is used to create a PAI instance.
-     * @param {CreatePaiInstanceRequest} req
-     * @param {function(string, CreatePaiInstanceResponse):void} cb
-     * @public
-     */
-    CreatePaiInstance(req, cb) {
-        let resp = new CreatePaiInstanceResponse();
-        this.request("CreatePaiInstance", req, resp, cb);
     }
 
     /**
@@ -602,20 +572,6 @@ Note: for a scaling group that is created based on a monthly-subscribed instance
     DescribeLaunchConfigurations(req, cb) {
         let resp = new DescribeLaunchConfigurationsResponse();
         this.request("DescribeLaunchConfigurations", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribePaiInstances) is used to query the information of PAI instances.
-
-* You can query the detailed information of PAI instances based on information such as instance ID and instance domain name. For more information on filters, see `Filter`.
-* If the parameter is empty, a certain number (specified by `Limit` and 20 by default) of PAI instances of the current user will be returned.
-     * @param {DescribePaiInstancesRequest} req
-     * @param {function(string, DescribePaiInstancesResponse):void} cb
-     * @public
-     */
-    DescribePaiInstances(req, cb) {
-        let resp = new DescribePaiInstancesResponse();
-        this.request("DescribePaiInstances", req, resp, cb);
     }
 
     /**

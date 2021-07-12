@@ -361,6 +361,18 @@ Notes about this policy:
          */
         this.MultiZoneSubnetPolicy = null;
 
+        /**
+         * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.HealthCheckType = null;
+
+        /**
+         * Grace period of the CLB health check
+         * @type {number || null}
+         */
+        this.LoadBalancerHealthCheckGracePeriod = null;
+
     }
 
     /**
@@ -392,6 +404,8 @@ Notes about this policy:
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
         this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
+        this.HealthCheckType = 'HealthCheckType' in params ? params.HealthCheckType : null;
+        this.LoadBalancerHealthCheckGracePeriod = 'LoadBalancerHealthCheckGracePeriod' in params ? params.LoadBalancerHealthCheckGracePeriod : null;
 
     }
 }
@@ -714,41 +728,6 @@ class DescribeAccountLimitsResponse extends  AbstractModel {
 }
 
 /**
- * CreatePaiInstance response structure.
- * @class
- */
-class CreatePaiInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * This parameter is returned when an instance is created via this API, representing one or more instance `IDs`. The return of the instance `ID` list does not mean that the instance is created successfully. You can find out whether the instance is created by checking the status of the instance `ID` in the InstancesSet returned by the [DescribeInstances API](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). If the status of the instance changes from "pending" to "running", the instance is created successfully.
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIdSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateLaunchConfiguration response structure.
  * @class
  */
@@ -892,119 +871,6 @@ class DescribeAutoScalingGroupsResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreatePaiInstance request structure.
- * @class
- */
-class CreatePaiInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * PAI instance domain name.
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * Information of the public network bandwidth configuration.
-         * @type {InternetAccessible || null}
-         */
-        this.InternetAccessible = null;
-
-        /**
-         * Base64-encoded string of the launch script.
-         * @type {string || null}
-         */
-        this.InitScript = null;
-
-        /**
-         * List of availability zones.
-         * @type {Array.<string> || null}
-         */
-        this.Zones = null;
-
-        /**
-         * VPC ID.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * List of subnets.
-         * @type {Array.<string> || null}
-         */
-        this.SubnetIds = null;
-
-        /**
-         * Instance display name.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * List of instance models.
-         * @type {Array.<string> || null}
-         */
-        this.InstanceTypes = null;
-
-        /**
-         * Instance login settings.
-         * @type {LoginSettings || null}
-         */
-        this.LoginSettings = null;
-
-        /**
-         * Instance billing type.
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * Relevant parameter settings for the prepaid mode (i.e., monthly subscription). This parameter can specify the purchased usage period, whether to set automatic renewal, and other attributes of the instance purchased on a prepaid basis. If the billing method of the specified instance is prepaid, this parameter is required.
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-
-        if (params.InternetAccessible) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetAccessible)
-            this.InternetAccessible = obj;
-        }
-        this.InitScript = 'InitScript' in params ? params.InitScript : null;
-        this.Zones = 'Zones' in params ? params.Zones : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
-
-        if (params.LoginSettings) {
-            let obj = new LoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
-        }
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-
-        if (params.InstanceChargePrepaid) {
-            let obj = new InstanceChargePrepaid();
-            obj.deserialize(params.InstanceChargePrepaid)
-            this.InstanceChargePrepaid = obj;
-        }
 
     }
 }
@@ -2826,63 +2692,6 @@ class ModifyLoadBalancersResponse extends  AbstractModel {
 }
 
 /**
- * DescribePaiInstances request structure.
- * @class
- */
-class DescribePaiInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Queries by PAI instance ID.
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * Filter.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Number of returned results. Default value: 20. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
  * CreateNotificationConfiguration request structure.
  * @class
  */
@@ -2976,54 +2785,6 @@ class DescribeScheduledActionsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyNotificationConfiguration request structure.
- * @class
- */
-class ModifyNotificationConfigurationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the notification to be modified.
-         * @type {string || null}
-         */
-        this.AutoScalingNotificationId = null;
-
-        /**
-         * Notification type, i.e., the set of types of notifications to be subscribed to. Value range:
-<li>SCALE_OUT_SUCCESSFUL: scale-out succeeded</li>
-<li>SCALE_OUT_FAILED: scale-out failed</li>
-<li>SCALE_IN_SUCCESSFUL: scale-in succeeded</li>
-<li>SCALE_IN_FAILED: scale-in failed</li>
-<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL: unhealthy instance replacement succeeded</li>
-<li>REPLACE_UNHEALTHY_INSTANCE_FAILED: unhealthy instance replacement failed</li>
-         * @type {Array.<string> || null}
-         */
-        this.NotificationTypes = null;
-
-        /**
-         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
-         * @type {Array.<string> || null}
-         */
-        this.NotificationUserGroupIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
-        this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
-        this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
 
     }
 }
@@ -3293,48 +3054,6 @@ class InstanceTag extends  AbstractModel {
 }
 
 /**
- * PAI instance
- * @class
- */
-class PaiInstance extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance domain name
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * URL of the PAI management page
-         * @type {string || null}
-         */
-        this.PaiMateUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.PaiMateUrl = 'PaiMateUrl' in params ? params.PaiMateUrl : null;
-
-    }
-}
-
-/**
  * CreateAutoScalingGroup request structure.
  * @class
  */
@@ -3474,6 +3193,18 @@ Notes about this policy:
          */
         this.MultiZoneSubnetPolicy = null;
 
+        /**
+         * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+         * @type {string || null}
+         */
+        this.HealthCheckType = null;
+
+        /**
+         * Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
+         * @type {number || null}
+         */
+        this.LoadBalancerHealthCheckGracePeriod = null;
+
     }
 
     /**
@@ -3523,6 +3254,8 @@ Notes about this policy:
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
         this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
+        this.HealthCheckType = 'HealthCheckType' in params ? params.HealthCheckType : null;
+        this.LoadBalancerHealthCheckGracePeriod = 'LoadBalancerHealthCheckGracePeriod' in params ? params.LoadBalancerHealthCheckGracePeriod : null;
 
     }
 }
@@ -3929,34 +3662,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
-
-    }
-}
-
-/**
- * PreviewPaiDomainName request structure.
- * @class
- */
-class PreviewPaiDomainNameRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Domain name type
-         * @type {string || null}
-         */
-        this.DomainNameType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DomainNameType = 'DomainNameType' in params ? params.DomainNameType : null;
 
     }
 }
@@ -5002,6 +4707,12 @@ Default value: CLASSIC_SCALING
          */
         this.ScalingMode = null;
 
+        /**
+         * Enable unhealthy instance replacement. If this feature is enabled, AS will replace instances that are found unhealthy in the CLB health check. If this parameter is not specified, the default value `False` will be used.
+         * @type {boolean || null}
+         */
+        this.ReplaceLoadBalancerUnhealthy = null;
+
     }
 
     /**
@@ -5013,6 +4724,7 @@ Default value: CLASSIC_SCALING
         }
         this.ReplaceMonitorUnhealthy = 'ReplaceMonitorUnhealthy' in params ? params.ReplaceMonitorUnhealthy : null;
         this.ScalingMode = 'ScalingMode' in params ? params.ScalingMode : null;
+        this.ReplaceLoadBalancerUnhealthy = 'ReplaceLoadBalancerUnhealthy' in params ? params.ReplaceLoadBalancerUnhealthy : null;
 
     }
 }
@@ -6205,41 +5917,6 @@ Setting it to `true` will clear data disks, which means that CVM newly created o
 }
 
 /**
- * PreviewPaiDomainName response structure.
- * @class
- */
-class PreviewPaiDomainNameResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Available PAI domain name
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DeleteAutoScalingGroup request structure.
  * @class
  */
@@ -6662,18 +6339,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DeleteLifecycleHook response structure.
+ * ModifyNotificationConfiguration request structure.
  * @class
  */
-class DeleteLifecycleHookResponse extends  AbstractModel {
+class ModifyNotificationConfigurationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ID of the notification to be modified.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AutoScalingNotificationId = null;
+
+        /**
+         * Notification type, i.e., the set of types of notifications to be subscribed to. Value range:
+<li>SCALE_OUT_SUCCESSFUL: scale-out succeeded</li>
+<li>SCALE_OUT_FAILED: scale-out failed</li>
+<li>SCALE_IN_SUCCESSFUL: scale-in succeeded</li>
+<li>SCALE_IN_FAILED: scale-in failed</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL: unhealthy instance replacement succeeded</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_FAILED: unhealthy instance replacement failed</li>
+         * @type {Array.<string> || null}
+         */
+        this.NotificationTypes = null;
+
+        /**
+         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
+         * @type {Array.<string> || null}
+         */
+        this.NotificationUserGroupIds = null;
 
     }
 
@@ -6684,7 +6379,9 @@ class DeleteLifecycleHookResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
+        this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
+        this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
 
     }
 }
@@ -6873,24 +6570,12 @@ class InstanceChargePrepaid extends  AbstractModel {
 }
 
 /**
- * DescribePaiInstances response structure.
+ * DeleteLifecycleHook response structure.
  * @class
  */
-class DescribePaiInstancesResponse extends  AbstractModel {
+class DeleteLifecycleHookResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Number of eligible PAI instances
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * PAI instance details
-         * @type {Array.<PaiInstance> || null}
-         */
-        this.PaiInstanceSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6906,16 +6591,6 @@ class DescribePaiInstancesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.PaiInstanceSet) {
-            this.PaiInstanceSet = new Array();
-            for (let z in params.PaiInstanceSet) {
-                let obj = new PaiInstance();
-                obj.deserialize(params.PaiInstanceSet[z]);
-                this.PaiInstanceSet.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6975,12 +6650,10 @@ module.exports = {
     DescribeAutoScalingGroupsRequest: DescribeAutoScalingGroupsRequest,
     CreateAutoScalingGroupResponse: CreateAutoScalingGroupResponse,
     DescribeAccountLimitsResponse: DescribeAccountLimitsResponse,
-    CreatePaiInstanceResponse: CreatePaiInstanceResponse,
     CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
     CreateLifecycleHookResponse: CreateLifecycleHookResponse,
     ClearLaunchConfigurationAttributesResponse: ClearLaunchConfigurationAttributesResponse,
     DescribeAutoScalingGroupsResponse: DescribeAutoScalingGroupsResponse,
-    CreatePaiInstanceRequest: CreatePaiInstanceRequest,
     SystemDisk: SystemDisk,
     SpotMarketOptions: SpotMarketOptions,
     StopAutoScalingInstancesResponse: StopAutoScalingInstancesResponse,
@@ -7016,10 +6689,8 @@ module.exports = {
     DescribeAutoScalingGroupLastActivitiesRequest: DescribeAutoScalingGroupLastActivitiesRequest,
     HostNameSettings: HostNameSettings,
     ModifyLoadBalancersResponse: ModifyLoadBalancersResponse,
-    DescribePaiInstancesRequest: DescribePaiInstancesRequest,
     CreateNotificationConfigurationRequest: CreateNotificationConfigurationRequest,
     DescribeScheduledActionsResponse: DescribeScheduledActionsResponse,
-    ModifyNotificationConfigurationRequest: ModifyNotificationConfigurationRequest,
     DeleteLifecycleHookRequest: DeleteLifecycleHookRequest,
     ModifyAutoScalingGroupResponse: ModifyAutoScalingGroupResponse,
     DeleteLaunchConfigurationRequest: DeleteLaunchConfigurationRequest,
@@ -7027,14 +6698,12 @@ module.exports = {
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     UpgradeLifecycleHookResponse: UpgradeLifecycleHookResponse,
     InstanceTag: InstanceTag,
-    PaiInstance: PaiInstance,
     CreateAutoScalingGroupRequest: CreateAutoScalingGroupRequest,
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,
     UpgradeLaunchConfigurationRequest: UpgradeLaunchConfigurationRequest,
     DescribeAutoScalingActivitiesResponse: DescribeAutoScalingActivitiesResponse,
     DescribeNotificationConfigurationsResponse: DescribeNotificationConfigurationsResponse,
     DataDisk: DataDisk,
-    PreviewPaiDomainNameRequest: PreviewPaiDomainNameRequest,
     DeleteScalingPolicyRequest: DeleteScalingPolicyRequest,
     LoginSettings: LoginSettings,
     CreateAutoScalingGroupFromInstanceResponse: CreateAutoScalingGroupFromInstanceResponse,
@@ -7076,7 +6745,6 @@ module.exports = {
     LifecycleHook: LifecycleHook,
     ForwardLoadBalancer: ForwardLoadBalancer,
     ClearLaunchConfigurationAttributesRequest: ClearLaunchConfigurationAttributesRequest,
-    PreviewPaiDomainNameResponse: PreviewPaiDomainNameResponse,
     DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
     RemoveInstancesRequest: RemoveInstancesRequest,
     StartAutoScalingInstancesRequest: StartAutoScalingInstancesRequest,
@@ -7086,13 +6754,13 @@ module.exports = {
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,
     StopAutoScalingInstancesRequest: StopAutoScalingInstancesRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
-    DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
+    ModifyNotificationConfigurationRequest: ModifyNotificationConfigurationRequest,
     ActivtyRelatedInstance: ActivtyRelatedInstance,
     InternetAccessible: InternetAccessible,
     EnableAutoScalingGroupResponse: EnableAutoScalingGroupResponse,
     UpgradeLaunchConfigurationResponse: UpgradeLaunchConfigurationResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
-    DescribePaiInstancesResponse: DescribePaiInstancesResponse,
+    DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
     ExecuteScalingPolicyRequest: ExecuteScalingPolicyRequest,
 
 }

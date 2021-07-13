@@ -54,6 +54,7 @@ module.exports = {
     sts: require("./sts"),
     tag: require("./tag"),
     tcaplusdb: require("./tcaplusdb"),
+    tcr: require("./tcr"),
     tem: require("./tem"),
     tiw: require("./tiw"),
     tke: require("./tke"),

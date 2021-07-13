@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const WebNodeTypeInfo = models.WebNodeTypeInfo;
 const InstanceLog = models.InstanceLog;
 const LocalDiskInfo = models.LocalDiskInfo;
 const TaskDetail = models.TaskDetail;
@@ -49,6 +50,7 @@ const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResp
 const RestartNodesRequest = models.RestartNodesRequest;
 const UpdatePluginsRequest = models.UpdatePluginsRequest;
 const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
+const KibanaNodeInfo = models.KibanaNodeInfo;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const EsAcl = models.EsAcl;
 const MasterNodeInfo = models.MasterNodeInfo;

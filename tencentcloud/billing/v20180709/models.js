@@ -1295,6 +1295,18 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
          */
         this.ActionType = null;
 
+        /**
+         * ID of the instance to be queried
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Billing mode. Valid values: `prePay` (prepaid), `postPay` (postpaid)
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
     }
 
     /**
@@ -1310,6 +1322,8 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.Month = 'Month' in params ? params.Month : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }

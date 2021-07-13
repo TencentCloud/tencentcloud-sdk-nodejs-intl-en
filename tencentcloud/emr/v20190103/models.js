@@ -181,6 +181,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.CbsEncrypt = null;
 
+        /**
+         * Custom application role
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationRole = null;
+
+        /**
+         * Security groups
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroups = null;
+
     }
 
     /**
@@ -226,6 +240,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SecurityOn = 'SecurityOn' in params ? params.SecurityOn : null;
         this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
         this.CbsEncrypt = 'CbsEncrypt' in params ? params.CbsEncrypt : null;
+        this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
+        this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
 
     }
 }
@@ -2482,6 +2498,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ProductId = null;
 
+        /**
+         * Availability zone
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
     }
 
     /**
@@ -2533,6 +2556,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ServiceClass = 'ServiceClass' in params ? params.ServiceClass : null;
         this.AliasInfo = 'AliasInfo' in params ? params.AliasInfo : null;
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }

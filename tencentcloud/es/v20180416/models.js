@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Visual node configuration
+ * @class
+ */
+class WebNodeTypeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of visual nodes. The value is always `1`.
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * Visual node specification
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+
+    }
+}
+
+/**
  * ES cluster log details
  * @class
  */
@@ -185,10 +220,11 @@ class NodeInfo extends  AbstractModel {
         this.NodeType = null;
 
         /**
-         * Node type <li>hotData: hot data node</li>
-<li>warmData: warm data node</li>
-<li>dedicatedMaster: dedicated primary node</li>
-Default value: hotData
+         * Node type<li>`hotData`: hot data node</li>
+<li>`warmData`: warm data node</li>
+<li>`dedicatedMaster`: dedicated master node</li>
+<li>`kibana`: Kibana node</li>
+Default value: `hotData`
          * @type {string || null}
          */
         this.Type = null;
@@ -854,7 +890,7 @@ class CreateInstanceRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Instance version ("5.6.4", "6.4.3", "6.8.2", or "7.5.1")
+         * Instance version. Valid values: `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1`, `7.10.1`
          * @type {string || null}
          */
         this.EsVersion = null;
@@ -1023,6 +1059,12 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
          */
         this.SceneType = null;
 
+        /**
+         * Visual node configuration
+         * @type {WebNodeTypeInfo || null}
+         */
+        this.WebNodeTypeInfo = null;
+
     }
 
     /**
@@ -1084,6 +1126,12 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
         }
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
         this.SceneType = 'SceneType' in params ? params.SceneType : null;
+
+        if (params.WebNodeTypeInfo) {
+            let obj = new WebNodeTypeInfo();
+            obj.deserialize(params.WebNodeTypeInfo)
+            this.WebNodeTypeInfo = obj;
+        }
 
     }
 }
@@ -1438,6 +1486,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.KibanaConfig = null;
 
+        /**
+         * Kibana node information
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {KibanaNodeInfo || null}
+         */
+        this.KibanaNodeInfo = null;
+
     }
 
     /**
@@ -1550,6 +1605,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.SecurityType = 'SecurityType' in params ? params.SecurityType : null;
         this.SceneType = 'SceneType' in params ? params.SceneType : null;
         this.KibanaConfig = 'KibanaConfig' in params ? params.KibanaConfig : null;
+
+        if (params.KibanaNodeInfo) {
+            let obj = new KibanaNodeInfo();
+            obj.deserialize(params.KibanaNodeInfo)
+            this.KibanaNodeInfo = obj;
+        }
 
     }
 }
@@ -2363,6 +2424,69 @@ class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
 }
 
 /**
+ * Kibana node information
+ * @class
+ */
+class KibanaNodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Kibana node specification
+         * @type {string || null}
+         */
+        this.KibanaNodeType = null;
+
+        /**
+         * Number of Kibana nodes
+         * @type {number || null}
+         */
+        this.KibanaNodeNum = null;
+
+        /**
+         * Number of Kibana node's CPUs
+         * @type {number || null}
+         */
+        this.KibanaNodeCpuNum = null;
+
+        /**
+         * Kibana node's memory in GB
+         * @type {number || null}
+         */
+        this.KibanaNodeMemSize = null;
+
+        /**
+         * Kibana node's disk type
+         * @type {string || null}
+         */
+        this.KibanaNodeDiskType = null;
+
+        /**
+         * Kibana node's disk size
+         * @type {number || null}
+         */
+        this.KibanaNodeDiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KibanaNodeType = 'KibanaNodeType' in params ? params.KibanaNodeType : null;
+        this.KibanaNodeNum = 'KibanaNodeNum' in params ? params.KibanaNodeNum : null;
+        this.KibanaNodeCpuNum = 'KibanaNodeCpuNum' in params ? params.KibanaNodeCpuNum : null;
+        this.KibanaNodeMemSize = 'KibanaNodeMemSize' in params ? params.KibanaNodeMemSize : null;
+        this.KibanaNodeDiskType = 'KibanaNodeDiskType' in params ? params.KibanaNodeDiskType : null;
+        this.KibanaNodeDiskSize = 'KibanaNodeDiskSize' in params ? params.KibanaNodeDiskSize : null;
+
+    }
+}
+
+/**
  * UpgradeLicense response structure.
  * @class
  */
@@ -2894,6 +3018,7 @@ class Operation extends  AbstractModel {
 }
 
 module.exports = {
+    WebNodeTypeInfo: WebNodeTypeInfo,
     InstanceLog: InstanceLog,
     LocalDiskInfo: LocalDiskInfo,
     TaskDetail: TaskDetail,
@@ -2927,6 +3052,7 @@ module.exports = {
     RestartNodesRequest: RestartNodesRequest,
     UpdatePluginsRequest: UpdatePluginsRequest,
     UpdateRequestTargetNodeTypesResponse: UpdateRequestTargetNodeTypesResponse,
+    KibanaNodeInfo: KibanaNodeInfo,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,

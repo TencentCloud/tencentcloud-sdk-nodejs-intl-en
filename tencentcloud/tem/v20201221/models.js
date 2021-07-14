@@ -17,7 +17,7 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * 
+ * Mounting configuration information 
  * @class
  */
 class MountedSettingConf extends  AbstractModel {
@@ -25,19 +25,19 @@ class MountedSettingConf extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Configuration Name
          * @type {string || null}
          */
         this.ConfigDataName = null;
 
         /**
-         * 
+         * Mount point path
          * @type {string || null}
          */
         this.MountedPath = null;
 
         /**
-         * 
+         * Configuration Content
          * @type {Array.<Pair> || null}
          */
         this.Data = null;
@@ -253,6 +253,12 @@ class CreateCosTokenV2Request extends  AbstractModel {
          */
         this.SourceChannel = null;
 
+        /**
+         * Input parameter of `deployVersion`
+         * @type {string || null}
+         */
+        this.TimeVersion = null;
+
     }
 
     /**
@@ -266,6 +272,7 @@ class CreateCosTokenV2Request extends  AbstractModel {
         this.PkgName = 'PkgName' in params ? params.PkgName : null;
         this.OptType = 'OptType' in params ? params.OptType : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.TimeVersion = 'TimeVersion' in params ? params.TimeVersion : null;
 
     }
 }
@@ -838,84 +845,25 @@ class DescribeNamespacesRequest extends  AbstractModel {
 }
 
 /**
- * Ingress configuration
+ * GenerateDownloadUrl response structure.
  * @class
  */
-class IngressInfo extends  AbstractModel {
+class GenerateDownloadUrlResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * tem namespaceId
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * eks namespace
-         * @type {string || null}
-         */
-        this.EksNamespace = null;
-
-        /**
-         * ip version
-         * @type {string || null}
-         */
-        this.AddressIPVersion = null;
-
-        /**
-         * ingress name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Rules configuration
-         * @type {Array.<IngressRule> || null}
-         */
-        this.Rules = null;
-
-        /**
-         * clb ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ClbId = null;
-
-        /**
-         * TLS configuration
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<IngressTls> || null}
-         */
-        this.Tls = null;
-
-        /**
-         * eks clusterId
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * clb ip
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Vip = null;
-
-        /**
-         * Creation time.
+         * Temp download URL for the package
 Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.Result = null;
 
         /**
-         * Whether to listen on both the HTTP Port 80 and HTTPS Port 443. The default value is `false`. The optional value `true` means listening on both the HTTP Port 80 and HTTPS Port 443.
-         * @type {boolean || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Mixed = null;
+        this.RequestId = null;
 
     }
 
@@ -926,33 +874,8 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.EksNamespace = 'EksNamespace' in params ? params.EksNamespace : null;
-        this.AddressIPVersion = 'AddressIPVersion' in params ? params.AddressIPVersion : null;
-        this.Name = 'Name' in params ? params.Name : null;
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new IngressRule();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
-        this.ClbId = 'ClbId' in params ? params.ClbId : null;
-
-        if (params.Tls) {
-            this.Tls = new Array();
-            for (let z in params.Tls) {
-                let obj = new IngressTls();
-                obj.deserialize(params.Tls[z]);
-                this.Tls.push(obj);
-            }
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Mixed = 'Mixed' in params ? params.Mixed : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1128,16 +1051,22 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
         this.UseRegistryDefaultConfig = null;
 
         /**
-         * 
+         * Mounting configurations
          * @type {Array.<MountedSettingConf> || null}
          */
         this.SettingConfs = null;
 
         /**
-         * 
+         * EKS access configuration
          * @type {EksService || null}
          */
         this.EksService = null;
+
+        /**
+         * ID of the version that you want to roll back to
+         * @type {string || null}
+         */
+        this.VersionId = null;
 
     }
 
@@ -1231,6 +1160,7 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
             obj.deserialize(params.EksService)
             this.EksService = obj;
         }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
@@ -1671,6 +1601,126 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Ingress configuration
+ * @class
+ */
+class IngressInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * tem namespaceId
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * eks namespace
+         * @type {string || null}
+         */
+        this.EksNamespace = null;
+
+        /**
+         * ip version
+         * @type {string || null}
+         */
+        this.AddressIPVersion = null;
+
+        /**
+         * ingress name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Rules configuration
+         * @type {Array.<IngressRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * clb ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClbId = null;
+
+        /**
+         * TLS configuration
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<IngressTls> || null}
+         */
+        this.Tls = null;
+
+        /**
+         * eks clusterId
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * clb ip
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Creation time.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether to listen on both the HTTP Port 80 and HTTPS Port 443. The default value is `false`. The optional value `true` means listening on both the HTTP Port 80 and HTTPS Port 443.
+         * @type {boolean || null}
+         */
+        this.Mixed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.EksNamespace = 'EksNamespace' in params ? params.EksNamespace : null;
+        this.AddressIPVersion = 'AddressIPVersion' in params ? params.AddressIPVersion : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new IngressRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.ClbId = 'ClbId' in params ? params.ClbId : null;
+
+        if (params.Tls) {
+            this.Tls = new Array();
+            for (let z in params.Tls) {
+                let obj = new IngressTls();
+                obj.deserialize(params.Tls[z]);
+                this.Tls.push(obj);
+            }
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Mixed = 'Mixed' in params ? params.Mixed : null;
 
     }
 }
@@ -2475,6 +2525,55 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * GenerateDownloadUrl request structure.
+ * @class
+ */
+class GenerateDownloadUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Package Name
+         * @type {string || null}
+         */
+        this.PkgName = null;
+
+        /**
+         * Version of the package to download
+         * @type {string || null}
+         */
+        this.DeployVersion = null;
+
+        /**
+         * Source channel
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.PkgName = 'PkgName' in params ? params.PkgName : null;
+        this.DeployVersion = 'DeployVersion' in params ? params.DeployVersion : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+
+    }
+}
+
+/**
  * Auto scaling configuration
  * @class
  */
@@ -2683,7 +2782,7 @@ class CreateServiceV2Request extends  AbstractModel {
 }
 
 /**
- * eks service info
+ * EKS service information
  * @class
  */
 class EksService extends  AbstractModel {
@@ -2691,67 +2790,78 @@ class EksService extends  AbstractModel {
         super();
 
         /**
-         * service name
+         * Service name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Available ports
          * @type {Array.<number> || null}
          */
         this.Ports = null;
 
         /**
-         * 
+         * Yaml contents
          * @type {string || null}
          */
         this.Yaml = null;
 
         /**
-         * 
+         * Service name
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ServiceName = null;
 
         /**
-         * 
+         * Version name
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.VersionName = null;
 
         /**
-         * 
+         * Private IP
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.ClusterIp = null;
 
         /**
-         * 
+         * Public IP
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ExternalIp = null;
 
         /**
-         * 
+         * The access type. Valid values:
+- EXTERNAL (internet access)
+- VPC（Intra-VPC access)
+- CLUSTER (Intra-cluster access)
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Subnet ID. It is filled when the access type is `VPC`.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 
+         * Load balancer ID. It is filled when the access type is `EXTERNAL` or `CLUSTER`. It’s created automatically by default.
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.LoadBalanceId = null;
 
         /**
-         * 
+         * Port Mapping
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<PortMapping> || null}
          */
         this.PortMappings = null;
@@ -2842,7 +2952,7 @@ module.exports = {
     DescribeRelatedIngressesRequest: DescribeRelatedIngressesRequest,
     CosToken: CosToken,
     DescribeNamespacesRequest: DescribeNamespacesRequest,
-    IngressInfo: IngressInfo,
+    GenerateDownloadUrlResponse: GenerateDownloadUrlResponse,
     DeployServiceV2Request: DeployServiceV2Request,
     ModifyIngressRequest: ModifyIngressRequest,
     DescribeRelatedIngressesResponse: DescribeRelatedIngressesResponse,
@@ -2852,6 +2962,7 @@ module.exports = {
     DescribeServiceRunPodListV2Request: DescribeServiceRunPodListV2Request,
     LogOutputConf: LogOutputConf,
     DescribeIngressesResponse: DescribeIngressesResponse,
+    IngressInfo: IngressInfo,
     DeleteIngressResponse: DeleteIngressResponse,
     RestartServiceRunPodResponse: RestartServiceRunPodResponse,
     ModifyNamespaceRequest: ModifyNamespaceRequest,
@@ -2868,6 +2979,7 @@ module.exports = {
     TemNamespaceInfo: TemNamespaceInfo,
     NamespacePage: NamespacePage,
     CreateCosTokenV2Response: CreateCosTokenV2Response,
+    GenerateDownloadUrlRequest: GenerateDownloadUrlRequest,
     EsInfo: EsInfo,
     DescribeIngressRequest: DescribeIngressRequest,
     CreateServiceV2Request: CreateServiceV2Request,

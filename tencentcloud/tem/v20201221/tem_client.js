@@ -34,7 +34,7 @@ const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const DescribeRelatedIngressesRequest = models.DescribeRelatedIngressesRequest;
 const CosToken = models.CosToken;
 const DescribeNamespacesRequest = models.DescribeNamespacesRequest;
-const IngressInfo = models.IngressInfo;
+const GenerateDownloadUrlResponse = models.GenerateDownloadUrlResponse;
 const DeployServiceV2Request = models.DeployServiceV2Request;
 const ModifyIngressRequest = models.ModifyIngressRequest;
 const DescribeRelatedIngressesResponse = models.DescribeRelatedIngressesResponse;
@@ -44,6 +44,7 @@ const DescribeRunPodPage = models.DescribeRunPodPage;
 const DescribeServiceRunPodListV2Request = models.DescribeServiceRunPodListV2Request;
 const LogOutputConf = models.LogOutputConf;
 const DescribeIngressesResponse = models.DescribeIngressesResponse;
+const IngressInfo = models.IngressInfo;
 const DeleteIngressResponse = models.DeleteIngressResponse;
 const RestartServiceRunPodResponse = models.RestartServiceRunPodResponse;
 const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
@@ -60,6 +61,7 @@ const DescribeServiceRunPodListV2Response = models.DescribeServiceRunPodListV2Re
 const TemNamespaceInfo = models.TemNamespaceInfo;
 const NamespacePage = models.NamespacePage;
 const CreateCosTokenV2Response = models.CreateCosTokenV2Response;
+const GenerateDownloadUrlRequest = models.GenerateDownloadUrlRequest;
 const EsInfo = models.EsInfo;
 const DescribeIngressRequest = models.DescribeIngressRequest;
 const CreateServiceV2Request = models.CreateServiceV2Request;
@@ -97,6 +99,17 @@ class TemClient extends AbstractClient {
     CreateNamespace(req, cb) {
         let resp = new CreateNamespaceResponse();
         this.request("CreateNamespace", req, resp, cb);
+    }
+
+    /**
+     * Generate the pre-signed download URL for the specified package
+     * @param {GenerateDownloadUrlRequest} req
+     * @param {function(string, GenerateDownloadUrlResponse):void} cb
+     * @public
+     */
+    GenerateDownloadUrl(req, cb) {
+        let resp = new GenerateDownloadUrlResponse();
+        this.request("GenerateDownloadUrl", req, resp, cb);
     }
 
     /**

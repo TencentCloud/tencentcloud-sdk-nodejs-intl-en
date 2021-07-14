@@ -4519,6 +4519,18 @@ class DomainSetList extends  AbstractModel {
          */
         this.NetType = null;
 
+        /**
+         * Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
+         * @type {boolean || null}
+         */
+        this.IsForcedHttps = null;
+
+        /**
+         * ICP filing status
+         * @type {boolean || null}
+         */
+        this.RegistrationStatus = null;
+
     }
 
     /**
@@ -4534,6 +4546,8 @@ class DomainSetList extends  AbstractModel {
         this.IsDefaultMapping = 'IsDefaultMapping' in params ? params.IsDefaultMapping : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.NetType = 'NetType' in params ? params.NetType : null;
+        this.IsForcedHttps = 'IsForcedHttps' in params ? params.IsForcedHttps : null;
+        this.RegistrationStatus = 'RegistrationStatus' in params ? params.RegistrationStatus : null;
 
     }
 }

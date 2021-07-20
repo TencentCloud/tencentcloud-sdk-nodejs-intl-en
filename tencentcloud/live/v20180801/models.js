@@ -7835,9 +7835,9 @@ class DescribeLiveTranscodeDetailInfoRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * Start time (Beijing time).
-In the format of `yyyymmdd`.
-Note: details for a specified day in the last month can be queried.
+         * Query date (UTC+8)
+Format: yyyymmdd
+Note: you can query the statistics for a day in the past month, with yesterday as the latest date allowed.
          * @type {string || null}
          */
         this.DayTime = null;
@@ -7865,9 +7865,9 @@ Note: details for the last month can be queried.
         this.StartDayTime = null;
 
         /**
-         * End day time (Beijing time),
-In the format of `yyyymmdd`.
-Note: detailed data for the last month can be queried. Either `DayTime` or `(StartDayTime,EndDayTime)` must be passed in. If both are passed in, `DayTime` shall prevail.
+         * End date (UTC+8)
+Format: yyyymmdd
+Note: you can query the statistics for a period in the past month, with yesterday as the latest date allowed. You must specify either `DayTime`, or `StartDayTime` and `EndDayTime`. If you specify all three parameters, only `DayTime` will be applied.
          * @type {string || null}
          */
         this.EndDayTime = null;
@@ -9247,18 +9247,18 @@ class RecordParam extends  AbstractModel {
         super();
 
         /**
-         * Recording interval.
-In seconds. Default value: 1800.
-Value range: 300-7200.
-This parameter is not valid for HLS, and a file will be generated from push start to interruption during HLS recording.
+         * Max recording time per file
+Default value: `1800` (seconds)
+Value range: 60-7200
+This parameter is invalid for HLS. Only one HLS file will be generated from push start to push end.
          * @type {number || null}
          */
         this.RecordInterval = null;
 
         /**
-         * Recording storage period.
-In seconds. Value range: 0-93312000.
-0: permanent storage.
+         * Storage duration of the recording file
+Value range: 0-129600000 seconds (0-1500 days)
+`0`: permanent
          * @type {number || null}
          */
         this.StorageTime = null;
@@ -9299,6 +9299,29 @@ If this parameter is not set, the recording filename will be `{StreamID}_{StartY
          */
         this.VodFileName = null;
 
+        /**
+         * Task flow
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Procedure = null;
+
+        /**
+         * Video storage class. Valid values:
+`normal`: STANDARD
+`cold`: STANDARD_IA
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * VOD subapplication category
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
     }
 
     /**
@@ -9313,6 +9336,9 @@ If this parameter is not set, the recording filename will be `{StreamID}_{StartY
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.VodSubAppId = 'VodSubAppId' in params ? params.VodSubAppId : null;
         this.VodFileName = 'VodFileName' in params ? params.VodFileName : null;
+        this.Procedure = 'Procedure' in params ? params.Procedure : null;
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
 
     }
 }

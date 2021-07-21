@@ -145,6 +145,69 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * Login and sensitive operation flag
+ * @class
+ */
+class LoginActionFlagIntl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Mobile number
+         * @type {number || null}
+         */
+        this.Phone = null;
+
+        /**
+         * Hard token
+         * @type {number || null}
+         */
+        this.Token = null;
+
+        /**
+         * Soft token
+         * @type {number || null}
+         */
+        this.Stoken = null;
+
+        /**
+         * WeChat
+         * @type {number || null}
+         */
+        this.Wechat = null;
+
+        /**
+         * Custom
+         * @type {number || null}
+         */
+        this.Custom = null;
+
+        /**
+         * Email
+         * @type {number || null}
+         */
+        this.Mail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.Stoken = 'Stoken' in params ? params.Stoken : null;
+        this.Wechat = 'Wechat' in params ? params.Wechat : null;
+        this.Custom = 'Custom' in params ? params.Custom : null;
+        this.Mail = 'Mail' in params ? params.Mail : null;
+
+    }
+}
+
+/**
  * ListAccessKeys request structure.
  * @class
  */
@@ -733,6 +796,27 @@ class UpdateRoleDescriptionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAccountSummary request structure.
+ * @class
+ */
+class GetAccountSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -3725,6 +3809,76 @@ class UpdateUserResponse extends  AbstractModel {
 }
 
 /**
+ * GetAccountSummary response structure.
+ * @class
+ */
+class GetAccountSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of policies
+         * @type {number || null}
+         */
+        this.Policies = null;
+
+        /**
+         * Number of roles
+         * @type {number || null}
+         */
+        this.Roles = null;
+
+        /**
+         * Number of identity providers
+         * @type {number || null}
+         */
+        this.Idps = null;
+
+        /**
+         * Number of sub-accounts
+         * @type {number || null}
+         */
+        this.User = null;
+
+        /**
+         * Number of groups
+         * @type {number || null}
+         */
+        this.Group = null;
+
+        /**
+         * Total number of grouped users
+         * @type {number || null}
+         */
+        this.Member = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Policies = 'Policies' in params ? params.Policies : null;
+        this.Roles = 'Roles' in params ? params.Roles : null;
+        this.Idps = 'Idps' in params ? params.Idps : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.Member = 'Member' in params ? params.Member : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateServiceLinkedRole response structure.
  * @class
  */
@@ -4321,6 +4475,70 @@ class GetSAMLProviderResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSafeAuthFlagIntl response structure.
+ * @class
+ */
+class DescribeSafeAuthFlagIntlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Login protection settings
+         * @type {LoginActionFlagIntl || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * Sensitive operation protection settings
+         * @type {LoginActionFlagIntl || null}
+         */
+        this.ActionFlag = null;
+
+        /**
+         * Suspicious login location protection settings
+         * @type {OffsiteFlag || null}
+         */
+        this.OffsiteFlag = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LoginFlag) {
+            let obj = new LoginActionFlagIntl();
+            obj.deserialize(params.LoginFlag)
+            this.LoginFlag = obj;
+        }
+
+        if (params.ActionFlag) {
+            let obj = new LoginActionFlagIntl();
+            obj.deserialize(params.ActionFlag)
+            this.ActionFlag = obj;
+        }
+
+        if (params.OffsiteFlag) {
+            let obj = new OffsiteFlag();
+            obj.deserialize(params.OffsiteFlag)
+            this.OffsiteFlag = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListPolicyVersions response structure.
  * @class
  */
@@ -4388,6 +4606,27 @@ class GetPolicyRequest extends  AbstractModel {
             return;
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+    }
+}
+
+/**
+ * DescribeSafeAuthFlagIntl request structure.
+ * @class
+ */
+class DescribeSafeAuthFlagIntlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -6058,6 +6297,7 @@ class CreateGroupResponse extends  AbstractModel {
 module.exports = {
     SubAccountUser: SubAccountUser,
     ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    LoginActionFlagIntl: LoginActionFlagIntl,
     ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
@@ -6074,6 +6314,7 @@ module.exports = {
     DeleteUserPermissionsBoundaryResponse: DeleteUserPermissionsBoundaryResponse,
     ListUsersResponse: ListUsersResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
+    GetAccountSummaryRequest: GetAccountSummaryRequest,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
     ListGroupsResponse: ListGroupsResponse,
     ListPolicyVersionsRequest: ListPolicyVersionsRequest,
@@ -6143,6 +6384,7 @@ module.exports = {
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
+    GetAccountSummaryResponse: GetAccountSummaryResponse,
     CreateServiceLinkedRoleResponse: CreateServiceLinkedRoleResponse,
     ListUsersRequest: ListUsersRequest,
     ListCollaboratorsRequest: ListCollaboratorsRequest,
@@ -6159,8 +6401,10 @@ module.exports = {
     GetPolicyVersionResponse: GetPolicyVersionResponse,
     CreateRoleResponse: CreateRoleResponse,
     GetSAMLProviderResponse: GetSAMLProviderResponse,
+    DescribeSafeAuthFlagIntlResponse: DescribeSafeAuthFlagIntlResponse,
     ListPolicyVersionsResponse: ListPolicyVersionsResponse,
     GetPolicyRequest: GetPolicyRequest,
+    DescribeSafeAuthFlagIntlRequest: DescribeSafeAuthFlagIntlRequest,
     SetDefaultPolicyVersionRequest: SetDefaultPolicyVersionRequest,
     AddUserToGroupRequest: AddUserToGroupRequest,
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,

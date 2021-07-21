@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SubAccountUser = models.SubAccountUser;
 const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const LoginActionFlagIntl = models.LoginActionFlagIntl;
 const ListAccessKeysRequest = models.ListAccessKeysRequest;
 const SetMfaFlagResponse = models.SetMfaFlagResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
@@ -34,6 +35,7 @@ const GetSecurityLastUsedRequest = models.GetSecurityLastUsedRequest;
 const DeleteUserPermissionsBoundaryResponse = models.DeleteUserPermissionsBoundaryResponse;
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
+const GetAccountSummaryRequest = models.GetAccountSummaryRequest;
 const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const ListGroupsResponse = models.ListGroupsResponse;
 const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
@@ -103,6 +105,7 @@ const GetGroupResponse = models.GetGroupResponse;
 const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
+const GetAccountSummaryResponse = models.GetAccountSummaryResponse;
 const CreateServiceLinkedRoleResponse = models.CreateServiceLinkedRoleResponse;
 const ListUsersRequest = models.ListUsersRequest;
 const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
@@ -119,8 +122,10 @@ const UpdateGroupRequest = models.UpdateGroupRequest;
 const GetPolicyVersionResponse = models.GetPolicyVersionResponse;
 const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
+const DescribeSafeAuthFlagIntlResponse = models.DescribeSafeAuthFlagIntlResponse;
 const ListPolicyVersionsResponse = models.ListPolicyVersionsResponse;
 const GetPolicyRequest = models.GetPolicyRequest;
+const DescribeSafeAuthFlagIntlRequest = models.DescribeSafeAuthFlagIntlRequest;
 const SetDefaultPolicyVersionRequest = models.SetDefaultPolicyVersionRequest;
 const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
@@ -600,14 +605,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get a key’s recent usage details.
-     * @param {GetSecurityLastUsedRequest} req
-     * @param {function(string, GetSecurityLastUsedResponse):void} cb
+     * This API is used to query account summary. 
+     * @param {GetAccountSummaryRequest} req
+     * @param {function(string, GetAccountSummaryResponse):void} cb
      * @public
      */
-    GetSecurityLastUsed(req, cb) {
-        let resp = new GetSecurityLastUsedResponse();
-        this.request("GetSecurityLastUsed", req, resp, cb);
+    GetAccountSummary(req, cb) {
+        let resp = new GetAccountSummaryResponse();
+        this.request("GetAccountSummary", req, resp, cb);
     }
 
     /**
@@ -630,6 +635,17 @@ class CamClient extends AbstractClient {
     DescribeSafeAuthFlag(req, cb) {
         let resp = new DescribeSafeAuthFlagResponse();
         this.request("DescribeSafeAuthFlag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query security settings.
+     * @param {DescribeSafeAuthFlagIntlRequest} req
+     * @param {function(string, DescribeSafeAuthFlagIntlResponse):void} cb
+     * @public
+     */
+    DescribeSafeAuthFlagIntl(req, cb) {
+        let resp = new DescribeSafeAuthFlagIntlResponse();
+        this.request("DescribeSafeAuthFlagIntl", req, resp, cb);
     }
 
     /**
@@ -773,6 +789,17 @@ class CamClient extends AbstractClient {
     ListEntitiesForPolicy(req, cb) {
         let resp = new ListEntitiesForPolicyResponse();
         this.request("ListEntitiesForPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a key’s recent usage details.
+     * @param {GetSecurityLastUsedRequest} req
+     * @param {function(string, GetSecurityLastUsedResponse):void} cb
+     * @public
+     */
+    GetSecurityLastUsed(req, cb) {
+        let resp = new GetSecurityLastUsedResponse();
+        this.request("GetSecurityLastUsed", req, resp, cb);
     }
 
     /**

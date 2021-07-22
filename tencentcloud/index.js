@@ -1,4 +1,5 @@
 module.exports = {
+    antiddos: require("./antiddos"),
     apigateway: require("./apigateway"),
     as: require("./as"),
     batch: require("./batch"),

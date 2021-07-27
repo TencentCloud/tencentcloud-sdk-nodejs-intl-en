@@ -1137,6 +1137,12 @@ class DeleteSnapshotsRequest extends  AbstractModel {
          */
         this.SnapshotIds = null;
 
+        /**
+         * Whether to forcibly delete the image associated with the snapshot
+         * @type {boolean || null}
+         */
+        this.DeleteBindImages = null;
+
     }
 
     /**
@@ -1147,6 +1153,7 @@ class DeleteSnapshotsRequest extends  AbstractModel {
             return;
         }
         this.SnapshotIds = 'SnapshotIds' in params ? params.SnapshotIds : null;
+        this.DeleteBindImages = 'DeleteBindImages' in params ? params.DeleteBindImages : null;
 
     }
 }
@@ -2540,10 +2547,10 @@ class CreateDisksRequest extends  AbstractModel {
         super();
 
         /**
-         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
-         * @type {string || null}
+         * The location of the instance. The availability zone and the project that the instance belongs to can be specified using this parameter. If the project is not specified, it will be created under the default project.
+         * @type {Placement || null}
          */
-        this.DiskType = null;
+        this.Placement = null;
 
         /**
          * Cloud disk billing method. POSTPAID_BY_HOUR: pay as you go by hour<br><li>CDCPAID: Billed together with the bound dedicated cluster<br>For information about the pricing of each method, see the cloud disk [Pricing Overview](https://intl.cloud.tencent.com/document/product/362/2413?from_cn_redirect=1).
@@ -2552,10 +2559,10 @@ class CreateDisksRequest extends  AbstractModel {
         this.DiskChargeType = null;
 
         /**
-         * The location of the instance. The availability zone and the project that the instance belongs to can be specified using this parameter. If the project is not specified, it will be created under the default project.
-         * @type {Placement || null}
+         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
+         * @type {string || null}
          */
-        this.Placement = null;
+        this.DiskType = null;
 
         /**
          * The displayed name of the cloud disk. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
@@ -2564,16 +2571,28 @@ class CreateDisksRequest extends  AbstractModel {
         this.DiskName = null;
 
         /**
+         * Cloud disk binding tag.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Snapshot ID. If this parameter is specified, the cloud disk is created based on the snapshot. The snapshot type must be a data disk snapshot. The snapshot can be queried in the DiskUsage field in the output parameter through the API [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
          * If the number of cloud disks to be created is left empty, the default is 1. There is a limit to the maximum number of cloud disks that can be created for a single request. For more information, please see [CBS Use Limits](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
          * @type {number || null}
          */
         this.DiskCount = null;
 
         /**
-         * Relevant parameter settings for the prepaid mode (i.e., monthly subscription). The monthly subscription cloud disk purchase attributes such as usage period and whether or not auto-renewal is set up can be specified using this parameter. <br>This parameter is required when creating a prepaid cloud disk. This parameter is not required when creating an hourly postpaid cloud disk. 
-         * @type {DiskChargePrepaid || null}
+         * Extra performance purchased for a cloud disk.<br>This optional parameter is only valid for Tremendous SSD (CLOUD_TSSD) and Enhanced SSD (CLOUD_HSSD).
+         * @type {number || null}
          */
-        this.DiskChargePrepaid = null;
+        this.ThroughputPerformance = null;
 
         /**
          * Cloud hard disk size (in GB). <br><li> If `SnapshotId` is passed, `DiskSize` cannot be passed. In this case, the size of the cloud disk is the size of the snapshot. <br><li>To pass `SnapshotId` and `DiskSize` at the same time, the size of the disk must be larger than or equal to the size of the snapshot. <br><li>For information about the size range of cloud disks, see cloud disk [Product Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1).
@@ -2582,10 +2601,10 @@ class CreateDisksRequest extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * Snapshot ID. If this parameter is specified, the cloud disk is created based on the snapshot. The snapshot type must be a data disk snapshot. The snapshot can be queried in the DiskUsage field in the output parameter through the API [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1).
-         * @type {string || null}
+         * The default of optional parameter is False. When True is selected, the cloud disk will be created as a shareable cloud disk.
+         * @type {boolean || null}
          */
-        this.SnapshotId = null;
+        this.Shareable = null;
 
         /**
          * A string to ensure the idempotency of the request, which is generated by the client. Each request shall have a unique string with a maximum of 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be ensured.
@@ -2600,22 +2619,16 @@ class CreateDisksRequest extends  AbstractModel {
         this.Encrypt = null;
 
         /**
-         * Cloud disk binding tag.
-         * @type {Array.<Tag> || null}
+         * Relevant parameter settings for the prepaid mode (i.e., monthly subscription). The monthly subscription cloud disk purchase attributes such as usage period and whether or not auto-renewal is set up can be specified using this parameter. <br>This parameter is required when creating a prepaid cloud disk. This parameter is not required when creating an hourly postpaid cloud disk. 
+         * @type {DiskChargePrepaid || null}
          */
-        this.Tags = null;
+        this.DiskChargePrepaid = null;
 
         /**
-         * The default of optional parameter is False. When True is selected, the cloud disk will be created as a shareable cloud disk.
-         * @type {boolean || null}
-         */
-        this.Shareable = null;
-
-        /**
-         * Extra performance purchased for a cloud disk.<br>This optional parameter is only valid for Tremendous SSD (CLOUD_TSSD) and Enhanced SSD (CLOUD_HSSD).
+         * Whether to delete the associated non-permanent snapshots when a cloud disk is terminated. Valid values: `0` (do not delete); `1` (delete). Default value: `0`. To find out whether a snapshot is permanent, you can call the `DescribeSnapshots` API and check the `IsPermanent` field (`true`: permanent; `false`: non-permanent) in its response.
          * @type {number || null}
          */
-        this.ThroughputPerformance = null;
+        this.DeleteSnapshot = null;
 
     }
 
@@ -2626,26 +2639,15 @@ class CreateDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
 
         if (params.Placement) {
             let obj = new Placement();
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
+        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskName = 'DiskName' in params ? params.DiskName : null;
-        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
-
-        if (params.DiskChargePrepaid) {
-            let obj = new DiskChargePrepaid();
-            obj.deserialize(params.DiskChargePrepaid)
-            this.DiskChargePrepaid = obj;
-        }
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -2655,8 +2657,20 @@ class CreateDisksRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-        this.Shareable = 'Shareable' in params ? params.Shareable : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.Shareable = 'Shareable' in params ? params.Shareable : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+
+        if (params.DiskChargePrepaid) {
+            let obj = new DiskChargePrepaid();
+            obj.deserialize(params.DiskChargePrepaid)
+            this.DiskChargePrepaid = obj;
+        }
+        this.DeleteSnapshot = 'DeleteSnapshot' in params ? params.DeleteSnapshot : null;
 
     }
 }

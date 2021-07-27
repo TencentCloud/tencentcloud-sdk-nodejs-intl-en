@@ -46,6 +46,7 @@ const EipConfigIn = models.EipConfigIn;
 const ListLayerVersionsResponse = models.ListLayerVersionsResponse;
 const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const CopyFunctionResponse = models.CopyFunctionResponse;
+const InvokeFunctionResponse = models.InvokeFunctionResponse;
 const Namespace = models.Namespace;
 const GetFunctionRequest = models.GetFunctionRequest;
 const ListNamespacesRequest = models.ListNamespacesRequest;
@@ -110,6 +111,7 @@ const UpdateNamespaceRequest = models.UpdateNamespaceRequest;
 const GetLayerVersionResponse = models.GetLayerVersionResponse;
 const PutReservedConcurrencyConfigResponse = models.PutReservedConcurrencyConfigResponse;
 const FunctionLog = models.FunctionLog;
+const InvokeFunctionRequest = models.InvokeFunctionRequest;
 const RetryConfig = models.RetryConfig;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
 const CfsInsInfo = models.CfsInsInfo;
@@ -171,6 +173,17 @@ class ScfClient extends AbstractClient {
     UpdateNamespace(req, cb) {
         let resp = new UpdateNamespaceResponse();
         this.request("UpdateNamespace", req, resp, cb);
+    }
+
+    /**
+     *  This API is used to invoke functions synchronously.
+     * @param {InvokeFunctionRequest} req
+     * @param {function(string, InvokeFunctionResponse):void} cb
+     * @public
+     */
+    InvokeFunction(req, cb) {
+        let resp = new InvokeFunctionResponse();
+        this.request("InvokeFunction", req, resp, cb);
     }
 
     /**

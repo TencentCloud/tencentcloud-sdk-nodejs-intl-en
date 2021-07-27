@@ -8696,6 +8696,27 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.SecurityGroupSet = null;
 
+        /**
+         * SNAT forwarding rule of the NAT Gateway.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<SourceIpTranslationNatRule> || null}
+         */
+        this.SourceIpTranslationNatRuleSet = null;
+
+        /**
+         * Whether the NAT Gateway is dedicated.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsExclusive = null;
+
+        /**
+         * Bandwidth of the gateway cluster where the dedicated NAT Gateway resides. Unit: Mbps. This field does not exist when the `IsExclusive` field is set to `false`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ExclusiveGatewayBandwidth = null;
+
     }
 
     /**
@@ -8744,6 +8765,17 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.SecurityGroupSet = 'SecurityGroupSet' in params ? params.SecurityGroupSet : null;
+
+        if (params.SourceIpTranslationNatRuleSet) {
+            this.SourceIpTranslationNatRuleSet = new Array();
+            for (let z in params.SourceIpTranslationNatRuleSet) {
+                let obj = new SourceIpTranslationNatRule();
+                obj.deserialize(params.SourceIpTranslationNatRuleSet[z]);
+                this.SourceIpTranslationNatRuleSet.push(obj);
+            }
+        }
+        this.IsExclusive = 'IsExclusive' in params ? params.IsExclusive : null;
+        this.ExclusiveGatewayBandwidth = 'ExclusiveGatewayBandwidth' in params ? params.ExclusiveGatewayBandwidth : null;
 
     }
 }
@@ -25066,6 +25098,7 @@ Important note: When the GatewayType is EIP, the GatewayId has a fixed value `0`
 
         /**
          * Routing policy ID. The IPv4 routing policy will have a meaningful value, while the IPv6 routing policy is always 0. We recommend using the unique ID `RouteItemId` for the routing policy.
+This field is required when you want to delete a routing policy.
          * @type {number || null}
          */
         this.RouteId = null;

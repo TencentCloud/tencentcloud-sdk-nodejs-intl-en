@@ -66,7 +66,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
 
         /**
          * List of instance types. Each type specifies different resource specifications. This list contains up to 10 instance types.
-The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. After `InstanceTypes` is successfully specified for the launch configuration, the original `InstanceType` will be automatically invalidated.
+The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. Specifying the `InstanceTypes` field will invalidate the original `InstanceType`.
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
@@ -89,7 +89,7 @@ If a model in InstanceTypes does not exist or has been discontinued, a verificat
         this.LaunchConfigurationName = null;
 
         /**
-         * Base64-encoded custom data of up to 16 KB. If you want to clear UserData, specify it as an empty string
+         * Base64-encoded custom data of up to 16 KB. If you want to clear `UserData`, set it to an empty string.
          * @type {string || null}
          */
         this.UserData = null;
@@ -103,7 +103,7 @@ At least one security group is required for this parameter. The security group s
 
         /**
          * Information of the public network bandwidth configuration.
-To modify it or even its subfield, you should specify all the subfields again.
+When the public outbound network bandwidth is 0 Mbps, assigning a public IP is not allowed. Accordingly, if a public IP is assigned, the new public network outbound bandwidth must be greater than 0 Mbps.
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
@@ -117,15 +117,19 @@ To modify it or even its subfield, you should specify all the subfields again.
         this.InstanceChargeType = null;
 
         /**
-         * 
+         * Parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set the auto-renewal, and other attributes of the monthly-subscribed instances.
+This parameter is required when changing the instance billing mode to monthly subscription. It will be automatically discarded after you choose another billing mode.
+This field requires passing in the `Period` field. Other fields that are not passed in will use their default values.
+This field can be modified only when the current billing mode is monthly subscription.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
 
         /**
          * Market-related options for instances, such as parameters related to spot instances.
-This parameter is required when changing the instance billing mode to spot instance. It will be automatically discarded after the spot instance is changed to another instance billing mode.
-To modify it or even its subfield, you should specify all the subfields again.
+This parameter is required when changing the instance billing mode to spot instance. It will be automatically discarded after you choose another instance billing mode.
+This field requires passing in the `MaxPrice` field under the `SpotOptions`. Other fields that are not passed in will use their default values.
+This field can be modified only when the current billing mode is spot instance.
          * @type {InstanceMarketOptionsRequest || null}
          */
         this.InstanceMarketOptions = null;
@@ -145,10 +149,28 @@ To modify it or even its subfield, you should specify all the subfields again.
         this.SystemDisk = null;
 
         /**
-         * Instance data disk configurations. Up to 11 data disks can be specified and will be collectively modified. Please provide all the new values for the modification.
+         * Configuration information of instance data disks.
+Up to 11 data disks can be specified and will be collectively modified. Please provide all the new values for the modification.
+The default data disk should be the same as the system disk.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
+
+        /**
+         * CVM hostname settings.
+This field is not supported for Windows instances.
+This field requires passing the `HostName` field. Other fields that are not passed in will use their default values.
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
+        /**
+         * Settings of CVM instance names. 
+If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
+This field requires passing in the `InstanceName` field. Other fields that are not passed in will use their default values.
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
 
     }
 
@@ -200,6 +222,18 @@ To modify it or even its subfield, you should specify all the subfields again.
                 obj.deserialize(params.DataDisks[z]);
                 this.DataDisks.push(obj);
             }
+        }
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
         }
 
     }
@@ -884,8 +918,8 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. For more information on limits of system disk types, see [CVM Instance Configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). Value range: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * System disk type. For more information on limits of system disk types, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>LOCAL_BASIC: local disk <br><li>LOCAL_SSD: local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: CLOUD_PREMIUM.
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -2263,6 +2297,36 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.MultiZoneSubnetPolicy = null;
 
+        /**
+         * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.HealthCheckType = null;
+
+        /**
+         * Grace period of the CLB health check
+         * @type {number || null}
+         */
+        this.LoadBalancerHealthCheckGracePeriod = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceAllocationPolicy = null;
+
+        /**
+         * 
+         * @type {SpotMixedAllocationPolicy || null}
+         */
+        this.SpotMixedAllocationPolicy = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.CapacityRebalance = null;
+
     }
 
     /**
@@ -2319,6 +2383,16 @@ class AutoScalingGroup extends  AbstractModel {
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
         this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
+        this.HealthCheckType = 'HealthCheckType' in params ? params.HealthCheckType : null;
+        this.LoadBalancerHealthCheckGracePeriod = 'LoadBalancerHealthCheckGracePeriod' in params ? params.LoadBalancerHealthCheckGracePeriod : null;
+        this.InstanceAllocationPolicy = 'InstanceAllocationPolicy' in params ? params.InstanceAllocationPolicy : null;
+
+        if (params.SpotMixedAllocationPolicy) {
+            let obj = new SpotMixedAllocationPolicy();
+            obj.deserialize(params.SpotMixedAllocationPolicy)
+            this.SpotMixedAllocationPolicy = obj;
+        }
+        this.CapacityRebalance = 'CapacityRebalance' in params ? params.CapacityRebalance : null;
 
     }
 }
@@ -3630,8 +3704,8 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * Data disk type. For more information on limits of data disk types, see [CVM Instance Configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). Value range: <br><li>LOCAL_BASIC: Local disk <br><li>LOCAL_SSD: Local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium cloud disk <br><li>CLOUD_SSD: SSD cloud disk <br><br>Default value: LOCAL_BASIC.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Data disk type. For more information on limits of data disk types, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>LOCAL_BASIC: local disk <br><li>LOCAL_SSD: local SSD disk <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: premium cloud storage<br><li>CLOUD_SSD: SSD cloud disk <br><br>The default value should be the same as the `DiskType` field under `SystemDisk`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -5901,6 +5975,20 @@ Setting it to `true` will clear data disks, which means that CVM newly created o
          */
         this.ClearDataDisks = null;
 
+        /**
+         * Whether to clear the CVM hostname settings. This parameter is optional and the default value is `false`.
+Setting it to `true` will clear the hostname settings, which means that CVM newly created on this launch configuration will have no hostname.
+         * @type {boolean || null}
+         */
+        this.ClearHostNameSettings = null;
+
+        /**
+         * Whether to clear the CVM instance name settings. This parameter is optional and the default value is `false`.
+Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the “as-{{AutoScalingGroupName}} format.
+         * @type {boolean || null}
+         */
+        this.ClearInstanceNameSettings = null;
+
     }
 
     /**
@@ -5912,6 +6000,8 @@ Setting it to `true` will clear data disks, which means that CVM newly created o
         }
         this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
         this.ClearDataDisks = 'ClearDataDisks' in params ? params.ClearDataDisks : null;
+        this.ClearHostNameSettings = 'ClearHostNameSettings' in params ? params.ClearHostNameSettings : null;
+        this.ClearInstanceNameSettings = 'ClearInstanceNameSettings' in params ? params.ClearInstanceNameSettings : null;
 
     }
 }
@@ -6045,6 +6135,55 @@ class AttachInstancesRequest extends  AbstractModel {
         }
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class SpotMixedAllocationPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BaseCapacity = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.OnDemandPercentageAboveBaseCapacity = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SpotAllocationStrategy = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.CompensateWithBaseInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BaseCapacity = 'BaseCapacity' in params ? params.BaseCapacity : null;
+        this.OnDemandPercentageAboveBaseCapacity = 'OnDemandPercentageAboveBaseCapacity' in params ? params.OnDemandPercentageAboveBaseCapacity : null;
+        this.SpotAllocationStrategy = 'SpotAllocationStrategy' in params ? params.SpotAllocationStrategy : null;
+        this.CompensateWithBaseInstance = 'CompensateWithBaseInstance' in params ? params.CompensateWithBaseInstance : null;
 
     }
 }
@@ -6749,6 +6888,7 @@ module.exports = {
     RemoveInstancesRequest: RemoveInstancesRequest,
     StartAutoScalingInstancesRequest: StartAutoScalingInstancesRequest,
     AttachInstancesRequest: AttachInstancesRequest,
+    SpotMixedAllocationPolicy: SpotMixedAllocationPolicy,
     DescribeScalingPoliciesResponse: DescribeScalingPoliciesResponse,
     Activity: Activity,
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,

@@ -125,6 +125,7 @@ const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const StartAutoScalingInstancesRequest = models.StartAutoScalingInstancesRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
+const SpotMixedAllocationPolicy = models.SpotMixedAllocationPolicy;
 const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;

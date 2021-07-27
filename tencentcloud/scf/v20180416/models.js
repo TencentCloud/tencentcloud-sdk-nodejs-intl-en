@@ -1386,6 +1386,46 @@ class CopyFunctionResponse extends  AbstractModel {
 }
 
 /**
+ * InvokeFunction response structure.
+ * @class
+ */
+class InvokeFunctionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function execution result
+         * @type {Result || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new Result();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Namespace
  * @class
  */
@@ -5378,6 +5418,69 @@ class FunctionLog extends  AbstractModel {
 }
 
 /**
+ * InvokeFunction request structure.
+ * @class
+ */
+class InvokeFunctionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Version number or alias of the triggered function
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
+         * Function running parameter, which is in the JSON format. Maximum parameter size is 1 MB.
+         * @type {string || null}
+         */
+        this.Event = null;
+
+        /**
+         * If this field is specified for a synchronous invocation, the return value will contain a 4 KB log. Valid value: `None` (default) or `Tail`. If the value is `Tail`, `log` in the return parameter will contain the corresponding function execution log.
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Traffic routing config in json format, e.g., {"k":"v"}. Please note that both "k" and "v" must be strings. Up to 1024 bytes allowed.
+         * @type {string || null}
+         */
+        this.RoutingKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.Event = 'Event' in params ? params.Event : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
+
+    }
+}
+
+/**
  * Async retry configuration
  * @class
  */
@@ -6878,6 +6981,7 @@ module.exports = {
     ListLayerVersionsResponse: ListLayerVersionsResponse,
     DeleteFunctionRequest: DeleteFunctionRequest,
     CopyFunctionResponse: CopyFunctionResponse,
+    InvokeFunctionResponse: InvokeFunctionResponse,
     Namespace: Namespace,
     GetFunctionRequest: GetFunctionRequest,
     ListNamespacesRequest: ListNamespacesRequest,
@@ -6942,6 +7046,7 @@ module.exports = {
     GetLayerVersionResponse: GetLayerVersionResponse,
     PutReservedConcurrencyConfigResponse: PutReservedConcurrencyConfigResponse,
     FunctionLog: FunctionLog,
+    InvokeFunctionRequest: InvokeFunctionRequest,
     RetryConfig: RetryConfig,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,

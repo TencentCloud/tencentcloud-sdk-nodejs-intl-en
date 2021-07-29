@@ -121,6 +121,7 @@ const ProhibitedAsrReviewTemplateInfoForUpdate = models.ProhibitedAsrReviewTempl
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
+const EditMediaOutputConfig = models.EditMediaOutputConfig;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const EditMediaRequest = models.EditMediaRequest;

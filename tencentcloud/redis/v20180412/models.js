@@ -1062,24 +1062,24 @@ class ModifyInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Tendis node information
+ * KillMasterGroup response structure.
  * @class
  */
-class TendisNodes extends  AbstractModel {
+class KillMasterGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node ID
-         * @type {string || null}
+         * Async task ID
+         * @type {number || null}
          */
-        this.NodeId = null;
+        this.TaskId = null;
 
         /**
-         * Node role
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.NodeRole = null;
+        this.RequestId = null;
 
     }
 
@@ -1090,8 +1090,8 @@ class TendisNodes extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1244,7 +1244,7 @@ class DescribeCommonDBInstancesRequest extends  AbstractModel {
         this.Vips = null;
 
         /**
-         * List of unique VPC IDs
+         * List of VPC IDs
          * @type {Array.<string> || null}
          */
         this.UniqVpcIds = null;
@@ -2823,7 +2823,7 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance status. Valid values: `0` (creating), `1` (running)
+         * Instance status. Valid values: `1` (task running), `2` (instance running), `-2` (instance isolated), `-3` (instance being eliminated), `-4` (instance eliminated)
          * @type {string || null}
          */
         this.Status = null;
@@ -3127,6 +3127,48 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
         this.ReadonlyPolicy = 'ReadonlyPolicy' in params ? params.ReadonlyPolicy : null;
         this.Privilege = 'Privilege' in params ? params.Privilege : null;
         this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+
+    }
+}
+
+/**
+ * ModifyMaintenanceWindow request structure.
+ * @class
+ */
+class ModifyMaintenanceWindowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time of the maintenance window, such as 17:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the maintenance window, such as 19:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -3682,10 +3724,10 @@ class DescribeInstanceMonitorTookDistRequest extends  AbstractModel {
 }
 
 /**
- * ModifyMaintenanceWindow request structure.
+ * KillMasterGroup request structure.
  * @class
  */
-class ModifyMaintenanceWindowRequest extends  AbstractModel {
+class KillMasterGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3696,16 +3738,16 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Start time of the maintenance window, such as 17:00
+         * 1. The password must contain 8-30 characters. A password of 12 or more characters is recommended.
+2. The password cannot start with a slash (/).
+3. The password must contain at least two of the following four types:
+    a. Lowercase letters (a-z)
+    b. Uppercase letters (A-Z)
+    c. Digits (0-9)
+    d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * End time of the maintenance window, such as 19:00
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.Password = null;
 
     }
 
@@ -3717,8 +3759,7 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -4847,7 +4888,13 @@ class CreateInstanceAccountRequest extends  AbstractModel {
         this.AccountName = null;
 
         /**
-         * Sub-account password
+         * 1. The password must contain 8-30 characters. A password of 12 or more characters is recommended.
+2. The password cannot start with a slash (/).
+3. The password must contain at least two of the following four types:
+    a. Lowercase letters (a-z)
+    b. Uppercase letters (A-Z)
+    c. Digits (0-9)
+    d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
          * @type {string || null}
          */
         this.AccountPassword = null;
@@ -5160,6 +5207,41 @@ class InstanceNode extends  AbstractModel {
                 this.InstanceClusterNode.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Tendis node information
+ * @class
+ */
+class TendisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
 
     }
 }
@@ -8491,7 +8573,7 @@ module.exports = {
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeTaskListResponse: DescribeTaskListResponse,
     ModifyInstanceRequest: ModifyInstanceRequest,
-    TendisNodes: TendisNodes,
+    KillMasterGroupResponse: KillMasterGroupResponse,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
     DescribeCommonDBInstancesRequest: DescribeCommonDBInstancesRequest,
@@ -8533,6 +8615,7 @@ module.exports = {
     DescribeInstanceDTSInfoRequest: DescribeInstanceDTSInfoRequest,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     ModifyInstanceAccountRequest: ModifyInstanceAccountRequest,
+    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
     DescribeBackupUrlResponse: DescribeBackupUrlResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
@@ -8545,7 +8628,7 @@ module.exports = {
     InstanceIntegerParam: InstanceIntegerParam,
     UpgradeVersionToMultiAvailabilityZonesRequest: UpgradeVersionToMultiAvailabilityZonesRequest,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
-    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
+    KillMasterGroupRequest: KillMasterGroupRequest,
     InstanceTextParam: InstanceTextParam,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
@@ -8575,6 +8658,7 @@ module.exports = {
     DescribeInstanceSecurityGroupResponse: DescribeInstanceSecurityGroupResponse,
     ProductConf: ProductConf,
     InstanceNode: InstanceNode,
+    TendisNodes: TendisNodes,
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,

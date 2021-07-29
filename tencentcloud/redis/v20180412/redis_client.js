@@ -34,7 +34,7 @@ const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeTaskListResponse = models.DescribeTaskListResponse;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
-const TendisNodes = models.TendisNodes;
+const KillMasterGroupResponse = models.KillMasterGroupResponse;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
 const DescribeCommonDBInstancesRequest = models.DescribeCommonDBInstancesRequest;
@@ -76,6 +76,7 @@ const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKe
 const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
+const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
 const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
@@ -88,7 +89,7 @@ const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const InstanceIntegerParam = models.InstanceIntegerParam;
 const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMultiAvailabilityZonesRequest;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
-const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
+const KillMasterGroupRequest = models.KillMasterGroupRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
@@ -118,6 +119,7 @@ const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowRespon
 const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
 const ProductConf = models.ProductConf;
 const InstanceNode = models.InstanceNode;
+const TendisNodes = models.TendisNodes;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
@@ -628,6 +630,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
         let resp = new DescribeInstanceMonitorBigKeyTypeDistResponse();
         this.request("DescribeInstanceMonitorBigKeyTypeDist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform a failure simulation.
+     * @param {KillMasterGroupRequest} req
+     * @param {function(string, KillMasterGroupResponse):void} cb
+     * @public
+     */
+    KillMasterGroup(req, cb) {
+        let resp = new KillMasterGroupResponse();
+        this.request("KillMasterGroup", req, resp, cb);
     }
 
     /**

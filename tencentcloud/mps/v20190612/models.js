@@ -5601,6 +5601,34 @@ class AiRecognitionTaskOcrFullTextSegmentItem extends  AbstractModel {
 }
 
 /**
+ * Configuration for output files of video editing
+ * @class
+ */
+class EditMediaOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`
+         * @type {string || null}
+         */
+        this.Container = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Container = 'Container' in params ? params.Container : null;
+
+    }
+}
+
+/**
  * ASR-detected porn information in text
  * @class
  */
@@ -5708,6 +5736,12 @@ class EditMediaRequest extends  AbstractModel {
         this.OutputObjectPath = null;
 
         /**
+         * Configuration for output files of video editing
+         * @type {EditMediaOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+        /**
          * Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
          * @type {TaskNotifyConfig || null}
          */
@@ -5756,6 +5790,12 @@ class EditMediaRequest extends  AbstractModel {
             this.OutputStorage = obj;
         }
         this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+
+        if (params.OutputConfig) {
+            let obj = new EditMediaOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
 
         if (params.TaskNotifyConfig) {
             let obj = new TaskNotifyConfig();
@@ -16258,8 +16298,8 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
         this.DefaultLibraryLabelSet = null;
 
         /**
-         * Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the custom figures will be returned. Valid values:
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
+Up to 100 tags are allowed, each containing no more than 16 characters.
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
@@ -18771,8 +18811,8 @@ class FaceConfigureInfo extends  AbstractModel {
         this.DefaultLibraryLabelSet = null;
 
         /**
-         * Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the custom figures will be returned. Valid values:
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
+Up to 100 tags are allowed, each containing no more than 16 characters.
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
@@ -20268,6 +20308,7 @@ module.exports = {
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
+    EditMediaOutputConfig: EditMediaOutputConfig,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     EditMediaRequest: EditMediaRequest,

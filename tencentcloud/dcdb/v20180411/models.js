@@ -1003,6 +1003,48 @@ class DcnDetailItem extends  AbstractModel {
          */
         this.DcnStatus = null;
 
+        /**
+         * Number of CPU cores of the instance
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Instance memory capacity in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance storage capacity in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Billing mode
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Creation time of the instance in the format of 2006-01-02 15:04:05
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Expiration time of the instance in the format of 2006-01-02 15:04:05
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), and `4` (dedicated disaster recovery instance).
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -1023,6 +1065,13 @@ class DcnDetailItem extends  AbstractModel {
         this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
         this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
         this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -1811,7 +1860,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.StatusDesc = null;
 
         /**
-         * Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated), `-2` (eliminated), `4` (initializing), `5` (eliminating), `6` (restarting), `7` (migrating data)
+         * Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated), `4` (initializing), `5` (eliminating), `6` (restarting), `7` (migrating data)
          * @type {number || null}
          */
         this.Status = null;

@@ -17,6 +17,135 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DeleteImmutableTagRules response structure.
+ * @class
+ */
+class DeleteImmutableTagRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeImmutableTagRules response structure.
+ * @class
+ */
+class DescribeImmutableTagRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule list
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<ImmutableTagRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Namespace with no rules created
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EmptyNs = null;
+
+        /**
+         * Total rules
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new ImmutableTagRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.EmptyNs = 'EmptyNs' in params ? params.EmptyNs : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckInstance response structure.
+ * @class
+ */
+class CheckInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Verification result. true: valid, false: invalid
+         * @type {boolean || null}
+         */
+        this.IsValidated = null;
+
+        /**
+         * ID of the region where the instance is located.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsValidated = 'IsValidated' in params ? params.IsValidated : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateMultipleSecurityPolicy request structure.
  * @class
  */
@@ -60,18 +189,12 @@ class CreateMultipleSecurityPolicyRequest extends  AbstractModel {
 }
 
 /**
- * CreateMultipleSecurityPolicy response structure.
+ * CreateImmutableTagRules response structure.
  * @class
  */
-class CreateMultipleSecurityPolicyResponse extends  AbstractModel {
+class CreateImmutableTagRulesResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -88,7 +211,6 @@ class CreateMultipleSecurityPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -125,6 +247,224 @@ class DeleteMultipleSecurityPolicyResponse extends  AbstractModel {
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Tag immutability rule
+ * @class
+ */
+class ImmutableTagRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Repository matching rule
+         * @type {string || null}
+         */
+        this.RepositoryPattern = null;
+
+        /**
+         * Tag matching rule
+         * @type {string || null}
+         */
+        this.TagPattern = null;
+
+        /**
+         * repoMatches or repoExcludes
+         * @type {string || null}
+         */
+        this.RepositoryDecoration = null;
+
+        /**
+         * matches or excludes
+         * @type {string || null}
+         */
+        this.TagDecoration = null;
+
+        /**
+         * Disabling rule
+         * @type {boolean || null}
+         */
+        this.Disabled = null;
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NsName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepositoryPattern = 'RepositoryPattern' in params ? params.RepositoryPattern : null;
+        this.TagPattern = 'TagPattern' in params ? params.TagPattern : null;
+        this.RepositoryDecoration = 'RepositoryDecoration' in params ? params.RepositoryDecoration : null;
+        this.TagDecoration = 'TagDecoration' in params ? params.TagDecoration : null;
+        this.Disabled = 'Disabled' in params ? params.Disabled : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.NsName = 'NsName' in params ? params.NsName : null;
+
+    }
+}
+
+/**
+ * DeleteMultipleSecurityPolicy request structure.
+ * @class
+ */
+class DeleteMultipleSecurityPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Security group policy
+         * @type {Array.<SecurityPolicy> || null}
+         */
+        this.SecurityGroupPolicySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+        if (params.SecurityGroupPolicySet) {
+            this.SecurityGroupPolicySet = new Array();
+            for (let z in params.SecurityGroupPolicySet) {
+                let obj = new SecurityPolicy();
+                obj.deserialize(params.SecurityGroupPolicySet[z]);
+                this.SecurityGroupPolicySet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CheckInstance request structure.
+ * @class
+ */
+class CheckInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance to be verified.
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+    }
+}
+
+/**
+ * CreateMultipleSecurityPolicy response structure.
+ * @class
+ */
+class CreateMultipleSecurityPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteImmutableTagRules request structure.
+ * @class
+ */
+class DeleteImmutableTagRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -179,10 +519,10 @@ class SecurityPolicy extends  AbstractModel {
 }
 
 /**
- * DeleteMultipleSecurityPolicy request structure.
+ * DescribeImmutableTagRules request structure.
  * @class
  */
-class DeleteMultipleSecurityPolicyRequest extends  AbstractModel {
+class DescribeImmutableTagRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -191,12 +531,6 @@ class DeleteMultipleSecurityPolicyRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.RegistryId = null;
-
-        /**
-         * Security group policy
-         * @type {Array.<SecurityPolicy> || null}
-         */
-        this.SecurityGroupPolicySet = null;
 
     }
 
@@ -209,23 +543,154 @@ class DeleteMultipleSecurityPolicyRequest extends  AbstractModel {
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
 
-        if (params.SecurityGroupPolicySet) {
-            this.SecurityGroupPolicySet = new Array();
-            for (let z in params.SecurityGroupPolicySet) {
-                let obj = new SecurityPolicy();
-                obj.deserialize(params.SecurityGroupPolicySet[z]);
-                this.SecurityGroupPolicySet.push(obj);
-            }
+    }
+}
+
+/**
+ * ModifyImmutableTagRules request structure.
+ * @class
+ */
+class ModifyImmutableTagRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Rule
+         * @type {ImmutableTagRule || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.Rule) {
+            let obj = new ImmutableTagRule();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyImmutableTagRules response structure.
+ * @class
+ */
+class ModifyImmutableTagRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateImmutableTagRules request structure.
+ * @class
+ */
+class CreateImmutableTagRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Rule
+         * @type {ImmutableTagRule || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+
+        if (params.Rule) {
+            let obj = new ImmutableTagRule();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
         }
 
     }
 }
 
 module.exports = {
+    DeleteImmutableTagRulesResponse: DeleteImmutableTagRulesResponse,
+    DescribeImmutableTagRulesResponse: DescribeImmutableTagRulesResponse,
+    CheckInstanceResponse: CheckInstanceResponse,
     CreateMultipleSecurityPolicyRequest: CreateMultipleSecurityPolicyRequest,
-    CreateMultipleSecurityPolicyResponse: CreateMultipleSecurityPolicyResponse,
+    CreateImmutableTagRulesResponse: CreateImmutableTagRulesResponse,
     DeleteMultipleSecurityPolicyResponse: DeleteMultipleSecurityPolicyResponse,
-    SecurityPolicy: SecurityPolicy,
+    ImmutableTagRule: ImmutableTagRule,
     DeleteMultipleSecurityPolicyRequest: DeleteMultipleSecurityPolicyRequest,
+    CheckInstanceRequest: CheckInstanceRequest,
+    CreateMultipleSecurityPolicyResponse: CreateMultipleSecurityPolicyResponse,
+    DeleteImmutableTagRulesRequest: DeleteImmutableTagRulesRequest,
+    SecurityPolicy: SecurityPolicy,
+    DescribeImmutableTagRulesRequest: DescribeImmutableTagRulesRequest,
+    ModifyImmutableTagRulesRequest: ModifyImmutableTagRulesRequest,
+    ModifyImmutableTagRulesResponse: ModifyImmutableTagRulesResponse,
+    CreateImmutableTagRulesRequest: CreateImmutableTagRulesRequest,
 
 }

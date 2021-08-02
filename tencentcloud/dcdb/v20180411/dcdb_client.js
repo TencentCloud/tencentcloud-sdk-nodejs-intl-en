@@ -24,6 +24,7 @@ const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const CancelDcnJobResponse = models.CancelDcnJobResponse;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
@@ -72,6 +73,7 @@ const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
+const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const ShardInfo = models.ShardInfo;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
@@ -462,6 +464,17 @@ Note: Accounts with the same username but different hosts are different accounts
     DescribeDatabaseTable(req, cb) {
         let resp = new DescribeDatabaseTableResponse();
         this.request("DescribeDatabaseTable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel CDN synchronization.
+     * @param {CancelDcnJobRequest} req
+     * @param {function(string, CancelDcnJobResponse):void} cb
+     * @public
+     */
+    CancelDcnJob(req, cb) {
+        let resp = new CancelDcnJobResponse();
+        this.request("CancelDcnJob", req, resp, cb);
     }
 
     /**

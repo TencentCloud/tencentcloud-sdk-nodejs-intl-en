@@ -25,6 +25,7 @@ const ProcedurePrivilege = models.ProcedurePrivilege;
 const DestroyHourDBInstanceRequest = models.DestroyHourDBInstanceRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const CancelDcnJobResponse = models.CancelDcnJobResponse;
 const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
 const DestroyHourDBInstanceResponse = models.DestroyHourDBInstanceResponse;
 const Account = models.Account;
@@ -77,6 +78,7 @@ const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
+const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
 const DcnDetailItem = models.DcnDetailItem;
@@ -501,6 +503,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDBSecurityGroups(req, cb) {
         let resp = new DescribeDBSecurityGroupsResponse();
         this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel DCN synchronization.
+     * @param {CancelDcnJobRequest} req
+     * @param {function(string, CancelDcnJobResponse):void} cb
+     * @public
+     */
+    CancelDcnJob(req, cb) {
+        let resp = new CancelDcnJobResponse();
+        this.request("CancelDcnJob", req, resp, cb);
     }
 
     /**

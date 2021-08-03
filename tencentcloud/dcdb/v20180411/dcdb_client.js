@@ -467,7 +467,7 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to cancel CDN synchronization.
+     * This API is used to cancel DCN synchronization.
      * @param {CancelDcnJobRequest} req
      * @param {function(string, CancelDcnJobResponse):void} cb
      * @public

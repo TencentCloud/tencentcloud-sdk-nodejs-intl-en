@@ -397,6 +397,41 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * CancelDcnJob response structure.
+ * @class
+ */
+class CancelDcnJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBResourceUsageDetails response structure.
  * @class
  */
@@ -3211,6 +3246,34 @@ class GrantAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * CancelDcnJob request structure.
+ * @class
+ */
+class CancelDcnJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Disaster recovery instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * OpenDBExtranetAccess request structure.
  * @class
  */
@@ -5480,6 +5543,7 @@ module.exports = {
     DestroyHourDBInstanceRequest: DestroyHourDBInstanceRequest,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
+    CancelDcnJobResponse: CancelDcnJobResponse,
     DescribeDBResourceUsageDetailsResponse: DescribeDBResourceUsageDetailsResponse,
     DestroyHourDBInstanceResponse: DestroyHourDBInstanceResponse,
     Account: Account,
@@ -5532,6 +5596,7 @@ module.exports = {
     ModifyBackupTimeResponse: ModifyBackupTimeResponse,
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
+    CancelDcnJobRequest: CancelDcnJobRequest,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DatabasePrivilege: DatabasePrivilege,
     DcnDetailItem: DcnDetailItem,

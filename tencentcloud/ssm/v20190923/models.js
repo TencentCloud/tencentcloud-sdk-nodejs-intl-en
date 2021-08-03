@@ -161,7 +161,7 @@ class DescribeSecretResponse extends  AbstractModel {
         this.CreateUin = null;
 
         /**
-         * Secret status, which can be `Enabled`, `Disabled`, or `PendingDelete`.
+         * Credential status: Enabled, Disabled, PendingDelete, Creating, Failed.
          * @type {string || null}
          */
         this.Status = null;
@@ -177,6 +177,41 @@ class DescribeSecretResponse extends  AbstractModel {
          * @type {number || null}
          */
         this.CreateTime = null;
+
+        /**
+         * 0: user-defined credential; 1: Tencent Cloud service credential.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SecretType = null;
+
+        /**
+         * Tencent Cloud service name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Tencent Cloud service instance ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourceID = null;
+
+        /**
+         * Whether to enable rotation. True: yes; False: no.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.RotationStatus = null;
+
+        /**
+         * Rotation frequency in days by default.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RotationFrequency = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -200,7 +235,33 @@ class DescribeSecretResponse extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.DeleteTime = 'DeleteTime' in params ? params.DeleteTime : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.SecretType = 'SecretType' in params ? params.SecretType : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.ResourceID = 'ResourceID' in params ? params.ResourceID : null;
+        this.RotationStatus = 'RotationStatus' in params ? params.RotationStatus : null;
+        this.RotationFrequency = 'RotationFrequency' in params ? params.RotationFrequency : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSupportedProducts request structure.
+ * @class
+ */
+class DescribeSupportedProductsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -319,6 +380,167 @@ class CreateSecretRequest extends  AbstractModel {
 }
 
 /**
+ * RotateProductSecret request structure.
+ * @class
+ */
+class RotateProductSecretRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the credential to be rotated.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+
+    }
+}
+
+/**
+ * CreateProductSecret request structure.
+ * @class
+ */
+class CreateProductSecretRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * Prefix of the user account name, which is specified by you and can contain up to 8 characters.
+Supported character sets include:
+Digits: [0, 9].
+Lowercase letters: [a, z].
+Uppercase letters: [A, Z].
+Special symbols: underscore.
+The prefix must begin with a letter.
+         * @type {string || null}
+         */
+        this.UserNamePrefix = null;
+
+        /**
+         * Name of the Tencent Cloud service bound to the credential, such as `Mysql`. The `DescribeSupportedProducts` API can be used to get the names of the supported Tencent Cloud services.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Tencent Cloud service instance ID.
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * Domain name of the account in the form of IP. You can enter `%`.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
+         * @type {Array.<ProductPrivilegeUnit> || null}
+         */
+        this.PrivilegesList = null;
+
+        /**
+         * Description, which is used to describe the purpose in detail and can contain up to 2,048 bytes.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Specifies the KMS CMK that encrypts the credential.
+If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.
+You can also specify a custom KMS CMK created in the same region for encryption.
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
+
+        /**
+         * List of tags.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * User-Defined rotation start time in the format of 2006-01-02 15:04:05.
+When `EnableRotation` is `True`, this parameter is required.
+         * @type {string || null}
+         */
+        this.RotationBeginTime = null;
+
+        /**
+         * Specifies whether to enable rotation
+True - enable
+False - do not enable
+If this parameter is not specified, `False` will be used by default.
+         * @type {boolean || null}
+         */
+        this.EnableRotation = null;
+
+        /**
+         * Rotation frequency in days. Default value: 1 day.
+         * @type {number || null}
+         */
+        this.RotationFrequency = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.UserNamePrefix = 'UserNamePrefix' in params ? params.UserNamePrefix : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+
+        if (params.PrivilegesList) {
+            this.PrivilegesList = new Array();
+            for (let z in params.PrivilegesList) {
+                let obj = new ProductPrivilegeUnit();
+                obj.deserialize(params.PrivilegesList[z]);
+                this.PrivilegesList.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.RotationBeginTime = 'RotationBeginTime' in params ? params.RotationBeginTime : null;
+        this.EnableRotation = 'EnableRotation' in params ? params.EnableRotation : null;
+        this.RotationFrequency = 'RotationFrequency' in params ? params.RotationFrequency : null;
+
+    }
+}
+
+/**
  * GetSecretValue response structure.
  * @class
  */
@@ -339,13 +561,15 @@ class GetSecretValueResponse extends  AbstractModel {
         this.VersionId = null;
 
         /**
-         * If the `SecretBinary` field in the request body is specified in the `CreateSecret` call, this field is returned and base64-encoded. The caller needs to perform base64 decoding to obtain the original data. Either `SecretBinary` or `SecretString` will be returned.
+         * When creating a credential (CreateSecret), if you specify binary data, this field will be the Base64-encoded returned result. The application needs to Base64-decode the result to get the original data.
+Either `SecretBinary` or `SecretString` cannot be empty.
          * @type {string || null}
          */
         this.SecretBinary = null;
 
         /**
-         * If the `SecretString` field in the request body is specified in the `CreateSecret` call, this field is returned. Either `SecretBinary` or `SecretString` will be returned.
+         * When creating a credential (CreateSecret), if you specify general text data, this field will be the returned result.
+Either `SecretBinary` or `SecretString` cannot be empty.
          * @type {string || null}
          */
         this.SecretString = null;
@@ -410,6 +634,48 @@ class GetRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSupportedProducts response structure.
+ * @class
+ */
+class DescribeSupportedProductsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of supported services.
+         * @type {Array.<string> || null}
+         */
+        this.Products = null;
+
+        /**
+         * Number of supported services
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Products = 'Products' in params ? params.Products : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteSecretVersion request structure.
  * @class
  */
@@ -453,52 +719,80 @@ class SecretMetadata extends  AbstractModel {
         super();
 
         /**
-         * Name of the Secret.
+         * Credential name
          * @type {string || null}
          */
         this.SecretName = null;
 
         /**
-         * Description of the Secret.
+         * Credential description
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * KMS Key ID used for Secret encryption.
+         * KMS `KeyId` used to encrypt the credential
          * @type {string || null}
          */
         this.KmsKeyId = null;
 
         /**
-         * Creator UIN.
+         * Creator UIN
          * @type {number || null}
          */
         this.CreateUin = null;
 
         /**
-         * Secret status, which can be `Enabled`, `Disabled`, or `PendingDelete`.
+         * Credential status: Enabled, Disabled, PendingDelete, Creating, Failed.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Secret deletion time, formatted as a Unix timestamp. This parameter is only applicable for Secrets in `PendingDelete` status.
+         * Credential deletion date, which takes effect for credentials in `PendingDelete` status and is in UNIX timestamp format
          * @type {number || null}
          */
         this.DeleteTime = null;
 
         /**
-         * Secret creation time, formatted as a Unix timestamp.
+         * Credential creation time in UNIX timestamp format
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Type of KMS CMK used for Secret encryption. `DEFAULT`: default key created by SecretsManager; `CUSTOMER`: user-specified key.
+         * Type of the KMS CMK used to encrypt the credential. `DEFAULT` represents the default key created by Secrets Manager, and `CUSTOMER` represents the user-specified key
          * @type {string || null}
          */
         this.KmsKeyType = null;
+
+        /**
+         * 1: enable rotation; 0: disable rotation
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RotationStatus = null;
+
+        /**
+         * Start time of the next rotation in UNIX timestamp format
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NextRotationTime = null;
+
+        /**
+         * 0: user-defined credential; 1: Tencent Cloud service credential.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SecretType = null;
+
+        /**
+         * Tencent Cloud service name, which takes effect only when `SecretType` is 1 (Tencent Cloud service credential)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductName = null;
 
     }
 
@@ -517,6 +811,10 @@ class SecretMetadata extends  AbstractModel {
         this.DeleteTime = 'DeleteTime' in params ? params.DeleteTime : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.KmsKeyType = 'KmsKeyType' in params ? params.KmsKeyType : null;
+        this.RotationStatus = 'RotationStatus' in params ? params.RotationStatus : null;
+        this.NextRotationTime = 'NextRotationTime' in params ? params.NextRotationTime : null;
+        this.SecretType = 'SecretType' in params ? params.SecretType : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
 
     }
 }
@@ -545,6 +843,90 @@ class ListSecretVersionIdsRequest extends  AbstractModel {
             return;
         }
         this.SecretName = 'SecretName' in params ? params.SecretName : null;
+
+    }
+}
+
+/**
+ * DescribeRotationDetail request structure.
+ * @class
+ */
+class DescribeRotationDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the name of the credential for which to get the credential rotation details.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRequestInfo request structure.
+ * @class
+ */
+class DescribeAsyncRequestInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID.
+         * @type {number || null}
+         */
+        this.FlowID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowID = 'FlowID' in params ? params.FlowID : null;
+
+    }
+}
+
+/**
+ * UpdateRotationStatus response structure.
+ * @class
+ */
+class UpdateRotationStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -706,6 +1088,41 @@ class DisableSecretResponse extends  AbstractModel {
 }
 
 /**
+ * Tag key and tag value.
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * ListSecrets request structure.
  * @class
  */
@@ -732,7 +1149,14 @@ class ListSecretsRequest extends  AbstractModel {
         this.OrderType = null;
 
         /**
-         * Filter according to Secret statuses. `0` (default): all Secrets; `1`: Secrets in `Enabled` status; `2`: Secrets in `Disabled` status; `3`: Secrets in `PendingDelete` status.
+         * Filter based on credential status.
+The default value is 0, indicating to query all.
+1: query the list of credentials in `Enabled` status.
+2: query the list of credentials in `Disabled` status.
+3: query the list of credentials in `PendingDelete` status.
+4: query the list of credentials in `PendingCreate` status.
+5: query the list of credentials in `CreateFailed` status.
+The `PendingCreate` and `CreateFailed` status only take effect when `SecretType` is Tencent Cloud service credential
          * @type {number || null}
          */
         this.State = null;
@@ -744,10 +1168,18 @@ class ListSecretsRequest extends  AbstractModel {
         this.SearchSecretName = null;
 
         /**
-         * Tag filter condition.
+         * Tag filter.
          * @type {Array.<TagFilter> || null}
          */
         this.TagFilters = null;
+
+        /**
+         * 0: user-defined credential (default value).
+1: Tencent Cloud service credential.
+Either 1 or 0 can be selected for this parameter.
+         * @type {number || null}
+         */
+        this.SecretType = null;
 
     }
 
@@ -772,6 +1204,7 @@ class ListSecretsRequest extends  AbstractModel {
                 this.TagFilters.push(obj);
             }
         }
+        this.SecretType = 'SecretType' in params ? params.SecretType : null;
 
     }
 }
@@ -847,6 +1280,58 @@ class EnableSecretResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateRotationStatus request structure.
+ * @class
+ */
+class UpdateRotationStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tencent Cloud service credential name.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * Specifies whether to enable rotation.
+True: enable rotation.
+False: disable rotation.
+         * @type {boolean || null}
+         */
+        this.EnableRotation = null;
+
+        /**
+         * Rotation frequency in days. Value range: 30–365.
+         * @type {number || null}
+         */
+        this.Frequency = null;
+
+        /**
+         * User-Defined rotation start time in the format of 2006-01-02 15:04:05.
+When `EnableRotation` is `True`, if `RotationBeginTime` is left empty, the current time will be entered by default.
+         * @type {string || null}
+         */
+        this.RotationBeginTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.EnableRotation = 'EnableRotation' in params ? params.EnableRotation : null;
+        this.Frequency = 'Frequency' in params ? params.Frequency : null;
+        this.RotationBeginTime = 'RotationBeginTime' in params ? params.RotationBeginTime : null;
+
+    }
+}
+
+/**
  * UpdateSecret request structure.
  * @class
  */
@@ -867,13 +1352,14 @@ class UpdateSecretRequest extends  AbstractModel {
         this.VersionId = null;
 
         /**
-         * Use this field if the new Secret content is in binary format, and base64-encoded. Either `SecretBinary` or `SecretString` is set.
+         * This field should be used and Base64-encoded if the content of the new credential is binary.
+Either `SecretBinary` or `SecretString` cannot be empty.
          * @type {string || null}
          */
         this.SecretBinary = null;
 
         /**
-         * Use this field if the new Secret content is in text format, and base64-encoding is not required. Either `SecretBinary` or `SecretString` is set.
+         * This field should be used without being Base64-encoded if the content of the new credential is text. Either `SecretBinary` or `SecretString` cannot be empty.
          * @type {string || null}
          */
         this.SecretString = null;
@@ -891,6 +1377,111 @@ class UpdateSecretRequest extends  AbstractModel {
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
         this.SecretBinary = 'SecretBinary' in params ? params.SecretBinary : null;
         this.SecretString = 'SecretString' in params ? params.SecretString : null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRequestInfo response structure.
+ * @class
+ */
+class DescribeAsyncRequestInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0: processing, 1: processing succeeded, 2: processing failed
+         * @type {number || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * Task description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestoreSecret request structure.
+ * @class
+ */
+class RestoreSecretRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the Secret to be restored.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+
+    }
+}
+
+/**
+ * RotateProductSecret response structure.
+ * @class
+ */
+class RotateProductSecretResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async rotation task ID.
+         * @type {number || null}
+         */
+        this.FlowID = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowID = 'FlowID' in params ? params.FlowID : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -986,7 +1577,8 @@ class PutSecretValueRequest extends  AbstractModel {
         this.VersionId = null;
 
         /**
-         * Binary Secret information that is base64-encoded. Either `SecretBinary` or `SecretString` must be set.
+         * Base64-encoded binary credential information.
+Either `SecretBinary` or `SecretString` must be set.
          * @type {string || null}
          */
         this.SecretBinary = null;
@@ -1015,6 +1607,48 @@ class PutSecretValueRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRotationHistory response structure.
+ * @class
+ */
+class DescribeRotationHistoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of version numbers.
+         * @type {Array.<string> || null}
+         */
+        this.VersionIDs = null;
+
+        /**
+         * Number of version numbers. The maximum number of version numbers that can be shown to users is 10.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionIDs = 'VersionIDs' in params ? params.VersionIDs : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetSecretValue request structure.
  * @class
  */
@@ -1029,7 +1663,8 @@ class GetSecretValueRequest extends  AbstractModel {
         this.SecretName = null;
 
         /**
-         * ID of the Secret version.
+         * Specifies the version number of the corresponding credential.
+For Tencent Cloud service credentials such as MySQL credentials, this API is used to get the plaintext information of a previously rotated credential by specifying the credential name and historical version number. If you want to get the plaintext of the credential version currently in use, you need to specify the version number as `SSM_Current`.
          * @type {string || null}
          */
         this.VersionId = null;
@@ -1092,15 +1727,74 @@ class GetServiceStatusResponse extends  AbstractModel {
 }
 
 /**
- * RestoreSecret request structure.
+ * DescribeRotationDetail response structure.
  * @class
  */
-class RestoreSecretRequest extends  AbstractModel {
+class DescribeRotationDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of the Secret to be restored.
+         * Specifies whether to allow rotation. True: yes; False: no.
+         * @type {boolean || null}
+         */
+        this.EnableRotation = null;
+
+        /**
+         * Rotation frequency in days. Default value: 1 day.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Frequency = null;
+
+        /**
+         * Last rotation time, which is an explicitly visible time string in the format of 2006-01-02 15:04:05.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LatestRotateTime = null;
+
+        /**
+         * Next rotation start time, which is an explicitly visible time string in the format of 2006-01-02 15:04:05.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NextRotateBeginTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnableRotation = 'EnableRotation' in params ? params.EnableRotation : null;
+        this.Frequency = 'Frequency' in params ? params.Frequency : null;
+        this.LatestRotateTime = 'LatestRotateTime' in params ? params.LatestRotateTime : null;
+        this.NextRotateBeginTime = 'NextRotateBeginTime' in params ? params.NextRotateBeginTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecret request structure.
+ * @class
+ */
+class DescribeSecretRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of a Secret whose detailed information is to be obtained.
          * @type {string || null}
          */
         this.SecretName = null;
@@ -1120,15 +1814,96 @@ class RestoreSecretRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSecret request structure.
+ * Permission granted when the credential is associated with the service
  * @class
  */
-class DescribeSecretRequest extends  AbstractModel {
+class ProductPrivilegeUnit extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of a Secret whose detailed information is to be obtained.
+         * Permission name. Valid values:
+GlobalPrivileges
+DatabasePrivileges
+TablePrivileges
+ColumnPrivileges
+
+When the permission is `DatabasePrivileges`, the database name must be specified by the `Database` parameter;
+
+When the permission is `TablePrivileges`, the database name and the table name in the database must be specified by the `Database` and `TableName` parameters;
+
+When the permission is `ColumnPrivileges`, the database name, table name in the database, and column name in the table must be specified by the `Database`, `TableName`, and `ColumnName` parameters.
+         * @type {string || null}
+         */
+        this.PrivilegeName = null;
+
+        /**
+         * Permission list.
+For the `Mysql` service, optional permission values are:
+
+1. Valid values of `GlobalPrivileges`: "SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER".
+Note: if this parameter is not passed in, it means to clear the permission.
+
+2. Valid values of `DatabasePrivileges`: "SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER".
+Note: if this parameter is not passed in, it means to clear the permission.
+
+3. Valid values of `TablePrivileges`: "SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER".
+Note: if this parameter is not passed in, it means to clear the permission.
+
+4. Valid values of `ColumnPrivileges`: "SELECT","INSERT","UPDATE","REFERENCES".
+Note: if this parameter is not passed in, it means to clear the permission.
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+        /**
+         * This value takes effect only when `PrivilegeName` is `DatabasePrivileges`.
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * This value takes effect only when `PrivilegeName` is `TablePrivileges`, and the `Database` parameter is required in this case to explicitly indicate the database instance.
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:
+Database: explicitly indicate the database instance.
+TableName: explicitly indicate the table
+         * @type {string || null}
+         */
+        this.ColumnName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PrivilegeName = 'PrivilegeName' in params ? params.PrivilegeName : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.ColumnName = 'ColumnName' in params ? params.ColumnName : null;
+
+    }
+}
+
+/**
+ * DescribeRotationHistory request structure.
+ * @class
+ */
+class DescribeRotationHistoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the name of the credential for which to get the credential rotation records.
          * @type {string || null}
          */
         this.SecretName = null;
@@ -1260,24 +2035,45 @@ class DisableSecretRequest extends  AbstractModel {
 }
 
 /**
- * Tag key and tag value.
+ * CreateProductSecret response structure.
  * @class
  */
-class Tag extends  AbstractModel {
+class CreateProductSecretResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key
+         * Name of the created credential.
          * @type {string || null}
          */
-        this.TagKey = null;
+        this.SecretName = null;
 
         /**
-         * Tag value
+         * Tag operation return code. 0: success; 1: internal error; 2: business processing error.
+Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TagCode = null;
+
+        /**
+         * Tag operation return message.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.TagValue = null;
+        this.TagMsg = null;
+
+        /**
+         * ID of the created Tencent Cloud service credential async task.
+         * @type {number || null}
+         */
+        this.FlowID = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1288,8 +2084,11 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.TagCode = 'TagCode' in params ? params.TagCode : null;
+        this.TagMsg = 'TagMsg' in params ? params.TagMsg : null;
+        this.FlowID = 'FlowID' in params ? params.FlowID : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1449,32 +2248,47 @@ module.exports = {
     RestoreSecretResponse: RestoreSecretResponse,
     UpdateDescriptionResponse: UpdateDescriptionResponse,
     DescribeSecretResponse: DescribeSecretResponse,
+    DescribeSupportedProductsRequest: DescribeSupportedProductsRequest,
     DeleteSecretRequest: DeleteSecretRequest,
     CreateSecretRequest: CreateSecretRequest,
+    RotateProductSecretRequest: RotateProductSecretRequest,
+    CreateProductSecretRequest: CreateProductSecretRequest,
     GetSecretValueResponse: GetSecretValueResponse,
     GetRegionsResponse: GetRegionsResponse,
+    DescribeSupportedProductsResponse: DescribeSupportedProductsResponse,
     DeleteSecretVersionRequest: DeleteSecretVersionRequest,
     SecretMetadata: SecretMetadata,
     ListSecretVersionIdsRequest: ListSecretVersionIdsRequest,
+    DescribeRotationDetailRequest: DescribeRotationDetailRequest,
+    DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
+    UpdateRotationStatusResponse: UpdateRotationStatusResponse,
     CreateSecretResponse: CreateSecretResponse,
     GetRegionsRequest: GetRegionsRequest,
     UpdateSecretResponse: UpdateSecretResponse,
     DisableSecretResponse: DisableSecretResponse,
+    Tag: Tag,
     ListSecretsRequest: ListSecretsRequest,
     UpdateDescriptionRequest: UpdateDescriptionRequest,
     EnableSecretResponse: EnableSecretResponse,
+    UpdateRotationStatusRequest: UpdateRotationStatusRequest,
     UpdateSecretRequest: UpdateSecretRequest,
+    DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
+    RestoreSecretRequest: RestoreSecretRequest,
+    RotateProductSecretResponse: RotateProductSecretResponse,
     VersionInfo: VersionInfo,
     TagFilter: TagFilter,
     PutSecretValueRequest: PutSecretValueRequest,
+    DescribeRotationHistoryResponse: DescribeRotationHistoryResponse,
     GetSecretValueRequest: GetSecretValueRequest,
     GetServiceStatusResponse: GetServiceStatusResponse,
-    RestoreSecretRequest: RestoreSecretRequest,
+    DescribeRotationDetailResponse: DescribeRotationDetailResponse,
     DescribeSecretRequest: DescribeSecretRequest,
+    ProductPrivilegeUnit: ProductPrivilegeUnit,
+    DescribeRotationHistoryRequest: DescribeRotationHistoryRequest,
     PutSecretValueResponse: PutSecretValueResponse,
     DeleteSecretResponse: DeleteSecretResponse,
     DisableSecretRequest: DisableSecretRequest,
-    Tag: Tag,
+    CreateProductSecretResponse: CreateProductSecretResponse,
     ListSecretsResponse: ListSecretsResponse,
     EnableSecretRequest: EnableSecretRequest,
     GetServiceStatusRequest: GetServiceStatusRequest,

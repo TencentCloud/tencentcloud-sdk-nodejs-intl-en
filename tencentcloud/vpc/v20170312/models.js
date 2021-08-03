@@ -2923,6 +2923,34 @@ class DescribeIpGeolocationInfosResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVpcTaskResult request structure.
+ * @class
+ */
+class DescribeVpcTaskResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `RequestId` returned by an async task
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * AssociateNetworkAclSubnets response structure.
  * @class
  */
@@ -20302,6 +20330,48 @@ class DisassociateVpcEndPointSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVpcTaskResult response structure.
+ * @class
+ */
+class DescribeVpcTaskResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Execution result of an async task Valid values: `SUCCESS`: the task has been successfully executed; `FAILED`: the job execution failed; `RUNNING`: the job is executing.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Output of the async task execution result
+         * @type {string || null}
+         */
+        this.Output = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Output = 'Output' in params ? params.Output : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AssociateNatGatewayAddress response structure.
  * @class
  */
@@ -22749,6 +22819,12 @@ class AssociateAddressRequest extends  AbstractModel {
          */
         this.PrivateIpAddress = null;
 
+        /**
+         * Whether to enable direct access when binding a specified EIP. For more information, see [EIP Direct Access](https://intl.cloud.tencent.com/document/product/1199/41709?from_cn_redirect=1). Valid values: `True` and `False`; default value: `False`. You can set this parameter to `True` when binding an EIP to a CVM instance or an EKS elastic cluster. This parameter is currently in beta. To use it, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&level3_id=1071&queue=96&scene_code=34639&step=2).
+         * @type {boolean || null}
+         */
+        this.EipDirectConnection = null;
+
     }
 
     /**
@@ -22762,6 +22838,7 @@ class AssociateAddressRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
         this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
+        this.EipDirectConnection = 'EipDirectConnection' in params ? params.EipDirectConnection : null;
 
     }
 }
@@ -25537,6 +25614,7 @@ module.exports = {
     UnassignIpv6SubnetCidrBlockResponse: UnassignIpv6SubnetCidrBlockResponse,
     ModifyVpcEndPointServiceAttributeRequest: ModifyVpcEndPointServiceAttributeRequest,
     DescribeIpGeolocationInfosResponse: DescribeIpGeolocationInfosResponse,
+    DescribeVpcTaskResultRequest: DescribeVpcTaskResultRequest,
     AssociateNetworkAclSubnetsResponse: AssociateNetworkAclSubnetsResponse,
     DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest: DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest,
     ResetRoutesRequest: ResetRoutesRequest,
@@ -25903,6 +25981,7 @@ module.exports = {
     DescribeAddressTemplateGroupsRequest: DescribeAddressTemplateGroupsRequest,
     CheckNetDetectStateResponse: CheckNetDetectStateResponse,
     DisassociateVpcEndPointSecurityGroupsResponse: DisassociateVpcEndPointSecurityGroupsResponse,
+    DescribeVpcTaskResultResponse: DescribeVpcTaskResultResponse,
     AssociateNatGatewayAddressResponse: AssociateNatGatewayAddressResponse,
     RemoveBandwidthPackageResourcesRequest: RemoveBandwidthPackageResourcesRequest,
     RouteTable: RouteTable,

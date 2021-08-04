@@ -682,22 +682,32 @@ class Resource extends  AbstractModel {
         super();
 
         /**
-         * Node specification description
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Node specification description, such as CVM.SA2
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Spec = null;
 
         /**
-         * Storage class
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Storage type
+Valid values:
+<li>4: SSD</li>
+<li>5: Premium Cloud Storage</li>
+<li>6: Enhanced SSD</li>
+<li>11: High-Throughput cloud disk</li>
+<li>12: Tremendous SSD</li>
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StorageType = null;
 
         /**
          * Disk type
-Note: this field may return null, indicating that no valid values can be obtained.
+Valid values:
+<li>`CLOUD_SSD`: SSD</li>
+<li>`CLOUD_PREMIUM`: Premium Cloud Storage</li>
+<li>`CLOUD_BASIC`: HDD</li>
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -745,22 +755,22 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Tags = null;
 
         /**
-         * Specification type
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specification type, such as S2.MEDIUM8
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * Number of local disks
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Number of local disks. This field has been disused.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LocalDiskNum = null;
 
         /**
-         * Number of disks
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Number of local disks, such as 2
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DiskNum = null;
@@ -933,6 +943,13 @@ class CreateInstanceResponse extends  AbstractModel {
         super();
 
         /**
+         * Instance ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -947,6 +964,7 @@ class CreateInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1021,6 +1039,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DynamicPodSpec = null;
 
+        /**
+         * Unique VPC ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Unique VPC subnet ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -1053,6 +1085,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             obj.deserialize(params.DynamicPodSpec)
             this.DynamicPodSpec = obj;
         }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -1436,10 +1470,26 @@ class CreateInstanceRequest extends  AbstractModel {
 
         /**
          * Product ID. Different product IDs represent different EMR product versions. Valid values:
-<li>1: EMR v1.3.1.</li>
-<li>2: EMR v2.0.1.</li>
-<li>4: EMR v2.1.0.</li>
-<li>7: EMR v3.0.0.</li>
+<li>1: EMR v1.3.1</li>
+<li>2: EMR v2.0.1</li>
+<li>4: EMR v2.1.0</li>
+<li>7: EMR v3.0.0</li>
+<li>9: EMR v2.2.0</li>
+<li>11: ClickHouse v1.0.0</li>
+<li>13: Druid v1.0.0</li>
+<li>15: EMR v2.2.1</li>
+<li>16: EMR v2.3.0</li>
+<li>17: ClickHouse v1.1.0</li>
+<li>19: EMR v2.4.0</li>
+<li>20: EMR v2.5.0</li>
+<li>22: ClickHouse v1.2.0</li>
+<li>24: EMR TianQiong v1.0.0</li>
+<li>25: EMR v3.1.0</li>
+<li>26: Doris v1.0.0</li>
+<li>27: Kafka v1.0.0</li>
+<li>28: EMR v3.2.0</li>
+<li>29: EMR v2.5.1</li>
+<li>30: EMR v2.6.0</li>
          * @type {number || null}
          */
         this.ProductId = null;
@@ -1451,11 +1501,8 @@ class CreateInstanceRequest extends  AbstractModel {
         this.VPCSettings = null;
 
         /**
-         * List of deployed components. Different required components need to be selected for different EMR product IDs (i.e., `ProductId`; for specific meanings, please see the `ProductId` field in the input parameter):
-<li>When `ProductId` is 1, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
-<li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
-<li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
-<li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
+         * List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
+Enter an instance value: `hive` or `flink`.
          * @type {Array.<string> || null}
          */
         this.Software = null;
@@ -1532,7 +1579,7 @@ class CreateInstanceRequest extends  AbstractModel {
         this.SgId = null;
 
         /**
-         * Bootstrap script settings.
+         * [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings
          * @type {Array.<PreExecuteFileSettings> || null}
          */
         this.PreExecutedFileSettings = null;
@@ -1585,6 +1632,7 @@ class CreateInstanceRequest extends  AbstractModel {
 
         /**
          * List of spread placement group IDs. Only one can be specified currently.
+This parameter can be obtained in the `SecurityGroupId` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -2116,12 +2164,120 @@ class PodParameter extends  AbstractModel {
 
         /**
          * Custom permission
+Example:
+{
+  "apiVersion": "v1",
+  "clusters": [
+    {
+      "cluster": {
+        "certificate-authority-data": "xxxxxx==",
+        "server": "https://xxxxx.com"
+      },
+      "name": "cls-xxxxx"
+    }
+  ],
+  "contexts": [
+    {
+      "context": {
+        "cluster": "cls-xxxxx",
+        "user": "100014xxxxx"
+      },
+      "name": "cls-a44yhcxxxxxxxxxx"
+    }
+  ],
+  "current-context": "cls-a4xxxx-context-default",
+  "kind": "Config",
+  "preferences": {},
+  "users": [
+    {
+      "name": "100014xxxxx",
+      "user": {
+        "client-certificate-data": "xxxxxx",
+        "client-key-data": "xxxxxx"
+      }
+    }
+  ]
+}
          * @type {string || null}
          */
         this.Config = null;
 
         /**
          * Custom parameter
+Example:
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+      "name": "test-deployment",
+      "labels": {
+        "app": "test"
+      }
+    },
+    "spec": {
+      "replicas": 3,
+      "selector": {
+        "matchLabels": {
+          "app": "test-app"
+        }
+      },
+      "template": {
+        "metadata": {
+          "annotations": {
+            "your-organization.com/department-v1": "test-example-v1",
+            "your-organization.com/department-v2": "test-example-v2"
+          },
+          "labels": {
+            "app": "test-app",
+            "environment": "production"
+          }
+        },
+        "spec": {
+          "nodeSelector": {
+            "your-organization/node-test": "test-node"
+          },
+          "containers": [
+            {
+              "name": "nginx",
+              "image": "nginx:1.14.2",
+              "ports": [
+                {
+                  "containerPort": 80
+                }
+              ]
+            }
+          ],
+          "affinity": {
+            "nodeAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": {
+                "nodeSelectorTerms": [
+                  {
+                    "matchExpressions": [
+                      {
+                        "key": "disk-type",
+                        "operator": "In",
+                        "values": [
+                          "ssd",
+                          "sas"
+                        ]
+                      },
+                      {
+                        "key": "cpu-num",
+                        "operator": "Gt",
+                        "values": [
+                          "6"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
          * @type {string || null}
          */
         this.Parameter = null;
@@ -2570,7 +2726,10 @@ class MultiDisk extends  AbstractModel {
         super();
 
         /**
-         * Cloud disk type. Valid values: CLOUD_PREMIUM, CLOUD_SSD, CLOUD_BASIC
+         * Cloud disk type
+<li>`CLOUD_SSD`: SSD</li>
+<li>`CLOUD_PREMIUM`: Premium Cloud Storage</li>
+<li>`CLOUD_HSSD`: Enhanced SSD</li>
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3222,6 +3381,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DynamicPodSpec = null;
 
+        /**
+         * Whether to support billing mode change. `0`: no; `1`: yes
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SupportModifyPayMode = null;
+
     }
 
     /**
@@ -3291,6 +3457,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
         this.IsDynamicSpec = 'IsDynamicSpec' in params ? params.IsDynamicSpec : null;
         this.DynamicPodSpec = 'DynamicPodSpec' in params ? params.DynamicPodSpec : null;
+        this.SupportModifyPayMode = 'SupportModifyPayMode' in params ? params.SupportModifyPayMode : null;
 
     }
 }
@@ -3542,6 +3709,12 @@ class InquiryPriceRenewInstanceRequest extends  AbstractModel {
          */
         this.Currency = null;
 
+        /**
+         * Whether to change from pay-as-you-go billing to monthly subscription billing. `0`: no; `1`: yes
+         * @type {number || null}
+         */
+        this.ModifyPayMode = null;
+
     }
 
     /**
@@ -3562,6 +3735,7 @@ class InquiryPriceRenewInstanceRequest extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.Currency = 'Currency' in params ? params.Currency : null;
+        this.ModifyPayMode = 'ModifyPayMode' in params ? params.ModifyPayMode : null;
 
     }
 }
@@ -3805,7 +3979,7 @@ class ScaleOutInstanceRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Resource type selected for expansion. Valid values: host (general CVM resource), pod (resource provided by TKE cluster)
+         * Resource type selected for scaling. Valid values: `host` (general CVM resource), `pod` (resource provided by TKE or EKS cluster)
          * @type {string || null}
          */
         this.HardwareResourceType = null;
@@ -3842,9 +4016,18 @@ class ScaleOutInstanceRequest extends  AbstractModel {
 
         /**
          * Number of master nodes to be added
+When a ClickHouse cluster is scaled, this parameter does not take effect.
+When a Kafka cluster is scaled, this parameter does not take effect.
+When `HardwareResourceType` is `pod`, this parameter does not take effect.
          * @type {number || null}
          */
         this.MasterCount = null;
+
+        /**
+         * Whether to start the service after scaling. `true`: yes; `false`: no
+         * @type {string || null}
+         */
+        this.StartServiceAfterScaleOut = null;
 
     }
 
@@ -3902,6 +4085,7 @@ class ScaleOutInstanceRequest extends  AbstractModel {
             this.PodParameter = obj;
         }
         this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+        this.StartServiceAfterScaleOut = 'StartServiceAfterScaleOut' in params ? params.StartServiceAfterScaleOut : null;
 
     }
 }

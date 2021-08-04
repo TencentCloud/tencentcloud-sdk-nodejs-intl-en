@@ -511,6 +511,48 @@ class CreateClusterRouteTableResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterCommonNames request structure.
+ * @class
+ */
+class DescribeClusterCommonNamesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Sub-account. Up to 50 sub-accounts can be passed in at a time.
+         * @type {Array.<string> || null}
+         */
+        this.SubaccountUins = null;
+
+        /**
+         * Role ID. Up to 50 role IDs can be passed in at a time.
+         * @type {Array.<string> || null}
+         */
+        this.RoleIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SubaccountUins = 'SubaccountUins' in params ? params.SubaccountUins : null;
+        this.RoleIds = 'RoleIds' in params ? params.RoleIds : null;
+
+    }
+}
+
+/**
  * DeleteClusterEndpoint response structure.
  * @class
  */
@@ -696,6 +738,182 @@ Note: this field may return `null`, indicating that no valid value is obtained.
                 this.Detail.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Node pool description
+ * @class
+ */
+class NodePool extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Node pool name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Cluster instance ID
+         * @type {string || null}
+         */
+        this.ClusterInstanceId = null;
+
+        /**
+         * The lifecycle state of the current node pool. Valid values: `creating`, `normal`, `updating`, `deleting`, and `deleted`.
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * Launch configuration ID
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * Auto-scaling group ID
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
+        /**
+         * Labels
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Array of taint
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * Node list
+         * @type {NodeCountSummary || null}
+         */
+        this.NodeCountSummary = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AutoscalingGroupStatus = null;
+
+        /**
+         * Maximum number of nodes
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.MaxNodesNum = null;
+
+        /**
+         * Minimum number of nodes
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.MinNodesNum = null;
+
+        /**
+         * Desired number of nodes
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.DesiredNodesNum = null;
+
+        /**
+         * The operating system of the node pool
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.NodePoolOs = null;
+
+        /**
+         * Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
+        /**
+         * Image ID
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * This parameter is required when the custom PodCIDR mode is enabled for the cluster.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.DesiredPodNum = null;
+
+        /**
+         * Custom script
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.UserScript = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ClusterInstanceId = 'ClusterInstanceId' in params ? params.ClusterInstanceId : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+
+        if (params.NodeCountSummary) {
+            let obj = new NodeCountSummary();
+            obj.deserialize(params.NodeCountSummary)
+            this.NodeCountSummary = obj;
+        }
+        this.AutoscalingGroupStatus = 'AutoscalingGroupStatus' in params ? params.AutoscalingGroupStatus : null;
+        this.MaxNodesNum = 'MaxNodesNum' in params ? params.MaxNodesNum : null;
+        this.MinNodesNum = 'MinNodesNum' in params ? params.MinNodesNum : null;
+        this.DesiredNodesNum = 'DesiredNodesNum' in params ? params.DesiredNodesNum : null;
+        this.NodePoolOs = 'NodePoolOs' in params ? params.NodePoolOs : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.DesiredPodNum = 'DesiredPodNum' in params ? params.DesiredPodNum : null;
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
 
     }
 }
@@ -1022,128 +1240,18 @@ class AddNodeToNodePoolRequest extends  AbstractModel {
 }
 
 /**
- * Node pool description
+ * EnableVpcCniNetworkType response structure.
  * @class
  */
-class NodePool extends  AbstractModel {
+class EnableVpcCniNetworkTypeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node pool ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.NodePoolId = null;
-
-        /**
-         * Node pool name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.ClusterInstanceId = null;
-
-        /**
-         * The lifecycle state of the current node pool. Valid values: `creating`, `normal`, `updating`, `deleting`, and `deleted`.
-         * @type {string || null}
-         */
-        this.LifeState = null;
-
-        /**
-         * Launch configuration ID
-         * @type {string || null}
-         */
-        this.LaunchConfigurationId = null;
-
-        /**
-         * Auto-scaling group ID
-         * @type {string || null}
-         */
-        this.AutoscalingGroupId = null;
-
-        /**
-         * Labels
-         * @type {Array.<Label> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * Array of taint
-         * @type {Array.<Taint> || null}
-         */
-        this.Taints = null;
-
-        /**
-         * Node list
-         * @type {NodeCountSummary || null}
-         */
-        this.NodeCountSummary = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.AutoscalingGroupStatus = null;
-
-        /**
-         * Maximum number of nodes
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {number || null}
-         */
-        this.MaxNodesNum = null;
-
-        /**
-         * Minimum number of nodes
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {number || null}
-         */
-        this.MinNodesNum = null;
-
-        /**
-         * Desired number of nodes
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {number || null}
-         */
-        this.DesiredNodesNum = null;
-
-        /**
-         * The operating system of the node pool
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.NodePoolOs = null;
-
-        /**
-         * Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.OsCustomizeType = null;
-
-        /**
-         * Image ID
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * This parameter is required when the custom PodCIDR mode is enabled for the cluster.
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {number || null}
-         */
-        this.DesiredPodNum = null;
-
-        /**
-         * Custom script
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.UserScript = null;
+        this.RequestId = null;
 
     }
 
@@ -1154,45 +1262,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
-        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.ClusterInstanceId = 'ClusterInstanceId' in params ? params.ClusterInstanceId : null;
-        this.LifeState = 'LifeState' in params ? params.LifeState : null;
-        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
-        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Label();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-
-        if (params.Taints) {
-            this.Taints = new Array();
-            for (let z in params.Taints) {
-                let obj = new Taint();
-                obj.deserialize(params.Taints[z]);
-                this.Taints.push(obj);
-            }
-        }
-
-        if (params.NodeCountSummary) {
-            let obj = new NodeCountSummary();
-            obj.deserialize(params.NodeCountSummary)
-            this.NodeCountSummary = obj;
-        }
-        this.AutoscalingGroupStatus = 'AutoscalingGroupStatus' in params ? params.AutoscalingGroupStatus : null;
-        this.MaxNodesNum = 'MaxNodesNum' in params ? params.MaxNodesNum : null;
-        this.MinNodesNum = 'MinNodesNum' in params ? params.MinNodesNum : null;
-        this.DesiredNodesNum = 'DesiredNodesNum' in params ? params.DesiredNodesNum : null;
-        this.NodePoolOs = 'NodePoolOs' in params ? params.NodePoolOs : null;
-        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.DesiredPodNum = 'DesiredPodNum' in params ? params.DesiredPodNum : null;
-        this.UserScript = 'UserScript' in params ? params.UserScript : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2134,6 +2204,20 @@ class SetNodePoolNodeProtectionResponse extends  AbstractModel {
         super();
 
         /**
+         * ID of the node that has successfully set the removal protection
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SucceedInstanceIds = null;
+
+        /**
+         * ID of the node that fails to set the removal protection
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2148,6 +2232,8 @@ class SetNodePoolNodeProtectionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SucceedInstanceIds = 'SucceedInstanceIds' in params ? params.SucceedInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3594,6 +3680,62 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * EnableVpcCniNetworkType request structure.
+ * @class
+ */
+class EnableVpcCniNetworkTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The VPC-CNI mode. `tke-route-eni`: Multi-IP ENI, `tke-direct-eni`: Independent ENI
+         * @type {string || null}
+         */
+        this.VpcCniType = null;
+
+        /**
+         * Whether to enable static IP address
+         * @type {boolean || null}
+         */
+        this.EnableStaticIp = null;
+
+        /**
+         * The container subnet being used
+         * @type {Array.<string> || null}
+         */
+        this.Subnets = null;
+
+        /**
+         * Specifies when to release the IP after the Pod termination in static IP mode. It must be longer than 300 seconds. If this parameter is left empty, the IP address will never be released.
+         * @type {number || null}
+         */
+        this.ExpiredSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
+        this.EnableStaticIp = 'EnableStaticIp' in params ? params.EnableStaticIp : null;
+        this.Subnets = 'Subnets' in params ? params.Subnets : null;
+        this.ExpiredSeconds = 'ExpiredSeconds' in params ? params.ExpiredSeconds : null;
+
+    }
+}
+
+/**
  * The policy to deal with resources in the cluster when the cluster is deleted.
  * @class
  */
@@ -3704,6 +3846,34 @@ class CreateClusterNodePoolFromExistingAsgResponse extends  AbstractModel {
         }
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeEnableVpcCniProgress request structure.
+ * @class
+ */
+class DescribeEnableVpcCniProgressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the cluster for which you want to enable the VPC-CNI mode
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -4474,7 +4644,8 @@ Note: This field may return null, indicating that no valid value was found.
         this.ExtraArgs = null;
 
         /**
-         * 
+         * When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DesiredPodNumber = null;
@@ -4517,6 +4688,49 @@ Note: This field may return null, indicating that no valid value was found.
             this.ExtraArgs = obj;
         }
         this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
+
+    }
+}
+
+/**
+ * DescribeEnableVpcCniProgress response structure.
+ * @class
+ */
+class DescribeEnableVpcCniProgressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status, which can be `Running`, `Succeed`, or `Failed`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The description for the task status when the task status is “Failed”, for example, failed to install the IPAMD component.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5363,7 +5577,8 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * Queries cluster access port status (Created = successfully enabled; Creating = in the process of being enabled; NotFound = not enabled).
+         * The status of cluster access port. It can be `Created` (enabled); `Creating` (enabling) and `NotFound` (not enabled)
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {string || null}
          */
         this.Status = null;
@@ -5760,6 +5975,14 @@ class AddExistedInstancesRequest extends  AbstractModel {
          */
         this.SkipValidateOptions = null;
 
+        /**
+         * This parameter is used to customize the configuration of an instance, which corresponds to the `InstanceIds` one-to-one in sequence. If this parameter is passed in, the default parameter `InstanceAdvancedSettings` will be overwritten and will not take effect. If this parameter is not passed in, the `InstanceAdvancedSettings` will take effect for each instance.
+
+The array length of `InstanceAdvancedSettingsOverride` should be the same as the array length of `InstanceIds`. If its array length is greater than the `InstanceIds` array length, an error will be reported. If its array length is less than the `InstanceIds` array length, the instance without corresponding configuration will use the default configuration.
+         * @type {Array.<InstanceAdvancedSettings> || null}
+         */
+        this.InstanceAdvancedSettingsOverrides = null;
+
     }
 
     /**
@@ -5798,6 +6021,15 @@ class AddExistedInstancesRequest extends  AbstractModel {
             this.NodePool = obj;
         }
         this.SkipValidateOptions = 'SkipValidateOptions' in params ? params.SkipValidateOptions : null;
+
+        if (params.InstanceAdvancedSettingsOverrides) {
+            this.InstanceAdvancedSettingsOverrides = new Array();
+            for (let z in params.InstanceAdvancedSettingsOverrides) {
+                let obj = new InstanceAdvancedSettings();
+                obj.deserialize(params.InstanceAdvancedSettingsOverrides[z]);
+                this.InstanceAdvancedSettingsOverrides.push(obj);
+            }
+        }
 
     }
 }
@@ -6070,6 +6302,12 @@ class ExistedInstancesForNode extends  AbstractModel {
          */
         this.InstanceAdvancedSettingsOverride = null;
 
+        /**
+         * When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
+         * @type {Array.<number> || null}
+         */
+        this.DesiredPodNumbers = null;
+
     }
 
     /**
@@ -6092,6 +6330,7 @@ class ExistedInstancesForNode extends  AbstractModel {
             obj.deserialize(params.InstanceAdvancedSettingsOverride)
             this.InstanceAdvancedSettingsOverride = obj;
         }
+        this.DesiredPodNumbers = 'DesiredPodNumbers' in params ? params.DesiredPodNumbers : null;
 
     }
 }
@@ -6294,6 +6533,30 @@ class SetNodePoolNodeProtectionRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Node ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Whether the node needs removal protection
+         * @type {boolean || null}
+         */
+        this.ProtectedFromScaleIn = null;
+
     }
 
     /**
@@ -6303,6 +6566,10 @@ class SetNodePoolNodeProtectionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ProtectedFromScaleIn = 'ProtectedFromScaleIn' in params ? params.ProtectedFromScaleIn : null;
 
     }
 }
@@ -6626,6 +6893,49 @@ class InstanceUpgradePreCheckResultItem extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterCommonNames response structure.
+ * @class
+ */
+class DescribeClusterCommonNamesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The CommonName in the certificate of the client corresponding to the sub-account UIN
+         * @type {Array.<CommonName> || null}
+         */
+        this.CommonNames = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CommonNames) {
+            this.CommonNames = new Array();
+            for (let z in params.CommonNames) {
+                let obj = new CommonName();
+                obj.deserialize(params.CommonNames[z]);
+                this.CommonNames.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Reinstallation parameter of existing instances
  * @class
  */
@@ -6699,6 +7009,41 @@ class ExistedInstancesPara extends  AbstractModel {
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
+
+    }
+}
+
+/**
+ * The CommonName in the certificate of the client corresponding to the user UIN
+ * @class
+ */
+class CommonName extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User UIN
+         * @type {string || null}
+         */
+        this.SubaccountUin = null;
+
+        /**
+         * The CommonName in the certificate of the client corresponding to the sub-account
+         * @type {string || null}
+         */
+        this.CN = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubaccountUin = 'SubaccountUin' in params ? params.SubaccountUin : null;
+        this.CN = 'CN' in params ? params.CN : null;
 
     }
 }
@@ -7303,17 +7648,19 @@ module.exports = {
     DeleteClusterResponse: DeleteClusterResponse,
     AutoscalingAdded: AutoscalingAdded,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
+    DescribeClusterCommonNamesRequest: DescribeClusterCommonNamesRequest,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
     ClusterVersion: ClusterVersion,
     RouteInfo: RouteInfo,
     InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
+    NodePool: NodePool,
     DeleteClusterRequest: DeleteClusterRequest,
     RunInstancesForNode: RunInstancesForNode,
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
     AddNodeToNodePoolRequest: AddNodeToNodePoolRequest,
-    NodePool: NodePool,
+    EnableVpcCniNetworkTypeResponse: EnableVpcCniNetworkTypeResponse,
     RouteTableInfo: RouteTableInfo,
     ClusterAsGroup: ClusterAsGroup,
     Instance: Instance,
@@ -7361,9 +7708,11 @@ module.exports = {
     ModifyClusterNodePoolResponse: ModifyClusterNodePoolResponse,
     GetUpgradeInstanceProgressResponse: GetUpgradeInstanceProgressResponse,
     DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
+    EnableVpcCniNetworkTypeRequest: EnableVpcCniNetworkTypeRequest,
     ResourceDeleteOption: ResourceDeleteOption,
     LoginSettings: LoginSettings,
     CreateClusterNodePoolFromExistingAsgResponse: CreateClusterNodePoolFromExistingAsgResponse,
+    DescribeEnableVpcCniProgressRequest: DescribeEnableVpcCniProgressRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
     EnhancedService: EnhancedService,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
@@ -7380,6 +7729,7 @@ module.exports = {
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     InstanceAdvancedSettings: InstanceAdvancedSettings,
+    DescribeEnableVpcCniProgressResponse: DescribeEnableVpcCniProgressResponse,
     Filter: Filter,
     ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
     ImageInstance: ImageInstance,
@@ -7420,7 +7770,9 @@ module.exports = {
     DescribeAvailableClusterVersionResponse: DescribeAvailableClusterVersionResponse,
     AddVpcCniSubnetsRequest: AddVpcCniSubnetsRequest,
     InstanceUpgradePreCheckResultItem: InstanceUpgradePreCheckResultItem,
+    DescribeClusterCommonNamesResponse: DescribeClusterCommonNamesResponse,
     ExistedInstancesPara: ExistedInstancesPara,
+    CommonName: CommonName,
     DescribeClusterAsGroupOptionResponse: DescribeClusterAsGroupOptionResponse,
     ClusterAsGroupAttribute: ClusterAsGroupAttribute,
     DeleteClusterNodePoolResponse: DeleteClusterNodePoolResponse,

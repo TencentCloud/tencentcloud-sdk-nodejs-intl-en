@@ -129,7 +129,7 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create EMR instance.
+     * This API is used to create an EMR cluster instance.
      * @param {CreateInstanceRequest} req
      * @param {function(string, CreateInstanceResponse):void} cb
      * @public

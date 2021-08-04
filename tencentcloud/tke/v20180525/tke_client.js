@@ -28,17 +28,19 @@ const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse
 const DeleteClusterResponse = models.DeleteClusterResponse;
 const AutoscalingAdded = models.AutoscalingAdded;
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
+const DescribeClusterCommonNamesRequest = models.DescribeClusterCommonNamesRequest;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const ClusterVersion = models.ClusterVersion;
 const RouteInfo = models.RouteInfo;
 const InstanceUpgradeProgressItem = models.InstanceUpgradeProgressItem;
+const NodePool = models.NodePool;
 const DeleteClusterRequest = models.DeleteClusterRequest;
 const RunInstancesForNode = models.RunInstancesForNode;
 const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const AddNodeToNodePoolRequest = models.AddNodeToNodePoolRequest;
-const NodePool = models.NodePool;
+const EnableVpcCniNetworkTypeResponse = models.EnableVpcCniNetworkTypeResponse;
 const RouteTableInfo = models.RouteTableInfo;
 const ClusterAsGroup = models.ClusterAsGroup;
 const Instance = models.Instance;
@@ -86,9 +88,11 @@ const DataDisk = models.DataDisk;
 const ModifyClusterNodePoolResponse = models.ModifyClusterNodePoolResponse;
 const GetUpgradeInstanceProgressResponse = models.GetUpgradeInstanceProgressResponse;
 const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
+const EnableVpcCniNetworkTypeRequest = models.EnableVpcCniNetworkTypeRequest;
 const ResourceDeleteOption = models.ResourceDeleteOption;
 const LoginSettings = models.LoginSettings;
 const CreateClusterNodePoolFromExistingAsgResponse = models.CreateClusterNodePoolFromExistingAsgResponse;
+const DescribeEnableVpcCniProgressRequest = models.DescribeEnableVpcCniProgressRequest;
 const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
 const EnhancedService = models.EnhancedService;
 const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
@@ -105,6 +109,7 @@ const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const DescribeEnableVpcCniProgressResponse = models.DescribeEnableVpcCniProgressResponse;
 const Filter = models.Filter;
 const ModifyClusterNodePoolRequest = models.ModifyClusterNodePoolRequest;
 const ImageInstance = models.ImageInstance;
@@ -145,7 +150,9 @@ const DescribeImagesRequest = models.DescribeImagesRequest;
 const DescribeAvailableClusterVersionResponse = models.DescribeAvailableClusterVersionResponse;
 const AddVpcCniSubnetsRequest = models.AddVpcCniSubnetsRequest;
 const InstanceUpgradePreCheckResultItem = models.InstanceUpgradePreCheckResultItem;
+const DescribeClusterCommonNamesResponse = models.DescribeClusterCommonNamesResponse;
 const ExistedInstancesPara = models.ExistedInstancesPara;
+const CommonName = models.CommonName;
 const DescribeClusterAsGroupOptionResponse = models.DescribeClusterAsGroupOptionResponse;
 const ClusterAsGroupAttribute = models.ClusterAsGroupAttribute;
 const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
@@ -250,6 +257,28 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the task progress of enabling VPC-CNI mode.
+     * @param {DescribeEnableVpcCniProgressRequest} req
+     * @param {function(string, DescribeEnableVpcCniProgressResponse):void} cb
+     * @public
+     */
+    DescribeEnableVpcCniProgress(req, cb) {
+        let resp = new DescribeEnableVpcCniProgressResponse();
+        this.request("DescribeEnableVpcCniProgress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable the VPC-CNI network mode for GR clusters.
+     * @param {EnableVpcCniNetworkTypeRequest} req
+     * @param {function(string, EnableVpcCniNetworkTypeResponse):void} cb
+     * @public
+     */
+    EnableVpcCniNetworkType(req, cb) {
+        let resp = new EnableVpcCniNetworkTypeResponse();
+        this.request("EnableVpcCniNetworkType", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a cluster. (Cloud API v3).
      * @param {DeleteClusterRequest} req
      * @param {function(string, DeleteClusterResponse):void} cb
@@ -346,6 +375,17 @@ class TkeClient extends AbstractClient {
     CreateClusterInstances(req, cb) {
         let resp = new CreateClusterInstancesResponse();
         this.request("CreateClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the CommonName from the kube-apiserver client certificate that corresponding to the sub-account in RBAC authorization mode. 
+     * @param {DescribeClusterCommonNamesRequest} req
+     * @param {function(string, DescribeClusterCommonNamesResponse):void} cb
+     * @public
+     */
+    DescribeClusterCommonNames(req, cb) {
+        let resp = new DescribeClusterCommonNamesResponse();
+        this.request("DescribeClusterCommonNames", req, resp, cb);
     }
 
     /**

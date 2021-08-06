@@ -1519,6 +1519,26 @@ class CynosdbInstanceDetail extends  AbstractModel {
          */
         this.RenewFlag = null;
 
+        /**
+         * The minimum number of CPU cores for a serverless instance
+         * @type {number || null}
+         */
+        this.MinCpu = null;
+
+        /**
+         * The maximum number of CPU cores for a serverless instance
+         * @type {number || null}
+         */
+        this.MaxCpu = null;
+
+        /**
+         * Serverless instance status. Valid values:
+resume
+pause
+         * @type {string || null}
+         */
+        this.ServerlessStatus = null;
+
     }
 
     /**
@@ -1559,6 +1579,9 @@ class CynosdbInstanceDetail extends  AbstractModel {
         this.Charset = 'Charset' in params ? params.Charset : null;
         this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.MinCpu = 'MinCpu' in params ? params.MinCpu : null;
+        this.MaxCpu = 'MaxCpu' in params ? params.MaxCpu : null;
+        this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
 
     }
 }
@@ -2272,7 +2295,7 @@ class DescribeResourcesByDealNameRequest extends  AbstractModel {
         super();
 
         /**
-         * Billing order ID
+         * Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Please call the API again until it succeeds.)
          * @type {string || null}
          */
         this.DealName = null;
@@ -2360,6 +2383,13 @@ class DescribeBackupListRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * Database type. Valid values: 
+<li> MYSQL </li>
+         * @type {string || null}
+         */
+        this.DbType = null;
+
     }
 
     /**
@@ -2372,6 +2402,7 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.DbType = 'DbType' in params ? params.DbType : null;
 
     }
 }
@@ -2703,6 +2734,20 @@ pause
          */
         this.ServerlessStatus = null;
 
+        /**
+         * Storage billing mode
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.StoragePayMode = null;
+
+        /**
+         * Prepaid storage ID
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.StorageId = null;
+
     }
 
     /**
@@ -2752,6 +2797,8 @@ pause
         this.MinCpu = 'MinCpu' in params ? params.MinCpu : null;
         this.MaxCpu = 'MaxCpu' in params ? params.MaxCpu : null;
         this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
+        this.StorageId = 'StorageId' in params ? params.StorageId : null;
 
     }
 }
@@ -3425,13 +3472,13 @@ class CreateClustersRequest extends  AbstractModel {
         this.Cpu = null;
 
         /**
-         * Memory of normal instance
+         * Memory of a non-serverless instance in GB
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Storage
+         * Storage capacity in GB
          * @type {number || null}
          */
         this.Storage = null;
@@ -3443,7 +3490,7 @@ class CreateClustersRequest extends  AbstractModel {
         this.ClusterName = null;
 
         /**
-         * Account password, which can contain 8–64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()~)
+         * Account password (it must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).)
          * @type {string || null}
          */
         this.AdminPassword = null;
@@ -3500,7 +3547,8 @@ timeRollback: rollback by time point
         this.ExpectTimeThresh = null;
 
         /**
-         * Storage upper limit of normal instance in GB
+         * The maximum storage of a non-serverless instance in GB
+If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter value cannot exceed the maximum storage corresponding to the CPU and memory specifications.
          * @type {number || null}
          */
         this.StorageLimit = null;
@@ -3592,6 +3640,14 @@ Default value: 600
          */
         this.AutoPauseDelay = null;
 
+        /**
+         * The billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid). Default value: `0`.
+If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be postpaid.
+Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
+         * @type {number || null}
+         */
+        this.StoragePayMode = null;
+
     }
 
     /**
@@ -3642,6 +3698,7 @@ Default value: 600
         this.MaxCpu = 'MaxCpu' in params ? params.MaxCpu : null;
         this.AutoPause = 'AutoPause' in params ? params.AutoPause : null;
         this.AutoPauseDelay = 'AutoPauseDelay' in params ? params.AutoPauseDelay : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
 
     }
 }
@@ -3824,6 +3881,36 @@ pause
          */
         this.ServerlessStatus = null;
 
+        /**
+         * Prepaid cluster storage
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Cluster storage ID used in prepaid storage modification
+         * @type {string || null}
+         */
+        this.StorageId = null;
+
+        /**
+         * Billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid)
+         * @type {number || null}
+         */
+        this.StoragePayMode = null;
+
+        /**
+         * The minimum storage corresponding to the compute specifications of the cluster
+         * @type {number || null}
+         */
+        this.MinStorageSize = null;
+
+        /**
+         * The maximum storage corresponding to the compute specifications of the cluster
+         * @type {number || null}
+         */
+        this.MaxStorageSize = null;
+
     }
 
     /**
@@ -3877,6 +3964,11 @@ pause
         }
         this.DbMode = 'DbMode' in params ? params.DbMode : null;
         this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.StorageId = 'StorageId' in params ? params.StorageId : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
+        this.MinStorageSize = 'MinStorageSize' in params ? params.MinStorageSize : null;
+        this.MaxStorageSize = 'MaxStorageSize' in params ? params.MaxStorageSize : null;
 
     }
 }

@@ -11957,7 +11957,7 @@ class DescribeAssistantCidrRequest extends  AbstractModel {
         this.VpcIds = null;
 
         /**
-         * Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+         * Filter condition. `VpcIds` and `Filters` cannot be specified at the same time.
 <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
          * @type {Array.<Filter> || null}
          */
@@ -13246,6 +13246,20 @@ class CcnAttachedInstance extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * Route table ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+        /**
+         * Route table name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RouteTableName = null;
+
     }
 
     /**
@@ -13267,6 +13281,8 @@ class CcnAttachedInstance extends  AbstractModel {
         this.CcnUin = 'CcnUin' in params ? params.CcnUin : null;
         this.InstanceArea = 'InstanceArea' in params ? params.InstanceArea : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
 
     }
 }
@@ -15408,6 +15424,13 @@ class CcnInstance extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * The ID of the route table associated with the instance
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
     }
 
     /**
@@ -15421,6 +15444,7 @@ class CcnInstance extends  AbstractModel {
         this.InstanceRegion = 'InstanceRegion' in params ? params.InstanceRegion : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
     }
 }
@@ -19709,6 +19733,20 @@ Note: This field may return null, indicating no valid value.
          */
         this.RoutePriorityFlag = null;
 
+        /**
+         * Number of route tables associated with the instance.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RouteTableCount = null;
+
+        /**
+         * Whether the multiple route tables feature is enabled for the CCN instance. Valid values: `False`: no; `True`: yes. Default value: `False`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.RouteTableFlag = null;
+
     }
 
     /**
@@ -19737,6 +19775,8 @@ Note: This field may return null, indicating no valid value.
             }
         }
         this.RoutePriorityFlag = 'RoutePriorityFlag' in params ? params.RoutePriorityFlag : null;
+        this.RouteTableCount = 'RouteTableCount' in params ? params.RouteTableCount : null;
+        this.RouteTableFlag = 'RouteTableFlag' in params ? params.RouteTableFlag : null;
 
     }
 }

@@ -188,6 +188,7 @@ const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
 const AIAnalysisTemplateItem = models.AIAnalysisTemplateItem;
+const HeadTailParameter = models.HeadTailParameter;
 const RawImageWatermarkInput = models.RawImageWatermarkInput;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;

@@ -3803,16 +3803,16 @@ class CallBackTemplateInfo extends  AbstractModel {
         this.StreamBeginNotifyUrl = null;
 
         /**
+         * Stream mixing callback URL (disused)
+         * @type {string || null}
+         */
+        this.StreamMixNotifyUrl = null;
+
+        /**
          * Interruption callback URL.
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
-
-        /**
-         * Stream mixing callback URL.
-         * @type {string || null}
-         */
-        this.StreamMixNotifyUrl = null;
 
         /**
          * Recording callback URL.
@@ -3851,8 +3851,8 @@ class CallBackTemplateInfo extends  AbstractModel {
         this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.StreamBeginNotifyUrl = 'StreamBeginNotifyUrl' in params ? params.StreamBeginNotifyUrl : null;
-        this.StreamEndNotifyUrl = 'StreamEndNotifyUrl' in params ? params.StreamEndNotifyUrl : null;
         this.StreamMixNotifyUrl = 'StreamMixNotifyUrl' in params ? params.StreamMixNotifyUrl : null;
+        this.StreamEndNotifyUrl = 'StreamEndNotifyUrl' in params ? params.StreamEndNotifyUrl : null;
         this.RecordNotifyUrl = 'RecordNotifyUrl' in params ? params.RecordNotifyUrl : null;
         this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
@@ -3996,6 +3996,16 @@ class UnBindLiveDomainCertRequest extends  AbstractModel {
          */
         this.DomainName = null;
 
+        /**
+         * Valid values:
+`gray`: unbind the canary certificate
+`formal` (default): unbind the formal certificate
+
+`formal` will be used if no value is passed in
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -4006,6 +4016,7 @@ class UnBindLiveDomainCertRequest extends  AbstractModel {
             return;
         }
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -5119,8 +5130,7 @@ Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/d
         this.CallbackKey = null;
 
         /**
-         * Stream mixing callback URL,
-Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
+         * Disused
          * @type {string || null}
          */
         this.StreamMixNotifyUrl = null;

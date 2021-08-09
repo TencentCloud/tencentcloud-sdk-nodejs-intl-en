@@ -26179,8 +26179,8 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
         this.DefaultLibraryLabelSet = null;
 
         /**
-         * Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
+You can specify up to 100 labels, with each containing up to 16 characters.
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
@@ -27245,8 +27245,8 @@ class FaceConfigureInfo extends  AbstractModel {
         this.DefaultLibraryLabelSet = null;
 
         /**
-         * Custom figure filter tag, which specifies the custom figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the custom figures will be returned. Valid values:
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
+You can specify up to 100 labels, with each containing up to 16 characters.
          * @type {Array.<string> || null}
          */
         this.UserDefineLibraryLabelSet = null;
@@ -27404,6 +27404,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ErrCode = null;
 
         /**
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
          * Error message.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -27463,6 +27469,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.Message = 'Message' in params ? params.Message : null;
 
         if (params.Input) {

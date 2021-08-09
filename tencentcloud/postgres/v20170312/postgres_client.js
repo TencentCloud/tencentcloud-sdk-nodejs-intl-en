@@ -49,6 +49,7 @@ const CreateReadOnlyDBInstanceResponse = models.CreateReadOnlyDBInstanceResponse
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const ModifySwitchTimePeriodResponse = models.ModifySwitchTimePeriodResponse;
 const DisIsolateDBInstancesRequest = models.DisIsolateDBInstancesRequest;
 const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
@@ -110,6 +111,7 @@ const AccountInfo = models.AccountInfo;
 const DBBackup = models.DBBackup;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
+const ModifySwitchTimePeriodRequest = models.ModifySwitchTimePeriodRequest;
 const RegionInfo = models.RegionInfo;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
@@ -215,6 +217,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to perform a primary-standby switch for an instance waiting for the switch after it is upgraded.
+     * @param {ModifySwitchTimePeriodRequest} req
+     * @param {function(string, ModifySwitchTimePeriodResponse):void} cb
+     * @public
+     */
+    ModifySwitchTimePeriod(req, cb) {
+        let resp = new ModifySwitchTimePeriodResponse();
+        this.request("ModifySwitchTimePeriod", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the purchase price of one or multiple instances.
      * @param {InquiryPriceCreateDBInstancesRequest} req
      * @param {function(string, InquiryPriceCreateDBInstancesResponse):void} cb
@@ -314,7 +327,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade an instance.
+     * This API is used to upgrade instance configurations.
      * @param {UpgradeDBInstanceRequest} req
      * @param {function(string, UpgradeDBInstanceResponse):void} cb
      * @public

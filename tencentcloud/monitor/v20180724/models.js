@@ -5281,19 +5281,25 @@ class DescribeBindingPolicyObjectListRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Policy group ID.
+         * Policy group ID. If the ID is in the format of “policy-xxxx”, please enter it in the `PolicyId` field. Enter 0 in this field.
          * @type {number || null}
          */
         this.GroupId = null;
 
         /**
-         * Number of parameters that can be returned on each page. Value range: 1 - 100. Default value: 20.
+         * Alarm policy ID in the format of “policy-xxxx”. If a value has been entered in this field, you can enter 0 in the `GroupId` field.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * The number of alarm objects returned each time. Value range: 1-100. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Parameter offset on each page. The value starts from 0 and the default value is 0.
+         * Offset, which starts from 0 and is set to 0 by default. For example, the parameter `Offset=0&Limit=20` returns the zeroth to 19th alarm objects, and `Offset=20&Limit=20` returns the 20th to 39th alarm objects, and so on.
          * @type {number || null}
          */
         this.Offset = null;
@@ -5315,6 +5321,7 @@ class DescribeBindingPolicyObjectListRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
 
@@ -5659,7 +5666,7 @@ class DescribeAllNamespacesRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter by use case. Valid values: ST_DASHBOARD (Dashboard type), ST_ALARM (alarm type)
+         * Filter by use case. Currently, the only valid value is `ST_ALARM` (alarm type).
          * @type {string || null}
          */
         this.SceneType = null;
@@ -6691,6 +6698,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.MetricsInfo = null;
 
+        /**
+         * Dimension information of an instance that triggered alarms.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Dimensions = null;
+
     }
 
     /**
@@ -6739,6 +6753,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.MetricsInfo.push(obj);
             }
         }
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
 
     }
 }

@@ -9432,6 +9432,57 @@ class AIAnalysisTemplateItem extends  AbstractModel {
 }
 
 /**
+ * Opening and closing credits parameters
+ * @class
+ */
+class HeadTailParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Opening credits list
+         * @type {Array.<MediaInputInfo> || null}
+         */
+        this.HeadSet = null;
+
+        /**
+         * Closing credits list
+         * @type {Array.<MediaInputInfo> || null}
+         */
+        this.TailSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HeadSet) {
+            this.HeadSet = new Array();
+            for (let z in params.HeadSet) {
+                let obj = new MediaInputInfo();
+                obj.deserialize(params.HeadSet[z]);
+                this.HeadSet.push(obj);
+            }
+        }
+
+        if (params.TailSet) {
+            this.TailSet = new Array();
+            for (let z in params.TailSet) {
+                let obj = new MediaInputInfo();
+                obj.deserialize(params.TailSet[z]);
+                this.TailSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Input parameter of image watermark template
  * @class
  */
@@ -12430,6 +12481,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ObjectNumberFormat = null;
 
+        /**
+         * Opening and closing credits parameters
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {HeadTailParameter || null}
+         */
+        this.HeadTailParameter = null;
+
     }
 
     /**
@@ -12485,6 +12543,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new NumberFormat();
             obj.deserialize(params.ObjectNumberFormat)
             this.ObjectNumberFormat = obj;
+        }
+
+        if (params.HeadTailParameter) {
+            let obj = new HeadTailParameter();
+            obj.deserialize(params.HeadTailParameter)
+            this.HeadTailParameter = obj;
         }
 
     }
@@ -14813,6 +14877,18 @@ class TaskNotifyConfig extends  AbstractModel {
          */
         this.NotifyMode = null;
 
+        /**
+         * Notification type, `CMQ` by default. If `URL` is passed in, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+         * @type {string || null}
+         */
+        this.NotifyType = null;
+
+        /**
+         * HTTP callback URL, required if `NotifyType` is set to `URL`
+         * @type {string || null}
+         */
+        this.NotifyUrl = null;
+
     }
 
     /**
@@ -14827,6 +14903,8 @@ class TaskNotifyConfig extends  AbstractModel {
         this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.NotifyMode = 'NotifyMode' in params ? params.NotifyMode : null;
+        this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
+        this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
 
     }
 }
@@ -20375,6 +20453,7 @@ module.exports = {
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
+    HeadTailParameter: HeadTailParameter,
     RawImageWatermarkInput: RawImageWatermarkInput,
     DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     AiSampleTagOperation: AiSampleTagOperation,

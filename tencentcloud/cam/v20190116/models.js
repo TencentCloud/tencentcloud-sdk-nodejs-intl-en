@@ -2267,6 +2267,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.IsServiceLinkedPolicy = null;
 
+        /**
+         * The number of entities associated with the policy.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AttachEntityCount = null;
+
+        /**
+         * The number of entities associated with the permission boundary.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AttachEntityBoundaryCount = null;
+
+        /**
+         * The last editted time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
     }
 
     /**
@@ -2288,6 +2309,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
         this.IsServiceLinkedPolicy = 'IsServiceLinkedPolicy' in params ? params.IsServiceLinkedPolicy : null;
+        this.AttachEntityCount = 'AttachEntityCount' in params ? params.AttachEntityCount : null;
+        this.AttachEntityBoundaryCount = 'AttachEntityBoundaryCount' in params ? params.AttachEntityBoundaryCount : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }

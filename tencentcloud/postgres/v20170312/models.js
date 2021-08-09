@@ -499,7 +499,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
+         * Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no). Default value: `0`
          * @type {number || null}
          */
         this.NeedSupportIpv6 = null;
@@ -1803,6 +1803,34 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifySwitchTimePeriod response structure.
+ * @class
+ */
+class ModifySwitchTimePeriodResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisIsolateDBInstances request structure.
  * @class
  */
@@ -1921,22 +1949,21 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter condition. Valid values: db-instance-id, db-instance-name, db-project-id, db-pay-mode, db-tag-key.
+         * Filter instances using one or more criteria. Valid filter names:
+db-instance-id: filter by instance ID (the filter value is a string)
+db-instance-name: filter by instance name (the filter value is a string)
+db-project-id: filter by project ID (the filter value is an integer)
+db-pay-mode: filter by billing mode (the filter value is a string)
+db-tag-key: filter by tag key (the filter value is a string)
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Number of entries returned per page. Default value: 10.
+         * The maximum number of results returned per page. Value range: 1-100. Default: `10`
          * @type {number || null}
          */
         this.Limit = null;
-
-        /**
-         * Data offset which starts from 0
-         * @type {number || null}
-         */
-        this.Offset = null;
 
         /**
          * Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
@@ -1945,7 +1972,13 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.OrderBy = null;
 
         /**
-         * In ascending or descending order
+         * Pagination offset, starting from 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting order. Valid values: `asc` (ascending), `desc` (descending)
          * @type {string || null}
          */
         this.OrderByType = null;
@@ -1969,8 +2002,8 @@ class DescribeDBInstancesRequest extends  AbstractModel {
             }
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
@@ -2048,6 +2081,24 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
          */
         this.ActivityId = null;
 
+        /**
+         * Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (specify a time to switch). Default value: `0`
+         * @type {number || null}
+         */
+        this.SwitchTag = null;
+
+        /**
+         * The earliest time to start a switch
+         * @type {string || null}
+         */
+        this.SwitchStartTime = null;
+
+        /**
+         * The latest time to start a switch
+         * @type {string || null}
+         */
+        this.SwitchEndTime = null;
+
     }
 
     /**
@@ -2063,6 +2114,9 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.SwitchTag = 'SwitchTag' in params ? params.SwitchTag : null;
+        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
+        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
 
     }
 }
@@ -5060,6 +5114,41 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * ModifySwitchTimePeriod request structure.
+ * @class
+ */
+class ModifySwitchTimePeriodRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the instance waiting for a switch
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Valid value: `0` (switch immediately)
+         * @type {number || null}
+         */
+        this.SwitchTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.SwitchTag = 'SwitchTag' in params ? params.SwitchTag : null;
+
+    }
+}
+
+/**
  * Region information such as number and status
  * @class
  */
@@ -5794,6 +5883,7 @@ module.exports = {
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeOrdersResponse: DescribeOrdersResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
+    ModifySwitchTimePeriodResponse: ModifySwitchTimePeriodResponse,
     DisIsolateDBInstancesRequest: DisIsolateDBInstancesRequest,
     ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
@@ -5855,6 +5945,7 @@ module.exports = {
     DBBackup: DBBackup,
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
+    ModifySwitchTimePeriodRequest: ModifySwitchTimePeriodRequest,
     RegionInfo: RegionInfo,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,

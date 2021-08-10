@@ -490,13 +490,13 @@ class DescribeDBDiagEventResponse extends  AbstractModel {
         this.EventId = null;
 
         /**
-         * Event details.
+         * Diagnosis event details. If there is no additional explanation information, the output will be empty.
          * @type {string || null}
          */
         this.Explanation = null;
 
         /**
-         * Summary.
+         * Diagnosis summary.
          * @type {string || null}
          */
         this.Outline = null;
@@ -520,7 +520,7 @@ class DescribeDBDiagEventResponse extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Suggestion.
+         * Suggestions. If there are no suggestions, the output will be empty.
          * @type {string || null}
          */
         this.Suggestions = null;
@@ -877,6 +877,12 @@ class SlowLogTopSqlItem extends  AbstractModel {
          */
         this.RowsExaminedAvg = null;
 
+        /**
+         * MD5 value of SOL template
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
     }
 
     /**
@@ -910,6 +916,7 @@ class SlowLogTopSqlItem extends  AbstractModel {
         this.RowsSentAvg = 'RowsSentAvg' in params ? params.RowsSentAvg : null;
         this.LockTimeAvg = 'LockTimeAvg' in params ? params.LockTimeAvg : null;
         this.RowsExaminedAvg = 'RowsExaminedAvg' in params ? params.RowsExaminedAvg : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -1649,7 +1656,7 @@ class DiagHistoryEventItem extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Event ID.
+         * Unique event ID.
          * @type {number || null}
          */
         this.EventId = null;
@@ -1661,34 +1668,32 @@ class DiagHistoryEventItem extends  AbstractModel {
         this.Severity = null;
 
         /**
-         * Summary.
+         * Diagnosis summary.
          * @type {string || null}
          */
         this.Outline = null;
 
         /**
-         * Diagnosis item.
+         * Diagnosis item description.
          * @type {string || null}
          */
         this.DiagItem = null;
 
         /**
          * Instance ID.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Reserved field
+         * Reserved field.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Metric = null;
 
         /**
-         * Region
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Region.
          * @type {string || null}
          */
         this.Region = null;
@@ -2669,14 +2674,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ProfileId = null;
 
         /**
-         * Configuration type.
+         * Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProfileType = null;
 
         /**
-         * Configuration level. Valid values: User, Instance.
+         * Configuration level. Valid values: User (user-level), Instance (instance-level). For database inspection emails, it should be `User`. For scheduled task emails, it should be `Instance`.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2727,13 +2732,13 @@ class AddUserContactRequest extends  AbstractModel {
         super();
 
         /**
-         * Contact name, which must be unique, can contain 2–60 letters, digits, and underscores, and cannot start with an underscore.
+         * Recipient name, which can contain up to 20 letters, digits, spaces, and special symbols `!@#$%^&*()_+-=()` and cannot begin with an underscore.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Email address, which can contain letters, digits, and underscores and cannot start with an underscore.
+         * Email address, which can contain letters, digits, underscores, and the @ symbol, cannot begin with an underscore, and must be unique.
          * @type {string || null}
          */
         this.ContactInfo = null;
@@ -3576,7 +3581,7 @@ class DescribeHealthScoreRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Time to get the health score.
+         * Time to get the health score in the format of `2019-09-10 12:13:14`.
          * @type {string || null}
          */
         this.Time = null;
@@ -3840,6 +3845,12 @@ class DescribeSlowLogUserHostStatsRequest extends  AbstractModel {
          */
         this.Product = null;
 
+        /**
+         * MD5 value of SOL template
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
     }
 
     /**
@@ -3853,6 +3864,7 @@ class DescribeSlowLogUserHostStatsRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Product = 'Product' in params ? params.Product : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -4072,13 +4084,13 @@ class DescribeUserSqlAdviceResponse extends  AbstractModel {
         super();
 
         /**
-         * SQL statement optimization suggestions, which can be parsed into JSON arrays.
+         * SQL statement optimization suggestions, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
          * @type {string || null}
          */
         this.Advices = null;
 
         /**
-         * Notes of SQL statement optimization suggestions, which can be parsed into String arrays.
+         * Notes of SQL statement optimization suggestions, which can be parsed into String arrays. If there is no need for optimization, the output will be empty.
          * @type {string || null}
          */
         this.Comments = null;
@@ -4102,13 +4114,13 @@ class DescribeUserSqlAdviceResponse extends  AbstractModel {
         this.Tables = null;
 
         /**
-         * SQL execution plan, which can be parsed into JSON.
+         * SQL execution plan, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
          * @type {string || null}
          */
         this.SqlPlan = null;
 
         /**
-         * Cost saving details after SQL statement optimization, which can be parsed into JSON.
+         * Cost saving details after SQL statement optimization, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
          * @type {string || null}
          */
         this.Cost = null;

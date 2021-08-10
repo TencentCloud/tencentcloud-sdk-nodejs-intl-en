@@ -126,7 +126,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the email sending configuration, including the email configuration for database inspection and the email sending configuration for scheduled task health reports. Please always select Guangzhou for `Region`.
+     * This API is used to get the email sending configuration, including the email configuration for database inspection and the email sending configuration for scheduled task health reports.
      * @param {DescribeMailProfileRequest} req
      * @param {function(string, DescribeMailProfileResponse):void} cb
      * @public
@@ -357,7 +357,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add the contact name and email. The returned value is the ID of the successfully added contact. Please always select Guangzhou for `Region`.
+     * This API is used to add the recipient name and email. The returned value is the ID of the successfully added recipient.
      * @param {AddUserContactRequest} req
      * @param {function(string, AddUserContactResponse):void} cb
      * @public

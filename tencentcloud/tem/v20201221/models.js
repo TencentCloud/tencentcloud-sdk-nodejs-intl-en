@@ -313,30 +313,42 @@ class DeployServiceV2Response extends  AbstractModel {
 }
 
 /**
- * Ingress TLS configuration
+ * Auto scaling configuration
  * @class
  */
-class IngressTls extends  AbstractModel {
+class EsInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Host array. An empty array indicates the default certificate for all domain names.
-         * @type {Array.<string> || null}
+         * Minimum number of instances
+         * @type {number || null}
          */
-        this.Hosts = null;
+        this.MinAliveInstances = null;
 
         /**
-         * Secret name. If a certificate is used, this field is left empty.
-         * @type {string || null}
+         * Maximum number of instances
+         * @type {number || null}
          */
-        this.SecretName = null;
+        this.MaxAliveInstances = null;
 
         /**
-         * SSL Certificate Id
+         * Auto scaling policy. 1: CPU; 2: memory
+         * @type {number || null}
+         */
+        this.EsStrategy = null;
+
+        /**
+         * Auto scaling condition value
+         * @type {number || null}
+         */
+        this.Threshold = null;
+
+        /**
+         * Version ID
          * @type {string || null}
          */
-        this.CertificateId = null;
+        this.VersionId = null;
 
     }
 
@@ -347,9 +359,11 @@ class IngressTls extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Hosts = 'Hosts' in params ? params.Hosts : null;
-        this.SecretName = 'SecretName' in params ? params.SecretName : null;
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.MinAliveInstances = 'MinAliveInstances' in params ? params.MinAliveInstances : null;
+        this.MaxAliveInstances = 'MaxAliveInstances' in params ? params.MaxAliveInstances : null;
+        this.EsStrategy = 'EsStrategy' in params ? params.EsStrategy : null;
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
@@ -1068,6 +1082,36 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
          */
         this.VersionId = null;
 
+        /**
+         * The script to run after startup
+         * @type {string || null}
+         */
+        this.PostStart = null;
+
+        /**
+         * The script to run before stop
+         * @type {string || null}
+         */
+        this.PreStop = null;
+
+        /**
+         * Configuration of 
+         * @type {DeployStrategyConf || null}
+         */
+        this.DeployStrategyConf = null;
+
+        /**
+         * Configuration of aliveness probe
+         * @type {HealthCheckConfig || null}
+         */
+        this.Liveness = null;
+
+        /**
+         * Configuration of readiness probe
+         * @type {HealthCheckConfig || null}
+         */
+        this.Readiness = null;
+
     }
 
     /**
@@ -1161,6 +1205,26 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
             this.EksService = obj;
         }
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.PostStart = 'PostStart' in params ? params.PostStart : null;
+        this.PreStop = 'PreStop' in params ? params.PreStop : null;
+
+        if (params.DeployStrategyConf) {
+            let obj = new DeployStrategyConf();
+            obj.deserialize(params.DeployStrategyConf)
+            this.DeployStrategyConf = obj;
+        }
+
+        if (params.Liveness) {
+            let obj = new HealthCheckConfig();
+            obj.deserialize(params.Liveness)
+            this.Liveness = obj;
+        }
+
+        if (params.Readiness) {
+            let obj = new HealthCheckConfig();
+            obj.deserialize(params.Readiness)
+            this.Readiness = obj;
+        }
 
     }
 }
@@ -2153,6 +2217,13 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.DeployVersion = null;
 
+        /**
+         * Number of Restarts
+Note: This is field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.RestartCount = null;
+
     }
 
     /**
@@ -2169,6 +2240,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.PodIp = 'PodIp' in params ? params.PodIp : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.DeployVersion = 'DeployVersion' in params ? params.DeployVersion : null;
+        this.RestartCount = 'RestartCount' in params ? params.RestartCount : null;
 
     }
 }
@@ -2484,6 +2556,83 @@ class NamespacePage extends  AbstractModel {
 }
 
 /**
+ * Health Check Configuration
+ * @class
+ */
+class HealthCheckConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Health check type. Valid values: `HttpGet`，`TcpSocket`，`Exec`
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The protocol type. It’s only valid when the health check type is `HttpGet`.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * The request path. It’s only valid when the health check type is `HttpGet`.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * The script to be executed. It’s only valid when the health check type is `Exec`.
+         * @type {string || null}
+         */
+        this.Exec = null;
+
+        /**
+         * The request port. It’s only valid when the health check type is `HttpGet` or `TcpSocket `.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * The initial delay for health check in seconds. Default: `0`
+         * @type {number || null}
+         */
+        this.InitialDelaySeconds = null;
+
+        /**
+         * Timeout period in seconds. Default: `1`
+         * @type {number || null}
+         */
+        this.TimeoutSeconds = null;
+
+        /**
+         * Interval period in seconds. Default: `10`
+         * @type {number || null}
+         */
+        this.PeriodSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Exec = 'Exec' in params ? params.Exec : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.InitialDelaySeconds = 'InitialDelaySeconds' in params ? params.InitialDelaySeconds : null;
+        this.TimeoutSeconds = 'TimeoutSeconds' in params ? params.TimeoutSeconds : null;
+        this.PeriodSeconds = 'PeriodSeconds' in params ? params.PeriodSeconds : null;
+
+    }
+}
+
+/**
  * CreateCosTokenV2 response structure.
  * @class
  */
@@ -2520,6 +2669,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Ingress TLS configuration
+ * @class
+ */
+class IngressTls extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Host array. An empty array indicates the default certificate for all domain names.
+         * @type {Array.<string> || null}
+         */
+        this.Hosts = null;
+
+        /**
+         * Secret name. If a certificate is used, this field is left empty.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * SSL Certificate Id
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Hosts = 'Hosts' in params ? params.Hosts : null;
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
 
     }
 }
@@ -2574,42 +2765,36 @@ class GenerateDownloadUrlRequest extends  AbstractModel {
 }
 
 /**
- * Auto scaling configuration
+ * Configuration of batch release policies
  * @class
  */
-class EsInfo extends  AbstractModel {
+class DeployStrategyConf extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Minimum number of instances
+         * Total batches
          * @type {number || null}
          */
-        this.MinAliveInstances = null;
+        this.TotalBatchCount = null;
 
         /**
-         * Maximum number of instances
+         * Number of instances for the beta batch
          * @type {number || null}
          */
-        this.MaxAliveInstances = null;
+        this.BetaBatchNum = null;
 
         /**
-         * Auto scaling policy. 1: CPU; 2: memory
+         * Batch deploy policy. `0`: automatically; `1`: manually. If you use beta batch, the policy for beta batch must be `0`. The policy specified here only applies to the rest batches.
          * @type {number || null}
          */
-        this.EsStrategy = null;
+        this.DeployStrategyType = null;
 
         /**
-         * Auto scaling condition value
+         * Interval between batches
          * @type {number || null}
          */
-        this.Threshold = null;
-
-        /**
-         * Version ID
-         * @type {string || null}
-         */
-        this.VersionId = null;
+        this.BatchInterval = null;
 
     }
 
@@ -2620,11 +2805,10 @@ class EsInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MinAliveInstances = 'MinAliveInstances' in params ? params.MinAliveInstances : null;
-        this.MaxAliveInstances = 'MaxAliveInstances' in params ? params.MaxAliveInstances : null;
-        this.EsStrategy = 'EsStrategy' in params ? params.EsStrategy : null;
-        this.Threshold = 'Threshold' in params ? params.Threshold : null;
-        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.TotalBatchCount = 'TotalBatchCount' in params ? params.TotalBatchCount : null;
+        this.BetaBatchNum = 'BetaBatchNum' in params ? params.BetaBatchNum : null;
+        this.DeployStrategyType = 'DeployStrategyType' in params ? params.DeployStrategyType : null;
+        this.BatchInterval = 'BatchInterval' in params ? params.BatchInterval : null;
 
     }
 }
@@ -2941,7 +3125,7 @@ module.exports = {
     CreateServiceV2Response: CreateServiceV2Response,
     CreateCosTokenV2Request: CreateCosTokenV2Request,
     DeployServiceV2Response: DeployServiceV2Response,
-    IngressTls: IngressTls,
+    EsInfo: EsInfo,
     DescribeNamespacesResponse: DescribeNamespacesResponse,
     PortMapping: PortMapping,
     RestartServiceRunPodRequest: RestartServiceRunPodRequest,
@@ -2978,9 +3162,11 @@ module.exports = {
     DescribeServiceRunPodListV2Response: DescribeServiceRunPodListV2Response,
     TemNamespaceInfo: TemNamespaceInfo,
     NamespacePage: NamespacePage,
+    HealthCheckConfig: HealthCheckConfig,
     CreateCosTokenV2Response: CreateCosTokenV2Response,
+    IngressTls: IngressTls,
     GenerateDownloadUrlRequest: GenerateDownloadUrlRequest,
-    EsInfo: EsInfo,
+    DeployStrategyConf: DeployStrategyConf,
     DescribeIngressRequest: DescribeIngressRequest,
     CreateServiceV2Request: CreateServiceV2Request,
     EksService: EksService,

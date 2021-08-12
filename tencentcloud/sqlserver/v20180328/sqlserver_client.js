@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const CloneDBResponse = models.CloneDBResponse;
 const DealInfo = models.DealInfo;
+const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const DeleteBackupMigrationRequest = models.DeleteBackupMigrationRequest;
@@ -29,9 +30,11 @@ const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
 const ModifyIncrementalMigrationRequest = models.ModifyIncrementalMigrationRequest;
 const MigrateDetail = models.MigrateDetail;
 const CreateIncrementalMigrationRequest = models.CreateIncrementalMigrationRequest;
+const RunMigrationRequest = models.RunMigrationRequest;
 const RunMigrationResponse = models.RunMigrationResponse;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
+const ParamRecord = models.ParamRecord;
 const RollbackInstanceResponse = models.RollbackInstanceResponse;
 const DeleteIncrementalMigrationRequest = models.DeleteIncrementalMigrationRequest;
 const DBRemark = models.DBRemark;
@@ -40,19 +43,19 @@ const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
-const RestoreInstanceRequest = models.RestoreInstanceRequest;
+const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const DescribeIncrementalMigrationRequest = models.DescribeIncrementalMigrationRequest;
-const RunMigrationRequest = models.RunMigrationRequest;
-const DescribeDBCharsetsRequest = models.DescribeDBCharsetsRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
+const ParameterDetail = models.ParameterDetail;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
-const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest;
+const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const Migration = models.Migration;
 const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
 const MigrationDetail = models.MigrationDetail;
 const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
@@ -61,7 +64,7 @@ const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const DBCreateInfo = models.DBCreateInfo;
 const AccountPrivilege = models.AccountPrivilege;
 const ModifyMigrationResponse = models.ModifyMigrationResponse;
-const AccountCreateInfo = models.AccountCreateInfo;
+const DescribeZonesResponse = models.DescribeZonesResponse;
 const DescribeDBsResponse = models.DescribeDBsResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const SlowlogInfo = models.SlowlogInfo;
@@ -70,23 +73,30 @@ const DescribeMigrationsResponse = models.DescribeMigrationsResponse;
 const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DeleteDBRequest = models.DeleteDBRequest;
+const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest;
 const MigrateSource = models.MigrateSource;
-const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const ModifyDatabaseCTRequest = models.ModifyDatabaseCTRequest;
 const ModifyBackupMigrationResponse = models.ModifyBackupMigrationResponse;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const CreateBackupMigrationRequest = models.CreateBackupMigrationRequest;
+const DescribeDBsNormalResponse = models.DescribeDBsNormalResponse;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
-const DescribeBackupUploadSizeResponse = models.DescribeBackupUploadSizeResponse;
+const DescribeDBCharsetsRequest = models.DescribeDBCharsetsRequest;
+const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeDBsRequest = models.DescribeDBsRequest;
 const ModifyDBNameRequest = models.ModifyDBNameRequest;
+const ModifyDatabaseCDCRequest = models.ModifyDatabaseCDCRequest;
+const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
 const DeleteMigrationRequest = models.DeleteMigrationRequest;
+const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
 const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
 const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
+const InstanceDBDetail = models.InstanceDBDetail;
 const RenameRestoreDatabase = models.RenameRestoreDatabase;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
@@ -94,11 +104,15 @@ const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const AccountPassword = models.AccountPassword;
 const DeleteMigrationResponse = models.DeleteMigrationResponse;
 const DescribeBackupMigrationRequest = models.DescribeBackupMigrationRequest;
-const InstanceDBDetail = models.InstanceDBDetail;
+const DescribeBackupUploadSizeResponse = models.DescribeBackupUploadSizeResponse;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const StartIncrementalMigrationResponse = models.StartIncrementalMigrationResponse;
 const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
 const ModifyDBInstanceNetworkResponse = models.ModifyDBInstanceNetworkResponse;
+const DbNormalDetail = models.DbNormalDetail;
 const AccountDetail = models.AccountDetail;
+const ModifyDatabaseMdfResponse = models.ModifyDatabaseMdfResponse;
 const CreateBackupResponse = models.CreateBackupResponse;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
@@ -112,11 +126,12 @@ const StartBackupMigrationRequest = models.StartBackupMigrationRequest;
 const Backup = models.Backup;
 const DescribeBackupCommandRequest = models.DescribeBackupCommandRequest;
 const AccountRemark = models.AccountRemark;
+const ModifyDatabaseCDCResponse = models.ModifyDatabaseCDCResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CreateIncrementalMigrationResponse = models.CreateIncrementalMigrationResponse;
 const AccountPrivilegeModifyInfo = models.AccountPrivilegeModifyInfo;
 const DescribeBackupMigrationResponse = models.DescribeBackupMigrationResponse;
-const DescribeZonesResponse = models.DescribeZonesResponse;
+const AccountCreateInfo = models.AccountCreateInfo;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DBPrivilege = models.DBPrivilege;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
@@ -127,6 +142,7 @@ const RecycleDBInstanceResponse = models.RecycleDBInstanceResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DeleteBackupMigrationResponse = models.DeleteBackupMigrationResponse;
 const CreateBackupRequest = models.CreateBackupRequest;
+const DescribeDBsNormalRequest = models.DescribeDBsNormalRequest;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const ModifyIncrementalMigrationResponse = models.ModifyIncrementalMigrationResponse;
 const MigrationAction = models.MigrationAction;
@@ -134,6 +150,7 @@ const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstan
 const CloneDBRequest = models.CloneDBRequest;
 const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
 const ModifyMigrationRequest = models.ModifyMigrationRequest;
+const Parameter = models.Parameter;
 const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeBackupUploadSizeRequest = models.DescribeBackupUploadSizeRequest;
 const DeleteDBResponse = models.DeleteDBResponse;
@@ -151,6 +168,7 @@ const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackInstanceRequest = models.RollbackInstanceRequest;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DescribeRollbackTimeRequest = models.DescribeRollbackTimeRequest;
+const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
 const DescribeIncrementalMigrationResponse = models.DescribeIncrementalMigrationResponse;
 const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
 const MigrateTarget = models.MigrateTarget;
@@ -170,6 +188,17 @@ class SqlserverClient extends AbstractClient {
         super("sqlserver.tencentcloudapi.com", "2018-03-28", credential, region, profile);
     }
     
+    /**
+     * This API is used to shrink database MDF files.
+     * @param {ModifyDatabaseMdfRequest} req
+     * @param {function(string, ModifyDatabaseMdfResponse):void} cb
+     * @public
+     */
+    ModifyDatabaseMdf(req, cb) {
+        let resp = new ModifyDatabaseMdfResponse();
+        this.request("ModifyDatabaseMdf", req, resp, cb);
+    }
+
     /**
      * This API is used to modify the backup policy.
      * @param {ModifyBackupStrategyRequest} req
@@ -201,6 +230,17 @@ class SqlserverClient extends AbstractClient {
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
         this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify account remarks.
+     * @param {ModifyAccountRemarkRequest} req
+     * @param {function(string, ModifyAccountRemarkResponse):void} cb
+     * @public
+     */
+    ModifyAccountRemark(req, cb) {
+        let resp = new ModifyAccountRemarkResponse();
+        this.request("ModifyAccountRemark", req, resp, cb);
     }
 
     /**
@@ -292,14 +332,16 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restore an instance from a backup file.
-     * @param {RestoreInstanceRequest} req
-     * @param {function(string, RestoreInstanceResponse):void} cb
+     * This API is used to modify instance parameters.
+<b>Note</b>: if <b>the instance needs to be restarted</b> for the modified parameter to take effect, <b>it will be restarted</b> immediately or during the maintenance time according to the `WaitSwitch` parameter.
+Before you modify a parameter, you can use the `DescribeInstanceParams` API to query whether the instance needs to be restarted.
+     * @param {ModifyInstanceParamRequest} req
+     * @param {function(string, ModifyInstanceParamResponse):void} cb
      * @public
      */
-    RestoreInstance(req, cb) {
-        let resp = new RestoreInstanceResponse();
-        this.request("RestoreInstance", req, resp, cb);
+    ModifyInstanceParam(req, cb) {
+        let resp = new ModifyInstanceParamResponse();
+        this.request("ModifyInstanceParam", req, resp, cb);
     }
 
     /**
@@ -311,6 +353,17 @@ class SqlserverClient extends AbstractClient {
     ModifyDBInstanceProject(req, cb) {
         let resp = new ModifyDBInstanceProjectResponse();
         this.request("ModifyDBInstanceProject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable the change tracking (CT) feature.
+     * @param {ModifyDatabaseCTRequest} req
+     * @param {function(string, ModifyDatabaseCTResponse):void} cb
+     * @public
+     */
+    ModifyDatabaseCT(req, cb) {
+        let resp = new ModifyDatabaseCTResponse();
+        this.request("ModifyDatabaseCT", req, resp, cb);
     }
 
     /**
@@ -347,14 +400,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify account remarks.
-     * @param {ModifyAccountRemarkRequest} req
-     * @param {function(string, ModifyAccountRemarkResponse):void} cb
+     * This API is used to query database configurations. It does not return information of the accounts that have permissions to operate the database.
+     * @param {DescribeDBsNormalRequest} req
+     * @param {function(string, DescribeDBsNormalResponse):void} cb
      * @public
      */
-    ModifyAccountRemark(req, cb) {
-        let resp = new ModifyAccountRemarkResponse();
-        this.request("ModifyAccountRemark", req, resp, cb);
+    DescribeDBsNormal(req, cb) {
+        let resp = new DescribeDBsNormalResponse();
+        this.request("DescribeDBsNormal", req, resp, cb);
     }
 
     /**
@@ -512,6 +565,28 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to start running a migration task.
+     * @param {RunMigrationRequest} req
+     * @param {function(string, RunMigrationResponse):void} cb
+     * @public
+     */
+    RunMigration(req, cb) {
+        let resp = new RunMigrationResponse();
+        this.request("RunMigration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a backup import task.
+     * @param {StartBackupMigrationRequest} req
+     * @param {function(string, StartBackupMigrationResponse):void} cb
+     * @public
+     */
+    StartBackupMigration(req, cb) {
+        let resp = new StartBackupMigrationResponse();
+        this.request("StartBackupMigration", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an incremental backup import task.
      * @param {DeleteIncrementalMigrationRequest} req
      * @param {function(string, DeleteIncrementalMigrationResponse):void} cb
@@ -633,14 +708,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start a backup import task.
-     * @param {StartBackupMigrationRequest} req
-     * @param {function(string, StartBackupMigrationResponse):void} cb
+     * This API is used to query the parameter list of an instance.
+     * @param {DescribeInstanceParamsRequest} req
+     * @param {function(string, DescribeInstanceParamsResponse):void} cb
      * @public
      */
-    StartBackupMigration(req, cb) {
-        let resp = new StartBackupMigrationResponse();
-        this.request("StartBackupMigration", req, resp, cb);
+    DescribeInstanceParams(req, cb) {
+        let resp = new DescribeInstanceParamsResponse();
+        this.request("DescribeInstanceParams", req, resp, cb);
     }
 
     /**
@@ -674,6 +749,17 @@ class SqlserverClient extends AbstractClient {
     ModifyIncrementalMigration(req, cb) {
         let resp = new ModifyIncrementalMigrationResponse();
         this.request("ModifyIncrementalMigration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restore an instance from a backup file.
+     * @param {RestoreInstanceRequest} req
+     * @param {function(string, RestoreInstanceResponse):void} cb
+     * @public
+     */
+    RestoreInstance(req, cb) {
+        let resp = new RestoreInstanceResponse();
+        this.request("RestoreInstance", req, resp, cb);
     }
 
     /**
@@ -743,6 +829,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the parameter modification records of an instance.
+     * @param {DescribeInstanceParamRecordsRequest} req
+     * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceParamRecords(req, cb) {
+        let resp = new DescribeInstanceParamRecordsResponse();
+        this.request("DescribeInstanceParamRecords", req, resp, cb);
+    }
+
+    /**
      * This API is used to query a backup upload permission.
      * @param {DescribeUploadBackupInfoRequest} req
      * @param {function(string, DescribeUploadBackupInfoResponse):void} cb
@@ -754,14 +851,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start running a migration task.
-     * @param {RunMigrationRequest} req
-     * @param {function(string, RunMigrationResponse):void} cb
+     * This API is used to enable or disable the change data capture (CDC) feature.
+     * @param {ModifyDatabaseCDCRequest} req
+     * @param {function(string, ModifyDatabaseCDCResponse):void} cb
      * @public
      */
-    RunMigration(req, cb) {
-        let resp = new RunMigrationResponse();
-        this.request("RunMigration", req, resp, cb);
+    ModifyDatabaseCDC(req, cb) {
+        let resp = new ModifyDatabaseCDCResponse();
+        this.request("ModifyDatabaseCDC", req, resp, cb);
     }
 
     /**

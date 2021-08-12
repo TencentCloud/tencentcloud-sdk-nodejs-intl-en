@@ -1950,11 +1950,11 @@ class DescribeDBInstancesRequest extends  AbstractModel {
 
         /**
          * Filter instances using one or more criteria. Valid filter names:
-db-instance-id: filter by instance ID (the filter value is a string)
-db-instance-name: filter by instance name (the filter value is a string)
-db-project-id: filter by project ID (the filter value is an integer)
-db-pay-mode: filter by billing mode (the filter value is a string)
-db-tag-key: filter by tag key (the filter value is a string)
+db-instance-id: filter by instance ID (in string format)
+db-instance-name: filter by instance name (in string format)
+db-project-id: filter by project ID (in integer format)
+db-pay-mode: filter by billing mode (in string format)
+db-tag-key: filter by tag key (in string format)
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2082,7 +2082,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.ActivityId = null;
 
         /**
-         * Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (specify a time to switch). Default value: `0`
+         * Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at specified time). Default value: `0`
          * @type {number || null}
          */
         this.SwitchTag = null;

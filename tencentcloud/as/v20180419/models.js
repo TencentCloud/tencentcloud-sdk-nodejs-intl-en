@@ -422,6 +422,14 @@ This parameter is valid only when `InstanceAllocationPolicy` is set to `SPOT_MIX
          */
         this.SpotMixedAllocationPolicy = null;
 
+        /**
+         * Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
+<br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
+<br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
+         * @type {boolean || null}
+         */
+        this.CapacityRebalance = null;
+
     }
 
     /**
@@ -462,6 +470,7 @@ This parameter is valid only when `InstanceAllocationPolicy` is set to `SPOT_MIX
             obj.deserialize(params.SpotMixedAllocationPolicy)
             this.SpotMixedAllocationPolicy = obj;
         }
+        this.CapacityRebalance = 'CapacityRebalance' in params ? params.CapacityRebalance : null;
 
     }
 }
@@ -3318,6 +3327,16 @@ This parameter is valid only when `InstanceAllocationPolicy ` is set to `SPOT_MI
          */
         this.SpotMixedAllocationPolicy = null;
 
+        /**
+         * Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
+<br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
+<br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
+
+Default value: `False`.
+         * @type {boolean || null}
+         */
+        this.CapacityRebalance = null;
+
     }
 
     /**
@@ -3376,6 +3395,7 @@ This parameter is valid only when `InstanceAllocationPolicy ` is set to `SPOT_MI
             obj.deserialize(params.SpotMixedAllocationPolicy)
             this.SpotMixedAllocationPolicy = obj;
         }
+        this.CapacityRebalance = 'CapacityRebalance' in params ? params.CapacityRebalance : null;
 
     }
 }

@@ -991,18 +991,18 @@ class DomainFilter extends  AbstractModel {
         super();
 
         /**
-         * Filter field name, the list supported is as follows:
-- origin: primary origin server.
-- domain: domain name.
-- resourceId: domain name id.
-- status: domain name status. Values include `online`, `offline`, or `processing`.
-- serviceType: service type. Values include `web`, `download`, or `media`.
+         * Filters field name, which includes:
+- `origin`: primary origin server.
+- `domain`: domain name.
+- `resourceId`: domain name ID.
+- `status`: domain name status. Valid values: `online`, `offline`, and `processing`.
+- `serviceType`: service type. Valid values: `web`, `download`, and `media`.
 - projectId: project ID.
-- domainType: primary origin server type, `cname` indicates external origin, `COS` indicates COS origin.
-- fullUrlCache: full-path cache, which can be on or off.
-- https: whether to configure HTTPS, which can be on, off or processing.
-- originPullProtocol: origin-pull protocol type. HTTP, follow, or HTTPS are supported.
-- tagKey: tag key.
+- `domainType`: primary origin server type. Valid values: `cname` (external origin), `COS` (COS origin), and `third_party` (3rd-party object storage origin).
+- `fullUrlCache`: whether to enable full-path cache, which can be `on` or `off`.
+- `https`: whether to configure HTTPS, which can be `on`, `off` or `processing`.
+- `originPullProtocol`: origin-pull protocol type, which can be `http`, `follow`, or `https`.
+- `tagKey`: tag key.
          * @type {string || null}
          */
         this.Name = null;
@@ -1520,7 +1520,8 @@ class DescribePayTypeResponse extends  AbstractModel {
          * Billing modes:
 `flux`: bill-by-traffic
 `bandwidth`: bill-by-bandwidth
-When you switch the billing mode for a daily-billing-cycle account, if there is bandwidth usage on the day, this field indicates the billing mode that will take effect on the next day; otherwise, it indicates the billing mode that has already taken effect
+`request`: bill-by-request
+In case the billing mode is changed in the day, if there is bandwidth consumption occurred in the current day, the billing mode returned is the new billing mode for the next day. If no bandwidth consumption occurs, it indicates the current billing mode.
          * @type {string || null}
          */
         this.PayType = null;
@@ -1534,12 +1535,11 @@ month: monthly settlement
         this.BillingCycle = null;
 
         /**
-         * Billing method:
-monthMax: billed by the monthly average of daily peak traffic (monthly settlement)
-day95: billed by the daily 95th percentile bandwidth (monthly settlement)
-month95: billed by the monthly 95th percentile bandwidth (monthly settlement)
-sum: billed by the total traffic (daily or monthly settlement)
-max: billed by the peak bandwidth (daily settlement)
+         * `monthMax`: billed by the monthly average of daily peak traffic (monthly settlement)
+`day95`: billed by the daily 95th percentile bandwidth (monthly settlement)
+`month95`: billed by the monthly 95th percentile bandwidth (monthly settlement)
+`sum`: billed by the total traffic/total requests (daily or monthly settlement)
+`max`: billed by the peak bandwidth (daily settlement)
          * @type {string || null}
          */
         this.StatType = null;
@@ -1553,9 +1553,10 @@ max: billed by the peak bandwidth (daily settlement)
         this.RegionType = null;
 
         /**
-         * Currently billing mode in effect:
+         * The current billing mode in effect:
 `flux`: bill-by-traffic
 `bandwidth`: bill-by-bandwidth
+`request`: bill-by-request
          * @type {string || null}
          */
         this.CurrentPayType = null;
@@ -1774,6 +1775,12 @@ client: specifies to query data of the client region (where a user request devic
          */
         this.AreaType = null;
 
+        /**
+         * Specifies the product to query, either `cdn` (default) or `ecdn`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -1793,6 +1800,7 @@ client: specifies to query data of the client region (where a user request devic
         this.Code = 'Code' in params ? params.Code : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.AreaType = 'AreaType' in params ? params.AreaType : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -1907,6 +1915,12 @@ Default value: `mainland`.
          */
         this.Area = null;
 
+        /**
+         * Specifies the product to query, either `cdn` (default) or `ecdn`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -1917,6 +1931,7 @@ Default value: `mainland`.
             return;
         }
         this.Area = 'Area' in params ? params.Area : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -2570,6 +2585,12 @@ Default value: `bandwidth`
          */
         this.Metric = null;
 
+        /**
+         * Specifies the product to query, either `cdn` (default) or `ecdn`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -2587,6 +2608,7 @@ Default value: `bandwidth`
         this.Area = 'Area' in params ? params.Area : null;
         this.District = 'District' in params ? params.District : null;
         this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -2858,6 +2880,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.CreateTime = null;
 
+        /**
+         * Either `cdn` or `ecdn`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Channel = null;
+
     }
 
     /**
@@ -2871,6 +2900,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -3034,6 +3064,12 @@ global: locked globally
          */
         this.Readonly = null;
 
+        /**
+         * Product of the domain name, either `cdn` or `ecdn`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -3061,6 +3097,7 @@ global: locked globally
         this.Disable = 'Disable' in params ? params.Disable : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Readonly = 'Readonly' in params ? params.Readonly : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -4341,6 +4378,18 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
          */
         this.Quic = null;
 
+        /**
+         * Access authentication for S3 origin
+         * @type {AwsPrivateAccess || null}
+         */
+        this.AwsPrivateAccess = null;
+
+        /**
+         * Access authentication for OSS origin
+         * @type {OssPrivateAccess || null}
+         */
+        this.OssPrivateAccess = null;
+
     }
 
     /**
@@ -4536,6 +4585,18 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
             let obj = new Quic();
             obj.deserialize(params.Quic)
             this.Quic = obj;
+        }
+
+        if (params.AwsPrivateAccess) {
+            let obj = new AwsPrivateAccess();
+            obj.deserialize(params.AwsPrivateAccess)
+            this.AwsPrivateAccess = obj;
+        }
+
+        if (params.OssPrivateAccess) {
+            let obj = new OssPrivateAccess();
+            obj.deserialize(params.OssPrivateAccess)
+            this.OssPrivateAccess = obj;
         }
 
     }
@@ -4853,6 +4914,18 @@ global: global acceleration
          */
         this.Quic = null;
 
+        /**
+         * Access authentication for OSS origin
+         * @type {OssPrivateAccess || null}
+         */
+        this.OssPrivateAccess = null;
+
+        /**
+         * WebSocket configuration.
+         * @type {WebSocket || null}
+         */
+        this.WebSocket = null;
+
     }
 
     /**
@@ -5078,6 +5151,18 @@ global: global acceleration
             this.Quic = obj;
         }
 
+        if (params.OssPrivateAccess) {
+            let obj = new OssPrivateAccess();
+            obj.deserialize(params.OssPrivateAccess)
+            this.OssPrivateAccess = obj;
+        }
+
+        if (params.WebSocket) {
+            let obj = new WebSocket();
+            obj.deserialize(params.WebSocket)
+            this.WebSocket = obj;
+        }
+
     }
 }
 
@@ -5293,6 +5378,18 @@ class DescribeCertDomainsRequest extends  AbstractModel {
          */
         this.Cert = null;
 
+        /**
+         * Managed certificate ID. `Cert` and `CertId` cannot be both empty. If they’re both filled in, `CerID` prevails.
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * Product of the domain name, either `cdn` (default) or `ecdn`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -5303,6 +5400,8 @@ class DescribeCertDomainsRequest extends  AbstractModel {
             return;
         }
         this.Cert = 'Cert' in params ? params.Cert : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -5707,6 +5806,44 @@ The domain name status should be `Disabled`
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
+ * WebSocket configuration.
+ * @class
+ */
+class WebSocket extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable custom WebSocket timeout setting. When it’s `off`: WebSocket connection is supported, and the default timeout period is 15 seconds. To change the timeout period, please set it to `on`.
+
+* WebSocket is now only available for beta users. To use it, please submit a ticket.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Sets the timeout period in seconds. Maximum value: 65.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
 
     }
 }
@@ -7205,6 +7342,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Quic = null;
 
+        /**
+         * Access authentication for OSS origin
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {OssPrivateAccess || null}
+         */
+        this.OssPrivateAccess = null;
+
+        /**
+         * WebSocket configuration.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {WebSocket || null}
+         */
+        this.WebSocket = null;
+
     }
 
     /**
@@ -7485,6 +7636,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             let obj = new Quic();
             obj.deserialize(params.Quic)
             this.Quic = obj;
+        }
+
+        if (params.OssPrivateAccess) {
+            let obj = new OssPrivateAccess();
+            obj.deserialize(params.OssPrivateAccess)
+            this.OssPrivateAccess = obj;
+        }
+
+        if (params.WebSocket) {
+            let obj = new WebSocket();
+            obj.deserialize(params.WebSocket)
+            this.WebSocket = obj;
         }
 
     }
@@ -9846,6 +10009,12 @@ class GetDisableRecordsRequest extends  AbstractModel {
         super();
 
         /**
+         * Specifies the URL to be queried
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
          * Starting time, such as `2018-12-12 10:24:00`
          * @type {string || null}
          */
@@ -9856,12 +10025,6 @@ class GetDisableRecordsRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.EndTime = null;
-
-        /**
-         * Specifies the URL to be queried
-         * @type {string || null}
-         */
-        this.Url = null;
 
         /**
          * Current URL status
@@ -9883,6 +10046,12 @@ enable: The URL is enabled (unblocked) and can be normally accessed
          */
         this.Limit = null;
 
+        /**
+         * Task ID. The task ID and start time cannot be both left empty.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
     }
 
     /**
@@ -9892,12 +10061,13 @@ enable: The URL is enabled (unblocked) and can be normally accessed
         if (!params) {
             return;
         }
+        this.Url = 'Url' in params ? params.Url : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Url = 'Url' in params ? params.Url : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -10100,6 +10270,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CacheOptResult = null;
 
         /**
+         * Task ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -10120,6 +10297,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.CacheOptResult)
             this.CacheOptResult = obj;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11930,6 +12108,50 @@ class UpdateDomainConfigResponse extends  AbstractModel {
 }
 
 /**
+ * Access authentication configuration for OSS origin 
+ * @class
+ */
+class OssPrivateAccess extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable access authentication. Valid values: `on`, `off`.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Access ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * Key.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+
+    }
+}
+
+/**
  * Logset information
  * @class
  */
@@ -12310,7 +12532,7 @@ class ScdnAclGroup extends  AbstractModel {
         this.Configure = null;
 
         /**
-         * Rule action, which is generally `refuse`.
+         * Rule action, which can be `refuse` or `redirect`.
          * @type {string || null}
          */
         this.Result = null;
@@ -12320,6 +12542,13 @@ class ScdnAclGroup extends  AbstractModel {
          * @type {string || null}
          */
         this.Status = null;
+
+        /**
+         * Error page configuration.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {ScdnErrorPage || null}
+         */
+        this.ErrorPage = null;
 
     }
 
@@ -12342,6 +12571,12 @@ class ScdnAclGroup extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.ErrorPage) {
+            let obj = new ScdnErrorPage();
+            obj.deserialize(params.ErrorPage)
+            this.ErrorPage = obj;
+        }
 
     }
 }
@@ -13088,9 +13323,13 @@ The gap between the start time and end time should be less than or equal to 90 d
         this.EndTime = null;
 
         /**
-         * Specifies the query metric, which can be:
+         * Specifies the metric to query, which can be:
 `flux`: traffic (in bytes)
+`fluxIn`: upstream traffic (in bytes), only used for the `ecdn` product
+`fluxOut`: downstream traffic (in bytes), only used for the `ecdn` product
 `bandwidth`: bandwidth (in bps)
+`bandwidthIn`: upstream bandwidth (in bps), only used for the `ecdn` product
+`bandwidthOut`: downstream bandwidth (in bps), only used for the `ecdn` product
 `request`: number of requests
 `hitRequest`: number of hit requests
 `requestHitRate`: request hit rate (in % with two decimal digits)
@@ -13101,7 +13340,7 @@ The gap between the start time and end time should be less than or equal to 90 d
 `3xx`: lists the number of all status codes starting with **3** returned during the queried period based on the specified interval (if any)
 `4xx`: lists the number of all status codes starting with **4** returned during the queried period based on the specified interval (if any)
 `5xx`: lists the number of all status codes starting with **5** returned during the queried period based on the specified interval (if any)
-It is supported to specify a status code for query. The return will be empty if the status code has never been generated.
+Specifies the status code to query. The return will be empty if the status code has never been generated.
          * @type {string || null}
          */
         this.Metric = null;
@@ -13196,6 +13435,12 @@ Note: non-IPv6 allowlisted users cannot specify `ipv4` and `ipv6` for query
          */
         this.AreaType = null;
 
+        /**
+         * Specifies the product to query, either `cdn` (default) or `ecdn`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -13219,6 +13464,7 @@ Note: non-IPv6 allowlisted users cannot specify `ipv4` and `ipv6` for query
         this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.AreaType = 'AreaType' in params ? params.AreaType : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -13567,6 +13813,7 @@ module.exports = {
     AdvancedAuthenticationTypeB: AdvancedAuthenticationTypeB,
     WebpAdapter: WebpAdapter,
     StartCdnDomainRequest: StartCdnDomainRequest,
+    WebSocket: WebSocket,
     MapInfo: MapInfo,
     DescribeCertDomainsResponse: DescribeCertDomainsResponse,
     ScdnBotConfig: ScdnBotConfig,
@@ -13671,6 +13918,7 @@ module.exports = {
     ListTopDataResponse: ListTopDataResponse,
     MaxAge: MaxAge,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
+    OssPrivateAccess: OssPrivateAccess,
     LogSetInfo: LogSetInfo,
     SecurityConfig: SecurityConfig,
     SearchClsLogRequest: SearchClsLogRequest,

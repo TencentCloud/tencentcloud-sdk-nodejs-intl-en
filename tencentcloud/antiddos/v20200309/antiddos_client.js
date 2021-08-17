@@ -32,6 +32,7 @@ const DescribeListDDoSSpeedLimitConfigRequest = models.DescribeListDDoSSpeedLimi
 const InstanceRelation = models.InstanceRelation;
 const DescribeListProtocolBlockConfigResponse = models.DescribeListProtocolBlockConfigResponse;
 const DescribeListBGPInstancesRequest = models.DescribeListBGPInstancesRequest;
+const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
 const DeleteDDoSSpeedLimitConfigRequest = models.DeleteDDoSSpeedLimitConfigRequest;
 const CreatePacketFilterConfigResponse = models.CreatePacketFilterConfigResponse;
 const CreateL7RuleCertsRequest = models.CreateL7RuleCertsRequest;
@@ -110,6 +111,7 @@ const PacketFilterConfig = models.PacketFilterConfig;
 const DefaultAlarmThreshold = models.DefaultAlarmThreshold;
 const ForwardListener = models.ForwardListener;
 const BGPInstanceSpecification = models.BGPInstanceSpecification;
+const SwitchWaterPrintConfigResponse = models.SwitchWaterPrintConfigResponse;
 const CreateWaterPrintKeyRequest = models.CreateWaterPrintKeyRequest;
 const WaterPrintRelation = models.WaterPrintRelation;
 const InsL7Rules = models.InsL7Rules;
@@ -527,6 +529,17 @@ class AntiddosClient extends AbstractClient {
     DeletePacketFilterConfig(req, cb) {
         let resp = new DeletePacketFilterConfigResponse();
         this.request("DeletePacketFilterConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable Anti-DDoS watermark configurations.
+     * @param {SwitchWaterPrintConfigRequest} req
+     * @param {function(string, SwitchWaterPrintConfigResponse):void} cb
+     * @public
+     */
+    SwitchWaterPrintConfig(req, cb) {
+        let resp = new SwitchWaterPrintConfigResponse();
+        this.request("SwitchWaterPrintConfig", req, resp, cb);
     }
 
     /**

@@ -36,6 +36,7 @@ const DescribeResourcesByTagResponse = models.DescribeResourcesByTagResponse;
 const ModifyGroupDomainConfigRequest = models.ModifyGroupDomainConfigRequest;
 const BandwidthPriceGradient = models.BandwidthPriceGradient;
 const DescribeHTTPListenersRequest = models.DescribeHTTPListenersRequest;
+const DescribeCustomHeaderResponse = models.DescribeCustomHeaderResponse;
 const ModifyRealServerNameResponse = models.ModifyRealServerNameResponse;
 const DescribeGroupDomainConfigResponse = models.DescribeGroupDomainConfigResponse;
 const ModifyCertificateResponse = models.ModifyCertificateResponse;
@@ -53,6 +54,7 @@ const DescribeRulesResponse = models.DescribeRulesResponse;
 const DescribeProxiesResponse = models.DescribeProxiesResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
 const ModifyRealServerNameRequest = models.ModifyRealServerNameRequest;
+const ModifyGroupDomainConfigResponse = models.ModifyGroupDomainConfigResponse;
 const DeleteProxyGroupResponse = models.DeleteProxyGroupResponse;
 const CreateDomainErrorPageInfoResponse = models.CreateDomainErrorPageInfoResponse;
 const BindListenerRealServersRequest = models.BindListenerRealServersRequest;
@@ -103,6 +105,7 @@ const CreateSecurityRulesResponse = models.CreateSecurityRulesResponse;
 const DescribeAccessRegionsRequest = models.DescribeAccessRegionsRequest;
 const CreateCertificateRequest = models.CreateCertificateRequest;
 const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
+const DescribeCustomHeaderRequest = models.DescribeCustomHeaderRequest;
 const DescribeProxyGroupListResponse = models.DescribeProxyGroupListResponse;
 const DescribeDomainErrorPageInfoRequest = models.DescribeDomainErrorPageInfoRequest;
 const HTTPSListener = models.HTTPSListener;
@@ -114,16 +117,17 @@ const CreateSecurityRulesRequest = models.CreateSecurityRulesRequest;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
 const DescribeProxiesStatusRequest = models.DescribeProxiesStatusRequest;
 const ProxyStatus = models.ProxyStatus;
-const DescribeGroupAndStatisticsProxyResponse = models.DescribeGroupAndStatisticsProxyResponse;
+const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
 const CreateDomainResponse = models.CreateDomainResponse;
 const ModifyProxiesProjectResponse = models.ModifyProxiesProjectResponse;
 const ModifyDomainRequest = models.ModifyDomainRequest;
 const ModifySecurityRuleRequest = models.ModifySecurityRuleRequest;
-const NationCountryInnerInfo = models.NationCountryInnerInfo;
+const CreateCustomHeaderResponse = models.CreateCustomHeaderResponse;
 const DescribeAccessRegionsByDestRegionRequest = models.DescribeAccessRegionsByDestRegionRequest;
 const RealServer = models.RealServer;
 const DescribeRealServersRequest = models.DescribeRealServersRequest;
 const StatisticsDataInfo = models.StatisticsDataInfo;
+const CreateCustomHeaderRequest = models.CreateCustomHeaderRequest;
 const ProxyGroupInfo = models.ProxyGroupInfo;
 const CreateProxyGroupDomainResponse = models.CreateProxyGroupDomainResponse;
 const Certificate = models.Certificate;
@@ -139,6 +143,7 @@ const DescribeProxiesStatusResponse = models.DescribeProxiesStatusResponse;
 const RemoveRealServersRequest = models.RemoveRealServersRequest;
 const CreateDomainRequest = models.CreateDomainRequest;
 const CreateRuleRequest = models.CreateRuleRequest;
+const ProxySimpleInfo = models.ProxySimpleInfo;
 const DeleteSecurityPolicyRequest = models.DeleteSecurityPolicyRequest;
 const HTTPListener = models.HTTPListener;
 const ProxyGroupDetail = models.ProxyGroupDetail;
@@ -149,7 +154,7 @@ const AddRealServersResponse = models.AddRealServersResponse;
 const CloseProxiesResponse = models.CloseProxiesResponse;
 const DeleteCertificateResponse = models.DeleteCertificateResponse;
 const SecurityPolicyRuleIn = models.SecurityPolicyRuleIn;
-const ProxySimpleInfo = models.ProxySimpleInfo;
+const DescribeBlackHeaderResponse = models.DescribeBlackHeaderResponse;
 const DescribeDestRegionsRequest = models.DescribeDestRegionsRequest;
 const ModifyRuleAttributeResponse = models.ModifyRuleAttributeResponse;
 const CreateTCPListenersResponse = models.CreateTCPListenersResponse;
@@ -184,14 +189,14 @@ const ModifyTCPListenerAttributeResponse = models.ModifyTCPListenerAttributeResp
 const CountryAreaMap = models.CountryAreaMap;
 const MetricStatisticsInfo = models.MetricStatisticsInfo;
 const DescribeProxyDetailResponse = models.DescribeProxyDetailResponse;
-const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
+const DescribeGroupAndStatisticsProxyResponse = models.DescribeGroupAndStatisticsProxyResponse;
 const CreateUDPListenersResponse = models.CreateUDPListenersResponse;
 const ModifyHTTPSListenerAttributeRequest = models.ModifyHTTPSListenerAttributeRequest;
 const DescribeProxyStatisticsRequest = models.DescribeProxyStatisticsRequest;
 const DomainRuleSet = models.DomainRuleSet;
 const DescribeTCPListenersRequest = models.DescribeTCPListenersRequest;
 const CreateCertificateResponse = models.CreateCertificateResponse;
-const ModifyGroupDomainConfigResponse = models.ModifyGroupDomainConfigResponse;
+const DescribeBlackHeaderRequest = models.DescribeBlackHeaderRequest;
 const DescribeProxyStatisticsResponse = models.DescribeProxyStatisticsResponse;
 const DescribeRealServersStatusResponse = models.DescribeRealServersStatusResponse;
 const ModifyProxyGroupAttributeRequest = models.ModifyProxyGroupAttributeRequest;
@@ -209,6 +214,7 @@ const CreateHTTPSListenerRequest = models.CreateHTTPSListenerRequest;
 const DeleteSecurityRulesRequest = models.DeleteSecurityRulesRequest;
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const OpenProxyGroupResponse = models.OpenProxyGroupResponse;
+const NationCountryInnerInfo = models.NationCountryInnerInfo;
 const ProxyIdDict = models.ProxyIdDict;
 const Filter = models.Filter;
 const CreateProxyResponse = models.CreateProxyResponse;
@@ -238,28 +244,6 @@ class GaapClient extends AbstractClient {
     }
     
     /**
-     * This API (DescribeProxyGroupList) is used to pull the list of connection groups and the basic information of each connection group.
-     * @param {DescribeProxyGroupListRequest} req
-     * @param {function(string, DescribeProxyGroupListResponse):void} cb
-     * @public
-     */
-    DescribeProxyGroupList(req, cb) {
-        let resp = new DescribeProxyGroupListResponse();
-        this.request("DescribeProxyGroupList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to enable security policies.
-     * @param {OpenSecurityPolicyRequest} req
-     * @param {function(string, OpenSecurityPolicyResponse):void} cb
-     * @public
-     */
-    OpenSecurityPolicy(req, cb) {
-        let resp = new OpenSecurityPolicyResponse();
-        this.request("OpenSecurityPolicy", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeCertificates) is used to query the list of available certificates.
      * @param {DescribeCertificatesRequest} req
      * @param {function(string, DescribeCertificatesResponse):void} cb
@@ -282,17 +266,6 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify security policy rule names.
-     * @param {ModifySecurityRuleRequest} req
-     * @param {function(string, ModifySecurityRuleResponse):void} cb
-     * @public
-     */
-    ModifySecurityRule(req, cb) {
-        let resp = new ModifySecurityRuleResponse();
-        this.request("ModifySecurityRule", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeHTTPSListeners) is used to query HTTPS listener information.
      * @param {DescribeHTTPSListenersRequest} req
      * @param {function(string, DescribeHTTPSListenersResponse):void} cb
@@ -301,17 +274,6 @@ class GaapClient extends AbstractClient {
     DescribeHTTPSListeners(req, cb) {
         let resp = new DescribeHTTPSListenersResponse();
         this.request("DescribeHTTPSListeners", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateHTTPListener) is used to create an HTTPS listener in the connection instance.
-     * @param {CreateHTTPSListenerRequest} req
-     * @param {function(string, CreateHTTPSListenerResponse):void} cb
-     * @public
-     */
-    CreateHTTPSListener(req, cb) {
-        let resp = new CreateHTTPSListenerResponse();
-        this.request("CreateHTTPSListener", req, resp, cb);
     }
 
     /**
@@ -326,25 +288,169 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the statistics of an origin server's health check results. Origin server status is displayed as 1 (normal) or 0 (exceptional). The queried origin server must be bound to a listener or rule, and the ID of the bound listener or rule must be specified for the query. This API supports displaying origin server status statistics at a 1-minute granularity.
-     * @param {DescribeRealServerStatisticsRequest} req
-     * @param {function(string, DescribeRealServerStatisticsResponse):void} cb
+     * This API is used to query names of blocked custom headers.
+     * @param {DescribeBlackHeaderRequest} req
+     * @param {function(string, DescribeBlackHeaderResponse):void} cb
      * @public
      */
-    DescribeRealServerStatistics(req, cb) {
-        let resp = new DescribeRealServerStatisticsResponse();
-        this.request("DescribeRealServerStatistics", req, resp, cb);
+    DescribeBlackHeader(req, cb) {
+        let resp = new DescribeBlackHeaderResponse();
+        this.request("DescribeBlackHeader", req, resp, cb);
     }
 
     /**
-     * This API (DescribeProxyGroupDetails) is used to query connection group details.
-     * @param {DescribeProxyGroupDetailsRequest} req
-     * @param {function(string, DescribeProxyGroupDetailsResponse):void} cb
+     * This API (DescribeCountryAreaMapping) is used to obtain the country/region code mapping table.
+     * @param {DescribeCountryAreaMappingRequest} req
+     * @param {function(string, DescribeCountryAreaMappingResponse):void} cb
      * @public
      */
-    DescribeProxyGroupDetails(req, cb) {
-        let resp = new DescribeProxyGroupDetailsResponse();
-        this.request("DescribeProxyGroupDetails", req, resp, cb);
+    DescribeCountryAreaMapping(req, cb) {
+        let resp = new DescribeCountryAreaMappingResponse();
+        this.request("DescribeCountryAreaMapping", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyHTTPListenerAttribute) is used to modify the HTTP listener configuration information of a connection. Currently only supports modifying listener name.
+Note: Grouped connections currently do not support HTTP/HTTPS listeners.
+     * @param {ModifyHTTPListenerAttributeRequest} req
+     * @param {function(string, ModifyHTTPListenerAttributeResponse):void} cb
+     * @public
+     */
+    ModifyHTTPListenerAttribute(req, cb) {
+        let resp = new ModifyHTTPListenerAttributeResponse();
+        this.request("ModifyHTTPListenerAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify certificate name and content.
+     * @param {ModifyCertificateAttributesRequest} req
+     * @param {function(string, ModifyCertificateAttributesResponse):void} cb
+     * @public
+     */
+    ModifyCertificateAttributes(req, cb) {
+        let resp = new ModifyCertificateAttributesResponse();
+        this.request("ModifyCertificateAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a custom header of the HTTP/HTTPS listener. When client requests reach the listener, they will be forwarded to the origin with this custom hearer.
+     * @param {CreateCustomHeaderRequest} req
+     * @param {function(string, CreateCustomHeaderResponse):void} cb
+     * @public
+     */
+    CreateCustomHeader(req, cb) {
+        let resp = new CreateCustomHeaderResponse();
+        this.request("CreateCustomHeader", req, resp, cb);
+    }
+
+    /**
+     * This is an internal API. It is used to query the information of connections and connection groups from which the statistics can be derived.
+     * @param {DescribeGroupAndStatisticsProxyRequest} req
+     * @param {function(string, DescribeGroupAndStatisticsProxyResponse):void} cb
+     * @public
+     */
+    DescribeGroupAndStatisticsProxy(req, cb) {
+        let resp = new DescribeGroupAndStatisticsProxyResponse();
+        this.request("DescribeGroupAndStatisticsProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable security policies.
+     * @param {CloseSecurityPolicyRequest} req
+     * @param {function(string, CloseSecurityPolicyResponse):void} cb
+     * @public
+     */
+    CloseSecurityPolicy(req, cb) {
+        let resp = new CloseSecurityPolicyResponse();
+        this.request("CloseSecurityPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateProxyGroupDomain) is used to create the connection group domain name, and enable the domain name resolution.
+     * @param {CreateProxyGroupDomainRequest} req
+     * @param {function(string, CreateProxyGroupDomainResponse):void} cb
+     * @public
+     */
+    CreateProxyGroupDomain(req, cb) {
+        let resp = new CreateProxyGroupDomainResponse();
+        this.request("CreateProxyGroupDomain", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateTCPListeners) is used to batch create UDP listeners of single connections or connection groups.
+     * @param {CreateUDPListenersRequest} req
+     * @param {function(string, CreateUDPListenersResponse):void} cb
+     * @public
+     */
+    CreateUDPListeners(req, cb) {
+        let resp = new CreateUDPListenersResponse();
+        this.request("CreateUDPListeners", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeProxyDetail) is used to query connection details.
+     * @param {DescribeProxyDetailRequest} req
+     * @param {function(string, DescribeProxyDetailResponse):void} cb
+     * @public
+     */
+    DescribeProxyDetail(req, cb) {
+        let resp = new DescribeProxyDetailResponse();
+        this.request("DescribeProxyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeRuleRealServers) is used to query forwarding rules-related origin server information, including information of origin servers that can be bound and have been bound.
+     * @param {DescribeRuleRealServersRequest} req
+     * @param {function(string, DescribeRuleRealServersResponse):void} cb
+     * @public
+     */
+    DescribeRuleRealServers(req, cb) {
+        let resp = new DescribeRuleRealServersResponse();
+        this.request("DescribeRuleRealServers", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDestRegions) is used to query an origin server region (i.e., the region in which the origin server locates).
+     * @param {DescribeDestRegionsRequest} req
+     * @param {function(string, DescribeDestRegionsResponse):void} cb
+     * @public
+     */
+    DescribeDestRegions(req, cb) {
+        let resp = new DescribeDestRegionsResponse();
+        this.request("DescribeDestRegions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pull the list of rules based on rule ID. It supports pulling 1 to 10 rules at a time.
+     * @param {DescribeRulesByRuleIdsRequest} req
+     * @param {function(string, DescribeRulesByRuleIdsResponse):void} cb
+     * @public
+     */
+    DescribeRulesByRuleIds(req, cb) {
+        let resp = new DescribeRulesByRuleIdsResponse();
+        this.request("DescribeRulesByRuleIds", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeProxyGroupList) is used to pull the list of connection groups and the basic information of each connection group.
+     * @param {DescribeProxyGroupListRequest} req
+     * @param {function(string, DescribeProxyGroupListResponse):void} cb
+     * @public
+     */
+    DescribeProxyGroupList(req, cb) {
+        let resp = new DescribeProxyGroupListResponse();
+        this.request("DescribeProxyGroupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable security policies.
+     * @param {OpenSecurityPolicyRequest} req
+     * @param {function(string, OpenSecurityPolicyResponse):void} cb
+     * @public
+     */
+    OpenSecurityPolicy(req, cb) {
+        let resp = new OpenSecurityPolicyResponse();
+        this.request("OpenSecurityPolicy", req, resp, cb);
     }
 
     /**
@@ -370,28 +476,6 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * This API (DescribeTCPListeners) is used to query the TCP listener information of a single connection or connection group.
-     * @param {DescribeTCPListenersRequest} req
-     * @param {function(string, DescribeTCPListenersResponse):void} cb
-     * @public
-     */
-    DescribeTCPListeners(req, cb) {
-        let resp = new DescribeTCPListenersResponse();
-        this.request("DescribeTCPListeners", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateRule) is used to create the forwarding rules of HTTP/HTTPS listeners.
-     * @param {CreateRuleRequest} req
-     * @param {function(string, CreateRuleResponse):void} cb
-     * @public
-     */
-    CreateRule(req, cb) {
-        let resp = new CreateRuleResponse();
-        this.request("CreateRule", req, resp, cb);
-    }
-
-    /**
      * This API is used to customize the error code of an error response to the specified domain name.
      * @param {CreateDomainErrorPageInfoRequest} req
      * @param {function(string, CreateDomainErrorPageInfoResponse):void} cb
@@ -414,61 +498,6 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain security policy details.
-     * @param {DescribeSecurityPolicyDetailRequest} req
-     * @param {function(string, DescribeSecurityPolicyDetailResponse):void} cb
-     * @public
-     */
-    DescribeSecurityPolicyDetail(req, cb) {
-        let resp = new DescribeSecurityPolicyDetailResponse();
-        this.request("DescribeSecurityPolicyDetail", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyDomain) is used to modify domain names of listeners. For connections of version 3.0, it supports modifying certificates of the domain names.
-     * @param {ModifyDomainRequest} req
-     * @param {function(string, ModifyDomainResponse):void} cb
-     * @public
-     */
-    ModifyDomain(req, cb) {
-        let resp = new ModifyDomainResponse();
-        this.request("ModifyDomain", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify certificate name and content.
-     * @param {ModifyCertificateAttributesRequest} req
-     * @param {function(string, ModifyCertificateAttributesResponse):void} cb
-     * @public
-     */
-    ModifyCertificateAttributes(req, cb) {
-        let resp = new ModifyCertificateAttributesResponse();
-        this.request("ModifyCertificateAttributes", req, resp, cb);
-    }
-
-    /**
-     * This API (OpenProxies) is used to enable one or more connections.
-     * @param {OpenProxiesRequest} req
-     * @param {function(string, OpenProxiesResponse):void} cb
-     * @public
-     */
-    OpenProxies(req, cb) {
-        let resp = new OpenProxiesResponse();
-        this.request("OpenProxies", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeRuleRealServers) is used to query forwarding rules-related origin server information, including information of origin servers that can be bound and have been bound.
-     * @param {DescribeRuleRealServersRequest} req
-     * @param {function(string, DescribeRuleRealServersResponse):void} cb
-     * @public
-     */
-    DescribeRuleRealServers(req, cb) {
-        let resp = new DescribeRuleRealServersResponse();
-        this.request("DescribeRuleRealServers", req, resp, cb);
-    }
-
-    /**
      * This API (ModifyRealServerName) is used to modify origin server names.
      * @param {ModifyRealServerNameRequest} req
      * @param {function(string, ModifyRealServerNameResponse):void} cb
@@ -480,36 +509,15 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * This API (CheckProxyCreate) is used to query whether an acceleration connection with the specified configuration can be created.
-     * @param {CheckProxyCreateRequest} req
-     * @param {function(string, CheckProxyCreateResponse):void} cb
+     * This API (BindListenerRealServers) is used for the TCP/UDP listener to bind/unbind the origin server.
+Note: This API unbinds the previously bound origin servers, and binds the origin servers selected for this call. For example, the previously bound origin servers are A, B and C, and the origin servers selected for this call are C, D and E, then the origin servers bound after this call will be C, D and E.
+     * @param {BindListenerRealServersRequest} req
+     * @param {function(string, BindListenerRealServersResponse):void} cb
      * @public
      */
-    CheckProxyCreate(req, cb) {
-        let resp = new CheckProxyCreateResponse();
-        this.request("CheckProxyCreate", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeCountryAreaMapping) is used to obtain the country/region code mapping table.
-     * @param {DescribeCountryAreaMappingRequest} req
-     * @param {function(string, DescribeCountryAreaMappingResponse):void} cb
-     * @public
-     */
-    DescribeCountryAreaMapping(req, cb) {
-        let resp = new DescribeCountryAreaMappingResponse();
-        this.request("DescribeCountryAreaMapping", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeAccessRegions) is used to query acceleration region (client access region).
-     * @param {DescribeAccessRegionsRequest} req
-     * @param {function(string, DescribeAccessRegionsResponse):void} cb
-     * @public
-     */
-    DescribeAccessRegions(req, cb) {
-        let resp = new DescribeAccessRegionsResponse();
-        this.request("DescribeAccessRegions", req, resp, cb);
+    BindListenerRealServers(req, cb) {
+        let resp = new BindListenerRealServersResponse();
+        this.request("BindListenerRealServers", req, resp, cb);
     }
 
     /**
@@ -524,15 +532,267 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * This API (ModifyHTTPListenerAttribute) is used to modify the HTTP listener configuration information of a connection. Currently only supports modifying listener name.
-Note: Grouped connections currently do not support HTTP/HTTPS listeners.
-     * @param {ModifyHTTPListenerAttributeRequest} req
-     * @param {function(string, ModifyHTTPListenerAttributeResponse):void} cb
+     * This API (DeleteCertificate) is used to delete certificates.
+     * @param {DeleteCertificateRequest} req
+     * @param {function(string, DeleteCertificateResponse):void} cb
      * @public
      */
-    ModifyHTTPListenerAttribute(req, cb) {
-        let resp = new ModifyHTTPListenerAttributeResponse();
-        this.request("ModifyHTTPListenerAttribute", req, resp, cb);
+    DeleteCertificate(req, cb) {
+        let resp = new DeleteCertificateResponse();
+        this.request("DeleteCertificate", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeAccessRegionsByDestRegion) is used to query the list of the available acceleration regions based on the origin server region.
+     * @param {DescribeAccessRegionsByDestRegionRequest} req
+     * @param {function(string, DescribeAccessRegionsByDestRegionResponse):void} cb
+     * @public
+     */
+    DescribeAccessRegionsByDestRegion(req, cb) {
+        let resp = new DescribeAccessRegionsByDestRegionResponse();
+        this.request("DescribeAccessRegionsByDestRegion", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyGroupDomainConfig) is used to configure the nearest access domain name of a connection group.
+     * @param {ModifyGroupDomainConfigRequest} req
+     * @param {function(string, ModifyGroupDomainConfigResponse):void} cb
+     * @public
+     */
+    ModifyGroupDomainConfig(req, cb) {
+        let resp = new ModifyGroupDomainConfigResponse();
+        this.request("ModifyGroupDomainConfig", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeTCPListeners) is used to query the TCP listener information of a single connection or connection group.
+     * @param {DescribeTCPListenersRequest} req
+     * @param {function(string, DescribeTCPListenersResponse):void} cb
+     * @public
+     */
+    DescribeTCPListeners(req, cb) {
+        let resp = new DescribeTCPListenersResponse();
+        this.request("DescribeTCPListeners", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query origin server information. It can query all origin servers under the specified project name, and supports fuzzy query by specified IPs or domain names.
+     * @param {DescribeRealServersRequest} req
+     * @param {function(string, DescribeRealServersResponse):void} cb
+     * @public
+     */
+    DescribeRealServers(req, cb) {
+        let resp = new DescribeRealServersResponse();
+        this.request("DescribeRealServers", req, resp, cb);
+    }
+
+    /**
+     * This is an internal API. It is used to query the information of connections and listeners from which the statistics can be derived.
+     * @param {DescribeProxyAndStatisticsListenersRequest} req
+     * @param {function(string, DescribeProxyAndStatisticsListenersResponse):void} cb
+     * @public
+     */
+    DescribeProxyAndStatisticsListeners(req, cb) {
+        let resp = new DescribeProxyAndStatisticsListenersResponse();
+        this.request("DescribeProxyAndStatisticsListeners", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateHTTPListener) is used to create an HTTP listener in the connection instance.
+     * @param {CreateHTTPListenerRequest} req
+     * @param {function(string, CreateHTTPListenerResponse):void} cb
+     * @public
+     */
+    CreateHTTPListener(req, cb) {
+        let resp = new CreateHTTPListenerResponse();
+        this.request("CreateHTTPListener", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeUDPListeners) is used to query the UDP listener information of a single connection or connection group.
+     * @param {DescribeUDPListenersRequest} req
+     * @param {function(string, DescribeUDPListenersResponse):void} cb
+     * @public
+     */
+    DescribeUDPListeners(req, cb) {
+        let resp = new DescribeUDPListenersResponse();
+        this.request("DescribeUDPListeners", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyProxyConfiguration) is used to modify connection configurations. You can expand or reduce the capacity based on current business requirements. It only supports connections with a Scalarable of 1. Scalarable can be obtained via DescribeProxies API.
+     * @param {ModifyProxyConfigurationRequest} req
+     * @param {function(string, ModifyProxyConfigurationResponse):void} cb
+     * @public
+     */
+    ModifyProxyConfiguration(req, cb) {
+        let resp = new ModifyProxyConfigurationResponse();
+        this.request("ModifyProxyConfiguration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable a connection group. Once disabled, the connection group will no longer generate traffic, but the basic connection configuration fees will still be incurred every day.
+     * @param {CloseProxyGroupRequest} req
+     * @param {function(string, CloseProxyGroupResponse):void} cb
+     * @public
+     */
+    CloseProxyGroup(req, cb) {
+        let resp = new CloseProxyGroupResponse();
+        this.request("CloseProxyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyTCPListenerAttribute) is used to modify the TCP listener configuration of a connection instance, including health check configuration and scheduling policies.
+     * @param {ModifyTCPListenerAttributeRequest} req
+     * @param {function(string, ModifyTCPListenerAttributeResponse):void} cb
+     * @public
+     */
+    ModifyTCPListenerAttribute(req, cb) {
+        let resp = new ModifyTCPListenerAttributeResponse();
+        this.request("ModifyTCPListenerAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the statistics of an origin server's health check results. Origin server status is displayed as 1 (normal) or 0 (exceptional). The queried origin server must be bound to a listener or rule, and the ID of the bound listener or rule must be specified for the query. This API supports displaying origin server status statistics at a 1-minute granularity.
+     * @param {DescribeRealServerStatisticsRequest} req
+     * @param {function(string, DescribeRealServerStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeRealServerStatistics(req, cb) {
+        let resp = new DescribeRealServerStatisticsResponse();
+        this.request("DescribeRealServerStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeHTTPListeners) is used to query HTTP listener information.
+     * @param {DescribeHTTPListenersRequest} req
+     * @param {function(string, DescribeHTTPListenersResponse):void} cb
+     * @public
+     */
+    DescribeHTTPListeners(req, cb) {
+        let resp = new DescribeHTTPListenersResponse();
+        this.request("DescribeHTTPListeners", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateProxyGroup) is used to create a connection group.
+     * @param {CreateProxyGroupRequest} req
+     * @param {function(string, CreateProxyGroupResponse):void} cb
+     * @public
+     */
+    CreateProxyGroup(req, cb) {
+        let resp = new CreateProxyGroupResponse();
+        this.request("CreateProxyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateCertificate) is used to create the GAAP certificates and configuration files, including basic authentication configuration files, client CA certificates, server SSL certificates, GAAP SSL certificates, and origin server CA certificates.
+     * @param {CreateCertificateRequest} req
+     * @param {function(string, CreateCertificateResponse):void} cb
+     * @public
+     */
+    CreateCertificate(req, cb) {
+        let resp = new CreateCertificateResponse();
+        this.request("CreateCertificate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of custom headers.
+     * @param {DescribeCustomHeaderRequest} req
+     * @param {function(string, DescribeCustomHeaderResponse):void} cb
+     * @public
+     */
+    DescribeCustomHeader(req, cb) {
+        let resp = new DescribeCustomHeaderResponse();
+        this.request("DescribeCustomHeader", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyProxiesAttribute) is used to modify instance attributes (currently only supports modifying connection name).
+     * @param {ModifyProxiesAttributeRequest} req
+     * @param {function(string, ModifyProxiesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyProxiesAttribute(req, cb) {
+        let resp = new ModifyProxiesAttributeResponse();
+        this.request("ModifyProxiesAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API (DestroyProxies) is used to terminate a connection. If terminated, no fees will be incurred.
+     * @param {DestroyProxiesRequest} req
+     * @param {function(string, DestroyProxiesResponse):void} cb
+     * @public
+     */
+    DestroyProxies(req, cb) {
+        let resp = new DestroyProxiesResponse();
+        this.request("DestroyProxies", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateProxy) is used to create an acceleration connection with specified configuration.
+     * @param {CreateProxyRequest} req
+     * @param {function(string, CreateProxyResponse):void} cb
+     * @public
+     */
+    CreateProxy(req, cb) {
+        let resp = new CreateProxyResponse();
+        this.request("CreateProxy", req, resp, cb);
+    }
+
+    /**
+     * This API (DeleteDomain) is only applicable to layer-7 listeners. It is used to delete the domain names of this listener, and all the rules under the domain name. All rules bound to the origin server are unbound automatically.
+     * @param {DeleteDomainRequest} req
+     * @param {function(string, DeleteDomainResponse):void} cb
+     * @public
+     */
+    DeleteDomain(req, cb) {
+        let resp = new DeleteDomainResponse();
+        this.request("DeleteDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain security policy details.
+     * @param {DescribeSecurityPolicyDetailRequest} req
+     * @param {function(string, DescribeSecurityPolicyDetailResponse):void} cb
+     * @public
+     */
+    DescribeSecurityPolicyDetail(req, cb) {
+        let resp = new DescribeSecurityPolicyDetailResponse();
+        this.request("DescribeSecurityPolicyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the added origin server (server) IP or domain name.
+     * @param {RemoveRealServersRequest} req
+     * @param {function(string, RemoveRealServersResponse):void} cb
+     * @public
+     */
+    RemoveRealServers(req, cb) {
+        let resp = new RemoveRealServersResponse();
+        this.request("RemoveRealServers", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of security rules based on security rule ID. It supports querying 1 to 20 security rules at a time.
+     * @param {DescribeSecurityRulesRequest} req
+     * @param {function(string, DescribeSecurityRulesResponse):void} cb
+     * @public
+     */
+    DescribeSecurityRules(req, cb) {
+        let resp = new DescribeSecurityRulesResponse();
+        this.request("DescribeSecurityRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create security policies.
+     * @param {CreateSecurityPolicyRequest} req
+     * @param {function(string, CreateSecurityPolicyResponse):void} cb
+     * @public
+     */
+    CreateSecurityPolicy(req, cb) {
+        let resp = new CreateSecurityPolicyResponse();
+        this.request("CreateSecurityPolicy", req, resp, cb);
     }
 
     /**
@@ -547,36 +807,58 @@ Note: Grouped connections currently do not support HTTP/HTTPS listeners.
     }
 
     /**
-     * This API (DescribeProxyDetail) is used to query connection details.
-     * @param {DescribeProxyDetailRequest} req
-     * @param {function(string, DescribeProxyDetailResponse):void} cb
+     * This API (CreateRule) is used to create the forwarding rules of HTTP/HTTPS listeners.
+     * @param {CreateRuleRequest} req
+     * @param {function(string, CreateRuleResponse):void} cb
      * @public
      */
-    DescribeProxyDetail(req, cb) {
-        let resp = new DescribeProxyDetailResponse();
-        this.request("DescribeProxyDetail", req, resp, cb);
+    CreateRule(req, cb) {
+        let resp = new CreateRuleResponse();
+        this.request("CreateRule", req, resp, cb);
     }
 
     /**
-     * This API (DeleteCertificate) is used to delete certificates.
-     * @param {DeleteCertificateRequest} req
-     * @param {function(string, DeleteCertificateResponse):void} cb
+     * This API (ModifyDomain) is used to modify domain names of listeners. For connections of version 3.0, it supports modifying certificates of the domain names.
+     * @param {ModifyDomainRequest} req
+     * @param {function(string, ModifyDomainResponse):void} cb
      * @public
      */
-    DeleteCertificate(req, cb) {
-        let resp = new DeleteCertificateResponse();
-        this.request("DeleteCertificate", req, resp, cb);
+    ModifyDomain(req, cb) {
+        let resp = new ModifyDomainResponse();
+        this.request("ModifyDomain", req, resp, cb);
     }
 
     /**
-     * This API is used to create security policies.
-     * @param {CreateSecurityPolicyRequest} req
-     * @param {function(string, CreateSecurityPolicyResponse):void} cb
+     * This API (OpenProxies) is used to enable one or more connections.
+     * @param {OpenProxiesRequest} req
+     * @param {function(string, OpenProxiesResponse):void} cb
      * @public
      */
-    CreateSecurityPolicy(req, cb) {
-        let resp = new CreateSecurityPolicyResponse();
-        this.request("CreateSecurityPolicy", req, resp, cb);
+    OpenProxies(req, cb) {
+        let resp = new OpenProxiesResponse();
+        this.request("OpenProxies", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyUDPListenerAttribute) is used to modify the UDP listener configuration of a connection instance, including modification of listener names and scheduling policies.
+     * @param {ModifyUDPListenerAttributeRequest} req
+     * @param {function(string, ModifyUDPListenerAttributeResponse):void} cb
+     * @public
+     */
+    ModifyUDPListenerAttribute(req, cb) {
+        let resp = new ModifyUDPListenerAttributeResponse();
+        this.request("ModifyUDPListenerAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeProxyGroupDetails) is used to query connection group details.
+     * @param {DescribeProxyGroupDetailsRequest} req
+     * @param {function(string, DescribeProxyGroupDetailsResponse):void} cb
+     * @public
+     */
+    DescribeProxyGroupDetails(req, cb) {
+        let resp = new DescribeProxyGroupDetailsResponse();
+        this.request("DescribeProxyGroupDetails", req, resp, cb);
     }
 
     /**
@@ -613,28 +895,6 @@ Note: Grouped connections currently do not support HTTP/HTTPS listeners.
     }
 
     /**
-     * This API (DescribeGroupDomainConfig) is used to obtain the domain name resolution configuration details of a connection group.
-     * @param {DescribeGroupDomainConfigRequest} req
-     * @param {function(string, DescribeGroupDomainConfigResponse):void} cb
-     * @public
-     */
-    DescribeGroupDomainConfig(req, cb) {
-        let resp = new DescribeGroupDomainConfigResponse();
-        this.request("DescribeGroupDomainConfig", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeUDPListeners) is used to query the UDP listener information of a single connection or connection group.
-     * @param {DescribeUDPListenersRequest} req
-     * @param {function(string, DescribeUDPListenersResponse):void} cb
-     * @public
-     */
-    DescribeUDPListeners(req, cb) {
-        let resp = new DescribeUDPListenersResponse();
-        this.request("DescribeUDPListeners", req, resp, cb);
-    }
-
-    /**
      * This API is used to add the information of the origin server (server), which supports IP or the domain name.
      * @param {AddRealServersRequest} req
      * @param {function(string, AddRealServersResponse):void} cb
@@ -643,28 +903,6 @@ Note: Grouped connections currently do not support HTTP/HTTPS listeners.
     AddRealServers(req, cb) {
         let resp = new AddRealServersResponse();
         this.request("AddRealServers", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeAccessRegionsByDestRegion) is used to query the list of the available acceleration regions based on the origin server region.
-     * @param {DescribeAccessRegionsByDestRegionRequest} req
-     * @param {function(string, DescribeAccessRegionsByDestRegionResponse):void} cb
-     * @public
-     */
-    DescribeAccessRegionsByDestRegion(req, cb) {
-        let resp = new DescribeAccessRegionsByDestRegionResponse();
-        this.request("DescribeAccessRegionsByDestRegion", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyHTTPSListenerAttribute) is used to modify HTTPS listener configurations. It currently do not support connection groups and connections of version 1.0.
-     * @param {ModifyHTTPSListenerAttributeRequest} req
-     * @param {function(string, ModifyHTTPSListenerAttributeResponse):void} cb
-     * @public
-     */
-    ModifyHTTPSListenerAttribute(req, cb) {
-        let resp = new ModifyHTTPSListenerAttributeResponse();
-        this.request("ModifyHTTPSListenerAttribute", req, resp, cb);
     }
 
     /**
@@ -680,17 +918,6 @@ This API only supports connections of version 3.0.
     }
 
     /**
-     * This API (ModifyRuleAttribute) is used to modify forwarding rule information, including health check configuration and forwarding policies.
-     * @param {ModifyRuleAttributeRequest} req
-     * @param {function(string, ModifyRuleAttributeResponse):void} cb
-     * @public
-     */
-    ModifyRuleAttribute(req, cb) {
-        let resp = new ModifyRuleAttributeResponse();
-        this.request("ModifyRuleAttribute", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeCertificateDetail) is used to query certificate details, including the certificate ID, name, type, content, key, and other information.
      * @param {DescribeCertificateDetailRequest} req
      * @param {function(string, DescribeCertificateDetailResponse):void} cb
@@ -699,249 +926,6 @@ This API only supports connections of version 3.0.
     DescribeCertificateDetail(req, cb) {
         let resp = new DescribeCertificateDetailResponse();
         this.request("DescribeCertificateDetail", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disable security policies.
-     * @param {CloseSecurityPolicyRequest} req
-     * @param {function(string, CloseSecurityPolicyResponse):void} cb
-     * @public
-     */
-    CloseSecurityPolicy(req, cb) {
-        let resp = new CloseSecurityPolicyResponse();
-        this.request("CloseSecurityPolicy", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyGroupDomainConfig) is used to configure the nearest access domain name of a connection group.
-     * @param {ModifyGroupDomainConfigRequest} req
-     * @param {function(string, ModifyGroupDomainConfigResponse):void} cb
-     * @public
-     */
-    ModifyGroupDomainConfig(req, cb) {
-        let resp = new ModifyGroupDomainConfigResponse();
-        this.request("ModifyGroupDomainConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, concurrence, packet loss, and latency data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
-     * @param {DescribeProxyStatisticsRequest} req
-     * @param {function(string, DescribeProxyStatisticsResponse):void} cb
-     * @public
-     */
-    DescribeProxyStatistics(req, cb) {
-        let resp = new DescribeProxyStatisticsResponse();
-        this.request("DescribeProxyStatistics", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete the added origin server (server) IP or domain name.
-     * @param {RemoveRealServersRequest} req
-     * @param {function(string, RemoveRealServersResponse):void} cb
-     * @public
-     */
-    RemoveRealServers(req, cb) {
-        let resp = new RemoveRealServersResponse();
-        this.request("RemoveRealServers", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the custom error response to a domain name.
-     * @param {DescribeDomainErrorPageInfoRequest} req
-     * @param {function(string, DescribeDomainErrorPageInfoResponse):void} cb
-     * @public
-     */
-    DescribeDomainErrorPageInfo(req, cb) {
-        let resp = new DescribeDomainErrorPageInfoResponse();
-        this.request("DescribeDomainErrorPageInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query origin server information. It can query all origin servers under the specified project name, and supports fuzzy query by specified IPs or domain names.
-     * @param {DescribeRealServersRequest} req
-     * @param {function(string, DescribeRealServersResponse):void} cb
-     * @public
-     */
-    DescribeRealServers(req, cb) {
-        let resp = new DescribeRealServersResponse();
-        this.request("DescribeRealServers", req, resp, cb);
-    }
-
-    /**
-     * This API (SetAuthentication) is used for the advanced authentication configuration of connections, including authentication methods and their certificates. If only supports connections of version 3.0.
-     * @param {SetAuthenticationRequest} req
-     * @param {function(string, SetAuthenticationResponse):void} cb
-     * @public
-     */
-    SetAuthentication(req, cb) {
-        let resp = new SetAuthenticationResponse();
-        this.request("SetAuthentication", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyUDPListenerAttribute) is used to modify the UDP listener configuration of a connection instance, including modification of listener names and scheduling policies.
-     * @param {ModifyUDPListenerAttributeRequest} req
-     * @param {function(string, ModifyUDPListenerAttributeResponse):void} cb
-     * @public
-     */
-    ModifyUDPListenerAttribute(req, cb) {
-        let resp = new ModifyUDPListenerAttributeResponse();
-        this.request("ModifyUDPListenerAttribute", req, resp, cb);
-    }
-
-    /**
-     * This is an internal API. It is used to query the information of connections and listeners from which the statistics can be derived.
-     * @param {DescribeProxyAndStatisticsListenersRequest} req
-     * @param {function(string, DescribeProxyAndStatisticsListenersResponse):void} cb
-     * @public
-     */
-    DescribeProxyAndStatisticsListeners(req, cb) {
-        let resp = new DescribeProxyAndStatisticsListenersResponse();
-        this.request("DescribeProxyAndStatisticsListeners", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateHTTPListener) is used to create an HTTP listener in the connection instance.
-     * @param {CreateHTTPListenerRequest} req
-     * @param {function(string, CreateHTTPListenerResponse):void} cb
-     * @public
-     */
-    CreateHTTPListener(req, cb) {
-        let resp = new CreateHTTPListenerResponse();
-        this.request("CreateHTTPListener", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateProxyGroupDomain) is used to create the connection group domain name, and enable the domain name resolution.
-     * @param {CreateProxyGroupDomainRequest} req
-     * @param {function(string, CreateProxyGroupDomainResponse):void} cb
-     * @public
-     */
-    CreateProxyGroupDomain(req, cb) {
-        let resp = new CreateProxyGroupDomainResponse();
-        this.request("CreateProxyGroupDomain", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyProxyConfiguration) is used to modify connection configurations. You can expand or reduce the capacity based on current business requirements. It only supports connections with a Scalarable of 1. Scalarable can be obtained via DescribeProxies API.
-     * @param {ModifyProxyConfigurationRequest} req
-     * @param {function(string, ModifyProxyConfigurationResponse):void} cb
-     * @public
-     */
-    ModifyProxyConfiguration(req, cb) {
-        let resp = new ModifyProxyConfigurationResponse();
-        this.request("ModifyProxyConfiguration", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeResourcesByTag) is used to query corresponding resource information by tags, including connection, connection group, and origin server.
-     * @param {DescribeResourcesByTagRequest} req
-     * @param {function(string, DescribeResourcesByTagResponse):void} cb
-     * @public
-     */
-    DescribeResourcesByTag(req, cb) {
-        let resp = new DescribeResourcesByTagResponse();
-        this.request("DescribeResourcesByTag", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disable a connection group. Once disabled, the connection group will no longer generate traffic, but the basic connection configuration fees will still be incurred every day.
-     * @param {CloseProxyGroupRequest} req
-     * @param {function(string, CloseProxyGroupResponse):void} cb
-     * @public
-     */
-    CloseProxyGroup(req, cb) {
-        let resp = new CloseProxyGroupResponse();
-        this.request("CloseProxyGroup", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyTCPListenerAttribute) is used to modify the TCP listener configuration of a connection instance, including health check configuration and scheduling policies.
-     * @param {ModifyTCPListenerAttributeRequest} req
-     * @param {function(string, ModifyTCPListenerAttributeResponse):void} cb
-     * @public
-     */
-    ModifyTCPListenerAttribute(req, cb) {
-        let resp = new ModifyTCPListenerAttributeResponse();
-        this.request("ModifyTCPListenerAttribute", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyProxyGroupAttribute) is used to modify connection group attributes. It currently only supports modifying connection group name.
-     * @param {ModifyProxyGroupAttributeRequest} req
-     * @param {function(string, ModifyProxyGroupAttributeResponse):void} cb
-     * @public
-     */
-    ModifyProxyGroupAttribute(req, cb) {
-        let resp = new ModifyProxyGroupAttributeResponse();
-        this.request("ModifyProxyGroupAttribute", req, resp, cb);
-    }
-
-    /**
-     * This is an internal API. It is used to query the information of connections and connection groups from which the statistics can be derived.
-     * @param {DescribeGroupAndStatisticsProxyRequest} req
-     * @param {function(string, DescribeGroupAndStatisticsProxyResponse):void} cb
-     * @public
-     */
-    DescribeGroupAndStatisticsProxy(req, cb) {
-        let resp = new DescribeGroupAndStatisticsProxyResponse();
-        this.request("DescribeGroupAndStatisticsProxy", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeDestRegions) is used to query an origin server region (i.e., the region in which the origin server locates).
-     * @param {DescribeDestRegionsRequest} req
-     * @param {function(string, DescribeDestRegionsResponse):void} cb
-     * @public
-     */
-    DescribeDestRegions(req, cb) {
-        let resp = new DescribeDestRegionsResponse();
-        this.request("DescribeDestRegions", req, resp, cb);
-    }
-
-    /**
-     * This API (BindListenerRealServers) is used for the TCP/UDP listener to bind/unbind the origin server.
-Note: This API unbinds the previously bound origin servers, and binds the origin servers selected for this call. For example, the previously bound origin servers are A, B and C, and the origin servers selected for this call are C, D and E, then the origin servers bound after this call will be C, D and E.
-     * @param {BindListenerRealServersRequest} req
-     * @param {function(string, BindListenerRealServersResponse):void} cb
-     * @public
-     */
-    BindListenerRealServers(req, cb) {
-        let resp = new BindListenerRealServersResponse();
-        this.request("BindListenerRealServers", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeHTTPListeners) is used to query HTTP listener information.
-     * @param {DescribeHTTPListenersRequest} req
-     * @param {function(string, DescribeHTTPListenersResponse):void} cb
-     * @public
-     */
-    DescribeHTTPListeners(req, cb) {
-        let resp = new DescribeHTTPListenersResponse();
-        this.request("DescribeHTTPListeners", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateProxyGroup) is used to create a connection group.
-     * @param {CreateProxyGroupRequest} req
-     * @param {function(string, CreateProxyGroupResponse):void} cb
-     * @public
-     */
-    CreateProxyGroup(req, cb) {
-        let resp = new CreateProxyGroupResponse();
-        this.request("CreateProxyGroup", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateTCPListeners) is used to batch create UDP listeners of single connections or connection groups.
-     * @param {CreateUDPListenersRequest} req
-     * @param {function(string, CreateUDPListenersResponse):void} cb
-     * @public
-     */
-    CreateUDPListeners(req, cb) {
-        let resp = new CreateUDPListenersResponse();
-        this.request("CreateUDPListeners", req, resp, cb);
     }
 
     /**
@@ -956,14 +940,124 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     }
 
     /**
-     * This API (CreateCertificate) is used to create the GAAP certificates and configuration files, including basic authentication configuration files, client CA certificates, server SSL certificates, GAAP SSL certificates, and origin server CA certificates.
-     * @param {CreateCertificateRequest} req
-     * @param {function(string, CreateCertificateResponse):void} cb
+     * This API (DescribeRealServersStatus) is used to query whether an origin server has been bound to a rule or listener.
+     * @param {DescribeRealServersStatusRequest} req
+     * @param {function(string, DescribeRealServersStatusResponse):void} cb
      * @public
      */
-    CreateCertificate(req, cb) {
-        let resp = new CreateCertificateResponse();
-        this.request("CreateCertificate", req, resp, cb);
+    DescribeRealServersStatus(req, cb) {
+        let resp = new DescribeRealServersStatusResponse();
+        this.request("DescribeRealServersStatus", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeRules) is used to query all rule information of a listener, including the domain names, paths, and list of bound origin servers. For version 3.0 connections, this API returns the advanced authentication configuration information of the domain name.
+     * @param {DescribeRulesRequest} req
+     * @param {function(string, DescribeRulesResponse):void} cb
+     * @public
+     */
+    DescribeRules(req, cb) {
+        let resp = new DescribeRulesResponse();
+        this.request("DescribeRules", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeListenerRealServers) is used to query the origin server list of TCP/UDP listeners, including the list of bound origin servers and origin servers that can be bound.
+     * @param {DescribeListenerRealServersRequest} req
+     * @param {function(string, DescribeListenerRealServersResponse):void} cb
+     * @public
+     */
+    DescribeListenerRealServers(req, cb) {
+        let resp = new DescribeListenerRealServersResponse();
+        this.request("DescribeListenerRealServers", req, resp, cb);
+    }
+
+    /**
+     * This API (SetAuthentication) is used for the advanced authentication configuration of connections, including authentication methods and their certificates. If only supports connections of version 3.0.
+     * @param {SetAuthenticationRequest} req
+     * @param {function(string, SetAuthenticationResponse):void} cb
+     * @public
+     */
+    SetAuthentication(req, cb) {
+        let resp = new SetAuthenticationResponse();
+        this.request("SetAuthentication", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateHTTPListener) is used to create an HTTPS listener in the connection instance.
+     * @param {CreateHTTPSListenerRequest} req
+     * @param {function(string, CreateHTTPSListenerResponse):void} cb
+     * @public
+     */
+    CreateHTTPSListener(req, cb) {
+        let resp = new CreateHTTPSListenerResponse();
+        this.request("CreateHTTPSListener", req, resp, cb);
+    }
+
+    /**
+     * This API (CheckProxyCreate) is used to query whether an acceleration connection with the specified configuration can be created.
+     * @param {CheckProxyCreateRequest} req
+     * @param {function(string, CheckProxyCreateResponse):void} cb
+     * @public
+     */
+    CheckProxyCreate(req, cb) {
+        let resp = new CheckProxyCreateResponse();
+        this.request("CheckProxyCreate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable all connections in a connection group.
+     * @param {OpenProxyGroupRequest} req
+     * @param {function(string, OpenProxyGroupResponse):void} cb
+     * @public
+     */
+    OpenProxyGroup(req, cb) {
+        let resp = new OpenProxyGroupResponse();
+        this.request("OpenProxyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeAccessRegions) is used to query acceleration region (client access region).
+     * @param {DescribeAccessRegionsRequest} req
+     * @param {function(string, DescribeAccessRegionsResponse):void} cb
+     * @public
+     */
+    DescribeAccessRegions(req, cb) {
+        let resp = new DescribeAccessRegionsResponse();
+        this.request("DescribeAccessRegions", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyRuleAttribute) is used to modify forwarding rule information, including health check configuration and forwarding policies.
+     * @param {ModifyRuleAttributeRequest} req
+     * @param {function(string, ModifyRuleAttributeResponse):void} cb
+     * @public
+     */
+    ModifyRuleAttribute(req, cb) {
+        let resp = new ModifyRuleAttributeResponse();
+        this.request("ModifyRuleAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeGroupDomainConfig) is used to obtain the domain name resolution configuration details of a connection group.
+     * @param {DescribeGroupDomainConfigRequest} req
+     * @param {function(string, DescribeGroupDomainConfigResponse):void} cb
+     * @public
+     */
+    DescribeGroupDomainConfig(req, cb) {
+        let resp = new DescribeGroupDomainConfigResponse();
+        this.request("DescribeGroupDomainConfig", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyHTTPSListenerAttribute) is used to modify HTTPS listener configurations. It currently do not support connection groups and connections of version 1.0.
+     * @param {ModifyHTTPSListenerAttributeRequest} req
+     * @param {function(string, ModifyHTTPSListenerAttributeResponse):void} cb
+     * @public
+     */
+    ModifyHTTPSListenerAttribute(req, cb) {
+        let resp = new ModifyHTTPSListenerAttributeResponse();
+        this.request("ModifyHTTPSListenerAttribute", req, resp, cb);
     }
 
     /**
@@ -978,25 +1072,69 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     }
 
     /**
-     * This API (DescribeRealServersStatus) is used to query whether an origin server has been bound to a rule or listener.
-     * @param {DescribeRealServersStatusRequest} req
-     * @param {function(string, DescribeRealServersStatusResponse):void} cb
+     * This API (DeleteListeners) is used to batch delete the listeners of a connection or connection group, including layer-4/7 listeners.
+     * @param {DeleteListenersRequest} req
+     * @param {function(string, DeleteListenersResponse):void} cb
      * @public
      */
-    DescribeRealServersStatus(req, cb) {
-        let resp = new DescribeRealServersStatusResponse();
-        this.request("DescribeRealServersStatus", req, resp, cb);
+    DeleteListeners(req, cb) {
+        let resp = new DeleteListenersResponse();
+        this.request("DeleteListeners", req, resp, cb);
     }
 
     /**
-     * This API is used to enable all connections in a connection group.
-     * @param {OpenProxyGroupRequest} req
-     * @param {function(string, OpenProxyGroupResponse):void} cb
+     * This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, concurrence, packet loss, and latency data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
+     * @param {DescribeProxyStatisticsRequest} req
+     * @param {function(string, DescribeProxyStatisticsResponse):void} cb
      * @public
      */
-    OpenProxyGroup(req, cb) {
-        let resp = new OpenProxyGroupResponse();
-        this.request("OpenProxyGroup", req, resp, cb);
+    DescribeProxyStatistics(req, cb) {
+        let resp = new DescribeProxyStatisticsResponse();
+        this.request("DescribeProxyStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the custom error response to a domain name.
+     * @param {DescribeDomainErrorPageInfoRequest} req
+     * @param {function(string, DescribeDomainErrorPageInfoResponse):void} cb
+     * @public
+     */
+    DescribeDomainErrorPageInfo(req, cb) {
+        let resp = new DescribeDomainErrorPageInfoResponse();
+        this.request("DescribeDomainErrorPageInfo", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyProxyGroupAttribute) is used to modify connection group attributes. It currently only supports modifying connection group name.
+     * @param {ModifyProxyGroupAttributeRequest} req
+     * @param {function(string, ModifyProxyGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifyProxyGroupAttribute(req, cb) {
+        let resp = new ModifyProxyGroupAttributeResponse();
+        this.request("ModifyProxyGroupAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API (InquiryPriceCreateProxy) is used to create the price inquiries of acceleration connections.
+     * @param {InquiryPriceCreateProxyRequest} req
+     * @param {function(string, InquiryPriceCreateProxyResponse):void} cb
+     * @public
+     */
+    InquiryPriceCreateProxy(req, cb) {
+        let resp = new InquiryPriceCreateProxyResponse();
+        this.request("InquiryPriceCreateProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify security policy rule names.
+     * @param {ModifySecurityRuleRequest} req
+     * @param {function(string, ModifySecurityRuleResponse):void} cb
+     * @public
+     */
+    ModifySecurityRule(req, cb) {
+        let resp = new ModifySecurityRuleResponse();
+        this.request("ModifySecurityRule", req, resp, cb);
     }
 
     /**
@@ -1033,28 +1171,6 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     }
 
     /**
-     * This API is used to query the list of security rules based on security rule ID. It supports querying 1 to 20 security rules at a time.
-     * @param {DescribeSecurityRulesRequest} req
-     * @param {function(string, DescribeSecurityRulesResponse):void} cb
-     * @public
-     */
-    DescribeSecurityRules(req, cb) {
-        let resp = new DescribeSecurityRulesResponse();
-        this.request("DescribeSecurityRules", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeRules) is used to query all rule information of a listener, including the domain names, paths, and list of bound origin servers. For version 3.0 connections, this API returns the advanced authentication configuration information of the domain name.
-     * @param {DescribeRulesRequest} req
-     * @param {function(string, DescribeRulesResponse):void} cb
-     * @public
-     */
-    DescribeRules(req, cb) {
-        let resp = new DescribeRulesResponse();
-        this.request("DescribeRules", req, resp, cb);
-    }
-
-    /**
      * This API (CreateTCPListeners) is used to batch create TCP listeners of single connections or connection groups.
      * @param {CreateTCPListenersRequest} req
      * @param {function(string, CreateTCPListenersResponse):void} cb
@@ -1063,28 +1179,6 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     CreateTCPListeners(req, cb) {
         let resp = new CreateTCPListenersResponse();
         this.request("CreateTCPListeners", req, resp, cb);
-    }
-
-    /**
-     * This API (DestroyProxies) is used to terminate a connection. If terminated, no fees will be incurred.
-     * @param {DestroyProxiesRequest} req
-     * @param {function(string, DestroyProxiesResponse):void} cb
-     * @public
-     */
-    DestroyProxies(req, cb) {
-        let resp = new DestroyProxiesResponse();
-        this.request("DestroyProxies", req, resp, cb);
-    }
-
-    /**
-     * This API (ModifyProxiesAttribute) is used to modify instance attributes (currently only supports modifying connection name).
-     * @param {ModifyProxiesAttributeRequest} req
-     * @param {function(string, ModifyProxiesAttributeResponse):void} cb
-     * @public
-     */
-    ModifyProxiesAttribute(req, cb) {
-        let resp = new ModifyProxiesAttributeResponse();
-        this.request("ModifyProxiesAttribute", req, resp, cb);
     }
 
     /**
@@ -1099,69 +1193,14 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     }
 
     /**
-     * This API (CreateProxy) is used to create an acceleration connection with specified configuration.
-     * @param {CreateProxyRequest} req
-     * @param {function(string, CreateProxyResponse):void} cb
+     * This API (DescribeResourcesByTag) is used to query corresponding resource information by tags, including connection, connection group, and origin server.
+     * @param {DescribeResourcesByTagRequest} req
+     * @param {function(string, DescribeResourcesByTagResponse):void} cb
      * @public
      */
-    CreateProxy(req, cb) {
-        let resp = new CreateProxyResponse();
-        this.request("CreateProxy", req, resp, cb);
-    }
-
-    /**
-     * This API (DeleteDomain) is only applicable to layer-7 listeners. It is used to delete the domain names of this listener, and all the rules under the domain name. All rules bound to the origin server are unbound automatically.
-     * @param {DeleteDomainRequest} req
-     * @param {function(string, DeleteDomainResponse):void} cb
-     * @public
-     */
-    DeleteDomain(req, cb) {
-        let resp = new DeleteDomainResponse();
-        this.request("DeleteDomain", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeListenerRealServers) is used to query the origin server list of TCP/UDP listeners, including the list of bound origin servers and origin servers that can be bound.
-     * @param {DescribeListenerRealServersRequest} req
-     * @param {function(string, DescribeListenerRealServersResponse):void} cb
-     * @public
-     */
-    DescribeListenerRealServers(req, cb) {
-        let resp = new DescribeListenerRealServersResponse();
-        this.request("DescribeListenerRealServers", req, resp, cb);
-    }
-
-    /**
-     * This API (DeleteListeners) is used to batch delete the listeners of a connection or connection group, including layer-4/7 listeners.
-     * @param {DeleteListenersRequest} req
-     * @param {function(string, DeleteListenersResponse):void} cb
-     * @public
-     */
-    DeleteListeners(req, cb) {
-        let resp = new DeleteListenersResponse();
-        this.request("DeleteListeners", req, resp, cb);
-    }
-
-    /**
-     * This API is used to pull the list of rules based on rule ID. It supports pulling 1 to 10 rules at a time.
-     * @param {DescribeRulesByRuleIdsRequest} req
-     * @param {function(string, DescribeRulesByRuleIdsResponse):void} cb
-     * @public
-     */
-    DescribeRulesByRuleIds(req, cb) {
-        let resp = new DescribeRulesByRuleIdsResponse();
-        this.request("DescribeRulesByRuleIds", req, resp, cb);
-    }
-
-    /**
-     * This API (InquiryPriceCreateProxy) is used to create the price inquiries of acceleration connections.
-     * @param {InquiryPriceCreateProxyRequest} req
-     * @param {function(string, InquiryPriceCreateProxyResponse):void} cb
-     * @public
-     */
-    InquiryPriceCreateProxy(req, cb) {
-        let resp = new InquiryPriceCreateProxyResponse();
-        this.request("InquiryPriceCreateProxy", req, resp, cb);
+    DescribeResourcesByTag(req, cb) {
+        let resp = new DescribeResourcesByTagResponse();
+        this.request("DescribeResourcesByTag", req, resp, cb);
     }
 
 

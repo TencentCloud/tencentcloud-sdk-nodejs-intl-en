@@ -768,6 +768,41 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * SwitchWaterPrintConfig request structure.
+ * @class
+ */
+class SwitchWaterPrintConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Watermark status. `1`: enabled; `0`: disabled.
+         * @type {number || null}
+         */
+        this.OpenStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
+
+    }
+}
+
+/**
  * DeleteDDoSSpeedLimitConfig request structure.
  * @class
  */
@@ -2788,7 +2823,10 @@ class WaterPrintConfig extends  AbstractModel {
         this.Keys = null;
 
         /**
-         * 
+         * Watermark checking mode, which can be:
+`checkall`: normal mode
+`shortfpcheckall`: compact mode
+]
          * @type {string || null}
          */
         this.Verify = null;
@@ -4289,9 +4327,9 @@ class PacketFilterConfig extends  AbstractModel {
         this.MatchType = null;
 
         /**
-         * Detection value. Should be in key string or regular expression.
-For `sunday`, enter a string or a string in hexadecimal byte code representation starting with `\x`. For example, a string "123" corresponds to the hexadecimal byte code "\x313233".
-For `pcre`, enter a regular expression.
+         * Detection value. Should be in key string or regular expression. 
+When the `MatchType` is `sunday`, enter a string or a string in hexadecimal byte code representation. For example, a string "123" corresponds to the hexadecimal byte code "\x313233".
+When the `MatchType` is `pcre`, enter a regular expression.
 ]
          * @type {string || null}
          */
@@ -4347,8 +4385,8 @@ For `pcre`, enter a regular expression.
 
         /**
          * The second detection value. Should be in key string or regular expression.
-For `sunday`, enter a string or a string in hexadecimal byte code representation starting with `\x`. For example, a string "123" corresponds to the hexadecimal byte code "\x313233".
-For `pcre`, enter a regular expression.
+When the `MatchType` is `sunday`, enter a string or a string in hexadecimal byte code representation. For example, a string "123" corresponds to the hexadecimal byte code "\x313233".
+When the `MatchType` is `pcre`, enter a regular expression.
 ]
          * @type {string || null}
          */
@@ -4463,7 +4501,7 @@ class ForwardListener extends  AbstractModel {
         super();
 
         /**
-         * Forwarding listening port. Value range: 1–65535.
+         * The starting port for listener forwarding. Value range: 1 to 65535.
          * @type {number || null}
          */
         this.FrontendPort = null;
@@ -4478,7 +4516,7 @@ class ForwardListener extends  AbstractModel {
         this.ForwardProtocol = null;
 
         /**
-         * 
+         * The ending port for listener forwarding. Value range: 1 to 65535.
          * @type {number || null}
          */
         this.FrontendPortEnd = null;
@@ -4547,6 +4585,34 @@ class BGPInstanceSpecification extends  AbstractModel {
         this.ProtectCountLimit = 'ProtectCountLimit' in params ? params.ProtectCountLimit : null;
         this.ProtectIPNumberLimit = 'ProtectIPNumberLimit' in params ? params.ProtectIPNumberLimit : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+
+    }
+}
+
+/**
+ * SwitchWaterPrintConfig response structure.
+ * @class
+ */
+class SwitchWaterPrintConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6022,6 +6088,7 @@ module.exports = {
     InstanceRelation: InstanceRelation,
     DescribeListProtocolBlockConfigResponse: DescribeListProtocolBlockConfigResponse,
     DescribeListBGPInstancesRequest: DescribeListBGPInstancesRequest,
+    SwitchWaterPrintConfigRequest: SwitchWaterPrintConfigRequest,
     DeleteDDoSSpeedLimitConfigRequest: DeleteDDoSSpeedLimitConfigRequest,
     CreatePacketFilterConfigResponse: CreatePacketFilterConfigResponse,
     CreateL7RuleCertsRequest: CreateL7RuleCertsRequest,
@@ -6100,6 +6167,7 @@ module.exports = {
     DefaultAlarmThreshold: DefaultAlarmThreshold,
     ForwardListener: ForwardListener,
     BGPInstanceSpecification: BGPInstanceSpecification,
+    SwitchWaterPrintConfigResponse: SwitchWaterPrintConfigResponse,
     CreateWaterPrintKeyRequest: CreateWaterPrintKeyRequest,
     WaterPrintRelation: WaterPrintRelation,
     InsL7Rules: InsL7Rules,

@@ -21,44 +21,52 @@ const UpdateApiKeyRequest = models.UpdateApiKeyRequest;
 const Service = models.Service;
 const DeleteAPIDocRequest = models.DeleteAPIDocRequest;
 const ApiUsagePlanSet = models.ApiUsagePlanSet;
-const DemoteServiceUsagePlanRequest = models.DemoteServiceUsagePlanRequest;
 const DescribeAPIDocDetailRequest = models.DescribeAPIDocDetailRequest;
 const ModifyAPIDocResponse = models.ModifyAPIDocResponse;
+const AttachedApiSummary = models.AttachedApiSummary;
 const DescribeUsagePlanRequest = models.DescribeUsagePlanRequest;
 const DeleteUsagePlanResponse = models.DeleteUsagePlanResponse;
 const DisableApiKeyResponse = models.DisableApiKeyResponse;
+const DescribeApiResponse = models.DescribeApiResponse;
 const UnReleaseServiceRequest = models.UnReleaseServiceRequest;
+const DetachPluginRequest = models.DetachPluginRequest;
 const ModifySubDomainRequest = models.ModifySubDomainRequest;
+const DescribeApiAppsStatusRequest = models.DescribeApiAppsStatusRequest;
 const DescribeServiceUsagePlanRequest = models.DescribeServiceUsagePlanRequest;
 const DescribeServiceEnvironmentListResponse = models.DescribeServiceEnvironmentListResponse;
+const DescribeApiAppBindApisStatusRequest = models.DescribeApiAppBindApisStatusRequest;
 const ModifyApiResponse = models.ModifyApiResponse;
 const ServiceEnvironmentStrategy = models.ServiceEnvironmentStrategy;
-const DescribeApiResponse = models.DescribeApiResponse;
+const ApiInfo = models.ApiInfo;
 const TargetServicesReq = models.TargetServicesReq;
+const ServiceEnvironmentSet = models.ServiceEnvironmentSet;
 const TsfLoadBalanceConfResp = models.TsfLoadBalanceConfResp;
 const CreateIPStrategyRequest = models.CreateIPStrategyRequest;
 const IPStrategy = models.IPStrategy;
 const DescribeUsagePlansStatusResponse = models.DescribeUsagePlansStatusResponse;
 const HealthCheckConf = models.HealthCheckConf;
+const Plugin = models.Plugin;
+const UnbindApiAppResponse = models.UnbindApiAppResponse;
 const DescribeApiUsagePlanResponse = models.DescribeApiUsagePlanResponse;
 const DeleteIPStrategyRequest = models.DeleteIPStrategyRequest;
-const ModifyAPIDocRequest = models.ModifyAPIDocRequest;
+const DescribeApiAppRequest = models.DescribeApiAppRequest;
+const DescribePluginResponse = models.DescribePluginResponse;
 const DomainSets = models.DomainSets;
 const DeleteUsagePlanRequest = models.DeleteUsagePlanRequest;
 const DeleteServiceRequest = models.DeleteServiceRequest;
 const DescribeApiEnvironmentStrategyRequest = models.DescribeApiEnvironmentStrategyRequest;
-const UpdateServiceResponse = models.UpdateServiceResponse;
+const DescribeServiceForApiAppResponse = models.DescribeServiceForApiAppResponse;
 const ServiceConfig = models.ServiceConfig;
-const ServiceEnvironmentSet = models.ServiceEnvironmentSet;
+const DeleteApiAppResponse = models.DeleteApiAppResponse;
 const DescribeServiceResponse = models.DescribeServiceResponse;
 const UsagePlanEnvironmentStatus = models.UsagePlanEnvironmentStatus;
 const ModifyIPStrategyResponse = models.ModifyIPStrategyResponse;
 const BindSubDomainResponse = models.BindSubDomainResponse;
 const BindEnvironmentResponse = models.BindEnvironmentResponse;
 const Tag = models.Tag;
-const DescribeServiceEnvironmentStrategyResponse = models.DescribeServiceEnvironmentStrategyResponse;
+const DescribeApiBindApiAppsStatusResponse = models.DescribeApiBindApiAppsStatusResponse;
 const ConstantParameter = models.ConstantParameter;
-const UsagePlansStatus = models.UsagePlansStatus;
+const DescribeApiForApiAppRequest = models.DescribeApiForApiAppRequest;
 const APIDocs = models.APIDocs;
 const LogQuery = models.LogQuery;
 const ServiceParameter = models.ServiceParameter;
@@ -66,13 +74,17 @@ const ModifyServiceResponse = models.ModifyServiceResponse;
 const DisableApiKeyRequest = models.DisableApiKeyRequest;
 const PathMapping = models.PathMapping;
 const UnBindIPStrategyResponse = models.UnBindIPStrategyResponse;
+const ModifyPluginRequest = models.ModifyPluginRequest;
 const BindIPStrategyResponse = models.BindIPStrategyResponse;
+const AvailableApiInfo = models.AvailableApiInfo;
 const DescribeApisStatusRequest = models.DescribeApisStatusRequest;
 const DeleteServiceSubDomainMappingRequest = models.DeleteServiceSubDomainMappingRequest;
+const BindApiAppRequest = models.BindApiAppRequest;
 const IPStrategyApi = models.IPStrategyApi;
 const DescribeIPStrategyResponse = models.DescribeIPStrategyResponse;
+const DescribePluginRequest = models.DescribePluginRequest;
 const DocumentSDK = models.DocumentSDK;
-const DeleteApiResponse = models.DeleteApiResponse;
+const AttachedApiInfo = models.AttachedApiInfo;
 const CreateApiResponse = models.CreateApiResponse;
 const DescribeIPStrategyApisStatusRequest = models.DescribeIPStrategyApisStatusRequest;
 const UnBindEnvironmentRequest = models.UnBindEnvironmentRequest;
@@ -81,6 +93,7 @@ const ModifyApiEnvironmentStrategyRequest = models.ModifyApiEnvironmentStrategyR
 const ModifyUsagePlanResponse = models.ModifyUsagePlanResponse;
 const CreateUsagePlanResponse = models.CreateUsagePlanResponse;
 const ReqParameter = models.ReqParameter;
+const DeletePluginRequest = models.DeletePluginRequest;
 const Base64EncodedTriggerRule = models.Base64EncodedTriggerRule;
 const RequestConfig = models.RequestConfig;
 const DeleteApiKeyResponse = models.DeleteApiKeyResponse;
@@ -88,19 +101,23 @@ const UsagePlan = models.UsagePlan;
 const DescribeServiceReleaseVersionRequest = models.DescribeServiceReleaseVersionRequest;
 const DescribeUsagePlanSecretIdsRequest = models.DescribeUsagePlanSecretIdsRequest;
 const DescribeLogSearchResponse = models.DescribeLogSearchResponse;
+const ModifyAPIDocRequest = models.ModifyAPIDocRequest;
 const UnBindIPStrategyRequest = models.UnBindIPStrategyRequest;
+const DescribePluginApisRequest = models.DescribePluginApisRequest;
 const ResponseErrorCodeReq = models.ResponseErrorCodeReq;
 const CreateServiceRequest = models.CreateServiceRequest;
 const DescribeIPStrategysStatusRequest = models.DescribeIPStrategysStatusRequest;
 const DemoteServiceUsagePlanResponse = models.DemoteServiceUsagePlanResponse;
 const EnableApiKeyResponse = models.EnableApiKeyResponse;
 const ServiceReleaseHistory = models.ServiceReleaseHistory;
+const DeleteApiAppRequest = models.DeleteApiAppRequest;
 const UnReleaseServiceResponse = models.UnReleaseServiceResponse;
 const CreateAPIDocResponse = models.CreateAPIDocResponse;
 const DescribeServiceRequest = models.DescribeServiceRequest;
+const UsagePlansStatus = models.UsagePlansStatus;
 const CreateUsagePlanRequest = models.CreateUsagePlanRequest;
 const DescribeUsagePlanSecretIdsResponse = models.DescribeUsagePlanSecretIdsResponse;
-const UpdateServiceRequest = models.UpdateServiceRequest;
+const CreatePluginRequest = models.CreatePluginRequest;
 const MicroServiceReq = models.MicroServiceReq;
 const ModifySubDomainResponse = models.ModifySubDomainResponse;
 const DescribeServiceSubDomainMappingsResponse = models.DescribeServiceSubDomainMappingsResponse;
@@ -109,14 +126,18 @@ const UnBindEnvironmentResponse = models.UnBindEnvironmentResponse;
 const UsagePlanBindSecret = models.UsagePlanBindSecret;
 const DeleteApiKeyRequest = models.DeleteApiKeyRequest;
 const ModifyApiEnvironmentStrategyResponse = models.ModifyApiEnvironmentStrategyResponse;
+const ModifyApiAppResponse = models.ModifyApiAppResponse;
+const UpdateApiAppKeyRequest = models.UpdateApiAppKeyRequest;
 const DomainSetList = models.DomainSetList;
 const IPStrategysStatus = models.IPStrategysStatus;
 const DescribeApiKeyResponse = models.DescribeApiKeyResponse;
 const ModifyApiIncrementResponse = models.ModifyApiIncrementResponse;
 const ModifyApiRequest = models.ModifyApiRequest;
+const DescribeAllPluginApisResponse = models.DescribeAllPluginApisResponse;
 const ModifyUsagePlanRequest = models.ModifyUsagePlanRequest;
 const ApiRequestConfig = models.ApiRequestConfig;
 const ModifyServiceRequest = models.ModifyServiceRequest;
+const DescribeAllPluginApisRequest = models.DescribeAllPluginApisRequest;
 const ApiIdStatus = models.ApiIdStatus;
 const CreateApiRequest = models.CreateApiRequest;
 const DescribeServiceEnvironmentStrategyRequest = models.DescribeServiceEnvironmentStrategyRequest;
@@ -125,71 +146,96 @@ const DeleteServiceResponse = models.DeleteServiceResponse;
 const DescribeServiceEnvironmentReleaseHistoryResponse = models.DescribeServiceEnvironmentReleaseHistoryResponse;
 const Environment = models.Environment;
 const DescribeAPIDocsRequest = models.DescribeAPIDocsRequest;
+const UsagePlanStatusInfo = models.UsagePlanStatusInfo;
 const ServiceReleaseHistoryInfo = models.ServiceReleaseHistoryInfo;
+const CreatePluginResponse = models.CreatePluginResponse;
 const ReleaseServiceResponse = models.ReleaseServiceResponse;
 const APIDocInfo = models.APIDocInfo;
+const DescribePluginApisResponse = models.DescribePluginApisResponse;
 const ModifyApiIncrementRequest = models.ModifyApiIncrementRequest;
 const GenerateApiDocumentRequest = models.GenerateApiDocumentRequest;
 const ServiceUsagePlanSet = models.ServiceUsagePlanSet;
 const DescribeIPStrategyApisStatusResponse = models.DescribeIPStrategyApisStatusResponse;
 const ModifyServiceEnvironmentStrategyResponse = models.ModifyServiceEnvironmentStrategyResponse;
 const UpdateApiKeyResponse = models.UpdateApiKeyResponse;
+const DescribeApiBindApiAppsStatusRequest = models.DescribeApiBindApiAppsStatusRequest;
 const DescribeApisStatusResponse = models.DescribeApisStatusResponse;
 const DescribeApiKeysStatusRequest = models.DescribeApiKeysStatusRequest;
-const ApiInfo = models.ApiInfo;
+const DemoteServiceUsagePlanRequest = models.DemoteServiceUsagePlanRequest;
 const BindSecretIdsResponse = models.BindSecretIdsResponse;
 const CreateApiRsp = models.CreateApiRsp;
 const UsagePlanBindEnvironment = models.UsagePlanBindEnvironment;
 const DeleteApiRequest = models.DeleteApiRequest;
 const DescribeServiceSubDomainMappingsRequest = models.DescribeServiceSubDomainMappingsRequest;
-const DescribeServiceEnvironmentListRequest = models.DescribeServiceEnvironmentListRequest;
+const DescribeApiAppResponse = models.DescribeApiAppResponse;
+const DescribeApiAppsStatusResponse = models.DescribeApiAppsStatusResponse;
 const ServiceSubDomainMappings = models.ServiceSubDomainMappings;
 const DescribeApiKeyRequest = models.DescribeApiKeyRequest;
 const DescribeAPIDocDetailResponse = models.DescribeAPIDocDetailResponse;
 const Filter = models.Filter;
+const BindApiAppResponse = models.BindApiAppResponse;
 const UsagePlanBindSecretStatus = models.UsagePlanBindSecretStatus;
 const DeleteServiceSubDomainMappingResponse = models.DeleteServiceSubDomainMappingResponse;
 const CreateApiKeyResponse = models.CreateApiKeyResponse;
 const DescribeUsagePlansStatusRequest = models.DescribeUsagePlansStatusRequest;
 const UsagePlanEnvironment = models.UsagePlanEnvironment;
 const ModifyIPStrategyRequest = models.ModifyIPStrategyRequest;
+const ModifyPluginResponse = models.ModifyPluginResponse;
 const UnBindSecretIdsRequest = models.UnBindSecretIdsRequest;
-const ApiEnvironmentStrategy = models.ApiEnvironmentStrategy;
+const DescribeApiRequest = models.DescribeApiRequest;
 const UnBindSecretIdsResponse = models.UnBindSecretIdsResponse;
 const ResetAPIDocPasswordRequest = models.ResetAPIDocPasswordRequest;
 const ApiUsagePlan = models.ApiUsagePlan;
 const BuildAPIDocRequest = models.BuildAPIDocRequest;
 const DescribeAPIDocsResponse = models.DescribeAPIDocsResponse;
+const DetachPluginResponse = models.DetachPluginResponse;
+const DeletePluginResponse = models.DeletePluginResponse;
 const ModifyServiceEnvironmentStrategyRequest = models.ModifyServiceEnvironmentStrategyRequest;
 const CreateAPIDocRequest = models.CreateAPIDocRequest;
+const DescribeApiAppBindApisStatusResponse = models.DescribeApiAppBindApisStatusResponse;
 const DescribeServiceSubDomainsRequest = models.DescribeServiceSubDomainsRequest;
+const ModifyApiAppRequest = models.ModifyApiAppRequest;
 const GenerateApiDocumentResponse = models.GenerateApiDocumentResponse;
 const DescribeUsagePlanEnvironmentsResponse = models.DescribeUsagePlanEnvironmentsResponse;
 const DescribeServiceSubDomainsResponse = models.DescribeServiceSubDomainsResponse;
+const AttachPluginRequest = models.AttachPluginRequest;
+const DescribeServiceForApiAppRequest = models.DescribeServiceForApiAppRequest;
 const BindSubDomainRequest = models.BindSubDomainRequest;
+const ApiAppInfos = models.ApiAppInfos;
 const IPStrategyApiStatus = models.IPStrategyApiStatus;
 const CreateIPStrategyResponse = models.CreateIPStrategyResponse;
+const DeleteApiResponse = models.DeleteApiResponse;
 const BindIPStrategyRequest = models.BindIPStrategyRequest;
+const UpdateServiceRequest = models.UpdateServiceRequest;
 const BuildAPIDocResponse = models.BuildAPIDocResponse;
 const ErrorCodes = models.ErrorCodes;
+const DescribeServiceEnvironmentListRequest = models.DescribeServiceEnvironmentListRequest;
 const ServiceEnvironmentStrategyStatus = models.ServiceEnvironmentStrategyStatus;
 const DescribeApiEnvironmentStrategyResponse = models.DescribeApiEnvironmentStrategyResponse;
 const MicroService = models.MicroService;
 const ApiEnvironmentStrategyStataus = models.ApiEnvironmentStrategyStataus;
+const ApiAppInfo = models.ApiAppInfo;
 const DeleteIPStrategyResponse = models.DeleteIPStrategyResponse;
+const ApiInfoSummary = models.ApiInfoSummary;
 const ApiKey = models.ApiKey;
+const ApiAppApiInfo = models.ApiAppApiInfo;
 const DescribeUsagePlanResponse = models.DescribeUsagePlanResponse;
+const AttachPluginResponse = models.AttachPluginResponse;
 const BindEnvironmentRequest = models.BindEnvironmentRequest;
 const DescribeIPStrategyRequest = models.DescribeIPStrategyRequest;
+const DescribeApiForApiAppResponse = models.DescribeApiForApiAppResponse;
+const EnvironmentStrategy = models.EnvironmentStrategy;
 const DescribeUsagePlanEnvironmentsRequest = models.DescribeUsagePlanEnvironmentsRequest;
 const DescribeServiceReleaseVersionResponse = models.DescribeServiceReleaseVersionResponse;
-const RequestParameter = models.RequestParameter;
+const ApiAppApiInfos = models.ApiAppApiInfos;
+const UpdateServiceResponse = models.UpdateServiceResponse;
 const UsagePlanInfo = models.UsagePlanInfo;
 const DescribeServiceEnvironmentReleaseHistoryRequest = models.DescribeServiceEnvironmentReleaseHistoryRequest;
-const UsagePlanStatusInfo = models.UsagePlanStatusInfo;
+const UnbindApiAppRequest = models.UnbindApiAppRequest;
 const ReleaseService = models.ReleaseService;
 const CreateServiceResponse = models.CreateServiceResponse;
 const DeleteAPIDocResponse = models.DeleteAPIDocResponse;
+const DescribeServiceEnvironmentStrategyResponse = models.DescribeServiceEnvironmentStrategyResponse;
 const DesApisStatus = models.DesApisStatus;
 const DescribeApiKeysStatusResponse = models.DescribeApiKeysStatusResponse;
 const ServicesStatus = models.ServicesStatus;
@@ -198,14 +244,17 @@ const ApisStatus = models.ApisStatus;
 const ApiKeysStatus = models.ApiKeysStatus;
 const APIDoc = models.APIDoc;
 const DescribeServiceUsagePlanResponse = models.DescribeServiceUsagePlanResponse;
+const CreateApiAppResponse = models.CreateApiAppResponse;
 const DescribeApiUsagePlanRequest = models.DescribeApiUsagePlanRequest;
 const UnBindSubDomainRequest = models.UnBindSubDomainRequest;
-const DescribeApiRequest = models.DescribeApiRequest;
+const ApiEnvironmentStrategy = models.ApiEnvironmentStrategy;
 const DescribeIPStrategysStatusResponse = models.DescribeIPStrategysStatusResponse;
-const EnvironmentStrategy = models.EnvironmentStrategy;
+const UpdateApiAppKeyResponse = models.UpdateApiAppKeyResponse;
+const CreateApiAppRequest = models.CreateApiAppRequest;
 const EnableApiKeyRequest = models.EnableApiKeyRequest;
 const ResetAPIDocPasswordResponse = models.ResetAPIDocPasswordResponse;
 const DescribeServicesStatusRequest = models.DescribeServicesStatusRequest;
+const RequestParameter = models.RequestParameter;
 const ServiceReleaseVersion = models.ServiceReleaseVersion;
 const DescribeServicesStatusResponse = models.DescribeServicesStatusResponse;
 const CreateApiKeyRequest = models.CreateApiKeyRequest;
@@ -245,14 +294,14 @@ The maximum unit in API Gateway is service. Multiple APIs can be created in one 
     }
 
     /**
-     * This API is used to query the list of usage plans.
-     * @param {DescribeUsagePlansStatusRequest} req
-     * @param {function(string, DescribeUsagePlansStatusResponse):void} cb
+     * This API is used to bind a plugin to an API.
+     * @param {AttachPluginRequest} req
+     * @param {function(string, AttachPluginResponse):void} cb
      * @public
      */
-    DescribeUsagePlansStatus(req, cb) {
-        let resp = new DescribeUsagePlansStatusResponse();
-        this.request("DescribeUsagePlansStatus", req, resp, cb);
+    AttachPlugin(req, cb) {
+        let resp = new AttachPluginResponse();
+        this.request("AttachPlugin", req, resp, cb);
     }
 
     /**
@@ -267,14 +316,14 @@ The maximum unit in API Gateway is service. Multiple APIs can be created in one 
     }
 
     /**
-     * This API is used to query the details of an API document.
-     * @param {DescribeAPIDocDetailRequest} req
-     * @param {function(string, DescribeAPIDocDetailResponse):void} cb
+     * This API is used to bind an application to an API.
+     * @param {BindApiAppRequest} req
+     * @param {function(string, BindApiAppResponse):void} cb
      * @public
      */
-    DescribeAPIDocDetail(req, cb) {
-        let resp = new DescribeAPIDocDetailResponse();
-        this.request("DescribeAPIDocDetail", req, resp, cb);
+    BindApiApp(req, cb) {
+        let resp = new BindApiAppResponse();
+        this.request("BindApiApp", req, resp, cb);
     }
 
     /**
@@ -289,16 +338,14 @@ The maximum unit in API Gateway is service. Multiple APIs can be created in one 
     }
 
     /**
-     * This API is used to degrade a usage plan of a service in an environment to the API level.
-This operation will be denied if there are no APIs under the service.
-This operation will also be denied if the current environment has not been published.
-     * @param {DemoteServiceUsagePlanRequest} req
-     * @param {function(string, DemoteServiceUsagePlanResponse):void} cb
+     * This API is used to create an application.
+     * @param {CreateApiAppRequest} req
+     * @param {function(string, CreateApiAppResponse):void} cb
      * @public
      */
-    DemoteServiceUsagePlan(req, cb) {
-        let resp = new DemoteServiceUsagePlanResponse();
-        this.request("DemoteServiceUsagePlan", req, resp, cb);
+    CreateApiApp(req, cb) {
+        let resp = new CreateApiAppResponse();
+        this.request("CreateApiApp", req, resp, cb);
     }
 
     /**
@@ -325,14 +372,37 @@ If you have created multiple API key pairs, you can use this API to query the in
     }
 
     /**
-     * This API is used to modify an API throttling policy.
-     * @param {ModifyApiEnvironmentStrategyRequest} req
-     * @param {function(string, ModifyApiEnvironmentStrategyResponse):void} cb
+     * This API is used to query the list of custom domain names.
+In API Gateway, you can bind custom domain names to a service for service call. This API is used to query the list of custom domain names bound to a service.
+     * @param {DescribeServiceSubDomainsRequest} req
+     * @param {function(string, DescribeServiceSubDomainsResponse):void} cb
      * @public
      */
-    ModifyApiEnvironmentStrategy(req, cb) {
-        let resp = new ModifyApiEnvironmentStrategyResponse();
-        this.request("ModifyApiEnvironmentStrategy", req, resp, cb);
+    DescribeServiceSubDomains(req, cb) {
+        let resp = new DescribeServiceSubDomainsResponse();
+        this.request("DescribeServiceSubDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of usage plans.
+     * @param {DescribeUsagePlansStatusRequest} req
+     * @param {function(string, DescribeUsagePlansStatusResponse):void} cb
+     * @public
+     */
+    DescribeUsagePlansStatus(req, cb) {
+        let resp = new DescribeUsagePlansStatusResponse();
+        this.request("DescribeUsagePlansStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of APIs bound to an application.
+     * @param {DescribeApiAppBindApisStatusRequest} req
+     * @param {function(string, DescribeApiAppBindApisStatusResponse):void} cb
+     * @public
+     */
+    DescribeApiAppBindApisStatus(req, cb) {
+        let resp = new DescribeApiAppBindApisStatusResponse();
+        this.request("DescribeApiAppBindApisStatus", req, resp, cb);
     }
 
     /**
@@ -370,15 +440,14 @@ In API Gateway, a usage plan can be bound to multiple key pairs. You can use thi
     }
 
     /**
-     * This API is used to query the list of custom domain names.
-In API Gateway, you can bind custom domain names to a service for service call. This API is used to query the list of custom domain names bound to a service.
-     * @param {DescribeServiceSubDomainsRequest} req
-     * @param {function(string, DescribeServiceSubDomainsResponse):void} cb
+     * This API is used to query the details of a service, such as its description, domain name, and protocol.
+     * @param {DescribeServiceForApiAppRequest} req
+     * @param {function(string, DescribeServiceForApiAppResponse):void} cb
      * @public
      */
-    DescribeServiceSubDomains(req, cb) {
-        let resp = new DescribeServiceSubDomainsResponse();
-        this.request("DescribeServiceSubDomains", req, resp, cb);
+    DescribeServiceForApiApp(req, cb) {
+        let resp = new DescribeServiceForApiAppResponse();
+        this.request("DescribeServiceForApiApp", req, resp, cb);
     }
 
     /**
@@ -404,6 +473,17 @@ In API Gateway, you can bind custom domain names to a service for service call. 
     }
 
     /**
+     * This API is used to unbind an application from an API.
+     * @param {UnbindApiAppRequest} req
+     * @param {function(string, UnbindApiAppResponse):void} cb
+     * @public
+     */
+    UnbindApiApp(req, cb) {
+        let resp = new UnbindApiAppResponse();
+        this.request("UnbindApiApp", req, resp, cb);
+    }
+
+    /**
      * This API is used to unbind an IP policy from a service.
      * @param {UnBindIPStrategyRequest} req
      * @param {function(string, UnBindIPStrategyResponse):void} cb
@@ -423,6 +503,17 @@ In API Gateway, you can bind custom domain names to a service for service call. 
     CreateAPIDoc(req, cb) {
         let resp = new CreateAPIDocResponse();
         this.request("CreateAPIDoc", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a created API.
+     * @param {ModifyApiAppRequest} req
+     * @param {function(string, ModifyApiAppResponse):void} cb
+     * @public
+     */
+    ModifyApiApp(req, cb) {
+        let resp = new ModifyApiAppResponse();
+        this.request("ModifyApiApp", req, resp, cb);
     }
 
     /**
@@ -448,6 +539,17 @@ In API Gateway, you can bind custom domain names to a service for service call. 
     }
 
     /**
+     * This API is used to modify a plugin.
+     * @param {ModifyPluginRequest} req
+     * @param {function(string, ModifyPluginResponse):void} cb
+     * @public
+     */
+    ModifyPlugin(req, cb) {
+        let resp = new ModifyPluginResponse();
+        this.request("ModifyPlugin", req, resp, cb);
+    }
+
+    /**
      * This API is used to deactivate a service.
 Only after a service is published to an environment can its APIs be called. You can call this API to deactivate a service in the release environment. Once deactivated, the service cannot be called.
      * @param {UnReleaseServiceRequest} req
@@ -460,6 +562,17 @@ Only after a service is published to an environment can its APIs be called. You 
     }
 
     /**
+     * This API is used to query the list of applications bound to an API.
+     * @param {DescribeApiBindApiAppsStatusRequest} req
+     * @param {function(string, DescribeApiBindApiAppsStatusResponse):void} cb
+     * @public
+     */
+    DescribeApiBindApiAppsStatus(req, cb) {
+        let resp = new DescribeApiBindApiAppsStatusResponse();
+        this.request("DescribeApiBindApiAppsStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to incrementally update an API and mainly called by programs (different from `ModifyApi`, which requires that full API parameters be passed in and is suitable for use in the console).
      * @param {ModifyApiIncrementRequest} req
      * @param {function(string, ModifyApiIncrementResponse):void} cb
@@ -468,6 +581,28 @@ Only after a service is published to an environment can its APIs be called. You 
     ModifyApiIncrement(req, cb) {
         let resp = new ModifyApiIncrementResponse();
         this.request("ModifyApiIncrement", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a created application.
+     * @param {DeleteApiAppRequest} req
+     * @param {function(string, DeleteApiAppResponse):void} cb
+     * @public
+     */
+    DeleteApiApp(req, cb) {
+        let resp = new DeleteApiAppResponse();
+        this.request("DeleteApiApp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an API document.
+     * @param {DescribeAPIDocDetailRequest} req
+     * @param {function(string, DescribeAPIDocDetailResponse):void} cb
+     * @public
+     */
+    DescribeAPIDocDetail(req, cb) {
+        let resp = new DescribeAPIDocDetailResponse();
+        this.request("DescribeAPIDocDetail", req, resp, cb);
     }
 
     /**
@@ -574,6 +709,41 @@ To use API Gateway, you need to create a usage plan and bind it to a service env
     }
 
     /**
+     * This API is used to update an application key.
+     * @param {UpdateApiAppKeyRequest} req
+     * @param {function(string, UpdateApiAppKeyResponse):void} cb
+     * @public
+     */
+    UpdateApiAppKey(req, cb) {
+        let resp = new UpdateApiAppKeyResponse();
+        this.request("UpdateApiAppKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a usage plan from a specified environment.
+     * @param {UnBindEnvironmentRequest} req
+     * @param {function(string, UnBindEnvironmentResponse):void} cb
+     * @public
+     */
+    UnBindEnvironment(req, cb) {
+        let resp = new UnBindEnvironmentResponse();
+        this.request("UnBindEnvironment", req, resp, cb);
+    }
+
+    /**
+     * This API is used to degrade a usage plan of a service in an environment to the API level.
+This operation will be denied if there are no APIs under the service.
+This operation will also be denied if the current environment has not been published.
+     * @param {DemoteServiceUsagePlanRequest} req
+     * @param {function(string, DemoteServiceUsagePlanResponse):void} cb
+     * @public
+     */
+    DemoteServiceUsagePlan(req, cb) {
+        let resp = new DemoteServiceUsagePlanResponse();
+        this.request("DemoteServiceUsagePlan", req, resp, cb);
+    }
+
+    /**
      * This API is used to update a created API key pair.
      * @param {UpdateApiKeyRequest} req
      * @param {function(string, UpdateApiKeyResponse):void} cb
@@ -582,6 +752,17 @@ To use API Gateway, you need to create a usage plan and bind it to a service env
     UpdateApiKey(req, cb) {
         let resp = new UpdateApiKeyResponse();
         this.request("UpdateApiKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an API Gateway plugin.
+     * @param {DeletePluginRequest} req
+     * @param {function(string, DeletePluginResponse):void} cb
+     * @public
+     */
+    DeletePlugin(req, cb) {
+        let resp = new DeletePluginResponse();
+        this.request("DeletePlugin", req, resp, cb);
     }
 
     /**
@@ -688,14 +869,14 @@ After binding a usage plan to environments, you can use this API to query all se
     }
 
     /**
-     * This API is used to reset the password of an API document.
-     * @param {ResetAPIDocPasswordRequest} req
-     * @param {function(string, ResetAPIDocPasswordResponse):void} cb
+     * This API is used to list all APIs that can use this plugin, no matter whether the API is bound with the plugin.
+     * @param {DescribeAllPluginApisRequest} req
+     * @param {function(string, DescribeAllPluginApisResponse):void} cb
      * @public
      */
-    ResetAPIDocPassword(req, cb) {
-        let resp = new ResetAPIDocPasswordResponse();
-        this.request("ResetAPIDocPassword", req, resp, cb);
+    DescribeAllPluginApis(req, cb) {
+        let resp = new DescribeAllPluginApisResponse();
+        this.request("DescribeAllPluginApis", req, resp, cb);
     }
 
     /**
@@ -755,6 +936,17 @@ A service is generally published on several versions. This API can be used to qu
     }
 
     /**
+     * This API is used to unbind an API from the plugin.
+     * @param {DetachPluginRequest} req
+     * @param {function(string, DetachPluginResponse):void} cb
+     * @public
+     */
+    DetachPlugin(req, cb) {
+        let resp = new DetachPluginResponse();
+        this.request("DetachPlugin", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a service IP policy.
      * @param {DeleteIPStrategyRequest} req
      * @param {function(string, DeleteIPStrategyResponse):void} cb
@@ -775,6 +967,17 @@ An API Gateway service can only be called when it is published to an environment
     ReleaseService(req, cb) {
         let resp = new ReleaseServiceResponse();
         this.request("ReleaseService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query APIs bound with a specified plugin.
+     * @param {DescribePluginApisRequest} req
+     * @param {function(string, DescribePluginApisResponse):void} cb
+     * @public
+     */
+    DescribePluginApis(req, cb) {
+        let resp = new DescribePluginApisResponse();
+        this.request("DescribePluginApis", req, resp, cb);
     }
 
     /**
@@ -800,14 +1003,14 @@ An API Gateway service can only be called when it is published to an environment
     }
 
     /**
-     * This API is used to unbind a usage plan from a specified environment.
-     * @param {UnBindEnvironmentRequest} req
-     * @param {function(string, UnBindEnvironmentResponse):void} cb
+     * This API is used to modify an API throttling policy.
+     * @param {ModifyApiEnvironmentStrategyRequest} req
+     * @param {function(string, ModifyApiEnvironmentStrategyResponse):void} cb
      * @public
      */
-    UnBindEnvironment(req, cb) {
-        let resp = new UnBindEnvironmentResponse();
-        this.request("UnBindEnvironment", req, resp, cb);
+    ModifyApiEnvironmentStrategy(req, cb) {
+        let resp = new ModifyApiEnvironmentStrategyResponse();
+        this.request("ModifyApiEnvironmentStrategy", req, resp, cb);
     }
 
     /**
@@ -819,6 +1022,17 @@ An API Gateway service can only be called when it is published to an environment
     DescribeApiEnvironmentStrategy(req, cb) {
         let resp = new DescribeApiEnvironmentStrategyResponse();
         this.request("DescribeApiEnvironmentStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the application list.
+     * @param {DescribeApiAppsStatusRequest} req
+     * @param {function(string, DescribeApiAppsStatusResponse):void} cb
+     * @public
+     */
+    DescribeApiAppsStatus(req, cb) {
+        let resp = new DescribeApiAppsStatusResponse();
+        this.request("DescribeApiAppsStatus", req, resp, cb);
     }
 
     /**
@@ -856,6 +1070,17 @@ You can bind a key to a usage plan and bind the usage plan to an environment whe
     }
 
     /**
+     * This API is used to search for an application by application ID.
+     * @param {DescribeApiAppRequest} req
+     * @param {function(string, DescribeApiAppResponse):void} cb
+     * @public
+     */
+    DescribeApiApp(req, cb) {
+        let resp = new DescribeApiAppResponse();
+        this.request("DescribeApiApp", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a custom domain name mapping in a service environment.
 You can use this API if you use a custom domain name and custom mapping. Please note that if you delete all mappings in all environments, a failure will be returned when this API is called.
      * @param {DeleteServiceSubDomainMappingRequest} req
@@ -877,6 +1102,17 @@ After creating an API key, you can query its details by using this API.
     DescribeApiKey(req, cb) {
         let resp = new DescribeApiKeyResponse();
         this.request("DescribeApiKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an API Gateway plugin.
+     * @param {CreatePluginRequest} req
+     * @param {function(string, CreatePluginResponse):void} cb
+     * @public
+     */
+    CreatePlugin(req, cb) {
+        let resp = new CreatePluginResponse();
+        this.request("CreatePlugin", req, resp, cb);
     }
 
     /**
@@ -915,6 +1151,17 @@ Each service in API Gateway provides a default domain name for users to call. If
     }
 
     /**
+     * This API is used to query the plugin details by plugin ID.
+     * @param {DescribePluginRequest} req
+     * @param {function(string, DescribePluginResponse):void} cb
+     * @public
+     */
+    DescribePlugin(req, cb) {
+        let resp = new DescribePluginResponse();
+        this.request("DescribePlugin", req, resp, cb);
+    }
+
+    /**
      * This API (`DescribeApi`) is used to query the details of the APIs users manage via Tencent Cloud API Gateway.
      * @param {DescribeApiRequest} req
      * @param {function(string, DescribeApiResponse):void} cb
@@ -923,6 +1170,17 @@ Each service in API Gateway provides a default domain name for users to call. If
     DescribeApi(req, cb) {
         let resp = new DescribeApiResponse();
         this.request("DescribeApi", req, resp, cb);
+    }
+
+    /**
+     * This API is used to automatically generate API documents and SDKs. One document and one SDK will be generated for each environment under each service, respectively.
+     * @param {GenerateApiDocumentRequest} req
+     * @param {function(string, GenerateApiDocumentResponse):void} cb
+     * @public
+     */
+    GenerateApiDocument(req, cb) {
+        let resp = new GenerateApiDocumentResponse();
+        this.request("GenerateApiDocument", req, resp, cb);
     }
 
     /**
@@ -948,14 +1206,25 @@ Each service in API Gateway provides a default domain name for users to call. If
     }
 
     /**
-     * This API is used to automatically generate API documents and SDKs. One document and one SDK will be generated for each environment under each service, respectively.
-     * @param {GenerateApiDocumentRequest} req
-     * @param {function(string, GenerateApiDocumentResponse):void} cb
+     * This API is used to reset the password of an API document.
+     * @param {ResetAPIDocPasswordRequest} req
+     * @param {function(string, ResetAPIDocPasswordResponse):void} cb
      * @public
      */
-    GenerateApiDocument(req, cb) {
-        let resp = new GenerateApiDocumentResponse();
-        this.request("GenerateApiDocument", req, resp, cb);
+    ResetAPIDocPassword(req, cb) {
+        let resp = new ResetAPIDocPasswordResponse();
+        this.request("ResetAPIDocPassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an API deployed at API Gateway.
+     * @param {DescribeApiForApiAppRequest} req
+     * @param {function(string, DescribeApiForApiAppResponse):void} cb
+     * @public
+     */
+    DescribeApiForApiApp(req, cb) {
+        let resp = new DescribeApiForApiAppResponse();
+        this.request("DescribeApiForApiApp", req, resp, cb);
     }
 
 

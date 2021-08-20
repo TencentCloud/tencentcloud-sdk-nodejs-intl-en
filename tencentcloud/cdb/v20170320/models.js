@@ -3020,7 +3020,7 @@ class ModifyAccountMaxUserConnectionsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * The maximum number of instance connections supported by an account
+         * Maximum connections of the account. Maximum value: `10240`.
          * @type {number || null}
          */
         this.MaxUserConnections = null;
@@ -9488,6 +9488,12 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
          */
         this.Cpu = null;
 
+        /**
+         * Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked: QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+         * @type {number || null}
+         */
+        this.FastUpgrade = null;
+
     }
 
     /**
@@ -9509,6 +9515,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.FastUpgrade = 'FastUpgrade' in params ? params.FastUpgrade : null;
 
     }
 }
@@ -10159,7 +10166,7 @@ class CreateAccountsRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * The maximum number of instance connections supported by the new account
+         * Maximum connections of the new account. Default value: `10240`. Maximum value: `10240`.
          * @type {number || null}
          */
         this.MaxUserConnections = null;

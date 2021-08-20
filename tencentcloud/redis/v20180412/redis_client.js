@@ -23,7 +23,7 @@ const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTop
 const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const TaskInfoDetail = models.TaskInfoDetail;
-const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
+const ApplyParamsTemplateRequest = models.ApplyParamsTemplateRequest;
 const UpgradeInstanceVersionResponse = models.UpgradeInstanceVersionResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const DescribeInstanceZoneInfoRequest = models.DescribeInstanceZoneInfoRequest;
@@ -39,8 +39,10 @@ const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
 const DescribeCommonDBInstancesRequest = models.DescribeCommonDBInstancesRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const RedisNodeInfo = models.RedisNodeInfo;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
+const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeInstanceZoneInfoResponse = models.DescribeInstanceZoneInfoResponse;
 const Account = models.Account;
@@ -50,6 +52,7 @@ const ResetPasswordResponse = models.ResetPasswordResponse;
 const ClearInstanceRequest = models.ClearInstanceRequest;
 const RegionConf = models.RegionConf;
 const BigKeyInfo = models.BigKeyInfo;
+const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const UpgradeVersionToMultiAvailabilityZonesResponse = models.UpgradeVersionToMultiAvailabilityZonesResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
@@ -58,27 +61,33 @@ const InstanceMultiParam = models.InstanceMultiParam;
 const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
 const RedisNode = models.RedisNode;
 const DescribeProjectSecurityGroupRequest = models.DescribeProjectSecurityGroupRequest;
-const RestoreInstanceResponse = models.RestoreInstanceResponse;
+const ParameterDetail = models.ParameterDetail;
 const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
 const DestroyPrepaidInstanceRequest = models.DestroyPrepaidInstanceRequest;
 const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
 const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
+const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
 const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
+const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const ChangeReplicaToMasterRequest = models.ChangeReplicaToMasterRequest;
 const ProxyNodes = models.ProxyNodes;
-const TradeDealDetail = models.TradeDealDetail;
+const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const RedisCommonInstanceList = models.RedisCommonInstanceList;
 const SourceInfo = models.SourceInfo;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
 const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
+const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
+const DescribeTendisSlowLogResponse = models.DescribeTendisSlowLogResponse;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
 const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
+const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
 const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
@@ -91,6 +100,7 @@ const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMul
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const KillMasterGroupRequest = models.KillMasterGroupRequest;
 const InstanceTextParam = models.InstanceTextParam;
+const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
 const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
@@ -99,6 +109,7 @@ const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
+const ApplyParamsTemplateResponse = models.ApplyParamsTemplateResponse;
 const RedisNodes = models.RedisNodes;
 const DescribeInstanceMonitorTopNCmdRequest = models.DescribeInstanceMonitorTopNCmdRequest;
 const ModifyNetworkConfigRequest = models.ModifyNetworkConfigRequest;
@@ -107,9 +118,12 @@ const InstanceParamHistory = models.InstanceParamHistory;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const CleanUpInstanceResponse = models.CleanUpInstanceResponse;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const DescribeInstanceShardsRequest = models.DescribeInstanceShardsRequest;
 const Outbound = models.Outbound;
 const DescribeAutoBackupConfigResponse = models.DescribeAutoBackupConfigResponse;
+const InquiryPriceUpgradeInstanceRequest = models.InquiryPriceUpgradeInstanceRequest;
+const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMonitorBigKeySizeDistResponse;
 const SecurityGroup = models.SecurityGroup;
@@ -122,6 +136,7 @@ const InstanceNode = models.InstanceNode;
 const TendisNodes = models.TendisNodes;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
+const TradeDealDetail = models.TradeDealDetail;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const ReplicaGroup = models.ReplicaGroup;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
@@ -132,32 +147,37 @@ const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const SourceCommand = models.SourceCommand;
 const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
 const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
+const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
 const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
 const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
 const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
 const DeleteInstanceAccountRequest = models.DeleteInstanceAccountRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
+const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
 const InstanceSet = models.InstanceSet;
 const ResourceTag = models.ResourceTag;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
-const DescribeCommonDBInstancesResponse = models.DescribeCommonDBInstancesResponse;
+const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
 const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
-const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
+const DescribeCommonDBInstancesResponse = models.DescribeCommonDBInstancesResponse;
+const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
+const BackupDownloadInfo = models.BackupDownloadInfo;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
-const ModifyInstanceResponse = models.ModifyInstanceResponse;
+const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
 const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
 const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
 const DisableReplicaReadonlyRequest = models.DisableReplicaReadonlyRequest;
+const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
 const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
@@ -168,9 +188,11 @@ const InstanceEnumParam = models.InstanceEnumParam;
 const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
 const SecurityGroupDetail = models.SecurityGroupDetail;
+const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceResponse;
 const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
 const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
 const InstanceClusterShard = models.InstanceClusterShard;
+const TendisSlowLogDetail = models.TendisSlowLogDetail;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
@@ -248,14 +270,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify an instance sub-account.
-     * @param {ModifyInstanceAccountRequest} req
-     * @param {function(string, ModifyInstanceAccountResponse):void} cb
+     * This API is used to query the list of parameter templates.
+     * @param {DescribeParamTemplatesRequest} req
+     * @param {function(string, DescribeParamTemplatesResponse):void} cb
      * @public
      */
-    ModifyInstanceAccount(req, cb) {
-        let resp = new ModifyInstanceAccountResponse();
-        this.request("ModifyInstanceAccount", req, resp, cb);
+    DescribeParamTemplates(req, cb) {
+        let resp = new DescribeParamTemplatesResponse();
+        this.request("DescribeParamTemplates", req, resp, cb);
     }
 
     /**
@@ -300,6 +322,17 @@ class RedisClient extends AbstractClient {
     CleanUpInstance(req, cb) {
         let resp = new CleanUpInstanceResponse();
         this.request("CleanUpInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query parameter template details.
+     * @param {DescribeParamTemplateInfoRequest} req
+     * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
+     * @public
+     */
+    DescribeParamTemplateInfo(req, cb) {
+        let resp = new DescribeParamTemplateInfoResponse();
+        this.request("DescribeParamTemplateInfo", req, resp, cb);
     }
 
     /**
@@ -391,14 +424,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to reset a password.
-     * @param {ResetPasswordRequest} req
-     * @param {function(string, ResetPasswordResponse):void} cb
+     * This API is used to delete a parameter template.
+     * @param {DeleteParamTemplateRequest} req
+     * @param {function(string, DeleteParamTemplateResponse):void} cb
      * @public
      */
-    ResetPassword(req, cb) {
-        let resp = new ResetPasswordResponse();
-        this.request("ResetPassword", req, resp, cb);
+    DeleteParamTemplate(req, cb) {
+        let resp = new DeleteParamTemplateResponse();
+        this.request("DeleteParamTemplate", req, resp, cb);
     }
 
     /**
@@ -421,6 +454,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorTopNCmd(req, cb) {
         let resp = new DescribeInstanceMonitorTopNCmdResponse();
         this.request("DescribeInstanceMonitorTopNCmd", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a parameter template.
+     * @param {CreateParamTemplateRequest} req
+     * @param {function(string, CreateParamTemplateResponse):void} cb
+     * @public
+     */
+    CreateParamTemplate(req, cb) {
+        let resp = new CreateParamTemplateResponse();
+        this.request("CreateParamTemplate", req, resp, cb);
     }
 
     /**
@@ -479,6 +523,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify an instance sub-account.
+     * @param {ModifyInstanceAccountRequest} req
+     * @param {function(string, ModifyInstanceAccountResponse):void} cb
+     * @public
+     */
+    ModifyInstanceAccount(req, cb) {
+        let resp = new ModifyInstanceAccountResponse();
+        this.request("ModifyInstanceAccount", req, resp, cb);
+    }
+
+    /**
      * This API is used to upgrade compatible instance version (for example, from Redis 2.8 to 4.0), or upgrade instance architecture (for example, from standard architecture to cluster architecture).
      * @param {UpgradeInstanceVersionRequest} req
      * @param {function(string, UpgradeInstanceVersionResponse):void} cb
@@ -487,6 +542,17 @@ class RedisClient extends AbstractClient {
     UpgradeInstanceVersion(req, cb) {
         let resp = new UpgradeInstanceVersionResponse();
         this.request("UpgradeInstanceVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the price for scaling an instance.
+     * @param {InquiryPriceUpgradeInstanceRequest} req
+     * @param {function(string, InquiryPriceUpgradeInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceUpgradeInstance(req, cb) {
+        let resp = new InquiryPriceUpgradeInstanceResponse();
+        this.request("InquiryPriceUpgradeInstance", req, resp, cb);
     }
 
     /**
@@ -556,6 +622,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query slow queries of a TencentDB for Tendis instance.
+     * @param {DescribeTendisSlowLogRequest} req
+     * @param {function(string, DescribeTendisSlowLogResponse):void} cb
+     * @public
+     */
+    DescribeTendisSlowLog(req, cb) {
+        let resp = new DescribeTendisSlowLogResponse();
+        this.request("DescribeTendisSlowLog", req, resp, cb);
+    }
+
+    /**
      * This API is used to associate a security group with instances in batches.
      * @param {AssociateSecurityGroupsRequest} req
      * @param {function(string, AssociateSecurityGroupsResponse):void} cb
@@ -575,6 +652,28 @@ class RedisClient extends AbstractClient {
     ModifyInstanceParams(req, cb) {
         let resp = new ModifyInstanceParamsResponse();
         this.request("ModifyInstanceParams", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a parameter template.
+     * @param {ModifyParamTemplateRequest} req
+     * @param {function(string, ModifyParamTemplateResponse):void} cb
+     * @public
+     */
+    ModifyParamTemplate(req, cb) {
+        let resp = new ModifyParamTemplateResponse();
+        this.request("ModifyParamTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the price for purchasing an instance.
+     * @param {InquiryPriceCreateInstanceRequest} req
+     * @param {function(string, InquiryPriceCreateInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceCreateInstance(req, cb) {
+        let resp = new InquiryPriceCreateInstanceResponse();
+        this.request("InquiryPriceCreateInstance", req, resp, cb);
     }
 
     /**
@@ -630,6 +729,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
         let resp = new DescribeInstanceMonitorBigKeyTypeDistResponse();
         this.request("DescribeInstanceMonitorBigKeyTypeDist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reset a password.
+     * @param {ResetPasswordRequest} req
+     * @param {function(string, ResetPasswordResponse):void} cb
+     * @public
+     */
+    ResetPassword(req, cb) {
+        let resp = new ResetPasswordResponse();
+        this.request("ResetPassword", req, resp, cb);
     }
 
     /**
@@ -729,6 +839,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceParams(req, cb) {
         let resp = new DescribeInstanceParamsResponse();
         this.request("DescribeInstanceParams", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply a parameter template to instances.
+     * @param {ApplyParamsTemplateRequest} req
+     * @param {function(string, ApplyParamsTemplateResponse):void} cb
+     * @public
+     */
+    ApplyParamsTemplate(req, cb) {
+        let resp = new ApplyParamsTemplateResponse();
+        this.request("ApplyParamsTemplate", req, resp, cb);
     }
 
     /**

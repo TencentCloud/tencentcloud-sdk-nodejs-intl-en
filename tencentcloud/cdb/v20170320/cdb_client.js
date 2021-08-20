@@ -647,7 +647,7 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API (DeleteParamTemplate) is used to delete a parameter template.
+     * This API is used to delete a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
      * @param {DeleteParamTemplateRequest} req
      * @param {function(string, DeleteParamTemplateResponse):void} cb
      * @public
@@ -789,7 +789,7 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
-     * This API (ModifyParamTemplate) is used to modify a parameter template.
+     * This API is used to modify a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
      * @public
@@ -877,7 +877,7 @@ The new API (CreateBackup) can specify the table to be backed up when a logical 
     }
 
     /**
-     * This API (DescribeParamTemplateInfo) is used to query parameter template details.
+     * This API is used to query parameter template details. The common request parameter `Region` can only be set to `ap-guangzhou`.
      * @param {DescribeParamTemplateInfoRequest} req
      * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
      * @public
@@ -1385,7 +1385,7 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API (CreateParamTemplate) is used to create a parameter template.
+     * This API is used to create a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
      * @param {CreateParamTemplateRequest} req
      * @param {function(string, CreateParamTemplateResponse):void} cb
      * @public

@@ -384,42 +384,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SwitchInstanceVip request structure.
+ * ApplyParamsTemplate request structure.
  * @class
  */
-class SwitchInstanceVipRequest extends  AbstractModel {
+class ApplyParamsTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Source instance ID.
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * The ID of the parameter template to be applied
          * @type {string || null}
          */
-        this.SrcInstanceId = null;
-
-        /**
-         * Target instance ID.
-         * @type {string || null}
-         */
-        this.DstInstanceId = null;
-
-        /**
-         * The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than `TimeDelay`, the VIP will not be switched. We recommend setting an acceptable value based on the actual business conditions.
-         * @type {number || null}
-         */
-        this.TimeDelay = null;
-
-        /**
-         * Whether to force the switch when DTS is disconnected. Valid values: 1 (yes), 0 (no).
-         * @type {number || null}
-         */
-        this.ForceSwitch = null;
-
-        /**
-         * Valid values: now (switch now), syncComplete (switch after sync is completed).
-         * @type {string || null}
-         */
-        this.SwitchTime = null;
+        this.TemplateId = null;
 
     }
 
@@ -430,11 +412,8 @@ class SwitchInstanceVipRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SrcInstanceId = 'SrcInstanceId' in params ? params.SrcInstanceId : null;
-        this.DstInstanceId = 'DstInstanceId' in params ? params.DstInstanceId : null;
-        this.TimeDelay = 'TimeDelay' in params ? params.TimeDelay : null;
-        this.ForceSwitch = 'ForceSwitch' in params ? params.ForceSwitch : null;
-        this.SwitchTime = 'SwitchTime' in params ? params.SwitchTime : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -483,12 +462,6 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Availability zone ID of the instance. For more information, please see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
          * Instance type. Valid values: 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
          * @type {number || null}
          */
@@ -517,6 +490,12 @@ class CreateInstancesRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.BillingMode = null;
+
+        /**
+         * Availability zone ID of the instance. For more information, please see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ZoneId = null;
 
         /**
          * Instance password. If the input parameter `NoAuth` is `true` and a VPC is used, the `Password` is optional; otherwise, it is required.
@@ -604,6 +583,18 @@ If the instance type parameter `TypeId` indicates CKV 3.2, the password contains
          */
         this.ResourceTags = null;
 
+        /**
+         * Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * ID of the parameter template applied to the created instance. If this parameter is left blank, the default parameter template will be applied.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
     }
 
     /**
@@ -613,12 +604,12 @@ If the instance type parameter `TypeId` indicates CKV 3.2, the password contains
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.TypeId = 'TypeId' in params ? params.TypeId : null;
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
         this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Password = 'Password' in params ? params.Password : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
@@ -649,6 +640,8 @@ If the instance type parameter `TypeId` indicates CKV 3.2, the password contains
                 this.ResourceTags.push(obj);
             }
         }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -1337,6 +1330,41 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * RestoreInstance response structure.
+ * @class
+ */
+class RestoreInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID, which can be used to query the task execution status through the DescribeTaskInfo API
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Redis master or replica node information
  * @class
  */
@@ -1351,16 +1379,22 @@ class RedisNodeInfo extends  AbstractModel {
         this.NodeType = null;
 
         /**
+         * ID of the master or replica node, which is not required upon creation of the instance
+         * @type {number || null}
+         */
+        this.NodeId = null;
+
+        /**
          * ID of the availability zone of the master or replica node
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * ID of the master or replica node, which is not required upon creation of the instance
-         * @type {number || null}
+         * ID of the availability zone of the master or replica node
+         * @type {string || null}
          */
-        this.NodeId = null;
+        this.ZoneName = null;
 
     }
 
@@ -1372,8 +1406,9 @@ class RedisNodeInfo extends  AbstractModel {
             return;
         }
         this.NodeType = 'NodeType' in params ? params.NodeType : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -1409,6 +1444,34 @@ class DescribeBackupUrlRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+
+    }
+}
+
+/**
+ * DeleteParamTemplate response structure.
+ * @class
+ */
+class DeleteParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1878,6 +1941,48 @@ class BigKeyInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeParamTemplates request structure.
+ * @class
+ */
+class DescribeParamTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of instance types. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture).
+         * @type {Array.<number> || null}
+         */
+        this.ProductTypes = null;
+
+        /**
+         * Array of template names.
+         * @type {Array.<string> || null}
+         */
+        this.TemplateNames = null;
+
+        /**
+         * Array of template IDs.
+         * @type {Array.<string> || null}
+         */
+        this.TemplateIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductTypes = 'ProductTypes' in params ? params.ProductTypes : null;
+        this.TemplateNames = 'TemplateNames' in params ? params.TemplateNames : null;
+        this.TemplateIds = 'TemplateIds' in params ? params.TemplateIds : null;
+
+    }
+}
+
+/**
  * RenewInstance request structure.
  * @class
  */
@@ -2243,24 +2348,69 @@ class DescribeProjectSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * RestoreInstance response structure.
+ * Details of the parameters in a parameter template
  * @class
  */
-class RestoreInstanceResponse extends  AbstractModel {
+class ParameterDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID, which can be used to query the task execution status through the DescribeTaskInfo API
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Parameter name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * Data type of the parameter
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * Default value of the parameter
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Current value of the parameter
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Whether the database needs to be restarted for the modified parameter to take effect. Valid values: `0` (no),`1` (yes)
+         * @type {number || null}
+         */
+        this.NeedReboot = null;
+
+        /**
+         * Maximum value of the parameter
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * Minimum value of the parameter
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * Enumerated values of the parameter. It is null if the parameter is non-enumerated
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
 
     }
 
@@ -2271,8 +2421,15 @@ class RestoreInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
 
     }
 }
@@ -2420,6 +2577,41 @@ class DisableReplicaReadonlyResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateParamTemplate response structure.
+ * @class
+ */
+class CreateParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template ID.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2598,6 +2790,62 @@ class DestroyPostpaidInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * SwitchInstanceVip request structure.
+ * @class
+ */
+class SwitchInstanceVipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Source instance ID.
+         * @type {string || null}
+         */
+        this.SrcInstanceId = null;
+
+        /**
+         * Target instance ID.
+         * @type {string || null}
+         */
+        this.DstInstanceId = null;
+
+        /**
+         * The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than `TimeDelay`, the VIP will not be switched. We recommend setting an acceptable value based on the actual business conditions.
+         * @type {number || null}
+         */
+        this.TimeDelay = null;
+
+        /**
+         * Whether to force the switch when DTS is disconnected. Valid values: 1 (yes), 0 (no).
+         * @type {number || null}
+         */
+        this.ForceSwitch = null;
+
+        /**
+         * Valid values: now (switch now), syncComplete (switch after sync is completed).
+         * @type {string || null}
+         */
+        this.SwitchTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcInstanceId = 'SrcInstanceId' in params ? params.SrcInstanceId : null;
+        this.DstInstanceId = 'DstInstanceId' in params ? params.DstInstanceId : null;
+        this.TimeDelay = 'TimeDelay' in params ? params.TimeDelay : null;
+        this.ForceSwitch = 'ForceSwitch' in params ? params.ForceSwitch : null;
+        this.SwitchTime = 'SwitchTime' in params ? params.SwitchTime : null;
+
+    }
+}
+
+/**
  * ChangeReplicaToMaster request structure.
  * @class
  */
@@ -2662,84 +2910,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Order deal information
+ * ModifyInstance response structure.
  * @class
  */
-class TradeDealDetail extends  AbstractModel {
+class ModifyInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Order ID, which is used when a TencentCloud API is called
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DealId = null;
-
-        /**
-         * Long order ID, which is used when an order issue is submitted for assistance
-         * @type {string || null}
-         */
-        this.DealName = null;
-
-        /**
-         * AZ ID
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Number of instances associated with an order
-         * @type {number || null}
-         */
-        this.GoodsNum = null;
-
-        /**
-         * Creates a user uin
-         * @type {string || null}
-         */
-        this.Creater = null;
-
-        /**
-         * Order creation time
-         * @type {string || null}
-         */
-        this.CreatTime = null;
-
-        /**
-         * Order timeout period
-         * @type {string || null}
-         */
-        this.OverdueTime = null;
-
-        /**
-         * Order completion time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Order status. 1: unpaid; 2: paid but not delivered; 3: In delivery; 4: successfully delivered; 5: delivery failed; 6: refunded; 7: order closed; 8: order expired; 9: order invalidated; 10: product invalidated; 11: requested payment rejected; 12: paying
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Order status description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Actual total price of an order in 0.01 CNY
-         * @type {number || null}
-         */
-        this.Price = null;
-
-        /**
-         * Instance ID
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
+        this.RequestId = null;
 
     }
 
@@ -2750,18 +2932,7 @@ class TradeDealDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = 'DealId' in params ? params.DealId : null;
-        this.DealName = 'DealName' in params ? params.DealName : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
-        this.Creater = 'Creater' in params ? params.Creater : null;
-        this.CreatTime = 'CreatTime' in params ? params.CreatTime : null;
-        this.OverdueTime = 'OverdueTime' in params ? params.OverdueTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Price = 'Price' in params ? params.Price : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3019,6 +3190,120 @@ class DescribeInstanceDTSInfoRequest extends  AbstractModel {
 }
 
 /**
+ * CreateParamTemplate request structure.
+ * @class
+ */
+class CreateParamTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Parameter template description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture). If `TempateId` is specified, this parameter can be left blank; otherwise, it is required.
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
+        /**
+         * ID of the source parameter template. You can create a template by copying the source parameter template.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Parameter list.
+         * @type {Array.<InstanceParam> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new InstanceParam();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeTendisSlowLog response structure.
+ * @class
+ */
+class DescribeTendisSlowLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of slow queries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Slow query details
+         * @type {Array.<TendisSlowLogDetail> || null}
+         */
+        this.TendisSlowLogDetail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TendisSlowLogDetail) {
+            this.TendisSlowLogDetail = new Array();
+            for (let z in params.TendisSlowLogDetail) {
+                let obj = new TendisSlowLogDetail();
+                obj.deserialize(params.TendisSlowLogDetail[z]);
+                this.TendisSlowLogDetail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProductInfo response structure.
  * @class
  */
@@ -3174,6 +3459,34 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeParamTemplateInfo request structure.
+ * @class
+ */
+class DescribeParamTemplateInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template ID.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
  * DescribeBackupUrl response structure.
  * @class
  */
@@ -3194,6 +3507,20 @@ class DescribeBackupUrlResponse extends  AbstractModel {
         this.InnerDownloadUrl = null;
 
         /**
+         * File name (only valid for TencentDB for Tendis instances)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Filenames = null;
+
+        /**
+         * List of backup file information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<BackupDownloadInfo> || null}
+         */
+        this.BackupInfos = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3210,6 +3537,16 @@ class DescribeBackupUrlResponse extends  AbstractModel {
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.InnerDownloadUrl = 'InnerDownloadUrl' in params ? params.InnerDownloadUrl : null;
+        this.Filenames = 'Filenames' in params ? params.Filenames : null;
+
+        if (params.BackupInfos) {
+            this.BackupInfos = new Array();
+            for (let z in params.BackupInfos) {
+                let obj = new BackupDownloadInfo();
+                obj.deserialize(params.BackupInfos[z]);
+                this.BackupInfos.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3246,6 +3583,42 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
         }
         this.Product = 'Product' in params ? params.Product : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceCreateInstance response structure.
+ * @class
+ */
+class InquiryPriceCreateInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Price. Unit: USD
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3842,6 +4215,55 @@ class InstanceTextParam extends  AbstractModel {
 }
 
 /**
+ * Parameter template information
+ * @class
+ */
+class ParamTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Parameter template name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Parameter template description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture)
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
+
+    }
+}
+
+/**
  * DescribeInstanceMonitorTopNCmdTook response structure.
  * @class
  */
@@ -4193,6 +4615,41 @@ class DescribeTaskInfoRequest extends  AbstractModel {
 }
 
 /**
+ * ApplyParamsTemplate response structure.
+ * @class
+ */
+class ApplyParamsTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {Array.<number> || null}
+         */
+        this.TaskIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Redis node information
  * @class
  */
@@ -4522,6 +4979,56 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeParamTemplates response structure.
+ * @class
+ */
+class DescribeParamTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of parameter templates of the user.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Parameter template details.
+         * @type {Array.<ParamTemplateInfo> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParamTemplateInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceShards request structure.
  * @class
  */
@@ -4677,6 +5184,83 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
         this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
         this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceUpgradeInstance request structure.
+ * @class
+ */
+class InquiryPriceUpgradeInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Shard size in MB.
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * Number of shards. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+         * @type {number || null}
+         */
+        this.RedisShardNum = null;
+
+        /**
+         * Number of replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+         * @type {number || null}
+         */
+        this.RedisReplicasNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
+        this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
+
+    }
+}
+
+/**
+ * ModifyParamTemplate response structure.
+ * @class
+ */
+class ModifyParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5367,6 +5951,111 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Order deal information
+ * @class
+ */
+class TradeDealDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID, which is used when a TencentCloud API is called
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * Long order ID, which is used when an order issue is submitted for assistance
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * AZ ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Number of instances associated with an order
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * Creates a user uin
+         * @type {string || null}
+         */
+        this.Creater = null;
+
+        /**
+         * Order creation time
+         * @type {string || null}
+         */
+        this.CreatTime = null;
+
+        /**
+         * Order timeout period
+         * @type {string || null}
+         */
+        this.OverdueTime = null;
+
+        /**
+         * Order completion time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Order status. 1: unpaid; 2: paid but not delivered; 3: In delivery; 4: successfully delivered; 5: delivery failed; 6: refunded; 7: order closed; 8: order expired; 9: order invalidated; 10: product invalidated; 11: requested payment rejected; 12: paying
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Order status description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Actual total price of an order in 0.01 CNY
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * Instance ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Creater = 'Creater' in params ? params.Creater : null;
+        this.CreatTime = 'CreatTime' in params ? params.CreatTime : null;
+        this.OverdueTime = 'OverdueTime' in params ? params.OverdueTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * AssociateSecurityGroups response structure.
  * @class
  */
@@ -5951,6 +6640,34 @@ class DescribeSlowLogRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteParamTemplate request structure.
+ * @class
+ */
+class DeleteParamTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template ID.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
  * DescribeAutoBackupConfig request structure.
  * @class
  */
@@ -6150,6 +6867,63 @@ class ManualBackupInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * ModifyParamTemplate request structure.
+ * @class
+ */
+class ModifyParamTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the parameter template to be modified.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * New name of the parameter template.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * New description of the parameter template.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * List of new parameters.
+         * @type {Array.<InstanceParam> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new InstanceParam();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
 
     }
 }
@@ -6664,30 +7438,24 @@ class ModifyMaintenanceWindowResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCommonDBInstances response structure.
+ * DescribeInstanceMonitorBigKeyTypeDist request structure.
  * @class
  */
-class DescribeCommonDBInstancesResponse extends  AbstractModel {
+class DescribeInstanceMonitorBigKeyTypeDistRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance quantity
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Instance information
-         * @type {Array.<RedisCommonInstanceList> || null}
-         */
-        this.InstanceDetails = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Time, such as "20190219"
+         * @type {string || null}
+         */
+        this.Date = null;
 
     }
 
@@ -6698,17 +7466,8 @@ class DescribeCommonDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.InstanceDetails) {
-            this.InstanceDetails = new Array();
-            for (let z in params.InstanceDetails) {
-                let obj = new RedisCommonInstanceList();
-                obj.deserialize(params.InstanceDetails[z]);
-                this.InstanceDetails.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Date = 'Date' in params ? params.Date : null;
 
     }
 }
@@ -6784,24 +7543,30 @@ class DestroyPrepaidInstanceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceMonitorBigKeyTypeDist request structure.
+ * DescribeCommonDBInstances response structure.
  * @class
  */
-class DescribeInstanceMonitorBigKeyTypeDistRequest extends  AbstractModel {
+class DescribeCommonDBInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Instance quantity
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.TotalCount = null;
 
         /**
-         * Time, such as "20190219"
+         * Instance information
+         * @type {Array.<RedisCommonInstanceList> || null}
+         */
+        this.InstanceDetails = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Date = null;
+        this.RequestId = null;
 
     }
 
@@ -6812,8 +7577,109 @@ class DescribeInstanceMonitorBigKeyTypeDistRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Date = 'Date' in params ? params.Date : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceDetails) {
+            this.InstanceDetails = new Array();
+            for (let z in params.InstanceDetails) {
+                let obj = new RedisCommonInstanceList();
+                obj.deserialize(params.InstanceDetails[z]);
+                this.InstanceDetails.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceCreateInstance request structure.
+ * @class
+ */
+class InquiryPriceCreateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance type. Valid values: `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture).
+         * @type {number || null}
+         */
+        this.TypeId = null;
+
+        /**
+         * Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
+If `TypeId` indicates the standard architecture, `MemSize` indicates the total memory capacity of an instance; if `TypeId` indicates the cluster architecture, `MemSize` indicates the memory capacity per shard.
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * Length of purchase in months, which is required when creating a monthly-subscribed instance. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36]. For pay-as-you-go instances, set the parameter to `1`.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Billing mode. Valid values: `0` (pay-as-you-go), `1` (monthly subscription).
+         * @type {number || null}
+         */
+        this.BillingMode = null;
+
+        /**
+         * ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Number of instance shards. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, Redis 2.8 in standalone architecture, and Redis 4.0 in standard architecture.
+         * @type {number || null}
+         */
+        this.RedisShardNum = null;
+
+        /**
+         * Number of instance replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+         * @type {number || null}
+         */
+        this.RedisReplicasNum = null;
+
+        /**
+         * Whether to support read-only replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+         * @type {boolean || null}
+         */
+        this.ReplicasReadonly = null;
+
+        /**
+         * Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TypeId = 'TypeId' in params ? params.TypeId : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
+        this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
+        this.ReplicasReadonly = 'ReplicasReadonly' in params ? params.ReplicasReadonly : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -6857,6 +7723,55 @@ class ModifyInstanceParamsRequest extends  AbstractModel {
                 this.InstanceParams.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Backup download information
+ * @class
+ */
+class BackupDownloadInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup file name
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Backup file size in bytes. If the parameter value is `0`, the backup file size is unknown.
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * Address (valid for 6 hours) used to download the backup file over a public network
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * Address (valid for 6 hours) used to download the backup file over a private network
+         * @type {string || null}
+         */
+        this.InnerDownloadUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.InnerDownloadUrl = 'InnerDownloadUrl' in params ? params.InnerDownloadUrl : null;
 
     }
 }
@@ -7093,18 +8008,48 @@ class InstanceClusterNode extends  AbstractModel {
 }
 
 /**
- * ModifyInstance response structure.
+ * DescribeTendisSlowLog request structure.
  * @class
  */
-class ModifyInstanceResponse extends  AbstractModel {
+class DescribeTendisSlowLogRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID in the format of crs-ngvou0i1
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Start time in the format of 2019-09-08 12:12:41
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * End time in the format of 2019-09-09 12:12:41
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Slow query threshold in ms
+         * @type {number || null}
+         */
+        this.MinQueryTime = null;
+
+        /**
+         * The maximum number of results returned per page. Default value: `20`
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset, which is an integral multiple of `Limit`
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -7115,7 +8060,12 @@ class ModifyInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MinQueryTime = 'MinQueryTime' in params ? params.MinQueryTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -7393,6 +8343,84 @@ class DisableReplicaReadonlyRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeParamTemplateInfo response structure.
+ * @class
+ */
+class DescribeParamTemplateInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of instance parameters
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Parameter template ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Parameter template name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture)
+         * @type {number || null}
+         */
+        this.ProductType = null;
+
+        /**
+         * Parameter template description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Parameter details
+         * @type {Array.<ParameterDetail> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParameterDetail();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7922,6 +8950,42 @@ class SecurityGroupDetail extends  AbstractModel {
 }
 
 /**
+ * InquiryPriceUpgradeInstance response structure.
+ * @class
+ */
+class InquiryPriceUpgradeInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Price. Unit: USD
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteInstanceAccount response structure.
  * @class
  */
@@ -8064,6 +9128,62 @@ class InstanceClusterShard extends  AbstractModel {
         this.StorageSlope = 'StorageSlope' in params ? params.StorageSlope : null;
         this.Runid = 'Runid' in params ? params.Runid : null;
         this.Connected = 'Connected' in params ? params.Connected : null;
+
+    }
+}
+
+/**
+ * Tendis slow query details
+ * @class
+ */
+class TendisSlowLogDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Execution time
+         * @type {string || null}
+         */
+        this.ExecuteTime = null;
+
+        /**
+         * Duration of the slow query (ms)
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Command
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * Command line details
+         * @type {string || null}
+         */
+        this.CommandLine = null;
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.Node = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExecuteTime = 'ExecuteTime' in params ? params.ExecuteTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.CommandLine = 'CommandLine' in params ? params.CommandLine : null;
+        this.Node = 'Node' in params ? params.Node : null;
 
     }
 }
@@ -8562,7 +9682,7 @@ module.exports = {
     ModifyAutoBackupConfigResponse: ModifyAutoBackupConfigResponse,
     RestoreInstanceRequest: RestoreInstanceRequest,
     TaskInfoDetail: TaskInfoDetail,
-    SwitchInstanceVipRequest: SwitchInstanceVipRequest,
+    ApplyParamsTemplateRequest: ApplyParamsTemplateRequest,
     UpgradeInstanceVersionResponse: UpgradeInstanceVersionResponse,
     CreateInstancesRequest: CreateInstancesRequest,
     DescribeInstanceZoneInfoRequest: DescribeInstanceZoneInfoRequest,
@@ -8578,8 +9698,10 @@ module.exports = {
     DescribeSlowLogResponse: DescribeSlowLogResponse,
     DescribeCommonDBInstancesRequest: DescribeCommonDBInstancesRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
+    RestoreInstanceResponse: RestoreInstanceResponse,
     RedisNodeInfo: RedisNodeInfo,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
+    DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeInstanceZoneInfoResponse: DescribeInstanceZoneInfoResponse,
     Account: Account,
@@ -8589,6 +9711,7 @@ module.exports = {
     ClearInstanceRequest: ClearInstanceRequest,
     RegionConf: RegionConf,
     BigKeyInfo: BigKeyInfo,
+    DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     RenewInstanceRequest: RenewInstanceRequest,
     UpgradeVersionToMultiAvailabilityZonesResponse: UpgradeVersionToMultiAvailabilityZonesResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
@@ -8597,27 +9720,33 @@ module.exports = {
     DescribeInstanceDealDetailRequest: DescribeInstanceDealDetailRequest,
     RedisNode: RedisNode,
     DescribeProjectSecurityGroupRequest: DescribeProjectSecurityGroupRequest,
-    RestoreInstanceResponse: RestoreInstanceResponse,
+    ParameterDetail: ParameterDetail,
     DescribeInstanceShardsResponse: DescribeInstanceShardsResponse,
     DestroyPrepaidInstanceRequest: DestroyPrepaidInstanceRequest,
     ManualBackupInstanceResponse: ManualBackupInstanceResponse,
     DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
+    CreateParamTemplateResponse: CreateParamTemplateResponse,
     InstanceTagInfo: InstanceTagInfo,
     DescribeInstanceDTSInfoResponse: DescribeInstanceDTSInfoResponse,
     DestroyPostpaidInstanceResponse: DestroyPostpaidInstanceResponse,
+    SwitchInstanceVipRequest: SwitchInstanceVipRequest,
     ChangeReplicaToMasterRequest: ChangeReplicaToMasterRequest,
     ProxyNodes: ProxyNodes,
-    TradeDealDetail: TradeDealDetail,
+    ModifyInstanceResponse: ModifyInstanceResponse,
     RedisCommonInstanceList: RedisCommonInstanceList,
     SourceInfo: SourceInfo,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
     DescribeInstanceDTSInfoRequest: DescribeInstanceDTSInfoRequest,
+    CreateParamTemplateRequest: CreateParamTemplateRequest,
+    DescribeTendisSlowLogResponse: DescribeTendisSlowLogResponse,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     ModifyInstanceAccountRequest: ModifyInstanceAccountRequest,
     ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
+    DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     DescribeBackupUrlResponse: DescribeBackupUrlResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
     InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
     ResetPasswordRequest: ResetPasswordRequest,
     ModifyInstanceAccountResponse: ModifyInstanceAccountResponse,
@@ -8630,6 +9759,7 @@ module.exports = {
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
     KillMasterGroupRequest: KillMasterGroupRequest,
     InstanceTextParam: InstanceTextParam,
+    ParamTemplateInfo: ParamTemplateInfo,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
     DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
@@ -8638,6 +9768,7 @@ module.exports = {
     ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
+    ApplyParamsTemplateResponse: ApplyParamsTemplateResponse,
     RedisNodes: RedisNodes,
     DescribeInstanceMonitorTopNCmdRequest: DescribeInstanceMonitorTopNCmdRequest,
     ModifyNetworkConfigRequest: ModifyNetworkConfigRequest,
@@ -8646,9 +9777,12 @@ module.exports = {
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     CleanUpInstanceResponse: CleanUpInstanceResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
+    DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     DescribeInstanceShardsRequest: DescribeInstanceShardsRequest,
     Outbound: Outbound,
     DescribeAutoBackupConfigResponse: DescribeAutoBackupConfigResponse,
+    InquiryPriceUpgradeInstanceRequest: InquiryPriceUpgradeInstanceRequest,
+    ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     DescribeInstanceMonitorBigKeySizeDistResponse: DescribeInstanceMonitorBigKeySizeDistResponse,
     SecurityGroup: SecurityGroup,
@@ -8661,6 +9795,7 @@ module.exports = {
     TendisNodes: TendisNodes,
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
+    TradeDealDetail: TradeDealDetail,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     ReplicaGroup: ReplicaGroup,
     DescribeTaskInfoResponse: DescribeTaskInfoResponse,
@@ -8671,32 +9806,37 @@ module.exports = {
     SourceCommand: SourceCommand,
     ModfiyInstancePasswordRequest: ModfiyInstancePasswordRequest,
     DescribeSlowLogRequest: DescribeSlowLogRequest,
+    DeleteParamTemplateRequest: DeleteParamTemplateRequest,
     DescribeAutoBackupConfigRequest: DescribeAutoBackupConfigRequest,
     DescribeInstanceMonitorSIPResponse: DescribeInstanceMonitorSIPResponse,
     DestroyPostpaidInstanceRequest: DestroyPostpaidInstanceRequest,
     DeleteInstanceAccountRequest: DeleteInstanceAccountRequest,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     ManualBackupInstanceRequest: ManualBackupInstanceRequest,
+    ModifyParamTemplateRequest: ModifyParamTemplateRequest,
     ModfiyInstancePasswordResponse: ModfiyInstancePasswordResponse,
     InstanceSet: InstanceSet,
     ResourceTag: ResourceTag,
     ModifyMaintenanceWindowResponse: ModifyMaintenanceWindowResponse,
-    DescribeCommonDBInstancesResponse: DescribeCommonDBInstancesResponse,
+    DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
     DestroyPrepaidInstanceResponse: DestroyPrepaidInstanceResponse,
-    DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
+    DescribeCommonDBInstancesResponse: DescribeCommonDBInstancesResponse,
+    InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     ModifyInstanceParamsRequest: ModifyInstanceParamsRequest,
+    BackupDownloadInfo: BackupDownloadInfo,
     BigKeyTypeInfo: BigKeyTypeInfo,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
     InstanceClusterNode: InstanceClusterNode,
-    ModifyInstanceResponse: ModifyInstanceResponse,
+    DescribeTendisSlowLogRequest: DescribeTendisSlowLogRequest,
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
     DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,
     UpgradeInstanceVersionRequest: UpgradeInstanceVersionRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
     DisableReplicaReadonlyRequest: DisableReplicaReadonlyRequest,
+    DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     DescribeProductInfoRequest: DescribeProductInfoRequest,
     SwitchInstanceVipResponse: SwitchInstanceVipResponse,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
@@ -8707,9 +9847,11 @@ module.exports = {
     CreateInstanceAccountResponse: CreateInstanceAccountResponse,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,
     SecurityGroupDetail: SecurityGroupDetail,
+    InquiryPriceUpgradeInstanceResponse: InquiryPriceUpgradeInstanceResponse,
     DeleteInstanceAccountResponse: DeleteInstanceAccountResponse,
     DescribeInstanceMonitorSIPRequest: DescribeInstanceMonitorSIPRequest,
     InstanceClusterShard: InstanceClusterShard,
+    TendisSlowLogDetail: TendisSlowLogDetail,
     ZoneCapacityConf: ZoneCapacityConf,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,

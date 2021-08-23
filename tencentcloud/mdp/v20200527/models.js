@@ -17,36 +17,18 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * ModifyMediaPackageChannelEndpoint request structure.
+ * DeleteStreamPackageChannels request structure.
  * @class
  */
-class ModifyMediaPackageChannelEndpointRequest extends  AbstractModel {
+class DeleteStreamPackageChannelsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID.
-         * @type {string || null}
+         * List of the IDs of the channels to delete
+         * @type {Array.<string> || null}
          */
-        this.Id = null;
-
-        /**
-         * Channel endpoint URL.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * The channel name after modification.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * The channel authentication after modification.
-         * @type {EndpointAuthInfo || null}
-         */
-        this.AuthInfo = null;
+        this.Ids = null;
 
     }
 
@@ -57,32 +39,31 @@ class ModifyMediaPackageChannelEndpointRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Name = 'Name' in params ? params.Name : null;
-
-        if (params.AuthInfo) {
-            let obj = new EndpointAuthInfo();
-            obj.deserialize(params.AuthInfo)
-            this.AuthInfo = obj;
-        }
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
 
 /**
- * DescribeMediaPackageChannel request structure.
+ * Channel input and output.
  * @class
  */
-class DescribeMediaPackageChannelRequest extends  AbstractModel {
+class PointInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID.
-         * @type {string || null}
+         * Channel input list.
+         * @type {Array.<InputInfo> || null}
          */
-        this.Id = null;
+        this.Inputs = null;
+
+        /**
+         * Channel output list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<EndpointInfo> || null}
+         */
+        this.Endpoints = null;
 
     }
 
@@ -93,16 +74,198 @@ class DescribeMediaPackageChannelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Inputs) {
+            this.Inputs = new Array();
+            for (let z in params.Inputs) {
+                let obj = new InputInfo();
+                obj.deserialize(params.Inputs[z]);
+                this.Inputs.push(obj);
+            }
+        }
+
+        if (params.Endpoints) {
+            this.Endpoints = new Array();
+            for (let z in params.Endpoints) {
+                let obj = new EndpointInfo();
+                obj.deserialize(params.Endpoints[z]);
+                this.Endpoints.push(obj);
+            }
+        }
 
     }
 }
 
 /**
- * DeleteMediaPackageChannelEndpoints response structure.
+ * DeleteStreamPackageChannels response structure.
  * @class
  */
-class DeleteMediaPackageChannelEndpointsResponse extends  AbstractModel {
+class DeleteStreamPackageChannelsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of the information of successfully deleted channels
+         * @type {Array.<ChannelInfo> || null}
+         */
+        this.SuccessInfos = null;
+
+        /**
+         * List of the information of the channels that failed to be deleted
+         * @type {Array.<ChannelInfo> || null}
+         */
+        this.FailInfos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SuccessInfos) {
+            this.SuccessInfos = new Array();
+            for (let z in params.SuccessInfos) {
+                let obj = new ChannelInfo();
+                obj.deserialize(params.SuccessInfos[z]);
+                this.SuccessInfos.push(obj);
+            }
+        }
+
+        if (params.FailInfos) {
+            this.FailInfos = new Array();
+            for (let z in params.FailInfos) {
+                let obj = new ChannelInfo();
+                obj.deserialize(params.FailInfos[z]);
+                this.FailInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeStreamPackageChannels response structure.
+ * @class
+ */
+class DescribeStreamPackageChannelsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of channel information
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {Array.<ChannelInfo> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of entries per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * Total number of pages
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new ChannelInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeStreamPackageChannels request structure.
+ * @class
+ */
+class DescribeStreamPackageChannelsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Page number. Value range: [1, 1000]
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of entries per page. Value range: [1, 1000]
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * ModifyStreamPackageChannelEndpoint response structure.
+ * @class
+ */
+class ModifyStreamPackageChannelEndpointResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -127,75 +290,25 @@ class DeleteMediaPackageChannelEndpointsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyMediaPackageChannelInputAuthInfo request structure.
+ * ModifyStreamPackageChannelInputAuthInfo response structure.
  * @class
  */
-class ModifyMediaPackageChannelInputAuthInfoRequest extends  AbstractModel {
+class ModifyStreamPackageChannelInputAuthInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID.
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Channel input URL.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Authentication configuration type. Valid values: CLOSE, UPDATE.
-CLOSE: disable authentication.
-UPDATE: update authentication.
-         * @type {string || null}
-         */
-        this.ActionType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.ActionType = 'ActionType' in params ? params.ActionType : null;
-
-    }
-}
-
-/**
- * CreateMediaPackageChannelEndpoint request structure.
- * @class
- */
-class CreateMediaPackageChannelEndpointRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Channel ID.
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Channel name.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Authentication information.
-         * @type {EndpointAuthInfo || null}
+         * Channel input authentication information
+         * @type {InputAuthInfo || null}
          */
         this.AuthInfo = null;
 
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
     }
 
     /**
@@ -205,29 +318,56 @@ class CreateMediaPackageChannelEndpointRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
 
         if (params.AuthInfo) {
-            let obj = new EndpointAuthInfo();
+            let obj = new InputAuthInfo();
             obj.deserialize(params.AuthInfo)
             this.AuthInfo = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * CreateMediaPackageChannel response structure.
+ * CreateStreamPackageChannel response structure.
  * @class
  */
-class CreateMediaPackageChannelResponse extends  AbstractModel {
+class CreateStreamPackageChannelResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel information.
-         * @type {ChannelInfo || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateStreamPackageChannelEndpoint response structure.
+ * @class
+ */
+class CreateStreamPackageChannelEndpointResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of the created channel endpoint
+         * @type {EndpointInfo || null}
          */
         this.Info = null;
 
@@ -248,7 +388,7 @@ class CreateMediaPackageChannelResponse extends  AbstractModel {
         }
 
         if (params.Info) {
-            let obj = new ChannelInfo();
+            let obj = new EndpointInfo();
             obj.deserialize(params.Info)
             this.Info = obj;
         }
@@ -258,30 +398,24 @@ class CreateMediaPackageChannelResponse extends  AbstractModel {
 }
 
 /**
- * ModifyMediaPackageChannel request structure.
+ * DeleteStreamPackageChannelEndpoints request structure.
  * @class
  */
-class ModifyMediaPackageChannelRequest extends  AbstractModel {
+class DeleteStreamPackageChannelEndpointsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID.
+         * Channel ID
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * The channel name after modification.
-         * @type {string || null}
+         * List of the URLs of the endpoints to delete
+         * @type {Array.<string> || null}
          */
-        this.Name = null;
-
-        /**
-         * The channel protocol after modification. Valid values: HLS, DASH.
-         * @type {string || null}
-         */
-        this.Protocol = null;
+        this.Urls = null;
 
     }
 
@@ -293,36 +427,7 @@ class ModifyMediaPackageChannelRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-
-    }
-}
-
-/**
- * ModifyMediaPackageChannelEndpoint response structure.
- * @class
- */
-class ModifyMediaPackageChannelEndpointResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Urls = 'Urls' in params ? params.Urls : null;
 
     }
 }
@@ -359,6 +464,13 @@ class ChannelInfo extends  AbstractModel {
          */
         this.Points = null;
 
+        /**
+         * Cache configuration
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {CacheInfo || null}
+         */
+        this.CacheInfo = null;
+
     }
 
     /**
@@ -378,22 +490,59 @@ class ChannelInfo extends  AbstractModel {
             this.Points = obj;
         }
 
+        if (params.CacheInfo) {
+            let obj = new CacheInfo();
+            obj.deserialize(params.CacheInfo)
+            this.CacheInfo = obj;
+        }
+
     }
 }
 
 /**
- * ModifyMediaPackageChannelInputAuthInfo response structure.
+ * Cache configuration
  * @class
  */
-class ModifyMediaPackageChannelInputAuthInfoResponse extends  AbstractModel {
+class CacheInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel input authentication information.
-         * @type {InputAuthInfo || null}
+         * List of timeout parameter configuration
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {Array.<CacheInfoInfo> || null}
          */
-        this.AuthInfo = null;
+        this.Info = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            this.Info = new Array();
+            for (let z in params.Info) {
+                let obj = new CacheInfoInfo();
+                obj.deserialize(params.Info[z]);
+                this.Info.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteStreamPackageChannelEndpoints response structure.
+ * @class
+ */
+class DeleteStreamPackageChannelEndpointsResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -409,12 +558,6 @@ class ModifyMediaPackageChannelInputAuthInfoResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.AuthInfo) {
-            let obj = new InputAuthInfo();
-            obj.deserialize(params.AuthInfo)
-            this.AuthInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -500,104 +643,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * CreateMediaPackageChannel request structure.
- * @class
- */
-class CreateMediaPackageChannelRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Channel name.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Channel protocol. Valid values: HLS, DASH.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-
-    }
-}
-
-/**
- * DeleteMediaPackageChannelEndpoints request structure.
- * @class
- */
-class DeleteMediaPackageChannelEndpointsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Channel ID.
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * The list of endpoint URLs.
-         * @type {Array.<string> || null}
-         */
-        this.Urls = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Urls = 'Urls' in params ? params.Urls : null;
-
-    }
-}
-
-/**
- * DeleteMediaPackageChannels request structure.
- * @class
- */
-class DeleteMediaPackageChannelsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The ID list of channels to be deleted.
-         * @type {Array.<string> || null}
-         */
-        this.Ids = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ids = 'Ids' in params ? params.Ids : null;
-
-    }
-}
-
-/**
  * Channel endpoint information.
  * @class
  */
@@ -645,49 +690,18 @@ class EndpointInfo extends  AbstractModel {
 }
 
 /**
- * DescribeMediaPackageChannels response structure.
+ * DescribeStreamPackageChannel request structure.
  * @class
  */
-class DescribeMediaPackageChannelsResponse extends  AbstractModel {
+class DescribeStreamPackageChannelRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The list of channel outputs.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ChannelInfo> || null}
-         */
-        this.Infos = null;
-
-        /**
-         * Page number.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * The size of each page.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Total number.
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * Total number of pages.
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Channel ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Id = null;
 
     }
 
@@ -698,37 +712,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.Infos) {
-            this.Infos = new Array();
-            for (let z in params.Infos) {
-                let obj = new ChannelInfo();
-                obj.deserialize(params.Infos[z]);
-                this.Infos.push(obj);
-            }
-        }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
 
 /**
- * ModifyMediaPackageChannel response structure.
+ * ModifyStreamPackageChannel request structure.
  * @class
  */
-class ModifyMediaPackageChannelResponse extends  AbstractModel {
+class ModifyStreamPackageChannelRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Channel ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Id = null;
+
+        /**
+         * New channel name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * New channel protocol. Valid values: HLS, DASH
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Cache configuration
+         * @type {CacheInfo || null}
+         */
+        this.CacheInfo = null;
 
     }
 
@@ -739,21 +758,259 @@ class ModifyMediaPackageChannelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.CacheInfo) {
+            let obj = new CacheInfo();
+            obj.deserialize(params.CacheInfo)
+            this.CacheInfo = obj;
+        }
 
     }
 }
 
 /**
- * DescribeMediaPackageChannel response structure.
+ * ModifyStreamPackageChannelEndpoint request structure.
  * @class
  */
-class DescribeMediaPackageChannelResponse extends  AbstractModel {
+class ModifyStreamPackageChannelEndpointRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel information.
+         * Channel ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Channel endpoint URL
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * New endpoint name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * New channel authentication information
+         * @type {EndpointAuthInfo || null}
+         */
+        this.AuthInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.AuthInfo) {
+            let obj = new EndpointAuthInfo();
+            obj.deserialize(params.AuthInfo)
+            this.AuthInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * Timeout information for cache configuration
+ * @class
+ */
+class CacheInfoInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Timeout period (ms), which must be an integer multiple of 1000
+.m3u8/.mpd: [1000, 60000]
+.ts/.m4s/.mp4: [10000, 1800000]
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * File extension. Valid values: .m3u8, .ts, .mpd, .m4s, .mp4
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Ext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.Ext = 'Ext' in params ? params.Ext : null;
+
+    }
+}
+
+/**
+ * CreateStreamPackageChannelEndpoint request structure.
+ * @class
+ */
+class CreateStreamPackageChannelEndpointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Channel name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Authentication information
+         * @type {EndpointAuthInfo || null}
+         */
+        this.AuthInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.AuthInfo) {
+            let obj = new EndpointAuthInfo();
+            obj.deserialize(params.AuthInfo)
+            this.AuthInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateStreamPackageChannel request structure.
+ * @class
+ */
+class CreateStreamPackageChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Channel protocol. Valid values: HLS, DASH
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Cache configuration
+         * @type {CacheInfo || null}
+         */
+        this.CacheInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.CacheInfo) {
+            let obj = new CacheInfo();
+            obj.deserialize(params.CacheInfo)
+            this.CacheInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyStreamPackageChannelInputAuthInfo request structure.
+ * @class
+ */
+class ModifyStreamPackageChannelInputAuthInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Channel input URL
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Authentication configuration. Valid values: `CLOSE`, `UPDATE`
+`CLOSE`: disable authentication
+`UPDATE`: update authentication information
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+
+    }
+}
+
+/**
+ * DescribeStreamPackageChannel response structure.
+ * @class
+ */
+class DescribeStreamPackageChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel information
          * @type {ChannelInfo || null}
          */
         this.Info = null;
@@ -785,76 +1042,12 @@ class DescribeMediaPackageChannelResponse extends  AbstractModel {
 }
 
 /**
- * Channel input and output.
+ * ModifyStreamPackageChannel response structure.
  * @class
  */
-class PointInfo extends  AbstractModel {
+class ModifyStreamPackageChannelResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Channel input list.
-         * @type {Array.<InputInfo> || null}
-         */
-        this.Inputs = null;
-
-        /**
-         * Channel output list.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<EndpointInfo> || null}
-         */
-        this.Endpoints = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Inputs) {
-            this.Inputs = new Array();
-            for (let z in params.Inputs) {
-                let obj = new InputInfo();
-                obj.deserialize(params.Inputs[z]);
-                this.Inputs.push(obj);
-            }
-        }
-
-        if (params.Endpoints) {
-            this.Endpoints = new Array();
-            for (let z in params.Endpoints) {
-                let obj = new EndpointInfo();
-                obj.deserialize(params.Endpoints[z]);
-                this.Endpoints.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DeleteMediaPackageChannels response structure.
- * @class
- */
-class DeleteMediaPackageChannelsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The information list of channels that have been deleted.
-         * @type {Array.<ChannelInfo> || null}
-         */
-        this.SuccessInfos = null;
-
-        /**
-         * The information list of channels that failed to be deleted.
-         * @type {Array.<ChannelInfo> || null}
-         */
-        this.FailInfos = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -871,60 +1064,7 @@ class DeleteMediaPackageChannelsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.SuccessInfos) {
-            this.SuccessInfos = new Array();
-            for (let z in params.SuccessInfos) {
-                let obj = new ChannelInfo();
-                obj.deserialize(params.SuccessInfos[z]);
-                this.SuccessInfos.push(obj);
-            }
-        }
-
-        if (params.FailInfos) {
-            this.FailInfos = new Array();
-            for (let z in params.FailInfos) {
-                let obj = new ChannelInfo();
-                obj.deserialize(params.FailInfos[z]);
-                this.FailInfos.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeMediaPackageChannels request structure.
- * @class
- */
-class DescribeMediaPackageChannelsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Page number. Value range: [1, 1000].
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * The size of each page. Value range: [1, 1000].
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -974,70 +1114,32 @@ Note: this field may return null, indicating that no valid values can be obtaine
     }
 }
 
-/**
- * CreateMediaPackageChannelEndpoint response structure.
- * @class
- */
-class CreateMediaPackageChannelEndpointResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The information of the created channel endpoint.
-         * @type {EndpointInfo || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new EndpointInfo();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
 module.exports = {
-    ModifyMediaPackageChannelEndpointRequest: ModifyMediaPackageChannelEndpointRequest,
-    DescribeMediaPackageChannelRequest: DescribeMediaPackageChannelRequest,
-    DeleteMediaPackageChannelEndpointsResponse: DeleteMediaPackageChannelEndpointsResponse,
-    ModifyMediaPackageChannelInputAuthInfoRequest: ModifyMediaPackageChannelInputAuthInfoRequest,
-    CreateMediaPackageChannelEndpointRequest: CreateMediaPackageChannelEndpointRequest,
-    CreateMediaPackageChannelResponse: CreateMediaPackageChannelResponse,
-    ModifyMediaPackageChannelRequest: ModifyMediaPackageChannelRequest,
-    ModifyMediaPackageChannelEndpointResponse: ModifyMediaPackageChannelEndpointResponse,
+    DeleteStreamPackageChannelsRequest: DeleteStreamPackageChannelsRequest,
+    PointInfo: PointInfo,
+    DeleteStreamPackageChannelsResponse: DeleteStreamPackageChannelsResponse,
+    DescribeStreamPackageChannelsResponse: DescribeStreamPackageChannelsResponse,
+    DescribeStreamPackageChannelsRequest: DescribeStreamPackageChannelsRequest,
+    ModifyStreamPackageChannelEndpointResponse: ModifyStreamPackageChannelEndpointResponse,
+    ModifyStreamPackageChannelInputAuthInfoResponse: ModifyStreamPackageChannelInputAuthInfoResponse,
+    CreateStreamPackageChannelResponse: CreateStreamPackageChannelResponse,
+    CreateStreamPackageChannelEndpointResponse: CreateStreamPackageChannelEndpointResponse,
+    DeleteStreamPackageChannelEndpointsRequest: DeleteStreamPackageChannelEndpointsRequest,
     ChannelInfo: ChannelInfo,
-    ModifyMediaPackageChannelInputAuthInfoResponse: ModifyMediaPackageChannelInputAuthInfoResponse,
+    CacheInfo: CacheInfo,
+    DeleteStreamPackageChannelEndpointsResponse: DeleteStreamPackageChannelEndpointsResponse,
     InputInfo: InputInfo,
     InputAuthInfo: InputAuthInfo,
-    CreateMediaPackageChannelRequest: CreateMediaPackageChannelRequest,
-    DeleteMediaPackageChannelEndpointsRequest: DeleteMediaPackageChannelEndpointsRequest,
-    DeleteMediaPackageChannelsRequest: DeleteMediaPackageChannelsRequest,
     EndpointInfo: EndpointInfo,
-    DescribeMediaPackageChannelsResponse: DescribeMediaPackageChannelsResponse,
-    ModifyMediaPackageChannelResponse: ModifyMediaPackageChannelResponse,
-    DescribeMediaPackageChannelResponse: DescribeMediaPackageChannelResponse,
-    PointInfo: PointInfo,
-    DeleteMediaPackageChannelsResponse: DeleteMediaPackageChannelsResponse,
-    DescribeMediaPackageChannelsRequest: DescribeMediaPackageChannelsRequest,
+    DescribeStreamPackageChannelRequest: DescribeStreamPackageChannelRequest,
+    ModifyStreamPackageChannelRequest: ModifyStreamPackageChannelRequest,
+    ModifyStreamPackageChannelEndpointRequest: ModifyStreamPackageChannelEndpointRequest,
+    CacheInfoInfo: CacheInfoInfo,
+    CreateStreamPackageChannelEndpointRequest: CreateStreamPackageChannelEndpointRequest,
+    CreateStreamPackageChannelRequest: CreateStreamPackageChannelRequest,
+    ModifyStreamPackageChannelInputAuthInfoRequest: ModifyStreamPackageChannelInputAuthInfoRequest,
+    DescribeStreamPackageChannelResponse: DescribeStreamPackageChannelResponse,
+    ModifyStreamPackageChannelResponse: ModifyStreamPackageChannelResponse,
     EndpointAuthInfo: EndpointAuthInfo,
-    CreateMediaPackageChannelEndpointResponse: CreateMediaPackageChannelEndpointResponse,
 
 }

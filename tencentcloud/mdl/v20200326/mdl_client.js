@@ -16,83 +16,95 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const InputStatistics = models.InputStatistics;
-const ModifyMediaLiveInputRequest = models.ModifyMediaLiveInputRequest;
-const DrmSettingsInfo = models.DrmSettingsInfo;
-const PipelineOutputStatistics = models.PipelineOutputStatistics;
-const AttachedInputInfo = models.AttachedInputInfo;
-const OutputGroupsInfo = models.OutputGroupsInfo;
-const StopMediaLiveChannelRequest = models.StopMediaLiveChannelRequest;
-const DashRemuxSettingsInfo = models.DashRemuxSettingsInfo;
-const MediaPackageSettingsInfo = models.MediaPackageSettingsInfo;
-const StartMediaLiveChannelRequest = models.StartMediaLiveChannelRequest;
-const VideoTemplateInfo = models.VideoTemplateInfo;
-const DeleteMediaLiveInputSecurityGroupResponse = models.DeleteMediaLiveInputSecurityGroupResponse;
-const DeleteMediaLiveInputRequest = models.DeleteMediaLiveInputRequest;
-const ModifyMediaLiveInputSecurityGroupRequest = models.ModifyMediaLiveInputSecurityGroupRequest;
-const StreamVideoInfo = models.StreamVideoInfo;
-const OutputsStatistics = models.OutputsStatistics;
-const DeleteMediaLiveInputResponse = models.DeleteMediaLiveInputResponse;
-const ModifyMediaLiveInputResponse = models.ModifyMediaLiveInputResponse;
+const DeleteStreamLiveChannelResponse = models.DeleteStreamLiveChannelResponse;
 const VideoPipelineInputStatistics = models.VideoPipelineInputStatistics;
-const CreateMediaLiveInputRequest = models.CreateMediaLiveInputRequest;
-const StreamScte35Info = models.StreamScte35Info;
-const Scte35SettingsInfo = models.Scte35SettingsInfo;
-const DescribeMediaLiveInputsRequest = models.DescribeMediaLiveInputsRequest;
-const PipelineInputStatistics = models.PipelineInputStatistics;
-const DescribeMediaLiveInputRequest = models.DescribeMediaLiveInputRequest;
-const DescribeMediaLiveChannelRequest = models.DescribeMediaLiveChannelRequest;
+const CreateStreamLiveInputSecurityGroupResponse = models.CreateStreamLiveInputSecurityGroupResponse;
+const StreamVideoInfo = models.StreamVideoInfo;
+const CreateStreamLivePlanRequest = models.CreateStreamLivePlanRequest;
+const DescribeStreamLiveInputRequest = models.DescribeStreamLiveInputRequest;
+const CreateStreamLiveInputRequest = models.CreateStreamLiveInputRequest;
 const AudioPidSelectionInfo = models.AudioPidSelectionInfo;
-const DescribeMediaLiveChannelLogsResponse = models.DescribeMediaLiveChannelLogsResponse;
-const StreamAudioInfo = models.StreamAudioInfo;
-const StartMediaLiveChannelResponse = models.StartMediaLiveChannelResponse;
-const DrmKey = models.DrmKey;
 const AudioPipelineInputStatistics = models.AudioPipelineInputStatistics;
-const DescribeMediaLiveInputSecurityGroupsResponse = models.DescribeMediaLiveInputSecurityGroupsResponse;
-const InputSecurityGroupInfo = models.InputSecurityGroupInfo;
-const StopMediaLiveChannelResponse = models.StopMediaLiveChannelResponse;
-const CreateMediaLiveChannelRequest = models.CreateMediaLiveChannelRequest;
-const DescribeMediaLiveInputSecurityGroupsRequest = models.DescribeMediaLiveInputSecurityGroupsRequest;
-const DescribeMediaLiveChannelResponse = models.DescribeMediaLiveChannelResponse;
-const ChannelAlertInfos = models.ChannelAlertInfos;
-const DeleteMediaLiveChannelResponse = models.DeleteMediaLiveChannelResponse;
-const ChannelInfo = models.ChannelInfo;
+const CreateStreamLivePlanResponse = models.CreateStreamLivePlanResponse;
+const DescribeStreamLiveChannelOutputStatisticsRequest = models.DescribeStreamLiveChannelOutputStatisticsRequest;
 const ChannelPipelineAlerts = models.ChannelPipelineAlerts;
 const InputInfo = models.InputInfo;
-const DescribeMediaLiveInputSecurityGroupResponse = models.DescribeMediaLiveInputSecurityGroupResponse;
-const DeleteMediaLiveChannelRequest = models.DeleteMediaLiveChannelRequest;
-const CreateMediaLiveInputResponse = models.CreateMediaLiveInputResponse;
-const DestinationInfo = models.DestinationInfo;
-const CreateMediaLiveChannelResponse = models.CreateMediaLiveChannelResponse;
-const DescribeMediaLiveInputResponse = models.DescribeMediaLiveInputResponse;
-const DescribeMediaLiveChannelInputStatisticsRequest = models.DescribeMediaLiveChannelInputStatisticsRequest;
-const InputSettingInfo = models.InputSettingInfo;
-const LogMessageInfo = models.LogMessageInfo;
-const DescribeMediaLiveChannelAlertsRequest = models.DescribeMediaLiveChannelAlertsRequest;
-const CreateMediaLiveInputSecurityGroupResponse = models.CreateMediaLiveInputSecurityGroupResponse;
-const DescribeMediaLiveInputsResponse = models.DescribeMediaLiveInputsResponse;
-const DescribeMediaLiveChannelOutputStatisticsResponse = models.DescribeMediaLiveChannelOutputStatisticsResponse;
-const DescribeMediaLiveInputSecurityGroupRequest = models.DescribeMediaLiveInputSecurityGroupRequest;
-const DescribeMediaLiveChannelAlertsResponse = models.DescribeMediaLiveChannelAlertsResponse;
-const DescribeMediaLiveChannelsResponse = models.DescribeMediaLiveChannelsResponse;
-const ChannelInputStatistics = models.ChannelInputStatistics;
-const HlsRemuxSettingsInfo = models.HlsRemuxSettingsInfo;
-const PipelineLogInfo = models.PipelineLogInfo;
-const ModifyMediaLiveChannelResponse = models.ModifyMediaLiveChannelResponse;
-const DescribeMediaLiveChannelLogsRequest = models.DescribeMediaLiveChannelLogsRequest;
-const CreateMediaLiveInputSecurityGroupRequest = models.CreateMediaLiveInputSecurityGroupRequest;
-const DeleteMediaLiveInputSecurityGroupRequest = models.DeleteMediaLiveInputSecurityGroupRequest;
+const AVTemplate = models.AVTemplate;
+const ModifyStreamLiveChannelResponse = models.ModifyStreamLiveChannelResponse;
+const DeleteStreamLiveInputRequest = models.DeleteStreamLiveInputRequest;
+const ModifyStreamLiveInputSecurityGroupResponse = models.ModifyStreamLiveInputSecurityGroupResponse;
+const ModifyStreamLiveInputRequest = models.ModifyStreamLiveInputRequest;
 const StreamInfo = models.StreamInfo;
-const AudioTemplateInfo = models.AudioTemplateInfo;
-const DescribeMediaLiveChannelOutputStatisticsRequest = models.DescribeMediaLiveChannelOutputStatisticsRequest;
-const DescribeMediaLiveChannelInputStatisticsResponse = models.DescribeMediaLiveChannelInputStatisticsResponse;
+const DescribeStreamLiveChannelAlertsRequest = models.DescribeStreamLiveChannelAlertsRequest;
 const AudioSelectorInfo = models.AudioSelectorInfo;
 const LogInfo = models.LogInfo;
-const ModifyMediaLiveInputSecurityGroupResponse = models.ModifyMediaLiveInputSecurityGroupResponse;
-const ChannelOutputsStatistics = models.ChannelOutputsStatistics;
-const ModifyMediaLiveChannelRequest = models.ModifyMediaLiveChannelRequest;
-const DescribeMediaLiveChannelsRequest = models.DescribeMediaLiveChannelsRequest;
+const DrmSettingsInfo = models.DrmSettingsInfo;
+const PipelineOutputStatistics = models.PipelineOutputStatistics;
+const DashRemuxSettingsInfo = models.DashRemuxSettingsInfo;
+const DescribeStreamLiveChannelResponse = models.DescribeStreamLiveChannelResponse;
+const DeleteStreamLiveInputSecurityGroupRequest = models.DeleteStreamLiveInputSecurityGroupRequest;
+const AttachedInput = models.AttachedInput;
+const PipelineInputStatistics = models.PipelineInputStatistics;
+const VideoTemplateInfo = models.VideoTemplateInfo;
+const TimingSettingsReq = models.TimingSettingsReq;
+const DescribeStreamLiveChannelLogsResponse = models.DescribeStreamLiveChannelLogsResponse;
+const DescribeStreamLiveChannelInputStatisticsRequest = models.DescribeStreamLiveChannelInputStatisticsRequest;
+const PipelineLogInfo = models.PipelineLogInfo;
+const DescribeStreamLiveChannelsRequest = models.DescribeStreamLiveChannelsRequest;
+const FailOverSettings = models.FailOverSettings;
+const ChannelInputStatistics = models.ChannelInputStatistics;
+const HlsRemuxSettingsInfo = models.HlsRemuxSettingsInfo;
+const EventSettingsResp = models.EventSettingsResp;
+const AudioTemplateInfo = models.AudioTemplateInfo;
+const StreamPackageSettingsInfo = models.StreamPackageSettingsInfo;
+const DescribeStreamLiveChannelsResponse = models.DescribeStreamLiveChannelsResponse;
+const PlanReq = models.PlanReq;
+const DescribeStreamLiveChannelRequest = models.DescribeStreamLiveChannelRequest;
+const DescribeStreamLivePlansRequest = models.DescribeStreamLivePlansRequest;
+const CreateStreamLiveChannelRequest = models.CreateStreamLiveChannelRequest;
+const DescribeStreamLiveInputsResponse = models.DescribeStreamLiveInputsResponse;
+const ModifyStreamLiveInputResponse = models.ModifyStreamLiveInputResponse;
+const DescribeStreamLiveChannelAlertsResponse = models.DescribeStreamLiveChannelAlertsResponse;
+const PlanResp = models.PlanResp;
+const DescribeStreamLivePlansResponse = models.DescribeStreamLivePlansResponse;
+const DescribeStreamLiveChannelLogsRequest = models.DescribeStreamLiveChannelLogsRequest;
+const CreateStreamLiveInputSecurityGroupRequest = models.CreateStreamLiveInputSecurityGroupRequest;
+const DescribeStreamLiveChannelOutputStatisticsResponse = models.DescribeStreamLiveChannelOutputStatisticsResponse;
+const EventSettingsReq = models.EventSettingsReq;
+const DrmKey = models.DrmKey;
 const OutputInfo = models.OutputInfo;
+const DescribeStreamLiveInputSecurityGroupRequest = models.DescribeStreamLiveInputSecurityGroupRequest;
+const CreateStreamLiveChannelResponse = models.CreateStreamLiveChannelResponse;
+const DescribeStreamLiveChannelInputStatisticsResponse = models.DescribeStreamLiveChannelInputStatisticsResponse;
+const StopStreamLiveChannelResponse = models.StopStreamLiveChannelResponse;
+const StartStreamLiveChannelResponse = models.StartStreamLiveChannelResponse;
+const StreamLiveOutputGroupsInfo = models.StreamLiveOutputGroupsInfo;
+const ChannelOutputsStatistics = models.ChannelOutputsStatistics;
+const DescribeStreamLiveInputSecurityGroupsResponse = models.DescribeStreamLiveInputSecurityGroupsResponse;
+const DeleteStreamLiveInputResponse = models.DeleteStreamLiveInputResponse;
+const StartStreamLiveChannelRequest = models.StartStreamLiveChannelRequest;
+const StreamScte35Info = models.StreamScte35Info;
+const StreamAudioInfo = models.StreamAudioInfo;
+const OutputsStatistics = models.OutputsStatistics;
+const InputSecurityGroupInfo = models.InputSecurityGroupInfo;
+const ModifyStreamLiveInputSecurityGroupRequest = models.ModifyStreamLiveInputSecurityGroupRequest;
+const ChannelAlertInfos = models.ChannelAlertInfos;
+const CreateStreamLiveInputResponse = models.CreateStreamLiveInputResponse;
+const DestinationInfo = models.DestinationInfo;
+const DeleteStreamLiveInputSecurityGroupResponse = models.DeleteStreamLiveInputSecurityGroupResponse;
+const DescribeStreamLiveInputResponse = models.DescribeStreamLiveInputResponse;
+const InputStatistics = models.InputStatistics;
+const LogMessageInfo = models.LogMessageInfo;
+const DescribeStreamLiveInputsRequest = models.DescribeStreamLiveInputsRequest;
+const Scte35SettingsInfo = models.Scte35SettingsInfo;
+const TimingSettingsResp = models.TimingSettingsResp;
+const ModifyStreamLiveChannelRequest = models.ModifyStreamLiveChannelRequest;
+const StopStreamLiveChannelRequest = models.StopStreamLiveChannelRequest;
+const DescribeStreamLiveInputSecurityGroupResponse = models.DescribeStreamLiveInputSecurityGroupResponse;
+const StreamLiveChannelInfo = models.StreamLiveChannelInfo;
+const InputSettingInfo = models.InputSettingInfo;
+const DescribeStreamLiveInputSecurityGroupsRequest = models.DescribeStreamLiveInputSecurityGroupsRequest;
+const DeleteStreamLiveChannelRequest = models.DeleteStreamLiveChannelRequest;
 
 
 /**
@@ -106,234 +118,256 @@ class MdlClient extends AbstractClient {
     }
     
     /**
-     * This API is used to create an input security group. Up to 5 ones can be created.
-     * @param {CreateMediaLiveInputSecurityGroupRequest} req
-     * @param {function(string, CreateMediaLiveInputSecurityGroupResponse):void} cb
+     * This API is used to query the alarm information of a StreamLive channel.
+     * @param {DescribeStreamLiveChannelAlertsRequest} req
+     * @param {function(string, DescribeStreamLiveChannelAlertsResponse):void} cb
      * @public
      */
-    CreateMediaLiveInputSecurityGroup(req, cb) {
-        let resp = new CreateMediaLiveInputSecurityGroupResponse();
-        this.request("CreateMediaLiveInputSecurityGroup", req, resp, cb);
+    DescribeStreamLiveChannelAlerts(req, cb) {
+        let resp = new DescribeStreamLiveChannelAlertsResponse();
+        this.request("DescribeStreamLiveChannelAlerts", req, resp, cb);
     }
 
     /**
-     * This API is used to query MediaLive channel logs, such as push event logs.
-     * @param {DescribeMediaLiveChannelLogsRequest} req
-     * @param {function(string, DescribeMediaLiveChannelLogsResponse):void} cb
+     * This API is used to query a StreamLive channel.
+     * @param {DescribeStreamLiveChannelRequest} req
+     * @param {function(string, DescribeStreamLiveChannelResponse):void} cb
      * @public
      */
-    DescribeMediaLiveChannelLogs(req, cb) {
-        let resp = new DescribeMediaLiveChannelLogsResponse();
-        this.request("DescribeMediaLiveChannelLogs", req, resp, cb);
+    DescribeStreamLiveChannel(req, cb) {
+        let resp = new DescribeStreamLiveChannelResponse();
+        this.request("DescribeStreamLiveChannel", req, resp, cb);
     }
 
     /**
-     * This API is used to query the output statistics of a channel.
-     * @param {DescribeMediaLiveChannelOutputStatisticsRequest} req
-     * @param {function(string, DescribeMediaLiveChannelOutputStatisticsResponse):void} cb
+     * This API is used to create a StreamLive input.
+     * @param {CreateStreamLiveInputRequest} req
+     * @param {function(string, CreateStreamLiveInputResponse):void} cb
      * @public
      */
-    DescribeMediaLiveChannelOutputStatistics(req, cb) {
-        let resp = new DescribeMediaLiveChannelOutputStatisticsResponse();
-        this.request("DescribeMediaLiveChannelOutputStatistics", req, resp, cb);
+    CreateStreamLiveInput(req, cb) {
+        let resp = new CreateStreamLiveInputResponse();
+        this.request("CreateStreamLiveInput", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a media input.
-     * @param {DeleteMediaLiveInputRequest} req
-     * @param {function(string, DeleteMediaLiveInputResponse):void} cb
+     * This API is used to query StreamLive channel logs, such as push event logs.
+     * @param {DescribeStreamLiveChannelLogsRequest} req
+     * @param {function(string, DescribeStreamLiveChannelLogsResponse):void} cb
      * @public
      */
-    DeleteMediaLiveInput(req, cb) {
-        let resp = new DeleteMediaLiveInputResponse();
-        this.request("DeleteMediaLiveInput", req, resp, cb);
+    DescribeStreamLiveChannelLogs(req, cb) {
+        let resp = new DescribeStreamLiveChannelLogsResponse();
+        this.request("DescribeStreamLiveChannelLogs", req, resp, cb);
     }
 
     /**
-     * This API is used to update a media input.
-     * @param {ModifyMediaLiveInputRequest} req
-     * @param {function(string, ModifyMediaLiveInputResponse):void} cb
+     * This API is used to query input security groups in batches.
+     * @param {DescribeStreamLiveInputSecurityGroupsRequest} req
+     * @param {function(string, DescribeStreamLiveInputSecurityGroupsResponse):void} cb
      * @public
      */
-    ModifyMediaLiveInput(req, cb) {
-        let resp = new ModifyMediaLiveInputResponse();
-        this.request("ModifyMediaLiveInput", req, resp, cb);
+    DescribeStreamLiveInputSecurityGroups(req, cb) {
+        let resp = new DescribeStreamLiveInputSecurityGroupsResponse();
+        this.request("DescribeStreamLiveInputSecurityGroups", req, resp, cb);
     }
 
     /**
-     * This API is used to query the information of media inputs in batches.
-     * @param {DescribeMediaLiveInputsRequest} req
-     * @param {function(string, DescribeMediaLiveInputsResponse):void} cb
+     * This API is used to query input statistics.
+     * @param {DescribeStreamLiveChannelInputStatisticsRequest} req
+     * @param {function(string, DescribeStreamLiveChannelInputStatisticsResponse):void} cb
      * @public
      */
-    DescribeMediaLiveInputs(req, cb) {
-        let resp = new DescribeMediaLiveInputsResponse();
-        this.request("DescribeMediaLiveInputs", req, resp, cb);
+    DescribeStreamLiveChannelInputStatistics(req, cb) {
+        let resp = new DescribeStreamLiveChannelInputStatisticsResponse();
+        this.request("DescribeStreamLiveChannelInputStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a StreamLive channel.
+     * @param {DeleteStreamLiveChannelRequest} req
+     * @param {function(string, DeleteStreamLiveChannelResponse):void} cb
+     * @public
+     */
+    DeleteStreamLiveChannel(req, cb) {
+        let resp = new DeleteStreamLiveChannelResponse();
+        this.request("DeleteStreamLiveChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an event in the plan.
+     * @param {CreateStreamLivePlanRequest} req
+     * @param {function(string, CreateStreamLivePlanResponse):void} cb
+     * @public
+     */
+    CreateStreamLivePlan(req, cb) {
+        let resp = new CreateStreamLivePlanResponse();
+        this.request("CreateStreamLivePlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a StreamLive channel.
+     * @param {CreateStreamLiveChannelRequest} req
+     * @param {function(string, CreateStreamLiveChannelResponse):void} cb
+     * @public
+     */
+    CreateStreamLiveChannel(req, cb) {
+        let resp = new CreateStreamLiveChannelResponse();
+        this.request("CreateStreamLiveChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an input security group.
+     * @param {ModifyStreamLiveInputSecurityGroupRequest} req
+     * @param {function(string, ModifyStreamLiveInputSecurityGroupResponse):void} cb
+     * @public
+     */
+    ModifyStreamLiveInputSecurityGroup(req, cb) {
+        let resp = new ModifyStreamLiveInputSecurityGroupResponse();
+        this.request("ModifyStreamLiveInputSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a StreamLive channel.
+     * @param {ModifyStreamLiveChannelRequest} req
+     * @param {function(string, ModifyStreamLiveChannelResponse):void} cb
+     * @public
+     */
+    ModifyStreamLiveChannel(req, cb) {
+        let resp = new ModifyStreamLiveChannelResponse();
+        this.request("ModifyStreamLiveChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query StreamLive channels in batches.
+     * @param {DescribeStreamLiveChannelsRequest} req
+     * @param {function(string, DescribeStreamLiveChannelsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLiveChannels(req, cb) {
+        let resp = new DescribeStreamLiveChannelsResponse();
+        this.request("DescribeStreamLiveChannels", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the events in the plan in batches.
+     * @param {DescribeStreamLivePlansRequest} req
+     * @param {function(string, DescribeStreamLivePlansResponse):void} cb
+     * @public
+     */
+    DescribeStreamLivePlans(req, cb) {
+        let resp = new DescribeStreamLivePlansResponse();
+        this.request("DescribeStreamLivePlans", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query StreamLive inputs in batches.
+     * @param {DescribeStreamLiveInputsRequest} req
+     * @param {function(string, DescribeStreamLiveInputsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLiveInputs(req, cb) {
+        let resp = new DescribeStreamLiveInputsResponse();
+        this.request("DescribeStreamLiveInputs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a StreamLive channel.
+     * @param {StartStreamLiveChannelRequest} req
+     * @param {function(string, StartStreamLiveChannelResponse):void} cb
+     * @public
+     */
+    StartStreamLiveChannel(req, cb) {
+        let resp = new StartStreamLiveChannelResponse();
+        this.request("StartStreamLiveChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a StreamLive input.
+     * @param {DescribeStreamLiveInputRequest} req
+     * @param {function(string, DescribeStreamLiveInputResponse):void} cb
+     * @public
+     */
+    DescribeStreamLiveInput(req, cb) {
+        let resp = new DescribeStreamLiveInputResponse();
+        this.request("DescribeStreamLiveInput", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a StreamLive input.
+     * @param {ModifyStreamLiveInputRequest} req
+     * @param {function(string, ModifyStreamLiveInputResponse):void} cb
+     * @public
+     */
+    ModifyStreamLiveInput(req, cb) {
+        let resp = new ModifyStreamLiveInputResponse();
+        this.request("ModifyStreamLiveInput", req, resp, cb);
     }
 
     /**
      * This API is used to query an input security group.
-     * @param {DescribeMediaLiveInputSecurityGroupRequest} req
-     * @param {function(string, DescribeMediaLiveInputSecurityGroupResponse):void} cb
+     * @param {DescribeStreamLiveInputSecurityGroupRequest} req
+     * @param {function(string, DescribeStreamLiveInputSecurityGroupResponse):void} cb
      * @public
      */
-    DescribeMediaLiveInputSecurityGroup(req, cb) {
-        let resp = new DescribeMediaLiveInputSecurityGroupResponse();
-        this.request("DescribeMediaLiveInputSecurityGroup", req, resp, cb);
+    DescribeStreamLiveInputSecurityGroup(req, cb) {
+        let resp = new DescribeStreamLiveInputSecurityGroupResponse();
+        this.request("DescribeStreamLiveInputSecurityGroup", req, resp, cb);
     }
 
     /**
-     * This API is used to create a media channel.
-     * @param {CreateMediaLiveChannelRequest} req
-     * @param {function(string, CreateMediaLiveChannelResponse):void} cb
+     * This API is used to delete a StreamLive input.
+     * @param {DeleteStreamLiveInputRequest} req
+     * @param {function(string, DeleteStreamLiveInputResponse):void} cb
      * @public
      */
-    CreateMediaLiveChannel(req, cb) {
-        let resp = new CreateMediaLiveChannelResponse();
-        this.request("CreateMediaLiveChannel", req, resp, cb);
+    DeleteStreamLiveInput(req, cb) {
+        let resp = new DeleteStreamLiveInputResponse();
+        this.request("DeleteStreamLiveInput", req, resp, cb);
     }
 
     /**
-     * This API is used to query the channel alarm information.
-     * @param {DescribeMediaLiveChannelAlertsRequest} req
-     * @param {function(string, DescribeMediaLiveChannelAlertsResponse):void} cb
+     * This API is used to query the output statistics of a StreamLive channel.
+     * @param {DescribeStreamLiveChannelOutputStatisticsRequest} req
+     * @param {function(string, DescribeStreamLiveChannelOutputStatisticsResponse):void} cb
      * @public
      */
-    DescribeMediaLiveChannelAlerts(req, cb) {
-        let resp = new DescribeMediaLiveChannelAlertsResponse();
-        this.request("DescribeMediaLiveChannelAlerts", req, resp, cb);
+    DescribeStreamLiveChannelOutputStatistics(req, cb) {
+        let resp = new DescribeStreamLiveChannelOutputStatisticsResponse();
+        this.request("DescribeStreamLiveChannelOutputStatistics", req, resp, cb);
     }
 
     /**
-     * This API is used to query the information of a MediaLive channel.
-     * @param {DescribeMediaLiveChannelRequest} req
-     * @param {function(string, DescribeMediaLiveChannelResponse):void} cb
+     * This API is used to stop a StreamLive channel.
+     * @param {StopStreamLiveChannelRequest} req
+     * @param {function(string, StopStreamLiveChannelResponse):void} cb
      * @public
      */
-    DescribeMediaLiveChannel(req, cb) {
-        let resp = new DescribeMediaLiveChannelResponse();
-        this.request("DescribeMediaLiveChannel", req, resp, cb);
-    }
-
-    /**
-     * This API is used to start a MediaLive channel.
-     * @param {StartMediaLiveChannelRequest} req
-     * @param {function(string, StartMediaLiveChannelResponse):void} cb
-     * @public
-     */
-    StartMediaLiveChannel(req, cb) {
-        let resp = new StartMediaLiveChannelResponse();
-        this.request("StartMediaLiveChannel", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a media input.
-     * @param {CreateMediaLiveInputRequest} req
-     * @param {function(string, CreateMediaLiveInputResponse):void} cb
-     * @public
-     */
-    CreateMediaLiveInput(req, cb) {
-        let resp = new CreateMediaLiveInputResponse();
-        this.request("CreateMediaLiveInput", req, resp, cb);
-    }
-
-    /**
-     * This API is used to update an input security group.
-     * @param {ModifyMediaLiveInputSecurityGroupRequest} req
-     * @param {function(string, ModifyMediaLiveInputSecurityGroupResponse):void} cb
-     * @public
-     */
-    ModifyMediaLiveInputSecurityGroup(req, cb) {
-        let resp = new ModifyMediaLiveInputSecurityGroupResponse();
-        this.request("ModifyMediaLiveInputSecurityGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the information of a MediaLive channel.
-     * @param {ModifyMediaLiveChannelRequest} req
-     * @param {function(string, ModifyMediaLiveChannelResponse):void} cb
-     * @public
-     */
-    ModifyMediaLiveChannel(req, cb) {
-        let resp = new ModifyMediaLiveChannelResponse();
-        this.request("ModifyMediaLiveChannel", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a MediaLive channel.
-     * @param {DeleteMediaLiveChannelRequest} req
-     * @param {function(string, DeleteMediaLiveChannelResponse):void} cb
-     * @public
-     */
-    DeleteMediaLiveChannel(req, cb) {
-        let resp = new DeleteMediaLiveChannelResponse();
-        this.request("DeleteMediaLiveChannel", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the input statistics.
-     * @param {DescribeMediaLiveChannelInputStatisticsRequest} req
-     * @param {function(string, DescribeMediaLiveChannelInputStatisticsResponse):void} cb
-     * @public
-     */
-    DescribeMediaLiveChannelInputStatistics(req, cb) {
-        let resp = new DescribeMediaLiveChannelInputStatisticsResponse();
-        this.request("DescribeMediaLiveChannelInputStatistics", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the information of MediaLive channels in batches.
-     * @param {DescribeMediaLiveChannelsRequest} req
-     * @param {function(string, DescribeMediaLiveChannelsResponse):void} cb
-     * @public
-     */
-    DescribeMediaLiveChannels(req, cb) {
-        let resp = new DescribeMediaLiveChannelsResponse();
-        this.request("DescribeMediaLiveChannels", req, resp, cb);
+    StopStreamLiveChannel(req, cb) {
+        let resp = new StopStreamLiveChannelResponse();
+        this.request("StopStreamLiveChannel", req, resp, cb);
     }
 
     /**
      * This API is used to delete an input security group.
-     * @param {DeleteMediaLiveInputSecurityGroupRequest} req
-     * @param {function(string, DeleteMediaLiveInputSecurityGroupResponse):void} cb
+     * @param {DeleteStreamLiveInputSecurityGroupRequest} req
+     * @param {function(string, DeleteStreamLiveInputSecurityGroupResponse):void} cb
      * @public
      */
-    DeleteMediaLiveInputSecurityGroup(req, cb) {
-        let resp = new DeleteMediaLiveInputSecurityGroupResponse();
-        this.request("DeleteMediaLiveInputSecurityGroup", req, resp, cb);
+    DeleteStreamLiveInputSecurityGroup(req, cb) {
+        let resp = new DeleteStreamLiveInputSecurityGroupResponse();
+        this.request("DeleteStreamLiveInputSecurityGroup", req, resp, cb);
     }
 
     /**
-     * This API is used to stop a MediaLive channel.
-     * @param {StopMediaLiveChannelRequest} req
-     * @param {function(string, StopMediaLiveChannelResponse):void} cb
+     * This API is used to create an input security group. Up to 5 security groups are allowed.
+     * @param {CreateStreamLiveInputSecurityGroupRequest} req
+     * @param {function(string, CreateStreamLiveInputSecurityGroupResponse):void} cb
      * @public
      */
-    StopMediaLiveChannel(req, cb) {
-        let resp = new StopMediaLiveChannelResponse();
-        this.request("StopMediaLiveChannel", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query a media input.
-     * @param {DescribeMediaLiveInputRequest} req
-     * @param {function(string, DescribeMediaLiveInputResponse):void} cb
-     * @public
-     */
-    DescribeMediaLiveInput(req, cb) {
-        let resp = new DescribeMediaLiveInputResponse();
-        this.request("DescribeMediaLiveInput", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the information of input security groups in batches.
-     * @param {DescribeMediaLiveInputSecurityGroupsRequest} req
-     * @param {function(string, DescribeMediaLiveInputSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DescribeMediaLiveInputSecurityGroups(req, cb) {
-        let resp = new DescribeMediaLiveInputSecurityGroupsResponse();
-        this.request("DescribeMediaLiveInputSecurityGroups", req, resp, cb);
+    CreateStreamLiveInputSecurityGroup(req, cb) {
+        let resp = new CreateStreamLiveInputSecurityGroupResponse();
+        this.request("CreateStreamLiveInputSecurityGroup", req, resp, cb);
     }
 
 

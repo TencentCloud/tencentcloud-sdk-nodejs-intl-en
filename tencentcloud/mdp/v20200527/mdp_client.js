@@ -16,30 +16,32 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ModifyMediaPackageChannelEndpointRequest = models.ModifyMediaPackageChannelEndpointRequest;
-const DescribeMediaPackageChannelRequest = models.DescribeMediaPackageChannelRequest;
-const DeleteMediaPackageChannelEndpointsResponse = models.DeleteMediaPackageChannelEndpointsResponse;
-const ModifyMediaPackageChannelInputAuthInfoRequest = models.ModifyMediaPackageChannelInputAuthInfoRequest;
-const CreateMediaPackageChannelEndpointRequest = models.CreateMediaPackageChannelEndpointRequest;
-const CreateMediaPackageChannelResponse = models.CreateMediaPackageChannelResponse;
-const ModifyMediaPackageChannelRequest = models.ModifyMediaPackageChannelRequest;
-const ModifyMediaPackageChannelEndpointResponse = models.ModifyMediaPackageChannelEndpointResponse;
+const DeleteStreamPackageChannelsRequest = models.DeleteStreamPackageChannelsRequest;
+const PointInfo = models.PointInfo;
+const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
+const DescribeStreamPackageChannelsResponse = models.DescribeStreamPackageChannelsResponse;
+const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
+const ModifyStreamPackageChannelEndpointResponse = models.ModifyStreamPackageChannelEndpointResponse;
+const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
+const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResponse;
+const CreateStreamPackageChannelEndpointResponse = models.CreateStreamPackageChannelEndpointResponse;
+const DeleteStreamPackageChannelEndpointsRequest = models.DeleteStreamPackageChannelEndpointsRequest;
 const ChannelInfo = models.ChannelInfo;
-const ModifyMediaPackageChannelInputAuthInfoResponse = models.ModifyMediaPackageChannelInputAuthInfoResponse;
+const CacheInfo = models.CacheInfo;
+const DeleteStreamPackageChannelEndpointsResponse = models.DeleteStreamPackageChannelEndpointsResponse;
 const InputInfo = models.InputInfo;
 const InputAuthInfo = models.InputAuthInfo;
-const CreateMediaPackageChannelRequest = models.CreateMediaPackageChannelRequest;
-const DeleteMediaPackageChannelEndpointsRequest = models.DeleteMediaPackageChannelEndpointsRequest;
-const DeleteMediaPackageChannelsRequest = models.DeleteMediaPackageChannelsRequest;
 const EndpointInfo = models.EndpointInfo;
-const DescribeMediaPackageChannelsResponse = models.DescribeMediaPackageChannelsResponse;
-const ModifyMediaPackageChannelResponse = models.ModifyMediaPackageChannelResponse;
-const DescribeMediaPackageChannelResponse = models.DescribeMediaPackageChannelResponse;
-const PointInfo = models.PointInfo;
-const DeleteMediaPackageChannelsResponse = models.DeleteMediaPackageChannelsResponse;
-const DescribeMediaPackageChannelsRequest = models.DescribeMediaPackageChannelsRequest;
+const DescribeStreamPackageChannelRequest = models.DescribeStreamPackageChannelRequest;
+const ModifyStreamPackageChannelRequest = models.ModifyStreamPackageChannelRequest;
+const ModifyStreamPackageChannelEndpointRequest = models.ModifyStreamPackageChannelEndpointRequest;
+const CacheInfoInfo = models.CacheInfoInfo;
+const CreateStreamPackageChannelEndpointRequest = models.CreateStreamPackageChannelEndpointRequest;
+const CreateStreamPackageChannelRequest = models.CreateStreamPackageChannelRequest;
+const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
+const DescribeStreamPackageChannelResponse = models.DescribeStreamPackageChannelResponse;
+const ModifyStreamPackageChannelResponse = models.ModifyStreamPackageChannelResponse;
 const EndpointAuthInfo = models.EndpointAuthInfo;
-const CreateMediaPackageChannelEndpointResponse = models.CreateMediaPackageChannelEndpointResponse;
 
 
 /**
@@ -53,102 +55,102 @@ class MdpClient extends AbstractClient {
     }
     
     /**
-     * This API is used to modify an endpoint of a media package channel.
-     * @param {ModifyMediaPackageChannelEndpointRequest} req
-     * @param {function(string, ModifyMediaPackageChannelEndpointResponse):void} cb
+     * This API is used to query the information of multiple StreamPackage channels.
+     * @param {DescribeStreamPackageChannelsRequest} req
+     * @param {function(string, DescribeStreamPackageChannelsResponse):void} cb
      * @public
      */
-    ModifyMediaPackageChannelEndpoint(req, cb) {
-        let resp = new ModifyMediaPackageChannelEndpointResponse();
-        this.request("ModifyMediaPackageChannelEndpoint", req, resp, cb);
+    DescribeStreamPackageChannels(req, cb) {
+        let resp = new DescribeStreamPackageChannelsResponse();
+        this.request("DescribeStreamPackageChannels", req, resp, cb);
     }
 
     /**
-     * This API is used to delete media package channels in batches.
-     * @param {DeleteMediaPackageChannelsRequest} req
-     * @param {function(string, DeleteMediaPackageChannelsResponse):void} cb
+     * This API is used to modify an endpoint of a StreamPackage channel.
+     * @param {ModifyStreamPackageChannelEndpointRequest} req
+     * @param {function(string, ModifyStreamPackageChannelEndpointResponse):void} cb
      * @public
      */
-    DeleteMediaPackageChannels(req, cb) {
-        let resp = new DeleteMediaPackageChannelsResponse();
-        this.request("DeleteMediaPackageChannels", req, resp, cb);
+    ModifyStreamPackageChannelEndpoint(req, cb) {
+        let resp = new ModifyStreamPackageChannelEndpointResponse();
+        this.request("ModifyStreamPackageChannelEndpoint", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the information of a media package channel.
-     * @param {ModifyMediaPackageChannelRequest} req
-     * @param {function(string, ModifyMediaPackageChannelResponse):void} cb
+     * This API is used to create a StreamPackage channel.
+     * @param {CreateStreamPackageChannelRequest} req
+     * @param {function(string, CreateStreamPackageChannelResponse):void} cb
      * @public
      */
-    ModifyMediaPackageChannel(req, cb) {
-        let resp = new ModifyMediaPackageChannelResponse();
-        this.request("ModifyMediaPackageChannel", req, resp, cb);
+    CreateStreamPackageChannel(req, cb) {
+        let resp = new CreateStreamPackageChannelResponse();
+        this.request("CreateStreamPackageChannel", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the input authentication information of a media package channel.
-     * @param {ModifyMediaPackageChannelInputAuthInfoRequest} req
-     * @param {function(string, ModifyMediaPackageChannelInputAuthInfoResponse):void} cb
+     * This API is used to delete endpoints from a StreamPackage channel in batches.
+     * @param {DeleteStreamPackageChannelEndpointsRequest} req
+     * @param {function(string, DeleteStreamPackageChannelEndpointsResponse):void} cb
      * @public
      */
-    ModifyMediaPackageChannelInputAuthInfo(req, cb) {
-        let resp = new ModifyMediaPackageChannelInputAuthInfoResponse();
-        this.request("ModifyMediaPackageChannelInputAuthInfo", req, resp, cb);
+    DeleteStreamPackageChannelEndpoints(req, cb) {
+        let resp = new DeleteStreamPackageChannelEndpointsResponse();
+        this.request("DeleteStreamPackageChannelEndpoints", req, resp, cb);
     }
 
     /**
-     * This API is used to delete endpoints from a media package channel in batches.
-     * @param {DeleteMediaPackageChannelEndpointsRequest} req
-     * @param {function(string, DeleteMediaPackageChannelEndpointsResponse):void} cb
+     * This API is used to modify the input authentication information of a StreamPackage channel.
+     * @param {ModifyStreamPackageChannelInputAuthInfoRequest} req
+     * @param {function(string, ModifyStreamPackageChannelInputAuthInfoResponse):void} cb
      * @public
      */
-    DeleteMediaPackageChannelEndpoints(req, cb) {
-        let resp = new DeleteMediaPackageChannelEndpointsResponse();
-        this.request("DeleteMediaPackageChannelEndpoints", req, resp, cb);
+    ModifyStreamPackageChannelInputAuthInfo(req, cb) {
+        let resp = new ModifyStreamPackageChannelInputAuthInfoResponse();
+        this.request("ModifyStreamPackageChannelInputAuthInfo", req, resp, cb);
     }
 
     /**
-     * This API is used to query the information list of media package channels.
-     * @param {DescribeMediaPackageChannelsRequest} req
-     * @param {function(string, DescribeMediaPackageChannelsResponse):void} cb
+     * This API is used to create an endpoint on a StreamPackage channel.
+     * @param {CreateStreamPackageChannelEndpointRequest} req
+     * @param {function(string, CreateStreamPackageChannelEndpointResponse):void} cb
      * @public
      */
-    DescribeMediaPackageChannels(req, cb) {
-        let resp = new DescribeMediaPackageChannelsResponse();
-        this.request("DescribeMediaPackageChannels", req, resp, cb);
+    CreateStreamPackageChannelEndpoint(req, cb) {
+        let resp = new CreateStreamPackageChannelEndpointResponse();
+        this.request("CreateStreamPackageChannelEndpoint", req, resp, cb);
     }
 
     /**
-     * This API is used to create an endpoint of a media package channel.
-     * @param {CreateMediaPackageChannelEndpointRequest} req
-     * @param {function(string, CreateMediaPackageChannelEndpointResponse):void} cb
+     * This API is used to delete StreamPackage channels in batches.
+     * @param {DeleteStreamPackageChannelsRequest} req
+     * @param {function(string, DeleteStreamPackageChannelsResponse):void} cb
      * @public
      */
-    CreateMediaPackageChannelEndpoint(req, cb) {
-        let resp = new CreateMediaPackageChannelEndpointResponse();
-        this.request("CreateMediaPackageChannelEndpoint", req, resp, cb);
+    DeleteStreamPackageChannels(req, cb) {
+        let resp = new DeleteStreamPackageChannelsResponse();
+        this.request("DeleteStreamPackageChannels", req, resp, cb);
     }
 
     /**
-     * This API is used to create a media package channel.
-     * @param {CreateMediaPackageChannelRequest} req
-     * @param {function(string, CreateMediaPackageChannelResponse):void} cb
+     * This API is used to query the information of a StreamPackage channel.
+     * @param {DescribeStreamPackageChannelRequest} req
+     * @param {function(string, DescribeStreamPackageChannelResponse):void} cb
      * @public
      */
-    CreateMediaPackageChannel(req, cb) {
-        let resp = new CreateMediaPackageChannelResponse();
-        this.request("CreateMediaPackageChannel", req, resp, cb);
+    DescribeStreamPackageChannel(req, cb) {
+        let resp = new DescribeStreamPackageChannelResponse();
+        this.request("DescribeStreamPackageChannel", req, resp, cb);
     }
 
     /**
-     * This API is used to query the information of a media package channel.
-     * @param {DescribeMediaPackageChannelRequest} req
-     * @param {function(string, DescribeMediaPackageChannelResponse):void} cb
+     * This API is used to modify a StreamPackage channel.
+     * @param {ModifyStreamPackageChannelRequest} req
+     * @param {function(string, ModifyStreamPackageChannelResponse):void} cb
      * @public
      */
-    DescribeMediaPackageChannel(req, cb) {
-        let resp = new DescribeMediaPackageChannelResponse();
-        this.request("DescribeMediaPackageChannel", req, resp, cb);
+    ModifyStreamPackageChannel(req, cb) {
+        let resp = new ModifyStreamPackageChannelResponse();
+        this.request("ModifyStreamPackageChannel", req, resp, cb);
     }
 
 

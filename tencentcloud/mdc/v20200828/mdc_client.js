@@ -16,53 +16,39 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateMediaConnectFlowRequest = models.CreateMediaConnectFlowRequest;
-const DeleteMediaConnectFlowResponse = models.DeleteMediaConnectFlowResponse;
+const DescribeOutputRTMPSettings = models.DescribeOutputRTMPSettings;
 const OutputAddress = models.OutputAddress;
 const DescribeInputRTPSettings = models.DescribeInputRTPSettings;
-const DeleteMediaConnectFlowRequest = models.DeleteMediaConnectFlowRequest;
-const StopMediaConnectFlowRequest = models.StopMediaConnectFlowRequest;
-const CreateOutputSrtSettingsDestinations = models.CreateOutputSrtSettingsDestinations;
-const DescribeMediaConnectFlowsResponse = models.DescribeMediaConnectFlowsResponse;
-const StartMediaConnectFlowRequest = models.StartMediaConnectFlowRequest;
-const DeleteMediaConnectOutputRequest = models.DeleteMediaConnectOutputRequest;
-const DeleteMediaConnectOutputResponse = models.DeleteMediaConnectOutputResponse;
+const ModifyStreamLinkFlowRequest = models.ModifyStreamLinkFlowRequest;
+const DeleteStreamLinkFlowRequest = models.DeleteStreamLinkFlowRequest;
+const CreateStreamLinkFlowRequest = models.CreateStreamLinkFlowRequest;
 const DescribeOutput = models.DescribeOutput;
 const DescribeFlow = models.DescribeFlow;
-const ModifyMediaConnectInputRequest = models.ModifyMediaConnectInputRequest;
-const CreateMediaConnectOutputRequest = models.CreateMediaConnectOutputRequest;
+const DeleteStreamLinkOutputRequest = models.DeleteStreamLinkOutputRequest;
 const CreateInputSRTSettings = models.CreateInputSRTSettings;
-const CreateMediaConnectOutputResponse = models.CreateMediaConnectOutputResponse;
-const ModifyMediaConnectOutputRequest = models.ModifyMediaConnectOutputRequest;
-const ModifyMediaConnectFlowResponse = models.ModifyMediaConnectFlowResponse;
-const CreateMediaConnectFlowResponse = models.CreateMediaConnectFlowResponse;
-const DescribeMediaConnectFlowRequest = models.DescribeMediaConnectFlowRequest;
-const DescribeOutputRTMPSettings = models.DescribeOutputRTMPSettings;
-const CreateOutputRTPSettingsDestinations = models.CreateOutputRTPSettingsDestinations;
-const ModifyOutput = models.ModifyOutput;
+const DescribeInputRTMPSettings = models.DescribeInputRTMPSettings;
+const ModifyStreamLinkFlowResponse = models.ModifyStreamLinkFlowResponse;
+const StartStreamLinkFlowRequest = models.StartStreamLinkFlowRequest;
+const StartStreamLinkFlowResponse = models.StartStreamLinkFlowResponse;
+const DescribeStreamLinkFlowResponse = models.DescribeStreamLinkFlowResponse;
+const StopStreamLinkFlowResponse = models.StopStreamLinkFlowResponse;
+const InputAddress = models.InputAddress;
+const StopStreamLinkFlowRequest = models.StopStreamLinkFlowRequest;
 const CreateInput = models.CreateInput;
-const CreateOutputRTMPSettings = models.CreateOutputRTMPSettings;
 const DescribeInput = models.DescribeInput;
-const CreateOutputRtmpSettingsDestinations = models.CreateOutputRtmpSettingsDestinations;
-const DescribeMediaConnectFlowResponse = models.DescribeMediaConnectFlowResponse;
+const DescribeStreamLinkFlowRequest = models.DescribeStreamLinkFlowRequest;
 const DescribeOutputSRTSettings = models.DescribeOutputSRTSettings;
-const ModifyMediaConnectFlowRequest = models.ModifyMediaConnectFlowRequest;
-const StopMediaConnectFlowResponse = models.StopMediaConnectFlowResponse;
+const DeleteStreamLinkOutputResponse = models.DeleteStreamLinkOutputResponse;
+const DescribeStreamLinkFlowsResponse = models.DescribeStreamLinkFlowsResponse;
 const RTMPAddressDestination = models.RTMPAddressDestination;
-const StartMediaConnectFlowResponse = models.StartMediaConnectFlowResponse;
-const ModifyMediaConnectOutputResponse = models.ModifyMediaConnectOutputResponse;
+const DeleteStreamLinkFlowResponse = models.DeleteStreamLinkFlowResponse;
 const DescribeOutputRTPSettings = models.DescribeOutputRTPSettings;
 const DescribeInputSRTSettings = models.DescribeInputSRTSettings;
-const CreateOutputRTPSettings = models.CreateOutputRTPSettings;
-const DescribeMediaConnectFlowsRequest = models.DescribeMediaConnectFlowsRequest;
-const InputAddress = models.InputAddress;
-const ModifyInput = models.ModifyInput;
-const CreateOutputSrtSettings = models.CreateOutputSrtSettings;
+const CreateStreamLinkFlowResponse = models.CreateStreamLinkFlowResponse;
 const CreateInputRTPSettings = models.CreateInputRTPSettings;
 const SRTAddressDestination = models.SRTAddressDestination;
-const ModifyMediaConnectInputResponse = models.ModifyMediaConnectInputResponse;
+const DescribeStreamLinkFlowsRequest = models.DescribeStreamLinkFlowsRequest;
 const RTPAddressDestination = models.RTPAddressDestination;
-const CreateOutput = models.CreateOutput;
 
 
 /**
@@ -76,124 +62,91 @@ class MdcClient extends AbstractClient {
     }
     
     /**
-     * This API is used to modify the output configuration of a MediaConnect flow.
-     * @param {ModifyMediaConnectOutputRequest} req
-     * @param {function(string, ModifyMediaConnectOutputResponse):void} cb
+     * This API is used to query the configuration information of multiple StreamLink flows in batches.
+     * @param {DescribeStreamLinkFlowsRequest} req
+     * @param {function(string, DescribeStreamLinkFlowsResponse):void} cb
      * @public
      */
-    ModifyMediaConnectOutput(req, cb) {
-        let resp = new ModifyMediaConnectOutputResponse();
-        this.request("ModifyMediaConnectOutput", req, resp, cb);
+    DescribeStreamLinkFlows(req, cb) {
+        let resp = new DescribeStreamLinkFlowsResponse();
+        this.request("DescribeStreamLinkFlows", req, resp, cb);
     }
 
     /**
-     * This API is used to query the configuration information of a MediaConnect flow.
-     * @param {DescribeMediaConnectFlowRequest} req
-     * @param {function(string, DescribeMediaConnectFlowResponse):void} cb
+     * This API is used to stop a StreamLink flow.
+     * @param {StopStreamLinkFlowRequest} req
+     * @param {function(string, StopStreamLinkFlowResponse):void} cb
      * @public
      */
-    DescribeMediaConnectFlow(req, cb) {
-        let resp = new DescribeMediaConnectFlowResponse();
-        this.request("DescribeMediaConnectFlow", req, resp, cb);
+    StopStreamLinkFlow(req, cb) {
+        let resp = new StopStreamLinkFlowResponse();
+        this.request("StopStreamLinkFlow", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the input information of a MediaConnect flow.
-     * @param {ModifyMediaConnectInputRequest} req
-     * @param {function(string, ModifyMediaConnectInputResponse):void} cb
+     * This API is used to delete a StreamLink flow.
+     * @param {DeleteStreamLinkFlowRequest} req
+     * @param {function(string, DeleteStreamLinkFlowResponse):void} cb
      * @public
      */
-    ModifyMediaConnectInput(req, cb) {
-        let resp = new ModifyMediaConnectInputResponse();
-        this.request("ModifyMediaConnectInput", req, resp, cb);
+    DeleteStreamLinkFlow(req, cb) {
+        let resp = new DeleteStreamLinkFlowResponse();
+        this.request("DeleteStreamLinkFlow", req, resp, cb);
     }
 
     /**
-     * This API is used to create the configuration of a MediaConnect flow.
-     * @param {CreateMediaConnectFlowRequest} req
-     * @param {function(string, CreateMediaConnectFlowResponse):void} cb
+     * This API is used to query the configuration information of a StreamLink flow.
+     * @param {DescribeStreamLinkFlowRequest} req
+     * @param {function(string, DescribeStreamLinkFlowResponse):void} cb
      * @public
      */
-    CreateMediaConnectFlow(req, cb) {
-        let resp = new CreateMediaConnectFlowResponse();
-        this.request("CreateMediaConnectFlow", req, resp, cb);
+    DescribeStreamLinkFlow(req, cb) {
+        let resp = new DescribeStreamLinkFlowResponse();
+        this.request("DescribeStreamLinkFlow", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the configuration information of a MediaConnect flow.
-     * @param {ModifyMediaConnectFlowRequest} req
-     * @param {function(string, ModifyMediaConnectFlowResponse):void} cb
+     * This API is used to create a StreamLink flow.
+     * @param {CreateStreamLinkFlowRequest} req
+     * @param {function(string, CreateStreamLinkFlowResponse):void} cb
      * @public
      */
-    ModifyMediaConnectFlow(req, cb) {
-        let resp = new ModifyMediaConnectFlowResponse();
-        this.request("ModifyMediaConnectFlow", req, resp, cb);
+    CreateStreamLinkFlow(req, cb) {
+        let resp = new CreateStreamLinkFlowResponse();
+        this.request("CreateStreamLinkFlow", req, resp, cb);
     }
 
     /**
-     * This API is used to delete the configuration of a MediaConnect flow.
-     * @param {DeleteMediaConnectFlowRequest} req
-     * @param {function(string, DeleteMediaConnectFlowResponse):void} cb
+     * This API is used to start a StreamLink flow.
+     * @param {StartStreamLinkFlowRequest} req
+     * @param {function(string, StartStreamLinkFlowResponse):void} cb
      * @public
      */
-    DeleteMediaConnectFlow(req, cb) {
-        let resp = new DeleteMediaConnectFlowResponse();
-        this.request("DeleteMediaConnectFlow", req, resp, cb);
+    StartStreamLinkFlow(req, cb) {
+        let resp = new StartStreamLinkFlowResponse();
+        this.request("StartStreamLinkFlow", req, resp, cb);
     }
 
     /**
-     * This API is used to stop a MediaConnect flow.
-     * @param {StopMediaConnectFlowRequest} req
-     * @param {function(string, StopMediaConnectFlowResponse):void} cb
+     * This API is used to delete an output of a StreamLink flow.
+     * @param {DeleteStreamLinkOutputRequest} req
+     * @param {function(string, DeleteStreamLinkOutputResponse):void} cb
      * @public
      */
-    StopMediaConnectFlow(req, cb) {
-        let resp = new StopMediaConnectFlowResponse();
-        this.request("StopMediaConnectFlow", req, resp, cb);
+    DeleteStreamLinkOutput(req, cb) {
+        let resp = new DeleteStreamLinkOutputResponse();
+        this.request("DeleteStreamLinkOutput", req, resp, cb);
     }
 
     /**
-     * This API is used to delete the output configuration of a MediaConnect flow.
-     * @param {DeleteMediaConnectOutputRequest} req
-     * @param {function(string, DeleteMediaConnectOutputResponse):void} cb
+     * This API is used to modify the configuration information of a StreamLink flow.
+     * @param {ModifyStreamLinkFlowRequest} req
+     * @param {function(string, ModifyStreamLinkFlowResponse):void} cb
      * @public
      */
-    DeleteMediaConnectOutput(req, cb) {
-        let resp = new DeleteMediaConnectOutputResponse();
-        this.request("DeleteMediaConnectOutput", req, resp, cb);
-    }
-
-    /**
-     * This API is used to start a MediaConnect flow.
-     * @param {StartMediaConnectFlowRequest} req
-     * @param {function(string, StartMediaConnectFlowResponse):void} cb
-     * @public
-     */
-    StartMediaConnectFlow(req, cb) {
-        let resp = new StartMediaConnectFlowResponse();
-        this.request("StartMediaConnectFlow", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create the output information of a MediaConnect flow.
-     * @param {CreateMediaConnectOutputRequest} req
-     * @param {function(string, CreateMediaConnectOutputResponse):void} cb
-     * @public
-     */
-    CreateMediaConnectOutput(req, cb) {
-        let resp = new CreateMediaConnectOutputResponse();
-        this.request("CreateMediaConnectOutput", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the configuration information of multiple MediaConnect flows in batches.
-     * @param {DescribeMediaConnectFlowsRequest} req
-     * @param {function(string, DescribeMediaConnectFlowsResponse):void} cb
-     * @public
-     */
-    DescribeMediaConnectFlows(req, cb) {
-        let resp = new DescribeMediaConnectFlowsResponse();
-        this.request("DescribeMediaConnectFlows", req, resp, cb);
+    ModifyStreamLinkFlow(req, cb) {
+        let resp = new ModifyStreamLinkFlowResponse();
+        this.request("ModifyStreamLinkFlow", req, resp, cb);
     }
 
 

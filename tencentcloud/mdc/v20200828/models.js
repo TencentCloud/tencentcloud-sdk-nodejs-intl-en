@@ -17,30 +17,33 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * CreateMediaConnectFlow request structure.
+ * RTMP configuration information of the queried output.
  * @class
  */
-class CreateMediaConnectFlowRequest extends  AbstractModel {
+class DescribeOutputRTMPSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow name.
-         * @type {string || null}
-         */
-        this.FlowName = null;
-
-        /**
-         * Maximum bandwidth in bps. Valid values: 10000000, 20000000, 50000000.
+         * Idle timeout period.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.MaxBandwidth = null;
+        this.IdleTimeout = null;
 
         /**
-         * Flow input group.
-         * @type {Array.<CreateInput> || null}
+         * Chunk size.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.InputGroup = null;
+        this.ChunkSize = null;
+
+        /**
+         * Destination address information list of RTMP push.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RTMPAddressDestination> || null}
+         */
+        this.Destinations = null;
 
     }
 
@@ -51,45 +54,17 @@ class CreateMediaConnectFlowRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowName = 'FlowName' in params ? params.FlowName : null;
-        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
+        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
+        this.ChunkSize = 'ChunkSize' in params ? params.ChunkSize : null;
 
-        if (params.InputGroup) {
-            this.InputGroup = new Array();
-            for (let z in params.InputGroup) {
-                let obj = new CreateInput();
-                obj.deserialize(params.InputGroup[z]);
-                this.InputGroup.push(obj);
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new RTMPAddressDestination();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * DeleteMediaConnectFlow response structure.
- * @class
- */
-class DeleteMediaConnectFlowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -158,15 +133,50 @@ class DescribeInputRTPSettings extends  AbstractModel {
 }
 
 /**
- * DeleteMediaConnectFlow request structure.
+ * ModifyStreamLinkFlow request structure.
  * @class
  */
-class DeleteMediaConnectFlowRequest extends  AbstractModel {
+class ModifyStreamLinkFlowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow ID.
+         * Flow ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Name of the flow to modify
+         * @type {string || null}
+         */
+        this.FlowName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.FlowName = 'FlowName' in params ? params.FlowName : null;
+
+    }
+}
+
+/**
+ * DeleteStreamLinkFlow request structure.
+ * @class
+ */
+class DeleteStreamLinkFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow ID
          * @type {string || null}
          */
         this.FlowId = null;
@@ -186,18 +196,30 @@ class DeleteMediaConnectFlowRequest extends  AbstractModel {
 }
 
 /**
- * StopMediaConnectFlow request structure.
+ * CreateStreamLinkFlow request structure.
  * @class
  */
-class StopMediaConnectFlowRequest extends  AbstractModel {
+class CreateStreamLinkFlowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow ID.
+         * Flow name
          * @type {string || null}
          */
-        this.FlowId = null;
+        this.FlowName = null;
+
+        /**
+         * Maximum bandwidth in bps. Valid values: `10000000`, `20000000`, `50000000`
+         * @type {number || null}
+         */
+        this.MaxBandwidth = null;
+
+        /**
+         * Flow input group
+         * @type {Array.<CreateInput> || null}
+         */
+        this.InputGroup = null;
 
     }
 
@@ -208,204 +230,17 @@ class StopMediaConnectFlowRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.FlowName = 'FlowName' in params ? params.FlowName : null;
+        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
 
-    }
-}
-
-/**
- * SRT destination address of the created MediaConnect flow output.
- * @class
- */
-class CreateOutputSrtSettingsDestinations extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Output IP.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Output port.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
-
-    }
-}
-
-/**
- * DescribeMediaConnectFlows response structure.
- * @class
- */
-class DescribeMediaConnectFlowsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Configuration information list of a flow.
-         * @type {Array.<DescribeFlow> || null}
-         */
-        this.Infos = null;
-
-        /**
-         * Number of current pages.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Number of entries per page.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Total number.
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * Total number of pages.
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Infos) {
-            this.Infos = new Array();
-            for (let z in params.Infos) {
-                let obj = new DescribeFlow();
-                obj.deserialize(params.Infos[z]);
-                this.Infos.push(obj);
+        if (params.InputGroup) {
+            this.InputGroup = new Array();
+            for (let z in params.InputGroup) {
+                let obj = new CreateInput();
+                obj.deserialize(params.InputGroup[z]);
+                this.InputGroup.push(obj);
             }
         }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StartMediaConnectFlow request structure.
- * @class
- */
-class StartMediaConnectFlowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-
-    }
-}
-
-/**
- * DeleteMediaConnectOutput request structure.
- * @class
- */
-class DeleteMediaConnectOutputRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Output ID.
-         * @type {string || null}
-         */
-        this.OutputId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.OutputId = 'OutputId' in params ? params.OutputId : null;
-
-    }
-}
-
-/**
- * DeleteMediaConnectOutput response structure.
- * @class
- */
-class DeleteMediaConnectOutputResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -550,7 +385,7 @@ class DescribeFlow extends  AbstractModel {
         this.FlowName = null;
 
         /**
-         * Flow status.
+         * Flow status. Valid values: `IDLE`, `RUNNING`
          * @type {string || null}
          */
         this.State = null;
@@ -610,24 +445,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyMediaConnectInput request structure.
+ * DeleteStreamLinkOutput request structure.
  * @class
  */
-class ModifyMediaConnectInputRequest extends  AbstractModel {
+class DeleteStreamLinkOutputRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow ID.
+         * Flow ID
          * @type {string || null}
          */
         this.FlowId = null;
 
         /**
-         * Information of the input to be modified.
-         * @type {ModifyInput || null}
+         * Output ID
+         * @type {string || null}
          */
-        this.Input = null;
+        this.OutputId = null;
 
     }
 
@@ -639,52 +474,7 @@ class ModifyMediaConnectInputRequest extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
-
-        if (params.Input) {
-            let obj = new ModifyInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-    }
-}
-
-/**
- * CreateMediaConnectOutput request structure.
- * @class
- */
-class CreateMediaConnectOutputRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Output configuration of a flow.
-         * @type {CreateOutput || null}
-         */
-        this.Output = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-
-        if (params.Output) {
-            let obj = new CreateOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.OutputId = 'OutputId' in params ? params.OutputId : null;
 
     }
 }
@@ -760,18 +550,49 @@ class CreateInputSRTSettings extends  AbstractModel {
 }
 
 /**
- * CreateMediaConnectOutput response structure.
+ * RTMP configuration information of the queried input
  * @class
  */
-class CreateMediaConnectOutputResponse extends  AbstractModel {
+class DescribeInputRTMPSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Information of the created output.
-         * @type {DescribeOutput || null}
+         * Path for RTMP stream pushing
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
          */
-        this.Info = null;
+        this.AppName = null;
+
+        /**
+         * StreamKey for RTMP stream pushing
+Format of an RTMP stream pushing URL: rtmp://IP address:1935/AppName/StreamKey
+         * @type {string || null}
+         */
+        this.StreamKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
+
+    }
+}
+
+/**
+ * ModifyStreamLinkFlow response structure.
+ * @class
+ */
+class ModifyStreamLinkFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -788,36 +609,24 @@ class CreateMediaConnectOutputResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Info) {
-            let obj = new DescribeOutput();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * ModifyMediaConnectOutput request structure.
+ * StartStreamLinkFlow request structure.
  * @class
  */
-class ModifyMediaConnectOutputRequest extends  AbstractModel {
+class StartStreamLinkFlowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow ID.
+         * Flow ID
          * @type {string || null}
          */
         this.FlowId = null;
-
-        /**
-         * Configuration of the output to be modified.
-         * @type {ModifyOutput || null}
-         */
-        this.Output = null;
 
     }
 
@@ -830,20 +639,14 @@ class ModifyMediaConnectOutputRequest extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
-        if (params.Output) {
-            let obj = new ModifyOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
-
     }
 }
 
 /**
- * ModifyMediaConnectFlow response structure.
+ * StartStreamLinkFlow response structure.
  * @class
  */
-class ModifyMediaConnectFlowResponse extends  AbstractModel {
+class StartStreamLinkFlowResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -868,15 +671,15 @@ class ModifyMediaConnectFlowResponse extends  AbstractModel {
 }
 
 /**
- * CreateMediaConnectFlow response structure.
+ * DescribeStreamLinkFlow response structure.
  * @class
  */
-class CreateMediaConnectFlowResponse extends  AbstractModel {
+class DescribeStreamLinkFlowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Information of the created flow.
+         * Configuration information of a flow
          * @type {DescribeFlow || null}
          */
         this.Info = null;
@@ -908,18 +711,18 @@ class CreateMediaConnectFlowResponse extends  AbstractModel {
 }
 
 /**
- * DescribeMediaConnectFlow request structure.
+ * StopStreamLinkFlow response structure.
  * @class
  */
-class DescribeMediaConnectFlowRequest extends  AbstractModel {
+class StopStreamLinkFlowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow ID.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FlowId = null;
+        this.RequestId = null;
 
     }
 
@@ -930,80 +733,27 @@ class DescribeMediaConnectFlowRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * RTMP configuration information of the queried output.
+ * Input address information.
  * @class
  */
-class DescribeOutputRTMPSettings extends  AbstractModel {
+class InputAddress extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Idle timeout period.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IdleTimeout = null;
-
-        /**
-         * Chunk size.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ChunkSize = null;
-
-        /**
-         * Destination address information list of RTMP push.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RTMPAddressDestination> || null}
-         */
-        this.Destinations = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
-        this.ChunkSize = 'ChunkSize' in params ? params.ChunkSize : null;
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new RTMPAddressDestination();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * RTP destination address of the created MediaConnect flow output.
- * @class
- */
-class CreateOutputRTPSettingsDestinations extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Push destination IP.
+         * Input address IP.
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * Push destination port.
+         * Input address port.
          * @type {number || null}
          */
         this.Port = null;
@@ -1024,54 +774,18 @@ class CreateOutputRTPSettingsDestinations extends  AbstractModel {
 }
 
 /**
- * Configuration of the modified output.
+ * StopStreamLinkFlow request structure.
  * @class
  */
-class ModifyOutput extends  AbstractModel {
+class StopStreamLinkFlowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the output to be modified.
+         * Flow ID
          * @type {string || null}
          */
-        this.OutputId = null;
-
-        /**
-         * Output name.
-         * @type {string || null}
-         */
-        this.OutputName = null;
-
-        /**
-         * Output description.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Output push protocol. Valid values: SRT, RTMP.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Configuration of SRT push.
-         * @type {CreateOutputSrtSettings || null}
-         */
-        this.SRTSettings = null;
-
-        /**
-         * Configuration of RTP push.
-         * @type {CreateOutputRTPSettings || null}
-         */
-        this.RTPSettings = null;
-
-        /**
-         * Configuration of RTMP push.
-         * @type {CreateOutputRTMPSettings || null}
-         */
-        this.RTMPSettings = null;
+        this.FlowId = null;
 
     }
 
@@ -1082,28 +796,7 @@ class ModifyOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OutputId = 'OutputId' in params ? params.OutputId : null;
-        this.OutputName = 'OutputName' in params ? params.OutputName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-
-        if (params.SRTSettings) {
-            let obj = new CreateOutputSrtSettings();
-            obj.deserialize(params.SRTSettings)
-            this.SRTSettings = obj;
-        }
-
-        if (params.RTPSettings) {
-            let obj = new CreateOutputRTPSettings();
-            obj.deserialize(params.RTPSettings)
-            this.RTPSettings = obj;
-        }
-
-        if (params.RTMPSettings) {
-            let obj = new CreateOutputRTMPSettings();
-            obj.deserialize(params.RTMPSettings)
-            this.RTMPSettings = obj;
-        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -1123,7 +816,7 @@ class CreateInput extends  AbstractModel {
         this.InputName = null;
 
         /**
-         * Input protocol. Valid values: SRT, RTP.
+         * Input protocol. Valid values: `SRT`, `RTP`, `RTMP`
          * @type {string || null}
          */
         this.Protocol = null;
@@ -1152,6 +845,12 @@ class CreateInput extends  AbstractModel {
          */
         this.RTPSettings = null;
 
+        /**
+         * Input failover. Valid values: `OPEN`, `CLOSE` (default)
+         * @type {string || null}
+         */
+        this.FailOver = null;
+
     }
 
     /**
@@ -1177,49 +876,7 @@ class CreateInput extends  AbstractModel {
             obj.deserialize(params.RTPSettings)
             this.RTPSettings = obj;
         }
-
-    }
-}
-
-/**
- * RTMP configuration of the created MediaConnect flow output.
- * @class
- */
-class CreateOutputRTMPSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Push destination address. You can enter one or two addresses.
-         * @type {Array.<CreateOutputRtmpSettingsDestinations> || null}
-         */
-        this.Destinations = null;
-
-        /**
-         * RTMP chunk size. Value range: [4096, 40960].
-         * @type {number || null}
-         */
-        this.ChunkSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new CreateOutputRtmpSettingsDestinations();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-        this.ChunkSize = 'ChunkSize' in params ? params.ChunkSize : null;
+        this.FailOver = 'FailOver' in params ? params.FailOver : null;
 
     }
 }
@@ -1289,6 +946,19 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.InputRegion = null;
 
+        /**
+         * RTMP configuration information of an input
+         * @type {DescribeInputRTMPSettings || null}
+         */
+        this.RTMPSettings = null;
+
+        /**
+         * Input failover
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.FailOver = null;
+
     }
 
     /**
@@ -1326,28 +996,29 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.InputRegion = 'InputRegion' in params ? params.InputRegion : null;
 
+        if (params.RTMPSettings) {
+            let obj = new DescribeInputRTMPSettings();
+            obj.deserialize(params.RTMPSettings)
+            this.RTMPSettings = obj;
+        }
+        this.FailOver = 'FailOver' in params ? params.FailOver : null;
+
     }
 }
 
 /**
- * RTMP destination address of the created MediaConnect flow output.
+ * DescribeStreamLinkFlow request structure.
  * @class
  */
-class CreateOutputRtmpSettingsDestinations extends  AbstractModel {
+class DescribeStreamLinkFlowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Push URL in the format of `rtmp://domain/live`.
+         * Flow ID
          * @type {string || null}
          */
-        this.Url = null;
-
-        /**
-         * Push `StreamKey` in the format of `stream?key=value`.
-         * @type {string || null}
-         */
-        this.StreamKey = null;
+        this.FlowId = null;
 
     }
 
@@ -1358,48 +1029,7 @@ class CreateOutputRtmpSettingsDestinations extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
-
-    }
-}
-
-/**
- * DescribeMediaConnectFlow response structure.
- * @class
- */
-class DescribeMediaConnectFlowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Configuration information of a flow.
-         * @type {DescribeFlow || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new DescribeFlow();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -1498,45 +1128,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyMediaConnectFlow request structure.
+ * DeleteStreamLinkOutput response structure.
  * @class
  */
-class ModifyMediaConnectFlowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Name of the flow to be modified.
-         * @type {string || null}
-         */
-        this.FlowName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.FlowName = 'FlowName' in params ? params.FlowName : null;
-
-    }
-}
-
-/**
- * StopMediaConnectFlow response structure.
- * @class
- */
-class StopMediaConnectFlowResponse extends  AbstractModel {
+class DeleteStreamLinkOutputResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1555,6 +1150,77 @@ class StopMediaConnectFlowResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlows response structure.
+ * @class
+ */
+class DescribeStreamLinkFlowsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of the configuration information of the flows
+         * @type {Array.<DescribeFlow> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * Number of the current page
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of entries per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * Total number of pages
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new DescribeFlow();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1596,10 +1262,10 @@ class RTMPAddressDestination extends  AbstractModel {
 }
 
 /**
- * StartMediaConnectFlow response structure.
+ * DeleteStreamLinkFlow response structure.
  * @class
  */
-class StartMediaConnectFlowResponse extends  AbstractModel {
+class DeleteStreamLinkFlowResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1617,46 +1283,6 @@ class StartMediaConnectFlowResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyMediaConnectOutput response structure.
- * @class
- */
-class ModifyMediaConnectOutputResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Output configuration after modification.
-         * @type {DescribeOutput || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new DescribeOutput();
-            obj.deserialize(params.Info)
-            this.Info = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1787,30 +1413,24 @@ class DescribeInputSRTSettings extends  AbstractModel {
 }
 
 /**
- * RTP configuration of the created MediaConnect flow output.
+ * CreateStreamLinkFlow response structure.
  * @class
  */
-class CreateOutputRTPSettings extends  AbstractModel {
+class CreateStreamLinkFlowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Push destination address. You can enter one or two addresses.
-         * @type {CreateOutputRTPSettingsDestinations || null}
+         * Information of the created flow
+         * @type {DescribeFlow || null}
          */
-        this.Destinations = null;
+        this.Info = null;
 
         /**
-         * Only `none` can be entered.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FEC = null;
-
-        /**
-         * Idle timeout period.
-         * @type {number || null}
-         */
-        this.IdleTimeout = null;
+        this.RequestId = null;
 
     }
 
@@ -1822,241 +1442,12 @@ class CreateOutputRTPSettings extends  AbstractModel {
             return;
         }
 
-        if (params.Destinations) {
-            let obj = new CreateOutputRTPSettingsDestinations();
-            obj.deserialize(params.Destinations)
-            this.Destinations = obj;
+        if (params.Info) {
+            let obj = new DescribeFlow();
+            obj.deserialize(params.Info)
+            this.Info = obj;
         }
-        this.FEC = 'FEC' in params ? params.FEC : null;
-        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
-
-    }
-}
-
-/**
- * DescribeMediaConnectFlows request structure.
- * @class
- */
-class DescribeMediaConnectFlowsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of current pages. Default value: 1.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Number of entries per page. Default value: 10.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-    }
-}
-
-/**
- * Input address information.
- * @class
- */
-class InputAddress extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Input address IP.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Input address port.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
-
-    }
-}
-
-/**
- * Parameters of the modified input.
- * @class
- */
-class ModifyInput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Input ID.
-         * @type {string || null}
-         */
-        this.InputId = null;
-
-        /**
-         * Input name.
-         * @type {string || null}
-         */
-        this.InputName = null;
-
-        /**
-         * Input description.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Allowed push IP in CIDR format.
-         * @type {Array.<string> || null}
-         */
-        this.AllowIpList = null;
-
-        /**
-         * SRT configuration information.
-         * @type {CreateInputSRTSettings || null}
-         */
-        this.SRTSettings = null;
-
-        /**
-         * RTP configuration information.
-         * @type {CreateInputRTPSettings || null}
-         */
-        this.RTPSettings = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InputId = 'InputId' in params ? params.InputId : null;
-        this.InputName = 'InputName' in params ? params.InputName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
-
-        if (params.SRTSettings) {
-            let obj = new CreateInputSRTSettings();
-            obj.deserialize(params.SRTSettings)
-            this.SRTSettings = obj;
-        }
-
-        if (params.RTPSettings) {
-            let obj = new CreateInputRTPSettings();
-            obj.deserialize(params.RTPSettings)
-            this.RTPSettings = obj;
-        }
-
-    }
-}
-
-/**
- * SRT configuration of the created MediaConnect flow output.
- * @class
- */
-class CreateOutputSrtSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Push destination address. Please configure one or two addresses.
-         * @type {Array.<CreateOutputSrtSettingsDestinations> || null}
-         */
-        this.Destinations = null;
-
-        /**
-         * Stream ID of SRT push.
-         * @type {string || null}
-         */
-        this.StreamId = null;
-
-        /**
-         * Total latency of SRT push.
-         * @type {number || null}
-         */
-        this.Latency = null;
-
-        /**
-         * Receive latency of SRT push.
-         * @type {number || null}
-         */
-        this.RecvLatency = null;
-
-        /**
-         * Peer latency of SRT push.
-         * @type {number || null}
-         */
-        this.PeerLatency = null;
-
-        /**
-         * Peer idle timeout period of SRT push.
-         * @type {number || null}
-         */
-        this.PeerIdleTimeout = null;
-
-        /**
-         * Encryption key of SRT push.
-         * @type {string || null}
-         */
-        this.Passphrase = null;
-
-        /**
-         * Key length of SRT push.
-         * @type {number || null}
-         */
-        this.PbKeyLen = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new CreateOutputSrtSettingsDestinations();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-        this.StreamId = 'StreamId' in params ? params.StreamId : null;
-        this.Latency = 'Latency' in params ? params.Latency : null;
-        this.RecvLatency = 'RecvLatency' in params ? params.RecvLatency : null;
-        this.PeerLatency = 'PeerLatency' in params ? params.PeerLatency : null;
-        this.PeerIdleTimeout = 'PeerIdleTimeout' in params ? params.PeerIdleTimeout : null;
-        this.Passphrase = 'Passphrase' in params ? params.Passphrase : null;
-        this.PbKeyLen = 'PbKeyLen' in params ? params.PbKeyLen : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2132,24 +1523,24 @@ class SRTAddressDestination extends  AbstractModel {
 }
 
 /**
- * ModifyMediaConnectInput response structure.
+ * DescribeStreamLinkFlows request structure.
  * @class
  */
-class ModifyMediaConnectInputResponse extends  AbstractModel {
+class DescribeStreamLinkFlowsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Input information after modification.
-         * @type {DescribeInput || null}
+         * Number of the current page. Default value: `1`
+         * @type {number || null}
          */
-        this.Info = null;
+        this.PageNum = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Number of entries per page. Default value: `10`
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.PageSize = null;
 
     }
 
@@ -2160,13 +1551,8 @@ class ModifyMediaConnectInputResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Info) {
-            let obj = new DescribeInput();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -2206,138 +1592,39 @@ class RTPAddressDestination extends  AbstractModel {
     }
 }
 
-/**
- * Configuration information of the created output.
- * @class
- */
-class CreateOutput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Output name.
-         * @type {string || null}
-         */
-        this.OutputName = null;
-
-        /**
-         * Output description.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Output protocol.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Output region.
-         * @type {string || null}
-         */
-        this.OutputRegion = null;
-
-        /**
-         * SRT configuration of output.
-         * @type {CreateOutputSrtSettings || null}
-         */
-        this.SRTSettings = null;
-
-        /**
-         * RTP configuration of output.
-         * @type {CreateInputRTPSettings || null}
-         */
-        this.RTPSettings = null;
-
-        /**
-         * RTMP configuration of output.
-         * @type {CreateOutputRTMPSettings || null}
-         */
-        this.RTMPSettings = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OutputName = 'OutputName' in params ? params.OutputName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.OutputRegion = 'OutputRegion' in params ? params.OutputRegion : null;
-
-        if (params.SRTSettings) {
-            let obj = new CreateOutputSrtSettings();
-            obj.deserialize(params.SRTSettings)
-            this.SRTSettings = obj;
-        }
-
-        if (params.RTPSettings) {
-            let obj = new CreateInputRTPSettings();
-            obj.deserialize(params.RTPSettings)
-            this.RTPSettings = obj;
-        }
-
-        if (params.RTMPSettings) {
-            let obj = new CreateOutputRTMPSettings();
-            obj.deserialize(params.RTMPSettings)
-            this.RTMPSettings = obj;
-        }
-
-    }
-}
-
 module.exports = {
-    CreateMediaConnectFlowRequest: CreateMediaConnectFlowRequest,
-    DeleteMediaConnectFlowResponse: DeleteMediaConnectFlowResponse,
+    DescribeOutputRTMPSettings: DescribeOutputRTMPSettings,
     OutputAddress: OutputAddress,
     DescribeInputRTPSettings: DescribeInputRTPSettings,
-    DeleteMediaConnectFlowRequest: DeleteMediaConnectFlowRequest,
-    StopMediaConnectFlowRequest: StopMediaConnectFlowRequest,
-    CreateOutputSrtSettingsDestinations: CreateOutputSrtSettingsDestinations,
-    DescribeMediaConnectFlowsResponse: DescribeMediaConnectFlowsResponse,
-    StartMediaConnectFlowRequest: StartMediaConnectFlowRequest,
-    DeleteMediaConnectOutputRequest: DeleteMediaConnectOutputRequest,
-    DeleteMediaConnectOutputResponse: DeleteMediaConnectOutputResponse,
+    ModifyStreamLinkFlowRequest: ModifyStreamLinkFlowRequest,
+    DeleteStreamLinkFlowRequest: DeleteStreamLinkFlowRequest,
+    CreateStreamLinkFlowRequest: CreateStreamLinkFlowRequest,
     DescribeOutput: DescribeOutput,
     DescribeFlow: DescribeFlow,
-    ModifyMediaConnectInputRequest: ModifyMediaConnectInputRequest,
-    CreateMediaConnectOutputRequest: CreateMediaConnectOutputRequest,
+    DeleteStreamLinkOutputRequest: DeleteStreamLinkOutputRequest,
     CreateInputSRTSettings: CreateInputSRTSettings,
-    CreateMediaConnectOutputResponse: CreateMediaConnectOutputResponse,
-    ModifyMediaConnectOutputRequest: ModifyMediaConnectOutputRequest,
-    ModifyMediaConnectFlowResponse: ModifyMediaConnectFlowResponse,
-    CreateMediaConnectFlowResponse: CreateMediaConnectFlowResponse,
-    DescribeMediaConnectFlowRequest: DescribeMediaConnectFlowRequest,
-    DescribeOutputRTMPSettings: DescribeOutputRTMPSettings,
-    CreateOutputRTPSettingsDestinations: CreateOutputRTPSettingsDestinations,
-    ModifyOutput: ModifyOutput,
+    DescribeInputRTMPSettings: DescribeInputRTMPSettings,
+    ModifyStreamLinkFlowResponse: ModifyStreamLinkFlowResponse,
+    StartStreamLinkFlowRequest: StartStreamLinkFlowRequest,
+    StartStreamLinkFlowResponse: StartStreamLinkFlowResponse,
+    DescribeStreamLinkFlowResponse: DescribeStreamLinkFlowResponse,
+    StopStreamLinkFlowResponse: StopStreamLinkFlowResponse,
+    InputAddress: InputAddress,
+    StopStreamLinkFlowRequest: StopStreamLinkFlowRequest,
     CreateInput: CreateInput,
-    CreateOutputRTMPSettings: CreateOutputRTMPSettings,
     DescribeInput: DescribeInput,
-    CreateOutputRtmpSettingsDestinations: CreateOutputRtmpSettingsDestinations,
-    DescribeMediaConnectFlowResponse: DescribeMediaConnectFlowResponse,
+    DescribeStreamLinkFlowRequest: DescribeStreamLinkFlowRequest,
     DescribeOutputSRTSettings: DescribeOutputSRTSettings,
-    ModifyMediaConnectFlowRequest: ModifyMediaConnectFlowRequest,
-    StopMediaConnectFlowResponse: StopMediaConnectFlowResponse,
+    DeleteStreamLinkOutputResponse: DeleteStreamLinkOutputResponse,
+    DescribeStreamLinkFlowsResponse: DescribeStreamLinkFlowsResponse,
     RTMPAddressDestination: RTMPAddressDestination,
-    StartMediaConnectFlowResponse: StartMediaConnectFlowResponse,
-    ModifyMediaConnectOutputResponse: ModifyMediaConnectOutputResponse,
+    DeleteStreamLinkFlowResponse: DeleteStreamLinkFlowResponse,
     DescribeOutputRTPSettings: DescribeOutputRTPSettings,
     DescribeInputSRTSettings: DescribeInputSRTSettings,
-    CreateOutputRTPSettings: CreateOutputRTPSettings,
-    DescribeMediaConnectFlowsRequest: DescribeMediaConnectFlowsRequest,
-    InputAddress: InputAddress,
-    ModifyInput: ModifyInput,
-    CreateOutputSrtSettings: CreateOutputSrtSettings,
+    CreateStreamLinkFlowResponse: CreateStreamLinkFlowResponse,
     CreateInputRTPSettings: CreateInputRTPSettings,
     SRTAddressDestination: SRTAddressDestination,
-    ModifyMediaConnectInputResponse: ModifyMediaConnectInputResponse,
+    DescribeStreamLinkFlowsRequest: DescribeStreamLinkFlowsRequest,
     RTPAddressDestination: RTPAddressDestination,
-    CreateOutput: CreateOutput,
 
 }

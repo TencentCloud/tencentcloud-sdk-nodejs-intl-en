@@ -3799,7 +3799,7 @@ class AsyncEvent extends  AbstractModel {
         this.Qualifier = null;
 
         /**
-         * Event status
+         * Event status. Values: `RUNNING`; `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed)
          * @type {string || null}
          */
         this.Status = null;
@@ -4825,6 +4825,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StatusReasons = null;
 
         /**
+         * Specifies whether to enable asynchronization 
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRunEnable = null;
+
+        /**
+         * Specifies whether to enable event tracking
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TraceEnable = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4946,6 +4960,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.StatusReasons.push(obj);
             }
         }
+        this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
+        this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

@@ -16094,6 +16094,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Fps = null;
 
+        /**
+         * Color primaries
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ColorPrimaries = null;
+
+        /**
+         * Color space
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ColorSpace = null;
+
+        /**
+         * Color transfer
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ColorTransfer = null;
+
     }
 
     /**
@@ -16108,6 +16129,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Width = 'Width' in params ? params.Width : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
+        this.ColorPrimaries = 'ColorPrimaries' in params ? params.ColorPrimaries : null;
+        this.ColorSpace = 'ColorSpace' in params ? params.ColorSpace : null;
+        this.ColorTransfer = 'ColorTransfer' in params ? params.ColorTransfer : null;
 
     }
 }
@@ -16664,6 +16688,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Codec = null;
 
+        /**
+         * Number of sound channels, e.g., 2
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.Channel = null;
+
     }
 
     /**
@@ -16676,6 +16707,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }

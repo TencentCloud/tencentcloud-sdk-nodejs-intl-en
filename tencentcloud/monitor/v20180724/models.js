@@ -5936,6 +5936,12 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
          */
         this.NotBindingNoticeRule = null;
 
+        /**
+         * Instance group ID.
+         * @type {number || null}
+         */
+        this.InstanceGroupId = null;
+
     }
 
     /**
@@ -5962,6 +5968,7 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
         this.RuleTypes = 'RuleTypes' in params ? params.RuleTypes : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.NotBindingNoticeRule = 'NotBindingNoticeRule' in params ? params.NotBindingNoticeRule : null;
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
 
     }
 }

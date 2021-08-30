@@ -29,6 +29,7 @@ const Assignment = models.Assignment;
 const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
 const DeleteTopicRequest = models.DeleteTopicRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
 const GroupInfoTopics = models.GroupInfoTopics;
 const TopicResult = models.TopicResult;
 const Region = models.Region;
@@ -63,6 +64,7 @@ const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeRouteRequest = models.DescribeRouteRequest;
+const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
 const UserResponse = models.UserResponse;
@@ -109,6 +111,7 @@ const CreateTopicResp = models.CreateTopicResp;
 const DescribeRouteResponse = models.DescribeRouteResponse;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
+const ConsumerRecord = models.ConsumerRecord;
 const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
 const Route = models.Route;
@@ -266,6 +269,17 @@ class CkafkaClient extends AbstractClient {
     DescribeTopicDetail(req, cb) {
         let resp = new DescribeTopicDetailResponse();
         this.request("DescribeTopicDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query messages based on a specified offset position.
+     * @param {FetchMessageByOffsetRequest} req
+     * @param {function(string, FetchMessageByOffsetResponse):void} cb
+     * @public
+     */
+    FetchMessageByOffset(req, cb) {
+        let resp = new FetchMessageByOffsetResponse();
+        this.request("FetchMessageByOffset", req, resp, cb);
     }
 
     /**

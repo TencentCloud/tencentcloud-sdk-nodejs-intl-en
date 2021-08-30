@@ -667,6 +667,46 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * FetchMessageByOffset response structure.
+ * @class
+ */
+class FetchMessageByOffsetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned results
+         * @type {ConsumerRecord || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ConsumerRecord();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Internal topic object of `GroupInfo`
  * @class
  */
@@ -2293,6 +2333,55 @@ class DescribeRouteRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * FetchMessageByOffset request structure.
+ * @class
+ */
+class FetchMessageByOffsetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Partition ID
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Offset information
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -4745,6 +4834,72 @@ class DescribeGroupOffsetsResponse extends  AbstractModel {
 }
 
 /**
+ * Message record
+ * @class
+ */
+class ConsumerRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Partition ID
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Message key
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Message value
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Message timestamp
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+
+    }
+}
+
+/**
  * ModifyGroupOffsets request structure.
  * @class
  */
@@ -5767,6 +5922,7 @@ module.exports = {
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
     DeleteTopicRequest: DeleteTopicRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
+    FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
     GroupInfoTopics: GroupInfoTopics,
     TopicResult: TopicResult,
     Region: Region,
@@ -5801,6 +5957,7 @@ module.exports = {
     DeleteAclResponse: DeleteAclResponse,
     DynamicRetentionTime: DynamicRetentionTime,
     DescribeRouteRequest: DescribeRouteRequest,
+    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
@@ -5847,6 +6004,7 @@ module.exports = {
     DescribeRouteResponse: DescribeRouteResponse,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
+    ConsumerRecord: ConsumerRecord,
     ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
     Route: Route,

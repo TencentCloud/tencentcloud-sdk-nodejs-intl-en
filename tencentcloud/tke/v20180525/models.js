@@ -167,6 +167,46 @@ class DescribeClusterSecurityRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyPrometheusAlertRule request structure.
+ * @class
+ */
+class ModifyPrometheusAlertRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Alarm configurations
+         * @type {PrometheusAlertRuleDetail || null}
+         */
+        this.AlertRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.AlertRule) {
+            let obj = new PrometheusAlertRuleDetail();
+            obj.deserialize(params.AlertRule)
+            this.AlertRule = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteClusterInstances response structure.
  * @class
  */
@@ -483,6 +523,46 @@ class AutoscalingAdded extends  AbstractModel {
 }
 
 /**
+ * CreatePrometheusAlertRule request structure.
+ * @class
+ */
+class CreatePrometheusAlertRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Alarm configurations
+         * @type {PrometheusAlertRuleDetail || null}
+         */
+        this.AlertRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.AlertRule) {
+            let obj = new PrometheusAlertRuleDetail();
+            obj.deserialize(params.AlertRule)
+            this.AlertRule = obj;
+        }
+
+    }
+}
+
+/**
  * CreateClusterRouteTable response structure.
  * @class
  */
@@ -576,6 +656,135 @@ class DeleteClusterEndpointResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * amp alarm channel configuration
+ * @class
+ */
+class PrometheusNotification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether it is enabled
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * Convergence time
+         * @type {string || null}
+         */
+        this.RepeatInterval = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.TimeRangeStart = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.TimeRangeEnd = null;
+
+        /**
+         * Alarm delivery method. Valid values: `SMS`, `EMAIL`, `CALL`, and `WECHAT`
+It respectively represents SMS, email, phone calls, and WeChat.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.NotifyWay = null;
+
+        /**
+         * The alarm recipient group (user group)
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverGroups = null;
+
+        /**
+         * The alarm sequence of phone calls
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.PhoneNotifyOrder = null;
+
+        /**
+         * The number of phone call alarms
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneCircleTimes = null;
+
+        /**
+         * Dialing interval in seconds within one polling
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneInnerInterval = null;
+
+        /**
+         * Polling interval in seconds
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneCircleInterval = null;
+
+        /**
+         * Phone call alarm arrival notification
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.PhoneArriveNotice = null;
+
+        /**
+         * Channel type. Default value: `amp`. The following channels are supported:
+amp
+webhook
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * This parameter is required if `Type` is `webhook`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.WebHook = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.RepeatInterval = 'RepeatInterval' in params ? params.RepeatInterval : null;
+        this.TimeRangeStart = 'TimeRangeStart' in params ? params.TimeRangeStart : null;
+        this.TimeRangeEnd = 'TimeRangeEnd' in params ? params.TimeRangeEnd : null;
+        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
+        this.ReceiverGroups = 'ReceiverGroups' in params ? params.ReceiverGroups : null;
+        this.PhoneNotifyOrder = 'PhoneNotifyOrder' in params ? params.PhoneNotifyOrder : null;
+        this.PhoneCircleTimes = 'PhoneCircleTimes' in params ? params.PhoneCircleTimes : null;
+        this.PhoneInnerInterval = 'PhoneInnerInterval' in params ? params.PhoneInnerInterval : null;
+        this.PhoneCircleInterval = 'PhoneCircleInterval' in params ? params.PhoneCircleInterval : null;
+        this.PhoneArriveNotice = 'PhoneArriveNotice' in params ? params.PhoneArriveNotice : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.WebHook = 'WebHook' in params ? params.WebHook : null;
 
     }
 }
@@ -1198,6 +1407,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyPrometheusAlertRule response structure.
+ * @class
+ */
+class ModifyPrometheusAlertRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AddNodeToNodePool request structure.
  * @class
  */
@@ -1472,6 +1709,110 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.LanIP = 'LanIP' in params ? params.LanIP : null;
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
         this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+
+    }
+}
+
+/**
+ * DescribeVpcCniPodLimits response structure.
+ * @class
+ */
+class DescribeVpcCniPodLimitsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of the models
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The model information and the maximum supported number of Pods in the VPC-CNI mode
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<PodLimitsInstance> || null}
+         */
+        this.PodLimitsInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.PodLimitsInstanceSet) {
+            this.PodLimitsInstanceSet = new Array();
+            for (let z in params.PodLimitsInstanceSet) {
+                let obj = new PodLimitsInstance();
+                obj.deserialize(params.PodLimitsInstanceSet[z]);
+                this.PodLimitsInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVersions response structure.
+ * @class
+ */
+class DescribeVersionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of versions
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Version list
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<VersionInstance> || null}
+         */
+        this.VersionInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VersionInstanceSet) {
+            this.VersionInstanceSet = new Array();
+            for (let z in params.VersionInstanceSet) {
+                let obj = new VersionInstance();
+                obj.deserialize(params.VersionInstanceSet[z]);
+                this.VersionInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2092,6 +2433,41 @@ class ExtensionAddon extends  AbstractModel {
 }
 
 /**
+ * DeletePrometheusAlertRule request structure.
+ * @class
+ */
+class DeletePrometheusAlertRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The ID list of alarm rules
+         * @type {Array.<string> || null}
+         */
+        this.AlertIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AlertIds = 'AlertIds' in params ? params.AlertIds : null;
+
+    }
+}
+
+/**
  * Region information
  * @class
  */
@@ -2191,6 +2567,136 @@ class Label extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * The maximum number of Pods in VPC-CNI mode supported by a model
+ * @class
+ */
+class PodLimitsByType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of Pods supported by a TKE shared ENI in non-static IP address mode
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.TKERouteENINonStaticIP = null;
+
+        /**
+         * The number of Pods supported by a TKE shared ENI in static IP address mode
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.TKERouteENIStaticIP = null;
+
+        /**
+         * The number of Pods supported by TKE independent ENI mode
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.TKEDirectENI = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TKERouteENINonStaticIP = 'TKERouteENINonStaticIP' in params ? params.TKERouteENINonStaticIP : null;
+        this.TKERouteENIStaticIP = 'TKERouteENIStaticIP' in params ? params.TKERouteENIStaticIP : null;
+        this.TKEDirectENI = 'TKEDirectENI' in params ? params.TKEDirectENI : null;
+
+    }
+}
+
+/**
+ * The alarm configuration
+ * @class
+ */
+class PrometheusAlertRuleDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Rule list
+         * @type {Array.<PrometheusAlertRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Last modification time
+         * @type {string || null}
+         */
+        this.UpdatedAt = null;
+
+        /**
+         * Alarm delivery methods
+         * @type {PrometheusNotification || null}
+         */
+        this.Notification = null;
+
+        /**
+         * Alarm rule ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * If the alarm is delivered via a template, the TemplateId is the template ID.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Alarm interval
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new PrometheusAlertRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+
+        if (params.Notification) {
+            let obj = new PrometheusNotification();
+            obj.deserialize(params.Notification)
+            this.Notification = obj;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
 
     }
 }
@@ -2686,6 +3192,51 @@ class ManuallyAdded extends  AbstractModel {
         this.Initializing = 'Initializing' in params ? params.Initializing : null;
         this.Normal = 'Normal' in params ? params.Normal : null;
         this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
+ * Version Info
+ * @class
+ */
+class VersionInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Version name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Version Info
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Remark
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -3283,24 +3834,19 @@ class AddNodeToNodePoolResponse extends  AbstractModel {
 }
 
 /**
- * List of tag descriptions. By specifying this parameter, you can bind tags to corresponding resource instances at the same time. Currently, only tags are bound to cloud host instances.
+ * Node custom parameter
  * @class
  */
-class TagSpecification extends  AbstractModel {
+class InstanceExtraArgs extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The type of resource that the tag is bound to. The type currently supported is `cluster`.
-         * @type {string || null}
+         * Kubelet custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
          */
-        this.ResourceType = null;
-
-        /**
-         * List of tag pairs
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
+        this.Kubelet = null;
 
     }
 
@@ -3311,16 +3857,7 @@ class TagSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
+        this.Kubelet = 'Kubelet' in params ? params.Kubelet : null;
 
     }
 }
@@ -3392,6 +3929,48 @@ class DescribeClustersResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVpcCniPodLimits request structure.
+ * @class
+ */
+class DescribeVpcCniPodLimitsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The availability zone of the model to query, for example, `ap-guangzhou-3`. This field is left empty by default, that is, do not filter by the availability zone.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * The instance family to query, for example, `S5`. This field is left empty by default, that is, do not filter by the instance family.
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * The instance model to query, for example, `S5.LARGE8`. This field is empty by default, that is, do not filter by instance type.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -3736,6 +4315,41 @@ class EnableVpcCniNetworkTypeRequest extends  AbstractModel {
 }
 
 /**
+ * CreatePrometheusAlertRule response structure.
+ * @class
+ */
+class CreatePrometheusAlertRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The policy to deal with resources in the cluster when the cluster is deleted.
  * @class
  */
@@ -3914,6 +4528,94 @@ class DescribeClusterEndpointStatusRequest extends  AbstractModel {
 }
 
 /**
+ * PROM instance alarm rule
+ * @class
+ */
+class PrometheusAlertRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * PromQL contents
+         * @type {string || null}
+         */
+        this.Rule = null;
+
+        /**
+         * Additional labels
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Alarm delivery template
+         * @type {string || null}
+         */
+        this.Template = null;
+
+        /**
+         * Duration
+         * @type {string || null}
+         */
+        this.For = null;
+
+        /**
+         * Rule description
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * Refer to annotations in prometheus rule
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Label> || null}
+         */
+        this.Annotations = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Rule = 'Rule' in params ? params.Rule : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+        this.Template = 'Template' in params ? params.Template : null;
+        this.For = 'For' in params ? params.For : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+
+        if (params.Annotations) {
+            this.Annotations = new Array();
+            for (let z in params.Annotations) {
+                let obj = new Label();
+                obj.deserialize(params.Annotations[z]);
+                this.Annotations.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Describes the configuration of enhanced services, such as Cloud Security and Cloud Monitor.
  * @class
  */
@@ -4074,6 +4776,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVersions request structure.
+ * @class
+ */
+class DescribeVersionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -4404,19 +5127,18 @@ class CreateClusterRequest extends  AbstractModel {
 }
 
 /**
- * Node custom parameter
+ * DeletePrometheusAlertRule response structure.
  * @class
  */
-class InstanceExtraArgs extends  AbstractModel {
+class DeletePrometheusAlertRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Kubelet custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {Array.<string> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Kubelet = null;
+        this.RequestId = null;
 
     }
 
@@ -4427,7 +5149,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
-        this.Kubelet = 'Kubelet' in params ? params.Kubelet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4531,6 +5253,34 @@ class DeleteClusterAsGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusInstance request structure.
+ * @class
+ */
+class DescribePrometheusInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeClusterInstances request structure.
  * @class
  */
@@ -4568,6 +5318,12 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
          */
         this.InstanceRole = null;
 
+        /**
+         * Filters include `nodepool-id` and `nodepool-instance-type` (how the instance is added to the pool). For `nodepool-instance-type`, the values can be `MANUALLY_ADDED`, `AUTOSCALING_ADDED` and `ALL`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -4582,6 +5338,15 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4688,6 +5453,64 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.ExtraArgs = obj;
         }
         this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
+
+    }
+}
+
+/**
+ * The model information and the maximum supported number of Pods in the VPC-CNI mode
+ * @class
+ */
+class PodLimitsInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The availability zone where the model is located
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * The instance family to which the model belongs
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * Instance type
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * The maximum number of Pods in the VPC-CNI mode supported by the model
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {PodLimitsByType || null}
+         */
+        this.PodLimits = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.PodLimits) {
+            let obj = new PodLimitsByType();
+            obj.deserialize(params.PodLimits)
+            this.PodLimits = obj;
+        }
 
     }
 }
@@ -5302,6 +6125,67 @@ class DeleteClusterNodePoolRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateClusterVersion request structure.
+ * @class
+ */
+class UpdateClusterVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The version that needs to upgrade to
+         * @type {string || null}
+         */
+        this.DstVersion = null;
+
+        /**
+         * Cluster custom parameter
+         * @type {ClusterExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+        /**
+         * The maximum tolerable number of unavailable pods
+         * @type {number || null}
+         */
+        this.MaxNotReadyPercent = null;
+
+        /**
+         * Whether to skip the precheck
+         * @type {boolean || null}
+         */
+        this.SkipPreCheck = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.DstVersion = 'DstVersion' in params ? params.DstVersion : null;
+
+        if (params.ExtraArgs) {
+            let obj = new ClusterExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
+        this.MaxNotReadyPercent = 'MaxNotReadyPercent' in params ? params.MaxNotReadyPercent : null;
+        this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
+
+    }
+}
+
+/**
  * DeleteClusterEndpointVip request structure.
  * @class
  */
@@ -5908,6 +6792,97 @@ class ModifyClusterAsGroupOptionAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusInstance response structure.
+ * @class
+ */
+class DescribePrometheusInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * COS bucket name
+         * @type {string || null}
+         */
+        this.COSBucket = null;
+
+        /**
+         * Data query address
+         * @type {string || null}
+         */
+        this.QueryAddress = null;
+
+        /**
+         * The grafana related information in the instance
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {PrometheusGrafanaInfo || null}
+         */
+        this.Grafana = null;
+
+        /**
+         * Custom alertmanager
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.AlertManagerUrl = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.COSBucket = 'COSBucket' in params ? params.COSBucket : null;
+        this.QueryAddress = 'QueryAddress' in params ? params.QueryAddress : null;
+
+        if (params.Grafana) {
+            let obj = new PrometheusGrafanaInfo();
+            obj.deserialize(params.Grafana)
+            this.Grafana = obj;
+        }
+        this.AlertManagerUrl = 'AlertManagerUrl' in params ? params.AlertManagerUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6644,7 +7619,7 @@ class RemoveNodeFromNodePoolRequest extends  AbstractModel {
         this.NodePoolId = null;
 
         /**
-         * Node ID list
+         * The node ID list. Up to 100 nodes can be removed at a time.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -6783,6 +7758,49 @@ Note: this field may return `null`, indicating that no valid value is obtained.
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * List of tag descriptions. By specifying this parameter, you can bind tags to corresponding resource instances at the same time. Currently, only tags are bound to cloud host instances.
+ * @class
+ */
+class TagSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The type of resource that the tag is bound to. The type currently supported is `cluster`.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * List of tag pairs
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -7338,42 +8356,45 @@ class ModifyClusterAsGroupAttributeRequest extends  AbstractModel {
 }
 
 /**
- * UpdateClusterVersion request structure.
+ * The grafana information in the managed PROM instance
  * @class
  */
-class UpdateClusterVersionRequest extends  AbstractModel {
+class PrometheusGrafanaInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * The version that needs to upgrade to
-         * @type {string || null}
-         */
-        this.DstVersion = null;
-
-        /**
-         * Cluster custom parameter
-         * @type {ClusterExtraArgs || null}
-         */
-        this.ExtraArgs = null;
-
-        /**
-         * The maximum tolerable number of unavailable pods
-         * @type {number || null}
-         */
-        this.MaxNotReadyPercent = null;
-
-        /**
-         * Whether to skip the precheck
+         * Whether it is enabled
          * @type {boolean || null}
          */
-        this.SkipPreCheck = null;
+        this.Enabled = null;
+
+        /**
+         * Domain name. It will be effective only when the public network access is enabled.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The private network or public network address
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Whether the public network access is enabled.
+`close`: the public network access is not enabled
+`opening`: the public network access is being enabled
+`open`: the public network access is enabled
+         * @type {string || null}
+         */
+        this.Internet = null;
+
+        /**
+         * The user name of the grafana admin
+         * @type {string || null}
+         */
+        this.AdminUser = null;
 
     }
 
@@ -7384,16 +8405,11 @@ class UpdateClusterVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.DstVersion = 'DstVersion' in params ? params.DstVersion : null;
-
-        if (params.ExtraArgs) {
-            let obj = new ClusterExtraArgs();
-            obj.deserialize(params.ExtraArgs)
-            this.ExtraArgs = obj;
-        }
-        this.MaxNotReadyPercent = 'MaxNotReadyPercent' in params ? params.MaxNotReadyPercent : null;
-        this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Internet = 'Internet' in params ? params.Internet : null;
+        this.AdminUser = 'AdminUser' in params ? params.AdminUser : null;
 
     }
 }
@@ -7639,6 +8655,7 @@ module.exports = {
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
     DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
+    ModifyPrometheusAlertRuleRequest: ModifyPrometheusAlertRuleRequest,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
     DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
     RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
@@ -7647,9 +8664,11 @@ module.exports = {
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     DeleteClusterResponse: DeleteClusterResponse,
     AutoscalingAdded: AutoscalingAdded,
+    CreatePrometheusAlertRuleRequest: CreatePrometheusAlertRuleRequest,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     DescribeClusterCommonNamesRequest: DescribeClusterCommonNamesRequest,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
+    PrometheusNotification: PrometheusNotification,
     ClusterVersion: ClusterVersion,
     RouteInfo: RouteInfo,
     InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
@@ -7659,11 +8678,14 @@ module.exports = {
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    ModifyPrometheusAlertRuleResponse: ModifyPrometheusAlertRuleResponse,
     AddNodeToNodePoolRequest: AddNodeToNodePoolRequest,
     EnableVpcCniNetworkTypeResponse: EnableVpcCniNetworkTypeResponse,
     RouteTableInfo: RouteTableInfo,
     ClusterAsGroup: ClusterAsGroup,
     Instance: Instance,
+    DescribeVpcCniPodLimitsResponse: DescribeVpcCniPodLimitsResponse,
+    DescribeVersionsResponse: DescribeVersionsResponse,
     CreateClusterNodePoolFromExistingAsgRequest: CreateClusterNodePoolFromExistingAsgRequest,
     Tag: Tag,
     ClusterNetworkSettings: ClusterNetworkSettings,
@@ -7677,8 +8699,11 @@ module.exports = {
     DescribeClustersRequest: DescribeClustersRequest,
     UpgradeClusterInstancesRequest: UpgradeClusterInstancesRequest,
     ExtensionAddon: ExtensionAddon,
+    DeletePrometheusAlertRuleRequest: DeletePrometheusAlertRuleRequest,
     RegionInstance: RegionInstance,
     Label: Label,
+    PodLimitsByType: PodLimitsByType,
+    PrometheusAlertRuleDetail: PrometheusAlertRuleDetail,
     SetNodePoolNodeProtectionResponse: SetNodePoolNodeProtectionResponse,
     DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
@@ -7689,6 +8714,7 @@ module.exports = {
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     ManuallyAdded: ManuallyAdded,
+    VersionInstance: VersionInstance,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
@@ -7700,35 +8726,41 @@ module.exports = {
     UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
     AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
-    TagSpecification: TagSpecification,
+    InstanceExtraArgs: InstanceExtraArgs,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
+    DescribeVpcCniPodLimitsRequest: DescribeVpcCniPodLimitsRequest,
     ClusterExtraArgs: ClusterExtraArgs,
     DataDisk: DataDisk,
     ModifyClusterNodePoolResponse: ModifyClusterNodePoolResponse,
     GetUpgradeInstanceProgressResponse: GetUpgradeInstanceProgressResponse,
     DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
     EnableVpcCniNetworkTypeRequest: EnableVpcCniNetworkTypeRequest,
+    CreatePrometheusAlertRuleResponse: CreatePrometheusAlertRuleResponse,
     ResourceDeleteOption: ResourceDeleteOption,
     LoginSettings: LoginSettings,
     CreateClusterNodePoolFromExistingAsgResponse: CreateClusterNodePoolFromExistingAsgResponse,
     DescribeEnableVpcCniProgressRequest: DescribeEnableVpcCniProgressRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
+    PrometheusAlertRule: PrometheusAlertRule,
     EnhancedService: EnhancedService,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
+    DescribeVersionsRequest: DescribeVersionsRequest,
     CreateClusterResponse: CreateClusterResponse,
     TaskStepInfo: TaskStepInfo,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     DeleteClusterRouteTableRequest: DeleteClusterRouteTableRequest,
     DescribeAvailableClusterVersionRequest: DescribeAvailableClusterVersionRequest,
     CreateClusterRequest: CreateClusterRequest,
-    InstanceExtraArgs: InstanceExtraArgs,
+    DeletePrometheusAlertRuleResponse: DeletePrometheusAlertRuleResponse,
     AcquireClusterAdminRoleRequest: AcquireClusterAdminRoleRequest,
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
+    DescribePrometheusInstanceRequest: DescribePrometheusInstanceRequest,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     InstanceAdvancedSettings: InstanceAdvancedSettings,
+    PodLimitsInstance: PodLimitsInstance,
     DescribeEnableVpcCniProgressResponse: DescribeEnableVpcCniProgressResponse,
     Filter: Filter,
     ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
@@ -7738,6 +8770,7 @@ module.exports = {
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
     DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
+    UpdateClusterVersionRequest: UpdateClusterVersionRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
     CheckInstancesUpgradeAbleResponse: CheckInstancesUpgradeAbleResponse,
     Cluster: Cluster,
@@ -7750,6 +8783,7 @@ module.exports = {
     ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     ModifyClusterAsGroupOptionAttributeResponse: ModifyClusterAsGroupOptionAttributeResponse,
+    DescribePrometheusInstanceResponse: DescribePrometheusInstanceResponse,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
     AddVpcCniSubnetsResponse: AddVpcCniSubnetsResponse,
@@ -7768,6 +8802,7 @@ module.exports = {
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,
     DescribeImagesRequest: DescribeImagesRequest,
     DescribeAvailableClusterVersionResponse: DescribeAvailableClusterVersionResponse,
+    TagSpecification: TagSpecification,
     AddVpcCniSubnetsRequest: AddVpcCniSubnetsRequest,
     InstanceUpgradePreCheckResultItem: InstanceUpgradePreCheckResultItem,
     DescribeClusterCommonNamesResponse: DescribeClusterCommonNamesResponse,
@@ -7781,7 +8816,7 @@ module.exports = {
     CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,
     NodePoolOption: NodePoolOption,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
-    UpdateClusterVersionRequest: UpdateClusterVersionRequest,
+    PrometheusGrafanaInfo: PrometheusGrafanaInfo,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
     NodeCountSummary: NodeCountSummary,
     DescribeClusterAsGroupsResponse: DescribeClusterAsGroupsResponse,

@@ -46,6 +46,7 @@ module.exports = {
     ocr: require("./ocr"),
     organization: require("./organization"),
     postgres: require("./postgres"),
+    privatedns: require("./privatedns"),
     redis: require("./redis"),
     scf: require("./scf"),
     ses: require("./ses"),

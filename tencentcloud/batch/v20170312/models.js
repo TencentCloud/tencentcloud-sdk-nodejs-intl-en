@@ -744,6 +744,12 @@ class SystemDisk extends  AbstractModel {
          */
         this.DiskSize = null;
 
+        /**
+         * ID of the dedicated cluster to which the instance belongs.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -756,6 +762,7 @@ class SystemDisk extends  AbstractModel {
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -3225,6 +3232,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ThroughputPerformance = null;
 
+        /**
+         * ID of the dedicated cluster to which the instance belongs.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -3242,6 +3256,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -4399,7 +4414,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain the ID in the returned `Zone` field.
+         * ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/35071) API and obtain the ID in the returned `Zone` field.
          * @type {string || null}
          */
         this.Zone = null;

@@ -37,6 +37,7 @@ const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const DescribeACLResponse = models.DescribeACLResponse;
 const JgwOperateResponse = models.JgwOperateResponse;
 const ZoneInfo = models.ZoneInfo;
+const DescribeTopicSubscribeGroupResponse = models.DescribeTopicSubscribeGroupResponse;
 const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
 const Topic = models.Topic;
 const Tag = models.Tag;
@@ -63,6 +64,7 @@ const CreateAclResponse = models.CreateAclResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
+const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
 const DescribeRouteRequest = models.DescribeRouteRequest;
 const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const DescribeRegionRequest = models.DescribeRegionRequest;
@@ -82,6 +84,7 @@ const ZoneResponse = models.ZoneResponse;
 const Instance = models.Instance;
 const DescribeInstanceAttributesResponse = models.DescribeInstanceAttributesResponse;
 const TopicDetailResponse = models.TopicDetailResponse;
+const TopicSubscribeGroup = models.TopicSubscribeGroup;
 const Config = models.Config;
 const ModifyPasswordRequest = models.ModifyPasswordRequest;
 const ModifyInstanceAttributesRequest = models.ModifyInstanceAttributesRequest;
@@ -170,6 +173,17 @@ class CkafkaClient extends AbstractClient {
     DescribeConsumerGroup(req, cb) {
         let resp = new DescribeConsumerGroupResponse();
         this.request("DescribeConsumerGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to search and subscribe the message group information of a topic.
+     * @param {DescribeTopicSubscribeGroupRequest} req
+     * @param {function(string, DescribeTopicSubscribeGroupResponse):void} cb
+     * @public
+     */
+    DescribeTopicSubscribeGroup(req, cb) {
+        let resp = new DescribeTopicSubscribeGroupResponse();
+        this.request("DescribeTopicSubscribeGroup", req, resp, cb);
     }
 
     /**

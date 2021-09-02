@@ -1075,6 +1075,46 @@ class ZoneInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeTopicSubscribeGroup response structure.
+ * @class
+ */
+class DescribeTopicSubscribeGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned results
+         * @type {TopicSubscribeGroup || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TopicSubscribeGroup();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCkafkaZone request structure.
  * @class
  */
@@ -2310,6 +2350,55 @@ Note: `null` may be returned for this field, indicating that no valid values can
 }
 
 /**
+ * DescribeTopicSubscribeGroup request structure.
+ * @class
+ */
+class DescribeTopicSubscribeGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Starting position of paging
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DescribeRoute request structure.
  * @class
  */
@@ -3164,6 +3253,65 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
+ * `DescribeTopicSubscribeGroup` output parameters
+ * @class
+ */
+class TopicSubscribeGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Number of consumer group status
+         * @type {string || null}
+         */
+        this.StatusCountInfo = null;
+
+        /**
+         * Consumer group information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<GroupInfoResponse> || null}
+         */
+        this.GroupsInfo = null;
+
+        /**
+         * Whether a request is asynchronous. If there are fewer consumer groups in the instances, the result will be returned directly, and status code is 1. When there are many consumer groups in the instances, cache will be updated asynchronously. When status code is 0, grouping information will not be returned until cache update is completed and status code becomes 1.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.StatusCountInfo = 'StatusCountInfo' in params ? params.StatusCountInfo : null;
+
+        if (params.GroupsInfo) {
+            this.GroupsInfo = new Array();
+            for (let z in params.GroupsInfo) {
+                let obj = new GroupInfoResponse();
+                obj.deserialize(params.GroupsInfo[z]);
+                this.GroupsInfo.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -5930,6 +6078,7 @@ module.exports = {
     DescribeACLResponse: DescribeACLResponse,
     JgwOperateResponse: JgwOperateResponse,
     ZoneInfo: ZoneInfo,
+    DescribeTopicSubscribeGroupResponse: DescribeTopicSubscribeGroupResponse,
     DescribeCkafkaZoneRequest: DescribeCkafkaZoneRequest,
     Topic: Topic,
     Tag: Tag,
@@ -5956,6 +6105,7 @@ module.exports = {
     CreateTopicRequest: CreateTopicRequest,
     DeleteAclResponse: DeleteAclResponse,
     DynamicRetentionTime: DynamicRetentionTime,
+    DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
     DescribeRouteRequest: DescribeRouteRequest,
     FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     DescribeRegionRequest: DescribeRegionRequest,
@@ -5975,6 +6125,7 @@ module.exports = {
     Instance: Instance,
     DescribeInstanceAttributesResponse: DescribeInstanceAttributesResponse,
     TopicDetailResponse: TopicDetailResponse,
+    TopicSubscribeGroup: TopicSubscribeGroup,
     Config: Config,
     ModifyPasswordRequest: ModifyPasswordRequest,
     ModifyInstanceAttributesRequest: ModifyInstanceAttributesRequest,

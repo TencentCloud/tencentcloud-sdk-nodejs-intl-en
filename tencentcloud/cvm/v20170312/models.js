@@ -841,7 +841,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * The tag description list. This parameter is used to bind a tag to a resource instance. A tag can only be bound to CVM instances.
+         * Binds the tag with the specified resources (CVM and CLB) as well
          * @type {Array.<TagSpecification> || null}
          */
         this.TagSpecification = null;
@@ -1205,7 +1205,7 @@ class ResetInstanceRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * System disk configurations in the instance. For instances with a cloud disk as the system disk, you can expand the capacity of the system disk to the specified value after re-installation by using this parameter. If the parameter is not specified, lower system disk capacity will be automatically expanded to the image size, and extra disk costs are generated. You can only expand but cannot reduce the system disk capacity. By re-installing the system, you only modify the system disk capacity, but not the type.
+         * Configurations of the system disk. For an instance whose system disk is a cloud disk, this parameter can be used to expand the system disk by specifying a new capacity after reinstallation. The system disk capacity can only be expanded but not shrunk. Reinstalling the system can only resize rather than changing the type of the system disk.
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
@@ -1586,7 +1586,7 @@ class RebootInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Whether to force restart an instance after a normal restart fails. Valid values: <br><li>TRUE: force restart an instance after a normal restart fails <br><li>FALSE: do not force restart an instance after a normal restart fails <br><br>Default value: FALSE.
+         * Whether to forcibly restart an instance after a normal restart fails. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default value: `FALSE`. This parameter has been disused. We recommend using `StopType` instead. Note that `ForceReboot` and `StopType` parameters cannot be specified at the same time.
          * @type {boolean || null}
          */
         this.ForceReboot = null;
@@ -1750,14 +1750,15 @@ class ZoneInfo extends  AbstractModel {
 
         /**
          * Availability zone name, such as `ap-guangzhou-3`.
-Check below for the list of all availability zones:
+The following is a list of all availability zones:
 <li> ap-chongqing-1 </li>
 <li> ap-seoul-1 </li>
 <li> ap-seoul-2 </li>
 <li> ap-chengdu-1 </li>
 <li> ap-chengdu-2 </li>
-<li> ap-hongkong-1 </li>
+<li> ap-hongkong-1 (sold out)</li>
 <li> ap-hongkong-2 </li>
+<li> ap-hongkong-3 </li>
 <li> ap-shenzhen-fsi-1 </li>
 <li> ap-shenzhen-fsi-2 </li>
 <li> ap-shenzhen-fsi-3 </li>
@@ -1766,13 +1767,17 @@ Check below for the list of all availability zones:
 <li> ap-guangzhou-3 </li>
 <li> ap-guangzhou-4 </li>
 <li> ap-guangzhou-6 </li>
+<li> ap-guangzhou-7 </li>
 <li> ap-tokyo-1 </li>
+<li> ap-tokyo-2 </li>
 <li> ap-singapore-1 </li>
 <li> ap-singapore-2 </li>
+<li> ap-singapore-3 </li>
 <li> ap-shanghai-fsi-1 </li>
 <li> ap-shanghai-fsi-2 </li>
 <li> ap-shanghai-fsi-3 </li>
 <li> ap-bangkok-1 </li>
+<li> ap-bangkok-2 </li>
 <li> ap-shanghai-1 (sold out) </li>
 <li> ap-shanghai-2 </li>
 <li> ap-shanghai-3 </li>
@@ -1791,6 +1796,7 @@ Check below for the list of all availability zones:
 <li> na-siliconvalley-1 </li>
 <li> na-siliconvalley-2 </li>
 <li> eu-frankfurt-1 </li>
+<li> eu-frankfurt-2 </li>
 <li> na-toronto-1 </li>
 <li> na-ashburn-1 </li>
 <li> na-ashburn-2 </li>
@@ -4303,7 +4309,7 @@ class CreateImageRequest extends  AbstractModel {
         this.ImageName = null;
 
         /**
-         * Instance ID used to create an image.
+         * ID of the instance from which an image will be created. This parameter is required when using instance to create an image.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4321,7 +4327,10 @@ class CreateImageRequest extends  AbstractModel {
         this.ForcePoweroff = null;
 
         /**
-         * Whether to enable Sysprep when creating a Windows image. Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_redirect=1) to learn more about Sysprep.
+         * Whether to enable Sysprep when creating a Windows image.
+Valid values: `TRUE` and `FALSE`; default value: `FALSE`.
+
+Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_redirect=1) to learn more about Sysprep.
          * @type {string || null}
          */
         this.Sysprep = null;
@@ -4428,7 +4437,7 @@ class Instance extends  AbstractModel {
         this.SystemDisk = null;
 
         /**
-         * Information on the data disks of the instance, which only covers the data disks purchased together with the instance. 
+         * Information of the instance data disks.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -4579,6 +4588,13 @@ Note: this field may return null, indicating that no valid value was found.
          */
         this.RdmaIpAddresses = null;
 
+        /**
+         * The isolation status of the instance. Valid values:<br><li>`ARREAR`: isolated due to overdue payment;<br></li><li>`EXPIRE`: isolated upon expiration;<br></li><li>`MANMADE`: isolated after manual returning;<br></li><li>`NOTISOLATED`: not isolated<br></li>
+Note: this field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.IsolatedSource = null;
+
     }
 
     /**
@@ -4662,6 +4678,7 @@ Note: this field may return null, indicating that no valid value was found.
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
         this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
         this.RdmaIpAddresses = 'RdmaIpAddresses' in params ? params.RdmaIpAddresses : null;
+        this.IsolatedSource = 'IsolatedSource' in params ? params.IsolatedSource : null;
 
     }
 }
@@ -4686,6 +4703,12 @@ class EnhancedService extends  AbstractModel {
          */
         this.MonitorService = null;
 
+        /**
+         * Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+         * @type {RunAutomationServiceEnabled || null}
+         */
+        this.AutomationService = null;
+
     }
 
     /**
@@ -4706,6 +4729,12 @@ class EnhancedService extends  AbstractModel {
             let obj = new RunMonitorServiceEnabled();
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
+        }
+
+        if (params.AutomationService) {
+            let obj = new RunAutomationServiceEnabled();
+            obj.deserialize(params.AutomationService)
+            this.AutomationService = obj;
         }
 
     }
@@ -6673,6 +6702,34 @@ class ReservedInstanceTypeItem extends  AbstractModel {
 }
 
 /**
+ * Describes the TAT service information.
+ * @class
+ */
+class RunAutomationServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
  * InquiryPriceRunInstances response structure.
  * @class
  */
@@ -7956,7 +8013,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Whether to use an instance as a public gateway. An instance can be used as a public gateway only when it has a public IP and resides in a VPC. Valid values: <br><li>TRUE: use the instance as a public gateway <br><li>FALSE: do not use the instance as a public gateway <br><br>Default value: FALSE.
+         * Whether to use a CVM instance as a public gateway. The public gateway is only available when the instance has a public IP and resides in a VPC. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
          * @type {boolean || null}
          */
         this.AsVpcGateway = null;
@@ -8660,6 +8717,7 @@ module.exports = {
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     ImageOsList: ImageOsList,
     ReservedInstanceTypeItem: ReservedInstanceTypeItem,
+    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
     DescribeHostsRequest: DescribeHostsRequest,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,

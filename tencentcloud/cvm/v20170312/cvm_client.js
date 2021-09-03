@@ -140,6 +140,7 @@ const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const ImageOsList = models.ImageOsList;
 const ReservedInstanceTypeItem = models.ReservedInstanceTypeItem;
+const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;

@@ -522,6 +522,12 @@ class ListAttachedGroupPoliciesRequest extends  AbstractModel {
          */
         this.Rp = null;
 
+        /**
+         * Search by keyword
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
     }
 
     /**
@@ -534,6 +540,7 @@ class ListAttachedGroupPoliciesRequest extends  AbstractModel {
         this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
         this.Page = 'Page' in params ? params.Page : null;
         this.Rp = 'Rp' in params ? params.Rp : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
 
     }
 }
@@ -5014,6 +5021,12 @@ class ListAttachedRolePoliciesRequest extends  AbstractModel {
          */
         this.PolicyType = null;
 
+        /**
+         * Search by keyword
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
     }
 
     /**
@@ -5028,6 +5041,7 @@ class ListAttachedRolePoliciesRequest extends  AbstractModel {
         this.RoleId = 'RoleId' in params ? params.RoleId : null;
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
         this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
 
     }
 }

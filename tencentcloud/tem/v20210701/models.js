@@ -943,7 +943,7 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
         this.CronHorizontalAutoscaler = null;
 
         /**
-         * 
+         * Specifies whether to enable logging. `1`: enable; `0`: do not enable
          * @type {number || null}
          */
         this.LogEnable = null;

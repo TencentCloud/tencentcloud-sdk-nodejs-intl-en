@@ -768,24 +768,24 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
 }
 
 /**
- * SwitchWaterPrintConfig request structure.
+ * Status of the IP
  * @class
  */
-class SwitchWaterPrintConfigRequest extends  AbstractModel {
+class KeyValue extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Anti-DDoS instance ID
+         * IP
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Key = null;
 
         /**
-         * Watermark status. `1`: enabled; `0`: disabled.
-         * @type {number || null}
+         * Status of the IP. Values: `1` (blocked); `2` (normal); `3` (being attacked)
+         * @type {string || null}
          */
-        this.OpenStatus = null;
+        this.Value = null;
 
     }
 
@@ -796,8 +796,8 @@ class SwitchWaterPrintConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -914,30 +914,24 @@ class CreateL7RuleCertsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeListSchedulingDomain response structure.
+ * DeleteDDoSGeoIPBlockConfig request structure.
  * @class
  */
-class DescribeListSchedulingDomainResponse extends  AbstractModel {
+class DeleteDDoSGeoIPBlockConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of lists
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * List of scheduling domain names
-         * @type {Array.<SchedulingDomainInfo> || null}
-         */
-        this.DomainList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Anti-DDoS instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Region blocking configuration. The configuration ID cannot be empty when you set this parameter.
+         * @type {DDoSGeoIPBlockConfig || null}
+         */
+        this.DDoSGeoIPBlockConfig = null;
 
     }
 
@@ -948,17 +942,13 @@ class DescribeListSchedulingDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
-        if (params.DomainList) {
-            this.DomainList = new Array();
-            for (let z in params.DomainList) {
-                let obj = new SchedulingDomainInfo();
-                obj.deserialize(params.DomainList[z]);
-                this.DomainList.push(obj);
-            }
+        if (params.DDoSGeoIPBlockConfig) {
+            let obj = new DDoSGeoIPBlockConfig();
+            obj.deserialize(params.DDoSGeoIPBlockConfig)
+            this.DDoSGeoIPBlockConfig = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1619,8 +1609,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.StaticPackRelation = null;
 
         /**
-         * Used to differentiate Anti-DDoS Advanced lines outside the Chinese mainland
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Specifies the ISP. `0`: Chinese mainland ISPs (default); `1`：Radware；`2`: Tencent; `3`: NSFOCUS. Note that `1`, `2` and `3` are used for services outside the Chinese mainland.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -1661,6 +1651,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          * @type {EipAddressRelation || null}
          */
         this.EipAddressInfo = null;
+
+        /**
+         * Recommended domain name for clients to access.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
 
     }
 
@@ -1727,6 +1724,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             obj.deserialize(params.EipAddressInfo)
             this.EipAddressInfo = obj;
         }
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -2788,6 +2786,49 @@ class DescribeListDDoSGeoIPBlockConfigResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBasicDeviceStatus response structure.
+ * @class
+ */
+class DescribeBasicDeviceStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The resource and status is returned.
+         * @type {Array.<KeyValue> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new KeyValue();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Watermark configuration
  * @class
  */
@@ -3110,7 +3151,7 @@ class BGPIPInstanceSpecification extends  AbstractModel {
         super();
 
         /**
-         * Base protection bandwidth (in Gbps)
+         * Base protection bandwidth (in Mbps)
          * @type {number || null}
          */
         this.ProtectBandwidth = null;
@@ -3155,7 +3196,7 @@ class BGPIPInstanceSpecification extends  AbstractModel {
         this.Line = null;
 
         /**
-         * Elastic protection bandwidth (in Gbps)
+         * Elastic protection bandwidth (in Mbps)
          * @type {number || null}
          */
         this.ElasticBandwidth = null;
@@ -3455,6 +3496,34 @@ class ListenerCcThreholdConfig extends  AbstractModel {
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
         this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
+
+    }
+}
+
+/**
+ * DescribeBasicDeviceStatus request structure.
+ * @class
+ */
+class DescribeBasicDeviceStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of IP resources
+         * @type {Array.<string> || null}
+         */
+        this.IpList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IpList = 'IpList' in params ? params.IpList : null;
 
     }
 }
@@ -3840,6 +3909,55 @@ Note: For custom protocol ranges, only protocol number is supported. Multiple ra
         this.Id = 'Id' in params ? params.Id : null;
         this.ProtocolList = 'ProtocolList' in params ? params.ProtocolList : null;
         this.DstPortList = 'DstPortList' in params ? params.DstPortList : null;
+
+    }
+}
+
+/**
+ * AssociateDDoSEipLoadBalancer request structure.
+ * @class
+ */
+class AssociateDDoSEipLoadBalancerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS instance ID (only Anti-DDoS Advanced). For example, `bgpip-0000011x`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * EIP of the Anti-DDoS instance ID.
+         * @type {string || null}
+         */
+        this.Eip = null;
+
+        /**
+         * ID of the CLB to bind, such as `lb-0000002i`. It can be queried in the console or obtained from `LoadBalancerId` returned by the `DescribeLoadBalancers` API.
+         * @type {string || null}
+         */
+        this.LoadBalancerID = null;
+
+        /**
+         * Region of the CLB instance, such as `ap-hongkong`.
+         * @type {string || null}
+         */
+        this.LoadBalancerRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Eip = 'Eip' in params ? params.Eip : null;
+        this.LoadBalancerID = 'LoadBalancerID' in params ? params.LoadBalancerID : null;
+        this.LoadBalancerRegion = 'LoadBalancerRegion' in params ? params.LoadBalancerRegion : null;
 
     }
 }
@@ -4903,6 +5021,34 @@ class AssociateDDoSEipAddressRequest extends  AbstractModel {
 }
 
 /**
+ * AssociateDDoSEipLoadBalancer response structure.
+ * @class
+ */
+class AssociateDDoSEipLoadBalancerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateBlackWhiteIpList request structure.
  * @class
  */
@@ -5023,10 +5169,10 @@ class SpeedValue extends  AbstractModel {
 }
 
 /**
- * DeleteDDoSGeoIPBlockConfig request structure.
+ * SwitchWaterPrintConfig request structure.
  * @class
  */
-class DeleteDDoSGeoIPBlockConfigRequest extends  AbstractModel {
+class SwitchWaterPrintConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -5037,10 +5183,10 @@ class DeleteDDoSGeoIPBlockConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Region blocking configuration. The configuration ID cannot be empty when you set this parameter.
-         * @type {DDoSGeoIPBlockConfig || null}
+         * Watermark status. `1`: enabled; `0`: disabled.
+         * @type {number || null}
          */
-        this.DDoSGeoIPBlockConfig = null;
+        this.OpenStatus = null;
 
     }
 
@@ -5052,12 +5198,57 @@ class DeleteDDoSGeoIPBlockConfigRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
 
-        if (params.DDoSGeoIPBlockConfig) {
-            let obj = new DDoSGeoIPBlockConfig();
-            obj.deserialize(params.DDoSGeoIPBlockConfig)
-            this.DDoSGeoIPBlockConfig = obj;
+    }
+}
+
+/**
+ * DescribeListSchedulingDomain response structure.
+ * @class
+ */
+class DescribeListSchedulingDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of lists
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of scheduling domain names
+         * @type {Array.<SchedulingDomainInfo> || null}
+         */
+        this.DomainList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.DomainList) {
+            this.DomainList = new Array();
+            for (let z in params.DomainList) {
+                let obj = new SchedulingDomainInfo();
+                obj.deserialize(params.DomainList[z]);
+                this.DomainList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6088,11 +6279,11 @@ module.exports = {
     InstanceRelation: InstanceRelation,
     DescribeListProtocolBlockConfigResponse: DescribeListProtocolBlockConfigResponse,
     DescribeListBGPInstancesRequest: DescribeListBGPInstancesRequest,
-    SwitchWaterPrintConfigRequest: SwitchWaterPrintConfigRequest,
+    KeyValue: KeyValue,
     DeleteDDoSSpeedLimitConfigRequest: DeleteDDoSSpeedLimitConfigRequest,
     CreatePacketFilterConfigResponse: CreatePacketFilterConfigResponse,
     CreateL7RuleCertsRequest: CreateL7RuleCertsRequest,
-    DescribeListSchedulingDomainResponse: DescribeListSchedulingDomainResponse,
+    DeleteDDoSGeoIPBlockConfigRequest: DeleteDDoSGeoIPBlockConfigRequest,
     CreateIPAlarmThresholdConfigRequest: CreateIPAlarmThresholdConfigRequest,
     DescribeDefaultAlarmThresholdResponse: DescribeDefaultAlarmThresholdResponse,
     CreateDDoSAIRequest: CreateDDoSAIRequest,
@@ -6133,6 +6324,7 @@ module.exports = {
     CreateDDoSSpeedLimitConfigResponse: CreateDDoSSpeedLimitConfigResponse,
     DeletePacketFilterConfigRequest: DeletePacketFilterConfigRequest,
     DescribeListDDoSGeoIPBlockConfigResponse: DescribeListDDoSGeoIPBlockConfigResponse,
+    DescribeBasicDeviceStatusResponse: DescribeBasicDeviceStatusResponse,
     WaterPrintConfig: WaterPrintConfig,
     ProtocolBlockConfig: ProtocolBlockConfig,
     DescribeListListenerRequest: DescribeListListenerRequest,
@@ -6148,12 +6340,14 @@ module.exports = {
     DescribeListDDoSSpeedLimitConfigResponse: DescribeListDDoSSpeedLimitConfigResponse,
     CreateDDoSGeoIPBlockConfigResponse: CreateDDoSGeoIPBlockConfigResponse,
     ListenerCcThreholdConfig: ListenerCcThreholdConfig,
+    DescribeBasicDeviceStatusRequest: DescribeBasicDeviceStatusRequest,
     IPLineInfo: IPLineInfo,
     EipAddressRelation: EipAddressRelation,
     DescribeListListenerResponse: DescribeListListenerResponse,
     ProtectThresholdRelation: ProtectThresholdRelation,
     CreateL7RuleCertsResponse: CreateL7RuleCertsResponse,
     DDoSSpeedLimitConfig: DDoSSpeedLimitConfig,
+    AssociateDDoSEipLoadBalancerRequest: AssociateDDoSEipLoadBalancerRequest,
     DescribeListProtectThresholdConfigResponse: DescribeListProtectThresholdConfigResponse,
     CertIdInsL7Rules: CertIdInsL7Rules,
     CreateDefaultAlarmThresholdResponse: CreateDefaultAlarmThresholdResponse,
@@ -6174,10 +6368,12 @@ module.exports = {
     DescribeListDDoSAIResponse: DescribeListDDoSAIResponse,
     ModifyDDoSSpeedLimitConfigRequest: ModifyDDoSSpeedLimitConfigRequest,
     AssociateDDoSEipAddressRequest: AssociateDDoSEipAddressRequest,
+    AssociateDDoSEipLoadBalancerResponse: AssociateDDoSEipLoadBalancerResponse,
     CreateBlackWhiteIpListRequest: CreateBlackWhiteIpListRequest,
     CreateBoundIPResponse: CreateBoundIPResponse,
     SpeedValue: SpeedValue,
-    DeleteDDoSGeoIPBlockConfigRequest: DeleteDDoSGeoIPBlockConfigRequest,
+    SwitchWaterPrintConfigRequest: SwitchWaterPrintConfigRequest,
+    DescribeListSchedulingDomainResponse: DescribeListSchedulingDomainResponse,
     CreateSchedulingDomainResponse: CreateSchedulingDomainResponse,
     EipProductInfo: EipProductInfo,
     CreateDDoSAIResponse: CreateDDoSAIResponse,

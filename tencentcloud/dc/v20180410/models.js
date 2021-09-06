@@ -2037,6 +2037,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Area = null;
 
+        /**
+         * Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccessPointType = null;
+
     }
 
     /**
@@ -2061,6 +2068,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.City = 'City' in params ? params.City : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
 
     }
 }

@@ -32,11 +32,11 @@ const DescribeListDDoSSpeedLimitConfigRequest = models.DescribeListDDoSSpeedLimi
 const InstanceRelation = models.InstanceRelation;
 const DescribeListProtocolBlockConfigResponse = models.DescribeListProtocolBlockConfigResponse;
 const DescribeListBGPInstancesRequest = models.DescribeListBGPInstancesRequest;
-const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
+const KeyValue = models.KeyValue;
 const DeleteDDoSSpeedLimitConfigRequest = models.DeleteDDoSSpeedLimitConfigRequest;
 const CreatePacketFilterConfigResponse = models.CreatePacketFilterConfigResponse;
 const CreateL7RuleCertsRequest = models.CreateL7RuleCertsRequest;
-const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
+const DeleteDDoSGeoIPBlockConfigRequest = models.DeleteDDoSGeoIPBlockConfigRequest;
 const CreateIPAlarmThresholdConfigRequest = models.CreateIPAlarmThresholdConfigRequest;
 const DescribeDefaultAlarmThresholdResponse = models.DescribeDefaultAlarmThresholdResponse;
 const CreateDDoSAIRequest = models.CreateDDoSAIRequest;
@@ -77,6 +77,7 @@ const ModifyDomainUsrNameRequest = models.ModifyDomainUsrNameRequest;
 const CreateDDoSSpeedLimitConfigResponse = models.CreateDDoSSpeedLimitConfigResponse;
 const DeletePacketFilterConfigRequest = models.DeletePacketFilterConfigRequest;
 const DescribeListDDoSGeoIPBlockConfigResponse = models.DescribeListDDoSGeoIPBlockConfigResponse;
+const DescribeBasicDeviceStatusResponse = models.DescribeBasicDeviceStatusResponse;
 const WaterPrintConfig = models.WaterPrintConfig;
 const ProtocolBlockConfig = models.ProtocolBlockConfig;
 const DescribeListListenerRequest = models.DescribeListListenerRequest;
@@ -92,12 +93,14 @@ const DDoSAIRelation = models.DDoSAIRelation;
 const DescribeListDDoSSpeedLimitConfigResponse = models.DescribeListDDoSSpeedLimitConfigResponse;
 const CreateDDoSGeoIPBlockConfigResponse = models.CreateDDoSGeoIPBlockConfigResponse;
 const ListenerCcThreholdConfig = models.ListenerCcThreholdConfig;
+const DescribeBasicDeviceStatusRequest = models.DescribeBasicDeviceStatusRequest;
 const IPLineInfo = models.IPLineInfo;
 const EipAddressRelation = models.EipAddressRelation;
 const DescribeListListenerResponse = models.DescribeListListenerResponse;
 const ProtectThresholdRelation = models.ProtectThresholdRelation;
 const CreateL7RuleCertsResponse = models.CreateL7RuleCertsResponse;
 const DDoSSpeedLimitConfig = models.DDoSSpeedLimitConfig;
+const AssociateDDoSEipLoadBalancerRequest = models.AssociateDDoSEipLoadBalancerRequest;
 const DescribeListProtectThresholdConfigResponse = models.DescribeListProtectThresholdConfigResponse;
 const CertIdInsL7Rules = models.CertIdInsL7Rules;
 const CreateDefaultAlarmThresholdResponse = models.CreateDefaultAlarmThresholdResponse;
@@ -118,10 +121,12 @@ const InsL7Rules = models.InsL7Rules;
 const DescribeListDDoSAIResponse = models.DescribeListDDoSAIResponse;
 const ModifyDDoSSpeedLimitConfigRequest = models.ModifyDDoSSpeedLimitConfigRequest;
 const AssociateDDoSEipAddressRequest = models.AssociateDDoSEipAddressRequest;
+const AssociateDDoSEipLoadBalancerResponse = models.AssociateDDoSEipLoadBalancerResponse;
 const CreateBlackWhiteIpListRequest = models.CreateBlackWhiteIpListRequest;
 const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const SpeedValue = models.SpeedValue;
-const DeleteDDoSGeoIPBlockConfigRequest = models.DeleteDDoSGeoIPBlockConfigRequest;
+const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
+const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
 const CreateSchedulingDomainResponse = models.CreateSchedulingDomainResponse;
 const EipProductInfo = models.EipProductInfo;
 const CreateDDoSAIResponse = models.CreateDDoSAIResponse;
@@ -454,6 +459,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to querying the status of Anti-DDoS IP.
+     * @param {DescribeBasicDeviceStatusRequest} req
+     * @param {function(string, DescribeBasicDeviceStatusResponse):void} cb
+     * @public
+     */
+    DescribeBasicDeviceStatus(req, cb) {
+        let resp = new DescribeBasicDeviceStatusResponse();
+        this.request("DescribeBasicDeviceStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to get a list of Anti-DDoS Pro instances.
 
      * @param {DescribeListBGPInstancesRequest} req
@@ -463,6 +479,17 @@ class AntiddosClient extends AbstractClient {
     DescribeListBGPInstances(req, cb) {
         let resp = new DescribeListBGPInstancesResponse();
         this.request("DescribeListBGPInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind an Anti-DDoS EIP to the specified private IP of a CLB instance.
+     * @param {AssociateDDoSEipLoadBalancerRequest} req
+     * @param {function(string, AssociateDDoSEipLoadBalancerResponse):void} cb
+     * @public
+     */
+    AssociateDDoSEipLoadBalancer(req, cb) {
+        let resp = new AssociateDDoSEipLoadBalancerResponse();
+        this.request("AssociateDDoSEipLoadBalancer", req, resp, cb);
     }
 
     /**

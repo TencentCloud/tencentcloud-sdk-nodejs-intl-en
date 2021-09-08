@@ -22,6 +22,7 @@ const GroupInfoMember = models.GroupInfoMember;
 const DeleteUserRequest = models.DeleteUserRequest;
 const PartitionOffset = models.PartitionOffset;
 const DescribeACLRequest = models.DescribeACLRequest;
+const DescribeTopicSyncReplicaResponse = models.DescribeTopicSyncReplicaResponse;
 const DescribeTopicAttributesRequest = models.DescribeTopicAttributesRequest;
 const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
 const ConsumerGroup = models.ConsumerGroup;
@@ -67,6 +68,7 @@ const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
 const DescribeRouteRequest = models.DescribeRouteRequest;
 const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
+const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
 const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
 const UserResponse = models.UserResponse;
@@ -105,6 +107,7 @@ const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const ModifyPasswordResponse = models.ModifyPasswordResponse;
 const InstanceDetailResponse = models.InstanceDetailResponse;
+const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const GroupInfoResponse = models.GroupInfoResponse;
 const TopicAttributesResponse = models.TopicAttributesResponse;
 const InstanceResponse = models.InstanceResponse;
@@ -126,6 +129,7 @@ const DescribeGroupRequest = models.DescribeGroupRequest;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
+const DescribeTopicSyncReplicaRequest = models.DescribeTopicSyncReplicaRequest;
 const InstanceDetail = models.InstanceDetail;
 const DescribeTopicDetailResponse = models.DescribeTopicDetailResponse;
 const SubscribedInfo = models.SubscribedInfo;
@@ -416,6 +420,17 @@ class CkafkaClient extends AbstractClient {
     DeleteUser(req, cb) {
         let resp = new DeleteUserResponse();
         this.request("DeleteUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the details of a synced topic replica.
+     * @param {DescribeTopicSyncReplicaRequest} req
+     * @param {function(string, DescribeTopicSyncReplicaResponse):void} cb
+     * @public
+     */
+    DescribeTopicSyncReplica(req, cb) {
+        let resp = new DescribeTopicSyncReplicaResponse();
+        this.request("DescribeTopicSyncReplica", req, resp, cb);
     }
 
     /**

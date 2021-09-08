@@ -619,7 +619,7 @@ class ModifyIncrementalMigrationRequest extends  AbstractModel {
         this.IncrementalMigrationId = null;
 
         /**
-         * Whether to restore backups. Valid values: `NO`, `YES`. If this parameter is not specified, whether to restore incremental backups will not change.
+         * Whether to restore backups. Valid values: `NO`, `YES`. If this parameter is not specified, current settings will be applied.
          * @type {string || null}
          */
         this.IsRecovery = null;

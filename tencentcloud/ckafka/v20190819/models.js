@@ -402,6 +402,46 @@ class DescribeACLRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTopicSyncReplica response structure.
+ * @class
+ */
+class DescribeTopicSyncReplicaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returns topic replica details
+         * @type {TopicInSyncReplicaResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TopicInSyncReplicaResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTopicAttributes request structure.
  * @class
  */
@@ -1426,7 +1466,7 @@ class OperateResponseData extends  AbstractModel {
         super();
 
         /**
-         * FlowId
+         * FlowId11
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2476,6 +2516,87 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
 }
 
 /**
+ * Topic replica and details
+ * @class
+ */
+class TopicInSyncReplicaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Partition name
+         * @type {string || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Leader ID
+         * @type {number || null}
+         */
+        this.Leader = null;
+
+        /**
+         * Replica set
+         * @type {string || null}
+         */
+        this.Replica = null;
+
+        /**
+         * ISR
+         * @type {string || null}
+         */
+        this.InSyncReplica = null;
+
+        /**
+         * Starting offset
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BeginOffset = null;
+
+        /**
+         * Ending offset
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EndOffset = null;
+
+        /**
+         * Number of messages
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageCount = null;
+
+        /**
+         * Unsynced replica set
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OutOfSyncReplica = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Leader = 'Leader' in params ? params.Leader : null;
+        this.Replica = 'Replica' in params ? params.Replica : null;
+        this.InSyncReplica = 'InSyncReplica' in params ? params.InSyncReplica : null;
+        this.BeginOffset = 'BeginOffset' in params ? params.BeginOffset : null;
+        this.EndOffset = 'EndOffset' in params ? params.EndOffset : null;
+        this.MessageCount = 'MessageCount' in params ? params.MessageCount : null;
+        this.OutOfSyncReplica = 'OutOfSyncReplica' in params ? params.OutOfSyncReplica : null;
+
+    }
+}
+
+/**
  * DescribeRegion request structure.
  * @class
  */
@@ -3487,6 +3608,12 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
          */
         this.RebalanceTime = null;
 
+        /**
+         * Timestamp
+         * @type {number || null}
+         */
+        this.PublicNetwork = null;
+
     }
 
     /**
@@ -3512,6 +3639,7 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
             this.DynamicRetentionConfig = obj;
         }
         this.RebalanceTime = 'RebalanceTime' in params ? params.RebalanceTime : null;
+        this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
 
     }
 }
@@ -4093,6 +4221,27 @@ Note: `null` may be returned for this field, indicating that no valid values can
          */
         this.RetentionTimeConfig = null;
 
+        /**
+         * Maximum number of connections
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxConnection = null;
+
+        /**
+         * Public network bandwidth
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PublicNetwork = null;
+
+        /**
+         * Time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeleteRouteTimestamp = null;
+
     }
 
     /**
@@ -4157,6 +4306,9 @@ Note: `null` may be returned for this field, indicating that no valid values can
             obj.deserialize(params.RetentionTimeConfig)
             this.RetentionTimeConfig = obj;
         }
+        this.MaxConnection = 'MaxConnection' in params ? params.MaxConnection : null;
+        this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
+        this.DeleteRouteTimestamp = 'DeleteRouteTimestamp' in params ? params.DeleteRouteTimestamp : null;
 
     }
 }
@@ -4524,6 +4676,49 @@ class InstanceDetailResponse extends  AbstractModel {
                 this.InstanceList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Set of topic replicas and details
+ * @class
+ */
+class TopicInSyncReplicaResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Set of topic details and replicas
+         * @type {Array.<TopicInSyncReplicaInfo> || null}
+         */
+        this.TopicInSyncReplicaList = null;
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicInSyncReplicaList) {
+            this.TopicInSyncReplicaList = new Array();
+            for (let z in params.TopicInSyncReplicaList) {
+                let obj = new TopicInSyncReplicaInfo();
+                obj.deserialize(params.TopicInSyncReplicaList[z]);
+                this.TopicInSyncReplicaList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
     }
 }
@@ -5191,7 +5386,7 @@ class Route extends  AbstractModel {
         this.RouteId = null;
 
         /**
-         * VIP network type (1: public network TGW; 2: classic network; 3: VPC; 4: Tencent Cloud-supported environment (generally used for internal instances); 5: SSL public network access; 6: BM VPC)
+         * VIP network type (1: public network TGW; 2: classic network; 3: VPC; 4: supporting network (Standard Edition); 5: SSL public network access; 6: BM VPC; 7: supporting network (Pro Edition))
          * @type {number || null}
          */
         this.VipType = null;
@@ -5216,6 +5411,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.DomainPort = null;
 
+        /**
+         * Timestamp
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeleteTimestamp = null;
+
     }
 
     /**
@@ -5239,6 +5441,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
+        this.DeleteTimestamp = 'DeleteTimestamp' in params ? params.DeleteTimestamp : null;
 
     }
 }
@@ -5688,6 +5891,62 @@ class DescribeUserRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTopicSyncReplica request structure.
+ * @class
+ */
+class DescribeTopicSyncReplicaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Offset. If this parameter is left empty, 0 will be used by default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filters unsynced replicas only
+         * @type {boolean || null}
+         */
+        this.OutOfSyncReplicaOnly = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OutOfSyncReplicaOnly = 'OutOfSyncReplicaOnly' in params ? params.OutOfSyncReplicaOnly : null;
+
+    }
+}
+
+/**
  * Instance details
  * @class
  */
@@ -6063,6 +6322,7 @@ module.exports = {
     DeleteUserRequest: DeleteUserRequest,
     PartitionOffset: PartitionOffset,
     DescribeACLRequest: DescribeACLRequest,
+    DescribeTopicSyncReplicaResponse: DescribeTopicSyncReplicaResponse,
     DescribeTopicAttributesRequest: DescribeTopicAttributesRequest,
     DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
     ConsumerGroup: ConsumerGroup,
@@ -6108,6 +6368,7 @@ module.exports = {
     DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
     DescribeRouteRequest: DescribeRouteRequest,
     FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
+    TopicInSyncReplicaInfo: TopicInSyncReplicaInfo,
     DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
@@ -6146,6 +6407,7 @@ module.exports = {
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
     ModifyPasswordResponse: ModifyPasswordResponse,
     InstanceDetailResponse: InstanceDetailResponse,
+    TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     GroupInfoResponse: GroupInfoResponse,
     TopicAttributesResponse: TopicAttributesResponse,
     InstanceResponse: InstanceResponse,
@@ -6167,6 +6429,7 @@ module.exports = {
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
     DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DescribeUserRequest: DescribeUserRequest,
+    DescribeTopicSyncReplicaRequest: DescribeTopicSyncReplicaRequest,
     InstanceDetail: InstanceDetail,
     DescribeTopicDetailResponse: DescribeTopicDetailResponse,
     SubscribedInfo: SubscribedInfo,

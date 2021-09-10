@@ -1662,36 +1662,24 @@ class CreateReadOnlyDBInstanceResponse extends  AbstractModel {
 }
 
 /**
- * CreateInstances response structure.
+ * Analyze the execution time of slow query statements by classifying them to different time ranges
  * @class
  */
-class CreateInstancesResponse extends  AbstractModel {
+class DurationAnalysis extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Order number list. Each instance corresponds to an order number.
-         * @type {Array.<string> || null}
-         */
-        this.DealNames = null;
-
-        /**
-         * Bill ID of frozen fees
+         * Time range
          * @type {string || null}
          */
-        this.BillId = null;
+        this.TimeSegment = null;
 
         /**
-         * ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
-         * @type {Array.<string> || null}
+         * The number of slow query statements whose execution time falls within the time range
+         * @type {number || null}
          */
-        this.DBInstanceIdSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Count = null;
 
     }
 
@@ -1702,10 +1690,8 @@ class CreateInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealNames = 'DealNames' in params ? params.DealNames : null;
-        this.BillId = 'BillId' in params ? params.BillId : null;
-        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TimeSegment = 'TimeSegment' in params ? params.TimeSegment : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -2657,12 +2643,30 @@ class DestroyDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * OpenServerlessDBExtranetAccess response structure.
+ * CreateInstances response structure.
  * @class
  */
-class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
+class CreateInstancesResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Order number list. Each instance corresponds to an order number.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * Bill ID of frozen fees
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
+         * @type {Array.<string> || null}
+         */
+        this.DBInstanceIdSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2679,7 +2683,122 @@ class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Detailed analysis of a slow query statement with abstract parameter values, which is returned by the `DescribeSlowQueryAnalysis` API
+ * @class
+ */
+class AnalysisItems extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The name of the database queried by the slow query statement
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * The name of the user who executes the slow query statement
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * The slow query statement whose parameter values are abstracted
+         * @type {string || null}
+         */
+        this.NormalQuery = null;
+
+        /**
+         * The address of the client that executes the slow query statement
+         * @type {string || null}
+         */
+        this.ClientAddr = null;
+
+        /**
+         * The number of executions of the slow query statement during the specified period of time
+         * @type {number || null}
+         */
+        this.CallNum = null;
+
+        /**
+         * The ratio (in decimal form) of the number of executions of the slow query statement to that of all slow query statements during the specified period of time
+         * @type {number || null}
+         */
+        this.CallPercent = null;
+
+        /**
+         * The total execution time of the slow query statement during the specified period of time
+         * @type {number || null}
+         */
+        this.CostTime = null;
+
+        /**
+         * The ratio (in decimal form) of the total execution time of the slow query statement to that of all slow query statements during the specified period of time
+         * @type {number || null}
+         */
+        this.CostPercent = null;
+
+        /**
+         * The shortest execution time (in ms) of the slow query statement during the specified period of time
+         * @type {number || null}
+         */
+        this.MinCostTime = null;
+
+        /**
+         * The longest execution time (in ms) of the slow query statement during the specified period of time
+         * @type {number || null}
+         */
+        this.MaxCostTime = null;
+
+        /**
+         * The average execution time (in ms) of the slow query statement during the specified period of time
+         * @type {number || null}
+         */
+        this.AvgCostTime = null;
+
+        /**
+         * The timestamp when the slow query statement starts to execute for the first time during the specified period of time
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * The timestamp when the slow query statement starts to execute for the last time during the specified period of time
+         * @type {string || null}
+         */
+        this.LastTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.NormalQuery = 'NormalQuery' in params ? params.NormalQuery : null;
+        this.ClientAddr = 'ClientAddr' in params ? params.ClientAddr : null;
+        this.CallNum = 'CallNum' in params ? params.CallNum : null;
+        this.CallPercent = 'CallPercent' in params ? params.CallPercent : null;
+        this.CostTime = 'CostTime' in params ? params.CostTime : null;
+        this.CostPercent = 'CostPercent' in params ? params.CostPercent : null;
+        this.MinCostTime = 'MinCostTime' in params ? params.MinCostTime : null;
+        this.MaxCostTime = 'MaxCostTime' in params ? params.MaxCostTime : null;
+        this.AvgCostTime = 'AvgCostTime' in params ? params.AvgCostTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.LastTime = 'LastTime' in params ? params.LastTime : null;
 
     }
 }
@@ -2878,6 +2997,73 @@ class DescribeRegionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeSlowQueryList response structure.
+ * @class
+ */
+class DescribeSlowQueryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of slow query statements during the specified period of time.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Analysis of the execution time of slow query statements by classifying them to different time ranges. These slow query statements fall within the query range you specified in the request parameters.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<DurationAnalysis> || null}
+         */
+        this.DurationAnalysis = null;
+
+        /**
+         * The list of slow query details during the specified period of time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RawSlowQuery> || null}
+         */
+        this.RawSlowQueryList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DurationAnalysis) {
+            this.DurationAnalysis = new Array();
+            for (let z in params.DurationAnalysis) {
+                let obj = new DurationAnalysis();
+                obj.deserialize(params.DurationAnalysis[z]);
+                this.DurationAnalysis.push(obj);
+            }
+        }
+
+        if (params.RawSlowQueryList) {
+            this.RawSlowQueryList = new Array();
+            for (let z in params.RawSlowQueryList) {
+                let obj = new RawSlowQuery();
+                obj.deserialize(params.RawSlowQueryList[z]);
+                this.RawSlowQueryList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3202,6 +3388,57 @@ class RestartDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Details returned by the `DescribeSlowQueryAnalysis` API
+ * @class
+ */
+class Detail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total execution time (in ms) of all slow query statements during the specified period of time
+         * @type {number || null}
+         */
+        this.TotalTime = null;
+
+        /**
+         * The total number of all slow query statements during the specified period of time
+         * @type {number || null}
+         */
+        this.TotalCallNum = null;
+
+        /**
+         * The statistical analysis list of slow queries
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<AnalysisItems> || null}
+         */
+        this.AnalysisItems = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
+        this.TotalCallNum = 'TotalCallNum' in params ? params.TotalCallNum : null;
+
+        if (params.AnalysisItems) {
+            this.AnalysisItems = new Array();
+            for (let z in params.AnalysisItems) {
+                let obj = new AnalysisItems();
+                obj.deserialize(params.AnalysisItems[z]);
+                this.AnalysisItems.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * IsolateDBInstances response structure.
  * @class
  */
@@ -3414,6 +3651,83 @@ class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSlowQueryAnalysis request structure.
+ * @class
+ */
+class DescribeSlowQueryAnalysisRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Start timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss". The log is retained for seven days by default, so the start timestamp must fall within the retention period.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss".
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Filter by database name. This parameter is optional.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * Sort by field. Valid values: `CallNum`, `CostTime`, `AvgCostTime`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Number of entries per page. Value range: [1,100].
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset. Value range: [0,INF).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3646,7 +3960,7 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * Instance status
+         * Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`
          * @type {string || null}
          */
         this.DBInstanceStatus = null;
@@ -5149,6 +5463,83 @@ class ModifySwitchTimePeriodRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSlowQueryList request structure.
+ * @class
+ */
+class DescribeSlowQueryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Start timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss". The log is retained for seven days by default, so the start timestamp must fall within the retention period.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss".
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Filter by database name. This parameter is optional.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * Sorting order. Valid values: `asc` (ascending), `desc` (descending). Default value: `desc`.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Sort by field. Valid values: `SessionStartTime` (default), `Duration`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Number of entries per page. Value range: [1,100]. Default value: `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset. Value range: [0,INF). Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * Region information such as number and status
  * @class
  */
@@ -5363,6 +5754,116 @@ class ResetAccountPasswordRequest extends  AbstractModel {
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * DescribeSlowQueryAnalysis response structure.
+ * @class
+ */
+class DescribeSlowQueryAnalysisResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of query results.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Detailed analysis.
+         * @type {Detail || null}
+         */
+        this.Detail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Detail) {
+            let obj = new Detail();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The list of slow query details returned by the `DescribeSlowQueryList` API
+ * @class
+ */
+class RawSlowQuery extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Slow query statement
+         * @type {string || null}
+         */
+        this.RawQuery = null;
+
+        /**
+         * The database queried by the slow query statement
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * The execution time of the slow query statement
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * The client that executes the slow query statement
+         * @type {string || null}
+         */
+        this.ClientAddr = null;
+
+        /**
+         * The name of the user who executes the slow query statement
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * The time when the slow query statement starts to execute
+         * @type {string || null}
+         */
+        this.SessionStartTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RawQuery = 'RawQuery' in params ? params.RawQuery : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ClientAddr = 'ClientAddr' in params ? params.ClientAddr : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.SessionStartTime = 'SessionStartTime' in params ? params.SessionStartTime : null;
 
     }
 }
@@ -5704,6 +6205,34 @@ class DescribeDBInstanceAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * OpenServerlessDBExtranetAccess response structure.
+ * @class
+ */
+class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBXlogs response structure.
  * @class
  */
@@ -5880,7 +6409,7 @@ module.exports = {
     ModifyDBInstanceReadOnlyGroupRequest: ModifyDBInstanceReadOnlyGroupRequest,
     AddDBInstanceToReadOnlyGroupResponse: AddDBInstanceToReadOnlyGroupResponse,
     CreateReadOnlyDBInstanceResponse: CreateReadOnlyDBInstanceResponse,
-    CreateInstancesResponse: CreateInstancesResponse,
+    DurationAnalysis: DurationAnalysis,
     DescribeOrdersResponse: DescribeOrdersResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
     ModifySwitchTimePeriodResponse: ModifySwitchTimePeriodResponse,
@@ -5899,21 +6428,25 @@ module.exports = {
     PgDeal: PgDeal,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,
     DestroyDBInstanceRequest: DestroyDBInstanceRequest,
-    OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
+    CreateInstancesResponse: CreateInstancesResponse,
+    AnalysisItems: AnalysisItems,
     Xlog: Xlog,
     DescribeServerlessDBInstancesRequest: DescribeServerlessDBInstancesRequest,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
+    DescribeSlowQueryListResponse: DescribeSlowQueryListResponse,
     ServerlessDBInstance: ServerlessDBInstance,
     CreateReadOnlyGroupRequest: CreateReadOnlyGroupRequest,
     CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
+    Detail: Detail,
     IsolateDBInstancesResponse: IsolateDBInstancesResponse,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
     RebalanceReadOnlyGroupResponse: RebalanceReadOnlyGroupResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
+    DescribeSlowQueryAnalysisRequest: DescribeSlowQueryAnalysisRequest,
     ErrLogDetail: ErrLogDetail,
     DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
     IsolateDBInstancesRequest: IsolateDBInstancesRequest,
@@ -5946,11 +6479,14 @@ module.exports = {
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     ModifySwitchTimePeriodRequest: ModifySwitchTimePeriodRequest,
+    DescribeSlowQueryListRequest: DescribeSlowQueryListRequest,
     RegionInfo: RegionInfo,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     RemoveDBInstanceFromReadOnlyGroupResponse: RemoveDBInstanceFromReadOnlyGroupResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
+    DescribeSlowQueryAnalysisResponse: DescribeSlowQueryAnalysisResponse,
+    RawSlowQuery: RawSlowQuery,
     DescribeReadOnlyGroupsRequest: DescribeReadOnlyGroupsRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
@@ -5958,6 +6494,7 @@ module.exports = {
     DescribeDBSlowlogsRequest: DescribeDBSlowlogsRequest,
     DestroyDBInstanceResponse: DestroyDBInstanceResponse,
     DescribeDBInstanceAttributeResponse: DescribeDBInstanceAttributeResponse,
+    OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     CreateDBInstancesResponse: CreateDBInstancesResponse,

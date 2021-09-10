@@ -817,6 +817,18 @@ class MountInfo extends  AbstractModel {
          */
         this.SubnetName = null;
 
+        /**
+         * CCN instance ID used by CFS Turbo
+         * @type {string || null}
+         */
+        this.CcnID = null;
+
+        /**
+         * CCN IP range used by CFS Turbo
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
     }
 
     /**
@@ -836,6 +848,8 @@ class MountInfo extends  AbstractModel {
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.CcnID = 'CcnID' in params ? params.CcnID : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
 
     }
 }
@@ -1050,13 +1064,13 @@ class CreateCfsFileSystemResponse extends  AbstractModel {
         this.FileSystemId = null;
 
         /**
-         * File system status
+         * File system status. Valid values: `creating`, `create_failed`, `available`, `unserviced`, `upgrading`, `deleting`
          * @type {string || null}
          */
         this.LifeCycleState = null;
 
         /**
-         * Used file system capacity
+         * Storage used by the file system, in bytes
          * @type {number || null}
          */
         this.SizeByte = null;
@@ -1223,6 +1237,12 @@ class FileSystemInfo extends  AbstractModel {
          */
         this.BandwidthLimit = null;
 
+        /**
+         * Total capacity of the file system
+         * @type {number || null}
+         */
+        this.Capacity = null;
+
     }
 
     /**
@@ -1255,6 +1275,7 @@ class FileSystemInfo extends  AbstractModel {
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.BandwidthLimit = 'BandwidthLimit' in params ? params.BandwidthLimit : null;
+        this.Capacity = 'Capacity' in params ? params.Capacity : null;
 
     }
 }
@@ -1548,25 +1569,25 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Network type. Valid values: VPC (VPC), BASIC (basic network)
+         * Network type. Valid values: `VPC` (private network), `BASIC` (classic network), `CCN` (Cloud Connect Network). You must set this parameter to `CCN` if you use the Turbo series. Classic network will be phased out and is not recommended.
          * @type {string || null}
          */
         this.NetInterface = null;
 
         /**
-         * Permission group ID
+         * Permission group ID (required for Standard and High-Performance). For the Turbo series, set it to `pgroupbasic`.
          * @type {string || null}
          */
         this.PGroupId = null;
 
         /**
-         * File system protocol type. Valid values: NFS, CIFS. If this parameter is left empty, NFS will be used by default
+         * File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * File system storage class. Valid values: SD (standard), HP (high-performance)
+         * Storage class of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), `TP` (High-Performance Turbo)
          * @type {string || null}
          */
         this.StorageType = null;
@@ -1584,7 +1605,7 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Specifies an IP address, which is supported only for VPC. If this parameter is left empty, a random IP will be assigned in the subnet
+         * IP address (this parameter supports only the VPC network type, and the Turbo series is not supported). If this parameter is left empty, a random IP in the subnet will be assigned.
          * @type {string || null}
          */
         this.MountIP = null;
@@ -1606,6 +1627,24 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ClientToken = null;
+
+        /**
+         * CCN instance ID (required if the network type is CCN)
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+         * @type {number || null}
+         */
+        this.Capacity = null;
 
     }
 
@@ -1635,6 +1674,9 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
             }
         }
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.Capacity = 'Capacity' in params ? params.Capacity : null;
 
     }
 }
@@ -2216,7 +2258,7 @@ class UpdateCfsFileSystemSizeLimitRequest extends  AbstractModel {
         this.FsLimit = null;
 
         /**
-         * File system ID
+         * File system ID. Currently, only Standard file systems are supported.
          * @type {string || null}
          */
         this.FileSystemId = null;

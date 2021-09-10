@@ -3705,6 +3705,12 @@ class EnhancedService extends  AbstractModel {
          */
         this.MonitorService = null;
 
+        /**
+         * Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+         * @type {RunAutomationServiceEnabled || null}
+         */
+        this.AutomationService = null;
+
     }
 
     /**
@@ -3726,6 +3732,40 @@ class EnhancedService extends  AbstractModel {
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
         }
+
+        if (params.AutomationService) {
+            let obj = new RunAutomationServiceEnabled();
+            obj.deserialize(params.AutomationService)
+            this.AutomationService = obj;
+        }
+
+    }
+}
+
+/**
+ * Describes the TAT service information.
+ * @class
+ */
+class RunAutomationServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -6246,7 +6286,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Whether to use an instance as a public gateway. An instance can be used as a public gateway only when it has a public IP and resides in a VPC. Valid values: <br><li>TRUE: use the instance as a public gateway <br><li>FALSE: do not use the instance as a public gateway <br><br>Default value: FALSE.
+         * Whether to use a CVM instance as a public gateway. The public gateway is only available when the instance has a public IP and resides in a VPC. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
          * @type {boolean || null}
          */
         this.AsVpcGateway = null;
@@ -6653,6 +6693,7 @@ module.exports = {
     Instance: Instance,
     OutputMapping: OutputMapping,
     EnhancedService: EnhancedService,
+    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     DescribeJobSubmitInfoResponse: DescribeJobSubmitInfoResponse,
     DescribeComputeEnvCreateInfosResponse: DescribeComputeEnvCreateInfosResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,

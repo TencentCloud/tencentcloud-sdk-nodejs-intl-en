@@ -223,7 +223,6 @@ class NodeInfo extends  AbstractModel {
          * Node type<li>`hotData`: hot data node</li>
 <li>`warmData`: warm data node</li>
 <li>`dedicatedMaster`: dedicated master node</li>
-<li>`kibana`: Kibana node</li>
 Default value: `hotData`
          * @type {string || null}
          */
@@ -1493,6 +1492,20 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.KibanaNodeInfo = null;
 
+        /**
+         * Visual node configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {WebNodeTypeInfo || null}
+         */
+        this.WebNodeTypeInfo = null;
+
+        /**
+         * JDK type. Valid values: `oracle`, `kona`
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Jdk = null;
+
     }
 
     /**
@@ -1611,6 +1624,13 @@ Note: this field may return `null`, indicating that no valid value can be obtain
             obj.deserialize(params.KibanaNodeInfo)
             this.KibanaNodeInfo = obj;
         }
+
+        if (params.WebNodeTypeInfo) {
+            let obj = new WebNodeTypeInfo();
+            obj.deserialize(params.WebNodeTypeInfo)
+            this.WebNodeTypeInfo = obj;
+        }
+        this.Jdk = 'Jdk' in params ? params.Jdk : null;
 
     }
 }
@@ -1791,6 +1811,12 @@ class RestartInstanceRequest extends  AbstractModel {
          */
         this.ForceRestart = null;
 
+        /**
+         * Restart mode. `0`: rolling restart; `1`: full restart
+         * @type {number || null}
+         */
+        this.RestartMode = null;
+
     }
 
     /**
@@ -1802,6 +1828,7 @@ class RestartInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+        this.RestartMode = 'RestartMode' in params ? params.RestartMode : null;
 
     }
 }
@@ -2091,6 +2118,12 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
          */
         this.KibanaConfig = null;
 
+        /**
+         * Visual node configuration
+         * @type {WebNodeTypeInfo || null}
+         */
+        this.WebNodeTypeInfo = null;
+
     }
 
     /**
@@ -2155,6 +2188,12 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
         }
         this.SceneType = 'SceneType' in params ? params.SceneType : null;
         this.KibanaConfig = 'KibanaConfig' in params ? params.KibanaConfig : null;
+
+        if (params.WebNodeTypeInfo) {
+            let obj = new WebNodeTypeInfo();
+            obj.deserialize(params.WebNodeTypeInfo)
+            this.WebNodeTypeInfo = obj;
+        }
 
     }
 }

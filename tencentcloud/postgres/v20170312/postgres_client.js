@@ -46,7 +46,7 @@ const ServerlessDBAccount = models.ServerlessDBAccount;
 const ModifyDBInstanceReadOnlyGroupRequest = models.ModifyDBInstanceReadOnlyGroupRequest;
 const AddDBInstanceToReadOnlyGroupResponse = models.AddDBInstanceToReadOnlyGroupResponse;
 const CreateReadOnlyDBInstanceResponse = models.CreateReadOnlyDBInstanceResponse;
-const CreateInstancesResponse = models.CreateInstancesResponse;
+const DurationAnalysis = models.DurationAnalysis;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
 const ModifySwitchTimePeriodResponse = models.ModifySwitchTimePeriodResponse;
@@ -65,21 +65,25 @@ const ReadOnlyGroup = models.ReadOnlyGroup;
 const PgDeal = models.PgDeal;
 const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
 const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
-const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
+const CreateInstancesResponse = models.CreateInstancesResponse;
+const AnalysisItems = models.AnalysisItems;
 const Xlog = models.Xlog;
 const DescribeServerlessDBInstancesRequest = models.DescribeServerlessDBInstancesRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const DescribeSlowQueryListResponse = models.DescribeSlowQueryListResponse;
 const ServerlessDBInstance = models.ServerlessDBInstance;
 const CreateReadOnlyGroupRequest = models.CreateReadOnlyGroupRequest;
 const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const Detail = models.Detail;
 const IsolateDBInstancesResponse = models.IsolateDBInstancesResponse;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const RebalanceReadOnlyGroupResponse = models.RebalanceReadOnlyGroupResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
+const DescribeSlowQueryAnalysisRequest = models.DescribeSlowQueryAnalysisRequest;
 const ErrLogDetail = models.ErrLogDetail;
 const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
 const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
@@ -112,11 +116,14 @@ const DBBackup = models.DBBackup;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const ModifySwitchTimePeriodRequest = models.ModifySwitchTimePeriodRequest;
+const DescribeSlowQueryListRequest = models.DescribeSlowQueryListRequest;
 const RegionInfo = models.RegionInfo;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const RemoveDBInstanceFromReadOnlyGroupResponse = models.RemoveDBInstanceFromReadOnlyGroupResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const DescribeSlowQueryAnalysisResponse = models.DescribeSlowQueryAnalysisResponse;
+const RawSlowQuery = models.RawSlowQuery;
 const DescribeReadOnlyGroupsRequest = models.DescribeReadOnlyGroupsRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
@@ -124,6 +131,7 @@ const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
 const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
+const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
@@ -206,14 +214,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restart an instance.
-     * @param {RestartDBInstanceRequest} req
-     * @param {function(string, RestartDBInstanceResponse):void} cb
+     * This API is used to analyze slow query statements with abstract parameter values and return aggregated statistical analysis results.
+     * @param {DescribeSlowQueryAnalysisRequest} req
+     * @param {function(string, DescribeSlowQueryAnalysisResponse):void} cb
      * @public
      */
-    RestartDBInstance(req, cb) {
-        let resp = new RestartDBInstanceResponse();
-        this.request("RestartDBInstance", req, resp, cb);
+    DescribeSlowQueryAnalysis(req, cb) {
+        let resp = new DescribeSlowQueryAnalysisResponse();
+        this.request("DescribeSlowQueryAnalysis", req, resp, cb);
     }
 
     /**
@@ -382,6 +390,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to restart an instance.
+     * @param {RestartDBInstanceRequest} req
+     * @param {function(string, RestartDBInstanceResponse):void} cb
+     * @public
+     */
+    RestartDBInstance(req, cb) {
+        let resp = new RestartDBInstanceResponse();
+        this.request("RestartDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to isolate one or more instances.
      * @param {IsolateDBInstancesRequest} req
      * @param {function(string, IsolateDBInstancesResponse):void} cb
@@ -459,14 +478,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the renewal price of an instance.
-     * @param {InquiryPriceRenewDBInstanceRequest} req
-     * @param {function(string, InquiryPriceRenewDBInstanceResponse):void} cb
+     * This API is used to get the slow query list.
+     * @param {DescribeSlowQueryListRequest} req
+     * @param {function(string, DescribeSlowQueryListResponse):void} cb
      * @public
      */
-    InquiryPriceRenewDBInstance(req, cb) {
-        let resp = new InquiryPriceRenewDBInstanceResponse();
-        this.request("InquiryPriceRenewDBInstance", req, resp, cb);
+    DescribeSlowQueryList(req, cb) {
+        let resp = new DescribeSlowQueryListResponse();
+        this.request("DescribeSlowQueryList", req, resp, cb);
     }
 
     /**
@@ -500,6 +519,17 @@ class PostgresClient extends AbstractClient {
     AddDBInstanceToReadOnlyGroup(req, cb) {
         let resp = new AddDBInstanceToReadOnlyGroupResponse();
         this.request("AddDBInstanceToReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the renewal price of an instance.
+     * @param {InquiryPriceRenewDBInstanceRequest} req
+     * @param {function(string, InquiryPriceRenewDBInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewDBInstance(req, cb) {
+        let resp = new InquiryPriceRenewDBInstanceResponse();
+        this.request("InquiryPriceRenewDBInstance", req, resp, cb);
     }
 
     /**

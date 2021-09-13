@@ -1597,7 +1597,7 @@ class FlowLog extends  AbstractModel {
         this.FlowLogName = null;
 
         /**
-         * The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
+         * The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, and `CCN`.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -2748,16 +2748,16 @@ class ModifyFlowLogAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the VPC instance
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
          * The unique ID of the flow log.
          * @type {string || null}
          */
         this.FlowLogId = null;
+
+        /**
+         * The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the attributes of a CCN flow log is modified.
+         * @type {string || null}
+         */
+        this.VpcId = null;
 
         /**
          * The name of the flow log.
@@ -2780,8 +2780,8 @@ class ModifyFlowLogAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.FlowLogId = 'FlowLogId' in params ? params.FlowLogId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.FlowLogName = 'FlowLogName' in params ? params.FlowLogName : null;
         this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
 
@@ -4156,16 +4156,16 @@ class DeleteFlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the VPC instance
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
          * The unique ID of the flow log.
          * @type {string || null}
          */
         this.FlowLogId = null;
+
+        /**
+         * The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless a CCN flow log is deleted.
+         * @type {string || null}
+         */
+        this.VpcId = null;
 
     }
 
@@ -4176,8 +4176,8 @@ class DeleteFlowLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.FlowLogId = 'FlowLogId' in params ? params.FlowLogId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
 }
@@ -10882,13 +10882,18 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         super();
 
         /**
-         * The type of the bandwidth package. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.
+         * The network type of the bandwidth package. Default value: `BGP`. Valid values:
+`BGP` 
+`HIGH_QUALITY_BGP`
          * @type {string || null}
          */
         this.NetworkType = null;
 
         /**
-         * The bandwidth package billing mode. Valid values: 'TOP5_POSTPAID_BY_MONTH' and 'PERCENT95_POSTPAID_BY_MONTH'.
+         * The billing mode of the bandwidth package. Default value: `TOP5_POSTPAID_BY_MONTH`. Valid values:
+<li>`TOP5_POSTPAID_BY_MONTH`: monthly top 5 </li>
+<li>`PERCENT95_POSTPAID_BY_MONTH`: monthly 95th percentile</li>
+<li>`FIXED_PREPAID_BY_MONTH`: monthly subscription</li>
          * @type {string || null}
          */
         this.ChargeType = null;
@@ -10900,7 +10905,7 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         this.BandwidthPackageName = null;
 
         /**
-         * The number of bandwidth packages (It can only be “1” for bill-by-CVM accounts)
+         * The number of bandwidth packages to create. Valid range: 1-20. It can only be “1” for bill-by-CVM accounts.
          * @type {number || null}
          */
         this.BandwidthPackageCount = null;
@@ -14469,10 +14474,11 @@ class DescribeCcnRoutesRequest extends  AbstractModel {
         /**
          * Filter condition. `RouteIds` and `Filters` cannot be specified at the same time.
 <li>route-id - String - (Filter condition) Routing policy ID.</li>
-<li>cidr-block - String - (Filter condition) Destination port.</li>
+<li>cidr-block - String - (Filter condition) Destination.</li>
 <li>instance-type - String - (Filter condition) The next hop type.</li>
 <li>instance-region - String - (Filter condition) The next hop region.</li>
-<li>instance-type - String - (Filter condition) The instance ID of the next hop.</li>
+<li>instance-id - String - (Filter condition) The instance ID of the next hop.</li>
+<li>route-table-id - String - (Filter condition) The list of route table IDs in the format of `ccntr-1234edfr`. Filters by the route table ID.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -16706,19 +16712,13 @@ class CreateFlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the VPC instance
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
          * The name of the flow log instance.
          * @type {string || null}
          */
         this.FlowLogName = null;
 
         /**
-         * The type of resources to which the flow log belongs. Valid values: 'VPC', 'SUBNET' and 'NETWORKINTERFACE'.
+         * The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, and `CCN`.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -16742,6 +16742,12 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.CloudLogId = null;
 
         /**
+         * The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
          * The description of the flow log instance
          * @type {string || null}
          */
@@ -16762,12 +16768,12 @@ class CreateFlowLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.FlowLogName = 'FlowLogName' in params ? params.FlowLogName : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.TrafficType = 'TrafficType' in params ? params.TrafficType : null;
         this.CloudLogId = 'CloudLogId' in params ? params.CloudLogId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
 
         if (params.Tags) {

@@ -134,6 +134,7 @@ const Alias = models.Alias;
 const GetLayerVersionRequest = models.GetLayerVersionRequest;
 const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
+const SearchKey = models.SearchKey;
 const DeleteTriggerRequest = models.DeleteTriggerRequest;
 const VpcConfig = models.VpcConfig;
 const GetProvisionedConcurrencyConfigResponse = models.GetProvisionedConcurrencyConfigResponse;

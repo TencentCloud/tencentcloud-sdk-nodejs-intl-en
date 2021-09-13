@@ -1562,6 +1562,12 @@ class ListNamespacesRequest extends  AbstractModel {
          */
         this.Order = null;
 
+        /**
+         * Specifies the range and keyword for search. The value of `Key` can be `Namespace` or `Description`. Multiple AND conditions can be specified.
+         * @type {Array.<SearchKey> || null}
+         */
+        this.SearchKey = null;
+
     }
 
     /**
@@ -1575,6 +1581,15 @@ class ListNamespacesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Orderby = 'Orderby' in params ? params.Orderby : null;
         this.Order = 'Order' in params ? params.Order : null;
+
+        if (params.SearchKey) {
+            this.SearchKey = new Array();
+            for (let z in params.SearchKey) {
+                let obj = new SearchKey();
+                obj.deserialize(params.SearchKey[z]);
+                this.SearchKey.push(obj);
+            }
+        }
 
     }
 }
@@ -5448,25 +5463,25 @@ class InvokeFunctionRequest extends  AbstractModel {
         this.FunctionName = null;
 
         /**
-         * Version number or alias of the triggered function
+         * Version or alias of the function. It defaults to `$DEFAULT`.
          * @type {string || null}
          */
         this.Qualifier = null;
 
         /**
-         * Function running parameter, which is in the JSON format. Maximum parameter size is 1 MB.
+         * Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB.
          * @type {string || null}
          */
         this.Event = null;
 
         /**
-         * If this field is specified for a synchronous invocation, the return value will contain a 4 KB log. Valid value: `None` (default) or `Tail`. If the value is `Tail`, `log` in the return parameter will contain the corresponding function execution log.
+         * Valid value: `None` (default) or `Tail`. If the value is `Tail`, `log` in the response will contain the corresponding function execution log (up to 4KB).
          * @type {string || null}
          */
         this.LogType = null;
 
         /**
-         * Namespace
+         * Namespace. `default` is used if it’s left empty.
          * @type {string || null}
          */
         this.Namespace = null;
@@ -6655,6 +6670,41 @@ class DeleteTriggerResponse extends  AbstractModel {
 }
 
 /**
+ * Key-value condition for keyword search
+ * @class
+ */
+class SearchKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Search range
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Keyword for search
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DeleteTrigger request structure.
  * @class
  */
@@ -7085,6 +7135,7 @@ module.exports = {
     GetLayerVersionRequest: GetLayerVersionRequest,
     GetFunctionLogsResponse: GetFunctionLogsResponse,
     DeleteTriggerResponse: DeleteTriggerResponse,
+    SearchKey: SearchKey,
     DeleteTriggerRequest: DeleteTriggerRequest,
     VpcConfig: VpcConfig,
     GetProvisionedConcurrencyConfigResponse: GetProvisionedConcurrencyConfigResponse,

@@ -3018,6 +3018,12 @@ class DescribeMigrateJobsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Tag filter.
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
     }
 
     /**
@@ -3033,6 +3039,15 @@ class DescribeMigrateJobsRequest extends  AbstractModel {
         this.OrderSeq = 'OrderSeq' in params ? params.OrderSeq : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
 
     }
 }
@@ -3726,6 +3741,13 @@ class MigrateJobInfo extends  AbstractModel {
          */
         this.ErrorInfo = null;
 
+        /**
+         * Tag
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3777,6 +3799,15 @@ class MigrateJobInfo extends  AbstractModel {
                 let obj = new ErrorInfo();
                 obj.deserialize(params.ErrorInfo[z]);
                 this.ErrorInfo.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
 

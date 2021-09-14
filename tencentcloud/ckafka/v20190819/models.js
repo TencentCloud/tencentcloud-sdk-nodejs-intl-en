@@ -1339,6 +1339,34 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteRouteTriggerTime request structure.
+ * @class
+ */
+class DeleteRouteTriggerTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Modification time.
+         * @type {string || null}
+         */
+        this.DelayTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
+
+    }
+}
+
+/**
  * Returned object for route information
  * @class
  */
@@ -1779,6 +1807,12 @@ class CreateAclRequest extends  AbstractModel {
          */
         this.Principal = null;
 
+        /**
+         * The resource name list, which is in JSON string format. Only one of `ResourceName` and `resourceNameList` can be specified.
+         * @type {string || null}
+         */
+        this.ResourceNameList = null;
+
     }
 
     /**
@@ -1795,6 +1829,7 @@ class CreateAclRequest extends  AbstractModel {
         this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
         this.Host = 'Host' in params ? params.Host : null;
         this.Principal = 'Principal' in params ? params.Principal : null;
+        this.ResourceNameList = 'ResourceNameList' in params ? params.ResourceNameList : null;
 
     }
 }
@@ -2837,6 +2872,34 @@ class ModifyTopicAttributesResponse extends  AbstractModel {
             let obj = new JgwOperateResponse();
             obj.deserialize(params.Result)
             this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRouteTriggerTime response structure.
+ * @class
+ */
+class DeleteRouteTriggerTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6344,6 +6407,7 @@ module.exports = {
     Tag: Tag,
     GroupResponse: GroupResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
+    DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
     RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
@@ -6375,6 +6439,7 @@ module.exports = {
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
     DescribeGroupInfoResponse: DescribeGroupInfoResponse,
     ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
+    DeleteRouteTriggerTimeResponse: DeleteRouteTriggerTimeResponse,
     DescribeUserResponse: DescribeUserResponse,
     AppIdResponse: AppIdResponse,
     DescribeTopicRequest: DescribeTopicRequest,

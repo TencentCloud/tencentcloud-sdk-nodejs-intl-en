@@ -3346,7 +3346,7 @@ class ClusterCIDRSettings extends  AbstractModel {
         this.MaxNodePodNum = null;
 
         /**
-         * Maximum number of cluster services
+         * The maximum number of services in a cluster. The range is from 32 to 32768. When its power is not 2, it will round upward to the closest power of 2. Default value is 256.
          * @type {number || null}
          */
         this.MaxClusterServiceNum = null;
@@ -3665,6 +3665,48 @@ Note: This field may return null, indicating that no valid value was found.
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+    }
+}
+
+/**
+ * ModifyNodePoolInstanceTypes request structure.
+ * @class
+ */
+class ModifyNodePoolInstanceTypesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * List of instance types
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
 
     }
 }
@@ -4430,6 +4472,34 @@ Note: This field may return null, indicating that no valid value is found.
 }
 
 /**
+ * ModifyNodePoolInstanceTypes response structure.
+ * @class
+ */
+class ModifyNodePoolInstanceTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusterNodePoolFromExistingAsg response structure.
  * @class
  */
@@ -4635,6 +4705,12 @@ class EnhancedService extends  AbstractModel {
          */
         this.MonitorService = null;
 
+        /**
+         * Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+         * @type {RunAutomationServiceEnabled || null}
+         */
+        this.AutomationService = null;
+
     }
 
     /**
@@ -4655,6 +4731,12 @@ class EnhancedService extends  AbstractModel {
             let obj = new RunMonitorServiceEnabled();
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
+        }
+
+        if (params.AutomationService) {
+            let obj = new RunAutomationServiceEnabled();
+            obj.deserialize(params.AutomationService)
+            this.AutomationService = obj;
         }
 
     }
@@ -5415,6 +5497,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DesiredPodNumber = null;
 
+        /**
+         * Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PreStartUserScript = null;
+
     }
 
     /**
@@ -5453,6 +5542,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.ExtraArgs = obj;
         }
         this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
+        this.PreStartUserScript = 'PreStartUserScript' in params ? params.PreStartUserScript : null;
 
     }
 }
@@ -6492,6 +6582,34 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.Status = 'Status' in params ? params.Status : null;
         this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Describes the TAT service information.
+ * @class
+ */
+class RunAutomationServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -8722,6 +8840,7 @@ module.exports = {
     Taint: Taint,
     CheckInstancesUpgradeAbleRequest: CheckInstancesUpgradeAbleRequest,
     ExistedInstance: ExistedInstance,
+    ModifyNodePoolInstanceTypesRequest: ModifyNodePoolInstanceTypesRequest,
     DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
     UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
@@ -8739,6 +8858,7 @@ module.exports = {
     CreatePrometheusAlertRuleResponse: CreatePrometheusAlertRuleResponse,
     ResourceDeleteOption: ResourceDeleteOption,
     LoginSettings: LoginSettings,
+    ModifyNodePoolInstanceTypesResponse: ModifyNodePoolInstanceTypesResponse,
     CreateClusterNodePoolFromExistingAsgResponse: CreateClusterNodePoolFromExistingAsgResponse,
     DescribeEnableVpcCniProgressRequest: DescribeEnableVpcCniProgressRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
@@ -8775,6 +8895,7 @@ module.exports = {
     CheckInstancesUpgradeAbleResponse: CheckInstancesUpgradeAbleResponse,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
+    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     UpgradeClusterInstancesResponse: UpgradeClusterInstancesResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,

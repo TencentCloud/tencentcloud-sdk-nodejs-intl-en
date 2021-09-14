@@ -21,6 +21,7 @@ const RestoreSecretResponse = models.RestoreSecretResponse;
 const UpdateDescriptionResponse = models.UpdateDescriptionResponse;
 const DescribeSecretResponse = models.DescribeSecretResponse;
 const DescribeSupportedProductsRequest = models.DescribeSupportedProductsRequest;
+const GetSecretValueRequest = models.GetSecretValueRequest;
 const DeleteSecretRequest = models.DeleteSecretRequest;
 const CreateSecretRequest = models.CreateSecretRequest;
 const RotateProductSecretRequest = models.RotateProductSecretRequest;
@@ -32,7 +33,7 @@ const DeleteSecretVersionRequest = models.DeleteSecretVersionRequest;
 const SecretMetadata = models.SecretMetadata;
 const ListSecretVersionIdsRequest = models.ListSecretVersionIdsRequest;
 const DescribeRotationDetailRequest = models.DescribeRotationDetailRequest;
-const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
+const CreateSSHKeyPairSecretResponse = models.CreateSSHKeyPairSecretResponse;
 const UpdateRotationStatusResponse = models.UpdateRotationStatusResponse;
 const CreateSecretResponse = models.CreateSecretResponse;
 const GetRegionsRequest = models.GetRegionsRequest;
@@ -42,6 +43,7 @@ const Tag = models.Tag;
 const ListSecretsRequest = models.ListSecretsRequest;
 const UpdateDescriptionRequest = models.UpdateDescriptionRequest;
 const EnableSecretResponse = models.EnableSecretResponse;
+const CreateSSHKeyPairSecretRequest = models.CreateSSHKeyPairSecretRequest;
 const UpdateRotationStatusRequest = models.UpdateRotationStatusRequest;
 const UpdateSecretRequest = models.UpdateSecretRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
@@ -50,19 +52,21 @@ const RotateProductSecretResponse = models.RotateProductSecretResponse;
 const VersionInfo = models.VersionInfo;
 const TagFilter = models.TagFilter;
 const PutSecretValueRequest = models.PutSecretValueRequest;
+const PutSecretValueResponse = models.PutSecretValueResponse;
 const DescribeRotationHistoryResponse = models.DescribeRotationHistoryResponse;
-const GetSecretValueRequest = models.GetSecretValueRequest;
+const GetSSHKeyPairValueRequest = models.GetSSHKeyPairValueRequest;
+const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const GetServiceStatusResponse = models.GetServiceStatusResponse;
 const DescribeRotationDetailResponse = models.DescribeRotationDetailResponse;
-const DescribeSecretRequest = models.DescribeSecretRequest;
+const EnableSecretRequest = models.EnableSecretRequest;
 const ProductPrivilegeUnit = models.ProductPrivilegeUnit;
 const DescribeRotationHistoryRequest = models.DescribeRotationHistoryRequest;
-const PutSecretValueResponse = models.PutSecretValueResponse;
+const GetSSHKeyPairValueResponse = models.GetSSHKeyPairValueResponse;
 const DeleteSecretResponse = models.DeleteSecretResponse;
 const DisableSecretRequest = models.DisableSecretRequest;
 const CreateProductSecretResponse = models.CreateProductSecretResponse;
 const ListSecretsResponse = models.ListSecretsResponse;
-const EnableSecretRequest = models.EnableSecretRequest;
+const DescribeSecretRequest = models.DescribeSecretRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const ListSecretVersionIdsResponse = models.ListSecretVersionIdsResponse;
 
@@ -132,6 +136,17 @@ This API is only applicable to user-defined credentials but not Tencent Cloud se
     ListSecrets(req, cb) {
         let resp = new ListSecretsResponse();
         this.request("ListSecrets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a secret that hosts SSH keys.
+     * @param {CreateSSHKeyPairSecretRequest} req
+     * @param {function(string, CreateSSHKeyPairSecretResponse):void} cb
+     * @public
+     */
+    CreateSSHKeyPairSecret(req, cb) {
+        let resp = new CreateSSHKeyPairSecretResponse();
+        this.request("CreateSSHKeyPairSecret", req, resp, cb);
     }
 
     /**
@@ -229,14 +244,14 @@ This API is only applicable to user-defined credentials but not Tencent Cloud se
     }
 
     /**
-     * This API is used to enable a Secret and will change its status to `Enabled`. You can call the `GetSecretValue` API to obtain the plaintext of this Secret. Secrets in `PendingDelete` status can only be enabled after being restored by using `RestoreSecret`.
-     * @param {EnableSecretRequest} req
-     * @param {function(string, EnableSecretResponse):void} cb
+     * This API is used to obtain the detailed attribute information of a Secret.
+     * @param {DescribeSecretRequest} req
+     * @param {function(string, DescribeSecretResponse):void} cb
      * @public
      */
-    EnableSecret(req, cb) {
-        let resp = new EnableSecretResponse();
-        this.request("EnableSecret", req, resp, cb);
+    DescribeSecret(req, cb) {
+        let resp = new DescribeSecretResponse();
+        this.request("DescribeSecret", req, resp, cb);
     }
 
     /**
@@ -249,6 +264,17 @@ This API is only applicable to Tencent Cloud service credentials.
     DescribeRotationDetail(req, cb) {
         let resp = new DescribeRotationDetailResponse();
         this.request("DescribeRotationDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the plaintext value of the SSH key secret.
+     * @param {GetSSHKeyPairValueRequest} req
+     * @param {function(string, GetSSHKeyPairValueResponse):void} cb
+     * @public
+     */
+    GetSSHKeyPairValue(req, cb) {
+        let resp = new GetSSHKeyPairValueResponse();
+        this.request("GetSSHKeyPairValue", req, resp, cb);
     }
 
     /**
@@ -274,14 +300,14 @@ This API is only applicable to Tencent Cloud service credentials.
     }
 
     /**
-     * This API is used to obtain the detailed attribute information of a Secret.
-     * @param {DescribeSecretRequest} req
-     * @param {function(string, DescribeSecretResponse):void} cb
+     * This API is used to enable a Secret and will change its status to `Enabled`. You can call the `GetSecretValue` API to obtain the plaintext of this Secret. Secrets in `PendingDelete` status can only be enabled after being restored by using `RestoreSecret`.
+     * @param {EnableSecretRequest} req
+     * @param {function(string, EnableSecretResponse):void} cb
      * @public
      */
-    DescribeSecret(req, cb) {
-        let resp = new DescribeSecretResponse();
-        this.request("DescribeSecret", req, resp, cb);
+    EnableSecret(req, cb) {
+        let resp = new EnableSecretResponse();
+        this.request("EnableSecret", req, resp, cb);
     }
 
     /**

@@ -44,6 +44,7 @@ const Topic = models.Topic;
 const Tag = models.Tag;
 const GroupResponse = models.GroupResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
+const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
 const RouteResponse = models.RouteResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
@@ -75,6 +76,7 @@ const UserResponse = models.UserResponse;
 const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
 const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
 const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
+const DeleteRouteTriggerTimeResponse = models.DeleteRouteTriggerTimeResponse;
 const DescribeUserResponse = models.DescribeUserResponse;
 const AppIdResponse = models.AppIdResponse;
 const DescribeTopicRequest = models.DescribeTopicRequest;
@@ -409,6 +411,17 @@ class CkafkaClient extends AbstractClient {
     DescribeInstancesDetail(req, cb) {
         let resp = new DescribeInstancesDetailResponse();
         this.request("DescribeInstancesDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the delayed trigger time of route deletion.
+     * @param {DeleteRouteTriggerTimeRequest} req
+     * @param {function(string, DeleteRouteTriggerTimeResponse):void} cb
+     * @public
+     */
+    DeleteRouteTriggerTime(req, cb) {
+        let resp = new DeleteRouteTriggerTimeResponse();
+        this.request("DeleteRouteTriggerTime", req, resp, cb);
     }
 
     /**

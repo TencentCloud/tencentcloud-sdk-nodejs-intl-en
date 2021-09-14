@@ -179,8 +179,8 @@ class DescribeSecretResponse extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * 0: user-defined credential; 1: Tencent Cloud service credential.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * `0`: user-defined secret; `1`: database credential; `2`: SSH key secret.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SecretType = null;
@@ -214,6 +214,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.RotationFrequency = null;
 
         /**
+         * Secret name. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * Project ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectID = null;
+
+        /**
+         * ID of the CVM instance associated with the SSH key. ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AssociatedInstanceIDs = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -240,6 +261,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ResourceID = 'ResourceID' in params ? params.ResourceID : null;
         this.RotationStatus = 'RotationStatus' in params ? params.RotationStatus : null;
         this.RotationFrequency = 'RotationFrequency' in params ? params.RotationFrequency : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
+        this.AssociatedInstanceIDs = 'AssociatedInstanceIDs' in params ? params.AssociatedInstanceIDs : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -267,6 +291,42 @@ class DescribeSupportedProductsRequest extends  AbstractModel {
 }
 
 /**
+ * GetSecretValue request structure.
+ * @class
+ */
+class GetSecretValueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of a Secret.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * Specifies the version number of the corresponding credential.
+For Tencent Cloud service credentials such as MySQL credentials, this API is used to get the plaintext information of a previously rotated credential by specifying the credential name and historical version number. If you want to get the plaintext of the credential version currently in use, you need to specify the version number as `SSM_Current`.
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
  * DeleteSecret request structure.
  * @class
  */
@@ -281,10 +341,19 @@ class DeleteSecretRequest extends  AbstractModel {
         this.SecretName = null;
 
         /**
-         * Scheduled deletion time, in days. If set to 0, the Secret is deleted immediately. A number in the range of 1 to 30 indicates the number of retention days. The Secret will be deleted after the set value.
+         * Scheduled deletion time (in days), indicating the number of retention days for the secret. Value range: 0-30. If it is `0`, the secret is deleted immediately.
+For an SSH key secret, this field can only be `0`.
          * @type {number || null}
          */
         this.RecoveryWindowInDays = null;
+
+        /**
+         * Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only valid for SSH key secrets. Valid values:
+`True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.
+`False`: only deletes the SSH key information in the secret.
+         * @type {boolean || null}
+         */
+        this.CleanSSHKey = null;
 
     }
 
@@ -297,6 +366,7 @@ class DeleteSecretRequest extends  AbstractModel {
         }
         this.SecretName = 'SecretName' in params ? params.SecretName : null;
         this.RecoveryWindowInDays = 'RecoveryWindowInDays' in params ? params.RecoveryWindowInDays : null;
+        this.CleanSSHKey = 'CleanSSHKey' in params ? params.CleanSSHKey : null;
 
     }
 }
@@ -794,6 +864,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ProductName = null;
 
+        /**
+         * Secret name. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * Project ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectID = null;
+
+        /**
+         * ID of the CVM instance associated with the SSH key. ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AssociatedInstanceIDs = null;
+
     }
 
     /**
@@ -815,6 +906,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.NextRotationTime = 'NextRotationTime' in params ? params.NextRotationTime : null;
         this.SecretType = 'SecretType' in params ? params.SecretType : null;
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
+        this.AssociatedInstanceIDs = 'AssociatedInstanceIDs' in params ? params.AssociatedInstanceIDs : null;
 
     }
 }
@@ -876,18 +970,50 @@ class DescribeRotationDetailRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAsyncRequestInfo request structure.
+ * CreateSSHKeyPairSecret response structure.
  * @class
  */
-class DescribeAsyncRequestInfoRequest extends  AbstractModel {
+class CreateSSHKeyPairSecretResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID.
+         * Name of the created secret.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * ID of the created SSH key.
+         * @type {string || null}
+         */
+        this.SSHKeyID = null;
+
+        /**
+         * Name of the created SSH key.
+         * @type {string || null}
+         */
+        this.SSHKeyName = null;
+
+        /**
+         * Tag return code. `0`: success; `1`: internal error; `2`: business processing error.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.FlowID = null;
+        this.TagCode = null;
+
+        /**
+         * Tag return message.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagMsg = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -898,7 +1024,12 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowID = 'FlowID' in params ? params.FlowID : null;
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.SSHKeyID = 'SSHKeyID' in params ? params.SSHKeyID : null;
+        this.SSHKeyName = 'SSHKeyName' in params ? params.SSHKeyName : null;
+        this.TagCode = 'TagCode' in params ? params.TagCode : null;
+        this.TagMsg = 'TagMsg' in params ? params.TagMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1174,12 +1305,18 @@ The `PendingCreate` and `CreateFailed` status only take effect when `SecretType`
         this.TagFilters = null;
 
         /**
-         * 0: user-defined credential (default value).
-1: Tencent Cloud service credential.
-Either 1 or 0 can be selected for this parameter.
+         * `0` (default): user-defined secret.
+`1`: Tencent Cloud services secret.
+`2`: SSH key secret.
          * @type {number || null}
          */
         this.SecretType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ProductName = null;
 
     }
 
@@ -1205,6 +1342,7 @@ Either 1 or 0 can be selected for this parameter.
             }
         }
         this.SecretType = 'SecretType' in params ? params.SecretType : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
 
     }
 }
@@ -1280,6 +1418,72 @@ class EnableSecretResponse extends  AbstractModel {
 }
 
 /**
+ * CreateSSHKeyPairSecret request structure.
+ * @class
+ */
+class CreateSSHKeyPairSecretRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * ID of the project to which the created SSH key belongs.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Description, such as what it is used for. It contains up to 2,048 bytes.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Specifies a KMS CMK to encrypt the secret.
+If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.
+You can also specify a custom KMS CMK created in the same region for encryption.
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
+
+        /**
+         * List of tags.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * UpdateRotationStatus request structure.
  * @class
  */
@@ -1295,8 +1499,8 @@ class UpdateRotationStatusRequest extends  AbstractModel {
 
         /**
          * Specifies whether to enable rotation.
-True: enable rotation.
-False: disable rotation.
+`true`: enables rotation.
+`false`: disables rotation.
          * @type {boolean || null}
          */
         this.EnableRotation = null;
@@ -1308,8 +1512,8 @@ False: disable rotation.
         this.Frequency = null;
 
         /**
-         * User-Defined rotation start time in the format of 2006-01-02 15:04:05.
-When `EnableRotation` is `True`, if `RotationBeginTime` is left empty, the current time will be entered by default.
+         * User-defined rotation start time in the format of 2006-01-02 15:04:05.
+When `EnableRotation` is `true` and `RotationBeginTime` is left empty, the current time will be entered by default.
          * @type {string || null}
          */
         this.RotationBeginTime = null;
@@ -1607,6 +1811,48 @@ Either `SecretBinary` or `SecretString` must be set.
 }
 
 /**
+ * PutSecretValue response structure.
+ * @class
+ */
+class PutSecretValueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the Secret.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * Version ID that is newly added.
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRotationHistory response structure.
  * @class
  */
@@ -1649,25 +1895,24 @@ class DescribeRotationHistoryResponse extends  AbstractModel {
 }
 
 /**
- * GetSecretValue request structure.
+ * GetSSHKeyPairValue request structure.
  * @class
  */
-class GetSecretValueRequest extends  AbstractModel {
+class GetSSHKeyPairValueRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of a Secret.
+         * Secret name. This field is only valid for SSH key secrets.
          * @type {string || null}
          */
         this.SecretName = null;
 
         /**
-         * Specifies the version number of the corresponding credential.
-For Tencent Cloud service credentials such as MySQL credentials, this API is used to get the plaintext information of a previously rotated credential by specifying the credential name and historical version number. If you want to get the plaintext of the credential version currently in use, you need to specify the version number as `SSM_Current`.
+         * 
          * @type {string || null}
          */
-        this.VersionId = null;
+        this.SSHKeyId = null;
 
     }
 
@@ -1679,7 +1924,35 @@ For Tencent Cloud service credentials such as MySQL credentials, this API is use
             return;
         }
         this.SecretName = 'SecretName' in params ? params.SecretName : null;
-        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.SSHKeyId = 'SSHKeyId' in params ? params.SSHKeyId : null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRequestInfo request structure.
+ * @class
+ */
+class DescribeAsyncRequestInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID.
+         * @type {number || null}
+         */
+        this.FlowID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowID = 'FlowID' in params ? params.FlowID : null;
 
     }
 }
@@ -1735,7 +2008,7 @@ class DescribeRotationDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Specifies whether to allow rotation. True: yes; False: no.
+         * Whether to enable rotation. `true`: enabled; `false`: disabled.
          * @type {boolean || null}
          */
         this.EnableRotation = null;
@@ -1786,15 +2059,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeSecret request structure.
+ * EnableSecret request structure.
  * @class
  */
-class DescribeSecretRequest extends  AbstractModel {
+class EnableSecretRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of a Secret whose detailed information is to be obtained.
+         * Name of the Secret to be enabled.
          * @type {string || null}
          */
         this.SecretName = null;
@@ -1923,24 +2196,50 @@ class DescribeRotationHistoryRequest extends  AbstractModel {
 }
 
 /**
- * PutSecretValue response structure.
+ * GetSSHKeyPairValue response structure.
  * @class
  */
-class PutSecretValueResponse extends  AbstractModel {
+class GetSSHKeyPairValueResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of the Secret.
+         * ID of the SSH key.
          * @type {string || null}
          */
-        this.SecretName = null;
+        this.SSHKeyID = null;
 
         /**
-         * Version ID that is newly added.
+         * Plaintext value of the Base64-encoded public key.
          * @type {string || null}
          */
-        this.VersionId = null;
+        this.PublicKey = null;
+
+        /**
+         * Plaintext value of the Base64-encoded private key.
+         * @type {string || null}
+         */
+        this.PrivateKey = null;
+
+        /**
+         * ID of the project to which the SSH key belongs.
+         * @type {number || null}
+         */
+        this.ProjectID = null;
+
+        /**
+         * Description of the SSH key.
+The description can be modified in the CVM console.
+         * @type {string || null}
+         */
+        this.SSHKeyDescription = null;
+
+        /**
+         * Name of the SSH key.
+The name can be modified in the CVM console.
+         * @type {string || null}
+         */
+        this.SSHKeyName = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1957,8 +2256,12 @@ class PutSecretValueResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecretName = 'SecretName' in params ? params.SecretName : null;
-        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.SSHKeyID = 'SSHKeyID' in params ? params.SSHKeyID : null;
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+        this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
+        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
+        this.SSHKeyDescription = 'SSHKeyDescription' in params ? params.SSHKeyDescription : null;
+        this.SSHKeyName = 'SSHKeyName' in params ? params.SSHKeyName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2144,15 +2447,15 @@ class ListSecretsResponse extends  AbstractModel {
 }
 
 /**
- * EnableSecret request structure.
+ * DescribeSecret request structure.
  * @class
  */
-class EnableSecretRequest extends  AbstractModel {
+class DescribeSecretRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name of the Secret to be enabled.
+         * Name of a Secret whose detailed information is to be obtained.
          * @type {string || null}
          */
         this.SecretName = null;
@@ -2249,6 +2552,7 @@ module.exports = {
     UpdateDescriptionResponse: UpdateDescriptionResponse,
     DescribeSecretResponse: DescribeSecretResponse,
     DescribeSupportedProductsRequest: DescribeSupportedProductsRequest,
+    GetSecretValueRequest: GetSecretValueRequest,
     DeleteSecretRequest: DeleteSecretRequest,
     CreateSecretRequest: CreateSecretRequest,
     RotateProductSecretRequest: RotateProductSecretRequest,
@@ -2260,7 +2564,7 @@ module.exports = {
     SecretMetadata: SecretMetadata,
     ListSecretVersionIdsRequest: ListSecretVersionIdsRequest,
     DescribeRotationDetailRequest: DescribeRotationDetailRequest,
-    DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
+    CreateSSHKeyPairSecretResponse: CreateSSHKeyPairSecretResponse,
     UpdateRotationStatusResponse: UpdateRotationStatusResponse,
     CreateSecretResponse: CreateSecretResponse,
     GetRegionsRequest: GetRegionsRequest,
@@ -2270,6 +2574,7 @@ module.exports = {
     ListSecretsRequest: ListSecretsRequest,
     UpdateDescriptionRequest: UpdateDescriptionRequest,
     EnableSecretResponse: EnableSecretResponse,
+    CreateSSHKeyPairSecretRequest: CreateSSHKeyPairSecretRequest,
     UpdateRotationStatusRequest: UpdateRotationStatusRequest,
     UpdateSecretRequest: UpdateSecretRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
@@ -2278,19 +2583,21 @@ module.exports = {
     VersionInfo: VersionInfo,
     TagFilter: TagFilter,
     PutSecretValueRequest: PutSecretValueRequest,
+    PutSecretValueResponse: PutSecretValueResponse,
     DescribeRotationHistoryResponse: DescribeRotationHistoryResponse,
-    GetSecretValueRequest: GetSecretValueRequest,
+    GetSSHKeyPairValueRequest: GetSSHKeyPairValueRequest,
+    DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     GetServiceStatusResponse: GetServiceStatusResponse,
     DescribeRotationDetailResponse: DescribeRotationDetailResponse,
-    DescribeSecretRequest: DescribeSecretRequest,
+    EnableSecretRequest: EnableSecretRequest,
     ProductPrivilegeUnit: ProductPrivilegeUnit,
     DescribeRotationHistoryRequest: DescribeRotationHistoryRequest,
-    PutSecretValueResponse: PutSecretValueResponse,
+    GetSSHKeyPairValueResponse: GetSSHKeyPairValueResponse,
     DeleteSecretResponse: DeleteSecretResponse,
     DisableSecretRequest: DisableSecretRequest,
     CreateProductSecretResponse: CreateProductSecretResponse,
     ListSecretsResponse: ListSecretsResponse,
-    EnableSecretRequest: EnableSecretRequest,
+    DescribeSecretRequest: DescribeSecretRequest,
     GetServiceStatusRequest: GetServiceStatusRequest,
     ListSecretVersionIdsResponse: ListSecretVersionIdsResponse,
 

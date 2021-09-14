@@ -86,6 +86,7 @@ const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
 const Taint = models.Taint;
 const CheckInstancesUpgradeAbleRequest = models.CheckInstancesUpgradeAbleRequest;
 const ExistedInstance = models.ExistedInstance;
+const ModifyNodePoolInstanceTypesRequest = models.ModifyNodePoolInstanceTypesRequest;
 const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
 const UpgradeAbleInstancesItem = models.UpgradeAbleInstancesItem;
 const GetUpgradeInstanceProgressRequest = models.GetUpgradeInstanceProgressRequest;
@@ -103,6 +104,7 @@ const EnableVpcCniNetworkTypeRequest = models.EnableVpcCniNetworkTypeRequest;
 const CreatePrometheusAlertRuleResponse = models.CreatePrometheusAlertRuleResponse;
 const ResourceDeleteOption = models.ResourceDeleteOption;
 const LoginSettings = models.LoginSettings;
+const ModifyNodePoolInstanceTypesResponse = models.ModifyNodePoolInstanceTypesResponse;
 const CreateClusterNodePoolFromExistingAsgResponse = models.CreateClusterNodePoolFromExistingAsgResponse;
 const DescribeEnableVpcCniProgressRequest = models.DescribeEnableVpcCniProgressRequest;
 const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
@@ -139,6 +141,7 @@ const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
 const CheckInstancesUpgradeAbleResponse = models.CheckInstancesUpgradeAbleResponse;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
+const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const UpgradeClusterInstancesResponse = models.UpgradeClusterInstancesResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
@@ -198,6 +201,17 @@ class TkeClient extends AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", credential, region, profile);
     }
     
+    /**
+     * This API is used to modify the model of instances in a node pool.
+     * @param {ModifyNodePoolInstanceTypesRequest} req
+     * @param {function(string, ModifyNodePoolInstanceTypesResponse):void} cb
+     * @public
+     */
+    ModifyNodePoolInstanceTypes(req, cb) {
+        let resp = new ModifyNodePoolInstanceTypesResponse();
+        this.request("ModifyNodePoolInstanceTypes", req, resp, cb);
+    }
+
     /**
      * This API is used to check which nodes can be upgraded in the given node list. 
      * @param {CheckInstancesUpgradeAbleRequest} req

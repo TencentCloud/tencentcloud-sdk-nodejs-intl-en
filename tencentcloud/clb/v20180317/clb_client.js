@@ -32,7 +32,7 @@ const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const DescribeLoadBalancerTrafficResponse = models.DescribeLoadBalancerTrafficResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
-const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
+const DescribeCustomizedConfigListResponse = models.DescribeCustomizedConfigListResponse;
 const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
@@ -46,7 +46,7 @@ const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const TargetGroupInstance = models.TargetGroupInstance;
-const DescribeRewriteResponse = models.DescribeRewriteResponse;
+const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
 const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
@@ -60,7 +60,7 @@ const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersReq
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
-const DescribeListenersResponse = models.DescribeListenersResponse;
+const DescribeCustomizedConfigListRequest = models.DescribeCustomizedConfigListRequest;
 const AutoRewriteRequest = models.AutoRewriteRequest;
 const DescribeLoadBalancerListByCertIdResponse = models.DescribeLoadBalancerListByCertIdResponse;
 const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
@@ -76,6 +76,7 @@ const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealth
 const DescribeClsLogSetRequest = models.DescribeClsLogSetRequest;
 const Listener = models.Listener;
 const LoadBalancerTraffic = models.LoadBalancerTraffic;
+const ConfigListItem = models.ConfigListItem;
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
 const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
 const ReplaceCertForLoadBalancersResponse = models.ReplaceCertForLoadBalancersResponse;
@@ -88,6 +89,7 @@ const AssociateTargetGroupsResponse = models.AssociateTargetGroupsResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteListenerRequest = models.DeleteListenerRequest;
 const ClassicalHealth = models.ClassicalHealth;
+const DescribeCustomizedConfigAssociateListRequest = models.DescribeCustomizedConfigAssociateListRequest;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const DescribeLoadBalancersDetailRequest = models.DescribeLoadBalancersDetailRequest;
 const TargetGroupBackend = models.TargetGroupBackend;
@@ -104,10 +106,12 @@ const LBChargePrepaid = models.LBChargePrepaid;
 const ClassicalListener = models.ClassicalListener;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CertificateInput = models.CertificateInput;
+const DescribeCustomizedConfigAssociateListResponse = models.DescribeCustomizedConfigAssociateListResponse;
 const CreateListenerResponse = models.CreateListenerResponse;
 const CreateTargetGroupResponse = models.CreateTargetGroupResponse;
 const CreateLoadBalancerSnatIpsResponse = models.CreateLoadBalancerSnatIpsResponse;
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
+const DescribeListenersResponse = models.DescribeListenersResponse;
 const RuleOutput = models.RuleOutput;
 const CreateTopicResponse = models.CreateTopicResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
@@ -121,6 +125,7 @@ const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
 const DescribeTargetGroupInstancesResponse = models.DescribeTargetGroupInstancesResponse;
 const CreateTargetGroupRequest = models.CreateTargetGroupRequest;
 const ClusterItem = models.ClusterItem;
+const BindDetailItem = models.BindDetailItem;
 const CreateListenerRequest = models.CreateListenerRequest;
 const CreateClsLogSetRequest = models.CreateClsLogSetRequest;
 const DisassociateTargetGroupsRequest = models.DisassociateTargetGroupsRequest;
@@ -151,7 +156,7 @@ const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const InternetAccessible = models.InternetAccessible;
 const CreateLoadBalancerSnatIpsRequest = models.CreateLoadBalancerSnatIpsRequest;
 const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
-const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
+const DescribeQuotaResponse = models.DescribeQuotaResponse;
 const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
 const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
 const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
@@ -164,6 +169,7 @@ const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListeners
 const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const DescribeRewriteResponse = models.DescribeRewriteResponse;
 const Quota = models.Quota;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
@@ -177,7 +183,7 @@ const DeleteListenerResponse = models.DeleteListenerResponse;
 const DeleteLoadBalancerSnatIpsResponse = models.DeleteLoadBalancerSnatIpsResponse;
 const CertificateOutput = models.CertificateOutput;
 const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
-const DescribeQuotaResponse = models.DescribeQuotaResponse;
+const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
 const TargetHealth = models.TargetHealth;
 const TargetGroupAssociation = models.TargetGroupAssociation;
 const ListenerHealth = models.ListenerHealth;
@@ -229,6 +235,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     DescribeClassicalLBListeners(req, cb) {
         let resp = new DescribeClassicalLBListenersResponse();
         this.request("DescribeClassicalLBListeners", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the configured location, bound server or bound CLB instance. If there are domain names, the result will be filtered by domain name.
+     * @param {DescribeCustomizedConfigAssociateListRequest} req
+     * @param {function(string, DescribeCustomizedConfigAssociateListResponse):void} cb
+     * @public
+     */
+    DescribeCustomizedConfigAssociateList(req, cb) {
+        let resp = new DescribeCustomizedConfigAssociateListResponse();
+        this.request("DescribeCustomizedConfigAssociateList", req, resp, cb);
     }
 
     /**
@@ -463,6 +480,18 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
+     * This API (ModifyTargetPort) is used to modify the port of a real server bound to a listener.
+This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+     * @param {ModifyTargetPortRequest} req
+     * @param {function(string, ModifyTargetPortResponse):void} cb
+     * @public
+     */
+    ModifyTargetPort(req, cb) {
+        let resp = new ModifyTargetPortResponse();
+        this.request("ModifyTargetPort", req, resp, cb);
+    }
+
+    /**
      * This API (DeleteRule) is used to delete a forwarding rule under a layer-7 CLB instance listener
 This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
      * @param {DeleteRuleRequest} req
@@ -603,15 +632,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (ModifyTargetPort) is used to modify the port of a real server bound to a listener.
-This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
-     * @param {ModifyTargetPortRequest} req
-     * @param {function(string, ModifyTargetPortResponse):void} cb
+     * This API is used to pull custom configuration lists to return the user configuration of `AppId`.
+     * @param {DescribeCustomizedConfigListRequest} req
+     * @param {function(string, DescribeCustomizedConfigListResponse):void} cb
      * @public
      */
-    ModifyTargetPort(req, cb) {
-        let resp = new ModifyTargetPortResponse();
-        this.request("ModifyTargetPort", req, resp, cb);
+    DescribeCustomizedConfigList(req, cb) {
+        let resp = new DescribeCustomizedConfigListResponse();
+        this.request("DescribeCustomizedConfigList", req, resp, cb);
     }
 
     /**

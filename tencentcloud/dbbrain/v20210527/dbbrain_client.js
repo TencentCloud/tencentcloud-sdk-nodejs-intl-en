@@ -33,6 +33,7 @@ const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
 const DescribeMySqlProcessListResponse = models.DescribeMySqlProcessListResponse;
 const HealthStatus = models.HealthStatus;
 const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
+const KillMySqlThreadsResponse = models.KillMySqlThreadsResponse;
 const CreateSchedulerMailProfileRequest = models.CreateSchedulerMailProfileRequest;
 const ContactItem = models.ContactItem;
 const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
@@ -55,6 +56,7 @@ const TableSpaceData = models.TableSpaceData;
 const EventInfo = models.EventInfo;
 const DescribeMailProfileRequest = models.DescribeMailProfileRequest;
 const DeleteSecurityAuditLogExportTasksResponse = models.DeleteSecurityAuditLogExportTasksResponse;
+const KillMySqlThreadsRequest = models.KillMySqlThreadsRequest;
 const CreateDBDiagReportUrlRequest = models.CreateDBDiagReportUrlRequest;
 const ScoreDetail = models.ScoreDetail;
 const HealthScoreInfo = models.HealthScoreInfo;
@@ -409,6 +411,17 @@ class DbbrainClient extends AbstractClient {
     ModifyDiagDBInstanceConf(req, cb) {
         let resp = new ModifyDiagDBInstanceConfResponse();
         this.request("ModifyDiagDBInstanceConf", req, resp, cb);
+    }
+
+    /**
+     * This API is used to interrupt the current session according to the session ID. It needs to be called twice to commit the session interruption task in two stages. In the pre-commit stage, the stage value is `Prepare`, and the returned value is `SqlExecId’. In the commit stage, the stage value is `Commit`, and `SqlExecId` will be passed in as a parameter. Then the session process will be terminated.
+     * @param {KillMySqlThreadsRequest} req
+     * @param {function(string, KillMySqlThreadsResponse):void} cb
+     * @public
+     */
+    KillMySqlThreads(req, cb) {
+        let resp = new KillMySqlThreadsResponse();
+        this.request("KillMySqlThreads", req, resp, cb);
     }
 
     /**

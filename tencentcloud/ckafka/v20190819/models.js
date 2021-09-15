@@ -1808,7 +1808,7 @@ class CreateAclRequest extends  AbstractModel {
         this.Principal = null;
 
         /**
-         * The resource name list, which is in JSON string format. Only one of `ResourceName` and `resourceNameList` can be specified.
+         * The resource name list, which is in JSON string format. Either `ResourceName` or `resourceNameList` can be specified.
          * @type {string || null}
          */
         this.ResourceNameList = null;

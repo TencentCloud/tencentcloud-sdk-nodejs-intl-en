@@ -3480,19 +3480,19 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
         this.OplogSize = null;
 
         /**
-         * Node quantity after configuration modification. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the node quantity won't change.
+         * Node quantity after configuration modification. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the node quantity remains unchanged.
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * Shard quantity after configuration modification, which can only be increased rather than decreased. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the shard quantity won't change.
+         * Shard quantity after configuration modification, which can only be increased rather than decreased. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the shard quantity remains unchanged.
          * @type {number || null}
          */
         this.ReplicateSetNum = null;
 
         /**
-         * Switch time. Valid values: `0` (upon modification completion), `1` (during maintenance time). Default value: `0`. If the node quantity or the shard quantity is modified, `1` is invalid.
+         * Switch time. Valid values: `0` (upon modification completion), `1` (during maintenance time). Default value: `0`. If the quantity of nodes or shards is modified, the value will be `0`.
          * @type {number || null}
          */
         this.InMaintenance = null;

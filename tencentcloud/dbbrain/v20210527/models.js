@@ -1073,6 +1073,49 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
 }
 
 /**
+ * KillMySqlThreads response structure.
+ * @class
+ */
+class KillMySqlThreadsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID list of MySQL sessions that have been killed.
+         * @type {Array.<number> || null}
+         */
+        this.Threads = null;
+
+        /**
+         * Execution ID, which is output in the “Prepare” stage and used to specify the ID of the session to be killed in the “Commit” stage.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SqlExecId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Threads = 'Threads' in params ? params.Threads : null;
+        this.SqlExecId = 'SqlExecId' in params ? params.SqlExecId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateSchedulerMailProfile request structure.
  * @class
  */
@@ -2235,6 +2278,62 @@ class DeleteSecurityAuditLogExportTasksResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * KillMySqlThreads request structure.
+ * @class
+ */
+class KillMySqlThreadsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The stage of a session killing task. Valid values: Prepare (preparation stage), Commit (commit stage).
+         * @type {string || null}
+         */
+        this.Stage = null;
+
+        /**
+         * The ID list of MySQL sessions to be killed. This parameter is used in the “Prepare” stage.
+         * @type {Array.<number> || null}
+         */
+        this.Threads = null;
+
+        /**
+         * Execution ID. This parameter is used in the “Commit” stage.
+         * @type {string || null}
+         */
+        this.SqlExecId = null;
+
+        /**
+         * Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Stage = 'Stage' in params ? params.Stage : null;
+        this.Threads = 'Threads' in params ? params.Threads : null;
+        this.SqlExecId = 'SqlExecId' in params ? params.SqlExecId : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -4919,6 +5018,7 @@ module.exports = {
     DescribeMySqlProcessListResponse: DescribeMySqlProcessListResponse,
     HealthStatus: HealthStatus,
     DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
+    KillMySqlThreadsResponse: KillMySqlThreadsResponse,
     CreateSchedulerMailProfileRequest: CreateSchedulerMailProfileRequest,
     ContactItem: ContactItem,
     DescribeDBSpaceStatusRequest: DescribeDBSpaceStatusRequest,
@@ -4941,6 +5041,7 @@ module.exports = {
     EventInfo: EventInfo,
     DescribeMailProfileRequest: DescribeMailProfileRequest,
     DeleteSecurityAuditLogExportTasksResponse: DeleteSecurityAuditLogExportTasksResponse,
+    KillMySqlThreadsRequest: KillMySqlThreadsRequest,
     CreateDBDiagReportUrlRequest: CreateDBDiagReportUrlRequest,
     ScoreDetail: ScoreDetail,
     HealthScoreInfo: HealthScoreInfo,

@@ -7676,6 +7676,12 @@ class DescribeAlarmNoticesRequest extends  AbstractModel {
          */
         this.GroupIds = null;
 
+        /**
+         * Filter by notification template ID. If an empty array is passed in or if this parameter is left empty, the filter operation will not be performed.
+         * @type {Array.<string> || null}
+         */
+        this.NoticeIds = null;
+
     }
 
     /**
@@ -7694,6 +7700,7 @@ class DescribeAlarmNoticesRequest extends  AbstractModel {
         this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
         this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+        this.NoticeIds = 'NoticeIds' in params ? params.NoticeIds : null;
 
     }
 }

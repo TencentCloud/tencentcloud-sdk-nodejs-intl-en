@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const TopicDetail = models.TopicDetail;
 const DeleteAclRequest = models.DeleteAclRequest;
 const GroupInfoMember = models.GroupInfoMember;
+const BatchCreateAclRequest = models.BatchCreateAclRequest;
 const DeleteUserRequest = models.DeleteUserRequest;
 const PartitionOffset = models.PartitionOffset;
 const DescribeACLRequest = models.DescribeACLRequest;
@@ -67,7 +68,7 @@ const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
-const DescribeRouteRequest = models.DescribeRouteRequest;
+const InstanceDetailResponse = models.InstanceDetailResponse;
 const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
 const DescribeRegionRequest = models.DescribeRegionRequest;
@@ -104,11 +105,12 @@ const InstanceAttributesResponse = models.InstanceAttributesResponse;
 const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
+const BatchCreateAclResponse = models.BatchCreateAclResponse;
 const CreateUserRequest = models.CreateUserRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const ModifyPasswordResponse = models.ModifyPasswordResponse;
-const InstanceDetailResponse = models.InstanceDetailResponse;
+const DescribeRouteRequest = models.DescribeRouteRequest;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const GroupInfoResponse = models.GroupInfoResponse;
 const TopicAttributesResponse = models.TopicAttributesResponse;
@@ -123,6 +125,7 @@ const ConsumerRecord = models.ConsumerRecord;
 const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
 const Route = models.Route;
+const AclRuleInfo = models.AclRuleInfo;
 const Acl = models.Acl;
 const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
@@ -411,6 +414,17 @@ class CkafkaClient extends AbstractClient {
     DescribeInstancesDetail(req, cb) {
         let resp = new DescribeInstancesDetailResponse();
         this.request("DescribeInstancesDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create ACL policies in batches.
+     * @param {BatchCreateAclRequest} req
+     * @param {function(string, BatchCreateAclResponse):void} cb
+     * @public
+     */
+    BatchCreateAcl(req, cb) {
+        let resp = new BatchCreateAclResponse();
+        this.request("BatchCreateAcl", req, resp, cb);
     }
 
     /**

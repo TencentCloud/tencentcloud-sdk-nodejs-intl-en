@@ -632,6 +632,12 @@ class AccessConfiguration extends  AbstractModel {
          */
         this.Concurrent = null;
 
+        /**
+         * Network type. Valid values: `normal` (default), `cn2`
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
     }
 
     /**
@@ -644,6 +650,7 @@ class AccessConfiguration extends  AbstractModel {
         this.AccessRegion = 'AccessRegion' in params ? params.AccessRegion : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
 
     }
 }
@@ -2923,6 +2930,12 @@ class CreateProxyGroupRequest extends  AbstractModel {
          */
         this.IPAddressVersion = null;
 
+        /**
+         * Package type of connection group. Valid values: `Thunder` (default) and `Accelerator`.
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -2954,6 +2967,7 @@ class CreateProxyGroupRequest extends  AbstractModel {
             }
         }
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -4275,6 +4289,20 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.UnhealthyThreshold = null;
 
+        /**
+         * Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
+        /**
+         * Specifies whether to enable session persistence. Values: `0` (disable), `1` (enable)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.SessionPersist = null;
+
     }
 
     /**
@@ -4309,6 +4337,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
         this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
         this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
 
     }
 }
@@ -5349,6 +5379,12 @@ class DescribeAccessRegionsByDestRegionRequest extends  AbstractModel {
          */
         this.IPAddressVersion = null;
 
+        /**
+         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -5360,6 +5396,7 @@ class DescribeAccessRegionsByDestRegionRequest extends  AbstractModel {
         }
         this.DestRegion = 'DestRegion' in params ? params.DestRegion : null;
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -6120,6 +6157,12 @@ The connection is to be replicated if this parameter is set.
          */
         this.IPAddressVersion = null;
 
+        /**
+         * Network type. Valid values: `normal` (default), `cn2`
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
     }
 
     /**
@@ -6149,6 +6192,7 @@ The connection is to be replicated if this parameter is set.
         this.ClonedProxyId = 'ClonedProxyId' in params ? params.ClonedProxyId : null;
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
 
     }
 }
@@ -6694,6 +6738,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.IPAddressVersion = null;
 
+        /**
+         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -6733,6 +6784,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Version = 'Version' in params ? params.Version : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -7442,6 +7494,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DiscountFlowUnitPrice = null;
 
         /**
+         * Dedicated BGP bandwidth price. Unit: USD/Mbps/day
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Cn2BandwidthPrice = null;
+
+        /**
+         * Dedicated BGP bandwidth discount price. Unit: USD/Mbps/day
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Cn2BandwidthPriceWithDiscount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -7470,6 +7536,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Currency = 'Currency' in params ? params.Currency : null;
         this.FlowUnitPrice = 'FlowUnitPrice' in params ? params.FlowUnitPrice : null;
         this.DiscountFlowUnitPrice = 'DiscountFlowUnitPrice' in params ? params.DiscountFlowUnitPrice : null;
+        this.Cn2BandwidthPrice = 'Cn2BandwidthPrice' in params ? params.Cn2BandwidthPrice : null;
+        this.Cn2BandwidthPriceWithDiscount = 'Cn2BandwidthPriceWithDiscount' in params ? params.Cn2BandwidthPriceWithDiscount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8002,19 +8070,20 @@ Other values: specified project
         this.ProjectId = null;
 
         /**
+         * Filter condition   
+Each request can have a maximum of 5 filter conditions for `Filter.Values`.
+RealServerRegion - String - Required: No - Filter by origin server region. You can also check the value of `RegionId` returned by the `DescribeDestRegions` API.
+PackageType - String - Required: No - Filter by type of connection groups, which can be `Thunder` (general connection group) or `Accelerator` (game accelerator connection group).
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
          * Tag list. If this field exists, the list of the resources with the tag will be pulled.
 It supports up to 5 tags. If there are two or more tags, the connection groups tagged any of them will be pulled.
          * @type {Array.<TagPair> || null}
          */
         this.TagSet = null;
-
-        /**
-         * Filter conditions.   
-The limit on Filter.Values of each request is 5.
-RealServerRegion - String - Required: No - Filter by origin server region; Refer to the RegionId in the results returned by DescribeDestRegions API.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
 
     }
 
@@ -8029,21 +8098,21 @@ RealServerRegion - String - Required: No - Filter by origin server region; Refer
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
-        if (params.TagSet) {
-            this.TagSet = new Array();
-            for (let z in params.TagSet) {
-                let obj = new TagPair();
-                obj.deserialize(params.TagSet[z]);
-                this.TagSet.push(obj);
-            }
-        }
-
         if (params.Filters) {
             this.Filters = new Array();
             for (let z in params.Filters) {
                 let obj = new Filter();
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
+            }
+        }
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new TagPair();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
             }
         }
 
@@ -9508,6 +9577,18 @@ class CheckProxyCreateRequest extends  AbstractModel {
          */
         this.IPAddressVersion = null;
 
+        /**
+         * Network type. Valid values: `normal` (default), `cn2`
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -9523,6 +9604,8 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -9541,6 +9624,12 @@ class DescribeRegionAndPriceRequest extends  AbstractModel {
          */
         this.IPAddressVersion = null;
 
+        /**
+         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -9551,6 +9640,7 @@ class DescribeRegionAndPriceRequest extends  AbstractModel {
             return;
         }
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -10183,6 +10273,18 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
          */
         this.IPAddressVersion = null;
 
+        /**
+         * Network type. Valid values: `normal` (default), `cn2`
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
     }
 
     /**
@@ -10200,6 +10302,8 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -10352,6 +10456,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CreateTime = null;
 
+        /**
+         * Specifies whether to enable session persistence. Values: `0` (disable), `1` (enable)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SessionPersist = null;
+
     }
 
     /**
@@ -10380,6 +10491,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
 
     }
 }
@@ -10564,8 +10676,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ModifyConfigTime = null;
 
         /**
-         * Connection type. 104: SILVER connection.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Connection type
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ProxyType = null;
@@ -10583,6 +10695,20 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          * @type {string || null}
          */
         this.IPAddressVersion = null;
+
+        /**
+         * Network type. Valid values: `normal`, `cn2`
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.PackageType = null;
 
     }
 
@@ -10639,6 +10765,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }

@@ -871,6 +871,55 @@ class CreatePacketFilterConfigResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeListWaterPrintConfig request structure.
+ * @class
+ */
+class DescribeListWaterPrintConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Starting offset of the page. Value: (number of pages – 1) * items per page.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of items per page. The default value is 20 when `Limit = 0`. The maximum value is 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Anti-DDoS instance ID filter. Anti-DDoS instance prefix wildcard search is supported. For example, you can filter Anti-DDoS Pro instances by `bgp-*`.
+         * @type {string || null}
+         */
+        this.FilterInstanceId = null;
+
+        /**
+         * IP filter
+         * @type {string || null}
+         */
+        this.FilterIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FilterInstanceId = 'FilterInstanceId' in params ? params.FilterInstanceId : null;
+        this.FilterIp = 'FilterIp' in params ? params.FilterIp : null;
+
+    }
+}
+
+/**
  * CreateL7RuleCerts request structure.
  * @class
  */
@@ -2794,7 +2843,10 @@ class DescribeBasicDeviceStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * The resource and status is returned.
+         * Status of the specified Anti-DDoS resource. Valid values:
+`1`: The IP is blocked.
+`2`: The P is normal.
+`3`: The IP is being attacked.
          * @type {Array.<KeyValue> || null}
          */
         this.Data = null;
@@ -4169,6 +4221,41 @@ class SuccessCode extends  AbstractModel {
 }
 
 /**
+ * "Protocol" and "Port" parameters
+ * @class
+ */
+class ProtocolPort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Protocol. Valid values: `tcp`, `udp`
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Port
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
  * DescribeListBGPInstances response structure.
  * @class
  */
@@ -5091,6 +5178,48 @@ class CreateBlackWhiteIpListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBizTrend response structure.
+ * @class
+ */
+class DescribeBizTrendResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Value at a time point on the curve
+         * @type {Array.<number> || null}
+         */
+        this.DataList = null;
+
+        /**
+         * Statistical dimension
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataList = 'DataList' in params ? params.DataList : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateBoundIP response structure.
  * @class
  */
@@ -5248,6 +5377,98 @@ class DescribeListSchedulingDomainResponse extends  AbstractModel {
                 this.DomainList.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCCTrend response structure.
+ * @class
+ */
+class DescribeCCTrendResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of values returned
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Instance IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Sampling period. Valid values: `300` (5 minutes), `3600` (one hour), `86400` (one day)
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Beginning of the time range for the query
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End of the time range for the query
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Value array
+         * @type {Array.<number> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Instance ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Metric. Valid values: `inqps`: total peak requests; `dropqps`: peak attack requests
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5501,36 +5722,54 @@ class RegionInfo extends  AbstractModel {
 }
 
 /**
- * DescribeListWaterPrintConfig request structure.
+ * DescribeDDoSTrend request structure.
  * @class
  */
-class DescribeListWaterPrintConfigRequest extends  AbstractModel {
+class DescribeDDoSTrendRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Starting offset of the page. Value: (number of pages – 1) * items per page.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of items per page. The default value is 20 when `Limit = 0`. The maximum value is 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Anti-DDoS instance ID filter. Anti-DDoS instance prefix wildcard search is supported. For example, you can filter Anti-DDoS Pro instances by `bgp-*`.
+         * Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
          * @type {string || null}
          */
-        this.FilterInstanceId = null;
+        this.Business = null;
 
         /**
-         * IP filter
+         * Instance IP
          * @type {string || null}
          */
-        this.FilterIp = null;
+        this.Ip = null;
+
+        /**
+         * Sampling period. Valid values: `300` (5 minutes), `3600` (one hour), `86400` (one day)
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Beginning of the time range for the query
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End of the time range for the query
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Metric. Valid values: `bps`: attack traffic bandwidth; `pps`: attack packet rate
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * Instance ID. Leave this field empty when `Business` is `basic`, as basic protection does not require an instance.
+         * @type {string || null}
+         */
+        this.Id = null;
 
     }
 
@@ -5541,10 +5780,13 @@ class DescribeListWaterPrintConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.FilterInstanceId = 'FilterInstanceId' in params ? params.FilterInstanceId : null;
-        this.FilterIp = 'FilterIp' in params ? params.FilterIp : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -5735,6 +5977,98 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * DescribeBizTrend request structure.
+ * @class
+ */
+class DescribeBizTrendRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Statistical method. Valid values: `max`, `min`, `avg`, `sum`. It can only be `max` if the statistical dimension is traffic rate or packet rate.
+         * @type {string || null}
+         */
+        this.Statistics = null;
+
+        /**
+         * Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Sampling interval. Valid values: `300`, `1800`, `3600`, `21600`, `86400`
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Beginning of the time range for the query, such as `2020-09-22 00:00:00`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End of the time range for the query, such as `2020-09-22 00:00:00`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Metric. Valid values: `connum`, `new_conn`, `inactive_conn`, `intraffic`, `outtraffic`, `inpkg`, `outpkg`, `qps`
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * You can query data by specifying a domain name when the metric is `qps`.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Protocol and port list, which is valid when the metric is `connum`, `new_conn` or `inactive_conn`. Valid protocols: `TCP`, `UDP`, `HTTP`, `HTTPS`
+         * @type {Array.<ProtocolPort> || null}
+         */
+        this.ProtoInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Statistics = 'Statistics' in params ? params.Statistics : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.ProtoInfo) {
+            this.ProtoInfo = new Array();
+            for (let z in params.ProtoInfo) {
+                let obj = new ProtocolPort();
+                obj.deserialize(params.ProtoInfo[z]);
+                this.ProtoInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeListWaterPrintConfig response structure.
  * @class
  */
@@ -5905,6 +6239,98 @@ class DeleteDDoSGeoIPBlockConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDDoSTrend response structure.
+ * @class
+ */
+class DescribeDDoSTrendResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of values returned
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Instance IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Sampling period. Valid values: `300` (5 minutes), `3600` (one hour), `86400` (one day)
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Beginning of the time range for the query
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End of the time range for the query
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Value array. The unit for attack traffic bandwidth is Mbps, and that for the packet rate is pps.
+         * @type {Array.<number> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Instance ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Metric. Valid values: `bps`: attack traffic bandwidth; `pps`: attack packet rate
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6262,6 +6688,83 @@ class CreatePacketFilterConfigRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeCCTrend request structure.
+ * @class
+ */
+class DescribeCCTrendRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Instance IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Sampling period. Valid values: `300` (5 minutes), `3600` (one hour), `86400` (one day)
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Beginning of the time range for the query
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End of the time range for the query
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Metric. Valid values: `inqps`: total peak requests; `dropqps`: peak attack requests
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * (Optional) Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Instance ID. Leave this field empty when `Business` is `basic`, as basic protection does not require an instance.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
 module.exports = {
     CreateDefaultAlarmThresholdRequest: CreateDefaultAlarmThresholdRequest,
     DescribeListBGPIPInstancesResponse: DescribeListBGPIPInstancesResponse,
@@ -6282,6 +6785,7 @@ module.exports = {
     KeyValue: KeyValue,
     DeleteDDoSSpeedLimitConfigRequest: DeleteDDoSSpeedLimitConfigRequest,
     CreatePacketFilterConfigResponse: CreatePacketFilterConfigResponse,
+    DescribeListWaterPrintConfigRequest: DescribeListWaterPrintConfigRequest,
     CreateL7RuleCertsRequest: CreateL7RuleCertsRequest,
     DeleteDDoSGeoIPBlockConfigRequest: DeleteDDoSGeoIPBlockConfigRequest,
     CreateIPAlarmThresholdConfigRequest: CreateIPAlarmThresholdConfigRequest,
@@ -6353,6 +6857,7 @@ module.exports = {
     CreateDefaultAlarmThresholdResponse: CreateDefaultAlarmThresholdResponse,
     DescribeListIPAlarmConfigResponse: DescribeListIPAlarmConfigResponse,
     SuccessCode: SuccessCode,
+    ProtocolPort: ProtocolPort,
     DescribeListBGPInstancesResponse: DescribeListBGPInstancesResponse,
     DescribeListDDoSAIRequest: DescribeListDDoSAIRequest,
     DescribeListIPAlarmConfigRequest: DescribeListIPAlarmConfigRequest,
@@ -6370,24 +6875,28 @@ module.exports = {
     AssociateDDoSEipAddressRequest: AssociateDDoSEipAddressRequest,
     AssociateDDoSEipLoadBalancerResponse: AssociateDDoSEipLoadBalancerResponse,
     CreateBlackWhiteIpListRequest: CreateBlackWhiteIpListRequest,
+    DescribeBizTrendResponse: DescribeBizTrendResponse,
     CreateBoundIPResponse: CreateBoundIPResponse,
     SpeedValue: SpeedValue,
     SwitchWaterPrintConfigRequest: SwitchWaterPrintConfigRequest,
     DescribeListSchedulingDomainResponse: DescribeListSchedulingDomainResponse,
+    DescribeCCTrendResponse: DescribeCCTrendResponse,
     CreateSchedulingDomainResponse: CreateSchedulingDomainResponse,
     EipProductInfo: EipProductInfo,
     CreateDDoSAIResponse: CreateDDoSAIResponse,
     DDoSGeoIPBlockConfigRelation: DDoSGeoIPBlockConfigRelation,
     DescribeListProtocolBlockConfigRequest: DescribeListProtocolBlockConfigRequest,
     RegionInfo: RegionInfo,
-    DescribeListWaterPrintConfigRequest: DescribeListWaterPrintConfigRequest,
+    DescribeDDoSTrendRequest: DescribeDDoSTrendRequest,
     ModifyDDoSGeoIPBlockConfigResponse: ModifyDDoSGeoIPBlockConfigResponse,
     BGPInstance: BGPInstance,
+    DescribeBizTrendRequest: DescribeBizTrendRequest,
     DescribeListWaterPrintConfigResponse: DescribeListWaterPrintConfigResponse,
     BGPInstanceUsages: BGPInstanceUsages,
     DeleteDDoSSpeedLimitConfigResponse: DeleteDDoSSpeedLimitConfigResponse,
     CreateWaterPrintKeyResponse: CreateWaterPrintKeyResponse,
     DeleteDDoSGeoIPBlockConfigResponse: DeleteDDoSGeoIPBlockConfigResponse,
+    DescribeDDoSTrendResponse: DescribeDDoSTrendResponse,
     DescribeListBlackWhiteIpListRequest: DescribeListBlackWhiteIpListRequest,
     ModifyDDoSSpeedLimitConfigResponse: ModifyDDoSSpeedLimitConfigResponse,
     SchedulingDomainInfo: SchedulingDomainInfo,
@@ -6395,5 +6904,6 @@ module.exports = {
     WaterPrintKey: WaterPrintKey,
     PacketFilterRelation: PacketFilterRelation,
     CreatePacketFilterConfigRequest: CreatePacketFilterConfigRequest,
+    DescribeCCTrendRequest: DescribeCCTrendRequest,
 
 }

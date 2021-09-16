@@ -35,6 +35,7 @@ const DescribeListBGPInstancesRequest = models.DescribeListBGPInstancesRequest;
 const KeyValue = models.KeyValue;
 const DeleteDDoSSpeedLimitConfigRequest = models.DeleteDDoSSpeedLimitConfigRequest;
 const CreatePacketFilterConfigResponse = models.CreatePacketFilterConfigResponse;
+const DescribeListWaterPrintConfigRequest = models.DescribeListWaterPrintConfigRequest;
 const CreateL7RuleCertsRequest = models.CreateL7RuleCertsRequest;
 const DeleteDDoSGeoIPBlockConfigRequest = models.DeleteDDoSGeoIPBlockConfigRequest;
 const CreateIPAlarmThresholdConfigRequest = models.CreateIPAlarmThresholdConfigRequest;
@@ -106,6 +107,7 @@ const CertIdInsL7Rules = models.CertIdInsL7Rules;
 const CreateDefaultAlarmThresholdResponse = models.CreateDefaultAlarmThresholdResponse;
 const DescribeListIPAlarmConfigResponse = models.DescribeListIPAlarmConfigResponse;
 const SuccessCode = models.SuccessCode;
+const ProtocolPort = models.ProtocolPort;
 const DescribeListBGPInstancesResponse = models.DescribeListBGPInstancesResponse;
 const DescribeListDDoSAIRequest = models.DescribeListDDoSAIRequest;
 const DescribeListIPAlarmConfigRequest = models.DescribeListIPAlarmConfigRequest;
@@ -123,24 +125,28 @@ const ModifyDDoSSpeedLimitConfigRequest = models.ModifyDDoSSpeedLimitConfigReque
 const AssociateDDoSEipAddressRequest = models.AssociateDDoSEipAddressRequest;
 const AssociateDDoSEipLoadBalancerResponse = models.AssociateDDoSEipLoadBalancerResponse;
 const CreateBlackWhiteIpListRequest = models.CreateBlackWhiteIpListRequest;
+const DescribeBizTrendResponse = models.DescribeBizTrendResponse;
 const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const SpeedValue = models.SpeedValue;
 const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
 const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
+const DescribeCCTrendResponse = models.DescribeCCTrendResponse;
 const CreateSchedulingDomainResponse = models.CreateSchedulingDomainResponse;
 const EipProductInfo = models.EipProductInfo;
 const CreateDDoSAIResponse = models.CreateDDoSAIResponse;
 const DDoSGeoIPBlockConfigRelation = models.DDoSGeoIPBlockConfigRelation;
 const DescribeListProtocolBlockConfigRequest = models.DescribeListProtocolBlockConfigRequest;
 const RegionInfo = models.RegionInfo;
-const DescribeListWaterPrintConfigRequest = models.DescribeListWaterPrintConfigRequest;
+const DescribeDDoSTrendRequest = models.DescribeDDoSTrendRequest;
 const ModifyDDoSGeoIPBlockConfigResponse = models.ModifyDDoSGeoIPBlockConfigResponse;
 const BGPInstance = models.BGPInstance;
+const DescribeBizTrendRequest = models.DescribeBizTrendRequest;
 const DescribeListWaterPrintConfigResponse = models.DescribeListWaterPrintConfigResponse;
 const BGPInstanceUsages = models.BGPInstanceUsages;
 const DeleteDDoSSpeedLimitConfigResponse = models.DeleteDDoSSpeedLimitConfigResponse;
 const CreateWaterPrintKeyResponse = models.CreateWaterPrintKeyResponse;
 const DeleteDDoSGeoIPBlockConfigResponse = models.DeleteDDoSGeoIPBlockConfigResponse;
+const DescribeDDoSTrendResponse = models.DescribeDDoSTrendResponse;
 const DescribeListBlackWhiteIpListRequest = models.DescribeListBlackWhiteIpListRequest;
 const ModifyDDoSSpeedLimitConfigResponse = models.ModifyDDoSSpeedLimitConfigResponse;
 const SchedulingDomainInfo = models.SchedulingDomainInfo;
@@ -148,6 +154,7 @@ const DescribeDefaultAlarmThresholdRequest = models.DescribeDefaultAlarmThreshol
 const WaterPrintKey = models.WaterPrintKey;
 const PacketFilterRelation = models.PacketFilterRelation;
 const CreatePacketFilterConfigRequest = models.CreatePacketFilterConfigRequest;
+const DescribeCCTrendRequest = models.DescribeCCTrendRequest;
 
 
 /**
@@ -216,14 +223,14 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query layer-7 rules matched with certificate IDs.
-     * @param {DescribeL7RulesBySSLCertIdRequest} req
-     * @param {function(string, DescribeL7RulesBySSLCertIdResponse):void} cb
+     * This API is used to get the traffic flow data collected in the specified period.
+     * @param {DescribeBizTrendRequest} req
+     * @param {function(string, DescribeBizTrendResponse):void} cb
      * @public
      */
-    DescribeL7RulesBySSLCertId(req, cb) {
-        let resp = new DescribeL7RulesBySSLCertIdResponse();
-        this.request("DescribeL7RulesBySSLCertId", req, resp, cb);
+    DescribeBizTrend(req, cb) {
+        let resp = new DescribeBizTrendResponse();
+        this.request("DescribeBizTrend", req, resp, cb);
     }
 
     /**
@@ -404,6 +411,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get CC attack data, including total peak requests (QPS) and attack requests (QPS).
+     * @param {DescribeCCTrendRequest} req
+     * @param {function(string, DescribeCCTrendResponse):void} cb
+     * @public
+     */
+    DescribeCCTrend(req, cb) {
+        let resp = new DescribeCCTrendResponse();
+        this.request("DescribeCCTrend", req, resp, cb);
+    }
+
+    /**
      * This API is used to set the default alarm threshold of an IP.
      * @param {CreateIPAlarmThresholdConfigRequest} req
      * @param {function(string, CreateIPAlarmThresholdConfigResponse):void} cb
@@ -412,6 +430,17 @@ class AntiddosClient extends AbstractClient {
     CreateIPAlarmThresholdConfig(req, cb) {
         let resp = new CreateIPAlarmThresholdConfigResponse();
         this.request("CreateIPAlarmThresholdConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query layer-7 rules matched with certificate IDs.
+     * @param {DescribeL7RulesBySSLCertIdRequest} req
+     * @param {function(string, DescribeL7RulesBySSLCertIdResponse):void} cb
+     * @public
+     */
+    DescribeL7RulesBySSLCertId(req, cb) {
+        let resp = new DescribeL7RulesBySSLCertIdResponse();
+        this.request("DescribeL7RulesBySSLCertId", req, resp, cb);
     }
 
     /**
@@ -501,6 +530,17 @@ class AntiddosClient extends AbstractClient {
     CreateBlackWhiteIpList(req, cb) {
         let resp = new CreateBlackWhiteIpListResponse();
         this.request("CreateBlackWhiteIpList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get DDoS attack traffic bandwidth and attack packet rate.
+     * @param {DescribeDDoSTrendRequest} req
+     * @param {function(string, DescribeDDoSTrendResponse):void} cb
+     * @public
+     */
+    DescribeDDoSTrend(req, cb) {
+        let resp = new DescribeDDoSTrendResponse();
+        this.request("DescribeDDoSTrend", req, resp, cb);
     }
 
     /**

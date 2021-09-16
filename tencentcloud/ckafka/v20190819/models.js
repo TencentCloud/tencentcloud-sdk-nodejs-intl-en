@@ -267,6 +267,63 @@ class GroupInfoMember extends  AbstractModel {
 }
 
 /**
+ * BatchCreateAcl request structure.
+ * @class
+ */
+class BatchCreateAclRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * ACL resource type. Default value: `2` (topic).
+         * @type {number || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Resource list array.
+         * @type {Array.<string> || null}
+         */
+        this.ResourceNames = null;
+
+        /**
+         * ACL rule list.
+         * @type {Array.<AclRuleInfo> || null}
+         */
+        this.RuleList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceNames = 'ResourceNames' in params ? params.ResourceNames : null;
+
+        if (params.RuleList) {
+            this.RuleList = new Array();
+            for (let z in params.RuleList) {
+                let obj = new AclRuleInfo();
+                obj.deserialize(params.RuleList[z]);
+                this.RuleList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteUser request structure.
  * @class
  */
@@ -2474,18 +2531,24 @@ class DescribeTopicSubscribeGroupRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRoute request structure.
+ * Returned result of instance details
  * @class
  */
-class DescribeRouteRequest extends  AbstractModel {
+class InstanceDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique instance ID
-         * @type {string || null}
+         * Total number of eligible instances
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.TotalCount = null;
+
+        /**
+         * List of eligible instance details
+         * @type {Array.<InstanceDetail> || null}
+         */
+        this.InstanceList = null;
 
     }
 
@@ -2496,7 +2559,16 @@ class DescribeRouteRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new InstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
 
     }
 }
@@ -4501,6 +4573,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * BatchCreateAcl response structure.
+ * @class
+ */
+class BatchCreateAclResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status code.
+         * @type {number || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateUser request structure.
  * @class
  */
@@ -4701,24 +4808,18 @@ class ModifyPasswordResponse extends  AbstractModel {
 }
 
 /**
- * Returned result of instance details
+ * DescribeRoute request structure.
  * @class
  */
-class InstanceDetailResponse extends  AbstractModel {
+class DescribeRouteRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of eligible instances
-         * @type {number || null}
+         * Unique instance ID
+         * @type {string || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * List of eligible instance details
-         * @type {Array.<InstanceDetail> || null}
-         */
-        this.InstanceList = null;
+        this.InstanceId = null;
 
     }
 
@@ -4729,16 +4830,7 @@ class InstanceDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.InstanceList) {
-            this.InstanceList = new Array();
-            for (let z in params.InstanceList) {
-                let obj = new InstanceDetail();
-                obj.deserialize(params.InstanceList[z]);
-                this.InstanceList.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5505,6 +5597,55 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
         this.DeleteTimestamp = 'DeleteTimestamp' in params ? params.DeleteTimestamp : null;
+
+    }
+}
+
+/**
+ * Four pieces of information of ACL rules: source IP address, destination IP address, source port, and destination port
+ * @class
+ */
+class AclRuleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ACL operation types. Enumerated values: `All` (all operations), `Read` (read), `Write` (write).
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * Permission types: `Deny`, `Allow`.
+         * @type {string || null}
+         */
+        this.PermissionType = null;
+
+        /**
+         * The default value is `*`, which means that any host can access the topic. Currently, CKafka does not support the host value being specified as * or IP range.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * The list of users allowed to access the topic. Default value: `User:*`, which means all users. The current user must be in the user list. Add the prefix `User:` before the user name (`User:A`, for example).
+         * @type {string || null}
+         */
+        this.Principal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.PermissionType = 'PermissionType' in params ? params.PermissionType : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Principal = 'Principal' in params ? params.Principal : null;
 
     }
 }
@@ -6382,6 +6523,7 @@ module.exports = {
     TopicDetail: TopicDetail,
     DeleteAclRequest: DeleteAclRequest,
     GroupInfoMember: GroupInfoMember,
+    BatchCreateAclRequest: BatchCreateAclRequest,
     DeleteUserRequest: DeleteUserRequest,
     PartitionOffset: PartitionOffset,
     DescribeACLRequest: DescribeACLRequest,
@@ -6430,7 +6572,7 @@ module.exports = {
     DeleteAclResponse: DeleteAclResponse,
     DynamicRetentionTime: DynamicRetentionTime,
     DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
-    DescribeRouteRequest: DescribeRouteRequest,
+    InstanceDetailResponse: InstanceDetailResponse,
     FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     TopicInSyncReplicaInfo: TopicInSyncReplicaInfo,
     DescribeRegionRequest: DescribeRegionRequest,
@@ -6467,11 +6609,12 @@ module.exports = {
     DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     Filter: Filter,
     GroupOffsetResponse: GroupOffsetResponse,
+    BatchCreateAclResponse: BatchCreateAclResponse,
     CreateUserRequest: CreateUserRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
     ModifyPasswordResponse: ModifyPasswordResponse,
-    InstanceDetailResponse: InstanceDetailResponse,
+    DescribeRouteRequest: DescribeRouteRequest,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     GroupInfoResponse: GroupInfoResponse,
     TopicAttributesResponse: TopicAttributesResponse,
@@ -6486,6 +6629,7 @@ module.exports = {
     ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
     Route: Route,
+    AclRuleInfo: AclRuleInfo,
     Acl: Acl,
     TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,

@@ -9,6 +9,7 @@ module.exports = {
     cdb: require("./cdb"),
     cdn: require("./cdn"),
     cfs: require("./cfs"),
+    chdfs: require("./chdfs"),
     ckafka: require("./ckafka"),
     clb: require("./clb"),
     cloudaudit: require("./cloudaudit"),

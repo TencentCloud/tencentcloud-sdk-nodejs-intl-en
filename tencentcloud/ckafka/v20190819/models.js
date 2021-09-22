@@ -5622,7 +5622,7 @@ class AclRuleInfo extends  AbstractModel {
         this.PermissionType = null;
 
         /**
-         * The default value is `*`, which means that any host can access the topic. Currently, CKafka does not support the host value being specified as * or IP range.
+         * The default value is `*`, which means that any host can access the topic. CKafka currently does not support specifying a host value of * or an IP range.
          * @type {string || null}
          */
         this.Host = null;

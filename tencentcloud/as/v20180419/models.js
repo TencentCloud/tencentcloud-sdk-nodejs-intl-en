@@ -1152,6 +1152,76 @@ The name contains 2 to 40 characters, and supports multiple dots (.). The string
 }
 
 /**
+ * Detailed description of scaling activity status
+ * @class
+ */
+class DetailedStatusMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Error type
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * AZ information
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance billing mode
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Instance type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+    }
+}
+
+/**
  * ModifyScheduledAction response structure.
  * @class
  */
@@ -6410,6 +6480,12 @@ class Activity extends  AbstractModel {
          */
         this.LifecycleActionResultSet = null;
 
+        /**
+         * Detailed description of scaling activity status
+         * @type {Array.<DetailedStatusMessage> || null}
+         */
+        this.DetailedStatusMessageSet = null;
+
     }
 
     /**
@@ -6446,6 +6522,15 @@ class Activity extends  AbstractModel {
                 let obj = new LifecycleActionResultInfo();
                 obj.deserialize(params.LifecycleActionResultSet[z]);
                 this.LifecycleActionResultSet.push(obj);
+            }
+        }
+
+        if (params.DetailedStatusMessageSet) {
+            this.DetailedStatusMessageSet = new Array();
+            for (let z in params.DetailedStatusMessageSet) {
+                let obj = new DetailedStatusMessage();
+                obj.deserialize(params.DetailedStatusMessageSet[z]);
+                this.DetailedStatusMessageSet.push(obj);
             }
         }
 
@@ -6875,6 +6960,7 @@ module.exports = {
     StopAutoScalingInstancesResponse: StopAutoScalingInstancesResponse,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
     InstanceNameSettings: InstanceNameSettings,
+    DetailedStatusMessage: DetailedStatusMessage,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
     CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
     ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,

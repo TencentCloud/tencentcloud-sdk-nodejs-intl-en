@@ -36,6 +36,12 @@ class ModifyPrivateZoneVpcRequest extends  AbstractModel {
          */
         this.VpcSet = null;
 
+        /**
+         * List of authorized accounts' VPCs to associate with the private domain
+         * @type {Array.<AccountVpcInfo> || null}
+         */
+        this.AccountVpcSet = null;
+
     }
 
     /**
@@ -53,6 +59,15 @@ class ModifyPrivateZoneVpcRequest extends  AbstractModel {
                 let obj = new VpcInfo();
                 obj.deserialize(params.VpcSet[z]);
                 this.VpcSet.push(obj);
+            }
+        }
+
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfo();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
             }
         }
 
@@ -155,6 +170,48 @@ class DescribePrivateZoneRecordListRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Output parameters of the associated VPC
+ * @class
+ */
+class AccountVpcInfoOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * UIN of the VPC account
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -671,6 +728,12 @@ class CreatePrivateZoneRequest extends  AbstractModel {
          */
         this.Vpcs = null;
 
+        /**
+         * List of authorized accounts' VPCs to associate with the private domain
+         * @type {Array.<AccountVpcInfo> || null}
+         */
+        this.AccountVpcSet = null;
+
     }
 
     /**
@@ -710,6 +773,67 @@ class CreatePrivateZoneRequest extends  AbstractModel {
                 this.Vpcs.push(obj);
             }
         }
+
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfo();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * VPC information of a Private DNS account
+ * @class
+ */
+class AccountVpcInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VpcId: vpc-xadsafsdasd
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * VPC region: ap-guangzhou, ap-shanghai
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * VPC account: 123456789
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * VPC name: testname
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
 
     }
 }
@@ -1577,6 +1701,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Tags = null;
 
+        /**
+         * List of authorized accounts' VPCs associated with the private domain
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<AccountVpcInfoOutput> || null}
+         */
+        this.AccountVpcSet = null;
+
     }
 
     /**
@@ -1611,6 +1742,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new TagInfo();
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
+            }
+        }
+
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfoOutput();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
             }
         }
 
@@ -1855,6 +1995,12 @@ class ModifyPrivateZoneVpcResponse extends  AbstractModel {
         this.VpcSet = null;
 
         /**
+         * List of authorized accounts' VPCs associated with the private domain
+         * @type {Array.<AccountVpcInfoOutput> || null}
+         */
+        this.AccountVpcSet = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1879,6 +2025,15 @@ class ModifyPrivateZoneVpcResponse extends  AbstractModel {
                 this.VpcSet.push(obj);
             }
         }
+
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfoOutput();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1888,6 +2043,7 @@ module.exports = {
     ModifyPrivateZoneVpcRequest: ModifyPrivateZoneVpcRequest,
     DescribeAuditLogResponse: DescribeAuditLogResponse,
     DescribePrivateZoneRecordListRequest: DescribePrivateZoneRecordListRequest,
+    AccountVpcInfoOutput: AccountVpcInfoOutput,
     DescribePrivateZoneRequest: DescribePrivateZoneRequest,
     DatePoint: DatePoint,
     PrivateZoneRecord: PrivateZoneRecord,
@@ -1899,6 +2055,7 @@ module.exports = {
     ModifyPrivateZoneRequest: ModifyPrivateZoneRequest,
     TagInfo: TagInfo,
     CreatePrivateZoneRequest: CreatePrivateZoneRequest,
+    AccountVpcInfo: AccountVpcInfo,
     ModifyPrivateZoneResponse: ModifyPrivateZoneResponse,
     CreatePrivateZoneResponse: CreatePrivateZoneResponse,
     SubscribePrivateZoneServiceRequest: SubscribePrivateZoneServiceRequest,

@@ -23,6 +23,7 @@ const ModifySmsSignRequest = models.ModifySmsSignRequest;
 const AddSmsSignRequest = models.AddSmsSignRequest;
 const AddTemplateStatus = models.AddTemplateStatus;
 const DescribeSmsTemplateListResponse = models.DescribeSmsTemplateListResponse;
+const DescribePhoneNumberInfoRequest = models.DescribePhoneNumberInfoRequest;
 const PullSmsSendStatusByPhoneNumberRequest = models.PullSmsSendStatusByPhoneNumberRequest;
 const AddSmsTemplateRequest = models.AddSmsTemplateRequest;
 const ModifySmsTemplateRequest = models.ModifySmsTemplateRequest;
@@ -39,12 +40,14 @@ const SendStatusStatistics = models.SendStatusStatistics;
 const CallbackStatusStatisticsRequest = models.CallbackStatusStatisticsRequest;
 const DeleteTemplateStatus = models.DeleteTemplateStatus;
 const DescribeSmsSignListRequest = models.DescribeSmsSignListRequest;
+const DescribePhoneNumberInfoResponse = models.DescribePhoneNumberInfoResponse;
 const DescribeTemplateListStatus = models.DescribeTemplateListStatus;
 const AddSmsTemplateResponse = models.AddSmsTemplateResponse;
 const PullSmsSendStatus = models.PullSmsSendStatus;
 const DescribeSmsSignListResponse = models.DescribeSmsSignListResponse;
 const DescribeSmsTemplateListRequest = models.DescribeSmsTemplateListRequest;
 const CallbackStatusStatistics = models.CallbackStatusStatistics;
+const PhoneNumberInfo = models.PhoneNumberInfo;
 const SendStatusStatisticsRequest = models.SendStatusStatisticsRequest;
 const DeleteSmsTemplateRequest = models.DeleteSmsTemplateRequest;
 const PullSmsReplyStatusByPhoneNumberResponse = models.PullSmsReplyStatusByPhoneNumberResponse;
@@ -217,8 +220,7 @@ Currently, you can also [configure the reply callback](https://intl.cloud.tencen
      * This API is used to pull SMS delivery status for one single number.
 Currently, you can also [configure the callback](https://intl.cloud.tencent.com/document/product/382/37809?from_cn_redirect=1#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) to get the delivery status.
 >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
->- You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11
-&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
+>- You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms) to eliminate the need to calculate signatures. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
 
      * @param {PullSmsSendStatusByPhoneNumberRequest} req
      * @param {function(string, PullSmsSendStatusByPhoneNumberResponse):void} cb
@@ -258,6 +260,17 @@ Currently, you can also [configure the reply callback](https://intl.cloud.tencen
     PullSmsReplyStatusByPhoneNumber(req, cb) {
         let resp = new PullSmsReplyStatusByPhoneNumberResponse();
         this.request("PullSmsReplyStatusByPhoneNumber", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query mobile number information, such as the country/region code and the number in standardized E.164 format. For example, if you query the number +86018845720123, you can know that the country code is 86, and the standardized E. 164 number is +86018845720123.
+     * @param {DescribePhoneNumberInfoRequest} req
+     * @param {function(string, DescribePhoneNumberInfoResponse):void} cb
+     * @public
+     */
+    DescribePhoneNumberInfo(req, cb) {
+        let resp = new DescribePhoneNumberInfoResponse();
+        this.request("DescribePhoneNumberInfo", req, resp, cb);
     }
 
     /**

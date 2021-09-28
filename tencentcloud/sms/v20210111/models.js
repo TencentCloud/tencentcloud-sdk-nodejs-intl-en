@@ -180,9 +180,10 @@ Note: the corresponding `DocumentType` must be selected according to `SignType`.
         this.DocumentType = null;
 
         /**
-         * Whether it is Global SMS:
-0: Mainland China SMS.
-1: Global SMS.
+         * A parameter used to specify whether it is Global SMS:
+`0`: Chinese mainland SMS.
+`1`: Global SMS.
+Note: the value of this parameter must be consistent with the `International` value of the signature to be modified. This parameter cannot be used to directly change a Chinese mainland signature to an international signature.
          * @type {number || null}
          */
         this.International = null;
@@ -247,6 +248,7 @@ class AddSmsSignRequest extends  AbstractModel {
 
         /**
          * Signature name.
+Note: you cannot apply for an approved or pending signature again.
          * @type {string || null}
          */
         this.SignName = null;
@@ -403,6 +405,35 @@ class DescribeSmsTemplateListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePhoneNumberInfo request structure.
+ * @class
+ */
+class DescribePhoneNumberInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A parameter used to query mobile numbers in E.164 format (+[country/region code][subscriber number]). Up to 200 mobile numbers can be queried at a time.
+Take the number +8613711112222 as an example. “86” is the country code (with a “+” sign in its front) and “13711112222” is the subscriber number.
+         * @type {Array.<string> || null}
+         */
+        this.PhoneNumberSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PhoneNumberSet = 'PhoneNumberSet' in params ? params.PhoneNumberSet : null;
 
     }
 }
@@ -967,8 +998,9 @@ class SendSmsRequest extends  AbstractModel {
         super();
 
         /**
-         * Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Mainland China mobile numbers or all global mobile numbers).
-Example: +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+         * Target mobile number in E.164 format (+[country/region code][subscriber number]). Up to 200 numbers, all of which should be either Chinese mainland numbers or international numbers, are supported in a single request.
+Take the number +8613711112222 as an example. “86” is the country code (with a “+” sign in its front) and “13711112222” is the subscriber number.
+Note: 11-digit Chinese mainland numbers prefixed by 0086 or 86 or those without any country/region code are also supported. The default prefix is +86.
          * @type {Array.<string> || null}
          */
         this.PhoneNumberSet = null;
@@ -986,14 +1018,15 @@ Example: +8613711112222, which has a + sign followed by 86 (country/region code)
         this.TemplateId = null;
 
         /**
-         * Content of the SMS signature, which should be encoded in UTF-8. You must enter an approved signature, such as Tencent Cloud. The signature information can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2).
-Note: this parameter is required for Mainland China SMS.
+         * SMS signature information which is encoded in UTF-8. You must enter an approved signature (such as Tencent Cloud). The signing information can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2).
+<dx-alert infotype="notice" title="Note">This parameter is required for Chinese mainland SMS.</dx-alert>
          * @type {string || null}
          */
         this.SignName = null;
 
         /**
-         * Template parameter. If there is no template parameter, leave this parameter blank.
+         * Template parameter. If there is no template parameter, leave this field empty.
+<dx-alert infotype="notice" title="Note">The number of template parameters should be consistent with that of the template variables of `TemplateId`.</dx-alert>
          * @type {Array.<string> || null}
          */
         this.TemplateParamSet = null;
@@ -1208,6 +1241,49 @@ Note: the maximum length of the array is 100 by default.
         }
         this.SignIdSet = 'SignIdSet' in params ? params.SignIdSet : null;
         this.International = 'International' in params ? params.International : null;
+
+    }
+}
+
+/**
+ * DescribePhoneNumberInfo response structure.
+ * @class
+ */
+class DescribePhoneNumberInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A parameter used to obtain mobile number information.
+         * @type {Array.<PhoneNumberInfo> || null}
+         */
+        this.PhoneNumberInfoSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PhoneNumberInfoSet) {
+            this.PhoneNumberInfoSet = new Array();
+            for (let z in params.PhoneNumberInfoSet) {
+                let obj = new PhoneNumberInfo();
+                obj.deserialize(params.PhoneNumberInfoSet[z]);
+                this.PhoneNumberInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1445,7 +1521,7 @@ class DescribeSmsTemplateListRequest extends  AbstractModel {
 
         /**
          * Template ID array.
-Note: the maximum length of the array is 100 by default.
+<dx-alert infotype="notice" title="Note">The max array length is 100 by default.</dx-alert>
          * @type {Array.<number> || null}
          */
         this.TemplateIdSet = null;
@@ -1553,6 +1629,76 @@ class CallbackStatusStatistics extends  AbstractModel {
         this.ShutdownErrorCount = 'ShutdownErrorCount' in params ? params.ShutdownErrorCount : null;
         this.BlackListCount = 'BlackListCount' in params ? params.BlackListCount : null;
         this.FrequencyLimitCount = 'FrequencyLimitCount' in params ? params.FrequencyLimitCount : null;
+
+    }
+}
+
+/**
+ * Mobile number information.
+ * @class
+ */
+class PhoneNumberInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Error code for mobile number information query. `Ok` will be returned if the query is successful.
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * Description of the error code for mobile number information query.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Country (or region) code.
+         * @type {string || null}
+         */
+        this.NationCode = null;
+
+        /**
+         * Subscriber number in normal format such as 13711112222, without any prefix (country or region code).
+         * @type {string || null}
+         */
+        this.SubscriberNumber = null;
+
+        /**
+         * The standardized mobile number in E.164 format after parsing, which is consistent with the parsed number for SMS message delivery. If the parsing fails, the original number will be returned.
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * Country or region code such as CN and US. If the country or region code cannot be identified, `DEF` will be returned by default.
+         * @type {string || null}
+         */
+        this.IsoCode = null;
+
+        /**
+         * Country code or region name such as China. For more information, see [Global SMS Price Overview](https://intl.cloud.tencent.com/document/product/382/18051?from_cn_redirect=1#.E6.97.A5.E7.BB.93.E5.90.8E.E4.BB.98.E8.B4.B9.3Ca-id.3D.22post-payment.22.3E.3C.2Fa.3E)
+         * @type {string || null}
+         */
+        this.IsoName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.NationCode = 'NationCode' in params ? params.NationCode : null;
+        this.SubscriberNumber = 'SubscriberNumber' in params ? params.SubscriberNumber : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.IsoCode = 'IsoCode' in params ? params.IsoCode : null;
+        this.IsoName = 'IsoName' in params ? params.IsoName : null;
 
     }
 }
@@ -1720,7 +1866,7 @@ class SendStatus extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * SMS request error code. For specific meanings, please see [Error Codes](https://intl.cloud.tencent.com/document/product/382/49316?from_cn_redirect=1).
+         * SMS request error code. For details, see [Error Codes](https://intl.cloud.tencent.com/document/api/382/55981?from_cn_redirect=1#6.-.E9.94.99.E8.AF.AF.E7.A0.81). `Ok` will be returned if the request is successful.
          * @type {string || null}
          */
         this.Code = null;
@@ -2155,6 +2301,7 @@ module.exports = {
     AddSmsSignRequest: AddSmsSignRequest,
     AddTemplateStatus: AddTemplateStatus,
     DescribeSmsTemplateListResponse: DescribeSmsTemplateListResponse,
+    DescribePhoneNumberInfoRequest: DescribePhoneNumberInfoRequest,
     PullSmsSendStatusByPhoneNumberRequest: PullSmsSendStatusByPhoneNumberRequest,
     AddSmsTemplateRequest: AddSmsTemplateRequest,
     ModifySmsTemplateRequest: ModifySmsTemplateRequest,
@@ -2171,12 +2318,14 @@ module.exports = {
     CallbackStatusStatisticsRequest: CallbackStatusStatisticsRequest,
     DeleteTemplateStatus: DeleteTemplateStatus,
     DescribeSmsSignListRequest: DescribeSmsSignListRequest,
+    DescribePhoneNumberInfoResponse: DescribePhoneNumberInfoResponse,
     DescribeTemplateListStatus: DescribeTemplateListStatus,
     AddSmsTemplateResponse: AddSmsTemplateResponse,
     PullSmsSendStatus: PullSmsSendStatus,
     DescribeSmsSignListResponse: DescribeSmsSignListResponse,
     DescribeSmsTemplateListRequest: DescribeSmsTemplateListRequest,
     CallbackStatusStatistics: CallbackStatusStatistics,
+    PhoneNumberInfo: PhoneNumberInfo,
     SendStatusStatisticsRequest: SendStatusStatisticsRequest,
     DeleteSmsTemplateRequest: DeleteSmsTemplateRequest,
     PullSmsReplyStatusByPhoneNumberResponse: PullSmsReplyStatusByPhoneNumberResponse,

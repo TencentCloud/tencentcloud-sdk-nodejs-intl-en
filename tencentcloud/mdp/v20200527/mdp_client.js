@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DeleteStreamPackageChannelsRequest = models.DeleteStreamPackageChannelsRequest;
 const PointInfo = models.PointInfo;
 const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
+const BindNewLVBDomainWithChannelResponse = models.BindNewLVBDomainWithChannelResponse;
 const DescribeStreamPackageChannelsResponse = models.DescribeStreamPackageChannelsResponse;
 const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
 const ModifyStreamPackageChannelEndpointResponse = models.ModifyStreamPackageChannelEndpointResponse;
@@ -39,6 +40,7 @@ const CacheInfoInfo = models.CacheInfoInfo;
 const CreateStreamPackageChannelEndpointRequest = models.CreateStreamPackageChannelEndpointRequest;
 const CreateStreamPackageChannelRequest = models.CreateStreamPackageChannelRequest;
 const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
+const BindNewLVBDomainWithChannelRequest = models.BindNewLVBDomainWithChannelRequest;
 const DescribeStreamPackageChannelResponse = models.DescribeStreamPackageChannelResponse;
 const ModifyStreamPackageChannelResponse = models.ModifyStreamPackageChannelResponse;
 const EndpointAuthInfo = models.EndpointAuthInfo;
@@ -99,14 +101,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the input authentication information of a StreamPackage channel.
-     * @param {ModifyStreamPackageChannelInputAuthInfoRequest} req
-     * @param {function(string, ModifyStreamPackageChannelInputAuthInfoResponse):void} cb
+     * This API is used to bind an LVB domain name to a channel.
+     * @param {BindNewLVBDomainWithChannelRequest} req
+     * @param {function(string, BindNewLVBDomainWithChannelResponse):void} cb
      * @public
      */
-    ModifyStreamPackageChannelInputAuthInfo(req, cb) {
-        let resp = new ModifyStreamPackageChannelInputAuthInfoResponse();
-        this.request("ModifyStreamPackageChannelInputAuthInfo", req, resp, cb);
+    BindNewLVBDomainWithChannel(req, cb) {
+        let resp = new BindNewLVBDomainWithChannelResponse();
+        this.request("BindNewLVBDomainWithChannel", req, resp, cb);
     }
 
     /**
@@ -151,6 +153,17 @@ class MdpClient extends AbstractClient {
     ModifyStreamPackageChannel(req, cb) {
         let resp = new ModifyStreamPackageChannelResponse();
         this.request("ModifyStreamPackageChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the input authentication information of a StreamPackage channel.
+     * @param {ModifyStreamPackageChannelInputAuthInfoRequest} req
+     * @param {function(string, ModifyStreamPackageChannelInputAuthInfoResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageChannelInputAuthInfo(req, cb) {
+        let resp = new ModifyStreamPackageChannelInputAuthInfoResponse();
+        this.request("ModifyStreamPackageChannelInputAuthInfo", req, resp, cb);
     }
 
 

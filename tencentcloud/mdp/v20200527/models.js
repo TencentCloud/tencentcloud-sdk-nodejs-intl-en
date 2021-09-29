@@ -155,6 +155,41 @@ class DeleteStreamPackageChannelsResponse extends  AbstractModel {
 }
 
 /**
+ * BindNewLVBDomainWithChannel response structure.
+ * @class
+ */
+class BindNewLVBDomainWithChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The LVB domain name bound successfully
+         * @type {string || null}
+         */
+        this.LVBDomain = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LVBDomain = 'LVBDomain' in params ? params.LVBDomain : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeStreamPackageChannels response structure.
  * @class
  */
@@ -338,6 +373,12 @@ class CreateStreamPackageChannelResponse extends  AbstractModel {
         super();
 
         /**
+         * Channel information
+         * @type {ChannelInfo || null}
+         */
+        this.Info = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -351,6 +392,12 @@ class CreateStreamPackageChannelResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Info) {
+            let obj = new ChannelInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1002,6 +1049,41 @@ class ModifyStreamPackageChannelInputAuthInfoRequest extends  AbstractModel {
 }
 
 /**
+ * BindNewLVBDomainWithChannel request structure.
+ * @class
+ */
+class BindNewLVBDomainWithChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * The LVB domain name to bind
+         * @type {string || null}
+         */
+        this.LVBDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.LVBDomain = 'LVBDomain' in params ? params.LVBDomain : null;
+
+    }
+}
+
+/**
  * DescribeStreamPackageChannel response structure.
  * @class
  */
@@ -1118,6 +1200,7 @@ module.exports = {
     DeleteStreamPackageChannelsRequest: DeleteStreamPackageChannelsRequest,
     PointInfo: PointInfo,
     DeleteStreamPackageChannelsResponse: DeleteStreamPackageChannelsResponse,
+    BindNewLVBDomainWithChannelResponse: BindNewLVBDomainWithChannelResponse,
     DescribeStreamPackageChannelsResponse: DescribeStreamPackageChannelsResponse,
     DescribeStreamPackageChannelsRequest: DescribeStreamPackageChannelsRequest,
     ModifyStreamPackageChannelEndpointResponse: ModifyStreamPackageChannelEndpointResponse,
@@ -1138,6 +1221,7 @@ module.exports = {
     CreateStreamPackageChannelEndpointRequest: CreateStreamPackageChannelEndpointRequest,
     CreateStreamPackageChannelRequest: CreateStreamPackageChannelRequest,
     ModifyStreamPackageChannelInputAuthInfoRequest: ModifyStreamPackageChannelInputAuthInfoRequest,
+    BindNewLVBDomainWithChannelRequest: BindNewLVBDomainWithChannelRequest,
     DescribeStreamPackageChannelResponse: DescribeStreamPackageChannelResponse,
     ModifyStreamPackageChannelResponse: ModifyStreamPackageChannelResponse,
     EndpointAuthInfo: EndpointAuthInfo,

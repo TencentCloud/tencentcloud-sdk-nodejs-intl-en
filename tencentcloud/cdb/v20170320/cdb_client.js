@@ -131,11 +131,11 @@ const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
 const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
 const RollbackTask = models.RollbackTask;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
-const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
+const CreateAuditPolicyRequest = models.CreateAuditPolicyRequest;
 const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
-const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
+const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
 const BackupItem = models.BackupItem;
 const DatabaseName = models.DatabaseName;
 const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
@@ -207,8 +207,10 @@ const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
 const ZoneSellConf = models.ZoneSellConf;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
+const RollbackTables = models.RollbackTables;
 const SlaveConfig = models.SlaveConfig;
 const RoInstanceInfo = models.RoInstanceInfo;
+const RollbackDBName = models.RollbackDBName;
 const CreateAccountsRequest = models.CreateAccountsRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
@@ -220,7 +222,7 @@ const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
 const CommonTimeWindow = models.CommonTimeWindow;
 const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
-const RollbackTables = models.RollbackTables;
+const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
 const DescribeBackupDatabasesRequest = models.DescribeBackupDatabasesRequest;
 const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
 const DeviceMemInfo = models.DeviceMemInfo;
@@ -237,7 +239,7 @@ const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
 const StopDelayReplicationResponse = models.StopDelayReplicationResponse;
-const OpenWanServiceRequest = models.OpenWanServiceRequest;
+const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
@@ -257,7 +259,7 @@ const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const RollbackDBName = models.RollbackDBName;
+const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const StopRollbackRequest = models.StopRollbackRequest;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
@@ -313,14 +315,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * This API (DescribeTimeWindow) is used to query the maintenance time window of a TencentDB instance.
-     * @param {DescribeTimeWindowRequest} req
-     * @param {function(string, DescribeTimeWindowResponse):void} cb
+     * This API is used to create an audit policy for a TencentDB instance by associating an audit rule with the TencentDB instance.
+     * @param {CreateAuditPolicyRequest} req
+     * @param {function(string, CreateAuditPolicyResponse):void} cb
      * @public
      */
-    DescribeTimeWindow(req, cb) {
-        let resp = new DescribeTimeWindowResponse();
-        this.request("DescribeTimeWindow", req, resp, cb);
+    CreateAuditPolicy(req, cb) {
+        let resp = new CreateAuditPolicyResponse();
+        this.request("CreateAuditPolicy", req, resp, cb);
     }
 
     /**
@@ -376,6 +378,17 @@ class CdbClient extends AbstractClient {
     ModifyInstanceTag(req, cb) {
         let resp = new ModifyInstanceTagResponse();
         this.request("ModifyInstanceTag", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeTimeWindow) is used to query the maintenance time window of a TencentDB instance.
+     * @param {DescribeTimeWindowRequest} req
+     * @param {function(string, DescribeTimeWindowResponse):void} cb
+     * @public
+     */
+    DescribeTimeWindow(req, cb) {
+        let resp = new DescribeTimeWindowResponse();
+        this.request("DescribeTimeWindow", req, resp, cb);
     }
 
     /**
@@ -669,14 +682,14 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
-     * @param {ModifyAccountMaxUserConnectionsRequest} req
-     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
+     * This API is used to create a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
+     * @param {CreateParamTemplateRequest} req
+     * @param {function(string, CreateParamTemplateResponse):void} cb
      * @public
      */
-    ModifyAccountMaxUserConnections(req, cb) {
-        let resp = new ModifyAccountMaxUserConnectionsResponse();
-        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
+    CreateParamTemplate(req, cb) {
+        let resp = new CreateParamTemplateResponse();
+        this.request("CreateParamTemplate", req, resp, cb);
     }
 
     /**
@@ -1385,14 +1398,14 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to create a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
-     * @param {CreateParamTemplateRequest} req
-     * @param {function(string, CreateParamTemplateResponse):void} cb
+     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
+     * @param {ModifyAccountMaxUserConnectionsRequest} req
+     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
      * @public
      */
-    CreateParamTemplate(req, cb) {
-        let resp = new CreateParamTemplateResponse();
-        this.request("CreateParamTemplate", req, resp, cb);
+    ModifyAccountMaxUserConnections(req, cb) {
+        let resp = new ModifyAccountMaxUserConnectionsResponse();
+        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
     }
 
 

@@ -264,11 +264,11 @@ class ResourceData extends  AbstractModel {
         super();
 
         /**
-         * Resource name, which is classified as follows based on different query conditions:
-A specific domain name: This indicates the details of this domain name
-multiDomains: This indicates the aggregate details of multiple domain names
-Project ID: This displays the ID of the specifically queried project
-all: This indicates the details at the account level
+         * Resource name, which is classified as follows based on different query filters:
+A single domain name: queries domain name details by a domain name. The details of the domain name will be displayed when the passed parameter `detail` is `true` (the `detail` parameter defaults to `false`).
+Multiple domain names: queries domain name details by multiple domain names. The aggregated details of the domain names will be displayed.
+Project ID: queries domain name details by a project ID. The aggregated details of the domain names of the project will be displayed.
+`all`: account-level data, which is aggregated details of all domain names of an account.
          * @type {string || null}
          */
         this.Resource = null;
@@ -1648,6 +1648,15 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.RequestHeaders = null;
 
+        /**
+         * When `Regex` is `false`, this parameter should be `true`.
+`false`: disabled
+`true`: enabled
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.FullMatch = null;
+
     }
 
     /**
@@ -1672,6 +1681,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
                 this.RequestHeaders.push(obj);
             }
         }
+        this.FullMatch = 'FullMatch' in params ? params.FullMatch : null;
 
     }
 }
@@ -2536,12 +2546,12 @@ The range between the start time and end time should be less than or equal to 90
 
         /**
          * Time granularity, which can be:
-min: 1-minute. The query range should be less than or equal to 24 hours
-5min: 5-minute. The query range should be less than or equal to 31 days
-hour: 1-hour. The query range should be less than or equal to 31 days
-day: 1-day. The query period should be greater than 31 days
+`min`: 1-minute granularity. The query period cannot exceed 24 hours.
+`5min`: 5-minute granularity. The query range cannot exceed 31 days.
+`hour`: 1-hour granularity. The query period cannot exceed 31 days.
+`day`: 1-day granularity. The query period cannot exceed 31 days.
 
-Currently, data query at 1-minute granularity is not supported if the `Area` field is `overseas`
+Querying 1-minute granularity data is not supported if the `Area` field is `overseas`.
          * @type {string || null}
          */
         this.Interval = null;
@@ -5566,8 +5576,7 @@ class AdvancedAuthenticationTypeA extends  AbstractModel {
 }
 
 /**
- * Advanced cache expiration configuration (This feature is in beta and not generally available yet.)
-Note: this version does not support setting homepage cache rules.
+ * (Disused) Advanced cache validity configuration. You can use `RuleCache` instead.
  * @class
  */
 class AdvancedCache extends  AbstractModel {
@@ -8187,8 +8196,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SimpleCache = null;
 
         /**
-         * Advanced cache expiration configuration (This feature is in beta and not generally available yet.)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * (Disused) Advanced cache validity configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {AdvancedCache || null}
          */
         this.AdvancedCache = null;
@@ -8613,7 +8622,8 @@ Default value: `mainland`. You can prefetch a URL to nodes in a region provided 
         this.Area = null;
 
         /**
-         * If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node
+         * If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node.
+Note: resources prefetched outside the Chinese mainland will be cached to CDN nodes outside the Chinese mainland and the traffic generated will incur costs.
          * @type {string || null}
          */
         this.Layer = null;
@@ -9116,10 +9126,11 @@ You must specify either a task ID or a starting time.
         this.Area = null;
 
         /**
-         * Specifies a task state for your query:
+         * Queries the status of a specified task
 `fail`: prefetch failed
 `done`: prefetch succeeded
 `process`: prefetch in progress
+`invalid`: invalid prefetch with 4XX/5XX status code returned from the origin server
          * @type {string || null}
          */
         this.Status = null;
@@ -10569,7 +10580,7 @@ class ScdnErrorPage extends  AbstractModel {
 }
 
 /**
- * Cache key configuration (filter parameter configuration)
+ * Cache key configuration (Ignore Query String configuration)
  * @class
  */
 class CacheKey extends  AbstractModel {
@@ -10578,8 +10589,8 @@ class CacheKey extends  AbstractModel {
 
         /**
          * Whether to enable full-path cache
-on: enable full-path cache (i.e., disable parameter filter)
-off: disable full-path cache (i.e., enable parameter filter)
+`on`: enables full-path cache (i.e., disables Ignore Query String)
+`off`: disables full-path cache (i.e., enables Ignore Query String)
          * @type {string || null}
          */
         this.FullUrlCache = null;
@@ -10688,7 +10699,7 @@ Note: this field may return null, indicating that no valid value is obtained.
 }
 
 /**
- * URL redirect configuration
+ * Configuration of URL rewriting
  * @class
  */
 class UrlRedirect extends  AbstractModel {
@@ -10696,16 +10707,16 @@ class UrlRedirect extends  AbstractModel {
         super();
 
         /**
-         * URL redirect configuration switch
-on: enabled
-off: disabled
+         * Whether URL rewriting is enabled
+`on`: enabled
+`off`: disabled
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * URL redirect rule, which is required if `Switch` is `on`. There can be up to 10 rules.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Rule of URL rewriting rule, which is required if `Switch` is `on`. There can be up to 10 rules.
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<UrlRedirectRule> || null}
          */
         this.PathRules = null;
@@ -10847,10 +10858,10 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.RuleType = null;
 
         /**
-         * Whether to enable full-path cache
-on: enable full-path cache (i.e., disable parameter filter)
-off: disable full-path cache (i.e., enable parameter filter)
-Note: this field may return null, indicating that no valid value is obtained.
+         * Whether full-path cache is enaled
+`on`: enables full-path cache (i.e., disables ignore query string)
+`off`: disables full-path cache (i.e., enables ignore query string)
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FullUrlCache = null;
@@ -11018,16 +11029,16 @@ class BandwidthAlert extends  AbstractModel {
         super();
 
         /**
-         * Bandwidth cap configuration switch
-on: enabled
-off: disabled
+         * Specifies whether to enable the bandwidth cap
+`on`: enable
+`off`: disable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Bandwidth cap threshold (in bps)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The upper limit of bandwidth usage (in bps) or traffic usage (in bytes).
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BpsThreshold = null;
@@ -11042,11 +11053,43 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CounterMeasure = null;
 
         /**
-         * The last time the bandwidth cap threshold was triggered
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The last time when the usage upper limit in the Chinese mainland was reached
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastTriggerTime = null;
+
+        /**
+         * Indicates whether to trigger alerts when the upper limit is reached
+`on`: enable
+`off`: disable
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AlertSwitch = null;
+
+        /**
+         * Triggers alarms when the ratio of bandwidth or traffic usage to the usage upper limit reaches the specified value
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AlertPercentage = null;
+
+        /**
+         * The last time when the usage outside the Chinese mainland reached the upper limit
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastTriggerTimeOverseas = null;
+
+        /**
+         * Dimension of the usage limit
+`bandwidth`: bandwidth
+`flux`: traffic
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Metric = null;
 
     }
 
@@ -11061,6 +11104,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BpsThreshold = 'BpsThreshold' in params ? params.BpsThreshold : null;
         this.CounterMeasure = 'CounterMeasure' in params ? params.CounterMeasure : null;
         this.LastTriggerTime = 'LastTriggerTime' in params ? params.LastTriggerTime : null;
+        this.AlertSwitch = 'AlertSwitch' in params ? params.AlertSwitch : null;
+        this.AlertPercentage = 'AlertPercentage' in params ? params.AlertPercentage : null;
+        this.LastTriggerTimeOverseas = 'LastTriggerTimeOverseas' in params ? params.LastTriggerTimeOverseas : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
 
     }
 }
@@ -11395,7 +11442,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Status code redirect configuration. This is disabled by default. (This feature is in beta and not generally available yet.)
+ * Status code redirect configuration, which is disabled by default.
  * @class
  */
 class ErrorPage extends  AbstractModel {
@@ -11466,6 +11513,7 @@ class PushTask extends  AbstractModel {
 `fail`: prefetch failed
 `done`: prefetch succeeded
 `process`: prefetch in progress
+`invalid`: invalid prefetch with 4XX/5XX status code returned from the origin server
          * @type {string || null}
          */
         this.Status = null;
@@ -12033,7 +12081,7 @@ class ListTopDataResponse extends  AbstractModel {
 }
 
 /**
- * Browser cache rule configuration. This is used to set the MaxAge default value and is disabled by default. (This feature is in beta and not generally available yet.)
+ * Browser cache rule configuration, which is used to set the default value of `MaxAge` and is disabled by default.
  * @class
  */
 class MaxAge extends  AbstractModel {
@@ -13346,8 +13394,10 @@ Specifies the status code to query. The return will be empty if the status code 
         this.Metric = null;
 
         /**
-         * Specifies the list of domain names to be queried
-Up to 30 domain names can be queried at a time
+         * Queries the information of specified domain names
+Specifies a domain name to query
+Specifies multiple domain names to query (30 at most at a time)
+Queries all Specifies an account to query all domain names
          * @type {Array.<string> || null}
          */
         this.Domains = null;

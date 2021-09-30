@@ -3104,13 +3104,13 @@ class BinlogInfo extends  AbstractModel {
         this.Date = null;
 
         /**
-         * Download address on the private network
+         * Download address
          * @type {string || null}
          */
         this.IntranetUrl = null;
 
         /**
-         * Download address on the public network
+         * Download address
          * @type {string || null}
          */
         this.InternetUrl = null;
@@ -4135,7 +4135,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InstanceId = null;
 
         /**
-         * Rollback policy. Value range: table, db, full. Default value: full. Table: expedited rollback mode, where only the selected table-level backups and binlogs are imported; for cross-table rollback, if the associated tables are not selected simultaneously, the rollback will fail; the parameter `Databases` must be empty under this mode. db: fast rollback mode, where only the selected database-level backups and binlogs are imported; for cross-database rollback, if the associated databases are not selected simultaneously, the rollback will fail. full: ordinary rollback mode, which imports all the backups and binlogs of the instance at a relatively low speed.
+         * Rollback policy. Valid values: `table` (ultrafast mode), `db` (faster mode), and `full` (fast mode). Default value: `full`. In the ultrafast mode, only backups and binlogs of the tables specified by the `Tables` parameter are imported; if `Tables` does not include all of the tables involved in cross-table operations, the rollback may fail; and the `Database` parameter must be left empty. In the faster mode, only backups and binlogs of the databases specified by the `Databases` parameter are imported, and if `Databases` does not include all of the databases involved in cross-database operations, the rollback may fail. In the fast mode, backups and binlogs of the entire instance will be imported in a speed slower than the other modes.
          * @type {string || null}
          */
         this.Strategy = null;
@@ -4263,13 +4263,13 @@ class BackupInfo extends  AbstractModel {
         this.Date = null;
 
         /**
-         * Download address on the private network
+         * Download address
          * @type {string || null}
          */
         this.IntranetUrl = null;
 
         /**
-         * Download address on the public network
+         * Download address
          * @type {string || null}
          */
         this.InternetUrl = null;
@@ -6074,18 +6074,43 @@ class DescribeBackupsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTimeWindow request structure.
+ * CreateAuditPolicy request structure.
  * @class
  */
-class DescribeTimeWindowRequest extends  AbstractModel {
+class CreateAuditPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * Audit policy name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Audit rule ID.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Retention period of audit logs. Valid values:
+7: seven days (a week);
+30: 30 days (a month);
+180: 180 days (six months);
+365: 365 days (a year);
+1095: 1095 days (three years);
+1825: 1825 days (five years).
+This parameter specifies the retention period (30 days by default) of audit logs, which is valid when you create the first audit policy for an instance. If the instance already has audit policies, this parameter is invalid, but you can use the `ModifyAuditConfig` API to modify the retention period.
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
 
     }
 
@@ -6096,7 +6121,10 @@ class DescribeTimeWindowRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
 
     }
 }
@@ -6229,54 +6257,18 @@ class DescribeDBImportRecordsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTimeWindow response structure.
+ * CreateAuditPolicy response structure.
  * @class
  */
-class DescribeTimeWindowResponse extends  AbstractModel {
+class CreateAuditPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of maintenance time windows on Monday.
-         * @type {Array.<string> || null}
+         * Audit policy ID.
+         * @type {string || null}
          */
-        this.Monday = null;
-
-        /**
-         * List of maintenance time windows on Tuesday.
-         * @type {Array.<string> || null}
-         */
-        this.Tuesday = null;
-
-        /**
-         * List of maintenance time windows on Wednesday.
-         * @type {Array.<string> || null}
-         */
-        this.Wednesday = null;
-
-        /**
-         * List of maintenance time windows on Thursday.
-         * @type {Array.<string> || null}
-         */
-        this.Thursday = null;
-
-        /**
-         * List of maintenance time windows on Friday.
-         * @type {Array.<string> || null}
-         */
-        this.Friday = null;
-
-        /**
-         * List of maintenance time windows on Saturday.
-         * @type {Array.<string> || null}
-         */
-        this.Saturday = null;
-
-        /**
-         * List of maintenance time windows on Sunday.
-         * @type {Array.<string> || null}
-         */
-        this.Sunday = null;
+        this.PolicyId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6293,13 +6285,7 @@ class DescribeTimeWindowResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Monday = 'Monday' in params ? params.Monday : null;
-        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
-        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
-        this.Thursday = 'Thursday' in params ? params.Thursday : null;
-        this.Friday = 'Friday' in params ? params.Friday : null;
-        this.Saturday = 'Saturday' in params ? params.Saturday : null;
-        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9489,7 +9475,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.Cpu = null;
 
         /**
-         * Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked: QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+         * Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
          * @type {number || null}
          */
         this.FastUpgrade = null;
@@ -9917,6 +9903,51 @@ class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
 }
 
 /**
+ * Details of the table for rollback
+ * @class
+ */
+class RollbackTables extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Table details
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RollbackTableName> || null}
+         */
+        this.Table = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+
+        if (params.Table) {
+            this.Table = new Array();
+            for (let z in params.Table) {
+                let obj = new RollbackTableName();
+                obj.deserialize(params.Table[z]);
+                this.Table.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Configuration information of the salve database
  * @class
  */
@@ -10129,6 +10160,43 @@ class RoInstanceInfo extends  AbstractModel {
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
         this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
         this.PayType = 'PayType' in params ? params.PayType : null;
+
+    }
+}
+
+/**
+ * Name of the database for rollback
+ * @class
+ */
+class RollbackDBName extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original database name before rollback
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * New database name after rollback
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NewDatabaseName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
 
     }
 }
@@ -10691,26 +10759,18 @@ class DescribeDBInstanceCharsetRequest extends  AbstractModel {
 }
 
 /**
- * Details of the table for rollback
+ * DescribeTimeWindow request structure.
  * @class
  */
-class RollbackTables extends  AbstractModel {
+class DescribeTimeWindowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database name
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
          * @type {string || null}
          */
-        this.Database = null;
-
-        /**
-         * Table details
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RollbackTableName> || null}
-         */
-        this.Table = null;
+        this.InstanceId = null;
 
     }
 
@@ -10721,16 +10781,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Database = 'Database' in params ? params.Database : null;
-
-        if (params.Table) {
-            this.Table = new Array();
-            for (let z in params.Table) {
-                let obj = new RollbackTableName();
-                obj.deserialize(params.Table[z]);
-                this.Table.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -11465,18 +11516,60 @@ class StopDelayReplicationResponse extends  AbstractModel {
 }
 
 /**
- * OpenWanService request structure.
+ * DescribeTimeWindow response structure.
  * @class
  */
-class OpenWanServiceRequest extends  AbstractModel {
+class DescribeTimeWindowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+         * List of maintenance time windows on Monday.
+         * @type {Array.<string> || null}
+         */
+        this.Monday = null;
+
+        /**
+         * List of maintenance time windows on Tuesday.
+         * @type {Array.<string> || null}
+         */
+        this.Tuesday = null;
+
+        /**
+         * List of maintenance time windows on Wednesday.
+         * @type {Array.<string> || null}
+         */
+        this.Wednesday = null;
+
+        /**
+         * List of maintenance time windows on Thursday.
+         * @type {Array.<string> || null}
+         */
+        this.Thursday = null;
+
+        /**
+         * List of maintenance time windows on Friday.
+         * @type {Array.<string> || null}
+         */
+        this.Friday = null;
+
+        /**
+         * List of maintenance time windows on Saturday.
+         * @type {Array.<string> || null}
+         */
+        this.Saturday = null;
+
+        /**
+         * List of maintenance time windows on Sunday.
+         * @type {Array.<string> || null}
+         */
+        this.Sunday = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -11487,7 +11580,14 @@ class OpenWanServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Monday = 'Monday' in params ? params.Monday : null;
+        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
+        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
+        this.Thursday = 'Thursday' in params ? params.Thursday : null;
+        this.Friday = 'Friday' in params ? params.Friday : null;
+        this.Saturday = 'Saturday' in params ? params.Saturday : null;
+        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12325,26 +12425,18 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
- * Name of the database for rollback
+ * OpenWanService request structure.
  * @class
  */
-class RollbackDBName extends  AbstractModel {
+class OpenWanServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Original database name before rollback
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
          * @type {string || null}
          */
-        this.DatabaseName = null;
-
-        /**
-         * New database name after rollback
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NewDatabaseName = null;
+        this.InstanceId = null;
 
     }
 
@@ -12355,8 +12447,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -13399,11 +13490,11 @@ module.exports = {
     DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
     RollbackTask: RollbackTask,
     DescribeBackupsResponse: DescribeBackupsResponse,
-    DescribeTimeWindowRequest: DescribeTimeWindowRequest,
+    CreateAuditPolicyRequest: CreateAuditPolicyRequest,
     CreateRoInstanceIpRequest: CreateRoInstanceIpRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
-    DescribeTimeWindowResponse: DescribeTimeWindowResponse,
+    CreateAuditPolicyResponse: CreateAuditPolicyResponse,
     BackupItem: BackupItem,
     DatabaseName: DatabaseName,
     SwitchDBInstanceMasterSlaveResponse: SwitchDBInstanceMasterSlaveResponse,
@@ -13475,8 +13566,10 @@ module.exports = {
     DescribeRoGroupsResponse: DescribeRoGroupsResponse,
     ZoneSellConf: ZoneSellConf,
     DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
+    RollbackTables: RollbackTables,
     SlaveConfig: SlaveConfig,
     RoInstanceInfo: RoInstanceInfo,
+    RollbackDBName: RollbackDBName,
     CreateAccountsRequest: CreateAccountsRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
@@ -13488,7 +13581,7 @@ module.exports = {
     CommonTimeWindow: CommonTimeWindow,
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
-    RollbackTables: RollbackTables,
+    DescribeTimeWindowRequest: DescribeTimeWindowRequest,
     DescribeBackupDatabasesRequest: DescribeBackupDatabasesRequest,
     ModifyTimeWindowResponse: ModifyTimeWindowResponse,
     DeviceMemInfo: DeviceMemInfo,
@@ -13505,7 +13598,7 @@ module.exports = {
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
     StopDelayReplicationResponse: StopDelayReplicationResponse,
-    OpenWanServiceRequest: OpenWanServiceRequest,
+    DescribeTimeWindowResponse: DescribeTimeWindowResponse,
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
@@ -13525,7 +13618,7 @@ module.exports = {
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     AddTimeWindowResponse: AddTimeWindowResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
-    RollbackDBName: RollbackDBName,
+    OpenWanServiceRequest: OpenWanServiceRequest,
     StopRollbackRequest: StopRollbackRequest,
     DeleteBackupRequest: DeleteBackupRequest,
     ModifyNameOrDescByDpIdRequest: ModifyNameOrDescByDpIdRequest,

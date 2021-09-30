@@ -1103,10 +1103,12 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API (AssignPrivateIpAddresses) is used for the ENI to apply for private IPs.
+     * This API is used to apply for private IPs for an ENI.
 * An ENI can only be bound with a limited number of IP addresses. For more information about resource limits, see <a href="/document/product/576/18527">ENI Use Limits</a>.
-* You can specify the private IP you want to apply for. It cannot be the primary IP, which already exists and cannot be modified. The private IP must be in the same subnet as the ENI, and cannot be occupied.
-* You can apply for more than one secondary private IP on the ENI. The API will return the specified number of secondary private IPs in the subnet IP range of the ENI.
+* You can apply for a specified private IP. It cannot be a primary IP because the primary IP already exists and cannot be modified. The private IP address must be an idle IP in the subnet to which the ENI belongs.
+* You can apply for more than one secondary private IP on the ENI. The API will return the specified number of secondary private IPs in the subnet IP range.
+>?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+>
      * @param {AssignPrivateIpAddressesRequest} req
      * @param {function(string, AssignPrivateIpAddressesResponse):void} cb
      * @public
@@ -1134,6 +1136,8 @@ After unbinding the network instance, the corresponding routing policy will also
 * The number of IPs bound with an ENI is limited. For more information, see <a href="/document/product/576/18527">ENI Use Limits</a>.
 * You can bind an existing security group when creating an ENI.
 * You can bind a tag when creating an ENI. The tag list in the response indicates the tags that have been successfully added.
+>?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+>
      * @param {CreateAndAttachNetworkInterfaceRequest} req
      * @param {function(string, CreateAndAttachNetworkInterfaceResponse):void} cb
      * @public
@@ -1547,9 +1551,11 @@ Before deleting a subnet, you need to remove all resources in the subnet, includ
     }
 
     /**
-     * This API is used to create a Classiclink between a VPC instance and a basic network device.
-* The VPC instance and the basic network device must be in the same region.
-* For differences between VPC and basic networks, see <a href="https://intl.cloud.tencent.com/document/product/215/30720?from_cn_redirect=1">VPC and Basic Networks</a>.
+     * This API is used to create a Classiclink between a VPC instance and a classic network device.
+* The VPC instance and the classic network device must be in the same region.
+* For differences between VPC and the classic network, see <a href="https://intl.cloud.tencent.com/document/product/215/30720?from_cn_redirect=1">VPC and Classic Network</a>.
+>?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+>
      * @param {AttachClassicLinkVpcRequest} req
      * @param {function(string, AttachClassicLinkVpcResponse):void} cb
      * @public
@@ -1618,12 +1624,14 @@ This API is completed asynchronously. If you need to query the async job executi
     }
 
     /**
-     * This API is used to create one or more ENIs.
+     * This API is used to create an ENI.
 * You can specify private IP addresses and a primary IP when creating an ENI. The specified private IP must be in the same subnet as the ENI and is not occupied.
 * When creating an ENI, you can specify the number of private IP addresses that you want to apply for. The system will randomly generate private IP addresses.
 * An ENI can only be bound with a limited number of IP addresses. For more information about resource limits, see <a href="/document/product/576/18527">ENI Use Limits</a>.
 * You can bind an existing security group when creating an ENI.
 * You can bind a tag when creating an ENI. The tag list in the response indicates the tags that have been successfully added.
+>?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+>
      * @param {CreateNetworkInterfaceRequest} req
      * @param {function(string, CreateNetworkInterfaceResponse):void} cb
      * @public
@@ -2051,7 +2059,8 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (CreateNatGateway) is used to create a NAT gateway.
+     * This API is used to create a NAT Gateway.
+Before taking actions on a NAT Gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
      * @param {CreateNatGatewayRequest} req
      * @param {function(string, CreateNatGatewayResponse):void} cb
      * @public
@@ -2965,7 +2974,7 @@ This API is used to verify whether there will be conflict with an existing route
     }
 
     /**
-     * This API is used to modify endpoint service attributes.
+     * This API is used to modify the VPC endpoint service attributes.
 
 
      * @param {ModifyVpcEndPointServiceAttributeRequest} req
@@ -3078,7 +3087,9 @@ If the subnet IP range still has occupied IPs that are not yet repossessed, the 
     }
 
     /**
-     * This API (CreateVpnConnection) is used to create VPN tunnel.
+     * This API is used to create a VPN tunnel.
+>?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+>
      * @param {CreateVpnConnectionRequest} req
      * @param {function(string, CreateVpnConnectionResponse):void} cb
      * @public
@@ -3122,7 +3133,9 @@ If the subnet IP range still has occupied IPs that are not yet repossessed, the 
     }
 
     /**
-     * This API (DetachClassicLinkVpc) is used to delete a Classiclink.
+     * This API is used to delete a Classiclink.
+>?This API is async. You can call the [`DescribeVpcTaskResult`](https://intl.cloud.tencent.com/document/api/215/59037?from_cn_redirect=1) API to query the task result. When the task is completed, you can continue other tasks.
+>
      * @param {DetachClassicLinkVpcRequest} req
      * @param {function(string, DetachClassicLinkVpcResponse):void} cb
      * @public

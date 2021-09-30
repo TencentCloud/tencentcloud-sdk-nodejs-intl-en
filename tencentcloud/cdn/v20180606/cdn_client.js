@@ -365,7 +365,7 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * This API is used to block access to a specific URL on CDN. After a URL is blocked, a 403 error will be returned for the arrived access requests initiated from the Chinese mainland. This API is in beta and not fully available now.
+     * This API is used to block access to a specific URL on CDN. When a URL is blocked, error 403 will be returned for requests from the Chinese mainland. URL blocking is not permanent. Note that this API is only available to beta users now. 
      * @param {DisableCachesRequest} req
      * @param {function(string, DisableCachesResponse):void} cb
      * @public
@@ -600,7 +600,7 @@ This API is in beta test and not fully available yet. Please stay tuned.
 
     /**
      * This API is used to cache specified URL resources to CDN nodes. You can specify acceleration regions for the prefetch.
-By default, a maximum of 1000 URLs can be prefetched per day either within or outside Chinese mainland, and up to 20 tasks can be submitted at a time.
+By default, a maximum of 1000 URLs can be prefetched per day either within or outside the Chinese mainland, and up to 20 tasks can be submitted at a time. Note that resources prefetched outside the Chinese mainland will be cached to CDN nodes outside the Chinese mainland and the traffic generated will incur costs.
      * @param {PushUrlsCacheRequest} req
      * @param {function(string, PushUrlsCacheResponse):void} cb
      * @public

@@ -2843,7 +2843,7 @@ class ModifyVpcEndPointServiceAttributeRequest extends  AbstractModel {
         this.EndPointServiceName = null;
 
         /**
-         * Whether to automatically accept
+         * Whether to automatically accept VPC endpoint connection requests. Valid values: <ui><li>`true`: yes<li>`false`: no</ul>
          * @type {boolean || null}
          */
         this.AutoAcceptFlag = null;
@@ -3914,12 +3914,14 @@ class DescribeVpcsRequest extends  AbstractModel {
 
         /**
          * Filter condition. `VpcIds` and `Filters` cannot be specified at the same time.
-<li>vpc-name - String - (Filter condition) VPC instance name.</li>
-<li>is-default - String - (Filter condition) Indicates whether it is the default VPC.</li>
-<li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
-<li>cidr-block - String - (Filter condition) VPC CIDR.</li>
-<li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-<li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key is replaced with the specific tag key. For usage, refer to case 2.</li>
+Valid filters include:
+<li>`vpc-name`: VPC instance name</li>
+<li>`is-default`: indicates whether it is the default VPC</li>
+<li>`vpc-id`: VPC instance ID, such as `vpc-f49l6u0z`</li>
+<li>`cidr-block`: VPC CIDR block</li>
+<li>`tag-key`: (optional) tag key</li>
+<li>`tag:tag-key`: (optional) tag key-value pair. Replace the `tag-key` with a specified tag value. For its usage, refer to the Example 2.</li>
+  **Note:** if one filter has multiple values, the logical relationship between these values is `OR`. The logical relationship between filters is `AND`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6831,12 +6833,6 @@ class CreateVpnConnectionRequest extends  AbstractModel {
         super();
 
         /**
-         * VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
          * The ID of the VPN gateway instance.
          * @type {string || null}
          */
@@ -6859,6 +6855,13 @@ class CreateVpnConnectionRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.PreShareKey = null;
+
+        /**
+         * VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
+This parameter is optional for a CCN-based VPN tunnel.
+         * @type {string || null}
+         */
+        this.VpcId = null;
 
         /**
          * The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
@@ -6902,6 +6905,12 @@ class CreateVpnConnectionRequest extends  AbstractModel {
          */
         this.HealthCheckRemoteIp = null;
 
+        /**
+         * Tunnel type. Valid values: `STATIC`, `StaticRoute`, and `Policy`.
+         * @type {string || null}
+         */
+        this.RouteType = null;
+
     }
 
     /**
@@ -6911,11 +6920,11 @@ class CreateVpnConnectionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
         this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
         this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
         this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
         if (params.SecurityPolicyDatabases) {
             this.SecurityPolicyDatabases = new Array();
@@ -6949,6 +6958,7 @@ class CreateVpnConnectionRequest extends  AbstractModel {
         this.EnableHealthCheck = 'EnableHealthCheck' in params ? params.EnableHealthCheck : null;
         this.HealthCheckLocalIp = 'HealthCheckLocalIp' in params ? params.HealthCheckLocalIp : null;
         this.HealthCheckRemoteIp = 'HealthCheckRemoteIp' in params ? params.HealthCheckRemoteIp : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
 
     }
 }

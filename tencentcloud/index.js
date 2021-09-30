@@ -35,6 +35,7 @@ module.exports = {
     iotcloud: require("./iotcloud"),
     ip: require("./ip"),
     kms: require("./kms"),
+    lighthouse: require("./lighthouse"),
     live: require("./live"),
     mariadb: require("./mariadb"),
     mdc: require("./mdc"),

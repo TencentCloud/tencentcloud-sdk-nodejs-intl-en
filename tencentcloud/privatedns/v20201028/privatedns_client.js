@@ -18,10 +18,13 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyPrivateZoneVpcRequest = models.ModifyPrivateZoneVpcRequest;
 const DescribeAuditLogResponse = models.DescribeAuditLogResponse;
+const DescribePrivateDNSAccountListResponse = models.DescribePrivateDNSAccountListResponse;
 const DescribePrivateZoneRecordListRequest = models.DescribePrivateZoneRecordListRequest;
+const PrivateDNSAccount = models.PrivateDNSAccount;
 const AccountVpcInfoOutput = models.AccountVpcInfoOutput;
 const DescribePrivateZoneRequest = models.DescribePrivateZoneRequest;
 const DatePoint = models.DatePoint;
+const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
 const PrivateZoneRecord = models.PrivateZoneRecord;
 const AuditLogInfo = models.AuditLogInfo;
 const DescribeRequestDataRequest = models.DescribeRequestDataRequest;
@@ -33,10 +36,10 @@ const TagInfo = models.TagInfo;
 const CreatePrivateZoneRequest = models.CreatePrivateZoneRequest;
 const AccountVpcInfo = models.AccountVpcInfo;
 const ModifyPrivateZoneResponse = models.ModifyPrivateZoneResponse;
-const CreatePrivateZoneResponse = models.CreatePrivateZoneResponse;
+const DescribePrivateZoneListRequest = models.DescribePrivateZoneListRequest;
 const SubscribePrivateZoneServiceRequest = models.SubscribePrivateZoneServiceRequest;
 const DescribePrivateZoneResponse = models.DescribePrivateZoneResponse;
-const DescribePrivateZoneListRequest = models.DescribePrivateZoneListRequest;
+const CreatePrivateZoneResponse = models.CreatePrivateZoneResponse;
 const DescribeDashboardResponse = models.DescribeDashboardResponse;
 const CreatePrivateZoneRecordResponse = models.CreatePrivateZoneRecordResponse;
 const DescribePrivateZoneServiceResponse = models.DescribePrivateZoneServiceResponse;
@@ -51,7 +54,7 @@ const Filter = models.Filter;
 const DeletePrivateZoneResponse = models.DeletePrivateZoneResponse;
 const DescribePrivateZoneListResponse = models.DescribePrivateZoneListResponse;
 const MetricData = models.MetricData;
-const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
+const DescribePrivateDNSAccountListRequest = models.DescribePrivateDNSAccountListRequest;
 const PrivateZone = models.PrivateZone;
 const CreatePrivateZoneRecordRequest = models.CreatePrivateZoneRecordRequest;
 const ModifyPrivateZoneRecordRequest = models.ModifyPrivateZoneRecordRequest;
@@ -159,6 +162,17 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify a private domain.
+     * @param {ModifyPrivateZoneRequest} req
+     * @param {function(string, ModifyPrivateZoneResponse):void} cb
+     * @public
+     */
+    ModifyPrivateZone(req, cb) {
+        let resp = new ModifyPrivateZoneResponse();
+        this.request("ModifyPrivateZone", req, resp, cb);
+    }
+
+    /**
      * This API is used to activate the Private DNS service.
      * @param {SubscribePrivateZoneServiceRequest} req
      * @param {function(string, SubscribePrivateZoneServiceResponse):void} cb
@@ -225,14 +239,14 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a private domain.
-     * @param {ModifyPrivateZoneRequest} req
-     * @param {function(string, ModifyPrivateZoneResponse):void} cb
+     * This API is used to get the list of Private DNS accounts.
+     * @param {DescribePrivateDNSAccountListRequest} req
+     * @param {function(string, DescribePrivateDNSAccountListResponse):void} cb
      * @public
      */
-    ModifyPrivateZone(req, cb) {
-        let resp = new ModifyPrivateZoneResponse();
-        this.request("ModifyPrivateZone", req, resp, cb);
+    DescribePrivateDNSAccountList(req, cb) {
+        let resp = new DescribePrivateDNSAccountListResponse();
+        this.request("DescribePrivateDNSAccountList", req, resp, cb);
     }
 
 

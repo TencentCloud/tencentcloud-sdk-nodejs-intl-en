@@ -118,6 +118,56 @@ class DescribeAuditLogResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePrivateDNSAccountList response structure.
+ * @class
+ */
+class DescribePrivateDNSAccountListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of Private DNS accounts
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of Private DNS accounts
+         * @type {Array.<PrivateDNSAccount> || null}
+         */
+        this.AccountSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AccountSet) {
+            this.AccountSet = new Array();
+            for (let z in params.AccountSet) {
+                let obj = new PrivateDNSAccount();
+                obj.deserialize(params.AccountSet[z]);
+                this.AccountSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePrivateZoneRecordList request structure.
  * @class
  */
@@ -170,6 +220,48 @@ class DescribePrivateZoneRecordListRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Private DNS account
+ * @class
+ */
+class PrivateDNSAccount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Root account UIN
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Root account name
+         * @type {string || null}
+         */
+        this.Account = null;
+
+        /**
+         * Account name
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Account = 'Account' in params ? params.Account : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
 
     }
 }
@@ -275,6 +367,27 @@ class DatePoint extends  AbstractModel {
         }
         this.Date = 'Date' in params ? params.Date : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribePrivateZoneService request structure.
+ * @class
+ */
+class DescribePrivateZoneServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -867,30 +980,30 @@ class ModifyPrivateZoneResponse extends  AbstractModel {
 }
 
 /**
- * CreatePrivateZone response structure.
+ * DescribePrivateZoneList request structure.
  * @class
  */
-class CreatePrivateZoneResponse extends  AbstractModel {
+class DescribePrivateZoneListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Private domain ID, such as zone-xxxxxx
-         * @type {string || null}
+         * Pagination offset, starting from 0
+         * @type {number || null}
          */
-        this.ZoneId = null;
+        this.Offset = null;
 
         /**
-         * Private domain
-         * @type {string || null}
+         * Number of entries per page. Maximum value: 100. Default value: 20
+         * @type {number || null}
          */
-        this.Domain = null;
+        this.Limit = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Filter parameter
+         * @type {Array.<Filter> || null}
          */
-        this.RequestId = null;
+        this.Filters = null;
 
     }
 
@@ -901,9 +1014,17 @@ class CreatePrivateZoneResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -970,30 +1091,30 @@ class DescribePrivateZoneResponse extends  AbstractModel {
 }
 
 /**
- * DescribePrivateZoneList request structure.
+ * CreatePrivateZone response structure.
  * @class
  */
-class DescribePrivateZoneListRequest extends  AbstractModel {
+class CreatePrivateZoneResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Pagination offset, starting from 0
-         * @type {number || null}
+         * Private domain ID, such as zone-xxxxxx
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.ZoneId = null;
 
         /**
-         * Number of entries per page. Maximum value: 100. Default value: 20
-         * @type {number || null}
+         * Private domain
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Domain = null;
 
         /**
-         * Filter parameter
-         * @type {Array.<Filter> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -1004,17 +1125,9 @@ class DescribePrivateZoneListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1606,12 +1719,30 @@ class MetricData extends  AbstractModel {
 }
 
 /**
- * DescribePrivateZoneService request structure.
+ * DescribePrivateDNSAccountList request structure.
  * @class
  */
-class DescribePrivateZoneServiceRequest extends  AbstractModel {
+class DescribePrivateDNSAccountListRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Pagination offset, starting from `0`
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page. Maximum value: `100`. Default value: `20`
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter parameters
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -1621,6 +1752,17 @@ class DescribePrivateZoneServiceRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
@@ -2042,10 +2184,13 @@ class ModifyPrivateZoneVpcResponse extends  AbstractModel {
 module.exports = {
     ModifyPrivateZoneVpcRequest: ModifyPrivateZoneVpcRequest,
     DescribeAuditLogResponse: DescribeAuditLogResponse,
+    DescribePrivateDNSAccountListResponse: DescribePrivateDNSAccountListResponse,
     DescribePrivateZoneRecordListRequest: DescribePrivateZoneRecordListRequest,
+    PrivateDNSAccount: PrivateDNSAccount,
     AccountVpcInfoOutput: AccountVpcInfoOutput,
     DescribePrivateZoneRequest: DescribePrivateZoneRequest,
     DatePoint: DatePoint,
+    DescribePrivateZoneServiceRequest: DescribePrivateZoneServiceRequest,
     PrivateZoneRecord: PrivateZoneRecord,
     AuditLogInfo: AuditLogInfo,
     DescribeRequestDataRequest: DescribeRequestDataRequest,
@@ -2057,10 +2202,10 @@ module.exports = {
     CreatePrivateZoneRequest: CreatePrivateZoneRequest,
     AccountVpcInfo: AccountVpcInfo,
     ModifyPrivateZoneResponse: ModifyPrivateZoneResponse,
-    CreatePrivateZoneResponse: CreatePrivateZoneResponse,
+    DescribePrivateZoneListRequest: DescribePrivateZoneListRequest,
     SubscribePrivateZoneServiceRequest: SubscribePrivateZoneServiceRequest,
     DescribePrivateZoneResponse: DescribePrivateZoneResponse,
-    DescribePrivateZoneListRequest: DescribePrivateZoneListRequest,
+    CreatePrivateZoneResponse: CreatePrivateZoneResponse,
     DescribeDashboardResponse: DescribeDashboardResponse,
     CreatePrivateZoneRecordResponse: CreatePrivateZoneRecordResponse,
     DescribePrivateZoneServiceResponse: DescribePrivateZoneServiceResponse,
@@ -2075,7 +2220,7 @@ module.exports = {
     DeletePrivateZoneResponse: DeletePrivateZoneResponse,
     DescribePrivateZoneListResponse: DescribePrivateZoneListResponse,
     MetricData: MetricData,
-    DescribePrivateZoneServiceRequest: DescribePrivateZoneServiceRequest,
+    DescribePrivateDNSAccountListRequest: DescribePrivateDNSAccountListRequest,
     PrivateZone: PrivateZone,
     CreatePrivateZoneRecordRequest: CreatePrivateZoneRecordRequest,
     ModifyPrivateZoneRecordRequest: ModifyPrivateZoneRecordRequest,

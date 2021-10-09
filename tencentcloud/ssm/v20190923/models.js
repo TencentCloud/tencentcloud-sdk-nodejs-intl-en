@@ -1313,7 +1313,11 @@ The `PendingCreate` and `CreateFailed` status only take effect when `SecretType`
         this.SecretType = null;
 
         /**
-         * 
+         * This parameter is valid only when SecretType is `1`.
+ 
+An empty value indicates querying all types of Tencent Cloud service secrets.
+`Mysql`: queries MySQL database credentials.
+`Tdsql-mysql`: queries TDSQL MySQL database credentials.
          * @type {string || null}
          */
         this.ProductName = null;
@@ -1909,7 +1913,7 @@ class GetSSHKeyPairValueRequest extends  AbstractModel {
         this.SecretName = null;
 
         /**
-         * 
+         * ID of the key pair, which is the unique identifier of the key pair in the CVM.
          * @type {string || null}
          */
         this.SSHKeyId = null;

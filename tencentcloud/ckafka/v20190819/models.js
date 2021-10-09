@@ -106,6 +106,13 @@ Note: `null` may be returned for this field, indicating that no valid values can
          */
         this.RetentionTimeConfig = null;
 
+        /**
+         * `0`: normal, `1`: deleted, `2`: deleting
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -138,6 +145,7 @@ Note: `null` may be returned for this field, indicating that no valid values can
             obj.deserialize(params.RetentionTimeConfig)
             this.RetentionTimeConfig = obj;
         }
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1002,6 +1010,131 @@ class DescribeInstancesDetailResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Output parameters of ACL rule list APIs
+ * @class
+ */
+class AclRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ACL rule name.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Instance ID.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Matching type. Currently, only prefix match is supported. Enumerated value list: PREFIXED
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PatternType = null;
+
+        /**
+         * Prefix value for prefix match.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * ACL resource type. Only “Topic” is supported. Enumerated value list: Topic.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * ACL information contained in the rule.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AclList = null;
+
+        /**
+         * Creation time of the rule.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTimeStamp = null;
+
+        /**
+         * A parameter used to specify whether the preset ACL rule is applied to new topics.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsApplied = null;
+
+        /**
+         * Rule update time.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTimeStamp = null;
+
+        /**
+         * Remarks of the rule.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * One of the corresponding topic names that is displayed.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * The number of topics that apply this ACL rule.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TopicCount = null;
+
+        /**
+         * Name of rule type.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PatternTypeTitle = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PatternType = 'PatternType' in params ? params.PatternType : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.AclList = 'AclList' in params ? params.AclList : null;
+        this.CreateTimeStamp = 'CreateTimeStamp' in params ? params.CreateTimeStamp : null;
+        this.IsApplied = 'IsApplied' in params ? params.IsApplied : null;
+        this.UpdateTimeStamp = 'UpdateTimeStamp' in params ? params.UpdateTimeStamp : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicCount = 'TopicCount' in params ? params.TopicCount : null;
+        this.PatternTypeTitle = 'PatternTypeTitle' in params ? params.PatternTypeTitle : null;
 
     }
 }
@@ -2363,6 +2496,18 @@ class CreateTopicRequest extends  AbstractModel {
          */
         this.SegmentMs = null;
 
+        /**
+         * Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
+         * @type {number || null}
+         */
+        this.EnableAclRule = null;
+
+        /**
+         * Name of the preset ACL rule.
+         * @type {string || null}
+         */
+        this.AclRuleName = null;
+
     }
 
     /**
@@ -2384,6 +2529,8 @@ class CreateTopicRequest extends  AbstractModel {
         this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
         this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
         this.SegmentMs = 'SegmentMs' in params ? params.SegmentMs : null;
+        this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
+        this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
 
     }
 }
@@ -3086,6 +3233,12 @@ class DescribeTopicRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Name of the preset ACL rule.
+         * @type {string || null}
+         */
+        this.AclRuleName = null;
+
     }
 
     /**
@@ -3099,6 +3252,7 @@ class DescribeTopicRequest extends  AbstractModel {
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
 
     }
 }
@@ -5011,6 +5165,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Partitions = null;
 
+        /**
+         * Switch of the preset ACL rule. `1`: enable, `0`: disable.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EnableAclRule = null;
+
+        /**
+         * Preset ACL rule list.
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {Array.<AclRule> || null}
+         */
+        this.AclRuleList = null;
+
     }
 
     /**
@@ -5039,6 +5207,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new TopicPartitionDO();
                 obj.deserialize(params.Partitions[z]);
                 this.Partitions.push(obj);
+            }
+        }
+        this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
+
+        if (params.AclRuleList) {
+            this.AclRuleList = new Array();
+            for (let z in params.AclRuleList) {
+                let obj = new AclRule();
+                obj.deserialize(params.AclRuleList[z]);
+                this.AclRuleList.push(obj);
             }
         }
 
@@ -5274,6 +5452,12 @@ class DescribeTopicDetailRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Name of the preset ACL rule.
+         * @type {string || null}
+         */
+        this.AclRuleName = null;
+
     }
 
     /**
@@ -5287,6 +5471,7 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
 
     }
 }
@@ -5828,6 +6013,24 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
          */
         this.CleanUpPolicy = null;
 
+        /**
+         * IP allowlist, which is required if the value of `enableWhileList` is 1.
+         * @type {Array.<string> || null}
+         */
+        this.IpWhiteList = null;
+
+        /**
+         * Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
+         * @type {number || null}
+         */
+        this.EnableAclRule = null;
+
+        /**
+         * Name of the preset ACL rule.
+         * @type {string || null}
+         */
+        this.AclRuleName = null;
+
     }
 
     /**
@@ -5847,6 +6050,9 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.SegmentMs = 'SegmentMs' in params ? params.SegmentMs : null;
         this.MaxMessageBytes = 'MaxMessageBytes' in params ? params.MaxMessageBytes : null;
         this.CleanUpPolicy = 'CleanUpPolicy' in params ? params.CleanUpPolicy : null;
+        this.IpWhiteList = 'IpWhiteList' in params ? params.IpWhiteList : null;
+        this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
+        this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
 
     }
 }
@@ -6540,6 +6746,7 @@ module.exports = {
     TopicResult: TopicResult,
     Region: Region,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
+    AclRule: AclRule,
     DescribeACLResponse: DescribeACLResponse,
     JgwOperateResponse: JgwOperateResponse,
     ZoneInfo: ZoneInfo,

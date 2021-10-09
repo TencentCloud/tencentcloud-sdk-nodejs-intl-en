@@ -690,6 +690,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * UnbindCdnDomainWithChannel request structure.
+ * @class
+ */
+class UnbindCdnDomainWithChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * CDN playback domain name
+         * @type {string || null}
+         */
+        this.CdnDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.CdnDomain = 'CdnDomain' in params ? params.CdnDomain : null;
+
+    }
+}
+
+/**
  * Channel endpoint information.
  * @class
  */
@@ -958,6 +993,34 @@ class CreateStreamPackageChannelEndpointRequest extends  AbstractModel {
 }
 
 /**
+ * UnbindCdnDomainWithChannel response structure.
+ * @class
+ */
+class UnbindCdnDomainWithChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateStreamPackageChannel request structure.
  * @class
  */
@@ -1213,12 +1276,14 @@ module.exports = {
     DeleteStreamPackageChannelEndpointsResponse: DeleteStreamPackageChannelEndpointsResponse,
     InputInfo: InputInfo,
     InputAuthInfo: InputAuthInfo,
+    UnbindCdnDomainWithChannelRequest: UnbindCdnDomainWithChannelRequest,
     EndpointInfo: EndpointInfo,
     DescribeStreamPackageChannelRequest: DescribeStreamPackageChannelRequest,
     ModifyStreamPackageChannelRequest: ModifyStreamPackageChannelRequest,
     ModifyStreamPackageChannelEndpointRequest: ModifyStreamPackageChannelEndpointRequest,
     CacheInfoInfo: CacheInfoInfo,
     CreateStreamPackageChannelEndpointRequest: CreateStreamPackageChannelEndpointRequest,
+    UnbindCdnDomainWithChannelResponse: UnbindCdnDomainWithChannelResponse,
     CreateStreamPackageChannelRequest: CreateStreamPackageChannelRequest,
     ModifyStreamPackageChannelInputAuthInfoRequest: ModifyStreamPackageChannelInputAuthInfoRequest,
     BindNewLVBDomainWithChannelRequest: BindNewLVBDomainWithChannelRequest,

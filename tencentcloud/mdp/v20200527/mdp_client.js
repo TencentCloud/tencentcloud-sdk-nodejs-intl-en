@@ -32,12 +32,14 @@ const CacheInfo = models.CacheInfo;
 const DeleteStreamPackageChannelEndpointsResponse = models.DeleteStreamPackageChannelEndpointsResponse;
 const InputInfo = models.InputInfo;
 const InputAuthInfo = models.InputAuthInfo;
+const UnbindCdnDomainWithChannelRequest = models.UnbindCdnDomainWithChannelRequest;
 const EndpointInfo = models.EndpointInfo;
 const DescribeStreamPackageChannelRequest = models.DescribeStreamPackageChannelRequest;
 const ModifyStreamPackageChannelRequest = models.ModifyStreamPackageChannelRequest;
 const ModifyStreamPackageChannelEndpointRequest = models.ModifyStreamPackageChannelEndpointRequest;
 const CacheInfoInfo = models.CacheInfoInfo;
 const CreateStreamPackageChannelEndpointRequest = models.CreateStreamPackageChannelEndpointRequest;
+const UnbindCdnDomainWithChannelResponse = models.UnbindCdnDomainWithChannelResponse;
 const CreateStreamPackageChannelRequest = models.CreateStreamPackageChannelRequest;
 const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
 const BindNewLVBDomainWithChannelRequest = models.BindNewLVBDomainWithChannelRequest;
@@ -153,6 +155,17 @@ class MdpClient extends AbstractClient {
     ModifyStreamPackageChannel(req, cb) {
         let resp = new ModifyStreamPackageChannelResponse();
         this.request("ModifyStreamPackageChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a CDN playback domain name from a channel.
+     * @param {UnbindCdnDomainWithChannelRequest} req
+     * @param {function(string, UnbindCdnDomainWithChannelResponse):void} cb
+     * @public
+     */
+    UnbindCdnDomainWithChannel(req, cb) {
+        let resp = new UnbindCdnDomainWithChannelResponse();
+        this.request("UnbindCdnDomainWithChannel", req, resp, cb);
     }
 
     /**

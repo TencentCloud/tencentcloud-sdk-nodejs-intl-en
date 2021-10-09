@@ -9083,6 +9083,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DomainStatus = null;
 
+        /**
+         * Blocking-related status of the domain name. `BANNED`: the domain name is blocked; `RECOVER`: the domain name is unblocked or normal; `BANNING`: the domain name is being blocked; `RECOVERING`: the domain name is being unblocked; `BAN_FAILED`: the blocking fails; RECOVER_FAILED: the unblocking fails.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BanStatus = null;
+
     }
 
     /**
@@ -9135,6 +9142,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
+        this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
 
     }
 }
@@ -10676,7 +10684,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ModifyConfigTime = null;
 
         /**
-         * Connection type
+         * Connection type. `100`: THUNDER connection; `103`: Microsoft connection.
 Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
@@ -10709,6 +10717,13 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          * @type {string || null}
          */
         this.PackageType = null;
+
+        /**
+         * Blocking-related status of the domain name. `BANNED`: the domain name is blocked; `RECOVER`: the domain name is unblocked or normal; `BANNING`: the domain name is being blocked; `RECOVERING`: the domain name is being unblocked; `BAN_FAILED`: the blocking fails; RECOVER_FAILED: the unblocking fails.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.BanStatus = null;
 
     }
 
@@ -10767,6 +10782,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
 
     }
 }

@@ -20,6 +20,7 @@ const DeleteImmutableTagRulesResponse = models.DeleteImmutableTagRulesResponse;
 const DescribeImmutableTagRulesResponse = models.DescribeImmutableTagRulesResponse;
 const CheckInstanceResponse = models.CheckInstanceResponse;
 const CreateMultipleSecurityPolicyRequest = models.CreateMultipleSecurityPolicyRequest;
+const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const CreateImmutableTagRulesResponse = models.CreateImmutableTagRulesResponse;
 const DeleteMultipleSecurityPolicyResponse = models.DeleteMultipleSecurityPolicyResponse;
 const ImmutableTagRule = models.ImmutableTagRule;
@@ -28,6 +29,7 @@ const CheckInstanceRequest = models.CheckInstanceRequest;
 const CreateMultipleSecurityPolicyResponse = models.CreateMultipleSecurityPolicyResponse;
 const DeleteImmutableTagRulesRequest = models.DeleteImmutableTagRulesRequest;
 const SecurityPolicy = models.SecurityPolicy;
+const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const DescribeImmutableTagRulesRequest = models.DescribeImmutableTagRulesRequest;
 const ModifyImmutableTagRulesRequest = models.ModifyImmutableTagRulesRequest;
 const ModifyImmutableTagRulesResponse = models.ModifyImmutableTagRulesResponse;
@@ -108,6 +110,17 @@ class TcrClient extends AbstractClient {
     CreateMultipleSecurityPolicy(req, cb) {
         let resp = new CreateMultipleSecurityPolicyResponse();
         this.request("CreateMultipleSecurityPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update instance information.
+     * @param {ModifyInstanceRequest} req
+     * @param {function(string, ModifyInstanceResponse):void} cb
+     * @public
+     */
+    ModifyInstance(req, cb) {
+        let resp = new ModifyInstanceResponse();
+        this.request("ModifyInstance", req, resp, cb);
     }
 
     /**

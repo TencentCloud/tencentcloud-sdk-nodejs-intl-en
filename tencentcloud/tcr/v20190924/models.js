@@ -189,6 +189,34 @@ class CreateMultipleSecurityPolicyRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyInstance response structure.
+ * @class
+ */
+class ModifyInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateImmutableTagRules response structure.
  * @class
  */
@@ -519,6 +547,41 @@ class SecurityPolicy extends  AbstractModel {
 }
 
 /**
+ * ModifyInstance request structure.
+ * @class
+ */
+class ModifyInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Instance specification
+         * @type {string || null}
+         */
+        this.RegistryType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
+
+    }
+}
+
+/**
  * DescribeImmutableTagRules request structure.
  * @class
  */
@@ -680,6 +743,7 @@ module.exports = {
     DescribeImmutableTagRulesResponse: DescribeImmutableTagRulesResponse,
     CheckInstanceResponse: CheckInstanceResponse,
     CreateMultipleSecurityPolicyRequest: CreateMultipleSecurityPolicyRequest,
+    ModifyInstanceResponse: ModifyInstanceResponse,
     CreateImmutableTagRulesResponse: CreateImmutableTagRulesResponse,
     DeleteMultipleSecurityPolicyResponse: DeleteMultipleSecurityPolicyResponse,
     ImmutableTagRule: ImmutableTagRule,
@@ -688,6 +752,7 @@ module.exports = {
     CreateMultipleSecurityPolicyResponse: CreateMultipleSecurityPolicyResponse,
     DeleteImmutableTagRulesRequest: DeleteImmutableTagRulesRequest,
     SecurityPolicy: SecurityPolicy,
+    ModifyInstanceRequest: ModifyInstanceRequest,
     DescribeImmutableTagRulesRequest: DescribeImmutableTagRulesRequest,
     ModifyImmutableTagRulesRequest: ModifyImmutableTagRulesRequest,
     ModifyImmutableTagRulesResponse: ModifyImmutableTagRulesResponse,

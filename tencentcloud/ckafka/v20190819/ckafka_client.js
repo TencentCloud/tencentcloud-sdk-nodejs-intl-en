@@ -36,6 +36,7 @@ const GroupInfoTopics = models.GroupInfoTopics;
 const TopicResult = models.TopicResult;
 const Region = models.Region;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
+const AclRule = models.AclRule;
 const DescribeACLResponse = models.DescribeACLResponse;
 const JgwOperateResponse = models.JgwOperateResponse;
 const ZoneInfo = models.ZoneInfo;

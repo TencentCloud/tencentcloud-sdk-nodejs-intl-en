@@ -2446,15 +2446,16 @@ class UrlSignatureAuthPolicy extends  AbstractModel {
         super();
 
         /**
-         * [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986) status. Valid values:
-<li>Enabled</li>
-<li>Disabled</li>
+         * Whether to enable or disable [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986). Valid values:
+<li>`Enabled`: enable</li>
+<li>`Disabled`: disable</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * The key for generating the signature of [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986)
+         * The key for generating the signature of [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986).
+`EncryptedKey` can contain 8-40 bytes, and cannot contain non-printable characters.
          * @type {string || null}
          */
         this.EncryptedKey = null;
@@ -2730,51 +2731,30 @@ class DeletePersonSampleRequest extends  AbstractModel {
 }
 
 /**
- * Sampled screenshot information
+ * Speech recognition segment.
  * @class
  */
-class MediaSampleSnapshotItem extends  AbstractModel {
+class AiRecognitionTaskAsrWordsSegmentItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Start time offset of recognized segment in seconds.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.StartTimeOffset = null;
 
         /**
-         * Sample type. Valid values:
-<li>Percent: samples at a specified percentage interval.</li>
-<li>Time: samples at a specified time interval.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SampleType = null;
-
-        /**
-         * Sampling interval
-<li>If `SampleType` is `Percent`, this value means taking a screenshot at an interval of the specified percentage.</li>
-<li>If `SampleType` is `Time`, this value means taking a screenshot at an interval of the specified time (in seconds). The first screenshot is always the first video frame.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * End time offset of recognition segment in seconds.
          * @type {number || null}
          */
-        this.Interval = null;
+        this.EndTimeOffset = null;
 
         /**
-         * List of URLs of generated screenshots.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * Confidence of recognized segment. Value range: 0-100.
+         * @type {number || null}
          */
-        this.ImageUrlSet = null;
-
-        /**
-         * List of watermarking template IDs if the screenshots are watermarked.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.WaterMarkDefinition = null;
+        this.Confidence = null;
 
     }
 
@@ -2785,11 +2765,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.SampleType = 'SampleType' in params ? params.SampleType : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
-        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
-        this.WaterMarkDefinition = 'WaterMarkDefinition' in params ? params.WaterMarkDefinition : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -5173,6 +5151,61 @@ class AiSampleFaceInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyVodDomainAccelerateConfig request structure.
+ * @class
+ */
+class ModifyVodDomainAccelerateConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name for acceleration setting
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Region. Valid values:
+<li>`Chinese Mainland`</li>
+<li>`Outside Chinese Mainland`</li>
+<li>`Global`</li>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Whether to enable or disable domain name acceleration for the selected region. Valid values:
+<li>`Enabled`: enable</li>
+<li>`Disabled`: disable</li>
+To enable acceleration in Chinese mainland for a domain name, please finish [ICP filing](https://intl.cloud.tencent.com/document/product/243/18905?from_cn_redirect=1) for it first.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Result type of adaptive bitrate streaming task
  * @class
  */
@@ -6140,44 +6173,89 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeSnapshotByTimeOffsetTemplates request structure.
+ * VOD media file metadata
  * @class
  */
-class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
+class MediaMetaData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID filter of time point screencapturing templates. Array length limit: 100.
-         * @type {Array.<number> || null}
-         */
-        this.Definitions = null;
-
-        /**
-         * Paged offset. Default value: 0.
+         * Size of uploaded media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Size = null;
 
         /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Template type filter. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
+         * Container, such as m4a and mp4.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Container = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * Sum of the average bitrate of a video stream and that of an audio stream in bps.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.SubAppId = null;
+        this.Bitrate = null;
+
+        /**
+         * Maximum value of the height of a video stream in px.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Maximum value of the width of a video stream in px.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Video duration in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Selected angle during video recording in degrees.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Rotate = null;
+
+        /**
+         * Video stream information.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaVideoStreamItem> || null}
+         */
+        this.VideoStreamSet = null;
+
+        /**
+         * Audio stream information.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaAudioStreamItem> || null}
+         */
+        this.AudioStreamSet = null;
+
+        /**
+         * Video duration in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VideoDuration = null;
+
+        /**
+         * Audio duration in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AudioDuration = null;
 
     }
 
@@ -6188,11 +6266,33 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Rotate = 'Rotate' in params ? params.Rotate : null;
+
+        if (params.VideoStreamSet) {
+            this.VideoStreamSet = new Array();
+            for (let z in params.VideoStreamSet) {
+                let obj = new MediaVideoStreamItem();
+                obj.deserialize(params.VideoStreamSet[z]);
+                this.VideoStreamSet.push(obj);
+            }
+        }
+
+        if (params.AudioStreamSet) {
+            this.AudioStreamSet = new Array();
+            for (let z in params.AudioStreamSet) {
+                let obj = new MediaAudioStreamItem();
+                obj.deserialize(params.AudioStreamSet[z]);
+                this.AudioStreamSet.push(obj);
+            }
+        }
+        this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
+        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
 
     }
 }
@@ -6485,6 +6585,52 @@ Transcoding specification:
                 this.Details.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * CreateVodDomain request structure.
+ * @class
+ */
+class CreateVodDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name to add to VOD. Note: a wildcard domain name is not supported.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Region to enable acceleration. Valid values:
+<li>`Chinese Mainland`</li>
+<li>`Outside Chinese Mainland`</li>
+<li>`Global`</li>
+If `AccelerateArea` is not set, VOD will enable acceleration in `Chinese Mainland` or `Outside Chinese Mainland` according to the region set under the user’s Tencent Cloud account. To enable acceleration in Chinese mainland for a domain name, please finish [ICP filing](https://intl.cloud.tencent.com/document/product/243/18905?from_cn_redirect=1) for it first.
+         * @type {string || null}
+         */
+        this.AccelerateArea = null;
+
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.AccelerateArea = 'AccelerateArea' in params ? params.AccelerateArea : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -9128,24 +9274,44 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of prohibited information detection task
+ * DescribeSnapshotByTimeOffsetTemplates request structure.
  * @class
  */
-class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
+class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Control parameter of prohibited information detection in speech.
-         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
+         * Unique ID filter of time point screencapturing templates. Array length limit: 100.
+         * @type {Array.<number> || null}
          */
-        this.AsrReviewInfo = null;
+        this.Definitions = null;
 
         /**
-         * Control parameter of prohibited information detection in text.
-         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
+         * Paged offset. Default value: 0.
+         * @type {number || null}
          */
-        this.OcrReviewInfo = null;
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Template type filter. Valid values:
+<li>Preset: preset template;</li>
+<li>Custom: custom template.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -9156,18 +9322,76 @@ class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
-        if (params.AsrReviewInfo) {
-            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
-            obj.deserialize(params.AsrReviewInfo)
-            this.AsrReviewInfo = obj;
-        }
+    }
+}
 
-        if (params.OcrReviewInfo) {
-            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
-            obj.deserialize(params.OcrReviewInfo)
-            this.OcrReviewInfo = obj;
+/**
+ * Sampled screenshot information
+ * @class
+ */
+class MediaSampleSnapshotItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Sample type. Valid values:
+<li>Percent: samples at a specified percentage interval.</li>
+<li>Time: samples at a specified time interval.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SampleType = null;
+
+        /**
+         * Sampling interval
+<li>If `SampleType` is `Percent`, this value means taking a screenshot at an interval of the specified percentage.</li>
+<li>If `SampleType` is `Time`, this value means taking a screenshot at an interval of the specified time (in seconds). The first screenshot is always the first video frame.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * List of URLs of generated screenshots.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ImageUrlSet = null;
+
+        /**
+         * List of watermarking template IDs if the screenshots are watermarked.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.WaterMarkDefinition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SampleType = 'SampleType' in params ? params.SampleType : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
+        this.WaterMarkDefinition = 'WaterMarkDefinition' in params ? params.WaterMarkDefinition : null;
 
     }
 }
@@ -11988,9 +12212,10 @@ class MediaDeleteItem extends  AbstractModel {
         super();
 
         /**
-         * Type of the content to be deleted. If this field is left empty, the parameter will be invalid. Valid values:
-<li>TranscodeFiles: deletes transcoded files.</li>
-<li>WechatPublishFiles: deletes files published on WeChat.</li>
+         * Type of files to delete. If this parameter is left empty, it will be invalid. Valid values:
+<li>`OriginalFiles`: original files. You cannot initiate transcoding, publishing on WeChat, or other video processing operations after deleting the original files.</li>
+<li>`TranscodeFiles`: transcoded files</li>
+<li>`WechatPublishFiles`: files for publishing on WeChat</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -13668,6 +13893,34 @@ class AiRecognitionTaskObjectResultItem extends  AbstractModel {
 }
 
 /**
+ * ModifyVodDomainConfig response structure.
+ * @class
+ */
+class ModifyVodDomainConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Information of time point screenshot in VOD file
  * @class
  */
@@ -13793,6 +14046,65 @@ class MediaKeyFrameDescItem extends  AbstractModel {
         }
         this.TimeOffset = 'TimeOffset' in params ? params.TimeOffset : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * ModifyVodDomainConfig request structure.
+ * @class
+ */
+class ModifyVodDomainConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
+         * @type {RefererAuthPolicy || null}
+         */
+        this.RefererAuthPolicy = null;
+
+        /**
+         * [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/14047?from_cn_redirect=1) policy
+         * @type {UrlSignatureAuthPolicy || null}
+         */
+        this.UrlSignatureAuthPolicy = null;
+
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.RefererAuthPolicy) {
+            let obj = new RefererAuthPolicy();
+            obj.deserialize(params.RefererAuthPolicy)
+            this.RefererAuthPolicy = obj;
+        }
+
+        if (params.UrlSignatureAuthPolicy) {
+            let obj = new UrlSignatureAuthPolicy();
+            obj.deserialize(params.UrlSignatureAuthPolicy)
+            this.UrlSignatureAuthPolicy = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -16215,22 +16527,24 @@ class RefererAuthPolicy extends  AbstractModel {
 
         /**
          * Referer authentication method. Valid values:
-<li>`Black`: blocklist</li>
-<li>`White`: allowlist</li>
+<li>`Black`: blocklist. Any HTTP request carrying a referer in the `Referers` list will be rejected. </li>
+<li>`White`: allowlist. Only HTTP requests carrying referers in the `Referers` list will be accepted.</li>
+When `Status` is set to `Enabled`, `AuthType` must be specified.
          * @type {string || null}
          */
         this.AuthType = null;
 
         /**
-         * List for referer authentication
+         * The list of referers (up to 20). When `Status` is set to `Enabled`, `Referers` cannot be empty. Enter domain names as referers.
          * @type {Array.<string> || null}
          */
         this.Referers = null;
 
         /**
          * Whether to allow requests with empty referer to access this domain name. Valid values:
-<li>Yes</li>
-<li>No</li>
+<li>`Yes`</li>
+<li>`No`</li>
+When `Status` is set to `Enabled`, `BlankRefererAllowed` must be specified.
          * @type {string || null}
          */
         this.BlankRefererAllowed = null;
@@ -17288,48 +17602,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
-
-    }
-}
-
-/**
- * Speech recognition segment.
- * @class
- */
-class AiRecognitionTaskAsrWordsSegmentItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Start time offset of recognized segment in seconds.
-         * @type {number || null}
-         */
-        this.StartTimeOffset = null;
-
-        /**
-         * End time offset of recognition segment in seconds.
-         * @type {number || null}
-         */
-        this.EndTimeOffset = null;
-
-        /**
-         * Confidence of recognized segment. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -19858,6 +20130,41 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * DeleteVodDomain request structure.
+ * @class
+ */
+class DeleteVodDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name to delete from VOD
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * CreateAIRecognitionTemplate request structure.
  * @class
  */
@@ -20949,131 +21256,6 @@ class ModifyTranscodeTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * VOD media file metadata
- * @class
- */
-class MediaMetaData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Size of uploaded media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * Container, such as m4a and mp4.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Container = null;
-
-        /**
-         * Sum of the average bitrate of a video stream and that of an audio stream in bps.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * Maximum value of the height of a video stream in px.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Maximum value of the width of a video stream in px.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Video duration in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Selected angle during video recording in degrees.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Rotate = null;
-
-        /**
-         * Video stream information.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaVideoStreamItem> || null}
-         */
-        this.VideoStreamSet = null;
-
-        /**
-         * Audio stream information.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaAudioStreamItem> || null}
-         */
-        this.AudioStreamSet = null;
-
-        /**
-         * Video duration in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VideoDuration = null;
-
-        /**
-         * Audio duration in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AudioDuration = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Container = 'Container' in params ? params.Container : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.Rotate = 'Rotate' in params ? params.Rotate : null;
-
-        if (params.VideoStreamSet) {
-            this.VideoStreamSet = new Array();
-            for (let z in params.VideoStreamSet) {
-                let obj = new MediaVideoStreamItem();
-                obj.deserialize(params.VideoStreamSet[z]);
-                this.VideoStreamSet.push(obj);
-            }
-        }
-
-        if (params.AudioStreamSet) {
-            this.AudioStreamSet = new Array();
-            for (let z in params.AudioStreamSet) {
-                let obj = new MediaAudioStreamItem();
-                obj.deserialize(params.AudioStreamSet[z]);
-                this.AudioStreamSet.push(obj);
-            }
-        }
-        this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
-        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
 
     }
 }
@@ -22542,6 +22724,62 @@ class SplitMediaOutputConfig extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.ClassId = 'ClassId' in params ? params.ClassId : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
+ * CreateVodDomain response structure.
+ * @class
+ */
+class CreateVodDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVodDomainAccelerateConfig response structure.
+ * @class
+ */
+class ModifyVodDomainAccelerateConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24450,6 +24688,34 @@ class DeleteWatermarkTemplateRequest extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * DeleteVodDomain response structure.
+ * @class
+ */
+class DeleteVodDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -29315,6 +29581,51 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Control parameter of prohibited information detection task
+ * @class
+ */
+class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Control parameter of prohibited information detection in speech.
+         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * Control parameter of prohibited information detection in text.
+         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
+
+    }
+}
+
+/**
  * Control parameter of intelligent frame-specific tagging task
  * @class
  */
@@ -29666,7 +29977,7 @@ module.exports = {
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
     ModifySubAppIdInfoRequest: ModifySubAppIdInfoRequest,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
-    MediaSampleSnapshotItem: MediaSampleSnapshotItem,
+    AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     AudioTemplateInfo: AudioTemplateInfo,
     ExecuteFunctionResponse: ExecuteFunctionResponse,
@@ -29712,6 +30023,7 @@ module.exports = {
     UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
     AiSampleFaceInfo: AiSampleFaceInfo,
+    ModifyVodDomainAccelerateConfigRequest: ModifyVodDomainAccelerateConfigRequest,
     MediaProcessTaskAdaptiveDynamicStreamingResult: MediaProcessTaskAdaptiveDynamicStreamingResult,
     OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
     WatermarkTemplate: WatermarkTemplate,
@@ -29728,12 +30040,13 @@ module.exports = {
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
-    DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    MediaMetaData: MediaMetaData,
     CdnLogInfo: CdnLogInfo,
     MediaSubtitleInfo: MediaSubtitleInfo,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     TaskStatData: TaskStatData,
+    CreateVodDomainRequest: CreateVodDomainRequest,
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     ProcessMediaByProcedureRequest: ProcessMediaByProcedureRequest,
     MediaProcessTaskInput: MediaProcessTaskInput,
@@ -29782,7 +30095,8 @@ module.exports = {
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
-    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
+    DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
     DeleteWordSamplesRequest: DeleteWordSamplesRequest,
     EmptyTrackItem: EmptyTrackItem,
@@ -29861,9 +30175,11 @@ module.exports = {
     MosaicInput: MosaicInput,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
     AiRecognitionTaskObjectResultItem: AiRecognitionTaskObjectResultItem,
+    ModifyVodDomainConfigResponse: ModifyVodDomainConfigResponse,
     MediaSnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo,
     DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     MediaKeyFrameDescItem: MediaKeyFrameDescItem,
+    ModifyVodDomainConfigRequest: ModifyVodDomainConfigRequest,
     AiSampleTagOperation: AiSampleTagOperation,
     PlayerConfig: PlayerConfig,
     ConfirmEventsRequest: ConfirmEventsRequest,
@@ -29926,7 +30242,6 @@ module.exports = {
     DescribeCDNUsageDataRequest: DescribeCDNUsageDataRequest,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
-    AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     DescribeReviewDetailsRequest: DescribeReviewDetailsRequest,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
@@ -29969,6 +30284,7 @@ module.exports = {
     DescribeMediaInfosRequest: DescribeMediaInfosRequest,
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
+    DeleteVodDomainRequest: DeleteVodDomainRequest,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
@@ -29989,7 +30305,6 @@ module.exports = {
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
     DeleteClassResponse: DeleteClassResponse,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
-    MediaMetaData: MediaMetaData,
     MediaSampleSnapshotInfo: MediaSampleSnapshotInfo,
     DescribeSubAppIdsResponse: DescribeSubAppIdsResponse,
     MediaInfo: MediaInfo,
@@ -30014,6 +30329,8 @@ module.exports = {
     DescribeSuperPlayerConfigsRequest: DescribeSuperPlayerConfigsRequest,
     HeadTailTaskInput: HeadTailTaskInput,
     SplitMediaOutputConfig: SplitMediaOutputConfig,
+    CreateVodDomainResponse: CreateVodDomainResponse,
+    ModifyVodDomainAccelerateConfigResponse: ModifyVodDomainAccelerateConfigResponse,
     AiRecognitionTaskSegmentResultInput: AiRecognitionTaskSegmentResultInput,
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeSubAppIdsRequest: DescribeSubAppIdsRequest,
@@ -30044,6 +30361,7 @@ module.exports = {
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,
     AiReviewProhibitedOcrTaskInput: AiReviewProhibitedOcrTaskInput,
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
+    DeleteVodDomainResponse: DeleteVodDomainResponse,
     EditMediaStreamInfo: EditMediaStreamInfo,
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
     LiveRealTimeClipResponse: LiveRealTimeClipResponse,
@@ -30122,6 +30440,7 @@ module.exports = {
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
     ComposeMediaOutput: ComposeMediaOutput,
     PullUploadTask: PullUploadTask,
+    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
     DescribeAIRecognitionTemplatesRequest: DescribeAIRecognitionTemplatesRequest,

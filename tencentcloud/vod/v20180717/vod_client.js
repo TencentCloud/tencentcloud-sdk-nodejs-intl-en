@@ -63,7 +63,7 @@ const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
 const ModifySubAppIdInfoRequest = models.ModifySubAppIdInfoRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
-const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
+const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
@@ -109,6 +109,7 @@ const EditMediaTaskInput = models.EditMediaTaskInput;
 const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTemplateInfo;
 const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
 const AiSampleFaceInfo = models.AiSampleFaceInfo;
+const ModifyVodDomainAccelerateConfigRequest = models.ModifyVodDomainAccelerateConfigRequest;
 const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAdaptiveDynamicStreamingResult;
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
 const WatermarkTemplate = models.WatermarkTemplate;
@@ -125,12 +126,13 @@ const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
 const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
-const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
+const MediaMetaData = models.MediaMetaData;
 const CdnLogInfo = models.CdnLogInfo;
 const MediaSubtitleInfo = models.MediaSubtitleInfo;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
 const MediaMiniProgramReviewInfoItem = models.MediaMiniProgramReviewInfoItem;
 const TaskStatData = models.TaskStatData;
+const CreateVodDomainRequest = models.CreateVodDomainRequest;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
 const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
@@ -179,7 +181,8 @@ const CreatePersonSampleResponse = models.CreatePersonSampleResponse;
 const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateResponse;
 const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const DescribeProcedureTemplatesRequest = models.DescribeProcedureTemplatesRequest;
-const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
+const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
+const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
 const DeleteWordSamplesRequest = models.DeleteWordSamplesRequest;
 const EmptyTrackItem = models.EmptyTrackItem;
@@ -258,9 +261,11 @@ const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const MosaicInput = models.MosaicInput;
 const AIAnalysisTemplateItem = models.AIAnalysisTemplateItem;
 const AiRecognitionTaskObjectResultItem = models.AiRecognitionTaskObjectResultItem;
+const ModifyVodDomainConfigResponse = models.ModifyVodDomainConfigResponse;
 const MediaSnapshotByTimeOffsetInfo = models.MediaSnapshotByTimeOffsetInfo;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const MediaKeyFrameDescItem = models.MediaKeyFrameDescItem;
+const ModifyVodDomainConfigRequest = models.ModifyVodDomainConfigRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;
 const PlayerConfig = models.PlayerConfig;
 const ConfirmEventsRequest = models.ConfirmEventsRequest;
@@ -323,7 +328,6 @@ const TranscodeTemplate = models.TranscodeTemplate;
 const DescribeCDNUsageDataRequest = models.DescribeCDNUsageDataRequest;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
-const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
 const DescribeReviewDetailsRequest = models.DescribeReviewDetailsRequest;
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
@@ -366,6 +370,7 @@ const ComposeMediaTaskOutput = models.ComposeMediaTaskOutput;
 const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
+const DeleteVodDomainRequest = models.DeleteVodDomainRequest;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
@@ -386,7 +391,6 @@ const AdaptiveDynamicStreamingInfoItem = models.AdaptiveDynamicStreamingInfoItem
 const ProhibitedOcrReviewTemplateInfo = models.ProhibitedOcrReviewTemplateInfo;
 const DeleteClassResponse = models.DeleteClassResponse;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
-const MediaMetaData = models.MediaMetaData;
 const MediaSampleSnapshotInfo = models.MediaSampleSnapshotInfo;
 const DescribeSubAppIdsResponse = models.DescribeSubAppIdsResponse;
 const MediaInfo = models.MediaInfo;
@@ -411,6 +415,8 @@ const DescribeMediaProcessUsageDataResponse = models.DescribeMediaProcessUsageDa
 const DescribeSuperPlayerConfigsRequest = models.DescribeSuperPlayerConfigsRequest;
 const HeadTailTaskInput = models.HeadTailTaskInput;
 const SplitMediaOutputConfig = models.SplitMediaOutputConfig;
+const CreateVodDomainResponse = models.CreateVodDomainResponse;
+const ModifyVodDomainAccelerateConfigResponse = models.ModifyVodDomainAccelerateConfigResponse;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
@@ -441,6 +447,7 @@ const DescribeAllClassResponse = models.DescribeAllClassResponse;
 const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest;
 const AiReviewProhibitedOcrTaskInput = models.AiReviewProhibitedOcrTaskInput;
 const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
+const DeleteVodDomainResponse = models.DeleteVodDomainResponse;
 const EditMediaStreamInfo = models.EditMediaStreamInfo;
 const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
 const LiveRealTimeClipResponse = models.LiveRealTimeClipResponse;
@@ -519,6 +526,7 @@ const HighlightSegmentItem = models.HighlightSegmentItem;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
 const ComposeMediaOutput = models.ComposeMediaOutput;
 const PullUploadTask = models.PullUploadTask;
+const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
@@ -895,6 +903,17 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * This API is used to get the list of transcoding templates based on unique template ID. The return result includes all eligible custom and [preset transcoding templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+     * @param {DescribeTranscodeTemplatesRequest} req
+     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeTranscodeTemplates(req, cb) {
+        let resp = new DescribeTranscodeTemplatesResponse();
+        this.request("DescribeTranscodeTemplates", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the information of video processing usage within the specified time range.
    1. Statistics on video processing for the last 365 days can be queried.
    2. The query time range cannot be more than 90 days.
@@ -1046,6 +1065,18 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
+     * This API is used to enable or disable the acceleration region of a domain name on VOD.
+1. You can enable or disable acceleration regions of only domain names whose status is `Online`.
+     * @param {ModifyVodDomainAccelerateConfigRequest} req
+     * @param {function(string, ModifyVodDomainAccelerateConfigResponse):void} cb
+     * @public
+     */
+    ModifyVodDomainAccelerateConfig(req, cb) {
+        let resp = new ModifyVodDomainAccelerateConfigResponse();
+        this.request("ModifyVodDomainAccelerateConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a superplayer configuration.  
 *Note: preset player configurations cannot be deleted.*
      * @param {DeleteSuperPlayerConfigRequest} req
@@ -1069,14 +1100,15 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to get the list of transcoding templates based on unique template ID. The return result includes all eligible custom and [preset transcoding templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
-     * @param {DescribeTranscodeTemplatesRequest} req
-     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
+     * This API is used to delete an acceleration domain name from VOD.
+1. Before deleting a domain name, disable its acceleration in all regions.
+     * @param {DeleteVodDomainRequest} req
+     * @param {function(string, DeleteVodDomainResponse):void} cb
      * @public
      */
-    DescribeTranscodeTemplates(req, cb) {
-        let resp = new DescribeTranscodeTemplatesResponse();
-        this.request("DescribeTranscodeTemplates", req, resp, cb);
+    DeleteVodDomain(req, cb) {
+        let resp = new DeleteVodDomainResponse();
+        this.request("DeleteVodDomain", req, resp, cb);
     }
 
     /**
@@ -1115,8 +1147,9 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * * This API is used to delete a media file and its corresponding files generated by video processing (such as transcoded videos, image sprites, screenshots, and videos published on WeChat);
-* The transcoded video files or video files published on WeChat can be deleted separately for a specified video ID.
+     * * This API is used to delete a media file and its processed files, such as the transcoded video files, image sprites, screenshots, and videos for publishing on WeChat.
+* You can delete the original files, transcoded video files, and videos for publishing on WeChat, etc. of videos with specified IDs.
+* Note: after the original file of a video is deleted, you cannot transcode the video, publish it on WeChat, or perform other operations on it.
      * @param {DeleteMediaRequest} req
      * @param {function(string, DeleteMediaResponse):void} cb
      * @public
@@ -1168,6 +1201,18 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     CreateAIAnalysisTemplate(req, cb) {
         let resp = new CreateAIAnalysisTemplateResponse();
         this.request("CreateAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify domain name settings, such as the hotlink protection configuration.
+1. You can modify settings of only domain names whose status is `Online`.
+     * @param {ModifyVodDomainConfigRequest} req
+     * @param {function(string, ModifyVodDomainConfigResponse):void} cb
+     * @public
+     */
+    ModifyVodDomainConfig(req, cb) {
+        let resp = new ModifyVodDomainConfigResponse();
+        this.request("ModifyVodDomainConfig", req, resp, cb);
     }
 
     /**
@@ -1253,14 +1298,15 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to modify subapplication information, but it is not allowed to modify primary application information.
-     * @param {ModifySubAppIdInfoRequest} req
-     * @param {function(string, ModifySubAppIdInfoResponse):void} cb
+     * This API is used to add an acceleration domain name to VOD. One user can add up to 20 domain names.
+1. After a domain name is added, VOD will deploy it, and it takes about 2 minutes for the domain name status to change from `Deploying` to `Online`.
+     * @param {CreateVodDomainRequest} req
+     * @param {function(string, CreateVodDomainResponse):void} cb
      * @public
      */
-    ModifySubAppIdInfo(req, cb) {
-        let resp = new ModifySubAppIdInfoResponse();
-        this.request("ModifySubAppIdInfo", req, resp, cb);
+    CreateVodDomain(req, cb) {
+        let resp = new CreateVodDomainResponse();
+        this.request("CreateVodDomain", req, resp, cb);
     }
 
     /**
@@ -1386,6 +1432,17 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     CreateWordSamples(req, cb) {
         let resp = new CreateWordSamplesResponse();
         this.request("CreateWordSamples", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify subapplication information, but it is not allowed to modify primary application information.
+     * @param {ModifySubAppIdInfoRequest} req
+     * @param {function(string, ModifySubAppIdInfoResponse):void} cb
+     * @public
+     */
+    ModifySubAppIdInfo(req, cb) {
+        let resp = new ModifySubAppIdInfoResponse();
+        this.request("ModifySubAppIdInfo", req, resp, cb);
     }
 
     /**

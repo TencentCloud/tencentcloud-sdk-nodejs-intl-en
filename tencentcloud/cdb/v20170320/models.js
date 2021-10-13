@@ -4005,6 +4005,12 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.AutoSyncFlag = null;
 
+        /**
+         * Financial cage ID.
+         * @type {string || null}
+         */
+        this.CageId = null;
+
     }
 
     /**
@@ -4066,6 +4072,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.AutoSyncFlag = 'AutoSyncFlag' in params ? params.AutoSyncFlag : null;
+        this.CageId = 'CageId' in params ? params.CageId : null;
 
     }
 }
@@ -4702,6 +4709,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.TagKeysForSearch = null;
 
+        /**
+         * Financial cage IDs.
+         * @type {Array.<string> || null}
+         */
+        this.CageIds = null;
+
     }
 
     /**
@@ -4738,6 +4751,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.WithMaster = 'WithMaster' in params ? params.WithMaster : null;
         this.DeployGroupIds = 'DeployGroupIds' in params ? params.DeployGroupIds : null;
         this.TagKeysForSearch = 'TagKeysForSearch' in params ? params.TagKeysForSearch : null;
+        this.CageIds = 'CageIds' in params ? params.CageIds : null;
 
     }
 }

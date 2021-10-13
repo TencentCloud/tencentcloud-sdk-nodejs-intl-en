@@ -1006,6 +1006,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Status = null;
 
+        /**
+         * ID of the application submitted for detection
+         * @type {number || null}
+         */
+        this.BizId = null;
+
     }
 
     /**
@@ -1035,6 +1041,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
 
     }
 }

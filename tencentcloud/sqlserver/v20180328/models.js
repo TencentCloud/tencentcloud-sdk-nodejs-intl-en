@@ -284,6 +284,62 @@ class DealInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupStrategy request structure.
+ * @class
+ */
+class ModifyBackupStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup mode, which supports daily backup only. Valid value: daily.
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * Backup time. Value range: an integer from 0 to 23.
+         * @type {number || null}
+         */
+        this.BackupTime = null;
+
+        /**
+         * Backup interval in days when the `BackupType` is `daily`. Valid value: 1.
+         * @type {number || null}
+         */
+        this.BackupDay = null;
+
+        /**
+         * Backup mode. Valid values: `master_pkg` (archive the backup files of the primary node), `master_no_pkg` (do not archive the backup files of the primary node), `slave_pkg` (archive the backup files of the replica node), `slave_no_pkg` (do not archive the backup files of the replica node). Backup files of the replica node are supported only when Always On disaster recovery is enabled.
+         * @type {string || null}
+         */
+        this.BackupModel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
+        this.BackupDay = 'BackupDay' in params ? params.BackupDay : null;
+        this.BackupModel = 'BackupModel' in params ? params.BackupModel : null;
+
+    }
+}
+
+/**
  * RestoreInstance request structure.
  * @class
  */
@@ -315,6 +371,12 @@ class RestoreInstanceRequest extends  AbstractModel {
          */
         this.RenameRestore = null;
 
+        /**
+         * Group ID of unarchived backup files grouped by backup task. This parameter is returned by the [DescribeBackups](https://intl.cloud.tencent.com/document/product/238/19943?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -336,23 +398,36 @@ class RestoreInstanceRequest extends  AbstractModel {
                 this.RenameRestore.push(obj);
             }
         }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
 
 /**
- * DescribeFlowStatus request structure.
+ * DescribeAccounts request structure.
  * @class
  */
-class DescribeFlowStatusRequest extends  AbstractModel {
+class DescribeAccountsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow ID
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Number of results per page. Value range: 1-100. Default value: 20
          * @type {number || null}
          */
-        this.FlowId = null;
+        this.Limit = null;
+
+        /**
+         * Page number. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -363,7 +438,9 @@ class DescribeFlowStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1127,24 +1204,78 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBCharsets response structure.
+ * DescribeBackups request structure.
  * @class
  */
-class DescribeDBCharsetsResponse extends  AbstractModel {
+class DescribeBackupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database character set list
-         * @type {Array.<string> || null}
-         */
-        this.DatabaseCharsets = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Start name (yyyy-MM-dd HH:mm:ss)
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StartTime = null;
+
+        /**
+         * End time (yyyy-MM-dd HH:mm:ss)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Instance ID in the format of mssql-njj2mtpl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Number of results per page. Value range: 1-100. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter by backup name. If this parameter is left empty, backup name will not be used in filtering.
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+        /**
+         * Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
+         * @type {number || null}
+         */
+        this.BackupWay = null;
+
+        /**
+         * Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
+        /**
+         * Filter backups by the database name. If the parameter is left empty, this filter criteria will not take effect.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * Whether to group backup files by backup task. Valid value: `0` (no), `1` (yes). Default value: `0`. This parameter is valid only for unarchived backup files.
+         * @type {number || null}
+         */
+        this.Group = null;
 
     }
 
@@ -1155,8 +1286,17 @@ class DescribeDBCharsetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DatabaseCharsets = 'DatabaseCharsets' in params ? params.DatabaseCharsets : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.Group = 'Group' in params ? params.Group : null;
 
     }
 }
@@ -1977,30 +2117,18 @@ class RecycleDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAccounts request structure.
+ * DescribeFlowStatus request structure.
  * @class
  */
-class DescribeAccountsRequest extends  AbstractModel {
+class DescribeFlowStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Number of results per page. Value range: 1-100. Default value: 20
+         * Flow ID
          * @type {number || null}
          */
-        this.Limit = null;
-
-        /**
-         * Page number. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.FlowId = null;
 
     }
 
@@ -2011,9 +2139,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -2762,6 +2888,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.SearchKey = null;
 
+        /**
+         * Unique Uid of an instance
+         * @type {Array.<string> || null}
+         */
+        this.UidSet = null;
+
     }
 
     /**
@@ -2785,6 +2917,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.UidSet = 'UidSet' in params ? params.UidSet : null;
 
     }
 }
@@ -2946,36 +3079,30 @@ class DescribeMigrationsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyBackupStrategy request structure.
+ * DescribeBackupFiles response structure.
  * @class
  */
-class ModifyBackupStrategyRequest extends  AbstractModel {
+class DescribeBackupFilesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Backup mode, which supports daily backup only. Valid value: daily.
-         * @type {string || null}
-         */
-        this.BackupType = null;
-
-        /**
-         * Backup time. Value range: an integer from 0 to 23.
+         * Total number of backups
          * @type {number || null}
          */
-        this.BackupTime = null;
+        this.TotalCount = null;
 
         /**
-         * Backup interval in days when the `BackupType` is `daily`. Valid value: 1.
-         * @type {number || null}
+         * List of backup file details
+         * @type {Array.<BackupFile> || null}
          */
-        this.BackupDay = null;
+        this.BackupFiles = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2986,10 +3113,17 @@ class ModifyBackupStrategyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.BackupType = 'BackupType' in params ? params.BackupType : null;
-        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
-        this.BackupDay = 'BackupDay' in params ? params.BackupDay : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BackupFiles) {
+            this.BackupFiles = new Array();
+            for (let z in params.BackupFiles) {
+                let obj = new BackupFile();
+                obj.deserialize(params.BackupFiles[z]);
+                this.BackupFiles.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4050,6 +4184,62 @@ class InstanceDBDetail extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupFiles request structure.
+ * @class
+ */
+class DescribeBackupFilesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of mssql-njj2mtpl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Group ID of unarchived backup files, which can be obtained by the `DescribeBackups` API
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Number of entries to be returned per page. Value range: 1-100. Default value: `20`
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number. Default value: `0`
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter backups by database name. If the parameter is left empty, this filter criterion will not take effect.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+
+    }
+}
+
+/**
  * Used in the `RestoreInstance`, `RollbackInstance`, `CreateMigration`, and `CloneDB` APIs to specify and rename the database to be restored, rolled back, migrated, or cloned.
  * @class
  */
@@ -4966,7 +5156,7 @@ class DBInstance extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance status. Valid values: <li>1: applying </li> <li>2: running </li> <li>3: restrictedly running (primary/secondary switching) </li> <li>4: isolated </li> <li>5: repossessing </li> <li>6: repossessed </li> <li>7: task running (e.g., backing up or rolling back the instance) </li> <li>8: decommissioned </li> <li>9: scaling </li> <li>10: migrating </li> <li>11: read-only </li> <li>12: restarting </li>
+         * Instance status. Valid values: <li>1: creating</li> <li>2: running</li> <li>3: instance operations restricted (due to the ongoing primary-replica switch)</li> <li>4: isolated</li> <li>5: repossessing</li> <li>6: repossessed</li> <li>7: running tasks (such as backup and rollback tasks)</li> <li>8: eliminated</li> <li>9: expanding capacity</li> <li>10: migrating</li> <li>11: read-only</li> <li>12: restarting</li>  <li>13: modifying configuration and waiting for switch</li> <li>14: implementing pub/sub</li> <li>15: modifying pub/sub configuration</li> <li>16: modifying configuration and switching</li> <li>17: creating read-only instances</li>
          * @type {number || null}
          */
         this.Status = null;
@@ -5150,6 +5340,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ResourceTags = null;
 
+        /**
+         * Backup mode. Valid values: `master_pkg` (archive the backup files of the primary node (default value)), `master_no_pkg` (do not archive the backup files of the primary node), `slave_pkg` (archive the backup files of the replica node (valid for Always On clusters)), `slave_no_pkg` (do not archive the backup files of the replica node (valid for Always On clusters)). This parameter is invalid for read-only instances.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupModel = null;
+
     }
 
     /**
@@ -5204,6 +5401,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.ResourceTags.push(obj);
             }
         }
+        this.BackupModel = 'BackupModel' in params ? params.BackupModel : null;
 
     }
 }
@@ -5622,13 +5820,13 @@ class Backup extends  AbstractModel {
         super();
 
         /**
-         * Filename
+         * File name. The name of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * File size in KB
+         * File size in KB. The size of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
          * @type {number || null}
          */
         this.Size = null;
@@ -5646,19 +5844,19 @@ class Backup extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Download address for private network
+         * Private network download address. The download address of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
          * @type {string || null}
          */
         this.InternalAddr = null;
 
         /**
-         * Download address for public network
+         * Public network download address. The download address of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
          * @type {string || null}
          */
         this.ExternalAddr = null;
 
         /**
-         * Unique ID of backup file, which will be used by the `RestoreInstance` API
+         * Unique ID of a backup file, which is used by the `RestoreInstance` API. The unique ID of an unarchived backup file is returned by the `DescribeBackupFiles` API instead of this parameter.
          * @type {number || null}
          */
         this.Id = null;
@@ -5688,10 +5886,16 @@ class Backup extends  AbstractModel {
         this.BackupWay = null;
 
         /**
-         * Backup name, which can be customized.
+         * Backup task name (customizable)
          * @type {string || null}
          */
         this.BackupName = null;
+
+        /**
+         * Group ID of unarchived backup files, which can be used as a request parameter in the `DescribeBackupFiles` API to get details of unarchived backup files in the specified group. This parameter is invalid for archived backup files.
+         * @type {string || null}
+         */
+        this.GroupId = null;
 
     }
 
@@ -5714,6 +5918,7 @@ class Backup extends  AbstractModel {
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
         this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -6473,6 +6678,62 @@ class DescribeDBsNormalRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * If the backup files are unarchived, each database corresponds to one backup file.
+ * @class
+ */
+class BackupFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of a backup file
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Backup file name
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * File size in KB
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Name of the database corresponding to the backup file
+         * @type {Array.<string> || null}
+         */
+        this.DBs = null;
+
+        /**
+         * Download address
+         * @type {string || null}
+         */
+        this.DownloadLink = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.DBs = 'DBs' in params ? params.DBs : null;
+        this.DownloadLink = 'DownloadLink' in params ? params.DownloadLink : null;
 
     }
 }
@@ -8007,72 +8268,24 @@ class DeleteAccountResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackups request structure.
+ * DescribeDBCharsets response structure.
  * @class
  */
-class DescribeBackupsRequest extends  AbstractModel {
+class DescribeDBCharsetsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start name (yyyy-MM-dd HH:mm:ss)
+         * Database character set list
+         * @type {Array.<string> || null}
+         */
+        this.DatabaseCharsets = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * End time (yyyy-MM-dd HH:mm:ss)
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Instance ID in the format of mssql-njj2mtpl
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Number of results per page. Value range: 1-100. Default value: 20
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Page number. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Filter by backup name. If this parameter is left empty, backup name will not be used in filtering.
-         * @type {string || null}
-         */
-        this.BackupName = null;
-
-        /**
-         * Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
-         * @type {number || null}
-         */
-        this.Strategy = null;
-
-        /**
-         * Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
-         * @type {number || null}
-         */
-        this.BackupWay = null;
-
-        /**
-         * Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
-         * @type {number || null}
-         */
-        this.BackupId = null;
-
-        /**
-         * Filter backups by the database name. If the parameter is left empty, this filter criteria will not take effect.
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
+        this.RequestId = null;
 
     }
 
@@ -8083,16 +8296,8 @@ class DescribeBackupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.BackupName = 'BackupName' in params ? params.BackupName : null;
-        this.Strategy = 'Strategy' in params ? params.Strategy : null;
-        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
-        this.BackupId = 'BackupId' in params ? params.BackupId : null;
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.DatabaseCharsets = 'DatabaseCharsets' in params ? params.DatabaseCharsets : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8101,8 +8306,9 @@ module.exports = {
     CreateDBInstancesRequest: CreateDBInstancesRequest,
     CloneDBResponse: CloneDBResponse,
     DealInfo: DealInfo,
+    ModifyBackupStrategyRequest: ModifyBackupStrategyRequest,
     RestoreInstanceRequest: RestoreInstanceRequest,
-    DescribeFlowStatusRequest: DescribeFlowStatusRequest,
+    DescribeAccountsRequest: DescribeAccountsRequest,
     CreateMigrationResponse: CreateMigrationResponse,
     DeleteBackupMigrationRequest: DeleteBackupMigrationRequest,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
@@ -8122,7 +8328,7 @@ module.exports = {
     DBRemark: DBRemark,
     MigrateDB: MigrateDB,
     DescribeRegionsResponse: DescribeRegionsResponse,
-    DescribeDBCharsetsResponse: DescribeDBCharsetsResponse,
+    DescribeBackupsRequest: DescribeBackupsRequest,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeRollbackTimeResponse: DescribeRollbackTimeResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
@@ -8136,7 +8342,7 @@ module.exports = {
     ModifyDBInstanceNetworkRequest: ModifyDBInstanceNetworkRequest,
     MigrationDetail: MigrationDetail,
     RecycleDBInstanceRequest: RecycleDBInstanceRequest,
-    DescribeAccountsRequest: DescribeAccountsRequest,
+    DescribeFlowStatusRequest: DescribeFlowStatusRequest,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     MigrateTask: MigrateTask,
     SpecInfo: SpecInfo,
@@ -8152,7 +8358,7 @@ module.exports = {
     SlowlogInfo: SlowlogInfo,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     DescribeMigrationsResponse: DescribeMigrationsResponse,
-    ModifyBackupStrategyRequest: ModifyBackupStrategyRequest,
+    DescribeBackupFilesResponse: DescribeBackupFilesResponse,
     DescribeZonesRequest: DescribeZonesRequest,
     DeleteDBRequest: DeleteDBRequest,
     StartIncrementalMigrationRequest: StartIncrementalMigrationRequest,
@@ -8179,6 +8385,7 @@ module.exports = {
     TerminateDBInstanceRequest: TerminateDBInstanceRequest,
     CreateDBRequest: CreateDBRequest,
     InstanceDBDetail: InstanceDBDetail,
+    DescribeBackupFilesRequest: DescribeBackupFilesRequest,
     RenameRestoreDatabase: RenameRestoreDatabase,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
     ModifyDBRemarkRequest: ModifyDBRemarkRequest,
@@ -8225,6 +8432,7 @@ module.exports = {
     DeleteBackupMigrationResponse: DeleteBackupMigrationResponse,
     CreateBackupRequest: CreateBackupRequest,
     DescribeDBsNormalRequest: DescribeDBsNormalRequest,
+    BackupFile: BackupFile,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
     ModifyIncrementalMigrationResponse: ModifyIncrementalMigrationResponse,
     MigrationAction: MigrationAction,
@@ -8257,6 +8465,6 @@ module.exports = {
     CreateDBInstancesResponse: CreateDBInstancesResponse,
     ModifyBackupMigrationRequest: ModifyBackupMigrationRequest,
     DeleteAccountResponse: DeleteAccountResponse,
-    DescribeBackupsRequest: DescribeBackupsRequest,
+    DescribeDBCharsetsResponse: DescribeDBCharsetsResponse,
 
 }

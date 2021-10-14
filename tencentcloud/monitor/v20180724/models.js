@@ -4396,6 +4396,20 @@ class MetricSet extends  AbstractModel {
          */
         this.Dimensions = null;
 
+        /**
+         * Metric name (in Chinese).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MetricCName = null;
+
+        /**
+         * Metric name (in English).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MetricEName = null;
+
     }
 
     /**
@@ -4434,6 +4448,8 @@ class MetricSet extends  AbstractModel {
                 this.Dimensions.push(obj);
             }
         }
+        this.MetricCName = 'MetricCName' in params ? params.MetricCName : null;
+        this.MetricEName = 'MetricEName' in params ? params.MetricEName : null;
 
     }
 }

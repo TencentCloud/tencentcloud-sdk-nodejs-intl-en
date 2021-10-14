@@ -46,6 +46,12 @@ We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can gu
          */
         this.IsWords = null;
 
+        /**
+         * Whether to slice the input image to enhance the recognition effects for scenarios where the whole image is big, but the size of a single character is small (e.g., test papers). This feature is disabled by default.
+         * @type {boolean || null}
+         */
+        this.EnableDetectSplit = null;
+
     }
 
     /**
@@ -58,6 +64,7 @@ We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can gu
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.IsWords = 'IsWords' in params ? params.IsWords : null;
+        this.EnableDetectSplit = 'EnableDetectSplit' in params ? params.EnableDetectSplit : null;
 
     }
 }
@@ -668,7 +675,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Image quality value, which is returned when `EnableQualityValue` is set to `true`. The smaller the value, the less clear the image is. Value range: 0−100 (a threshold greater than or equal to 50 is recommended.)
-Note: this field may return `null`, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.QualityValue = null;
@@ -1316,21 +1323,32 @@ We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can gu
         this.Scene = null;
 
         /**
-         * Language to be recognized.
+         * Language to recognize
 The language can be automatically recognized or manually specified. Chinese-English mix (`zh`) is selected by default. Mixed characters in English and each supported language can be recognized together.
 Valid values:
-zh\auto\jap\kor\
-spa\fre\ger\por\
-vie\may\rus\ita\
-hol\swe\fin\dan\
-nor\hun\tha\lat\ara
-Value meanings:
-Chinese-English mix, automatic recognition, Japanese, Korean,
-Spanish, French, German, Portuguese,
-Vietnamese, Malay, Russian, Italian,
-Dutch, Swedish, Finnish, Danish,
-Norwegian, Hungarian, Thai, Latin,
-Arabic.
+`zh`: Chinese-English mix
+`zh_rare`: supports letters, digits, rare Chinese characters, Traditional Chinese characters, special characters, etc.
+`auto`
+`mix`: language mix
+`jap`: Japanese
+`kor`: Korean
+`spa`: Spanish
+`fre`: French
+`ger`: German
+`por`: Portuguese
+`vie`: Vietnamese
+`may`: Malay
+`rus`: Russian
+`ita`: Italian
+`hol`: Dutch
+`swe`: Swedish
+`fin`: Finnish
+`dan`: Danish
+`nor`: Norwegian
+`hun`: Hungarian
+`tha`: Thai
+`hi`: Hindi
+`ara`: Arabic
          * @type {string || null}
          */
         this.LanguageType = null;

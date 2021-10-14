@@ -6498,6 +6498,18 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
          */
         this.TopicName = null;
 
+        /**
+         * Notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+         * @type {string || null}
+         */
+        this.NotifyType = null;
+
+        /**
+         * HTTP callback URL, required if `NotifyType` is set to `URL`
+         * @type {string || null}
+         */
+        this.NotifyUrl = null;
+
     }
 
     /**
@@ -6511,6 +6523,8 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
         this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
+        this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
 
     }
 }

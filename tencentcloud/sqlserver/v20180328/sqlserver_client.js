@@ -19,8 +19,9 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const CloneDBResponse = models.CloneDBResponse;
 const DealInfo = models.DealInfo;
+const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
-const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const DeleteBackupMigrationRequest = models.DeleteBackupMigrationRequest;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
@@ -40,7 +41,7 @@ const DeleteIncrementalMigrationRequest = models.DeleteIncrementalMigrationReque
 const DBRemark = models.DBRemark;
 const MigrateDB = models.MigrateDB;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
-const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
+const DescribeBackupsRequest = models.DescribeBackupsRequest;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
@@ -54,7 +55,7 @@ const Migration = models.Migration;
 const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
 const MigrationDetail = models.MigrationDetail;
 const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
@@ -70,7 +71,7 @@ const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const SlowlogInfo = models.SlowlogInfo;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const DescribeMigrationsResponse = models.DescribeMigrationsResponse;
-const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
+const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DeleteDBRequest = models.DeleteDBRequest;
 const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest;
@@ -97,6 +98,7 @@ const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
 const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
 const InstanceDBDetail = models.InstanceDBDetail;
+const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const RenameRestoreDatabase = models.RenameRestoreDatabase;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
@@ -143,6 +145,7 @@ const DeleteAccountRequest = models.DeleteAccountRequest;
 const DeleteBackupMigrationResponse = models.DeleteBackupMigrationResponse;
 const CreateBackupRequest = models.CreateBackupRequest;
 const DescribeDBsNormalRequest = models.DescribeDBsNormalRequest;
+const BackupFile = models.BackupFile;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const ModifyIncrementalMigrationResponse = models.ModifyIncrementalMigrationResponse;
 const MigrationAction = models.MigrationAction;
@@ -175,7 +178,7 @@ const MigrateTarget = models.MigrateTarget;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 const ModifyBackupMigrationRequest = models.ModifyBackupMigrationRequest;
 const DeleteAccountResponse = models.DeleteAccountResponse;
-const DescribeBackupsRequest = models.DescribeBackupsRequest;
+const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
 
 
 /**
@@ -727,6 +730,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     ModifyDBInstanceNetwork(req, cb) {
         let resp = new ModifyDBInstanceNetworkResponse();
         this.request("ModifyDBInstanceNetwork", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of unarchived database backup files.
+     * @param {DescribeBackupFilesRequest} req
+     * @param {function(string, DescribeBackupFilesResponse):void} cb
+     * @public
+     */
+    DescribeBackupFiles(req, cb) {
+        let resp = new DescribeBackupFilesResponse();
+        this.request("DescribeBackupFiles", req, resp, cb);
     }
 
     /**

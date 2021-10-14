@@ -778,7 +778,7 @@ class SelectedTableWithField extends  AbstractModel {
         this.TableType = null;
 
         /**
-         * The list of fields on which indexes need to be created
+         * The list of fields on which indexes will be created, table caching enabled, or data subscription enabled
          * @type {Array.<FieldInfo> || null}
          */
         this.SelectedFields = null;
@@ -788,6 +788,12 @@ class SelectedTableWithField extends  AbstractModel {
          * @type {number || null}
          */
         this.ShardNum = null;
+
+        /**
+         * CKafka instance information
+         * @type {KafkaInfo || null}
+         */
+        this.KafkaInfo = null;
 
     }
 
@@ -813,6 +819,12 @@ class SelectedTableWithField extends  AbstractModel {
             }
         }
         this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
+
+        if (params.KafkaInfo) {
+            let obj = new KafkaInfo();
+            obj.deserialize(params.KafkaInfo)
+            this.KafkaInfo = obj;
+        }
 
     }
 }
@@ -880,6 +892,12 @@ class ProxyMachineInfo extends  AbstractModel {
          */
         this.MachineType = null;
 
+        /**
+         * The number of proxy resources to be assigned
+         * @type {number || null}
+         */
+        this.AvailableCount = null;
+
     }
 
     /**
@@ -891,6 +909,7 @@ class ProxyMachineInfo extends  AbstractModel {
         }
         this.ProxyUid = 'ProxyUid' in params ? params.ProxyUid : null;
         this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.AvailableCount = 'AvailableCount' in params ? params.AvailableCount : null;
 
     }
 }
@@ -1031,6 +1050,56 @@ class DescribeRegionsResponse extends  AbstractModel {
                 let obj = new RegionInfo();
                 obj.deserialize(params.RegionInfos[z]);
                 this.RegionInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetTableDataFlow response structure.
+ * @class
+ */
+class SetTableDataFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of tables for which data subscription has been enabled
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The result list of tables for which data subscription has been enabled
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1252,6 +1321,49 @@ class DescribeMachineResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteTableDataFlow request structure.
+ * @class
+ */
+class DeleteTableDataFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the cluster where the tables reside
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The list of tables for which data subscription will be disabled
+         * @type {Array.<SelectedTableInfoNew> || null}
+         */
+        this.SelectedTables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SelectedTableInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
+            }
+        }
 
     }
 }
@@ -2637,6 +2749,20 @@ Note: `null` may be returned for this field, indicating that no valid values can
          */
         this.DbaUins = null;
 
+        /**
+         * Whether data subscription is enabled
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DataFlowStatus = null;
+
+        /**
+         * CKafka information when data subscription is enabled
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {KafkaInfo || null}
+         */
+        this.KafkaInfo = null;
+
     }
 
     /**
@@ -2686,6 +2812,13 @@ Note: `null` may be returned for this field, indicating that no valid values can
         }
         this.Censorship = 'Censorship' in params ? params.Censorship : null;
         this.DbaUins = 'DbaUins' in params ? params.DbaUins : null;
+        this.DataFlowStatus = 'DataFlowStatus' in params ? params.DataFlowStatus : null;
+
+        if (params.KafkaInfo) {
+            let obj = new KafkaInfo();
+            obj.deserialize(params.KafkaInfo)
+            this.KafkaInfo = obj;
+        }
 
     }
 }
@@ -3521,6 +3654,12 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.ClusterType = null;
 
+        /**
+         * Authentication type. Valid values: `0` (static password), `1` (signature)
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
     }
 
     /**
@@ -3564,6 +3703,7 @@ class CreateClusterRequest extends  AbstractModel {
             }
         }
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
 
     }
 }
@@ -4793,7 +4933,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SortRule = null;
 
         /**
-         * Distributed index information of table
+         * Information about global indexes, table caching, or data subscription
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DbClusterInfoStruct = null;
@@ -5472,6 +5613,49 @@ class ModifyTablesRequest extends  AbstractModel {
 }
 
 /**
+ * SetTableDataFlow request structure.
+ * @class
+ */
+class SetTableDataFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the cluster where the tables reside
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The list of tables for which data subscription will be enabled
+         * @type {Array.<SelectedTableWithField> || null}
+         */
+        this.SelectedTables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SelectedTableWithField();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTableGroupTags request structure.
  * @class
  */
@@ -5645,6 +5829,119 @@ class DescribeTablesRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CKafka address
+ * @class
+ */
+class KafkaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CKafka address
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * CKafka topic
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * CKafka username
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * CKafka password
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * CKafka instance
+         * @type {string || null}
+         */
+        this.Instance = null;
+
+        /**
+         * Whether VPC access is enabled
+         * @type {number || null}
+         */
+        this.IsVpc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Instance = 'Instance' in params ? params.Instance : null;
+        this.IsVpc = 'IsVpc' in params ? params.IsVpc : null;
+
+    }
+}
+
+/**
+ * DeleteTableDataFlow response structure.
+ * @class
+ */
+class DeleteTableDataFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of tables for which data subscription has been disabled
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The result list of tables for which data subscription has been disabled
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7381,9 +7678,11 @@ module.exports = {
     DescribeTasksResponse: DescribeTasksResponse,
     DeleteTablesRequest: DeleteTablesRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    SetTableDataFlowResponse: SetTableDataFlowResponse,
     SelectedTableInfoNew: SelectedTableInfoNew,
     ModifyClusterPasswordRequest: ModifyClusterPasswordRequest,
     DescribeMachineResponse: DescribeMachineResponse,
+    DeleteTableDataFlowRequest: DeleteTableDataFlowRequest,
     DeleteTableGroupRequest: DeleteTableGroupRequest,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TagsInfoOfTableGroup: TagsInfoOfTableGroup,
@@ -7458,9 +7757,12 @@ module.exports = {
     EnableRestProxyResponse: EnableRestProxyResponse,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
     ModifyTablesRequest: ModifyTablesRequest,
+    SetTableDataFlowRequest: SetTableDataFlowRequest,
     DescribeTableGroupTagsRequest: DescribeTableGroupTagsRequest,
     DescribeTablesInRecycleRequest: DescribeTablesInRecycleRequest,
     DescribeTablesRequest: DescribeTablesRequest,
+    KafkaInfo: KafkaInfo,
+    DeleteTableDataFlowResponse: DeleteTableDataFlowResponse,
     UpdateApplyRequest: UpdateApplyRequest,
     ModifyTableMemosRequest: ModifyTableMemosRequest,
     DescribeUinInWhitelistResponse: DescribeUinInWhitelistResponse,

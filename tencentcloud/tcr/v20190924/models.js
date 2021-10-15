@@ -45,32 +45,12 @@ class DeleteImmutableTagRulesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeImmutableTagRules response structure.
+ * ModifyInstance response structure.
  * @class
  */
-class DescribeImmutableTagRulesResponse extends  AbstractModel {
+class ModifyInstanceResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Rule list
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<ImmutableTagRule> || null}
-         */
-        this.Rules = null;
-
-        /**
-         * Namespace with no rules created
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.EmptyNs = null;
-
-        /**
-         * Total rules
-         * @type {number || null}
-         */
-        this.Total = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -87,41 +67,158 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new ImmutableTagRule();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
-        this.EmptyNs = 'EmptyNs' in params ? params.EmptyNs : null;
-        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * CheckInstance response structure.
+ * Task details
  * @class
  */
-class CheckInstanceResponse extends  AbstractModel {
+class TaskDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Verification result. true: valid, false: invalid
-         * @type {boolean || null}
+         * Task
+         * @type {string || null}
          */
-        this.IsValidated = null;
+        this.TaskName = null;
 
         /**
-         * ID of the region where the instance is located.
+         * Task UUID
+         * @type {string || null}
+         */
+        this.TaskUUID = null;
+
+        /**
+         * Task status
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * Task details
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskMessage = null;
+
+        /**
+         * Start time of the task
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * End time of the task
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FinishedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskUUID = 'TaskUUID' in params ? params.TaskUUID : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TaskMessage = 'TaskMessage' in params ? params.TaskMessage : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.FinishedTime = 'FinishedTime' in params ? params.FinishedTime : null;
+
+    }
+}
+
+/**
+ * ID of Enterprise Registry replication instance
+ * @class
+ */
+class ReplicationRegistry extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Master instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Replication instance ID
+         * @type {string || null}
+         */
+        this.ReplicationRegistryId = null;
+
+        /**
+         * Region ID of the replication instance
          * @type {number || null}
          */
-        this.RegionId = null;
+        this.ReplicationRegionId = null;
+
+        /**
+         * Region name of the replication instance
+         * @type {string || null}
+         */
+        this.ReplicationRegionName = null;
+
+        /**
+         * Status of the replication instance
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
+        this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
+        this.ReplicationRegionName = 'ReplicationRegionName' in params ? params.ReplicationRegionName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+
+    }
+}
+
+/**
+ * DescribeReplicationInstanceCreateTasks response structure.
+ * @class
+ */
+class DescribeReplicationInstanceCreateTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task details
+         * @type {Array.<TaskDetail> || null}
+         */
+        this.TaskDetail = null;
+
+        /**
+         * Overall task status
+         * @type {string || null}
+         */
+        this.Status = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -138,9 +235,313 @@ class CheckInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IsValidated = 'IsValidated' in params ? params.IsValidated : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+
+        if (params.TaskDetail) {
+            this.TaskDetail = new Array();
+            for (let z in params.TaskDetail) {
+                let obj = new TaskDetail();
+                obj.deserialize(params.TaskDetail[z]);
+                this.TaskDetail.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteMultipleSecurityPolicy response structure.
+ * @class
+ */
+class DeleteMultipleSecurityPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReplicationInstances request structure.
+ * @class
+ */
+class DescribeReplicationInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of output entries. Default value: 20, maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ManageReplication request structure.
+ * @class
+ */
+class ManageReplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Source instance ID
+         * @type {string || null}
+         */
+        this.SourceRegistryId = null;
+
+        /**
+         * Destination instance ID
+         * @type {string || null}
+         */
+        this.DestinationRegistryId = null;
+
+        /**
+         * Synchronization rule
+         * @type {ReplicationRule || null}
+         */
+        this.Rule = null;
+
+        /**
+         * Rule description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Region ID of the destination instance. For example, `1` represents Guangzhou
+         * @type {number || null}
+         */
+        this.DestinationRegionId = null;
+
+        /**
+         * Configuration of the synchronization rule
+         * @type {PeerReplicationOption || null}
+         */
+        this.PeerReplicationOption = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceRegistryId = 'SourceRegistryId' in params ? params.SourceRegistryId : null;
+        this.DestinationRegistryId = 'DestinationRegistryId' in params ? params.DestinationRegistryId : null;
+
+        if (params.Rule) {
+            let obj = new ReplicationRule();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.DestinationRegionId = 'DestinationRegionId' in params ? params.DestinationRegionId : null;
+
+        if (params.PeerReplicationOption) {
+            let obj = new PeerReplicationOption();
+            obj.deserialize(params.PeerReplicationOption)
+            this.PeerReplicationOption = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyImmutableTagRules request structure.
+ * @class
+ */
+class ModifyImmutableTagRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Rule
+         * @type {ImmutableTagRule || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.Rule) {
+            let obj = new ImmutableTagRule();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateReplicationInstance response structure.
+ * @class
+ */
+class CreateReplicationInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Enterprise Registry Instance ID
+         * @type {string || null}
+         */
+        this.ReplicationRegistryId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Synchronization rule
+ * @class
+ */
+class ReplicationRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of synchronization rule
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Destination namespace
+         * @type {string || null}
+         */
+        this.DestNamespace = null;
+
+        /**
+         * Whether to override
+         * @type {boolean || null}
+         */
+        this.Override = null;
+
+        /**
+         * Synchronization filters
+         * @type {Array.<ReplicationFilter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DestNamespace = 'DestNamespace' in params ? params.DestNamespace : null;
+        this.Override = 'Override' in params ? params.Override : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ReplicationFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -189,10 +590,187 @@ class CreateMultipleSecurityPolicyRequest extends  AbstractModel {
 }
 
 /**
- * ModifyInstance response structure.
+ * DescribeReplicationInstances response structure.
  * @class
  */
-class ModifyInstanceResponse extends  AbstractModel {
+class DescribeReplicationInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of instances
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Replication instance list
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ReplicationRegistry> || null}
+         */
+        this.ReplicationRegistries = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReplicationRegistries) {
+            this.ReplicationRegistries = new Array();
+            for (let z in params.ReplicationRegistries) {
+                let obj = new ReplicationRegistry();
+                obj.deserialize(params.ReplicationRegistries[z]);
+                this.ReplicationRegistries.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstance request structure.
+ * @class
+ */
+class ModifyInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Instance specification
+         * @type {string || null}
+         */
+        this.RegistryType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
+
+    }
+}
+
+/**
+ * CheckInstance request structure.
+ * @class
+ */
+class CheckInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance to be verified.
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+    }
+}
+
+/**
+ * DescribeReplicationInstanceSyncStatus request structure.
+ * @class
+ */
+class DescribeReplicationInstanceSyncStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Master instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Replication instance ID
+         * @type {string || null}
+         */
+        this.ReplicationRegistryId = null;
+
+        /**
+         * Region ID of the replication instance
+         * @type {number || null}
+         */
+        this.ReplicationRegionId = null;
+
+        /**
+         * Whether to show the synchronization log
+         * @type {boolean || null}
+         */
+        this.ShowReplicationLog = null;
+
+        /**
+         * Page offset for log display. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of output entries. Default value: 5, maximum value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
+        this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
+        this.ShowReplicationLog = 'ShowReplicationLog' in params ? params.ShowReplicationLog : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyImmutableTagRules response structure.
+ * @class
+ */
+class ModifyImmutableTagRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -211,6 +789,90 @@ class ModifyInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateReplicationInstance request structure.
+ * @class
+ */
+class CreateReplicationInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Master instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Region ID of the replication instance
+         * @type {number || null}
+         */
+        this.ReplicationRegionId = null;
+
+        /**
+         * Region name of the replication instance
+         * @type {string || null}
+         */
+        this.ReplicationRegionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
+        this.ReplicationRegionName = 'ReplicationRegionName' in params ? params.ReplicationRegionName : null;
+
+    }
+}
+
+/**
+ * CheckInstance response structure.
+ * @class
+ */
+class CheckInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Verification result. true: valid, false: invalid
+         * @type {boolean || null}
+         */
+        this.IsValidated = null;
+
+        /**
+         * ID of the region where the instance is located.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsValidated = 'IsValidated' in params ? params.IsValidated : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -245,10 +907,38 @@ class CreateImmutableTagRulesResponse extends  AbstractModel {
 }
 
 /**
- * DeleteMultipleSecurityPolicy response structure.
+ * DescribeImmutableTagRules request structure.
  * @class
  */
-class DeleteMultipleSecurityPolicyResponse extends  AbstractModel {
+class DescribeImmutableTagRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+    }
+}
+
+/**
+ * CreateMultipleSecurityPolicy response structure.
+ * @class
+ */
+class CreateMultipleSecurityPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -274,6 +964,213 @@ class DeleteMultipleSecurityPolicyResponse extends  AbstractModel {
             return;
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteImmutableTagRules request structure.
+ * @class
+ */
+class DeleteImmutableTagRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * ManageReplication response structure.
+ * @class
+ */
+class ManageReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReplicationInstanceCreateTasks request structure.
+ * @class
+ */
+class DescribeReplicationInstanceCreateTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Replication instance ID
+         * @type {string || null}
+         */
+        this.ReplicationRegistryId = null;
+
+        /**
+         * Region ID of the replication instance
+         * @type {number || null}
+         */
+        this.ReplicationRegionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
+        this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
+
+    }
+}
+
+/**
+ * CreateImmutableTagRules request structure.
+ * @class
+ */
+class CreateImmutableTagRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Rule
+         * @type {ImmutableTagRule || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+
+        if (params.Rule) {
+            let obj = new ImmutableTagRule();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeReplicationInstanceSyncStatus response structure.
+ * @class
+ */
+class DescribeReplicationInstanceSyncStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Synchronization status
+         * @type {string || null}
+         */
+        this.ReplicationStatus = null;
+
+        /**
+         * Synchronization completion time
+         * @type {string || null}
+         */
+        this.ReplicationTime = null;
+
+        /**
+         * Synchronization log
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {ReplicationLog || null}
+         */
+        this.ReplicationLog = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplicationStatus = 'ReplicationStatus' in params ? params.ReplicationStatus : null;
+        this.ReplicationTime = 'ReplicationTime' in params ? params.ReplicationTime : null;
+
+        if (params.ReplicationLog) {
+            let obj = new ReplicationLog();
+            obj.deserialize(params.ReplicationLog)
+            this.ReplicationLog = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -393,46 +1290,32 @@ class DeleteMultipleSecurityPolicyRequest extends  AbstractModel {
 }
 
 /**
- * CheckInstance request structure.
+ * DescribeImmutableTagRules response structure.
  * @class
  */
-class CheckInstanceRequest extends  AbstractModel {
+class DescribeImmutableTagRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the instance to be verified.
-         * @type {string || null}
+         * Rule list
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<ImmutableTagRule> || null}
          */
-        this.RegistryId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-
-    }
-}
-
-/**
- * CreateMultipleSecurityPolicy response structure.
- * @class
- */
-class CreateMultipleSecurityPolicyResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.Rules = null;
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Namespace with no rules created
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
          */
-        this.RegistryId = null;
+        this.EmptyNs = null;
+
+        /**
+         * Total rules
+         * @type {number || null}
+         */
+        this.Total = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -449,37 +1332,47 @@ class CreateMultipleSecurityPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new ImmutableTagRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.EmptyNs = 'EmptyNs' in params ? params.EmptyNs : null;
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DeleteImmutableTagRules request structure.
+ * Parameters for cross-account synchronization
  * @class
  */
-class DeleteImmutableTagRulesRequest extends  AbstractModel {
+class PeerReplicationOption extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * UIN of the destination instance
          * @type {string || null}
          */
-        this.RegistryId = null;
+        this.PeerRegistryUin = null;
 
         /**
-         * Namespace
+         * Permanent access Token for the destination instance
          * @type {string || null}
          */
-        this.NamespaceName = null;
+        this.PeerRegistryToken = null;
 
         /**
-         * Rule ID
-         * @type {number || null}
+         * Whether to enable cross-account synchronization
+         * @type {boolean || null}
          */
-        this.RuleId = null;
+        this.EnablePeerReplication = null;
 
     }
 
@@ -490,9 +1383,78 @@ class DeleteImmutableTagRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.PeerRegistryUin = 'PeerRegistryUin' in params ? params.PeerRegistryUin : null;
+        this.PeerRegistryToken = 'PeerRegistryToken' in params ? params.PeerRegistryToken : null;
+        this.EnablePeerReplication = 'EnablePeerReplication' in params ? params.EnablePeerReplication : null;
+
+    }
+}
+
+/**
+ * Synchronization log
+ * @class
+ */
+class ReplicationLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource type
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Path of the source resource
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Path of the destination resource
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Destination = null;
+
+        /**
+         * Synchronization status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Start time
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Destination = 'Destination' in params ? params.Destination : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -547,24 +1509,24 @@ class SecurityPolicy extends  AbstractModel {
 }
 
 /**
- * ModifyInstance request structure.
+ * Synchronization rule filter
  * @class
  */
-class ModifyInstanceRequest extends  AbstractModel {
+class ReplicationFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Type (`name`, `tag` and `resource`)
          * @type {string || null}
          */
-        this.RegistryId = null;
+        this.Type = null;
 
         /**
-         * Instance specification
+         * It is left blank by default
          * @type {string || null}
          */
-        this.RegistryType = null;
+        this.Value = null;
 
     }
 
@@ -575,187 +1537,46 @@ class ModifyInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
-
-    }
-}
-
-/**
- * DescribeImmutableTagRules request structure.
- * @class
- */
-class DescribeImmutableTagRulesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-
-    }
-}
-
-/**
- * ModifyImmutableTagRules request structure.
- * @class
- */
-class ModifyImmutableTagRulesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-        /**
-         * Namespace
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * Rule ID
-         * @type {number || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * Rule
-         * @type {ImmutableTagRule || null}
-         */
-        this.Rule = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-
-        if (params.Rule) {
-            let obj = new ImmutableTagRule();
-            obj.deserialize(params.Rule)
-            this.Rule = obj;
-        }
-
-    }
-}
-
-/**
- * ModifyImmutableTagRules response structure.
- * @class
- */
-class ModifyImmutableTagRulesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateImmutableTagRules request structure.
- * @class
- */
-class CreateImmutableTagRulesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-        /**
-         * Namespace
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * Rule
-         * @type {ImmutableTagRule || null}
-         */
-        this.Rule = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-
-        if (params.Rule) {
-            let obj = new ImmutableTagRule();
-            obj.deserialize(params.Rule)
-            this.Rule = obj;
-        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
 
 module.exports = {
     DeleteImmutableTagRulesResponse: DeleteImmutableTagRulesResponse,
-    DescribeImmutableTagRulesResponse: DescribeImmutableTagRulesResponse,
-    CheckInstanceResponse: CheckInstanceResponse,
-    CreateMultipleSecurityPolicyRequest: CreateMultipleSecurityPolicyRequest,
     ModifyInstanceResponse: ModifyInstanceResponse,
-    CreateImmutableTagRulesResponse: CreateImmutableTagRulesResponse,
+    TaskDetail: TaskDetail,
+    ReplicationRegistry: ReplicationRegistry,
+    DescribeReplicationInstanceCreateTasksResponse: DescribeReplicationInstanceCreateTasksResponse,
     DeleteMultipleSecurityPolicyResponse: DeleteMultipleSecurityPolicyResponse,
-    ImmutableTagRule: ImmutableTagRule,
-    DeleteMultipleSecurityPolicyRequest: DeleteMultipleSecurityPolicyRequest,
+    DescribeReplicationInstancesRequest: DescribeReplicationInstancesRequest,
+    ManageReplicationRequest: ManageReplicationRequest,
+    ModifyImmutableTagRulesRequest: ModifyImmutableTagRulesRequest,
+    CreateReplicationInstanceResponse: CreateReplicationInstanceResponse,
+    ReplicationRule: ReplicationRule,
+    CreateMultipleSecurityPolicyRequest: CreateMultipleSecurityPolicyRequest,
+    DescribeReplicationInstancesResponse: DescribeReplicationInstancesResponse,
+    ModifyInstanceRequest: ModifyInstanceRequest,
     CheckInstanceRequest: CheckInstanceRequest,
+    DescribeReplicationInstanceSyncStatusRequest: DescribeReplicationInstanceSyncStatusRequest,
+    ModifyImmutableTagRulesResponse: ModifyImmutableTagRulesResponse,
+    CreateReplicationInstanceRequest: CreateReplicationInstanceRequest,
+    CheckInstanceResponse: CheckInstanceResponse,
+    CreateImmutableTagRulesResponse: CreateImmutableTagRulesResponse,
+    DescribeImmutableTagRulesRequest: DescribeImmutableTagRulesRequest,
     CreateMultipleSecurityPolicyResponse: CreateMultipleSecurityPolicyResponse,
     DeleteImmutableTagRulesRequest: DeleteImmutableTagRulesRequest,
-    SecurityPolicy: SecurityPolicy,
-    ModifyInstanceRequest: ModifyInstanceRequest,
-    DescribeImmutableTagRulesRequest: DescribeImmutableTagRulesRequest,
-    ModifyImmutableTagRulesRequest: ModifyImmutableTagRulesRequest,
-    ModifyImmutableTagRulesResponse: ModifyImmutableTagRulesResponse,
+    ManageReplicationResponse: ManageReplicationResponse,
+    DescribeReplicationInstanceCreateTasksRequest: DescribeReplicationInstanceCreateTasksRequest,
     CreateImmutableTagRulesRequest: CreateImmutableTagRulesRequest,
+    DescribeReplicationInstanceSyncStatusResponse: DescribeReplicationInstanceSyncStatusResponse,
+    ImmutableTagRule: ImmutableTagRule,
+    DeleteMultipleSecurityPolicyRequest: DeleteMultipleSecurityPolicyRequest,
+    DescribeImmutableTagRulesResponse: DescribeImmutableTagRulesResponse,
+    PeerReplicationOption: PeerReplicationOption,
+    ReplicationLog: ReplicationLog,
+    SecurityPolicy: SecurityPolicy,
+    ReplicationFilter: ReplicationFilter,
 
 }

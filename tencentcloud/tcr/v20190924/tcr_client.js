@@ -17,23 +17,39 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteImmutableTagRulesResponse = models.DeleteImmutableTagRulesResponse;
-const DescribeImmutableTagRulesResponse = models.DescribeImmutableTagRulesResponse;
-const CheckInstanceResponse = models.CheckInstanceResponse;
-const CreateMultipleSecurityPolicyRequest = models.CreateMultipleSecurityPolicyRequest;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
-const CreateImmutableTagRulesResponse = models.CreateImmutableTagRulesResponse;
+const TaskDetail = models.TaskDetail;
+const ReplicationRegistry = models.ReplicationRegistry;
+const DescribeReplicationInstanceCreateTasksResponse = models.DescribeReplicationInstanceCreateTasksResponse;
 const DeleteMultipleSecurityPolicyResponse = models.DeleteMultipleSecurityPolicyResponse;
-const ImmutableTagRule = models.ImmutableTagRule;
-const DeleteMultipleSecurityPolicyRequest = models.DeleteMultipleSecurityPolicyRequest;
+const DescribeReplicationInstancesRequest = models.DescribeReplicationInstancesRequest;
+const ManageReplicationRequest = models.ManageReplicationRequest;
+const ModifyImmutableTagRulesRequest = models.ModifyImmutableTagRulesRequest;
+const CreateReplicationInstanceResponse = models.CreateReplicationInstanceResponse;
+const ReplicationRule = models.ReplicationRule;
+const CreateMultipleSecurityPolicyRequest = models.CreateMultipleSecurityPolicyRequest;
+const DescribeReplicationInstancesResponse = models.DescribeReplicationInstancesResponse;
+const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const CheckInstanceRequest = models.CheckInstanceRequest;
+const DescribeReplicationInstanceSyncStatusRequest = models.DescribeReplicationInstanceSyncStatusRequest;
+const ModifyImmutableTagRulesResponse = models.ModifyImmutableTagRulesResponse;
+const CreateReplicationInstanceRequest = models.CreateReplicationInstanceRequest;
+const CheckInstanceResponse = models.CheckInstanceResponse;
+const CreateImmutableTagRulesResponse = models.CreateImmutableTagRulesResponse;
+const DescribeImmutableTagRulesRequest = models.DescribeImmutableTagRulesRequest;
 const CreateMultipleSecurityPolicyResponse = models.CreateMultipleSecurityPolicyResponse;
 const DeleteImmutableTagRulesRequest = models.DeleteImmutableTagRulesRequest;
-const SecurityPolicy = models.SecurityPolicy;
-const ModifyInstanceRequest = models.ModifyInstanceRequest;
-const DescribeImmutableTagRulesRequest = models.DescribeImmutableTagRulesRequest;
-const ModifyImmutableTagRulesRequest = models.ModifyImmutableTagRulesRequest;
-const ModifyImmutableTagRulesResponse = models.ModifyImmutableTagRulesResponse;
+const ManageReplicationResponse = models.ManageReplicationResponse;
+const DescribeReplicationInstanceCreateTasksRequest = models.DescribeReplicationInstanceCreateTasksRequest;
 const CreateImmutableTagRulesRequest = models.CreateImmutableTagRulesRequest;
+const DescribeReplicationInstanceSyncStatusResponse = models.DescribeReplicationInstanceSyncStatusResponse;
+const ImmutableTagRule = models.ImmutableTagRule;
+const DeleteMultipleSecurityPolicyRequest = models.DeleteMultipleSecurityPolicyRequest;
+const DescribeImmutableTagRulesResponse = models.DescribeImmutableTagRulesResponse;
+const PeerReplicationOption = models.PeerReplicationOption;
+const ReplicationLog = models.ReplicationLog;
+const SecurityPolicy = models.SecurityPolicy;
+const ReplicationFilter = models.ReplicationFilter;
 
 
 /**
@@ -47,14 +63,36 @@ class TcrClient extends AbstractClient {
     }
     
     /**
-     * This API is used to list the tag immutability rule.
-     * @param {DescribeImmutableTagRulesRequest} req
-     * @param {function(string, DescribeImmutableTagRulesResponse):void} cb
+     * This API is used to query the task status of creating a replication instance.
+     * @param {DescribeReplicationInstanceCreateTasksRequest} req
+     * @param {function(string, DescribeReplicationInstanceCreateTasksResponse):void} cb
      * @public
      */
-    DescribeImmutableTagRules(req, cb) {
-        let resp = new DescribeImmutableTagRulesResponse();
-        this.request("DescribeImmutableTagRules", req, resp, cb);
+    DescribeReplicationInstanceCreateTasks(req, cb) {
+        let resp = new DescribeReplicationInstanceCreateTasksResponse();
+        this.request("DescribeReplicationInstanceCreateTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete multiple public network access allowlist policies of the instance.
+     * @param {DeleteMultipleSecurityPolicyRequest} req
+     * @param {function(string, DeleteMultipleSecurityPolicyResponse):void} cb
+     * @public
+     */
+    DeleteMultipleSecurityPolicy(req, cb) {
+        let resp = new DeleteMultipleSecurityPolicyResponse();
+        this.request("DeleteMultipleSecurityPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to manage the instance synchronization rule.
+     * @param {ManageReplicationRequest} req
+     * @param {function(string, ManageReplicationResponse):void} cb
+     * @public
+     */
+    ManageReplication(req, cb) {
+        let resp = new ManageReplicationResponse();
+        this.request("ManageReplication", req, resp, cb);
     }
 
     /**
@@ -69,6 +107,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the list of replication instances.
+     * @param {DescribeReplicationInstancesRequest} req
+     * @param {function(string, DescribeReplicationInstancesResponse):void} cb
+     * @public
+     */
+    DescribeReplicationInstances(req, cb) {
+        let resp = new DescribeReplicationInstancesResponse();
+        this.request("DescribeReplicationInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to create the tag immutability rule.
      * @param {CreateImmutableTagRulesRequest} req
      * @param {function(string, CreateImmutableTagRulesResponse):void} cb
@@ -77,6 +126,28 @@ class TcrClient extends AbstractClient {
     CreateImmutableTagRules(req, cb) {
         let resp = new CreateImmutableTagRulesResponse();
         this.request("CreateImmutableTagRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the synchronization status of a replication instance.
+     * @param {DescribeReplicationInstanceSyncStatusRequest} req
+     * @param {function(string, DescribeReplicationInstanceSyncStatusResponse):void} cb
+     * @public
+     */
+    DescribeReplicationInstanceSyncStatus(req, cb) {
+        let resp = new DescribeReplicationInstanceSyncStatusResponse();
+        this.request("DescribeReplicationInstanceSyncStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a replication instance.
+     * @param {CreateReplicationInstanceRequest} req
+     * @param {function(string, CreateReplicationInstanceResponse):void} cb
+     * @public
+     */
+    CreateReplicationInstance(req, cb) {
+        let resp = new CreateReplicationInstanceResponse();
+        this.request("CreateReplicationInstance", req, resp, cb);
     }
 
     /**
@@ -124,14 +195,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete multiple public network access allowlist policies of the instance.
-     * @param {DeleteMultipleSecurityPolicyRequest} req
-     * @param {function(string, DeleteMultipleSecurityPolicyResponse):void} cb
+     * This API is used to list the tag immutability rule.
+     * @param {DescribeImmutableTagRulesRequest} req
+     * @param {function(string, DescribeImmutableTagRulesResponse):void} cb
      * @public
      */
-    DeleteMultipleSecurityPolicy(req, cb) {
-        let resp = new DeleteMultipleSecurityPolicyResponse();
-        this.request("DeleteMultipleSecurityPolicy", req, resp, cb);
+    DescribeImmutableTagRules(req, cb) {
+        let resp = new DescribeImmutableTagRulesResponse();
+        this.request("DescribeImmutableTagRules", req, resp, cb);
     }
 
 

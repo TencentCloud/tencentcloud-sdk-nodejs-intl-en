@@ -1065,8 +1065,8 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     }
 
     /**
-     * This API is used to enable or disable the acceleration region of a domain name on VOD.
-1. You can enable or disable acceleration regions of only domain names whose status is `Online`.
+     * This API is used to modify the acceleration region of a domain name on VOD.
+1. You can modify acceleration regions of only domain names whose status is `Online`.
      * @param {ModifyVodDomainAccelerateConfigRequest} req
      * @param {function(string, ModifyVodDomainAccelerateConfigResponse):void} cb
      * @public

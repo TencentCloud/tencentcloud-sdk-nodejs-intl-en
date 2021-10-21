@@ -35,6 +35,7 @@ const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const PrometheusNotification = models.PrometheusNotification;
 const ClusterVersion = models.ClusterVersion;
 const RouteInfo = models.RouteInfo;
+const ServiceAccountAuthenticationOptions = models.ServiceAccountAuthenticationOptions;
 const InstanceUpgradeProgressItem = models.InstanceUpgradeProgressItem;
 const NodePool = models.NodePool;
 const DeleteClusterRequest = models.DeleteClusterRequest;
@@ -77,7 +78,7 @@ const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const UpgradeNodeResetParam = models.UpgradeNodeResetParam;
 const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
-const ManuallyAdded = models.ManuallyAdded;
+const DescribeClusterAuthenticationOptionsRequest = models.DescribeClusterAuthenticationOptionsRequest;
 const VersionInstance = models.VersionInstance;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
 const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest;
@@ -122,6 +123,8 @@ const CreateClusterRequest = models.CreateClusterRequest;
 const DeletePrometheusAlertRuleResponse = models.DeletePrometheusAlertRuleResponse;
 const AcquireClusterAdminRoleRequest = models.AcquireClusterAdminRoleRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
+const ModifyClusterAuthenticationOptionsResponse = models.ModifyClusterAuthenticationOptionsResponse;
+const DescribeClusterAuthenticationOptionsResponse = models.DescribeClusterAuthenticationOptionsResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const DescribePrometheusInstanceRequest = models.DescribePrometheusInstanceRequest;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
@@ -137,6 +140,7 @@ const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
 const DeleteClusterNodePoolRequest = models.DeleteClusterNodePoolRequest;
 const UpdateClusterVersionRequest = models.UpdateClusterVersionRequest;
+const ModifyClusterAuthenticationOptionsRequest = models.ModifyClusterAuthenticationOptionsRequest;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
 const CheckInstancesUpgradeAbleResponse = models.CheckInstancesUpgradeAbleResponse;
 const Cluster = models.Cluster;
@@ -181,6 +185,7 @@ const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const UpdateClusterVersionResponse = models.UpdateClusterVersionResponse;
 const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
+const ManuallyAdded = models.ManuallyAdded;
 const NodePoolOption = models.NodePoolOption;
 const ModifyClusterAsGroupAttributeRequest = models.ModifyClusterAsGroupAttributeRequest;
 const PrometheusGrafanaInfo = models.PrometheusGrafanaInfo;
@@ -202,14 +207,14 @@ class TkeClient extends AbstractClient {
     }
     
     /**
-     * This API is used to modify the model of instances in a node pool.
-     * @param {ModifyNodePoolInstanceTypesRequest} req
-     * @param {function(string, ModifyNodePoolInstanceTypesResponse):void} cb
+     * This API is used to query cluster authentication configuration.
+     * @param {DescribeClusterAuthenticationOptionsRequest} req
+     * @param {function(string, DescribeClusterAuthenticationOptionsResponse):void} cb
      * @public
      */
-    ModifyNodePoolInstanceTypes(req, cb) {
-        let resp = new ModifyNodePoolInstanceTypesResponse();
-        this.request("ModifyNodePoolInstanceTypes", req, resp, cb);
+    DescribeClusterAuthenticationOptions(req, cb) {
+        let resp = new DescribeClusterAuthenticationOptionsResponse();
+        this.request("DescribeClusterAuthenticationOptions", req, resp, cb);
     }
 
     /**
@@ -265,6 +270,17 @@ class TkeClient extends AbstractClient {
     DescribeImages(req, cb) {
         let resp = new DescribeImagesResponse();
         this.request("DescribeImages", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify cluster authentication configuration.
+     * @param {ModifyClusterAuthenticationOptionsRequest} req
+     * @param {function(string, ModifyClusterAuthenticationOptionsResponse):void} cb
+     * @public
+     */
+    ModifyClusterAuthenticationOptions(req, cb) {
+        let resp = new ModifyClusterAuthenticationOptionsResponse();
+        this.request("ModifyClusterAuthenticationOptions", req, resp, cb);
     }
 
     /**
@@ -639,6 +655,17 @@ class TkeClient extends AbstractClient {
     DescribeClusterRouteTables(req, cb) {
         let resp = new DescribeClusterRouteTablesResponse();
         this.request("DescribeClusterRouteTables", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the model of instances in a node pool.
+     * @param {ModifyNodePoolInstanceTypesRequest} req
+     * @param {function(string, ModifyNodePoolInstanceTypesResponse):void} cb
+     * @public
+     */
+    ModifyNodePoolInstanceTypes(req, cb) {
+        let resp = new ModifyNodePoolInstanceTypesResponse();
+        this.request("ModifyNodePoolInstanceTypes", req, resp, cb);
     }
 
     /**

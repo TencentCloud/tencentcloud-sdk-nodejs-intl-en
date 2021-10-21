@@ -70,7 +70,7 @@ const OfflineClusterResponse = models.OfflineClusterResponse;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
 const ObjectTask = models.ObjectTask;
 const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
-const PolicyRule = models.PolicyRule;
+const ParamItem = models.ParamItem;
 const IsolateClusterResponse = models.IsolateClusterResponse;
 const CreateClustersResponse = models.CreateClustersResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
@@ -82,6 +82,7 @@ const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
+const PolicyRule = models.PolicyRule;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 

@@ -867,6 +867,51 @@ class RouteInfo extends  AbstractModel {
 }
 
 /**
+ * ServiceAccount authentication configuration
+ * @class
+ */
+class ServiceAccountAuthenticationOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * service-account-issuer
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Issuer = null;
+
+        /**
+         * service-account-jwks-uri
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.JWKSURI = null;
+
+        /**
+         * If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoCreateDiscoveryAnonymousAuth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Issuer = 'Issuer' in params ? params.Issuer : null;
+        this.JWKSURI = 'JWKSURI' in params ? params.JWKSURI : null;
+        this.AutoCreateDiscoveryAnonymousAuth = 'AutoCreateDiscoveryAnonymousAuth' in params ? params.AutoCreateDiscoveryAnonymousAuth : null;
+
+    }
+}
+
+/**
  * Upgrade progress of a node
  * @class
  */
@@ -2286,10 +2331,44 @@ all clusters under the account will be obtained)
         this.Limit = null;
 
         /**
-         * Filter condition. Currently, only filtering by a single ClusterName is supported
+         * ·  ClusterName
+    Filters by the cluster name
+    Type: String
+    Required: no
+
+·  Tags
+    Filters by key-value pairs of tags
+    Type: String
+    Required: no
+
+·  vpc-id
+    Filters by the VPC ID
+    Type: String
+    Required: no
+
+·  tag-key
+    Filters by the tag key
+    Type: String
+    Required: no
+
+·  tag-value
+    Filters by the tag value
+    Type: String
+    Required: no
+
+·  tag:tag-key
+    Filters by key-value pairs of tags
+    Type: String
+    Required: no
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
+
+        /**
+         * Cluster type, such as `MANAGED_CLUSTER`
+         * @type {string || null}
+         */
+        this.ClusterType = null;
 
     }
 
@@ -2312,6 +2391,7 @@ all clusters under the account will be obtained)
                 this.Filters.push(obj);
             }
         }
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
 
     }
 }
@@ -3148,36 +3228,18 @@ class CreateClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
- * Nodes that are manually added
+ * DescribeClusterAuthenticationOptions request structure.
  * @class
  */
-class ManuallyAdded extends  AbstractModel {
+class DescribeClusterAuthenticationOptionsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of nodes that are being added
-         * @type {number || null}
+         * Cluster ID
+         * @type {string || null}
          */
-        this.Joining = null;
-
-        /**
-         * Number of nodes that are being initialized
-         * @type {number || null}
-         */
-        this.Initializing = null;
-
-        /**
-         * Number of normal nodes
-         * @type {number || null}
-         */
-        this.Normal = null;
-
-        /**
-         * Total number of nodes
-         * @type {number || null}
-         */
-        this.Total = null;
+        this.ClusterId = null;
 
     }
 
@@ -3188,10 +3250,7 @@ class ManuallyAdded extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Joining = 'Joining' in params ? params.Joining : null;
-        this.Initializing = 'Initializing' in params ? params.Initializing : null;
-        this.Normal = 'Normal' in params ? params.Normal : null;
-        this.Total = 'Total' in params ? params.Total : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -3305,6 +3364,12 @@ class DescribeClusterKubeconfigRequest extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * Defaults to `false`, which means to obtain the kubeconfig of private network
+         * @type {boolean || null}
+         */
+        this.IsExtranet = null;
+
     }
 
     /**
@@ -3315,6 +3380,7 @@ class DescribeClusterKubeconfigRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
 
     }
 }
@@ -5307,6 +5373,83 @@ class CreateClusterAsGroupResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterAuthenticationOptions response structure.
+ * @class
+ */
+class ModifyClusterAuthenticationOptionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterAuthenticationOptions response structure.
+ * @class
+ */
+class DescribeClusterAuthenticationOptionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ServiceAccount authentication configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {ServiceAccountAuthenticationOptions || null}
+         */
+        this.ServiceAccounts = null;
+
+        /**
+         * Result of the last modification. Values: `Updating`, `Success`, `Failed` or `TimeOut`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LatestOperationState = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ServiceAccounts) {
+            let obj = new ServiceAccountAuthenticationOptions();
+            obj.deserialize(params.ServiceAccounts)
+            this.ServiceAccounts = obj;
+        }
+        this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteClusterAsGroups response structure.
  * @class
  */
@@ -5761,6 +5904,12 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
          */
         this.OsCustomizeType = null;
 
+        /**
+         * Node custom parameter
+         * @type {InstanceExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
     }
 
     /**
@@ -5796,6 +5945,12 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
         this.EnableAutoscale = 'EnableAutoscale' in params ? params.EnableAutoscale : null;
         this.OsName = 'OsName' in params ? params.OsName : null;
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+
+        if (params.ExtraArgs) {
+            let obj = new InstanceExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
 
     }
 }
@@ -6271,6 +6426,46 @@ class UpdateClusterVersionRequest extends  AbstractModel {
         }
         this.MaxNotReadyPercent = 'MaxNotReadyPercent' in params ? params.MaxNotReadyPercent : null;
         this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
+
+    }
+}
+
+/**
+ * ModifyClusterAuthenticationOptions request structure.
+ * @class
+ */
+class ModifyClusterAuthenticationOptionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * ServiceAccount authentication configuration
+         * @type {ServiceAccountAuthenticationOptions || null}
+         */
+        this.ServiceAccounts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ServiceAccounts) {
+            let obj = new ServiceAccountAuthenticationOptions();
+            obj.deserialize(params.ServiceAccounts)
+            this.ServiceAccounts = obj;
+        }
 
     }
 }
@@ -8392,6 +8587,55 @@ class CreateClusterNodePoolResponse extends  AbstractModel {
 }
 
 /**
+ * Nodes that are manually added
+ * @class
+ */
+class ManuallyAdded extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of nodes that are being added
+         * @type {number || null}
+         */
+        this.Joining = null;
+
+        /**
+         * Number of nodes that are being initialized
+         * @type {number || null}
+         */
+        this.Initializing = null;
+
+        /**
+         * Number of normal nodes
+         * @type {number || null}
+         */
+        this.Normal = null;
+
+        /**
+         * Total number of nodes
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Joining = 'Joining' in params ? params.Joining : null;
+        this.Initializing = 'Initializing' in params ? params.Initializing : null;
+        this.Normal = 'Normal' in params ? params.Normal : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
  * The options for adding the existing node to the node pool
  * @class
  */
@@ -8789,6 +9033,7 @@ module.exports = {
     PrometheusNotification: PrometheusNotification,
     ClusterVersion: ClusterVersion,
     RouteInfo: RouteInfo,
+    ServiceAccountAuthenticationOptions: ServiceAccountAuthenticationOptions,
     InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
     NodePool: NodePool,
     DeleteClusterRequest: DeleteClusterRequest,
@@ -8831,7 +9076,7 @@ module.exports = {
     UpgradeNodeResetParam: UpgradeNodeResetParam,
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
-    ManuallyAdded: ManuallyAdded,
+    DescribeClusterAuthenticationOptionsRequest: DescribeClusterAuthenticationOptionsRequest,
     VersionInstance: VersionInstance,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
@@ -8876,6 +9121,8 @@ module.exports = {
     DeletePrometheusAlertRuleResponse: DeletePrometheusAlertRuleResponse,
     AcquireClusterAdminRoleRequest: AcquireClusterAdminRoleRequest,
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
+    ModifyClusterAuthenticationOptionsResponse: ModifyClusterAuthenticationOptionsResponse,
+    DescribeClusterAuthenticationOptionsResponse: DescribeClusterAuthenticationOptionsResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     DescribePrometheusInstanceRequest: DescribePrometheusInstanceRequest,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
@@ -8891,6 +9138,7 @@ module.exports = {
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
     DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     UpdateClusterVersionRequest: UpdateClusterVersionRequest,
+    ModifyClusterAuthenticationOptionsRequest: ModifyClusterAuthenticationOptionsRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
     CheckInstancesUpgradeAbleResponse: CheckInstancesUpgradeAbleResponse,
     Cluster: Cluster,
@@ -8935,6 +9183,7 @@ module.exports = {
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     UpdateClusterVersionResponse: UpdateClusterVersionResponse,
     CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,
+    ManuallyAdded: ManuallyAdded,
     NodePoolOption: NodePoolOption,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
     PrometheusGrafanaInfo: PrometheusGrafanaInfo,

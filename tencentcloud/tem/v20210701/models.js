@@ -469,7 +469,7 @@ class RestartApplicationPodRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Page number
+         * Page offset
          * @type {number || null}
          */
         this.Offset = null;
@@ -1595,7 +1595,7 @@ class DescribeRunPodPage extends  AbstractModel {
         super();
 
         /**
-         * Page number
+         * Page offset
          * @type {number || null}
          */
         this.Offset = null;
@@ -2989,7 +2989,7 @@ class DescribeEnvironmentsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Page number
+         * Page offset
          * @type {number || null}
          */
         this.Offset = null;

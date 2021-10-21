@@ -16129,6 +16129,13 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.ColorTransfer = null;
 
+        /**
+         * HDR type
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.HdrType = null;
+
     }
 
     /**
@@ -16146,6 +16153,7 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.ColorPrimaries = 'ColorPrimaries' in params ? params.ColorPrimaries : null;
         this.ColorSpace = 'ColorSpace' in params ? params.ColorSpace : null;
         this.ColorTransfer = 'ColorTransfer' in params ? params.ColorTransfer : null;
+        this.HdrType = 'HdrType' in params ? params.HdrType : null;
 
     }
 }

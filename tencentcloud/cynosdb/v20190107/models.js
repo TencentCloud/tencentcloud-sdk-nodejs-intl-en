@@ -1194,6 +1194,12 @@ class AddInstancesRequest extends  AbstractModel {
          */
         this.OrderSource = null;
 
+        /**
+         * Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+         * @type {number || null}
+         */
+        this.DealMode = null;
+
     }
 
     /**
@@ -1215,6 +1221,7 @@ class AddInstancesRequest extends  AbstractModel {
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
         this.OrderSource = 'OrderSource' in params ? params.OrderSource : null;
+        this.DealMode = 'DealMode' in params ? params.DealMode : null;
 
     }
 }
@@ -2735,18 +2742,17 @@ pause
         this.ServerlessStatus = null;
 
         /**
-         * Storage billing mode
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.StoragePayMode = null;
-
-        /**
          * Prepaid storage ID
 Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.StorageId = null;
+
+        /**
+         * Storage billing mode
+         * @type {number || null}
+         */
+        this.StoragePayMode = null;
 
     }
 
@@ -2797,8 +2803,8 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.MinCpu = 'MinCpu' in params ? params.MinCpu : null;
         this.MaxCpu = 'MaxCpu' in params ? params.MaxCpu : null;
         this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
-        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
         this.StorageId = 'StorageId' in params ? params.StorageId : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
 
     }
 }
@@ -2897,6 +2903,12 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.DbType = null;
 
+        /**
+         * Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+         * @type {number || null}
+         */
+        this.DealMode = null;
+
     }
 
     /**
@@ -2913,6 +2925,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
+        this.DealMode = 'DealMode' in params ? params.DealMode : null;
 
     }
 }
@@ -3196,60 +3209,30 @@ class DescribeInstanceSpecsRequest extends  AbstractModel {
 }
 
 /**
- * Security group rule
+ * Parameter to be modified
  * @class
  */
-class PolicyRule extends  AbstractModel {
+class ParamItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy, which can be `ACCEPT` or `DROP`
+         * Parameter name
          * @type {string || null}
          */
-        this.Action = null;
+        this.ParamName = null;
 
         /**
-         * Source IP or IP range, such as 192.168.0.0/16
+         * New value
          * @type {string || null}
          */
-        this.CidrIp = null;
+        this.CurrentValue = null;
 
         /**
-         * Port
+         * Original value
          * @type {string || null}
          */
-        this.PortRange = null;
-
-        /**
-         * Network protocol, such as UDP and TCP
-         * @type {string || null}
-         */
-        this.IpProtocol = null;
-
-        /**
-         * Protocol port ID or protocol port group ID.
-         * @type {string || null}
-         */
-        this.ServiceModule = null;
-
-        /**
-         * IP address ID or IP address group ID.
-         * @type {string || null}
-         */
-        this.AddressModule = null;
-
-        /**
-         * id
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Desc = null;
+        this.OldValue = null;
 
     }
 
@@ -3260,14 +3243,9 @@ class PolicyRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = 'Action' in params ? params.Action : null;
-        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
-        this.PortRange = 'PortRange' in params ? params.PortRange : null;
-        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
-        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
-        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
 
     }
 }
@@ -3339,15 +3317,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DealNames = null;
 
         /**
-         * List of resource IDs (this parameter may not be returned in case of asynchronous delivery. We strongly recommend you call the `DescribeResourcesByDealName` API with the `dealNames` field to get the IDs of asynchronously delivered resources)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of resource IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get resource IDs.)
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
 
         /**
-         * List of cluster IDs (this parameter may not be returned in case of asynchronous delivery. We strongly recommend you call the `DescribeResourcesByDealName` API with the `dealNames` field to get the IDs of asynchronously delivered clusters)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of cluster IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get cluster IDs.)
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;
@@ -3648,6 +3626,36 @@ Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
          */
         this.StoragePayMode = null;
 
+        /**
+         * Array of security group IDs
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Array of alarm policy IDs
+         * @type {Array.<string> || null}
+         */
+        this.AlarmPolicyIds = null;
+
+        /**
+         * Array of parameters
+         * @type {Array.<ParamItem> || null}
+         */
+        this.ClusterParams = null;
+
+        /**
+         * Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+         * @type {number || null}
+         */
+        this.DealMode = null;
+
+        /**
+         * Parameter template ID
+         * @type {number || null}
+         */
+        this.ParamTemplateId = null;
+
     }
 
     /**
@@ -3699,6 +3707,19 @@ Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
         this.AutoPause = 'AutoPause' in params ? params.AutoPause : null;
         this.AutoPauseDelay = 'AutoPauseDelay' in params ? params.AutoPauseDelay : null;
         this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.AlarmPolicyIds = 'AlarmPolicyIds' in params ? params.AlarmPolicyIds : null;
+
+        if (params.ClusterParams) {
+            this.ClusterParams = new Array();
+            for (let z in params.ClusterParams) {
+                let obj = new ParamItem();
+                obj.deserialize(params.ClusterParams[z]);
+                this.ClusterParams.push(obj);
+            }
+        }
+        this.DealMode = 'DealMode' in params ? params.DealMode : null;
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
 
     }
 }
@@ -4289,6 +4310,83 @@ class ModifyBackupConfigResponse extends  AbstractModel {
 }
 
 /**
+ * Security group rule
+ * @class
+ */
+class PolicyRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy, which can be `ACCEPT` or `DROP`
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Source IP or IP range, such as 192.168.0.0/16
+         * @type {string || null}
+         */
+        this.CidrIp = null;
+
+        /**
+         * Port
+         * @type {string || null}
+         */
+        this.PortRange = null;
+
+        /**
+         * Network protocol, such as UDP and TCP
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+        /**
+         * Protocol port ID or protocol port group ID.
+         * @type {string || null}
+         */
+        this.ServiceModule = null;
+
+        /**
+         * IP address ID or IP address group ID.
+         * @type {string || null}
+         */
+        this.AddressModule = null;
+
+        /**
+         * id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
+        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
  * DescribeBackupConfig response structure.
  * @class
  */
@@ -4450,7 +4548,7 @@ module.exports = {
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,
     ObjectTask: ObjectTask,
     DescribeInstanceSpecsRequest: DescribeInstanceSpecsRequest,
-    PolicyRule: PolicyRule,
+    ParamItem: ParamItem,
     IsolateClusterResponse: IsolateClusterResponse,
     CreateClustersResponse: CreateClustersResponse,
     SetRenewFlagRequest: SetRenewFlagRequest,
@@ -4462,6 +4560,7 @@ module.exports = {
     CynosdbInstanceGrp: CynosdbInstanceGrp,
     DescribeClustersResponse: DescribeClustersResponse,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
+    PolicyRule: PolicyRule,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
 

@@ -2092,7 +2092,7 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Inputs to attach. You can attach 1-5 inputs.
+         * Inputs to attach. You can attach 1 to 5 inputs.
          * @type {Array.<AttachedInput> || null}
          */
         this.AttachedInputs = null;
@@ -3725,7 +3725,7 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Inputs to attach. You can attach 1-5 inputs.
+         * Inputs to attach. You can attach 1 to 5 inputs.
          * @type {Array.<AttachedInput> || null}
          */
         this.AttachedInputs = null;

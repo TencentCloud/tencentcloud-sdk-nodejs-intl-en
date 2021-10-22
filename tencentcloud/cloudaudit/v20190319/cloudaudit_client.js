@@ -16,27 +16,11 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteRecorderResponse = models.DeleteRecorderResponse;
-const DescribeDiscoveredResourceResponse = models.DescribeDiscoveredResourceResponse;
-const ConfigurationItems = models.ConfigurationItems;
-const CreateRecorderResponse = models.CreateRecorderResponse;
-const SupportResourceType = models.SupportResourceType;
-const DescribeRecorderResponse = models.DescribeRecorderResponse;
-const UpdateRecorderRequest = models.UpdateRecorderRequest;
-const UpdateRecorderResponse = models.UpdateRecorderResponse;
-const DescribeDiscoveredResourceRequest = models.DescribeDiscoveredResourceRequest;
-const ListDiscoveredResourcesResponse = models.ListDiscoveredResourcesResponse;
-const ListSupportResourceTypesRequest = models.ListSupportResourceTypesRequest;
-const ListSupportResourceTypesResponse = models.ListSupportResourceTypesResponse;
-const ListDiscoveredResourcesRequest = models.ListDiscoveredResourcesRequest;
-const DescribeRecorderRequest = models.DescribeRecorderRequest;
-const CreateRecorderRequest = models.CreateRecorderRequest;
-const GetConfigurationItemsRequest = models.GetConfigurationItemsRequest;
-const GetConfigurationItemsResponse = models.GetConfigurationItemsResponse;
-const DeleteRecorderRequest = models.DeleteRecorderRequest;
-const RecordResourceType = models.RecordResourceType;
-const Resources = models.Resources;
-const RelatedEvent = models.RelatedEvent;
+const LookupAttribute = models.LookupAttribute;
+const DescribeEventsResponse = models.DescribeEventsResponse;
+const Resource = models.Resource;
+const Event = models.Event;
+const DescribeEventsRequest = models.DescribeEventsRequest;
 
 
 /**
@@ -50,91 +34,14 @@ class CloudauditClient extends AbstractClient {
     }
     
     /**
-     * This API is used to create resource recorders to detect and record resource configuration changes.
-     * @param {CreateRecorderRequest} req
-     * @param {function(string, CreateRecorderResponse):void} cb
+     * This API is used to query CloudAudit logs.
+     * @param {DescribeEventsRequest} req
+     * @param {function(string, DescribeEventsResponse):void} cb
      * @public
      */
-    CreateRecorder(req, cb) {
-        let resp = new CreateRecorderResponse();
-        this.request("CreateRecorder", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of resource configuration items and display resource configuration changes in chronological order.
-     * @param {GetConfigurationItemsRequest} req
-     * @param {function(string, GetConfigurationItemsResponse):void} cb
-     * @public
-     */
-    GetConfigurationItems(req, cb) {
-        let resp = new GetConfigurationItemsResponse();
-        this.request("GetConfigurationItems", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view the list of discovered resources.
-     * @param {ListDiscoveredResourcesRequest} req
-     * @param {function(string, ListDiscoveredResourcesResponse):void} cb
-     * @public
-     */
-    ListDiscoveredResources(req, cb) {
-        let resp = new ListDiscoveredResourcesResponse();
-        this.request("ListDiscoveredResources", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view the basic information of discovered resources.
-     * @param {DescribeDiscoveredResourceRequest} req
-     * @param {function(string, DescribeDiscoveredResourceResponse):void} cb
-     * @public
-     */
-    DescribeDiscoveredResource(req, cb) {
-        let resp = new DescribeDiscoveredResourceResponse();
-        this.request("DescribeDiscoveredResource", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete resource recorders. After deletion, resource configuration changes will not be recorded.
-     * @param {DeleteRecorderRequest} req
-     * @param {function(string, DeleteRecorderResponse):void} cb
-     * @public
-     */
-    DeleteRecorder(req, cb) {
-        let resp = new DeleteRecorderResponse();
-        this.request("DeleteRecorder", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the resources to monitor, recorder name, and other recorder configurations.
-     * @param {UpdateRecorderRequest} req
-     * @param {function(string, UpdateRecorderResponse):void} cb
-     * @public
-     */
-    UpdateRecorder(req, cb) {
-        let resp = new UpdateRecorderResponse();
-        this.request("UpdateRecorder", req, resp, cb);
-    }
-
-    /**
-     * This API is used to display current configurations and status of a recorder.
-     * @param {DescribeRecorderRequest} req
-     * @param {function(string, DescribeRecorderResponse):void} cb
-     * @public
-     */
-    DescribeRecorder(req, cb) {
-        let resp = new DescribeRecorderResponse();
-        this.request("DescribeRecorder", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of all CFA supported resource types.
-     * @param {ListSupportResourceTypesRequest} req
-     * @param {function(string, ListSupportResourceTypesResponse):void} cb
-     * @public
-     */
-    ListSupportResourceTypes(req, cb) {
-        let resp = new ListSupportResourceTypesResponse();
-        this.request("ListSupportResourceTypes", req, resp, cb);
+    DescribeEvents(req, cb) {
+        let resp = new DescribeEventsResponse();
+        this.request("DescribeEvents", req, resp, cb);
     }
 
 

@@ -318,6 +318,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.RTMPSettings = null;
 
+        /**
+         * RTMP pull configuration of the output
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {DescribeOutputRTMPPullSettings || null}
+         */
+        this.RTMPPullSettings = null;
+
+        /**
+         * CIDR allowlist
+This parameter is valid if `Protocol` is set to `RTMP_PULL`. If this parameter is left empty, there is no restriction on clients’ IP addresses.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.AllowIpList = null;
+
     }
 
     /**
@@ -360,6 +375,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.RTMPSettings)
             this.RTMPSettings = obj;
         }
+
+        if (params.RTMPPullSettings) {
+            let obj = new DescribeOutputRTMPPullSettings();
+            obj.deserialize(params.RTMPPullSettings)
+            this.RTMPPullSettings = obj;
+        }
+        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
 
     }
 }
@@ -882,6 +904,41 @@ class CreateInput extends  AbstractModel {
 }
 
 /**
+ * RTMP pull URL of the output
+ * @class
+ */
+class DescribeOutputRTMPPullServerUrl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `tcUrl` of the RTMP pull URL
+         * @type {string || null}
+         */
+        this.TcUrl = null;
+
+        /**
+         * Stream key of the RTMP pull URL
+         * @type {string || null}
+         */
+        this.StreamKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TcUrl = 'TcUrl' in params ? params.TcUrl : null;
+        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
+
+    }
+}
+
+/**
  * Configuration information of the queried input.
  * @class
  */
@@ -1151,6 +1208,43 @@ class DeleteStreamLinkOutputResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RTMP pull configuration of the output
+ * @class
+ */
+class DescribeOutputRTMPPullSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of pull URLs
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<DescribeOutputRTMPPullServerUrl> || null}
+         */
+        this.ServerUrls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ServerUrls) {
+            this.ServerUrls = new Array();
+            for (let z in params.ServerUrls) {
+                let obj = new DescribeOutputRTMPPullServerUrl();
+                obj.deserialize(params.ServerUrls[z]);
+                this.ServerUrls.push(obj);
+            }
+        }
 
     }
 }
@@ -1612,10 +1706,12 @@ module.exports = {
     InputAddress: InputAddress,
     StopStreamLinkFlowRequest: StopStreamLinkFlowRequest,
     CreateInput: CreateInput,
+    DescribeOutputRTMPPullServerUrl: DescribeOutputRTMPPullServerUrl,
     DescribeInput: DescribeInput,
     DescribeStreamLinkFlowRequest: DescribeStreamLinkFlowRequest,
     DescribeOutputSRTSettings: DescribeOutputSRTSettings,
     DeleteStreamLinkOutputResponse: DeleteStreamLinkOutputResponse,
+    DescribeOutputRTMPPullSettings: DescribeOutputRTMPPullSettings,
     DescribeStreamLinkFlowsResponse: DescribeStreamLinkFlowsResponse,
     RTMPAddressDestination: RTMPAddressDestination,
     DeleteStreamLinkFlowResponse: DeleteStreamLinkFlowResponse,

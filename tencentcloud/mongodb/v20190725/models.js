@@ -88,7 +88,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of secondary nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+         * The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
          * @type {number || null}
          */
         this.NodeNum = null;
@@ -106,7 +106,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.Volume = null;
 
         /**
-         * Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
+         * Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition; MONGO_42_WT: MongoDB 4.2 WiredTiger Edition.
          * @type {string || null}
          */
         this.MongoVersion = null;
@@ -118,7 +118,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.GoodsNum = null;
 
         /**
-         * Instance region name in the format of ap-guangzhou-2.
+         * AZ in the format of ap-guangzhou-2. If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
          * @type {string || null}
          */
         this.Zone = null;
@@ -190,13 +190,13 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.AutoVoucher = null;
 
         /**
-         * Valid values: 1 (regular instance), 2 (temp instance), 3 (read-only instance), 4 (disaster recovery instance).
+         * Instance type. Valid values: `1` (primary instance), `2` (temp instance), `3` (read-only instance), `4` (disaster recovery instance), `5` (cloned instance).
          * @type {number || null}
          */
         this.Clone = null;
 
         /**
-         * Primary instance ID. It is required for read-only and disaster recovery instances.
+         * Primary instance ID. It is required for read-only, disaster recovery, and cloned instances.
          * @type {string || null}
          */
         this.Father = null;
@@ -206,6 +206,42 @@ class CreateDBInstanceRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.SecurityGroup = null;
+
+        /**
+         * The point in time to which the cloned instance will be rolled back. This parameter is required for a cloned instance. The point in time in the format of 2021-08-13 16:30:00 must be within the last seven days.
+         * @type {string || null}
+         */
+        this.RestoreTime = null;
+
+        /**
+         * Instance name, which can contain up to 60 letters, digits, or symbols (_-).
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * AZ list when multi-AZ deployment is enabled. For the specific purchasable versions which support multi-AZ deployment, please see the return result of the `DescribeSpecInfo` API. Notes: 1. Nodes of a multi-AZ instance must be deployed across three AZs. 2. To ensure a successful cross-AZ switch, you should not deploy most of the nodes to the same AZ. (For example, a three-node sharded cluster instance does not support deploying two or more nodes in the same AZ.) 3. MongoDB 4.2 and later versions do not support multi-AZ deployment. 4. Read-Only and disaster recovery instances do not support multi-AZ deployment. 5. Instances in the classic network do not support multi-AZ deployment.
+         * @type {Array.<string> || null}
+         */
+        this.AvailabilityZoneList = null;
+
+        /**
+         * The number of mongos CPUs, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+         * @type {number || null}
+         */
+        this.MongosCpu = null;
+
+        /**
+         * The size of mongos memory, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+         * @type {number || null}
+         */
+        this.MongosMemory = null;
+
+        /**
+         * The number of mongos routers, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. Note: please purchase 3-32 mongos routers for high availability.
+         * @type {number || null}
+         */
+        this.MongosNodeNum = null;
 
     }
 
@@ -244,6 +280,12 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.Clone = 'Clone' in params ? params.Clone : null;
         this.Father = 'Father' in params ? params.Father : null;
         this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
+        this.RestoreTime = 'RestoreTime' in params ? params.RestoreTime : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AvailabilityZoneList = 'AvailabilityZoneList' in params ? params.AvailabilityZoneList : null;
+        this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
+        this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
+        this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
 
     }
 }
@@ -720,13 +762,13 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.ReplicateSetNum = null;
 
         /**
-         * Number of nodes in each replica set. Currently, the number of nodes in a replica set is fixed at 3, while the number of shards is customizable. For more information, please see the parameter returned by the DescribeSpecInfo API
+         * The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * Version number. For the specific purchasable versions supported, please see the return result of the DescribeSpecInfo API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition
+         * Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition; MONGO_42_WT: MongoDB 4.2 WiredTiger Edition.
          * @type {string || null}
          */
         this.MongoVersion = null;
@@ -744,7 +786,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.GoodsNum = null;
 
         /**
-         * AZ information in the format of ap-guangzhou-2
+         * AZ in the format of ap-guangzhou-2. If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
          * @type {string || null}
          */
         this.Zone = null;
@@ -786,7 +828,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Valid values: 1 (regular instance), 2 (temp instance), 3 (read-only instance), 4 (disaster recovery instance).
+         * Instance type. Valid values: `1` (primary instance), `2` (temp instance), `3` (read-only instance), `4` (disaster recovery instance), `5` (cloned instance).
          * @type {number || null}
          */
         this.Clone = null;
@@ -802,6 +844,42 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.SecurityGroup = null;
+
+        /**
+         * The point in time to which the cloned instance will be rolled back. This parameter is required for a cloned instance. The point in time in the format of 2021-08-13 16:30:00 must be within the last seven days.
+         * @type {string || null}
+         */
+        this.RestoreTime = null;
+
+        /**
+         * Instance name, which can contain up to 60 letters, digits, or symbols (_-).
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * AZ list when multi-AZ deployment is enabled. For the specific purchasable versions which support multi-AZ deployment, please see the return result of the `DescribeSpecInfo` API. Notes: 1. Nodes of a multi-AZ instance must be deployed across three AZs. 2. To ensure a successful cross-AZ switch, you should not deploy most of the nodes to the same AZ. (For example, a three-node sharded cluster instance does not support deploying two or more nodes in the same AZ.) 3. MongoDB 4.2 and later versions do not support multi-AZ deployment. 4. Read-Only and disaster recovery instances do not support multi-AZ deployment. 5. Instances in the classic network do not support multi-AZ deployment.
+         * @type {Array.<string> || null}
+         */
+        this.AvailabilityZoneList = null;
+
+        /**
+         * The number of mongos CPUs, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+         * @type {number || null}
+         */
+        this.MongosCpu = null;
+
+        /**
+         * The size of mongos memory, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+         * @type {number || null}
+         */
+        this.MongosMemory = null;
+
+        /**
+         * The number of mongos routers, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. Note: please purchase 3-32 mongos routers for high availability.
+         * @type {number || null}
+         */
+        this.MongosNodeNum = null;
 
     }
 
@@ -837,6 +915,12 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Clone = 'Clone' in params ? params.Clone : null;
         this.Father = 'Father' in params ? params.Father : null;
         this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
+        this.RestoreTime = 'RestoreTime' in params ? params.RestoreTime : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AvailabilityZoneList = 'AvailabilityZoneList' in params ? params.AvailabilityZoneList : null;
+        this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
+        this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
+        this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
 
     }
 }
@@ -2076,7 +2160,7 @@ class DescribeAsyncRequestInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Status.
+         * Status. Valid values: `initial` (initializing), `running`, `paused` (paused due to failure), `undoed` (rolled back due to failure), `failed` (ended due to failure), `success`
          * @type {string || null}
          */
         this.Status = null;

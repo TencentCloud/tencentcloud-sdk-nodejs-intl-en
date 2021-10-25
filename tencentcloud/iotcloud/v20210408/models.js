@@ -447,6 +447,34 @@ class CreatePrivateCAResponse extends  AbstractModel {
 }
 
 /**
+ * SetProductsForbiddenStatus response structure.
+ * @class
+ */
+class SetProductsForbiddenStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Sub-product information
  * @class
  */
@@ -577,6 +605,41 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.Type = 'Type' in params ? params.Type : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * SetProductsForbiddenStatus request structure.
+ * @class
+ */
+class SetProductsForbiddenStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of products to enable or disable
+         * @type {Array.<string> || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * `0`: enable; `1`: disable
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1973,7 +2036,8 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.FirmwareUpdateTime = null;
 
         /**
-         * 
+         * Account ID of the creator
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CreateUserId = null;
@@ -2052,9 +2116,11 @@ module.exports = {
     DeleteDeviceRequest: DeleteDeviceRequest,
     DeleteProductResponse: DeleteProductResponse,
     CreatePrivateCAResponse: CreatePrivateCAResponse,
+    SetProductsForbiddenStatusResponse: SetProductsForbiddenStatusResponse,
     BindProductInfo: BindProductInfo,
     DescribeDevicesResponse: DescribeDevicesResponse,
     DeviceTag: DeviceTag,
+    SetProductsForbiddenStatusRequest: SetProductsForbiddenStatusRequest,
     DescribeProductCARequest: DescribeProductCARequest,
     CreatePrivateCARequest: CreatePrivateCARequest,
     DescribeProductResponse: DescribeProductResponse,

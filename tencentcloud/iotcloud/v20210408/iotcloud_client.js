@@ -28,9 +28,11 @@ const DescribePrivateCABindedProductsResponse = models.DescribePrivateCABindedPr
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DeleteProductResponse = models.DeleteProductResponse;
 const CreatePrivateCAResponse = models.CreatePrivateCAResponse;
+const SetProductsForbiddenStatusResponse = models.SetProductsForbiddenStatusResponse;
 const BindProductInfo = models.BindProductInfo;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const DeviceTag = models.DeviceTag;
+const SetProductsForbiddenStatusRequest = models.SetProductsForbiddenStatusRequest;
 const DescribeProductCARequest = models.DescribeProductCARequest;
 const CreatePrivateCARequest = models.CreatePrivateCARequest;
 const DescribeProductResponse = models.DescribeProductResponse;
@@ -155,14 +157,14 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a private CA certificate.
-     * @param {UpdatePrivateCARequest} req
-     * @param {function(string, UpdatePrivateCAResponse):void} cb
+     * This API is used to enable or disable multiple products at a time.
+     * @param {SetProductsForbiddenStatusRequest} req
+     * @param {function(string, SetProductsForbiddenStatusResponse):void} cb
      * @public
      */
-    UpdatePrivateCA(req, cb) {
-        let resp = new UpdatePrivateCAResponse();
-        this.request("UpdatePrivateCA", req, resp, cb);
+    SetProductsForbiddenStatus(req, cb) {
+        let resp = new SetProductsForbiddenStatusResponse();
+        this.request("SetProductsForbiddenStatus", req, resp, cb);
     }
 
     /**
@@ -229,6 +231,17 @@ class IotcloudClient extends AbstractClient {
     DescribeProduct(req, cb) {
         let resp = new DescribeProductResponse();
         this.request("DescribeProduct", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a private CA certificate.
+     * @param {UpdatePrivateCARequest} req
+     * @param {function(string, UpdatePrivateCAResponse):void} cb
+     * @public
+     */
+    UpdatePrivateCA(req, cb) {
+        let resp = new UpdatePrivateCAResponse();
+        this.request("UpdatePrivateCA", req, resp, cb);
     }
 
 

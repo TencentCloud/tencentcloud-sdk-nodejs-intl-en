@@ -35,6 +35,7 @@ const DeleteStreamLiveInputRequest = models.DeleteStreamLiveInputRequest;
 const ModifyStreamLiveInputSecurityGroupResponse = models.ModifyStreamLiveInputSecurityGroupResponse;
 const ModifyStreamLiveInputRequest = models.ModifyStreamLiveInputRequest;
 const StreamInfo = models.StreamInfo;
+const DescribeStreamLiveRegionsRequest = models.DescribeStreamLiveRegionsRequest;
 const DescribeStreamLiveChannelAlertsRequest = models.DescribeStreamLiveChannelAlertsRequest;
 const AudioSelectorInfo = models.AudioSelectorInfo;
 const LogInfo = models.LogInfo;
@@ -59,6 +60,8 @@ const AudioTemplateInfo = models.AudioTemplateInfo;
 const StreamPackageSettingsInfo = models.StreamPackageSettingsInfo;
 const DescribeStreamLiveChannelsResponse = models.DescribeStreamLiveChannelsResponse;
 const PlanReq = models.PlanReq;
+const DescribeStreamLiveRegionsResponse = models.DescribeStreamLiveRegionsResponse;
+const StreamLiveRegionInfo = models.StreamLiveRegionInfo;
 const DescribeStreamLiveChannelRequest = models.DescribeStreamLiveChannelRequest;
 const DescribeStreamLivePlansRequest = models.DescribeStreamLivePlansRequest;
 const CreateStreamLiveChannelRequest = models.CreateStreamLiveChannelRequest;
@@ -87,6 +90,7 @@ const StreamScte35Info = models.StreamScte35Info;
 const StreamAudioInfo = models.StreamAudioInfo;
 const OutputsStatistics = models.OutputsStatistics;
 const InputSecurityGroupInfo = models.InputSecurityGroupInfo;
+const RegionInfo = models.RegionInfo;
 const ModifyStreamLiveInputSecurityGroupRequest = models.ModifyStreamLiveInputSecurityGroupRequest;
 const ChannelAlertInfos = models.ChannelAlertInfos;
 const CreateStreamLiveInputResponse = models.CreateStreamLiveInputResponse;
@@ -192,6 +196,17 @@ class MdlClient extends AbstractClient {
     DeleteStreamLiveChannel(req, cb) {
         let resp = new DeleteStreamLiveChannelResponse();
         this.request("DeleteStreamLiveChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query all StreamLive regions.
+     * @param {DescribeStreamLiveRegionsRequest} req
+     * @param {function(string, DescribeStreamLiveRegionsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLiveRegions(req, cb) {
+        let resp = new DescribeStreamLiveRegionsResponse();
+        this.request("DescribeStreamLiveRegions", req, resp, cb);
     }
 
     /**

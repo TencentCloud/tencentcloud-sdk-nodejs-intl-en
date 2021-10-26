@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeOutputRTMPSettings = models.DescribeOutputRTMPSettings;
 const OutputAddress = models.OutputAddress;
 const DescribeInputRTPSettings = models.DescribeInputRTPSettings;
+const DescribeStreamLinkRegionsRequest = models.DescribeStreamLinkRegionsRequest;
 const ModifyStreamLinkFlowRequest = models.ModifyStreamLinkFlowRequest;
 const DeleteStreamLinkFlowRequest = models.DeleteStreamLinkFlowRequest;
 const CreateStreamLinkFlowRequest = models.CreateStreamLinkFlowRequest;
@@ -29,7 +30,7 @@ const CreateInputSRTSettings = models.CreateInputSRTSettings;
 const DescribeInputRTMPSettings = models.DescribeInputRTMPSettings;
 const ModifyStreamLinkFlowResponse = models.ModifyStreamLinkFlowResponse;
 const StartStreamLinkFlowRequest = models.StartStreamLinkFlowRequest;
-const StartStreamLinkFlowResponse = models.StartStreamLinkFlowResponse;
+const RegionInfo = models.RegionInfo;
 const DescribeStreamLinkFlowResponse = models.DescribeStreamLinkFlowResponse;
 const StopStreamLinkFlowResponse = models.StopStreamLinkFlowResponse;
 const InputAddress = models.InputAddress;
@@ -44,12 +45,15 @@ const DescribeOutputRTMPPullSettings = models.DescribeOutputRTMPPullSettings;
 const DescribeStreamLinkFlowsResponse = models.DescribeStreamLinkFlowsResponse;
 const RTMPAddressDestination = models.RTMPAddressDestination;
 const DeleteStreamLinkFlowResponse = models.DeleteStreamLinkFlowResponse;
+const DescribeStreamLinkRegionsResponse = models.DescribeStreamLinkRegionsResponse;
 const DescribeOutputRTPSettings = models.DescribeOutputRTPSettings;
 const DescribeInputSRTSettings = models.DescribeInputSRTSettings;
+const StartStreamLinkFlowResponse = models.StartStreamLinkFlowResponse;
 const CreateStreamLinkFlowResponse = models.CreateStreamLinkFlowResponse;
 const CreateInputRTPSettings = models.CreateInputRTPSettings;
 const SRTAddressDestination = models.SRTAddressDestination;
 const DescribeStreamLinkFlowsRequest = models.DescribeStreamLinkFlowsRequest;
+const StreamLinkRegionInfo = models.StreamLinkRegionInfo;
 const RTPAddressDestination = models.RTPAddressDestination;
 
 
@@ -149,6 +153,17 @@ class MdcClient extends AbstractClient {
     ModifyStreamLinkFlow(req, cb) {
         let resp = new ModifyStreamLinkFlowResponse();
         this.request("ModifyStreamLinkFlow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query all StreamLink regions.
+     * @param {DescribeStreamLinkRegionsRequest} req
+     * @param {function(string, DescribeStreamLinkRegionsResponse):void} cb
+     * @public
+     */
+    DescribeStreamLinkRegions(req, cb) {
+        let resp = new DescribeStreamLinkRegionsResponse();
+        this.request("DescribeStreamLinkRegions", req, resp, cb);
     }
 
 

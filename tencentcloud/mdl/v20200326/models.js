@@ -926,6 +926,27 @@ class StreamInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeStreamLiveRegions request structure.
+ * @class
+ */
+class DescribeStreamLiveRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeStreamLiveChannelAlerts request structure.
  * @class
  */
@@ -2016,6 +2037,82 @@ class PlanReq extends  AbstractModel {
             let obj = new EventSettingsReq();
             obj.deserialize(params.EventSettings)
             this.EventSettings = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeStreamLiveRegions response structure.
+ * @class
+ */
+class DescribeStreamLiveRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * StreamLive region information
+         * @type {StreamLiveRegionInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new StreamLiveRegionInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StreamLive region information
+ * @class
+ */
+class StreamLiveRegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of StreamLive regions
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.Regions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Regions) {
+            this.Regions = new Array();
+            for (let z in params.Regions) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.Regions[z]);
+                this.Regions.push(obj);
+            }
         }
 
     }
@@ -3287,6 +3384,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Region information
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * ModifyStreamLiveInputSecurityGroup request structure.
  * @class
  */
@@ -4132,6 +4257,7 @@ module.exports = {
     ModifyStreamLiveInputSecurityGroupResponse: ModifyStreamLiveInputSecurityGroupResponse,
     ModifyStreamLiveInputRequest: ModifyStreamLiveInputRequest,
     StreamInfo: StreamInfo,
+    DescribeStreamLiveRegionsRequest: DescribeStreamLiveRegionsRequest,
     DescribeStreamLiveChannelAlertsRequest: DescribeStreamLiveChannelAlertsRequest,
     AudioSelectorInfo: AudioSelectorInfo,
     LogInfo: LogInfo,
@@ -4156,6 +4282,8 @@ module.exports = {
     StreamPackageSettingsInfo: StreamPackageSettingsInfo,
     DescribeStreamLiveChannelsResponse: DescribeStreamLiveChannelsResponse,
     PlanReq: PlanReq,
+    DescribeStreamLiveRegionsResponse: DescribeStreamLiveRegionsResponse,
+    StreamLiveRegionInfo: StreamLiveRegionInfo,
     DescribeStreamLiveChannelRequest: DescribeStreamLiveChannelRequest,
     DescribeStreamLivePlansRequest: DescribeStreamLivePlansRequest,
     CreateStreamLiveChannelRequest: CreateStreamLiveChannelRequest,
@@ -4184,6 +4312,7 @@ module.exports = {
     StreamAudioInfo: StreamAudioInfo,
     OutputsStatistics: OutputsStatistics,
     InputSecurityGroupInfo: InputSecurityGroupInfo,
+    RegionInfo: RegionInfo,
     ModifyStreamLiveInputSecurityGroupRequest: ModifyStreamLiveInputSecurityGroupRequest,
     ChannelAlertInfos: ChannelAlertInfos,
     CreateStreamLiveInputResponse: CreateStreamLiveInputResponse,

@@ -133,6 +133,27 @@ class DescribeInputRTPSettings extends  AbstractModel {
 }
 
 /**
+ * DescribeStreamLinkRegions request structure.
+ * @class
+ */
+class DescribeStreamLinkRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ModifyStreamLinkFlow request structure.
  * @class
  */
@@ -665,18 +686,18 @@ class StartStreamLinkFlowRequest extends  AbstractModel {
 }
 
 /**
- * StartStreamLinkFlow response structure.
+ * Region information
  * @class
  */
-class StartStreamLinkFlowResponse extends  AbstractModel {
+class RegionInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Region name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
 
     }
 
@@ -687,7 +708,7 @@ class StartStreamLinkFlowResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -1384,6 +1405,46 @@ class DeleteStreamLinkFlowResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeStreamLinkRegions response structure.
+ * @class
+ */
+class DescribeStreamLinkRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * StreamLink region information
+         * @type {StreamLinkRegionInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new StreamLinkRegionInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RTP configuration information of the queried output.
  * @class
  */
@@ -1502,6 +1563,34 @@ class DescribeInputSRTSettings extends  AbstractModel {
         this.PeerIdleTimeout = 'PeerIdleTimeout' in params ? params.PeerIdleTimeout : null;
         this.Passphrase = 'Passphrase' in params ? params.Passphrase : null;
         this.PbKeyLen = 'PbKeyLen' in params ? params.PbKeyLen : null;
+
+    }
+}
+
+/**
+ * StartStreamLinkFlow response structure.
+ * @class
+ */
+class StartStreamLinkFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1652,6 +1741,42 @@ class DescribeStreamLinkFlowsRequest extends  AbstractModel {
 }
 
 /**
+ * StreamLink region information
+ * @class
+ */
+class StreamLinkRegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of StreamLink regions
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.Regions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Regions) {
+            this.Regions = new Array();
+            for (let z in params.Regions) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.Regions[z]);
+                this.Regions.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Destination address information of RTP push.
  * @class
  */
@@ -1690,6 +1815,7 @@ module.exports = {
     DescribeOutputRTMPSettings: DescribeOutputRTMPSettings,
     OutputAddress: OutputAddress,
     DescribeInputRTPSettings: DescribeInputRTPSettings,
+    DescribeStreamLinkRegionsRequest: DescribeStreamLinkRegionsRequest,
     ModifyStreamLinkFlowRequest: ModifyStreamLinkFlowRequest,
     DeleteStreamLinkFlowRequest: DeleteStreamLinkFlowRequest,
     CreateStreamLinkFlowRequest: CreateStreamLinkFlowRequest,
@@ -1700,7 +1826,7 @@ module.exports = {
     DescribeInputRTMPSettings: DescribeInputRTMPSettings,
     ModifyStreamLinkFlowResponse: ModifyStreamLinkFlowResponse,
     StartStreamLinkFlowRequest: StartStreamLinkFlowRequest,
-    StartStreamLinkFlowResponse: StartStreamLinkFlowResponse,
+    RegionInfo: RegionInfo,
     DescribeStreamLinkFlowResponse: DescribeStreamLinkFlowResponse,
     StopStreamLinkFlowResponse: StopStreamLinkFlowResponse,
     InputAddress: InputAddress,
@@ -1715,12 +1841,15 @@ module.exports = {
     DescribeStreamLinkFlowsResponse: DescribeStreamLinkFlowsResponse,
     RTMPAddressDestination: RTMPAddressDestination,
     DeleteStreamLinkFlowResponse: DeleteStreamLinkFlowResponse,
+    DescribeStreamLinkRegionsResponse: DescribeStreamLinkRegionsResponse,
     DescribeOutputRTPSettings: DescribeOutputRTPSettings,
     DescribeInputSRTSettings: DescribeInputSRTSettings,
+    StartStreamLinkFlowResponse: StartStreamLinkFlowResponse,
     CreateStreamLinkFlowResponse: CreateStreamLinkFlowResponse,
     CreateInputRTPSettings: CreateInputRTPSettings,
     SRTAddressDestination: SRTAddressDestination,
     DescribeStreamLinkFlowsRequest: DescribeStreamLinkFlowsRequest,
+    StreamLinkRegionInfo: StreamLinkRegionInfo,
     RTPAddressDestination: RTPAddressDestination,
 
 }

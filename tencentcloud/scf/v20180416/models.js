@@ -354,8 +354,8 @@ class GetReservedConcurrencyConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Reserved concurrency memory of function.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The reserved quota of the function
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ReservedMem = null;
@@ -2061,7 +2061,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.CfsConfig = null;
 
         /**
-         * Timeout period for function initialization. Default value: 15 seconds
+         * The function initialization timeout period
          * @type {number || null}
          */
         this.InitTimeout = null;
@@ -2139,7 +2139,7 @@ class DeleteReservedConcurrencyConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of the function for which to delete the provisioned concurrency
+         * Specifies the function of which you want to delete the reserved quota
          * @type {string || null}
          */
         this.FunctionName = null;
@@ -2859,7 +2859,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.TriggerName = null;
 
         /**
-         * Trigger type. Currently, COS, CMQ, timer, and ckafka triggers are supported.
+         * Type of trigger. Values: `cos`, `cmq`, `timer`, `ckafka` and `apigw`. To create a CLS trigger, please refer to [Creating Shipping Task (SCF)](https://intl.cloud.tencent.com/document/product/614/61096?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Type = null;
@@ -3521,7 +3521,7 @@ class CreateFunctionRequest extends  AbstractModel {
         this.CfsConfig = null;
 
         /**
-         * Timeout period for function initialization
+         * The function initialization timeout period. It defaults to 65s for general cases and 90s for image deployment functions.
          * @type {number || null}
          */
         this.InitTimeout = null;
@@ -4011,7 +4011,7 @@ class InvokeRequest extends  AbstractModel {
         this.FunctionName = null;
 
         /**
-         * The value is `RequestResponse` (synchronous) or `Event` (asynchronous). The default value is synchronous.
+         * Fill in `RequestResponse` for synchronized invocations (default and recommended) and `Event` for asychronized invocations. Note that for synchronized invocations, the max timeout period is 300s. Choose asychronized invocations if the required timeout period is longer than 300 seconds. You can also use [InvokeFunction](https://intl.cloud.tencent.com/document/product/583/58400?from_cn_redirect=1) for synchronized invocations. 
          * @type {string || null}
          */
         this.InvocationType = null;
@@ -4023,13 +4023,13 @@ class InvokeRequest extends  AbstractModel {
         this.Qualifier = null;
 
         /**
-         * Function running parameter, which is in the JSON format. Maximum parameter size is 1 MB.
+         * Function running parameter, which is in the JSON format. The maximum parameter size is 6 MB for synchronized invocations and 128KB for asynchronized invocations. This field corresponds to [event input parameter](https://intl.cloud.tencent.com/document/product/583/9210?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E).
          * @type {string || null}
          */
         this.ClientContext = null;
 
         /**
-         * If this field is specified during sync invocation, the returned value will contain 4 KB of logs. Valid values: None, Tail. Default value: None. If the value is `Tail`, the `Log` field in the returned parameter will contain the corresponding function execution log
+         * Null for async invocations
          * @type {string || null}
          */
         this.LogType = null;
@@ -4227,13 +4227,13 @@ class PutReservedConcurrencyConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of the function for which to set the provisioned concurrency
+         * Specifies the function of which you want to configure the reserved quota
          * @type {string || null}
          */
         this.FunctionName = null;
 
         /**
-         * Reserved concurrency memory of function. Note: the upper limit for the total reserved concurrency memory of the function is the user's total concurrency memory minus 12800
+         * Reserved memory quota of the function. Note: the upper limit for the total reserved quota of the function is the user's total concurrency memory minus 12800
          * @type {number || null}
          */
         this.ReservedConcurrencyMem = null;
@@ -5116,6 +5116,12 @@ class Code extends  AbstractModel {
          */
         this.GitUserNameSecret = null;
 
+        /**
+         * TCR image configurations
+         * @type {ImageConfig || null}
+         */
+        this.ImageConfig = null;
+
     }
 
     /**
@@ -5139,6 +5145,12 @@ class Code extends  AbstractModel {
         this.GitDirectory = 'GitDirectory' in params ? params.GitDirectory : null;
         this.GitCommitId = 'GitCommitId' in params ? params.GitCommitId : null;
         this.GitUserNameSecret = 'GitUserNameSecret' in params ? params.GitUserNameSecret : null;
+
+        if (params.ImageConfig) {
+            let obj = new ImageConfig();
+            obj.deserialize(params.ImageConfig)
+            this.ImageConfig = obj;
+        }
 
     }
 }
@@ -5469,7 +5481,7 @@ class InvokeFunctionRequest extends  AbstractModel {
         this.Qualifier = null;
 
         /**
-         * Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB.
+         * Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB. This field corresponds to [event input parameter](https://intl.cloud.tencent.com/document/product/583/9210?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E).
          * @type {string || null}
          */
         this.Event = null;
@@ -6127,7 +6139,7 @@ class GetReservedConcurrencyConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of the function for which to get the provisioned concurrency details.
+         * Specifies the function of which you want to obtain the reserved quota
          * @type {string || null}
          */
         this.FunctionName = null;
@@ -6296,6 +6308,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ReservedConcurrencyMem = null;
 
+        /**
+         * Asynchronization attribute of the function. Values: `TRUE` and `FALSE`.
+         * @type {string || null}
+         */
+        this.AsyncRunEnable = null;
+
+        /**
+         * Whether to enable call tracing for ansynchronized functions. Values: `TRUE` and `FALSE`.
+         * @type {string || null}
+         */
+        this.TraceEnable = null;
+
     }
 
     /**
@@ -6335,6 +6359,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.TotalProvisionedConcurrencyMem = 'TotalProvisionedConcurrencyMem' in params ? params.TotalProvisionedConcurrencyMem : null;
         this.ReservedConcurrencyMem = 'ReservedConcurrencyMem' in params ? params.ReservedConcurrencyMem : null;
+        this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
+        this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
 
     }
 }
@@ -6637,6 +6663,73 @@ class GetFunctionLogsResponse extends  AbstractModel {
             this.SearchContext = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TCR image information
+ * @class
+ */
+class ImageConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image repository type, which can be `personal` or `enterprise`
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+        /**
+         * {domain}/{namespace}/{imageName}:{tag}@{digest}
+         * @type {string || null}
+         */
+        this.ImageUri = null;
+
+        /**
+         * The temp token that a TCR Enterprise instance uses to obtain an image. It’s required when `ImageType` is `enterprise`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Entry point of the application
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EntryPoint = null;
+
+        /**
+         * entrypoint execution command
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * Command parameters
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Args = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
+        this.ImageUri = 'ImageUri' in params ? params.ImageUri : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.EntryPoint = 'EntryPoint' in params ? params.EntryPoint : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.Args = 'Args' in params ? params.Args : null;
 
     }
 }
@@ -7134,6 +7227,7 @@ module.exports = {
     Alias: Alias,
     GetLayerVersionRequest: GetLayerVersionRequest,
     GetFunctionLogsResponse: GetFunctionLogsResponse,
+    ImageConfig: ImageConfig,
     DeleteTriggerResponse: DeleteTriggerResponse,
     SearchKey: SearchKey,
     DeleteTriggerRequest: DeleteTriggerRequest,

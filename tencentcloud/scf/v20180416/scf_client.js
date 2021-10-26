@@ -133,6 +133,7 @@ const EipOutConfig = models.EipOutConfig;
 const Alias = models.Alias;
 const GetLayerVersionRequest = models.GetLayerVersionRequest;
 const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
+const ImageConfig = models.ImageConfig;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
 const SearchKey = models.SearchKey;
 const DeleteTriggerRequest = models.DeleteTriggerRequest;
@@ -481,7 +482,7 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to get the reserved concurrency details of a function.
+     * This API is used to obtain the reserved quota details of a function. 
      * @param {GetReservedConcurrencyConfigRequest} req
      * @param {function(string, GetReservedConcurrencyConfigResponse):void} cb
      * @public
@@ -514,7 +515,7 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to set the reserved concurrency of a function.
+     * This API is used to configure the reserved quota of a function.
      * @param {PutReservedConcurrencyConfigRequest} req
      * @param {function(string, PutReservedConcurrencyConfigResponse):void} cb
      * @public
@@ -536,7 +537,7 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to delete the reserved concurrency configuration of a function.
+     * This API is used to delete the configuration of reserved quota.
      * @param {DeleteReservedConcurrencyConfigRequest} req
      * @param {function(string, DeleteReservedConcurrencyConfigResponse):void} cb
      * @public

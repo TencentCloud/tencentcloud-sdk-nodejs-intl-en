@@ -449,24 +449,18 @@ class DescribeBackupConfigRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRoMinScale response structure.
+ * ModifyAccountMaxUserConnections response structure.
  * @class
  */
-class DescribeRoMinScaleResponse extends  AbstractModel {
+class ModifyAccountMaxUserConnectionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Memory size in MB.
-         * @type {number || null}
+         * Async task request ID, which can be used to query the execution result of an async task
+         * @type {string || null}
          */
-        this.Memory = null;
-
-        /**
-         * Disk size in GB.
-         * @type {number || null}
-         */
-        this.Volume = null;
+        this.AsyncRequestId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -483,8 +477,7 @@ class DescribeRoMinScaleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3856,7 +3849,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.UniqSubnetId = null;
 
         /**
-         * Project ID. If this is left empty, the default project will be used. Please use the [DescribeProject](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API to get the project ID.
+         * Project ID. If this is left empty, the default project will be used.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -4501,6 +4494,12 @@ which is left empty by default. Specify this parameter when cloning a strong syn
          */
         this.InstanceNodes = null;
 
+        /**
+         * Placement group ID.
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
     }
 
     /**
@@ -4535,6 +4534,7 @@ which is left empty by default. Specify this parameter when cloning a strong syn
         this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
         this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
 
     }
 }
@@ -4548,7 +4548,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Project ID. You can use the [project list querying API](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) to query the project ID.
+         * Project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -4873,34 +4873,6 @@ class DescribeDBSwitchRecordsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Table name
- * @class
- */
-class TableName extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Table name
-         * @type {string || null}
-         */
-        this.TableName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TableName = 'TableName' in params ? params.TableName : null;
 
     }
 }
@@ -5593,24 +5565,18 @@ class CreateRoInstanceIpResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackupDatabases response structure.
+ * CreateAuditPolicy response structure.
  * @class
  */
-class DescribeBackupDatabasesResponse extends  AbstractModel {
+class CreateAuditPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of the returned data entries.
-         * @type {number || null}
+         * Audit policy ID.
+         * @type {string || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * Array of eligible databases.
-         * @type {Array.<DatabaseName> || null}
-         */
-        this.Items = null;
+        this.PolicyId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5627,16 +5593,7 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new DatabaseName();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5665,41 +5622,6 @@ class SwitchForUpgradeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyAccountMaxUserConnections response structure.
- * @class
- */
-class ModifyAccountMaxUserConnectionsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Async task request ID, which can be used to query the execution result of an async task
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6271,18 +6193,54 @@ class DescribeDBImportRecordsResponse extends  AbstractModel {
 }
 
 /**
- * CreateAuditPolicy response structure.
+ * DescribeTimeWindow response structure.
  * @class
  */
-class CreateAuditPolicyResponse extends  AbstractModel {
+class DescribeTimeWindowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Audit policy ID.
-         * @type {string || null}
+         * List of maintenance time windows on Monday.
+         * @type {Array.<string> || null}
          */
-        this.PolicyId = null;
+        this.Monday = null;
+
+        /**
+         * List of maintenance time windows on Tuesday.
+         * @type {Array.<string> || null}
+         */
+        this.Tuesday = null;
+
+        /**
+         * List of maintenance time windows on Wednesday.
+         * @type {Array.<string> || null}
+         */
+        this.Wednesday = null;
+
+        /**
+         * List of maintenance time windows on Thursday.
+         * @type {Array.<string> || null}
+         */
+        this.Thursday = null;
+
+        /**
+         * List of maintenance time windows on Friday.
+         * @type {Array.<string> || null}
+         */
+        this.Friday = null;
+
+        /**
+         * List of maintenance time windows on Saturday.
+         * @type {Array.<string> || null}
+         */
+        this.Saturday = null;
+
+        /**
+         * List of maintenance time windows on Sunday.
+         * @type {Array.<string> || null}
+         */
+        this.Sunday = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6299,7 +6257,13 @@ class CreateAuditPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Monday = 'Monday' in params ? params.Monday : null;
+        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
+        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
+        this.Thursday = 'Thursday' in params ? params.Thursday : null;
+        this.Friday = 'Friday' in params ? params.Friday : null;
+        this.Saturday = 'Saturday' in params ? params.Saturday : null;
+        this.Sunday = 'Sunday' in params ? params.Sunday : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6336,34 +6300,6 @@ class BackupItem extends  AbstractModel {
         }
         this.Db = 'Db' in params ? params.Db : null;
         this.Table = 'Table' in params ? params.Table : null;
-
-    }
-}
-
-/**
- * Name of a database
- * @class
- */
-class DatabaseName extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of a database
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
 
     }
 }
@@ -6620,24 +6556,24 @@ class DescribeParamTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackupTables response structure.
+ * DescribeRoMinScale response structure.
  * @class
  */
-class DescribeBackupTablesResponse extends  AbstractModel {
+class DescribeRoMinScaleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of the returned data entries.
+         * Memory size in MB.
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Memory = null;
 
         /**
-         * Array of eligible tables.
-         * @type {Array.<TableName> || null}
+         * Disk size in GB.
+         * @type {number || null}
          */
-        this.Items = null;
+        this.Volume = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6654,16 +6590,8 @@ class DescribeBackupTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new TableName();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8533,69 +8461,6 @@ class DescribeDBInstanceConfigRequest extends  AbstractModel {
 }
 
 /**
- * DescribeBackupTables request structure.
- * @class
- */
-class DescribeBackupTablesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-07-12 10:29:20.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Specified database name.
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-        /**
-         * Prefix of the table to be queried.
-         * @type {string || null}
-         */
-        this.SearchTable = null;
-
-        /**
-         * Pagination offset.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of entries per page. Value range: 1-2,000.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.SearchTable = 'SearchTable' in params ? params.SearchTable : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
  * Instance details
  * @class
  */
@@ -10179,43 +10044,6 @@ class RoInstanceInfo extends  AbstractModel {
 }
 
 /**
- * Name of the database for rollback
- * @class
- */
-class RollbackDBName extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Original database name before rollback
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-        /**
-         * New database name after rollback
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NewDatabaseName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
-
-    }
-}
-
-/**
  * CreateAccounts request structure.
  * @class
  */
@@ -10796,62 +10624,6 @@ class DescribeTimeWindowRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * DescribeBackupDatabases request structure.
- * @class
- */
-class DescribeBackupDatabasesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-07-12 10:29:20.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Prefix of the database to be queried.
-         * @type {string || null}
-         */
-        this.SearchDatabase = null;
-
-        /**
-         * Pagination offset.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of entries per page. Value range: 1-2,000.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.SearchDatabase = 'SearchDatabase' in params ? params.SearchDatabase : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -11530,60 +11302,18 @@ class StopDelayReplicationResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTimeWindow response structure.
+ * OpenWanService request structure.
  * @class
  */
-class DescribeTimeWindowResponse extends  AbstractModel {
+class OpenWanServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of maintenance time windows on Monday.
-         * @type {Array.<string> || null}
-         */
-        this.Monday = null;
-
-        /**
-         * List of maintenance time windows on Tuesday.
-         * @type {Array.<string> || null}
-         */
-        this.Tuesday = null;
-
-        /**
-         * List of maintenance time windows on Wednesday.
-         * @type {Array.<string> || null}
-         */
-        this.Wednesday = null;
-
-        /**
-         * List of maintenance time windows on Thursday.
-         * @type {Array.<string> || null}
-         */
-        this.Thursday = null;
-
-        /**
-         * List of maintenance time windows on Friday.
-         * @type {Array.<string> || null}
-         */
-        this.Friday = null;
-
-        /**
-         * List of maintenance time windows on Saturday.
-         * @type {Array.<string> || null}
-         */
-        this.Saturday = null;
-
-        /**
-         * List of maintenance time windows on Sunday.
-         * @type {Array.<string> || null}
-         */
-        this.Sunday = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -11594,14 +11324,7 @@ class DescribeTimeWindowResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Monday = 'Monday' in params ? params.Monday : null;
-        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
-        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
-        this.Thursday = 'Thursday' in params ? params.Thursday : null;
-        this.Friday = 'Friday' in params ? params.Friday : null;
-        this.Saturday = 'Saturday' in params ? params.Saturday : null;
-        this.Sunday = 'Sunday' in params ? params.Sunday : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -12439,18 +12162,26 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
- * OpenWanService request structure.
+ * Name of the database for rollback
  * @class
  */
-class OpenWanServiceRequest extends  AbstractModel {
+class RollbackDBName extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+         * Original database name before rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.DatabaseName = null;
+
+        /**
+         * New database name after rollback
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NewDatabaseName = null;
 
     }
 
@@ -12461,7 +12192,8 @@ class OpenWanServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
 
     }
 }
@@ -13396,7 +13128,7 @@ module.exports = {
     CreateDBImportJobRequest: CreateDBImportJobRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
-    DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
+    ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
     DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobRequest: StopDBImportJobRequest,
     OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
@@ -13474,7 +13206,6 @@ module.exports = {
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
     DescribeDBSwitchRecordsResponse: DescribeDBSwitchRecordsResponse,
-    TableName: TableName,
     RollbackTableName: RollbackTableName,
     DeleteBackupResponse: DeleteBackupResponse,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
@@ -13492,9 +13223,8 @@ module.exports = {
     CloseWanServiceRequest: CloseWanServiceRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
-    DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
+    CreateAuditPolicyResponse: CreateAuditPolicyResponse,
     SwitchForUpgradeResponse: SwitchForUpgradeResponse,
-    ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     StopRollbackResponse: StopRollbackResponse,
@@ -13508,15 +13238,14 @@ module.exports = {
     CreateRoInstanceIpRequest: CreateRoInstanceIpRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
-    CreateAuditPolicyResponse: CreateAuditPolicyResponse,
+    DescribeTimeWindowResponse: DescribeTimeWindowResponse,
     BackupItem: BackupItem,
-    DatabaseName: DatabaseName,
     SwitchDBInstanceMasterSlaveResponse: SwitchDBInstanceMasterSlaveResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
-    DescribeBackupTablesResponse: DescribeBackupTablesResponse,
+    DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
     Outbound: Outbound,
     SlaveInstanceInfo: SlaveInstanceInfo,
     RoWeightValue: RoWeightValue,
@@ -13561,7 +13290,6 @@ module.exports = {
     DescribeTagsOfInstanceIdsResponse: DescribeTagsOfInstanceIdsResponse,
     DescribeDeployGroupListResponse: DescribeDeployGroupListResponse,
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
-    DescribeBackupTablesRequest: DescribeBackupTablesRequest,
     InstanceInfo: InstanceInfo,
     ModifyRoTypeRequest: ModifyRoTypeRequest,
     DatabasePrivilege: DatabasePrivilege,
@@ -13583,7 +13311,6 @@ module.exports = {
     RollbackTables: RollbackTables,
     SlaveConfig: SlaveConfig,
     RoInstanceInfo: RoInstanceInfo,
-    RollbackDBName: RollbackDBName,
     CreateAccountsRequest: CreateAccountsRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
@@ -13596,7 +13323,6 @@ module.exports = {
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
-    DescribeBackupDatabasesRequest: DescribeBackupDatabasesRequest,
     ModifyTimeWindowResponse: ModifyTimeWindowResponse,
     DeviceMemInfo: DeviceMemInfo,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
@@ -13612,7 +13338,7 @@ module.exports = {
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
     StopDelayReplicationResponse: StopDelayReplicationResponse,
-    DescribeTimeWindowResponse: DescribeTimeWindowResponse,
+    OpenWanServiceRequest: OpenWanServiceRequest,
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
@@ -13632,7 +13358,7 @@ module.exports = {
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     AddTimeWindowResponse: AddTimeWindowResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
-    OpenWanServiceRequest: OpenWanServiceRequest,
+    RollbackDBName: RollbackDBName,
     StopRollbackRequest: StopRollbackRequest,
     DeleteBackupRequest: DeleteBackupRequest,
     ModifyNameOrDescByDpIdRequest: ModifyNameOrDescByDpIdRequest,

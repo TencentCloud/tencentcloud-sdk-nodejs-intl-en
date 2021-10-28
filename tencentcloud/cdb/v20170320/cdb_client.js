@@ -23,7 +23,7 @@ const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesRespon
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
-const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
+const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
@@ -101,7 +101,6 @@ const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
-const TableName = models.TableName;
 const RollbackTableName = models.RollbackTableName;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
@@ -119,9 +118,8 @@ const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
-const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
+const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
 const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
-const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const StopRollbackResponse = models.StopRollbackResponse;
@@ -135,15 +133,14 @@ const CreateAuditPolicyRequest = models.CreateAuditPolicyRequest;
 const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
-const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
+const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const BackupItem = models.BackupItem;
-const DatabaseName = models.DatabaseName;
 const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
-const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
+const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const Outbound = models.Outbound;
 const SlaveInstanceInfo = models.SlaveInstanceInfo;
 const RoWeightValue = models.RoWeightValue;
@@ -188,7 +185,6 @@ const DeviceCpuInfo = models.DeviceCpuInfo;
 const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
 const DescribeDeployGroupListResponse = models.DescribeDeployGroupListResponse;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
-const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
 const InstanceInfo = models.InstanceInfo;
 const ModifyRoTypeRequest = models.ModifyRoTypeRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
@@ -210,7 +206,6 @@ const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverview
 const RollbackTables = models.RollbackTables;
 const SlaveConfig = models.SlaveConfig;
 const RoInstanceInfo = models.RoInstanceInfo;
-const RollbackDBName = models.RollbackDBName;
 const CreateAccountsRequest = models.CreateAccountsRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
@@ -223,7 +218,6 @@ const CommonTimeWindow = models.CommonTimeWindow;
 const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
-const DescribeBackupDatabasesRequest = models.DescribeBackupDatabasesRequest;
 const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
 const DeviceMemInfo = models.DeviceMemInfo;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
@@ -239,7 +233,7 @@ const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
 const StopDelayReplicationResponse = models.StopDelayReplicationResponse;
-const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
+const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
@@ -259,7 +253,7 @@ const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const OpenWanServiceRequest = models.OpenWanServiceRequest;
+const RollbackDBName = models.RollbackDBName;
 const StopRollbackRequest = models.StopRollbackRequest;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
@@ -756,19 +750,6 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API is used to query the backup tables of the specified database. It has been disused.
-After the legacy version becomes capable of full backup, if you want to download logical backup files by table, you need to use this API.
-The new API (CreateBackup) can specify the table to be backed up when a logical backup file is created, which can be downloaded directly.
-     * @param {DescribeBackupTablesRequest} req
-     * @param {function(string, DescribeBackupTablesResponse):void} cb
-     * @public
-     */
-    DescribeBackupTables(req, cb) {
-        let resp = new DescribeBackupTablesResponse();
-        this.request("DescribeBackupTables", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeProjectSecurityGroups) is used to query the security group details of a project.
      * @param {DescribeProjectSecurityGroupsRequest} req
      * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
@@ -1222,19 +1203,6 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     ModifyDBInstanceProject(req, cb) {
         let resp = new ModifyDBInstanceProjectResponse();
         this.request("ModifyDBInstanceProject", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the databases contained in a backup file. It has been disused.
-After the legacy version becomes capable of full backup, if you want to download logical backup files by table, you need to use this API.
-The new API (CreateBackup) can specify the table to be backed up when a logical backup file is created, which can be downloaded directly.
-     * @param {DescribeBackupDatabasesRequest} req
-     * @param {function(string, DescribeBackupDatabasesResponse):void} cb
-     * @public
-     */
-    DescribeBackupDatabases(req, cb) {
-        let resp = new DescribeBackupDatabasesResponse();
-        this.request("DescribeBackupDatabases", req, resp, cb);
     }
 
     /**

@@ -42,6 +42,7 @@ const JgwOperateResponse = models.JgwOperateResponse;
 const ZoneInfo = models.ZoneInfo;
 const DescribeTopicSubscribeGroupResponse = models.DescribeTopicSubscribeGroupResponse;
 const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
+const SaleInfo = models.SaleInfo;
 const Topic = models.Topic;
 const Tag = models.Tag;
 const GroupResponse = models.GroupResponse;

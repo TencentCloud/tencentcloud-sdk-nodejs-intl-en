@@ -124,13 +124,13 @@ class DescribeAbnormalEventRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Query start time
+         * Query start time (s) in the format of Unix timestamp, e.g., 1592448600
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time
+         * Query end time (s) in the format of Unix timestamp, e.g., 1592449080
          * @type {number || null}
          */
         this.EndTime = null;
@@ -682,19 +682,19 @@ class DescribeUserInformationRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * Query start time in the format of UNIX timestamp (e.g. 1588031999s) in the last 5 days.
+         * Query start time (s) in the format of Unix timestamp (e.g., 1590065777), which must be a time point in the last 14 days
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time in the format of UNIX timestamp (e.g. 1588031999s).
+         * Query end time (s) in the format of Unix timestamp (e.g., 1590065877)
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * User `SDKAppID` (e.g. 1400188366).
+         * `SDKAppID` of the users to query, e.g., 1400353843
          * @type {string || null}
          */
         this.SdkAppId = null;
@@ -752,19 +752,19 @@ class DescribeCallDetailRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+         * Query start time (s) in the format of Unix timestamp (e.g., 1590065777), which must be a time point in the last 14 days. The start and end time for query must not be more than 1 hour apart.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time in the format of local UNIX timestamp, such as 1588031999s.
+         * Query end time (s) in the format of Unix timestamp, e.g., 1590065877
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * User `SDKAppID`, such as 1400188366.
+         * `SDKAppID` of the users to query, e.g., 1400353843
          * @type {string || null}
          */
         this.SdkAppId = null;
@@ -1010,6 +1010,12 @@ Grey: 0x999999, whose decimal number is 10066329
          */
         this.AudioCodec = null;
 
+        /**
+         * URL of the background image for the mixed stream, which can be in PNG, JPG, JPEG, or BMP format and does not support the alpha channel. The URL must not exceed 512 bytes. When both `BackgroundImageUrl` and `BackgroundImageId` are specified, the former will be used. The background image must not exceed 10 MB.
+         * @type {string || null}
+         */
+        this.BackgroundImageUrl = null;
+
     }
 
     /**
@@ -1030,6 +1036,7 @@ Grey: 0x999999, whose decimal number is 10066329
         this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
         this.BackgroundImageId = 'BackgroundImageId' in params ? params.BackgroundImageId : null;
         this.AudioCodec = 'AudioCodec' in params ? params.AudioCodec : null;
+        this.BackgroundImageUrl = 'BackgroundImageUrl' in params ? params.BackgroundImageUrl : null;
 
     }
 }
@@ -1309,19 +1316,19 @@ class DescribeHistoryScaleRequest extends  AbstractModel {
         super();
 
         /**
-         * User `sdkappid`
+         * `SDKAppID` of the users to query, e.g., 1400188366
          * @type {string || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 5 days.
+         * Query start time (s) in the format of Unix timestamp (e.g., 1587571000), which must be a time point in the last 5 days
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time in the format of local UNIX timestamp, such as 1588031999s.
+         * Query end time (s) in the format of Unix timestamp, e.g., 1588034999
          * @type {number || null}
          */
         this.EndTime = null;
@@ -2078,7 +2085,7 @@ class DescribeDetailEventResponse extends  AbstractModel {
         super();
 
         /**
-         * List of returned events
+         * List of returned events. An empty array will be returned if no data can be found.
          * @type {Array.<EventList> || null}
          */
         this.Data = null;
@@ -2685,13 +2692,13 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+         * Query start time (s) in the format of Unix timestamp (e.g., 1588031999), which must be a time point in the last 14 days
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time in the format of local UNIX timestamp, such as 1588031999s.
+         * Query end time (s) in the format of Unix timestamp, e.g., 1588034999
          * @type {number || null}
          */
         this.EndTime = null;
@@ -2800,13 +2807,13 @@ class DescribeDetailEventRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 14 days.
+         * Query start time (s) in the format of Unix timestamp (e.g., 1588055615), which must be a time point in the last 14 days
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time in the format of local UNIX timestamp, such as 1588031999s.
+         * Query end time (s) in the format of Unix timestamp, e.g., 1588058615
          * @type {number || null}
          */
         this.EndTime = null;
@@ -3041,6 +3048,12 @@ class WaterMarkParams extends  AbstractModel {
          */
         this.LocationY = null;
 
+        /**
+         * URL of the watermark image for the mixed stream, which can be in PNG, JPG, JPEG, or BMP format and does not support the alpha channel. The URL must not exceed 512 bytes. When both `WaterMarkUrl` and `WaterMarkId` are specified, the former will be used. The watermark image cannot exceed 10 MB.
+         * @type {string || null}
+         */
+        this.WaterMarkUrl = null;
+
     }
 
     /**
@@ -3055,6 +3068,7 @@ class WaterMarkParams extends  AbstractModel {
         this.WaterMarkHeight = 'WaterMarkHeight' in params ? params.WaterMarkHeight : null;
         this.LocationX = 'LocationX' in params ? params.LocationX : null;
         this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.WaterMarkUrl = 'WaterMarkUrl' in params ? params.WaterMarkUrl : null;
 
     }
 }

@@ -1108,7 +1108,7 @@ Note: `null` may be returned for this field, indicating that no valid values can
 
         /**
          * Name of rule type.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PatternTypeTitle = null;
@@ -1283,6 +1283,13 @@ class ZoneInfo extends  AbstractModel {
          */
         this.SoldOut = null;
 
+        /**
+         * Information on whether Standard Edition has been sold out.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<SaleInfo> || null}
+         */
+        this.SalesInfo = null;
+
     }
 
     /**
@@ -1300,6 +1307,15 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneStatus = 'ZoneStatus' in params ? params.ZoneStatus : null;
         this.Exflag = 'Exflag' in params ? params.Exflag : null;
         this.SoldOut = 'SoldOut' in params ? params.SoldOut : null;
+
+        if (params.SalesInfo) {
+            this.SalesInfo = new Array();
+            for (let z in params.SalesInfo) {
+                let obj = new SaleInfo();
+                obj.deserialize(params.SalesInfo[z]);
+                this.SalesInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -1361,6 +1377,59 @@ class DescribeCkafkaZoneRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * Sales information of Standard Edition
+ * @class
+ */
+class SaleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Manually set flag.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Flag = null;
+
+        /**
+         * CKafka version (v1.1.1/2.4.2/0.10.2）
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Whether it is Pro Edition or Standard Edition.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Whether it has been sold out. `true`: sold out.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.SoldOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.SoldOut = 'SoldOut' in params ? params.SoldOut : null;
 
     }
 }
@@ -6752,6 +6821,7 @@ module.exports = {
     ZoneInfo: ZoneInfo,
     DescribeTopicSubscribeGroupResponse: DescribeTopicSubscribeGroupResponse,
     DescribeCkafkaZoneRequest: DescribeCkafkaZoneRequest,
+    SaleInfo: SaleInfo,
     Topic: Topic,
     Tag: Tag,
     GroupResponse: GroupResponse,

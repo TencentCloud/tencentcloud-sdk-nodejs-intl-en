@@ -709,6 +709,48 @@ class GetSecurityLastUsedRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeUserSAMLConfig response structure.
+ * @class
+ */
+class DescribeUserSAMLConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SAML metadata document.
+         * @type {string || null}
+         */
+        this.SAMLMetadata = null;
+
+        /**
+         * Status. `0`: not set, `11`: enabled, `2`: disabled.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SAMLMetadata = 'SAMLMetadata' in params ? params.SAMLMetadata : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteUserPermissionsBoundary response structure.
  * @class
  */
@@ -1000,6 +1042,27 @@ class DescribeRoleListRequest extends  AbstractModel {
         }
         this.Page = 'Page' in params ? params.Page : null;
         this.Rp = 'Rp' in params ? params.Rp : null;
+
+    }
+}
+
+/**
+ * DescribeUserSAMLConfig request structure.
+ * @class
+ */
+class DescribeUserSAMLConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -1696,6 +1759,41 @@ class UpdateRoleDescriptionRequest extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.RoleId = 'RoleId' in params ? params.RoleId : null;
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
+ * UpdateUserSAMLConfig request structure.
+ * @class
+ */
+class UpdateUserSAMLConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the modification operation. `enable`: enable, `disable`: disable, `updateSAML`: modify metadata document.
+         * @type {string || null}
+         */
+        this.Operate = null;
+
+        /**
+         * Metadata document, which must be Base64 encoded. This parameter is required only when the value of `Operate` is `updateSAML`.
+         * @type {string || null}
+         */
+        this.SAMLMetadataDocument = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Operate = 'Operate' in params ? params.Operate : null;
+        this.SAMLMetadataDocument = 'SAMLMetadataDocument' in params ? params.SAMLMetadataDocument : null;
 
     }
 }
@@ -4324,6 +4422,34 @@ class DeletePolicyVersionRequest extends  AbstractModel {
 }
 
 /**
+ * CreateUserSAMLConfig request structure.
+ * @class
+ */
+class CreateUserSAMLConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SAML metadata document, which must be Base64 encoded.
+         * @type {string || null}
+         */
+        this.SAMLMetadataDocument = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SAMLMetadataDocument = 'SAMLMetadataDocument' in params ? params.SAMLMetadataDocument : null;
+
+    }
+}
+
+/**
  * UpdateGroup request structure.
  * @class
  */
@@ -5642,6 +5768,34 @@ class AddUserResponse extends  AbstractModel {
 }
 
 /**
+ * CreateUserSAMLConfig response structure.
+ * @class
+ */
+class CreateUserSAMLConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeSubAccounts response structure.
  * @class
  */
@@ -5741,6 +5895,34 @@ Note: This field may return null, indicating that no valid value was found.
  * @class
  */
 class AddUserToGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateUserSAMLConfig response structure.
+ * @class
+ */
+class UpdateUserSAMLConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -6349,6 +6531,7 @@ module.exports = {
     AttachRolePolicyResponse: AttachRolePolicyResponse,
     GetServiceLinkedRoleDeletionStatusResponse: GetServiceLinkedRoleDeletionStatusResponse,
     GetSecurityLastUsedRequest: GetSecurityLastUsedRequest,
+    DescribeUserSAMLConfigResponse: DescribeUserSAMLConfigResponse,
     DeleteUserPermissionsBoundaryResponse: DeleteUserPermissionsBoundaryResponse,
     ListUsersResponse: ListUsersResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
@@ -6358,6 +6541,7 @@ module.exports = {
     ListPolicyVersionsRequest: ListPolicyVersionsRequest,
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
+    DescribeUserSAMLConfigRequest: DescribeUserSAMLConfigRequest,
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
     PolicyVersionItem: PolicyVersionItem,
@@ -6376,6 +6560,7 @@ module.exports = {
     OffsiteFlag: OffsiteFlag,
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
+    UpdateUserSAMLConfigRequest: UpdateUserSAMLConfigRequest,
     DeleteGroupResponse: DeleteGroupResponse,
     RoleInfo: RoleInfo,
     DescribeSafeAuthFlagResponse: DescribeSafeAuthFlagResponse,
@@ -6435,6 +6620,7 @@ module.exports = {
     DetachGroupPolicyResponse: DetachGroupPolicyResponse,
     CreatePolicyRequest: CreatePolicyRequest,
     DeletePolicyVersionRequest: DeletePolicyVersionRequest,
+    CreateUserSAMLConfigRequest: CreateUserSAMLConfigRequest,
     UpdateGroupRequest: UpdateGroupRequest,
     GetPolicyVersionResponse: GetPolicyVersionResponse,
     CreateRoleResponse: CreateRoleResponse,
@@ -6465,9 +6651,11 @@ module.exports = {
     ListUsersForGroupResponse: ListUsersForGroupResponse,
     PolicyVersionDetail: PolicyVersionDetail,
     AddUserResponse: AddUserResponse,
+    CreateUserSAMLConfigResponse: CreateUserSAMLConfigResponse,
     DescribeSubAccountsResponse: DescribeSubAccountsResponse,
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
+    UpdateUserSAMLConfigResponse: UpdateUserSAMLConfigResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
     DescribeSafeAuthFlagCollResponse: DescribeSafeAuthFlagCollResponse,
     DescribeSafeAuthFlagCollRequest: DescribeSafeAuthFlagCollRequest,

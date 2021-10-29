@@ -32,6 +32,7 @@ const ListGroupsForUserRequest = models.ListGroupsForUserRequest;
 const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
 const GetServiceLinkedRoleDeletionStatusResponse = models.GetServiceLinkedRoleDeletionStatusResponse;
 const GetSecurityLastUsedRequest = models.GetSecurityLastUsedRequest;
+const DescribeUserSAMLConfigResponse = models.DescribeUserSAMLConfigResponse;
 const DeleteUserPermissionsBoundaryResponse = models.DeleteUserPermissionsBoundaryResponse;
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
@@ -41,6 +42,7 @@ const ListGroupsResponse = models.ListGroupsResponse;
 const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
+const DescribeUserSAMLConfigRequest = models.DescribeUserSAMLConfigRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const DeleteRoleResponse = models.DeleteRoleResponse;
 const PolicyVersionItem = models.PolicyVersionItem;
@@ -59,6 +61,7 @@ const ListPoliciesResponse = models.ListPoliciesResponse;
 const OffsiteFlag = models.OffsiteFlag;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
+const UpdateUserSAMLConfigRequest = models.UpdateUserSAMLConfigRequest;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const RoleInfo = models.RoleInfo;
 const DescribeSafeAuthFlagResponse = models.DescribeSafeAuthFlagResponse;
@@ -118,6 +121,7 @@ const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDel
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
 const CreatePolicyRequest = models.CreatePolicyRequest;
 const DeletePolicyVersionRequest = models.DeletePolicyVersionRequest;
+const CreateUserSAMLConfigRequest = models.CreateUserSAMLConfigRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
 const GetPolicyVersionResponse = models.GetPolicyVersionResponse;
 const CreateRoleResponse = models.CreateRoleResponse;
@@ -148,9 +152,11 @@ const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
 const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
 const PolicyVersionDetail = models.PolicyVersionDetail;
 const AddUserResponse = models.AddUserResponse;
+const CreateUserSAMLConfigResponse = models.CreateUserSAMLConfigResponse;
 const DescribeSubAccountsResponse = models.DescribeSubAccountsResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
+const UpdateUserSAMLConfigResponse = models.UpdateUserSAMLConfigResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
 const DescribeSafeAuthFlagCollResponse = models.DescribeSafeAuthFlagCollResponse;
 const DescribeSafeAuthFlagCollRequest = models.DescribeSafeAuthFlagCollRequest;
@@ -330,6 +336,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query user SAML configurations.
+     * @param {DescribeUserSAMLConfigRequest} req
+     * @param {function(string, DescribeUserSAMLConfigResponse):void} cb
+     * @public
+     */
+    DescribeUserSAMLConfig(req, cb) {
+        let resp = new DescribeUserSAMLConfigResponse();
+        this.request("DescribeUserSAMLConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a policy version of a policy.
      * @param {DeletePolicyVersionRequest} req
      * @param {function(string, DeletePolicyVersionResponse):void} cb
@@ -349,6 +366,17 @@ class CamClient extends AbstractClient {
     DetachRolePolicy(req, cb) {
         let resp = new DetachRolePolicyResponse();
         this.request("DetachRolePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the operative policy version.
+     * @param {SetDefaultPolicyVersionRequest} req
+     * @param {function(string, SetDefaultPolicyVersionResponse):void} cb
+     * @public
+     */
+    SetDefaultPolicyVersion(req, cb) {
+        let resp = new SetDefaultPolicyVersionResponse();
+        this.request("SetDefaultPolicyVersion", req, resp, cb);
     }
 
     /**
@@ -550,14 +578,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the operative policy version.
-     * @param {SetDefaultPolicyVersionRequest} req
-     * @param {function(string, SetDefaultPolicyVersionResponse):void} cb
+     * This API is used to create user SAML configurations.
+     * @param {CreateUserSAMLConfigRequest} req
+     * @param {function(string, CreateUserSAMLConfigResponse):void} cb
      * @public
      */
-    SetDefaultPolicyVersion(req, cb) {
-        let resp = new SetDefaultPolicyVersionResponse();
-        this.request("SetDefaultPolicyVersion", req, resp, cb);
+    CreateUserSAMLConfig(req, cb) {
+        let resp = new CreateUserSAMLConfigResponse();
+        this.request("CreateUserSAMLConfig", req, resp, cb);
     }
 
     /**
@@ -789,6 +817,17 @@ class CamClient extends AbstractClient {
     ListEntitiesForPolicy(req, cb) {
         let resp = new ListEntitiesForPolicyResponse();
         this.request("ListEntitiesForPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify user SAML configurations.
+     * @param {UpdateUserSAMLConfigRequest} req
+     * @param {function(string, UpdateUserSAMLConfigResponse):void} cb
+     * @public
+     */
+    UpdateUserSAMLConfig(req, cb) {
+        let resp = new UpdateUserSAMLConfigResponse();
+        this.request("UpdateUserSAMLConfig", req, resp, cb);
     }
 
     /**

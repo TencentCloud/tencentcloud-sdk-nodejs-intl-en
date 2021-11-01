@@ -13,6 +13,7 @@ module.exports = {
     ckafka: require("./ckafka"),
     clb: require("./clb"),
     cloudaudit: require("./cloudaudit"),
+    cls: require("./cls"),
     cmq: require("./cmq"),
     common: require("./common"),
     cvm: require("./cvm"),

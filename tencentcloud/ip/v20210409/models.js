@@ -59,7 +59,7 @@ A global mobile number within 1-32 digits is allowed, such as 18888888888.
         this.PhoneNum = null;
 
         /**
-         * Country code, which can be obtained via the `GetCountryCodes` API, such as `86`.
+         * Country code, which can be obtained via the `GetCountryCodes` API, such as 852.
          * @type {string || null}
          */
         this.CountryCode = null;

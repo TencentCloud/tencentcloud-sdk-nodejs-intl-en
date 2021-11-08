@@ -330,7 +330,7 @@ class CreateDBImportJobRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Filename. The file should have already been uploaded to Tencent Cloud.
+         * Filename. The file must be a .sql file uploaded to Tencent Cloud.
          * @type {string || null}
          */
         this.FileName = null;
@@ -561,18 +561,24 @@ class StopDBImportJobRequest extends  AbstractModel {
 }
 
 /**
- * OfflineIsolatedInstances response structure.
+ * RO instance weight value
  * @class
  */
-class OfflineIsolatedInstancesResponse extends  AbstractModel {
+class RoWeightValue extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * RO instance ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Weight value. Value range: [0, 100].
+         * @type {number || null}
+         */
+        this.Weight = null;
 
     }
 
@@ -583,7 +589,8 @@ class OfflineIsolatedInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -4004,6 +4011,18 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.CageId = null;
 
+        /**
+         * The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+         * @type {Array.<string> || null}
+         */
+        this.AlarmPolicyIdList = null;
+
+        /**
+         * Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
     }
 
     /**
@@ -4066,6 +4085,8 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.AutoSyncFlag = 'AutoSyncFlag' in params ? params.AutoSyncFlag : null;
         this.CageId = 'CageId' in params ? params.CageId : null;
+        this.AlarmPolicyIdList = 'AlarmPolicyIdList' in params ? params.AlarmPolicyIdList : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
     }
 }
@@ -4322,6 +4343,12 @@ class BackupInfo extends  AbstractModel {
          */
         this.Way = null;
 
+        /**
+         * Manual backup alias
+         * @type {string || null}
+         */
+        this.ManualBackupName = null;
+
     }
 
     /**
@@ -4344,6 +4371,7 @@ class BackupInfo extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.Method = 'Method' in params ? params.Method : null;
         this.Way = 'Way' in params ? params.Way : null;
+        this.ManualBackupName = 'ManualBackupName' in params ? params.ManualBackupName : null;
 
     }
 }
@@ -4500,6 +4528,12 @@ which is left empty by default. Specify this parameter when cloning a strong syn
          */
         this.DeployGroupId = null;
 
+        /**
+         * Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
     }
 
     /**
@@ -4535,6 +4569,7 @@ which is left empty by default. Specify this parameter when cloning a strong syn
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
         this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
     }
 }
@@ -6710,41 +6745,6 @@ class SlaveInstanceInfo extends  AbstractModel {
 }
 
 /**
- * RO instance weight value
- * @class
- */
-class RoWeightValue extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * RO instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Weight value. Value range: [0, 100].
-         * @type {number || null}
-         */
-        this.Weight = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-
-    }
-}
-
-/**
  * ModifyParamTemplate response structure.
  * @class
  */
@@ -7552,34 +7552,6 @@ class BalanceRoGroupLoadRequest extends  AbstractModel {
             return;
         }
         this.RoGroupId = 'RoGroupId' in params ? params.RoGroupId : null;
-
-    }
-}
-
-/**
- * ModifyRoType response structure.
- * @class
- */
-class ModifyRoTypeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8831,36 +8803,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * ModifyRoType request structure.
+ * OfflineIsolatedInstances response structure.
  * @class
  */
-class ModifyRoTypeRequest extends  AbstractModel {
+class OfflineIsolatedInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * The original type of an RO replica. Valid values: `NORMAL` (do not support delayed replication), `DELAY_REPLICATION` (support delayed replication).
-         * @type {string || null}
-         */
-        this.SrcRoInstType = null;
-
-        /**
-         * The target type of an RO replica. Valid values: `NORMAL` (do not support delayed replication), `DELAY_REPLICATION` (support delayed replication).
-         * @type {string || null}
-         */
-        this.DstRoInstType = null;
-
-        /**
-         * Replication delay in seconds. This parameter is required when a regular RO replica is switched to a delayed one. Value range: 1 to 259200.
-         * @type {number || null}
-         */
-        this.ReplicationDelay = null;
+        this.RequestId = null;
 
     }
 
@@ -8871,10 +8825,7 @@ class ModifyRoTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.SrcRoInstType = 'SrcRoInstType' in params ? params.SrcRoInstType : null;
-        this.DstRoInstType = 'DstRoInstType' in params ? params.DstRoInstType : null;
-        this.ReplicationDelay = 'ReplicationDelay' in params ? params.ReplicationDelay : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10380,6 +10331,12 @@ For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you sh
          */
         this.BackupDBTableList = null;
 
+        /**
+         * Manual backup alias
+         * @type {string || null}
+         */
+        this.ManualBackupName = null;
+
     }
 
     /**
@@ -10400,6 +10357,7 @@ For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you sh
                 this.BackupDBTableList.push(obj);
             }
         }
+        this.ManualBackupName = 'ManualBackupName' in params ? params.ManualBackupName : null;
 
     }
 }
@@ -13131,7 +13089,7 @@ module.exports = {
     ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
     DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobRequest: StopDBImportJobRequest,
-    OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
+    RoWeightValue: RoWeightValue,
     DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
     StopDBImportJobResponse: StopDBImportJobResponse,
     DescribeDBInstanceInfoResponse: DescribeDBInstanceInfoResponse,
@@ -13248,7 +13206,6 @@ module.exports = {
     DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
     Outbound: Outbound,
     SlaveInstanceInfo: SlaveInstanceInfo,
-    RoWeightValue: RoWeightValue,
     ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
@@ -13270,7 +13227,6 @@ module.exports = {
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     TablePrivilege: TablePrivilege,
     BalanceRoGroupLoadRequest: BalanceRoGroupLoadRequest,
-    ModifyRoTypeResponse: ModifyRoTypeResponse,
     DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     ColumnPrivilege: ColumnPrivilege,
     DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
@@ -13291,7 +13247,7 @@ module.exports = {
     DescribeDeployGroupListResponse: DescribeDeployGroupListResponse,
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
     InstanceInfo: InstanceInfo,
-    ModifyRoTypeRequest: ModifyRoTypeRequest,
+    OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
     DatabasePrivilege: DatabasePrivilege,
     RoGroupAttr: RoGroupAttr,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,

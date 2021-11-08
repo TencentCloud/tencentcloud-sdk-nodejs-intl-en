@@ -26,7 +26,7 @@ const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
-const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
+const RoWeightValue = models.RoWeightValue;
 const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
@@ -143,7 +143,6 @@ const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const Outbound = models.Outbound;
 const SlaveInstanceInfo = models.SlaveInstanceInfo;
-const RoWeightValue = models.RoWeightValue;
 const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
@@ -165,7 +164,6 @@ const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVer
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const TablePrivilege = models.TablePrivilege;
 const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
-const ModifyRoTypeResponse = models.ModifyRoTypeResponse;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
 const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
@@ -186,7 +184,7 @@ const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsRespon
 const DescribeDeployGroupListResponse = models.DescribeDeployGroupListResponse;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const InstanceInfo = models.InstanceInfo;
-const ModifyRoTypeRequest = models.ModifyRoTypeRequest;
+const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
 const DatabasePrivilege = models.DatabasePrivilege;
 const RoGroupAttr = models.RoGroupAttr;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
@@ -1118,14 +1116,18 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (ModifyAccountDescription) is used to modify the remarks of a TencentDB instance account.
-     * @param {ModifyAccountDescriptionRequest} req
-     * @param {function(string, ModifyAccountDescriptionResponse):void} cb
+     * This API (RestartDBInstances) is used to restart TencentDB instances.
+
+Note:
+1. This API only supports restarting primary instances.
+2. The instance status must be normal, and no other async tasks are in progress.
+     * @param {RestartDBInstancesRequest} req
+     * @param {function(string, RestartDBInstancesResponse):void} cb
      * @public
      */
-    ModifyAccountDescription(req, cb) {
-        let resp = new ModifyAccountDescriptionResponse();
-        this.request("ModifyAccountDescription", req, resp, cb);
+    RestartDBInstances(req, cb) {
+        let resp = new RestartDBInstancesResponse();
+        this.request("RestartDBInstances", req, resp, cb);
     }
 
     /**
@@ -1162,14 +1164,14 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API is used to change a general RO replica to delayed RO replica.
-     * @param {ModifyRoTypeRequest} req
-     * @param {function(string, ModifyRoTypeResponse):void} cb
+     * This API (ModifyAccountDescription) is used to modify the remarks of a TencentDB instance account.
+     * @param {ModifyAccountDescriptionRequest} req
+     * @param {function(string, ModifyAccountDescriptionResponse):void} cb
      * @public
      */
-    ModifyRoType(req, cb) {
-        let resp = new ModifyRoTypeResponse();
-        this.request("ModifyRoType", req, resp, cb);
+    ModifyAccountDescription(req, cb) {
+        let resp = new ModifyAccountDescriptionResponse();
+        this.request("ModifyAccountDescription", req, resp, cb);
     }
 
     /**
@@ -1214,21 +1216,6 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     ModifyAutoRenewFlag(req, cb) {
         let resp = new ModifyAutoRenewFlagResponse();
         this.request("ModifyAutoRenewFlag", req, resp, cb);
-    }
-
-    /**
-     * This API (RestartDBInstances) is used to restart TencentDB instances.
-
-Note:
-1. This API only supports restarting primary instances.
-2. The instance status must be normal, and no other async tasks are in progress.
-     * @param {RestartDBInstancesRequest} req
-     * @param {function(string, RestartDBInstancesResponse):void} cb
-     * @public
-     */
-    RestartDBInstances(req, cb) {
-        let resp = new RestartDBInstancesResponse();
-        this.request("RestartDBInstances", req, resp, cb);
     }
 
     /**

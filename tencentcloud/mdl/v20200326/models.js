@@ -1078,14 +1078,16 @@ DRM encryption is supported only for HLS, DASH, HLS_ARCHIVE, DASH_ARCHIVE, HLS_M
         this.State = null;
 
         /**
-         * This parameter can be set to `CustomDRMKeys` or left empty.
-CustomDRMKeys means encryption keys customized by users.
+         * Valid values: `CustomDRMKeys` (default value), `SDMCDRM`
+`CustomDRMKeys` means encryption keys customized by users.
+`SDMCDRM` means the DRM key management system of SDMC.
          * @type {string || null}
          */
         this.Scheme = null;
 
         /**
-         * If `Scheme` is set to `CustomDRMKeys`, this parameter is required and should be specified by the user.
+         * If `Scheme` is set to `CustomDRMKeys`, this parameter is required.
+If `Scheme` is set to `SDMCDRM`, this parameter is optional. It supports digits, letters, hyphens, and underscores and must contain 1 to 36 characters. If it is not specified, the value of `ChannelId` will be used.
          * @type {string || null}
          */
         this.ContentId = null;
@@ -1096,6 +1098,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {Array.<DrmKey> || null}
          */
         this.Keys = null;
+
+        /**
+         * SDMC key configuration. This parameter is used when `Scheme` is set to `SDMCDRM`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {SDMCSettingsInfo || null}
+         */
+        this.SDMCSettings = null;
 
     }
 
@@ -1117,6 +1126,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.Keys[z]);
                 this.Keys.push(obj);
             }
+        }
+
+        if (params.SDMCSettings) {
+            let obj = new SDMCSettingsInfo();
+            obj.deserialize(params.SDMCSettings)
+            this.SDMCSettings = obj;
         }
 
     }
@@ -1236,6 +1251,76 @@ class DescribeStreamLiveChannelResponse extends  AbstractModel {
             this.Info = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SDMC DRM configuration information. This parameter is valid only when `Scheme` is set to `SDMCDRM`.
+ * @class
+ */
+class SDMCSettingsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User ID in the SDMC DRM system
+         * @type {string || null}
+         */
+        this.Uid = null;
+
+        /**
+         * Tracks of the SDMC DRM system. This parameter is valid for DASH output groups.
+`1`: audio
+`2`: SD
+`4`: HD
+`8`: UHD1
+`16`: UHD2
+
+Default value: `31` (audio + SD + HD + UHD1 + UHD2)
+         * @type {number || null}
+         */
+        this.Tracks = null;
+
+        /**
+         * Key ID in the SDMC DRM system; required
+         * @type {string || null}
+         */
+        this.SecretId = null;
+
+        /**
+         * Key in the SDMC DRM system; required
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * Key request URL of the SDMC DRM system, which is `https://uat.multidrm.tv/cpix/2.2/getcontentkey` by default
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Token name in an SDMC key request URL, which is `token` by default
+         * @type {string || null}
+         */
+        this.TokenName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Tracks = 'Tracks' in params ? params.Tracks : null;
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.TokenName = 'TokenName' in params ? params.TokenName : null;
 
     }
 }
@@ -1398,6 +1483,51 @@ For other inputs, the quantity is 1.
                 this.Audio.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Time-shift configuration. This parameter is valid only for HLS_ARCHIVE and DASH_ARCHIVE output groups.
+ * @class
+ */
+class TimeShiftSettingsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable time shifting. Valid values: `OPEN`; `CLOSE`
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Domain name bound for time shifting
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.PlayDomain = null;
+
+        /**
+         * Allowable time-shift period (s). Value range: [600, 1209600]. Default value: 300
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.StartoverWindow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.State = 'State' in params ? params.State : null;
+        this.PlayDomain = 'PlayDomain' in params ? params.PlayDomain : null;
+        this.StartoverWindow = 'StartoverWindow' in params ? params.StartoverWindow : null;
 
     }
 }
@@ -2989,6 +3119,13 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.StreamPackageSettings = null;
 
+        /**
+         * Time-shift configuration information
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {TimeShiftSettingsInfo || null}
+         */
+        this.TimeShiftSettings = null;
+
     }
 
     /**
@@ -3041,6 +3178,12 @@ Note: this field may return `null`, indicating that no valid value was found.
             let obj = new StreamPackageSettingsInfo();
             obj.deserialize(params.StreamPackageSettings)
             this.StreamPackageSettings = obj;
+        }
+
+        if (params.TimeShiftSettings) {
+            let obj = new TimeShiftSettingsInfo();
+            obj.deserialize(params.TimeShiftSettings)
+            this.TimeShiftSettings = obj;
         }
 
     }
@@ -3814,6 +3957,20 @@ UTC time, such as `2020-01-01T12:00:00Z`
          */
         this.Time = null;
 
+        /**
+         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+It indicates the start time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -3825,6 +3982,8 @@ UTC time, such as `2020-01-01T12:00:00Z`
         }
         this.StartType = 'StartType' in params ? params.StartType : null;
         this.Time = 'Time' in params ? params.Time : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4265,9 +4424,11 @@ module.exports = {
     PipelineOutputStatistics: PipelineOutputStatistics,
     DashRemuxSettingsInfo: DashRemuxSettingsInfo,
     DescribeStreamLiveChannelResponse: DescribeStreamLiveChannelResponse,
+    SDMCSettingsInfo: SDMCSettingsInfo,
     DeleteStreamLiveInputSecurityGroupRequest: DeleteStreamLiveInputSecurityGroupRequest,
     AttachedInput: AttachedInput,
     PipelineInputStatistics: PipelineInputStatistics,
+    TimeShiftSettingsInfo: TimeShiftSettingsInfo,
     VideoTemplateInfo: VideoTemplateInfo,
     TimingSettingsReq: TimingSettingsReq,
     DescribeStreamLiveChannelLogsResponse: DescribeStreamLiveChannelLogsResponse,

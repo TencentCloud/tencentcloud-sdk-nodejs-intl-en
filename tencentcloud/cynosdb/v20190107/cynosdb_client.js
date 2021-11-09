@@ -22,7 +22,7 @@ const Addr = models.Addr;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const InstanceSpec = models.InstanceSpec;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
-const SetRenewFlagResponse = models.SetRenewFlagResponse;
+const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
 const Account = models.Account;
 const SecurityGroup = models.SecurityGroup;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
@@ -36,11 +36,13 @@ const DescribeBackupListResponse = models.DescribeBackupListResponse;
 const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
 const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
+const ModifyClusterParamRequest = models.ModifyClusterParamRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DescribeRollbackTimeValidityRequest = models.DescribeRollbackTimeValidityRequest;
 const IsolateClusterRequest = models.IsolateClusterRequest;
 const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsResponse;
 const AddInstancesRequest = models.AddInstancesRequest;
+const NetAddr = models.NetAddr;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
 const Tag = models.Tag;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
@@ -81,6 +83,7 @@ const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
 const DescribeClustersResponse = models.DescribeClustersResponse;
+const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const PolicyRule = models.PolicyRule;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
@@ -252,6 +255,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to set auto-renewal for an instance.
+     * @param {SetRenewFlagRequest} req
+     * @param {function(string, SetRenewFlagResponse):void} cb
+     * @public
+     */
+    SetRenewFlag(req, cb) {
+        let resp = new SetRenewFlagResponse();
+        this.request("SetRenewFlag", req, resp, cb);
+    }
+
+    /**
      * This API is used to display cluster details.
      * @param {DescribeClusterDetailRequest} req
      * @param {function(string, DescribeClusterDetailResponse):void} cb
@@ -318,14 +332,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set auto-renewal for an instance.
-     * @param {SetRenewFlagRequest} req
-     * @param {function(string, SetRenewFlagResponse):void} cb
+     * This API is used to modify the parameters of a cluster.
+     * @param {ModifyClusterParamRequest} req
+     * @param {function(string, ModifyClusterParamResponse):void} cb
      * @public
      */
-    SetRenewFlag(req, cb) {
-        let resp = new SetRenewFlagResponse();
-        this.request("SetRenewFlag", req, resp, cb);
+    ModifyClusterParam(req, cb) {
+        let resp = new ModifyClusterParamResponse();
+        this.request("ModifyClusterParam", req, resp, cb);
     }
 
     /**

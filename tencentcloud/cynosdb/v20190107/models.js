@@ -315,18 +315,18 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * SetRenewFlag response structure.
+ * ModifyClusterParam response structure.
  * @class
  */
-class SetRenewFlagResponse extends  AbstractModel {
+class ModifyClusterParamResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of successfully manipulated instances
-         * @type {number || null}
+         * Async request ID used to query the result
+         * @type {string || null}
          */
-        this.Count = null;
+        this.AsyncRequestId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -343,7 +343,7 @@ class SetRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -958,6 +958,49 @@ class ModifyBackupConfigRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterParam request structure.
+ * @class
+ */
+class ModifyClusterParamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The list of parameters to be modified
+         * @type {Array.<ParamItem> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new ParamItem();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeDBSecurityGroups request structure.
  * @class
  */
@@ -1222,6 +1265,67 @@ class AddInstancesRequest extends  AbstractModel {
         this.DbType = 'DbType' in params ? params.DbType : null;
         this.OrderSource = 'OrderSource' in params ? params.OrderSource : null;
         this.DealMode = 'DealMode' in params ? params.DealMode : null;
+
+    }
+}
+
+/**
+ * Network information
+ * @class
+ */
+class NetAddr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Private network IP
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Private network port number
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Public network domain name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.WanDomain = null;
+
+        /**
+         * Public network port number
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.WanPort = null;
+
+        /**
+         * Network type. Valid values: `ro` (read-only), `rw` or `ha` (read-write)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
+        this.WanPort = 'WanPort' in params ? params.WanPort : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
 
     }
 }
@@ -3932,6 +4036,12 @@ pause
          */
         this.MaxStorageSize = null;
 
+        /**
+         * Network information of the cluster
+         * @type {Array.<NetAddr> || null}
+         */
+        this.NetAddrs = null;
+
     }
 
     /**
@@ -3990,6 +4100,15 @@ pause
         this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
         this.MinStorageSize = 'MinStorageSize' in params ? params.MinStorageSize : null;
         this.MaxStorageSize = 'MaxStorageSize' in params ? params.MaxStorageSize : null;
+
+        if (params.NetAddrs) {
+            this.NetAddrs = new Array();
+            for (let z in params.NetAddrs) {
+                let obj = new NetAddr();
+                obj.deserialize(params.NetAddrs[z]);
+                this.NetAddrs.push(obj);
+            }
+        }
 
     }
 }
@@ -4282,6 +4401,41 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
+ * SetRenewFlag response structure.
+ * @class
+ */
+class SetRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of successfully manipulated instances
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyBackupConfig response structure.
  * @class
  */
@@ -4500,7 +4654,7 @@ module.exports = {
     DescribeClustersRequest: DescribeClustersRequest,
     InstanceSpec: InstanceSpec,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
-    SetRenewFlagResponse: SetRenewFlagResponse,
+    ModifyClusterParamResponse: ModifyClusterParamResponse,
     Account: Account,
     SecurityGroup: SecurityGroup,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
@@ -4514,11 +4668,13 @@ module.exports = {
     DescribeRollbackTimeRangeResponse: DescribeRollbackTimeRangeResponse,
     ModifyMaintainPeriodConfigRequest: ModifyMaintainPeriodConfigRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
+    ModifyClusterParamRequest: ModifyClusterParamRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     DescribeRollbackTimeValidityRequest: DescribeRollbackTimeValidityRequest,
     IsolateClusterRequest: IsolateClusterRequest,
     DescribeClusterInstanceGrpsResponse: DescribeClusterInstanceGrpsResponse,
     AddInstancesRequest: AddInstancesRequest,
+    NetAddr: NetAddr,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
     Tag: Tag,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
@@ -4559,6 +4715,7 @@ module.exports = {
     OfflineInstanceResponse: OfflineInstanceResponse,
     CynosdbInstanceGrp: CynosdbInstanceGrp,
     DescribeClustersResponse: DescribeClustersResponse,
+    SetRenewFlagResponse: SetRenewFlagResponse,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     PolicyRule: PolicyRule,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,

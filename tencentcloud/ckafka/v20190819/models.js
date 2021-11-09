@@ -2500,7 +2500,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Topic name string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`)
+         * Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -2577,6 +2577,12 @@ class CreateTopicRequest extends  AbstractModel {
          */
         this.AclRuleName = null;
 
+        /**
+         * Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
+         * @type {number || null}
+         */
+        this.RetentionBytes = null;
+
     }
 
     /**
@@ -2600,6 +2606,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.SegmentMs = 'SegmentMs' in params ? params.SegmentMs : null;
         this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
         this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
+        this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
 
     }
 }
@@ -3853,6 +3860,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.MaxMessageBytes = null;
 
+        /**
+         * Message retention file size.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RetentionBytes = null;
+
     }
 
     /**
@@ -3869,6 +3883,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
         this.SegmentBytes = 'SegmentBytes' in params ? params.SegmentBytes : null;
         this.MaxMessageBytes = 'MaxMessageBytes' in params ? params.MaxMessageBytes : null;
+        this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
 
     }
 }
@@ -6100,6 +6115,12 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
          */
         this.AclRuleName = null;
 
+        /**
+         * Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
+         * @type {number || null}
+         */
+        this.RetentionBytes = null;
+
     }
 
     /**
@@ -6122,6 +6143,7 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.IpWhiteList = 'IpWhiteList' in params ? params.IpWhiteList : null;
         this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
         this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
+        this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
 
     }
 }

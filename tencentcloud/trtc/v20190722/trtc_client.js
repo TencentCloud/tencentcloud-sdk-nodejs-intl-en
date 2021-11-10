@@ -17,41 +17,40 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeAbnormalEventResponse = models.DescribeAbnormalEventResponse;
-const RealtimeData = models.RealtimeData;
 const DescribeAbnormalEventRequest = models.DescribeAbnormalEventRequest;
+const DescribeTrtcInteractiveTimeResponse = models.DescribeTrtcInteractiveTimeResponse;
 const ModifyPictureResponse = models.ModifyPictureResponse;
 const StartMCUMixTranscodeByStrRoomIdRequest = models.StartMCUMixTranscodeByStrRoomIdRequest;
 const LayoutParams = models.LayoutParams;
 const TimeValue = models.TimeValue;
 const CreatePictureRequest = models.CreatePictureRequest;
-const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
+const DescribeTrtcMcuTranscodeTimeRequest = models.DescribeTrtcMcuTranscodeTimeRequest;
+const SdkAppIdTrtcMcuTranscodeTimeUsage = models.SdkAppIdTrtcMcuTranscodeTimeUsage;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
-const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
 const DismissRoomResponse = models.DismissRoomResponse;
-const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
+const EventMessage = models.EventMessage;
+const DescribeRecordStatisticRequest = models.DescribeRecordStatisticRequest;
 const DescribeUserInformationRequest = models.DescribeUserInformationRequest;
 const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
-const DescribeRealtimeNetworkRequest = models.DescribeRealtimeNetworkRequest;
+const ScaleInfomation = models.ScaleInfomation;
 const DescribeUserInformationResponse = models.DescribeUserInformationResponse;
 const EncodeParams = models.EncodeParams;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const StartMCUMixTranscodeRequest = models.StartMCUMixTranscodeRequest;
-const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
 const StopMCUMixTranscodeRequest = models.StopMCUMixTranscodeRequest;
 const UserInformation = models.UserInformation;
 const DescribeHistoryScaleRequest = models.DescribeHistoryScaleRequest;
 const DeletePictureRequest = models.DeletePictureRequest;
 const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
+const RecordUsage = models.RecordUsage;
 const RemoveUserRequest = models.RemoveUserRequest;
 const OutputParams = models.OutputParams;
-const EventMessage = models.EventMessage;
 const ModifyPictureRequest = models.ModifyPictureRequest;
 const CreateTroubleInfoResponse = models.CreateTroubleInfoResponse;
 const StopMCUMixTranscodeByStrRoomIdRequest = models.StopMCUMixTranscodeByStrRoomIdRequest;
 const QualityData = models.QualityData;
 const AbnormalEvent = models.AbnormalEvent;
 const StopMCUMixTranscodeByStrRoomIdResponse = models.StopMCUMixTranscodeByStrRoomIdResponse;
-const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
 const DeletePictureResponse = models.DeletePictureResponse;
 const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
 const EventList = models.EventList;
@@ -59,25 +58,31 @@ const DismissRoomRequest = models.DismissRoomRequest;
 const DescribeDetailEventResponse = models.DescribeDetailEventResponse;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
-const PictureInfo = models.PictureInfo;
+const OneSdkAppIdTranscodeTimeUsagesInfo = models.OneSdkAppIdTranscodeTimeUsagesInfo;
+const DescribeTrtcMcuTranscodeTimeResponse = models.DescribeTrtcMcuTranscodeTimeResponse;
 const DescribePictureRequest = models.DescribePictureRequest;
+const SdkAppIdRecordUsage = models.SdkAppIdRecordUsage;
+const OneSdkAppIdUsagesInfo = models.OneSdkAppIdUsagesInfo;
 const SmallVideoLayoutParams = models.SmallVideoLayoutParams;
 const RemoveUserResponse = models.RemoveUserResponse;
 const PresetLayoutConfig = models.PresetLayoutConfig;
-const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
+const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
 const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
 const DescribePictureResponse = models.DescribePictureResponse;
+const SdkAppIdTrtcUsage = models.SdkAppIdTrtcUsage;
+const DescribeTrtcInteractiveTimeRequest = models.DescribeTrtcInteractiveTimeRequest;
 const PublishCdnParams = models.PublishCdnParams;
 const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
-const ScaleInfomation = models.ScaleInfomation;
 const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
 const AbnormalExperience = models.AbnormalExperience;
 const RoomState = models.RoomState;
 const CreatePictureResponse = models.CreatePictureResponse;
 const WaterMarkParams = models.WaterMarkParams;
+const DescribeRecordStatisticResponse = models.DescribeRecordStatisticResponse;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
 const StartMCUMixTranscodeByStrRoomIdResponse = models.StartMCUMixTranscodeByStrRoomIdResponse;
+const PictureInfo = models.PictureInfo;
 
 
 /**
@@ -212,39 +217,6 @@ Notes:
     }
 
     /**
-     * This API is used to query the quality metrics of an `SDKAppID` in the last 24 hours on a per-minute basis, including room entry success rate, instant playback rate of the first frame, and audio/video lag rate. The query period must be 1-60 minutes.
-     * @param {DescribeRealtimeQualityRequest} req
-     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
-     * @public
-     */
-    DescribeRealtimeQuality(req, cb) {
-        let resp = new DescribeRealtimeQualityResponse();
-        this.request("DescribeRealtimeQuality", req, resp, cb);
-    }
-
-    /**
-     *  This API is used to query the scale of an `SDKAppID` in the last 24 hours on a per-minute basis. The query period must be 1-60 minutes.
-     * @param {DescribeRealtimeScaleRequest} req
-     * @param {function(string, DescribeRealtimeScaleResponse):void} cb
-     * @public
-     */
-    DescribeRealtimeScale(req, cb) {
-        let resp = new DescribeRealtimeScaleResponse();
-        this.request("DescribeRealtimeScale", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the network conditions of an `SDKAppID`, including upstream and downstream packet loss, in the last 24 hours on a per-minute basis. The query period must be 1-60 minutes.
-     * @param {DescribeRealtimeNetworkRequest} req
-     * @param {function(string, DescribeRealtimeNetworkResponse):void} cb
-     * @public
-     */
-    DescribeRealtimeNetwork(req, cb) {
-        let resp = new DescribeRealtimeNetworkResponse();
-        this.request("DescribeRealtimeNetwork", req, resp, cb);
-    }
-
-    /**
      * This API is used to stop On-Cloud MixTranscoding.
      * @param {StopMCUMixTranscodeByStrRoomIdRequest} req
      * @param {function(string, StopMCUMixTranscodeByStrRoomIdResponse):void} cb
@@ -264,6 +236,17 @@ Notes:
     ModifyPicture(req, cb) {
         let resp = new ModifyPictureResponse();
         this.request("ModifyPicture", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+     * @param {DismissRoomByStrRoomIdRequest} req
+     * @param {function(string, DismissRoomByStrRoomIdResponse):void} cb
+     * @public
+     */
+    DismissRoomByStrRoomId(req, cb) {
+        let resp = new DismissRoomByStrRoomIdResponse();
+        this.request("DismissRoomByStrRoomId", req, resp, cb);
     }
 
     /**
@@ -331,14 +314,49 @@ Notes:
     }
 
     /**
-     * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
-     * @param {DismissRoomByStrRoomIdRequest} req
-     * @param {function(string, DismissRoomByStrRoomIdResponse):void} cb
+     * This API is used to query billable on-cloud recording durations.
+
+- If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
+- The period queried in a request cannot be longer than 31 days.
+- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+- In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
+     * @param {DescribeRecordStatisticRequest} req
+     * @param {function(string, DescribeRecordStatisticResponse):void} cb
      * @public
      */
-    DismissRoomByStrRoomId(req, cb) {
-        let resp = new DismissRoomByStrRoomIdResponse();
-        this.request("DismissRoomByStrRoomId", req, resp, cb);
+    DescribeRecordStatistic(req, cb) {
+        let resp = new DescribeRecordStatisticResponse();
+        this.request("DescribeRecordStatistic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query billable relaying and transcoding durations.
+- If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
+- The period queried in a request cannot be longer than 31 days.
+- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+- In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
+     * @param {DescribeTrtcMcuTranscodeTimeRequest} req
+     * @param {function(string, DescribeTrtcMcuTranscodeTimeResponse):void} cb
+     * @public
+     */
+    DescribeTrtcMcuTranscodeTime(req, cb) {
+        let resp = new DescribeTrtcMcuTranscodeTimeResponse();
+        this.request("DescribeTrtcMcuTranscodeTime", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query billable audio/video interaction durations.
+- If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
+- The period queried in a request cannot be longer than 31 days.
+- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+- In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
+     * @param {DescribeTrtcInteractiveTimeRequest} req
+     * @param {function(string, DescribeTrtcInteractiveTimeResponse):void} cb
+     * @public
+     */
+    DescribeTrtcInteractiveTime(req, cb) {
+        let resp = new DescribeTrtcInteractiveTimeResponse();
+        this.request("DescribeTrtcInteractiveTime", req, resp, cb);
     }
 
     /**

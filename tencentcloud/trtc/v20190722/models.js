@@ -67,49 +67,6 @@ class DescribeAbnormalEventResponse extends  AbstractModel {
 }
 
 /**
- * Returned data of seconds-level monitoring
- * @class
- */
-class RealtimeData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned data
-         * @type {Array.<TimeValue> || null}
-         */
-        this.Content = null;
-
-        /**
-         * Data type field
-         * @type {string || null}
-         */
-        this.DataType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new TimeValue();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
-        }
-        this.DataType = 'DataType' in params ? params.DataType : null;
-
-    }
-}
-
-/**
  * DescribeAbnormalEvent request structure.
  * @class
  */
@@ -154,6 +111,49 @@ class DescribeAbnormalEventRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
+ * DescribeTrtcInteractiveTime response structure.
+ * @class
+ */
+class DescribeTrtcInteractiveTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Duration statistics of the queried application(s)
+         * @type {Array.<OneSdkAppIdUsagesInfo> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Usages) {
+            this.Usages = new Array();
+            for (let z in params.Usages) {
+                let obj = new OneSdkAppIdUsagesInfo();
+                obj.deserialize(params.Usages[z]);
+                this.Usages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -484,18 +484,31 @@ class CreatePictureRequest extends  AbstractModel {
 }
 
 /**
- * StopMCUMixTranscode response structure.
+ * DescribeTrtcMcuTranscodeTime request structure.
  * @class
  */
-class StopMCUMixTranscodeResponse extends  AbstractModel {
+class DescribeTrtcMcuTranscodeTimeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Query start date in the format of YYYY-MM-DD
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StartTime = null;
+
+        /**
+         * Query end date in the format of YYYY-MM-DD
+The period queried in a request cannot be longer than 31 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
 
     }
 
@@ -506,7 +519,66 @@ class StopMCUMixTranscodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * Billable relaying and transcoding duration statistics
+If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
+ * @class
+ */
+class SdkAppIdTrtcMcuTranscodeTimeUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time point for the statistics. e.g., `2020-09-07` or `2020-09-07 00:05:05`
+         * @type {string || null}
+         */
+        this.TimeKey = null;
+
+        /**
+         * Audio duration (s)
+         * @type {number || null}
+         */
+        this.AudioTime = null;
+
+        /**
+         * SD video duration (s)
+         * @type {number || null}
+         */
+        this.VideoTimeSd = null;
+
+        /**
+         * HD video duration (s)
+         * @type {number || null}
+         */
+        this.VideoTimeHd = null;
+
+        /**
+         * FHD video duration (s)
+         * @type {number || null}
+         */
+        this.VideoTimeFhd = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
+        this.VideoTimeSd = 'VideoTimeSd' in params ? params.VideoTimeSd : null;
+        this.VideoTimeHd = 'VideoTimeHd' in params ? params.VideoTimeHd : null;
+        this.VideoTimeFhd = 'VideoTimeFhd' in params ? params.VideoTimeFhd : null;
 
     }
 }
@@ -554,49 +626,6 @@ class RemoveUserByStrRoomIdRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRealtimeScale response structure.
- * @class
- */
-class DescribeRealtimeScaleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned data array
-         * @type {Array.<RealtimeData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new RealtimeData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DismissRoom response structure.
  * @class
  */
@@ -625,24 +654,46 @@ class DismissRoomResponse extends  AbstractModel {
 }
 
 /**
- * DescribeRealtimeNetwork response structure.
+ * Event information, including event timestamp and event ID.
  * @class
  */
-class DescribeRealtimeNetworkResponse extends  AbstractModel {
+class EventMessage extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data returned by query
-         * @type {Array.<RealtimeData> || null}
+         * Video stream type:
+0: non-video event;
+2: big image;
+3: small image;
+7: relayed stream image.
+         * @type {number || null}
          */
-        this.Data = null;
+        this.Type = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Event reporting time in the format of UNIX timestamp, such as 1589891188801ms
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Time = null;
+
+        /**
+         * Event ID. Events divide into SDK events and WebRTC events. For more information, please see Appendix - Event ID Mapping Table at https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * First event parameter, such as video resolution width
+         * @type {number || null}
+         */
+        this.ParamOne = null;
+
+        /**
+         * Second event parameter, such as video resolution height
+         * @type {number || null}
+         */
+        this.ParamTwo = null;
 
     }
 
@@ -653,16 +704,54 @@ class DescribeRealtimeNetworkResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
+        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new RealtimeData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeRecordStatistic request structure.
+ * @class
+ */
+class DescribeRecordStatisticRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query start date in the format of YYYY-MM-DD
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query end date in the format of YYYY-MM-DD
+The period queried in a request cannot be longer than 31 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
 
     }
 }
@@ -828,38 +917,39 @@ bigvHeight: upstream/downstream resolution in height.
 }
 
 /**
- * DescribeRealtimeNetwork request structure.
+ * Historical scale information
  * @class
  */
-class DescribeRealtimeNetworkRequest extends  AbstractModel {
+class ScaleInfomation extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Query start time in the format of UNIX timestamp, such as 1588031999s, which is a point in time in the last 24 hours.
+         * Start time for each day
          * @type {number || null}
          */
-        this.StartTime = null;
+        this.Time = null;
 
         /**
-         * Query end time in the format of local UNIX timestamp, such as 1588031999s.
+         * Number of users in room. If a user enters the room for multiple times, the user will be counted as one user.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.EndTime = null;
+        this.UserNumber = null;
 
         /**
-         * User `sdkappid`
-         * @type {string || null}
+         * Number of room entries. Every time when a user enters the room, it will be counted as one room entry.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.SdkAppId = null;
+        this.UserCount = null;
 
         /**
-         * Type of data to query
-sendLossRateRaw: upstream packet loss rate;
-recvLossRateRaw: downstream packet loss rate.
-         * @type {Array.<string> || null}
+         * Number of rooms under `sdkappid` on a day
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.DataType = null;
+        this.RoomNumbers = null;
 
     }
 
@@ -870,10 +960,10 @@ recvLossRateRaw: downstream packet loss rate.
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.DataType = 'DataType' in params ? params.DataType : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
+        this.UserCount = 'UserCount' in params ? params.UserCount : null;
+        this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
 
     }
 }
@@ -1153,49 +1243,6 @@ class StartMCUMixTranscodeRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRealtimeQuality response structure.
- * @class
- */
-class DescribeRealtimeQualityResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Type of returned data
-         * @type {Array.<RealtimeData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new RealtimeData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * StopMCUMixTranscode request structure.
  * @class
  */
@@ -1435,6 +1482,62 @@ class DescribeRoomInformationResponse extends  AbstractModel {
 }
 
 /**
+ * Recording duration statistics
+ * @class
+ */
+class RecordUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time point for the statistics, e.g., `2020-09-07` or `2020-09-07 00:05:05`
+         * @type {string || null}
+         */
+        this.TimeKey = null;
+
+        /**
+         * SD video duration (s)
+         * @type {number || null}
+         */
+        this.Class1VideoTime = null;
+
+        /**
+         * HD video duration (s)
+         * @type {number || null}
+         */
+        this.Class2VideoTime = null;
+
+        /**
+         * FHD video duration (s)
+         * @type {number || null}
+         */
+        this.Class3VideoTime = null;
+
+        /**
+         * Audio duration (s)
+         * @type {number || null}
+         */
+        this.AudioTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.Class1VideoTime = 'Class1VideoTime' in params ? params.Class1VideoTime : null;
+        this.Class2VideoTime = 'Class2VideoTime' in params ? params.Class2VideoTime : null;
+        this.Class3VideoTime = 'Class3VideoTime' in params ? params.Class3VideoTime : null;
+        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
+
+    }
+}
+
+/**
  * RemoveUser request structure.
  * @class
  */
@@ -1521,66 +1624,6 @@ class OutputParams extends  AbstractModel {
         this.PureAudioStream = 'PureAudioStream' in params ? params.PureAudioStream : null;
         this.RecordId = 'RecordId' in params ? params.RecordId : null;
         this.RecordAudioOnly = 'RecordAudioOnly' in params ? params.RecordAudioOnly : null;
-
-    }
-}
-
-/**
- * Event information, including event timestamp and event ID.
- * @class
- */
-class EventMessage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Video stream type:
-0: non-video event;
-2: big image;
-3: small image;
-7: relayed stream image.
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Event reporting time in the format of UNIX timestamp, such as 1589891188801ms
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * Event ID. Events divide into SDK events and WebRTC events. For more information, please see Appendix - Event ID Mapping Table at https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
-         * @type {number || null}
-         */
-        this.EventId = null;
-
-        /**
-         * First event parameter, such as video resolution width
-         * @type {number || null}
-         */
-        this.ParamOne = null;
-
-        /**
-         * Second event parameter, such as video resolution height
-         * @type {number || null}
-         */
-        this.ParamTwo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
-        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
 
     }
 }
@@ -1828,59 +1871,6 @@ class StopMCUMixTranscodeByStrRoomIdResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRealtimeQuality request structure.
- * @class
- */
-class DescribeRealtimeQualityRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 24 hours.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end time in the format of local UNIX timestamp, such as 1588031999s.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * User `sdkappid`
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Type of data to query
-enterTotalSuccPercent: room entry success rate;
-fistFreamInSecRate: instant playback rate of the first frame;
-blockPercent: video lag rate;
-audioBlockPercent: audio lag rate.
-         * @type {Array.<string> || null}
-         */
-        this.DataType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.DataType = 'DataType' in params ? params.DataType : null;
 
     }
 }
@@ -2183,48 +2173,30 @@ class StartMCUMixTranscodeResponse extends  AbstractModel {
 }
 
 /**
- * Image information list
+ * Relaying and transcoding duration statistics
  * @class
  */
-class PictureInfo extends  AbstractModel {
+class OneSdkAppIdTranscodeTimeUsagesInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image height
-         * @type {number || null}
+         * Array of relaying and transcoding durations
+         * @type {Array.<SdkAppIdTrtcMcuTranscodeTimeUsage> || null}
          */
-        this.Height = null;
+        this.SdkAppIdTranscodeTimeUsages = null;
 
         /**
-         * Image width
+         * Number of records returned
          * @type {number || null}
          */
-        this.Width = null;
+        this.TotalNum = null;
 
         /**
-         * X-axis value of the image’s position
-         * @type {number || null}
-         */
-        this.XPosition = null;
-
-        /**
-         * Y-axis value of the image’s position
-         * @type {number || null}
-         */
-        this.YPosition = null;
-
-        /**
-         * Application ID
-         * @type {number || null}
+         * ID of the application queried. Its value may be an application ID or `total`, which indicates that the total durations of all applications are queried.
+         * @type {string || null}
          */
         this.SdkAppId = null;
-
-        /**
-         * Image ID
-         * @type {number || null}
-         */
-        this.PictureId = null;
 
     }
 
@@ -2235,12 +2207,60 @@ class PictureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+
+        if (params.SdkAppIdTranscodeTimeUsages) {
+            this.SdkAppIdTranscodeTimeUsages = new Array();
+            for (let z in params.SdkAppIdTranscodeTimeUsages) {
+                let obj = new SdkAppIdTrtcMcuTranscodeTimeUsage();
+                obj.deserialize(params.SdkAppIdTranscodeTimeUsages[z]);
+                this.SdkAppIdTranscodeTimeUsages.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+
+    }
+}
+
+/**
+ * DescribeTrtcMcuTranscodeTime response structure.
+ * @class
+ */
+class DescribeTrtcMcuTranscodeTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Duration statistics of the queried application(s)
+         * @type {Array.<OneSdkAppIdTranscodeTimeUsagesInfo> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Usages) {
+            this.Usages = new Array();
+            for (let z in params.Usages) {
+                let obj = new OneSdkAppIdTranscodeTimeUsagesInfo();
+                obj.deserialize(params.Usages[z]);
+                this.Usages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2290,6 +2310,99 @@ class DescribePictureRequest extends  AbstractModel {
         this.PictureId = 'PictureId' in params ? params.PictureId : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.PageNo = 'PageNo' in params ? params.PageNo : null;
+
+    }
+}
+
+/**
+ * Recording duration statistics of a specific application (`SdkAppId`)
+ * @class
+ */
+class SdkAppIdRecordUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Durations for the period queried
+         * @type {Array.<RecordUsage> || null}
+         */
+        this.Usages = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+        if (params.Usages) {
+            this.Usages = new Array();
+            for (let z in params.Usages) {
+                let obj = new RecordUsage();
+                obj.deserialize(params.Usages[z]);
+                this.Usages.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Array of billable audio/video interaction durations of a specific application (`SdkAppId`) and array length
+ * @class
+ */
+class OneSdkAppIdUsagesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of records returned for the `SdkAppId`
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * Array of durations
+         * @type {Array.<SdkAppIdTrtcUsage> || null}
+         */
+        this.SdkAppIdTrtcTimeUsages = null;
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.SdkAppIdTrtcTimeUsages) {
+            this.SdkAppIdTrtcTimeUsages = new Array();
+            for (let z in params.SdkAppIdTrtcTimeUsages) {
+                let obj = new SdkAppIdTrtcUsage();
+                obj.deserialize(params.SdkAppIdTrtcTimeUsages[z]);
+                this.SdkAppIdTrtcTimeUsages.push(obj);
+            }
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
 
     }
 }
@@ -2477,38 +2590,18 @@ class PresetLayoutConfig extends  AbstractModel {
 }
 
 /**
- * DescribeRealtimeScale request structure.
+ * StopMCUMixTranscode response structure.
  * @class
  */
-class DescribeRealtimeScaleRequest extends  AbstractModel {
+class StopMCUMixTranscodeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Query start time in the format of local UNIX timestamp, such as 1588031999s, which is a point in time in the last 24 hours.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end time in the format of local UNIX timestamp, such as 1588031999s.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * User `sdkappid`
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.SdkAppId = null;
-
-        /**
-         * Type of data to query
-`UserNum: number of users in call;
-RoomNum: number of rooms.
-         * @type {Array.<string> || null}
-         */
-        this.DataType = null;
+        this.RequestId = null;
 
     }
 
@@ -2519,10 +2612,7 @@ RoomNum: number of rooms.
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.DataType = 'DataType' in params ? params.DataType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2643,6 +2733,114 @@ class DescribePictureResponse extends  AbstractModel {
 }
 
 /**
+ * Audio/Video interaction duration statistics
+If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
+ * @class
+ */
+class SdkAppIdTrtcUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time point for the statistics. e.g., `2020-09-07` or `2020-09-07 00:05:05`
+         * @type {string || null}
+         */
+        this.TimeKey = null;
+
+        /**
+         * Audio duration (s)
+         * @type {number || null}
+         */
+        this.AudioTime = null;
+
+        /**
+         * Audio/Video duration (s)
+This parameter is returned only for users who signed up before October 11, 2019 and have not switched to the [new billing standards](https://intl.cloud.tencent.com/document/product/647/17157?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.AudioVideoTime = null;
+
+        /**
+         * SD video duration (s)
+         * @type {number || null}
+         */
+        this.VideoTimeSd = null;
+
+        /**
+         * HD video duration (s)
+         * @type {number || null}
+         */
+        this.VideoTimeHd = null;
+
+        /**
+         * FHD video duration (s)
+         * @type {number || null}
+         */
+        this.VideoTimeHdp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
+        this.AudioVideoTime = 'AudioVideoTime' in params ? params.AudioVideoTime : null;
+        this.VideoTimeSd = 'VideoTimeSd' in params ? params.VideoTimeSd : null;
+        this.VideoTimeHd = 'VideoTimeHd' in params ? params.VideoTimeHd : null;
+        this.VideoTimeHdp = 'VideoTimeHdp' in params ? params.VideoTimeHdp : null;
+
+    }
+}
+
+/**
+ * DescribeTrtcInteractiveTime request structure.
+ * @class
+ */
+class DescribeTrtcInteractiveTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query start date in the format of YYYY-MM-DD
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query end date in the format of YYYY-MM-DD
+The period queried in a request cannot be longer than 31 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
  * Relayed push parameters of a non-Tencent Cloud CDN
  * @class
  */
@@ -2736,58 +2934,6 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
         this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-    }
-}
-
-/**
- * Historical scale information
- * @class
- */
-class ScaleInfomation extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Start time for each day
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * Number of users in room. If a user enters the room for multiple times, the user will be counted as one user.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UserNumber = null;
-
-        /**
-         * Number of room entries. Every time when a user enters the room, it will be counted as one room entry.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UserCount = null;
-
-        /**
-         * Number of rooms under `sdkappid` on a day
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RoomNumbers = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
-        this.UserCount = 'UserCount' in params ? params.UserCount : null;
-        this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
 
     }
 }
@@ -3074,6 +3220,49 @@ class WaterMarkParams extends  AbstractModel {
 }
 
 /**
+ * DescribeRecordStatistic response structure.
+ * @class
+ */
+class DescribeRecordStatisticResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Duration statistics of the queried application(s)
+         * @type {Array.<SdkAppIdRecordUsage> || null}
+         */
+        this.SdkAppIdUsages = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SdkAppIdUsages) {
+            this.SdkAppIdUsages = new Array();
+            for (let z in params.SdkAppIdUsages) {
+                let obj = new SdkAppIdRecordUsage();
+                obj.deserialize(params.SdkAppIdUsages[z]);
+                this.SdkAppIdUsages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DismissRoomByStrRoomId response structure.
  * @class
  */
@@ -3179,43 +3368,105 @@ class StartMCUMixTranscodeByStrRoomIdResponse extends  AbstractModel {
     }
 }
 
+/**
+ * Image information list
+ * @class
+ */
+class PictureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image height
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Image width
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * X-axis value of the image’s position
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Y-axis value of the image’s position
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Image ID
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+
+    }
+}
+
 module.exports = {
     DescribeAbnormalEventResponse: DescribeAbnormalEventResponse,
-    RealtimeData: RealtimeData,
     DescribeAbnormalEventRequest: DescribeAbnormalEventRequest,
+    DescribeTrtcInteractiveTimeResponse: DescribeTrtcInteractiveTimeResponse,
     ModifyPictureResponse: ModifyPictureResponse,
     StartMCUMixTranscodeByStrRoomIdRequest: StartMCUMixTranscodeByStrRoomIdRequest,
     LayoutParams: LayoutParams,
     TimeValue: TimeValue,
     CreatePictureRequest: CreatePictureRequest,
-    StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
+    DescribeTrtcMcuTranscodeTimeRequest: DescribeTrtcMcuTranscodeTimeRequest,
+    SdkAppIdTrtcMcuTranscodeTimeUsage: SdkAppIdTrtcMcuTranscodeTimeUsage,
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
-    DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
     DismissRoomResponse: DismissRoomResponse,
-    DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
+    EventMessage: EventMessage,
+    DescribeRecordStatisticRequest: DescribeRecordStatisticRequest,
     DescribeUserInformationRequest: DescribeUserInformationRequest,
     DescribeCallDetailRequest: DescribeCallDetailRequest,
-    DescribeRealtimeNetworkRequest: DescribeRealtimeNetworkRequest,
+    ScaleInfomation: ScaleInfomation,
     DescribeUserInformationResponse: DescribeUserInformationResponse,
     EncodeParams: EncodeParams,
     RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
     StartMCUMixTranscodeRequest: StartMCUMixTranscodeRequest,
-    DescribeRealtimeQualityResponse: DescribeRealtimeQualityResponse,
     StopMCUMixTranscodeRequest: StopMCUMixTranscodeRequest,
     UserInformation: UserInformation,
     DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
     DeletePictureRequest: DeletePictureRequest,
     DescribeRoomInformationResponse: DescribeRoomInformationResponse,
+    RecordUsage: RecordUsage,
     RemoveUserRequest: RemoveUserRequest,
     OutputParams: OutputParams,
-    EventMessage: EventMessage,
     ModifyPictureRequest: ModifyPictureRequest,
     CreateTroubleInfoResponse: CreateTroubleInfoResponse,
     StopMCUMixTranscodeByStrRoomIdRequest: StopMCUMixTranscodeByStrRoomIdRequest,
     QualityData: QualityData,
     AbnormalEvent: AbnormalEvent,
     StopMCUMixTranscodeByStrRoomIdResponse: StopMCUMixTranscodeByStrRoomIdResponse,
-    DescribeRealtimeQualityRequest: DescribeRealtimeQualityRequest,
     DeletePictureResponse: DeletePictureResponse,
     CreateTroubleInfoRequest: CreateTroubleInfoRequest,
     EventList: EventList,
@@ -3223,24 +3474,30 @@ module.exports = {
     DescribeDetailEventResponse: DescribeDetailEventResponse,
     DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
-    PictureInfo: PictureInfo,
+    OneSdkAppIdTranscodeTimeUsagesInfo: OneSdkAppIdTranscodeTimeUsagesInfo,
+    DescribeTrtcMcuTranscodeTimeResponse: DescribeTrtcMcuTranscodeTimeResponse,
     DescribePictureRequest: DescribePictureRequest,
+    SdkAppIdRecordUsage: SdkAppIdRecordUsage,
+    OneSdkAppIdUsagesInfo: OneSdkAppIdUsagesInfo,
     SmallVideoLayoutParams: SmallVideoLayoutParams,
     RemoveUserResponse: RemoveUserResponse,
     PresetLayoutConfig: PresetLayoutConfig,
-    DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
+    StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
     DescribePictureResponse: DescribePictureResponse,
+    SdkAppIdTrtcUsage: SdkAppIdTrtcUsage,
+    DescribeTrtcInteractiveTimeRequest: DescribeTrtcInteractiveTimeRequest,
     PublishCdnParams: PublishCdnParams,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,
-    ScaleInfomation: ScaleInfomation,
     DescribeDetailEventRequest: DescribeDetailEventRequest,
     AbnormalExperience: AbnormalExperience,
     RoomState: RoomState,
     CreatePictureResponse: CreatePictureResponse,
     WaterMarkParams: WaterMarkParams,
+    DescribeRecordStatisticResponse: DescribeRecordStatisticResponse,
     DismissRoomByStrRoomIdResponse: DismissRoomByStrRoomIdResponse,
     DescribeHistoryScaleResponse: DescribeHistoryScaleResponse,
     StartMCUMixTranscodeByStrRoomIdResponse: StartMCUMixTranscodeByStrRoomIdResponse,
+    PictureInfo: PictureInfo,
 
 }

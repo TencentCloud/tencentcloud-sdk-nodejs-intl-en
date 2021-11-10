@@ -960,7 +960,7 @@ class CreateStreamPackageChannelEndpointRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Channel name
+         * Endpoint name, which must contain 1 to 32 characters and supports digits, letters, and underscores
          * @type {string || null}
          */
         this.Name = null;

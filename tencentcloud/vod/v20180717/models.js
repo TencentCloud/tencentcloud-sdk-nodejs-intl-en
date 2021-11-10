@@ -5177,7 +5177,6 @@ class ModifyVodDomainAccelerateConfigRequest extends  AbstractModel {
          * Whether to enable or disable domain name acceleration for the selected region. Valid values:
 <li>`Enabled`: enable</li>
 <li>`Disabled`: disable</li>
-To enable acceleration in Chinese mainland for a domain name, please finish [ICP filing](https://intl.cloud.tencent.com/document/product/243/18905?from_cn_redirect=1) for it first.
          * @type {string || null}
          */
         this.Status = null;
@@ -6608,7 +6607,7 @@ class CreateVodDomainRequest extends  AbstractModel {
 <li>`Chinese Mainland`</li>
 <li>`Outside Chinese Mainland`</li>
 <li>`Global`</li>
-If `AccelerateArea` is not set, VOD will enable acceleration in `Chinese Mainland` or `Outside Chinese Mainland` according to the region set under the user’s Tencent Cloud account. To enable acceleration in Chinese mainland for a domain name, please finish [ICP filing](https://intl.cloud.tencent.com/document/product/243/18905?from_cn_redirect=1) for it first.
+If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
          * @type {string || null}
          */
         this.AccelerateArea = null;
@@ -13288,6 +13287,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
+         * Progress of a media file composing task. Value range: [0, 100]
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
          * Input of media file composing task.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {ComposeMediaTaskInput || null}
@@ -13309,16 +13314,16 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.MetaData = null;
 
         /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
-         * @type {string || null}
-         */
-        this.SessionContext = null;
-
-        /**
          * ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is not carried or is left empty, no deduplication will be performed.
          * @type {string || null}
          */
         this.SessionId = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this parameter. It can contain up to 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
 
     }
 
@@ -13333,6 +13338,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Status = 'Status' in params ? params.Status : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
         if (params.Input) {
             let obj = new ComposeMediaTaskInput();
@@ -13351,8 +13357,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             obj.deserialize(params.MetaData)
             this.MetaData = obj;
         }
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -27828,6 +27834,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
+         * Progress of a video editing task. Value range: [0, 100]
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
          * Input of video editing task.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {EditMediaTaskInput || null}
@@ -27842,18 +27854,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Output = null;
 
         /**
+         * Metadata of a source video
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
          * If a video processing flow is specified when a video editing task is initiated, this field will be the ID of the task flow.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProcedureTaskId = null;
-
-        /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SessionContext = null;
 
         /**
          * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
@@ -27863,10 +27874,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SessionId = null;
 
         /**
-         * Metadata of a source video
-         * @type {MediaMetaData || null}
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.MetaData = null;
+        this.SessionContext = null;
 
     }
 
@@ -27882,6 +27894,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
         if (params.Input) {
             let obj = new EditMediaTaskInput();
@@ -27894,15 +27907,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
-        this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
         if (params.MetaData) {
             let obj = new MediaMetaData();
             obj.deserialize(params.MetaData)
             this.MetaData = obj;
         }
+        this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }

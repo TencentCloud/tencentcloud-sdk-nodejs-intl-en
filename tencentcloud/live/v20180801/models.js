@@ -4082,7 +4082,7 @@ class DescribeScreenShotSheetNumListRequest extends  AbstractModel {
         this.PushDomains = null;
 
         /**
-         * Data dimension. The data has a delay of one and a half hours. Valid values: 1. Minute (5-minute granularity, which supports a maximum query time range of 31 days); 2. Day (1-day granularity, which is the default value and supports a maximum query time range of 186 days).
+         * Data granularity. There is a 1.5-hour delay in data reporting. Valid values: `Minute` (5-minute granularity; query period of up to 31 days); `Day` (1-day granularity based on UTC+8:00; query period of up to 186 days)
          * @type {string || null}
          */
         this.Granularity = null;
@@ -5644,7 +5644,7 @@ class CreateCommonMixStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of stream mix session (from applying for stream mix to canceling stream mix).
+         * ID of a stream mix session (from applying for the stream mix to cancelling it). This parameter can contain up to 80 bytes of letters, digits, and underscores.
          * @type {string || null}
          */
         this.MixStreamSessionId = null;
@@ -6955,7 +6955,7 @@ class DescribeStreamPushInfoListRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time point in the format of `yyyy-mm-dd HH:MM:SS`. The maximum time span is 6 hours. Data for the last 6 days can be queried.
+         * End time in the format of yyyy-mm-dd HH:MM:SS. You can query data in the past 7 days. You’re advised to set the query period to up to 3 hours.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -7468,7 +7468,7 @@ Default value: 10.
         this.PageSize = null;
 
         /**
-         * The stream name to search for
+         * Stream name for query
          * @type {string || null}
          */
         this.StreamName = null;
@@ -8014,6 +8014,15 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
          */
         this.DomainPrefix = null;
 
+        /**
+         * Playback region. This parameter is valid only when `DomainType` is set to `1`.
+`1`: Chinese mainland
+`2`: global
+`3`: outside Chinese mainland
+         * @type {number || null}
+         */
+        this.PlayType = null;
+
     }
 
     /**
@@ -8029,6 +8038,7 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
         this.DomainPrefix = 'DomainPrefix' in params ? params.DomainPrefix : null;
+        this.PlayType = 'PlayType' in params ? params.PlayType : null;
 
     }
 }

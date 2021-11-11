@@ -39,6 +39,7 @@ const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
 const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
+const SummaryTotal = models.SummaryTotal;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
 

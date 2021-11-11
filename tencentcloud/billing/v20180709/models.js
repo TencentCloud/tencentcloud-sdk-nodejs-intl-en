@@ -38,6 +38,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SummaryOverview = null;
 
         /**
+         * Total cost
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {SummaryTotal || null}
+         */
+        this.SummaryTotal = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -61,6 +68,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.SummaryOverview[z]);
                 this.SummaryOverview.push(obj);
             }
+        }
+
+        if (params.SummaryTotal) {
+            let obj = new SummaryTotal();
+            obj.deserialize(params.SummaryTotal)
+            this.SummaryTotal = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -229,7 +242,8 @@ class BillResourceSummary extends  AbstractModel {
         this.TotalCost = null;
 
         /**
-         * Discount rate
+         * Discount
+If different discounts or contract prices are applied, `-` will be returned for this parameter.
          * @type {string || null}
          */
         this.Discount = null;
@@ -411,6 +425,12 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
          */
         this.PayerUin = null;
 
+        /**
+         * Resource tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
     }
 
     /**
@@ -424,6 +444,7 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -741,6 +762,12 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.BillMonth = null;
 
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -758,6 +785,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -819,6 +847,12 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.BillMonth = null;
 
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -836,6 +870,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1187,6 +1222,12 @@ class ActionSummaryOverviewItem extends  AbstractModel {
          */
         this.BillMonth = null;
 
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -1204,6 +1245,7 @@ class ActionSummaryOverviewItem extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1271,16 +1313,16 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
-         * @type {string || null}
-         */
-        this.PeriodType = null;
-
-        /**
          * Month; format: yyyy-mm. This value cannot be earlier than the month when Bill 2.0 is enabled. Last 24 months data are available.
          * @type {string || null}
          */
         this.Month = null;
+
+        /**
+         * The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+         * @type {string || null}
+         */
+        this.PeriodType = null;
 
         /**
          * Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
@@ -1290,7 +1332,36 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.NeedRecordNum = null;
 
         /**
-         * 
+         * Action type to query. Valid values:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
          * @type {string || null}
          */
         this.ActionType = null;
@@ -1318,8 +1389,8 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
         this.Month = 'Month' in params ? params.Month : null;
+        this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
@@ -1607,6 +1678,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RealTotalCostRatio = null;
 
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -1619,6 +1697,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1679,6 +1758,12 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
          */
         this.BillMonth = null;
 
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -1696,6 +1781,7 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1803,6 +1889,43 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * Total cost
+ * @class
+ */
+class SummaryTotal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total cost
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
+/**
  * Detailed summary of purchases by billing mode
  * @class
  */
@@ -1858,6 +1981,12 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
          */
         this.VoucherPayAmount = null;
 
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -1883,6 +2012,7 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
         this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1919,6 +2049,12 @@ class BusinessSummaryTotal extends  AbstractModel {
          */
         this.CashPayAmount = null;
 
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -1932,6 +2068,7 @@ class BusinessSummaryTotal extends  AbstractModel {
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1960,6 +2097,7 @@ module.exports = {
     ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     DescribeBillDetailResponse: DescribeBillDetailResponse,
     DescribeBillSummaryByProjectResponse: DescribeBillSummaryByProjectResponse,
+    SummaryTotal: SummaryTotal,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
     BusinessSummaryTotal: BusinessSummaryTotal,
 

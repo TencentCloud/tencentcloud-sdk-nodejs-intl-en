@@ -1625,17 +1625,31 @@ class TimingSettingsReq extends  AbstractModel {
         super();
 
         /**
-         * Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`
+         * Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`. This parameter is required if `EventType` is `INPUT_SWITCH`.
          * @type {string || null}
          */
         this.StartType = null;
 
         /**
-         * Required if `StartType` is `FIXED_TIME`
-UTC time, such as `2020-01-01T12:00:00Z`
+         * This parameter is required if `EventType` is `INPUT_SWITCH` and `StartType` is `FIXED_TIME`.
+It must be in UTC format, e.g., `2020-01-01T12:00:00Z`.
          * @type {string || null}
          */
         this.Time = null;
+
+        /**
+         * This parameter is required if `EventType` is `TIMED_RECORD`.
+It specifies the recording start time in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * This parameter is required if `EventType` is `TIMED_RECORD`.
+It specifies the recording end time in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the recording start time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -1648,6 +1662,8 @@ UTC time, such as `2020-01-01T12:00:00Z`
         }
         this.StartType = 'StartType' in params ? params.StartType : null;
         this.Time = 'Time' in params ? params.Time : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1976,6 +1992,24 @@ class EventSettingsResp extends  AbstractModel {
          */
         this.InputAttachment = null;
 
+        /**
+         * Name of the output group attached. This parameter is not empty if `EventType` is `TIMED_RECORD`.
+         * @type {string || null}
+         */
+        this.OutputGroupName = null;
+
+        /**
+         * Name of the manifest file for timed recording, which ends with `.m3u8` for HLS and `.mpd` for DASH. This parameter is not empty if `EventType` is `TIMED_RECORD`.
+         * @type {string || null}
+         */
+        this.ManifestName = null;
+
+        /**
+         * URL of the COS bucket where recording files are saved. This parameter is not empty if `EventType` is `TIMED_RECORD`. It may contain 1 or 2 URLs. The first URL corresponds to pipeline 0 and the second pipeline 1.
+         * @type {Array.<EventSettingsDestinationResp> || null}
+         */
+        this.Destinations = null;
+
     }
 
     /**
@@ -1987,6 +2021,17 @@ class EventSettingsResp extends  AbstractModel {
         }
         this.EventType = 'EventType' in params ? params.EventType : null;
         this.InputAttachment = 'InputAttachment' in params ? params.InputAttachment : null;
+        this.OutputGroupName = 'OutputGroupName' in params ? params.OutputGroupName : null;
+        this.ManifestName = 'ManifestName' in params ? params.ManifestName : null;
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new EventSettingsDestinationResp();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
 
     }
 }
@@ -2738,6 +2783,34 @@ class DescribeStreamLiveChannelOutputStatisticsResponse extends  AbstractModel {
 }
 
 /**
+ * Destination address information in event settings
+ * @class
+ */
+class EventSettingsDestinationReq extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * URL of the COS bucket to save recording files
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * Configuration information of an event in the plan
  * @class
  */
@@ -2746,7 +2819,7 @@ class EventSettingsReq extends  AbstractModel {
         super();
 
         /**
-         * Only `INPUT_SWITCH` is supported currently. If you do not specify this parameter, `INPUT_SWITCH` will be used.
+         * Valid values: `INPUT_SWITCH`, `TIMED_RECORD`. If it is not specified, `INPUT_SWITCH` will be used.
          * @type {string || null}
          */
         this.EventType = null;
@@ -2756,6 +2829,24 @@ class EventSettingsReq extends  AbstractModel {
          * @type {string || null}
          */
         this.InputAttachment = null;
+
+        /**
+         * Name of the output group to attach. This parameter is required if `EventType` is `TIMED_RECORD`.
+         * @type {string || null}
+         */
+        this.OutputGroupName = null;
+
+        /**
+         * Name of the manifest file for timed recording, which must end with `.m3u8` for HLS and `.mpd` for DASH. This parameter is required if `EventType` is `TIMED_RECORD`.
+         * @type {string || null}
+         */
+        this.ManifestName = null;
+
+        /**
+         * URL of the COS bucket to save recording files. This parameter is required if `EventType` is `TIMED_RECORD`. It may contain 1 or 2 URLs. The first URL corresponds to pipeline 0 and the second pipeline 1.
+         * @type {Array.<EventSettingsDestinationReq> || null}
+         */
+        this.Destinations = null;
 
     }
 
@@ -2768,6 +2859,17 @@ class EventSettingsReq extends  AbstractModel {
         }
         this.EventType = 'EventType' in params ? params.EventType : null;
         this.InputAttachment = 'InputAttachment' in params ? params.InputAttachment : null;
+        this.OutputGroupName = 'OutputGroupName' in params ? params.OutputGroupName : null;
+        this.ManifestName = 'ManifestName' in params ? params.ManifestName : null;
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new EventSettingsDestinationReq();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
 
     }
 }
@@ -2826,6 +2928,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Track = 'Track' in params ? params.Track : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.Iv = 'Iv' in params ? params.Iv : null;
+
+    }
+}
+
+/**
+ * Destination address information in event settings
+ * @class
+ */
+class EventSettingsDestinationResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * URL of the COS bucket where recording files are saved
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -4456,8 +4586,10 @@ module.exports = {
     DescribeStreamLiveChannelLogsRequest: DescribeStreamLiveChannelLogsRequest,
     CreateStreamLiveInputSecurityGroupRequest: CreateStreamLiveInputSecurityGroupRequest,
     DescribeStreamLiveChannelOutputStatisticsResponse: DescribeStreamLiveChannelOutputStatisticsResponse,
+    EventSettingsDestinationReq: EventSettingsDestinationReq,
     EventSettingsReq: EventSettingsReq,
     DrmKey: DrmKey,
+    EventSettingsDestinationResp: EventSettingsDestinationResp,
     OutputInfo: OutputInfo,
     DescribeStreamLiveInputSecurityGroupRequest: DescribeStreamLiveInputSecurityGroupRequest,
     CreateStreamLiveChannelResponse: CreateStreamLiveChannelResponse,

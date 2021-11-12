@@ -17,24 +17,74 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * Email content, which can be plain text (TEXT), pure code (HTML), or a combination of TEXT and HTML (recommended).
+ * BatchSendEmail request structure.
  * @class
  */
-class Simple extends  AbstractModel {
+class BatchSendEmailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * HTML code after base64 encoding. To ensure correct display, this parameter should include all code information and cannot contain external CSS.
+         * Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:
+Sender <email address>, for example:
+Tencent Cloud team <noreply@mail.qcloud.com>
          * @type {string || null}
          */
-        this.Html = null;
+        this.FromEmailAddress = null;
 
         /**
-         * Plain text content after base64 encoding. If HTML is not involved, the plain text will be displayed in the email. Otherwise, this parameter represents the plain text style of the email.
+         * Recipient group ID
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * Email subject
          * @type {string || null}
          */
-        this.Text = null;
+        this.Subject = null;
+
+        /**
+         * Task type. Valid values: `1`: batch; `2`: scheduled; `3`: recurring
+         * @type {number || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will be sent to Tencent Cloud.
+         * @type {string || null}
+         */
+        this.ReplyToAddresses = null;
+
+        /**
+         * Template when emails are sent using a template
+         * @type {Template || null}
+         */
+        this.Template = null;
+
+        /**
+         * Email content when emails are sent by calling the API
+         * @type {Simple || null}
+         */
+        this.Simple = null;
+
+        /**
+         * Email attachments
+         * @type {Array.<Attachment> || null}
+         */
+        this.Attachments = null;
+
+        /**
+         * Parameter required for a recurring sending task
+         * @type {CycleEmailParam || null}
+         */
+        this.CycleParam = null;
+
+        /**
+         * Parameter required for a scheduled sending task
+         * @type {TimedEmailParam || null}
+         */
+        this.TimedParam = null;
 
     }
 
@@ -45,8 +95,168 @@ class Simple extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Html = 'Html' in params ? params.Html : null;
-        this.Text = 'Text' in params ? params.Text : null;
+        this.FromEmailAddress = 'FromEmailAddress' in params ? params.FromEmailAddress : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.Subject = 'Subject' in params ? params.Subject : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.ReplyToAddresses = 'ReplyToAddresses' in params ? params.ReplyToAddresses : null;
+
+        if (params.Template) {
+            let obj = new Template();
+            obj.deserialize(params.Template)
+            this.Template = obj;
+        }
+
+        if (params.Simple) {
+            let obj = new Simple();
+            obj.deserialize(params.Simple)
+            this.Simple = obj;
+        }
+
+        if (params.Attachments) {
+            this.Attachments = new Array();
+            for (let z in params.Attachments) {
+                let obj = new Attachment();
+                obj.deserialize(params.Attachments[z]);
+                this.Attachments.push(obj);
+            }
+        }
+
+        if (params.CycleParam) {
+            let obj = new CycleEmailParam();
+            obj.deserialize(params.CycleParam)
+            this.CycleParam = obj;
+        }
+
+        if (params.TimedParam) {
+            let obj = new TimedEmailParam();
+            obj.deserialize(params.TimedParam)
+            this.TimedParam = obj;
+        }
+
+    }
+}
+
+/**
+ * GetEmailTemplate request structure.
+ * @class
+ */
+class GetEmailTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+
+    }
+}
+
+/**
+ * CreateEmailTemplate request structure.
+ * @class
+ */
+class CreateEmailTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Template content.
+         * @type {TemplateContent || null}
+         */
+        this.TemplateContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+
+        if (params.TemplateContent) {
+            let obj = new TemplateContent();
+            obj.deserialize(params.TemplateContent)
+            this.TemplateContent = obj;
+        }
+
+    }
+}
+
+/**
+ * Template list structure.
+ * @class
+ */
+class TemplatesMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creation time.
+         * @type {number || null}
+         */
+        this.CreatedTimestamp = null;
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Template status. 1: under review; 0: approved; 2: rejected; other values: unavailable.
+         * @type {number || null}
+         */
+        this.TemplateStatus = null;
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateID = null;
+
+        /**
+         * Review reply
+         * @type {string || null}
+         */
+        this.ReviewReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreatedTimestamp = 'CreatedTimestamp' in params ? params.CreatedTimestamp : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateStatus = 'TemplateStatus' in params ? params.TemplateStatus : null;
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+        this.ReviewReason = 'ReviewReason' in params ? params.ReviewReason : null;
 
     }
 }
@@ -193,7 +403,7 @@ class ListBlackEmailAddressRequest extends  AbstractModel {
 }
 
 /**
- * Attachment structure, including attachment name and content after base64 encoding.
+ * Attachment structure, including attachment name and Base64-encoded attachment content
  * @class
  */
 class Attachment extends  AbstractModel {
@@ -314,9 +524,9 @@ class SendEmailRequest extends  AbstractModel {
         super();
 
         /**
-         * Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:  
-sender &lt;email address&gt;. For example: 
-Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
+         * Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format: 
+Sender <email address>, for example:
+Tencent Cloud team <noreply@mail.qcloud.com>
          * @type {string || null}
          */
         this.FromEmailAddress = null;
@@ -435,6 +645,41 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.EmailAddress = 'EmailAddress' in params ? params.EmailAddress : null;
         this.EmailSenderName = 'EmailSenderName' in params ? params.EmailSenderName : null;
         this.CreatedTimestamp = 'CreatedTimestamp' in params ? params.CreatedTimestamp : null;
+
+    }
+}
+
+/**
+ * BatchSendEmail response structure.
+ * @class
+ */
+class BatchSendEmailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sending task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -708,24 +953,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * CreateEmailTemplate request structure.
+ * CreateEmailIdentity request structure.
  * @class
  */
-class CreateEmailTemplateRequest extends  AbstractModel {
+class CreateEmailIdentityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template name.
+         * Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
          * @type {string || null}
          */
-        this.TemplateName = null;
-
-        /**
-         * Template content.
-         * @type {TemplateContent || null}
-         */
-        this.TemplateContent = null;
+        this.EmailIdentity = null;
 
     }
 
@@ -736,13 +975,7 @@ class CreateEmailTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-
-        if (params.TemplateContent) {
-            let obj = new TemplateContent();
-            obj.deserialize(params.TemplateContent)
-            this.TemplateContent = obj;
-        }
+        this.EmailIdentity = 'EmailIdentity' in params ? params.EmailIdentity : null;
 
     }
 }
@@ -1294,42 +1527,24 @@ class GetSendEmailStatusRequest extends  AbstractModel {
 }
 
 /**
- * Template list structure.
+ * Email content, which can be plain text (TEXT), pure code (HTML), or a combination of TEXT and HTML (recommended).
  * @class
  */
-class TemplatesMetadata extends  AbstractModel {
+class Simple extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Creation time.
-         * @type {number || null}
-         */
-        this.CreatedTimestamp = null;
-
-        /**
-         * Template name.
+         * HTML code after base64 encoding. To ensure correct display, this parameter should include all code information and cannot contain external CSS.
          * @type {string || null}
          */
-        this.TemplateName = null;
+        this.Html = null;
 
         /**
-         * Template status. 1: under review; 0: approved; 2: rejected; other values: unavailable.
-         * @type {number || null}
-         */
-        this.TemplateStatus = null;
-
-        /**
-         * Template ID.
-         * @type {number || null}
-         */
-        this.TemplateID = null;
-
-        /**
-         * Review reply
+         * Plain text content after base64 encoding. If HTML is not involved, the plain text will be displayed in the email. Otherwise, this parameter represents the plain text style of the email.
          * @type {string || null}
          */
-        this.ReviewReason = null;
+        this.Text = null;
 
     }
 
@@ -1340,11 +1555,8 @@ class TemplatesMetadata extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CreatedTimestamp = 'CreatedTimestamp' in params ? params.CreatedTimestamp : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.TemplateStatus = 'TemplateStatus' in params ? params.TemplateStatus : null;
-        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
-        this.ReviewReason = 'ReviewReason' in params ? params.ReviewReason : null;
+        this.Html = 'Html' in params ? params.Html : null;
+        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -1632,18 +1844,24 @@ class BlackEmailAddress extends  AbstractModel {
 }
 
 /**
- * GetEmailTemplate request structure.
+ * Parameter required to create a recurring sending task
  * @class
  */
-class GetEmailTemplateRequest extends  AbstractModel {
+class CycleEmailParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template ID.
+         * Start time of the task
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * Task recurrence in hours
          * @type {number || null}
          */
-        this.TemplateID = null;
+        this.IntervalTime = null;
 
     }
 
@@ -1654,7 +1872,8 @@ class GetEmailTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.IntervalTime = 'IntervalTime' in params ? params.IntervalTime : null;
 
     }
 }
@@ -1740,34 +1959,6 @@ class CreateEmailIdentityResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateEmailIdentity request structure.
- * @class
- */
-class CreateEmailIdentityRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
-         * @type {string || null}
-         */
-        this.EmailIdentity = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EmailIdentity = 'EmailIdentity' in params ? params.EmailIdentity : null;
 
     }
 }
@@ -1892,6 +2083,34 @@ class UpdateEmailTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Time parameter required to create a scheduled sending task, such as the start time
+ * @class
+ */
+class TimedEmailParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time of a scheduled sending task
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+
+    }
+}
+
+/**
  * Describes the domain name, record type, expected value, and currently configured value of DNS records.
  * @class
  */
@@ -2009,7 +2228,10 @@ class ListEmailIdentitiesRequest extends  AbstractModel {
 }
 
 module.exports = {
-    Simple: Simple,
+    BatchSendEmailRequest: BatchSendEmailRequest,
+    GetEmailTemplateRequest: GetEmailTemplateRequest,
+    CreateEmailTemplateRequest: CreateEmailTemplateRequest,
+    TemplatesMetadata: TemplatesMetadata,
     ListEmailAddressRequest: ListEmailAddressRequest,
     GetEmailIdentityResponse: GetEmailIdentityResponse,
     ListBlackEmailAddressRequest: ListBlackEmailAddressRequest,
@@ -2018,6 +2240,7 @@ module.exports = {
     GetSendEmailStatusResponse: GetSendEmailStatusResponse,
     SendEmailRequest: SendEmailRequest,
     EmailSender: EmailSender,
+    BatchSendEmailResponse: BatchSendEmailResponse,
     DeleteEmailIdentityRequest: DeleteEmailIdentityRequest,
     UpdateEmailIdentityRequest: UpdateEmailIdentityRequest,
     GetEmailIdentityRequest: GetEmailIdentityRequest,
@@ -2025,7 +2248,7 @@ module.exports = {
     GetStatisticsReportRequest: GetStatisticsReportRequest,
     DeleteEmailTemplateResponse: DeleteEmailTemplateResponse,
     Volume: Volume,
-    CreateEmailTemplateRequest: CreateEmailTemplateRequest,
+    CreateEmailIdentityRequest: CreateEmailIdentityRequest,
     UpdateEmailTemplateRequest: UpdateEmailTemplateRequest,
     UpdateEmailIdentityResponse: UpdateEmailIdentityResponse,
     DeleteEmailTemplateRequest: DeleteEmailTemplateRequest,
@@ -2037,7 +2260,7 @@ module.exports = {
     SendEmailResponse: SendEmailResponse,
     ListBlackEmailAddressResponse: ListBlackEmailAddressResponse,
     GetSendEmailStatusRequest: GetSendEmailStatusRequest,
-    TemplatesMetadata: TemplatesMetadata,
+    Simple: Simple,
     ListEmailIdentitiesResponse: ListEmailIdentitiesResponse,
     ListEmailAddressResponse: ListEmailAddressResponse,
     TemplateContent: TemplateContent,
@@ -2045,14 +2268,14 @@ module.exports = {
     DeleteEmailAddressRequest: DeleteEmailAddressRequest,
     EmailIdentity: EmailIdentity,
     BlackEmailAddress: BlackEmailAddress,
-    GetEmailTemplateRequest: GetEmailTemplateRequest,
+    CycleEmailParam: CycleEmailParam,
     DeleteEmailAddressResponse: DeleteEmailAddressResponse,
     CreateEmailIdentityResponse: CreateEmailIdentityResponse,
-    CreateEmailIdentityRequest: CreateEmailIdentityRequest,
     CreateEmailAddressRequest: CreateEmailAddressRequest,
     CreateEmailTemplateResponse: CreateEmailTemplateResponse,
     CreateEmailAddressResponse: CreateEmailAddressResponse,
     UpdateEmailTemplateResponse: UpdateEmailTemplateResponse,
+    TimedEmailParam: TimedEmailParam,
     DNSAttributes: DNSAttributes,
     GetEmailTemplateResponse: GetEmailTemplateResponse,
     ListEmailIdentitiesRequest: ListEmailIdentitiesRequest,

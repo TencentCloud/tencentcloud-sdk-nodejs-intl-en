@@ -16,7 +16,10 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const Simple = models.Simple;
+const BatchSendEmailRequest = models.BatchSendEmailRequest;
+const GetEmailTemplateRequest = models.GetEmailTemplateRequest;
+const CreateEmailTemplateRequest = models.CreateEmailTemplateRequest;
+const TemplatesMetadata = models.TemplatesMetadata;
 const ListEmailAddressRequest = models.ListEmailAddressRequest;
 const GetEmailIdentityResponse = models.GetEmailIdentityResponse;
 const ListBlackEmailAddressRequest = models.ListBlackEmailAddressRequest;
@@ -25,6 +28,7 @@ const Template = models.Template;
 const GetSendEmailStatusResponse = models.GetSendEmailStatusResponse;
 const SendEmailRequest = models.SendEmailRequest;
 const EmailSender = models.EmailSender;
+const BatchSendEmailResponse = models.BatchSendEmailResponse;
 const DeleteEmailIdentityRequest = models.DeleteEmailIdentityRequest;
 const UpdateEmailIdentityRequest = models.UpdateEmailIdentityRequest;
 const GetEmailIdentityRequest = models.GetEmailIdentityRequest;
@@ -32,7 +36,7 @@ const DeleteEmailIdentityResponse = models.DeleteEmailIdentityResponse;
 const GetStatisticsReportRequest = models.GetStatisticsReportRequest;
 const DeleteEmailTemplateResponse = models.DeleteEmailTemplateResponse;
 const Volume = models.Volume;
-const CreateEmailTemplateRequest = models.CreateEmailTemplateRequest;
+const CreateEmailIdentityRequest = models.CreateEmailIdentityRequest;
 const UpdateEmailTemplateRequest = models.UpdateEmailTemplateRequest;
 const UpdateEmailIdentityResponse = models.UpdateEmailIdentityResponse;
 const DeleteEmailTemplateRequest = models.DeleteEmailTemplateRequest;
@@ -44,7 +48,7 @@ const ListEmailTemplatesResponse = models.ListEmailTemplatesResponse;
 const SendEmailResponse = models.SendEmailResponse;
 const ListBlackEmailAddressResponse = models.ListBlackEmailAddressResponse;
 const GetSendEmailStatusRequest = models.GetSendEmailStatusRequest;
-const TemplatesMetadata = models.TemplatesMetadata;
+const Simple = models.Simple;
 const ListEmailIdentitiesResponse = models.ListEmailIdentitiesResponse;
 const ListEmailAddressResponse = models.ListEmailAddressResponse;
 const TemplateContent = models.TemplateContent;
@@ -52,14 +56,14 @@ const GetStatisticsReportResponse = models.GetStatisticsReportResponse;
 const DeleteEmailAddressRequest = models.DeleteEmailAddressRequest;
 const EmailIdentity = models.EmailIdentity;
 const BlackEmailAddress = models.BlackEmailAddress;
-const GetEmailTemplateRequest = models.GetEmailTemplateRequest;
+const CycleEmailParam = models.CycleEmailParam;
 const DeleteEmailAddressResponse = models.DeleteEmailAddressResponse;
 const CreateEmailIdentityResponse = models.CreateEmailIdentityResponse;
-const CreateEmailIdentityRequest = models.CreateEmailIdentityRequest;
 const CreateEmailAddressRequest = models.CreateEmailAddressRequest;
 const CreateEmailTemplateResponse = models.CreateEmailTemplateResponse;
 const CreateEmailAddressResponse = models.CreateEmailAddressResponse;
 const UpdateEmailTemplateResponse = models.UpdateEmailTemplateResponse;
+const TimedEmailParam = models.TimedEmailParam;
 const DNSAttributes = models.DNSAttributes;
 const GetEmailTemplateResponse = models.GetEmailTemplateResponse;
 const ListEmailIdentitiesRequest = models.ListEmailIdentitiesRequest;
@@ -132,18 +136,18 @@ Note: only an approved template can be used to send emails.
     }
 
     /**
-     * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on. The maximum time span is 14 days.
-     * @param {GetStatisticsReportRequest} req
-     * @param {function(string, GetStatisticsReportResponse):void} cb
+     * This API is used to send a TEXT or HTML email to multiple recipients at a time for marketing or notification purposes. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature. You need to create a recipient group with email addresses first and then send emails by group ID. SES supports scheduled and recurring email sending tasks. You need to pass in `TimedParam` for a scheduled task and `CycleParam` for a recurring one.
+     * @param {BatchSendEmailRequest} req
+     * @param {function(string, BatchSendEmailResponse):void} cb
      * @public
      */
-    GetStatisticsReport(req, cb) {
-        let resp = new GetStatisticsReportResponse();
-        this.request("GetStatisticsReport", req, resp, cb);
+    BatchSendEmail(req, cb) {
+        let resp = new BatchSendEmailResponse();
+        this.request("BatchSendEmail", req, resp, cb);
     }
 
     /**
-     * This API is used to send a TEXT or HTML email. By default, you can only send emails using a template. To send custom content, please contact your sales rep to enable this feature.
+     * This API is used to send a TEXT or HTML email triggered for authentication or transaction. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature.
      * @param {SendEmailRequest} req
      * @param {function(string, SendEmailResponse):void} cb
      * @public
@@ -165,14 +169,14 @@ Note: only an approved template can be used to send emails.
     }
 
     /**
-     * The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
-     * @param {ListBlackEmailAddressRequest} req
-     * @param {function(string, ListBlackEmailAddressResponse):void} cb
+     * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
+     * @param {GetStatisticsReportRequest} req
+     * @param {function(string, GetStatisticsReportResponse):void} cb
      * @public
      */
-    ListBlackEmailAddress(req, cb) {
-        let resp = new ListBlackEmailAddressResponse();
-        this.request("ListBlackEmailAddress", req, resp, cb);
+    GetStatisticsReport(req, cb) {
+        let resp = new GetStatisticsReportResponse();
+        this.request("GetStatisticsReport", req, resp, cb);
     }
 
     /**
@@ -184,6 +188,17 @@ Note: only an approved template can be used to send emails.
     GetSendEmailStatus(req, cb) {
         let resp = new GetSendEmailStatusResponse();
         this.request("GetSendEmailStatus", req, resp, cb);
+    }
+
+    /**
+     * The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
+     * @param {ListBlackEmailAddressRequest} req
+     * @param {function(string, ListBlackEmailAddressResponse):void} cb
+     * @public
+     */
+    ListBlackEmailAddress(req, cb) {
+        let resp = new ListBlackEmailAddressResponse();
+        this.request("ListBlackEmailAddress", req, resp, cb);
     }
 
     /**

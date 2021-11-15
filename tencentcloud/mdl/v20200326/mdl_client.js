@@ -34,15 +34,16 @@ const ModifyStreamLiveChannelResponse = models.ModifyStreamLiveChannelResponse;
 const DeleteStreamLiveInputRequest = models.DeleteStreamLiveInputRequest;
 const ModifyStreamLiveInputSecurityGroupResponse = models.ModifyStreamLiveInputSecurityGroupResponse;
 const ModifyStreamLiveInputRequest = models.ModifyStreamLiveInputRequest;
-const StreamInfo = models.StreamInfo;
+const DescribeStreamLiveChannelResponse = models.DescribeStreamLiveChannelResponse;
 const DescribeStreamLiveRegionsRequest = models.DescribeStreamLiveRegionsRequest;
 const DescribeStreamLiveChannelAlertsRequest = models.DescribeStreamLiveChannelAlertsRequest;
 const AudioSelectorInfo = models.AudioSelectorInfo;
 const LogInfo = models.LogInfo;
 const DrmSettingsInfo = models.DrmSettingsInfo;
 const PipelineOutputStatistics = models.PipelineOutputStatistics;
+const DeleteStreamLivePlanResponse = models.DeleteStreamLivePlanResponse;
 const DashRemuxSettingsInfo = models.DashRemuxSettingsInfo;
-const DescribeStreamLiveChannelResponse = models.DescribeStreamLiveChannelResponse;
+const StreamInfo = models.StreamInfo;
 const SDMCSettingsInfo = models.SDMCSettingsInfo;
 const DeleteStreamLiveInputSecurityGroupRequest = models.DeleteStreamLiveInputSecurityGroupRequest;
 const AttachedInput = models.AttachedInput;
@@ -53,6 +54,7 @@ const TimingSettingsReq = models.TimingSettingsReq;
 const DescribeStreamLiveChannelLogsResponse = models.DescribeStreamLiveChannelLogsResponse;
 const DescribeStreamLiveChannelInputStatisticsRequest = models.DescribeStreamLiveChannelInputStatisticsRequest;
 const PipelineLogInfo = models.PipelineLogInfo;
+const DeleteStreamLivePlanRequest = models.DeleteStreamLivePlanRequest;
 const DescribeStreamLiveChannelsRequest = models.DescribeStreamLiveChannelsRequest;
 const FailOverSettings = models.FailOverSettings;
 const ChannelInputStatistics = models.ChannelInputStatistics;
@@ -159,14 +161,14 @@ class MdlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query StreamLive channel logs, such as push event logs.
-     * @param {DescribeStreamLiveChannelLogsRequest} req
-     * @param {function(string, DescribeStreamLiveChannelLogsResponse):void} cb
+     * This API is used to delete a StreamLive event.
+     * @param {DeleteStreamLivePlanRequest} req
+     * @param {function(string, DeleteStreamLivePlanResponse):void} cb
      * @public
      */
-    DescribeStreamLiveChannelLogs(req, cb) {
-        let resp = new DescribeStreamLiveChannelLogsResponse();
-        this.request("DescribeStreamLiveChannelLogs", req, resp, cb);
+    DeleteStreamLivePlan(req, cb) {
+        let resp = new DeleteStreamLivePlanResponse();
+        this.request("DeleteStreamLivePlan", req, resp, cb);
     }
 
     /**
@@ -178,6 +180,17 @@ class MdlClient extends AbstractClient {
     DescribeStreamLiveInputSecurityGroups(req, cb) {
         let resp = new DescribeStreamLiveInputSecurityGroupsResponse();
         this.request("DescribeStreamLiveInputSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a StreamLive channel.
+     * @param {StartStreamLiveChannelRequest} req
+     * @param {function(string, StartStreamLiveChannelResponse):void} cb
+     * @public
+     */
+    StartStreamLiveChannel(req, cb) {
+        let resp = new StartStreamLiveChannelResponse();
+        this.request("StartStreamLiveChannel", req, resp, cb);
     }
 
     /**
@@ -291,14 +304,14 @@ class MdlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start a StreamLive channel.
-     * @param {StartStreamLiveChannelRequest} req
-     * @param {function(string, StartStreamLiveChannelResponse):void} cb
+     * This API is used to query StreamLive channel logs, such as push event logs.
+     * @param {DescribeStreamLiveChannelLogsRequest} req
+     * @param {function(string, DescribeStreamLiveChannelLogsResponse):void} cb
      * @public
      */
-    StartStreamLiveChannel(req, cb) {
-        let resp = new StartStreamLiveChannelResponse();
-        this.request("StartStreamLiveChannel", req, resp, cb);
+    DescribeStreamLiveChannelLogs(req, cb) {
+        let resp = new DescribeStreamLiveChannelLogsResponse();
+        this.request("DescribeStreamLiveChannelLogs", req, resp, cb);
     }
 
     /**

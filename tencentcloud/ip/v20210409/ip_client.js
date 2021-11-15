@@ -16,20 +16,20 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const QueryAgentCreditRequest = models.QueryAgentCreditRequest;
-const AssignClientCreditRequest = models.AssignClientCreditRequest;
+const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
-const QueryUinCreditHistoryData = models.QueryUinCreditHistoryData;
-const QueryCreditHistoryResponse = models.QueryCreditHistoryResponse;
-const AssignClientCreditResponse = models.AssignClientCreditResponse;
-const QueryClientListItem = models.QueryClientListItem;
+const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
+const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
+const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
+const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
+const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const CreateAccountResponse = models.CreateAccountResponse;
-const QueryCreditHistoryRequest = models.QueryCreditHistoryRequest;
-const QueryAgentCreditResponse = models.QueryAgentCreditResponse;
-const QueryClientListRequest = models.QueryClientListRequest;
-const QueryClientListResponse = models.QueryClientListResponse;
+const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
+const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
+const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
+const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
 const CountryCodeItem = models.CountryCodeItem;
 
 
@@ -43,50 +43,6 @@ class IpClient extends AbstractClient {
         super("ip.tencentcloudapi.com", "2021-04-09", credential, region, profile);
     }
     
-    /**
-     * This API is used to query all the credit allocation records of a single customer.
-     * @param {QueryCreditHistoryRequest} req
-     * @param {function(string, QueryCreditHistoryResponse):void} cb
-     * @public
-     */
-    QueryCreditHistory(req, cb) {
-        let resp = new QueryCreditHistoryResponse();
-        this.request("QueryCreditHistory", req, resp, cb);
-    }
-
-    /**
-     * This API is used for a partner to query its own total credit, available credit, and used credit in USD.
-     * @param {QueryAgentCreditRequest} req
-     * @param {function(string, QueryAgentCreditResponse):void} cb
-     * @public
-     */
-    QueryAgentCredit(req, cb) {
-        let resp = new QueryAgentCreditResponse();
-        this.request("QueryAgentCredit", req, resp, cb);
-    }
-
-    /**
-     * This API is used to obtain country and region codes.
-     * @param {GetCountryCodesRequest} req
-     * @param {function(string, GetCountryCodesResponse):void} cb
-     * @public
-     */
-    GetCountryCodes(req, cb) {
-        let resp = new GetCountryCodesResponse();
-        this.request("GetCountryCodes", req, resp, cb);
-    }
-
-    /**
-     * This API is used for a partner to query a customer's credit and basic information.
-     * @param {QueryClientListRequest} req
-     * @param {function(string, QueryClientListResponse):void} cb
-     * @public
-     */
-    QueryClientList(req, cb) {
-        let resp = new QueryClientListResponse();
-        this.request("QueryClientList", req, resp, cb);
-    }
-
     /**
      * This API is used to create a Tencent Cloud account in the International Partner platform for a customer. After registration, the customer will be automatically bound to the partner account.
 
@@ -103,18 +59,62 @@ Notes:<br>
     }
 
     /**
+     * This API is used for a partner to query its own total credit, available credit, and used credit in USD.
+     * @param {QueryPartnerCreditRequest} req
+     * @param {function(string, QueryPartnerCreditResponse):void} cb
+     * @public
+     */
+    QueryPartnerCredit(req, cb) {
+        let resp = new QueryPartnerCreditResponse();
+        this.request("QueryPartnerCredit", req, resp, cb);
+    }
+
+    /**
      * This API is used for a partner to set credit for a customer, such as increasing or lowering the credit and setting it to 0.
 1. The credit is valid permanently and will not be zeroed regularly.
 2. The customer's service will be suspended when its available credit sets to 0, so caution should be exercised with this operation.
 3. To prevent the customer from making new purchases without affecting their use of previously purchased products, the partner can set their available credit to 0 after obtaining the non-stop feature privilege from the channel manager.
 4. The set credit is an increase to the current available credit and cannot exceed the remaining allocable credit. Setting the credit to a negative value indicates to repossess it. The available credit can be set to 0 at the minimum.
-     * @param {AssignClientCreditRequest} req
-     * @param {function(string, AssignClientCreditResponse):void} cb
+     * @param {AllocateCustomerCreditRequest} req
+     * @param {function(string, AllocateCustomerCreditResponse):void} cb
      * @public
      */
-    AssignClientCredit(req, cb) {
-        let resp = new AssignClientCreditResponse();
-        this.request("AssignClientCredit", req, resp, cb);
+    AllocateCustomerCredit(req, cb) {
+        let resp = new AllocateCustomerCreditResponse();
+        this.request("AllocateCustomerCredit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain country and region codes.
+     * @param {GetCountryCodesRequest} req
+     * @param {function(string, GetCountryCodesResponse):void} cb
+     * @public
+     */
+    GetCountryCodes(req, cb) {
+        let resp = new GetCountryCodesResponse();
+        this.request("GetCountryCodes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query all the credit allocation records of a single customer.
+     * @param {QueryCreditAllocationHistoryRequest} req
+     * @param {function(string, QueryCreditAllocationHistoryResponse):void} cb
+     * @public
+     */
+    QueryCreditAllocationHistory(req, cb) {
+        let resp = new QueryCreditAllocationHistoryResponse();
+        this.request("QueryCreditAllocationHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used for a partner to query a customer's credit and basic information.
+     * @param {QueryCustomersCreditRequest} req
+     * @param {function(string, QueryCustomersCreditResponse):void} cb
+     * @public
+     */
+    QueryCustomersCredit(req, cb) {
+        let resp = new QueryCustomersCreditResponse();
+        this.request("QueryCustomersCredit", req, resp, cb);
     }
 
 

@@ -853,36 +853,24 @@ Note: If this parameter is not specified or empty, the original input settings w
 }
 
 /**
- * Push information.
+ * DescribeStreamLiveChannel response structure.
  * @class
  */
-class StreamInfo extends  AbstractModel {
+class DescribeStreamLiveChannelResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Client IP.
+         * Channel information
+         * @type {StreamLiveChannelInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ClientIp = null;
-
-        /**
-         * Video information of pushed streams.
-         * @type {Array.<StreamVideoInfo> || null}
-         */
-        this.Video = null;
-
-        /**
-         * Audio information of pushed streams.
-         * @type {Array.<StreamAudioInfo> || null}
-         */
-        this.Audio = null;
-
-        /**
-         * SCTE-35 information of pushed streams.
-         * @type {Array.<StreamScte35Info> || null}
-         */
-        this.Scte35 = null;
+        this.RequestId = null;
 
     }
 
@@ -893,34 +881,13 @@ class StreamInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
 
-        if (params.Video) {
-            this.Video = new Array();
-            for (let z in params.Video) {
-                let obj = new StreamVideoInfo();
-                obj.deserialize(params.Video[z]);
-                this.Video.push(obj);
-            }
+        if (params.Info) {
+            let obj = new StreamLiveChannelInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
         }
-
-        if (params.Audio) {
-            this.Audio = new Array();
-            for (let z in params.Audio) {
-                let obj = new StreamAudioInfo();
-                obj.deserialize(params.Audio[z]);
-                this.Audio.push(obj);
-            }
-        }
-
-        if (params.Scte35) {
-            this.Scte35 = new Array();
-            for (let z in params.Scte35) {
-                let obj = new StreamScte35Info();
-                obj.deserialize(params.Scte35[z]);
-                this.Scte35.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1174,6 +1141,34 @@ In seconds, indicating data time.
 }
 
 /**
+ * DeleteStreamLivePlan response structure.
+ * @class
+ */
+class DeleteStreamLivePlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DASH configuration information.
  * @class
  */
@@ -1216,24 +1211,36 @@ class DashRemuxSettingsInfo extends  AbstractModel {
 }
 
 /**
- * DescribeStreamLiveChannel response structure.
+ * Push information.
  * @class
  */
-class DescribeStreamLiveChannelResponse extends  AbstractModel {
+class StreamInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel information
-         * @type {StreamLiveChannelInfo || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Client IP.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClientIp = null;
+
+        /**
+         * Video information of pushed streams.
+         * @type {Array.<StreamVideoInfo> || null}
+         */
+        this.Video = null;
+
+        /**
+         * Audio information of pushed streams.
+         * @type {Array.<StreamAudioInfo> || null}
+         */
+        this.Audio = null;
+
+        /**
+         * SCTE-35 information of pushed streams.
+         * @type {Array.<StreamScte35Info> || null}
+         */
+        this.Scte35 = null;
 
     }
 
@@ -1244,13 +1251,34 @@ class DescribeStreamLiveChannelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
 
-        if (params.Info) {
-            let obj = new StreamLiveChannelInfo();
-            obj.deserialize(params.Info)
-            this.Info = obj;
+        if (params.Video) {
+            this.Video = new Array();
+            for (let z in params.Video) {
+                let obj = new StreamVideoInfo();
+                obj.deserialize(params.Video[z]);
+                this.Video.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Audio) {
+            this.Audio = new Array();
+            for (let z in params.Audio) {
+                let obj = new StreamAudioInfo();
+                obj.deserialize(params.Audio[z]);
+                this.Audio.push(obj);
+            }
+        }
+
+        if (params.Scte35) {
+            this.Scte35 = new Array();
+            for (let z in params.Scte35) {
+                let obj = new StreamScte35Info();
+                obj.deserialize(params.Scte35[z]);
+                this.Scte35.push(obj);
+            }
+        }
 
     }
 }
@@ -1808,6 +1836,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Pipeline1.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteStreamLivePlan request structure.
+ * @class
+ */
+class DeleteStreamLivePlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the channel whose event is to be deleted
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * Name of the event to delete
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
 
     }
 }
@@ -4545,15 +4608,16 @@ module.exports = {
     DeleteStreamLiveInputRequest: DeleteStreamLiveInputRequest,
     ModifyStreamLiveInputSecurityGroupResponse: ModifyStreamLiveInputSecurityGroupResponse,
     ModifyStreamLiveInputRequest: ModifyStreamLiveInputRequest,
-    StreamInfo: StreamInfo,
+    DescribeStreamLiveChannelResponse: DescribeStreamLiveChannelResponse,
     DescribeStreamLiveRegionsRequest: DescribeStreamLiveRegionsRequest,
     DescribeStreamLiveChannelAlertsRequest: DescribeStreamLiveChannelAlertsRequest,
     AudioSelectorInfo: AudioSelectorInfo,
     LogInfo: LogInfo,
     DrmSettingsInfo: DrmSettingsInfo,
     PipelineOutputStatistics: PipelineOutputStatistics,
+    DeleteStreamLivePlanResponse: DeleteStreamLivePlanResponse,
     DashRemuxSettingsInfo: DashRemuxSettingsInfo,
-    DescribeStreamLiveChannelResponse: DescribeStreamLiveChannelResponse,
+    StreamInfo: StreamInfo,
     SDMCSettingsInfo: SDMCSettingsInfo,
     DeleteStreamLiveInputSecurityGroupRequest: DeleteStreamLiveInputSecurityGroupRequest,
     AttachedInput: AttachedInput,
@@ -4564,6 +4628,7 @@ module.exports = {
     DescribeStreamLiveChannelLogsResponse: DescribeStreamLiveChannelLogsResponse,
     DescribeStreamLiveChannelInputStatisticsRequest: DescribeStreamLiveChannelInputStatisticsRequest,
     PipelineLogInfo: PipelineLogInfo,
+    DeleteStreamLivePlanRequest: DeleteStreamLivePlanRequest,
     DescribeStreamLiveChannelsRequest: DescribeStreamLiveChannelsRequest,
     FailOverSettings: FailOverSettings,
     ChannelInputStatistics: ChannelInputStatistics,

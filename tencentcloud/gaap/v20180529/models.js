@@ -36,6 +36,24 @@ class RegionDetail extends  AbstractModel {
          */
         this.RegionName = null;
 
+        /**
+         * Region where the data center locates
+         * @type {string || null}
+         */
+        this.RegionArea = null;
+
+        /**
+         * Name of the region where the data center locates
+         * @type {string || null}
+         */
+        this.RegionAreaName = null;
+
+        /**
+         * Data center type. `dc`: data center; `ec`: edge server.
+         * @type {string || null}
+         */
+        this.IDCType = null;
+
     }
 
     /**
@@ -47,6 +65,9 @@ class RegionDetail extends  AbstractModel {
         }
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionArea = 'RegionArea' in params ? params.RegionArea : null;
+        this.RegionAreaName = 'RegionAreaName' in params ? params.RegionAreaName : null;
+        this.IDCType = 'IDCType' in params ? params.IDCType : null;
 
     }
 }
@@ -2544,78 +2565,30 @@ class DescribeProxyDetailRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTCPListenerAttribute request structure.
+ * IP details
  * @class
  */
-class ModifyTCPListenerAttributeRequest extends  AbstractModel {
+class IPDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Listener ID
+         * IP string
          * @type {string || null}
          */
-        this.ListenerId = null;
+        this.IP = null;
 
         /**
-         * Connection group ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+         * Network provider. `BGP`: Tencent Cloud BGP (default); `CMCC`: China Mobile; `CUCC`: China Unicom; `CTCC`: China Telecom.
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.Provider = null;
 
         /**
-         * Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
-         * @type {string || null}
-         */
-        this.ProxyId = null;
-
-        /**
-         * Listener name
-         * @type {string || null}
-         */
-        this.ListenerName = null;
-
-        /**
-         * Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
-         * @type {string || null}
-         */
-        this.Scheduler = null;
-
-        /**
-         * Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+         * Max bandwidth
          * @type {number || null}
          */
-        this.DelayLoop = null;
-
-        /**
-         * Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
-         * @type {number || null}
-         */
-        this.ConnectTimeout = null;
-
-        /**
-         * Whether to enable health check. 1: enable; 0: disable.
-         * @type {number || null}
-         */
-        this.HealthCheck = null;
-
-        /**
-         * Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
-         * @type {number || null}
-         */
-        this.FailoverSwitch = null;
-
-        /**
-         * Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
-         * @type {number || null}
-         */
-        this.HealthyThreshold = null;
-
-        /**
-         * Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 -10.
-         * @type {number || null}
-         */
-        this.UnhealthyThreshold = null;
+        this.Bandwidth = null;
 
     }
 
@@ -2626,17 +2599,54 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
-        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
-        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
-        this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
-        this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
-        this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
-        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
-        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
-        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+
+    }
+}
+
+/**
+ * Connection status information
+ * @class
+ */
+class ProxyStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Connection instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Connection status.
+Valid values:
+`RUNNING`: running
+`CREATING`: creating
+`DESTROYING`: terminating
+`OPENING`: enabling
+`CLOSING`: disabling
+`CLOSED`: disabled
+`ADJUSTING`: adjusting configuration
+`ISOLATING`: isolating
+`ISOLATED`: isolated
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -3119,6 +3129,13 @@ class RealServerStatus extends  AbstractModel {
          */
         this.ProxyId = null;
 
+        /**
+         * ID of the connection group bound to this origin server. This string is null if no connection groups are bound.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -3131,6 +3148,7 @@ class RealServerStatus extends  AbstractModel {
         this.RealServerId = 'RealServerId' in params ? params.RealServerId : null;
         this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -3777,6 +3795,26 @@ When this field does not exist, all connections are pulled, including both not-g
          */
         this.Independent = null;
 
+        /**
+         * Specifies how connections are listed. Valid values:
+`asc`: ascending order
+`desc`: descending order
+Default: `desc`
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field. Valid values:
+`create_time`: sort by the creation time
+`proxy_id`: sort by the connection ID
+`bandwidth`:sort by the bandwidth limit
+`concurrent_connections`: sort by the number of concurrent connections
+Default: `create_time`
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
     }
 
     /**
@@ -3809,6 +3847,8 @@ When this field does not exist, all connections are pulled, including both not-g
             }
         }
         this.Independent = 'Independent' in params ? params.Independent : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
 
     }
 }
@@ -5056,35 +5096,78 @@ class DescribeProxiesStatusRequest extends  AbstractModel {
 }
 
 /**
- * Connection status information
+ * ModifyTCPListenerAttribute request structure.
  * @class
  */
-class ProxyStatus extends  AbstractModel {
+class ModifyTCPListenerAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Connection instance ID.
+         * Listener ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ListenerId = null;
 
         /**
-         * Connection status.
-Valid values:
-RUNNING: running;
-CREATING: creating;
-DESTROYING: terminating;
-OPENING: enabling;
-CLOSING: disabling;
-CLOSED: disabled;
-ADJUSTING: adjusting configuration;
-ISOLATING: isolating;
-ISOLATED: isolated;
-UNKNOWN: unknown status.
+         * Connection group ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
          * @type {string || null}
          */
-        this.Status = null;
+        this.GroupId = null;
+
+        /**
+         * Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * Listener name
+         * @type {string || null}
+         */
+        this.ListenerName = null;
+
+        /**
+         * Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+         * @type {string || null}
+         */
+        this.Scheduler = null;
+
+        /**
+         * Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+         * @type {number || null}
+         */
+        this.DelayLoop = null;
+
+        /**
+         * Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+         * @type {number || null}
+         */
+        this.ConnectTimeout = null;
+
+        /**
+         * Whether to enable health check. 1: enable; 0: disable.
+         * @type {number || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
+        /**
+         * Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 -10.
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
 
     }
 
@@ -5095,8 +5178,17 @@ UNKNOWN: unknown status.
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
+        this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
+        this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
 
     }
 }
@@ -8023,6 +8115,24 @@ class AccessRegionDetial extends  AbstractModel {
          */
         this.BandwidthList = null;
 
+        /**
+         * Region where the data center locates
+         * @type {string || null}
+         */
+        this.RegionArea = null;
+
+        /**
+         * Name of the region where the data center locates
+         * @type {string || null}
+         */
+        this.RegionAreaName = null;
+
+        /**
+         * Data center type. `dc`: data center; `ec`: edge server.
+         * @type {string || null}
+         */
+        this.IDCType = null;
+
     }
 
     /**
@@ -8036,6 +8146,9 @@ class AccessRegionDetial extends  AbstractModel {
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.ConcurrentList = 'ConcurrentList' in params ? params.ConcurrentList : null;
         this.BandwidthList = 'BandwidthList' in params ? params.BandwidthList : null;
+        this.RegionArea = 'RegionArea' in params ? params.RegionArea : null;
+        this.RegionAreaName = 'RegionAreaName' in params ? params.RegionAreaName : null;
+        this.IDCType = 'IDCType' in params ? params.IDCType : null;
 
     }
 }
@@ -10562,17 +10675,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Concurrent = null;
 
         /**
-         * Connection status:
-RUNNING: running;
-CREATING: creating;
-DESTROYING: terminating;
-OPENING: enabling;
-CLOSING: disabling;
-CLOSED: disabled;
-ADJUSTING: adjusting configuration
-ISOLATING: isolating (it's triggered when the account is in arrears);
-ISOLATED: isolated (it's triggered when the account is in arrears);
-UNKNOWN: unknown status.
+         * Connection status. Valid values:
+`RUNNING`: running
+`CREATING`: creating
+`DESTROYING`: terminating
+`OPENING`: enabling
+`CLOSING`: disabling
+`CLOSED`: disabled
+`ADJUSTING`: adjusting configuration
+`ISOLATING`: isolating
+`ISOLATED`: isolated
+`CLONING`: copying
          * @type {string || null}
          */
         this.Status = null;
@@ -10705,7 +10818,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.IPAddressVersion = null;
 
         /**
-         * Network type. Valid values: `normal`, `cn2`
+         * Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland).
 Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
@@ -10724,6 +10837,12 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          * @type {string || null}
          */
         this.BanStatus = null;
+
+        /**
+         * 
+         * @type {Array.<IPDetail> || null}
+         */
+        this.IPList = null;
 
     }
 
@@ -10783,6 +10902,15 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.PackageType = 'PackageType' in params ? params.PackageType : null;
         this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
+
+        if (params.IPList) {
+            this.IPList = new Array();
+            for (let z in params.IPList) {
+                let obj = new IPDetail();
+                obj.deserialize(params.IPList[z]);
+                this.IPList.push(obj);
+            }
+        }
 
     }
 }
@@ -11129,7 +11257,8 @@ module.exports = {
     CloseProxiesRequest: CloseProxiesRequest,
     DescribeListenerRealServersResponse: DescribeListenerRealServersResponse,
     DescribeProxyDetailRequest: DescribeProxyDetailRequest,
-    ModifyTCPListenerAttributeRequest: ModifyTCPListenerAttributeRequest,
+    IPDetail: IPDetail,
+    ProxyStatus: ProxyStatus,
     DeleteDomainRequest: DeleteDomainRequest,
     OpenSecurityPolicyResponse: OpenSecurityPolicyResponse,
     ModifyCertificateAttributesResponse: ModifyCertificateAttributesResponse,
@@ -11176,7 +11305,7 @@ module.exports = {
     CreateSecurityRulesRequest: CreateSecurityRulesRequest,
     DescribeCertificatesRequest: DescribeCertificatesRequest,
     DescribeProxiesStatusRequest: DescribeProxiesStatusRequest,
-    ProxyStatus: ProxyStatus,
+    ModifyTCPListenerAttributeRequest: ModifyTCPListenerAttributeRequest,
     DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
     CreateDomainResponse: CreateDomainResponse,
     ModifyProxiesProjectResponse: ModifyProxiesProjectResponse,

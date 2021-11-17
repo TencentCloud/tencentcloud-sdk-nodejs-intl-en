@@ -172,6 +172,12 @@ This field requires passing in the `InstanceName` field. Other fields that are n
          */
         this.InstanceNameSettings = null;
 
+        /**
+         * Specifies whether to enable additional services, such as security services and monitoring service.
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
     }
 
     /**
@@ -234,6 +240,12 @@ This field requires passing in the `InstanceName` field. Other fields that are n
             let obj = new InstanceNameSettings();
             obj.deserialize(params.InstanceNameSettings)
             this.InstanceNameSettings = obj;
+        }
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
         }
 
     }
@@ -542,6 +554,24 @@ class AutoScalingNotification extends  AbstractModel {
          */
         this.AutoScalingNotificationId = null;
 
+        /**
+         * Notification receiver type.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * CMQ queue name.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * CMQ topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
     }
 
     /**
@@ -555,6 +585,9 @@ class AutoScalingNotification extends  AbstractModel {
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
         this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
         this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -1787,7 +1820,7 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * List of CLBs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
+         * List of application CLBs. Up to 50 CLBs are allowed. You cannot specify `loadBalancerIds` and `ForwardLoadBalancers` at the same time.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -1909,7 +1942,7 @@ class SetInstancesProtectionRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Whether the instance needs to be protected from scale-in.
+         * Whether to enable scale-in protection for this instance
          * @type {boolean || null}
          */
         this.ProtectedFromScaleIn = null;
@@ -2014,7 +2047,8 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the returned values of [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1). If this is left empty, default project is used.
+         * Project ID of the launch configuration. The default project is used if it’s left blank.
+Note that this project ID is not the same as the project ID of the scaling group. 
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -2900,6 +2934,24 @@ class CreateNotificationConfigurationRequest extends  AbstractModel {
          */
         this.NotificationUserGroupIds = null;
 
+        /**
+         * Notification receiver type. Values: `USER_GROUP`，`CMQ_QUEUE`，`CMQ_TOPIC`. Default: `USER_GROUP`.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * CMQ queue name. This field is required when `TargetType` is `CMQ_QUEUE`.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * CMQ topic name. This field is required when `TargetType` is `CMQ_TOPIC`.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
     }
 
     /**
@@ -2912,6 +2964,9 @@ class CreateNotificationConfigurationRequest extends  AbstractModel {
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -3287,13 +3342,13 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * Project ID
+         * Project ID of an instance in a scaling group. The default project is used if it’s left blank.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * List of CLBs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
+         * List of application CLBs. Up to 50 CLBs are allowed. You cannot specify `loadBalancerIds` and `ForwardLoadBalancers` at the same time.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -3580,7 +3635,7 @@ If a model in InstanceTypes does not exist or has been deactivated, a verificati
         this.LoginSettings = null;
 
         /**
-         * Project ID of the instance. This parameter can be obtained from the `projectId` field in the returned values of [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1). If this is left empty, default project is used.
+         * Project ID of the instance. Leave it blank as the default.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -4844,15 +4899,11 @@ class DescribeLifecycleHooksRequest extends  AbstractModel {
         this.LifecycleHookIds = null;
 
         /**
-         * Filter.
-<li> lifecycle-hook-id - String - Required: No - (Filter) Filter by lifecycle hook ID.</li>
-<li> lifecycle-hook-name - String - Required: No - (Filter) Filter by lifecycle hook name.</li>
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-Filter.
-<li> lifecycle-hook-id - String - Required: No - (Filter) Filter by lifecycle hook ID.</li>
-<li> lifecycle-hook-name - String - Required: No - (Filter) Filter by lifecycle hook name.</li>
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `LifecycleHookIds` and `Filters` at the same time.
+         * Filters.
+<li> `lifecycle-hook-id` - String - Required: No - (Filter) Filter by lifecycle hook ID.</li>
+<li> `lifecycle-hook-name` - String - Required: No - (Filter) Filter by lifecycle hook name.</li>
+<li> `auto-scaling-group-id` - String - Required: No - (Filter) Filter by scaling group ID.</li>
+Up to 10 filters can be included in a request and up to 5 values for each filter. It cannot be specified with `LifecycleHookIds` at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6671,6 +6722,18 @@ class ModifyNotificationConfigurationRequest extends  AbstractModel {
          */
         this.NotificationUserGroupIds = null;
 
+        /**
+         * CMQ queue name.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * CMQ topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
     }
 
     /**
@@ -6683,6 +6746,8 @@ class ModifyNotificationConfigurationRequest extends  AbstractModel {
         this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
         this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }

@@ -41,12 +41,13 @@ const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstance
 const NormalQueryItem = models.NormalQueryItem;
 const Tag = models.Tag;
 const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
-const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
+const CloseServerlessDBExtranetAccessRequest = models.CloseServerlessDBExtranetAccessRequest;
 const ServerlessDBAccount = models.ServerlessDBAccount;
 const ModifyDBInstanceReadOnlyGroupRequest = models.ModifyDBInstanceReadOnlyGroupRequest;
 const AddDBInstanceToReadOnlyGroupResponse = models.AddDBInstanceToReadOnlyGroupResponse;
 const CreateReadOnlyDBInstanceResponse = models.CreateReadOnlyDBInstanceResponse;
 const DurationAnalysis = models.DurationAnalysis;
+const DescribeDBInstanceParametersRequest = models.DescribeDBInstanceParametersRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
 const ModifySwitchTimePeriodResponse = models.ModifySwitchTimePeriodResponse;
@@ -60,11 +61,13 @@ const DescribeReadOnlyGroupsResponse = models.DescribeReadOnlyGroupsResponse;
 const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
 const SpecInfo = models.SpecInfo;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
-const CloseServerlessDBExtranetAccessRequest = models.CloseServerlessDBExtranetAccessRequest;
+const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const ReadOnlyGroup = models.ReadOnlyGroup;
 const PgDeal = models.PgDeal;
 const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
 const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
+const DescribeParamsEventRequest = models.DescribeParamsEventRequest;
+const EventInfo = models.EventInfo;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const AnalysisItems = models.AnalysisItems;
 const Xlog = models.Xlog;
@@ -74,8 +77,11 @@ const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeSlowQueryListResponse = models.DescribeSlowQueryListResponse;
 const ServerlessDBInstance = models.ServerlessDBInstance;
 const CreateReadOnlyGroupRequest = models.CreateReadOnlyGroupRequest;
+const DescribeParamsEventResponse = models.DescribeParamsEventResponse;
 const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
+const EventItem = models.EventItem;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const ParamInfo = models.ParamInfo;
 const Detail = models.Detail;
 const IsolateDBInstancesResponse = models.IsolateDBInstancesResponse;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
@@ -94,6 +100,7 @@ const DeleteReadOnlyGroupRequest = models.DeleteReadOnlyGroupRequest;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const Filter = models.Filter;
 const DisIsolateDBInstancesResponse = models.DisIsolateDBInstancesResponse;
+const ModifyDBInstanceParametersResponse = models.ModifyDBInstanceParametersResponse;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const SlowlogDetail = models.SlowlogDetail;
 const RemoveDBInstanceFromReadOnlyGroupRequest = models.RemoveDBInstanceFromReadOnlyGroupRequest;
@@ -114,15 +121,18 @@ const ModifyReadOnlyGroupConfigResponse = models.ModifyReadOnlyGroupConfigRespon
 const AccountInfo = models.AccountInfo;
 const DBBackup = models.DBBackup;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
+const ParamEntry = models.ParamEntry;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const ModifySwitchTimePeriodRequest = models.ModifySwitchTimePeriodRequest;
 const DescribeSlowQueryListRequest = models.DescribeSlowQueryListRequest;
+const DescribeDBInstanceParametersResponse = models.DescribeDBInstanceParametersResponse;
 const RegionInfo = models.RegionInfo;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const RemoveDBInstanceFromReadOnlyGroupResponse = models.RemoveDBInstanceFromReadOnlyGroupResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeSlowQueryAnalysisResponse = models.DescribeSlowQueryAnalysisResponse;
+const ModifyDBInstanceParametersRequest = models.ModifyDBInstanceParametersRequest;
 const RawSlowQuery = models.RawSlowQuery;
 const DescribeReadOnlyGroupsRequest = models.DescribeReadOnlyGroupsRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -170,6 +180,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify parameters in batches.
+     * @param {ModifyDBInstanceParametersRequest} req
+     * @param {function(string, ModifyDBInstanceParametersResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceParameters(req, cb) {
+        let resp = new ModifyDBInstanceParametersResponse();
+        this.request("ModifyDBInstanceParameters", req, resp, cb);
+    }
+
+    /**
      * This API is used to eliminate an isolated instance by specifying the `DBInstanceId` parameter. The data of an eliminated instance will be deleted and cannot be recovered.
      * @param {DestroyDBInstanceRequest} req
      * @param {function(string, DestroyDBInstanceResponse):void} cb
@@ -214,7 +235,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to analyze slow query statements with abstract parameter values and return aggregated statistical analysis results.
+     * This API is used to count and analyze slow query statements during the specified period of time and return aggregated statistical analysis results which are classified by statement with abstract parameter values.
      * @param {DescribeSlowQueryAnalysisRequest} req
      * @param {function(string, DescribeSlowQueryAnalysisResponse):void} cb
      * @public
@@ -247,14 +268,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable public network access.
-     * @param {OpenDBExtranetAccessRequest} req
-     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
+     * This API is used to get the list of modifiable parameters of an instance.
+     * @param {DescribeDBInstanceParametersRequest} req
+     * @param {function(string, DescribeDBInstanceParametersResponse):void} cb
      * @public
      */
-    OpenDBExtranetAccess(req, cb) {
-        let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
+    DescribeDBInstanceParameters(req, cb) {
+        let resp = new DescribeDBInstanceParametersResponse();
+        this.request("DescribeDBInstanceParameters", req, resp, cb);
     }
 
     /**
@@ -401,6 +422,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enable public network access.
+     * @param {OpenDBExtranetAccessRequest} req
+     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    OpenDBExtranetAccess(req, cb) {
+        let resp = new OpenDBExtranetAccessResponse();
+        this.request("OpenDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
      * This API is used to isolate one or more instances.
      * @param {IsolateDBInstancesRequest} req
      * @param {function(string, IsolateDBInstancesResponse):void} cb
@@ -478,7 +510,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the slow query list.
+     * This API is used to get the slow queries during the specified period of time.
      * @param {DescribeSlowQueryListRequest} req
      * @param {function(string, DescribeSlowQueryListResponse):void} cb
      * @public
@@ -654,7 +686,18 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get slow query logs.
+     * This API is used to get the details of parameter modification events.
+     * @param {DescribeParamsEventRequest} req
+     * @param {function(string, DescribeParamsEventResponse):void} cb
+     * @public
+     */
+    DescribeParamsEvent(req, cb) {
+        let resp = new DescribeParamsEventResponse();
+        this.request("DescribeParamsEvent", req, resp, cb);
+    }
+
+    /**
+     * This API was used to get slow query logs. Since it was deprecated on September 1, 2021, it has no longer returned data. Please use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
      * @param {DescribeDBSlowlogsRequest} req
      * @param {function(string, DescribeDBSlowlogsResponse):void} cb
      * @public

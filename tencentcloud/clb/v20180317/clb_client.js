@@ -22,6 +22,7 @@ const DescribeQuotaRequest = models.DescribeQuotaRequest;
 const DescribeTargetGroupListRequest = models.DescribeTargetGroupListRequest;
 const BatchDeregisterTargetsResponse = models.BatchDeregisterTargetsResponse;
 const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
+const RulesItems = models.RulesItems;
 const ExtraInfo = models.ExtraInfo;
 const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
 const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadbalancersRequest;
@@ -39,6 +40,7 @@ const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributes
 const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
 const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
 const ClassicalTarget = models.ClassicalTarget;
+const ListenerItem = models.ListenerItem;
 const RsWeightRule = models.RsWeightRule;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
 const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
@@ -68,6 +70,7 @@ const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
+const DescribeLBListenersRequest = models.DescribeLBListenersRequest;
 const Target = models.Target;
 const DescribeLoadBalancerTrafficRequest = models.DescribeLoadBalancerTrafficRequest;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
@@ -116,6 +119,7 @@ const RuleOutput = models.RuleOutput;
 const CreateTopicResponse = models.CreateTopicResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const ModifyTargetGroupInstancesPortResponse = models.ModifyTargetGroupInstancesPortResponse;
+const LbRsItem = models.LbRsItem;
 const RuleTargets = models.RuleTargets;
 const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
 const DeregisterTargetGroupInstancesRequest = models.DeregisterTargetGroupInstancesRequest;
@@ -141,6 +145,7 @@ const RewriteTarget = models.RewriteTarget;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const DescribeLoadBalancersDetailResponse = models.DescribeLoadBalancersDetailResponse;
 const LoadBalancerDetail = models.LoadBalancerDetail;
+const LbRsTargets = models.LbRsTargets;
 const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
 const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const BatchTarget = models.BatchTarget;
@@ -171,6 +176,7 @@ const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
 const Quota = models.Quota;
+const LBItem = models.LBItem;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
 const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
@@ -179,6 +185,7 @@ const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResp
 const RewriteLocationMap = models.RewriteLocationMap;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
+const DescribeLBListenersResponse = models.DescribeLBListenersResponse;
 const DeleteListenerResponse = models.DeleteListenerResponse;
 const DeleteLoadBalancerSnatIpsResponse = models.DeleteLoadBalancerSnatIpsResponse;
 const CertificateOutput = models.CertificateOutput;
@@ -538,6 +545,17 @@ This is an async API. After it is returned successfully, you can call the `Descr
     AssociateTargetGroups(req, cb) {
         let resp = new AssociateTargetGroupsResponse();
         this.request("AssociateTargetGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query CLB instances bound to the CVM or ENI.
+     * @param {DescribeLBListenersRequest} req
+     * @param {function(string, DescribeLBListenersResponse):void} cb
+     * @public
+     */
+    DescribeLBListeners(req, cb) {
+        let resp = new DescribeLBListenersResponse();
+        this.request("DescribeLBListeners", req, resp, cb);
     }
 
     /**

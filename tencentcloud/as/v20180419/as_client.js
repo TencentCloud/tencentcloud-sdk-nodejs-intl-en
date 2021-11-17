@@ -380,11 +380,11 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
-     * This API (ModifyLoadBalancers) is used to modify the load balancers of an auto scaling group.
+     * This API is used to modify the cloud load balancers of a scaling group.
 
-* This API can specify a new load balancer configuration for the auto scaling group. The new configuration overwrites the original load balancer configuration.
-* If you want to clear the load balancer for the auto scaling group, specify only the auto scaling group ID but not the specific load balancer when calling this API.
-* This API modifies the load balancer of the auto scaling group and generate a scaling activity to asynchronously modify the load balancers of existing instances.
+* This API can specify a new cloud load balancer configuration for the scaling group. The new configuration overwrites the original load balancer configuration.
+* To clear the cloud load balancer of the scaling group, specify only the scaling group ID but not the specific cloud load balancer.
+* This API modifies the cloud load balancer of the scaling group and generate a scaling activity to asynchronously modify the cloud load balancers of existing instances.
      * @param {ModifyLoadBalancersRequest} req
      * @param {function(string, ModifyLoadBalancersResponse):void} cb
      * @public
@@ -406,8 +406,8 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
-     * This API (SetInstancesProtection) is used to enable scale-in protection for an instance.
-When an instance has scale-in protection enabled, it will not be removed when scaling is triggered by replacement of unhealthy instances, alarm trigger policy, threshold change, etc.
+     * This API is used to enable scale-in protection for an instance.
+When scale-in protection is enabled, the instance will not be removed in scale-in activities triggered by replacement of unhealthy instances, alarm threshold reached, change of desired quantity, etc.
      * @param {SetInstancesProtectionRequest} req
      * @param {function(string, SetInstancesProtectionResponse):void} cb
      * @public
@@ -418,7 +418,8 @@ When an instance has scale-in protection enabled, it will not be removed when sc
     }
 
     /**
-     * This API (ModifyNotificationConfiguration) is used to modify a notification.
+     * This API is used to modify a notification policy.
+* The receiver type of the notification policy cannot be modified.
      * @param {ModifyNotificationConfigurationRequest} req
      * @param {function(string, ModifyNotificationConfigurationResponse):void} cb
      * @public
@@ -471,7 +472,34 @@ When an instance has scale-in protection enabled, it will not be removed when sc
     }
 
     /**
-     * This API (CreateNotificationConfiguration) is used to create a notification.
+     * This API is used to create a notification policy.
+When the notification is sent to a CMQ topic or queue, the following contents are included:
+```
+{
+    "Service": "Tencent Cloud Auto Scaling",
+    "CreatedTime": "2021-10-11T10:15:11Z", // Activity creation time
+    "AppId": "100000000",
+    "ActivityId": "asa-fznnvrja", // Scaling activity ID
+    "AutoScalingGroupId": "asg-pc2oqu2z", // Scaling group ID
+    "ActivityType": "SCALE_OUT",  // Scaling activity type
+    "StatusCode": "SUCCESSFUL",   // Scaling activity result
+    "Description": "Activity was launched in response to a difference between desired capacity and actual capacity,
+    scale out 1 instance(s).", // Scaling activity description
+    "StartTime": "2021-10-11T10:15:11Z",  // Activity starting time
+    "EndTime": "2021-10-11T10:15:32Z",    // Activity ending time
+    "DetailedStatusMessageSet": [ // A collection of failed attempts during the scaling process (Failed attempts are allowed in a successful scaling activity)
+        {
+            "Code": "InvalidInstanceType",
+            "Zone": "ap-guangzhou-2",
+            "InstanceId": "",
+            "InstanceChargeType": "POSTPAID_BY_HOUR",
+            "SubnetId": "subnet-4t5mgeuu",
+            "Message": "The specified instance type `S5.LARGE8` is invalid in `subnet-4t5mgeuu`, `ap-guangzhou-2`.",
+            "InstanceType": "S5.LARGE8",
+        }
+    ]
+}
+```
      * @param {CreateNotificationConfigurationRequest} req
      * @param {function(string, CreateNotificationConfigurationResponse):void} cb
      * @public

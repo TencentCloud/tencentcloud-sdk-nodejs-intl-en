@@ -1456,24 +1456,24 @@ class DescribeDBInstanceAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstancesProject response structure.
+ * CloseServerlessDBExtranetAccess request structure.
  * @class
  */
-class ModifyDBInstancesProjectResponse extends  AbstractModel {
+class CloseServerlessDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of successfully transferred instances
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Unique ID of an instance
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DBInstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
 
     }
 
@@ -1484,8 +1484,8 @@ class ModifyDBInstancesProjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
 
     }
 }
@@ -1692,6 +1692,41 @@ class DurationAnalysis extends  AbstractModel {
         }
         this.TimeSegment = 'TimeSegment' in params ? params.TimeSegment : null;
         this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstanceParameters request structure.
+ * @class
+ */
+class DescribeDBInstanceParametersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Name of the parameter to be queried. If `ParamName` is left empty or not passed in, the list of all parameters will be returned.
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
 
     }
 }
@@ -2285,24 +2320,24 @@ class ResetAccountPasswordResponse extends  AbstractModel {
 }
 
 /**
- * CloseServerlessDBExtranetAccess request structure.
+ * ModifyDBInstancesProject response structure.
  * @class
  */
-class CloseServerlessDBExtranetAccessRequest extends  AbstractModel {
+class ModifyDBInstancesProjectResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of an instance
-         * @type {string || null}
+         * Number of successfully transferred instances
+         * @type {number || null}
          */
-        this.DBInstanceId = null;
+        this.Count = null;
 
         /**
-         * Instance name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DBInstanceName = null;
+        this.RequestId = null;
 
     }
 
@@ -2313,8 +2348,8 @@ class CloseServerlessDBExtranetAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2638,6 +2673,119 @@ class DestroyDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeParamsEvent request structure.
+ * @class
+ */
+class DescribeParamsEventRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
+ * Parameter modification event information
+ * @class
+ */
+class EventInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Original parameter value
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OldValue = null;
+
+        /**
+         * New parameter value in this modification event
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NewValue = null;
+
+        /**
+         * Start time of parameter modification
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Start time when the modified parameter takes effect
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EffectiveTime = null;
+
+        /**
+         * Modification status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Operator (generally, the value is the UIN of a sub-user)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Event log
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EventLog = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+        this.NewValue = 'NewValue' in params ? params.NewValue : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.EffectiveTime = 'EffectiveTime' in params ? params.EffectiveTime : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.EventLog = 'EventLog' in params ? params.EventLog : null;
 
     }
 }
@@ -3332,6 +3480,56 @@ class CreateReadOnlyGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeParamsEvent response structure.
+ * @class
+ */
+class DescribeParamsEventResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of modified parameters
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Details of parameter modification events
+         * @type {Array.<EventItem> || null}
+         */
+        this.EventItems = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.EventItems) {
+            this.EventItems = new Array();
+            for (let z in params.EventItems) {
+                let obj = new EventItem();
+                obj.deserialize(params.EventItems[z]);
+                this.EventItems.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CloseServerlessDBExtranetAccess response structure.
  * @class
  */
@@ -3360,6 +3558,59 @@ class CloseServerlessDBExtranetAccessResponse extends  AbstractModel {
 }
 
 /**
+ * Modification details of one parameter
+ * @class
+ */
+class EventItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * The number of modification events
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EventCount = null;
+
+        /**
+         * Modification event details
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<EventInfo> || null}
+         */
+        this.EventDetail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+
+        if (params.EventDetail) {
+            this.EventDetail = new Array();
+            for (let z in params.EventDetail) {
+                let obj = new EventInfo();
+                obj.deserialize(params.EventDetail[z]);
+                this.EventDetail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * RestartDBInstance request structure.
  * @class
  */
@@ -3383,6 +3634,163 @@ class RestartDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
+ * Parameter details
+ * @class
+ */
+class ParamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Parameter name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ParamValueType = null;
+
+        /**
+         * Value unit of the parameter. If the parameter has no unit, this field will return an empty string.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * Default value of the parameter, which is returned as a string
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Current value of the parameter, which is returned as a string
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Value range of the enum parameter
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * The maximum value of the `integer` or `real` parameter
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Max = null;
+
+        /**
+         * The minimum value of the `integer` or `real` parameter
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Min = null;
+
+        /**
+         * Parameter description in Chinese
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ParamDescriptionCH = null;
+
+        /**
+         * Parameter description in English
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ParamDescriptionEN = null;
+
+        /**
+         * Whether to restart the instance for the modified parameter to take effect. Valid values: `true` (yes), `false` (no)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.NeedReboot = null;
+
+        /**
+         * Parameter category in Chinese
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClassificationCN = null;
+
+        /**
+         * Parameter category in English
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClassificationEN = null;
+
+        /**
+         * Whether the parameter is related to specifications. Valid values: `true` (yes), `false` (no)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.SpecRelated = null;
+
+        /**
+         * Whether it is a key parameter. Valid values: `true` (yes, and modifying it may affect instance performance), `false` (no)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Advanced = null;
+
+        /**
+         * The last modified time of the parameter
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ParamValueType = 'ParamValueType' in params ? params.ParamValueType : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.ParamDescriptionCH = 'ParamDescriptionCH' in params ? params.ParamDescriptionCH : null;
+        this.ParamDescriptionEN = 'ParamDescriptionEN' in params ? params.ParamDescriptionEN : null;
+        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
+        this.ClassificationCN = 'ClassificationCN' in params ? params.ClassificationCN : null;
+        this.ClassificationEN = 'ClassificationEN' in params ? params.ClassificationEN : null;
+        this.SpecRelated = 'SpecRelated' in params ? params.SpecRelated : null;
+        this.Advanced = 'Advanced' in params ? params.Advanced : null;
+        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
 
     }
 }
@@ -4351,6 +4759,34 @@ class Filter extends  AbstractModel {
  * @class
  */
 class DisIsolateDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceParameters response structure.
+ * @class
+ */
+class ModifyDBInstanceParametersResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5386,6 +5822,41 @@ class DescribeDBErrlogsResponse extends  AbstractModel {
 }
 
 /**
+ * Parameters to be modified in batches
+ * @class
+ */
+class ParamEntry extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The new value to which the parameter will be modified. When this parameter is used as an input parameter, its value must be a string, such as `0.1` (decimal), `1000` (integer), and `replica` (enum).
+         * @type {string || null}
+         */
+        this.ExpectedValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ExpectedValue = 'ExpectedValue' in params ? params.ExpectedValue : null;
+
+    }
+}
+
+/**
  * InquiryPriceUpgradeDBInstance response structure.
  * @class
  */
@@ -5535,6 +6006,56 @@ class DescribeSlowQueryListRequest extends  AbstractModel {
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstanceParameters response structure.
+ * @class
+ */
+class DescribeDBInstanceParametersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of the parameters in the returned list
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Details of the returned parameter list
+         * @type {Array.<ParamInfo> || null}
+         */
+        this.Detail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new ParamInfo();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5801,6 +6322,49 @@ class DescribeSlowQueryAnalysisResponse extends  AbstractModel {
             this.Detail = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceParameters request structure.
+ * @class
+ */
+class ModifyDBInstanceParametersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Parameters to be modified and their new values
+         * @type {Array.<ParamEntry> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new ParamEntry();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
 
     }
 }
@@ -6404,12 +6968,13 @@ module.exports = {
     NormalQueryItem: NormalQueryItem,
     Tag: Tag,
     DescribeDBInstanceAttributeRequest: DescribeDBInstanceAttributeRequest,
-    ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
+    CloseServerlessDBExtranetAccessRequest: CloseServerlessDBExtranetAccessRequest,
     ServerlessDBAccount: ServerlessDBAccount,
     ModifyDBInstanceReadOnlyGroupRequest: ModifyDBInstanceReadOnlyGroupRequest,
     AddDBInstanceToReadOnlyGroupResponse: AddDBInstanceToReadOnlyGroupResponse,
     CreateReadOnlyDBInstanceResponse: CreateReadOnlyDBInstanceResponse,
     DurationAnalysis: DurationAnalysis,
+    DescribeDBInstanceParametersRequest: DescribeDBInstanceParametersRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
     ModifySwitchTimePeriodResponse: ModifySwitchTimePeriodResponse,
@@ -6423,11 +6988,13 @@ module.exports = {
     SetAutoRenewFlagResponse: SetAutoRenewFlagResponse,
     SpecInfo: SpecInfo,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
-    CloseServerlessDBExtranetAccessRequest: CloseServerlessDBExtranetAccessRequest,
+    ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     ReadOnlyGroup: ReadOnlyGroup,
     PgDeal: PgDeal,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,
     DestroyDBInstanceRequest: DestroyDBInstanceRequest,
+    DescribeParamsEventRequest: DescribeParamsEventRequest,
+    EventInfo: EventInfo,
     CreateInstancesResponse: CreateInstancesResponse,
     AnalysisItems: AnalysisItems,
     Xlog: Xlog,
@@ -6437,8 +7004,11 @@ module.exports = {
     DescribeSlowQueryListResponse: DescribeSlowQueryListResponse,
     ServerlessDBInstance: ServerlessDBInstance,
     CreateReadOnlyGroupRequest: CreateReadOnlyGroupRequest,
+    DescribeParamsEventResponse: DescribeParamsEventResponse,
     CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
+    EventItem: EventItem,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
+    ParamInfo: ParamInfo,
     Detail: Detail,
     IsolateDBInstancesResponse: IsolateDBInstancesResponse,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
@@ -6457,6 +7027,7 @@ module.exports = {
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     Filter: Filter,
     DisIsolateDBInstancesResponse: DisIsolateDBInstancesResponse,
+    ModifyDBInstanceParametersResponse: ModifyDBInstanceParametersResponse,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     SlowlogDetail: SlowlogDetail,
     RemoveDBInstanceFromReadOnlyGroupRequest: RemoveDBInstanceFromReadOnlyGroupRequest,
@@ -6477,15 +7048,18 @@ module.exports = {
     AccountInfo: AccountInfo,
     DBBackup: DBBackup,
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
+    ParamEntry: ParamEntry,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     ModifySwitchTimePeriodRequest: ModifySwitchTimePeriodRequest,
     DescribeSlowQueryListRequest: DescribeSlowQueryListRequest,
+    DescribeDBInstanceParametersResponse: DescribeDBInstanceParametersResponse,
     RegionInfo: RegionInfo,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     RemoveDBInstanceFromReadOnlyGroupResponse: RemoveDBInstanceFromReadOnlyGroupResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeSlowQueryAnalysisResponse: DescribeSlowQueryAnalysisResponse,
+    ModifyDBInstanceParametersRequest: ModifyDBInstanceParametersRequest,
     RawSlowQuery: RawSlowQuery,
     DescribeReadOnlyGroupsRequest: DescribeReadOnlyGroupsRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,

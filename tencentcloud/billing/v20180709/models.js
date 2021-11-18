@@ -1333,35 +1333,26 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
 
         /**
          * Action type to query. Valid values:
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+Purchase
+Renewal
+Modify
+Refund
+Deduction
+Hourly settlement
+Daily settlement
+Monthly settlement
+Offline project deduction
+Offline deduction
+adjust-CR
+adjust-DR
+One-off RI Fee
+Spot
+Hourly RI fee
+New monthly subscription
+Monthly subscription renewal
+Monthly subscription specification adjustment
+Monthly subscription specification adjustment
+Monthly subscription refund
          * @type {string || null}
          */
         this.ActionType = null;
@@ -1425,6 +1416,17 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
          */
         this.PayerUin = null;
 
+        /**
+         * A bill type, which corresponds to a subtotal type of L0 bills.
+This parameter has become valid since v3.0 bills took effect in May 2021.
+Valid values:
+`consume`: consumption
+`refund`: refund
+`adjustment`: bill adjustment
+         * @type {string || null}
+         */
+        this.PayType = null;
+
     }
 
     /**
@@ -1437,6 +1439,7 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
 
     }
 }

@@ -2117,7 +2117,7 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Date. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+         * Date. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. However, this parameter is now invalid.
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
@@ -2556,10 +2556,11 @@ class DisableReplicaReadonlyResponse extends  AbstractModel {
         super();
 
         /**
-         * ERROR: failure; OK: success
-         * @type {string || null}
+         * Task ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.Status = null;
+        this.TaskId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2576,7 +2577,7 @@ class DisableReplicaReadonlyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3495,19 +3496,19 @@ class DescribeBackupUrlResponse extends  AbstractModel {
         super();
 
         /**
-         * Download address on the public network (valid for 6 hours)
+         * Public network download address (valid for six hours). This field will be deprecated soon.
          * @type {Array.<string> || null}
          */
         this.DownloadUrl = null;
 
         /**
-         * Download address on the private network (valid for 6 hours)
+         * Private network download address (valid for six hours). This field will be deprecated soon.
          * @type {Array.<string> || null}
          */
         this.InnerDownloadUrl = null;
 
         /**
-         * File name (only valid for TencentDB for Tendis instances)
+         * Filename. This field will be deprecated soon.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -3596,7 +3597,7 @@ class InquiryPriceCreateInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * Price. Unit: USD
+         * Price in USD
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -5529,10 +5530,18 @@ class EnableReplicaReadonlyResponse extends  AbstractModel {
         super();
 
         /**
-         * ERROR: erroneous; OK: correct.
+         * Valid values: `ERROR`, `OK`. This field has been deprecated.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
+
+        /**
+         * Task ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TaskId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5550,6 +5559,7 @@ class EnableReplicaReadonlyResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6886,19 +6896,19 @@ class ModifyParamTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * New name of the parameter template.
+         * New name after the parameter template is modified.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * New description of the parameter template.
+         * New description after the parameter template is modified.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * List of new parameters.
+         * New parameter list after the parameter template is modified.
          * @type {Array.<InstanceParam> || null}
          */
         this.ParamList = null;
@@ -7638,19 +7648,19 @@ If `TypeId` indicates the standard architecture, `MemSize` indicates the total m
         this.ZoneId = null;
 
         /**
-         * Number of instance shards. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, Redis 2.8 in standalone architecture, and Redis 4.0 in standard architecture.
+         * Instance shard quantity. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, Redis 2.8 standalone edition, and Redis 4.0 standard architecture.
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Number of instance replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+         * Instance replica quantity. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, and Redis 2.8 standalone edition.
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
 
         /**
-         * Whether to support read-only replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
+         * Whether to support read-only replicas. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, and Redis 2.8 standalone edition.
          * @type {boolean || null}
          */
         this.ReplicasReadonly = null;
@@ -9281,19 +9291,19 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Shard size in MB
+         * Shard size in MB. This parameter cannot be passed in at the same time as `RedisShardNum`/`RedisReplicasNum`.
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * Number of shards. This parameter can be left blank for Redis 2.8 primary-secondary edition, CKV primary-secondary edition, and Redis 2.8 standalone edition
+         * Shard quantity. This parameter is not required by standard architecture instances and cannot be passed in at the same time as `RedisReplicasNum`/`MemSize`.
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Number of replicas. This parameter can be left blank for Redis 2.8 primary-secondary edition, CKV primary-secondary edition, and Redis 2.8 standalone edition
+         * Replica quantity. This parameter cannot be passed in at the same time as `RedisShardNum`/`MemSize`. To modify the number of replicas in a multi-AZ instance, `NodeSet` must be passed in.
          * @type {number || null}
          */
         this.RedisReplicasNum = null;

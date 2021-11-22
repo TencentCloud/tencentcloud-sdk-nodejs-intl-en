@@ -52,6 +52,18 @@ We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can gu
          */
         this.EnableDetectSplit = null;
 
+        /**
+         * Whether to enable PDF recognition. Default value: `false`. If you enable this feature, both images and PDF files can be recognized.
+         * @type {boolean || null}
+         */
+        this.IsPdf = null;
+
+        /**
+         * Number of a PDF page that needs to be recognized. Currently, only one single page can be recognized. This parameter takes effect only if a PDF file is uploaded and `IsPdf` is set to `true`. Default value: `1`
+         * @type {number || null}
+         */
+        this.PdfPageNumber = null;
+
     }
 
     /**
@@ -65,6 +77,8 @@ We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can gu
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.IsWords = 'IsWords' in params ? params.IsWords : null;
         this.EnableDetectSplit = 'EnableDetectSplit' in params ? params.EnableDetectSplit : null;
+        this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
+        this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
 
     }
 }
@@ -574,9 +588,9 @@ class HKIDCardOCRRequest extends  AbstractModel {
         this.ReturnHeadImage = null;
 
         /**
-         * Base64-encoded value of image.
-Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-Supported image size: the downloaded image cannot exceed 3 MB in size after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+         * Base64 string of the image
+Supported image formats: PNG, JPG, JPEG. GIF is not supported yet.
+Supported image size: The downloaded image cannot exceed 7 MB after being Base64-encoded, and it cannot take longer than 3 seconds to download the image.
          * @type {string || null}
          */
         this.ImageBase64 = null;

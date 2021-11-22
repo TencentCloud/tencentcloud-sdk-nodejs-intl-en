@@ -2031,6 +2031,90 @@ db-tag-key: filter by tag key (in string format)
 }
 
 /**
+ * ModifyDBInstanceSpec request structure.
+ * @class
+ */
+class ModifyDBInstanceSpecRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of postgres-6bwgamo3.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Instance memory size in GiB after modification.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance disk size in GiB after modification.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list. Currently, you can specify only one voucher.
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Campaign ID.
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+         * @type {number || null}
+         */
+        this.SwitchTag = null;
+
+        /**
+         * The earliest time to start a switch.
+         * @type {string || null}
+         */
+        this.SwitchStartTime = null;
+
+        /**
+         * The latest time to start a switch.
+         * @type {string || null}
+         */
+        this.SwitchEndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.SwitchTag = 'SwitchTag' in params ? params.SwitchTag : null;
+        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
+        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
+
+    }
+}
+
+/**
  * ModifyAccountRemark response structure.
  * @class
  */
@@ -4017,6 +4101,34 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+    }
+}
+
+/**
+ * OpenServerlessDBExtranetAccess response structure.
+ * @class
+ */
+class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6769,12 +6881,24 @@ class DescribeDBInstanceAttributeResponse extends  AbstractModel {
 }
 
 /**
- * OpenServerlessDBExtranetAccess response structure.
+ * ModifyDBInstanceSpec response structure.
  * @class
  */
-class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
+class ModifyDBInstanceSpecResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Order ID.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * Bill ID of frozen fees.
+         * @type {string || null}
+         */
+        this.BillId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6791,6 +6915,8 @@ class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6981,6 +7107,7 @@ module.exports = {
     DisIsolateDBInstancesRequest: DisIsolateDBInstancesRequest,
     ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
+    ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeZonesRequest: DescribeZonesRequest,
@@ -7015,6 +7142,7 @@ module.exports = {
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
     RebalanceReadOnlyGroupResponse: RebalanceReadOnlyGroupResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
+    OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     DescribeSlowQueryAnalysisRequest: DescribeSlowQueryAnalysisRequest,
     ErrLogDetail: ErrLogDetail,
@@ -7068,7 +7196,7 @@ module.exports = {
     DescribeDBSlowlogsRequest: DescribeDBSlowlogsRequest,
     DestroyDBInstanceResponse: DestroyDBInstanceResponse,
     DescribeDBInstanceAttributeResponse: DescribeDBInstanceAttributeResponse,
-    OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
+    ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     CreateDBInstancesResponse: CreateDBInstancesResponse,

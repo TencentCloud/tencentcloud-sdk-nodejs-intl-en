@@ -2321,6 +2321,36 @@ class DescribeStreamLiveRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * Timed recording settings
+ * @class
+ */
+class TimedRecordSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to automatically delete finished recording events. Valid values: `CLOSE`, `OPEN`. If this parameter is left empty, `CLOSE` will be used.
+If it is set to `OPEN`, a recording event will be deleted 7 days after it is finished.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AutoClear = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoClear = 'AutoClear' in params ? params.AutoClear : null;
+
+    }
+}
+
+/**
  * StreamLive region information
  * @class
  */
@@ -2456,6 +2486,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
          */
         this.AVTemplates = null;
 
+        /**
+         * Event settings
+         * @type {PlanSettings || null}
+         */
+        this.PlanSettings = null;
+
     }
 
     /**
@@ -2510,6 +2546,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
                 obj.deserialize(params.AVTemplates[z]);
                 this.AVTemplates.push(obj);
             }
+        }
+
+        if (params.PlanSettings) {
+            let obj = new PlanSettings();
+            obj.deserialize(params.PlanSettings)
+            this.PlanSettings = obj;
         }
 
     }
@@ -3423,6 +3465,40 @@ class ChannelOutputsStatistics extends  AbstractModel {
 }
 
 /**
+ * Event settings
+ * @class
+ */
+class PlanSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Timed recording settings
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {TimedRecordSettings || null}
+         */
+        this.TimedRecordSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TimedRecordSettings) {
+            let obj = new TimedRecordSettings();
+            obj.deserialize(params.TimedRecordSettings)
+            this.TimedRecordSettings = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeStreamLiveInputSecurityGroups response structure.
  * @class
  */
@@ -4231,6 +4307,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
          */
         this.AVTemplates = null;
 
+        /**
+         * Event settings
+         * @type {PlanSettings || null}
+         */
+        this.PlanSettings = null;
+
     }
 
     /**
@@ -4286,6 +4368,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
                 obj.deserialize(params.AVTemplates[z]);
                 this.AVTemplates.push(obj);
             }
+        }
+
+        if (params.PlanSettings) {
+            let obj = new PlanSettings();
+            obj.deserialize(params.PlanSettings)
+            this.PlanSettings = obj;
         }
 
     }
@@ -4418,6 +4506,13 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.AVTemplates = null;
 
+        /**
+         * Event settings
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {PlanSettings || null}
+         */
+        this.PlanSettings = null;
+
     }
 
     /**
@@ -4474,6 +4569,12 @@ Note: this field may return `null`, indicating that no valid value was found.
                 obj.deserialize(params.AVTemplates[z]);
                 this.AVTemplates.push(obj);
             }
+        }
+
+        if (params.PlanSettings) {
+            let obj = new PlanSettings();
+            obj.deserialize(params.PlanSettings)
+            this.PlanSettings = obj;
         }
 
     }
@@ -4639,6 +4740,7 @@ module.exports = {
     DescribeStreamLiveChannelsResponse: DescribeStreamLiveChannelsResponse,
     PlanReq: PlanReq,
     DescribeStreamLiveRegionsResponse: DescribeStreamLiveRegionsResponse,
+    TimedRecordSettings: TimedRecordSettings,
     StreamLiveRegionInfo: StreamLiveRegionInfo,
     DescribeStreamLiveChannelRequest: DescribeStreamLiveChannelRequest,
     DescribeStreamLivePlansRequest: DescribeStreamLivePlansRequest,
@@ -4663,6 +4765,7 @@ module.exports = {
     StartStreamLiveChannelResponse: StartStreamLiveChannelResponse,
     StreamLiveOutputGroupsInfo: StreamLiveOutputGroupsInfo,
     ChannelOutputsStatistics: ChannelOutputsStatistics,
+    PlanSettings: PlanSettings,
     DescribeStreamLiveInputSecurityGroupsResponse: DescribeStreamLiveInputSecurityGroupsResponse,
     DeleteStreamLiveInputResponse: DeleteStreamLiveInputResponse,
     StartStreamLiveChannelRequest: StartStreamLiveChannelRequest,

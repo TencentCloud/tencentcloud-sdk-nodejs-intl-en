@@ -54,6 +54,7 @@ const ModifySwitchTimePeriodResponse = models.ModifySwitchTimePeriodResponse;
 const DisIsolateDBInstancesRequest = models.DisIsolateDBInstancesRequest;
 const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
@@ -88,6 +89,7 @@ const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const RebalanceReadOnlyGroupResponse = models.RebalanceReadOnlyGroupResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const DescribeSlowQueryAnalysisRequest = models.DescribeSlowQueryAnalysisRequest;
 const ErrLogDetail = models.ErrLogDetail;
@@ -141,7 +143,7 @@ const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
 const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
-const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
+const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
@@ -474,6 +476,17 @@ class PostgresClient extends AbstractClient {
     InquiryPriceUpgradeDBInstance(req, cb) {
         let resp = new InquiryPriceUpgradeDBInstanceResponse();
         this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance specifications including memory and disk size.
+     * @param {ModifyDBInstanceSpecRequest} req
+     * @param {function(string, ModifyDBInstanceSpecResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSpec(req, cb) {
+        let resp = new ModifyDBInstanceSpecResponse();
+        this.request("ModifyDBInstanceSpec", req, resp, cb);
     }
 
     /**

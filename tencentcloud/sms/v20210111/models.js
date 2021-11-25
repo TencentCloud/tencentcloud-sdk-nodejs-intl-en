@@ -153,12 +153,13 @@ class ModifySmsSignRequest extends  AbstractModel {
 
         /**
          * Signature type. Each of these types is followed by their `DocumentType` (identity certificate type) option:
-0: company. Valid values of `DocumentType` include 0, 1, 2, and 3.
+0: company. Valid values of `DocumentType` include 0 and 1.
 1: app. Valid values of `DocumentType` include 0, 1, 2, 3, and 4.
 2: website. Valid values of `DocumentType` include 0, 1, 2, 3, and 5.
-3: WeChat Official Account or WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
+3: WeChat Official Account. Valid values of `DocumentType` include 0, 1, 2, 3, and 8.
 4: trademark. Valid values of `DocumentType` include 7.
 5: government/public institution/other. Valid values of `DocumentType` include 2 and 3.
+6: WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
 Note: the identity certificate type must be selected according to the correspondence; otherwise, the review will fail.
          * @type {number || null}
          */
@@ -174,7 +175,7 @@ Note: the identity certificate type must be selected according to the correspond
 5: screenshot of website ICP filing backend (for personal website).
 6: screenshot of WeChat Mini Program settings page (for personal WeChat Mini Program).
 7: trademark registration certificate.
-Note: the corresponding `DocumentType` must be selected according to `SignType`.
+8: screenshot of WeChat Official Account settings page (for personal WeChat Official Account).
          * @type {number || null}
          */
         this.DocumentType = null;
@@ -255,12 +256,13 @@ Note: you cannot apply for an approved or pending signature again.
 
         /**
          * Signature type. Each of these types is followed by their `DocumentType` (identity certificate type) option:
-0: company. Valid values of `DocumentType` include 0, 1, 2, and 3.
+0: company. Valid values of `DocumentType` include 0 and 1.
 1: app. Valid values of `DocumentType` include 0, 1, 2, 3, and 4.
 2: website. Valid values of `DocumentType` include 0, 1, 2, 3, and 5.
-3: WeChat Official Account or WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
+3: WeChat Official Account. Valid values of `DocumentType` include 0, 1, 2, 3, and 8.
 4: trademark. Valid values of `DocumentType` include 7.
 5: government/public institution/other. Valid values of `DocumentType` include 2 and 3.
+6: WeChat Mini Program. Valid values of `DocumentType` include 0, 1, 2, 3, and 6.
 Note: the identity certificate type must be selected according to the correspondence; otherwise, the review will fail.
          * @type {number || null}
          */
@@ -276,7 +278,7 @@ Note: the identity certificate type must be selected according to the correspond
 5: screenshot of website ICP filing backend (for personal website).
 6: screenshot of WeChat Mini Program settings page (for personal WeChat Mini Program).
 7: trademark registration certificate.
-Note: the corresponding `DocumentType` must be selected according to `SignType`.
+8: screenshot of WeChat Official Account settings page (for personal WeChat Official Account).
          * @type {number || null}
          */
         this.DocumentType = null;
@@ -1012,14 +1014,14 @@ Note: 11-digit Chinese mainland numbers prefixed by 0086 or 86 or those without 
         this.SmsSdkAppId = null;
 
         /**
-         * Template ID. You must enter the ID of an approved template, which can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2). If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
+         * Template ID. You must enter the ID of an approved template, which can be viewed on the [Mainland China SMS](https://console.cloud.tencent.com/smsv2/csms-template) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template) body template management page. If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
          * @type {string || null}
          */
         this.TemplateId = null;
 
         /**
-         * SMS signature information which is encoded in UTF-8. You must enter an approved signature (such as Tencent Cloud). The signing information can be viewed in the [SMS console](https://console.cloud.tencent.com/smsv2).
-<dx-alert infotype="notice" title="Note">This parameter is required for Chinese mainland SMS.</dx-alert>
+         * Content of the SMS signature, which should be encoded in UTF-8. You must enter an approved signature, such as Tencent Cloud. The signature information can be viewed on the [Mainland China SMS](https://console.cloud.tencent.com/smsv2/csms-sign) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-sign) signature management page.
+<dx-alert infotype="notice" title="Note">This parameter is required for Mainland China SMS.</dx-alert>
          * @type {string || null}
          */
         this.SignName = null;
@@ -1032,7 +1034,7 @@ Note: 11-digit Chinese mainland numbers prefixed by 0086 or 86 or those without 
         this.TemplateParamSet = null;
 
         /**
-         * SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+         * SMS code number extension, which is not activated by default. If you need to activate it, you can contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
          * @type {string || null}
          */
         this.ExtendCode = null;
@@ -1045,7 +1047,7 @@ Note: 11-digit Chinese mainland numbers prefixed by 0086 or 86 or those without 
 
         /**
          * This parameter is not required for Mainland China SMS. For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
-Note: if your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+Note: if your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
          * @type {string || null}
          */
         this.SenderId = null;
@@ -1520,19 +1522,33 @@ class DescribeSmsTemplateListRequest extends  AbstractModel {
         super();
 
         /**
-         * Template ID array.
-<dx-alert infotype="notice" title="Note">The max array length is 100 by default.</dx-alert>
-         * @type {Array.<number> || null}
-         */
-        this.TemplateIdSet = null;
-
-        /**
          * Whether it is Global SMS:
 0: Mainland China SMS.
 1: Global SMS.
          * @type {number || null}
          */
         this.International = null;
+
+        /**
+         * Array of template IDs. If the array is empty, the template list information will be queried by default (only allowed for root accounts). You need to use the `Limit` and `Offset` fields to set the query range.
+<dx-alert infotype="notice" title="Note">The default array length can be up to 100</dx-alert>
+         * @type {Array.<number> || null}
+         */
+        this.TemplateIdSet = null;
+
+        /**
+         * Upper limit. Maximum value: 100.
+Note: it is 0 by default and is enabled when `TemplateIdSet` is empty.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset.
+Note: it is 0 by default and is enabled when `TemplateIdSet` is empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -1543,8 +1559,10 @@ class DescribeSmsTemplateListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateIdSet = 'TemplateIdSet' in params ? params.TemplateIdSet : null;
         this.International = 'International' in params ? params.International : null;
+        this.TemplateIdSet = 'TemplateIdSet' in params ? params.TemplateIdSet : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1854,7 +1872,7 @@ class SendStatus extends  AbstractModel {
         this.PhoneNumber = null;
 
         /**
-         * Number of billable SMS messages. For billing rules, please see [Billing Policy](https://intl.cloud.tencent.com/document/product/382/36135?from_cn_redirect=1).
+         * Number of billable SMS messages. For billing rules, see Billing Policy.
          * @type {number || null}
          */
         this.Fee = null;
@@ -1866,7 +1884,7 @@ class SendStatus extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * SMS request error code. For details, see [Error Codes](https://intl.cloud.tencent.com/document/api/382/55981?from_cn_redirect=1#6.-.E9.94.99.E8.AF.AF.E7.A0.81). `Ok` will be returned if the request is successful.
+         * SMS request error code. For specific meanings, see [Error Codes](https://intl.cloud.tencent.com/zh/document/product/382/40536#6.-error-code). `Ok` will be returned for successful delivery.
          * @type {string || null}
          */
         this.Code = null;

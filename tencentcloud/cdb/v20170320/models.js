@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ModifyInstanceTag response structure.
+ * @class
+ */
+class ModifyInstanceTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Purchasable instance type
  * @class
  */
@@ -2895,18 +2923,42 @@ class SwitchForUpgradeRequest extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceTag response structure.
+ * ModifyBackupDownloadRestriction request structure.
  * @class
  */
-class ModifyInstanceTagResponse extends  AbstractModel {
+class ModifyBackupDownloadRestrictionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Valid values: `NoLimit` (backups can be downloaded over both private and public networks with any IPs), `LimitOnlyIntranet` (backups can be downloaded over the private network with any private IPs), `Customize` (backups can be downloaded over specified VPCs with specified IPs). The `LimitVpc` and `LimitIp` parameters are valid only when this parameter is set to `Customize`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LimitType = null;
+
+        /**
+         * Valid value: `In` (backups can only be downloaded over the VPCs specified in `LimitVpc`). Default value: `In`.
+         * @type {string || null}
+         */
+        this.VpcComparisonSymbol = null;
+
+        /**
+         * Valid values: `In` (backups can only be downloaded with the IPs specified in `LimitIp`), `NotIn` (backups cannot be downloaded with the IPs specified in `LimitIp`). Default value: `In`.
+         * @type {string || null}
+         */
+        this.IpComparisonSymbol = null;
+
+        /**
+         * VPCs used to restrict backup download.
+         * @type {Array.<BackupLimitVpcItem> || null}
+         */
+        this.LimitVpc = null;
+
+        /**
+         * IPs used to restrict backup download.
+         * @type {Array.<string> || null}
+         */
+        this.LimitIp = null;
 
     }
 
@@ -2917,7 +2969,19 @@ class ModifyInstanceTagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LimitType = 'LimitType' in params ? params.LimitType : null;
+        this.VpcComparisonSymbol = 'VpcComparisonSymbol' in params ? params.VpcComparisonSymbol : null;
+        this.IpComparisonSymbol = 'IpComparisonSymbol' in params ? params.IpComparisonSymbol : null;
+
+        if (params.LimitVpc) {
+            this.LimitVpc = new Array();
+            for (let z in params.LimitVpc) {
+                let obj = new BackupLimitVpcItem();
+                obj.deserialize(params.LimitVpc[z]);
+                this.LimitVpc.push(obj);
+            }
+        }
+        this.LimitIp = 'LimitIp' in params ? params.LimitIp : null;
 
     }
 }
@@ -3045,6 +3109,56 @@ class ModifyAccountMaxUserConnectionsRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
+
+    }
+}
+
+/**
+ * ModifyAccountDescription request structure.
+ * @class
+ */
+class ModifyAccountDescriptionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * TencentDB account
+         * @type {Array.<Account> || null}
+         */
+        this.Accounts = null;
+
+        /**
+         * Database account remarks
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new Account();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -4908,6 +5022,69 @@ class DescribeDBSwitchRecordsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Slow log details
+ * @class
+ */
+class SlowLogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup filename
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Backup file size in bytes
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Backup snapshot time in the format of yyyy-MM-dd HH:mm:ss, such as 2016-03-17 02:10:37
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * Download address on the private network
+         * @type {string || null}
+         */
+        this.IntranetUrl = null;
+
+        /**
+         * Download address on the public network
+         * @type {string || null}
+         */
+        this.InternetUrl = null;
+
+        /**
+         * Log type. Value range: slowlog (slow log)
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
+        this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -7487,6 +7664,56 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceParams response structure.
+ * @class
+ */
+class DescribeInstanceParamsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of instance parameters.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Parameter details.
+         * @type {Array.<ParameterDetail> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParameterDetail();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Table permission
  * @class
  */
@@ -9034,30 +9261,48 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAccountDescription request structure.
+ * DescribeBackupDownloadRestriction response structure.
  * @class
  */
-class ModifyAccountDescriptionRequest extends  AbstractModel {
+class DescribeBackupDownloadRestrictionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * Valid values: `NoLimit` (backups can be downloaded over both private and public networks with any IPs), `LimitOnlyIntranet` (backups can be downloaded over the private network with any private IPs), `Customize` (backups can be downloaded over specified VPCs with specified IPs). The `LimitVpc` and `LimitIp` parameters are valid only when this parameter is set to `Customize`.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.LimitType = null;
 
         /**
-         * TencentDB account
-         * @type {Array.<Account> || null}
-         */
-        this.Accounts = null;
-
-        /**
-         * Database account remarks
+         * Valid value: `In` (backups can only be downloaded over the VPCs specified in `LimitVpc`).
          * @type {string || null}
          */
-        this.Description = null;
+        this.VpcComparisonSymbol = null;
+
+        /**
+         * Valid values: `In` (backups can only be downloaded with the IPs specified in `LimitIp`), `NotIn` (backups cannot be downloaded with the IPs specified in `LimitIp`).
+         * @type {string || null}
+         */
+        this.IpComparisonSymbol = null;
+
+        /**
+         * VPCs used to restrict backup download.
+         * @type {Array.<BackupLimitVpcItem> || null}
+         */
+        this.LimitVpc = null;
+
+        /**
+         * IPs used to restrict backup download.
+         * @type {Array.<string> || null}
+         */
+        this.LimitIp = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -9068,17 +9313,20 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LimitType = 'LimitType' in params ? params.LimitType : null;
+        this.VpcComparisonSymbol = 'VpcComparisonSymbol' in params ? params.VpcComparisonSymbol : null;
+        this.IpComparisonSymbol = 'IpComparisonSymbol' in params ? params.IpComparisonSymbol : null;
 
-        if (params.Accounts) {
-            this.Accounts = new Array();
-            for (let z in params.Accounts) {
-                let obj = new Account();
-                obj.deserialize(params.Accounts[z]);
-                this.Accounts.push(obj);
+        if (params.LimitVpc) {
+            this.LimitVpc = new Array();
+            for (let z in params.LimitVpc) {
+                let obj = new BackupLimitVpcItem();
+                obj.deserialize(params.LimitVpc[z]);
+                this.LimitVpc.push(obj);
             }
         }
-        this.Description = 'Description' in params ? params.Description : null;
+        this.LimitIp = 'LimitIp' in params ? params.LimitIp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10082,6 +10330,34 @@ class IsolateDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ModifyBackupDownloadRestriction response structure.
+ * @class
+ */
+class ModifyBackupDownloadRestrictionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11394,48 +11670,12 @@ class DescribeParamTemplateInfoRequest extends  AbstractModel {
 }
 
 /**
- * Slow log details
+ * DescribeBackupDownloadRestriction request structure.
  * @class
  */
-class SlowLogInfo extends  AbstractModel {
+class DescribeBackupDownloadRestrictionRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Backup filename
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Backup file size in bytes
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * Backup snapshot time in the format of yyyy-MM-dd HH:mm:ss, such as 2016-03-17 02:10:37
-         * @type {string || null}
-         */
-        this.Date = null;
-
-        /**
-         * Download address on the private network
-         * @type {string || null}
-         */
-        this.IntranetUrl = null;
-
-        /**
-         * Download address on the public network
-         * @type {string || null}
-         */
-        this.InternetUrl = null;
-
-        /**
-         * Log type. Value range: slowlog (slow log)
-         * @type {string || null}
-         */
-        this.Type = null;
 
     }
 
@@ -11446,12 +11686,6 @@ class SlowLogInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Date = 'Date' in params ? params.Date : null;
-        this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
-        this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
-        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -11682,30 +11916,24 @@ class DescribeDBInstanceInfoRequest extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceParams response structure.
+ * VPCs used to restrict backup download
  * @class
  */
-class DescribeInstanceParamsResponse extends  AbstractModel {
+class BackupLimitVpcItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of instance parameters.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Parameter details.
-         * @type {Array.<ParameterDetail> || null}
-         */
-        this.Items = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The region where the backup download restrictions take effect. It must be the same as the common request parameter `Region` of the API.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Region = null;
+
+        /**
+         * The list of VPCs used to restrict backup download
+         * @type {Array.<string> || null}
+         */
+        this.VpcList = null;
 
     }
 
@@ -11716,17 +11944,8 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new ParameterDetail();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcList = 'VpcList' in params ? params.VpcList : null;
 
     }
 }
@@ -13079,6 +13298,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 module.exports = {
+    ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     SellType: SellType,
     TaskDetail: TaskDetail,
     DeviceDiskInfo: DeviceDiskInfo,
@@ -13136,10 +13356,11 @@ module.exports = {
     ParameterDetail: ParameterDetail,
     BackupSummaryItem: BackupSummaryItem,
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
-    ModifyInstanceTagResponse: ModifyInstanceTagResponse,
+    ModifyBackupDownloadRestrictionRequest: ModifyBackupDownloadRestrictionRequest,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     ModifyAccountMaxUserConnectionsRequest: ModifyAccountMaxUserConnectionsRequest,
+    ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     BinlogInfo: BinlogInfo,
     DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
@@ -13164,6 +13385,7 @@ module.exports = {
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
     DescribeDBSwitchRecordsResponse: DescribeDBSwitchRecordsResponse,
+    SlowLogInfo: SlowLogInfo,
     RollbackTableName: RollbackTableName,
     DeleteBackupResponse: DeleteBackupResponse,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
@@ -13225,6 +13447,7 @@ module.exports = {
     OpenDBInstanceGTIDRequest: OpenDBInstanceGTIDRequest,
     UpgradeDBInstanceEngineVersionResponse: UpgradeDBInstanceEngineVersionResponse,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
+    DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     TablePrivilege: TablePrivilege,
     BalanceRoGroupLoadRequest: BalanceRoGroupLoadRequest,
     DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
@@ -13253,7 +13476,7 @@ module.exports = {
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     RoVipInfo: RoVipInfo,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
-    ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
+    DescribeBackupDownloadRestrictionResponse: DescribeBackupDownloadRestrictionResponse,
     ModifyAccountPasswordRequest: ModifyAccountPasswordRequest,
     DescribeTablesRequest: DescribeTablesRequest,
     InstanceRebootTime: InstanceRebootTime,
@@ -13269,6 +13492,7 @@ module.exports = {
     RoInstanceInfo: RoInstanceInfo,
     CreateAccountsRequest: CreateAccountsRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
+    ModifyBackupDownloadRestrictionResponse: ModifyBackupDownloadRestrictionResponse,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
     DeviceCpuRateInfo: DeviceCpuRateInfo,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
@@ -13298,13 +13522,13 @@ module.exports = {
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
-    SlowLogInfo: SlowLogInfo,
+    DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
     DescribeDataBackupOverviewRequest: DescribeDataBackupOverviewRequest,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     ParamRecord: ParamRecord,
     RestartDBInstancesRequest: RestartDBInstancesRequest,
     DescribeDBInstanceInfoRequest: DescribeDBInstanceInfoRequest,
-    DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
+    BackupLimitVpcItem: BackupLimitVpcItem,
     DescribeDBZoneConfigResponse: DescribeDBZoneConfigResponse,
     CreateDeployGroupRequest: CreateDeployGroupRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,

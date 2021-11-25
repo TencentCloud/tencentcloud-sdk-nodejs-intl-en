@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const SellType = models.SellType;
 const TaskDetail = models.TaskDetail;
 const DeviceDiskInfo = models.DeviceDiskInfo;
@@ -73,10 +74,11 @@ const DescribeDataBackupOverviewResponse = models.DescribeDataBackupOverviewResp
 const ParameterDetail = models.ParameterDetail;
 const BackupSummaryItem = models.BackupSummaryItem;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
-const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
+const ModifyBackupDownloadRestrictionRequest = models.ModifyBackupDownloadRestrictionRequest;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
+const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const BinlogInfo = models.BinlogInfo;
 const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
@@ -101,6 +103,7 @@ const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
+const SlowLogInfo = models.SlowLogInfo;
 const RollbackTableName = models.RollbackTableName;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
@@ -162,6 +165,7 @@ const TagInfoUnit = models.TagInfoUnit;
 const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const TablePrivilege = models.TablePrivilege;
 const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
@@ -190,7 +194,7 @@ const RoGroupAttr = models.RoGroupAttr;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const RoVipInfo = models.RoVipInfo;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
-const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
 const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const InstanceRebootTime = models.InstanceRebootTime;
@@ -206,6 +210,7 @@ const SlaveConfig = models.SlaveConfig;
 const RoInstanceInfo = models.RoInstanceInfo;
 const CreateAccountsRequest = models.CreateAccountsRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
 const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
 const DeviceCpuRateInfo = models.DeviceCpuRateInfo;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
@@ -235,13 +240,13 @@ const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
-const SlowLogInfo = models.SlowLogInfo;
+const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
 const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const ParamRecord = models.ParamRecord;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
 const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
-const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const BackupLimitVpcItem = models.BackupLimitVpcItem;
 const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
 const CreateDeployGroupRequest = models.CreateDeployGroupRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
@@ -351,14 +356,18 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * This API (DescribeAccounts) is used to query information of all TencentDB accounts.
-     * @param {DescribeAccountsRequest} req
-     * @param {function(string, DescribeAccountsResponse):void} cb
+     * This API (RestartDBInstances) is used to restart TencentDB instances.
+
+Note:
+1. This API only supports restarting primary instances.
+2. The instance status must be normal, and no other async tasks are in progress.
+     * @param {RestartDBInstancesRequest} req
+     * @param {function(string, RestartDBInstancesResponse):void} cb
      * @public
      */
-    DescribeAccounts(req, cb) {
-        let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
+    RestartDBInstances(req, cb) {
+        let resp = new RestartDBInstancesResponse();
+        this.request("RestartDBInstances", req, resp, cb);
     }
 
     /**
@@ -454,14 +463,14 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API (ModifyDBInstanceSecurityGroups) is used to modify the security groups bound to a TencentDB instance.
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * This API is used to modify the restrictions of downloading backups in a region. You can specify which types of networks (private, or both private and public), VPCs, and IPs to download backups.
+     * @param {ModifyBackupDownloadRestrictionRequest} req
+     * @param {function(string, ModifyBackupDownloadRestrictionResponse):void} cb
      * @public
      */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    ModifyBackupDownloadRestriction(req, cb) {
+        let resp = new ModifyBackupDownloadRestrictionResponse();
+        this.request("ModifyBackupDownloadRestriction", req, resp, cb);
     }
 
     /**
@@ -1116,18 +1125,25 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (RestartDBInstances) is used to restart TencentDB instances.
-
-Note:
-1. This API only supports restarting primary instances.
-2. The instance status must be normal, and no other async tasks are in progress.
-     * @param {RestartDBInstancesRequest} req
-     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * This API (DescribeAccounts) is used to query information of all TencentDB accounts.
+     * @param {DescribeAccountsRequest} req
+     * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
      */
-    RestartDBInstances(req, cb) {
-        let resp = new RestartDBInstancesResponse();
-        this.request("RestartDBInstances", req, resp, cb);
+    DescribeAccounts(req, cb) {
+        let resp = new DescribeAccountsResponse();
+        this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the restrictions of downloading backups in a region.
+     * @param {DescribeBackupDownloadRestrictionRequest} req
+     * @param {function(string, DescribeBackupDownloadRestrictionResponse):void} cb
+     * @public
+     */
+    DescribeBackupDownloadRestriction(req, cb) {
+        let resp = new DescribeBackupDownloadRestrictionResponse();
+        this.request("DescribeBackupDownloadRestriction", req, resp, cb);
     }
 
     /**
@@ -1251,6 +1267,17 @@ Note that before enabling public network access, you need to first [initialize t
     OpenWanService(req, cb) {
         let resp = new OpenWanServiceResponse();
         this.request("OpenWanService", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyDBInstanceSecurityGroups) is used to modify the security groups bound to a TencentDB instance.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**

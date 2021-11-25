@@ -81,6 +81,13 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.Events = null;
 
         /**
+         * Total number of events.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -106,6 +113,7 @@ Note: `null` may be returned for this field, indicating that no valid values can
                 this.Events.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

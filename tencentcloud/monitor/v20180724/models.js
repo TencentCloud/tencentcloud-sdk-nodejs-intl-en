@@ -357,7 +357,7 @@ class DescribeProductEventListRequest extends  AbstractModel {
         this.Dimensions = null;
 
         /**
-         * Region filter parameter for service events, such as `gz`. For region abbreviations, please see [Region List](https://intl.cloud.tencent.com/document/product/248/50863?from_cn_redirect=1)
+         * Region filter parameter for service events.
          * @type {Array.<string> || null}
          */
         this.RegionList = null;
@@ -875,7 +875,7 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
         this.MonitorType = null;
 
         /**
-         * Type of alarm policy, which can be obtained via [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1). An example value is `cvm_device`.
+         * Type of alarm policy, which can be obtained via [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1). For the monitoring of Tencent Cloud services, the value of this parameter is `QceNamespacesNew.N.Id` of the output parameter of `DescribeAllNamespaces`, for example, `cvm_device`.
          * @type {string || null}
          */
         this.Namespace = null;
@@ -4757,7 +4757,6 @@ class DescribeAlarmHistoriesRequest extends  AbstractModel {
 
         /**
          * Filter by project ID. Valid values: `-1` (no project), `0` (default project)
-You can query [Project Management](https://console.cloud.tencent.com/project) on this page.
          * @type {Array.<number> || null}
          */
         this.ProjectIds = null;
@@ -4770,7 +4769,6 @@ You can query [Project Management](https://console.cloud.tencent.com/project) on
 
         /**
          * Filter by policy type. Monitoring type and policy type are first-level and second-level filters respectively and both need to be passed in. For example, `[{"MonitorType": "MT_QCE", "Namespace": "cvm_device"}]`
-This parameter can be queried with the API [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1).
          * @type {Array.<MonitorTypeNamespace> || null}
          */
         this.Namespaces = null;
@@ -4794,13 +4792,13 @@ This parameter can be queried with the API [DescribeAllNamespaces](https://intl.
         this.Content = null;
 
         /**
-         * Search by recipient. You can get the user list with the API [ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1) in “Cloud Access Management” or query the sub-user information with the API [GetUser](https://intl.cloud.tencent.com/document/product/598/34590?from_cn_redirect=1). The `Uid` field in the returned result should be entered here.
+         * Search by recipient
          * @type {Array.<number> || null}
          */
         this.ReceiverUids = null;
 
         /**
-         * Search by recipient group. You can get the user group list with the API [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) in “Cloud Access Management” or query the user group list where a sub-user is in with the API [ListGroupsForUser](https://intl.cloud.tencent.com/document/product/598/34588?from_cn_redirect=1). The `GroupId` field in the returned result should be entered here.
+         * Search by recipient group
          * @type {Array.<number> || null}
          */
         this.ReceiverGroups = null;

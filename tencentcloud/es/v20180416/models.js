@@ -1064,6 +1064,12 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
          */
         this.WebNodeTypeInfo = null;
 
+        /**
+         * Valid values: `https`, `http` (default)
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
     }
 
     /**
@@ -1131,6 +1137,7 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
             obj.deserialize(params.WebNodeTypeInfo)
             this.WebNodeTypeInfo = obj;
         }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
 
     }
 }
@@ -1506,6 +1513,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Jdk = null;
 
+        /**
+         * Cluster network communication protocol
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Security group ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroups = null;
+
     }
 
     /**
@@ -1631,6 +1652,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.WebNodeTypeInfo = obj;
         }
         this.Jdk = 'Jdk' in params ? params.Jdk : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
 
     }
 }
@@ -2124,6 +2147,30 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
          */
         this.WebNodeTypeInfo = null;
 
+        /**
+         * Whether to switch to the new network architecture
+         * @type {string || null}
+         */
+        this.SwitchPrivateLink = null;
+
+        /**
+         * Whether to enable Cerebro
+         * @type {boolean || null}
+         */
+        this.EnableCerebro = null;
+
+        /**
+         * Cerebro public network access status
+         * @type {string || null}
+         */
+        this.CerebroPublicAccess = null;
+
+        /**
+         * Cerebro private network access status
+         * @type {string || null}
+         */
+        this.CerebroPrivateAccess = null;
+
     }
 
     /**
@@ -2194,6 +2241,10 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
             obj.deserialize(params.WebNodeTypeInfo)
             this.WebNodeTypeInfo = obj;
         }
+        this.SwitchPrivateLink = 'SwitchPrivateLink' in params ? params.SwitchPrivateLink : null;
+        this.EnableCerebro = 'EnableCerebro' in params ? params.EnableCerebro : null;
+        this.CerebroPublicAccess = 'CerebroPublicAccess' in params ? params.CerebroPublicAccess : null;
+        this.CerebroPrivateAccess = 'CerebroPrivateAccess' in params ? params.CerebroPrivateAccess : null;
 
     }
 }

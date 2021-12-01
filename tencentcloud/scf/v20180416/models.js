@@ -1012,6 +1012,13 @@ class VersionProvisionedConcurrencyInfo extends  AbstractModel {
          */
         this.Qualifier = null;
 
+        /**
+         * List of scheduled provisioned concurrency scaling actions
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TriggerAction> || null}
+         */
+        this.TriggerActions = null;
+
     }
 
     /**
@@ -1026,6 +1033,15 @@ class VersionProvisionedConcurrencyInfo extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.StatusReason = 'StatusReason' in params ? params.StatusReason : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+
+        if (params.TriggerActions) {
+            this.TriggerActions = new Array();
+            for (let z in params.TriggerActions) {
+                let obj = new TriggerAction();
+                obj.deserialize(params.TriggerActions[z]);
+                this.TriggerActions.push(obj);
+            }
+        }
 
     }
 }
@@ -2281,6 +2297,12 @@ class TerminateAsyncEventRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * Specifies whether to enable graceful shutdown
+         * @type {boolean || null}
+         */
+        this.GraceShutdown = null;
+
     }
 
     /**
@@ -2293,6 +2315,7 @@ class TerminateAsyncEventRequest extends  AbstractModel {
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.GraceShutdown = 'GraceShutdown' in params ? params.GraceShutdown : null;
 
     }
 }
@@ -5039,7 +5062,7 @@ class Code extends  AbstractModel {
         this.CosBucketName = null;
 
         /**
-         * COS object path
+         * File path of code package stored in COS, which should start with “/”
          * @type {string || null}
          */
         this.CosObjectName = null;
@@ -5681,6 +5704,51 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Details of a scheduled provisioned concurrency scaling action
+ * @class
+ */
+class TriggerAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scheduled action name
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * Target provisioned concurrency of the scheduled scaling action 
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TriggerProvisionedConcurrencyNum = null;
+
+        /**
+         * Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TriggerCronConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.TriggerProvisionedConcurrencyNum = 'TriggerProvisionedConcurrencyNum' in params ? params.TriggerProvisionedConcurrencyNum : null;
+        this.TriggerCronConfig = 'TriggerCronConfig' in params ? params.TriggerCronConfig : null;
+
+    }
+}
+
+/**
  * Limit information
  * @class
  */
@@ -6197,6 +6265,12 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * Scheduled provisioned concurrency scaling action
+         * @type {Array.<TriggerAction> || null}
+         */
+        this.TriggerActions = null;
+
     }
 
     /**
@@ -6210,6 +6284,15 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.VersionProvisionedConcurrencyNum = 'VersionProvisionedConcurrencyNum' in params ? params.VersionProvisionedConcurrencyNum : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+        if (params.TriggerActions) {
+            this.TriggerActions = new Array();
+            for (let z in params.TriggerActions) {
+                let obj = new TriggerAction();
+                obj.deserialize(params.TriggerActions[z]);
+                this.TriggerActions.push(obj);
+            }
+        }
 
     }
 }
@@ -7209,6 +7292,7 @@ module.exports = {
     RetryConfig: RetryConfig,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
     CfsInsInfo: CfsInsInfo,
+    TriggerAction: TriggerAction,
     LimitsInfo: LimitsInfo,
     ListLayersResponse: ListLayersResponse,
     FunctionVersion: FunctionVersion,

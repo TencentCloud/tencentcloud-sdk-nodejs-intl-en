@@ -702,6 +702,24 @@ class UploadLogRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Topic partition where data will be written into by `HashKey` 
+         * @type {string || null}
+         */
+        this.HashKey = null;
+
+        /**
+         * Compression type
+         * @type {string || null}
+         */
+        this.CompressType = null;
+
     }
 
     /**
@@ -711,6 +729,9 @@ class UploadLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.HashKey = 'HashKey' in params ? params.HashKey : null;
+        this.CompressType = 'CompressType' in params ? params.CompressType : null;
 
     }
 }
@@ -3629,13 +3650,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.AnalysisResults = null;
 
         /**
-         * 
+         * New log analysis result, which will be valid if `UseNewAnalysis` is `true`
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.AnalysisRecords = null;
 
         /**
-         * 
+         * Column attribute of log analysis, which will be valid if `UseNewAnalysis` is `true`
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<Column> || null}
          */
         this.Columns = null;
@@ -5542,7 +5565,7 @@ class GetAlarmLogRequest extends  AbstractModel {
         this.Sort = null;
 
         /**
-         * 
+         * If the value is `true`, the new search method will be used, and the response parameters `AnalysisRecords` and `Columns` will be valid. If the value is `false`, the old search method will be used, and `AnalysisResults` and `ColNames` will be valid.
          * @type {boolean || null}
          */
         this.UseNewAnalysis = null;

@@ -463,10 +463,16 @@ class CreateServiceTemplateRequest extends  AbstractModel {
         this.ServiceTemplateName = null;
 
         /**
-         * It supports single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP, and GRE.
+         * Supported ports inlcude single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP and GRE. Either Services or ServicesExtra is required.
          * @type {Array.<string> || null}
          */
         this.Services = null;
+
+        /**
+         * You can add remarks. Supported ports include single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP and GRE. Either Services or ServicesExtra is required.
+         * @type {Array.<ServicesInfo> || null}
+         */
+        this.ServicesExtra = null;
 
     }
 
@@ -479,6 +485,15 @@ class CreateServiceTemplateRequest extends  AbstractModel {
         }
         this.ServiceTemplateName = 'ServiceTemplateName' in params ? params.ServiceTemplateName : null;
         this.Services = 'Services' in params ? params.Services : null;
+
+        if (params.ServicesExtra) {
+            this.ServicesExtra = new Array();
+            for (let z in params.ServicesExtra) {
+                let obj = new ServicesInfo();
+                obj.deserialize(params.ServicesExtra[z]);
+                this.ServicesExtra.push(obj);
+            }
+        }
 
     }
 }
@@ -1162,6 +1177,12 @@ class ModifyServiceTemplateAttributeRequest extends  AbstractModel {
          */
         this.Services = null;
 
+        /**
+         * Protocol port information with remarks. Supported ports include single port, multiple ports, consecutive ports and other ports. Supported protocols include TCP, UDP, ICMP, and GRE.
+         * @type {Array.<ServicesInfo> || null}
+         */
+        this.ServicesExtra = null;
+
     }
 
     /**
@@ -1175,6 +1196,15 @@ class ModifyServiceTemplateAttributeRequest extends  AbstractModel {
         this.ServiceTemplateName = 'ServiceTemplateName' in params ? params.ServiceTemplateName : null;
         this.Services = 'Services' in params ? params.Services : null;
 
+        if (params.ServicesExtra) {
+            this.ServicesExtra = new Array();
+            for (let z in params.ServicesExtra) {
+                let obj = new ServicesInfo();
+                obj.deserialize(params.ServicesExtra[z]);
+                this.ServicesExtra.push(obj);
+            }
+        }
+
     }
 }
 
@@ -1187,13 +1217,13 @@ class DescribeIpGeolocationInfosRequest extends  AbstractModel {
         super();
 
         /**
-         * IP addresses to be queried. Both IPv4 and IPv6 addresses are supported.
+         * The list of IP addresses (only IPv4 addresses are available currently) to be queried; upper limit: 100
          * @type {Array.<string> || null}
          */
         this.AddressIps = null;
 
         /**
-         * Fields of the IP addresses to be queried, including `Country`, `Province`, `City`, `Region`, `Isp`, `AsName` and `AsId`
+         * Fields of the IP addresses to be queried.
          * @type {IpField || null}
          */
         this.Fields = null;
@@ -2106,6 +2136,12 @@ class AddressTemplate extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * IP address information with remarks
+         * @type {Array.<AddressInfo> || null}
+         */
+        this.AddressExtraSet = null;
+
     }
 
     /**
@@ -2119,6 +2155,15 @@ class AddressTemplate extends  AbstractModel {
         this.AddressTemplateId = 'AddressTemplateId' in params ? params.AddressTemplateId : null;
         this.AddressSet = 'AddressSet' in params ? params.AddressSet : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.AddressExtraSet) {
+            this.AddressExtraSet = new Array();
+            for (let z in params.AddressExtraSet) {
+                let obj = new AddressInfo();
+                obj.deserialize(params.AddressExtraSet[z]);
+                this.AddressExtraSet.push(obj);
+            }
+        }
 
     }
 }
@@ -2602,6 +2647,12 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
          */
         this.ChargeType = null;
 
+        /**
+         * When a monthly-subscribed bandwidth package is returned, whether to convert it to a pay-as-you-go bandwidth packages. Default value: `No`
+         * @type {boolean || null}
+         */
+        this.MigrateOnRefund = null;
+
     }
 
     /**
@@ -2614,6 +2665,7 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.BandwidthPackageName = 'BandwidthPackageName' in params ? params.BandwidthPackageName : null;
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.MigrateOnRefund = 'MigrateOnRefund' in params ? params.MigrateOnRefund : null;
 
     }
 }
@@ -3394,6 +3446,12 @@ class ServiceTemplate extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * Protocol port template information with remarks
+         * @type {Array.<ServicesInfo> || null}
+         */
+        this.ServiceExtraSet = null;
+
     }
 
     /**
@@ -3407,6 +3465,15 @@ class ServiceTemplate extends  AbstractModel {
         this.ServiceTemplateName = 'ServiceTemplateName' in params ? params.ServiceTemplateName : null;
         this.ServiceSet = 'ServiceSet' in params ? params.ServiceSet : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.ServiceExtraSet) {
+            this.ServiceExtraSet = new Array();
+            for (let z in params.ServiceExtraSet) {
+                let obj = new ServicesInfo();
+                obj.deserialize(params.ServiceExtraSet[z]);
+                this.ServiceExtraSet.push(obj);
+            }
+        }
 
     }
 }
@@ -6181,6 +6248,12 @@ class ModifyAddressTemplateAttributeRequest extends  AbstractModel {
          */
         this.Addresses = null;
 
+        /**
+         * Address information with remarks, including the IP, CIDR block or IP address range.
+         * @type {Array.<AddressInfo> || null}
+         */
+        this.AddressesExtra = null;
+
     }
 
     /**
@@ -6193,6 +6266,15 @@ class ModifyAddressTemplateAttributeRequest extends  AbstractModel {
         this.AddressTemplateId = 'AddressTemplateId' in params ? params.AddressTemplateId : null;
         this.AddressTemplateName = 'AddressTemplateName' in params ? params.AddressTemplateName : null;
         this.Addresses = 'Addresses' in params ? params.Addresses : null;
+
+        if (params.AddressesExtra) {
+            this.AddressesExtra = new Array();
+            for (let z in params.AddressesExtra) {
+                let obj = new AddressInfo();
+                obj.deserialize(params.AddressesExtra[z]);
+                this.AddressesExtra.push(obj);
+            }
+        }
 
     }
 }
@@ -18067,13 +18149,13 @@ class ModifyCcnAttributeRequest extends  AbstractModel {
         this.CcnId = null;
 
         /**
-         * The name of the CCN. The maximum length is 60 characters.
+         * The name of CCN instance. Up to 60 characters allowed. It can contain up to 60 bytes. Either `CcnName` or `CcnDescription` must be specified.
          * @type {string || null}
          */
         this.CcnName = null;
 
         /**
-         * The description of the CCN. The maximum length is 100 characters.
+         * The description of CCN instance. Up to 100 characters allowed. It can contain up to 60 bytes. Either `CcnName` or `CcnDescription` must be specified.
          * @type {string || null}
          */
         this.CcnDescription = null;
@@ -18602,6 +18684,18 @@ class VpnGateway extends  AbstractModel {
          */
         this.NetworkInstanceId = null;
 
+        /**
+         * CDC instance ID
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * Maximum number of connected clients allowed for the SSL VPN gateway.
+         * @type {number || null}
+         */
+        this.MaxConnection = null;
+
     }
 
     /**
@@ -18637,6 +18731,8 @@ class VpnGateway extends  AbstractModel {
         }
         this.Version = 'Version' in params ? params.Version : null;
         this.NetworkInstanceId = 'NetworkInstanceId' in params ? params.NetworkInstanceId : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.MaxConnection = 'MaxConnection' in params ? params.MaxConnection : null;
 
     }
 }
@@ -20980,6 +21076,42 @@ class CreateLocalGatewayResponse extends  AbstractModel {
 }
 
 /**
+ * Protocol port template information
+ * @class
+ */
+class ServicesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Protocol port
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * Remarks
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Service = 'Service' in params ? params.Service : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * MigratePrivateIpAddress request structure.
  * @class
  */
@@ -21030,9 +21162,10 @@ class DescribeServiceTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter conditions.
-<li>service-template-name - String - (Filter condition) Protocol port template name.</li>
-<li>service-template-id - String - (Filter condition) Protocol port template instance ID, such as `ppm-e6dy460g`.</li>
+         * Filters
+<li>service-template-name - Protocol port template name.</li>
+<li>service-template-id - Protocol port template ID, such as `ppm-e6dy460g`.</li>
+<li>service-port-Protocol port.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -21146,7 +21279,7 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * VPN gateway type. Value: `CCN`, indicates CCN-type VPN gateway
+         * VPN gateway type. Values: `CCN` (CCN VPN gateway), `SSL` (SSL VPN gateway)
          * @type {string || null}
          */
         this.Type = null;
@@ -21156,6 +21289,18 @@ class CreateVpnGatewayRequest extends  AbstractModel {
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * CDC instance ID
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
+         * @type {number || null}
+         */
+        this.MaxConnection = null;
 
     }
 
@@ -21187,6 +21332,8 @@ class CreateVpnGatewayRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.MaxConnection = 'MaxConnection' in params ? params.MaxConnection : null;
 
     }
 }
@@ -22238,10 +22385,16 @@ class CreateAddressTemplateRequest extends  AbstractModel {
         this.AddressTemplateName = null;
 
         /**
-         * Address information, including IP, CIDR and IP address range.
+         * The address information can be presented by the IP, CIDR block or IP address range. Either Addresses or AddressesExtra is required.
          * @type {Array.<string> || null}
          */
         this.Addresses = null;
+
+        /**
+         * The address information can contain remarks and be presented by the IP, CIDR block or IP address range. Either Addresses or AddressesExtra is required.
+         * @type {Array.<AddressInfo> || null}
+         */
+        this.AddressesExtra = null;
 
     }
 
@@ -22254,6 +22407,15 @@ class CreateAddressTemplateRequest extends  AbstractModel {
         }
         this.AddressTemplateName = 'AddressTemplateName' in params ? params.AddressTemplateName : null;
         this.Addresses = 'Addresses' in params ? params.Addresses : null;
+
+        if (params.AddressesExtra) {
+            this.AddressesExtra = new Array();
+            for (let z in params.AddressesExtra) {
+                let obj = new AddressInfo();
+                obj.deserialize(params.AddressesExtra[z]);
+                this.AddressesExtra.push(obj);
+            }
+        }
 
     }
 }
@@ -22600,6 +22762,13 @@ class SecurityGroup extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * Security group update time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
     }
 
     /**
@@ -22624,6 +22793,7 @@ class SecurityGroup extends  AbstractModel {
                 this.TagSet.push(obj);
             }
         }
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -23312,6 +23482,12 @@ class UnassignPrivateIpAddressesRequest extends  AbstractModel {
          */
         this.PrivateIpAddresses = null;
 
+        /**
+         * Instance ID of the server bound with this IP. This parameter is only applicable when you need to return an IP and unbind the related servers.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -23331,6 +23507,7 @@ class UnassignPrivateIpAddressesRequest extends  AbstractModel {
                 this.PrivateIpAddresses.push(obj);
             }
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -24513,9 +24690,10 @@ class DescribeAddressTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter conditions.
-<li>address-template-name - String - (Filter condition) IP address template name.</li>
-<li>address-template-id - String - (Filter condition) IP address template instance ID, such as `ipm-mdunqeb6`.</li>
+         * Filters
+<li>address-template-name - IP address template name.</li>
+<li>address-template-id - IP address template ID, such as `ipm-mdunqeb6`.</li>
+<li>address-ip - IP address.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -25406,6 +25584,41 @@ class DeleteVpcResponse extends  AbstractModel {
 }
 
 /**
+ * Prepaid (monthly subscription) billing object.
+ * @class
+ */
+class InstanceChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Purchased usage period (in month). Value range: [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36].
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Auto-renewal ID. Value range: NOTIFY_AND_AUTO_RENEW: notify expiry and renew automatically, NOTIFY_AND_MANUAL_RENEW: notify expiry but do not renew automatically. The default is NOTIFY_AND_MANUAL_RENEW
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * DescribeVpcEndPointServiceWhiteList response structure.
  * @class
  */
@@ -25484,24 +25697,25 @@ class AcceptAttachCcnInstancesResponse extends  AbstractModel {
 }
 
 /**
- * Prepaid (monthly subscription) billing object.
+ * IP address template information
  * @class
  */
-class InstanceChargePrepaid extends  AbstractModel {
+class AddressInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Purchased usage period (in month). Value range: [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36].
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * Auto-renewal ID. Value range: NOTIFY_AND_AUTO_RENEW: notify expiry and renew automatically, NOTIFY_AND_MANUAL_RENEW: notify expiry but do not renew automatically. The default is NOTIFY_AND_MANUAL_RENEW
+         * IP address
          * @type {string || null}
          */
-        this.RenewFlag = null;
+        this.Address = null;
+
+        /**
+         * Remarks
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -25512,8 +25726,8 @@ class InstanceChargePrepaid extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -26050,6 +26264,7 @@ module.exports = {
     DirectConnectGatewayCcnRoute: DirectConnectGatewayCcnRoute,
     DeleteHaVipRequest: DeleteHaVipRequest,
     CreateLocalGatewayResponse: CreateLocalGatewayResponse,
+    ServicesInfo: ServicesInfo,
     MigratePrivateIpAddressRequest: MigratePrivateIpAddressRequest,
     DescribeServiceTemplatesRequest: DescribeServiceTemplatesRequest,
     DeleteRouteTableRequest: DeleteRouteTableRequest,
@@ -26151,9 +26366,10 @@ module.exports = {
     ModifySubnetAttributeRequest: ModifySubnetAttributeRequest,
     DescribeBandwidthPackageQuotaRequest: DescribeBandwidthPackageQuotaRequest,
     DeleteVpcResponse: DeleteVpcResponse,
+    InstanceChargePrepaid: InstanceChargePrepaid,
     DescribeVpcEndPointServiceWhiteListResponse: DescribeVpcEndPointServiceWhiteListResponse,
     AcceptAttachCcnInstancesResponse: AcceptAttachCcnInstancesResponse,
-    InstanceChargePrepaid: InstanceChargePrepaid,
+    AddressInfo: AddressInfo,
     AuditCrossBorderComplianceRequest: AuditCrossBorderComplianceRequest,
     DescribeNetDetectsResponse: DescribeNetDetectsResponse,
 

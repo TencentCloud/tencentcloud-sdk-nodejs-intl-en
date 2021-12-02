@@ -720,7 +720,7 @@ class CreateAccountRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * Account password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * Account password. It must contain 8-32 characters in all of the following four types: lowercase letters, uppercase letters, digits, and symbols (()~!@#$%^&*-+=_|{}[]:<>,.?/), and cannot start with a slash (/).
          * @type {string || null}
          */
         this.Password = null;
@@ -1443,6 +1443,34 @@ class NodeInfo extends  AbstractModel {
 }
 
 /**
+ * ModifySyncTaskAttribute response structure.
+ * @class
+ */
+class ModifySyncTaskAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceSecurityGroups response structure.
  * @class
  */
@@ -2008,11 +2036,11 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
         this.DbName = null;
 
         /**
-         * Global permission. Valid values: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER, SHOW DATABASES 
-Database permission. Valid values: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER 
-Table/view permission. Valid values: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER 
-Stored procedure/function permission. Valid values: ALTER ROUTINE, EXECUTE 
-Field permission. Valid values: INSERT, REFERENCES, SELECT, UPDATE
+         * Global permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`, `SHOW DATABASES`, `REPLICATION CLIENT`, `REPLICATION SLAVE`. 
+Database permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`. 
+Table/View permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`. 
+Stored procedure/function permission. Valid values: `ALTER ROUTINE`, `EXECUTE`. 
+Field permission. Valid values: `INSERT`, `REFERENCES`, `SELECT`, `UPDATE`.
          * @type {Array.<string> || null}
          */
         this.Privileges = null;
@@ -2659,6 +2687,41 @@ class ColumnPrivilege extends  AbstractModel {
         this.Table = 'Table' in params ? params.Table : null;
         this.Column = 'Column' in params ? params.Column : null;
         this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
+ * ModifySyncTaskAttribute request structure.
+ * @class
+ */
+class ModifySyncTaskAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of tasks for which to modify the attributes. The IDs can be obtained by the return value of the `DescribeSyncTasks` API. Up to 100 tasks can be operated at a time.
+         * @type {Array.<string> || null}
+         */
+        this.TaskIds = null;
+
+        /**
+         * Task name. You can specify any name you like, but its length cannot exceed 100 characters.
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
 
     }
 }
@@ -3868,6 +3931,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ExampleSql = null;
 
+        /**
+         * Host address of the account
+         * @type {string || null}
+         */
+        this.Host = null;
+
     }
 
     /**
@@ -3895,6 +3964,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TsMin = 'TsMin' in params ? params.TsMin : null;
         this.User = 'User' in params ? params.User : null;
         this.ExampleSql = 'ExampleSql' in params ? params.ExampleSql : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -4209,8 +4279,8 @@ Note: if the parameter is left empty, no change will be made to the granted data
         this.DatabasePrivileges = null;
 
         /**
-         * Table permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"TRIGGER"`.
-Note: if the parameter is left empty, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+         * Database table permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
+Note: if the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
          * @type {Array.<TablePrivilege> || null}
          */
         this.TablePrivileges = null;
@@ -4223,22 +4293,22 @@ Note: if the parameter is left empty, no change will be made to the granted colu
         this.ColumnPrivileges = null;
 
         /**
-         * View permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"TRIGGER"`.
-Note: if the parameter is left empty, no change will be made to the granted view permissions. To clear the granted view permissions, set `Privileges` to an empty array.
+         * Database view permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
+Note: if the parameter is not passed in, no change will be made to the granted view permissions. To clear the granted view permissions, set `Privileges` to an empty array.
          * @type {Array.<ViewPrivileges> || null}
          */
         this.ViewPrivileges = null;
 
         /**
-         * Function permissions. Valid values of `Privileges`: `"ALTER ROUTINE"`, `"EXECUTE"`.
-Note: if the parameter is left empty, no change will be made to the granted function permissions. To clear the granted function permissions, set `Privileges` to an empty array.
+         * Database function permissions. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.
+Note: if the parameter is not passed in, no change will be made to the granted function permissions. To clear the granted function permissions, set `Privileges` to an empty array.
          * @type {Array.<FunctionPrivilege> || null}
          */
         this.FunctionPrivileges = null;
 
         /**
-         * Stored procedure permission. Valid values of `Privileges`: `"ALTER ROUTINE"`, `"EXECUTE"`.
-Note: if the parameter is left empty, no change will be made to the granted stored procedure permissions. To clear the granted stored procedure permissions, set `Privileges` to an empty array.
+         * Database stored procedure permission. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.
+Note: if the parameter is not passed in, no change will be made to the granted stored procedure permissions. To clear the granted stored procedure permissions, set `Privileges` to an empty array.
          * @type {Array.<ProcedurePrivilege> || null}
          */
         this.ProcedurePrivileges = null;
@@ -4465,6 +4535,41 @@ class DescribeDBPerformanceResponse extends  AbstractModel {
             this.SlaveDelay = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDBSyncMode request structure.
+ * @class
+ */
+class ModifyDBSyncModeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of an instance for which to modify the sync mode. The ID is in the format of tdsql-ow728lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Sync mode. Valid values: `0` (async), `1` (strong sync), `2` (downgradable strong sync).
+         * @type {number || null}
+         */
+        this.SyncMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
 
     }
 }
@@ -5344,6 +5449,41 @@ class MonitorData extends  AbstractModel {
 }
 
 /**
+ * ModifyDBSyncMode response structure.
+ * @class
+ */
+class ModifyDBSyncModeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID. The task status can be queried through the `DescribeFlow` API.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceNodeInfo response structure.
  * @class
  */
@@ -5564,6 +5704,7 @@ module.exports = {
     DBBackupTimeConfig: DBBackupTimeConfig,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
     NodeInfo: NodeInfo,
+    ModifySyncTaskAttributeResponse: ModifySyncTaskAttributeResponse,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
@@ -5589,6 +5730,7 @@ module.exports = {
     ModifyBackupTimeRequest: ModifyBackupTimeRequest,
     SecurityGroupBound: SecurityGroupBound,
     ColumnPrivilege: ColumnPrivilege,
+    ModifySyncTaskAttributeRequest: ModifySyncTaskAttributeRequest,
     InitDBInstancesRequest: InitDBInstancesRequest,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DBInstance: DBInstance,
@@ -5615,6 +5757,7 @@ module.exports = {
     DescribeFlowRequest: DescribeFlowRequest,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     DescribeDBPerformanceResponse: DescribeDBPerformanceResponse,
+    ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     CreateAccountResponse: CreateAccountResponse,
     DescribeLogFileRetentionPeriodResponse: DescribeLogFileRetentionPeriodResponse,
@@ -5632,6 +5775,7 @@ module.exports = {
     DescribeLogFileRetentionPeriodRequest: DescribeLogFileRetentionPeriodRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     MonitorData: MonitorData,
+    ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,
     ModifyLogFileRetentionPeriodResponse: ModifyLogFileRetentionPeriodResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,

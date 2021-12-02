@@ -46,6 +46,7 @@ const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse
 const DBBackupTimeConfig = models.DBBackupTimeConfig;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
 const NodeInfo = models.NodeInfo;
+const ModifySyncTaskAttributeResponse = models.ModifySyncTaskAttributeResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
@@ -71,6 +72,7 @@ const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
 const SecurityGroupBound = models.SecurityGroupBound;
 const ColumnPrivilege = models.ColumnPrivilege;
+const ModifySyncTaskAttributeRequest = models.ModifySyncTaskAttributeRequest;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DBInstance = models.DBInstance;
@@ -97,6 +99,7 @@ const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
+const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
@@ -114,6 +117,7 @@ const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const MonitorData = models.MonitorData;
+const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const ModifyLogFileRetentionPeriodResponse = models.ModifyLogFileRetentionPeriodResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
@@ -323,6 +327,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to modify sync task attributes (currently, only the task name can be modified).
+     * @param {ModifySyncTaskAttributeRequest} req
+     * @param {function(string, ModifySyncTaskAttributeResponse):void} cb
+     * @public
+     */
+    ModifySyncTaskAttribute(req, cb) {
+        let resp = new ModifySyncTaskAttributeResponse();
+        this.request("ModifySyncTaskAttribute", req, resp, cb);
+    }
+
+    /**
      * This API is used to terminate a pay-as-you-go instance.
      * @param {DestroyHourDBInstanceRequest} req
      * @param {function(string, DestroyHourDBInstanceResponse):void} cb
@@ -436,6 +451,17 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     ModifyDBInstanceSecurityGroups(req, cb) {
         let resp = new ModifyDBInstanceSecurityGroupsResponse();
         this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the sync mode of a TencentDB instance.
+     * @param {ModifyDBSyncModeRequest} req
+     * @param {function(string, ModifyDBSyncModeResponse):void} cb
+     * @public
+     */
+    ModifyDBSyncMode(req, cb) {
+        let resp = new ModifyDBSyncModeResponse();
+        this.request("ModifyDBSyncMode", req, resp, cb);
     }
 
     /**

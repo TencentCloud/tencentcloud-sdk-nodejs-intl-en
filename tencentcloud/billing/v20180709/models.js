@@ -669,7 +669,27 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * 
+         * Action type to query. Valid values:
+Purchase
+Renewal
+Modify
+Refund
+Deduction
+Hourly settlement
+Daily settlement
+Monthly settlement
+Offline project deduction
+Offline deduction
+adjust-CR
+adjust-DR
+One-off RI Fee
+Spot
+Hourly RI fee
+New monthly subscription
+Monthly subscription renewal
+Monthly subscription specification adjustment
+Monthly subscription specification adjustment
+Monthly subscription refund
          * @type {string || null}
          */
         this.ActionType = null;
@@ -679,6 +699,13 @@ class DescribeBillDetailRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.ProjectId = null;
+
+        /**
+         * Business code
+Note: To query business codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
 
     }
 
@@ -701,6 +728,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
 
     }
 }
@@ -1369,6 +1397,13 @@ Monthly subscription refund
          */
         this.PayMode = null;
 
+        /**
+         * Business code
+Note: To query business codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
     }
 
     /**
@@ -1386,6 +1421,7 @@ Monthly subscription refund
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
 
     }
 }

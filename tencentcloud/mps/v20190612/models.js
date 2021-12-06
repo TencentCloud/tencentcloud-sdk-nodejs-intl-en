@@ -8031,6 +8031,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Output = null;
 
+        /**
+         * Transcoding progress. Value range: 0-100
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
     }
 
     /**
@@ -8056,6 +8063,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }

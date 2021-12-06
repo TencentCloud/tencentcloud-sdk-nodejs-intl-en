@@ -220,6 +220,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SetType = null;
 
+        /**
+         * Cluster type for service deployment
+Note: this field may return null, indicating that no valid values found.
+         * @type {string || null}
+         */
+        this.DeploymentType = null;
+
     }
 
     /**
@@ -255,6 +262,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SetType = 'SetType' in params ? params.SetType : null;
+        this.DeploymentType = 'DeploymentType' in params ? params.DeploymentType : null;
 
     }
 }
@@ -2851,6 +2859,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SetType = null;
 
         /**
+         * Cluster type for service deployment
+Note: this field may return null, indicating that no valid values found.
+         * @type {string || null}
+         */
+        this.DeploymentType = null;
+
+        /**
+         * Whether it’s for special usage
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SpecialUse = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2913,6 +2935,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.SetType = 'SetType' in params ? params.SetType : null;
+        this.DeploymentType = 'DeploymentType' in params ? params.DeploymentType : null;
+        this.SpecialUse = 'SpecialUse' in params ? params.SpecialUse : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5612,13 +5636,13 @@ class CreatePluginRequest extends  AbstractModel {
         super();
 
         /**
-         * Custom plugin name. A plugin name contain up to 50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
+         * Custom plugin name. A plugin name should contain 2-50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
          * @type {string || null}
          */
         this.PluginName = null;
 
         /**
-         * Plugin type. Valid value: `IPControl`.
+         * Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`
          * @type {string || null}
          */
         this.PluginType = null;
@@ -6042,7 +6066,7 @@ class DomainSetList extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * Domain name resolution status. True: success; False: failure.
+         * Domain name resolution status. `1`: normal, `0`: failed
          * @type {number || null}
          */
         this.Status = null;

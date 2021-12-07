@@ -42,11 +42,13 @@ const DeleteClusterRequest = models.DeleteClusterRequest;
 const RunInstancesForNode = models.RunInstancesForNode;
 const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
+const InstanceExtraArgs = models.InstanceExtraArgs;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const ModifyPrometheusAlertRuleResponse = models.ModifyPrometheusAlertRuleResponse;
 const AddNodeToNodePoolRequest = models.AddNodeToNodePoolRequest;
 const EnableVpcCniNetworkTypeResponse = models.EnableVpcCniNetworkTypeResponse;
 const RouteTableInfo = models.RouteTableInfo;
+const EnableClusterDeletionProtectionResponse = models.EnableClusterDeletionProtectionResponse;
 const ClusterAsGroup = models.ClusterAsGroup;
 const Instance = models.Instance;
 const DescribeVpcCniPodLimitsResponse = models.DescribeVpcCniPodLimitsResponse;
@@ -91,8 +93,9 @@ const ModifyNodePoolInstanceTypesRequest = models.ModifyNodePoolInstanceTypesReq
 const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
 const UpgradeAbleInstancesItem = models.UpgradeAbleInstancesItem;
 const GetUpgradeInstanceProgressRequest = models.GetUpgradeInstanceProgressRequest;
+const EnableClusterDeletionProtectionRequest = models.EnableClusterDeletionProtectionRequest;
 const AddNodeToNodePoolResponse = models.AddNodeToNodePoolResponse;
-const InstanceExtraArgs = models.InstanceExtraArgs;
+const DisableClusterDeletionProtectionRequest = models.DisableClusterDeletionProtectionRequest;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const DescribeVpcCniPodLimitsRequest = models.DescribeVpcCniPodLimitsRequest;
@@ -150,6 +153,7 @@ const UpgradeClusterInstancesResponse = models.UpgradeClusterInstancesResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
 const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
+const DisableClusterDeletionProtectionResponse = models.DisableClusterDeletionProtectionResponse;
 const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionRequest;
 const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
@@ -237,6 +241,17 @@ class TkeClient extends AbstractClient {
     CreateCluster(req, cb) {
         let resp = new CreateClusterResponse();
         this.request("CreateCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove a node from a node pool but retain it in the cluster.
+     * @param {RemoveNodeFromNodePoolRequest} req
+     * @param {function(string, RemoveNodeFromNodePoolResponse):void} cb
+     * @public
+     */
+    RemoveNodeFromNodePool(req, cb) {
+        let resp = new RemoveNodeFromNodePoolResponse();
+        this.request("RemoveNodeFromNodePool", req, resp, cb);
     }
 
     /**
@@ -493,6 +508,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enable cluster deletion protection.
+     * @param {EnableClusterDeletionProtectionRequest} req
+     * @param {function(string, EnableClusterDeletionProtectionResponse):void} cb
+     * @public
+     */
+    EnableClusterDeletionProtection(req, cb) {
+        let resp = new EnableClusterDeletionProtectionResponse();
+        this.request("EnableClusterDeletionProtection", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the node pool list
      * @param {DescribeClusterNodePoolsRequest} req
      * @param {function(string, DescribeClusterNodePoolsResponse):void} cb
@@ -702,14 +728,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to remove a node from a node pool but retain it in the cluster.
-     * @param {RemoveNodeFromNodePoolRequest} req
-     * @param {function(string, RemoveNodeFromNodePoolResponse):void} cb
+     * This API is used to disable cluster deletion protection.
+     * @param {DisableClusterDeletionProtectionRequest} req
+     * @param {function(string, DisableClusterDeletionProtectionResponse):void} cb
      * @public
      */
-    RemoveNodeFromNodePool(req, cb) {
-        let resp = new RemoveNodeFromNodePoolResponse();
-        this.request("RemoveNodeFromNodePool", req, resp, cb);
+    DisableClusterDeletionProtection(req, cb) {
+        let resp = new DisableClusterDeletionProtectionResponse();
+        this.request("DisableClusterDeletionProtection", req, resp, cb);
     }
 
     /**

@@ -1400,6 +1400,35 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * Node custom parameter
+ * @class
+ */
+class InstanceExtraArgs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Kubelet custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Kubelet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Kubelet = 'Kubelet' in params ? params.Kubelet : null;
+
+    }
+}
+
+/**
  * DescribeRegions response structure.
  * @class
  */
@@ -1587,6 +1616,34 @@ class RouteTableInfo extends  AbstractModel {
         this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
         this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+    }
+}
+
+/**
+ * EnableClusterDeletionProtection response structure.
+ * @class
+ */
+class EnableClusterDeletionProtectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3914,6 +3971,34 @@ class GetUpgradeInstanceProgressRequest extends  AbstractModel {
 }
 
 /**
+ * EnableClusterDeletionProtection request structure.
+ * @class
+ */
+class EnableClusterDeletionProtectionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * AddNodeToNodePool response structure.
  * @class
  */
@@ -3942,19 +4027,18 @@ class AddNodeToNodePoolResponse extends  AbstractModel {
 }
 
 /**
- * Node custom parameter
+ * DisableClusterDeletionProtection request structure.
  * @class
  */
-class InstanceExtraArgs extends  AbstractModel {
+class DisableClusterDeletionProtectionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Kubelet custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {Array.<string> || null}
+         * Cluster ID
+         * @type {string || null}
          */
-        this.Kubelet = null;
+        this.ClusterId = null;
 
     }
 
@@ -3965,7 +4049,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
-        this.Kubelet = 'Kubelet' in params ? params.Kubelet : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -6961,6 +7045,34 @@ class CreateClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DisableClusterDeletionProtection response structure.
+ * @class
+ */
+class DisableClusterDeletionProtectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterAsGroupOption request structure.
  * @class
  */
@@ -9040,11 +9152,13 @@ module.exports = {
     RunInstancesForNode: RunInstancesForNode,
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
+    InstanceExtraArgs: InstanceExtraArgs,
     DescribeRegionsResponse: DescribeRegionsResponse,
     ModifyPrometheusAlertRuleResponse: ModifyPrometheusAlertRuleResponse,
     AddNodeToNodePoolRequest: AddNodeToNodePoolRequest,
     EnableVpcCniNetworkTypeResponse: EnableVpcCniNetworkTypeResponse,
     RouteTableInfo: RouteTableInfo,
+    EnableClusterDeletionProtectionResponse: EnableClusterDeletionProtectionResponse,
     ClusterAsGroup: ClusterAsGroup,
     Instance: Instance,
     DescribeVpcCniPodLimitsResponse: DescribeVpcCniPodLimitsResponse,
@@ -9089,8 +9203,9 @@ module.exports = {
     DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
     UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
+    EnableClusterDeletionProtectionRequest: EnableClusterDeletionProtectionRequest,
     AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
-    InstanceExtraArgs: InstanceExtraArgs,
+    DisableClusterDeletionProtectionRequest: DisableClusterDeletionProtectionRequest,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
     DescribeVpcCniPodLimitsRequest: DescribeVpcCniPodLimitsRequest,
@@ -9148,6 +9263,7 @@ module.exports = {
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
     CreateClusterInstancesResponse: CreateClusterInstancesResponse,
+    DisableClusterDeletionProtectionResponse: DisableClusterDeletionProtectionResponse,
     DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
     ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,

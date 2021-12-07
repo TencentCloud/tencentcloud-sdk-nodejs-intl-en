@@ -30,6 +30,7 @@ const ModifyDDoSGeoIPBlockConfigRequest = models.ModifyDDoSGeoIPBlockConfigReque
 const DescribeL7RulesBySSLCertIdResponse = models.DescribeL7RulesBySSLCertIdResponse;
 const DescribeListDDoSSpeedLimitConfigRequest = models.DescribeListDDoSSpeedLimitConfigRequest;
 const InstanceRelation = models.InstanceRelation;
+const ModifyNewDomainRulesRequest = models.ModifyNewDomainRulesRequest;
 const DescribeListProtocolBlockConfigResponse = models.DescribeListProtocolBlockConfigResponse;
 const DescribeListBGPInstancesRequest = models.DescribeListBGPInstancesRequest;
 const KeyValue = models.KeyValue;
@@ -42,6 +43,7 @@ const CreateIPAlarmThresholdConfigRequest = models.CreateIPAlarmThresholdConfigR
 const DescribeDefaultAlarmThresholdResponse = models.DescribeDefaultAlarmThresholdResponse;
 const CreateDDoSAIRequest = models.CreateDDoSAIRequest;
 const DescribeListProtectThresholdConfigRequest = models.DescribeListProtectThresholdConfigRequest;
+const ModifyNewDomainRulesResponse = models.ModifyNewDomainRulesResponse;
 const CreateWaterPrintConfigResponse = models.CreateWaterPrintConfigResponse;
 const DescribeListBGPIPInstancesRequest = models.DescribeListBGPIPInstancesRequest;
 const StaticPackRelation = models.StaticPackRelation;
@@ -65,6 +67,7 @@ const BGPIPInstanceUsages = models.BGPIPInstanceUsages;
 const ModifyPacketFilterConfigResponse = models.ModifyPacketFilterConfigResponse;
 const DescribeListDDoSGeoIPBlockConfigRequest = models.DescribeListDDoSGeoIPBlockConfigRequest;
 const Layer7Rule = models.Layer7Rule;
+const L4RuleSource = models.L4RuleSource;
 const CreateDDoSSpeedLimitConfigRequest = models.CreateDDoSSpeedLimitConfigRequest;
 const CreateDDoSGeoIPBlockConfigRequest = models.CreateDDoSGeoIPBlockConfigRequest;
 const CreateProtocolBlockConfigRequest = models.CreateProtocolBlockConfigRequest;
@@ -126,6 +129,7 @@ const AssociateDDoSEipAddressRequest = models.AssociateDDoSEipAddressRequest;
 const AssociateDDoSEipLoadBalancerResponse = models.AssociateDDoSEipLoadBalancerResponse;
 const CreateBlackWhiteIpListRequest = models.CreateBlackWhiteIpListRequest;
 const DescribeBizTrendResponse = models.DescribeBizTrendResponse;
+const NewL7RuleEntry = models.NewL7RuleEntry;
 const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const SpeedValue = models.SpeedValue;
 const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
@@ -312,6 +316,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify layer-7 forwarding rules.
+     * @param {ModifyNewDomainRulesRequest} req
+     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
+     * @public
+     */
+    ModifyNewDomainRules(req, cb) {
+        let resp = new ModifyNewDomainRulesResponse();
+        this.request("ModifyNewDomainRules", req, resp, cb);
+    }
+
+    /**
      * This API is used to get a list of Anti-DDoS region blocking configurations.
      * @param {DescribeListDDoSGeoIPBlockConfigRequest} req
      * @param {function(string, DescribeListDDoSGeoIPBlockConfigResponse):void} cb
@@ -411,7 +426,7 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get CC attack data, including total peak requests (QPS) and attack requests (QPS).
+     * This API is used to get CC attack data, including total QPS peaks, attack QPS, total number of requests and number of attack requests.
      * @param {DescribeCCTrendRequest} req
      * @param {function(string, DescribeCCTrendResponse):void} cb
      * @public

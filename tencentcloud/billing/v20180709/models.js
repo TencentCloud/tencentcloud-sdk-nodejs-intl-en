@@ -1379,7 +1379,6 @@ Hourly RI fee
 New monthly subscription
 Monthly subscription renewal
 Monthly subscription specification adjustment
-Monthly subscription specification adjustment
 Monthly subscription refund
          * @type {string || null}
          */

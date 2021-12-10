@@ -604,16 +604,22 @@ class BindingPolicyObjectRequest extends  AbstractModel {
         super();
 
         /**
-         * Policy group ID. If `PolicyId` is used, this parameter will be ignored, and any value, e.g., 0, can be passed in.
+         * Required. The value is fixed to monitor.
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * Policy group ID, such as `4739573`. This parameter will be disused soon. Another parameter `PolicyId` is recommended.
          * @type {number || null}
          */
         this.GroupId = null;
 
         /**
-         * Required. The value is fixed to monitor.
+         * Alarm policy ID, such as `policy-gh892hg0`. At least one of the two parameters, `PolicyId` and `GroupId`, must be specified; otherwise, an error will be reported. `PolicyId` is preferred over `GroupId` when both of them are specified.
          * @type {string || null}
          */
-        this.Module = null;
+        this.PolicyId = null;
 
         /**
          * Instance group ID.
@@ -627,12 +633,6 @@ class BindingPolicyObjectRequest extends  AbstractModel {
          */
         this.Dimensions = null;
 
-        /**
-         * Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
-         * @type {string || null}
-         */
-        this.PolicyId = null;
-
     }
 
     /**
@@ -642,8 +642,9 @@ class BindingPolicyObjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.Module = 'Module' in params ? params.Module : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
 
         if (params.Dimensions) {
@@ -654,7 +655,6 @@ class BindingPolicyObjectRequest extends  AbstractModel {
                 this.Dimensions.push(obj);
             }
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }

@@ -1500,7 +1500,7 @@ class RemoveUserFromGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * The UID of the user to be deleted and an array corresponding to the User Group IDs
+         * The user’s UIN/UID to be deleted and the array corresponding to the user group ID.
          * @type {Array.<GroupIdOfUidInfo> || null}
          */
         this.Info = null;
@@ -1695,16 +1695,22 @@ class GroupIdOfUidInfo extends  AbstractModel {
         super();
 
         /**
+         * User Group ID
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
          * Sub-user UID
          * @type {number || null}
          */
         this.Uid = null;
 
         /**
-         * User Group ID
+         * Sub-user UIN. For UIN and UID, at least one of them is required.
          * @type {number || null}
          */
-        this.GroupId = null;
+        this.Uin = null;
 
     }
 
@@ -1715,8 +1721,9 @@ class GroupIdOfUidInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uid = 'Uid' in params ? params.Uid : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
 
     }
 }
@@ -4832,7 +4839,7 @@ class AddUserToGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * How sub-user UIDs are associated with the ID of the user group they are added to.
+         * The association between the user group ID and the sub-user UIN/UID.
          * @type {Array.<GroupIdOfUidInfo> || null}
          */
         this.Info = null;

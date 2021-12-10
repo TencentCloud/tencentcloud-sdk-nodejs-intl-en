@@ -2081,13 +2081,13 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
         this.SwitchTag = null;
 
         /**
-         * The earliest time to start a switch.
+         * The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
          * @type {string || null}
          */
         this.SwitchStartTime = null;
 
         /**
-         * The latest time to start a switch.
+         * The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
          * @type {string || null}
          */
         this.SwitchEndTime = null;
@@ -2248,6 +2248,56 @@ class DescribeZonesRequest extends  AbstractModel {
 }
 
 /**
+ * Purchasable specification details in an AZ in a region.
+ * @class
+ */
+class SpecInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region abbreviation, which corresponds to the `Region` field of `RegionSet`
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * AZ abbreviate, which corresponds to the `Zone` field of `ZoneSet`
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Specification details list
+         * @type {Array.<SpecItemInfo> || null}
+         */
+        this.SpecItemInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.SpecItemInfoList) {
+            this.SpecItemInfoList = new Array();
+            for (let z in params.SpecItemInfoList) {
+                let obj = new SpecItemInfo();
+                obj.deserialize(params.SpecItemInfoList[z]);
+                this.SpecItemInfoList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeReadOnlyGroups response structure.
  * @class
  */
@@ -2326,30 +2376,68 @@ class SetAutoRenewFlagResponse extends  AbstractModel {
 }
 
 /**
- * Purchasable specification details in an AZ in a region.
+ * Network information.
  * @class
  */
-class SpecInfo extends  AbstractModel {
+class NetworkAccess extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region abbreviation, which corresponds to the `Region` field of `RegionSet`
+         * Network resource ID, instance ID or RO group ID (this field has been deprecated)
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Region = null;
+        this.ResourceId = null;
 
         /**
-         * AZ abbreviate, which corresponds to the `Zone` field of `ZoneSet`
+         * Resource type. Valid values: `1` (instance), `2` (RO group) (this field has been deprecated)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * VPC ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Zone = null;
+        this.VpcId = null;
 
         /**
-         * Specification details list
-         * @type {Array.<SpecItemInfo> || null}
+         * IPv4 address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.SpecItemInfoList = null;
+        this.Vip = null;
+
+        /**
+         * IPv6 address
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vip6 = null;
+
+        /**
+         * Access port
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Subnet ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Network status. Valid values: `1` (applying), `2` (in use), `3` (deleting), `4` (deleted)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VpcStatus = null;
 
     }
 
@@ -2360,17 +2448,14 @@ class SpecInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-
-        if (params.SpecItemInfoList) {
-            this.SpecItemInfoList = new Array();
-            for (let z in params.SpecItemInfoList) {
-                let obj = new SpecItemInfo();
-                obj.deserialize(params.SpecItemInfoList[z]);
-                this.SpecItemInfoList.push(obj);
-            }
-        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcStatus = 'VpcStatus' in params ? params.VpcStatus : null;
 
     }
 }
@@ -2554,6 +2639,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DBInstanceNetInfo = null;
 
+        /**
+         * Network information list of the RO group
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<NetworkAccess> || null}
+         */
+        this.NetworkAccessList = null;
+
     }
 
     /**
@@ -2594,6 +2686,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 let obj = new DBInstanceNetInfo();
                 obj.deserialize(params.DBInstanceNetInfo[z]);
                 this.DBInstanceNetInfo.push(obj);
+            }
+        }
+
+        if (params.NetworkAccessList) {
+            this.NetworkAccessList = new Array();
+            for (let z in params.NetworkAccessList) {
+                let obj = new NetworkAccess();
+                obj.deserialize(params.NetworkAccessList[z]);
+                this.NetworkAccessList.push(obj);
             }
         }
 
@@ -3413,6 +3514,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.TagList = null;
 
+        /**
+         * Database kernel version
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
     }
 
     /**
@@ -3461,6 +3569,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.TagList.push(obj);
             }
         }
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
 
     }
 }
@@ -3745,7 +3854,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Name = null;
 
         /**
-         * Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values)
+         * Value type of the parameter. Valid values: `integer`, `real` (floating-point), `bool`, `enum`, `mutil_enum` (this type of parameter can be set to multiple enumerated values).
+For an `integer` or `real` parameter, the `Min` field represents the minimum value and the `Max` field the maximum value. 
+For a `bool` parameter, the valid values include `true` and `false`; 
+For an `enum` or `mutil_enum` parameter, the `EnumValue` field represents the valid values.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4208,25 +4320,25 @@ class DescribeSlowQueryAnalysisRequest extends  AbstractModel {
         this.DatabaseName = null;
 
         /**
-         * Sort by field. Valid values: `CallNum`, `CostTime`, `AvgCostTime`.
+         * Sort by field. Valid values: `CallNum`, `CostTime`, `AvgCostTime`. Default value: `CallNum`.
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+         * Sorting order. Valid values: `asc` (ascending), `desc` (descending). Default value: `desc`.
          * @type {string || null}
          */
         this.OrderByType = null;
 
         /**
-         * Number of entries per page. Value range: [1,100].
+         * Number of entries per page. Value range: [1,100]. Default value: `50`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Pagination offset. Value range: [0,INF).
+         * Pagination offset. Value range: [0,INF). Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -4528,7 +4640,7 @@ class DBInstance extends  AbstractModel {
         this.DBCharset = null;
 
         /**
-         * PostgreSQL kernel version
+         * PostgreSQL major version
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -4634,6 +4746,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.OfflineTime = null;
 
+        /**
+         * Database kernel version
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
+        /**
+         * Network information list of the instance
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<NetworkAccess> || null}
+         */
+        this.NetworkAccessList = null;
+
     }
 
     /**
@@ -4691,6 +4817,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ReadOnlyInstanceNum = 'ReadOnlyInstanceNum' in params ? params.ReadOnlyInstanceNum : null;
         this.StatusInReadonlyGroup = 'StatusInReadonlyGroup' in params ? params.StatusInReadonlyGroup : null;
         this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
+
+        if (params.NetworkAccessList) {
+            this.NetworkAccessList = new Array();
+            for (let z in params.NetworkAccessList) {
+                let obj = new NetworkAccess();
+                obj.deserialize(params.NetworkAccessList[z]);
+                this.NetworkAccessList.push(obj);
+            }
+        }
 
     }
 }
@@ -7111,9 +7247,10 @@ module.exports = {
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeZonesRequest: DescribeZonesRequest,
+    SpecInfo: SpecInfo,
     DescribeReadOnlyGroupsResponse: DescribeReadOnlyGroupsResponse,
     SetAutoRenewFlagResponse: SetAutoRenewFlagResponse,
-    SpecInfo: SpecInfo,
+    NetworkAccess: NetworkAccess,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     ReadOnlyGroup: ReadOnlyGroup,

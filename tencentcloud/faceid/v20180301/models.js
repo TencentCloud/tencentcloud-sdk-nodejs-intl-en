@@ -88,27 +88,31 @@ class LivenessCompareRequest extends  AbstractModel {
         super();
 
         /**
-         * Base64 string of the image for face comparison.
-The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
-Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-        /**
-         * Base64 string of the video for liveness detection.
-The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
-Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
-         * @type {string || null}
-         */
-        this.VideoBase64 = null;
-
-        /**
          * Liveness detection type. Valid values: LIP/ACTION/SILENT.
 LIP: numeric mode; ACTION: motion mode; SILENT: silent mode. You need to select a mode to input.
          * @type {string || null}
          */
         this.LivenessType = null;
+
+        /**
+         * Base64 string of the image for face comparison.
+The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
+Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
+
+Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * URL of the image for face comparison. The size of the downloaded image after Base64 encoding can be up to 3 MB. JPG and PNG formats are supported.
+
+Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
+
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
 
         /**
          * Lip mode: set this parameter to a custom 4-digit verification code.
@@ -127,6 +131,26 @@ Silent mode: do not pass in this parameter.
          */
         this.Optional = null;
 
+        /**
+         * Base64 string of the video for liveness detection.
+The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
+Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
+
+Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
+         * @type {string || null}
+         */
+        this.VideoBase64 = null;
+
+        /**
+         * URL of the video for liveness detection. The size of the downloaded video after Base64 encoding can be up to 8 MB. It takes no more than 4 seconds to download. MP4, AVI, and FLV formats are supported.
+
+Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
+
+We recommend you store the video in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.VideoUrl = null;
+
     }
 
     /**
@@ -136,11 +160,13 @@ Silent mode: do not pass in this parameter.
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
         this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
         this.Optional = 'Optional' in params ? params.Optional : null;
+        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
+        this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
 
     }
 }

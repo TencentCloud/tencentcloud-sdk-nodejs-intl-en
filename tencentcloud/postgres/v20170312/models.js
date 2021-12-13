@@ -2640,7 +2640,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DBInstanceNetInfo = null;
 
         /**
-         * Network information list of the RO group
+         * Network access list of the RO group
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<NetworkAccess> || null}
          */
@@ -4754,7 +4754,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DBKernelVersion = null;
 
         /**
-         * Network information list of the instance
+         * Network access list of the instance
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<NetworkAccess> || null}
          */

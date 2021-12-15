@@ -382,6 +382,40 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Parameters of the protocol
+ * @class
+ */
+class ProtocolParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameters of WebSockets protocol
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {WSParams || null}
+         */
+        this.WSParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WSParams) {
+            let obj = new WSParams();
+            obj.deserialize(params.WSParams)
+            this.WSParams = obj;
+        }
+
+    }
+}
+
+/**
  * Version routing configuration of alias
  * @class
  */
@@ -1754,6 +1788,35 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * Parameters of the specified protocol
+ * @class
+ */
+class WSParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Idle timeout period in seconds. Default: 15; range: 1 to 1800
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IdleTimeOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdleTimeOut = 'IdleTimeOut' in params ? params.IdleTimeOut : null;
+
+    }
+}
+
+/**
  * GetAlias request structure.
  * @class
  */
@@ -2029,6 +2092,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.Role = null;
 
         /**
+         * Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+         * @type {string || null}
+         */
+        this.InstallDependency = null;
+
+        /**
          * CLS logset ID to which logs are shipped
          * @type {string || null}
          */
@@ -2082,6 +2151,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          */
         this.InitTimeout = null;
 
+        /**
+         * Parameters of the specified protocol
+         * @type {ProtocolParams || null}
+         */
+        this.ProtocolParams = null;
+
     }
 
     /**
@@ -2110,6 +2185,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             this.VpcConfig = obj;
         }
         this.Role = 'Role' in params ? params.Role : null;
+        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
         this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
         this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
         this.Publish = 'Publish' in params ? params.Publish : null;
@@ -2142,6 +2218,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             this.CfsConfig = obj;
         }
         this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
+
+        if (params.ProtocolParams) {
+            let obj = new ProtocolParams();
+            obj.deserialize(params.ProtocolParams)
+            this.ProtocolParams = obj;
+        }
 
     }
 }
@@ -3496,6 +3578,12 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Role = null;
 
         /**
+         * Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+         * @type {string || null}
+         */
+        this.InstallDependency = null;
+
+        /**
          * CLS Logset ID to which the function logs are shipped
          * @type {string || null}
          */
@@ -3567,6 +3655,18 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.TraceEnable = null;
 
+        /**
+         * Protocols supported by HTTP-triggered functions. Valid value: `WS` (WebSockets)
+         * @type {string || null}
+         */
+        this.ProtocolType = null;
+
+        /**
+         * Parameters of the specified protocol
+         * @type {ProtocolParams || null}
+         */
+        this.ProtocolParams = null;
+
     }
 
     /**
@@ -3602,6 +3702,7 @@ class CreateFunctionRequest extends  AbstractModel {
         }
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.Role = 'Role' in params ? params.Role : null;
+        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
         this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
         this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
         this.Type = 'Type' in params ? params.Type : null;
@@ -3645,6 +3746,13 @@ class CreateFunctionRequest extends  AbstractModel {
         }
         this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
         this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
+        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
+
+        if (params.ProtocolParams) {
+            let obj = new ProtocolParams();
+            obj.deserialize(params.ProtocolParams)
+            this.ProtocolParams = obj;
+        }
 
     }
 }
@@ -4877,6 +4985,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.TraceEnable = null;
 
         /**
+         * Protocols supported by HTTP-triggered functions. It supports WebSockets for now.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ProtocolType = null;
+
+        /**
+         * Parameters of the specified protocol
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {ProtocolParams || null}
+         */
+        this.ProtocolParams = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -5000,6 +5122,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
         this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
+        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
+
+        if (params.ProtocolParams) {
+            let obj = new ProtocolParams();
+            obj.deserialize(params.ProtocolParams)
+            this.ProtocolParams = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7200,6 +7329,7 @@ module.exports = {
     ListAliasesResponse: ListAliasesResponse,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
     GetReservedConcurrencyConfigResponse: GetReservedConcurrencyConfigResponse,
+    ProtocolParams: ProtocolParams,
     RoutingConfig: RoutingConfig,
     DeleteProvisionedConcurrencyConfigResponse: DeleteProvisionedConcurrencyConfigResponse,
     VersionWeight: VersionWeight,
@@ -7230,6 +7360,7 @@ module.exports = {
     PublishVersionRequest: PublishVersionRequest,
     DeleteAliasRequest: DeleteAliasRequest,
     ListVersionByFunctionResponse: ListVersionByFunctionResponse,
+    WSParams: WSParams,
     GetAliasRequest: GetAliasRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
     PublicNetConfigOut: PublicNetConfigOut,

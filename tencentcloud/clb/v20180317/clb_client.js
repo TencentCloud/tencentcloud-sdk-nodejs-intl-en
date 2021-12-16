@@ -57,7 +57,7 @@ const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
 const DescribeTargetGroupsResponse = models.DescribeTargetGroupsResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
-const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
+const ModifyLoadBalancerSlaResponse = models.ModifyLoadBalancerSlaResponse;
 const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
@@ -71,6 +71,7 @@ const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
 const DescribeLBListenersRequest = models.DescribeLBListenersRequest;
+const SlaUpdateParam = models.SlaUpdateParam;
 const Target = models.Target;
 const DescribeLoadBalancerTrafficRequest = models.DescribeLoadBalancerTrafficRequest;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
@@ -172,10 +173,12 @@ const SnatIp = models.SnatIp;
 const DescribeBlockIPTaskResponse = models.DescribeBlockIPTaskResponse;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
 const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
+const ModifyLoadBalancerSlaRequest = models.ModifyLoadBalancerSlaRequest;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
 const Quota = models.Quota;
+const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
 const LBItem = models.LBItem;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
@@ -220,6 +223,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     RegisterTargets(req, cb) {
         let resp = new RegisterTargetsResponse();
         this.request("RegisterTargets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade shared CLB instances to LCU-supported CLB instances (downgrade is not allowed) and upgrade/downgrade the specification of LCU-supported instances.
+     * @param {ModifyLoadBalancerSlaRequest} req
+     * @param {function(string, ModifyLoadBalancerSlaResponse):void} cb
+     * @public
+     */
+    ModifyLoadBalancerSla(req, cb) {
+        let resp = new ModifyLoadBalancerSlaResponse();
+        this.request("ModifyLoadBalancerSla", req, resp, cb);
     }
 
     /**

@@ -2057,36 +2057,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SetLoadBalancerClsLog request structure.
+ * ModifyLoadBalancerSla response structure.
  * @class
  */
-class SetLoadBalancerClsLogRequest extends  AbstractModel {
+class ModifyLoadBalancerSlaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB instance ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * CLS logset ID
-         * @type {string || null}
-         */
-        this.LogSetId = null;
-
-        /**
-         * CLS log topic ID
-         * @type {string || null}
-         */
-        this.LogTopicId = null;
-
-        /**
-         * Log type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
-         * @type {string || null}
-         */
-        this.LogType = null;
+        this.RequestId = null;
 
     }
 
@@ -2097,10 +2079,7 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
-        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
-        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2678,6 +2657,41 @@ class DescribeLBListenersRequest extends  AbstractModel {
                 this.Backends.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Parameter for instance specification adjustment
+ * @class
+ */
+class SlaUpdateParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the CLB instance
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * Target instance specification
+         * @type {string || null}
+         */
+        this.SlaType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.SlaType = 'SlaType' in params ? params.SlaType : null;
 
     }
 }
@@ -7697,13 +7711,13 @@ class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * Information of the SNAT IP to be added. You can apply for a specified IP or apply for an automatically assigned IP by specifying a subnet.
+         * Information of the SNAT IP to be added. You can specify a SNAT IP or use the one automatically assigned by a subnet.
          * @type {Array.<SnatIp> || null}
          */
         this.SnatIps = null;
 
         /**
-         * Number of SNAT IPs to be added. This parameter is used in conjunction with `SnatIps`. Note that if `Ip` is specified in `SnapIps`, this parameter is not available.
+         * Number of SNAT IPs to be added. This parameter is used in conjunction with `SnatIps`. Note that if `Ip` is specified in `SnapIps`, this parameter is not available. It defaults to `1` and the upper limit is `10`.
          * @type {number || null}
          */
         this.Number = null;
@@ -8315,6 +8329,42 @@ class ModifyTargetGroupAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyLoadBalancerSla request structure.
+ * @class
+ */
+class ModifyLoadBalancerSlaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the LCU-supported CLB instance, and the target specification
+         * @type {Array.<SlaUpdateParam> || null}
+         */
+        this.LoadBalancerSla = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LoadBalancerSla) {
+            this.LoadBalancerSla = new Array();
+            for (let z in params.LoadBalancerSla) {
+                let obj = new SlaUpdateParam();
+                obj.deserialize(params.LoadBalancerSla[z]);
+                this.LoadBalancerSla.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeBlockIPTask request structure.
  * @class
  */
@@ -8464,6 +8514,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.QuotaId = 'QuotaId' in params ? params.QuotaId : null;
         this.QuotaCurrent = 'QuotaCurrent' in params ? params.QuotaCurrent : null;
         this.QuotaLimit = 'QuotaLimit' in params ? params.QuotaLimit : null;
+
+    }
+}
+
+/**
+ * SetLoadBalancerClsLog request structure.
+ * @class
+ */
+class SetLoadBalancerClsLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLS logset ID
+<li>Enter the ID of logset you need to add or update. You can acquire the ID by invoking [DescribeLogsets](https://intl.cloud.tencent.com/document/product/614/56454?from_cn_redirect=1).</li>
+<li>To delete the log set, set this parameter to `null`.</li>
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * CLS log topic ID
+<li>Enter the ID of log topic you need to add or update. You can acquire the ID by invoking [DescribeTopics](https://intl.cloud.tencent.com/document/product/614/56454?from_cn_redirect=1).</li>
+<li>To delete the log set, set this parameter to `null`.</li>
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+        /**
+         * Log type:
+<li>`ACCESS`: access logs</li>
+<li>`HEALTH`: health check logs</li>
+Default: `ACCESS`
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
 
     }
 }
@@ -10028,7 +10134,7 @@ module.exports = {
     RegisterTargetsWithClassicalLBResponse: RegisterTargetsWithClassicalLBResponse,
     DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
-    SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
+    ModifyLoadBalancerSlaResponse: ModifyLoadBalancerSlaResponse,
     DeleteLoadBalancerListenersRequest: DeleteLoadBalancerListenersRequest,
     BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
@@ -10042,6 +10148,7 @@ module.exports = {
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
     DescribeLBListenersRequest: DescribeLBListenersRequest,
+    SlaUpdateParam: SlaUpdateParam,
     Target: Target,
     DescribeLoadBalancerTrafficRequest: DescribeLoadBalancerTrafficRequest,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
@@ -10143,10 +10250,12 @@ module.exports = {
     DescribeBlockIPTaskResponse: DescribeBlockIPTaskResponse,
     DescribeClassicalLBListenersResponse: DescribeClassicalLBListenersResponse,
     ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
+    ModifyLoadBalancerSlaRequest: ModifyLoadBalancerSlaRequest,
     DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
     DescribeRewriteResponse: DescribeRewriteResponse,
     Quota: Quota,
+    SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
     LBItem: LBItem,
     DeleteLoadBalancerListenersResponse: DeleteLoadBalancerListenersResponse,
     DescribeListenersRequest: DescribeListenersRequest,

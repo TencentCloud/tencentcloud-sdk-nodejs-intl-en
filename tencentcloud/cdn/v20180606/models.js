@@ -173,27 +173,48 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Smart compression configuration. By default, Gzip compression is performed for files with js, html, css, xml, json, shtml, and htm suffixes, and with sizes between 256 and 2097152 bytes.
+ * 
  * @class
  */
-class Compression extends  AbstractModel {
+class AdvanceHttps extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Smart compression configuration switch
-on: enabled
-off: disabled
+         * 
          * @type {string || null}
          */
-        this.Switch = null;
+        this.CustomTlsStatus = null;
 
         /**
-         * Compression rules array
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CompressionRule> || null}
+         * 
+         * @type {Array.<string> || null}
          */
-        this.CompressionRules = null;
+        this.TlsVersion = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Cipher = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VerifyOriginType = null;
+
+        /**
+         * 
+         * @type {ServerCert || null}
+         */
+        this.CertInfo = null;
+
+        /**
+         * 
+         * @type {ClientCert || null}
+         */
+        this.OriginCertInfo = null;
 
     }
 
@@ -204,15 +225,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.CustomTlsStatus = 'CustomTlsStatus' in params ? params.CustomTlsStatus : null;
+        this.TlsVersion = 'TlsVersion' in params ? params.TlsVersion : null;
+        this.Cipher = 'Cipher' in params ? params.Cipher : null;
+        this.VerifyOriginType = 'VerifyOriginType' in params ? params.VerifyOriginType : null;
 
-        if (params.CompressionRules) {
-            this.CompressionRules = new Array();
-            for (let z in params.CompressionRules) {
-                let obj = new CompressionRule();
-                obj.deserialize(params.CompressionRules[z]);
-                this.CompressionRules.push(obj);
-            }
+        if (params.CertInfo) {
+            let obj = new ServerCert();
+            obj.deserialize(params.CertInfo)
+            this.CertInfo = obj;
+        }
+
+        if (params.OriginCertInfo) {
+            let obj = new ClientCert();
+            obj.deserialize(params.OriginCertInfo)
+            this.OriginCertInfo = obj;
         }
 
     }
@@ -452,6 +479,83 @@ class DescribePurgeQuotaResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SCDN layer-7 rule configuration for CC frequency limiting
+ * @class
+ */
+class ScdnSevenLayerRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether values are case sensitive
+         * @type {boolean || null}
+         */
+        this.CaseSensitive = null;
+
+        /**
+         * Rule types:
+`protocol`: protocol. Valid values: `HTTP` and `HTTPS`.
+`method`: request method. Valid values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
+`all`: domain name. The matching content is `*` and cannot be edited.
+`ip`: IP in CIDR format.
+`directory`: path starting with a slash (/). You can specify a directory or specific path using up to 128 characters.
+`index`: default homepage, which is specified by `/;/index.html` and cannot be edited.
+`path`: full path of the file, such as `/acb/test.png`. Wildcard is supported, such as `/abc/*.jpg`.
+`file`: file extension, such as `jpg`, `png` and `css`.
+`param`: request parameter. The value can contain up to 512 characters.
+`referer`: Referer. The value can contain up to 512 characters.
+`cookie`: Cookie. The value can contain up to 512 characters.
+`user-agent`: User-Agent. The value can contain up to 512 characters.
+`head`: custom header. The value can contain up to 512 characters. If the matching content is blank or does not exist, enter the matching parameter directly.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Logical operator, which connects the relation between RuleType and RuleValue. Valid values:
+`exclude`: the rule value is not contained. 
+`include`: the rule value is contained. 
+`notequal`: the rule value is not equal to the specified rule type. 
+`equal`: the rule value is equal to the specified rule type. 
+`matching`: the rule value matches with the prefix of the specified rule type.
+`null`: the rule value is empty or does not exist.
+         * @type {string || null}
+         */
+        this.LogicOperator = null;
+
+        /**
+         * Rule value
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RuleValue = null;
+
+        /**
+         * Matched parameter. Only request parameters, Cookie, and custom request headers have a value.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.LogicOperator = 'LogicOperator' in params ? params.LogicOperator : null;
+        this.RuleValue = 'RuleValue' in params ? params.RuleValue : null;
+        this.RuleParam = 'RuleParam' in params ? params.RuleParam : null;
 
     }
 }
@@ -906,30 +1010,67 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Precise access control match rule
+ * Remote authentication rule
  * @class
  */
-class ScdnAclRule extends  AbstractModel {
+class RemoteAuthenticationRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Match keywords. Valid values: `params`, `url`, `ip`, `referer`, and `user-agent`.
+         * Remote authentication server
+The server configured in `RemoteAutherntication` is used by default.
          * @type {string || null}
          */
-        this.MatchKey = null;
+        this.Server = null;
 
         /**
-         * Logical operator. Valid values: `exclude`, `include`, `notequal`, `equal`, `len-less`, `len-equal`, and `len-more`.
+         * HTTP method used by the remote authentication server. Valid values: `get`, `post`, `head`, and `all`. 
+`all`: the remote authentication server follows the client request method.
+Default: `all`
          * @type {string || null}
          */
-        this.LogiOperator = null;
+        this.AuthMethod = null;
 
         /**
-         * Match value
+         * Rule types:
+`all`: apply to all files
+`file`: apply to files with the specified suffixes
+`directory`: apply to the specified directories
+`path`: apply to the specified absolute paths
+Default: `all`.
          * @type {string || null}
          */
-        this.MatchValue = null;
+        this.RuleType = null;
+
+        /**
+         * Content for each `RuleType`:
+For `all`, enter a wildcard `*`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+For `index`, enter a forward slash `/`.
+Default: `*`
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * Timeout period of the remote authentication server. Unit: ms.
+Value range: [1, 30,000]
+Default: 20000
+         * @type {number || null}
+         */
+        this.AuthTimeout = null;
+
+        /**
+         * Whether to deny or allow the request when the remote authentication server is timed out:
+`RETURN_200`: the request is allowed when the remote authentication server is timed out.
+`RETURN_403`: the request is denied when the remote authentication server is timed out.
+Default: `RETURN_200`
+         * @type {string || null}
+         */
+        this.AuthTimeoutAction = null;
 
     }
 
@@ -940,9 +1081,58 @@ class ScdnAclRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MatchKey = 'MatchKey' in params ? params.MatchKey : null;
-        this.LogiOperator = 'LogiOperator' in params ? params.LogiOperator : null;
-        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
+        this.Server = 'Server' in params ? params.Server : null;
+        this.AuthMethod = 'AuthMethod' in params ? params.AuthMethod : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.AuthTimeout = 'AuthTimeout' in params ? params.AuthTimeout : null;
+        this.AuthTimeoutAction = 'AuthTimeoutAction' in params ? params.AuthTimeoutAction : null;
+
+    }
+}
+
+/**
+ * Smart compression configuration. By default, Gzip compression is performed for files with js, html, css, xml, json, shtml, and htm suffixes, and with sizes between 256 and 2097152 bytes.
+ * @class
+ */
+class Compression extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Smart compression configuration switch
+on: enabled
+off: disabled
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Compression rules array
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CompressionRule> || null}
+         */
+        this.CompressionRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.CompressionRules) {
+            this.CompressionRules = new Array();
+            for (let z in params.CompressionRules) {
+                let obj = new CompressionRule();
+                obj.deserialize(params.CompressionRules[z]);
+                this.CompressionRules.push(obj);
+            }
+        }
 
     }
 }
@@ -1791,6 +1981,12 @@ client: specifies to query data of the client region (where a user request devic
          */
         this.Product = null;
 
+        /**
+         * Returns the first N data entries. The default value is 100 if this parameter is not specified, whereas 1000 if `Metric` is `url`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
     }
 
     /**
@@ -1811,6 +2007,7 @@ client: specifies to query data of the client region (where a user request devic
         this.Area = 'Area' in params ? params.Area : null;
         this.AreaType = 'AreaType' in params ? params.AreaType : null;
         this.Product = 'Product' in params ? params.Product : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2010,7 +2207,7 @@ class AdvancedAuthenticationTypeD extends  AbstractModel {
 }
 
 /**
- * Compression rules configuration. Up to 100 entries can be set.
+ * Intelligent compression rule configuration
  * @class
  */
 class CompressionRule extends  AbstractModel {
@@ -2023,14 +2220,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {boolean || null}
          */
         this.Compress = null;
-
-        /**
-         * Compress according to the file suffix type
-Such as: jpg, txt
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.FileExtensions = null;
 
         /**
          * The minimum file size to trigger compression (in bytes)
@@ -2056,6 +2245,39 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Algorithms = null;
 
+        /**
+         * Compress according to the file suffix type
+Such as: jpg, txt
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FileExtensions = null;
+
+        /**
+         * Rule types:
+`all`: effective for all files.
+`file`: effective for specified file suffixes.
+`directory`: effective for specified paths.
+`path`: effective for specified absolute paths.
+`contentType`: effective when the `ContentType` is specified
+If this field is specified, `FileExtensions` does not take effect.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Content for each `CacheType`:
+For `all`, enter a wildcard `*`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+For `contentType`, enter `text/html`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
     }
 
     /**
@@ -2066,10 +2288,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Compress = 'Compress' in params ? params.Compress : null;
-        this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
         this.MinLength = 'MinLength' in params ? params.MinLength : null;
         this.MaxLength = 'MaxLength' in params ? params.MaxLength : null;
         this.Algorithms = 'Algorithms' in params ? params.Algorithms : null;
+        this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
     }
 }
@@ -2162,19 +2386,22 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Origins = null;
 
         /**
-         * Master origin server type
-The following types are supported for input parameters:
-domain: domain name type
-cos: COS origin
-ip: IP list used as origin server
-ipv6: origin server list is a single IPv6 address
-ip_ipv6: origin server list is multiple IPv4 addresses and an IPv6 address
-The following types of output parameters are added:
-image: Cloud Infinite origin
-ftp: legacy FTP origin, which is no longer maintained.
-When modifying `Origins`, you need to enter the corresponding OriginType.
-The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Primary origin server type
+Input:
+`domain`: domain name
+`cos`: COS bucket address
+`ip`: IP address
+`ipv6`: a single IPv6 address
+`ip_ipv6`: multiple IPv4 addresses and one IPv6 address
+`ip_domain`: both IP addresses and domain names (only available to beta users)
+`ipv6_domain`: multiple IPv6 addresses and one domain name
+`ip_ipv6_domain`: multiple IPv4 and IPv6 addresses and one domain name
+Output: 
+`image`: Cloud Infinite origin
+`ftp`: FTP origin (disused)
+When modifying `Origins`, you need to enter the corresponding `OriginType`.
+The IPv6 feature is now only available to beta users. Please submit an application to use this feature.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginType = null;
@@ -2214,11 +2441,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BackupOrigins = null;
 
         /**
-         * Backup origin server type, which supports the following types:
-domain: domain name type
-ip: IP list used as origin server
-When modifying BackupOrigins, you need to enter the corresponding BackupOriginType.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Secondary origin type. Values:
+`domain`: domain name
+`ip`: IP address
+When modifying `BackupOrigins`, you need to enter the corresponding `BackupOriginType`.
+The following backup origin servers are only available to beta users. Submit an application if you want to become a beta user.
+`ipv6_domain`: multiple IPv6 addresses and one domain name
+`ip_ipv6`: multiple IPv4 addresses and one IPv6 address
+`ipv6_domain`: multiple IPv6 addresses and one domain name
+`ip_ipv6_domain`: multiple IPv4 and IPv6 addresses and one domain name
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BackupOriginType = null;
@@ -2249,6 +2481,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          * @type {Array.<PathBasedOriginRule> || null}
          */
         this.PathBasedOrigin = null;
+
+        /**
+         * 
+         * @type {AdvanceHttps || null}
+         */
+        this.AdvanceHttps = null;
 
     }
 
@@ -2285,6 +2523,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 obj.deserialize(params.PathBasedOrigin[z]);
                 this.PathBasedOrigin.push(obj);
             }
+        }
+
+        if (params.AdvanceHttps) {
+            let obj = new AdvanceHttps();
+            obj.deserialize(params.AdvanceHttps)
+            this.AdvanceHttps = obj;
         }
 
     }
@@ -2911,6 +3155,98 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
+ * SCDN custom CC rules
+ * @class
+ */
+class AdvancedCCRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Detection duration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DetectionTime = null;
+
+        /**
+         * Detection frequency threshold
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FrequencyLimit = null;
+
+        /**
+         * Whether to enable IP penalty. Valid values: `on` and `off`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PunishmentSwitch = null;
+
+        /**
+         * IP penalty duration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PunishmentTime = null;
+
+        /**
+         * Action. Valid values: `intercept` and `redirect`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * A redirection URL used when Action is `redirect`
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+        /**
+         * Layer-7 rule configuration for CC frequency limiting
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ScdnSevenLayerRules> || null}
+         */
+        this.Configure = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.DetectionTime = 'DetectionTime' in params ? params.DetectionTime : null;
+        this.FrequencyLimit = 'FrequencyLimit' in params ? params.FrequencyLimit : null;
+        this.PunishmentSwitch = 'PunishmentSwitch' in params ? params.PunishmentSwitch : null;
+        this.PunishmentTime = 'PunishmentTime' in params ? params.PunishmentTime : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+
+        if (params.Configure) {
+            this.Configure = new Array();
+            for (let z in params.Configure) {
+                let obj = new ScdnSevenLayerRules();
+                obj.deserialize(params.Configure[z]);
+                this.Configure.push(obj);
+            }
+        }
 
     }
 }
@@ -4845,9 +5181,10 @@ Applicable to cases where the acceleration domain name configuration differs for
 
         /**
          * Domain name acceleration region
-mainland: acceleration inside mainland China
-overseas: acceleration outside mainland China
-global: global acceleration
+`mainland`: acceleration inside the Chinese mainland
+`overseas`: acceleration outside the Chinese mainland
+`global`: global acceleration
+When you change it to from `mainland`/`overseas` to `global`, configurations of the domain name will be deployed to the region inside or outside the Chinese mainland. The deployment will take some time as this domain name has special settings.
          * @type {string || null}
          */
         this.Area = null;
@@ -4877,7 +5214,7 @@ global: global acceleration
         this.AccessControl = null;
 
         /**
-         * URL redirect configuration
+         * Configuration of URL rewriting
          * @type {UrlRedirect || null}
          */
         this.UrlRedirect = null;
@@ -4935,6 +5272,18 @@ global: global acceleration
          * @type {WebSocket || null}
          */
         this.WebSocket = null;
+
+        /**
+         * Configuration of remote authentication
+         * @type {RemoteAuthentication || null}
+         */
+        this.RemoteAuthentication = null;
+
+        /**
+         * Shared CNAME configuration (only available to beta users)
+         * @type {ShareCname || null}
+         */
+        this.ShareCname = null;
 
     }
 
@@ -5171,6 +5520,18 @@ global: global acceleration
             let obj = new WebSocket();
             obj.deserialize(params.WebSocket)
             this.WebSocket = obj;
+        }
+
+        if (params.RemoteAuthentication) {
+            let obj = new RemoteAuthentication();
+            obj.deserialize(params.RemoteAuthentication)
+            this.RemoteAuthentication = obj;
+        }
+
+        if (params.ShareCname) {
+            let obj = new ShareCname();
+            obj.deserialize(params.ShareCname)
+            this.ShareCname = obj;
         }
 
     }
@@ -6058,6 +6419,14 @@ hex: hexadecimal
          */
         this.TimeFormat = null;
 
+        /**
+         * Backup key, which is used to calculate a signature.
+6-32 characters. Only digits and letters are allowed. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
+
     }
 
     /**
@@ -6074,6 +6443,7 @@ hex: hexadecimal
         this.SignParam = 'SignParam' in params ? params.SignParam : null;
         this.TimeParam = 'TimeParam' in params ? params.TimeParam : null;
         this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
 
     }
 }
@@ -6127,6 +6497,14 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.TimeFormat = null;
 
+        /**
+         * Backup key, which is used to calculate a signature.
+6-32 characters. Only digits and letters are allowed. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
+
     }
 
     /**
@@ -6141,6 +6519,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
         this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
 
     }
 }
@@ -6182,6 +6561,14 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
          */
         this.FilterType = null;
 
+        /**
+         * Backup key, which is used to calculate a signature.
+6-32 characters. Only digits and letters are allowed. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
+
     }
 
     /**
@@ -6195,6 +6582,7 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
 
     }
 }
@@ -6249,6 +6637,14 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
          */
         this.FilterType = null;
 
+        /**
+         * Backup key, which is used to calculate a signature.
+6-32 characters. Only digits and letters are allowed. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
+
     }
 
     /**
@@ -6263,6 +6659,7 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
 
     }
 }
@@ -6761,6 +7158,48 @@ Up to 100 entries can be submitted at a time and 3,000 entries per day.
 }
 
 /**
+ * Precise access control match rule
+ * @class
+ */
+class ScdnAclRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Keyword
+         * @type {string || null}
+         */
+        this.MatchKey = null;
+
+        /**
+         * Logical operator. Valid values:
+         * @type {string || null}
+         */
+        this.LogiOperator = null;
+
+        /**
+         * Matched value
+         * @type {string || null}
+         */
+        this.MatchValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MatchKey = 'MatchKey' in params ? params.MatchKey : null;
+        this.LogiOperator = 'LogiOperator' in params ? params.LogiOperator : null;
+        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
+
+    }
+}
+
+/**
  * Cache expiration rules configuration
  * @class
  */
@@ -7066,8 +7505,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.FollowRedirect = null;
 
         /**
-         * Custom error page configuration (in beta)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Configuration of custom error page
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {ErrorPage || null}
          */
         this.ErrorPage = null;
@@ -7317,21 +7756,21 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Ipv6Access = null;
 
         /**
-         * Advanced configuration set
+         * Advanced configuration settings
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<AdvanceConfig> || null}
          */
         this.AdvanceSet = null;
 
         /**
-         * Offline cache
+         * Offline cache (only available to beta users)
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {OfflineCache || null}
          */
         this.OfflineCache = null;
 
         /**
-         * Merging pull requests
+         * Merging origin-pull requests (only available to beta users)
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {OriginCombine || null}
          */
@@ -7364,6 +7803,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          * @type {WebSocket || null}
          */
         this.WebSocket = null;
+
+        /**
+         * Remote authentication configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {RemoteAuthentication || null}
+         */
+        this.RemoteAuthentication = null;
+
+        /**
+         * Shared CNAME configuration (only available to beta users)
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {ShareCname || null}
+         */
+        this.ShareCname = null;
 
     }
 
@@ -7657,6 +8110,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             let obj = new WebSocket();
             obj.deserialize(params.WebSocket)
             this.WebSocket = obj;
+        }
+
+        if (params.RemoteAuthentication) {
+            let obj = new RemoteAuthentication();
+            obj.deserialize(params.RemoteAuthentication)
+            this.RemoteAuthentication = obj;
+        }
+
+        if (params.ShareCname) {
+            let obj = new ShareCname();
+            obj.deserialize(params.ShareCname)
+            this.ShareCname = obj;
         }
 
     }
@@ -8418,6 +8883,13 @@ off: disabled
          */
         this.Switch = null;
 
+        /**
+         * Range GETs configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RangeOriginPullRule> || null}
+         */
+        this.RangeRules = null;
+
     }
 
     /**
@@ -8428,6 +8900,15 @@ off: disabled
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.RangeRules) {
+            this.RangeRules = new Array();
+            for (let z in params.RangeRules) {
+                let obj = new RangeOriginPullRule();
+                obj.deserialize(params.RangeRules[z]);
+                this.RangeRules.push(obj);
+            }
+        }
 
     }
 }
@@ -9644,6 +10125,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CacheOptResult = null;
 
         /**
+         * Task ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -9664,6 +10152,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.CacheOptResult)
             this.CacheOptResult = obj;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9710,6 +10199,299 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Action = 'Action' in params ? params.Action : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Precise access control rule
+ * @class
+ */
+class AdvancedScdnAclRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Keyword. Valid values:
+`protocol`: HTTP protocol
+`httpVersion`: HTTP version
+`method`: request method
+`ip`: requester IP
+`ipAsn`: ASN of the requester IP
+`ipCountry`: country/region of the requester IP
+`ipArea`: region of the requester IP
+`xForwardFor`: X-Forward-For request header
+`directory`: path
+`index`: homepage
+`path`: full path of a file
+`file`: file extension
+`param`: request parameter
+`referer`: Referer request header
+`cookie`: Cookie request header
+`userAgent`: User-Agent request header
+`head`: custom request header
+         * @type {string || null}
+         */
+        this.MatchKey = null;
+
+        /**
+         * Logical operator. Valid values:
+`exclude`: the keyword is not included
+`include`: the keyword is included
+`notequal`: not the same as the keyword
+`equal`: the same as the keyword
+`matching`: the prefix is matched
+`null`: empty or does not exist
+         * @type {string || null}
+         */
+        this.LogicOperator = null;
+
+        /**
+         * Match value
+When `MatchKey` is `protocol`,
+Values: `HTTP` and `HTTPS`.
+
+When `MatchKey` is `httpVersion`,
+Values: `HTTP/1.0`, `HTTP/1.1`, `HTTP/1.2`, `HTTP/2`, and `HTTP/3`.
+
+When `MatchKey` is `method`,
+Values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
+
+When `MatchKey` is `ipCountry`, valid values include:
+`OTHER`: other countries/regions
+`VE`: Venezuela
+`UY`: Uruguay
+`SR`: Suriname
+`PY`: Paraguay
+`PE`: Peru
+`GY`: Guyana
+`EC`: Ecuador
+`CO`: Colombia
+`CL`: Chile
+`BR`: Brazil
+`BO`: Bolivia
+`AR`: Argentina
+`NZ`: New Zealand
+`WS`: Samoa
+`VU`: Vanuatu
+`TV`: Tuvalu
+`TO`: Tonga
+`TK`: Tokelau
+`PW`: Palau
+`NU`: Niue
+`NR`: Nauru
+`KI`: Kiribati
+`GU`: Guam
+`FM`: Micronesia
+`AU`: Australia
+`US`: United States
+`PR`: Puerto Rico
+`DO`: Dominican Republic
+`CR`: Costa Rica
+`AS`: American Samoa
+`AG`: Antigua and Barbuda
+`PA`: Panama
+`NI`: Nicaragua
+`MX`: Mexico
+`JM`: Jamaica
+`HT`: Haiti
+`HN`: Honduras
+`GT`: Guatemala
+`GP`: Guadeloupe
+`GL`: Greenland
+`GD`: Grenada
+`CU`: Cuba
+`CA`: Canada
+`BZ`: Belize
+`BS`: Bahamas
+`BM`: Bermuda
+`BB`: Barbados
+`AW`: Aruba
+`AI`: Anguilla
+`VA`: Vatican
+`SK`: Slovakia
+`RU`: Russia
+`GB`: United Kingdom
+`CZ`: Czech Republic
+`UA`: Ukraine
+`TR`: Turkey
+`SI`: Slovenia
+`SE`: Sweden
+`RS`: Republic of Serbia
+`RO`: Romania
+`PT`: Portugal
+`PL`: Poland
+`NO`: Norway
+`NL`: Netherlands
+`MT`: Malta
+`MK`: Macedonia
+`ME`: Montenegro
+`MD`: Moldova
+`MC`: Monaco
+`LV`: Latvia
+`LU`: Luxembourg
+`LT`: Lithuania
+`LI`: Liechtenstein
+`KZ`: Kazakhstan
+`IT`: Italy
+`IS`: Iceland
+`IE`: Ireland
+`HU`: Hungary
+`HR`: Croatia
+`GR`: Greece
+`GI`: Gibraltar
+`GG`: Guernsey
+`GE`: Georgia
+`FR`: France
+`FI`: Finland
+`ES`: Spain
+`EE`: Estonia
+`DK`: Denmark
+`DE`: Germany
+`CY`: Cyprus
+`CH`: Switzerland
+`BY`: Belarus
+`BG`: Bulgaria
+`BE`: Belgium
+`AZ`: Azerbaijan
+`AT`: Austria
+`AM`: Armenia
+`AL`: Albania
+`AD`: Andorra
+`TL`: East Timor
+`SY`: Syria
+`SA`: Saudi Arabia
+`PS`: Palestine
+`LK`: Sri Lanka
+`LK`: Sri Lanka
+`KP`: North Korea
+`KG`: Kyrgyzstan
+`HK`: Hong Kong, China
+`BN`: Brunei
+`BD`: Bangladesh
+`AE`: United Arab Emirates
+`YE`: Yemen
+`VN`: Vietnam
+`UZ`: Uzbekistan
+`TW`: Taiwan, China
+`TM`: Turkmenistan
+`TJ`: Tajikistan
+`TH`: Thailand
+`SG`: Singapore
+`QA`: Qatar
+`PK`: Pakistan
+`PH`: Philippines
+`OM`: Oman
+`NP`: Nepal
+`MY`: Malaysia
+`MV`: Maldives
+`MO`: Macao, China
+`MN`: Mongolia
+`MM`: Myanmar
+`LB`: Lebanon
+`KW`: Kuwait
+`KR`: South Korea
+`KH`: Cambodia
+`JP`: Japan
+`JO`: Jordan
+`IR`: Iran
+`IQ`: Iraq
+`IN`: India
+`IL`: Israel
+`ID`: Indonesia
+`CN`: China
+`BT`: Bhutan
+`BH`: Bahrain
+`AF`: Afghanistan
+`LY`: Libya
+`CD`: Democratic Republic of the Congo
+`RE`: La Réunion
+`SZ`: Swaziland
+`ZW`: Zimbabwe
+`ZM`: Zambia
+`YT`: Mayotte
+`UG`: Uganda
+`TZ`: Tanzania
+`TN`: Tunisia
+`TG`: Togo
+`TD`: Chad
+`SO`: Somalia
+`SN`: Senegal
+`SD`: Sudan
+`SC`: Seychelles
+`RW`: Rwanda
+`NG`: Nigeria
+`NE`: Niger
+`NA`: Namibia
+`MZ`: Mozambique
+`MW`: Malawi
+`MU`: Mauritius
+`MR`: Mauritania
+`ML`: Mali
+`MG`: Madagascar
+`MA`: Morocco
+`LS`: Lesotho
+`LR`: Liberia
+`KM`: Comoros
+`KE`: Kenya
+`GN`: Guinea
+`GM`: Gambia
+`GH`: Ghana
+`GA`: Gabon
+`ET`: Ethiopia
+`ER`: Eritrea
+`EG`: Egypt
+`DZ`: Algeria
+`DJ`: Djibouti
+`CM`: Cameroon
+`CG`: Republic of the Congo
+`BW`: Botswana
+`BJ`: Benin
+`BI`: Burundi
+`AO`: Angola
+
+When MatchKey is `ipArea`, valid values include:
+`OTHER`: other areas
+`AS`: Asia
+`EU`: Europe
+`AN`: Antarctica
+`AF`: Africa
+`OC`: Oceania
+`NA`: North America
+`SA`: South America
+
+When MatchKey is `index`,
+valid value is `/;/index.html`.
+         * @type {Array.<string> || null}
+         */
+        this.MatchValue = null;
+
+        /**
+         * Whether to distinguish uppercase or lowercase letters. `true`: case sensitive; `false`: case insensitive.
+         * @type {boolean || null}
+         */
+        this.CaseSensitive = null;
+
+        /**
+         * This field is required when `MatchKey` is `param` or `cookie`. For `param`, it indicates a key value of the request parameter if MatchKey is `param`, while a key value of the Cookie request header if MatchKey is `cookie`.
+         * @type {string || null}
+         */
+        this.MatchKeyParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MatchKey = 'MatchKey' in params ? params.MatchKey : null;
+        this.LogicOperator = 'LogicOperator' in params ? params.LogicOperator : null;
+        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
+        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
+        this.MatchKeyParam = 'MatchKeyParam' in params ? params.MatchKeyParam : null;
 
     }
 }
@@ -9930,6 +10712,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Rules = null;
 
+        /**
+         * Advanced custom CC attack defense rule
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<AdvancedCCRules> || null}
+         */
+        this.AdvancedRules = null;
+
     }
 
     /**
@@ -9947,6 +10736,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 let obj = new ScdnCCRules();
                 obj.deserialize(params.Rules[z]);
                 this.Rules.push(obj);
+            }
+        }
+
+        if (params.AdvancedRules) {
+            this.AdvancedRules = new Array();
+            for (let z in params.AdvancedRules) {
+                let obj = new AdvancedCCRules();
+                obj.deserialize(params.AdvancedRules[z]);
+                this.AdvancedRules.push(obj);
             }
         }
 
@@ -10344,6 +11142,56 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Range GETs configuration
+ * @class
+ */
+class RangeOriginPullRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether Range GETs is enabled
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Rule types:
+`file`: effective for specified file suffixes.
+`directory`: effective for specified paths.
+`path`: effective for specified absolute paths.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Content for each `RuleType`:
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+
+    }
+}
+
+/**
  * DescribeCdnIp response structure.
  * @class
  */
@@ -10554,6 +11402,8 @@ class ScdnErrorPage extends  AbstractModel {
 
         /**
          * Status code
+`403` is passed in when the action is `intercept`.
+`301` is passed in when the action is `redirect`.
          * @type {number || null}
          */
         this.RedirectCode = null;
@@ -10828,6 +11678,63 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Configuration of remote authentication rules. Setting up multiple rules is supported.
+`RemoteAuthenticationRules` and `Server` cannot be configured at the same time.
+If only `Server` is configured, all parameters of `RemoteAuthenticationRules` will be set to the default values. The default values are described in each configuration parameter.
+ * @class
+ */
+class RemoteAuthentication extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Remote authentication switch
+`on`: enable
+`off`: disable
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Remote authentication rule configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RemoteAuthenticationRule> || null}
+         */
+        this.RemoteAuthenticationRules = null;
+
+        /**
+         * Remote authentication server
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Server = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.RemoteAuthenticationRules) {
+            this.RemoteAuthenticationRules = new Array();
+            for (let z in params.RemoteAuthenticationRules) {
+                let obj = new RemoteAuthenticationRule();
+                obj.deserialize(params.RemoteAuthenticationRules[z]);
+                this.RemoteAuthenticationRules.push(obj);
+            }
+        }
+        this.Server = 'Server' in params ? params.Server : null;
+
+    }
+}
+
+/**
  * Path-based cache key configuration
  * @class
  */
@@ -10957,6 +11864,44 @@ For `path`, enter the corresponding absolute path, such as /xxx/test.html.
         this.RuleType = 'RuleType' in params ? params.RuleType : null;
         this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
         this.KBpsThreshold = 'KBpsThreshold' in params ? params.KBpsThreshold : null;
+
+    }
+}
+
+/**
+ * Shared CNAME configuration
+ * @class
+ */
+class ShareCname extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether to enable Shared CNAME. If it is set to `off`, the default CNAME is used. If it is set to `on`, a shared CNAME is used.
+
+* ShareCname is only available to beta users. To use this feature, please submit a ticket for application.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Shared CNAME to be configured
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Cname = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
 
     }
 }
@@ -12473,18 +13418,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ManageClsTopicDomains response structure.
+ * SCDN precise access control configuration
  * @class
  */
-class ManageClsTopicDomainsResponse extends  AbstractModel {
+class AdvancedScdnAclGroup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Rule name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RuleName = null;
+
+        /**
+         * Specific configurations
+         * @type {Array.<AdvancedScdnAclRule> || null}
+         */
+        this.Configure = null;
+
+        /**
+         * Action. Valid values: `intercept` and `redirect`.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * Whether the rule is activated. Valid values: `active` and `inactive`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error page configuration
+         * @type {ScdnErrorPage || null}
+         */
+        this.ErrorPage = null;
 
     }
 
@@ -12495,7 +13464,24 @@ class ManageClsTopicDomainsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+        if (params.Configure) {
+            this.Configure = new Array();
+            for (let z in params.Configure) {
+                let obj = new AdvancedScdnAclRule();
+                obj.deserialize(params.Configure[z]);
+                this.Configure.push(obj);
+            }
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.ErrorPage) {
+            let obj = new ScdnErrorPage();
+            obj.deserialize(params.ErrorPage)
+            this.ErrorPage = obj;
+        }
 
     }
 }
@@ -12560,6 +13546,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ManageClsTopicDomains response structure.
+ * @class
+ */
+class ManageClsTopicDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SCDN precise access control configuration
  * @class
  */
@@ -12580,7 +13594,7 @@ class ScdnAclGroup extends  AbstractModel {
         this.Configure = null;
 
         /**
-         * Rule action, which can be `refuse` or `redirect`.
+         * Action. Valid values: `intercept` and `redirect`.
          * @type {string || null}
          */
         this.Result = null;
@@ -12806,6 +13820,14 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.FilterRules = null;
 
+        /**
+         * HTTP code returned when the IP allowlist/blocklist verification fails
+Valid values: 400-499
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReturnCode = null;
+
     }
 
     /**
@@ -12827,6 +13849,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
                 this.FilterRules.push(obj);
             }
         }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
 
     }
 }
@@ -12846,7 +13869,7 @@ class ScdnAclConfig extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * ACL rule group, which is required when the access control is on.
+         * This field is disused. Please use `AdvancedScriptData` instead.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<ScdnAclGroup> || null}
          */
@@ -12858,6 +13881,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          * @type {ScdnErrorPage || null}
          */
         this.ErrorPage = null;
+
+        /**
+         * ACL rule group, which is required when the access control is on.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<AdvancedScdnAclGroup> || null}
+         */
+        this.AdvancedScriptData = null;
 
     }
 
@@ -12883,6 +13913,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             let obj = new ScdnErrorPage();
             obj.deserialize(params.ErrorPage)
             this.ErrorPage = obj;
+        }
+
+        if (params.AdvancedScriptData) {
+            this.AdvancedScriptData = new Array();
+            for (let z in params.AdvancedScriptData) {
+                let obj = new AdvancedScdnAclGroup();
+                obj.deserialize(params.AdvancedScriptData[z]);
+                this.AdvancedScriptData.push(obj);
+            }
         }
 
     }
@@ -13695,6 +14734,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.RedirectHost = null;
 
+        /**
+         * Whether to use full-path matching or arbitrary matching
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.FullMatch = null;
+
     }
 
     /**
@@ -13708,6 +14754,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Pattern = 'Pattern' in params ? params.Pattern : null;
         this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
         this.RedirectHost = 'RedirectHost' in params ? params.RedirectHost : null;
+        this.FullMatch = 'FullMatch' in params ? params.FullMatch : null;
 
     }
 }
@@ -13780,19 +14827,21 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
     AdvancedAuthentication: AdvancedAuthentication,
-    Compression: Compression,
+    AdvanceHttps: AdvanceHttps,
     Revalidate: Revalidate,
     ResourceData: ResourceData,
     UrlRecord: UrlRecord,
     DescribePushQuotaResponse: DescribePushQuotaResponse,
     DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,
+    ScdnSevenLayerRules: ScdnSevenLayerRules,
     Authentication: Authentication,
     ImageOptimization: ImageOptimization,
     Https: Https,
     RuleCache: RuleCache,
     DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
-    ScdnAclRule: ScdnAclRule,
+    RemoteAuthenticationRule: RemoteAuthenticationRule,
+    Compression: Compression,
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
     DescribeCdnOriginIpResponse: DescribeCdnOriginIpResponse,
@@ -13830,6 +14879,7 @@ module.exports = {
     DescribeCdnOriginIpRequest: DescribeCdnOriginIpRequest,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
+    AdvancedCCRules: AdvancedCCRules,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     BriefDomain: BriefDomain,
     TimestampData: TimestampData,
@@ -13881,6 +14931,7 @@ module.exports = {
     AccessControlRule: AccessControlRule,
     HttpHeaderPathRule: HttpHeaderPathRule,
     DisableCachesRequest: DisableCachesRequest,
+    ScdnAclRule: ScdnAclRule,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
     Hsts: Hsts,
@@ -13918,6 +14969,7 @@ module.exports = {
     DescribeMapInfoRequest: DescribeMapInfoRequest,
     EnableCachesResponse: EnableCachesResponse,
     RuleQueryString: RuleQueryString,
+    AdvancedScdnAclRule: AdvancedScdnAclRule,
     DescribeIpVisitRequest: DescribeIpVisitRequest,
     HttpHeaderRule: HttpHeaderRule,
     StatusCodeCacheRule: StatusCodeCacheRule,
@@ -13931,6 +14983,7 @@ module.exports = {
     DescribeBillingDataResponse: DescribeBillingDataResponse,
     DisableCachesResponse: DisableCachesResponse,
     SchemeKey: SchemeKey,
+    RangeOriginPullRule: RangeOriginPullRule,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
@@ -13940,8 +14993,10 @@ module.exports = {
     UrlRedirect: UrlRedirect,
     DownstreamCapping: DownstreamCapping,
     CookieKey: CookieKey,
+    RemoteAuthentication: RemoteAuthentication,
     KeyRule: KeyRule,
     CappingRule: CappingRule,
+    ShareCname: ShareCname,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
     BandwidthAlert: BandwidthAlert,
@@ -13974,9 +15029,10 @@ module.exports = {
     SearchClsLogRequest: SearchClsLogRequest,
     AdvanceConfig: AdvanceConfig,
     AwsPrivateAccess: AwsPrivateAccess,
-    ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
+    AdvancedScdnAclGroup: AdvancedScdnAclGroup,
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
+    ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
     ScdnAclGroup: ScdnAclGroup,
     ScdnWafRule: ScdnWafRule,
     ClsSearchLogs: ClsSearchLogs,

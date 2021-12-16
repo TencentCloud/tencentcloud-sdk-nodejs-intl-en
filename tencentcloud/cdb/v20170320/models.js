@@ -9558,6 +9558,12 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
          */
         this.FastUpgrade = null;
 
+        /**
+         * Delay threshold. Value range: 1-10. Default value: `10`.
+         * @type {number || null}
+         */
+        this.MaxDelayTime = null;
+
     }
 
     /**
@@ -9580,6 +9586,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.FastUpgrade = 'FastUpgrade' in params ? params.FastUpgrade : null;
+        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
 
     }
 }
@@ -10992,6 +10999,12 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
          */
         this.UpgradeSubversion = null;
 
+        /**
+         * Delay threshold. Value range: 1-10
+         * @type {number || null}
+         */
+        this.MaxDelayTime = null;
+
     }
 
     /**
@@ -11005,6 +11018,7 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
         this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
         this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
+        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
 
     }
 }
@@ -12524,8 +12538,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Timestamp = null;
 
         /**
-         * SQL execution duration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * SQL execution duration in seconds.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.QueryTime = null;
@@ -12559,8 +12573,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Database = null;
 
         /**
-         * Lock duration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Lock duration in seconds.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LockTime = null;

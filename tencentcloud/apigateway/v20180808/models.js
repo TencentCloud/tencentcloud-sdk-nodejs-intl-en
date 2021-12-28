@@ -5642,7 +5642,7 @@ class CreatePluginRequest extends  AbstractModel {
         this.PluginName = null;
 
         /**
-         * Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`
+         * Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`, `Routing`, `TrafficControlByParameter`.
          * @type {string || null}
          */
         this.PluginType = null;
@@ -7378,6 +7378,30 @@ class CreateApiRequest extends  AbstractModel {
          */
         this.ServiceScfFunctionType = null;
 
+        /**
+         * EIAM application type.
+         * @type {string || null}
+         */
+        this.EIAMAppType = null;
+
+        /**
+         * EIAM application authentication type. Valid values: `AuthenticationOnly`, `Authentication`, `Authorization`.
+         * @type {string || null}
+         */
+        this.EIAMAuthType = null;
+
+        /**
+         * Validity of the EIAM application token. Unit: second. Default value: `7200`.
+         * @type {number || null}
+         */
+        this.TokenTimeout = null;
+
+        /**
+         * EIAM application ID.
+         * @type {string || null}
+         */
+        this.EIAMAppId = null;
+
     }
 
     /**
@@ -7512,6 +7536,10 @@ class CreateApiRequest extends  AbstractModel {
         this.UserType = 'UserType' in params ? params.UserType : null;
         this.IsBase64Encoded = 'IsBase64Encoded' in params ? params.IsBase64Encoded : null;
         this.ServiceScfFunctionType = 'ServiceScfFunctionType' in params ? params.ServiceScfFunctionType : null;
+        this.EIAMAppType = 'EIAMAppType' in params ? params.EIAMAppType : null;
+        this.EIAMAuthType = 'EIAMAuthType' in params ? params.EIAMAuthType : null;
+        this.TokenTimeout = 'TokenTimeout' in params ? params.TokenTimeout : null;
+        this.EIAMAppId = 'EIAMAppId' in params ? params.EIAMAppId : null;
 
     }
 }
@@ -13036,7 +13064,7 @@ class DescribeServicesStatusRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter. Valid values: ServiceId, ServiceName, NotUsagePlanId, Environment, IpVersion, InstanceId
+         * Filter. Valid values: `ServiceId`, `ServiceName`, `NotUsagePlanId`, `Environment`, `IpVersion`, `InstanceId`, `NetType`, `EIAMAppId`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;

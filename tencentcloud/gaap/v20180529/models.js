@@ -9030,6 +9030,12 @@ Time range: <= 30 days, supported minimum granularity: 86,400 seconds;
          */
         this.Granularity = null;
 
+        /**
+         * Specifies the ISP. Valid values: `CMCC`, `CUCC`, and `CTCC`. If it is not specified, all ISP data will be returned. Note that this field is valid only when a non-BGP connection is used.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
     }
 
     /**
@@ -9044,6 +9050,7 @@ Time range: <= 30 days, supported minimum granularity: 86,400 seconds;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.MetricNames = 'MetricNames' in params ? params.MetricNames : null;
         this.Granularity = 'Granularity' in params ? params.Granularity : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
 
     }
 }

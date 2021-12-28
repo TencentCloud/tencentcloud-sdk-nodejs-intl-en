@@ -397,12 +397,6 @@ class CreateInstancesRequest extends  AbstractModel {
         this.SpecCode = null;
 
         /**
-         * PostgreSQL kernel version. Valid values: `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
-         * @type {string || null}
-         */
-        this.DBVersion = null;
-
-        /**
          * Instance storage capacity in GB
          * @type {number || null}
          */
@@ -449,6 +443,12 @@ class CreateInstancesRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.ProjectId = null;
+
+        /**
+         * PostgreSQL major version. Valid values: `9.3`, `9.5`, `10`, `11`, `12`, `13`, `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
 
         /**
          * Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
@@ -516,6 +516,18 @@ class CreateInstancesRequest extends  AbstractModel {
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
     }
 
     /**
@@ -526,7 +538,6 @@ class CreateInstancesRequest extends  AbstractModel {
             return;
         }
         this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.Period = 'Period' in params ? params.Period : null;
@@ -535,6 +546,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.AdminName = 'AdminName' in params ? params.AdminName : null;
         this.AdminPassword = 'AdminPassword' in params ? params.AdminPassword : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
@@ -554,6 +566,8 @@ class CreateInstancesRequest extends  AbstractModel {
             }
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
 
     }
 }
@@ -1117,10 +1131,24 @@ class DBInstanceNetInfo extends  AbstractModel {
         this.NetType = null;
 
         /**
-         * Network connection status
+         * Network connection status. Valid values: `initing` (never enabled before), `opened` (enabled), `closed` (disabled), `opening` (enabling), `closing` (disabling)
          * @type {string || null}
          */
         this.Status = null;
+
+        /**
+         * VPC ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
 
     }
 
@@ -1136,6 +1164,8 @@ class DBInstanceNetInfo extends  AbstractModel {
         this.Port = 'Port' in params ? params.Port : null;
         this.NetType = 'NetType' in params ? params.NetType : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -2376,7 +2406,7 @@ class SetAutoRenewFlagResponse extends  AbstractModel {
 }
 
 /**
- * Network information.
+ * Network information. (This parameter structure has been deprecated. Please use `DBInstanceNetInfo` to query network information.)
  * @class
  */
 class NetworkAccess extends  AbstractModel {
@@ -2384,14 +2414,14 @@ class NetworkAccess extends  AbstractModel {
         super();
 
         /**
-         * Network resource ID, instance ID or RO group ID (this field has been deprecated)
+         * Network resource ID, instance ID, or RO group ID
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * Resource type. Valid values: `1` (instance), `2` (RO group) (this field has been deprecated)
+         * Resource type. Valid values: `1` (instance), `2` (RO group)
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2640,7 +2670,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DBInstanceNetInfo = null;
 
         /**
-         * Network access list of the RO group
+         * Network access list of the RO group (this field has been deprecated)
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<NetworkAccess> || null}
          */
@@ -4592,7 +4622,7 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`
+         * Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`
          * @type {string || null}
          */
         this.DBInstanceStatus = null;
@@ -4754,11 +4784,17 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DBKernelVersion = null;
 
         /**
-         * Network access list of the instance
+         * Network access list of the instance (this field has been deprecated)
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<NetworkAccess> || null}
          */
         this.NetworkAccessList = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
 
     }
 
@@ -4827,6 +4863,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.NetworkAccessList.push(obj);
             }
         }
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
 
     }
 }

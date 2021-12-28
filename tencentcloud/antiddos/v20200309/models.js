@@ -1809,7 +1809,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DamDDoSStatus = null;
 
         /**
-         * 
+         * Whether it’s an IPv6 address. `1`: Yes; `0`: No.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.V6Flag = null;

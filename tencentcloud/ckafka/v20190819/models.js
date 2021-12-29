@@ -165,25 +165,25 @@ class DeleteAclRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * ACL resource type. 0: UNKNOWN, 1: ANY, 2: TOPIC, 3: GROUP, 4: CLUSTER, 5: TRANSACTIONAL_ID. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka
+         * ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
          * @type {number || null}
          */
         this.ResourceType = null;
 
         /**
-         * Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
+         * Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name; if `resourceType` is `CLUSTER`, this field can be left empty.
          * @type {string || null}
          */
         this.ResourceName = null;
 
         /**
-         * ACL operation mode. 0: UNKNOWN, 1: ANY, 2: ALL, 3: READ, 4: WRITE, 5: CREATE, 6: DELETE, 7: ALTER, 8: DESCRIBE, 9: CLUSTER_ACTION, 10: DESCRIBE_CONFIGS, 11: ALTER_CONFIGS, 12: IDEMPOTEN_WRITE. Currently, CKafka only supports `READ` and `WRITE`, and other values will be used for future ACLs compatible with open-source Kafka
+         * ACL operation type (`2`: ALL, `3`: READ, `4`: WRITE, `5`: CREATE, `6`: DELETE, `7`: ALTER, `8`: DESCRIBE, `9`: CLUSTER_ACTION, `10`: DESCRIBE_CONFIGS, `11`: ALTER_CONFIGS, `12`: IDEMPOTENT_WRITE).
          * @type {number || null}
          */
         this.Operation = null;
 
         /**
-         * Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
+         * Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
          * @type {number || null}
          */
         this.PermissionType = null;
@@ -418,13 +418,13 @@ class DescribeACLRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * ACL resource type. 0: UNKNOWN, 1: ANY, 2: TOPIC, 3: GROUP, 4: CLUSTER, 5: TRANSACTIONAL_ID. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka
+         * ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
          * @type {number || null}
          */
         this.ResourceType = null;
 
         /**
-         * Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
+         * Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name; if `resourceType` is `CLUSTER`, this field can be left empty.
          * @type {string || null}
          */
         this.ResourceName = null;
@@ -1175,6 +1175,55 @@ class DescribeACLResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DynamicDiskConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.StepForwardPercentage = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DiskQuotaPercentage = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxDiskSpace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.StepForwardPercentage = 'StepForwardPercentage' in params ? params.StepForwardPercentage : null;
+        this.DiskQuotaPercentage = 'DiskQuotaPercentage' in params ? params.DiskQuotaPercentage : null;
+        this.MaxDiskSpace = 'MaxDiskSpace' in params ? params.MaxDiskSpace : null;
 
     }
 }
@@ -2031,25 +2080,25 @@ class CreateAclRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * ACL resource type. 0: UNKNOWN, 1: ANY, 2: TOPIC, 3: GROUP, 4: CLUSTER, 5: TRANSACTIONAL_ID. Currently, only `TOPIC` is available, and other fields will be used for future ACLs compatible with open-source Kafka
+         * ACL resource type (`2`: TOPIC, `3`: GROUP, `4`: CLUSTER).
          * @type {number || null}
          */
         this.ResourceType = null;
 
         /**
-         * ACL operation mode. 0: UNKNOWN, 1: ANY, 2: ALL, 3: READ, 4: WRITE, 5: CREATE, 6: DELETE, 7: ALTER, 8: DESCRIBE, 9: CLUSTER_ACTION, 10: DESCRIBE_CONFIGS, 11: ALTER_CONFIGS
+         * ACL operation type (`2`: ALL, `3`: READ, `4`: WRITE, `5`: CREATE, `6`: DELETE, `7`: ALTER, `8`: DESCRIBE, `9`: CLUSTER_ACTION, `10`: DESCRIBE_CONFIGS, `11`: ALTER_CONFIGS, `12`: IDEMPOTENT_WRITE).
          * @type {number || null}
          */
         this.Operation = null;
 
         /**
-         * Permission type. 0: UNKNOWN, 1: ANY, 2: DENY, 3: ALLOW. Currently, CKafka supports `ALLOW` (equivalent to allowlist), and other fields will be used for future ACLs compatible with open-source Kafka
+         * Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
          * @type {number || null}
          */
         this.PermissionType = null;
 
         /**
-         * Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name
+         * Resource name, which is related to `resourceType`. For example, if `resourceType` is `TOPIC`, this field indicates the topic name; if `resourceType` is `GROUP`, this field indicates the group name; if `resourceType` is `CLUSTER`, this field can be left empty.
          * @type {string || null}
          */
         this.ResourceName = null;
@@ -4379,7 +4428,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Tag key match.
+         * Tag key value (this field has been deprecated).
          * @type {string || null}
          */
         this.TagKey = null;
@@ -4615,6 +4664,26 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.DeleteRouteTimestamp = null;
 
+        /**
+         * Number of remaining creatable partitions
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RemainingPartitions = null;
+
+        /**
+         * Number of remaining creatable topics
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RemainingTopics = null;
+
+        /**
+         * 
+         * @type {DynamicDiskConfig || null}
+         */
+        this.DynamicDiskConfig = null;
+
     }
 
     /**
@@ -4682,6 +4751,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MaxConnection = 'MaxConnection' in params ? params.MaxConnection : null;
         this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
         this.DeleteRouteTimestamp = 'DeleteRouteTimestamp' in params ? params.DeleteRouteTimestamp : null;
+        this.RemainingPartitions = 'RemainingPartitions' in params ? params.RemainingPartitions : null;
+        this.RemainingTopics = 'RemainingTopics' in params ? params.RemainingTopics : null;
+
+        if (params.DynamicDiskConfig) {
+            let obj = new DynamicDiskConfig();
+            obj.deserialize(params.DynamicDiskConfig)
+            this.DynamicDiskConfig = obj;
+        }
 
     }
 }
@@ -6839,6 +6916,7 @@ module.exports = {
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
     AclRule: AclRule,
     DescribeACLResponse: DescribeACLResponse,
+    DynamicDiskConfig: DynamicDiskConfig,
     JgwOperateResponse: JgwOperateResponse,
     ZoneInfo: ZoneInfo,
     DescribeTopicSubscribeGroupResponse: DescribeTopicSubscribeGroupResponse,

@@ -1192,10 +1192,23 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain the OCR-detected prohibited information in text.
+         * List of video segments that contain OCR-detected prohibited information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain OCR-detected prohibited information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL for video segments that contain OCR-detected prohibited information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -1217,6 +1230,8 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -1310,10 +1325,23 @@ class AiAnalysisTaskCoverOutput extends  AbstractModel {
         super();
 
         /**
-         * List of intelligently generated covers.
+         * List of intelligently generated thumbnails
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `CoverSetFileUrl`.
          * @type {Array.<MediaAiAnalysisCoverItem> || null}
          */
         this.CoverSet = null;
+
+        /**
+         * URL to the file for intelligently generated thumbnails. The file is in JSON format and has the same data structure as `CoverSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `CoverSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.CoverSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for intelligently generated thumbnails, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.CoverSetFileUrlExpireTime = null;
 
     }
 
@@ -1333,6 +1361,8 @@ class AiAnalysisTaskCoverOutput extends  AbstractModel {
                 this.CoverSet.push(obj);
             }
         }
+        this.CoverSetFileUrl = 'CoverSetFileUrl' in params ? params.CoverSetFileUrl : null;
+        this.CoverSetFileUrlExpireTime = 'CoverSetFileUrlExpireTime' in params ? params.CoverSetFileUrlExpireTime : null;
 
     }
 }
@@ -4812,10 +4842,23 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
         super();
 
         /**
-         * List of intelligently generated video categories.
+         * List of intelligently generated video categories
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `ClassificationSetFileUrl`.
          * @type {Array.<MediaAiAnalysisClassificationItem> || null}
          */
         this.ClassificationSet = null;
+
+        /**
+         * URL to the file for intelligently generated video categories. The file is in JSON format and has the same data structure as `ClassificationSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `ClassificationSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.ClassificationSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for intelligently generated video categories, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.ClassificationSetFileUrlExpireTime = null;
 
     }
 
@@ -4835,6 +4878,8 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
                 this.ClassificationSet.push(obj);
             }
         }
+        this.ClassificationSetFileUrl = 'ClassificationSetFileUrl' in params ? params.ClassificationSetFileUrl : null;
+        this.ClassificationSetFileUrlExpireTime = 'ClassificationSetFileUrlExpireTime' in params ? params.ClassificationSetFileUrlExpireTime : null;
 
     }
 }
@@ -8044,10 +8089,23 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain the ASR-detected porn information in speech.
+         * List of video segments that contain ASR-detected porn information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain ASR-detected porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for video segments that contain ASR-detected porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -8069,6 +8127,8 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -10189,6 +10249,79 @@ class AiRecognitionTaskSegmentSegmentItem extends  AbstractModel {
 }
 
 /**
+ * Video retrieval task information
+ * @class
+ */
+class RestoreMediaTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File ID
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Original storage class
+         * @type {string || null}
+         */
+        this.OriginalStorageClass = null;
+
+        /**
+         * Target storage class. For temporary retrieval, the target storage class is the same as the original.
+         * @type {string || null}
+         */
+        this.TargetStorageClass = null;
+
+        /**
+         * Retrieval mode. Valid values:
+<li>Expedited</li>
+<li>Standard</li>
+<li>Bulk</li>
+         * @type {string || null}
+         */
+        this.RestoreTier = null;
+
+        /**
+         * Validity period (days) for a temporary copy. `0` indicates permanent retrieval.
+         * @type {number || null}
+         */
+        this.RestoreDay = null;
+
+        /**
+         * This field has been disused.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * This field has been disused.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.OriginalStorageClass = 'OriginalStorageClass' in params ? params.OriginalStorageClass : null;
+        this.TargetStorageClass = 'TargetStorageClass' in params ? params.TargetStorageClass : null;
+        this.RestoreTier = 'RestoreTier' in params ? params.RestoreTier : null;
+        this.RestoreDay = 'RestoreDay' in params ? params.RestoreDay : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
  * Input parameter type of OCR-based porn information detection in text task in content audit
  * @class
  */
@@ -10291,10 +10424,23 @@ class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
         super();
 
         /**
-         * List of frame-specific video tags.
+         * List of frame-specific video tags
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaAiAnalysisFrameTagSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for frame-specific video tags. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for frame-specific video tags, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -10314,6 +10460,8 @@ class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -10935,10 +11083,23 @@ class AiAnalysisTaskTagOutput extends  AbstractModel {
         super();
 
         /**
-         * List of intelligently generated video tags.
+         * List of intelligently generated video tags
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `TagSetFileUrl`.
          * @type {Array.<MediaAiAnalysisTagItem> || null}
          */
         this.TagSet = null;
+
+        /**
+         * URL to the file for intelligently generated video tags. The file is in JSON format and has the same data structure as `TagSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `TagSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.TagSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for intelligently generated video tags, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.TagSetFileUrlExpireTime = null;
 
     }
 
@@ -10958,6 +11119,8 @@ class AiAnalysisTaskTagOutput extends  AbstractModel {
                 this.TagSet.push(obj);
             }
         }
+        this.TagSetFileUrl = 'TagSetFileUrl' in params ? params.TagSetFileUrl : null;
+        this.TagSetFileUrlExpireTime = 'TagSetFileUrlExpireTime' in params ? params.TagSetFileUrlExpireTime : null;
 
     }
 }
@@ -10971,10 +11134,23 @@ class AiAnalysisTaskHighlightOutput extends  AbstractModel {
         super();
 
         /**
-         * List of intelligently generated highlights.
+         * List of intelligently generated highlights
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `HighlightSetFileUrl`.
          * @type {Array.<MediaAiAnalysisHighlightItem> || null}
          */
         this.HighlightSet = null;
+
+        /**
+         * URL to the file for intelligently generated highlights. The file is in JSON format and has the same data structure as `HighlightSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `HighlightSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.HighlightSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for intelligently generated highlights, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.HighlightSetFileUrlExpireTime = null;
 
     }
 
@@ -10994,6 +11170,8 @@ class AiAnalysisTaskHighlightOutput extends  AbstractModel {
                 this.HighlightSet.push(obj);
             }
         }
+        this.HighlightSetFileUrl = 'HighlightSetFileUrl' in params ? params.HighlightSetFileUrl : null;
+        this.HighlightSetFileUrlExpireTime = 'HighlightSetFileUrlExpireTime' in params ? params.HighlightSetFileUrlExpireTime : null;
 
     }
 }
@@ -14510,11 +14688,23 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Label = null;
 
         /**
-         * List of video segments that contain the detected terrorism information.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of video segments that contain terrorism information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain terrorism information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for video segments that contain terrorism information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -14537,6 +14727,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -14668,10 +14860,23 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain OCR-detected terrorism information in text.
+         * List of video segments that contain OCR-detected terrorism information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain OCR-detected terrorism information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for video segments that contain OCR-detected terrorism information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -14693,6 +14898,8 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -16673,10 +16880,23 @@ class AiReviewPornOcrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain the OCR-detected porn information in text.
+         * List of video segments that contain OCR-detected porn information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain OCR-detected porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for video segments that contain OCR-detected porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -16698,6 +16918,8 @@ class AiReviewPornOcrTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -18014,10 +18236,23 @@ class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain the ASR-detected prohibited information in speech.
+         * List of video segments that contain ASR-detected prohibited information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain ASR-detected prohibited information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for video segments that contain ASR-detected prohibited information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -18039,6 +18274,8 @@ class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -19175,12 +19412,12 @@ class MediaSourceData extends  AbstractModel {
         super();
 
         /**
-         * Source category of media file:
-<li>Record: recording, such as LVB recording and LVB time shifting recording.</li>
-<li>Upload: upload, such as pull for upload, upload from server, and UCG upload from client.</li>
-<li>VideoProcessing: video processing, such as video splicing and video clipping.</li>
-<li>Unknown: unknown source.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Source of a media file:
+<li>`Record`: recording, such as live or time-shift recording</li>
+<li>`Upload`: upload, such as pull for upload, upload from server, and UGC upload from client</li>
+<li>`VideoProcessing`: video processing, such as video splicing and video clipping</li>
+<li>`WebPageRecord`: panoramic recording </li>
+<li>`Unknown`: unknown source</li>
          * @type {string || null}
          */
         this.SourceType = null;
@@ -19484,6 +19721,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.WechatMiniProgramPublishCompleteEvent = null;
 
+        /**
+         * Callback for video retrieval. This parameter is valid when the event type is `RestoreMediaComplete`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {RestoreMediaTask || null}
+         */
+        this.RestoreMediaCompleteEvent = null;
+
     }
 
     /**
@@ -19578,6 +19822,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new WechatMiniProgramPublishTask();
             obj.deserialize(params.WechatMiniProgramPublishCompleteEvent)
             this.WechatMiniProgramPublishCompleteEvent = obj;
+        }
+
+        if (params.RestoreMediaCompleteEvent) {
+            let obj = new RestoreMediaTask();
+            obj.deserialize(params.RestoreMediaCompleteEvent)
+            this.RestoreMediaCompleteEvent = obj;
         }
 
     }
@@ -19694,10 +19944,23 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain ASR-detected politically sensitive information in speech.
+         * List of video segments that contain ASR-detected politically sensitive information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain ASR-detected politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for video segments that contain ASR-detected politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -19719,6 +19982,8 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -20496,11 +20761,23 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Label = null;
 
         /**
-         * List of video segments that contain the detected porn information.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of video segments that contain porn information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file of for video segments that contain porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -20523,6 +20800,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -22989,11 +23268,23 @@ Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/mili
         this.Label = null;
 
         /**
-         * List of video segments that contain the detected politically sensitive information.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of video segments that contain politically sensitive information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewPoliticalSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for video segments that contain politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -23016,6 +23307,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -27999,10 +28292,23 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain OCR-detected politically sensitive information in text.
+         * List of video segments that contain OCR-detected politically sensitive information
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
+
+        /**
+         * URL to the file for video segments that contain OCR-detected politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for video segments that contain OCR-detected politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
 
     }
 
@@ -28024,6 +28330,8 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -30124,6 +30432,7 @@ module.exports = {
     SegmentConfigureInfoForUpdate: SegmentConfigureInfoForUpdate,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
     AiRecognitionTaskSegmentSegmentItem: AiRecognitionTaskSegmentSegmentItem,
+    RestoreMediaTask: RestoreMediaTask,
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
     CreateSuperPlayerConfigResponse: CreateSuperPlayerConfigResponse,

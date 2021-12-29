@@ -61,6 +61,7 @@ module.exports = {
     tag: require("./tag"),
     tcaplusdb: require("./tcaplusdb"),
     tcr: require("./tcr"),
+    tdmq: require("./tdmq"),
     tem: require("./tem"),
     tiw: require("./tiw"),
     tke: require("./tke"),

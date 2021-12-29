@@ -241,6 +241,7 @@ const DeleteCdnDomainResponse = models.DeleteCdnDomainResponse;
 const OriginIp = models.OriginIp;
 const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
+const ExtraLogset = models.ExtraLogset;
 const CacheTagKey = models.CacheTagKey;
 const Quic = models.Quic;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;

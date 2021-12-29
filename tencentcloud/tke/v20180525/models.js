@@ -6319,7 +6319,7 @@ The following conditions are required to use ipvs-bpf network mode:
         this.AuditLogTopicId = null;
 
         /**
-         * Specifies whether the VPC CNI type is multi-IP ENI or or independent ENI.
+         * Specifies the ENI type. Values: `tke-route-eni` (multi-IP shared ENI); `tke-direct-eni` (independent ENI). It defaults to `tke-route-eni`.
          * @type {string || null}
          */
         this.VpcCniType = null;

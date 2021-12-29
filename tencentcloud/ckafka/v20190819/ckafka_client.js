@@ -38,6 +38,7 @@ const Region = models.Region;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const AclRule = models.AclRule;
 const DescribeACLResponse = models.DescribeACLResponse;
+const DynamicDiskConfig = models.DynamicDiskConfig;
 const JgwOperateResponse = models.JgwOperateResponse;
 const ZoneInfo = models.ZoneInfo;
 const DescribeTopicSubscribeGroupResponse = models.DescribeTopicSubscribeGroupResponse;

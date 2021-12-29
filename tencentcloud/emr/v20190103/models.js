@@ -627,6 +627,16 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
          */
         this.ProductId = null;
 
+        /**
+         * Scenario-based values:
+Hadoop-Kudu
+Hadoop-Zookeeper
+Hadoop-Presto
+Hadoop-Hbase
+         * @type {string || null}
+         */
+        this.SceneName = null;
+
     }
 
     /**
@@ -669,6 +679,7 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
             this.MetaDBInfo = obj;
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.SceneName = 'SceneName' in params ? params.SceneName : null;
 
     }
 }
@@ -1670,6 +1681,16 @@ This parameter can be obtained in the `SecurityGroupId` field in the return valu
          */
         this.ApplicationRole = null;
 
+        /**
+         * Scenario-based values:
+Hadoop-Kudu
+Hadoop-Zookeeper
+Hadoop-Presto
+Hadoop-Hbase
+         * @type {string || null}
+         */
+        this.SceneName = null;
+
     }
 
     /**
@@ -1752,6 +1773,7 @@ This parameter can be obtained in the `SecurityGroupId` field in the return valu
             this.MetaDBInfo = obj;
         }
         this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
+        this.SceneName = 'SceneName' in params ? params.SceneName : null;
 
     }
 }
@@ -2661,6 +2683,48 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.Zone = null;
 
+        /**
+         * Scenario name
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.SceneName = null;
+
+        /**
+         * Scenario-based cluster type
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.SceneServiceClass = null;
+
+        /**
+         * Scenario-based EMR version
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.SceneEmrVersion = null;
+
+        /**
+         * Scenario-based cluster type
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * VPC name
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Subnet name
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
     }
 
     /**
@@ -2713,6 +2777,12 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.AliasInfo = 'AliasInfo' in params ? params.AliasInfo : null;
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.SceneName = 'SceneName' in params ? params.SceneName : null;
+        this.SceneServiceClass = 'SceneServiceClass' in params ? params.SceneServiceClass : null;
+        this.SceneEmrVersion = 'SceneEmrVersion' in params ? params.SceneEmrVersion : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
 
     }
 }

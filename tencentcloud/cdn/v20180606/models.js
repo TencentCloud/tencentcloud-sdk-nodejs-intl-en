@@ -3141,6 +3141,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Channel = null;
 
+        /**
+         * Whether the log topic has been removed from CLS
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Deleted = null;
+
     }
 
     /**
@@ -3155,6 +3162,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
+        this.Deleted = 'Deleted' in params ? params.Deleted : null;
 
     }
 }
@@ -4123,17 +4131,24 @@ class ListClsLogTopicsResponse extends  AbstractModel {
         super();
 
         /**
-         * Logset information
+         * Information of logsets in the Shanghai region
          * @type {LogSetInfo || null}
          */
         this.Logset = null;
 
         /**
-         * Log topic information list
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Information of log topics in the Shanghai region
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<TopicInfo> || null}
          */
         this.Topics = null;
+
+        /**
+         * Information on logsets in regions except Shanghai
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ExtraLogset> || null}
+         */
+        this.ExtraLogset = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4163,6 +4178,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new TopicInfo();
                 obj.deserialize(params.Topics[z]);
                 this.Topics.push(obj);
+            }
+        }
+
+        if (params.ExtraLogset) {
+            this.ExtraLogset = new Array();
+            for (let z in params.ExtraLogset) {
+                let obj = new ExtraLogset();
+                obj.deserialize(params.ExtraLogset[z]);
+                this.ExtraLogset.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -13201,6 +13225,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Region = null;
 
+        /**
+         * Whether the logset has been removed from CLS
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Deleted = null;
+
+        /**
+         * Whether English is used in this region
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionEn = null;
+
     }
 
     /**
@@ -13218,6 +13256,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.LogsetSavePeriod = 'LogsetSavePeriod' in params ? params.LogsetSavePeriod : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Region = 'Region' in params ? params.Region : null;
+        this.Deleted = 'Deleted' in params ? params.Deleted : null;
+        this.RegionEn = 'RegionEn' in params ? params.RegionEn : null;
 
     }
 }
@@ -14559,6 +14599,56 @@ Note: non-IPv6 allowlisted users cannot specify `ipv4` and `ipv6` for query
 }
 
 /**
+ * Information of logsets and log topics (except those created in the Shanghai region)
+ * @class
+ */
+class ExtraLogset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {LogSetInfo || null}
+         */
+        this.Logset = null;
+
+        /**
+         * Log topic information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TopicInfo> || null}
+         */
+        this.Topics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Logset) {
+            let obj = new LogSetInfo();
+            obj.deserialize(params.Logset)
+            this.Logset = obj;
+        }
+
+        if (params.Topics) {
+            this.Topics = new Array();
+            for (let z in params.Topics) {
+                let obj = new TopicInfo();
+                obj.deserialize(params.Topics[z]);
+                this.Topics.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * A part of `CacheKey`
  * @class
  */
@@ -15050,6 +15140,7 @@ module.exports = {
     OriginIp: OriginIp,
     CdnIp: CdnIp,
     DescribeCdnDataRequest: DescribeCdnDataRequest,
+    ExtraLogset: ExtraLogset,
     CacheTagKey: CacheTagKey,
     Quic: Quic,
     DescribeDomainsRequest: DescribeDomainsRequest,

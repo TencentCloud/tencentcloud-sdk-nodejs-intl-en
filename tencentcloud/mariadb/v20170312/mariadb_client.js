@@ -26,6 +26,7 @@ const DestroyHourDBInstanceRequest = models.DestroyHourDBInstanceRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CancelDcnJobResponse = models.CancelDcnJobResponse;
+const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
 const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
 const DestroyHourDBInstanceResponse = models.DestroyHourDBInstanceResponse;
 const Account = models.Account;
@@ -63,6 +64,7 @@ const DBParamValue = models.DBParamValue;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
+const DescribeFileDownloadUrlResponse = models.DescribeFileDownloadUrlResponse;
 const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
@@ -168,6 +170,17 @@ Note: accounts with the same username but different hosts are different accounts
     ModifyAccountDescription(req, cb) {
         let resp = new ModifyAccountDescriptionResponse();
         this.request("ModifyAccountDescription", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the download URL of a specific backup or log file of a database.
+     * @param {DescribeFileDownloadUrlRequest} req
+     * @param {function(string, DescribeFileDownloadUrlResponse):void} cb
+     * @public
+     */
+    DescribeFileDownloadUrl(req, cb) {
+        let resp = new DescribeFileDownloadUrlResponse();
+        this.request("DescribeFileDownloadUrl", req, resp, cb);
     }
 
     /**

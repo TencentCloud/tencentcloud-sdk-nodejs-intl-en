@@ -36,6 +36,7 @@ const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse
 const ClientConnection = models.ClientConnection;
 const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
 const BackupInfo = models.BackupInfo;
+const SecurityGroup = models.SecurityGroup;
 const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const SpecificationInfo = models.SpecificationInfo;
@@ -51,23 +52,27 @@ const ResetDBInstancePasswordRequest = models.ResetDBInstancePasswordRequest;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
+const InstanceIntegerParam = models.InstanceIntegerParam;
 const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const AssignProjectResponse = models.AssignProjectResponse;
 const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
+const InstanceMultiParam = models.InstanceMultiParam;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
-const SecurityGroup = models.SecurityGroup;
+const InstanceTextParam = models.InstanceTextParam;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
 const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
 const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
 const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
+const InstanceEnumParam = models.InstanceEnumParam;
 const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
@@ -81,6 +86,7 @@ const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const SlowLogPattern = models.SlowLogPattern;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
+const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
 const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
@@ -297,6 +303,17 @@ This API is used to get the permission to download a backup file. The detailed b
     ModifyDBInstanceSpec(req, cb) {
         let resp = new ModifyDBInstanceSpecResponse();
         this.request("ModifyDBInstanceSpec", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the modifiable parameter list of an instance.
+     * @param {DescribeInstanceParamsRequest} req
+     * @param {function(string, DescribeInstanceParamsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceParams(req, cb) {
+        let resp = new DescribeInstanceParamsResponse();
+        this.request("DescribeInstanceParams", req, resp, cb);
     }
 
     /**

@@ -1127,35 +1127,37 @@ class DescribeAlarmsRequest extends  AbstractModel {
         /**
          * <br><li> name
 
-Filter by **alarm policy name**.
-Type: String
+Filter by **alarm policy name**
+Type: string
 
 Required: no
 
 <br><li> alarmId
 
-Filter by **alarm policy ID**.
-Type: String
+Filter by **alarm policy ID**
+Type: string
 
 Required: no
 
 <br><li> topicId
 
-Filter by **log topic ID of monitoring object**.
+Filter by **log topic ID**
 
-Type: String
+Type: string
 
 Required: no
 
 <br><li> enable
 
-Filter by **enablement status**.
+Filter by **enablement status**
 
-Type: String
+Type: string
+
+Note: The valid values of `enable` include `1`, `t`, `T`, `TRUE`, `true`, `True`, `0`, `f`, `F`, `FALSE`, `false`, and `False`. If other values are entered, an “invalid parameter” error will be returned.
 
 Required: no
 
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+Each request can have up to 10 `Filters` and 5 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1978,6 +1980,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DescribeConsumer request structure.
+ * @class
+ */
+class DescribeConsumerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID bound to the task
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
  * Shipping task information
  * @class
  */
@@ -2062,6 +2092,72 @@ class ShipperTaskInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyConsumer request structure.
+ * @class
+ */
+class ModifyConsumerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID bound to the task
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Whether to enable the shipping task
+         * @type {boolean || null}
+         */
+        this.Effective = null;
+
+        /**
+         * Whether to ship metadata. Default value: `false`
+         * @type {boolean || null}
+         */
+        this.NeedContent = null;
+
+        /**
+         * Metadata to ship if `NeedContent` is `true`
+         * @type {ConsumerContent || null}
+         */
+        this.Content = null;
+
+        /**
+         * CKafka information
+         * @type {Ckafka || null}
+         */
+        this.Ckafka = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Effective = 'Effective' in params ? params.Effective : null;
+        this.NeedContent = 'NeedContent' in params ? params.NeedContent : null;
+
+        if (params.Content) {
+            let obj = new ConsumerContent();
+            obj.deserialize(params.Content)
+            this.Content = obj;
+        }
+
+        if (params.Ckafka) {
+            let obj = new Ckafka();
+            obj.deserialize(params.Ckafka)
+            this.Ckafka = obj;
+        }
+
+    }
+}
+
+/**
  * CreateIndex response structure.
  * @class
  */
@@ -2094,6 +2190,34 @@ class CreateIndexResponse extends  AbstractModel {
  * @class
  */
 class DeleteConfigFromMachineGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateConsumer response structure.
+ * @class
+ */
+class CreateConsumerResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3422,60 +3546,18 @@ class CreateIndexRequest extends  AbstractModel {
 }
 
 /**
- * CreateTopic request structure.
+ * DeleteConsumer response structure.
  * @class
  */
-class CreateTopicRequest extends  AbstractModel {
+class DeleteConsumerResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Logset ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.LogsetId = null;
-
-        /**
-         * Log topic name
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Number of log topic partitions. Default value: 1. Maximum value: 10
-         * @type {number || null}
-         */
-        this.PartitionCount = null;
-
-        /**
-         * Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Whether to enable automatic split. Default value: true
-         * @type {boolean || null}
-         */
-        this.AutoSplit = null;
-
-        /**
-         * Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50
-         * @type {number || null}
-         */
-        this.MaxSplitPartitions = null;
-
-        /**
-         * Log topic storage class. Valid values: `hot`: real-time storage; `cold`: offline storage. Default value: `hot`. If `cold` is passed in, please contact the customer service to add the log topic to the allowlist first.
-         * @type {string || null}
-         */
-        this.StorageType = null;
-
-        /**
-         * Lifecycle in days. Value range: 1–366. Default value: 30
-         * @type {number || null}
-         */
-        this.Period = null;
+        this.RequestId = null;
 
     }
 
@@ -3486,22 +3568,7 @@ class CreateTopicRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.AutoSplit = 'AutoSplit' in params ? params.AutoSplit : null;
-        this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
-        this.StorageType = 'StorageType' in params ? params.StorageType : null;
-        this.Period = 'Period' in params ? params.Period : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3781,52 +3848,60 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
 }
 
 /**
- * DescribeConfigs request structure.
+ * CreateTopic request structure.
  * @class
  */
-class DescribeConfigsRequest extends  AbstractModel {
+class CreateTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <br><li> configName
-
-Filter by fuzzy match of **collection configuration name**
-Type: String
-
-Required: no
-
-<br><li> configId
-
-Filter by **collection configuration ID**.
-Type: String
-
-Required: no
-
-<br><li> topicId
-
-Filter by **log topic**.
-
-Type: String
-
-Required: no
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
+         * Logset ID
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.LogsetId = null;
 
         /**
-         * Page offset. Default value: 0
-         * @type {number || null}
+         * Log topic name
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.TopicName = null;
 
         /**
-         * Maximum number of entries per page. Default value: 20. Maximum value: 100
+         * Number of log topic partitions. Default value: 1. Maximum value: 10
          * @type {number || null}
          */
-        this.Limit = null;
+        this.PartitionCount = null;
+
+        /**
+         * Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether to enable automatic split. Default value: true
+         * @type {boolean || null}
+         */
+        this.AutoSplit = null;
+
+        /**
+         * Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50
+         * @type {number || null}
+         */
+        this.MaxSplitPartitions = null;
+
+        /**
+         * Log topic storage class. Valid values: `hot`: real-time storage; `cold`: offline storage. Default value: `hot`. If `cold` is passed in, please contact the customer service to add the log topic to the allowlist first.
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * Lifecycle in days. Value range: 1–366. Default value: 30
+         * @type {number || null}
+         */
+        this.Period = null;
 
     }
 
@@ -3837,17 +3912,22 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
         if (!params) {
             return;
         }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AutoSplit = 'AutoSplit' in params ? params.AutoSplit : null;
+        this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -4094,6 +4174,34 @@ class ModifyIndexResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteConsumer request structure.
+ * @class
+ */
+class DeleteConsumerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID bound to the task
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
  * DeleteIndex request structure.
  * @class
  */
@@ -4117,6 +4225,73 @@ class DeleteIndexRequest extends  AbstractModel {
             return;
         }
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
+ * DescribeConsumer response structure.
+ * @class
+ */
+class DescribeConsumerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the shipping task is effective
+         * @type {boolean || null}
+         */
+        this.Effective = null;
+
+        /**
+         * Whether log metadata is shipped
+         * @type {boolean || null}
+         */
+        this.NeedContent = null;
+
+        /**
+         * Metadata shipped if `NeedContent` is `true`
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {ConsumerContent || null}
+         */
+        this.Content = null;
+
+        /**
+         * CKafka information
+         * @type {Ckafka || null}
+         */
+        this.Ckafka = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Effective = 'Effective' in params ? params.Effective : null;
+        this.NeedContent = 'NeedContent' in params ? params.NeedContent : null;
+
+        if (params.Content) {
+            let obj = new ConsumerContent();
+            obj.deserialize(params.Content)
+            this.Content = obj;
+        }
+
+        if (params.Ckafka) {
+            let obj = new Ckafka();
+            obj.deserialize(params.Ckafka)
+            this.Ckafka = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4330,6 +4505,106 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Time = 'Time' in params ? params.Time : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
         this.AsyncSearchTaskId = 'AsyncSearchTaskId' in params ? params.AsyncSearchTaskId : null;
+
+    }
+}
+
+/**
+ * ModifyConsumer response structure.
+ * @class
+ */
+class ModifyConsumerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConfigs request structure.
+ * @class
+ */
+class DescribeConfigsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <br><li> configName
+
+Filter by fuzzy match of **collection configuration name**
+Type: String
+
+Required: no
+
+<br><li> configId
+
+Filter by **collection configuration ID**.
+Type: String
+
+Required: no
+
+<br><li> topicId
+
+Filter by **log topic**.
+
+Type: String
+
+Required: no
+
+Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Page offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of entries per page. Default value: 20. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -6226,6 +6501,65 @@ class DescribeAsyncSearchResultRequest extends  AbstractModel {
 }
 
 /**
+ * CreateConsumer request structure.
+ * @class
+ */
+class CreateConsumerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID to bind
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Whether to ship log metadata. Default value: `true`
+         * @type {boolean || null}
+         */
+        this.NeedContent = null;
+
+        /**
+         * Metadata to ship if `NeedContent` is `true`
+         * @type {ConsumerContent || null}
+         */
+        this.Content = null;
+
+        /**
+         * CKafka information
+         * @type {Ckafka || null}
+         */
+        this.Ckafka = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.NeedContent = 'NeedContent' in params ? params.NeedContent : null;
+
+        if (params.Content) {
+            let obj = new ConsumerContent();
+            obj.deserialize(params.Content)
+            this.Content = obj;
+        }
+
+        if (params.Ckafka) {
+            let obj = new Ckafka();
+            obj.deserialize(params.Ckafka)
+            this.Ckafka = obj;
+        }
+
+    }
+}
+
+/**
  * Alarm notification template type
  * @class
  */
@@ -6941,6 +7275,41 @@ class ModifyMachineGroupRequest extends  AbstractModel {
 }
 
 /**
+ * MergePartition request structure.
+ * @class
+ */
+class MergePartitionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Merged `PartitionId`
+         * @type {number || null}
+         */
+        this.PartitionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.PartitionId = 'PartitionId' in params ? params.PartitionId : null;
+
+    }
+}
+
+/**
  * DescribeAlarmNotices request structure.
  * @class
  */
@@ -7199,24 +7568,48 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * MergePartition request structure.
+ * Information of the CKafka instance to ship to
  * @class
  */
-class MergePartitionRequest extends  AbstractModel {
+class Ckafka extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log topic ID
+         * CKafka VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * CKafka Vport
+         * @type {string || null}
+         */
+        this.Vport = null;
+
+        /**
+         * CKafka instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * CKafka instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * CKafka topic ID
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * Merged `PartitionId`
-         * @type {number || null}
+         * CKafka topic name
+         * @type {string || null}
          */
-        this.PartitionId = null;
+        this.TopicName = null;
 
     }
 
@@ -7227,8 +7620,12 @@ class MergePartitionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.PartitionId = 'PartitionId' in params ? params.PartitionId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -7569,7 +7966,7 @@ class SearchLogRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * This field is used to load more logs. Pass through the last `Context` value returned to get more log content. It will expire after 1 hour.
+         * This parameter is used to load more logs. Pass through the last `Context` value returned to get more log content. Up to 10,000 raw logs can be obtained in total. This parameter expires in 1 hour.
          * @type {string || null}
          */
         this.Context = null;
@@ -8279,6 +8676,43 @@ class Filter extends  AbstractModel {
 }
 
 /**
+ * Shipping content
+ * @class
+ */
+class ConsumerContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to ship tag information
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {boolean || null}
+         */
+        this.EnableTag = null;
+
+        /**
+         * List of metadata to ship. Currently, only __SOURCE__, __FILENAME__, and __TIMESTAMP__ are supported.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.MetaFields = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnableTag = 'EnableTag' in params ? params.EnableTag : null;
+        this.MetaFields = 'MetaFields' in params ? params.MetaFields : null;
+
+    }
+}
+
+/**
  * CreateExport response structure.
  * @class
  */
@@ -8432,9 +8866,12 @@ module.exports = {
     DescribeExportsRequest: DescribeExportsRequest,
     CreateAsyncSearchTaskRequest: CreateAsyncSearchTaskRequest,
     TopicInfo: TopicInfo,
+    DescribeConsumerRequest: DescribeConsumerRequest,
     ShipperTaskInfo: ShipperTaskInfo,
+    ModifyConsumerRequest: ModifyConsumerRequest,
     CreateIndexResponse: CreateIndexResponse,
     DeleteConfigFromMachineGroupResponse: DeleteConfigFromMachineGroupResponse,
+    CreateConsumerResponse: CreateConsumerResponse,
     ModifyMachineGroupResponse: ModifyMachineGroupResponse,
     RuleInfo: RuleInfo,
     DeleteMachineGroupRequest: DeleteMachineGroupRequest,
@@ -8458,19 +8895,23 @@ module.exports = {
     DescribeMachineGroupsRequest: DescribeMachineGroupsRequest,
     DescribeAsyncContextTasksResponse: DescribeAsyncContextTasksResponse,
     CreateIndexRequest: CreateIndexRequest,
-    CreateTopicRequest: CreateTopicRequest,
+    DeleteConsumerResponse: DeleteConsumerResponse,
     DescribeTopicsRequest: DescribeTopicsRequest,
     GetAlarmLogResponse: GetAlarmLogResponse,
     DescribeAsyncSearchTasksRequest: DescribeAsyncSearchTasksRequest,
-    DescribeConfigsRequest: DescribeConfigsRequest,
+    CreateTopicRequest: CreateTopicRequest,
     DescribeAsyncSearchResultResponse: DescribeAsyncSearchResultResponse,
     DescribeAsyncContextTasksRequest: DescribeAsyncContextTasksRequest,
     AlarmTarget: AlarmTarget,
     DeleteConfigResponse: DeleteConfigResponse,
     ModifyIndexResponse: ModifyIndexResponse,
+    DeleteConsumerRequest: DeleteConsumerRequest,
     DeleteIndexRequest: DeleteIndexRequest,
+    DescribeConsumerResponse: DescribeConsumerResponse,
     ExtractRuleInfo: ExtractRuleInfo,
     AsyncContextTask: AsyncContextTask,
+    ModifyConsumerResponse: ModifyConsumerResponse,
+    DescribeConfigsRequest: DescribeConfigsRequest,
     DeleteConfigRequest: DeleteConfigRequest,
     AnalysisDimensional: AnalysisDimensional,
     LogsetInfo: LogsetInfo,
@@ -8506,6 +8947,7 @@ module.exports = {
     ModifyShipperRequest: ModifyShipperRequest,
     DescribeLogContextResponse: DescribeLogContextResponse,
     DescribeAsyncSearchResultRequest: DescribeAsyncSearchResultRequest,
+    CreateConsumerRequest: CreateConsumerRequest,
     AlarmNotice: AlarmNotice,
     ModifyConfigResponse: ModifyConfigResponse,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,
@@ -8520,10 +8962,11 @@ module.exports = {
     KeyValueInfo: KeyValueInfo,
     DeleteAsyncSearchTaskRequest: DeleteAsyncSearchTaskRequest,
     ModifyMachineGroupRequest: ModifyMachineGroupRequest,
+    MergePartitionRequest: MergePartitionRequest,
     DescribeAlarmNoticesRequest: DescribeAlarmNoticesRequest,
     NoticeReceiver: NoticeReceiver,
     AsyncSearchTask: AsyncSearchTask,
-    MergePartitionRequest: MergePartitionRequest,
+    Ckafka: Ckafka,
     WebCallback: WebCallback,
     CreateAsyncSearchTaskResponse: CreateAsyncSearchTaskResponse,
     DeleteAlarmNoticeRequest: DeleteAlarmNoticeRequest,
@@ -8545,6 +8988,7 @@ module.exports = {
     DescribeLogsetsRequest: DescribeLogsetsRequest,
     DeleteTopicResponse: DeleteTopicResponse,
     Filter: Filter,
+    ConsumerContent: ConsumerContent,
     CreateExportResponse: CreateExportResponse,
     KeyRegexInfo: KeyRegexInfo,
     MergePartitionResponse: MergePartitionResponse,

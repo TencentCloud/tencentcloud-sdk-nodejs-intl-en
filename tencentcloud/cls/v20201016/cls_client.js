@@ -56,9 +56,12 @@ const DeleteAsyncSearchTaskResponse = models.DeleteAsyncSearchTaskResponse;
 const DescribeExportsRequest = models.DescribeExportsRequest;
 const CreateAsyncSearchTaskRequest = models.CreateAsyncSearchTaskRequest;
 const TopicInfo = models.TopicInfo;
+const DescribeConsumerRequest = models.DescribeConsumerRequest;
 const ShipperTaskInfo = models.ShipperTaskInfo;
+const ModifyConsumerRequest = models.ModifyConsumerRequest;
 const CreateIndexResponse = models.CreateIndexResponse;
 const DeleteConfigFromMachineGroupResponse = models.DeleteConfigFromMachineGroupResponse;
+const CreateConsumerResponse = models.CreateConsumerResponse;
 const ModifyMachineGroupResponse = models.ModifyMachineGroupResponse;
 const RuleInfo = models.RuleInfo;
 const DeleteMachineGroupRequest = models.DeleteMachineGroupRequest;
@@ -82,19 +85,23 @@ const MachineGroupInfo = models.MachineGroupInfo;
 const DescribeMachineGroupsRequest = models.DescribeMachineGroupsRequest;
 const DescribeAsyncContextTasksResponse = models.DescribeAsyncContextTasksResponse;
 const CreateIndexRequest = models.CreateIndexRequest;
-const CreateTopicRequest = models.CreateTopicRequest;
+const DeleteConsumerResponse = models.DeleteConsumerResponse;
 const DescribeTopicsRequest = models.DescribeTopicsRequest;
 const GetAlarmLogResponse = models.GetAlarmLogResponse;
 const DescribeAsyncSearchTasksRequest = models.DescribeAsyncSearchTasksRequest;
-const DescribeConfigsRequest = models.DescribeConfigsRequest;
+const CreateTopicRequest = models.CreateTopicRequest;
 const DescribeAsyncSearchResultResponse = models.DescribeAsyncSearchResultResponse;
 const DescribeAsyncContextTasksRequest = models.DescribeAsyncContextTasksRequest;
 const AlarmTarget = models.AlarmTarget;
 const DeleteConfigResponse = models.DeleteConfigResponse;
 const ModifyIndexResponse = models.ModifyIndexResponse;
+const DeleteConsumerRequest = models.DeleteConsumerRequest;
 const DeleteIndexRequest = models.DeleteIndexRequest;
+const DescribeConsumerResponse = models.DescribeConsumerResponse;
 const ExtractRuleInfo = models.ExtractRuleInfo;
 const AsyncContextTask = models.AsyncContextTask;
+const ModifyConsumerResponse = models.ModifyConsumerResponse;
+const DescribeConfigsRequest = models.DescribeConfigsRequest;
 const DeleteConfigRequest = models.DeleteConfigRequest;
 const AnalysisDimensional = models.AnalysisDimensional;
 const LogsetInfo = models.LogsetInfo;
@@ -130,6 +137,7 @@ const LogContextInfo = models.LogContextInfo;
 const ModifyShipperRequest = models.ModifyShipperRequest;
 const DescribeLogContextResponse = models.DescribeLogContextResponse;
 const DescribeAsyncSearchResultRequest = models.DescribeAsyncSearchResultRequest;
+const CreateConsumerRequest = models.CreateConsumerRequest;
 const AlarmNotice = models.AlarmNotice;
 const ModifyConfigResponse = models.ModifyConfigResponse;
 const ModifyAlarmNoticeResponse = models.ModifyAlarmNoticeResponse;
@@ -144,10 +152,11 @@ const ShipperInfo = models.ShipperInfo;
 const KeyValueInfo = models.KeyValueInfo;
 const DeleteAsyncSearchTaskRequest = models.DeleteAsyncSearchTaskRequest;
 const ModifyMachineGroupRequest = models.ModifyMachineGroupRequest;
+const MergePartitionRequest = models.MergePartitionRequest;
 const DescribeAlarmNoticesRequest = models.DescribeAlarmNoticesRequest;
 const NoticeReceiver = models.NoticeReceiver;
 const AsyncSearchTask = models.AsyncSearchTask;
-const MergePartitionRequest = models.MergePartitionRequest;
+const Ckafka = models.Ckafka;
 const WebCallback = models.WebCallback;
 const CreateAsyncSearchTaskResponse = models.CreateAsyncSearchTaskResponse;
 const DeleteAlarmNoticeRequest = models.DeleteAlarmNoticeRequest;
@@ -169,6 +178,7 @@ const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
 const DescribeLogsetsRequest = models.DescribeLogsetsRequest;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const Filter = models.Filter;
+const ConsumerContent = models.ConsumerContent;
 const CreateExportResponse = models.CreateExportResponse;
 const KeyRegexInfo = models.KeyRegexInfo;
 const MergePartitionResponse = models.MergePartitionResponse;
@@ -215,6 +225,17 @@ class ClsClient extends AbstractClient {
     GetAlarmLog(req, cb) {
         let resp = new GetAlarmLogResponse();
         this.request("GetAlarmLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a shipping task.
+     * @param {CreateConsumerRequest} req
+     * @param {function(string, CreateConsumerResponse):void} cb
+     * @public
+     */
+    CreateConsumer(req, cb) {
+        let resp = new CreateConsumerResponse();
+        this.request("CreateConsumer", req, resp, cb);
     }
 
     /**
@@ -350,14 +371,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify an existing shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
-     * @param {ModifyShipperRequest} req
-     * @param {function(string, ModifyShipperResponse):void} cb
+     * This API is used to modify a shipping task.
+     * @param {ModifyConsumerRequest} req
+     * @param {function(string, ModifyConsumerResponse):void} cb
      * @public
      */
-    ModifyShipper(req, cb) {
-        let resp = new ModifyShipperResponse();
-        this.request("ModifyShipper", req, resp, cb);
+    ModifyConsumer(req, cb) {
+        let resp = new ModifyConsumerResponse();
+        this.request("ModifyConsumer", req, resp, cb);
     }
 
     /**
@@ -372,7 +393,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an alarm notification template.
+     * This API is used to create a notification group.
      * @param {CreateAlarmNoticeRequest} req
      * @param {function(string, CreateAlarmNoticeResponse):void} cb
      * @public
@@ -383,14 +404,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get a collection rule configuration.
-     * @param {DescribeConfigsRequest} req
-     * @param {function(string, DescribeConfigsResponse):void} cb
+     * This API is used to delete a shipping task.
+     * @param {DeleteConsumerRequest} req
+     * @param {function(string, DeleteConsumerResponse):void} cb
      * @public
      */
-    DescribeConfigs(req, cb) {
-        let resp = new DescribeConfigsResponse();
-        this.request("DescribeConfigs", req, resp, cb);
+    DeleteConsumer(req, cb) {
+        let resp = new DeleteConsumerResponse();
+        this.request("DeleteConsumer", req, resp, cb);
     }
 
     /**
@@ -482,7 +503,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of alarm policies.
+     * This API is used to get the alarm policy list.
      * @param {DescribeAlarmsRequest} req
      * @param {function(string, DescribeAlarmsResponse):void} cb
      * @public
@@ -504,7 +525,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of alarm notification templates.
+     * This API is used to get the notification group list.
      * @param {DescribeAlarmNoticesRequest} req
      * @param {function(string, DescribeAlarmNoticesResponse):void} cb
      * @public
@@ -537,7 +558,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete an alarm notification template.
+     * This API is used to delete a notification group.
      * @param {DeleteAlarmNoticeRequest} req
      * @param {function(string, DeleteAlarmNoticeResponse):void} cb
      * @public
@@ -560,7 +581,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify an alarm notification template.
+     * This API is used to modify a notification group.
      * @param {ModifyAlarmNoticeRequest} req
      * @param {function(string, ModifyAlarmNoticeResponse):void} cb
      * @public
@@ -571,7 +592,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search for logs.
+     * This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent calls to the same log topic cannot exceed 15.
      * @param {SearchLogRequest} req
      * @param {function(string, SearchLogResponse):void} cb
      * @public
@@ -763,6 +784,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
+     * This API is used to modify an existing shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
+     * @param {ModifyShipperRequest} req
+     * @param {function(string, ModifyShipperResponse):void} cb
+     * @public
+     */
+    ModifyShipper(req, cb) {
+        let resp = new ModifyShipperResponse();
+        this.request("ModifyShipper", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a collection rule configuration.
      * @param {CreateConfigRequest} req
      * @param {function(string, CreateConfigResponse):void} cb
@@ -837,6 +869,28 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     DescribeLogContext(req, cb) {
         let resp = new DescribeLogContextResponse();
         this.request("DescribeLogContext", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a shipping task.
+     * @param {DescribeConsumerRequest} req
+     * @param {function(string, DescribeConsumerResponse):void} cb
+     * @public
+     */
+    DescribeConsumer(req, cb) {
+        let resp = new DescribeConsumerResponse();
+        this.request("DescribeConsumer", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a collection rule configuration.
+     * @param {DescribeConfigsRequest} req
+     * @param {function(string, DescribeConfigsResponse):void} cb
+     * @public
+     */
+    DescribeConfigs(req, cb) {
+        let resp = new DescribeConfigsResponse();
+        this.request("DescribeConfigs", req, resp, cb);
     }
 
     /**

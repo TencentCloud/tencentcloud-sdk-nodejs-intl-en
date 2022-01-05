@@ -1100,6 +1100,12 @@ class ClientConnection extends  AbstractModel {
          */
         this.Count = null;
 
+        /**
+         * Whether it is the Tencent Cloud IP for automated testing
+         * @type {boolean || null}
+         */
+        this.InternalService = null;
+
     }
 
     /**
@@ -1111,6 +1117,7 @@ class ClientConnection extends  AbstractModel {
         }
         this.IP = 'IP' in params ? params.IP : null;
         this.Count = 'Count' in params ? params.Count : null;
+        this.InternalService = 'InternalService' in params ? params.InternalService : null;
 
     }
 }
@@ -1241,6 +1248,92 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+
+    }
+}
+
+/**
+ * Security group information
+ * @class
+ */
+class SecurityGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Inbound rule
+         * @type {Array.<SecurityGroupBound> || null}
+         */
+        this.Inbound = null;
+
+        /**
+         * Outbound rule
+         * @type {Array.<SecurityGroupBound> || null}
+         */
+        this.Outbound = null;
+
+        /**
+         * Security group ID
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Security group name
+         * @type {string || null}
+         */
+        this.SecurityGroupName = null;
+
+        /**
+         * Security group remarks
+         * @type {string || null}
+         */
+        this.SecurityGroupRemark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Inbound) {
+            this.Inbound = new Array();
+            for (let z in params.Inbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Inbound[z]);
+                this.Inbound.push(obj);
+            }
+        }
+
+        if (params.Outbound) {
+            this.Outbound = new Array();
+            for (let z in params.Outbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Outbound[z]);
+                this.Outbound.push(obj);
+            }
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
 
     }
 }
@@ -2000,6 +2093,97 @@ class OfflineIsolatedDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * The collection of modifiable integer parameters of an instance.
+ * @class
+ */
+class InstanceIntegerParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current value
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Default value
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Maximum value
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * Minimum value
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no)
+         * @type {string || null}
+         */
+        this.NeedRestart = null;
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Parameter description
+         * @type {Array.<string> || null}
+         */
+        this.Tips = null;
+
+        /**
+         * Data type of the parameter
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+        /**
+         * Whether the TencentDB for MongoDB console has pulled parameter information successfully. Valid values: `1` (no), `0` (yes). This field is only used in the console.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * This field is not in use
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+
+    }
+}
+
+/**
  * DescribeDBInstanceDeal request structure.
  * @class
  */
@@ -2229,6 +2413,101 @@ class CreateDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceParams response structure.
+ * @class
+ */
+class DescribeInstanceParamsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The collection of enum parameters
+         * @type {Array.<InstanceEnumParam> || null}
+         */
+        this.InstanceEnumParam = null;
+
+        /**
+         * The collection of integer parameters
+         * @type {Array.<InstanceIntegerParam> || null}
+         */
+        this.InstanceIntegerParam = null;
+
+        /**
+         * The collection of text parameters
+         * @type {Array.<InstanceTextParam> || null}
+         */
+        this.InstanceTextParam = null;
+
+        /**
+         * The collection of string parameters used to represent time ranges
+         * @type {Array.<InstanceMultiParam> || null}
+         */
+        this.InstanceMultiParam = null;
+
+        /**
+         * The total number of modifiable parameters of the instance, such as 0
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceEnumParam) {
+            this.InstanceEnumParam = new Array();
+            for (let z in params.InstanceEnumParam) {
+                let obj = new InstanceEnumParam();
+                obj.deserialize(params.InstanceEnumParam[z]);
+                this.InstanceEnumParam.push(obj);
+            }
+        }
+
+        if (params.InstanceIntegerParam) {
+            this.InstanceIntegerParam = new Array();
+            for (let z in params.InstanceIntegerParam) {
+                let obj = new InstanceIntegerParam();
+                obj.deserialize(params.InstanceIntegerParam[z]);
+                this.InstanceIntegerParam.push(obj);
+            }
+        }
+
+        if (params.InstanceTextParam) {
+            this.InstanceTextParam = new Array();
+            for (let z in params.InstanceTextParam) {
+                let obj = new InstanceTextParam();
+                obj.deserialize(params.InstanceTextParam[z]);
+                this.InstanceTextParam.push(obj);
+            }
+        }
+
+        if (params.InstanceMultiParam) {
+            this.InstanceMultiParam = new Array();
+            for (let z in params.InstanceMultiParam) {
+                let obj = new InstanceMultiParam();
+                obj.deserialize(params.InstanceMultiParam[z]);
+                this.InstanceMultiParam.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AssignProject response structure.
  * @class
  */
@@ -2390,6 +2669,83 @@ class DescribeDBBackupsRequest extends  AbstractModel {
 }
 
 /**
+ * The collection of modifiable string parameters of an instance which are used to represent time ranges.
+ * @class
+ */
+class InstanceMultiParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current value
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Default value
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Acceptable values
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * Whether to restart the instance for the parameter to take effect
+         * @type {string || null}
+         */
+        this.NeedRestart = null;
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Whether the TencentDB for MongoDB console has pulled parameter information successfully
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Parameter description
+         * @type {Array.<string> || null}
+         */
+        this.Tips = null;
+
+        /**
+         * Data type of the parameter
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+
+    }
+}
+
+/**
  * DescribeClientConnections request structure.
  * @class
  */
@@ -2523,54 +2879,60 @@ class ModifyDBInstanceSpecResponse extends  AbstractModel {
 }
 
 /**
- * Security group information
+ * The collection of modifiable text parameters of an instance.
  * @class
  */
-class SecurityGroup extends  AbstractModel {
+class InstanceTextParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Creation time
+         * Current value (not in use)
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.CurrentValue = null;
 
         /**
-         * Inbound rule
-         * @type {Array.<SecurityGroupBound> || null}
-         */
-        this.Inbound = null;
-
-        /**
-         * Outbound rule
-         * @type {Array.<SecurityGroupBound> || null}
-         */
-        this.Outbound = null;
-
-        /**
-         * Security group ID
+         * Default value (not in use)
          * @type {string || null}
          */
-        this.SecurityGroupId = null;
+        this.DefaultValue = null;
 
         /**
-         * Security group name
+         * Whether to restart the instance for the parameter to take effect (not in use)
          * @type {string || null}
          */
-        this.SecurityGroupName = null;
+        this.NeedRestart = null;
 
         /**
-         * Security group remarks
+         * Parameter name (not in use)
          * @type {string || null}
          */
-        this.SecurityGroupRemark = null;
+        this.ParamName = null;
+
+        /**
+         * Acceptable values (not in use)
+         * @type {string || null}
+         */
+        this.TextValue = null;
+
+        /**
+         * Parameter description (not in use)
+         * @type {Array.<string> || null}
+         */
+        this.Tips = null;
+
+        /**
+         * Data type of the parameter (not in use)
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+        /**
+         * Whether the TencentDB for MongoDB console has pulled parameter information successfully (not in use)
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -2581,29 +2943,14 @@ class SecurityGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-
-        if (params.Inbound) {
-            this.Inbound = new Array();
-            for (let z in params.Inbound) {
-                let obj = new SecurityGroupBound();
-                obj.deserialize(params.Inbound[z]);
-                this.Inbound.push(obj);
-            }
-        }
-
-        if (params.Outbound) {
-            this.Outbound = new Array();
-            for (let z in params.Outbound) {
-                let obj = new SecurityGroupBound();
-                obj.deserialize(params.Outbound[z]);
-                this.Outbound.push(obj);
-            }
-        }
-        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
-        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
-        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.TextValue = 'TextValue' in params ? params.TextValue : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2849,6 +3196,83 @@ class RenewDBInstancesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The collection of modifiable enum parameters of an instance.
+ * @class
+ */
+class InstanceEnumParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current value
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Default value
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Acceptable values
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no)
+         * @type {string || null}
+         */
+        this.NeedRestart = null;
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Parameter description
+         * @type {Array.<string> || null}
+         */
+        this.Tips = null;
+
+        /**
+         * Data type of the parameter
+         * @type {string || null}
+         */
+        this.ValueType = null;
+
+        /**
+         * Whether the TencentDB for MongoDB console has pulled parameter information successfully. Valid values: `1` (yes), `0` (no, and displays "Loading" in the console)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -3735,6 +4159,34 @@ class CreateBackupDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceParams request structure.
+ * @class
+ */
+class DescribeInstanceParamsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * Description on the billing mode of an instance
  * @class
  */
@@ -3954,6 +4406,7 @@ module.exports = {
     ClientConnection: ClientConnection,
     InquirePriceModifyDBInstanceSpecRequest: InquirePriceModifyDBInstanceSpecRequest,
     BackupInfo: BackupInfo,
+    SecurityGroup: SecurityGroup,
     InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     SpecificationInfo: SpecificationInfo,
@@ -3969,23 +4422,27 @@ module.exports = {
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
+    InstanceIntegerParam: InstanceIntegerParam,
     DescribeDBInstanceDealRequest: DescribeDBInstanceDealRequest,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
+    DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     AssignProjectResponse: AssignProjectResponse,
     BackupDownloadTask: BackupDownloadTask,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
+    InstanceMultiParam: InstanceMultiParam,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
     DescribeDBInstanceDealResponse: DescribeDBInstanceDealResponse,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
-    SecurityGroup: SecurityGroup,
+    InstanceTextParam: InstanceTextParam,
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
     DescribeBackupDownloadTaskRequest: DescribeBackupDownloadTaskRequest,
     DescribeBackupAccessRequest: DescribeBackupAccessRequest,
     RenameInstanceRequest: RenameInstanceRequest,
     DescribeSecurityGroupRequest: DescribeSecurityGroupRequest,
     RenewDBInstancesResponse: RenewDBInstancesResponse,
+    InstanceEnumParam: InstanceEnumParam,
     DescribeBackupDownloadTaskResponse: DescribeBackupDownloadTaskResponse,
     RenameInstanceResponse: RenameInstanceResponse,
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
@@ -3999,6 +4456,7 @@ module.exports = {
     SlowLogPattern: SlowLogPattern,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
+    DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     InstanceChargePrepaid: InstanceChargePrepaid,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     RenewDBInstancesRequest: RenewDBInstancesRequest,

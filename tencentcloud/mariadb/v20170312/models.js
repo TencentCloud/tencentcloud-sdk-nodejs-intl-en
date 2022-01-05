@@ -432,6 +432,41 @@ class CancelDcnJobResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFileDownloadUrl request structure.
+ * @class
+ */
+class DescribeFileDownloadUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Unsigned file path
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+
+    }
+}
+
+/**
  * DescribeDBResourceUsageDetails response structure.
  * @class
  */
@@ -2228,6 +2263,41 @@ class DescribeDcnDetailRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeFileDownloadUrl response structure.
+ * @class
+ */
+class DescribeFileDownloadUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signed download URL
+         * @type {string || null}
+         */
+        this.PreSignedUrl = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PreSignedUrl = 'PreSignedUrl' in params ? params.PreSignedUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5684,6 +5754,7 @@ module.exports = {
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     CancelDcnJobResponse: CancelDcnJobResponse,
+    DescribeFileDownloadUrlRequest: DescribeFileDownloadUrlRequest,
     DescribeDBResourceUsageDetailsResponse: DescribeDBResourceUsageDetailsResponse,
     DestroyHourDBInstanceResponse: DestroyHourDBInstanceResponse,
     Account: Account,
@@ -5721,6 +5792,7 @@ module.exports = {
     ModifyDBParametersRequest: ModifyDBParametersRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeDcnDetailRequest: DescribeDcnDetailRequest,
+    DescribeFileDownloadUrlResponse: DescribeFileDownloadUrlResponse,
     ModifyDBParametersResponse: ModifyDBParametersResponse,
     CopyAccountPrivilegesRequest: CopyAccountPrivilegesRequest,
     SecurityGroup: SecurityGroup,

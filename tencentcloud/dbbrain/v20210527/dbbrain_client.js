@@ -25,6 +25,7 @@ const ScoreItem = models.ScoreItem;
 const InstanceConfs = models.InstanceConfs;
 const CreateSecurityAuditLogExportTaskRequest = models.CreateSecurityAuditLogExportTaskRequest;
 const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
+const DescribeDBDiagEventsResponse = models.DescribeDBDiagEventsResponse;
 const DescribeDBDiagReportTasksResponse = models.DescribeDBDiagReportTasksResponse;
 const AddUserContactResponse = models.AddUserContactResponse;
 const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
@@ -40,12 +41,12 @@ const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
 const TimeSlice = models.TimeSlice;
 const ModifyDiagDBInstanceConfRequest = models.ModifyDiagDBInstanceConfRequest;
 const DescribeSecurityAuditLogDownloadUrlsRequest = models.DescribeSecurityAuditLogDownloadUrlsRequest;
-const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
+const MySqlProcess = models.MySqlProcess;
 const CreateMailProfileResponse = models.CreateMailProfileResponse;
 const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
 const CreateDBDiagReportUrlResponse = models.CreateDBDiagReportUrlResponse;
 const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
-const MySqlProcess = models.MySqlProcess;
+const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
 const DiagHistoryEventItem = models.DiagHistoryEventItem;
 const SlowLogHost = models.SlowLogHost;
 const CreateMailProfileRequest = models.CreateMailProfileRequest;
@@ -92,6 +93,7 @@ const MonitorFloatMetric = models.MonitorFloatMetric;
 const DescribeAllUserGroupResponse = models.DescribeAllUserGroupResponse;
 const DescribeUserSqlAdviceResponse = models.DescribeUserSqlAdviceResponse;
 const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
+const DescribeDBDiagEventsRequest = models.DescribeDBDiagEventsRequest;
 const GroupItem = models.GroupItem;
 const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
 const DescribeDBDiagReportTasksRequest = models.DescribeDBDiagReportTasksRequest;
@@ -191,6 +193,17 @@ class DbbrainClient extends AbstractClient {
     DescribeAllUserGroup(req, cb) {
         let resp = new DescribeAllUserGroupResponse();
         this.request("DescribeAllUserGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the diagnosis event list in a specified time period by risk level, instance ID, etc.
+     * @param {DescribeDBDiagEventsRequest} req
+     * @param {function(string, DescribeDBDiagEventsResponse):void} cb
+     * @public
+     */
+    DescribeDBDiagEvents(req, cb) {
+        let resp = new DescribeDBDiagEventsResponse();
+        this.request("DescribeDBDiagEvents", req, resp, cb);
     }
 
     /**

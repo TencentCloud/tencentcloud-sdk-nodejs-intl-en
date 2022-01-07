@@ -570,6 +570,56 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeDBDiagEvents response structure.
+ * @class
+ */
+class DescribeDBDiagEventsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of diagnosis events.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Diagnosis event list.
+         * @type {Array.<DiagHistoryEventItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new DiagHistoryEventItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBDiagReportTasks response structure.
  * @class
  */
@@ -1392,25 +1442,60 @@ class DescribeSecurityAuditLogDownloadUrlsRequest extends  AbstractModel {
 }
 
 /**
- * CreateDBDiagReportTask response structure.
+ * Relational database thread
  * @class
  */
-class CreateDBDiagReportTaskResponse extends  AbstractModel {
+class MySqlProcess extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task request ID, which can be used to query the execution result of an async task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Thread ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ID = null;
+
+        /**
+         * Thread operation account name.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Thread operation host address.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Thread operation database.
+         * @type {string || null}
+         */
+        this.DB = null;
+
+        /**
+         * Thread operation status.
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Thread execution type.
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * Thread operation duration in seconds.
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Thread operation statement.
+         * @type {string || null}
+         */
+        this.Info = null;
 
     }
 
@@ -1421,8 +1506,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.DB = 'DB' in params ? params.DB : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Info = 'Info' in params ? params.Info : null;
 
     }
 }
@@ -1596,60 +1687,25 @@ class DescribeDBDiagHistoryRequest extends  AbstractModel {
 }
 
 /**
- * Relational database thread
+ * CreateDBDiagReportTask response structure.
  * @class
  */
-class MySqlProcess extends  AbstractModel {
+class CreateDBDiagReportTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Thread ID.
-         * @type {string || null}
+         * Async task request ID, which can be used to query the execution result of an async task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.ID = null;
+        this.AsyncRequestId = null;
 
         /**
-         * Thread operation account name.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.User = null;
-
-        /**
-         * Thread operation host address.
-         * @type {string || null}
-         */
-        this.Host = null;
-
-        /**
-         * Thread operation database.
-         * @type {string || null}
-         */
-        this.DB = null;
-
-        /**
-         * Thread operation status.
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * Thread execution type.
-         * @type {string || null}
-         */
-        this.Command = null;
-
-        /**
-         * Thread operation duration in seconds.
-         * @type {string || null}
-         */
-        this.Time = null;
-
-        /**
-         * Thread operation statement.
-         * @type {string || null}
-         */
-        this.Info = null;
+        this.RequestId = null;
 
     }
 
@@ -1660,14 +1716,8 @@ class MySqlProcess extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ID = 'ID' in params ? params.ID : null;
-        this.User = 'User' in params ? params.User : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.DB = 'DB' in params ? params.DB : null;
-        this.State = 'State' in params ? params.State : null;
-        this.Command = 'Command' in params ? params.Command : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.Info = 'Info' in params ? params.Info : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3542,7 +3592,7 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
+         * End time in the format of "2019-09-11 10:13:14". The interval between the end time and the start time can be up to 7 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4308,6 +4358,69 @@ class DescribeDBSpaceStatusResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBDiagEvents request structure.
+ * @class
+ */
+class DescribeDBDiagEventsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time in the format of “2021-05-27 00:00:00”. The earliest time that can be queried is 30 days before the current time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in the format of "2021-05-27 01:00:00". The interval between the end time and the start time can be up to 7 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Risk level list. Valid values in descending order of severity: `1` (critical), `2` (serious), `3` (alarm), `4` (warning), `5` (healthy).
+         * @type {Array.<number> || null}
+         */
+        this.Severities = null;
+
+        /**
+         * Instance ID list.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 50.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Severities = 'Severities' in params ? params.Severities : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Describes the group information.
  * @class
  */
@@ -5010,6 +5123,7 @@ module.exports = {
     InstanceConfs: InstanceConfs,
     CreateSecurityAuditLogExportTaskRequest: CreateSecurityAuditLogExportTaskRequest,
     DescribeDBDiagEventResponse: DescribeDBDiagEventResponse,
+    DescribeDBDiagEventsResponse: DescribeDBDiagEventsResponse,
     DescribeDBDiagReportTasksResponse: DescribeDBDiagReportTasksResponse,
     AddUserContactResponse: AddUserContactResponse,
     ModifyDiagDBInstanceConfResponse: ModifyDiagDBInstanceConfResponse,
@@ -5025,12 +5139,12 @@ module.exports = {
     TimeSlice: TimeSlice,
     ModifyDiagDBInstanceConfRequest: ModifyDiagDBInstanceConfRequest,
     DescribeSecurityAuditLogDownloadUrlsRequest: DescribeSecurityAuditLogDownloadUrlsRequest,
-    CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
+    MySqlProcess: MySqlProcess,
     CreateMailProfileResponse: CreateMailProfileResponse,
     DescribeSlowLogTimeSeriesStatsRequest: DescribeSlowLogTimeSeriesStatsRequest,
     CreateDBDiagReportUrlResponse: CreateDBDiagReportUrlResponse,
     DescribeDBDiagHistoryRequest: DescribeDBDiagHistoryRequest,
-    MySqlProcess: MySqlProcess,
+    CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
     DiagHistoryEventItem: DiagHistoryEventItem,
     SlowLogHost: SlowLogHost,
     CreateMailProfileRequest: CreateMailProfileRequest,
@@ -5077,6 +5191,7 @@ module.exports = {
     DescribeAllUserGroupResponse: DescribeAllUserGroupResponse,
     DescribeUserSqlAdviceResponse: DescribeUserSqlAdviceResponse,
     DescribeDBSpaceStatusResponse: DescribeDBSpaceStatusResponse,
+    DescribeDBDiagEventsRequest: DescribeDBDiagEventsRequest,
     GroupItem: GroupItem,
     DescribeTopSpaceTableTimeSeriesRequest: DescribeTopSpaceTableTimeSeriesRequest,
     DescribeDBDiagReportTasksRequest: DescribeDBDiagReportTasksRequest,

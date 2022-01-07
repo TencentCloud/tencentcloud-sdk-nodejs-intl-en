@@ -198,18 +198,32 @@ class DescribeFileSystemResponse extends  AbstractModel {
         this.FileSystem = null;
 
         /**
-         * Used capacity (in bytes), including STANDARD storage and ARCHIVE storage
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Used capacity of the file system, in bytes
+Note: this field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.CapacityUsed = null;
 
         /**
-         * Used ARCHIVE storage capacity (in bytes)
+         * Used ARCHIVE capacity of COS, in bytes
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ArchiveCapacityUsed = null;
+
+        /**
+         * Used STANDARD capacity of COS, in bytes
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StandardCapacityUsed = null;
+
+        /**
+         * Used STANDARD_IA capacity of COS, in bytes
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DegradeCapacityUsed = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -234,6 +248,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.CapacityUsed = 'CapacityUsed' in params ? params.CapacityUsed : null;
         this.ArchiveCapacityUsed = 'ArchiveCapacityUsed' in params ? params.ArchiveCapacityUsed : null;
+        this.StandardCapacityUsed = 'StandardCapacityUsed' in params ? params.StandardCapacityUsed : null;
+        this.DegradeCapacityUsed = 'DegradeCapacityUsed' in params ? params.DegradeCapacityUsed : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -375,6 +391,18 @@ Note: the file system capacity after change cannot be smaller than the currently
          */
         this.PosixAcl = null;
 
+        /**
+         * Whether to enable verification of Ranger service addresses
+         * @type {boolean || null}
+         */
+        this.EnableRanger = null;
+
+        /**
+         * List of Ranger service addresses, which can be an empty array
+         * @type {Array.<string> || null}
+         */
+        this.RangerServiceAddresses = null;
+
     }
 
     /**
@@ -390,6 +418,8 @@ Note: the file system capacity after change cannot be smaller than the currently
         this.CapacityQuota = 'CapacityQuota' in params ? params.CapacityQuota : null;
         this.SuperUsers = 'SuperUsers' in params ? params.SuperUsers : null;
         this.PosixAcl = 'PosixAcl' in params ? params.PosixAcl : null;
+        this.EnableRanger = 'EnableRanger' in params ? params.EnableRanger : null;
+        this.RangerServiceAddresses = 'RangerServiceAddresses' in params ? params.RangerServiceAddresses : null;
 
     }
 }
@@ -1013,6 +1043,18 @@ class CreateFileSystemRequest extends  AbstractModel {
          */
         this.RootInodeGroup = null;
 
+        /**
+         * Whether to enable verification of Ranger service addresses
+         * @type {boolean || null}
+         */
+        this.EnableRanger = null;
+
+        /**
+         * List of Ranger service addresses (empty array by default)
+         * @type {Array.<string> || null}
+         */
+        this.RangerServiceAddresses = null;
+
     }
 
     /**
@@ -1029,6 +1071,8 @@ class CreateFileSystemRequest extends  AbstractModel {
         this.SuperUsers = 'SuperUsers' in params ? params.SuperUsers : null;
         this.RootInodeUser = 'RootInodeUser' in params ? params.RootInodeUser : null;
         this.RootInodeGroup = 'RootInodeGroup' in params ? params.RootInodeGroup : null;
+        this.EnableRanger = 'EnableRanger' in params ? params.EnableRanger : null;
+        this.RangerServiceAddresses = 'RangerServiceAddresses' in params ? params.RangerServiceAddresses : null;
 
     }
 }
@@ -1383,6 +1427,20 @@ class FileSystem extends  AbstractModel {
          */
         this.PosixAcl = null;
 
+        /**
+         * Whether to enable verification of Ranger service addresses
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {boolean || null}
+         */
+        this.EnableRanger = null;
+
+        /**
+         * List of Ranger service addresses
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.RangerServiceAddresses = null;
+
     }
 
     /**
@@ -1403,6 +1461,8 @@ class FileSystem extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.SuperUsers = 'SuperUsers' in params ? params.SuperUsers : null;
         this.PosixAcl = 'PosixAcl' in params ? params.PosixAcl : null;
+        this.EnableRanger = 'EnableRanger' in params ? params.EnableRanger : null;
+        this.RangerServiceAddresses = 'RangerServiceAddresses' in params ? params.RangerServiceAddresses : null;
 
     }
 }
@@ -1428,7 +1488,7 @@ class RestoreTask extends  AbstractModel {
         this.FilePath = null;
 
         /**
-         * Restoration task type (1: standard; 2: expedited; 3: bulk)
+         * Restoration task type (`1`: standard; `2`: expedited; `3`: bulk, with only the expedited type available currently)
          * @type {number || null}
          */
         this.Type = null;
@@ -1641,7 +1701,7 @@ class Transition extends  AbstractModel {
         this.Days = null;
 
         /**
-         * Transition type (1: archive; 2: deletion)
+         * Transition type (`1`: transition to ARCHIVE; `2`: delete; `3`: transition to STANDARD_IA)
          * @type {number || null}
          */
         this.Type = null;

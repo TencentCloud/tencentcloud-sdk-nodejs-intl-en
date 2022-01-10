@@ -27,8 +27,9 @@ const ExtraInfo = models.ExtraInfo;
 const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
 const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadbalancersRequest;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
-const RuleHealth = models.RuleHealth;
+const DescribeLoadBalancerOverviewResponse = models.DescribeLoadBalancerOverviewResponse;
 const DeleteRuleRequest = models.DeleteRuleRequest;
+const CloneLoadBalancerRequest = models.CloneLoadBalancerRequest;
 const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const DescribeLoadBalancerTrafficResponse = models.DescribeLoadBalancerTrafficResponse;
@@ -50,6 +51,7 @@ const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const TargetGroupInstance = models.TargetGroupInstance;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
+const RuleHealth = models.RuleHealth;
 const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
@@ -142,6 +144,7 @@ const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
 const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
+const DescribeLoadBalancerOverviewRequest = models.DescribeLoadBalancerOverviewRequest;
 const RewriteTarget = models.RewriteTarget;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const DescribeLoadBalancersDetailResponse = models.DescribeLoadBalancersDetailResponse;
@@ -155,6 +158,7 @@ const TargetRegionInfo = models.TargetRegionInfo;
 const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
+const CloneLoadBalancerResponse = models.CloneLoadBalancerResponse;
 const DescribeClsLogSetResponse = models.DescribeClsLogSetResponse;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
@@ -754,6 +758,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
+     * Queries the total number of CLB instances and the number of CLB instances in different status (running, isolated and about to expire).
+     * @param {DescribeLoadBalancerOverviewRequest} req
+     * @param {function(string, DescribeLoadBalancerOverviewResponse):void} cb
+     * @public
+     */
+    DescribeLoadBalancerOverview(req, cb) {
+        let resp = new DescribeLoadBalancerOverviewResponse();
+        this.request("DescribeLoadBalancerOverview", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeTargets) is used to query the list of real servers bound to some listeners of a CLB instance.
      * @param {DescribeTargetsRequest} req
      * @param {function(string, DescribeTargetsResponse):void} cb
@@ -897,6 +912,17 @@ This is an async API. After it is returned successfully, you can call the `Descr
     DescribeLoadBalancerTraffic(req, cb) {
         let resp = new DescribeLoadBalancerTrafficResponse();
         this.request("DescribeLoadBalancerTraffic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to generate a CLB instance that has the same rules and binding relations as the specified CLB instance.
+     * @param {CloneLoadBalancerRequest} req
+     * @param {function(string, CloneLoadBalancerResponse):void} cb
+     * @public
+     */
+    CloneLoadBalancer(req, cb) {
+        let resp = new CloneLoadBalancerResponse();
+        this.request("CloneLoadBalancer", req, resp, cb);
     }
 
     /**

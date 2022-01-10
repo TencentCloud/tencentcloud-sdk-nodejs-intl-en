@@ -654,39 +654,42 @@ Note: A secondary AZ will load traffic if the primary AZ has failures. The API `
 }
 
 /**
- * Health check status of a forwarding rule
+ * DescribeLoadBalancerOverview response structure.
  * @class
  */
-class RuleHealth extends  AbstractModel {
+class DescribeLoadBalancerOverviewResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Forwarding rule ID
-         * @type {string || null}
+         * Total number of CLB instances
+         * @type {number || null}
          */
-        this.LocationId = null;
+        this.TotalCount = null;
 
         /**
-         * Domain name of the forwarding rule
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Number of CLB instances that are running
+         * @type {number || null}
          */
-        this.Domain = null;
+        this.RunningCount = null;
 
         /**
-         * Forwarding rule Url
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Number of CLB instances that are isolated
+         * @type {number || null}
          */
-        this.Url = null;
+        this.IsolationCount = null;
 
         /**
-         * Health status of the real server bound to this rule
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<TargetHealth> || null}
+         * Number of CLB instances that are about to expire
+         * @type {number || null}
          */
-        this.Targets = null;
+        this.WillExpireCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -697,18 +700,11 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
-
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new TargetHealth();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
-            }
-        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RunningCount = 'RunningCount' in params ? params.RunningCount : null;
+        this.IsolationCount = 'IsolationCount' in params ? params.IsolationCount : null;
+        this.WillExpireCount = 'WillExpireCount' in params ? params.WillExpireCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -772,6 +768,189 @@ class DeleteRuleRequest extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.NewDefaultServerDomain = 'NewDefaultServerDomain' in params ? params.NewDefaultServerDomain : null;
+
+    }
+}
+
+/**
+ * CloneLoadBalancer request structure.
+ * @class
+ */
+class CloneLoadBalancerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * Clones the name of the CLB instance. The name must be 1-60 characters containing letters, numbers, "-" or "_".
+Note: if the name of a new CLB instance already exists, a default name will be generated automatically.
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * ID of the project to which a CLB instance belongs, which can be obtained through the DescribeProject API. If this parameter is not passed in, the default project will be used.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
+Note: A primary AZ is the default AZ that carries traffic. When it fails, the optimal secondary AZ is chosen automatically to take its place. 
+         * @type {string || null}
+         */
+        this.MasterZoneId = null;
+
+        /**
+         * Sets the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB instances.
+Note: A secondary AZ carries traffic when the primary AZ fails. 
+         * @type {string || null}
+         */
+        this.SlaveZoneId = null;
+
+        /**
+         * Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * CLB network billing mode. This parameter is applicable only to public network CLB instances.
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+         * @type {string || null}
+         */
+        this.VipIsp = null;
+
+        /**
+         * Applies for CLB instances for a specified VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Tags a CLB instance when purchasing it
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Dedicated cluster information
+         * @type {ExclusiveCluster || null}
+         */
+        this.ExclusiveCluster = null;
+
+        /**
+         * Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
+         * @type {string || null}
+         */
+        this.BandwidthPackageId = null;
+
+        /**
+         * Whether to support binding cross-VPC IPs or cross-region IPs
+         * @type {boolean || null}
+         */
+        this.SnatPro = null;
+
+        /**
+         * Creates `SnatIp` when the binding IPs of other VPCs feature is enabled
+         * @type {Array.<SnatIp> || null}
+         */
+        this.SnatIps = null;
+
+        /**
+         * ID of the public network CLB dedicated cluster
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SlaType = null;
+
+        /**
+         * Tag of the STGW dedicated cluster
+         * @type {string || null}
+         */
+        this.ClusterTag = null;
+
+        /**
+         * Availability zones for nearby access of private network CLB instances to distribute traffic
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Unique ID of an EIP, which can only be used when binding the EIP of a private network CLB instance (e.g., `eip-11112222`)
+         * @type {string || null}
+         */
+        this.EipAddressId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.MasterZoneId = 'MasterZoneId' in params ? params.MasterZoneId : null;
+        this.SlaveZoneId = 'SlaveZoneId' in params ? params.SlaveZoneId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+        this.VipIsp = 'VipIsp' in params ? params.VipIsp : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.ExclusiveCluster) {
+            let obj = new ExclusiveCluster();
+            obj.deserialize(params.ExclusiveCluster)
+            this.ExclusiveCluster = obj;
+        }
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
+
+        if (params.SnatIps) {
+            this.SnatIps = new Array();
+            for (let z in params.SnatIps) {
+                let obj = new SnatIp();
+                obj.deserialize(params.SnatIps[z]);
+                this.SnatIps.push(obj);
+            }
+        }
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.SlaType = 'SlaType' in params ? params.SlaType : null;
+        this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.EipAddressId = 'EipAddressId' in params ? params.EipAddressId : null;
 
     }
 }
@@ -1749,6 +1928,66 @@ class CreateRuleResponse extends  AbstractModel {
         }
         this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Health check status of a forwarding rule
+ * @class
+ */
+class RuleHealth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Forwarding rule ID
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Domain name of the forwarding rule
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Forwarding rule Url
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Health status of the real server bound to this rule
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TargetHealth> || null}
+         */
+        this.Targets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new TargetHealth();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
 
     }
 }
@@ -4003,7 +4242,7 @@ class DescribeLoadBalancersDetailRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * List of fields to be returned. The `LoadBalancerId` and `LoadBalancerName` are returned by default.
+         * List of fields. Only fields specified will be returned. If it’s left blank, `null` is returned. The fields `LoadBalancerId` and `LoadBalancerName` are added by default. For details about fields, see <a href="https://intl.cloud.tencent.com/document/api/214/30694?from_cn_redirect=1#LoadBalancerDetail">LoadBalancerDetail</a>.
          * @type {Array.<string> || null}
          */
         this.Fields = null;
@@ -6564,6 +6803,27 @@ class DeregisterTargetsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeLoadBalancerOverview request structure.
+ * @class
+ */
+class DescribeLoadBalancerOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * Redirect target information
  * @class
  */
@@ -7392,6 +7652,34 @@ class ReplaceCertForLoadBalancersRequest extends  AbstractModel {
  * @class
  */
 class DeleteRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloneLoadBalancer response structure.
+ * @class
+ */
+class CloneLoadBalancerResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -9974,6 +10262,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.HealthLogTopicId = null;
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+        /**
+         * CLB attribute
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AttributeFlags = null;
+
     }
 
     /**
@@ -10088,6 +10389,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.NfvInfo = 'NfvInfo' in params ? params.NfvInfo : null;
         this.HealthLogSetId = 'HealthLogSetId' in params ? params.HealthLogSetId : null;
         this.HealthLogTopicId = 'HealthLogTopicId' in params ? params.HealthLogTopicId : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.AttributeFlags = 'AttributeFlags' in params ? params.AttributeFlags : null;
 
     }
 }
@@ -10104,8 +10407,9 @@ module.exports = {
     BatchModifyTargetWeightResponse: BatchModifyTargetWeightResponse,
     SetSecurityGroupForLoadbalancersRequest: SetSecurityGroupForLoadbalancersRequest,
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
-    RuleHealth: RuleHealth,
+    DescribeLoadBalancerOverviewResponse: DescribeLoadBalancerOverviewResponse,
     DeleteRuleRequest: DeleteRuleRequest,
+    CloneLoadBalancerRequest: CloneLoadBalancerRequest,
     DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
     DescribeLoadBalancerTrafficResponse: DescribeLoadBalancerTrafficResponse,
@@ -10127,6 +10431,7 @@ module.exports = {
     TargetGroupInstance: TargetGroupInstance,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     CreateRuleResponse: CreateRuleResponse,
+    RuleHealth: RuleHealth,
     RegisterTargetGroupInstancesResponse: RegisterTargetGroupInstancesResponse,
     ClassicalTargetInfo: ClassicalTargetInfo,
     DescribeTargetsRequest: DescribeTargetsRequest,
@@ -10219,6 +10524,7 @@ module.exports = {
     DeleteLoadBalancerResponse: DeleteLoadBalancerResponse,
     AutoRewriteResponse: AutoRewriteResponse,
     DeregisterTargetsResponse: DeregisterTargetsResponse,
+    DescribeLoadBalancerOverviewRequest: DescribeLoadBalancerOverviewRequest,
     RewriteTarget: RewriteTarget,
     ModifyTargetWeightRequest: ModifyTargetWeightRequest,
     DescribeLoadBalancersDetailResponse: DescribeLoadBalancersDetailResponse,
@@ -10232,6 +10538,7 @@ module.exports = {
     DescribeTargetHealthRequest: DescribeTargetHealthRequest,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DeleteRuleResponse: DeleteRuleResponse,
+    CloneLoadBalancerResponse: CloneLoadBalancerResponse,
     DescribeClsLogSetResponse: DescribeClsLogSetResponse,
     ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,

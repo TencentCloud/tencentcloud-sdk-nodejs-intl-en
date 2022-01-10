@@ -17,6 +17,48 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * This parameter describes the configuration of automatically initializing and mounting the cloud disk to the CVM when purchasing a new cloud disk.
+ * @class
+ */
+class AutoMountConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance to which the cloud disk is attached.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Path to the mount point in the CVM
+         * @type {Array.<string> || null}
+         */
+        this.MountPoint = null;
+
+        /**
+         * File system type. Supported: ext4 and xfs.
+         * @type {string || null}
+         */
+        this.FileSystemType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MountPoint = 'MountPoint' in params ? params.MountPoint : null;
+        this.FileSystemType = 'FileSystemType' in params ? params.FileSystemType : null;
+
+    }
+}
+
+/**
  * DetachDisks request structure.
  * @class
  */
@@ -498,72 +540,18 @@ class DescribeInstancesDiskNumRequest extends  AbstractModel {
 }
 
 /**
- * This describes the detailed information of the scheduled snapshot policy.
+ * AttachDisks response structure.
  * @class
  */
-class AutoSnapshotPolicy extends  AbstractModel {
+class AttachDisksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Scheduled snapshot policy ID.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AutoSnapshotPolicyId = null;
-
-        /**
-         * Scheduled snapshot policy name.
-         * @type {string || null}
-         */
-        this.AutoSnapshotPolicyName = null;
-
-        /**
-         * Scheduled snapshot policy state. Value range:<br><li>NORMAL: Normal<br><li>ISOLATED: Isolated.
-         * @type {string || null}
-         */
-        this.AutoSnapshotPolicyState = null;
-
-        /**
-         * Whether scheduled snapshot policy is activated.
-         * @type {boolean || null}
-         */
-        this.IsActivated = null;
-
-        /**
-         * Whether the snapshot created by this scheduled snapshot policy is retained permanently.
-         * @type {boolean || null}
-         */
-        this.IsPermanent = null;
-
-        /**
-         * Number of days the snapshot created by this scheduled snapshot policy is retained.
-         * @type {number || null}
-         */
-        this.RetentionDays = null;
-
-        /**
-         * The time the scheduled snapshot policy was created.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The time the scheduled snapshot will be triggered again.
-         * @type {string || null}
-         */
-        this.NextTriggerTime = null;
-
-        /**
-         * The policy for executing the scheduled snapshot.
-         * @type {Array.<Policy> || null}
-         */
-        this.Policy = null;
-
-        /**
-         * The list of cloud disk IDs that the current scheduled snapshot policy is bound to.
-         * @type {Array.<string> || null}
-         */
-        this.DiskIdSet = null;
+        this.RequestId = null;
 
     }
 
@@ -574,24 +562,7 @@ class AutoSnapshotPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
-        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
-        this.AutoSnapshotPolicyState = 'AutoSnapshotPolicyState' in params ? params.AutoSnapshotPolicyState : null;
-        this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
-        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
-        this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.NextTriggerTime = 'NextTriggerTime' in params ? params.NextTriggerTime : null;
-
-        if (params.Policy) {
-            this.Policy = new Array();
-            for (let z in params.Policy) {
-                let obj = new Policy();
-                obj.deserialize(params.Policy[z]);
-                this.Policy.push(obj);
-            }
-        }
-        this.DiskIdSet = 'DiskIdSet' in params ? params.DiskIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1349,30 +1320,48 @@ class DescribeSnapshotOperationLogsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDiskAssociatedAutoSnapshotPolicy response structure.
+ * DescribeAutoSnapshotPolicies request structure.
  * @class
  */
-class DescribeDiskAssociatedAutoSnapshotPolicyResponse extends  AbstractModel {
+class DescribeAutoSnapshotPoliciesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The quantity of scheduled snapshots binded to cloud disk.
+         * List of scheduled snapshot policy IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
+         * @type {Array.<string> || null}
+         */
+        this.AutoSnapshotPolicyIds = null;
+
+        /**
+         * Filter conditions. Specification of both the `AutoSnapshotPolicyIds` and `Filters` parameters is not supported.<br><li>auto-snapshot-policy-id - Array of String - Required or not: No - (Filter condition) Filters according to the scheduled snapshot policy ID. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. <br><li>auto-snapshot-policy-state - Array of String - Required or not: No - (Filter condition) Filters according to the status of the scheduled snapshot policy. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. (NORMAL: normal | ISOLATED: isolated)<br><li>auto-snapshot-policy-name - Array of String - Required or not: No - (Filter condition) Filters according to the name of the scheduled snapshot policy.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Limit = null;
 
         /**
-         * List of scheduled snapshots bound to cloud disk.
-         * @type {Array.<AutoSnapshotPolicy> || null}
+         * Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
+         * @type {number || null}
          */
-        this.AutoSnapshotPolicySet = null;
+        this.Offset = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Outputs the ordering of the scheduled snapshot lists. Value range: <br><li>ASC: Ascending order <br><li>DESC: Descending order.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Order = null;
+
+        /**
+         * The sorting filter applied to the scheduled snapshot list. Value range: <Sort by creation time of scheduled snapshot. By default, this is sorted by creation time.
+         * @type {string || null}
+         */
+        this.OrderField = null;
 
     }
 
@@ -1383,17 +1372,20 @@ class DescribeDiskAssociatedAutoSnapshotPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.AutoSnapshotPolicyIds = 'AutoSnapshotPolicyIds' in params ? params.AutoSnapshotPolicyIds : null;
 
-        if (params.AutoSnapshotPolicySet) {
-            this.AutoSnapshotPolicySet = new Array();
-            for (let z in params.AutoSnapshotPolicySet) {
-                let obj = new AutoSnapshotPolicy();
-                obj.deserialize(params.AutoSnapshotPolicySet[z]);
-                this.AutoSnapshotPolicySet.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
 
     }
 }
@@ -2198,18 +2190,72 @@ class CreateDisksResponse extends  AbstractModel {
 }
 
 /**
- * AttachDisks response structure.
+ * This describes the detailed information of the scheduled snapshot policy.
  * @class
  */
-class AttachDisksResponse extends  AbstractModel {
+class AutoSnapshotPolicy extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Scheduled snapshot policy ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AutoSnapshotPolicyId = null;
+
+        /**
+         * Scheduled snapshot policy name.
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyName = null;
+
+        /**
+         * Scheduled snapshot policy state. Value range:<br><li>NORMAL: Normal<br><li>ISOLATED: Isolated.
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyState = null;
+
+        /**
+         * Whether scheduled snapshot policy is activated.
+         * @type {boolean || null}
+         */
+        this.IsActivated = null;
+
+        /**
+         * Whether the snapshot created by this scheduled snapshot policy is retained permanently.
+         * @type {boolean || null}
+         */
+        this.IsPermanent = null;
+
+        /**
+         * Number of days the snapshot created by this scheduled snapshot policy is retained.
+         * @type {number || null}
+         */
+        this.RetentionDays = null;
+
+        /**
+         * The time the scheduled snapshot policy was created.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The time the scheduled snapshot will be triggered again.
+         * @type {string || null}
+         */
+        this.NextTriggerTime = null;
+
+        /**
+         * The policy for executing the scheduled snapshot.
+         * @type {Array.<Policy> || null}
+         */
+        this.Policy = null;
+
+        /**
+         * The list of cloud disk IDs that the current scheduled snapshot policy is bound to.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIdSet = null;
 
     }
 
@@ -2220,7 +2266,24 @@ class AttachDisksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
+        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
+        this.AutoSnapshotPolicyState = 'AutoSnapshotPolicyState' in params ? params.AutoSnapshotPolicyState : null;
+        this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
+        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.NextTriggerTime = 'NextTriggerTime' in params ? params.NextTriggerTime : null;
+
+        if (params.Policy) {
+            this.Policy = new Array();
+            for (let z in params.Policy) {
+                let obj = new Policy();
+                obj.deserialize(params.Policy[z]);
+                this.Policy.push(obj);
+            }
+        }
+        this.DiskIdSet = 'DiskIdSet' in params ? params.DiskIdSet : null;
 
     }
 }
@@ -2630,6 +2693,12 @@ class CreateDisksRequest extends  AbstractModel {
          */
         this.DeleteSnapshot = null;
 
+        /**
+         * When a cloud disk is created, automatically initialize it and attach it to the specified mount point
+         * @type {AutoMountConfiguration || null}
+         */
+        this.AutoMountConfiguration = null;
+
     }
 
     /**
@@ -2671,6 +2740,12 @@ class CreateDisksRequest extends  AbstractModel {
             this.DiskChargePrepaid = obj;
         }
         this.DeleteSnapshot = 'DeleteSnapshot' in params ? params.DeleteSnapshot : null;
+
+        if (params.AutoMountConfiguration) {
+            let obj = new AutoMountConfiguration();
+            obj.deserialize(params.AutoMountConfiguration)
+            this.AutoMountConfiguration = obj;
+        }
 
     }
 }
@@ -2803,48 +2878,30 @@ class DescribeDiskAssociatedAutoSnapshotPolicyRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAutoSnapshotPolicies request structure.
+ * DescribeDiskAssociatedAutoSnapshotPolicy response structure.
  * @class
  */
-class DescribeAutoSnapshotPoliciesRequest extends  AbstractModel {
+class DescribeDiskAssociatedAutoSnapshotPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of scheduled snapshot policy IDs to be queried. The parameter does not support specifying both `SnapshotIds` and `Filters`.
-         * @type {Array.<string> || null}
-         */
-        this.AutoSnapshotPolicyIds = null;
-
-        /**
-         * Filter conditions. Specification of both the `AutoSnapshotPolicyIds` and `Filters` parameters is not supported.<br><li>auto-snapshot-policy-id - Array of String - Required or not: No - (Filter condition) Filters according to the scheduled snapshot policy ID. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. <br><li>auto-snapshot-policy-state - Array of String - Required or not: No - (Filter condition) Filters according to the status of the scheduled snapshot policy. The format of the scheduled snapshot policy ID is as follows: `asp-11112222`. (NORMAL: normal | ISOLATED: isolated)<br><li>auto-snapshot-policy-name - Array of String - Required or not: No - (Filter condition) Filters according to the name of the scheduled snapshot policy.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Number of results to be returned. Default is 20. Maximum is 100. For more information on `Limit`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
+         * The quantity of scheduled snapshots binded to cloud disk.
          * @type {number || null}
          */
-        this.Limit = null;
+        this.TotalCount = null;
 
         /**
-         * Offset. Default is 0. For more information on `Offset`, please see relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/product/362/15633?from_cn_redirect=1).
-         * @type {number || null}
+         * List of scheduled snapshots bound to cloud disk.
+         * @type {Array.<AutoSnapshotPolicy> || null}
          */
-        this.Offset = null;
+        this.AutoSnapshotPolicySet = null;
 
         /**
-         * Outputs the ordering of the scheduled snapshot lists. Value range: <br><li>ASC: Ascending order <br><li>DESC: Descending order.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Order = null;
-
-        /**
-         * The sorting filter applied to the scheduled snapshot list. Value range: <Sort by creation time of scheduled snapshot. By default, this is sorted by creation time.
-         * @type {string || null}
-         */
-        this.OrderField = null;
+        this.RequestId = null;
 
     }
 
@@ -2855,20 +2912,17 @@ class DescribeAutoSnapshotPoliciesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoSnapshotPolicyIds = 'AutoSnapshotPolicyIds' in params ? params.AutoSnapshotPolicyIds : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.AutoSnapshotPolicySet) {
+            this.AutoSnapshotPolicySet = new Array();
+            for (let z in params.AutoSnapshotPolicySet) {
+                let obj = new AutoSnapshotPolicy();
+                obj.deserialize(params.AutoSnapshotPolicySet[z]);
+                this.AutoSnapshotPolicySet.push(obj);
             }
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Order = 'Order' in params ? params.Order : null;
-        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3879,6 +3933,18 @@ class ApplySnapshotRequest extends  AbstractModel {
          */
         this.DiskId = null;
 
+        /**
+         * Specifies whether to shut down a CVM automatically before a rollback
+         * @type {boolean || null}
+         */
+        this.AutoStopInstance = null;
+
+        /**
+         * Specifies whether to start up a CVM automatically after a rollback
+         * @type {boolean || null}
+         */
+        this.AutoStartInstance = null;
+
     }
 
     /**
@@ -3890,11 +3956,14 @@ class ApplySnapshotRequest extends  AbstractModel {
         }
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.AutoStopInstance = 'AutoStopInstance' in params ? params.AutoStopInstance : null;
+        this.AutoStartInstance = 'AutoStartInstance' in params ? params.AutoStartInstance : null;
 
     }
 }
 
 module.exports = {
+    AutoMountConfiguration: AutoMountConfiguration,
     DetachDisksRequest: DetachDisksRequest,
     DescribeDiskOperationLogsResponse: DescribeDiskOperationLogsResponse,
     ResizeDiskRequest: ResizeDiskRequest,
@@ -3906,7 +3975,7 @@ module.exports = {
     TerminateDisksRequest: TerminateDisksRequest,
     DescribeDisksRequest: DescribeDisksRequest,
     DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
-    AutoSnapshotPolicy: AutoSnapshotPolicy,
+    AttachDisksResponse: AttachDisksResponse,
     Policy: Policy,
     ModifySnapshotsSharePermissionResponse: ModifySnapshotsSharePermissionResponse,
     InquirePriceModifyDiskExtraPerformanceRequest: InquirePriceModifyDiskExtraPerformanceRequest,
@@ -3926,7 +3995,7 @@ module.exports = {
     DeleteAutoSnapshotPoliciesRequest: DeleteAutoSnapshotPoliciesRequest,
     DiskChargePrepaid: DiskChargePrepaid,
     DescribeSnapshotOperationLogsResponse: DescribeSnapshotOperationLogsResponse,
-    DescribeDiskAssociatedAutoSnapshotPolicyResponse: DescribeDiskAssociatedAutoSnapshotPolicyResponse,
+    DescribeAutoSnapshotPoliciesRequest: DescribeAutoSnapshotPoliciesRequest,
     TerminateDisksResponse: TerminateDisksResponse,
     GetSnapOverviewResponse: GetSnapOverviewResponse,
     ApplySnapshotResponse: ApplySnapshotResponse,
@@ -3942,7 +4011,7 @@ module.exports = {
     Snapshot: Snapshot,
     SnapshotOperationLog: SnapshotOperationLog,
     CreateDisksResponse: CreateDisksResponse,
-    AttachDisksResponse: AttachDisksResponse,
+    AutoSnapshotPolicy: AutoSnapshotPolicy,
     CreateAutoSnapshotPolicyResponse: CreateAutoSnapshotPolicyResponse,
     ModifySnapshotsSharePermissionRequest: ModifySnapshotsSharePermissionRequest,
     DiskOperationLog: DiskOperationLog,
@@ -3954,7 +4023,7 @@ module.exports = {
     AttachDisksRequest: AttachDisksRequest,
     DescribeAutoSnapshotPoliciesResponse: DescribeAutoSnapshotPoliciesResponse,
     DescribeDiskAssociatedAutoSnapshotPolicyRequest: DescribeDiskAssociatedAutoSnapshotPolicyRequest,
-    DescribeAutoSnapshotPoliciesRequest: DescribeAutoSnapshotPoliciesRequest,
+    DescribeDiskAssociatedAutoSnapshotPolicyResponse: DescribeDiskAssociatedAutoSnapshotPolicyResponse,
     Image: Image,
     DescribeDiskConfigQuotaResponse: DescribeDiskConfigQuotaResponse,
     ModifyDiskAttributesRequest: ModifyDiskAttributesRequest,

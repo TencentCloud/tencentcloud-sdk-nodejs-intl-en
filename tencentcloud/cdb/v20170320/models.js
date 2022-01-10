@@ -2613,6 +2613,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.RoGroupZone = null;
 
+        /**
+         * Replication delay.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DelayReplicationTime = null;
+
     }
 
     /**
@@ -2645,6 +2652,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
         this.RoGroupRegion = 'RoGroupRegion' in params ? params.RoGroupRegion : null;
         this.RoGroupZone = 'RoGroupZone' in params ? params.RoGroupZone : null;
+        this.DelayReplicationTime = 'DelayReplicationTime' in params ? params.DelayReplicationTime : null;
 
     }
 }
@@ -3369,42 +3377,6 @@ class CloneItem extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
-
-    }
-}
-
-/**
- * StartDelayReplication response structure.
- * @class
- */
-class StartDelayReplicationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Delayed replication task ID. This parameter will be returned if `DelayReplicationType` is not `DEFAULT`. It can be used to view the status of the delayed replication task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5658,6 +5630,42 @@ class DeleteAccountsResponse extends  AbstractModel {
 }
 
 /**
+ * StartReplication response structure.
+ * @class
+ */
+class StartReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CloseWanService request structure.
  * @class
  */
@@ -6172,6 +6180,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * StartReplication request structure.
+ * @class
+ */
+class StartReplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Read-Only instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeBackups response structure.
  * @class
  */
@@ -6217,6 +6253,55 @@ class DescribeBackupsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Multi-AZ information
+ * @class
+ */
+class ZoneConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
+         * @type {Array.<number> || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * AZ where the primary instance is located
+         * @type {Array.<string> || null}
+         */
+        this.MasterZone = null;
+
+        /**
+         * AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
+         * @type {Array.<string> || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
+         * @type {Array.<string> || null}
+         */
+        this.BackupZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
 
     }
 }
@@ -6476,6 +6561,42 @@ class DescribeTimeWindowResponse extends  AbstractModel {
         this.Friday = 'Friday' in params ? params.Friday : null;
         this.Saturday = 'Saturday' in params ? params.Saturday : null;
         this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopReplication response structure.
+ * @class
+ */
+class StopReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7006,41 +7127,6 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyRoReplicationDelay request structure.
- * @class
- */
-class ModifyRoReplicationDelayRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Replication delay in seconds. Value range: 1 to 259200.
-         * @type {number || null}
-         */
-        this.ReplicationDelay = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ReplicationDelay = 'ReplicationDelay' in params ? params.ReplicationDelay : null;
-
-    }
-}
-
-/**
  * StartBatchRollback request structure.
  * @class
  */
@@ -7163,36 +7249,18 @@ class SecurityGroup extends  AbstractModel {
 }
 
 /**
- * Multi-AZ information
+ * StopReplication request structure.
  * @class
  */
-class ZoneConf extends  AbstractModel {
+class StopReplicationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
-         * @type {Array.<number> || null}
+         * Read-Only instance ID.
+         * @type {string || null}
          */
-        this.DeployMode = null;
-
-        /**
-         * AZ where the primary instance is located
-         * @type {Array.<string> || null}
-         */
-        this.MasterZone = null;
-
-        /**
-         * AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
-         * @type {Array.<string> || null}
-         */
-        this.SlaveZone = null;
-
-        /**
-         * AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
-         * @type {Array.<string> || null}
-         */
-        this.BackupZone = null;
+        this.InstanceId = null;
 
     }
 
@@ -7203,10 +7271,7 @@ class ZoneConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
-        this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
-        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
-        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -9130,6 +9195,12 @@ class RoGroupAttr extends  AbstractModel {
          */
         this.WeightMode = null;
 
+        /**
+         * Replication delay.
+         * @type {number || null}
+         */
+        this.ReplicationDelayTime = null;
+
     }
 
     /**
@@ -9144,6 +9215,7 @@ class RoGroupAttr extends  AbstractModel {
         this.RoOfflineDelay = 'RoOfflineDelay' in params ? params.RoOfflineDelay : null;
         this.MinRoInGroup = 'MinRoInGroup' in params ? params.MinRoInGroup : null;
         this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
+        this.ReplicationDelayTime = 'ReplicationDelayTime' in params ? params.ReplicationDelayTime : null;
 
     }
 }
@@ -9564,6 +9636,18 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
          */
         this.MaxDelayTime = null;
 
+        /**
+         * Whether to migrate the source node across AZs. Valid values: `0` (no), `1`(yes). Default value: `0`. If it is `1`, you can modify the source node AZ.
+         * @type {number || null}
+         */
+        this.CrossCluster = null;
+
+        /**
+         * New AZ of the source node. This field is only valid when `CrossCluster` is `1`. Only migration across AZs in the same region is supported.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
     }
 
     /**
@@ -9587,6 +9671,8 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.FastUpgrade = 'FastUpgrade' in params ? params.FastUpgrade : null;
         this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
+        this.CrossCluster = 'CrossCluster' in params ? params.CrossCluster : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -10654,6 +10740,13 @@ class ModifyRoGroupInfoResponse extends  AbstractModel {
         super();
 
         /**
+         * Async task ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -10668,6 +10761,7 @@ class ModifyRoGroupInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11019,55 +11113,6 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
         this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
         this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
-
-    }
-}
-
-/**
- * StartDelayReplication request structure.
- * @class
- */
-class StartDelayReplicationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Delayed replication mode. Valid values: `DEFAULT` (replicate according to the specified replication delay), `GTID` (replicate according to the specified GTID), `DUE_TIME` (replicate according to the specified point in time).
-         * @type {string || null}
-         */
-        this.DelayReplicationType = null;
-
-        /**
-         * Specified point in time. Default value: 0. The maximum value cannot be later than the current time.
-         * @type {number || null}
-         */
-        this.DueTime = null;
-
-        /**
-         * Specified GITD. This parameter is required when the delayed replication mode is `GTID`.
-         * @type {string || null}
-         */
-        this.Gtid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DelayReplicationType = 'DelayReplicationType' in params ? params.DelayReplicationType : null;
-        this.DueTime = 'DueTime' in params ? params.DueTime : null;
-        this.Gtid = 'Gtid' in params ? params.Gtid : null;
 
     }
 }
@@ -11517,34 +11562,6 @@ class DescribeTagsOfInstanceIdsRequest extends  AbstractModel {
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * StopDelayReplication response structure.
- * @class
- */
-class StopDelayReplicationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12824,6 +12841,12 @@ class ModifyRoGroupInfoRequest extends  AbstractModel {
          */
         this.IsBalanceRoLoad = null;
 
+        /**
+         * This field has been deprecated.
+         * @type {number || null}
+         */
+        this.ReplicationDelayTime = null;
+
     }
 
     /**
@@ -12850,6 +12873,7 @@ class ModifyRoGroupInfoRequest extends  AbstractModel {
             }
         }
         this.IsBalanceRoLoad = 'IsBalanceRoLoad' in params ? params.IsBalanceRoLoad : null;
+        this.ReplicationDelayTime = 'ReplicationDelayTime' in params ? params.ReplicationDelayTime : null;
 
     }
 }
@@ -12975,34 +12999,6 @@ class OpenWanServiceResponse extends  AbstractModel {
 }
 
 /**
- * ModifyRoReplicationDelay response structure.
- * @class
- */
-class ModifyRoReplicationDelayResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyBackupConfig request structure.
  * @class
  */
@@ -13101,34 +13097,6 @@ class ModifyAccountPasswordResponse extends  AbstractModel {
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StopDelayReplication request structure.
- * @class
- */
-class StopDelayReplicationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -13379,7 +13347,6 @@ module.exports = {
     BinlogInfo: BinlogInfo,
     DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
     CloneItem: CloneItem,
-    StartDelayReplicationResponse: StartDelayReplicationResponse,
     DescribeTasksRequest: DescribeTasksRequest,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
@@ -13414,6 +13381,7 @@ module.exports = {
     ModifyInstanceTagRequest: ModifyInstanceTagRequest,
     DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
     DeleteAccountsResponse: DeleteAccountsResponse,
+    StartReplicationResponse: StartReplicationResponse,
     CloseWanServiceRequest: CloseWanServiceRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
@@ -13427,12 +13395,15 @@ module.exports = {
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
     DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
     RollbackTask: RollbackTask,
+    StartReplicationRequest: StartReplicationRequest,
     DescribeBackupsResponse: DescribeBackupsResponse,
+    ZoneConf: ZoneConf,
     CreateAuditPolicyRequest: CreateAuditPolicyRequest,
     CreateRoInstanceIpRequest: CreateRoInstanceIpRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     DescribeTimeWindowResponse: DescribeTimeWindowResponse,
+    StopReplicationResponse: StopReplicationResponse,
     BackupItem: BackupItem,
     SwitchDBInstanceMasterSlaveResponse: SwitchDBInstanceMasterSlaveResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
@@ -13445,10 +13416,9 @@ module.exports = {
     ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
-    ModifyRoReplicationDelayRequest: ModifyRoReplicationDelayRequest,
     StartBatchRollbackRequest: StartBatchRollbackRequest,
     SecurityGroup: SecurityGroup,
-    ZoneConf: ZoneConf,
+    StopReplicationRequest: StopReplicationRequest,
     BalanceRoGroupLoadResponse: BalanceRoGroupLoadResponse,
     DeviceNetInfo: DeviceNetInfo,
     SlaveInfo: SlaveInfo,
@@ -13521,7 +13491,6 @@ module.exports = {
     DeviceMemInfo: DeviceMemInfo,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
-    StartDelayReplicationRequest: StartDelayReplicationRequest,
     DeleteDeployGroupsRequest: DeleteDeployGroupsRequest,
     DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
     DatabasesWithCharacterLists: DatabasesWithCharacterLists,
@@ -13531,7 +13500,6 @@ module.exports = {
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
-    StopDelayReplicationResponse: StopDelayReplicationResponse,
     OpenWanServiceRequest: OpenWanServiceRequest,
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
@@ -13565,10 +13533,8 @@ module.exports = {
     ReleaseResult: ReleaseResult,
     ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
     OpenWanServiceResponse: OpenWanServiceResponse,
-    ModifyRoReplicationDelayResponse: ModifyRoReplicationDelayResponse,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
-    StopDelayReplicationRequest: StopDelayReplicationRequest,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,

@@ -3007,6 +3007,12 @@ class ClusterBasicSettings extends  AbstractModel {
          */
         this.NeedWorkSecurityGroup = null;
 
+        /**
+         * When the Cilium Overlay add-on is selected, TKE will take two IPs from the subnet to create the private network CLB.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -3033,6 +3039,7 @@ class ClusterBasicSettings extends  AbstractModel {
         }
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
         this.NeedWorkSecurityGroup = 'NeedWorkSecurityGroup' in params ? params.NeedWorkSecurityGroup : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -5267,7 +5274,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.InstanceAdvancedSettings = null;
 
         /**
-         * Configuration information of an existing instance
+         * The configuration information for existing instances. All instances must be in the same VPC. Up to 100 instances are allowed in one VPC. Spot instances are not supported.
          * @type {Array.<ExistedInstancesForNode> || null}
          */
         this.ExistedInstancesForNode = null;

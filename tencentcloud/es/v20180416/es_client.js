@@ -22,8 +22,10 @@ const LocalDiskInfo = models.LocalDiskInfo;
 const TaskDetail = models.TaskDetail;
 const NodeInfo = models.NodeInfo;
 const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
+const UpdateInstanceResponse = models.UpdateInstanceResponse;
 const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
 const OperationDetail = models.OperationDetail;
+const KibanaView = models.KibanaView;
 const EsPublicAcl = models.EsPublicAcl;
 const DictInfo = models.DictInfo;
 const RestartInstanceResponse = models.RestartInstanceResponse;
@@ -31,7 +33,7 @@ const RestartKibanaRequest = models.RestartKibanaRequest;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
 const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
-const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
+const NodeView = models.NodeView;
 const CosBackup = models.CosBackup;
 const TagInfo = models.TagInfo;
 const KeyValue = models.KeyValue;
@@ -58,11 +60,14 @@ const DeleteInstanceRequest = models.DeleteInstanceRequest;
 const SubTaskDetail = models.SubTaskDetail;
 const RestartNodesResponse = models.RestartNodesResponse;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
-const UpdateInstanceResponse = models.UpdateInstanceResponse;
+const ClusterView = models.ClusterView;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const DescribeViewsResponse = models.DescribeViewsResponse;
+const DescribeViewsRequest = models.DescribeViewsRequest;
 const GetRequestTargetNodeTypesResponse = models.GetRequestTargetNodeTypesResponse;
 const RestartKibanaResponse = models.RestartKibanaResponse;
 const Operation = models.Operation;
+const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
 
 
 /**
@@ -128,6 +133,17 @@ class EsClient extends AbstractClient {
     UpdatePlugins(req, cb) {
         let resp = new UpdatePluginsResponse();
         this.request("UpdatePlugins", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query view data from three dimensions: cluster, node, and Kibana.
+     * @param {DescribeViewsRequest} req
+     * @param {function(string, DescribeViewsResponse):void} cb
+     * @public
+     */
+    DescribeViews(req, cb) {
+        let resp = new DescribeViewsResponse();
+        this.request("DescribeViews", req, resp, cb);
     }
 
     /**

@@ -31,12 +31,6 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.SpecCode = null;
 
         /**
-         * PostgreSQL kernel version. Valid values: `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
-         * @type {string || null}
-         */
-        this.DBVersion = null;
-
-        /**
          * Instance capacity size in GB.
          * @type {number || null}
          */
@@ -65,6 +59,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.ProjectId = null;
+
+        /**
+         * PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
 
         /**
          * Instance billing type.
@@ -132,6 +132,18 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
+        /**
+         * PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
     }
 
     /**
@@ -142,12 +154,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
             return;
         }
         this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
@@ -167,6 +179,8 @@ class CreateDBInstancesRequest extends  AbstractModel {
             }
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
 
     }
 }
@@ -445,7 +459,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * PostgreSQL major version. Valid values: `9.3`, `9.5`, `10`, `11`, `12`, `13`, `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
+         * PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -517,16 +531,22 @@ class CreateInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * 
+         * PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
          * @type {string || null}
          */
         this.DBMajorVersion = null;
 
         /**
-         * 
+         * PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
          * @type {string || null}
          */
         this.DBKernelVersion = null;
+
+        /**
+         * 
+         * @type {Array.<DBNode> || null}
+         */
+        this.DBNodeSet = null;
 
     }
 
@@ -569,6 +589,15 @@ class CreateInstancesRequest extends  AbstractModel {
         this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
         this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
 
+        if (params.DBNodeSet) {
+            this.DBNodeSet = new Array();
+            for (let z in params.DBNodeSet) {
+                let obj = new DBNode();
+                obj.deserialize(params.DBNodeSet[z]);
+                this.DBNodeSet.push(obj);
+            }
+        }
+
     }
 }
 
@@ -587,7 +616,7 @@ class SpecItemInfo extends  AbstractModel {
         this.SpecCode = null;
 
         /**
-         * PostgreSQL kernel version number
+         * PostgerSQL version number
          * @type {string || null}
          */
         this.Version = null;
@@ -640,6 +669,20 @@ class SpecItemInfo extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * PostgreSQL major version number
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MajorVersion = null;
+
+        /**
+         * PostgreSQL kernel version number
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KernelVersion = null;
+
     }
 
     /**
@@ -659,6 +702,8 @@ class SpecItemInfo extends  AbstractModel {
         this.Qps = 'Qps' in params ? params.Qps : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.MajorVersion = 'MajorVersion' in params ? params.MajorVersion : null;
+        this.KernelVersion = 'KernelVersion' in params ? params.KernelVersion : null;
 
     }
 }
@@ -3551,6 +3596,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DBKernelVersion = null;
 
+        /**
+         * Database major version number
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
     }
 
     /**
@@ -3600,6 +3652,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
 
     }
 }
@@ -4670,7 +4723,7 @@ class DBInstance extends  AbstractModel {
         this.DBCharset = null;
 
         /**
-         * PostgreSQL major version
+         * PostgreSQL version number
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -4791,10 +4844,17 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.NetworkAccessList = null;
 
         /**
-         * 
+         * PostgreSQL major version number
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DBMajorVersion = null;
+
+        /**
+         * 
+         * @type {Array.<DBNode> || null}
+         */
+        this.DBNodeSet = null;
 
     }
 
@@ -4864,6 +4924,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
+
+        if (params.DBNodeSet) {
+            this.DBNodeSet = new Array();
+            for (let z in params.DBNodeSet) {
+                let obj = new DBNode();
+                obj.deserialize(params.DBNodeSet[z]);
+                this.DBNodeSet.push(obj);
+            }
+        }
 
     }
 }
@@ -5211,6 +5280,41 @@ class RemoveDBInstanceFromReadOnlyGroupRequest extends  AbstractModel {
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DBNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -7333,6 +7437,7 @@ module.exports = {
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     SlowlogDetail: SlowlogDetail,
     RemoveDBInstanceFromReadOnlyGroupRequest: RemoveDBInstanceFromReadOnlyGroupRequest,
+    DBNode: DBNode,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     CreateReadOnlyDBInstanceRequest: CreateReadOnlyDBInstanceRequest,

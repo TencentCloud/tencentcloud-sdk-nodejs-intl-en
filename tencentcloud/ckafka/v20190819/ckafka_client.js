@@ -23,7 +23,7 @@ const BatchCreateAclRequest = models.BatchCreateAclRequest;
 const DeleteUserRequest = models.DeleteUserRequest;
 const PartitionOffset = models.PartitionOffset;
 const DescribeACLRequest = models.DescribeACLRequest;
-const DescribeTopicSyncReplicaResponse = models.DescribeTopicSyncReplicaResponse;
+const BatchModifyTopicResultDTO = models.BatchModifyTopicResultDTO;
 const DescribeTopicAttributesRequest = models.DescribeTopicAttributesRequest;
 const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
 const ConsumerGroup = models.ConsumerGroup;
@@ -32,6 +32,7 @@ const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
 const DeleteTopicRequest = models.DeleteTopicRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
+const BatchModifyTopicAttributesResponse = models.BatchModifyTopicAttributesResponse;
 const GroupInfoTopics = models.GroupInfoTopics;
 const TopicResult = models.TopicResult;
 const Region = models.Region;
@@ -46,6 +47,7 @@ const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
 const SaleInfo = models.SaleInfo;
 const Topic = models.Topic;
 const Tag = models.Tag;
+const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
 const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
@@ -59,7 +61,9 @@ const CreatePartitionResponse = models.CreatePartitionResponse;
 const ClusterInfo = models.ClusterInfo;
 const DeleteUserResponse = models.DeleteUserResponse;
 const CreateAclRequest = models.CreateAclRequest;
+const DescribeTopicSyncReplicaResponse = models.DescribeTopicSyncReplicaResponse;
 const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
+const Partitions = models.Partitions;
 const DescribeTopicResponse = models.DescribeTopicResponse;
 const ConsumerGroupResponse = models.ConsumerGroupResponse;
 const CreateTopicIpWhiteListResponse = models.CreateTopicIpWhiteListResponse;
@@ -105,7 +109,7 @@ const GroupOffsetPartition = models.GroupOffsetPartition;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
-const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
+const DescribeGroupRequest = models.DescribeGroupRequest;
 const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
 const BatchCreateAclResponse = models.BatchCreateAclResponse;
@@ -116,16 +120,20 @@ const ModifyPasswordResponse = models.ModifyPasswordResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const GroupInfoResponse = models.GroupInfoResponse;
+const BatchModifyGroupOffsetsRequest = models.BatchModifyGroupOffsetsRequest;
 const TopicAttributesResponse = models.TopicAttributesResponse;
 const InstanceResponse = models.InstanceResponse;
 const DescribeGroup = models.DescribeGroup;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
+const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
+const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const DescribeRouteResponse = models.DescribeRouteResponse;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
 const ConsumerRecord = models.ConsumerRecord;
 const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
+const BatchModifyTopicAttributesRequest = models.BatchModifyTopicAttributesRequest;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
 const Route = models.Route;
 const AclRuleInfo = models.AclRuleInfo;
@@ -133,7 +141,6 @@ const Acl = models.Acl;
 const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
-const DescribeGroupRequest = models.DescribeGroupRequest;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
@@ -196,6 +203,17 @@ class CkafkaClient extends AbstractClient {
     DescribeTopicSubscribeGroup(req, cb) {
         let resp = new DescribeTopicSubscribeGroupResponse();
         this.request("DescribeTopicSubscribeGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch set topic attributes.
+     * @param {BatchModifyTopicAttributesRequest} req
+     * @param {function(string, BatchModifyTopicAttributesResponse):void} cb
+     * @public
+     */
+    BatchModifyTopicAttributes(req, cb) {
+        let resp = new BatchModifyTopicAttributesResponse();
+        this.request("BatchModifyTopicAttributes", req, resp, cb);
     }
 
     /**
@@ -364,6 +382,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete a user.
+     * @param {DeleteUserRequest} req
+     * @param {function(string, DeleteUserResponse):void} cb
+     * @public
+     */
+    DeleteUser(req, cb) {
+        let resp = new DeleteUserResponse();
+        this.request("DeleteUser", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an ACL.
      * @param {DeleteAclRequest} req
      * @param {function(string, DeleteAclResponse):void} cb
@@ -398,7 +427,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get instance attributes.
+     * This API is used to get instance attributes. 
      * @param {DescribeInstanceAttributesRequest} req
      * @param {function(string, DescribeInstanceAttributesResponse):void} cb
      * @public
@@ -442,14 +471,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a user.
-     * @param {DeleteUserRequest} req
-     * @param {function(string, DeleteUserResponse):void} cb
+     * This API is used to batch modify consumer group offsets.
+     * @param {BatchModifyGroupOffsetsRequest} req
+     * @param {function(string, BatchModifyGroupOffsetsResponse):void} cb
      * @public
      */
-    DeleteUser(req, cb) {
-        let resp = new DeleteUserResponse();
-        this.request("DeleteUser", req, resp, cb);
+    BatchModifyGroupOffsets(req, cb) {
+        let resp = new BatchModifyGroupOffsetsResponse();
+        this.request("BatchModifyGroupOffsets", req, resp, cb);
     }
 
     /**

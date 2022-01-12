@@ -107,6 +107,7 @@ const ModifyDBInstanceParametersResponse = models.ModifyDBInstanceParametersResp
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const SlowlogDetail = models.SlowlogDetail;
 const RemoveDBInstanceFromReadOnlyGroupRequest = models.RemoveDBInstanceFromReadOnlyGroupRequest;
+const DBNode = models.DBNode;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const CreateReadOnlyDBInstanceRequest = models.CreateReadOnlyDBInstanceRequest;

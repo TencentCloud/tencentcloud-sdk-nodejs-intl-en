@@ -467,24 +467,39 @@ class DescribeACLRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTopicSyncReplica response structure.
+ * Results of the batch modified topic attributes
  * @class
  */
-class DescribeTopicSyncReplicaResponse extends  AbstractModel {
+class BatchModifyTopicResultDTO extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returns topic replica details
-         * @type {TopicInSyncReplicaResult || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Topic name.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Status code.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * Message status.
+         * @type {string || null}
+         */
+        this.Message = null;
 
     }
 
@@ -495,13 +510,10 @@ class DescribeTopicSyncReplicaResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new TopicInSyncReplicaResult();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -805,6 +817,49 @@ class FetchMessageByOffsetResponse extends  AbstractModel {
             let obj = new ConsumerRecord();
             obj.deserialize(params.Result)
             this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * BatchModifyTopicAttributes response structure.
+ * @class
+ */
+class BatchModifyTopicAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result.
+         * @type {Array.<BatchModifyTopicResultDTO> || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new BatchModifyTopicResultDTO();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1180,7 +1235,7 @@ class DescribeACLResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Dynamic disk expansion configuration
  * @class
  */
 class DynamicDiskConfig extends  AbstractModel {
@@ -1188,25 +1243,29 @@ class DynamicDiskConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable dynamic disk expansion configuration. `0`: disable, `1`: enable.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Enable = null;
 
         /**
-         * 
+         * Percentage of dynamic disk expansion each time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StepForwardPercentage = null;
 
         /**
-         * 
+         * Disk quota threshold (in percentage) for triggering the automatic disk expansion event.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DiskQuotaPercentage = null;
 
         /**
-         * 
+         * Max disk space in GB.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxDiskSpace = null;
@@ -1557,6 +1616,46 @@ class Tag extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * BatchModifyGroupOffsets response structure.
+ * @class
+ */
+class BatchModifyGroupOffsetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result.
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2143,6 +2242,46 @@ class CreateAclRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTopicSyncReplica response structure.
+ * @class
+ */
+class DescribeTopicSyncReplicaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returns topic replica details
+         * @type {TopicInSyncReplicaResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TopicInSyncReplicaResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAppInfo request structure.
  * @class
  */
@@ -2173,6 +2312,41 @@ class DescribeAppInfoRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Partition information
+ * @class
+ */
+class Partitions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Partition.
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Partition consumption offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2632,6 +2806,12 @@ class CreateTopicRequest extends  AbstractModel {
          */
         this.RetentionBytes = null;
 
+        /**
+         * Tag list.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2656,6 +2836,15 @@ class CreateTopicRequest extends  AbstractModel {
         this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
         this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
         this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -3609,6 +3798,20 @@ Note: `null` may be returned for this field, indicating that no valid values can
          */
         this.Physical = null;
 
+        /**
+         * Public network bandwidth.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicNetwork = null;
+
+        /**
+         * Public network bandwidth configuration.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicNetworkLimit = null;
+
     }
 
     /**
@@ -3654,6 +3857,8 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.StandardS2 = 'StandardS2' in params ? params.StandardS2 : null;
         this.Profession = 'Profession' in params ? params.Profession : null;
         this.Physical = 'Physical' in params ? params.Physical : null;
+        this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
+        this.PublicNetworkLimit = 'PublicNetworkLimit' in params ? params.PublicNetworkLimit : null;
 
     }
 }
@@ -4036,6 +4241,12 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
          */
         this.PublicNetwork = null;
 
+        /**
+         * Dynamic disk expansion policy configuration.
+         * @type {DynamicDiskConfig || null}
+         */
+        this.DynamicDiskConfig = null;
+
     }
 
     /**
@@ -4062,6 +4273,12 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         }
         this.RebalanceTime = 'RebalanceTime' in params ? params.RebalanceTime : null;
         this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
+
+        if (params.DynamicDiskConfig) {
+            let obj = new DynamicDiskConfig();
+            obj.deserialize(params.DynamicDiskConfig)
+            this.DynamicDiskConfig = obj;
+        }
 
     }
 }
@@ -4679,7 +4896,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.RemainingTopics = null;
 
         /**
-         * 
+         * Dynamic disk expansion policy.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {DynamicDiskConfig || null}
          */
         this.DynamicDiskConfig = null;
@@ -4764,24 +4982,36 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeCkafkaZone response structure.
+ * DescribeGroup request structure.
  * @class
  */
-class DescribeCkafkaZoneResponse extends  AbstractModel {
+class DescribeGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned results for the query
-         * @type {ZoneResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Search keyword
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of results to be returned
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -4792,13 +5022,10 @@ class DescribeCkafkaZoneResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new ZoneResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5270,6 +5497,63 @@ Stable: each consumer in the consumer group has joined and is in stable state
 }
 
 /**
+ * BatchModifyGroupOffsets request structure.
+ * @class
+ */
+class BatchModifyGroupOffsetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Consumer group name.
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Partition information.
+         * @type {Array.<Partitions> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * Name of the specified topic. Default value: names of all topics.
+         * @type {Array.<string> || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new Partitions();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
  * Returned topic attributes result entity
  * @class
  */
@@ -5537,6 +5821,144 @@ class CreateTopicResp extends  AbstractModel {
             return;
         }
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
+ * Topic parameters that can be modified in batches
+ * @class
+ */
+class BatchModifyTopicInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * The number of partitions.
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * Number of replicas.
+         * @type {number || null}
+         */
+        this.ReplicaNum = null;
+
+        /**
+         * Message deletion policy. Valid values: `delete`, `compact`.
+         * @type {string || null}
+         */
+        this.CleanUpPolicy = null;
+
+        /**
+         * The minimum number of replicas specified by `min.insync.replicas` when the producer sets `request.required.acks` to `-1`.
+         * @type {number || null}
+         */
+        this.MinInsyncReplicas = null;
+
+        /**
+         * Whether to allow a non-ISR replica to be the leader.
+         * @type {boolean || null}
+         */
+        this.UncleanLeaderElectionEnable = null;
+
+        /**
+         * Message retention period in topic dimension in milliseconds. Value range: 1 minute to 90 days.
+         * @type {number || null}
+         */
+        this.RetentionMs = null;
+
+        /**
+         * Message retention size in topic dimension. Value range: 1 MB - 1024 GB.
+         * @type {number || null}
+         */
+        this.RetentionBytes = null;
+
+        /**
+         * Segment rolling duration in milliseconds. Value range: 1-90 days.
+         * @type {number || null}
+         */
+        this.SegmentMs = null;
+
+        /**
+         * Message size per batch. Value range: 1 KB - 12 MB.
+         * @type {number || null}
+         */
+        this.MaxMessageBytes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.Note = 'Note' in params ? params.Note : null;
+        this.ReplicaNum = 'ReplicaNum' in params ? params.ReplicaNum : null;
+        this.CleanUpPolicy = 'CleanUpPolicy' in params ? params.CleanUpPolicy : null;
+        this.MinInsyncReplicas = 'MinInsyncReplicas' in params ? params.MinInsyncReplicas : null;
+        this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
+        this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
+        this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
+        this.SegmentMs = 'SegmentMs' in params ? params.SegmentMs : null;
+        this.MaxMessageBytes = 'MaxMessageBytes' in params ? params.MaxMessageBytes : null;
+
+    }
+}
+
+/**
+ * DescribeCkafkaZone response structure.
+ * @class
+ */
+class DescribeCkafkaZoneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned results for the query
+         * @type {ZoneResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ZoneResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5816,6 +6238,49 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
         this.ShiftTimestamp = 'ShiftTimestamp' in params ? params.ShiftTimestamp : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Partitions = 'Partitions' in params ? params.Partitions : null;
+
+    }
+}
+
+/**
+ * BatchModifyTopicAttributes request structure.
+ * @class
+ */
+class BatchModifyTopicAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Topic attribute list
+         * @type {Array.<BatchModifyTopicInfo> || null}
+         */
+        this.Topic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Topic) {
+            this.Topic = new Array();
+            for (let z in params.Topic) {
+                let obj = new BatchModifyTopicInfo();
+                obj.deserialize(params.Topic[z]);
+                this.Topic.push(obj);
+            }
+        }
 
     }
 }
@@ -6198,6 +6663,12 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
          */
         this.RetentionBytes = null;
 
+        /**
+         * Tag list.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6221,6 +6692,15 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
         this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
         this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -6261,55 +6741,6 @@ class CreateTopicResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeGroup request structure.
- * @class
- */
-class DescribeGroupRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Search keyword
-         * @type {string || null}
-         */
-        this.SearchWord = null;
-
-        /**
-         * Offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number of results to be returned
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -6901,7 +7332,7 @@ module.exports = {
     DeleteUserRequest: DeleteUserRequest,
     PartitionOffset: PartitionOffset,
     DescribeACLRequest: DescribeACLRequest,
-    DescribeTopicSyncReplicaResponse: DescribeTopicSyncReplicaResponse,
+    BatchModifyTopicResultDTO: BatchModifyTopicResultDTO,
     DescribeTopicAttributesRequest: DescribeTopicAttributesRequest,
     DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
     ConsumerGroup: ConsumerGroup,
@@ -6910,6 +7341,7 @@ module.exports = {
     DeleteTopicRequest: DeleteTopicRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
+    BatchModifyTopicAttributesResponse: BatchModifyTopicAttributesResponse,
     GroupInfoTopics: GroupInfoTopics,
     TopicResult: TopicResult,
     Region: Region,
@@ -6924,6 +7356,7 @@ module.exports = {
     SaleInfo: SaleInfo,
     Topic: Topic,
     Tag: Tag,
+    BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     GroupResponse: GroupResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
     DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
@@ -6937,7 +7370,9 @@ module.exports = {
     ClusterInfo: ClusterInfo,
     DeleteUserResponse: DeleteUserResponse,
     CreateAclRequest: CreateAclRequest,
+    DescribeTopicSyncReplicaResponse: DescribeTopicSyncReplicaResponse,
     DescribeAppInfoRequest: DescribeAppInfoRequest,
+    Partitions: Partitions,
     DescribeTopicResponse: DescribeTopicResponse,
     ConsumerGroupResponse: ConsumerGroupResponse,
     CreateTopicIpWhiteListResponse: CreateTopicIpWhiteListResponse,
@@ -6983,7 +7418,7 @@ module.exports = {
     DeleteTopicResponse: DeleteTopicResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
-    DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
+    DescribeGroupRequest: DescribeGroupRequest,
     Filter: Filter,
     GroupOffsetResponse: GroupOffsetResponse,
     BatchCreateAclResponse: BatchCreateAclResponse,
@@ -6994,16 +7429,20 @@ module.exports = {
     DescribeRouteRequest: DescribeRouteRequest,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     GroupInfoResponse: GroupInfoResponse,
+    BatchModifyGroupOffsetsRequest: BatchModifyGroupOffsetsRequest,
     TopicAttributesResponse: TopicAttributesResponse,
     InstanceResponse: InstanceResponse,
     DescribeGroup: DescribeGroup,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
+    BatchModifyTopicInfo: BatchModifyTopicInfo,
+    DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     DescribeRouteResponse: DescribeRouteResponse,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
     ConsumerRecord: ConsumerRecord,
     ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
+    BatchModifyTopicAttributesRequest: BatchModifyTopicAttributesRequest,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
     Route: Route,
     AclRuleInfo: AclRuleInfo,
@@ -7011,7 +7450,6 @@ module.exports = {
     TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,
-    DescribeGroupRequest: DescribeGroupRequest,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
     DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DescribeUserRequest: DescribeUserRequest,

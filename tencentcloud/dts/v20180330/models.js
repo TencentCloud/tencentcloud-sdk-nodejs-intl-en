@@ -17,56 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeSyncJobs response structure.
- * @class
- */
-class DescribeSyncJobsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of tasks
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Array of task details
-         * @type {Array.<SyncJobInfo> || null}
-         */
-        this.JobList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.JobList) {
-            this.JobList = new Array();
-            for (let z in params.JobList) {
-                let obj = new SyncJobInfo();
-                obj.deserialize(params.JobList[z]);
-                this.JobList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeMigrateJobs response structure.
  * @class
  */
@@ -117,54 +67,43 @@ class DescribeMigrateJobsResponse extends  AbstractModel {
 }
 
 /**
- * Describes the specific migration process
+ * Information of steps in migration
  * @class
  */
-class MigrateDetailInfo extends  AbstractModel {
+class MigrateStepDetailInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of steps
+         * Step number
          * @type {number || null}
          */
-        this.StepAll = null;
+        this.StepNo = null;
 
         /**
-         * Current step
-         * @type {number || null}
-         */
-        this.StepNow = null;
-
-        /**
-         * Overall progress, such as "10"
+         * Step name
          * @type {string || null}
          */
-        this.Progress = null;
+        this.StepName = null;
 
         /**
-         * Progress of current step, such as "1"
+         * Step ID
          * @type {string || null}
          */
-        this.CurrentStepProgress = null;
+        this.StepId = null;
 
         /**
-         * Master/slave lag in MB, which is valid during incremental sync and currently supported by TencentDB for Redis and MySQL
+         * Step status. Value range: 0 (default), 1 (succeeded), 2 (failed), 3 (in progress), 4 (not started)
          * @type {number || null}
          */
-        this.MasterSlaveDistance = null;
+        this.Status = null;
 
         /**
-         * Master/slave lag in seconds, which is valid during incremental sync and currently supported by TencentDB for MySQL
-         * @type {number || null}
+         * Start time of current step in the format of `yyyy-mm-dd hh:mm:ss`. This field is meaningless if it does not exist or is empty
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.SecondsBehindMaster = null;
-
-        /**
-         * Step information
-         * @type {Array.<MigrateStepDetailInfo> || null}
-         */
-        this.StepInfo = null;
+        this.StartTime = null;
 
     }
 
@@ -175,21 +114,11 @@ class MigrateDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepAll = 'StepAll' in params ? params.StepAll : null;
-        this.StepNow = 'StepNow' in params ? params.StepNow : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.CurrentStepProgress = 'CurrentStepProgress' in params ? params.CurrentStepProgress : null;
-        this.MasterSlaveDistance = 'MasterSlaveDistance' in params ? params.MasterSlaveDistance : null;
-        this.SecondsBehindMaster = 'SecondsBehindMaster' in params ? params.SecondsBehindMaster : null;
-
-        if (params.StepInfo) {
-            this.StepInfo = new Array();
-            for (let z in params.StepInfo) {
-                let obj = new MigrateStepDetailInfo();
-                obj.deserialize(params.StepInfo[z]);
-                this.StepInfo.push(obj);
-            }
-        }
+        this.StepNo = 'StepNo' in params ? params.StepNo : null;
+        this.StepName = 'StepName' in params ? params.StepName : null;
+        this.StepId = 'StepId' in params ? params.StepId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
 
     }
 }
@@ -300,41 +229,6 @@ class ModifySubscribeVipVportRequest extends  AbstractModel {
 }
 
 /**
- * Instance information of disaster recovery sync, which records the information of the master instance or disaster recovery instance
- * @class
- */
-class SyncInstanceInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Region name, such as ap-guangzhou
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * Short instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
  * ModifySubscribeName response structure.
  * @class
  */
@@ -357,41 +251,6 @@ class ModifySubscribeNameResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateSyncJob response structure.
- * @class
- */
-class CreateSyncJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Disaster recovery sync task ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -489,74 +348,6 @@ class ModifySubscribeObjectsResponse extends  AbstractModel {
 }
 
 /**
- * SwitchDrToMaster request structure.
- * @class
- */
-class SwitchDrToMasterRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Disaster recovery instance information
-         * @type {SyncInstanceInfo || null}
-         */
-        this.DstInfo = null;
-
-        /**
-         * Database type (such as MySQL)
-         * @type {string || null}
-         */
-        this.DatabaseType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DstInfo) {
-            let obj = new SyncInstanceInfo();
-            obj.deserialize(params.DstInfo)
-            this.DstInfo = obj;
-        }
-        this.DatabaseType = 'DatabaseType' in params ? params.DatabaseType : null;
-
-    }
-}
-
-/**
- * StartSyncJob request structure.
- * @class
- */
-class StartSyncJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Disaster recovery sync task ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-
-    }
-}
-
-/**
  * CreateMigrateJob request structure.
  * @class
  */
@@ -577,7 +368,7 @@ class CreateMigrateJobRequest extends  AbstractModel {
         this.MigrateOption = null;
 
         /**
-         * Source instance database type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, and Percona. For more information on the supported types in a specific region, see the migration task creation page in the console.
+         * Source instance database type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, Percona, and SQL Server. For more information on the supported types in a specific region, see the migration task creation page in the console.
          * @type {string || null}
          */
         this.SrcDatabaseType = null;
@@ -595,7 +386,7 @@ class CreateMigrateJobRequest extends  AbstractModel {
         this.SrcInfo = null;
 
         /**
-         * Target instance access type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, and Percona. For more information on the supported types in a specific region, see the migration task creation page in the console.
+         * Target instance access type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, and Percona, SQL Server, and TDSQL-C for MySQL. For more information on the supported types in a specific region, see the migration task creation page in the console.
          * @type {string || null}
          */
         this.DstDatabaseType = null;
@@ -615,16 +406,18 @@ class CreateMigrateJobRequest extends  AbstractModel {
         /**
          * Information of the source table to be migrated, which is described in JSON string format. It is required if MigrateOption.MigrateObject is 2 (migrating the specified table).
 For databases with a database-table structure:
-[{Database:db1,Table:[table1,table2]},{Database:db2}]
+[{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
 For databases with a database-schema-table structure:
-[{Database:db1,Schema:s1
-Table:[table1,table2]},{Database:db1,Schema:s2
-Table:[table1,table2]},{Database:db2,Schema:s1
-Table:[table1,table2]},{Database:db3},{Database:db4
-Schema:s1}]
+[{"Database":"db1","Schema":"s1","Table":["table1","table2"]},{"Database":"db1","Schema":"s2","Table":["table1","table2"]},{"Database":"db2","Schema":"s1","Table":["table1","table2"]},{"Database":"db3"},{"Database":"db4","Schema":"s1"}]
          * @type {string || null}
          */
         this.DatabaseInfo = null;
+
+        /**
+         * Tag of the instance to be migrated.
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -660,163 +453,60 @@ Schema:s1}]
         }
         this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
 
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * Subscription instance information
+ * Sale information of data subscription region
  * @class
  */
-class SubscribeInfo extends  AbstractModel {
+class SubscribeRegionConf extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data subscription instance ID
+         * Region name, such as Guangzhou
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.SubscribeId = null;
+        this.RegionName = null;
 
         /**
-         * Data subscription instance name
-         * @type {string || null}
-         */
-        this.SubscribeName = null;
-
-        /**
-         * ID of channel bound to data subscription instance
-         * @type {string || null}
-         */
-        this.ChannelId = null;
-
-        /**
-         * Name of product bound to data subscription instance
-         * @type {string || null}
-         */
-        this.Product = null;
-
-        /**
-         * ID of database instance bound to data subscription instance
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Status of database instance bound to data subscription instance
-         * @type {string || null}
-         */
-        this.InstanceStatus = null;
-
-        /**
-         * Data subscription instance configuration status. Valid values: unconfigure, configuring, configured
-         * @type {string || null}
-         */
-        this.SubsStatus = null;
-
-        /**
-         * Last modified time
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Isolation time
-         * @type {string || null}
-         */
-        this.IsolateTime = null;
-
-        /**
-         * Expiration time
-         * @type {string || null}
-         */
-        this.ExpireTime = null;
-
-        /**
-         * Deactivation time
-         * @type {string || null}
-         */
-        this.OfflineTime = null;
-
-        /**
-         * Last modified consumption starting time point. If it has never been modified, this field is 0
-         * @type {string || null}
-         */
-        this.ConsumeStartTime = null;
-
-        /**
-         * Data subscription instance region
+         * Region ID, such as ap-guangzhou
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Billing mode. 1: pay-as-you-go
+         * Region name, such as South China
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Whether it is the default region. 0: no, 1: yes
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.PayType = null;
+        this.IsDefaultRegion = null;
 
         /**
-         * Data subscription instance VIP
-         * @type {string || null}
-         */
-        this.Vip = null;
-
-        /**
-         * Data subscription instance Vport
+         * Purchasable status of current region. 1: normal, 2: beta test, 3: not purchasable
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
-         */
-        this.Vport = null;
-
-        /**
-         * Unique ID of the VPC where the data subscription instance VIP resides
-         * @type {string || null}
-         */
-        this.UniqVpcId = null;
-
-        /**
-         * Unique ID of the subnet where the data subscription instance VIP resides
-         * @type {string || null}
-         */
-        this.UniqSubnetId = null;
-
-        /**
-         * Data subscription instance status. Valid values: creating, normal, isolating, isolated, offlining, offline
-         * @type {string || null}
          */
         this.Status = null;
-
-        /**
-         * Timestamp of the last message confirmed by the SDK. If the SDK keeps consuming, this field can also be used as the current consumption time point of the SDK
-         * @type {string || null}
-         */
-        this.SdkConsumedTime = null;
-
-        /**
-         * Tag
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<TagItem> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Whether auto-renewal is enabled. 0: do not enable; 1: enable
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AutoRenewFlag = null;
-
-        /**
-         * Subscription instance edition. ·`txdts`: legacy data subscription; `kafka`: data subscription in Kafka edition
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubscribeVersion = null;
 
     }
 
@@ -827,38 +517,11 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
-        this.SubscribeName = 'SubscribeName' in params ? params.SubscribeName : null;
-        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
-        this.Product = 'Product' in params ? params.Product : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
-        this.SubsStatus = 'SubsStatus' in params ? params.SubsStatus : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
-        this.ConsumeStartTime = 'ConsumeStartTime' in params ? params.ConsumeStartTime : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.Region = 'Region' in params ? params.Region : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.Vport = 'Vport' in params ? params.Vport : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.IsDefaultRegion = 'IsDefaultRegion' in params ? params.IsDefaultRegion : null;
         this.Status = 'Status' in params ? params.Status : null;
-        this.SdkConsumedTime = 'SdkConsumedTime' in params ? params.SdkConsumedTime : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new TagItem();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.SubscribeVersion = 'SubscribeVersion' in params ? params.SubscribeVersion : null;
 
     }
 }
@@ -894,152 +557,6 @@ class ModifySubscribeNameRequest extends  AbstractModel {
         }
         this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
         this.SubscribeName = 'SubscribeName' in params ? params.SubscribeName : null;
-
-    }
-}
-
-/**
- * Disaster recovery sync task information
- * @class
- */
-class SyncJobInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Disaster recovery task ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * Disaster recovery task name
-         * @type {string || null}
-         */
-        this.JobName = null;
-
-        /**
-         * Task sync
-         * @type {SyncOption || null}
-         */
-        this.SyncOption = null;
-
-        /**
-         * Source access type
-         * @type {string || null}
-         */
-        this.SrcAccessType = null;
-
-        /**
-         * Source data type
-         * @type {string || null}
-         */
-        this.SrcDatabaseType = null;
-
-        /**
-         * Source instance information
-         * @type {SyncInstanceInfo || null}
-         */
-        this.SrcInfo = null;
-
-        /**
-         * Disaster recovery access type
-         * @type {string || null}
-         */
-        this.DstAccessType = null;
-
-        /**
-         * Disaster recovery data type
-         * @type {string || null}
-         */
-        this.DstDatabaseType = null;
-
-        /**
-         * Disaster recovery instance information
-         * @type {SyncInstanceInfo || null}
-         */
-        this.DstInfo = null;
-
-        /**
-         * Task information
-         * @type {SyncDetailInfo || null}
-         */
-        this.Detail = null;
-
-        /**
-         * Task status
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Table to be migrated
-         * @type {string || null}
-         */
-        this.DatabaseInfo = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.JobName = 'JobName' in params ? params.JobName : null;
-
-        if (params.SyncOption) {
-            let obj = new SyncOption();
-            obj.deserialize(params.SyncOption)
-            this.SyncOption = obj;
-        }
-        this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
-        this.SrcDatabaseType = 'SrcDatabaseType' in params ? params.SrcDatabaseType : null;
-
-        if (params.SrcInfo) {
-            let obj = new SyncInstanceInfo();
-            obj.deserialize(params.SrcInfo)
-            this.SrcInfo = obj;
-        }
-        this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
-        this.DstDatabaseType = 'DstDatabaseType' in params ? params.DstDatabaseType : null;
-
-        if (params.DstInfo) {
-            let obj = new SyncInstanceInfo();
-            obj.deserialize(params.DstInfo)
-            this.DstInfo = obj;
-        }
-
-        if (params.Detail) {
-            let obj = new SyncDetailInfo();
-            obj.deserialize(params.Detail)
-            this.Detail = obj;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1773,63 +1290,6 @@ class CreateMigrateCheckJobResponse extends  AbstractModel {
 }
 
 /**
- * Information of steps in migration
- * @class
- */
-class MigrateStepDetailInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Step number
-         * @type {number || null}
-         */
-        this.StepNo = null;
-
-        /**
-         * Step name
-         * @type {string || null}
-         */
-        this.StepName = null;
-
-        /**
-         * Step ID
-         * @type {string || null}
-         */
-        this.StepId = null;
-
-        /**
-         * Step status. Value range: 0 (default), 1 (succeeded), 2 (failed), 3 (in progress), 4 (not started)
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Start time of current step in the format of `yyyy-mm-dd hh:mm:ss`. This field is meaningless if it does not exist or is empty
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StepNo = 'StepNo' in params ? params.StepNo : null;
-        this.StepName = 'StepName' in params ? params.StepName : null;
-        this.StepId = 'StepId' in params ? params.StepId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-
-    }
-}
-
-/**
  * ModifySubscribeObjects request structure.
  * @class
  */
@@ -1938,67 +1398,6 @@ class DescribeMigrateCheckJobResponse extends  AbstractModel {
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.CheckFlag = 'CheckFlag' in params ? params.CheckFlag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Sale information of data subscription region
- * @class
- */
-class SubscribeRegionConf extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Region name, such as Guangzhou
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RegionName = null;
-
-        /**
-         * Region ID, such as ap-guangzhou
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * Region name, such as South China
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Whether it is the default region. 0: no, 1: yes
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsDefaultRegion = null;
-
-        /**
-         * Purchasable status of current region. 1: normal, 2: beta test, 3: not purchasable
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Area = 'Area' in params ? params.Area : null;
-        this.IsDefaultRegion = 'IsDefaultRegion' in params ? params.IsDefaultRegion : null;
-        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2248,34 +1647,6 @@ class ResetSubscribeResponse extends  AbstractModel {
 }
 
 /**
- * StartSyncJob response structure.
- * @class
- */
-class StartSyncJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeSubscribes response structure.
  * @class
  */
@@ -2326,36 +1697,24 @@ class DescribeSubscribesResponse extends  AbstractModel {
 }
 
 /**
- * Check steps for a disaster recovery task
+ * ModifySubscribeConsumeTime request structure.
  * @class
  */
-class SyncCheckStepInfo extends  AbstractModel {
+class ModifySubscribeConsumeTimeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Step number
-         * @type {number || null}
-         */
-        this.StepNo = null;
-
-        /**
-         * Step name
+         * Data subscription instance ID
          * @type {string || null}
          */
-        this.StepName = null;
+        this.SubscribeId = null;
 
         /**
-         * Code of the step execution result
-         * @type {number || null}
-         */
-        this.StepCode = null;
-
-        /**
-         * Message about the step execution result
+         * Consumption starting time point in the format of `Y-m-d h:m:s`, i.e., the starting time point for data subscription. Value range: within the last 24 hours
          * @type {string || null}
          */
-        this.StepMessage = null;
+        this.ConsumeStartTime = null;
 
     }
 
@@ -2366,38 +1725,8 @@ class SyncCheckStepInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepNo = 'StepNo' in params ? params.StepNo : null;
-        this.StepName = 'StepName' in params ? params.StepName : null;
-        this.StepCode = 'StepCode' in params ? params.StepCode : null;
-        this.StepMessage = 'StepMessage' in params ? params.StepMessage : null;
-
-    }
-}
-
-/**
- * CreateSyncCheckJob response structure.
- * @class
- */
-class CreateSyncCheckJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.ConsumeStartTime = 'ConsumeStartTime' in params ? params.ConsumeStartTime : null;
 
     }
 }
@@ -2431,18 +1760,54 @@ class StopMigrateJobRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSyncCheckJob request structure.
+ * Describes the specific migration process
  * @class
  */
-class DescribeSyncCheckJobRequest extends  AbstractModel {
+class MigrateDetailInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the disaster recovery sync task to be queried
+         * Total number of steps
+         * @type {number || null}
+         */
+        this.StepAll = null;
+
+        /**
+         * Current step
+         * @type {number || null}
+         */
+        this.StepNow = null;
+
+        /**
+         * Overall progress, such as "10"
          * @type {string || null}
          */
-        this.JobId = null;
+        this.Progress = null;
+
+        /**
+         * Progress of current step, such as "1"
+         * @type {string || null}
+         */
+        this.CurrentStepProgress = null;
+
+        /**
+         * Master/slave lag in MB, which is valid during incremental sync and currently supported by TencentDB for Redis and MySQL
+         * @type {number || null}
+         */
+        this.MasterSlaveDistance = null;
+
+        /**
+         * Master/slave lag in seconds, which is valid during incremental sync and currently supported by TencentDB for MySQL
+         * @type {number || null}
+         */
+        this.SecondsBehindMaster = null;
+
+        /**
+         * Step information
+         * @type {Array.<MigrateStepDetailInfo> || null}
+         */
+        this.StepInfo = null;
 
     }
 
@@ -2453,7 +1818,21 @@ class DescribeSyncCheckJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.StepAll = 'StepAll' in params ? params.StepAll : null;
+        this.StepNow = 'StepNow' in params ? params.StepNow : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.CurrentStepProgress = 'CurrentStepProgress' in params ? params.CurrentStepProgress : null;
+        this.MasterSlaveDistance = 'MasterSlaveDistance' in params ? params.MasterSlaveDistance : null;
+        this.SecondsBehindMaster = 'SecondsBehindMaster' in params ? params.SecondsBehindMaster : null;
+
+        if (params.StepInfo) {
+            this.StepInfo = new Array();
+            for (let z in params.StepInfo) {
+                let obj = new MigrateStepDetailInfo();
+                obj.deserialize(params.StepInfo[z]);
+                this.StepInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -2509,34 +1888,6 @@ class DescribeRegionConfResponse extends  AbstractModel {
 }
 
 /**
- * ModifySyncJob response structure.
- * @class
- */
-class ModifySyncJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeAsyncRequestInfo response structure.
  * @class
  */
@@ -2579,24 +1930,159 @@ class DescribeAsyncRequestInfoResponse extends  AbstractModel {
 }
 
 /**
- * CompleteMigrateJob request structure.
+ * Subscription instance information
  * @class
  */
-class CompleteMigrateJobRequest extends  AbstractModel {
+class SubscribeInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data migration task ID
+         * Data subscription instance ID
          * @type {string || null}
          */
-        this.JobId = null;
+        this.SubscribeId = null;
 
         /**
-         * The way to complete the task, which is supported only for legacy MySQL migration task. waitForSync: wait for the source-replica lag to become 0 before stopping; immediately: complete immediately without waiting for source-replica sync. Default value: waitForSync
+         * Data subscription instance name
          * @type {string || null}
          */
-        this.CompleteMode = null;
+        this.SubscribeName = null;
+
+        /**
+         * ID of channel bound to data subscription instance
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * Name of product bound to data subscription instance
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * ID of database instance bound to data subscription instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Status of database instance bound to data subscription instance
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * Data subscription instance configuration status. Valid values: unconfigure, configuring, configured
+         * @type {string || null}
+         */
+        this.SubsStatus = null;
+
+        /**
+         * Last modified time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Isolation time
+         * @type {string || null}
+         */
+        this.IsolateTime = null;
+
+        /**
+         * Expiration time
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Deactivation time
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
+
+        /**
+         * Last modified consumption starting time point. If it has never been modified, this field is 0
+         * @type {string || null}
+         */
+        this.ConsumeStartTime = null;
+
+        /**
+         * Data subscription instance region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Billing mode. 1: pay-as-you-go
+         * @type {number || null}
+         */
+        this.PayType = null;
+
+        /**
+         * Data subscription instance VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Data subscription instance Vport
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Unique ID of the VPC where the data subscription instance VIP resides
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Unique ID of the subnet where the data subscription instance VIP resides
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Data subscription instance status. Valid values: creating, normal, isolating, isolated, offlining, offline
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Timestamp of the last message confirmed by the SDK. If the SDK keeps consuming, this field can also be used as the current consumption time point of the SDK
+         * @type {string || null}
+         */
+        this.SdkConsumedTime = null;
+
+        /**
+         * Tag
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether auto-renewal is enabled. 0: do not enable; 1: enable
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Subscription instance edition. ·`txdts`: legacy data subscription; `kafka`: data subscription in Kafka edition
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubscribeVersion = null;
 
     }
 
@@ -2607,8 +2093,38 @@ class CompleteMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.CompleteMode = 'CompleteMode' in params ? params.CompleteMode : null;
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.SubscribeName = 'SubscribeName' in params ? params.SubscribeName : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.SubsStatus = 'SubsStatus' in params ? params.SubsStatus : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.ConsumeStartTime = 'ConsumeStartTime' in params ? params.ConsumeStartTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SdkConsumedTime = 'SdkConsumedTime' in params ? params.SdkConsumedTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.SubscribeVersion = 'SubscribeVersion' in params ? params.SubscribeVersion : null;
 
     }
 }
@@ -2713,76 +2229,6 @@ class TagFilter extends  AbstractModel {
 }
 
 /**
- * ModifySubscribeConsumeTime request structure.
- * @class
- */
-class ModifySubscribeConsumeTimeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Data subscription instance ID
-         * @type {string || null}
-         */
-        this.SubscribeId = null;
-
-        /**
-         * Consumption starting time point in the format of `Y-m-d h:m:s`, i.e., the starting time point for data subscription. Value range: within the last 24 hours
-         * @type {string || null}
-         */
-        this.ConsumeStartTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
-        this.ConsumeStartTime = 'ConsumeStartTime' in params ? params.ConsumeStartTime : null;
-
-    }
-}
-
-/**
- * SwitchDrToMaster response structure.
- * @class
- */
-class SwitchDrToMasterResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Backend async task request ID
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyMigrateJob response structure.
  * @class
  */
@@ -2806,170 +2252,6 @@ class ModifyMigrateJobResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateSyncJob request structure.
- * @class
- */
-class CreateSyncJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Disaster recovery sync task name
-         * @type {string || null}
-         */
-        this.JobName = null;
-
-        /**
-         * Configuration options of a disaster recovery sync task
-         * @type {SyncOption || null}
-         */
-        this.SyncOption = null;
-
-        /**
-         * Source instance database type, which currently only supports mysql
-         * @type {string || null}
-         */
-        this.SrcDatabaseType = null;
-
-        /**
-         * Source instance access type, which currently only supports cdb (TencentDB instances)
-         * @type {string || null}
-         */
-        this.SrcAccessType = null;
-
-        /**
-         * Source instance information
-         * @type {SyncInstanceInfo || null}
-         */
-        this.SrcInfo = null;
-
-        /**
-         * Target instance access type, which currently only supports mysql
-         * @type {string || null}
-         */
-        this.DstDatabaseType = null;
-
-        /**
-         * Target instance access type, which currently only supports cdb (TencentDB instances)
-         * @type {string || null}
-         */
-        this.DstAccessType = null;
-
-        /**
-         * Target instance information
-         * @type {SyncInstanceInfo || null}
-         */
-        this.DstInfo = null;
-
-        /**
-         * Information of the source table to be synced, which is described in JSON string format.
-For databases with a database-table structure:
-[{Database:db1,Table:[table1,table2]},{Database:db2}]
-         * @type {string || null}
-         */
-        this.DatabaseInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobName = 'JobName' in params ? params.JobName : null;
-
-        if (params.SyncOption) {
-            let obj = new SyncOption();
-            obj.deserialize(params.SyncOption)
-            this.SyncOption = obj;
-        }
-        this.SrcDatabaseType = 'SrcDatabaseType' in params ? params.SrcDatabaseType : null;
-        this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
-
-        if (params.SrcInfo) {
-            let obj = new SyncInstanceInfo();
-            obj.deserialize(params.SrcInfo)
-            this.SrcInfo = obj;
-        }
-        this.DstDatabaseType = 'DstDatabaseType' in params ? params.DstDatabaseType : null;
-        this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
-
-        if (params.DstInfo) {
-            let obj = new SyncInstanceInfo();
-            obj.deserialize(params.DstInfo)
-            this.DstInfo = obj;
-        }
-        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
-
-    }
-}
-
-/**
- * DescribeSyncJobs request structure.
- * @class
- */
-class DescribeSyncJobsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Disaster recovery sync task ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * Disaster recovery sync task name
-         * @type {string || null}
-         */
-        this.JobName = null;
-
-        /**
-         * Sort by field. Value range: JobId, Status, JobName, CreateTime
-         * @type {string || null}
-         */
-        this.Order = null;
-
-        /**
-         * Sorting order. Value range: ASC (ascending), DESC (descending)
-         * @type {string || null}
-         */
-        this.OrderSeq = null;
-
-        /**
-         * Offset. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of the returned instances. Value range: [1, 100]. Default value: 20
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.JobName = 'JobName' in params ? params.JobName : null;
-        this.Order = 'Order' in params ? params.Order : null;
-        this.OrderSeq = 'OrderSeq' in params ? params.OrderSeq : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3053,84 +2335,6 @@ class DescribeMigrateJobsRequest extends  AbstractModel {
 }
 
 /**
- * Describes the specific process of the sync task.
- * @class
- */
-class SyncDetailInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of steps
-         * @type {number || null}
-         */
-        this.StepAll = null;
-
-        /**
-         * Current step
-         * @type {number || null}
-         */
-        this.StepNow = null;
-
-        /**
-         * Overall progress
-         * @type {string || null}
-         */
-        this.Progress = null;
-
-        /**
-         * Progress of the current step
-         * @type {string || null}
-         */
-        this.CurrentStepProgress = null;
-
-        /**
-         * Master/slave delay in MB
-         * @type {number || null}
-         */
-        this.MasterSlaveDistance = null;
-
-        /**
-         * Master/slave delay in seconds
-         * @type {number || null}
-         */
-        this.SecondsBehindMaster = null;
-
-        /**
-         * Step information
-         * @type {Array.<SyncStepDetailInfo> || null}
-         */
-        this.StepInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StepAll = 'StepAll' in params ? params.StepAll : null;
-        this.StepNow = 'StepNow' in params ? params.StepNow : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.CurrentStepProgress = 'CurrentStepProgress' in params ? params.CurrentStepProgress : null;
-        this.MasterSlaveDistance = 'MasterSlaveDistance' in params ? params.MasterSlaveDistance : null;
-        this.SecondsBehindMaster = 'SecondsBehindMaster' in params ? params.SecondsBehindMaster : null;
-
-        if (params.StepInfo) {
-            this.StepInfo = new Array();
-            for (let z in params.StepInfo) {
-                let obj = new SyncStepDetailInfo();
-                obj.deserialize(params.StepInfo[z]);
-                this.StepInfo.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * StopMigrateJob response structure.
  * @class
  */
@@ -3154,55 +2358,6 @@ class StopMigrateJobResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Configuration options of a disaster recovery sync task
- * @class
- */
-class SyncOption extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Sync object. 1: entire instance; 2: specified table
-         * @type {number || null}
-         */
-        this.SyncObject = null;
-
-        /**
-         * Sync start configuration. 1: start immediately
-         * @type {number || null}
-         */
-        this.RunMode = null;
-
-        /**
-         * Sync mode. 3: full + incremental sync
-         * @type {number || null}
-         */
-        this.SyncType = null;
-
-        /**
-         * Data consistency check. 1: no configuration required
-         * @type {number || null}
-         */
-        this.ConsistencyType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SyncObject = 'SyncObject' in params ? params.SyncObject : null;
-        this.RunMode = 'RunMode' in params ? params.RunMode : null;
-        this.SyncType = 'SyncType' in params ? params.SyncType : null;
-        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
 
     }
 }
@@ -3236,55 +2391,6 @@ class OfflineIsolatedSubscribeResponse extends  AbstractModel {
 }
 
 /**
- * Sync task progress
- * @class
- */
-class SyncStepDetailInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Step number
-         * @type {number || null}
-         */
-        this.StepNo = null;
-
-        /**
-         * Step name
-         * @type {string || null}
-         */
-        this.StepName = null;
-
-        /**
-         * Whether it can be stopped
-         * @type {number || null}
-         */
-        this.CanStop = null;
-
-        /**
-         * Step ID
-         * @type {number || null}
-         */
-        this.StepId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StepNo = 'StepNo' in params ? params.StepNo : null;
-        this.StepName = 'StepName' in params ? params.StepName : null;
-        this.CanStop = 'CanStop' in params ? params.CanStop : null;
-        this.StepId = 'StepId' in params ? params.StepId : null;
-
-    }
-}
-
-/**
  * IsolateSubscribe request structure.
  * @class
  */
@@ -3313,244 +2419,10 @@ class IsolateSubscribeRequest extends  AbstractModel {
 }
 
 /**
- * DeleteSyncJob response structure.
+ * CompleteMigrateJob request structure.
  * @class
  */
-class DeleteSyncJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateSyncCheckJob request structure.
- * @class
- */
-class CreateSyncCheckJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Disaster recovery sync task ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-
-    }
-}
-
-/**
- * ModifySyncJob request structure.
- * @class
- */
-class ModifySyncJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the disaster recovery sync task to be modified
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * Name of the disaster recovery sync task
-         * @type {string || null}
-         */
-        this.JobName = null;
-
-        /**
-         * Configuration options of a disaster recovery sync task
-         * @type {SyncOption || null}
-         */
-        this.SyncOption = null;
-
-        /**
-         * When syncing the specified table, you need to set the information of the source table to be synced, which should be described in JSON string format. Below are examples.
-For databases with a database-table structure:
-[{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
-         * @type {string || null}
-         */
-        this.DatabaseInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.JobName = 'JobName' in params ? params.JobName : null;
-
-        if (params.SyncOption) {
-            let obj = new SyncOption();
-            obj.deserialize(params.SyncOption)
-            this.SyncOption = obj;
-        }
-        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
-
-    }
-}
-
-/**
- * DescribeRegionConf request structure.
- * @class
- */
-class DescribeRegionConfRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
- * CompleteMigrateJob response structure.
- * @class
- */
-class CompleteMigrateJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StartMigrateJob response structure.
- * @class
- */
-class StartMigrateJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Data subscription object
- * @class
- */
-class SubscribeObject extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Data subscription object type. 0: database, 1: database table
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ObjectsType = null;
-
-        /**
-         * Name of subscribed database
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-        /**
-         * Array of table names in subscribed database
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.TableNames = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ObjectsType = 'ObjectsType' in params ? params.ObjectsType : null;
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.TableNames = 'TableNames' in params ? params.TableNames : null;
-
-    }
-}
-
-/**
- * CreateMigrateJob response structure.
- * @class
- */
-class CreateMigrateJobResponse extends  AbstractModel {
+class CompleteMigrateJobRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3561,10 +2433,10 @@ class CreateMigrateJobResponse extends  AbstractModel {
         this.JobId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The way to complete the task, which is supported only for legacy MySQL migration task. waitForSync: wait for the source-replica lag to become 0 before stopping; immediately: complete immediately without waiting for source-replica sync. Default value: waitForSync
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CompleteMode = null;
 
     }
 
@@ -3576,63 +2448,7 @@ class CreateMigrateJobResponse extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeSubscribeConf request structure.
- * @class
- */
-class DescribeSubscribeConfRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Subscription instance ID
-         * @type {string || null}
-         */
-        this.SubscribeId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
-
-    }
-}
-
-/**
- * ModifySubscribeVipVport response structure.
- * @class
- */
-class ModifySubscribeVipVportResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CompleteMode = 'CompleteMode' in params ? params.CompleteMode : null;
 
     }
 }
@@ -3815,10 +2631,104 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DeleteMigrateJob request structure.
+ * DescribeRegionConf request structure.
  * @class
  */
-class DeleteMigrateJobRequest extends  AbstractModel {
+class DescribeRegionConfRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CompleteMigrateJob response structure.
+ * @class
+ */
+class CompleteMigrateJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Data subscription object
+ * @class
+ */
+class SubscribeObject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data subscription object type. 0: database, 1: database table
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ObjectsType = null;
+
+        /**
+         * Name of subscribed database
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * Array of table names in subscribed database
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.TableNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ObjectsType = 'ObjectsType' in params ? params.ObjectsType : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.TableNames = 'TableNames' in params ? params.TableNames : null;
+
+    }
+}
+
+/**
+ * CreateMigrateJob response structure.
+ * @class
+ */
+class CreateMigrateJobResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3827,6 +2737,12 @@ class DeleteMigrateJobRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.JobId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3838,20 +2754,77 @@ class DeleteMigrateJobRequest extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DeleteSyncJob request structure.
+ * DescribeSubscribeConf request structure.
  * @class
  */
-class DeleteSyncJobRequest extends  AbstractModel {
+class DescribeSubscribeConfRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the disaster recovery sync task to be deleted
+         * Subscription instance ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+
+    }
+}
+
+/**
+ * ModifySubscribeVipVport response structure.
+ * @class
+ */
+class ModifySubscribeVipVportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteMigrateJob request structure.
+ * @class
+ */
+class DeleteMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data migration task ID
          * @type {string || null}
          */
         this.JobId = null;
@@ -4074,42 +3047,12 @@ class ErrorInfo extends  AbstractModel {
 }
 
 /**
- * DescribeSyncCheckJob response structure.
+ * StartMigrateJob response structure.
  * @class
  */
-class DescribeSyncCheckJobResponse extends  AbstractModel {
+class StartMigrateJobResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Task check status: starting, running, finished
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Code of the task check result
-         * @type {number || null}
-         */
-        this.ErrorCode = null;
-
-        /**
-         * Prompt message
-         * @type {string || null}
-         */
-        this.ErrorMessage = null;
-
-        /**
-         * Description of a task execution step
-         * @type {Array.<SyncCheckStepInfo> || null}
-         */
-        this.StepInfo = null;
-
-        /**
-         * Check flag. 0: checking; 1: successfully checked
-         * @type {number || null}
-         */
-        this.CheckFlag = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4126,19 +3069,6 @@ class DescribeSyncCheckJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
-
-        if (params.StepInfo) {
-            this.StepInfo = new Array();
-            for (let z in params.StepInfo) {
-                let obj = new SyncCheckStepInfo();
-                obj.deserialize(params.StepInfo[z]);
-                this.StepInfo.push(obj);
-            }
-        }
-        this.CheckFlag = 'CheckFlag' in params ? params.CheckFlag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4173,24 +3103,18 @@ class StartMigrateJobRequest extends  AbstractModel {
 }
 
 module.exports = {
-    DescribeSyncJobsResponse: DescribeSyncJobsResponse,
     DescribeMigrateJobsResponse: DescribeMigrateJobsResponse,
-    MigrateDetailInfo: MigrateDetailInfo,
+    MigrateStepDetailInfo: MigrateStepDetailInfo,
     DeleteMigrateJobResponse: DeleteMigrateJobResponse,
     CreateMigrateCheckJobRequest: CreateMigrateCheckJobRequest,
     ModifySubscribeVipVportRequest: ModifySubscribeVipVportRequest,
-    SyncInstanceInfo: SyncInstanceInfo,
     ModifySubscribeNameResponse: ModifySubscribeNameResponse,
-    CreateSyncJobResponse: CreateSyncJobResponse,
     DescribeMigrateCheckJobRequest: DescribeMigrateCheckJobRequest,
     IsolateSubscribeResponse: IsolateSubscribeResponse,
     ModifySubscribeObjectsResponse: ModifySubscribeObjectsResponse,
-    SwitchDrToMasterRequest: SwitchDrToMasterRequest,
-    StartSyncJobRequest: StartSyncJobRequest,
     CreateMigrateJobRequest: CreateMigrateJobRequest,
-    SubscribeInfo: SubscribeInfo,
+    SubscribeRegionConf: SubscribeRegionConf,
     ModifySubscribeNameRequest: ModifySubscribeNameRequest,
-    SyncJobInfo: SyncJobInfo,
     ModifySubscribeConsumeTimeResponse: ModifySubscribeConsumeTimeResponse,
     DstInfo: DstInfo,
     DescribeSubscribeConfResponse: DescribeSubscribeConfResponse,
@@ -4200,57 +3124,41 @@ module.exports = {
     ModifyMigrateJobRequest: ModifyMigrateJobRequest,
     CreateSubscribeRequest: CreateSubscribeRequest,
     CreateMigrateCheckJobResponse: CreateMigrateCheckJobResponse,
-    MigrateStepDetailInfo: MigrateStepDetailInfo,
     ModifySubscribeObjectsRequest: ModifySubscribeObjectsRequest,
     DescribeMigrateCheckJobResponse: DescribeMigrateCheckJobResponse,
-    SubscribeRegionConf: SubscribeRegionConf,
     ActivateSubscribeRequest: ActivateSubscribeRequest,
     OfflineIsolatedSubscribeRequest: OfflineIsolatedSubscribeRequest,
     DescribeSubscribesRequest: DescribeSubscribesRequest,
     ResetSubscribeResponse: ResetSubscribeResponse,
-    StartSyncJobResponse: StartSyncJobResponse,
     DescribeSubscribesResponse: DescribeSubscribesResponse,
-    SyncCheckStepInfo: SyncCheckStepInfo,
-    CreateSyncCheckJobResponse: CreateSyncCheckJobResponse,
+    ModifySubscribeConsumeTimeRequest: ModifySubscribeConsumeTimeRequest,
     StopMigrateJobRequest: StopMigrateJobRequest,
-    DescribeSyncCheckJobRequest: DescribeSyncCheckJobRequest,
+    MigrateDetailInfo: MigrateDetailInfo,
     DescribeRegionConfResponse: DescribeRegionConfResponse,
-    ModifySyncJobResponse: ModifySyncJobResponse,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
-    CompleteMigrateJobRequest: CompleteMigrateJobRequest,
+    SubscribeInfo: SubscribeInfo,
     ResetSubscribeRequest: ResetSubscribeRequest,
     TagItem: TagItem,
     TagFilter: TagFilter,
-    ModifySubscribeConsumeTimeRequest: ModifySubscribeConsumeTimeRequest,
-    SwitchDrToMasterResponse: SwitchDrToMasterResponse,
     ModifyMigrateJobResponse: ModifyMigrateJobResponse,
-    CreateSyncJobRequest: CreateSyncJobRequest,
-    DescribeSyncJobsRequest: DescribeSyncJobsRequest,
     DescribeMigrateJobsRequest: DescribeMigrateJobsRequest,
-    SyncDetailInfo: SyncDetailInfo,
     StopMigrateJobResponse: StopMigrateJobResponse,
-    SyncOption: SyncOption,
     OfflineIsolatedSubscribeResponse: OfflineIsolatedSubscribeResponse,
-    SyncStepDetailInfo: SyncStepDetailInfo,
     IsolateSubscribeRequest: IsolateSubscribeRequest,
-    DeleteSyncJobResponse: DeleteSyncJobResponse,
-    CreateSyncCheckJobRequest: CreateSyncCheckJobRequest,
-    ModifySyncJobRequest: ModifySyncJobRequest,
+    CompleteMigrateJobRequest: CompleteMigrateJobRequest,
+    MigrateJobInfo: MigrateJobInfo,
     DescribeRegionConfRequest: DescribeRegionConfRequest,
     CompleteMigrateJobResponse: CompleteMigrateJobResponse,
-    StartMigrateJobResponse: StartMigrateJobResponse,
     SubscribeObject: SubscribeObject,
     CreateMigrateJobResponse: CreateMigrateJobResponse,
     DescribeSubscribeConfRequest: DescribeSubscribeConfRequest,
     ModifySubscribeVipVportResponse: ModifySubscribeVipVportResponse,
-    MigrateJobInfo: MigrateJobInfo,
     DeleteMigrateJobRequest: DeleteMigrateJobRequest,
-    DeleteSyncJobRequest: DeleteSyncJobRequest,
     ActivateSubscribeResponse: ActivateSubscribeResponse,
     CreateSubscribeResponse: CreateSubscribeResponse,
     MigrateOption: MigrateOption,
     ErrorInfo: ErrorInfo,
-    DescribeSyncCheckJobResponse: DescribeSyncCheckJobResponse,
+    StartMigrateJobResponse: StartMigrateJobResponse,
     StartMigrateJobRequest: StartMigrateJobRequest,
 
 }

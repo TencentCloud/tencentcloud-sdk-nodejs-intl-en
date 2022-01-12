@@ -314,6 +314,42 @@ class GetRequestTargetNodeTypesRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateInstance response structure.
+ * @class
+ */
+class UpdateInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceOperations request structure.
  * @class
  */
@@ -416,6 +452,83 @@ class OperationDetail extends  AbstractModel {
                 this.NewInfo.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Kibana view data
+ * @class
+ */
+class KibanaView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Kibana node IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Node disk size
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Disk usage
+         * @type {number || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * Node memory size
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * Memory usage
+         * @type {number || null}
+         */
+        this.MemUsage = null;
+
+        /**
+         * Number of node CPUs
+         * @type {number || null}
+         */
+        this.CpuNum = null;
+
+        /**
+         * CPU usage
+         * @type {number || null}
+         */
+        this.CpuUsage = null;
+
+        /**
+         * Availability zone
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
+        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.CpuUsage = 'CpuUsage' in params ? params.CpuUsage : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -568,6 +681,13 @@ class CreateInstanceResponse extends  AbstractModel {
         this.InstanceId = null;
 
         /**
+         * Order ID
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -583,6 +703,7 @@ class CreateInstanceResponse extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -707,48 +828,114 @@ class UpdateRequestTargetNodeTypesRequest extends  AbstractModel {
 }
 
 /**
- * UpgradeLicense request structure.
+ * Node view data
  * @class
  */
-class UpgradeLicenseRequest extends  AbstractModel {
+class NodeView extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Node ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.NodeId = null;
 
         /**
-         * License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
+         * Node IP
          * @type {string || null}
          */
-        this.LicenseType = null;
+        this.NodeIp = null;
 
         /**
-         * Whether to automatically use vouchers <li>0: No </li><li>1: Yes </li>Default value: 0
+         * Whether the node is visible
          * @type {number || null}
          */
-        this.AutoVoucher = null;
+        this.Visible = null;
 
         /**
-         * List of voucher IDs (only one voucher can be specified at a time currently)
+         * Whether the node encounters circuit breaking
+         * @type {number || null}
+         */
+        this.Break = null;
+
+        /**
+         * Node disk size
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Disk usage
+         * @type {number || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * Node memory size (in GB)
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * Memory usage
+         * @type {number || null}
+         */
+        this.MemUsage = null;
+
+        /**
+         * Number of node CPUs
+         * @type {number || null}
+         */
+        this.CpuNum = null;
+
+        /**
+         * CPU usage
+         * @type {number || null}
+         */
+        this.CpuUsage = null;
+
+        /**
+         * Availability zone
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+        /**
+         * Node HTTP IP
+         * @type {string || null}
+         */
+        this.NodeHttpIp = null;
+
+        /**
+         * JVM memory usage
+         * @type {number || null}
+         */
+        this.JvmMemUsage = null;
+
+        /**
+         * Number of node shards
+         * @type {number || null}
+         */
+        this.ShardNum = null;
+
+        /**
+         * ID list of node disks
          * @type {Array.<string> || null}
          */
-        this.VoucherIds = null;
+        this.DiskIds = null;
 
         /**
-         * Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
-         * @type {number || null}
-         */
-        this.BasicSecurityType = null;
-
-        /**
-         * Whether to force restart <li>true: yes </li><li>false: no </li>Default value: false
+         * Whether a hidden availability zone
          * @type {boolean || null}
          */
-        this.ForceRestart = null;
+        this.Hidden = null;
 
     }
 
@@ -759,12 +946,23 @@ class UpgradeLicenseRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
-        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeIp = 'NodeIp' in params ? params.NodeIp : null;
+        this.Visible = 'Visible' in params ? params.Visible : null;
+        this.Break = 'Break' in params ? params.Break : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
+        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.CpuUsage = 'CpuUsage' in params ? params.CpuUsage : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.NodeHttpIp = 'NodeHttpIp' in params ? params.NodeHttpIp : null;
+        this.JvmMemUsage = 'JvmMemUsage' in params ? params.JvmMemUsage : null;
+        this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.Hidden = 'Hidden' in params ? params.Hidden : null;
 
     }
 }
@@ -1369,42 +1567,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Warm node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.WarmNodeType = null;
 
         /**
          * Number of warm nodes
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.WarmNodeNum = null;
 
         /**
          * Number of warm node CPU cores
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.WarmCpuNum = null;
 
         /**
-         * Warm node memory size in GB
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Warm node memory size (in GB)
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.WarmMemSize = null;
 
         /**
          * Warm node disk type
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.WarmDiskType = null;
 
         /**
-         * Warm node disk size in GB
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Warm node disk size (in GB)
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.WarmDiskSize = null;
@@ -1526,6 +1724,90 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          * @type {Array.<string> || null}
          */
         this.SecurityGroups = null;
+
+        /**
+         * Cold node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ColdNodeType = null;
+
+        /**
+         * Number of cold nodes
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.ColdNodeNum = null;
+
+        /**
+         * Number of cold node CPU cores
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.ColdCpuNum = null;
+
+        /**
+         * Cold node memory size (in GB)
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.ColdMemSize = null;
+
+        /**
+         * Cold node disk type
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ColdDiskType = null;
+
+        /**
+         * Cold node disk size (in GB)
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.ColdDiskSize = null;
+
+        /**
+         * Frozen node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.FrozenNodeType = null;
+
+        /**
+         * Number of frozen nodes
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.FrozenNodeNum = null;
+
+        /**
+         * Number of frozen node CPU cores
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.FrozenCpuNum = null;
+
+        /**
+         * Frozen node memory size (GB)
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.FrozenMemSize = null;
+
+        /**
+         * Frozen node disk type
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.FrozenDiskType = null;
+
+        /**
+         * Frozen node disk size (in GB)
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.FrozenDiskSize = null;
 
     }
 
@@ -1654,6 +1936,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Jdk = 'Jdk' in params ? params.Jdk : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+        this.ColdNodeType = 'ColdNodeType' in params ? params.ColdNodeType : null;
+        this.ColdNodeNum = 'ColdNodeNum' in params ? params.ColdNodeNum : null;
+        this.ColdCpuNum = 'ColdCpuNum' in params ? params.ColdCpuNum : null;
+        this.ColdMemSize = 'ColdMemSize' in params ? params.ColdMemSize : null;
+        this.ColdDiskType = 'ColdDiskType' in params ? params.ColdDiskType : null;
+        this.ColdDiskSize = 'ColdDiskSize' in params ? params.ColdDiskSize : null;
+        this.FrozenNodeType = 'FrozenNodeType' in params ? params.FrozenNodeType : null;
+        this.FrozenNodeNum = 'FrozenNodeNum' in params ? params.FrozenNodeNum : null;
+        this.FrozenCpuNum = 'FrozenCpuNum' in params ? params.FrozenCpuNum : null;
+        this.FrozenMemSize = 'FrozenMemSize' in params ? params.FrozenMemSize : null;
+        this.FrozenDiskType = 'FrozenDiskType' in params ? params.FrozenDiskType : null;
+        this.FrozenDiskSize = 'FrozenDiskSize' in params ? params.FrozenDiskSize : null;
 
     }
 }
@@ -1953,6 +2247,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.IpList = null;
 
+        /**
+         * List of availability zones
+         * @type {Array.<string> || null}
+         */
+        this.ZoneList = null;
+
     }
 
     /**
@@ -1979,6 +2279,7 @@ class DescribeInstancesRequest extends  AbstractModel {
             }
         }
         this.IpList = 'IpList' in params ? params.IpList : null;
+        this.ZoneList = 'ZoneList' in params ? params.ZoneList : null;
 
     }
 }
@@ -2467,6 +2768,12 @@ class UpdatePluginsRequest extends  AbstractModel {
          */
         this.ForceUpdate = null;
 
+        /**
+         * 0: system plugin
+         * @type {number || null}
+         */
+        this.PluginType = null;
+
     }
 
     /**
@@ -2481,6 +2788,7 @@ class UpdatePluginsRequest extends  AbstractModel {
         this.RemovePluginList = 'RemovePluginList' in params ? params.RemovePluginList : null;
         this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
         this.ForceUpdate = 'ForceUpdate' in params ? params.ForceUpdate : null;
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
 
     }
 }
@@ -2585,6 +2893,13 @@ class UpgradeLicenseResponse extends  AbstractModel {
         super();
 
         /**
+         * Order ID
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2599,6 +2914,7 @@ class UpgradeLicenseResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2871,18 +3187,146 @@ class UpgradeInstanceResponse extends  AbstractModel {
 }
 
 /**
- * UpdateInstance response structure.
+ * Cluster view data
  * @class
  */
-class UpdateInstanceResponse extends  AbstractModel {
+class ClusterView extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Cluster health status
+         * @type {number || null}
+         */
+        this.Health = null;
+
+        /**
+         * Whether the cluster is visible
+         * @type {number || null}
+         */
+        this.Visible = null;
+
+        /**
+         * Whether the cluster encounters circuit breaking
+         * @type {number || null}
+         */
+        this.Break = null;
+
+        /**
+         * Average disk usage
+         * @type {number || null}
+         */
+        this.AvgDiskUsage = null;
+
+        /**
+         * Average memory usage
+         * @type {number || null}
+         */
+        this.AvgMemUsage = null;
+
+        /**
+         * Average CPU usage
+         * @type {number || null}
+         */
+        this.AvgCpuUsage = null;
+
+        /**
+         * Total disk size of the cluster
+         * @type {number || null}
+         */
+        this.TotalDiskSize = null;
+
+        /**
+         * Types of nodes to receive client requests
+         * @type {Array.<string> || null}
+         */
+        this.TargetNodeTypes = null;
+
+        /**
+         * Number of online nodes
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * Total number of nodes
+         * @type {number || null}
+         */
+        this.TotalNodeNum = null;
+
+        /**
+         * Number of data nodes
+         * @type {number || null}
+         */
+        this.DataNodeNum = null;
+
+        /**
+         * Number of indices
+         * @type {number || null}
+         */
+        this.IndexNum = null;
+
+        /**
+         * Number of documents
+         * @type {number || null}
+         */
+        this.DocNum = null;
+
+        /**
+         * Used disk size (in bytes)
+         * @type {number || null}
+         */
+        this.DiskUsedInBytes = null;
+
+        /**
+         * Number of shards
+         * @type {number || null}
+         */
+        this.ShardNum = null;
+
+        /**
+         * Number of primary shards
+         * @type {number || null}
+         */
+        this.PrimaryShardNum = null;
+
+        /**
+         * Number of relocating shards
+         * @type {number || null}
+         */
+        this.RelocatingShardNum = null;
+
+        /**
+         * Number of initializing shards
+         * @type {number || null}
+         */
+        this.InitializingShardNum = null;
+
+        /**
+         * Number of unassigned shards
+         * @type {number || null}
+         */
+        this.UnassignedShardNum = null;
+
+        /**
+         * Total COS storage of an enterprise cluster, in GB
+         * @type {number || null}
+         */
+        this.TotalCosStorage = null;
+
+        /**
+         * Name of the COS bucket that stores searchable snapshots of an enterprise cluster
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SearchableSnapshotCosBucket = null;
+
+        /**
+         * COS app ID of the searchable snapshots of an enterprise cluster
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.SearchableSnapshotCosAppId = null;
 
     }
 
@@ -2893,7 +3337,28 @@ class UpdateInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Health = 'Health' in params ? params.Health : null;
+        this.Visible = 'Visible' in params ? params.Visible : null;
+        this.Break = 'Break' in params ? params.Break : null;
+        this.AvgDiskUsage = 'AvgDiskUsage' in params ? params.AvgDiskUsage : null;
+        this.AvgMemUsage = 'AvgMemUsage' in params ? params.AvgMemUsage : null;
+        this.AvgCpuUsage = 'AvgCpuUsage' in params ? params.AvgCpuUsage : null;
+        this.TotalDiskSize = 'TotalDiskSize' in params ? params.TotalDiskSize : null;
+        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.TotalNodeNum = 'TotalNodeNum' in params ? params.TotalNodeNum : null;
+        this.DataNodeNum = 'DataNodeNum' in params ? params.DataNodeNum : null;
+        this.IndexNum = 'IndexNum' in params ? params.IndexNum : null;
+        this.DocNum = 'DocNum' in params ? params.DocNum : null;
+        this.DiskUsedInBytes = 'DiskUsedInBytes' in params ? params.DiskUsedInBytes : null;
+        this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
+        this.PrimaryShardNum = 'PrimaryShardNum' in params ? params.PrimaryShardNum : null;
+        this.RelocatingShardNum = 'RelocatingShardNum' in params ? params.RelocatingShardNum : null;
+        this.InitializingShardNum = 'InitializingShardNum' in params ? params.InitializingShardNum : null;
+        this.UnassignedShardNum = 'UnassignedShardNum' in params ? params.UnassignedShardNum : null;
+        this.TotalCosStorage = 'TotalCosStorage' in params ? params.TotalCosStorage : null;
+        this.SearchableSnapshotCosBucket = 'SearchableSnapshotCosBucket' in params ? params.SearchableSnapshotCosBucket : null;
+        this.SearchableSnapshotCosAppId = 'SearchableSnapshotCosAppId' in params ? params.SearchableSnapshotCosAppId : null;
 
     }
 }
@@ -2957,6 +3422,107 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
         this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
+
+    }
+}
+
+/**
+ * DescribeViews response structure.
+ * @class
+ */
+class DescribeViewsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster view
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {ClusterView || null}
+         */
+        this.ClusterView = null;
+
+        /**
+         * Node view
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<NodeView> || null}
+         */
+        this.NodesView = null;
+
+        /**
+         * Kibana view
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<KibanaView> || null}
+         */
+        this.KibanasView = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterView) {
+            let obj = new ClusterView();
+            obj.deserialize(params.ClusterView)
+            this.ClusterView = obj;
+        }
+
+        if (params.NodesView) {
+            this.NodesView = new Array();
+            for (let z in params.NodesView) {
+                let obj = new NodeView();
+                obj.deserialize(params.NodesView[z]);
+                this.NodesView.push(obj);
+            }
+        }
+
+        if (params.KibanasView) {
+            this.KibanasView = new Array();
+            for (let z in params.KibanasView) {
+                let obj = new KibanaView();
+                obj.deserialize(params.KibanasView[z]);
+                this.KibanasView.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeViews request structure.
+ * @class
+ */
+class DescribeViewsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3107,6 +3673,69 @@ class Operation extends  AbstractModel {
     }
 }
 
+/**
+ * UpgradeLicense request structure.
+ * @class
+ */
+class UpgradeLicenseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * Whether to automatically use vouchers <li>0: No </li><li>1: Yes </li>Default value: 0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * List of voucher IDs (only one voucher can be specified at a time currently)
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
+
+        /**
+         * Whether to force restart <li>true: yes </li><li>false: no </li>Default value: false
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+
+    }
+}
+
 module.exports = {
     WebNodeTypeInfo: WebNodeTypeInfo,
     InstanceLog: InstanceLog,
@@ -3114,8 +3743,10 @@ module.exports = {
     TaskDetail: TaskDetail,
     NodeInfo: NodeInfo,
     GetRequestTargetNodeTypesRequest: GetRequestTargetNodeTypesRequest,
+    UpdateInstanceResponse: UpdateInstanceResponse,
     DescribeInstanceOperationsRequest: DescribeInstanceOperationsRequest,
     OperationDetail: OperationDetail,
+    KibanaView: KibanaView,
     EsPublicAcl: EsPublicAcl,
     DictInfo: DictInfo,
     RestartInstanceResponse: RestartInstanceResponse,
@@ -3123,7 +3754,7 @@ module.exports = {
     CreateInstanceResponse: CreateInstanceResponse,
     DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
     UpdateRequestTargetNodeTypesRequest: UpdateRequestTargetNodeTypesRequest,
-    UpgradeLicenseRequest: UpgradeLicenseRequest,
+    NodeView: NodeView,
     CosBackup: CosBackup,
     TagInfo: TagInfo,
     KeyValue: KeyValue,
@@ -3150,10 +3781,13 @@ module.exports = {
     SubTaskDetail: SubTaskDetail,
     RestartNodesResponse: RestartNodesResponse,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
-    UpdateInstanceResponse: UpdateInstanceResponse,
+    ClusterView: ClusterView,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    DescribeViewsResponse: DescribeViewsResponse,
+    DescribeViewsRequest: DescribeViewsRequest,
     GetRequestTargetNodeTypesResponse: GetRequestTargetNodeTypesResponse,
     RestartKibanaResponse: RestartKibanaResponse,
     Operation: Operation,
+    UpgradeLicenseRequest: UpgradeLicenseRequest,
 
 }

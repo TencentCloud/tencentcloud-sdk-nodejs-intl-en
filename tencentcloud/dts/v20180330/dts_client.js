@@ -16,24 +16,18 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeSyncJobsResponse = models.DescribeSyncJobsResponse;
 const DescribeMigrateJobsResponse = models.DescribeMigrateJobsResponse;
-const MigrateDetailInfo = models.MigrateDetailInfo;
+const MigrateStepDetailInfo = models.MigrateStepDetailInfo;
 const DeleteMigrateJobResponse = models.DeleteMigrateJobResponse;
 const CreateMigrateCheckJobRequest = models.CreateMigrateCheckJobRequest;
 const ModifySubscribeVipVportRequest = models.ModifySubscribeVipVportRequest;
-const SyncInstanceInfo = models.SyncInstanceInfo;
 const ModifySubscribeNameResponse = models.ModifySubscribeNameResponse;
-const CreateSyncJobResponse = models.CreateSyncJobResponse;
 const DescribeMigrateCheckJobRequest = models.DescribeMigrateCheckJobRequest;
 const IsolateSubscribeResponse = models.IsolateSubscribeResponse;
 const ModifySubscribeObjectsResponse = models.ModifySubscribeObjectsResponse;
-const SwitchDrToMasterRequest = models.SwitchDrToMasterRequest;
-const StartSyncJobRequest = models.StartSyncJobRequest;
 const CreateMigrateJobRequest = models.CreateMigrateJobRequest;
-const SubscribeInfo = models.SubscribeInfo;
+const SubscribeRegionConf = models.SubscribeRegionConf;
 const ModifySubscribeNameRequest = models.ModifySubscribeNameRequest;
-const SyncJobInfo = models.SyncJobInfo;
 const ModifySubscribeConsumeTimeResponse = models.ModifySubscribeConsumeTimeResponse;
 const DstInfo = models.DstInfo;
 const DescribeSubscribeConfResponse = models.DescribeSubscribeConfResponse;
@@ -43,57 +37,41 @@ const ConsistencyParams = models.ConsistencyParams;
 const ModifyMigrateJobRequest = models.ModifyMigrateJobRequest;
 const CreateSubscribeRequest = models.CreateSubscribeRequest;
 const CreateMigrateCheckJobResponse = models.CreateMigrateCheckJobResponse;
-const MigrateStepDetailInfo = models.MigrateStepDetailInfo;
 const ModifySubscribeObjectsRequest = models.ModifySubscribeObjectsRequest;
 const DescribeMigrateCheckJobResponse = models.DescribeMigrateCheckJobResponse;
-const SubscribeRegionConf = models.SubscribeRegionConf;
 const ActivateSubscribeRequest = models.ActivateSubscribeRequest;
 const OfflineIsolatedSubscribeRequest = models.OfflineIsolatedSubscribeRequest;
 const DescribeSubscribesRequest = models.DescribeSubscribesRequest;
 const ResetSubscribeResponse = models.ResetSubscribeResponse;
-const StartSyncJobResponse = models.StartSyncJobResponse;
 const DescribeSubscribesResponse = models.DescribeSubscribesResponse;
-const SyncCheckStepInfo = models.SyncCheckStepInfo;
-const CreateSyncCheckJobResponse = models.CreateSyncCheckJobResponse;
+const ModifySubscribeConsumeTimeRequest = models.ModifySubscribeConsumeTimeRequest;
 const StopMigrateJobRequest = models.StopMigrateJobRequest;
-const DescribeSyncCheckJobRequest = models.DescribeSyncCheckJobRequest;
+const MigrateDetailInfo = models.MigrateDetailInfo;
 const DescribeRegionConfResponse = models.DescribeRegionConfResponse;
-const ModifySyncJobResponse = models.ModifySyncJobResponse;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
-const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
+const SubscribeInfo = models.SubscribeInfo;
 const ResetSubscribeRequest = models.ResetSubscribeRequest;
 const TagItem = models.TagItem;
 const TagFilter = models.TagFilter;
-const ModifySubscribeConsumeTimeRequest = models.ModifySubscribeConsumeTimeRequest;
-const SwitchDrToMasterResponse = models.SwitchDrToMasterResponse;
 const ModifyMigrateJobResponse = models.ModifyMigrateJobResponse;
-const CreateSyncJobRequest = models.CreateSyncJobRequest;
-const DescribeSyncJobsRequest = models.DescribeSyncJobsRequest;
 const DescribeMigrateJobsRequest = models.DescribeMigrateJobsRequest;
-const SyncDetailInfo = models.SyncDetailInfo;
 const StopMigrateJobResponse = models.StopMigrateJobResponse;
-const SyncOption = models.SyncOption;
 const OfflineIsolatedSubscribeResponse = models.OfflineIsolatedSubscribeResponse;
-const SyncStepDetailInfo = models.SyncStepDetailInfo;
 const IsolateSubscribeRequest = models.IsolateSubscribeRequest;
-const DeleteSyncJobResponse = models.DeleteSyncJobResponse;
-const CreateSyncCheckJobRequest = models.CreateSyncCheckJobRequest;
-const ModifySyncJobRequest = models.ModifySyncJobRequest;
+const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
+const MigrateJobInfo = models.MigrateJobInfo;
 const DescribeRegionConfRequest = models.DescribeRegionConfRequest;
 const CompleteMigrateJobResponse = models.CompleteMigrateJobResponse;
-const StartMigrateJobResponse = models.StartMigrateJobResponse;
 const SubscribeObject = models.SubscribeObject;
 const CreateMigrateJobResponse = models.CreateMigrateJobResponse;
 const DescribeSubscribeConfRequest = models.DescribeSubscribeConfRequest;
 const ModifySubscribeVipVportResponse = models.ModifySubscribeVipVportResponse;
-const MigrateJobInfo = models.MigrateJobInfo;
 const DeleteMigrateJobRequest = models.DeleteMigrateJobRequest;
-const DeleteSyncJobRequest = models.DeleteSyncJobRequest;
 const ActivateSubscribeResponse = models.ActivateSubscribeResponse;
 const CreateSubscribeResponse = models.CreateSubscribeResponse;
 const MigrateOption = models.MigrateOption;
 const ErrorInfo = models.ErrorInfo;
-const DescribeSyncCheckJobResponse = models.DescribeSyncCheckJobResponse;
+const StartMigrateJobResponse = models.StartMigrateJobResponse;
 const StartMigrateJobRequest = models.StartMigrateJobRequest;
 
 
@@ -108,28 +86,6 @@ class DtsClient extends AbstractClient {
     }
     
     /**
-     * This API is used to delete a disaster recovery sync task. Sync tasks that are running cannot be deleted.
-     * @param {DeleteSyncJobRequest} req
-     * @param {function(string, DeleteSyncJobResponse):void} cb
-     * @public
-     */
-    DeleteSyncJob(req, cb) {
-        let resp = new DeleteSyncJobResponse();
-        this.request("DeleteSyncJob", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query disaster recovery sync tasks initiated on the DTS platform.
-     * @param {DescribeSyncJobsRequest} req
-     * @param {function(string, DescribeSyncJobsResponse):void} cb
-     * @public
-     */
-    DescribeSyncJobs(req, cb) {
-        let resp = new DescribeSyncJobsResponse();
-        this.request("DescribeSyncJobs", req, resp, cb);
-    }
-
-    /**
      * This API is used to configure a data subscription, which can be called only for subscription instances in unconfigured status.
      * @param {ActivateSubscribeRequest} req
      * @param {function(string, ActivateSubscribeResponse):void} cb
@@ -141,31 +97,6 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a disaster recovery sync task. 
-If the status of a sync task is creating, created, check succeeded, or check failed, this API can be called to modify the task. 
-The information of the source and target instances cannot be modified, but the task name and the tables to be synced can.
-     * @param {ModifySyncJobRequest} req
-     * @param {function(string, ModifySyncJobResponse):void} cb
-     * @public
-     */
-    ModifySyncJob(req, cb) {
-        let resp = new ModifySyncJobResponse();
-        this.request("ModifySyncJob", req, resp, cb);
-    }
-
-    /**
-     * This API (CreateSyncJob) is used to create a disaster recovery sync task.
-After successful creation, check can be initiated through the CreateSyncCheckJob API. The sync task can be started through the StartSyncJob API only if the check succeeds.
-     * @param {CreateSyncJobRequest} req
-     * @param {function(string, CreateSyncJobResponse):void} cb
-     * @public
-     */
-    CreateSyncJob(req, cb) {
-        let resp = new CreateSyncJobResponse();
-        this.request("CreateSyncJob", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify the subscription rule of a data subscription channel.
      * @param {ModifySubscribeObjectsRequest} req
      * @param {function(string, ModifySubscribeObjectsResponse):void} cb
@@ -174,17 +105,6 @@ After successful creation, check can be initiated through the CreateSyncCheckJob
     ModifySubscribeObjects(req, cb) {
         let resp = new ModifySubscribeObjectsResponse();
         this.request("ModifySubscribeObjects", req, resp, cb);
-    }
-
-    /**
-     * This API is used to start a disaster recovery sync task after it is successfully checked through the CreateSyncCheckJob and DescribeSyncCheckJob APIs.
-     * @param {StartSyncJobRequest} req
-     * @param {function(string, StartSyncJobResponse):void} cb
-     * @public
-     */
-    StartSyncJob(req, cb) {
-        let resp = new StartSyncJobResponse();
-        this.request("StartSyncJob", req, resp, cb);
     }
 
     /**
@@ -209,17 +129,6 @@ If the check fails, the reason can be queried. Please modify the migration confi
     DescribeAsyncRequestInfo(req, cb) {
         let resp = new DescribeAsyncRequestInfoResponse();
         this.request("DescribeAsyncRequestInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to promote a disaster recovery instance to a master instance, which will stop sync from the original master instance and end the master/slave relationship.
-     * @param {SwitchDrToMasterRequest} req
-     * @param {function(string, SwitchDrToMasterResponse):void} cb
-     * @public
-     */
-    SwitchDrToMaster(req, cb) {
-        let resp = new SwitchDrToMasterResponse();
-        this.request("SwitchDrToMaster", req, resp, cb);
     }
 
     /**
@@ -266,22 +175,6 @@ For a finance zone linkage, please use the domain name https://dts.ap-shenzhen-f
     DescribeSubscribes(req, cb) {
         let resp = new DescribeSubscribesResponse();
         this.request("DescribeSubscribes", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the check result after a disaster recovery sync check task is created through the CreateSyncCheckJob API. Check status and progress can be queried.
-If the check succeeds, you can call the StartSyncJob API to start the sync task.
-If the check fails, the reason will be returned. You can modify the configuration through the ModifySyncJob API and initiate check again.
-It takes about 30 seconds to complete the check task. If the returned status is not "finished", the check has not been completed, and this API needs to be polled.
-If Status=finished and CheckFlag=1, the check succeeds.
-If Status=finished and CheckFlag !=1, the check fails.
-     * @param {DescribeSyncCheckJobRequest} req
-     * @param {function(string, DescribeSyncCheckJobResponse):void} cb
-     * @public
-     */
-    DescribeSyncCheckJob(req, cb) {
-        let resp = new DescribeSyncCheckJobResponse();
-        this.request("DescribeSyncCheckJob", req, resp, cb);
     }
 
     /**
@@ -341,18 +234,6 @@ After successful check, if the migration task needs to be modified, a new check 
     ModifySubscribeName(req, cb) {
         let resp = new ModifySubscribeNameResponse();
         this.request("ModifySubscribeName", req, resp, cb);
-    }
-
-    /**
-     * Before the StartSyncJob API is called to start disaster recovery sync, this API should be called first to create a check. Data sync can start only if the check succeeds. You can view the check result through the DescribeSyncCheckJob API.
-Sync can begin only if the check succeeds.
-     * @param {CreateSyncCheckJobRequest} req
-     * @param {function(string, CreateSyncCheckJobResponse):void} cb
-     * @public
-     */
-    CreateSyncCheckJob(req, cb) {
-        let resp = new CreateSyncCheckJobResponse();
-        this.request("CreateSyncCheckJob", req, resp, cb);
     }
 
     /**

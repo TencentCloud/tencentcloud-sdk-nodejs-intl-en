@@ -173,7 +173,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * 
+ * Custom HTTPS forwarding configuration
  * @class
  */
 class AdvanceHttps extends  AbstractModel {
@@ -181,37 +181,46 @@ class AdvanceHttps extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Custom TLS data switch
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CustomTlsStatus = null;
 
         /**
-         * 
+         * Specifies the TLS version. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.TlsVersion = null;
 
         /**
-         * 
+         * Custom encryption suite
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Cipher = null;
 
         /**
-         * 
+         * Origin authentication type
+`off`: disable authentication
+`oneWay`: authenticate the origin 
+`twoWay`: two-way authentication
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VerifyOriginType = null;
 
         /**
-         * 
+         * Information of the origin-pull certificate
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {ServerCert || null}
          */
         this.CertInfo = null;
 
         /**
-         * 
+         * Information of the origin server certificate
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {ClientCert || null}
          */
         this.OriginCertInfo = null;
@@ -2483,7 +2492,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.PathBasedOrigin = null;
 
         /**
-         * 
+         * Advanced HTTPS forwarding configuration
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {AdvanceHttps || null}
          */
         this.AdvanceHttps = null;

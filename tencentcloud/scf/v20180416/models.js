@@ -1268,6 +1268,62 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * GetRequestStatus request structure.
+ * @class
+ */
+class GetRequestStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * ID of the request to be queried
+         * @type {string || null}
+         */
+        this.FunctionRequestId = null;
+
+        /**
+         * Function namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Start time of the query, for example `2017-05-16 20:00:00`. If it’s left empty, it defaults to the current time minus 24 hours.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the query, for example `2017-05-16 20:59:59`. If it’s left empty, it defaults to the current time. Note that the EndTime should be later than the StartTime
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionRequestId = 'FunctionRequestId' in params ? params.FunctionRequestId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * Log filtering criteria, which is for distinguishing between logs of successful and failed execution
  * @class
  */
@@ -1392,6 +1448,12 @@ class DeleteFunctionRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * Function version. Enter the number of the version that needs to be deleted, otherwise all versions of the function will be deleted.
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
     }
 
     /**
@@ -1403,6 +1465,7 @@ class DeleteFunctionRequest extends  AbstractModel {
         }
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
 
     }
 }
@@ -1935,16 +1998,16 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
         super();
 
         /**
-         * Function handler name, which is in the `file name.function name` form. Use a period (.) to separate a file name and function name. The file name and function name must start and end with letters and contain 2-60 characters, including letters, digits, underscores (_), and hyphens (-).
-         * @type {string || null}
-         */
-        this.Handler = null;
-
-        /**
          * Name of the function to be modified
          * @type {string || null}
          */
         this.FunctionName = null;
+
+        /**
+         * Function handler name, which is in the `file name.function name` form. Use a period (.) to separate a file name and function name. The file name and function name must start and end with letters and contain 2-60 characters, including letters, digits, underscores (_), and hyphens (-).
+         * @type {string || null}
+         */
+        this.Handler = null;
 
         /**
          * COS bucket name
@@ -1975,6 +2038,12 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.CosBucketRegion = null;
+
+        /**
+         * Whether to install dependencies automatically
+         * @type {string || null}
+         */
+        this.InstallDependency = null;
 
         /**
          * Function environment
@@ -2009,13 +2078,14 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Handler = 'Handler' in params ? params.Handler : null;
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Handler = 'Handler' in params ? params.Handler : null;
         this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
         this.CosObjectName = 'CosObjectName' in params ? params.CosObjectName : null;
         this.ZipFile = 'ZipFile' in params ? params.ZipFile : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.CosBucketRegion = 'CosBucketRegion' in params ? params.CosBucketRegion : null;
+        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
         this.Publish = 'Publish' in params ? params.Publish : null;
 
@@ -2380,7 +2450,7 @@ class TerminateAsyncEventRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Specifies whether to enable graceful shutdown
+         * Disused
          * @type {boolean || null}
          */
         this.GraceShutdown = null;
@@ -3504,6 +3574,83 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Running status of the function
+ * @class
+ */
+class RequestStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Return value after the function is executed
+         * @type {string || null}
+         */
+        this.RetMsg = null;
+
+        /**
+         * Request ID
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+        /**
+         * Request start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Result of the request. `0`: succeeded, `1`: running, `-1`: exception
+         * @type {number || null}
+         */
+        this.RetCode = null;
+
+        /**
+         * Time consumed for the request in ms
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Time consumed by the request in MB
+         * @type {number || null}
+         */
+        this.MemUsage = null;
+
+        /**
+         * Retry Attempts
+         * @type {number || null}
+         */
+        this.RetryNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.RetMsg = 'RetMsg' in params ? params.RetMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
+        this.RetryNum = 'RetryNum' in params ? params.RetryNum : null;
+
+    }
+}
+
+/**
  * CreateFunction request structure.
  * @class
  */
@@ -3802,6 +3949,34 @@ class PutTotalConcurrencyConfigResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAsyncEventStatus request structure.
+ * @class
+ */
+class GetAsyncEventStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the async execution request
+         * @type {string || null}
+         */
+        this.InvokeRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
 
     }
 }
@@ -4148,7 +4323,7 @@ class InvokeRequest extends  AbstractModel {
         this.InvocationType = null;
 
         /**
-         * Version number or name of the triggered function
+         * The version or alias of the triggered function. It defaults to $LATEST
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -4655,7 +4830,10 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * Fields to be filtered
+         * Fields to be filtered. Up to 10 conditions allowed.
+Values of `Name`: `VpcId`, `SubnetId`, `ClsTopicId`, `ClsLogsetId`, `Role`, `CfsId`, `CfsMountInsId`, `Eip`. Values limit: 1.
+Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.
+When `Name` is `Runtime`, `CustomImage` refers to the image type function 
          * @type {string || null}
          */
         this.Name = null;
@@ -5473,6 +5651,100 @@ Deleted: deleted
 }
 
 /**
+ * GetRequestStatus response structure.
+ * @class
+ */
+class GetRequestStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total running functions
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Details of the function running status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RequestStatus> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new RequestStatus();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Async event status
+ * @class
+ */
+class AsyncEventStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async event status. Values: `RUNNING` (running); `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Request status code
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * Async execution request ID
+         * @type {string || null}
+         */
+        this.InvokeRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
+
+    }
+}
+
+/**
  * PutReservedConcurrencyConfig response structure.
  * @class
  */
@@ -6005,6 +6277,13 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.ModTime = null;
 
+        /**
+         * Version status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -6018,6 +6297,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.Description = 'Description' in params ? params.Description : null;
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -6215,6 +6495,46 @@ class ListFunctionsResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAsyncEventStatus response structure.
+ * @class
+ */
+class GetAsyncEventStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async event status
+         * @type {AsyncEventStatus || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new AsyncEventStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6907,7 +7227,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.RegistryId = null;
 
         /**
-         * Entry point of the application
+         * Disused
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -7348,6 +7668,7 @@ module.exports = {
     GetFunctionLogsRequest: GetFunctionLogsRequest,
     StatusReason: StatusReason,
     Tag: Tag,
+    GetRequestStatusRequest: GetRequestStatusRequest,
     LogFilter: LogFilter,
     EipConfigIn: EipConfigIn,
     ListLayerVersionsResponse: ListLayerVersionsResponse,
@@ -7388,9 +7709,11 @@ module.exports = {
     CreateAliasResponse: CreateAliasResponse,
     LogSearchContext: LogSearchContext,
     TriggerInfo: TriggerInfo,
+    RequestStatus: RequestStatus,
     CreateFunctionRequest: CreateFunctionRequest,
     GetAccountRequest: GetAccountRequest,
     PutTotalConcurrencyConfigResponse: PutTotalConcurrencyConfigResponse,
+    GetAsyncEventStatusRequest: GetAsyncEventStatusRequest,
     DeleteAliasResponse: DeleteAliasResponse,
     PublishVersionResponse: PublishVersionResponse,
     AsyncEvent: AsyncEvent,
@@ -7417,6 +7740,8 @@ module.exports = {
     PutTotalConcurrencyConfigRequest: PutTotalConcurrencyConfigRequest,
     UpdateNamespaceRequest: UpdateNamespaceRequest,
     GetLayerVersionResponse: GetLayerVersionResponse,
+    GetRequestStatusResponse: GetRequestStatusResponse,
+    AsyncEventStatus: AsyncEventStatus,
     PutReservedConcurrencyConfigResponse: PutReservedConcurrencyConfigResponse,
     FunctionLog: FunctionLog,
     InvokeFunctionRequest: InvokeFunctionRequest,
@@ -7431,6 +7756,7 @@ module.exports = {
     DeadLetterConfig: DeadLetterConfig,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
     ListFunctionsResponse: ListFunctionsResponse,
+    GetAsyncEventStatusResponse: GetAsyncEventStatusResponse,
     ListTriggersRequest: ListTriggersRequest,
     CreateFunctionResponse: CreateFunctionResponse,
     GetReservedConcurrencyConfigRequest: GetReservedConcurrencyConfigRequest,

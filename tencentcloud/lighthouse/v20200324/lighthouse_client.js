@@ -18,7 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeInstancesTrafficPackagesRequest = models.DescribeInstancesTrafficPackagesRequest;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
-const ResetInstanceBlueprint = models.ResetInstanceBlueprint;
+const DescribeDisksDeniedActionsRequest = models.DescribeDisksDeniedActionsRequest;
 const DescribeInstancesTrafficPackagesResponse = models.DescribeInstancesTrafficPackagesResponse;
 const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
@@ -27,6 +27,7 @@ const DescribeSnapshotsDeniedActionsResponse = models.DescribeSnapshotsDeniedAct
 const RegionInfo = models.RegionInfo;
 const DescribeBlueprintInstancesResponse = models.DescribeBlueprintInstancesResponse;
 const InstanceDeniedActions = models.InstanceDeniedActions;
+const InquirePriceCreateDisksRequest = models.InquirePriceCreateDisksRequest;
 const ModifyBundle = models.ModifyBundle;
 const DetachCcnResponse = models.DetachCcnResponse;
 const CreateInstanceSnapshotResponse = models.CreateInstanceSnapshotResponse;
@@ -35,23 +36,30 @@ const DeleteFirewallRulesResponse = models.DeleteFirewallRulesResponse;
 const DescribeGeneralResourceQuotasRequest = models.DescribeGeneralResourceQuotasRequest;
 const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
-const ResetInstanceRequest = models.ResetInstanceRequest;
+const ResetInstanceBlueprint = models.ResetInstanceBlueprint;
 const DescribeBundlesResponse = models.DescribeBundlesResponse;
 const InquirePriceRenewInstancesRequest = models.InquirePriceRenewInstancesRequest;
+const DiscountDetail = models.DiscountDetail;
+const DescribeDiskConfigsRequest = models.DescribeDiskConfigsRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
+const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsRequest;
 const AttachCcnResponse = models.AttachCcnResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
 const ResetAttachCcnRequest = models.ResetAttachCcnRequest;
-const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsRequest;
+const AttachDisksRequest = models.AttachDisksRequest;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
-const ZoneInfo = models.ZoneInfo;
+const TerminateDisksResponse = models.TerminateDisksResponse;
 const KeyPair = models.KeyPair;
 const DescribeFirewallRulesTemplateRequest = models.DescribeFirewallRulesTemplateRequest;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ModifyBlueprintAttributeRequest = models.ModifyBlueprintAttributeRequest;
+const InquirePriceRenewDisksRequest = models.InquirePriceRenewDisksRequest;
+const Disk = models.Disk;
+const ZoneInfo = models.ZoneInfo;
 const DescribeBlueprintInstancesRequest = models.DescribeBlueprintInstancesRequest;
 const ApplyInstanceSnapshotResponse = models.ApplyInstanceSnapshotResponse;
+const DetachDisksRequest = models.DetachDisksRequest;
 const ModifyFirewallRulesRequest = models.ModifyFirewallRulesRequest;
 const CreateBlueprintRequest = models.CreateBlueprintRequest;
 const DeleteFirewallRulesRequest = models.DeleteFirewallRulesRequest;
@@ -61,29 +69,36 @@ const InstanceTrafficPackage = models.InstanceTrafficPackage;
 const StartInstancesResponse = models.StartInstancesResponse;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const TrafficPackage = models.TrafficPackage;
-const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
+const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const DescribeBlueprintsRequest = models.DescribeBlueprintsRequest;
 const InstanceReturnable = models.InstanceReturnable;
 const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
+const ModifyDisksAttributeRequest = models.ModifyDisksAttributeRequest;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const SnapshotDeniedActions = models.SnapshotDeniedActions;
 const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
+const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
+const DescribeDisksResponse = models.DescribeDisksResponse;
+const DescribeBundleDiscountResponse = models.DescribeBundleDiscountResponse;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
+const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
+const DataDiskPrice = models.DataDiskPrice;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
 const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
 const FirewallRule = models.FirewallRule;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
-const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
+const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const InquirePriceCreateBlueprintResponse = models.InquirePriceCreateBlueprintResponse;
 const DescribeInstancesReturnableRequest = models.DescribeInstancesReturnableRequest;
-const StopInstancesRequest = models.StopInstancesRequest;
+const DiskReturnable = models.DiskReturnable;
 const DescribeBlueprintsResponse = models.DescribeBlueprintsResponse;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
@@ -93,15 +108,20 @@ const Instance = models.Instance;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const ModifyFirewallRulesResponse = models.ModifyFirewallRulesResponse;
+const DiskPrice = models.DiskPrice;
 const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
 const DescribeBundlesRequest = models.DescribeBundlesRequest;
 const Blueprint = models.Blueprint;
 const DeniedAction = models.DeniedAction;
 const ModifyInstancesLoginKeyPairAttributeResponse = models.ModifyInstancesLoginKeyPairAttributeResponse;
+const InquirePriceRenewDisksResponse = models.InquirePriceRenewDisksResponse;
 const Bundle = models.Bundle;
+const DiskConfig = models.DiskConfig;
 const InquirePriceCreateInstancesResponse = models.InquirePriceCreateInstancesResponse;
 const DescribeSnapshotsDeniedActionsRequest = models.DescribeSnapshotsDeniedActionsRequest;
+const DescribeDiskDiscountResponse = models.DescribeDiskDiscountResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
+const DiskChargePrepaid = models.DiskChargePrepaid;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DetachCcnRequest = models.DetachCcnRequest;
@@ -109,7 +129,9 @@ const Filter = models.Filter;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const Snapshot = models.Snapshot;
 const ModifyFirewallRuleDescriptionResponse = models.ModifyFirewallRuleDescriptionResponse;
+const DescribeDiskDiscountRequest = models.DescribeDiskDiscountRequest;
 const InquirePriceCreateBlueprintRequest = models.InquirePriceCreateBlueprintRequest;
+const AttachDisksResponse = models.AttachDisksResponse;
 const CreateFirewallRulesRequest = models.CreateFirewallRulesRequest;
 const Software = models.Software;
 const DescribeFirewallRulesResponse = models.DescribeFirewallRulesResponse;
@@ -117,34 +139,52 @@ const DescribeInstancesReturnableResponse = models.DescribeInstancesReturnableRe
 const DeleteBlueprintsRequest = models.DeleteBlueprintsRequest;
 const FirewallRuleInfo = models.FirewallRuleInfo;
 const CreateFirewallRulesResponse = models.CreateFirewallRulesResponse;
+const DescribeDisksRequest = models.DescribeDisksRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const CreateBlueprintResponse = models.CreateBlueprintResponse;
+const PolicyDetail = models.PolicyDetail;
+const DetachDisksResponse = models.DetachDisksResponse;
 const DescribeResetInstanceBlueprintsRequest = models.DescribeResetInstanceBlueprintsRequest;
 const ResetAttachCcnResponse = models.ResetAttachCcnResponse;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
 const ApplyInstanceSnapshotRequest = models.ApplyInstanceSnapshotRequest;
+const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
+const RenewDiskChargePrepaid = models.RenewDiskChargePrepaid;
+const TerminateDisksRequest = models.TerminateDisksRequest;
+const ResetInstanceRequest = models.ResetInstanceRequest;
+const DescribeDiskConfigsResponse = models.DescribeDiskConfigsResponse;
 const InternetAccessible = models.InternetAccessible;
 const RebootInstancesResponse = models.RebootInstancesResponse;
+const DescribeDisksDeniedActionsResponse = models.DescribeDisksDeniedActionsResponse;
 const DescribeInstanceLoginKeyPairAttributeRequest = models.DescribeInstanceLoginKeyPairAttributeRequest;
+const DescribeBundleDiscountRequest = models.DescribeBundleDiscountRequest;
 const Price = models.Price;
+const DescribeDisksReturnableResponse = models.DescribeDisksReturnableResponse;
 const BlueprintPrice = models.BlueprintPrice;
 const GeneralResourceQuota = models.GeneralResourceQuota;
 const DescribeResetInstanceBlueprintsResponse = models.DescribeResetInstanceBlueprintsResponse;
+const DescribeDisksReturnableRequest = models.DescribeDisksReturnableRequest;
 const SoftwareDetail = models.SoftwareDetail;
 const InstancePrice = models.InstancePrice;
+const Tag = models.Tag;
 const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const DescribeGeneralResourceQuotasResponse = models.DescribeGeneralResourceQuotasResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
-const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
+const StopInstancesRequest = models.StopInstancesRequest;
+const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const DescribeFirewallRulesRequest = models.DescribeFirewallRulesRequest;
+const DiskDeniedActions = models.DiskDeniedActions;
 const InquirePriceCreateInstancesRequest = models.InquirePriceCreateInstancesRequest;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const DescribeModifyInstanceBundlesResponse = models.DescribeModifyInstanceBundlesResponse;
+const AttachDetail = models.AttachDetail;
+const ModifyDisksAttributeResponse = models.ModifyDisksAttributeResponse;
 const CreateInstanceSnapshotRequest = models.CreateInstanceSnapshotRequest;
 const BlueprintInstance = models.BlueprintInstance;
+const InquirePriceCreateDisksResponse = models.InquirePriceCreateDisksResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const DescribeInstanceLoginKeyPairAttributeResponse = models.DescribeInstanceLoginKeyPairAttributeResponse;
@@ -207,14 +247,14 @@ In the `FirewallRule` parameter:
     }
 
     /**
-     * This API is used to query the list of package options of an instance.
-     * @param {DescribeModifyInstanceBundlesRequest} req
-     * @param {function(string, DescribeModifyInstanceBundlesResponse):void} cb
+     * This API is used to query the number of cloud disks attached to instances.
+     * @param {DescribeInstancesDiskNumRequest} req
+     * @param {function(string, DescribeInstancesDiskNumResponse):void} cb
      * @public
      */
-    DescribeModifyInstanceBundles(req, cb) {
-        let resp = new DescribeModifyInstanceBundlesResponse();
-        this.request("DescribeModifyInstanceBundles", req, resp, cb);
+    DescribeInstancesDiskNum(req, cb) {
+        let resp = new DescribeInstancesDiskNumResponse();
+        this.request("DescribeInstancesDiskNum", req, resp, cb);
     }
 
     /**
@@ -279,14 +319,25 @@ In the `FirewallRules` parameter:
     }
 
     /**
-     * This API is used to query a firewall rule template.
-     * @param {DescribeFirewallRulesTemplateRequest} req
-     * @param {function(string, DescribeFirewallRulesTemplateResponse):void} cb
+     * This API is used to query the list of package options of an instance.
+     * @param {DescribeModifyInstanceBundlesRequest} req
+     * @param {function(string, DescribeModifyInstanceBundlesResponse):void} cb
      * @public
      */
-    DescribeFirewallRulesTemplate(req, cb) {
-        let resp = new DescribeFirewallRulesTemplateResponse();
-        this.request("DescribeFirewallRulesTemplate", req, resp, cb);
+    DescribeModifyInstanceBundles(req, cb) {
+        let resp = new DescribeModifyInstanceBundlesResponse();
+        this.request("DescribeModifyInstanceBundles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of instances associated with CCN.
+     * @param {DescribeCcnAttachedInstancesRequest} req
+     * @param {function(string, DescribeCcnAttachedInstancesResponse):void} cb
+     * @public
+     */
+    DescribeCcnAttachedInstances(req, cb) {
+        let resp = new DescribeCcnAttachedInstancesResponse();
+        this.request("DescribeCcnAttachedInstances", req, resp, cb);
     }
 
     /**
@@ -323,14 +374,25 @@ In the `FirewallRules` parameter:
     }
 
     /**
-     * This API is used to query the information of instances associated with CCN.
-     * @param {DescribeCcnAttachedInstancesRequest} req
-     * @param {function(string, DescribeCcnAttachedInstancesResponse):void} cb
+     * This API is used to modify the configuration of auto-renewal of cloud disks.
+     * @param {ModifyDisksRenewFlagRequest} req
+     * @param {function(string, ModifyDisksRenewFlagResponse):void} cb
      * @public
      */
-    DescribeCcnAttachedInstances(req, cb) {
-        let resp = new DescribeCcnAttachedInstancesResponse();
-        this.request("DescribeCcnAttachedInstances", req, resp, cb);
+    ModifyDisksRenewFlag(req, cb) {
+        let resp = new ModifyDisksRenewFlagResponse();
+        this.request("ModifyDisksRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a firewall rule template.
+     * @param {DescribeFirewallRulesTemplateRequest} req
+     * @param {function(string, DescribeFirewallRulesTemplateResponse):void} cb
+     * @public
+     */
+    DescribeFirewallRulesTemplate(req, cb) {
+        let resp = new DescribeFirewallRulesTemplateResponse();
+        this.request("DescribeFirewallRulesTemplate", req, resp, cb);
     }
 
     /**
@@ -380,6 +442,17 @@ In the `FirewallRules` parameter:
     InquirePriceCreateBlueprint(req, cb) {
         let resp = new InquirePriceCreateBlueprintResponse();
         this.request("InquirePriceCreateBlueprint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to attach one or more cloud disks.
+     * @param {AttachDisksRequest} req
+     * @param {function(string, AttachDisksResponse):void} cb
+     * @public
+     */
+    AttachDisks(req, cb) {
+        let resp = new AttachDisksResponse();
+        this.request("AttachDisks", req, resp, cb);
     }
 
     /**
@@ -437,6 +510,17 @@ In the `FirewallRules` parameter:
     }
 
     /**
+     * This API is used to query the discount information of a package.
+     * @param {DescribeBundleDiscountRequest} req
+     * @param {function(string, DescribeBundleDiscountResponse):void} cb
+     * @public
+     */
+    DescribeBundleDiscount(req, cb) {
+        let resp = new DescribeBundleDiscountResponse();
+        this.request("DescribeBundleDiscount", req, resp, cb);
+    }
+
+    /**
      * This API is used to associate a CCN instance.
      * @param {AttachCcnRequest} req
      * @param {function(string, AttachCcnResponse):void} cb
@@ -486,19 +570,14 @@ Note: Just like powering off a physical PC, a forced shutdown may cause data los
     }
 
     /**
-     * This API is used to reinstall the image on the specified instance.
-
-* If you specify a `BlueprintId`, the specified image is used; otherwise, the image used by the current instance is used.
-* The system disk will be formatted and reset. Therefore, make sure that no important files are stored on the system disk.
-* Currently, this API does not support switching the operating system between `LINUX_UNIX` and `WINDOWS` for instances.
-* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
-     * @param {ResetInstanceRequest} req
-     * @param {function(string, ResetInstanceResponse):void} cb
+     * This API is used to query the list of operation limits of one or more cloud disks.
+     * @param {DescribeDisksDeniedActionsRequest} req
+     * @param {function(string, DescribeDisksDeniedActionsResponse):void} cb
      * @public
      */
-    ResetInstance(req, cb) {
-        let resp = new ResetInstanceResponse();
-        this.request("ResetInstance", req, resp, cb);
+    DescribeDisksDeniedActions(req, cb) {
+        let resp = new DescribeDisksDeniedActionsResponse();
+        this.request("DescribeDisksDeniedActions", req, resp, cb);
     }
 
     /**
@@ -510,6 +589,17 @@ Note: Just like powering off a physical PC, a forced shutdown may cause data los
     DescribeFirewallRules(req, cb) {
         let resp = new DescribeFirewallRulesResponse();
         this.request("DescribeFirewallRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of one or more cloud disks.
+     * @param {DescribeDisksRequest} req
+     * @param {function(string, DescribeDisksResponse):void} cb
+     * @public
+     */
+    DescribeDisks(req, cb) {
+        let resp = new DescribeDisksResponse();
+        this.request("DescribeDisks", req, resp, cb);
     }
 
     /**
@@ -535,14 +625,14 @@ Note: Just like powering off a physical PC, a forced shutdown may cause data los
     }
 
     /**
-     * This API is used to create a system disk snapshot of the specified instance.
-     * @param {CreateInstanceSnapshotRequest} req
-     * @param {function(string, CreateInstanceSnapshotResponse):void} cb
+     * This API is used to query the list of operation limits of one or more instances.
+     * @param {DescribeInstancesDeniedActionsRequest} req
+     * @param {function(string, DescribeInstancesDeniedActionsResponse):void} cb
      * @public
      */
-    CreateInstanceSnapshot(req, cb) {
-        let resp = new CreateInstanceSnapshotResponse();
-        this.request("CreateInstanceSnapshot", req, resp, cb);
+    DescribeInstancesDeniedActions(req, cb) {
+        let resp = new DescribeInstancesDeniedActionsResponse();
+        this.request("DescribeInstancesDeniedActions", req, resp, cb);
     }
 
     /**
@@ -580,14 +670,25 @@ The snapshot must be in `NORMAL` status. To query the status of a snapshot, you 
     }
 
     /**
-     * This API is used to query the list of operation limits of one or more instances.
-     * @param {DescribeInstancesDeniedActionsRequest} req
-     * @param {function(string, DescribeInstancesDeniedActionsResponse):void} cb
+     * This API is used to create a system disk snapshot of the specified instance.
+     * @param {CreateInstanceSnapshotRequest} req
+     * @param {function(string, CreateInstanceSnapshotResponse):void} cb
      * @public
      */
-    DescribeInstancesDeniedActions(req, cb) {
-        let resp = new DescribeInstancesDeniedActionsResponse();
-        this.request("DescribeInstancesDeniedActions", req, resp, cb);
+    CreateInstanceSnapshot(req, cb) {
+        let resp = new CreateInstanceSnapshotResponse();
+        this.request("CreateInstanceSnapshot", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify cloud disk attributes.
+     * @param {ModifyDisksAttributeRequest} req
+     * @param {function(string, ModifyDisksAttributeResponse):void} cb
+     * @public
+     */
+    ModifyDisksAttribute(req, cb) {
+        let resp = new ModifyDisksAttributeResponse();
+        this.request("ModifyDisksAttribute", req, resp, cb);
     }
 
     /**
@@ -627,6 +728,28 @@ The snapshot must be in `NORMAL` status. To query the status of a snapshot, you 
     }
 
     /**
+     * This API is used to query whether the specified cloud disk can be returned.
+     * @param {DescribeDisksReturnableRequest} req
+     * @param {function(string, DescribeDisksReturnableResponse):void} cb
+     * @public
+     */
+    DescribeDisksReturnable(req, cb) {
+        let resp = new DescribeDisksReturnableResponse();
+        this.request("DescribeDisksReturnable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the price of renewing cloud disks.
+     * @param {InquirePriceRenewDisksRequest} req
+     * @param {function(string, InquirePriceRenewDisksResponse):void} cb
+     * @public
+     */
+    InquirePriceRenewDisks(req, cb) {
+        let resp = new InquirePriceRenewDisksResponse();
+        this.request("InquirePriceRenewDisks", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the information of an image instance.
      * @param {DescribeBlueprintInstancesRequest} req
      * @param {function(string, DescribeBlueprintInstancesResponse):void} cb
@@ -635,6 +758,22 @@ The snapshot must be in `NORMAL` status. To query the status of a snapshot, you 
     DescribeBlueprintInstances(req, cb) {
         let resp = new DescribeBlueprintInstancesResponse();
         this.request("DescribeBlueprintInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reinstall the image on the specified instance.
+
+* If you specify a `BlueprintId`, the specified image is used; otherwise, the image used by the current instance is used.
+* The system disk will be formatted and reset. Therefore, make sure that no important files are stored on the system disk.
+* Currently, this API does not support switching the operating system between `LINUX_UNIX` and `WINDOWS` for instances.
+* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+     * @param {ResetInstanceRequest} req
+     * @param {function(string, ResetInstanceResponse):void} cb
+     * @public
+     */
+    ResetInstance(req, cb) {
+        let resp = new ResetInstanceResponse();
+        this.request("ResetInstance", req, resp, cb);
     }
 
     /**
@@ -727,6 +866,17 @@ In the `FirewallRules` parameter:
     }
 
     /**
+     * This API is used to terminate one or more cloud disk.
+     * @param {TerminateDisksRequest} req
+     * @param {function(string, TerminateDisksResponse):void} cb
+     * @public
+     */
+    TerminateDisks(req, cb) {
+        let resp = new TerminateDisksResponse();
+        this.request("TerminateDisks", req, resp, cb);
+    }
+
+    /**
      * This API is used to start one or more instances.
 
 * You can only perform this operation on instances whose status is `STOPPED`.
@@ -776,6 +926,39 @@ In the `FirewallRules` parameter:
     }
 
     /**
+     * This API is used to query the price of purchasing cloud disks.
+     * @param {InquirePriceCreateDisksRequest} req
+     * @param {function(string, InquirePriceCreateDisksResponse):void} cb
+     * @public
+     */
+    InquirePriceCreateDisks(req, cb) {
+        let resp = new InquirePriceCreateDisksResponse();
+        this.request("InquirePriceCreateDisks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the discount information of a cloud disk.
+     * @param {DescribeDiskDiscountRequest} req
+     * @param {function(string, DescribeDiskDiscountResponse):void} cb
+     * @public
+     */
+    DescribeDiskDiscount(req, cb) {
+        let resp = new DescribeDiskDiscountResponse();
+        this.request("DescribeDiskDiscount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the cloud disk configuration.
+     * @param {DescribeDiskConfigsRequest} req
+     * @param {function(string, DescribeDiskConfigsResponse):void} cb
+     * @public
+     */
+    DescribeDiskConfigs(req, cb) {
+        let resp = new DescribeDiskConfigsResponse();
+        this.request("DescribeDiskConfigs", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of AZs in a region.
      * @param {DescribeZonesRequest} req
      * @param {function(string, DescribeZonesResponse):void} cb
@@ -822,6 +1005,17 @@ In the `FirewallRules` parameter:
     CreateBlueprint(req, cb) {
         let resp = new CreateBlueprintResponse();
         this.request("CreateBlueprint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to detach one or more cloud disks.
+     * @param {DetachDisksRequest} req
+     * @param {function(string, DetachDisksResponse):void} cb
+     * @public
+     */
+    DetachDisks(req, cb) {
+        let resp = new DetachDisksResponse();
+        this.request("DetachDisks", req, resp, cb);
     }
 
 

@@ -87,30 +87,18 @@ class AssociateInstancesKeyPairsResponse extends  AbstractModel {
 }
 
 /**
- * Image reset information
+ * DescribeDisksDeniedActions request structure.
  * @class
  */
-class ResetInstanceBlueprint extends  AbstractModel {
+class DescribeDisksDeniedActionsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image details
-         * @type {Blueprint || null}
+         * List of cloud disk IDs.
+         * @type {Array.<string> || null}
          */
-        this.BlueprintInfo = null;
-
-        /**
-         * Whether the image can be reset as the target image
-         * @type {boolean || null}
-         */
-        this.IsResettable = null;
-
-        /**
-         * Non-Resettable flag. If the image is resettable, it will be ""
-         * @type {string || null}
-         */
-        this.NonResettableMessage = null;
+        this.DiskIds = null;
 
     }
 
@@ -121,14 +109,7 @@ class ResetInstanceBlueprint extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.BlueprintInfo) {
-            let obj = new Blueprint();
-            obj.deserialize(params.BlueprintInfo)
-            this.BlueprintInfo = obj;
-        }
-        this.IsResettable = 'IsResettable' in params ? params.IsResettable : null;
-        this.NonResettableMessage = 'NonResettableMessage' in params ? params.NonResettableMessage : null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
 
     }
 }
@@ -454,6 +435,60 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * InquirePriceCreateDisks request structure.
+ * @class
+ */
+class InquirePriceCreateDisksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk size in GB.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud storage), "CLOUD_SSD" (SSD cloud disk).
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Parameter settings for purchasing the monthly subscribed cloud disk.
+         * @type {DiskChargePrepaid || null}
+         */
+        this.DiskChargePrepaid = null;
+
+        /**
+         * Number of cloud disks. Default value: 1.
+         * @type {number || null}
+         */
+        this.DiskCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+
+        if (params.DiskChargePrepaid) {
+            let obj = new DiskChargePrepaid();
+            obj.deserialize(params.DiskChargePrepaid)
+            this.DiskChargePrepaid = obj;
+        }
+        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
+
+    }
+}
+
+/**
  * Changeable packages for the instance.
  * @class
  */
@@ -586,6 +621,13 @@ class InquirePriceRenewInstancesResponse extends  AbstractModel {
         this.Price = null;
 
         /**
+         * List of data disk price information.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DataDiskPrice> || null}
+         */
+        this.DataDiskPriceSet = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -605,6 +647,15 @@ class InquirePriceRenewInstancesResponse extends  AbstractModel {
             let obj = new Price();
             obj.deserialize(params.Price)
             this.Price = obj;
+        }
+
+        if (params.DataDiskPriceSet) {
+            this.DataDiskPriceSet = new Array();
+            for (let z in params.DataDiskPriceSet) {
+                let obj = new DataDiskPrice();
+                obj.deserialize(params.DataDiskPriceSet[z]);
+                this.DataDiskPriceSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -741,24 +792,30 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ResetInstance request structure.
+ * Image reset information
  * @class
  */
-class ResetInstanceRequest extends  AbstractModel {
+class ResetInstanceBlueprint extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-         * @type {string || null}
+         * Image details
+         * @type {Blueprint || null}
          */
-        this.InstanceId = null;
+        this.BlueprintInfo = null;
 
         /**
-         * Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
+         * Whether the image can be reset as the target image
+         * @type {boolean || null}
+         */
+        this.IsResettable = null;
+
+        /**
+         * Non-Resettable flag. If the image is resettable, it will be ""
          * @type {string || null}
          */
-        this.BlueprintId = null;
+        this.NonResettableMessage = null;
 
     }
 
@@ -769,8 +826,14 @@ class ResetInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+
+        if (params.BlueprintInfo) {
+            let obj = new Blueprint();
+            obj.deserialize(params.BlueprintInfo)
+            this.BlueprintInfo = obj;
+        }
+        this.IsResettable = 'IsResettable' in params ? params.IsResettable : null;
+        this.NonResettableMessage = 'NonResettableMessage' in params ? params.NonResettableMessage : null;
 
     }
 }
@@ -845,6 +908,18 @@ class InquirePriceRenewInstancesRequest extends  AbstractModel {
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * Whether to renew the data disk
+         * @type {boolean || null}
+         */
+        this.RenewDataDisk = null;
+
+        /**
+         * Whether the data disk has the same expiration time as the instance
+         * @type {boolean || null}
+         */
+        this.AlignInstanceExpiredTime = null;
+
     }
 
     /**
@@ -860,6 +935,115 @@ class InquirePriceRenewInstancesRequest extends  AbstractModel {
             let obj = new InstanceChargePrepaid();
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
+        }
+        this.RenewDataDisk = 'RenewDataDisk' in params ? params.RenewDataDisk : null;
+        this.AlignInstanceExpiredTime = 'AlignInstanceExpiredTime' in params ? params.AlignInstanceExpiredTime : null;
+
+    }
+}
+
+/**
+ * Package discount details (only returned for price query APIs called in the console).
+ * @class
+ */
+class DiscountDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Billing duration.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Billing unit.
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * Total price.
+         * @type {number || null}
+         */
+        this.TotalCost = null;
+
+        /**
+         * Discounted total price.
+         * @type {number || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Discount.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * Discount details.
+         * @type {PolicyDetail || null}
+         */
+        this.PolicyDetail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+
+        if (params.PolicyDetail) {
+            let obj = new PolicyDetail();
+            obj.deserialize(params.PolicyDetail)
+            this.PolicyDetail = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeDiskConfigs request structure.
+ * @class
+ */
+class DescribeDiskConfigsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter list.
+<li>zone</li>Filter by availability zone.
+Type: String
+Required: no
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
@@ -911,6 +1095,41 @@ class DescribeRegionsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AssociateInstancesKeyPairs request structure.
+ * @class
+ */
+class AssociateInstancesKeyPairsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key pair ID list. Each request can contain up to 100 key pairs.
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+        /**
+         * Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1000,24 +1219,30 @@ class ResetAttachCcnRequest extends  AbstractModel {
 }
 
 /**
- * AssociateInstancesKeyPairs request structure.
+ * AttachDisks request structure.
  * @class
  */
-class AssociateInstancesKeyPairsRequest extends  AbstractModel {
+class AttachDisksRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Key pair ID list. Each request can contain up to 100 key pairs.
+         * List of cloud disk IDs.
          * @type {Array.<string> || null}
          */
-        this.KeyIds = null;
+        this.DiskIds = null;
 
         /**
-         * Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-         * @type {Array.<string> || null}
+         * Instance ID.
+         * @type {string || null}
          */
-        this.InstanceIds = null;
+        this.InstanceId = null;
+
+        /**
+         * Whether Auto-Renewal is enabled 
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
 
     }
 
@@ -1028,8 +1253,9 @@ class AssociateInstancesKeyPairsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -1141,30 +1367,18 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot sp
 }
 
 /**
- * AZ details
+ * TerminateDisks response structure.
  * @class
  */
-class ZoneInfo extends  AbstractModel {
+class TerminateDisksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Zone = null;
-
-        /**
-         * Chinese name of AZ
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * AZ tags on instance purchase page
-         * @type {string || null}
-         */
-        this.InstanceDisplayLabel = null;
+        this.RequestId = null;
 
     }
 
@@ -1175,9 +1389,7 @@ class ZoneInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.InstanceDisplayLabel = 'InstanceDisplayLabel' in params ? params.InstanceDisplayLabel : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1362,6 +1574,237 @@ class ModifyBlueprintAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * InquirePriceRenewDisks request structure.
+ * @class
+ */
+class InquirePriceRenewDisksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk IDs.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * Parameter settings for renewing the monthly subscribed cloud disk.
+         * @type {RenewDiskChargePrepaid || null}
+         */
+        this.RenewDiskChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+
+        if (params.RenewDiskChargePrepaid) {
+            let obj = new RenewDiskChargePrepaid();
+            obj.deserialize(params.RenewDiskChargePrepaid)
+            this.RenewDiskChargePrepaid = obj;
+        }
+
+    }
+}
+
+/**
+ * Disk information
+ * @class
+ */
+class Disk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Disk ID
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Availability zone
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Disk name
+         * @type {string || null}
+         */
+        this.DiskName = null;
+
+        /**
+         * Disk type
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * Disk media type
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Disk payment type
+         * @type {string || null}
+         */
+        this.DiskChargeType = null;
+
+        /**
+         * Disk size
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Renewal flag
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * Disk status
+         * @type {string || null}
+         */
+        this.DiskState = null;
+
+        /**
+         * Whether the disk is attached to an instance
+         * @type {boolean || null}
+         */
+        this.Attached = null;
+
+        /**
+         * Whether to release the disk along with the instance
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
+        /**
+         * Last operation
+         * @type {string || null}
+         */
+        this.LatestOperation = null;
+
+        /**
+         * Last operation status
+         * @type {string || null}
+         */
+        this.LatestOperationState = null;
+
+        /**
+         * Last request ID
+         * @type {string || null}
+         */
+        this.LatestOperationRequestId = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Expiration date
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * Isolation time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IsolatedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.DiskState = 'DiskState' in params ? params.DiskState : null;
+        this.Attached = 'Attached' in params ? params.Attached : null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.LatestOperation = 'LatestOperation' in params ? params.LatestOperation : null;
+        this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
+        this.LatestOperationRequestId = 'LatestOperationRequestId' in params ? params.LatestOperationRequestId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+
+    }
+}
+
+/**
+ * AZ details
+ * @class
+ */
+class ZoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Chinese name of AZ
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * AZ tags on instance purchase page
+         * @type {string || null}
+         */
+        this.InstanceDisplayLabel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.InstanceDisplayLabel = 'InstanceDisplayLabel' in params ? params.InstanceDisplayLabel : null;
+
+    }
+}
+
+/**
  * DescribeBlueprintInstances request structure.
  * @class
  */
@@ -1413,6 +1856,34 @@ class ApplyInstanceSnapshotResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetachDisks request structure.
+ * @class
+ */
+class DetachDisksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk IDs.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
 
     }
 }
@@ -1826,18 +2297,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DisassociateInstancesKeyPairs response structure.
+ * DescribeInstancesDiskNum request structure.
  * @class
  */
-class DisassociateInstancesKeyPairsResponse extends  AbstractModel {
+class DescribeInstancesDiskNumRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * List of instance IDs.
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -1848,7 +2319,7 @@ class DisassociateInstancesKeyPairsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -2022,6 +2493,41 @@ class DescribeInstancesDeniedActionsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDisksAttribute request structure.
+ * @class
+ */
+class ModifyDisksAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk IDs.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * Cloud disk name.
+         * @type {string || null}
+         */
+        this.DiskName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
+
+    }
+}
+
+/**
  * ModifyInstancesAttribute request structure.
  * @class
  */
@@ -2177,6 +2683,34 @@ class DeleteSnapshotsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDisksRenewFlag response structure.
+ * @class
+ */
+class ModifyDisksRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifySnapshotAttribute request structure.
  * @class
  */
@@ -2212,6 +2746,106 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDisks response structure.
+ * @class
+ */
+class DescribeDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk information.
+         * @type {Array.<Disk> || null}
+         */
+        this.DiskSet = null;
+
+        /**
+         * Number of eligible cloud disks.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskSet) {
+            this.DiskSet = new Array();
+            for (let z in params.DiskSet) {
+                let obj = new Disk();
+                obj.deserialize(params.DiskSet[z]);
+                this.DiskSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBundleDiscount response structure.
+ * @class
+ */
+class DescribeBundleDiscountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Currency: CNY, USD.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
+         * @type {Array.<DiscountDetail> || null}
+         */
+        this.DiscountDetail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Currency = 'Currency' in params ? params.Currency : null;
+
+        if (params.DiscountDetail) {
+            this.DiscountDetail = new Array();
+            for (let z in params.DiscountDetail) {
+                let obj = new DiscountDetail();
+                obj.deserialize(params.DiscountDetail[z]);
+                this.DiscountDetail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteSnapshots response structure.
  * @class
  */
@@ -2235,6 +2869,41 @@ class DeleteSnapshotsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDisksRenewFlag request structure.
+ * @class
+ */
+class ModifyDisksRenewFlagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk IDs.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * Whether Auto-Renewal is enabled 
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -2270,6 +2939,62 @@ class DisassociateInstancesKeyPairsRequest extends  AbstractModel {
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Data disk price
+ * @class
+ */
+class DataDiskPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk ID.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * Cloud disk unit price.
+         * @type {number || null}
+         */
+        this.OriginalDiskPrice = null;
+
+        /**
+         * Total cloud disk price.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discount.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * Discounted total price.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.OriginalDiskPrice = 'OriginalDiskPrice' in params ? params.OriginalDiskPrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
 
     }
 }
@@ -2485,44 +3210,30 @@ class ModifyBlueprintAttributeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeModifyInstanceBundles request structure.
+ * DescribeFirewallRulesTemplate response structure.
  * @class
  */
-class DescribeModifyInstanceBundlesRequest extends  AbstractModel {
+class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
+         * Number of eligible firewall rules.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Firewall rule details list.
+         * @type {Array.<FirewallRuleInfo> || null}
+         */
+        this.FirewallRuleSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Filter list.
-<li>bundle-id</li>Filter by **package ID**.
-Type: String
-Required: no
-<li>support-platform-type</li>Filter by **system type**.
-Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
-Type: String
-Required: no
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -2533,18 +3244,17 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.FirewallRuleSet) {
+            this.FirewallRuleSet = new Array();
+            for (let z in params.FirewallRuleSet) {
+                let obj = new FirewallRuleInfo();
+                obj.deserialize(params.FirewallRuleSet[z]);
+                this.FirewallRuleSet.push(obj);
             }
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2566,6 +3276,56 @@ class DescribeRegionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeInstancesDiskNum response structure.
+ * @class
+ */
+class DescribeInstancesDiskNumResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of all attached disks
+         * @type {Array.<AttachDetail> || null}
+         */
+        this.AttachDetailSet = null;
+
+        /**
+         * Number of attached cloud disks
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AttachDetailSet) {
+            this.AttachDetailSet = new Array();
+            for (let z in params.AttachDetailSet) {
+                let obj = new AttachDetail();
+                obj.deserialize(params.AttachDetailSet[z]);
+                this.AttachDetailSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2653,18 +3413,36 @@ class DescribeInstancesReturnableRequest extends  AbstractModel {
 }
 
 /**
- * StopInstances request structure.
+ * Details of the returnable cloud disk
  * @class
  */
-class StopInstancesRequest extends  AbstractModel {
+class DiskReturnable extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-         * @type {Array.<string> || null}
+         * Cloud disk ID.
+         * @type {string || null}
          */
-        this.InstanceIds = null;
+        this.DiskId = null;
+
+        /**
+         * Whether the cloud disk can be returned.
+         * @type {boolean || null}
+         */
+        this.IsReturnable = null;
+
+        /**
+         * Error code of cloud disk return failure.
+         * @type {number || null}
+         */
+        this.ReturnFailCode = null;
+
+        /**
+         * Error message of cloud disk return failure.
+         * @type {string || null}
+         */
+        this.ReturnFailMessage = null;
 
     }
 
@@ -2675,7 +3453,10 @@ class StopInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.IsReturnable = 'IsReturnable' in params ? params.IsReturnable : null;
+        this.ReturnFailCode = 'ReturnFailCode' in params ? params.ReturnFailCode : null;
+        this.ReturnFailMessage = 'ReturnFailMessage' in params ? params.ReturnFailMessage : null;
 
     }
 }
@@ -3046,6 +3827,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Zone = null;
 
+        /**
+         * The list of tags associated with the instance
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3095,6 +3882,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Platform = 'Platform' in params ? params.Platform : null;
         this.OsName = 'OsName' in params ? params.OsName : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -3198,6 +3994,55 @@ class ModifyFirewallRulesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Cloud disk price
+ * @class
+ */
+class DiskPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk unit price.
+         * @type {number || null}
+         */
+        this.OriginalDiskPrice = null;
+
+        /**
+         * Total cloud disk price.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discount.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * Discounted total price.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalDiskPrice = 'OriginalDiskPrice' in params ? params.OriginalDiskPrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
 
     }
 }
@@ -3525,6 +4370,46 @@ class ModifyInstancesLoginKeyPairAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * InquirePriceRenewDisks response structure.
+ * @class
+ */
+class InquirePriceRenewDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk price.
+         * @type {DiskPrice || null}
+         */
+        this.DiskPrice = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskPrice) {
+            let obj = new DiskPrice();
+            obj.deserialize(params.DiskPrice)
+            this.DiskPrice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Package information.
  * @class
  */
@@ -3657,6 +4542,69 @@ Valid values:
 }
 
 /**
+ * Cloud disk configuration
+ * @class
+ */
+class DiskConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Availability zone.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Cloud disk type.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Cloud disk sale status.
+         * @type {string || null}
+         */
+        this.DiskSalesState = null;
+
+        /**
+         * Maximum cloud disk size.
+         * @type {number || null}
+         */
+        this.MaxDiskSize = null;
+
+        /**
+         * Minimum cloud disk size.
+         * @type {number || null}
+         */
+        this.MinDiskSize = null;
+
+        /**
+         * Cloud disk increment.
+         * @type {number || null}
+         */
+        this.DiskStepSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSalesState = 'DiskSalesState' in params ? params.DiskSalesState : null;
+        this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
+        this.MinDiskSize = 'MinDiskSize' in params ? params.MinDiskSize : null;
+        this.DiskStepSize = 'DiskStepSize' in params ? params.DiskStepSize : null;
+
+    }
+}
+
+/**
  * InquirePriceCreateInstances response structure.
  * @class
  */
@@ -3725,6 +4673,56 @@ class DescribeSnapshotsDeniedActionsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDiskDiscount response structure.
+ * @class
+ */
+class DescribeDiskDiscountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Currency: CNY, USD.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
+         * @type {Array.<DiscountDetail> || null}
+         */
+        this.DiscountDetail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Currency = 'Currency' in params ? params.Currency : null;
+
+        if (params.DiscountDetail) {
+            this.DiscountDetail = new Array();
+            for (let z in params.DiscountDetail) {
+                let obj = new DiscountDetail();
+                obj.deserialize(params.DiscountDetail[z]);
+                this.DiscountDetail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResetInstancesPassword request structure.
  * @class
  */
@@ -3764,6 +4762,48 @@ The password of a `WINDOWS` instance must contain 12–30 characters in at least
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.Password = 'Password' in params ? params.Password : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
+
+    }
+}
+
+/**
+ * Parameter settings for the monthly subscribed cloud disk
+ * @class
+ */
+class DiskChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Purchase duration.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Whether Auto-Renewal is enabled 
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * Purchase duration unit. Default value: "m" (month)
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
 
     }
 }
@@ -4130,6 +5170,41 @@ class ModifyFirewallRuleDescriptionResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDiskDiscount request structure.
+ * @class
+ */
+class DescribeDiskDiscountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk type. Valid values: "CLOUD_PREMIUM".
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Cloud disk size.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+    }
+}
+
+/**
  * InquirePriceCreateBlueprint request structure.
  * @class
  */
@@ -4153,6 +5228,34 @@ class InquirePriceCreateBlueprintRequest extends  AbstractModel {
             return;
         }
         this.BlueprintCount = 'BlueprintCount' in params ? params.BlueprintCount : null;
+
+    }
+}
+
+/**
+ * AttachDisks response structure.
+ * @class
+ */
+class AttachDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4498,6 +5601,102 @@ class CreateFirewallRulesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDisks request structure.
+ * @class
+ */
+class DescribeDisksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk IDs.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * Filter list.
+disk-id
+Filter by **cloud disk ID**.
+Type: String
+Required: no
+instance-id
+Filter by **instance ID**.
+Type: String
+Required: no
+disk-name
+Filter by **cloud disk name**.
+Type: String
+Required: no
+zone
+Filter by **availability zone**.
+Type: String
+Required: no
+disk-usage
+Filter by **cloud disk type**.
+Type: String
+Required: no
+disk-state
+Filter by **cloud disk status**.
+Type: String
+Required: no
+Each request can contain up to 10 filters, each of which can have 5 values. You cannot specify both `DiskIds` and `Filters` at the same time.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The field by which the cloud disks are sorted. Valid values: "CREATED_TIME" (creation time), "EXPIRED_TIME" (expiration time), "DISK_SIZE" (size of cloud disks). Default value: "CREATED_TIME".
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * Sorting order of the output cloud disks. Valid values: "ASC" (ascending order), "DESC" (descending order). Default value: "DESC".
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
  * DescribeInstances response structure.
  * @class
  */
@@ -4627,6 +5826,76 @@ class CreateBlueprintResponse extends  AbstractModel {
             return;
         }
         this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Discount details.
+ * @class
+ */
+class PolicyDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User discount.
+         * @type {number || null}
+         */
+        this.UserDiscount = null;
+
+        /**
+         * Public discount.
+         * @type {number || null}
+         */
+        this.CommonDiscount = null;
+
+        /**
+         * Final discount.
+         * @type {number || null}
+         */
+        this.FinalDiscount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserDiscount = 'UserDiscount' in params ? params.UserDiscount : null;
+        this.CommonDiscount = 'CommonDiscount' in params ? params.CommonDiscount : null;
+        this.FinalDiscount = 'FinalDiscount' in params ? params.FinalDiscount : null;
+
+    }
+}
+
+/**
+ * DetachDisks response structure.
+ * @class
+ */
+class DetachDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4800,6 +6069,34 @@ class ApplyInstanceSnapshotRequest extends  AbstractModel {
 }
 
 /**
+ * DisassociateInstancesKeyPairs response structure.
+ * @class
+ */
+class DisassociateInstancesKeyPairsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * TerminateInstances request structure.
  * @class
  */
@@ -4823,6 +6120,161 @@ class TerminateInstancesRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Parameter settings for renewing the monthly subscribed cloud disk
+ * @class
+ */
+class RenewDiskChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Purchase duration.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Whether Auto-Renewal is enabled 
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * Duration unit. Default value: "m" (month).
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * Expiration time of the current instance.
+         * @type {string || null}
+         */
+        this.CurInstanceDeadline = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.CurInstanceDeadline = 'CurInstanceDeadline' in params ? params.CurInstanceDeadline : null;
+
+    }
+}
+
+/**
+ * TerminateDisks request structure.
+ * @class
+ */
+class TerminateDisksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk IDs.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+
+    }
+}
+
+/**
+ * ResetInstance request structure.
+ * @class
+ */
+class ResetInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.BlueprintId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+
+    }
+}
+
+/**
+ * DescribeDiskConfigs response structure.
+ * @class
+ */
+class DescribeDiskConfigsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk configurations.
+         * @type {Array.<DiskConfig> || null}
+         */
+        this.DiskConfigSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskConfigSet) {
+            this.DiskConfigSet = new Array();
+            for (let z in params.DiskConfigSet) {
+                let obj = new DiskConfig();
+                obj.deserialize(params.DiskConfigSet[z]);
+                this.DiskConfigSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4900,6 +6352,49 @@ class RebootInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDisksDeniedActions response structure.
+ * @class
+ */
+class DescribeDisksDeniedActionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of operation limits of cloud disks.
+         * @type {Array.<DiskDeniedActions> || null}
+         */
+        this.DiskDeniedActionSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskDeniedActionSet) {
+            this.DiskDeniedActionSet = new Array();
+            for (let z in params.DiskDeniedActionSet) {
+                let obj = new DiskDeniedActions();
+                obj.deserialize(params.DiskDeniedActionSet[z]);
+                this.DiskDeniedActionSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceLoginKeyPairAttribute request structure.
  * @class
  */
@@ -4923,6 +6418,34 @@ class DescribeInstanceLoginKeyPairAttributeRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeBundleDiscount request structure.
+ * @class
+ */
+class DescribeBundleDiscountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Package ID.
+         * @type {string || null}
+         */
+        this.BundleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BundleId = 'BundleId' in params ? params.BundleId : null;
 
     }
 }
@@ -4956,6 +6479,56 @@ class Price extends  AbstractModel {
             obj.deserialize(params.InstancePrice)
             this.InstancePrice = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeDisksReturnable response structure.
+ * @class
+ */
+class DescribeDisksReturnableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of returnable cloud disks.
+         * @type {Array.<DiskReturnable> || null}
+         */
+        this.DiskReturnableSet = null;
+
+        /**
+         * Number of eligible cloud disks.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskReturnableSet) {
+            this.DiskReturnableSet = new Array();
+            for (let z in params.DiskReturnableSet) {
+                let obj = new DiskReturnable();
+                obj.deserialize(params.DiskReturnableSet[z]);
+                this.DiskReturnableSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5104,6 +6677,48 @@ class DescribeResetInstanceBlueprintsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDisksReturnable request structure.
+ * @class
+ */
+class DescribeDisksReturnableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of cloud disk IDs.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * Image software details.
  * @class
  */
@@ -5190,6 +6805,41 @@ class InstancePrice extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Discount = 'Discount' in params ? params.Discount : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
+ * Information on tags
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -5301,30 +6951,18 @@ class ModifyInstancesRenewFlagRequest extends  AbstractModel {
 }
 
 /**
- * DescribeFirewallRulesTemplate response structure.
+ * StopInstances request structure.
  * @class
  */
-class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
+class StopInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible firewall rules.
-         * @type {number || null}
+         * Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+         * @type {Array.<string> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * Firewall rule details list.
-         * @type {Array.<FirewallRuleInfo> || null}
-         */
-        this.FirewallRuleSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -5335,17 +6973,72 @@ class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
-        if (params.FirewallRuleSet) {
-            this.FirewallRuleSet = new Array();
-            for (let z in params.FirewallRuleSet) {
-                let obj = new FirewallRuleInfo();
-                obj.deserialize(params.FirewallRuleSet[z]);
-                this.FirewallRuleSet.push(obj);
+    }
+}
+
+/**
+ * DescribeModifyInstanceBundles request structure.
+ * @class
+ */
+class DescribeModifyInstanceBundlesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Filter list.
+<li>bundle-id</li>Filter by **package ID**.
+Type: String
+Required: no
+<li>support-platform-type</li>Filter by **system type**.
+Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+Type: String
+Required: no
+Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5416,6 +7109,49 @@ class DescribeFirewallRulesRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * List of operation limits of disks.
+ * @class
+ */
+class DiskDeniedActions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk ID.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * List of operation limits.
+         * @type {Array.<DeniedAction> || null}
+         */
+        this.DeniedActions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+
+        if (params.DeniedActions) {
+            this.DeniedActions = new Array();
+            for (let z in params.DeniedActions) {
+                let obj = new DeniedAction();
+                obj.deserialize(params.DeniedActions[z]);
+                this.DeniedActions.push(obj);
+            }
+        }
 
     }
 }
@@ -5592,6 +7328,76 @@ class DescribeModifyInstanceBundlesResponse extends  AbstractModel {
 }
 
 /**
+ * Attachment information 
+ * @class
+ */
+class AttachDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Number of elastic cloud disks attached to the instance
+         * @type {number || null}
+         */
+        this.AttachedDiskCount = null;
+
+        /**
+         * Upper limit of attached elastic cloud disks
+         * @type {number || null}
+         */
+        this.MaxAttachCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AttachedDiskCount = 'AttachedDiskCount' in params ? params.AttachedDiskCount : null;
+        this.MaxAttachCount = 'MaxAttachCount' in params ? params.MaxAttachCount : null;
+
+    }
+}
+
+/**
+ * ModifyDisksAttribute response structure.
+ * @class
+ */
+class ModifyDisksAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateInstanceSnapshot request structure.
  * @class
  */
@@ -5677,6 +7483,46 @@ class BlueprintInstance extends  AbstractModel {
             }
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * InquirePriceCreateDisks response structure.
+ * @class
+ */
+class InquirePriceCreateDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk price.
+         * @type {DiskPrice || null}
+         */
+        this.DiskPrice = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskPrice) {
+            let obj = new DiskPrice();
+            obj.deserialize(params.DiskPrice)
+            this.DiskPrice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5782,7 +7628,7 @@ class DescribeInstanceLoginKeyPairAttributeResponse extends  AbstractModel {
 module.exports = {
     DescribeInstancesTrafficPackagesRequest: DescribeInstancesTrafficPackagesRequest,
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
-    ResetInstanceBlueprint: ResetInstanceBlueprint,
+    DescribeDisksDeniedActionsRequest: DescribeDisksDeniedActionsRequest,
     DescribeInstancesTrafficPackagesResponse: DescribeInstancesTrafficPackagesResponse,
     DescribeInstancesDeniedActionsRequest: DescribeInstancesDeniedActionsRequest,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
@@ -5791,6 +7637,7 @@ module.exports = {
     RegionInfo: RegionInfo,
     DescribeBlueprintInstancesResponse: DescribeBlueprintInstancesResponse,
     InstanceDeniedActions: InstanceDeniedActions,
+    InquirePriceCreateDisksRequest: InquirePriceCreateDisksRequest,
     ModifyBundle: ModifyBundle,
     DetachCcnResponse: DetachCcnResponse,
     CreateInstanceSnapshotResponse: CreateInstanceSnapshotResponse,
@@ -5799,23 +7646,30 @@ module.exports = {
     DescribeGeneralResourceQuotasRequest: DescribeGeneralResourceQuotasRequest,
     DeleteKeyPairsRequest: DeleteKeyPairsRequest,
     SystemDisk: SystemDisk,
-    ResetInstanceRequest: ResetInstanceRequest,
+    ResetInstanceBlueprint: ResetInstanceBlueprint,
     DescribeBundlesResponse: DescribeBundlesResponse,
     InquirePriceRenewInstancesRequest: InquirePriceRenewInstancesRequest,
+    DiscountDetail: DiscountDetail,
+    DescribeDiskConfigsRequest: DescribeDiskConfigsRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    AssociateInstancesKeyPairsRequest: AssociateInstancesKeyPairsRequest,
     AttachCcnResponse: AttachCcnResponse,
     RebootInstancesRequest: RebootInstancesRequest,
     ResetAttachCcnRequest: ResetAttachCcnRequest,
-    AssociateInstancesKeyPairsRequest: AssociateInstancesKeyPairsRequest,
+    AttachDisksRequest: AttachDisksRequest,
     ImportKeyPairResponse: ImportKeyPairResponse,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
-    ZoneInfo: ZoneInfo,
+    TerminateDisksResponse: TerminateDisksResponse,
     KeyPair: KeyPair,
     DescribeFirewallRulesTemplateRequest: DescribeFirewallRulesTemplateRequest,
     DescribeKeyPairsResponse: DescribeKeyPairsResponse,
     ModifyBlueprintAttributeRequest: ModifyBlueprintAttributeRequest,
+    InquirePriceRenewDisksRequest: InquirePriceRenewDisksRequest,
+    Disk: Disk,
+    ZoneInfo: ZoneInfo,
     DescribeBlueprintInstancesRequest: DescribeBlueprintInstancesRequest,
     ApplyInstanceSnapshotResponse: ApplyInstanceSnapshotResponse,
+    DetachDisksRequest: DetachDisksRequest,
     ModifyFirewallRulesRequest: ModifyFirewallRulesRequest,
     CreateBlueprintRequest: CreateBlueprintRequest,
     DeleteFirewallRulesRequest: DeleteFirewallRulesRequest,
@@ -5825,29 +7679,36 @@ module.exports = {
     StartInstancesResponse: StartInstancesResponse,
     TerminateInstancesResponse: TerminateInstancesResponse,
     TrafficPackage: TrafficPackage,
-    DisassociateInstancesKeyPairsResponse: DisassociateInstancesKeyPairsResponse,
+    DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
     DescribeBlueprintsRequest: DescribeBlueprintsRequest,
     InstanceReturnable: InstanceReturnable,
     DescribeInstancesDeniedActionsResponse: DescribeInstancesDeniedActionsResponse,
+    ModifyDisksAttributeRequest: ModifyDisksAttributeRequest,
     ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
     DescribeZonesRequest: DescribeZonesRequest,
     StartInstancesRequest: StartInstancesRequest,
     SnapshotDeniedActions: SnapshotDeniedActions,
     DeleteSnapshotsRequest: DeleteSnapshotsRequest,
+    ModifyDisksRenewFlagResponse: ModifyDisksRenewFlagResponse,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
+    DescribeDisksResponse: DescribeDisksResponse,
+    DescribeBundleDiscountResponse: DescribeBundleDiscountResponse,
     DeleteSnapshotsResponse: DeleteSnapshotsResponse,
+    ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
+    DataDiskPrice: DataDiskPrice,
     ImportKeyPairRequest: ImportKeyPairRequest,
     DeleteBlueprintsResponse: DeleteBlueprintsResponse,
     ModifyInstancesLoginKeyPairAttributeRequest: ModifyInstancesLoginKeyPairAttributeRequest,
     StopInstancesResponse: StopInstancesResponse,
     FirewallRule: FirewallRule,
     ModifyBlueprintAttributeResponse: ModifyBlueprintAttributeResponse,
-    DescribeModifyInstanceBundlesRequest: DescribeModifyInstanceBundlesRequest,
+    DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
+    DescribeInstancesDiskNumResponse: DescribeInstancesDiskNumResponse,
     InquirePriceCreateBlueprintResponse: InquirePriceCreateBlueprintResponse,
     DescribeInstancesReturnableRequest: DescribeInstancesReturnableRequest,
-    StopInstancesRequest: StopInstancesRequest,
+    DiskReturnable: DiskReturnable,
     DescribeBlueprintsResponse: DescribeBlueprintsResponse,
     DescribeKeyPairsRequest: DescribeKeyPairsRequest,
     DescribeCcnAttachedInstancesRequest: DescribeCcnAttachedInstancesRequest,
@@ -5857,15 +7718,20 @@ module.exports = {
     CreateKeyPairResponse: CreateKeyPairResponse,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     ModifyFirewallRulesResponse: ModifyFirewallRulesResponse,
+    DiskPrice: DiskPrice,
     DescribeCcnAttachedInstancesResponse: DescribeCcnAttachedInstancesResponse,
     DescribeBundlesRequest: DescribeBundlesRequest,
     Blueprint: Blueprint,
     DeniedAction: DeniedAction,
     ModifyInstancesLoginKeyPairAttributeResponse: ModifyInstancesLoginKeyPairAttributeResponse,
+    InquirePriceRenewDisksResponse: InquirePriceRenewDisksResponse,
     Bundle: Bundle,
+    DiskConfig: DiskConfig,
     InquirePriceCreateInstancesResponse: InquirePriceCreateInstancesResponse,
     DescribeSnapshotsDeniedActionsRequest: DescribeSnapshotsDeniedActionsRequest,
+    DescribeDiskDiscountResponse: DescribeDiskDiscountResponse,
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
+    DiskChargePrepaid: DiskChargePrepaid,
     CreateKeyPairRequest: CreateKeyPairRequest,
     DescribeInstancesRequest: DescribeInstancesRequest,
     DetachCcnRequest: DetachCcnRequest,
@@ -5873,7 +7739,9 @@ module.exports = {
     DescribeSnapshotsResponse: DescribeSnapshotsResponse,
     Snapshot: Snapshot,
     ModifyFirewallRuleDescriptionResponse: ModifyFirewallRuleDescriptionResponse,
+    DescribeDiskDiscountRequest: DescribeDiskDiscountRequest,
     InquirePriceCreateBlueprintRequest: InquirePriceCreateBlueprintRequest,
+    AttachDisksResponse: AttachDisksResponse,
     CreateFirewallRulesRequest: CreateFirewallRulesRequest,
     Software: Software,
     DescribeFirewallRulesResponse: DescribeFirewallRulesResponse,
@@ -5881,34 +7749,52 @@ module.exports = {
     DeleteBlueprintsRequest: DeleteBlueprintsRequest,
     FirewallRuleInfo: FirewallRuleInfo,
     CreateFirewallRulesResponse: CreateFirewallRulesResponse,
+    DescribeDisksRequest: DescribeDisksRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeZonesResponse: DescribeZonesResponse,
     CreateBlueprintResponse: CreateBlueprintResponse,
+    PolicyDetail: PolicyDetail,
+    DetachDisksResponse: DetachDisksResponse,
     DescribeResetInstanceBlueprintsRequest: DescribeResetInstanceBlueprintsRequest,
     ResetAttachCcnResponse: ResetAttachCcnResponse,
     ModifyInstancesRenewFlagResponse: ModifyInstancesRenewFlagResponse,
     ApplyInstanceSnapshotRequest: ApplyInstanceSnapshotRequest,
+    DisassociateInstancesKeyPairsResponse: DisassociateInstancesKeyPairsResponse,
     TerminateInstancesRequest: TerminateInstancesRequest,
+    RenewDiskChargePrepaid: RenewDiskChargePrepaid,
+    TerminateDisksRequest: TerminateDisksRequest,
+    ResetInstanceRequest: ResetInstanceRequest,
+    DescribeDiskConfigsResponse: DescribeDiskConfigsResponse,
     InternetAccessible: InternetAccessible,
     RebootInstancesResponse: RebootInstancesResponse,
+    DescribeDisksDeniedActionsResponse: DescribeDisksDeniedActionsResponse,
     DescribeInstanceLoginKeyPairAttributeRequest: DescribeInstanceLoginKeyPairAttributeRequest,
+    DescribeBundleDiscountRequest: DescribeBundleDiscountRequest,
     Price: Price,
+    DescribeDisksReturnableResponse: DescribeDisksReturnableResponse,
     BlueprintPrice: BlueprintPrice,
     GeneralResourceQuota: GeneralResourceQuota,
     DescribeResetInstanceBlueprintsResponse: DescribeResetInstanceBlueprintsResponse,
+    DescribeDisksReturnableRequest: DescribeDisksReturnableRequest,
     SoftwareDetail: SoftwareDetail,
     InstancePrice: InstancePrice,
+    Tag: Tag,
     ModifySnapshotAttributeResponse: ModifySnapshotAttributeResponse,
     DescribeGeneralResourceQuotasResponse: DescribeGeneralResourceQuotasResponse,
     ModifyInstancesRenewFlagRequest: ModifyInstancesRenewFlagRequest,
-    DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
+    StopInstancesRequest: StopInstancesRequest,
+    DescribeModifyInstanceBundlesRequest: DescribeModifyInstanceBundlesRequest,
     ResetInstanceResponse: ResetInstanceResponse,
     DescribeFirewallRulesRequest: DescribeFirewallRulesRequest,
+    DiskDeniedActions: DiskDeniedActions,
     InquirePriceCreateInstancesRequest: InquirePriceCreateInstancesRequest,
     CcnAttachedInstance: CcnAttachedInstance,
     DescribeModifyInstanceBundlesResponse: DescribeModifyInstanceBundlesResponse,
+    AttachDetail: AttachDetail,
+    ModifyDisksAttributeResponse: ModifyDisksAttributeResponse,
     CreateInstanceSnapshotRequest: CreateInstanceSnapshotRequest,
     BlueprintInstance: BlueprintInstance,
+    InquirePriceCreateDisksResponse: InquirePriceCreateDisksResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     DescribeInstanceLoginKeyPairAttributeResponse: DescribeInstanceLoginKeyPairAttributeResponse,

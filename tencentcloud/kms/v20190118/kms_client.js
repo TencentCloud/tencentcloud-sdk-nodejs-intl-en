@@ -190,7 +190,7 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
-     * This API is used to get the information of the public key that is encrypted with the asymmetric cryptographic algorithm and of which the `KeyUsage` is `ASYMMETRIC_DECRYPT_RSA_2048` or `ASYMMETRIC_DECRYPT_SM2`. This public key can be used to encrypt data locally, and the data encrypted with it can only be decrypted with the corresponding private key through KMS. The public key can only be obtained from the asymmetric key in `Enabled` state.
+     * This API is used to get the public key of an asymmetric KMS key (which must be enabled). With the public key, you can encrypt messages and verify signatures.
      * @param {GetPublicKeyRequest} req
      * @param {function(string, GetPublicKeyResponse):void} cb
      * @public
@@ -246,7 +246,7 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
 
     /**
      * This API is used to generate a signature with an asymmetric key.
-Note: only the keys with `KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2` can be used for signature generation.
+Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `ASYMMETRIC_SIGN_VERIFY_SM2` and `ASYMMETRIC_SIGN_VERIFY_ECC`), the key can be used for signing.
      * @param {SignByAsymmetricKeyRequest} req
      * @param {function(string, SignByAsymmetricKeyResponse):void} cb
      * @public
@@ -653,7 +653,7 @@ Note: only the keys with `KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2` can be used for 
     }
 
     /**
-     * This API is used to obtain the list of supported regions.
+     * This API is used to return all regions support KMS service.
      * @param {GetRegionsRequest} req
      * @param {function(string, GetRegionsResponse):void} cb
      * @public

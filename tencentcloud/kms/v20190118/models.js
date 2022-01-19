@@ -221,7 +221,7 @@ class CreateKeyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Key purpose. Valid values: `ENCRYPT_DECRYPT` (default value; creating a symmetric key for encryption and decryption), `ASYMMETRIC_DECRYPT_RSA_2048` (creating an RSA2048 asymmetric key for encryption and decryption), `ASYMMETRIC_DECRYPT_SM2` (creating an SM2 asymmetric key for encryption and decryption), and `ASYMMETRIC_SIGN_VERIFY_SM2` (creating an SM2 asymmetric key for signature verification).
+         * Defines the purpose of the key. The valid values are as follows: `ENCRYPT_DECRYPT` (default): creates a symmetric encryption/decryption key; `ASYMMETRIC_DECRYPT_RSA_2048`: creates an asymmetric encryption/decryption 2048-bit RSA key; `ASYMMETRIC_DECRYPT_SM2`: creates an asymmetric encryption/decryption SM2 key; `ASYMMETRIC_SIGN_VERIFY_SM2`: creates an asymmetric SM2 key for signature verification; `ASYMMETRIC_SIGN_VERIFY_ECC`: creates an asymmetric 2048-bit RSA key for signature verification; `ASYMMETRIC_SIGN_VERIFY_ECDSA384`: creates an asymmetric ECDSA384 key for signature verification. You can get a full list of supported key purposes and algorithms using the ListAlgorithms API.
          * @type {string || null}
          */
         this.KeyUsage = null;
@@ -362,13 +362,13 @@ class VerifyByAsymmetricKeyRequest extends  AbstractModel {
         this.SignatureValue = null;
 
         /**
-         * The original message or message abstract. For an original message, the length before Base64 encoding can contain up to 4,096 bytes. For a message abstract, the SM2 signature algorithm only supports 32-byte (before Base64 encoding) message abstracts.
+         * Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Signature algorithm. Supported algorithm: SM2DSA.
+         * Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
          * @type {string || null}
          */
         this.Algorithm = null;
@@ -979,6 +979,18 @@ class GenerateDataKeyRequest extends  AbstractModel {
          */
         this.EncryptionContext = null;
 
+        /**
+         * PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
+         * @type {string || null}
+         */
+        this.EncryptionPublicKey = null;
+
+        /**
+         * Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+         * @type {string || null}
+         */
+        this.EncryptionAlgorithm = null;
+
     }
 
     /**
@@ -992,6 +1004,8 @@ class GenerateDataKeyRequest extends  AbstractModel {
         this.KeySpec = 'KeySpec' in params ? params.KeySpec : null;
         this.NumberOfBytes = 'NumberOfBytes' in params ? params.NumberOfBytes : null;
         this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+        this.EncryptionPublicKey = 'EncryptionPublicKey' in params ? params.EncryptionPublicKey : null;
+        this.EncryptionAlgorithm = 'EncryptionAlgorithm' in params ? params.EncryptionAlgorithm : null;
 
     }
 }
@@ -1243,7 +1257,7 @@ class VerifyByAsymmetricKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether the signature is valid.
+         * Whether the signature is valid. `true`: the signature is valid; `false`: the signature is invalid.
          * @type {boolean || null}
          */
         this.SignatureValid = null;
@@ -1368,7 +1382,8 @@ class DecryptResponse extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * Decrypted plaintext. This field is Base64-encoded. In order to get the original plaintext, the Base64-decoding is needed
+         * If `EncryptionPublicKey` is left empty, a Base64-encoded ciphertext will be returned. To get the plaintext, you need to decode the ciphertext first.
+If `EncryptionPublicKey` is specified, this field will return the Base64-encoded ciphertext encrypted with the specified public key. To get the plaintext, you need to decode the ciphertext and upload the corresponding private key.
          * @type {string || null}
          */
         this.Plaintext = null;
@@ -1932,7 +1947,7 @@ class ListKeyDetailRequest extends  AbstractModel {
         this.Origin = null;
 
         /**
-         * Filter by the `KeyUsage` field of CMKs. Valid values: `ALL` (filtering all CMKs), `ENCRYPT_DECRYPT` (it will be used when the parameter is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, and `ASYMMETRIC_SIGN_VERIFY_SM2`.
+         * Filters by the `KeyUsage` field value. Valid values: `ALL` (all CMKs), `ENCRYPT_DECRYPT` (used when this field is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, and `ASYMMETRIC_SIGN_VERIFY_ECC`.
          * @type {string || null}
          */
         this.KeyUsage = null;
@@ -2087,7 +2102,8 @@ class GenerateDataKeyResponse extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * Plaintext of the generated data key. The plaintext is Base64-encoded and can be used locally after having it Base64-decoded.
+         * If `EncryptionPublicKey` is left empty, a Base64-encoded ciphertext will be returned. To get the plaintext, you need to decode the ciphertext first.
+If `EncryptionPublicKey` is specified, this field will return the Base64-encoded ciphertext encrypted with the specified public key. To get the plaintext, you need to decode the ciphertext and upload the corresponding private key.
          * @type {string || null}
          */
         this.Plaintext = null;
@@ -2453,7 +2469,7 @@ class EncryptResponse extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded encrypted ciphertext
+         * Base64-encoded ciphertext, which is the encrypted information of the ciphertext and key. To get the plaintext, you need to pass in this field to the Decrypt API.
          * @type {string || null}
          */
         this.CiphertextBlob = null;
@@ -2928,7 +2944,7 @@ class KeyMetadata extends  AbstractModel {
         this.KeyState = null;
 
         /**
-         * CMK purpose. Valid values: `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, and `ASYMMETRIC_SIGN_VERIFY_SM2`.
+         * CMK purpose. Valid values: `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, and `ASYMMETRIC_SIGN_VERIFY_ECC`.
          * @type {string || null}
          */
         this.KeyUsage = null;
@@ -3065,6 +3081,18 @@ class DecryptRequest extends  AbstractModel {
          */
         this.EncryptionContext = null;
 
+        /**
+         * PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
+         * @type {string || null}
+         */
+        this.EncryptionPublicKey = null;
+
+        /**
+         * Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+         * @type {string || null}
+         */
+        this.EncryptionAlgorithm = null;
+
     }
 
     /**
@@ -3076,6 +3104,8 @@ class DecryptRequest extends  AbstractModel {
         }
         this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
         this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+        this.EncryptionPublicKey = 'EncryptionPublicKey' in params ? params.EncryptionPublicKey : null;
+        this.EncryptionAlgorithm = 'EncryptionAlgorithm' in params ? params.EncryptionAlgorithm : null;
 
     }
 }
@@ -3448,13 +3478,13 @@ class SignByAsymmetricKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Signature algorithm. Supported algorithm: SM2DSA.
+         * Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
          * @type {string || null}
          */
         this.Algorithm = null;
 
         /**
-         * The original message or message abstract. For an original message, the length before Base64 encoding can contain up to 4,096 bytes. For a message abstract, the SM2 signature algorithm only supports 32-byte (before Base64 encoding) message abstracts.
+         * Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
          * @type {string || null}
          */
         this.Message = null;

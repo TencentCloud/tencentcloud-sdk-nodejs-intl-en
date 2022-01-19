@@ -24,12 +24,14 @@ const ScaleOutInstancesRequest = models.ScaleOutInstancesRequest;
 const AutoScalingNotification = models.AutoScalingNotification;
 const ModifyScheduledActionRequest = models.ModifyScheduledActionRequest;
 const DescribeAutoScalingGroupsRequest = models.DescribeAutoScalingGroupsRequest;
-const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
+const LaunchConfiguration = models.LaunchConfiguration;
 const DescribeAccountLimitsResponse = models.DescribeAccountLimitsResponse;
 const CreateLaunchConfigurationResponse = models.CreateLaunchConfigurationResponse;
+const Advice = models.Advice;
 const CreateLifecycleHookResponse = models.CreateLifecycleHookResponse;
 const ClearLaunchConfigurationAttributesResponse = models.ClearLaunchConfigurationAttributesResponse;
 const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
+const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
 const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
 const StopAutoScalingInstancesResponse = models.StopAutoScalingInstancesResponse;
@@ -37,31 +39,34 @@ const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
 const InstanceNameSettings = models.InstanceNameSettings;
 const DetailedStatusMessage = models.DetailedStatusMessage;
 const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
-const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
+const AttachLoadBalancersResponse = models.AttachLoadBalancersResponse;
 const ExecuteScalingPolicyResponse = models.ExecuteScalingPolicyResponse;
-const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
+const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
 const SetInstancesProtectionResponse = models.SetInstancesProtectionResponse;
 const StartAutoScalingInstancesResponse = models.StartAutoScalingInstancesResponse;
 const CompleteLifecycleActionRequest = models.CompleteLifecycleActionRequest;
 const CreateScalingPolicyResponse = models.CreateScalingPolicyResponse;
 const CreateNotificationConfigurationResponse = models.CreateNotificationConfigurationResponse;
 const DescribeLaunchConfigurationsResponse = models.DescribeLaunchConfigurationsResponse;
+const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
 const Tag = models.Tag;
+const DetachLoadBalancersRequest = models.DetachLoadBalancersRequest;
 const DescribeAutoScalingInstancesRequest = models.DescribeAutoScalingInstancesRequest;
-const LimitedLoginSettings = models.LimitedLoginSettings;
 const ModifyLoadBalancersRequest = models.ModifyLoadBalancersRequest;
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
 const ModifyScalingPolicyResponse = models.ModifyScalingPolicyResponse;
 const SetInstancesProtectionRequest = models.SetInstancesProtectionRequest;
 const DeleteNotificationConfigurationResponse = models.DeleteNotificationConfigurationResponse;
 const DetachInstancesResponse = models.DetachInstancesResponse;
+const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
 const CreateLaunchConfigurationRequest = models.CreateLaunchConfigurationRequest;
 const AutoScalingGroup = models.AutoScalingGroup;
 const AttachInstancesResponse = models.AttachInstancesResponse;
 const DescribeAutoScalingGroupLastActivitiesResponse = models.DescribeAutoScalingGroupLastActivitiesResponse;
 const DescribeAccountLimitsRequest = models.DescribeAccountLimitsRequest;
 const UpgradeLifecycleHookRequest = models.UpgradeLifecycleHookRequest;
+const DetachLoadBalancersResponse = models.DetachLoadBalancersResponse;
 const ScalingPolicy = models.ScalingPolicy;
 const DescribeAutoScalingGroupLastActivitiesRequest = models.DescribeAutoScalingGroupLastActivitiesRequest;
 const HostNameSettings = models.HostNameSettings;
@@ -69,12 +74,14 @@ const ModifyLoadBalancersResponse = models.ModifyLoadBalancersResponse;
 const CreateNotificationConfigurationRequest = models.CreateNotificationConfigurationRequest;
 const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
 const DeleteLifecycleHookRequest = models.DeleteLifecycleHookRequest;
+const ModifyLoadBalancerTargetAttributesResponse = models.ModifyLoadBalancerTargetAttributesResponse;
 const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
 const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
 const ModifyScalingPolicyRequest = models.ModifyScalingPolicyRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const UpgradeLifecycleHookResponse = models.UpgradeLifecycleHookResponse;
 const InstanceTag = models.InstanceTag;
+const DescribeAutoScalingAdvicesResponse = models.DescribeAutoScalingAdvicesResponse;
 const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
 const UpgradeLaunchConfigurationRequest = models.UpgradeLaunchConfigurationRequest;
@@ -86,7 +93,7 @@ const LoginSettings = models.LoginSettings;
 const CreateAutoScalingGroupFromInstanceResponse = models.CreateAutoScalingGroupFromInstanceResponse;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
-const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
+const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
 const EnhancedService = models.EnhancedService;
 const DeleteLaunchConfigurationResponse = models.DeleteLaunchConfigurationResponse;
 const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
@@ -102,16 +109,18 @@ const ScaleOutInstancesResponse = models.ScaleOutInstancesResponse;
 const Filter = models.Filter;
 const DescribeLifecycleHooksRequest = models.DescribeLifecycleHooksRequest;
 const ServiceSettings = models.ServiceSettings;
-const LaunchConfiguration = models.LaunchConfiguration;
+const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
 const TargetAttribute = models.TargetAttribute;
 const ModifyNotificationConfigurationResponse = models.ModifyNotificationConfigurationResponse;
-const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
+const LimitedLoginSettings = models.LimitedLoginSettings;
 const DescribeLifecycleHooksResponse = models.DescribeLifecycleHooksResponse;
 const CreateScalingPolicyRequest = models.CreateScalingPolicyRequest;
 const ScaleInInstancesResponse = models.ScaleInInstancesResponse;
+const DescribeAutoScalingAdvicesRequest = models.DescribeAutoScalingAdvicesRequest;
 const DeleteNotificationConfigurationRequest = models.DeleteNotificationConfigurationRequest;
 const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
 const NotificationTarget = models.NotificationTarget;
+const ModifyLoadBalancerTargetAttributesRequest = models.ModifyLoadBalancerTargetAttributesRequest;
 const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
 const LifecycleActionResultInfo = models.LifecycleActionResultInfo;
 const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
@@ -122,10 +131,11 @@ const ScaleInInstancesRequest = models.ScaleInInstancesRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const ClearLaunchConfigurationAttributesRequest = models.ClearLaunchConfigurationAttributesRequest;
-const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
-const RemoveInstancesRequest = models.RemoveInstancesRequest;
+const ForwardLoadBalancerIdentification = models.ForwardLoadBalancerIdentification;
+const AutoScalingAdvice = models.AutoScalingAdvice;
 const StartAutoScalingInstancesRequest = models.StartAutoScalingInstancesRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
+const AttachLoadBalancersRequest = models.AttachLoadBalancersRequest;
 const SpotMixedAllocationPolicy = models.SpotMixedAllocationPolicy;
 const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const Activity = models.Activity;
@@ -134,6 +144,7 @@ const StopAutoScalingInstancesRequest = models.StopAutoScalingInstancesRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
+const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
 const InternetAccessible = models.InternetAccessible;
 const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
 const UpgradeLaunchConfigurationResponse = models.UpgradeLaunchConfigurationResponse;
@@ -197,6 +208,17 @@ class AsClient extends AbstractClient {
     ModifyScalingPolicy(req, cb) {
         let resp = new ModifyScalingPolicyResponse();
         this.request("ModifyScalingPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the target rule attributes of the CLB in the scaling group.
+     * @param {ModifyLoadBalancerTargetAttributesRequest} req
+     * @param {function(string, ModifyLoadBalancerTargetAttributesResponse):void} cb
+     * @public
+     */
+    ModifyLoadBalancerTargetAttributes(req, cb) {
+        let resp = new ModifyLoadBalancerTargetAttributesResponse();
+        this.request("ModifyLoadBalancerTargetAttributes", req, resp, cb);
     }
 
     /**
@@ -266,6 +288,17 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
+     * This API is used to unbind one or more CLBs from a scaling group. This API will not terminate CLBs.
+     * @param {DetachLoadBalancersRequest} req
+     * @param {function(string, DetachLoadBalancersResponse):void} cb
+     * @public
+     */
+    DetachLoadBalancers(req, cb) {
+        let resp = new DetachLoadBalancersResponse();
+        this.request("DetachLoadBalancers", req, resp, cb);
+    }
+
+    /**
      * This API (AttachInstances) is used to add CVM instances to an auto scaling group.
 
      * @param {AttachInstancesRequest} req
@@ -297,6 +330,17 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     DeleteScheduledAction(req, cb) {
         let resp = new DeleteScheduledActionResponse();
         this.request("DeleteScheduledAction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add CLBs to a security group.
+     * @param {AttachLoadBalancersRequest} req
+     * @param {function(string, AttachLoadBalancersResponse):void} cb
+     * @public
+     */
+    AttachLoadBalancers(req, cb) {
+        let resp = new AttachLoadBalancersResponse();
+        this.request("AttachLoadBalancers", req, resp, cb);
     }
 
     /**
@@ -338,6 +382,17 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     CreateScheduledAction(req, cb) {
         let resp = new CreateScheduledActionResponse();
         this.request("CreateScheduledAction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query suggestions for scaling group configurations.
+     * @param {DescribeAutoScalingAdvicesRequest} req
+     * @param {function(string, DescribeAutoScalingAdvicesResponse):void} cb
+     * @public
+     */
+    DescribeAutoScalingAdvices(req, cb) {
+        let resp = new DescribeAutoScalingAdvicesResponse();
+        this.request("DescribeAutoScalingAdvices", req, resp, cb);
     }
 
     /**

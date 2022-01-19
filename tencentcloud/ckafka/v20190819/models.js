@@ -3412,6 +3412,41 @@ class ModifyTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * Message content that can be sent in batches
+ * @class
+ */
+class BatchContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message body that is sent.
+         * @type {string || null}
+         */
+        this.Body = null;
+
+        /**
+         * Message sending key name.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Body = 'Body' in params ? params.Body : null;
+        this.Key = 'Key' in params ? params.Key : null;
+
+    }
+}
+
+/**
  * DeleteRouteTriggerTime response structure.
  * @class
  */
@@ -3637,6 +3672,82 @@ class Group extends  AbstractModel {
             return;
         }
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
+
+    }
+}
+
+/**
+ * `GroupInfo` response data entity
+ * @class
+ */
+class GroupInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Error code. 0: success
+         * @type {string || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * Group status description (common valid values: Empty, Stable, Dead):
+Dead: the consumer group does not exist
+Empty: there are currently no consumer subscriptions in the consumer group
+PreparingRebalance: the consumer group is currently in `rebalance` state
+CompletingRebalance: the consumer group is currently in `rebalance` state
+Stable: each consumer in the consumer group has joined and is in stable state
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * The type of protocol selected by the consumer group, which is `consumer` for common consumers. However, some systems use their own protocols; for example, the protocol used by kafka-connect is `connect`. Only with the standard `consumer` protocol can this API get to know the specific assigning method and parse the specific partition assignment
+         * @type {string || null}
+         */
+        this.ProtocolType = null;
+
+        /**
+         * Consumer partition assignment algorithm, such as `range` (which is the default value for the Kafka consumer SDK), `roundrobin`, and `sticky`
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * This array contains information only if `state` is `Stable` and `protocol_type` is `consumer`
+         * @type {Array.<GroupInfoMember> || null}
+         */
+        this.Members = null;
+
+        /**
+         * Kafka consumer group
+         * @type {string || null}
+         */
+        this.Group = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.State = 'State' in params ? params.State : null;
+        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.Members) {
+            this.Members = new Array();
+            for (let z in params.Members) {
+                let obj = new GroupInfoMember();
+                obj.deserialize(params.Members[z]);
+                this.Members.push(obj);
+            }
+        }
+        this.Group = 'Group' in params ? params.Group : null;
 
     }
 }
@@ -5421,53 +5532,24 @@ class TopicInSyncReplicaResult extends  AbstractModel {
 }
 
 /**
- * `GroupInfo` response data entity
+ * SendMessage response structure.
  * @class
  */
-class GroupInfoResponse extends  AbstractModel {
+class SendMessageResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Error code. 0: success
-         * @type {string || null}
+         * Message ID list.
+         * @type {Array.<string> || null}
          */
-        this.ErrorCode = null;
+        this.MessageId = null;
 
         /**
-         * Group status description (common valid values: Empty, Stable, Dead):
-Dead: the consumer group does not exist
-Empty: there are currently no consumer subscriptions in the consumer group
-PreparingRebalance: the consumer group is currently in `rebalance` state
-CompletingRebalance: the consumer group is currently in `rebalance` state
-Stable: each consumer in the consumer group has joined and is in stable state
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.State = null;
-
-        /**
-         * The type of protocol selected by the consumer group, which is `consumer` for common consumers. However, some systems use their own protocols; for example, the protocol used by kafka-connect is `connect`. Only with the standard `consumer` protocol can this API get to know the specific assigning method and parse the specific partition assignment
-         * @type {string || null}
-         */
-        this.ProtocolType = null;
-
-        /**
-         * Consumer partition assignment algorithm, such as `range` (which is the default value for the Kafka consumer SDK), `roundrobin`, and `sticky`
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * This array contains information only if `state` is `Stable` and `protocol_type` is `consumer`
-         * @type {Array.<GroupInfoMember> || null}
-         */
-        this.Members = null;
-
-        /**
-         * Kafka consumer group
-         * @type {string || null}
-         */
-        this.Group = null;
+        this.RequestId = null;
 
     }
 
@@ -5478,20 +5560,48 @@ Stable: each consumer in the consumer group has joined and is in stable state
         if (!params) {
             return;
         }
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.State = 'State' in params ? params.State : null;
-        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.Members) {
-            this.Members = new Array();
-            for (let z in params.Members) {
-                let obj = new GroupInfoMember();
-                obj.deserialize(params.Members[z]);
-                this.Members.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeCkafkaZone response structure.
+ * @class
+ */
+class DescribeCkafkaZoneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned results for the query
+         * @type {ZoneResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Group = 'Group' in params ? params.Group : null;
+
+        if (params.Result) {
+            let obj = new ZoneResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5924,46 +6034,6 @@ class BatchModifyTopicInfo extends  AbstractModel {
 }
 
 /**
- * DescribeCkafkaZone response structure.
- * @class
- */
-class DescribeCkafkaZoneResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned results for the query
-         * @type {ZoneResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            let obj = new ZoneResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeRoute response structure.
  * @class
  */
@@ -6095,6 +6165,49 @@ class DescribeGroupOffsetsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendMessage request structure.
+ * @class
+ */
+class SendMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Datahub access ID.
+         * @type {string || null}
+         */
+        this.DataHubId = null;
+
+        /**
+         * Message content that is sent.
+         * @type {Array.<BatchContent> || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataHubId = 'DataHubId' in params ? params.DataHubId : null;
+
+        if (params.Message) {
+            this.Message = new Array();
+            for (let z in params.Message) {
+                let obj = new BatchContent();
+                obj.deserialize(params.Message[z]);
+                this.Message.push(obj);
+            }
+        }
 
     }
 }
@@ -7393,12 +7506,14 @@ module.exports = {
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
     DescribeGroupInfoResponse: DescribeGroupInfoResponse,
     ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
+    BatchContent: BatchContent,
     DeleteRouteTriggerTimeResponse: DeleteRouteTriggerTimeResponse,
     DescribeUserResponse: DescribeUserResponse,
     AppIdResponse: AppIdResponse,
     DescribeTopicRequest: DescribeTopicRequest,
     CreatePartitionRequest: CreatePartitionRequest,
     Group: Group,
+    GroupInfoResponse: GroupInfoResponse,
     DescribeAppInfoResponse: DescribeAppInfoResponse,
     AclResponse: AclResponse,
     ZoneResponse: ZoneResponse,
@@ -7428,7 +7543,8 @@ module.exports = {
     ModifyPasswordResponse: ModifyPasswordResponse,
     DescribeRouteRequest: DescribeRouteRequest,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
-    GroupInfoResponse: GroupInfoResponse,
+    SendMessageResponse: SendMessageResponse,
+    DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     BatchModifyGroupOffsetsRequest: BatchModifyGroupOffsetsRequest,
     TopicAttributesResponse: TopicAttributesResponse,
     InstanceResponse: InstanceResponse,
@@ -7436,10 +7552,10 @@ module.exports = {
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
     BatchModifyTopicInfo: BatchModifyTopicInfo,
-    DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     DescribeRouteResponse: DescribeRouteResponse,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
+    SendMessageRequest: SendMessageRequest,
     ConsumerRecord: ConsumerRecord,
     ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
     BatchModifyTopicAttributesRequest: BatchModifyTopicAttributesRequest,

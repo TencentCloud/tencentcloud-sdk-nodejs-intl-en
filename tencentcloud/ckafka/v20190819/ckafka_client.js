@@ -84,12 +84,14 @@ const UserResponse = models.UserResponse;
 const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
 const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
 const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
+const BatchContent = models.BatchContent;
 const DeleteRouteTriggerTimeResponse = models.DeleteRouteTriggerTimeResponse;
 const DescribeUserResponse = models.DescribeUserResponse;
 const AppIdResponse = models.AppIdResponse;
 const DescribeTopicRequest = models.DescribeTopicRequest;
 const CreatePartitionRequest = models.CreatePartitionRequest;
 const Group = models.Group;
+const GroupInfoResponse = models.GroupInfoResponse;
 const DescribeAppInfoResponse = models.DescribeAppInfoResponse;
 const AclResponse = models.AclResponse;
 const ZoneResponse = models.ZoneResponse;
@@ -119,7 +121,8 @@ const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const ModifyPasswordResponse = models.ModifyPasswordResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
-const GroupInfoResponse = models.GroupInfoResponse;
+const SendMessageResponse = models.SendMessageResponse;
+const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const BatchModifyGroupOffsetsRequest = models.BatchModifyGroupOffsetsRequest;
 const TopicAttributesResponse = models.TopicAttributesResponse;
 const InstanceResponse = models.InstanceResponse;
@@ -127,10 +130,10 @@ const DescribeGroup = models.DescribeGroup;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
 const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
-const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const DescribeRouteResponse = models.DescribeRouteResponse;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
+const SendMessageRequest = models.SendMessageRequest;
 const ConsumerRecord = models.ConsumerRecord;
 const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
 const BatchModifyTopicAttributesRequest = models.BatchModifyTopicAttributesRequest;
@@ -214,6 +217,17 @@ class CkafkaClient extends AbstractClient {
     BatchModifyTopicAttributes(req, cb) {
         let resp = new BatchModifyTopicAttributesResponse();
         this.request("BatchModifyTopicAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to send messages through the HTTP access layer.
+     * @param {SendMessageRequest} req
+     * @param {function(string, SendMessageResponse):void} cb
+     * @public
+     */
+    SendMessage(req, cb) {
+        let resp = new SendMessageResponse();
+        this.request("SendMessage", req, resp, cb);
     }
 
     /**

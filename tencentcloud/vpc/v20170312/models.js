@@ -2539,6 +2539,12 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * ID of DC highly available placement group
+         * @type {string || null}
+         */
+        this.HaZoneGroupId = null;
+
     }
 
     /**
@@ -2554,6 +2560,7 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
         this.GatewayType = 'GatewayType' in params ? params.GatewayType : null;
         this.ModeType = 'ModeType' in params ? params.ModeType : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.HaZoneGroupId = 'HaZoneGroupId' in params ? params.HaZoneGroupId : null;
 
     }
 }
@@ -6125,7 +6132,7 @@ class TransformAddressRequest extends  AbstractModel {
         super();
 
         /**
-         * The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/9389?from_cn_redirect=1) API.
+         * The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [CVM console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of the API [DescribeInstances](https://intl.cloud.tencent.com/document/product/213/33256).
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6993,6 +7000,30 @@ This parameter is optional for a CCN-based VPN tunnel.
          */
         this.RouteType = null;
 
+        /**
+         * Negotiation type. Valid values: `active` (default value), `passive` and `flowTrigger`.
+         * @type {string || null}
+         */
+        this.NegotiationType = null;
+
+        /**
+         * Specifies whether to enable DPD. Valid values: `0` (disable) and `1` (enable)
+         * @type {number || null}
+         */
+        this.DpdEnable = null;
+
+        /**
+         * DPD timeout period. Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of `DpdEnable` is 1. 
+         * @type {string || null}
+         */
+        this.DpdTimeout = null;
+
+        /**
+         * The action after DPD timeout. Valid values: `clear` (disconnect) and `restart` (try again). It’s valid when `DpdEnable` is `1`. 
+         * @type {string || null}
+         */
+        this.DpdAction = null;
+
     }
 
     /**
@@ -7041,6 +7072,10 @@ This parameter is optional for a CCN-based VPN tunnel.
         this.HealthCheckLocalIp = 'HealthCheckLocalIp' in params ? params.HealthCheckLocalIp : null;
         this.HealthCheckRemoteIp = 'HealthCheckRemoteIp' in params ? params.HealthCheckRemoteIp : null;
         this.RouteType = 'RouteType' in params ? params.RouteType : null;
+        this.NegotiationType = 'NegotiationType' in params ? params.NegotiationType : null;
+        this.DpdEnable = 'DpdEnable' in params ? params.DpdEnable : null;
+        this.DpdTimeout = 'DpdTimeout' in params ? params.DpdTimeout : null;
+        this.DpdAction = 'DpdAction' in params ? params.DpdAction : null;
 
     }
 }
@@ -11467,21 +11502,21 @@ class DescribeAddressesRequest extends  AbstractModel {
         this.AddressIds = null;
 
         /**
-         * Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-<li> address-id - String - Required: No - (Filter condition) Filter by the unique EIP ID, such as `eip-11112222`.</li>
-<li> address-name - String - Required: No - (Filter condition) Filter by the EIP name. Fuzzy filtering is not supported.</li>
-<li> address-ip - String - Required: No - (Filter condition) Filter by EIP.</li>
-<li> address-status - String - Required: No - (Filter condition) Filter by the EIP state. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
-<li> instance-id - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
-<li> private-ip-address - String - Required: No - (Filter condition) Filter by the private IP address bound to the EIP.</li>
-<li> network-interface-id - String - Required: No - (Filter condition) Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
-<li> is-arrears - String - Required: No - (Filter condition) Whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
-<li> address-type - String - Required: No - (Filter condition) Filter by the IP type. Valid values: `EIP`, `AnycastEIP`, and `HighQualityEIP`.</li>
-<li> address-isp - String - Required: No - (Filter condition) Filter by the ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
-<li> dedicated-cluster-id - String - Required: No - (Filter condition) Filter by the unique CDC ID, such as `cluster-11112222`.</li>
-<li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-<li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
-<li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
+         * Each request can have up to 10 `Filters` and 100 `Filter.Values`. Detailed filter conditions:
+<li> address-id - String - Optional - Filter by unique EIP ID, such as `eip-11112222`.</li>
+<li> address-name - String - Optional - Filter by EIP name. Fuzzy filtering is not supported.</li>
+<li> address-ip - String - Optional - Filter by EIP address.</li>
+<li> address-status - String - Optional - Filter by EIP status. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
+<li> instance-id - String - Optional - Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
+<li> private-ip-address - String - Optional - Filter by the private IP address bound to the EIP.</li>
+<li> network-interface-id - String - Optional - Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
+<li> is-arrears - String - Optional - Filter by the fact whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
+<li> address-type - String - Optional - Filter by IP type. Valid values: `WanIP`, `EIP`, `AnycastEIP`, and `HighQualityEIP`. Default value: `EIP`.</li>
+<li> address-isp - String - Optional - Filter by ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
+<li> dedicated-cluster-id - String - Optional - Filter by unique CDC ID, such as `cluster-11112222`.</li>
+<li> tag-key - String - Optional - Filter by tag key.</li>
+<li> tag-value - String - Optional - Filter by tag value.</li>
+<li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -11537,6 +11572,21 @@ class DescribeSecurityGroupPoliciesRequest extends  AbstractModel {
          */
         this.SecurityGroupId = null;
 
+        /**
+         * Filter conditions. `SecurityGroupId` and `Filters` cannot be specified at the same time.
+<li>security-group-id - String - Security group ID.</li>
+<li>ip - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
+<li>address-module - String - IP address or address group template ID.</li>
+<li>service-module - String - Protocol port or port group template ID.</li>
+<li>protocol-type - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
+<li>port - String - Optional - Protocol port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
+<li>poly - String - Protocol policy. Valid values: `ALL` (means "all policies"), `ACCEPT` (means "allow") and `DROP` (means "reject").</li>
+<li>direction - String - Protocol rule. Valid values: `ALL` (means "all rules"), `INBOUND`(means "inbound rules") and `OUTBOUND` (means "outbound rules").</li>
+<li>description - String - Protocol description. Fuzzy matching is supported in this filter condition.</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -11547,6 +11597,15 @@ class DescribeSecurityGroupPoliciesRequest extends  AbstractModel {
             return;
         }
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -12474,6 +12533,48 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Zone = null;
 
+        /**
+         * The status of gateway traffic monitoring
+0: disable
+1: enable
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EnableFlowDetails = null;
+
+        /**
+         * The last time when the gateway traffic monitoring is enabled/disabled
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FlowDetailsUpdateTime = null;
+
+        /**
+         * Whether gateway traffic monitoring is supported
+0: No
+1: Yes
+Note: this field may return `null`, indicating that no valid values can be found.
+         * @type {number || null}
+         */
+        this.NewAfc = null;
+
+        /**
+         * Direct connect gateway access network types:
+<li>`VXLAN` - VXLAN type.</li>
+<li>`MPLS` - MPLS type.</li>
+<li>`Hybrid` - Hybrid type.</li>
+Note: this field may return `null`, indicating that no valid values can be found.
+         * @type {string || null}
+         */
+        this.AccessNetworkType = null;
+
+        /**
+         * AZ list of direct connect gateway with cross-AZ placement groups
+Note: this field may return `null`, indicating that no valid values can be found.
+         * @type {Array.<string> || null}
+         */
+        this.HaZoneList = null;
+
     }
 
     /**
@@ -12500,6 +12601,11 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ModeType = 'ModeType' in params ? params.ModeType : null;
         this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.EnableFlowDetails = 'EnableFlowDetails' in params ? params.EnableFlowDetails : null;
+        this.FlowDetailsUpdateTime = 'FlowDetailsUpdateTime' in params ? params.FlowDetailsUpdateTime : null;
+        this.NewAfc = 'NewAfc' in params ? params.NewAfc : null;
+        this.AccessNetworkType = 'AccessNetworkType' in params ? params.AccessNetworkType : null;
+        this.HaZoneList = 'HaZoneList' in params ? params.HaZoneList : null;
 
     }
 }
@@ -14968,6 +15074,30 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
          */
         this.HealthCheckRemoteIp = null;
 
+        /**
+         * Negotiation type. Valid values: `active` (default value), `passive` and `flowTrigger`.
+         * @type {string || null}
+         */
+        this.NegotiationType = null;
+
+        /**
+         * Specifies whether to enable DPD. Valid values: `0` (disable) and `1` (enable)
+         * @type {number || null}
+         */
+        this.DpdEnable = null;
+
+        /**
+         * DPD timeout period. Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of `DpdEnable` is 1. 
+         * @type {string || null}
+         */
+        this.DpdTimeout = null;
+
+        /**
+         * The action after DPD timeout. Valid values: `clear` (disconnect) and `restart` (try again). It’s valid when `DpdEnable` is `1`. 
+         * @type {string || null}
+         */
+        this.DpdAction = null;
+
     }
 
     /**
@@ -15004,6 +15134,10 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
         this.EnableHealthCheck = 'EnableHealthCheck' in params ? params.EnableHealthCheck : null;
         this.HealthCheckLocalIp = 'HealthCheckLocalIp' in params ? params.HealthCheckLocalIp : null;
         this.HealthCheckRemoteIp = 'HealthCheckRemoteIp' in params ? params.HealthCheckRemoteIp : null;
+        this.NegotiationType = 'NegotiationType' in params ? params.NegotiationType : null;
+        this.DpdEnable = 'DpdEnable' in params ? params.DpdEnable : null;
+        this.DpdTimeout = 'DpdTimeout' in params ? params.DpdTimeout : null;
+        this.DpdAction = 'DpdAction' in params ? params.DpdAction : null;
 
     }
 }
@@ -20991,6 +21125,18 @@ class DirectConnectGatewayCcnRoute extends  AbstractModel {
          */
         this.ASPath = null;
 
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Last updated time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
     }
 
     /**
@@ -21003,6 +21149,8 @@ class DirectConnectGatewayCcnRoute extends  AbstractModel {
         this.RouteId = 'RouteId' in params ? params.RouteId : null;
         this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
         this.ASPath = 'ASPath' in params ? params.ASPath : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -23046,7 +23194,7 @@ class AssociateAddressRequest extends  AbstractModel {
         this.PrivateIpAddress = null;
 
         /**
-         * Whether to enable direct access when binding a specified EIP. For more information, see [EIP Direct Access](https://intl.cloud.tencent.com/document/product/1199/41709?from_cn_redirect=1). Valid values: `True` and `False`; default value: `False`. You can set this parameter to `True` when binding an EIP to a CVM instance or an EKS elastic cluster. This parameter is currently in beta. To use it, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&level3_id=1071&queue=96&scene_code=34639&step=2).
+         * Specify whether to configure direct access when binding EIPs. For details, see [EIP Direct Access](https://intl.cloud.tencent.com/document/product/213/12540). Valid values: `True` and `False` (default). This parameter can be set to `True` when binding EIPs to a CVM instance or EKS cluster. It is in a beta test. To try it out, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&level3_id=1071&queue=96&scene_code=34639&step=2).
          * @type {boolean || null}
          */
         this.EipDirectConnection = null;

@@ -1157,7 +1157,7 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API is used to query the list of user-imported SQL files.
+     * This API is used to query the list of SQL files imported by users. The common request parameter `Region` must be `ap-shanghai`.
      * @param {DescribeUploadedFilesRequest} req
      * @param {function(string, DescribeUploadedFilesResponse):void} cb
      * @public

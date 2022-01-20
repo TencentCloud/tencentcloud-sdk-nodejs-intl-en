@@ -544,7 +544,7 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     }
 
     /**
-     * This API (DescribeAccessRegionsByDestRegion) is used to query the list of the available acceleration regions based on the origin server region.
+     * This API is used to query the available accelerator region based on the origin server region.
      * @param {DescribeAccessRegionsByDestRegionRequest} req
      * @param {function(string, DescribeAccessRegionsByDestRegionResponse):void} cb
      * @public

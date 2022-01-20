@@ -1120,6 +1120,13 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.UserScript = null;
 
+        /**
+         * Resource tag
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1168,6 +1175,15 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.DesiredPodNum = 'DesiredPodNum' in params ? params.DesiredPodNum : null;
         this.UserScript = 'UserScript' in params ? params.UserScript : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -4806,6 +4822,13 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.Annotations = null;
 
+        /**
+         * Alarm rule status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RuleState = null;
+
     }
 
     /**
@@ -4838,6 +4861,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
                 this.Annotations.push(obj);
             }
         }
+        this.RuleState = 'RuleState' in params ? params.RuleState : null;
 
     }
 }
@@ -6001,6 +6025,18 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
          */
         this.ExtraArgs = null;
 
+        /**
+         * Resource tag
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Unschedulable = null;
+
     }
 
     /**
@@ -6042,6 +6078,16 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
             obj.deserialize(params.ExtraArgs)
             this.ExtraArgs = obj;
         }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
 
     }
 }
@@ -6195,6 +6241,12 @@ class CreateClusterNodePoolRequest extends  AbstractModel {
          */
         this.OsCustomizeType = null;
 
+        /**
+         * Resource tag
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6235,6 +6287,15 @@ class CreateClusterNodePoolRequest extends  AbstractModel {
         }
         this.NodePoolOs = 'NodePoolOs' in params ? params.NodePoolOs : null;
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

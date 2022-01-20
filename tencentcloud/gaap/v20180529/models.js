@@ -3770,6 +3770,7 @@ AccessRegion - String - Required: No - Filter by access region.
 RealServerRegion - String - Required: No - Filter by origin server region.
 GroupId - String - Required: No - Filter by connection group ID.
 IPAddressVersion - String - Required: No - Filter by IP version.
+PackageType - String - Required: No - Filter by package type of connection groups.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5472,7 +5473,7 @@ class DescribeAccessRegionsByDestRegionRequest extends  AbstractModel {
         this.IPAddressVersion = null;
 
         /**
-         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
          * @type {string || null}
          */
         this.PackageType = null;
@@ -6250,10 +6251,22 @@ The connection is to be replicated if this parameter is set.
         this.IPAddressVersion = null;
 
         /**
-         * Network type. Valid values: `normal` (default), `cn2`
+         * Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland).
          * @type {string || null}
          */
         this.NetworkType = null;
+
+        /**
+         * Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
 
     }
 
@@ -6285,6 +6298,8 @@ The connection is to be replicated if this parameter is set.
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -8133,6 +8148,12 @@ class AccessRegionDetial extends  AbstractModel {
          */
         this.IDCType = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.FeatureBitmap = null;
+
     }
 
     /**
@@ -8149,6 +8170,7 @@ class AccessRegionDetial extends  AbstractModel {
         this.RegionArea = 'RegionArea' in params ? params.RegionArea : null;
         this.RegionAreaName = 'RegionAreaName' in params ? params.RegionAreaName : null;
         this.IDCType = 'IDCType' in params ? params.IDCType : null;
+        this.FeatureBitmap = 'FeatureBitmap' in params ? params.FeatureBitmap : null;
 
     }
 }
@@ -9712,10 +9734,16 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.NetworkType = null;
 
         /**
-         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-border connection group).
          * @type {string || null}
          */
         this.PackageType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
 
     }
 
@@ -9734,6 +9762,7 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -9753,7 +9782,7 @@ class DescribeRegionAndPriceRequest extends  AbstractModel {
         this.IPAddressVersion = null;
 
         /**
-         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
          * @type {string || null}
          */
         this.PackageType = null;
@@ -10408,10 +10437,16 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.NetworkType = null;
 
         /**
-         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
          * @type {string || null}
          */
         this.PackageType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
 
     }
 
@@ -10432,6 +10467,7 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -10832,7 +10868,8 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.NetworkType = null;
 
         /**
-         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), 
+and `CrossBorder` (cross-MLC-border connection).
 Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
@@ -10850,6 +10887,12 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          * @type {Array.<IPDetail> || null}
          */
         this.IPList = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
 
     }
 
@@ -10918,6 +10961,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
                 this.IPList.push(obj);
             }
         }
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }

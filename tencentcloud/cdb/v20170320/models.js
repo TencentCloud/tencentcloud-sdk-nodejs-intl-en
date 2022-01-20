@@ -2050,6 +2050,12 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.EngineVersions = null;
+
     }
 
     /**
@@ -2059,6 +2065,7 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.EngineVersions = 'EngineVersions' in params ? params.EngineVersions : null;
 
     }
 }
@@ -4098,6 +4105,12 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.CageId = null;
 
         /**
+         * Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+         * @type {string || null}
+         */
+        this.ParamTemplateType = null;
+
+        /**
          * The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
          * @type {Array.<string> || null}
          */
@@ -4171,6 +4184,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.AutoSyncFlag = 'AutoSyncFlag' in params ? params.AutoSyncFlag : null;
         this.CageId = 'CageId' in params ? params.CageId : null;
+        this.ParamTemplateType = 'ParamTemplateType' in params ? params.ParamTemplateType : null;
         this.AlarmPolicyIdList = 'AlarmPolicyIdList' in params ? params.AlarmPolicyIdList : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
@@ -4620,6 +4634,12 @@ which is left empty by default. Specify this parameter when cloning a strong syn
          */
         this.DryRun = null;
 
+        /**
+         * Financial cage ID.
+         * @type {string || null}
+         */
+        this.CageId = null;
+
     }
 
     /**
@@ -4656,6 +4676,7 @@ which is left empty by default. Specify this parameter when cloning a strong syn
         this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.CageId = 'CageId' in params ? params.CageId : null;
 
     }
 }

@@ -2295,6 +2295,21 @@ Default value: 5.
          */
         this.ServiceName = null;
 
+        /**
+         * Region. Valid values:
+China Mainland
+Asia Pacific I
+Asia Pacific II
+Asia Pacific III
+Europe
+North America
+South America
+Middle East
+Africa
+         * @type {Array.<string> || null}
+         */
+        this.RegionNames = null;
+
     }
 
     /**
@@ -2310,6 +2325,7 @@ Default value: 5.
         this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
         this.Granularity = 'Granularity' in params ? params.Granularity : null;
         this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.RegionNames = 'RegionNames' in params ? params.RegionNames : null;
 
     }
 }
@@ -3531,9 +3547,10 @@ class CommonMixLayoutParams extends  AbstractModel {
         super();
 
         /**
-         * Input layer. Value range: [1,16].
-1) For `image_layer` of background stream (i.e., main host video image or canvas), enter 1.
-2) For audio stream mix, this parameter is also required.
+         * Input layer. Value range: [1,16]
+(1) For the background stream, i.e., the room owner’s image or the canvas, set this parameter to `1`.
+(2) This parameter is required for audio-only stream mixing as well.
+Note that two inputs cannot have the same `ImageLayer` value.
          * @type {number || null}
          */
         this.ImageLayer = null;
@@ -3551,16 +3568,6 @@ If this parameter is left empty, 0 will be used by default.
         this.InputType = null;
 
         /**
-         * Output width of input video image. Value range:
-Pixel: [0,2000]
-Percentage: [0.01,0.99]
-If this parameter is left empty, the input stream width will be used by default.
-If percentage is used, the expected output is (percentage * background width).
-         * @type {number || null}
-         */
-        this.ImageWidth = null;
-
-        /**
          * Output height of input video image. Value range:
 Pixel: [0,2000]
 Percentage: [0.01,0.99]
@@ -3569,6 +3576,16 @@ If percentage is used, the expected output is (percentage * background height).
          * @type {number || null}
          */
         this.ImageHeight = null;
+
+        /**
+         * Output width of input video image. Value range:
+Pixel: [0,2000]
+Percentage: [0.01,0.99]
+If this parameter is left empty, the input stream width will be used by default.
+If percentage is used, the expected output is (percentage * background width).
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
 
         /**
          * X-axis offset of input in output video image. Value range:
@@ -3623,8 +3640,8 @@ Gray: 0x999999
         }
         this.ImageLayer = 'ImageLayer' in params ? params.ImageLayer : null;
         this.InputType = 'InputType' in params ? params.InputType : null;
-        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
         this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
         this.LocationX = 'LocationX' in params ? params.LocationX : null;
         this.LocationY = 'LocationY' in params ? params.LocationY : null;
         this.Color = 'Color' in params ? params.Color : null;
@@ -5845,7 +5862,7 @@ class PushDataInfo extends  AbstractModel {
         this.VideoFps = null;
 
         /**
-         * Pushed video bitrate in bps.
+         * Video bitrate (Kbps) for publishing
          * @type {number || null}
          */
         this.VideoSpeed = null;
@@ -5857,7 +5874,7 @@ class PushDataInfo extends  AbstractModel {
         this.AudioFps = null;
 
         /**
-         * Pushed audio bitrate in bps.
+         * Audio bitrate (Kbps) for publishing
          * @type {number || null}
          */
         this.AudioSpeed = null;
@@ -9829,9 +9846,10 @@ It must be a multiple of 2. The original width is 0.
         this.NeedAudio = null;
 
         /**
-         * Height. Default value: 0.
-Value range: [0,3000]
-The value must be a multiple of 2, and 0 is the original height.
+         * Height. Default value: 0
+Value range: 0-3000
+The value must be a multiple of 2. The original height is `0`.
+This parameter is required for a top speed codec template (when `AiTransCode` is `1`).
          * @type {number || null}
          */
         this.Height = null;
@@ -11030,8 +11048,8 @@ Only letters, digits, underscores, and hyphens can be contained.
         this.Description = null;
 
         /**
-         * Screencapturing interval in seconds. Default value: 10s.
-Value range: 5-300s.
+         * Screencapturing interval (s). Default value: 10
+Value range: 2-300
          * @type {number || null}
          */
         this.SnapshotInterval = null;

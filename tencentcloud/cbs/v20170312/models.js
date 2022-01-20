@@ -419,6 +419,12 @@ class TerminateDisksRequest extends  AbstractModel {
          */
         this.DiskIds = null;
 
+        /**
+         * Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
+         * @type {number || null}
+         */
+        this.DeleteSnapshot = null;
+
     }
 
     /**
@@ -429,6 +435,7 @@ class TerminateDisksRequest extends  AbstractModel {
             return;
         }
         this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.DeleteSnapshot = 'DeleteSnapshot' in params ? params.DeleteSnapshot : null;
 
     }
 }
@@ -3089,7 +3096,7 @@ class CreateSnapshotRequest extends  AbstractModel {
         this.SnapshotName = null;
 
         /**
-         * Expiration time of the snapshot. The snapshot will be automatically deleted upon expiration.
+         * Expiration time of the snapshot. It must be in UTC ISO-8601 format, eg. 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires
          * @type {string || null}
          */
         this.Deadline = null;
@@ -3746,6 +3753,12 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.CreateTime = null;
 
+        /**
+         * Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
+         * @type {number || null}
+         */
+        this.DeleteSnapshot = null;
+
     }
 
     /**
@@ -3803,6 +3816,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.ReturnFailCode = 'ReturnFailCode' in params ? params.ReturnFailCode : null;
         this.Shareable = 'Shareable' in params ? params.Shareable : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DeleteSnapshot = 'DeleteSnapshot' in params ? params.DeleteSnapshot : null;
 
     }
 }

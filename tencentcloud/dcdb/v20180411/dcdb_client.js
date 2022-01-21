@@ -25,6 +25,7 @@ const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CancelDcnJobResponse = models.CancelDcnJobResponse;
+const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
@@ -59,6 +60,7 @@ const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const DCDBInstanceInfo = models.DCDBInstanceInfo;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
+const DescribeFileDownloadUrlResponse = models.DescribeFileDownloadUrlResponse;
 const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const DCDBShardInfo = models.DCDBShardInfo;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
@@ -86,6 +88,7 @@ const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
+const ResourceTag = models.ResourceTag;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
 const DescribeFlowRequest = models.DescribeFlowRequest;
@@ -152,6 +155,17 @@ If no filter is specified, 10 instances will be returned by default. Up to 100 i
     DescribeDCDBInstances(req, cb) {
         let resp = new DescribeDCDBInstancesResponse();
         this.request("DescribeDCDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the download URL of a specific backup or log file of a database.
+     * @param {DescribeFileDownloadUrlRequest} req
+     * @param {function(string, DescribeFileDownloadUrlResponse):void} cb
+     * @public
+     */
+    DescribeFileDownloadUrl(req, cb) {
+        let resp = new DescribeFileDownloadUrlResponse();
+        this.request("DescribeFileDownloadUrl", req, resp, cb);
     }
 
     /**

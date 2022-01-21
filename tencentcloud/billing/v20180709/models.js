@@ -146,7 +146,7 @@ class BillResourceSummary extends  AbstractModel {
         this.BusinessCodeName = null;
 
         /**
-         * Sub-product name: sub-categories of Tencent Cloud services, such as CVM-Standard S1; if no subproduct name is obtained, '-' is returned.
+         * Subproduct name, which is the subcategory of a Tencent Cloud product, such as CVM-Standard S1. If no subproduct name can be obtained, `-` is returned.
          * @type {string || null}
          */
         this.ProductCodeName = null;
@@ -322,13 +322,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OperateUin = null;
 
         /**
-         * 
+         * Product code
          * @type {string || null}
          */
         this.BusinessCode = null;
 
         /**
-         * 
+         * Subproduct code
          * @type {string || null}
          */
         this.ProductCode = null;
@@ -701,8 +701,8 @@ Monthly subscription refund
         this.ProjectId = null;
 
         /**
-         * Business code
-Note: To query business codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+         * Product code
+Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
          * @type {string || null}
          */
         this.BusinessCode = null;
@@ -828,7 +828,7 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
 
         /**
          * Product code
-Note: This field may return null, indicating that no valid value was found.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {string || null}
          */
         this.BusinessCode = null;
@@ -1397,8 +1397,8 @@ Monthly subscription refund
         this.PayMode = null;
 
         /**
-         * Business code
-Note: To query business codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+         * Product code
+Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
          * @type {string || null}
          */
         this.BusinessCode = null;
@@ -1604,20 +1604,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Product code
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {string || null}
          */
         this.BusinessCode = null;
 
         /**
          * Subproduct code
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {string || null}
          */
         this.ProductCode = null;
 
         /**
-         * Transaction type/code (optional)
+         * Transaction type
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {string || null}
          */
         this.ActionType = null;

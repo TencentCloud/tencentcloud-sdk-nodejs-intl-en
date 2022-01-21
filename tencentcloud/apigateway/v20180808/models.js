@@ -2642,6 +2642,13 @@ class ServiceConfig extends  AbstractModel {
          */
         this.Method = null;
 
+        /**
+         * API backend COS configuration. It’s required if the `ServiceType` is ·`COS`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {CosConfig || null}
+         */
+        this.CosConfig = null;
+
     }
 
     /**
@@ -2656,6 +2663,12 @@ class ServiceConfig extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.Path = 'Path' in params ? params.Path : null;
         this.Method = 'Method' in params ? params.Method : null;
+
+        if (params.CosConfig) {
+            let obj = new CosConfig();
+            obj.deserialize(params.CosConfig)
+            this.CosConfig = obj;
+        }
 
     }
 }
@@ -4383,6 +4396,51 @@ class ModifyApiEnvironmentStrategyRequest extends  AbstractModel {
 }
 
 /**
+ * Service release history
+ * @class
+ */
+class ServiceReleaseHistory extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of published versions.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Historical version list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ServiceReleaseHistoryInfo> || null}
+         */
+        this.VersionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VersionList) {
+            this.VersionList = new Array();
+            for (let z in params.VersionList) {
+                let obj = new ServiceReleaseHistoryInfo();
+                obj.deserialize(params.VersionList[z]);
+                this.VersionList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyUsagePlan response structure.
  * @class
  */
@@ -5280,6 +5338,46 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribePluginApis response structure.
+ * @class
+ */
+class DescribePluginApisResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of APIs bound with the plugin
+         * @type {AttachedApiSummary || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new AttachedApiSummary();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EnableApiKey response structure.
  * @class
  */
@@ -5311,51 +5409,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Service release history
- * @class
- */
-class ServiceReleaseHistory extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of published versions.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Historical version list.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ServiceReleaseHistoryInfo> || null}
-         */
-        this.VersionList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.VersionList) {
-            this.VersionList = new Array();
-            for (let z in params.VersionList) {
-                let obj = new ServiceReleaseHistoryInfo();
-                obj.deserialize(params.VersionList[z]);
-                this.VersionList.push(obj);
-            }
-        }
 
     }
 }
@@ -8118,24 +8171,38 @@ class APIDocInfo extends  AbstractModel {
 }
 
 /**
- * DescribePluginApis response structure.
+ * COS-type API configuration
  * @class
  */
-class DescribePluginApisResponse extends  AbstractModel {
+class CosConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of APIs bound with the plugin
-         * @type {AttachedApiSummary || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Specifies how the backend COS bucket is called by the API. The frontend request method and Action can be:
+GET：GetObject
+PUT：PutObject
+POST：PostObject、AppendObject
+HEAD： HeadObject
+DELETE： DeleteObject
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Action = null;
+
+        /**
+         * Backend COS bucket of the API
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+        /**
+         * Whether to enable the backend COS signature for the API. It defaults to `false`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Authorization = null;
 
     }
 
@@ -8146,13 +8213,9 @@ class DescribePluginApisResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new AttachedApiSummary();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.Authorization = 'Authorization' in params ? params.Authorization : null;
 
     }
 }
@@ -13366,6 +13429,7 @@ module.exports = {
     UnBindEnvironmentRequest: UnBindEnvironmentRequest,
     OauthConfig: OauthConfig,
     ModifyApiEnvironmentStrategyRequest: ModifyApiEnvironmentStrategyRequest,
+    ServiceReleaseHistory: ServiceReleaseHistory,
     ModifyUsagePlanResponse: ModifyUsagePlanResponse,
     CreateUsagePlanResponse: CreateUsagePlanResponse,
     ReqParameter: ReqParameter,
@@ -13384,8 +13448,8 @@ module.exports = {
     CreateServiceRequest: CreateServiceRequest,
     DescribeIPStrategysStatusRequest: DescribeIPStrategysStatusRequest,
     DemoteServiceUsagePlanResponse: DemoteServiceUsagePlanResponse,
+    DescribePluginApisResponse: DescribePluginApisResponse,
     EnableApiKeyResponse: EnableApiKeyResponse,
-    ServiceReleaseHistory: ServiceReleaseHistory,
     DeleteApiAppRequest: DeleteApiAppRequest,
     UnReleaseServiceResponse: UnReleaseServiceResponse,
     CreateAPIDocResponse: CreateAPIDocResponse,
@@ -13427,7 +13491,7 @@ module.exports = {
     CreatePluginResponse: CreatePluginResponse,
     ReleaseServiceResponse: ReleaseServiceResponse,
     APIDocInfo: APIDocInfo,
-    DescribePluginApisResponse: DescribePluginApisResponse,
+    CosConfig: CosConfig,
     ModifyApiIncrementRequest: ModifyApiIncrementRequest,
     GenerateApiDocumentRequest: GenerateApiDocumentRequest,
     ServiceUsagePlanSet: ServiceUsagePlanSet,

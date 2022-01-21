@@ -404,6 +404,48 @@ class CancelDcnJobResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFileDownloadUrl request structure.
+ * @class
+ */
+class DescribeFileDownloadUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Shard ID
+         * @type {string || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * Unsigned file path
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+
+    }
+}
+
+/**
  * DescribeDBSyncMode response structure.
  * @class
  */
@@ -514,7 +556,7 @@ class CreateAccountRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * Account password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+         * Account password. It must contain 8-32 characters in all of the following four types: lowercase letters, uppercase letters, digits, and symbols (()~!@#$%^&*-+=_|{}[]:<>,.?/), and cannot start with a slash (/).
          * @type {string || null}
          */
         this.Password = null;
@@ -1336,6 +1378,12 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
+         * Number of security groups.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1359,6 +1407,7 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1643,17 +1692,16 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
         this.DbName = null;
 
         /**
-         * Global permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE TEMPORARY TABLES; LOCK TABLES; EXECUTE; CREATE VIEW; SHOW VIEW; CREATE ROUTINE; ALTER ROUTINE; EVENT; TRIGGER; SHOW DATABASES 
-Database permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE TEMPORARY TABLES; LOCK TABLES; EXECUTE; CREATE VIEW; SHOW VIEW; CREATE ROUTINE; ALTER ROUTINE; EVENT; TRIGGER 
-Table/view permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE VIEW; SHOW VIEW; TRIGGER 
-Stored procedure/function permission. Valid values: ALTER ROUTINE; EXECUTE 
-Field permission. Valid values: INSERT; REFERENCES; SELECT; UPDATE
+         * Global permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`, `SHOW DATABASES`, `REPLICATION CLIENT`, `REPLICATION SLAVE`.
+Database permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`. 
+Table permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.  
+Field permission. Valid values: `INSERT`, `REFERENCES`, `SELECT`, `UPDATE`.
          * @type {Array.<string> || null}
          */
         this.Privileges = null;
 
         /**
-         * Type. Valid values: table; view; proc; func; \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
+         * Type. Valid values: `table`, `\*`. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
          * @type {string || null}
          */
         this.Type = null;
@@ -2138,6 +2186,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.InstanceType = null;
 
+        /**
+         * Instance tag information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -2203,6 +2258,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
         this.DcnDstNum = 'DcnDstNum' in params ? params.DcnDstNum : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -2273,6 +2337,41 @@ class DescribeDcnDetailRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeFileDownloadUrl response structure.
+ * @class
+ */
+class DescribeFileDownloadUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Signed download URL
+         * @type {string || null}
+         */
+        this.PreSignedUrl = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PreSignedUrl = 'PreSignedUrl' in params ? params.PreSignedUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3659,6 +3758,41 @@ class InitDCDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * Tag object, including tag key and tag value
+ * @class
+ */
+class ResourceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DeleteAccount request structure.
  * @class
  */
@@ -4745,6 +4879,7 @@ module.exports = {
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     CancelDcnJobResponse: CancelDcnJobResponse,
+    DescribeFileDownloadUrlRequest: DescribeFileDownloadUrlRequest,
     DescribeDBSyncModeResponse: DescribeDBSyncModeResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     CreateAccountRequest: CreateAccountRequest,
@@ -4779,6 +4914,7 @@ module.exports = {
     DCDBInstanceInfo: DCDBInstanceInfo,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeDcnDetailRequest: DescribeDcnDetailRequest,
+    DescribeFileDownloadUrlResponse: DescribeFileDownloadUrlResponse,
     ModifyDBParametersResponse: ModifyDBParametersResponse,
     DCDBShardInfo: DCDBShardInfo,
     CopyAccountPrivilegesRequest: CopyAccountPrivilegesRequest,
@@ -4806,6 +4942,7 @@ module.exports = {
     DestroyDCDBInstanceResponse: DestroyDCDBInstanceResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     InitDCDBInstancesRequest: InitDCDBInstancesRequest,
+    ResourceTag: ResourceTag,
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeDCDBInstancesResponse: DescribeDCDBInstancesResponse,
     DescribeFlowRequest: DescribeFlowRequest,

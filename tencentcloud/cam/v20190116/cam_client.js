@@ -52,7 +52,7 @@ const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
 const ListGroupsRequest = models.ListGroupsRequest;
 const DeletePolicyVersionResponse = models.DeletePolicyVersionResponse;
 const UpdateSAMLProviderRequest = models.UpdateSAMLProviderRequest;
-const UpdateAssumeRolePolicyRequest = models.UpdateAssumeRolePolicyRequest;
+const AttachedUserPolicyGroupInfo = models.AttachedUserPolicyGroupInfo;
 const ListGroupsForUserResponse = models.ListGroupsForUserResponse;
 const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
@@ -67,6 +67,7 @@ const RoleInfo = models.RoleInfo;
 const DescribeSafeAuthFlagResponse = models.DescribeSafeAuthFlagResponse;
 const CreatePolicyVersionRequest = models.CreatePolicyVersionRequest;
 const SecretIdLastUsed = models.SecretIdLastUsed;
+const ListAttachedUserAllPoliciesResponse = models.ListAttachedUserAllPoliciesResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const GetUserResponse = models.GetUserResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
@@ -76,6 +77,7 @@ const StrategyInfo = models.StrategyInfo;
 const DeletePolicyRequest = models.DeletePolicyRequest;
 const GroupInfo = models.GroupInfo;
 const AddUserRequest = models.AddUserRequest;
+const UpdateAssumeRolePolicyRequest = models.UpdateAssumeRolePolicyRequest;
 const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
 const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
@@ -120,6 +122,7 @@ const ListPoliciesRequest = models.ListPoliciesRequest;
 const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDeletionStatusRequest;
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
 const CreatePolicyRequest = models.CreatePolicyRequest;
+const ListAttachedUserAllPoliciesRequest = models.ListAttachedUserAllPoliciesRequest;
 const DeletePolicyVersionRequest = models.DeletePolicyVersionRequest;
 const CreateUserSAMLConfigRequest = models.CreateUserSAMLConfigRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
@@ -143,6 +146,7 @@ const GetSAMLProviderRequest = models.GetSAMLProviderRequest;
 const DetachUserPolicyResponse = models.DetachUserPolicyResponse;
 const GetRoleResponse = models.GetRoleResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
+const AttachedUserPolicy = models.AttachedUserPolicy;
 const DeleteServiceLinkedRoleResponse = models.DeleteServiceLinkedRoleResponse;
 const GetPolicyResponse = models.GetPolicyResponse;
 const DescribeSafeAuthFlagRequest = models.DescribeSafeAuthFlagRequest;
@@ -575,6 +579,17 @@ class CamClient extends AbstractClient {
     UpdateAssumeRolePolicy(req, cb) {
         let resp = new UpdateAssumeRolePolicyResponse();
         this.request("UpdateAssumeRolePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to list policies associated with the user (including those inherited from the user group).
+     * @param {ListAttachedUserAllPoliciesRequest} req
+     * @param {function(string, ListAttachedUserAllPoliciesResponse):void} cb
+     * @public
+     */
+    ListAttachedUserAllPolicies(req, cb) {
+        let resp = new ListAttachedUserAllPoliciesResponse();
+        this.request("ListAttachedUserAllPolicies", req, resp, cb);
     }
 
     /**

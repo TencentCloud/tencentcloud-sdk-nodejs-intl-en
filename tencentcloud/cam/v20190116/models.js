@@ -1358,30 +1358,24 @@ class UpdateSAMLProviderRequest extends  AbstractModel {
 }
 
 /**
- * UpdateAssumeRolePolicy request structure.
+ * Information on policies associated with the user via the user group.
  * @class
  */
-class UpdateAssumeRolePolicyRequest extends  AbstractModel {
+class AttachedUserPolicyGroupInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy document
-         * @type {string || null}
+         * Group ID.
+         * @type {number || null}
          */
-        this.PolicyDocument = null;
+        this.GroupId = null;
 
         /**
-         * Role ID, used to specify a role. Input either `RoleId` or `RoleName`
+         * Group name.
          * @type {string || null}
          */
-        this.RoleId = null;
-
-        /**
-         * Role name, used to specify a role. Input either `RoleId` or `RoleName`
-         * @type {string || null}
-         */
-        this.RoleName = null;
+        this.GroupName = null;
 
     }
 
@@ -1392,9 +1386,8 @@ class UpdateAssumeRolePolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
-        this.RoleId = 'RoleId' in params ? params.RoleId : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
 
     }
 }
@@ -2070,6 +2063,56 @@ Note: this field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * ListAttachedUserAllPolicies response structure.
+ * @class
+ */
+class ListAttachedUserAllPoliciesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy list.
+         * @type {Array.<AttachedUserPolicy> || null}
+         */
+        this.PolicyList = null;
+
+        /**
+         * Total number of policies.
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PolicyList) {
+            this.PolicyList = new Array();
+            for (let z in params.PolicyList) {
+                let obj = new AttachedUserPolicy();
+                obj.deserialize(params.PolicyList[z]);
+                this.PolicyList.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteGroup request structure.
  * @class
  */
@@ -2585,6 +2628,48 @@ class AddUserRequest extends  AbstractModel {
         this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
+
+    }
+}
+
+/**
+ * UpdateAssumeRolePolicy request structure.
+ * @class
+ */
+class UpdateAssumeRolePolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy document
+         * @type {string || null}
+         */
+        this.PolicyDocument = null;
+
+        /**
+         * Role ID, used to specify a role. Input either `RoleId` or `RoleName`
+         * @type {string || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * Role name, used to specify a role. Input either `RoleId` or `RoleName`
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
     }
 }
@@ -4394,6 +4479,69 @@ class CreatePolicyRequest extends  AbstractModel {
 }
 
 /**
+ * ListAttachedUserAllPolicies request structure.
+ * @class
+ */
+class ListAttachedUserAllPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target user ID.
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+        /**
+         * The number of policies displayed on each page. Value range: 1-200.
+         * @type {number || null}
+         */
+        this.Rp = null;
+
+        /**
+         * Page number. Value range: 1-200.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * `0`: return policies that are directly associated and inherited from the user group; `1`: return policies that are directly associated; `2`: return policies inherited from the user group.
+         * @type {number || null}
+         */
+        this.AttachType = null;
+
+        /**
+         * Policy type.
+         * @type {number || null}
+         */
+        this.StrategyType = null;
+
+        /**
+         * Keyword for searching.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+        this.Rp = 'Rp' in params ? params.Rp : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.AttachType = 'AttachType' in params ? params.AttachType : null;
+        this.StrategyType = 'StrategyType' in params ? params.StrategyType : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+
+    }
+}
+
+/**
  * DeletePolicyVersion request structure.
  * @class
  */
@@ -5327,6 +5475,101 @@ class CreateRoleRequest extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
         this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
+
+    }
+}
+
+/**
+ * Details of policies associated with the user
+ * @class
+ */
+class AttachedUserPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID.
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Policy name.
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * Policy description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * Policy type (`1`: custom policy; `2`: preset policy).
+         * @type {string || null}
+         */
+        this.StrategyType = null;
+
+        /**
+         * Creation mode (`1`: create by product feature or project permission; other values: create by policy syntax).
+         * @type {string || null}
+         */
+        this.CreateMode = null;
+
+        /**
+         * Information on policies inherited from the user group.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<AttachedUserPolicyGroupInfo> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * Whether the product has been deprecated (`0`: no; `1`: yes).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Deactived = null;
+
+        /**
+         * List of deprecated products.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.StrategyType = 'StrategyType' in params ? params.StrategyType : null;
+        this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new AttachedUserPolicyGroupInfo();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
 
     }
 }
@@ -6558,7 +6801,7 @@ module.exports = {
     ListGroupsRequest: ListGroupsRequest,
     DeletePolicyVersionResponse: DeletePolicyVersionResponse,
     UpdateSAMLProviderRequest: UpdateSAMLProviderRequest,
-    UpdateAssumeRolePolicyRequest: UpdateAssumeRolePolicyRequest,
+    AttachedUserPolicyGroupInfo: AttachedUserPolicyGroupInfo,
     ListGroupsForUserResponse: ListGroupsForUserResponse,
     ListUsersForGroupRequest: ListUsersForGroupRequest,
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
@@ -6573,6 +6816,7 @@ module.exports = {
     DescribeSafeAuthFlagResponse: DescribeSafeAuthFlagResponse,
     CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     SecretIdLastUsed: SecretIdLastUsed,
+    ListAttachedUserAllPoliciesResponse: ListAttachedUserAllPoliciesResponse,
     DeleteGroupRequest: DeleteGroupRequest,
     GetUserResponse: GetUserResponse,
     DeleteUserResponse: DeleteUserResponse,
@@ -6582,6 +6826,7 @@ module.exports = {
     DeletePolicyRequest: DeletePolicyRequest,
     GroupInfo: GroupInfo,
     AddUserRequest: AddUserRequest,
+    UpdateAssumeRolePolicyRequest: UpdateAssumeRolePolicyRequest,
     LoginActionFlag: LoginActionFlag,
     DeleteRoleRequest: DeleteRoleRequest,
     UpdateRoleConsoleLoginRequest: UpdateRoleConsoleLoginRequest,
@@ -6626,6 +6871,7 @@ module.exports = {
     GetServiceLinkedRoleDeletionStatusRequest: GetServiceLinkedRoleDeletionStatusRequest,
     DetachGroupPolicyResponse: DetachGroupPolicyResponse,
     CreatePolicyRequest: CreatePolicyRequest,
+    ListAttachedUserAllPoliciesRequest: ListAttachedUserAllPoliciesRequest,
     DeletePolicyVersionRequest: DeletePolicyVersionRequest,
     CreateUserSAMLConfigRequest: CreateUserSAMLConfigRequest,
     UpdateGroupRequest: UpdateGroupRequest,
@@ -6649,6 +6895,7 @@ module.exports = {
     DetachUserPolicyResponse: DetachUserPolicyResponse,
     GetRoleResponse: GetRoleResponse,
     CreateRoleRequest: CreateRoleRequest,
+    AttachedUserPolicy: AttachedUserPolicy,
     DeleteServiceLinkedRoleResponse: DeleteServiceLinkedRoleResponse,
     GetPolicyResponse: GetPolicyResponse,
     DescribeSafeAuthFlagRequest: DescribeSafeAuthFlagRequest,

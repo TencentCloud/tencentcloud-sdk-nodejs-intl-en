@@ -4386,6 +4386,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.VideoSeek = null;
 
+        /**
+         * Private access for S3 origin
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AwsPrivateAccess || null}
+         */
+        this.AwsPrivateAccess = null;
+
+        /**
+         * Private access for OSS origin
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {OssPrivateAccess || null}
+         */
+        this.OssPrivateAccess = null;
+
     }
 
     /**
@@ -4533,6 +4547,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new VideoSeek();
             obj.deserialize(params.VideoSeek)
             this.VideoSeek = obj;
+        }
+
+        if (params.AwsPrivateAccess) {
+            let obj = new AwsPrivateAccess();
+            obj.deserialize(params.AwsPrivateAccess)
+            this.AwsPrivateAccess = obj;
+        }
+
+        if (params.OssPrivateAccess) {
+            let obj = new OssPrivateAccess();
+            obj.deserialize(params.OssPrivateAccess)
+            this.OssPrivateAccess = obj;
         }
 
     }
@@ -6959,9 +6985,8 @@ class ServerCert extends  AbstractModel {
         super();
 
         /**
-         * Server certificate ID
-This is auto-generated when the certificate is being hosted by the SSL Certificate Service
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Server certificate ID, which is auto-generated when the certificate is added to Tencent Cloud SSL Certificates
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertId = null;
@@ -9353,6 +9378,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.VideoSeek = null;
 
+        /**
+         * Private access for S3 origin
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {AwsPrivateAccess || null}
+         */
+        this.AwsPrivateAccess = null;
+
+        /**
+         * Private access for OSS origin
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {OssPrivateAccess || null}
+         */
+        this.OssPrivateAccess = null;
+
     }
 
     /**
@@ -9500,6 +9539,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new VideoSeek();
             obj.deserialize(params.VideoSeek)
             this.VideoSeek = obj;
+        }
+
+        if (params.AwsPrivateAccess) {
+            let obj = new AwsPrivateAccess();
+            obj.deserialize(params.AwsPrivateAccess)
+            this.AwsPrivateAccess = obj;
+        }
+
+        if (params.OssPrivateAccess) {
+            let obj = new OssPrivateAccess();
+            obj.deserialize(params.OssPrivateAccess)
+            this.OssPrivateAccess = obj;
         }
 
     }

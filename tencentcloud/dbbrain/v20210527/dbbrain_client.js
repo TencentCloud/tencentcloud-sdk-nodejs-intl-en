@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SchemaSpaceTimeSeries = models.SchemaSpaceTimeSeries;
 const HealthReportTask = models.HealthReportTask;
+const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
 const CreateDBDiagReportTaskRequest = models.CreateDBDiagReportTaskRequest;
 const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
 const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
@@ -44,10 +45,12 @@ const DescribeSecurityAuditLogDownloadUrlsRequest = models.DescribeSecurityAudit
 const MySqlProcess = models.MySqlProcess;
 const CreateMailProfileResponse = models.CreateMailProfileResponse;
 const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
-const CreateDBDiagReportUrlResponse = models.CreateDBDiagReportUrlResponse;
-const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
-const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
 const DiagHistoryEventItem = models.DiagHistoryEventItem;
+const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
+const CreateKillTaskResponse = models.CreateKillTaskResponse;
+const DescribeDBDiagEventsRequest = models.DescribeDBDiagEventsRequest;
+const CreateDBDiagReportUrlResponse = models.CreateDBDiagReportUrlResponse;
+const CreateKillTaskRequest = models.CreateKillTaskRequest;
 const SlowLogHost = models.SlowLogHost;
 const CreateMailProfileRequest = models.CreateMailProfileRequest;
 const MonitorFloatMetricSeriesData = models.MonitorFloatMetricSeriesData;
@@ -84,16 +87,17 @@ const DescribeHealthScoreRequest = models.DescribeHealthScoreRequest;
 const IssueTypeInfo = models.IssueTypeInfo;
 const DescribeDiagDBInstancesResponse = models.DescribeDiagDBInstancesResponse;
 const DescribeAllUserGroupRequest = models.DescribeAllUserGroupRequest;
+const CreateProxySessionKillTaskRequest = models.CreateProxySessionKillTaskRequest;
 const CreateSecurityAuditLogExportTaskResponse = models.CreateSecurityAuditLogExportTaskResponse;
 const SchemaItem = models.SchemaItem;
 const DescribeSlowLogUserHostStatsRequest = models.DescribeSlowLogUserHostStatsRequest;
 const DescribeTopSpaceSchemasResponse = models.DescribeTopSpaceSchemasResponse;
+const CreateProxySessionKillTaskResponse = models.CreateProxySessionKillTaskResponse;
 const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
 const MonitorFloatMetric = models.MonitorFloatMetric;
 const DescribeAllUserGroupResponse = models.DescribeAllUserGroupResponse;
 const DescribeUserSqlAdviceResponse = models.DescribeUserSqlAdviceResponse;
 const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
-const DescribeDBDiagEventsRequest = models.DescribeDBDiagEventsRequest;
 const GroupItem = models.GroupItem;
 const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
 const DescribeDBDiagReportTasksRequest = models.DescribeDBDiagReportTasksRequest;
@@ -171,6 +175,17 @@ class DbbrainClient extends AbstractClient {
     DescribeMySqlProcessList(req, cb) {
         let resp = new DescribeMySqlProcessListResponse();
         this.request("DescribeMySqlProcessList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an async task of killing all proxy node connection sessions and is currently supported only for Redis. The async task ID is the returned value, which can be passed to the API `DescribeProxySessionKillTasks` as a parameter to query the execution status of the session killing task.
+     * @param {CreateProxySessionKillTaskRequest} req
+     * @param {function(string, CreateProxySessionKillTaskResponse):void} cb
+     * @public
+     */
+    CreateProxySessionKillTask(req, cb) {
+        let resp = new CreateProxySessionKillTaskResponse();
+        this.request("CreateProxySessionKillTask", req, resp, cb);
     }
 
     /**
@@ -391,6 +406,17 @@ class DbbrainClient extends AbstractClient {
     DescribeTopSpaceSchemaTimeSeries(req, cb) {
         let resp = new DescribeTopSpaceSchemaTimeSeriesResponse();
         this.request("DescribeTopSpaceSchemaTimeSeries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create session killing tasks.
+     * @param {CreateKillTaskRequest} req
+     * @param {function(string, CreateKillTaskResponse):void} cb
+     * @public
+     */
+    CreateKillTask(req, cb) {
+        let resp = new CreateKillTaskResponse();
+        this.request("CreateKillTask", req, resp, cb);
     }
 
     /**

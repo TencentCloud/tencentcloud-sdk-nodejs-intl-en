@@ -45,7 +45,7 @@ Tencent Cloud team <noreply@mail.qcloud.com>
         this.Subject = null;
 
         /**
-         * Task type. Valid values: `1`: batch; `2`: scheduled; `3`: recurring
+         * Task type. `1`: immediate; `2`: scheduled; `3`: recurring
          * @type {number || null}
          */
         this.TaskType = null;
@@ -85,6 +85,12 @@ Tencent Cloud team <noreply@mail.qcloud.com>
          * @type {TimedEmailParam || null}
          */
         this.TimedParam = null;
+
+        /**
+         * Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+         * @type {string || null}
+         */
+        this.Unsubscribe = null;
 
     }
 
@@ -133,6 +139,7 @@ Tencent Cloud team <noreply@mail.qcloud.com>
             obj.deserialize(params.TimedParam)
             this.TimedParam = obj;
         }
+        this.Unsubscribe = 'Unsubscribe' in params ? params.Unsubscribe : null;
 
     }
 }
@@ -161,6 +168,91 @@ class GetEmailTemplateRequest extends  AbstractModel {
             return;
         }
         this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+
+    }
+}
+
+/**
+ * ListSendTasks response structure.
+ * @class
+ */
+class ListSendTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Data record
+         * @type {Array.<SendTaskData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SendTaskData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateReceiver response structure.
+ * @class
+ */
+class CreateReceiverResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recipient group ID, by which recipient email addresses are uploaded
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -278,6 +370,55 @@ class ListEmailAddressRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ListReceivers request structure.
+ * @class
+ */
+class ListReceiversRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset, starting from 0. The value is an integer.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of records to query. The value is an integer not exceeding 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Group status (`1`: to be uploaded; `2` uploading; `3` uploaded). To query groups in all states, do not pass in this parameter.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Group name keyword for fuzzy query
+         * @type {string || null}
+         */
+        this.KeyWord = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.KeyWord = 'KeyWord' in params ? params.KeyWord : null;
 
     }
 }
@@ -453,6 +594,8 @@ class Template extends  AbstractModel {
 
         /**
          * Variable parameters in the template. Please use `json.dump` to format the JSON object into a string type. The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the corresponding value (represented by {{value}}) when sending the email.
+Note: The parameter value cannot be data of a complex type such as HTML.
+Example: {"name":"xxx","age":"xx"}
          * @type {string || null}
          */
         this.TemplateData = null;
@@ -468,6 +611,62 @@ class Template extends  AbstractModel {
         }
         this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
         this.TemplateData = 'TemplateData' in params ? params.TemplateData : null;
+
+    }
+}
+
+/**
+ * ListSendTasks request structure.
+ * @class
+ */
+class ListSendTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset, starting from 0. The value is an integer. `0` means to skip 0 entries.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of records to query. The value is an integer not exceeding 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent. To query tasks in all states, do not pass in this parameter.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Recipient group ID
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
+         * @type {number || null}
+         */
+        this.TaskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
 
     }
 }
@@ -524,9 +723,9 @@ class SendEmailRequest extends  AbstractModel {
         super();
 
         /**
-         * Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format: 
-Sender <email address>, for example:
-Tencent Cloud team <noreply@mail.qcloud.com>
+         * Sender address. Enter a sender address, for example, noreply@mail.qcloud.com.
+To display the sender name, enter the address in the following format: 
+Sender <email address>
          * @type {string || null}
          */
         this.FromEmailAddress = null;
@@ -567,6 +766,12 @@ Tencent Cloud team <noreply@mail.qcloud.com>
          */
         this.Attachments = null;
 
+        /**
+         * Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+         * @type {string || null}
+         */
+        this.Unsubscribe = null;
+
     }
 
     /**
@@ -601,6 +806,7 @@ Tencent Cloud team <noreply@mail.qcloud.com>
                 this.Attachments.push(obj);
             }
         }
+        this.Unsubscribe = 'Unsubscribe' in params ? params.Unsubscribe : null;
 
     }
 }
@@ -846,6 +1052,186 @@ class GetStatisticsReportRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteBlackList request structure.
+ * @class
+ */
+class DeleteBlackListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of email addresses to be unblocklisted. Enter at least one address.
+         * @type {Array.<string> || null}
+         */
+        this.EmailAddressList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EmailAddressList = 'EmailAddressList' in params ? params.EmailAddressList : null;
+
+    }
+}
+
+/**
+ * Email sending task data
+ * @class
+ */
+class SendTaskData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Sender address
+         * @type {string || null}
+         */
+        this.FromEmailAddress = null;
+
+        /**
+         * Recipient group ID
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent
+         * @type {number || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * Task type. `1`: immediate; `2`: scheduled; `3`: recurring
+         * @type {number || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * Number of emails requested to be sent
+         * @type {number || null}
+         */
+        this.RequestCount = null;
+
+        /**
+         * Number of emails sent
+         * @type {number || null}
+         */
+        this.SendCount = null;
+
+        /**
+         * Number of emails cached
+         * @type {number || null}
+         */
+        this.CacheCount = null;
+
+        /**
+         * Task creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Task update time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Email subject
+         * @type {string || null}
+         */
+        this.Subject = null;
+
+        /**
+         * Template and template data
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {Template || null}
+         */
+        this.Template = null;
+
+        /**
+         * Parameters of a recurring task
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {CycleEmailParam || null}
+         */
+        this.CycleParam = null;
+
+        /**
+         * Parameters of a scheduled task
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {TimedEmailParam || null}
+         */
+        this.TimedParam = null;
+
+        /**
+         * Task exception information
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * Recipient group name
+         * @type {string || null}
+         */
+        this.ReceiversName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.FromEmailAddress = 'FromEmailAddress' in params ? params.FromEmailAddress : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.RequestCount = 'RequestCount' in params ? params.RequestCount : null;
+        this.SendCount = 'SendCount' in params ? params.SendCount : null;
+        this.CacheCount = 'CacheCount' in params ? params.CacheCount : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Subject = 'Subject' in params ? params.Subject : null;
+
+        if (params.Template) {
+            let obj = new Template();
+            obj.deserialize(params.Template)
+            this.Template = obj;
+        }
+
+        if (params.CycleParam) {
+            let obj = new CycleEmailParam();
+            obj.deserialize(params.CycleParam)
+            this.CycleParam = obj;
+        }
+
+        if (params.TimedParam) {
+            let obj = new TimedEmailParam();
+            obj.deserialize(params.TimedParam)
+            this.TimedParam = obj;
+        }
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.ReceiversName = 'ReceiversName' in params ? params.ReceiversName : null;
+
+    }
+}
+
+/**
  * DeleteEmailTemplate response structure.
  * @class
  */
@@ -981,30 +1367,50 @@ class CreateEmailIdentityRequest extends  AbstractModel {
 }
 
 /**
- * UpdateEmailTemplate request structure.
+ * Recipient group data type
  * @class
  */
-class UpdateEmailTemplateRequest extends  AbstractModel {
+class ReceiverData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template content.
-         * @type {TemplateContent || null}
-         */
-        this.TemplateContent = null;
-
-        /**
-         * Template ID.
+         * Recipient group ID
          * @type {number || null}
          */
-        this.TemplateID = null;
+        this.ReceiverId = null;
 
         /**
-         * Template name.
+         * Recipient group name
          * @type {string || null}
          */
-        this.TemplateName = null;
+        this.ReceiversName = null;
+
+        /**
+         * Total number of recipient email addresses
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Recipient group description
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * Group status (`1`: to be uploaded; `2` uploading; `3` uploaded)
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.ReceiversStatus = null;
+
+        /**
+         * Creation time, such as 2021-09-28 16:40:35
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
     }
 
@@ -1015,14 +1421,12 @@ class UpdateEmailTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TemplateContent) {
-            let obj = new TemplateContent();
-            obj.deserialize(params.TemplateContent)
-            this.TemplateContent = obj;
-        }
-        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.ReceiversName = 'ReceiversName' in params ? params.ReceiversName : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.ReceiversStatus = 'ReceiversStatus' in params ? params.ReceiversStatus : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -1136,6 +1540,53 @@ class DeleteBlackListResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateEmailTemplate request structure.
+ * @class
+ */
+class UpdateEmailTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template content.
+         * @type {TemplateContent || null}
+         */
+        this.TemplateContent = null;
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateID = null;
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TemplateContent) {
+            let obj = new TemplateContent();
+            obj.deserialize(params.TemplateContent)
+            this.TemplateContent = obj;
+        }
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
 
     }
 }
@@ -1308,18 +1759,24 @@ class ListEmailTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * DeleteBlackList request structure.
+ * CreateReceiver request structure.
  * @class
  */
-class DeleteBlackListRequest extends  AbstractModel {
+class CreateReceiverRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of email addresses to be unblocklisted. Enter at least one address.
-         * @type {Array.<string> || null}
+         * Recipient group name
+         * @type {string || null}
          */
-        this.EmailAddressList = null;
+        this.ReceiversName = null;
+
+        /**
+         * Recipient group description
+         * @type {string || null}
+         */
+        this.Desc = null;
 
     }
 
@@ -1330,7 +1787,36 @@ class DeleteBlackListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EmailAddressList = 'EmailAddressList' in params ? params.EmailAddressList : null;
+        this.ReceiversName = 'ReceiversName' in params ? params.ReceiversName : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * CreateReceiverDetail response structure.
+ * @class
+ */
+class CreateReceiverDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1999,6 +2485,41 @@ class CreateEmailAddressRequest extends  AbstractModel {
 }
 
 /**
+ * CreateReceiverDetail request structure.
+ * @class
+ */
+class CreateReceiverDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recipient group ID
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * Email address
+         * @type {Array.<string> || null}
+         */
+        this.Emails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.Emails = 'Emails' in params ? params.Emails : null;
+
+    }
+}
+
+/**
  * CreateEmailTemplate response structure.
  * @class
  */
@@ -2020,6 +2541,56 @@ class CreateEmailTemplateResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListReceivers response structure.
+ * @class
+ */
+class ListReceiversResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Data record
+         * @type {Array.<ReceiverData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ReceiverData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2230,13 +2801,17 @@ class ListEmailIdentitiesRequest extends  AbstractModel {
 module.exports = {
     BatchSendEmailRequest: BatchSendEmailRequest,
     GetEmailTemplateRequest: GetEmailTemplateRequest,
+    ListSendTasksResponse: ListSendTasksResponse,
+    CreateReceiverResponse: CreateReceiverResponse,
     CreateEmailTemplateRequest: CreateEmailTemplateRequest,
     TemplatesMetadata: TemplatesMetadata,
     ListEmailAddressRequest: ListEmailAddressRequest,
+    ListReceiversRequest: ListReceiversRequest,
     GetEmailIdentityResponse: GetEmailIdentityResponse,
     ListBlackEmailAddressRequest: ListBlackEmailAddressRequest,
     Attachment: Attachment,
     Template: Template,
+    ListSendTasksRequest: ListSendTasksRequest,
     GetSendEmailStatusResponse: GetSendEmailStatusResponse,
     SendEmailRequest: SendEmailRequest,
     EmailSender: EmailSender,
@@ -2246,16 +2821,20 @@ module.exports = {
     GetEmailIdentityRequest: GetEmailIdentityRequest,
     DeleteEmailIdentityResponse: DeleteEmailIdentityResponse,
     GetStatisticsReportRequest: GetStatisticsReportRequest,
+    DeleteBlackListRequest: DeleteBlackListRequest,
+    SendTaskData: SendTaskData,
     DeleteEmailTemplateResponse: DeleteEmailTemplateResponse,
     Volume: Volume,
     CreateEmailIdentityRequest: CreateEmailIdentityRequest,
-    UpdateEmailTemplateRequest: UpdateEmailTemplateRequest,
+    ReceiverData: ReceiverData,
     UpdateEmailIdentityResponse: UpdateEmailIdentityResponse,
     DeleteEmailTemplateRequest: DeleteEmailTemplateRequest,
     DeleteBlackListResponse: DeleteBlackListResponse,
+    UpdateEmailTemplateRequest: UpdateEmailTemplateRequest,
     SendEmailStatus: SendEmailStatus,
     ListEmailTemplatesRequest: ListEmailTemplatesRequest,
-    DeleteBlackListRequest: DeleteBlackListRequest,
+    CreateReceiverRequest: CreateReceiverRequest,
+    CreateReceiverDetailResponse: CreateReceiverDetailResponse,
     ListEmailTemplatesResponse: ListEmailTemplatesResponse,
     SendEmailResponse: SendEmailResponse,
     ListBlackEmailAddressResponse: ListBlackEmailAddressResponse,
@@ -2272,7 +2851,9 @@ module.exports = {
     DeleteEmailAddressResponse: DeleteEmailAddressResponse,
     CreateEmailIdentityResponse: CreateEmailIdentityResponse,
     CreateEmailAddressRequest: CreateEmailAddressRequest,
+    CreateReceiverDetailRequest: CreateReceiverDetailRequest,
     CreateEmailTemplateResponse: CreateEmailTemplateResponse,
+    ListReceiversResponse: ListReceiversResponse,
     CreateEmailAddressResponse: CreateEmailAddressResponse,
     UpdateEmailTemplateResponse: UpdateEmailTemplateResponse,
     TimedEmailParam: TimedEmailParam,

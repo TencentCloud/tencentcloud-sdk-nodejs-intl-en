@@ -4761,6 +4761,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.TagKey = null;
 
+        /**
+         * VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
     }
 
     /**
@@ -4776,6 +4782,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
 }
@@ -5369,13 +5376,13 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default
+         * Offset. If this parameter is left empty, `0` will be used by default.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20
+         * Number of returned results. If this parameter is left empty, `10` will be used by default. The maximum value is `20`.
          * @type {number || null}
          */
         this.Limit = null;
@@ -5387,10 +5394,16 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
         this.TagKey = null;
 
         /**
-         * Filter
+         * Filter.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
+
+        /**
+         * This parameter has been deprecated and replaced with `InstanceIdList`.
+         * @type {string || null}
+         */
+        this.InstanceIds = null;
 
     }
 
@@ -5416,6 +5429,7 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -7246,6 +7260,27 @@ Note: `null` may be returned for this field, indicating that no valid values can
          */
         this.RebalanceTime = null;
 
+        /**
+         * Number of partitions in the current instance.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PartitionNumber = null;
+
+        /**
+         * Public network bandwidth type.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicNetworkChargeType = null;
+
+        /**
+         * Public network bandwidth.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PublicNetwork = null;
+
     }
 
     /**
@@ -7298,6 +7333,9 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.MaxTopicNumber = 'MaxTopicNumber' in params ? params.MaxTopicNumber : null;
         this.MaxPartitionNumber = 'MaxPartitionNumber' in params ? params.MaxPartitionNumber : null;
         this.RebalanceTime = 'RebalanceTime' in params ? params.RebalanceTime : null;
+        this.PartitionNumber = 'PartitionNumber' in params ? params.PartitionNumber : null;
+        this.PublicNetworkChargeType = 'PublicNetworkChargeType' in params ? params.PublicNetworkChargeType : null;
+        this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
 
     }
 }

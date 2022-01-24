@@ -4123,6 +4123,12 @@ class KillMasterGroupRequest extends  AbstractModel {
          */
         this.Password = null;
 
+        /**
+         * Node information of a single-AZ deployed instance
+         * @type {Array.<number> || null}
+         */
+        this.ShardIds = null;
+
     }
 
     /**
@@ -4134,6 +4140,7 @@ class KillMasterGroupRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Password = 'Password' in params ? params.Password : null;
+        this.ShardIds = 'ShardIds' in params ? params.ShardIds : null;
 
     }
 }

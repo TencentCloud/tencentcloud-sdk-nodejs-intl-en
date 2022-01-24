@@ -637,6 +637,12 @@ Hadoop-Hbase
          */
         this.SceneName = null;
 
+        /**
+         * Shared component information
+         * @type {Array.<ExternalService> || null}
+         */
+        this.ExternalService = null;
+
     }
 
     /**
@@ -680,6 +686,50 @@ Hadoop-Hbase
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.SceneName = 'SceneName' in params ? params.SceneName : null;
+
+        if (params.ExternalService) {
+            this.ExternalService = new Array();
+            for (let z in params.ExternalService) {
+                let obj = new ExternalService();
+                obj.deserialize(params.ExternalService[z]);
+                this.ExternalService.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Shared self-built component parameters
+ * @class
+ */
+class CustomServiceDefine extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom parameter key
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Custom parameter value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1283,6 +1333,63 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.VolumePath = 'VolumePath' in params ? params.VolumePath : null;
+
+    }
+}
+
+/**
+ * Shared component information
+ * @class
+ */
+class ExternalService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shared component type, which can be EMR or CUSTOM
+         * @type {string || null}
+         */
+        this.ShareType = null;
+
+        /**
+         * Custom parameters
+         * @type {Array.<CustomServiceDefine> || null}
+         */
+        this.CustomServiceDefineList = null;
+
+        /**
+         * Shared component name
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * Shared component cluster
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShareType = 'ShareType' in params ? params.ShareType : null;
+
+        if (params.CustomServiceDefineList) {
+            this.CustomServiceDefineList = new Array();
+            for (let z in params.CustomServiceDefineList) {
+                let obj = new CustomServiceDefine();
+                obj.deserialize(params.CustomServiceDefineList[z]);
+                this.CustomServiceDefineList.push(obj);
+            }
+        }
+        this.Service = 'Service' in params ? params.Service : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4168,6 +4275,7 @@ module.exports = {
     PriceResource: PriceResource,
     ScaleOutInstanceResponse: ScaleOutInstanceResponse,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
+    CustomServiceDefine: CustomServiceDefine,
     Resource: Resource,
     TerminateInstanceRequest: TerminateInstanceRequest,
     PodVolume: PodVolume,
@@ -4178,6 +4286,7 @@ module.exports = {
     TerminateTasksRequest: TerminateTasksRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
     HostVolumeContext: HostVolumeContext,
+    ExternalService: ExternalService,
     DescribeClusterNodesRequest: DescribeClusterNodesRequest,
     PreExecuteFileSettings: PreExecuteFileSettings,
     CreateInstanceRequest: CreateInstanceRequest,

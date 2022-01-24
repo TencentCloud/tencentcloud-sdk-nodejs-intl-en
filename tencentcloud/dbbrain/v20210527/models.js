@@ -144,6 +144,42 @@ class HealthReportTask extends  AbstractModel {
 }
 
 /**
+ * CreateDBDiagReportTask response structure.
+ * @class
+ */
+class CreateDBDiagReportTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateDBDiagReportTask request structure.
  * @class
  */
@@ -1596,133 +1632,6 @@ class DescribeSlowLogTimeSeriesStatsRequest extends  AbstractModel {
 }
 
 /**
- * CreateDBDiagReportUrl response structure.
- * @class
- */
-class CreateDBDiagReportUrlResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Health report URL.
-         * @type {string || null}
-         */
-        this.ReportUrl = null;
-
-        /**
-         * Expiration timestamp of health report URL (in seconds).
-         * @type {number || null}
-         */
-        this.ExpireTime = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReportUrl = 'ReportUrl' in params ? params.ReportUrl : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeDBDiagHistory request structure.
- * @class
- */
-class DescribeDBDiagHistoryRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Start time, such as "2019-09-10 12:13:14".
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time, such as "2019-09-11 12:13:14". The interval between the end time and the start time can be up to 2 days.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
-         * @type {string || null}
-         */
-        this.Product = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Product = 'Product' in params ? params.Product : null;
-
-    }
-}
-
-/**
- * CreateDBDiagReportTask response structure.
- * @class
- */
-class CreateDBDiagReportTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Async task request ID, which can be used to query the execution result of an async task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Instance diagnosis event
  * @class
  */
@@ -1810,6 +1719,279 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Metric = 'Metric' in params ? params.Metric : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * DescribeDBDiagHistory request structure.
+ * @class
+ */
+class DescribeDBDiagHistoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time, such as "2019-09-10 12:13:14".
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, such as "2019-09-11 12:13:14". The interval between the end time and the start time can be up to 2 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * CreateKillTask response structure.
+ * @class
+ */
+class CreateKillTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. `1` is returned if the session killing task is successfully created.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDBDiagEvents request structure.
+ * @class
+ */
+class DescribeDBDiagEventsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time in the format of “2021-05-27 00:00:00”. The earliest time that can be queried is 30 days before the current time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in the format of "2021-05-27 01:00:00". The interval between the end time and the start time can be up to 7 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Risk level list. Valid values in descending order of severity: `1` (critical), `2` (serious), `3` (alarm), `4` (warning), `5` (healthy).
+         * @type {Array.<number> || null}
+         */
+        this.Severities = null;
+
+        /**
+         * Instance ID list.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 50.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Severities = 'Severities' in params ? params.Severities : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreateDBDiagReportUrl response structure.
+ * @class
+ */
+class CreateDBDiagReportUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Health report URL.
+         * @type {string || null}
+         */
+        this.ReportUrl = null;
+
+        /**
+         * Expiration timestamp of health report URL (in seconds).
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReportUrl = 'ReportUrl' in params ? params.ReportUrl : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateKillTask request structure.
+ * @class
+ */
+class CreateKillTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance associated with the session killing task.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Task duration in seconds. Pass in `-1` to stop the task manually.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Client IP, which is a task filter.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Database name, which is a task filter. Multiple database names are separated by comma.
+         * @type {string || null}
+         */
+        this.DB = null;
+
+        /**
+         * Related command, which is a task filter. Multiple commands are separated by comma.
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * Task filter. Filtering by single filter prefix is supported.
+         * @type {string || null}
+         */
+        this.Info = null;
+
+        /**
+         * User type, which is a task filter.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Session duration in seconds, which is a task filter.
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.DB = 'DB' in params ? params.DB : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.Info = 'Info' in params ? params.Info : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -3679,7 +3861,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ProfileList = null;
 
         /**
-         * Total number of email templates.
+         * Total number of the configured emails.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -3900,6 +4082,41 @@ class DescribeAllUserGroupRequest extends  AbstractModel {
 }
 
 /**
+ * CreateProxySessionKillTask request structure.
+ * @class
+ */
+class CreateProxySessionKillTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Service type. Valid value: `redis` (TencentDB for Redis).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
  * CreateSecurityAuditLogExportTask response structure.
  * @class
  */
@@ -4063,6 +4280,41 @@ class DescribeTopSpaceSchemasResponse extends  AbstractModel {
             }
         }
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateProxySessionKillTask response structure.
+ * @class
+ */
+class CreateProxySessionKillTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID that is returned after the session killing task is created.
+         * @type {number || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4353,69 +4605,6 @@ class DescribeDBSpaceStatusResponse extends  AbstractModel {
         this.Total = 'Total' in params ? params.Total : null;
         this.AvailableDays = 'AvailableDays' in params ? params.AvailableDays : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeDBDiagEvents request structure.
- * @class
- */
-class DescribeDBDiagEventsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Start time in the format of “2021-05-27 00:00:00”. The earliest time that can be queried is 30 days before the current time.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time in the format of "2021-05-27 01:00:00". The interval between the end time and the start time can be up to 7 days.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Risk level list. Valid values in descending order of severity: `1` (critical), `2` (serious), `3` (alarm), `4` (warning), `5` (healthy).
-         * @type {Array.<number> || null}
-         */
-        this.Severities = null;
-
-        /**
-         * Instance ID list.
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * Offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned results. Default value: 20. Maximum value: 50.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Severities = 'Severities' in params ? params.Severities : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5116,6 +5305,7 @@ class DescribeSecurityAuditLogDownloadUrlsResponse extends  AbstractModel {
 module.exports = {
     SchemaSpaceTimeSeries: SchemaSpaceTimeSeries,
     HealthReportTask: HealthReportTask,
+    CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
     CreateDBDiagReportTaskRequest: CreateDBDiagReportTaskRequest,
     TableSpaceTimeSeries: TableSpaceTimeSeries,
     DescribeTopSpaceTablesRequest: DescribeTopSpaceTablesRequest,
@@ -5142,10 +5332,12 @@ module.exports = {
     MySqlProcess: MySqlProcess,
     CreateMailProfileResponse: CreateMailProfileResponse,
     DescribeSlowLogTimeSeriesStatsRequest: DescribeSlowLogTimeSeriesStatsRequest,
-    CreateDBDiagReportUrlResponse: CreateDBDiagReportUrlResponse,
-    DescribeDBDiagHistoryRequest: DescribeDBDiagHistoryRequest,
-    CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
     DiagHistoryEventItem: DiagHistoryEventItem,
+    DescribeDBDiagHistoryRequest: DescribeDBDiagHistoryRequest,
+    CreateKillTaskResponse: CreateKillTaskResponse,
+    DescribeDBDiagEventsRequest: DescribeDBDiagEventsRequest,
+    CreateDBDiagReportUrlResponse: CreateDBDiagReportUrlResponse,
+    CreateKillTaskRequest: CreateKillTaskRequest,
     SlowLogHost: SlowLogHost,
     CreateMailProfileRequest: CreateMailProfileRequest,
     MonitorFloatMetricSeriesData: MonitorFloatMetricSeriesData,
@@ -5182,16 +5374,17 @@ module.exports = {
     IssueTypeInfo: IssueTypeInfo,
     DescribeDiagDBInstancesResponse: DescribeDiagDBInstancesResponse,
     DescribeAllUserGroupRequest: DescribeAllUserGroupRequest,
+    CreateProxySessionKillTaskRequest: CreateProxySessionKillTaskRequest,
     CreateSecurityAuditLogExportTaskResponse: CreateSecurityAuditLogExportTaskResponse,
     SchemaItem: SchemaItem,
     DescribeSlowLogUserHostStatsRequest: DescribeSlowLogUserHostStatsRequest,
     DescribeTopSpaceSchemasResponse: DescribeTopSpaceSchemasResponse,
+    CreateProxySessionKillTaskResponse: CreateProxySessionKillTaskResponse,
     DescribeSlowLogTimeSeriesStatsResponse: DescribeSlowLogTimeSeriesStatsResponse,
     MonitorFloatMetric: MonitorFloatMetric,
     DescribeAllUserGroupResponse: DescribeAllUserGroupResponse,
     DescribeUserSqlAdviceResponse: DescribeUserSqlAdviceResponse,
     DescribeDBSpaceStatusResponse: DescribeDBSpaceStatusResponse,
-    DescribeDBDiagEventsRequest: DescribeDBDiagEventsRequest,
     GroupItem: GroupItem,
     DescribeTopSpaceTableTimeSeriesRequest: DescribeTopSpaceTableTimeSeriesRequest,
     DescribeDBDiagReportTasksRequest: DescribeDBDiagReportTasksRequest,

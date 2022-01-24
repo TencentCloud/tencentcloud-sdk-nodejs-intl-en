@@ -18,13 +18,17 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const BatchSendEmailRequest = models.BatchSendEmailRequest;
 const GetEmailTemplateRequest = models.GetEmailTemplateRequest;
+const ListSendTasksResponse = models.ListSendTasksResponse;
+const CreateReceiverResponse = models.CreateReceiverResponse;
 const CreateEmailTemplateRequest = models.CreateEmailTemplateRequest;
 const TemplatesMetadata = models.TemplatesMetadata;
 const ListEmailAddressRequest = models.ListEmailAddressRequest;
+const ListReceiversRequest = models.ListReceiversRequest;
 const GetEmailIdentityResponse = models.GetEmailIdentityResponse;
 const ListBlackEmailAddressRequest = models.ListBlackEmailAddressRequest;
 const Attachment = models.Attachment;
 const Template = models.Template;
+const ListSendTasksRequest = models.ListSendTasksRequest;
 const GetSendEmailStatusResponse = models.GetSendEmailStatusResponse;
 const SendEmailRequest = models.SendEmailRequest;
 const EmailSender = models.EmailSender;
@@ -34,16 +38,20 @@ const UpdateEmailIdentityRequest = models.UpdateEmailIdentityRequest;
 const GetEmailIdentityRequest = models.GetEmailIdentityRequest;
 const DeleteEmailIdentityResponse = models.DeleteEmailIdentityResponse;
 const GetStatisticsReportRequest = models.GetStatisticsReportRequest;
+const DeleteBlackListRequest = models.DeleteBlackListRequest;
+const SendTaskData = models.SendTaskData;
 const DeleteEmailTemplateResponse = models.DeleteEmailTemplateResponse;
 const Volume = models.Volume;
 const CreateEmailIdentityRequest = models.CreateEmailIdentityRequest;
-const UpdateEmailTemplateRequest = models.UpdateEmailTemplateRequest;
+const ReceiverData = models.ReceiverData;
 const UpdateEmailIdentityResponse = models.UpdateEmailIdentityResponse;
 const DeleteEmailTemplateRequest = models.DeleteEmailTemplateRequest;
 const DeleteBlackListResponse = models.DeleteBlackListResponse;
+const UpdateEmailTemplateRequest = models.UpdateEmailTemplateRequest;
 const SendEmailStatus = models.SendEmailStatus;
 const ListEmailTemplatesRequest = models.ListEmailTemplatesRequest;
-const DeleteBlackListRequest = models.DeleteBlackListRequest;
+const CreateReceiverRequest = models.CreateReceiverRequest;
+const CreateReceiverDetailResponse = models.CreateReceiverDetailResponse;
 const ListEmailTemplatesResponse = models.ListEmailTemplatesResponse;
 const SendEmailResponse = models.SendEmailResponse;
 const ListBlackEmailAddressResponse = models.ListBlackEmailAddressResponse;
@@ -60,7 +68,9 @@ const CycleEmailParam = models.CycleEmailParam;
 const DeleteEmailAddressResponse = models.DeleteEmailAddressResponse;
 const CreateEmailIdentityResponse = models.CreateEmailIdentityResponse;
 const CreateEmailAddressRequest = models.CreateEmailAddressRequest;
+const CreateReceiverDetailRequest = models.CreateReceiverDetailRequest;
 const CreateEmailTemplateResponse = models.CreateEmailTemplateResponse;
+const ListReceiversResponse = models.ListReceiversResponse;
 const CreateEmailAddressResponse = models.CreateEmailAddressResponse;
 const UpdateEmailTemplateResponse = models.UpdateEmailTemplateResponse;
 const TimedEmailParam = models.TimedEmailParam;
@@ -80,36 +90,14 @@ class SesClient extends AbstractClient {
     }
     
     /**
-     * This API is used to get the list of sender addresses.
-     * @param {ListEmailAddressRequest} req
-     * @param {function(string, ListEmailAddressResponse):void} cb
+     * This API is used to get the list of sender domains, including verified and unverified domains.
+     * @param {ListEmailIdentitiesRequest} req
+     * @param {function(string, ListEmailIdentitiesResponse):void} cb
      * @public
      */
-    ListEmailAddress(req, cb) {
-        let resp = new ListEmailAddressResponse();
-        this.request("ListEmailAddress", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a sender domain. Before you can send an email using Tencent Cloud SES, you must create a sender domain as your identity. It can be the domain of your website or mobile app. You must verify the domain to prove that you own it and authorize Tencent Cloud SES to use it to send emails.
-     * @param {CreateEmailIdentityRequest} req
-     * @param {function(string, CreateEmailIdentityResponse):void} cb
-     * @public
-     */
-    CreateEmailIdentity(req, cb) {
-        let resp = new CreateEmailIdentityResponse();
-        this.request("CreateEmailIdentity", req, resp, cb);
-    }
-
-    /**
-     * This API is used to unblocklist email addresses. If you confirm that a blocklisted recipient address is valid and active, you can remove it from Tencent Cloud’s address blocklist database.
-     * @param {DeleteBlackListRequest} req
-     * @param {function(string, DeleteBlackListResponse):void} cb
-     * @public
-     */
-    DeleteBlackList(req, cb) {
-        let resp = new DeleteBlackListResponse();
-        this.request("DeleteBlackList", req, resp, cb);
+    ListEmailIdentities(req, cb) {
+        let resp = new ListEmailIdentitiesResponse();
+        this.request("ListEmailIdentities", req, resp, cb);
     }
 
     /**
@@ -121,6 +109,105 @@ class SesClient extends AbstractClient {
     CreateEmailAddress(req, cb) {
         let resp = new CreateEmailAddressResponse();
         this.request("CreateEmailAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get email sending status. Only data within 30 days can be queried.
+     * @param {GetSendEmailStatusRequest} req
+     * @param {function(string, GetSendEmailStatusResponse):void} cb
+     * @public
+     */
+    GetSendEmailStatus(req, cb) {
+        let resp = new GetSendEmailStatusResponse();
+        this.request("GetSendEmailStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a recipient group, which is the list of target email addresses for batch sending emails. After creating a group, you need to upload recipient email addresses. Then, you can create a sending task and select the group to batch send emails.
+     * @param {CreateReceiverRequest} req
+     * @param {function(string, CreateReceiverResponse):void} cb
+     * @public
+     */
+    CreateReceiver(req, cb) {
+        let resp = new CreateReceiverResponse();
+        this.request("CreateReceiver", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the configuration details of a sender domain.
+     * @param {GetEmailIdentityRequest} req
+     * @param {function(string, GetEmailIdentityResponse):void} cb
+     * @public
+     */
+    GetEmailIdentity(req, cb) {
+        let resp = new GetEmailIdentityResponse();
+        this.request("GetEmailIdentity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the details of a template.
+     * @param {GetEmailTemplateRequest} req
+     * @param {function(string, GetEmailTemplateResponse):void} cb
+     * @public
+     */
+    GetEmailTemplate(req, cb) {
+        let resp = new GetEmailTemplateResponse();
+        this.request("GetEmailTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
+     * @param {GetStatisticsReportRequest} req
+     * @param {function(string, GetStatisticsReportResponse):void} cb
+     * @public
+     */
+    GetStatisticsReport(req, cb) {
+        let resp = new GetStatisticsReportResponse();
+        this.request("GetStatisticsReport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update an email template. An updated template must be approved again before it can be used.
+     * @param {UpdateEmailTemplateRequest} req
+     * @param {function(string, UpdateEmailTemplateResponse):void} cb
+     * @public
+     */
+    UpdateEmailTemplate(req, cb) {
+        let resp = new UpdateEmailTemplateResponse();
+        this.request("UpdateEmailTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to verify whether your DNS configuration is correct.
+     * @param {UpdateEmailIdentityRequest} req
+     * @param {function(string, UpdateEmailIdentityResponse):void} cb
+     * @public
+     */
+    UpdateEmailIdentity(req, cb) {
+        let resp = new UpdateEmailIdentityResponse();
+        this.request("UpdateEmailIdentity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a sender domain. After deleted, the sender domain can no longer be used to send emails.
+     * @param {DeleteEmailIdentityRequest} req
+     * @param {function(string, DeleteEmailIdentityResponse):void} cb
+     * @public
+     */
+    DeleteEmailIdentity(req, cb) {
+        let resp = new DeleteEmailIdentityResponse();
+        this.request("DeleteEmailIdentity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of sender addresses.
+     * @param {ListEmailAddressRequest} req
+     * @param {function(string, ListEmailAddressResponse):void} cb
+     * @public
+     */
+    ListEmailAddress(req, cb) {
+        let resp = new ListEmailAddressResponse();
+        this.request("ListEmailAddress", req, resp, cb);
     }
 
     /**
@@ -147,61 +234,6 @@ Note: only an approved template can be used to send emails.
     }
 
     /**
-     * This API is used to send a TEXT or HTML email triggered for authentication or transaction. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature.
-     * @param {SendEmailRequest} req
-     * @param {function(string, SendEmailResponse):void} cb
-     * @public
-     */
-    SendEmail(req, cb) {
-        let resp = new SendEmailResponse();
-        this.request("SendEmail", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of sender domains, including verified and unverified domains.
-     * @param {ListEmailIdentitiesRequest} req
-     * @param {function(string, ListEmailIdentitiesResponse):void} cb
-     * @public
-     */
-    ListEmailIdentities(req, cb) {
-        let resp = new ListEmailIdentitiesResponse();
-        this.request("ListEmailIdentities", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
-     * @param {GetStatisticsReportRequest} req
-     * @param {function(string, GetStatisticsReportResponse):void} cb
-     * @public
-     */
-    GetStatisticsReport(req, cb) {
-        let resp = new GetStatisticsReportResponse();
-        this.request("GetStatisticsReport", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get email sending status. Only data within 90 days can be queried.
-     * @param {GetSendEmailStatusRequest} req
-     * @param {function(string, GetSendEmailStatusResponse):void} cb
-     * @public
-     */
-    GetSendEmailStatus(req, cb) {
-        let resp = new GetSendEmailStatusResponse();
-        this.request("GetSendEmailStatus", req, resp, cb);
-    }
-
-    /**
-     * The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
-     * @param {ListBlackEmailAddressRequest} req
-     * @param {function(string, ListBlackEmailAddressResponse):void} cb
-     * @public
-     */
-    ListBlackEmailAddress(req, cb) {
-        let resp = new ListBlackEmailAddressResponse();
-        this.request("ListBlackEmailAddress", req, resp, cb);
-    }
-
-    /**
      * This API is used to delete an email template.
      * @param {DeleteEmailTemplateRequest} req
      * @param {function(string, DeleteEmailTemplateResponse):void} cb
@@ -210,28 +242,6 @@ Note: only an approved template can be used to send emails.
     DeleteEmailTemplate(req, cb) {
         let resp = new DeleteEmailTemplateResponse();
         this.request("DeleteEmailTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to update an email template. An updated template must be approved again before it can be used.
-     * @param {UpdateEmailTemplateRequest} req
-     * @param {function(string, UpdateEmailTemplateResponse):void} cb
-     * @public
-     */
-    UpdateEmailTemplate(req, cb) {
-        let resp = new UpdateEmailTemplateResponse();
-        this.request("UpdateEmailTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the configuration details of a sender domain.
-     * @param {GetEmailIdentityRequest} req
-     * @param {function(string, GetEmailIdentityResponse):void} cb
-     * @public
-     */
-    GetEmailIdentity(req, cb) {
-        let resp = new GetEmailIdentityResponse();
-        this.request("GetEmailIdentity", req, resp, cb);
     }
 
     /**
@@ -246,36 +256,80 @@ Note: only an approved template can be used to send emails.
     }
 
     /**
-     * This API is used to verify whether your DNS configuration is correct.
-     * @param {UpdateEmailIdentityRequest} req
-     * @param {function(string, UpdateEmailIdentityResponse):void} cb
+     * This API is used to query batch email sending tasks (including immediate, scheduled, and recurring tasks) by page. You can query task data including the number of emails requested to be sent, the number of sent emails, the number of cached emails, and task status.
+     * @param {ListSendTasksRequest} req
+     * @param {function(string, ListSendTasksResponse):void} cb
      * @public
      */
-    UpdateEmailIdentity(req, cb) {
-        let resp = new UpdateEmailIdentityResponse();
-        this.request("UpdateEmailIdentity", req, resp, cb);
+    ListSendTasks(req, cb) {
+        let resp = new ListSendTasksResponse();
+        this.request("ListSendTasks", req, resp, cb);
     }
 
     /**
-     * This API is used to get the details of a template.
-     * @param {GetEmailTemplateRequest} req
-     * @param {function(string, GetEmailTemplateResponse):void} cb
+     * This API is used to create a sender domain. Before you can send an email using Tencent Cloud SES, you must create a sender domain as your identity. It can be the domain of your website or mobile app. You must verify the domain to prove that you own it and authorize Tencent Cloud SES to use it to send emails.
+     * @param {CreateEmailIdentityRequest} req
+     * @param {function(string, CreateEmailIdentityResponse):void} cb
      * @public
      */
-    GetEmailTemplate(req, cb) {
-        let resp = new GetEmailTemplateResponse();
-        this.request("GetEmailTemplate", req, resp, cb);
+    CreateEmailIdentity(req, cb) {
+        let resp = new CreateEmailIdentityResponse();
+        this.request("CreateEmailIdentity", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a sender domain. After deleted, the sender domain can no longer be used to send emails.
-     * @param {DeleteEmailIdentityRequest} req
-     * @param {function(string, DeleteEmailIdentityResponse):void} cb
+     * This API is used to unblocklist email addresses. If you confirm that a blocklisted recipient address is valid and active, you can remove it from Tencent Cloud’s address blocklist database.
+     * @param {DeleteBlackListRequest} req
+     * @param {function(string, DeleteBlackListResponse):void} cb
      * @public
      */
-    DeleteEmailIdentity(req, cb) {
-        let resp = new DeleteEmailIdentityResponse();
-        this.request("DeleteEmailIdentity", req, resp, cb);
+    DeleteBlackList(req, cb) {
+        let resp = new DeleteBlackListResponse();
+        this.request("DeleteBlackList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to send a TEXT or HTML email triggered for authentication or transaction. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature.
+     * @param {SendEmailRequest} req
+     * @param {function(string, SendEmailResponse):void} cb
+     * @public
+     */
+    SendEmail(req, cb) {
+        let resp = new SendEmailResponse();
+        this.request("SendEmail", req, resp, cb);
+    }
+
+    /**
+     * The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
+     * @param {ListBlackEmailAddressRequest} req
+     * @param {function(string, ListBlackEmailAddressResponse):void} cb
+     * @public
+     */
+    ListBlackEmailAddress(req, cb) {
+        let resp = new ListBlackEmailAddressResponse();
+        this.request("ListBlackEmailAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add recipient email addresses (up to 100,000 at a time) to a recipient group. This will be processed asynchronously. You can upload recipient email addresses only once. If the data volume is large, it may take some time to upload. You can check the recipient group to learn the upload status and upload quantity.
+     * @param {CreateReceiverDetailRequest} req
+     * @param {function(string, CreateReceiverDetailResponse):void} cb
+     * @public
+     */
+    CreateReceiverDetail(req, cb) {
+        let resp = new CreateReceiverDetailResponse();
+        this.request("CreateReceiverDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query recipient groups. It supports pagination, fuzzy query, and query by status.
+     * @param {ListReceiversRequest} req
+     * @param {function(string, ListReceiversResponse):void} cb
+     * @public
+     */
+    ListReceivers(req, cb) {
+        let resp = new ListReceiversResponse();
+        this.request("ListReceivers", req, resp, cb);
     }
 
     /**

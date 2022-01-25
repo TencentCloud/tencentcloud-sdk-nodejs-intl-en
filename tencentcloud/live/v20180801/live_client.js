@@ -190,6 +190,7 @@ const DescribeConcurrentRecordStreamNumRequest = models.DescribeConcurrentRecord
 const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const CommonMixControlParams = models.CommonMixControlParams;
+const TranscodeTotalInfo = models.TranscodeTotalInfo;
 const DescribeAreaBillBandwidthAndFluxListResponse = models.DescribeAreaBillBandwidthAndFluxListResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
@@ -216,7 +217,7 @@ const ModifyLiveTranscodeTemplateRequest = models.ModifyLiveTranscodeTemplateReq
 const ModifyLiveDomainCertResponse = models.ModifyLiveDomainCertResponse;
 const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
 const DescribeAllStreamPlayInfoListResponse = models.DescribeAllStreamPlayInfoListResponse;
-const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
+const DescribeLiveTranscodeTotalInfoResponse = models.DescribeLiveTranscodeTotalInfoResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateRecordTaskRequest = models.CreateRecordTaskRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
@@ -260,7 +261,9 @@ const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListRe
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
+const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
+const DescribeLiveTranscodeTotalInfoRequest = models.DescribeLiveTranscodeTotalInfoRequest;
 const CreateRecordTaskResponse = models.CreateRecordTaskResponse;
 const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
@@ -744,6 +747,20 @@ Note: if you are to set the delay before stream push, set it at least 5 minutes 
     DeleteLiveTranscodeRule(req, cb) {
         let resp = new DeleteLiveTranscodeRuleResponse();
         this.request("DeleteLiveTranscodeRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query your total usage of the transcoding service in the last 30 days.
+Notes:
+If the start time and end time are on the same day, the data returned will be on a 5-minute basis.
+If not or if the data of specified domains is queried, the data returned will be on an hourly basis.
+     * @param {DescribeLiveTranscodeTotalInfoRequest} req
+     * @param {function(string, DescribeLiveTranscodeTotalInfoResponse):void} cb
+     * @public
+     */
+    DescribeLiveTranscodeTotalInfo(req, cb) {
+        let resp = new DescribeLiveTranscodeTotalInfoResponse();
+        this.request("DescribeLiveTranscodeTotalInfo", req, resp, cb);
     }
 
     /**

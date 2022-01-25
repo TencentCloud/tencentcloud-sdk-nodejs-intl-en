@@ -9109,6 +9109,62 @@ If you set this parameter to 1, SEI (Supplemental Enhanced Information) of the i
 }
 
 /**
+ * Total usage of the transcoding service
+ * @class
+ */
+class TranscodeTotalInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Usage time (Beijing time)
+Example: 2019-03-01 00:00:00
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Transcoding duration in minutes
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Codec, with modules
+Examples:
+`liveprocessor_H264`: live transcoding-H264
+`liveprocessor_H265`: live transcoding-H265
+`topspeed_H264`: top speed codec-H264
+`topspeed_H265`: top speed codec-H265
+         * @type {string || null}
+         */
+        this.ModuleCodec = null;
+
+        /**
+         * Resolution
+Example: 540*480
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ModuleCodec = 'ModuleCodec' in params ? params.ModuleCodec : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+
+    }
+}
+
+/**
  * DescribeAreaBillBandwidthAndFluxList response structure.
  * @class
  */
@@ -9720,8 +9776,8 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS.
-The difference between the start time and end time cannot be greater than 24 hours. Data in the last 30 days can be queried.
+         * End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
+The start time and end time cannot be more than 24 hours apart and must be within the last 15 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -10511,12 +10567,19 @@ class DescribeAllStreamPlayInfoListResponse extends  AbstractModel {
 }
 
 /**
- * ForbidLiveDomain response structure.
+ * DescribeLiveTranscodeTotalInfo response structure.
  * @class
  */
-class ForbidLiveDomainResponse extends  AbstractModel {
+class DescribeLiveTranscodeTotalInfoResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * List of transcoding data
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {Array.<TranscodeTotalInfo> || null}
+         */
+        this.DataInfoList = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -10532,6 +10595,15 @@ class ForbidLiveDomainResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new TranscodeTotalInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -12443,6 +12515,34 @@ class DescribeLiveStreamEventListResponse extends  AbstractModel {
 }
 
 /**
+ * ForbidLiveDomain response structure.
+ * @class
+ */
+class ForbidLiveDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveCallbackRules response structure.
  * @class
  */
@@ -12481,6 +12581,61 @@ class DescribeLiveCallbackRulesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLiveTranscodeTotalInfo request structure.
+ * @class
+ */
+class DescribeLiveTranscodeTotalInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time (Beijing time)
+Format: yyyy-mm-dd HH:MM:SS
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time (Beijing time)
+Format: yyyy-mm-dd HH:MM:SS
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * List of push domains to query. If this parameter is left empty, the data of all domains is queried.
+If this parameter is specified, the data returned will be on an hourly basis.
+         * @type {Array.<string> || null}
+         */
+        this.PushDomains = null;
+
+        /**
+         * Valid values:
+`Mainland`: queries transcoding data in the Chinese mainland
+`Oversea`: queries transcoding data outside the Chinese mainland
+By default, the data both in and outside the Chinese mainland is queried.
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
 
     }
 }
@@ -13206,6 +13361,7 @@ module.exports = {
     DescribePlayErrorCodeSumInfoListRequest: DescribePlayErrorCodeSumInfoListRequest,
     ModifyLiveCertRequest: ModifyLiveCertRequest,
     CommonMixControlParams: CommonMixControlParams,
+    TranscodeTotalInfo: TranscodeTotalInfo,
     DescribeAreaBillBandwidthAndFluxListResponse: DescribeAreaBillBandwidthAndFluxListResponse,
     ForbidLiveDomainRequest: ForbidLiveDomainRequest,
     DescribeLiveRecordRulesRequest: DescribeLiveRecordRulesRequest,
@@ -13232,7 +13388,7 @@ module.exports = {
     ModifyLiveDomainCertResponse: ModifyLiveDomainCertResponse,
     EnableLiveDomainRequest: EnableLiveDomainRequest,
     DescribeAllStreamPlayInfoListResponse: DescribeAllStreamPlayInfoListResponse,
-    ForbidLiveDomainResponse: ForbidLiveDomainResponse,
+    DescribeLiveTranscodeTotalInfoResponse: DescribeLiveTranscodeTotalInfoResponse,
     DescribeLiveSnapshotRulesRequest: DescribeLiveSnapshotRulesRequest,
     CreateRecordTaskRequest: CreateRecordTaskRequest,
     CreateLiveTranscodeRuleResponse: CreateLiveTranscodeRuleResponse,
@@ -13276,7 +13432,9 @@ module.exports = {
     CreateLiveSnapshotRuleResponse: CreateLiveSnapshotRuleResponse,
     DelayInfo: DelayInfo,
     DescribeLiveStreamEventListResponse: DescribeLiveStreamEventListResponse,
+    ForbidLiveDomainResponse: ForbidLiveDomainResponse,
     DescribeLiveCallbackRulesResponse: DescribeLiveCallbackRulesResponse,
+    DescribeLiveTranscodeTotalInfoRequest: DescribeLiveTranscodeTotalInfoRequest,
     CreateRecordTaskResponse: CreateRecordTaskResponse,
     ForbidStreamInfo: ForbidStreamInfo,
     ResumeDelayLiveStreamResponse: ResumeDelayLiveStreamResponse,

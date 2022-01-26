@@ -6886,6 +6886,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ValidationCode = null;
 
+        /**
+         * Start time of the notification in seconds, which is calculated from 00:00:00.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the notification in seconds, which is calculated from 00:00:00.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -6898,6 +6912,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.URL = 'URL' in params ? params.URL : null;
         this.IsValid = 'IsValid' in params ? params.IsValid : null;
         this.ValidationCode = 'ValidationCode' in params ? params.ValidationCode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }

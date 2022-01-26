@@ -200,8 +200,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ResourceID = null;
 
         /**
-         * Whether to enable rotation. True: yes; False: no.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether to enable rotation. `True`: enable rotation; `False`: disable rotation.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.RotationStatus = null;
@@ -235,6 +235,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AssociatedInstanceIDs = null;
 
         /**
+         * UIN of the Tencent Cloud API key. This field is valid when the secret type is Tencent Cloud API key secret.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -264,6 +271,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
         this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
         this.AssociatedInstanceIDs = 'AssociatedInstanceIDs' in params ? params.AssociatedInstanceIDs : null;
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -851,8 +859,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.NextRotationTime = null;
 
         /**
-         * 0: user-defined credential; 1: Tencent Cloud service credential.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * `0`: user-defined secret.
+`1`: Tencent Cloud services secret.
+`2`: SSH key secret.
+`3`: Tencent Cloud API key secret.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SecretType = null;
@@ -885,6 +896,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.AssociatedInstanceIDs = null;
 
+        /**
+         * UIN of the Tencent Cloud API key. This field is valid when the secret type is Tencent Cloud API key secret.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
     }
 
     /**
@@ -909,6 +927,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
         this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
         this.AssociatedInstanceIDs = 'AssociatedInstanceIDs' in params ? params.AssociatedInstanceIDs : null;
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
 
     }
 }
@@ -1308,6 +1327,7 @@ The `PendingCreate` and `CreateFailed` status only take effect when `SecretType`
          * `0` (default): user-defined secret.
 `1`: Tencent Cloud services secret.
 `2`: SSH key secret.
+`3`: Tencent Cloud API key secret.
          * @type {number || null}
          */
         this.SecretType = null;
@@ -1668,7 +1688,7 @@ class RotateProductSecretResponse extends  AbstractModel {
         super();
 
         /**
-         * Async rotation task ID.
+         * Asynchronous rotation task ID. This field is valid when `SecretType` is `1` (i.e., the secret type is Tencent Cloud services secret, such as MySQL/TDSQL credentials).
          * @type {number || null}
          */
         this.FlowID = null;
@@ -1982,6 +2002,13 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.InvalidType = null;
 
         /**
+         * `true`: allow SSM to manage Tencent Cloud API key secrets.
+`false`: forbid SSM to manage Tencent Cloud API key secrets.
+         * @type {boolean || null}
+         */
+        this.AccessKeyEscrowEnabled = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1998,6 +2025,7 @@ class GetServiceStatusResponse extends  AbstractModel {
         }
         this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
         this.InvalidType = 'InvalidType' in params ? params.InvalidType : null;
+        this.AccessKeyEscrowEnabled = 'AccessKeyEscrowEnabled' in params ? params.AccessKeyEscrowEnabled : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

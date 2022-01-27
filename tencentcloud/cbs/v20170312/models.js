@@ -172,6 +172,69 @@ class ResizeDiskRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDiskAttributes request structure.
+ * @class
+ */
+class ModifyDiskAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of one or more cloud disks to be operated. If multiple cloud disk IDs are selected, it only supports modifying all cloud disks with the same attributes.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Name of new cloud disk.
+         * @type {string || null}
+         */
+        this.DiskName = null;
+
+        /**
+         * Whether it is an elastic cloud disk. FALSE: non-elastic cloud disk; TRUE: elastic cloud disk. You can only modify non-elastic cloud disks to elastic cloud disks.
+         * @type {boolean || null}
+         */
+        this.Portable = null;
+
+        /**
+         * Whether the cloud disk is terminated with the CVM after it has been successfully mounted. `TRUE` indicates that it is terminated with the CVM. `FALSE` indicates that it is not terminated with the CVM. This is only supported for cloud disks and data disks that are pay-as-you-go.
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
+        /**
+         * When changing the type of a cloud disk, this parameter can be passed to indicate the desired cloud disk type. Value range: <br><li>CLOUD_PREMIUM: Premium cloud storage.  <br><li>CLOUD_SSD: SSD cloud disk. <br>Currently, batch operations are not supported for changing type. That is, when `DiskType` is passed, only one cloud disk can be passed through `DiskIds`. <br>When the cloud disk type is changed, the changing of other attributes is not supported concurrently.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
+        this.Portable = 'Portable' in params ? params.Portable : null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+
+    }
+}
+
+/**
  * Describes the prepaid or postpaid price for the cloud disk.
  * @class
  */
@@ -343,24 +406,18 @@ class SharePermission extends  AbstractModel {
 }
 
 /**
- * ModifyDiskExtraPerformance request structure.
+ * InitializeDisks request structure.
  * @class
  */
-class ModifyDiskExtraPerformanceRequest extends  AbstractModel {
+class InitializeDisksRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the cloud disk to create a snapshot, which can be obtained via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
-         * @type {string || null}
+         * ID list of the cloud disks to be reinitialized. Up to 20 disks can be reinitialized at a time.
+         * @type {Array.<string> || null}
          */
-        this.DiskId = null;
-
-        /**
-         * The extra throughput to purchase, in MB/s
-         * @type {number || null}
-         */
-        this.ThroughputPerformance = null;
+        this.DiskIds = null;
 
     }
 
@@ -371,8 +428,7 @@ class ModifyDiskExtraPerformanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
-        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
 
     }
 }
@@ -1761,6 +1817,41 @@ class DetachDisksResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDiskExtraPerformance request structure.
+ * @class
+ */
+class ModifyDiskExtraPerformanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the cloud disk to create a snapshot, which can be obtained via the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * The extra throughput to purchase, in MB/s
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+
+    }
+}
+
+/**
  * Key-value pair filters for conditional filtering queries.
  * @class
  */
@@ -3013,48 +3104,18 @@ class DescribeDiskConfigQuotaResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDiskAttributes request structure.
+ * InitializeDisks response structure.
  * @class
  */
-class ModifyDiskAttributesRequest extends  AbstractModel {
+class InitializeDisksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * IDs of one or more cloud disks to be operated. If multiple cloud disk IDs are selected, it only supports modifying all cloud disks with the same attributes.
-         * @type {Array.<string> || null}
-         */
-        this.DiskIds = null;
-
-        /**
-         * The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Name of new cloud disk.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DiskName = null;
-
-        /**
-         * Whether it is an elastic cloud disk. FALSE: non-elastic cloud disk; TRUE: elastic cloud disk. You can only modify non-elastic cloud disks to elastic cloud disks.
-         * @type {boolean || null}
-         */
-        this.Portable = null;
-
-        /**
-         * Whether the cloud disk is terminated with the CVM after it has been successfully mounted. `TRUE` indicates that it is terminated with the CVM. `FALSE` indicates that it is not terminated with the CVM. This is only supported for cloud disks and data disks that are pay-as-you-go.
-         * @type {boolean || null}
-         */
-        this.DeleteWithInstance = null;
-
-        /**
-         * When changing the type of a cloud disk, this parameter can be passed to indicate the desired cloud disk type. Value range: <br><li>CLOUD_PREMIUM: Premium cloud storage.  <br><li>CLOUD_SSD: SSD cloud disk. <br>Currently, batch operations are not supported for changing type. That is, when `DiskType` is passed, only one cloud disk can be passed through `DiskIds`. <br>When the cloud disk type is changed, the changing of other attributes is not supported concurrently.
-         * @type {string || null}
-         */
-        this.DiskType = null;
+        this.RequestId = null;
 
     }
 
@@ -3065,12 +3126,7 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.DiskName = 'DiskName' in params ? params.DiskName : null;
-        this.Portable = 'Portable' in params ? params.Portable : null;
-        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3981,10 +4037,11 @@ module.exports = {
     DetachDisksRequest: DetachDisksRequest,
     DescribeDiskOperationLogsResponse: DescribeDiskOperationLogsResponse,
     ResizeDiskRequest: ResizeDiskRequest,
+    ModifyDiskAttributesRequest: ModifyDiskAttributesRequest,
     Price: Price,
     DescribeSnapshotSharePermissionResponse: DescribeSnapshotSharePermissionResponse,
     SharePermission: SharePermission,
-    ModifyDiskExtraPerformanceRequest: ModifyDiskExtraPerformanceRequest,
+    InitializeDisksRequest: InitializeDisksRequest,
     ModifyDiskAttributesResponse: ModifyDiskAttributesResponse,
     TerminateDisksRequest: TerminateDisksRequest,
     DescribeDisksRequest: DescribeDisksRequest,
@@ -4019,6 +4076,7 @@ module.exports = {
     PrepayPrice: PrepayPrice,
     DeleteSnapshotsResponse: DeleteSnapshotsResponse,
     DetachDisksResponse: DetachDisksResponse,
+    ModifyDiskExtraPerformanceRequest: ModifyDiskExtraPerformanceRequest,
     Filter: Filter,
     InquiryPriceCreateDisksRequest: InquiryPriceCreateDisksRequest,
     DescribeSnapshotsResponse: DescribeSnapshotsResponse,
@@ -4040,7 +4098,7 @@ module.exports = {
     DescribeDiskAssociatedAutoSnapshotPolicyResponse: DescribeDiskAssociatedAutoSnapshotPolicyResponse,
     Image: Image,
     DescribeDiskConfigQuotaResponse: DescribeDiskConfigQuotaResponse,
-    ModifyDiskAttributesRequest: ModifyDiskAttributesRequest,
+    InitializeDisksResponse: InitializeDisksResponse,
     CreateSnapshotRequest: CreateSnapshotRequest,
     AttachDetail: AttachDetail,
     InquiryPriceResizeDiskResponse: InquiryPriceResizeDiskResponse,

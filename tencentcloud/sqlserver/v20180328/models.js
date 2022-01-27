@@ -2013,6 +2013,12 @@ class ModifyDBInstanceNetworkRequest extends  AbstractModel {
          */
         this.OldIpRetainTime = null;
 
+        /**
+         * New VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
     }
 
     /**
@@ -2026,6 +2032,7 @@ class ModifyDBInstanceNetworkRequest extends  AbstractModel {
         this.NewVpcId = 'NewVpcId' in params ? params.NewVpcId : null;
         this.NewSubnetId = 'NewSubnetId' in params ? params.NewSubnetId : null;
         this.OldIpRetainTime = 'OldIpRetainTime' in params ? params.OldIpRetainTime : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
 
     }
 }

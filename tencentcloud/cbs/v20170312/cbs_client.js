@@ -20,10 +20,11 @@ const AutoMountConfiguration = models.AutoMountConfiguration;
 const DetachDisksRequest = models.DetachDisksRequest;
 const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
+const ModifyDiskAttributesRequest = models.ModifyDiskAttributesRequest;
 const Price = models.Price;
 const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
 const SharePermission = models.SharePermission;
-const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
+const InitializeDisksRequest = models.InitializeDisksRequest;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
 const DescribeDisksRequest = models.DescribeDisksRequest;
@@ -58,6 +59,7 @@ const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const PrepayPrice = models.PrepayPrice;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const DetachDisksResponse = models.DetachDisksResponse;
+const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
 const Filter = models.Filter;
 const InquiryPriceCreateDisksRequest = models.InquiryPriceCreateDisksRequest;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
@@ -79,7 +81,7 @@ const DescribeDiskAssociatedAutoSnapshotPolicyRequest = models.DescribeDiskAssoc
 const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
 const Image = models.Image;
 const DescribeDiskConfigQuotaResponse = models.DescribeDiskConfigQuotaResponse;
-const ModifyDiskAttributesRequest = models.ModifyDiskAttributesRequest;
+const InitializeDisksResponse = models.InitializeDisksResponse;
 const CreateSnapshotRequest = models.CreateSnapshotRequest;
 const AttachDetail = models.AttachDetail;
 const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
@@ -237,6 +239,20 @@ This can be filtered according to the cloud disk ID. The format of cloud disk ID
     }
 
     /**
+     * This API (CreateAutoSnapshotPolicy) is used to create a scheduled snapshot policy.
+
+* For the limits on the number of scheduled snapshot policies that can be created in each region, see [Scheduled Snapshots](https://intl.cloud.tencent.com/document/product/362/8191?from_cn_redirect=1).
+* The quantity and capacity of the snapshots that can be created in each region are limited. For more information, see the **Snapshots** page on the Tencent Cloud Console. If the number of snapshots exceeds the quota, the creation of the scheduled snapshots will fail.
+     * @param {CreateAutoSnapshotPolicyRequest} req
+     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
+     * @public
+     */
+    CreateAutoSnapshotPolicy(req, cb) {
+        let resp = new CreateAutoSnapshotPolicyResponse();
+        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeDisks) is used to query the list of cloud disks.
 
 * The details of the cloud disk can be queried based on the ID, type or status of the cloud disk. The relationship between different conditions is AND. For more information about filtering, please see the `Filter`.
@@ -356,17 +372,18 @@ This can be filtered according to the cloud disk ID. The format of cloud disk ID
     }
 
     /**
-     * This API (CreateAutoSnapshotPolicy) is used to create a scheduled snapshot policy.
-
-* For the limits on the number of scheduled snapshot policies that can be created in each region, see [Scheduled Snapshots](https://intl.cloud.tencent.com/document/product/362/8191?from_cn_redirect=1).
-* The quantity and capacity of the snapshots that can be created in each region are limited. For more information, see the **Snapshots** page on the Tencent Cloud Console. If the number of snapshots exceeds the quota, the creation of the scheduled snapshots will fail.
-     * @param {CreateAutoSnapshotPolicyRequest} req
-     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
+     * This API is used to reinitialize the cloud disks. Note the following when reinitializing the cloud disks:
+1. For a cloud disk created from a snapshot, it is rolled back to the state of the snapshot;
+2. For a cloud disk created from the scratch, all data are cleared. Please check and back up the necessary data before the reinitialization;
+3. Currently, you can only re-initialize a cloud disk when it’s not attached to a resource and not shared by others;
+4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
+     * @param {InitializeDisksRequest} req
+     * @param {function(string, InitializeDisksResponse):void} cb
      * @public
      */
-    CreateAutoSnapshotPolicy(req, cb) {
-        let resp = new CreateAutoSnapshotPolicyResponse();
-        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
+    InitializeDisks(req, cb) {
+        let resp = new InitializeDisksResponse();
+        this.request("InitializeDisks", req, resp, cb);
     }
 
     /**

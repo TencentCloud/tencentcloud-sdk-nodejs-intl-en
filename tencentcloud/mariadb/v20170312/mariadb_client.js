@@ -51,15 +51,17 @@ const ModifySyncTaskAttributeResponse = models.ModifySyncTaskAttributeResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
-const CloneAccountRequest = models.CloneAccountRequest;
+const CreateHourDBInstanceResponse = models.CreateHourDBInstanceResponse;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
+const SwitchDBInstanceHARequest = models.SwitchDBInstanceHARequest;
 const DBParamValue = models.DBParamValue;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
@@ -97,12 +99,14 @@ const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ViewPrivileges = models.ViewPrivileges;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
+const ResourceTag = models.ResourceTag;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
+const CloneAccountRequest = models.CloneAccountRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
@@ -112,6 +116,7 @@ const LogFileInfo = models.LogFileInfo;
 const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDetailsRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DBAccount = models.DBAccount;
+const CreateHourDBInstanceRequest = models.CreateHourDBInstanceRequest;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -147,6 +152,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeAccountPrivileges(req, cb) {
         let resp = new DescribeAccountPrivilegesResponse();
         this.request("DescribeAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create pay-as-you-go instances.
+     * @param {CreateHourDBInstanceRequest} req
+     * @param {function(string, CreateHourDBInstanceResponse):void} cb
+     * @public
+     */
+    CreateHourDBInstance(req, cb) {
+        let resp = new CreateHourDBInstanceResponse();
+        this.request("CreateHourDBInstance", req, resp, cb);
     }
 
     /**
@@ -259,6 +275,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeFlow(req, cb) {
         let resp = new DescribeFlowResponse();
         this.request("DescribeFlow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a primary-replica switch of instances.
+     * @param {SwitchDBInstanceHARequest} req
+     * @param {function(string, SwitchDBInstanceHAResponse):void} cb
+     * @public
+     */
+    SwitchDBInstanceHA(req, cb) {
+        let resp = new SwitchDBInstanceHAResponse();
+        this.request("SwitchDBInstanceHA", req, resp, cb);
     }
 
     /**

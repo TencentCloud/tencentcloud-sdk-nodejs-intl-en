@@ -1611,48 +1611,32 @@ class CopyAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
- * CloneAccount request structure.
+ * CreateHourDBInstance response structure.
  * @class
  */
-class CloneAccountRequest extends  AbstractModel {
+class CreateHourDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Order ID, which is used in the `DescribeOrders` API.
+ The parameter can be used to either query order details or call the user account APIs to make another payment when this payment fails.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.DealName = null;
 
         /**
-         * Source user account name
-         * @type {string || null}
+         * IDs of the instances you have purchased in this order. If no instance IDs are returned, you can query them with the `DescribeOrders` API. You can also use the `DescribeDBInstances` API to check whether an instance has been created successfully.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
          */
-        this.SrcUser = null;
+        this.InstanceIds = null;
 
         /**
-         * Source user host
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.SrcHost = null;
-
-        /**
-         * Target user account name
-         * @type {string || null}
-         */
-        this.DstUser = null;
-
-        /**
-         * Target user host
-         * @type {string || null}
-         */
-        this.DstHost = null;
-
-        /**
-         * Description of target account
-         * @type {string || null}
-         */
-        this.DstDesc = null;
+        this.RequestId = null;
 
     }
 
@@ -1663,12 +1647,9 @@ class CloneAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.SrcUser = 'SrcUser' in params ? params.SrcUser : null;
-        this.SrcHost = 'SrcHost' in params ? params.SrcHost : null;
-        this.DstUser = 'DstUser' in params ? params.DstUser : null;
-        this.DstHost = 'DstHost' in params ? params.DstHost : null;
-        this.DstDesc = 'DstDesc' in params ? params.DstDesc : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1898,6 +1879,41 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * SwitchDBInstanceHA response structure.
+ * @class
+ */
+class SwitchDBInstanceHAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Table permission
  * @class
  */
@@ -1954,6 +1970,12 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
+         * Total number of security groups.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1977,6 +1999,7 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2115,6 +2138,41 @@ Field permission. Valid values: `INSERT`, `REFERENCES`, `SELECT`, `UPDATE`.
         this.Type = 'Type' in params ? params.Type : null;
         this.Object = 'Object' in params ? params.Object : null;
         this.ColName = 'ColName' in params ? params.ColName : null;
+
+    }
+}
+
+/**
+ * SwitchDBInstanceHA request structure.
+ * @class
+ */
+class SwitchDBInstanceHARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of tdsql-ow728lmc
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Target AZ. The node with the lowest delay in the target AZ will be automatically promoted to primary node.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -3189,6 +3247,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.InstanceType = null;
 
+        /**
+         * Instance tag information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -3248,6 +3313,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
         this.DcnDstNum = 'DcnDstNum' in params ? params.DcnDstNum : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -4245,6 +4319,41 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
 }
 
 /**
+ * Tag object, including tag key and tag value
+ * @class
+ */
+class ResourceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DeleteAccount request structure.
  * @class
  */
@@ -4682,6 +4791,69 @@ class DescribeInstanceNodeInfoRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * CloneAccount request structure.
+ * @class
+ */
+class CloneAccountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Source user account name
+         * @type {string || null}
+         */
+        this.SrcUser = null;
+
+        /**
+         * Source user host
+         * @type {string || null}
+         */
+        this.SrcHost = null;
+
+        /**
+         * Target user account name
+         * @type {string || null}
+         */
+        this.DstUser = null;
+
+        /**
+         * Target user host
+         * @type {string || null}
+         */
+        this.DstHost = null;
+
+        /**
+         * Description of target account
+         * @type {string || null}
+         */
+        this.DstDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SrcUser = 'SrcUser' in params ? params.SrcUser : null;
+        this.SrcHost = 'SrcHost' in params ? params.SrcHost : null;
+        this.DstUser = 'DstUser' in params ? params.DstUser : null;
+        this.DstHost = 'DstHost' in params ? params.DstHost : null;
+        this.DstDesc = 'DstDesc' in params ? params.DstDesc : null;
 
     }
 }
@@ -5152,6 +5324,173 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.DelayThresh = 'DelayThresh' in params ? params.DelayThresh : null;
+
+    }
+}
+
+/**
+ * CreateHourDBInstance request structure.
+ * @class
+ */
+class CreateHourDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZs to deploy instance nodes. You can specify up to two AZs. If each shard has one primary node and two replica nodes, two of the three will be deployed in the first AZ you have specified.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Number of nodes.
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Memory size in GB.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Storage size in GB.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Number of instances to purchase.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Project ID. If this parameter is not passed in, the default project will be used.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Unique ID of the network. If this parameter is not passed in, the classic network will be used.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Unique ID of the subnet. If `VpcId` is specified, this parameter is required.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Database engine version. Valid values:
+10.0.10: MariaDB 10.0.10;
+10.1.9: MariaDB 10.1.9;
+5.7.17: Percona 5.7.17.
+If this parameter is left empty, `10.1.9` will be used.
+         * @type {string || null}
+         */
+        this.DbVersionId = null;
+
+        /**
+         * Custom name of the instance.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Security group ID. If this parameter is not passed in, no security groups will be associated when the instance is created.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Whether IPv6 is supported.
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * Array of tag key-value pairs.
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * If you create a disaster recovery instance, you need to use this parameter to specify the region of the associated primary instance so that the disaster recovery instance can sync data with the primary instance over the Data Communication Network (DCN).
+         * @type {string || null}
+         */
+        this.DcnRegion = null;
+
+        /**
+         * If you create a disaster recovery instance, you need to use this parameter to specify the ID of the associated primary instance so that the disaster recovery instance can sync data with the primary instance over the Data Communication Network (DCN).
+         * @type {string || null}
+         */
+        this.DcnInstanceId = null;
+
+        /**
+         * List of parameters. Valid values: `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; 0: case-sensitive; 1: case-insensitive); `innodb_page_size` (InnoDB data page size; default size: 16 KB); `sync_mode` (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: 2).
+         * @type {Array.<DBParamValue> || null}
+         */
+        this.InitParams = null;
+
+        /**
+         * ID of the instance whose backup data will be rolled back to the new instance you create.
+         * @type {string || null}
+         */
+        this.RollbackInstanceId = null;
+
+        /**
+         * Rollback time.
+         * @type {string || null}
+         */
+        this.RollbackTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.DcnRegion = 'DcnRegion' in params ? params.DcnRegion : null;
+        this.DcnInstanceId = 'DcnInstanceId' in params ? params.DcnInstanceId : null;
+
+        if (params.InitParams) {
+            this.InitParams = new Array();
+            for (let z in params.InitParams) {
+                let obj = new DBParamValue();
+                obj.deserialize(params.InitParams[z]);
+                this.InitParams.push(obj);
+            }
+        }
+        this.RollbackInstanceId = 'RollbackInstanceId' in params ? params.RollbackInstanceId : null;
+        this.RollbackTime = 'RollbackTime' in params ? params.RollbackTime : null;
 
     }
 }
@@ -5779,15 +6118,17 @@ module.exports = {
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
-    CloneAccountRequest: CloneAccountRequest,
+    CreateHourDBInstanceResponse: CreateHourDBInstanceResponse,
     ParamModifyResult: ParamModifyResult,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
     TablePrivilege: TablePrivilege,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeBackupTimeRequest: DescribeBackupTimeRequest,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
+    SwitchDBInstanceHARequest: SwitchDBInstanceHARequest,
     DBParamValue: DBParamValue,
     ModifyDBParametersRequest: ModifyDBParametersRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
@@ -5825,12 +6166,14 @@ module.exports = {
     ViewPrivileges: ViewPrivileges,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
+    ResourceTag: ResourceTag,
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeFlowRequest: DescribeFlowRequest,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     DescribeDBPerformanceResponse: DescribeDBPerformanceResponse,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
+    CloneAccountRequest: CloneAccountRequest,
     CreateAccountResponse: CreateAccountResponse,
     DescribeLogFileRetentionPeriodResponse: DescribeLogFileRetentionPeriodResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
@@ -5840,6 +6183,7 @@ module.exports = {
     DescribeDBResourceUsageDetailsRequest: DescribeDBResourceUsageDetailsRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DBAccount: DBAccount,
+    CreateHourDBInstanceRequest: CreateHourDBInstanceRequest,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     DescribeDBPerformanceDetailsResponse: DescribeDBPerformanceDetailsResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,

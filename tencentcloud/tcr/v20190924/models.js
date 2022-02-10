@@ -490,6 +490,48 @@ class CreateReplicationInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * CreateInstanceToken request structure.
+ * @class
+ */
+class CreateInstanceTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Access credential type. Values: `longterm` and `temp` (default, valid for one hour)
+         * @type {string || null}
+         */
+        this.TokenType = null;
+
+        /**
+         * Description of the long-term access credential
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.TokenType = 'TokenType' in params ? params.TokenType : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
  * Synchronization rule
  * @class
  */
@@ -1543,6 +1585,64 @@ class ReplicationFilter extends  AbstractModel {
     }
 }
 
+/**
+ * CreateInstanceToken response structure.
+ * @class
+ */
+class CreateInstanceTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Username
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * Access credential
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * Expiration timestamp of access credential. It is a string of numbers without unit.
+         * @type {number || null}
+         */
+        this.ExpTime = null;
+
+        /**
+         * Token ID of long-term access credential. It is not available to temporary access credential.
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.TokenId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.ExpTime = 'ExpTime' in params ? params.ExpTime : null;
+        this.TokenId = 'TokenId' in params ? params.TokenId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DeleteImmutableTagRulesResponse: DeleteImmutableTagRulesResponse,
     ModifyInstanceResponse: ModifyInstanceResponse,
@@ -1554,6 +1654,7 @@ module.exports = {
     ManageReplicationRequest: ManageReplicationRequest,
     ModifyImmutableTagRulesRequest: ModifyImmutableTagRulesRequest,
     CreateReplicationInstanceResponse: CreateReplicationInstanceResponse,
+    CreateInstanceTokenRequest: CreateInstanceTokenRequest,
     ReplicationRule: ReplicationRule,
     CreateMultipleSecurityPolicyRequest: CreateMultipleSecurityPolicyRequest,
     DescribeReplicationInstancesResponse: DescribeReplicationInstancesResponse,
@@ -1578,5 +1679,6 @@ module.exports = {
     ReplicationLog: ReplicationLog,
     SecurityPolicy: SecurityPolicy,
     ReplicationFilter: ReplicationFilter,
+    CreateInstanceTokenResponse: CreateInstanceTokenResponse,
 
 }

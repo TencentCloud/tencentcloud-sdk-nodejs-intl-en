@@ -543,7 +543,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.DBKernelVersion = null;
 
         /**
-         * 
+         * Instance node information, which is required if you purchase a multi-AZ deployed instance.
          * @type {Array.<DBNode> || null}
          */
         this.DBNodeSet = null;
@@ -709,6 +709,48 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DescribeAvailableRecoveryTime response structure.
+ * @class
+ */
+class DescribeAvailableRecoveryTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The earliest restoration time (UTC+8).
+         * @type {string || null}
+         */
+        this.RecoveryBeginTime = null;
+
+        /**
+         * The latest restoration time (UTC+8).
+         * @type {string || null}
+         */
+        this.RecoveryEndTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecoveryBeginTime = 'RecoveryBeginTime' in params ? params.RecoveryBeginTime : null;
+        this.RecoveryEndTime = 'RecoveryEndTime' in params ? params.RecoveryEndTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceReadOnlyGroup response structure.
  * @class
  */
@@ -739,6 +781,260 @@ class ModifyDBInstanceReadOnlyGroupResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloneDBInstance request structure.
+ * @class
+ */
+class CloneDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the original instance to be cloned.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * @type {string || null}
+         */
+        this.SpecCode = null;
+
+        /**
+         * Instance storage capacity in GB.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ID of a subnet in the VPC specified by `VpcId`.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Name of the purchased instance.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Security group ID.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * The information of tags to be bound with the purchased instance. This parameter is left empty by default.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * This parameter is required if you purchase a multi-AZ deployed instance.
+         * @type {Array.<DBNode> || null}
+         */
+        this.DBNodeSet = null;
+
+        /**
+         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list.
+         * @type {string || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Campaign ID.
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * Basic backup set ID.
+         * @type {string || null}
+         */
+        this.BackupSetId = null;
+
+        /**
+         * Restoration point in time.
+         * @type {string || null}
+         */
+        this.RecoveryTargetTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+
+        if (params.DBNodeSet) {
+            this.DBNodeSet = new Array();
+            for (let z in params.DBNodeSet) {
+                let obj = new DBNode();
+                obj.deserialize(params.DBNodeSet[z]);
+                this.DBNodeSet.push(obj);
+            }
+        }
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.BackupSetId = 'BackupSetId' in params ? params.BackupSetId : null;
+        this.RecoveryTargetTime = 'RecoveryTargetTime' in params ? params.RecoveryTargetTime : null;
+
+    }
+}
+
+/**
+ * DescribeCloneDBInstanceSpec request structure.
+ * @class
+ */
+class DescribeCloneDBInstanceSpecRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Basic backup set ID. Either this parameter or `RecoveryTargetTime` must be passed in. If both are passed in, only this parameter takes effect.
+         * @type {string || null}
+         */
+        this.BackupSetId = null;
+
+        /**
+         * Restoration time (UTC+8). Either this parameter or `BackupSetId` must be passed in.
+         * @type {string || null}
+         */
+        this.RecoveryTargetTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.BackupSetId = 'BackupSetId' in params ? params.BackupSetId : null;
+        this.RecoveryTargetTime = 'RecoveryTargetTime' in params ? params.RecoveryTargetTime : null;
+
+    }
+}
+
+/**
+ * Backup plan
+ * @class
+ */
+class BackupPlan extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup cycle
+         * @type {string || null}
+         */
+        this.BackupPeriod = null;
+
+        /**
+         * Retention period of basic backups
+         * @type {number || null}
+         */
+        this.BaseBackupRetentionPeriod = null;
+
+        /**
+         * The earliest time to start a backup
+         * @type {string || null}
+         */
+        this.MinBackupStartTime = null;
+
+        /**
+         * The latest time to start a backup
+         * @type {string || null}
+         */
+        this.MaxBackupStartTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupPeriod = 'BackupPeriod' in params ? params.BackupPeriod : null;
+        this.BaseBackupRetentionPeriod = 'BaseBackupRetentionPeriod' in params ? params.BaseBackupRetentionPeriod : null;
+        this.MinBackupStartTime = 'MinBackupStartTime' in params ? params.MinBackupStartTime : null;
+        this.MaxBackupStartTime = 'MaxBackupStartTime' in params ? params.MaxBackupStartTime : null;
 
     }
 }
@@ -1216,6 +1512,70 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * ModifyDBInstanceDeployment request structure.
+ * @class
+ */
+class ModifyDBInstanceDeploymentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Instance node information.
+         * @type {Array.<DBNode> || null}
+         */
+        this.DBNodeSet = null;
+
+        /**
+         * Switch time. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+         * @type {number || null}
+         */
+        this.SwitchTag = null;
+
+        /**
+         * The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+         * @type {string || null}
+         */
+        this.SwitchStartTime = null;
+
+        /**
+         * The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+         * @type {string || null}
+         */
+        this.SwitchEndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+        if (params.DBNodeSet) {
+            this.DBNodeSet = new Array();
+            for (let z in params.DBNodeSet) {
+                let obj = new DBNode();
+                obj.deserialize(params.DBNodeSet[z]);
+                this.DBNodeSet.push(obj);
+            }
+        }
+        this.SwitchTag = 'SwitchTag' in params ? params.SwitchTag : null;
+        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
+        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
+
+    }
+}
+
+/**
  * AZ information such as number and status
  * @class
  */
@@ -1242,7 +1602,7 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Availability status. UNAVAILABLE: unavailable, AVAILABLE: available
+         * Availability status. Valid values: `UNAVAILABLE`, `AVAILABLE`, `SELLOUT`
          * @type {string || null}
          */
         this.ZoneState = null;
@@ -1252,6 +1612,13 @@ class ZoneInfo extends  AbstractModel {
          * @type {number || null}
          */
         this.ZoneSupportIpv6 = null;
+
+        /**
+         * AZs that can be used as standby when this AZ is primary
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.StandbyZoneSet = null;
 
     }
 
@@ -1267,6 +1634,7 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
         this.ZoneSupportIpv6 = 'ZoneSupportIpv6' in params ? params.ZoneSupportIpv6 : null;
+        this.StandbyZoneSet = 'StandbyZoneSet' in params ? params.StandbyZoneSet : null;
 
     }
 }
@@ -1566,33 +1934,32 @@ class CloseServerlessDBExtranetAccessRequest extends  AbstractModel {
 }
 
 /**
- * PostgreSQL for Serverless instance account description
+ * CloneDBInstance response structure.
  * @class
  */
-class ServerlessDBAccount extends  AbstractModel {
+class CloneDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Username
+         * Order ID.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.DBUser = null;
+        this.DealName = null;
 
         /**
-         * Password
+         * Bill ID.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.DBPassword = null;
+        this.BillId = null;
 
         /**
-         * The maximum number of connections
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.DBConnLimit = null;
+        this.RequestId = null;
 
     }
 
@@ -1603,9 +1970,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.DBUser = 'DBUser' in params ? params.DBUser : null;
-        this.DBPassword = 'DBPassword' in params ? params.DBPassword : null;
-        this.DBConnLimit = 'DBConnLimit' in params ? params.DBConnLimit : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1732,6 +2099,34 @@ class CreateReadOnlyDBInstanceResponse extends  AbstractModel {
         this.BillId = 'BillId' in params ? params.BillId : null;
         this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAvailableRecoveryTime request structure.
+ * @class
+ */
+class DescribeAvailableRecoveryTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -2032,6 +2427,49 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Port = 'Port' in params ? params.Port : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.NetType = 'NetType' in params ? params.NetType : null;
+
+    }
+}
+
+/**
+ * DescribeBackupPlans response structure.
+ * @class
+ */
+class DescribeBackupPlansResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The set of instance backup plans
+         * @type {Array.<BackupPlan> || null}
+         */
+        this.Plans = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Plans) {
+            this.Plans = new Array();
+            for (let z in params.Plans) {
+                let obj = new BackupPlan();
+                obj.deserialize(params.Plans[z]);
+                this.Plans.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2933,6 +3371,79 @@ class DestroyDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
+ * PostgreSQL for Serverless instance account description
+ * @class
+ */
+class ServerlessDBAccount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Username
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBUser = null;
+
+        /**
+         * Password
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBPassword = null;
+
+        /**
+         * The maximum number of connections
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DBConnLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBUser = 'DBUser' in params ? params.DBUser : null;
+        this.DBPassword = 'DBPassword' in params ? params.DBPassword : null;
+        this.DBConnLimit = 'DBConnLimit' in params ? params.DBConnLimit : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceDeployment response structure.
+ * @class
+ */
+class ModifyDBInstanceDeploymentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4851,7 +5362,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DBMajorVersion = null;
 
         /**
-         * 
+         * Instance node information
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<DBNode> || null}
          */
         this.DBNodeSet = null;
@@ -5285,7 +5797,7 @@ class RemoveDBInstanceFromReadOnlyGroupRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance node information including node type and AZ.
  * @class
  */
 class DBNode extends  AbstractModel {
@@ -5293,13 +5805,15 @@ class DBNode extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Node type. Valid values:
+`Primary`;
+`Standby`.
          * @type {string || null}
          */
         this.Role = null;
 
         /**
-         * 
+         * AZ where the node resides, such as ap-guangzhou-1.
          * @type {string || null}
          */
         this.Zone = null;
@@ -5549,6 +6063,48 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCloneDBInstanceSpec response structure.
+ * @class
+ */
+class DescribeCloneDBInstanceSpecResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Code of the minimum specification available for purchase.
+         * @type {string || null}
+         */
+        this.MinSpecCode = null;
+
+        /**
+         * The minimum disk capacity in GB available for purchase.
+         * @type {number || null}
+         */
+        this.MinStorage = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MinSpecCode = 'MinSpecCode' in params ? params.MinSpecCode : null;
+        this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeZones response structure.
  * @class
  */
@@ -5769,6 +6325,34 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
+
+    }
+}
+
+/**
+ * ModifyBackupPlan response structure.
+ * @class
+ */
+class ModifyBackupPlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6136,6 +6720,13 @@ class DBBackup extends  AbstractModel {
          */
         this.ExternalAddr = null;
 
+        /**
+         * Backup set ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SetId = null;
+
     }
 
     /**
@@ -6156,6 +6747,7 @@ class DBBackup extends  AbstractModel {
         this.DbList = 'DbList' in params ? params.DbList : null;
         this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
         this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.SetId = 'SetId' in params ? params.SetId : null;
 
     }
 }
@@ -6206,6 +6798,62 @@ class DescribeDBErrlogsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyBackupPlan request structure.
+ * @class
+ */
+class ModifyBackupPlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * The earliest time to start a backup
+         * @type {string || null}
+         */
+        this.MinBackupStartTime = null;
+
+        /**
+         * The latest time to start a backup
+         * @type {string || null}
+         */
+        this.MaxBackupStartTime = null;
+
+        /**
+         * Backup retention period in days. Value range: 3-7
+         * @type {number || null}
+         */
+        this.BaseBackupRetentionPeriod = null;
+
+        /**
+         * Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
+         * @type {Array.<string> || null}
+         */
+        this.BackupPeriod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.MinBackupStartTime = 'MinBackupStartTime' in params ? params.MinBackupStartTime : null;
+        this.MaxBackupStartTime = 'MaxBackupStartTime' in params ? params.MaxBackupStartTime : null;
+        this.BaseBackupRetentionPeriod = 'BaseBackupRetentionPeriod' in params ? params.BaseBackupRetentionPeriod : null;
+        this.BackupPeriod = 'BackupPeriod' in params ? params.BackupPeriod : null;
 
     }
 }
@@ -6622,6 +7270,34 @@ class RemoveDBInstanceFromReadOnlyGroupResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBackupPlans request structure.
+ * @class
+ */
+class DescribeBackupPlansRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -7354,7 +8030,11 @@ module.exports = {
     DeleteReadOnlyGroupResponse: DeleteReadOnlyGroupResponse,
     CreateInstancesRequest: CreateInstancesRequest,
     SpecItemInfo: SpecItemInfo,
+    DescribeAvailableRecoveryTimeResponse: DescribeAvailableRecoveryTimeResponse,
     ModifyDBInstanceReadOnlyGroupResponse: ModifyDBInstanceReadOnlyGroupResponse,
+    CloneDBInstanceRequest: CloneDBInstanceRequest,
+    DescribeCloneDBInstanceSpecRequest: DescribeCloneDBInstanceSpecRequest,
+    BackupPlan: BackupPlan,
     OpenServerlessDBExtranetAccessRequest: OpenServerlessDBExtranetAccessRequest,
     RenewInstanceResponse: RenewInstanceResponse,
     DeleteServerlessDBInstanceResponse: DeleteServerlessDBInstanceResponse,
@@ -7366,16 +8046,18 @@ module.exports = {
     RebalanceReadOnlyGroupRequest: RebalanceReadOnlyGroupRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
     DBInstanceNetInfo: DBInstanceNetInfo,
+    ModifyDBInstanceDeploymentRequest: ModifyDBInstanceDeploymentRequest,
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     NormalQueryItem: NormalQueryItem,
     Tag: Tag,
     DescribeDBInstanceAttributeRequest: DescribeDBInstanceAttributeRequest,
     CloseServerlessDBExtranetAccessRequest: CloseServerlessDBExtranetAccessRequest,
-    ServerlessDBAccount: ServerlessDBAccount,
+    CloneDBInstanceResponse: CloneDBInstanceResponse,
     ModifyDBInstanceReadOnlyGroupRequest: ModifyDBInstanceReadOnlyGroupRequest,
     AddDBInstanceToReadOnlyGroupResponse: AddDBInstanceToReadOnlyGroupResponse,
     CreateReadOnlyDBInstanceResponse: CreateReadOnlyDBInstanceResponse,
+    DescribeAvailableRecoveryTimeRequest: DescribeAvailableRecoveryTimeRequest,
     DurationAnalysis: DurationAnalysis,
     DescribeDBInstanceParametersRequest: DescribeDBInstanceParametersRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
@@ -7383,6 +8065,7 @@ module.exports = {
     ModifySwitchTimePeriodResponse: ModifySwitchTimePeriodResponse,
     DisIsolateDBInstancesRequest: DisIsolateDBInstancesRequest,
     ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
+    DescribeBackupPlansResponse: DescribeBackupPlansResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
@@ -7398,6 +8081,8 @@ module.exports = {
     PgDeal: PgDeal,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,
     DestroyDBInstanceRequest: DestroyDBInstanceRequest,
+    ServerlessDBAccount: ServerlessDBAccount,
+    ModifyDBInstanceDeploymentResponse: ModifyDBInstanceDeploymentResponse,
     DescribeParamsEventRequest: DescribeParamsEventRequest,
     EventInfo: EventInfo,
     CreateInstancesResponse: CreateInstancesResponse,
@@ -7441,12 +8126,14 @@ module.exports = {
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     CreateReadOnlyDBInstanceRequest: CreateReadOnlyDBInstanceRequest,
+    DescribeCloneDBInstanceSpecResponse: DescribeCloneDBInstanceSpecResponse,
     DescribeZonesResponse: DescribeZonesResponse,
     CreateServerlessDBInstanceResponse: CreateServerlessDBInstanceResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
+    ModifyBackupPlanResponse: ModifyBackupPlanResponse,
     CreateServerlessDBInstanceRequest: CreateServerlessDBInstanceRequest,
     InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
     CreateReadOnlyGroupResponse: CreateReadOnlyGroupResponse,
@@ -7455,6 +8142,7 @@ module.exports = {
     AccountInfo: AccountInfo,
     DBBackup: DBBackup,
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
+    ModifyBackupPlanRequest: ModifyBackupPlanRequest,
     ParamEntry: ParamEntry,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     ModifySwitchTimePeriodRequest: ModifySwitchTimePeriodRequest,
@@ -7464,6 +8152,7 @@ module.exports = {
     RestartDBInstanceResponse: RestartDBInstanceResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     RemoveDBInstanceFromReadOnlyGroupResponse: RemoveDBInstanceFromReadOnlyGroupResponse,
+    DescribeBackupPlansRequest: DescribeBackupPlansRequest,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeSlowQueryAnalysisResponse: DescribeSlowQueryAnalysisResponse,
     ModifyDBInstanceParametersRequest: ModifyDBInstanceParametersRequest,

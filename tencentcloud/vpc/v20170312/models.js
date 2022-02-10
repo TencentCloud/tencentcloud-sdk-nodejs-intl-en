@@ -1609,7 +1609,7 @@ class FlowLog extends  AbstractModel {
         super();
 
         /**
-         * ID of the VPC instance
+         * ID of the VPC instance.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -1633,7 +1633,7 @@ class FlowLog extends  AbstractModel {
         this.ResourceType = null;
 
         /**
-         * The unique ID of the resource.
+         * The unique ID of the resource
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -1645,13 +1645,13 @@ class FlowLog extends  AbstractModel {
         this.TrafficType = null;
 
         /**
-         * The storage ID of the flow log.
+         * The storage ID of the flow log
          * @type {string || null}
          */
         this.CloudLogId = null;
 
         /**
-         * The storage ID status of the flow log.
+         * Flow log storage ID status.
          * @type {string || null}
          */
         this.CloudLogState = null;
@@ -1669,10 +1669,30 @@ class FlowLog extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * Tag list, such as [{"Key": "city", "Value": "shanghai"}]
+         * Tag list, such as [{"Key": "city", "Value": "shanghai"}].
          * @type {Array.<Tag> || null}
          */
         this.TagSet = null;
+
+        /**
+         * Whether to enable. `true`: yes; `false`: no.
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Consumer end types: cls and ckafka
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * Information of the consumer, which is returned when the consumer type is `ckafka`.
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {FlowLogStorage || null}
+         */
+        this.FlowLogStorage = null;
 
     }
 
@@ -1701,6 +1721,14 @@ class FlowLog extends  AbstractModel {
                 obj.deserialize(params.TagSet[z]);
                 this.TagSet.push(obj);
             }
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+
+        if (params.FlowLogStorage) {
+            let obj = new FlowLogStorage();
+            obj.deserialize(params.FlowLogStorage)
+            this.FlowLogStorage = obj;
         }
 
     }
@@ -7891,6 +7919,42 @@ class DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse extends  Ab
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Flow log storage information
+ * @class
+ */
+class FlowLogStorage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage instance ID, which is required when `StorageType` is `ckafka`.
+         * @type {string || null}
+         */
+        this.StorageId = null;
+
+        /**
+         * Topic ID, which is required when `StorageType` is `ckafka`.
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.StorageTopic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageId = 'StorageId' in params ? params.StorageId : null;
+        this.StorageTopic = 'StorageTopic' in params ? params.StorageTopic : null;
 
     }
 }
@@ -16962,12 +17026,6 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.TrafficType = null;
 
         /**
-         * The storage ID of the flow log.
-         * @type {string || null}
-         */
-        this.CloudLogId = null;
-
-        /**
          * The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
          * @type {string || null}
          */
@@ -16980,10 +17038,28 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.FlowLogDescription = null;
 
         /**
+         * The storage ID of the flow log.
+         * @type {string || null}
+         */
+        this.CloudLogId = null;
+
+        /**
          * Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * Consumer types: `cls` and `ckafka`
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * Information of the flow log consumer, which is required when the consumer type is `ckafka`.
+         * @type {FlowLogStorage || null}
+         */
+        this.FlowLogStorage = null;
 
     }
 
@@ -16998,9 +17074,9 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.TrafficType = 'TrafficType' in params ? params.TrafficType : null;
-        this.CloudLogId = 'CloudLogId' in params ? params.CloudLogId : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
+        this.CloudLogId = 'CloudLogId' in params ? params.CloudLogId : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -17009,6 +17085,13 @@ class CreateFlowLogRequest extends  AbstractModel {
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
             }
+        }
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+
+        if (params.FlowLogStorage) {
+            let obj = new FlowLogStorage();
+            obj.deserialize(params.FlowLogStorage)
+            this.FlowLogStorage = obj;
         }
 
     }
@@ -18607,7 +18690,7 @@ class Address extends  AbstractModel {
         this.IsEipDirectConnection = null;
 
         /**
-         * The resource type of the EIP. This includes `CalcIP`, `WanIP`, `EIP`, and `AnycastEIP`. Among these, `CalcIP` indicates the device IP, `WanIP` indicates the common public IP, `EIP` indicates Elastic IP, and `AnycastEip` indicates accelerated EIP.
+         * EIP resource type. Valid values: `CalcIP` (device IP), `WanIP` (public network IP), `EIP` (elastic IP) and `AnycastEIP` (accelerated EIP).
          * @type {string || null}
          */
         this.AddressType = null;
@@ -18645,6 +18728,16 @@ Note: this field may return `null`, indicating that no valid value was found.
 
         /**
          * Network billing mode of EIP. The EIP for the bill-by-CVM account will return `null`.
+Note: this field may return `null`, indicating that no valid value was found.
+Including:
+<li><strong>BANDWIDTH_PREPAID_BY_MONTH</strong></li>
+<p style="padding-left: 30px;">Prepaid by monthly-subscribed bandwidth.</p>
+<li><strong>TRAFFIC_POSTPAID_BY_HOUR</strong></li>
+<p style="padding-left: 30px;">Pay-as-you-go billing by hourly traffic.</p>
+<li><strong>BANDWIDTH_POSTPAID_BY_HOUR</strong></li>
+<p style="padding-left: 30px;">Pay-as-you-go billing by hourly bandwidth.</p>
+<li><strong>BANDWIDTH_PACKAGE</strong></li>
+<p style="padding-left: 30px;">Bandwidth package.</p>
 Note: this field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
@@ -26131,6 +26224,7 @@ module.exports = {
     Vpc: Vpc,
     CreateVpnGatewayResponse: CreateVpnGatewayResponse,
     DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse: DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse,
+    FlowLogStorage: FlowLogStorage,
     DescribeVpcIpv6AddressesResponse: DescribeVpcIpv6AddressesResponse,
     RejectAttachCcnInstancesRequest: RejectAttachCcnInstancesRequest,
     ModifyCcnRegionBandwidthLimitsTypeRequest: ModifyCcnRegionBandwidthLimitsTypeRequest,

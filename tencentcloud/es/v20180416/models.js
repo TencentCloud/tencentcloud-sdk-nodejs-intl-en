@@ -1809,6 +1809,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.FrozenDiskSize = null;
 
+        /**
+         * Cluster health status. `-1`: Unknown; `0`: Green; `1`: Yellow; `2`: Red
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.HealthStatus = null;
+
     }
 
     /**
@@ -1948,6 +1955,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.FrozenMemSize = 'FrozenMemSize' in params ? params.FrozenMemSize : null;
         this.FrozenDiskType = 'FrozenDiskType' in params ? params.FrozenDiskType : null;
         this.FrozenDiskSize = 'FrozenDiskSize' in params ? params.FrozenDiskSize : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
 
     }
 }
@@ -2253,6 +2261,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.ZoneList = null;
 
+        /**
+         * Health status filter list
+         * @type {Array.<number> || null}
+         */
+        this.HealthStatus = null;
+
     }
 
     /**
@@ -2280,6 +2294,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         }
         this.IpList = 'IpList' in params ? params.IpList : null;
         this.ZoneList = 'ZoneList' in params ? params.ZoneList : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
 
     }
 }

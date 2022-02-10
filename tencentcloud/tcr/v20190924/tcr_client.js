@@ -26,6 +26,7 @@ const DescribeReplicationInstancesRequest = models.DescribeReplicationInstancesR
 const ManageReplicationRequest = models.ManageReplicationRequest;
 const ModifyImmutableTagRulesRequest = models.ModifyImmutableTagRulesRequest;
 const CreateReplicationInstanceResponse = models.CreateReplicationInstanceResponse;
+const CreateInstanceTokenRequest = models.CreateInstanceTokenRequest;
 const ReplicationRule = models.ReplicationRule;
 const CreateMultipleSecurityPolicyRequest = models.CreateMultipleSecurityPolicyRequest;
 const DescribeReplicationInstancesResponse = models.DescribeReplicationInstancesResponse;
@@ -50,6 +51,7 @@ const PeerReplicationOption = models.PeerReplicationOption;
 const ReplicationLog = models.ReplicationLog;
 const SecurityPolicy = models.SecurityPolicy;
 const ReplicationFilter = models.ReplicationFilter;
+const CreateInstanceTokenResponse = models.CreateInstanceTokenResponse;
 
 
 /**
@@ -62,6 +64,17 @@ class TcrClient extends AbstractClient {
         super("tcr.tencentcloudapi.com", "2019-09-24", credential, region, profile);
     }
     
+    /**
+     * This API is used to query the synchronization status of a replication instance.
+     * @param {DescribeReplicationInstanceSyncStatusRequest} req
+     * @param {function(string, DescribeReplicationInstanceSyncStatusResponse):void} cb
+     * @public
+     */
+    DescribeReplicationInstanceSyncStatus(req, cb) {
+        let resp = new DescribeReplicationInstanceSyncStatusResponse();
+        this.request("DescribeReplicationInstanceSyncStatus", req, resp, cb);
+    }
+
     /**
      * This API is used to query the task status of creating a replication instance.
      * @param {DescribeReplicationInstanceCreateTasksRequest} req
@@ -129,14 +142,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the synchronization status of a replication instance.
-     * @param {DescribeReplicationInstanceSyncStatusRequest} req
-     * @param {function(string, DescribeReplicationInstanceSyncStatusResponse):void} cb
+     * This API is used to list the tag immutability rule.
+     * @param {DescribeImmutableTagRulesRequest} req
+     * @param {function(string, DescribeImmutableTagRulesResponse):void} cb
      * @public
      */
-    DescribeReplicationInstanceSyncStatus(req, cb) {
-        let resp = new DescribeReplicationInstanceSyncStatusResponse();
-        this.request("DescribeReplicationInstanceSyncStatus", req, resp, cb);
+    DescribeImmutableTagRules(req, cb) {
+        let resp = new DescribeImmutableTagRulesResponse();
+        this.request("DescribeImmutableTagRules", req, resp, cb);
     }
 
     /**
@@ -195,14 +208,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to list the tag immutability rule.
-     * @param {DescribeImmutableTagRulesRequest} req
-     * @param {function(string, DescribeImmutableTagRulesResponse):void} cb
+     * This API is used to create a temporary or long-term instance access credential.
+     * @param {CreateInstanceTokenRequest} req
+     * @param {function(string, CreateInstanceTokenResponse):void} cb
      * @public
      */
-    DescribeImmutableTagRules(req, cb) {
-        let resp = new DescribeImmutableTagRulesResponse();
-        this.request("DescribeImmutableTagRules", req, resp, cb);
+    CreateInstanceToken(req, cb) {
+        let resp = new CreateInstanceTokenResponse();
+        this.request("CreateInstanceToken", req, resp, cb);
     }
 
 

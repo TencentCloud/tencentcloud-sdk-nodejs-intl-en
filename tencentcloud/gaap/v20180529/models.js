@@ -54,6 +54,23 @@ class RegionDetail extends  AbstractModel {
          */
         this.IDCType = null;
 
+        /**
+         * Feature bitmap. Valid values:
+`0`: the feature is not supported;
+`1`: the feature is supported.
+Each bit in the bitmap represents a feature:
+1st bit: layer-4 acceleration;
+2nd bit: layer-7 acceleration;
+3rd bit: HTTP3 access;
+4th bit: IPv6;
+5th bit: dedicated BGP access;
+6th bit: non-BGP access;
+7th bit: QoS acceleration.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FeatureBitmap = null;
+
     }
 
     /**
@@ -68,6 +85,7 @@ class RegionDetail extends  AbstractModel {
         this.RegionArea = 'RegionArea' in params ? params.RegionArea : null;
         this.RegionAreaName = 'RegionAreaName' in params ? params.RegionAreaName : null;
         this.IDCType = 'IDCType' in params ? params.IDCType : null;
+        this.FeatureBitmap = 'FeatureBitmap' in params ? params.FeatureBitmap : null;
 
     }
 }
@@ -1410,6 +1428,16 @@ class DescribeHTTPSListenersRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * Specifies whether to enable HTTP3. Valid values:
+`0`: disable HTTP3;
+`1`: enable HTTP3.
+Note: If HTTP3 is enabled for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
+After the connection is created, you cannot change your HTTP3 setting.
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -1427,6 +1455,7 @@ class DescribeHTTPSListenersRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -2946,6 +2975,16 @@ class CreateProxyGroupRequest extends  AbstractModel {
          */
         this.PackageType = null;
 
+        /**
+         * Specifies whether to enable HTTP3. Valid values:
+`0`: disable HTTP3;
+`1`: enable HTTP3.
+Note that if HTTP3 is enabled for a connection, TCP/UDP access will not be allowed.
+After the connection is created, you cannot change your HTTP3 setting.
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -2978,6 +3017,7 @@ class CreateProxyGroupRequest extends  AbstractModel {
         }
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
         this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -5780,6 +5820,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ProxyType = null;
 
+        /**
+         * Specifies whether to enable HTTP3. Valid values:
+`0`: disable HTTP3;
+`1`: enable HTTP3.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -5812,6 +5861,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Version = 'Version' in params ? params.Version : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -6263,7 +6313,7 @@ The connection is to be replicated if this parameter is set.
         this.PackageType = null;
 
         /**
-         * 
+         * Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
          * @type {number || null}
          */
         this.Http3Supported = null;
@@ -6471,6 +6521,15 @@ This field or the `ClientCertificateId` field is required for mutual authenticat
          */
         this.PolyClientCertificateIds = null;
 
+        /**
+         * Specifies whether to enable HTTP3. Valid values:
+`0`: disable HTTP3;
+`1`: enable HTTP3.
+HTTP3 is not enabled by default. You can enable it with this field SetDomainHttp3.
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -6485,6 +6544,7 @@ This field or the `ClientCertificateId` field is required for mutual authenticat
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
         this.ClientCertificateId = 'ClientCertificateId' in params ? params.ClientCertificateId : null;
         this.PolyClientCertificateIds = 'PolyClientCertificateIds' in params ? params.PolyClientCertificateIds : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -6846,11 +6906,20 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.IPAddressVersion = null;
 
         /**
-         * Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+         * Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-MLC-border connection group).
 Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PackageType = null;
+
+        /**
+         * Specifies whether to enable HTTP3. Valid values:
+`0`: disable;
+`1`: enable.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
 
     }
 
@@ -6892,6 +6961,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
         this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -8149,7 +8219,18 @@ class AccessRegionDetial extends  AbstractModel {
         this.IDCType = null;
 
         /**
-         * 
+         * Feature bitmap. Valid values:
+`0`: disable the feature;
+`1`: enable the feature.
+Each bit in the bitmap represents a feature:
+1st bit: layer-4 acceleration;
+2nd bit: layer-7 acceleration;
+3rd bit: HTTP3 access;
+4th bit: IPv6;
+5th bit: dedicated BGP access;
+6th bit: non-BGP access;
+7th bit: QoS acceleration.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FeatureBitmap = null;
@@ -9232,6 +9313,15 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.BanStatus = null;
 
+        /**
+         * Specifies whether to enable HTTP3. Valid values:
+`0`: disable HTTP3;
+`1`: enable HTTP3.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -9285,6 +9375,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         }
         this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
         this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -9740,7 +9831,7 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.PackageType = null;
 
         /**
-         * 
+         * Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
          * @type {number || null}
          */
         this.Http3Supported = null;
@@ -10059,6 +10150,16 @@ The one-way authentication is used by default.
          */
         this.GroupId = null;
 
+        /**
+         * Specifies whether to enable HTTP3. Valid values:
+`0`: disable HTTP3;
+`1`: enable HTTP3.
+Note: If HTTP3 is enabled for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
+After the connection is created, you cannot change your HTTP3 setting.
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -10077,6 +10178,7 @@ The one-way authentication is used by default.
         this.ClientCertificateId = 'ClientCertificateId' in params ? params.ClientCertificateId : null;
         this.PolyClientCertificateIds = 'PolyClientCertificateIds' in params ? params.PolyClientCertificateIds : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -10443,7 +10545,7 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.PackageType = null;
 
         /**
-         * 
+         * Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
          * @type {number || null}
          */
         this.Http3Supported = null;
@@ -10889,7 +10991,10 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.IPList = null;
 
         /**
-         * 
+         * Specifies whether to enable HTTP3. Valid values:
+`0`: disable HTTP3;
+`1`: enable HTTP3.
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Http3Supported = null;

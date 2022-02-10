@@ -633,6 +633,34 @@ class DescribeClusterCommonNamesRequest extends  AbstractModel {
 }
 
 /**
+ * Describes the TAT service information.
+ * @class
+ */
+class RunAutomationServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
  * DeleteClusterEndpoint response structure.
  * @class
  */
@@ -3336,6 +3364,34 @@ class DescribeClusterAuthenticationOptionsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterStatus request structure.
+ * @class
+ */
+class DescribeClusterStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID list. All clusters are pulled if it is left empty.
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+
+    }
+}
+
+/**
  * Version Info
  * @class
  */
@@ -3376,6 +3432,56 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Name = 'Name' in params ? params.Name : null;
         this.Version = 'Version' in params ? params.Version : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * DescribeClusterStatus response structure.
+ * @class
+ */
+class DescribeClusterStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster status list
+         * @type {Array.<ClusterStatus> || null}
+         */
+        this.ClusterStatusSet = null;
+
+        /**
+         * Number of clusters
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterStatusSet) {
+            this.ClusterStatusSet = new Array();
+            for (let z in params.ClusterStatusSet) {
+                let obj = new ClusterStatus();
+                obj.deserialize(params.ClusterStatusSet[z]);
+                this.ClusterStatusSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6032,7 +6138,7 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 
+         * Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run `kubectl uncordon nodename` to enable this node for scheduling.
          * @type {number || null}
          */
         this.Unschedulable = null;
@@ -6934,18 +7040,82 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
- * Describes the TAT service information.
+ * Cluster status information
  * @class
  */
-class RunAutomationServiceEnabled extends  AbstractModel {
+class ClusterStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster status
+         * @type {string || null}
+         */
+        this.ClusterState = null;
+
+        /**
+         * Status of nodes in the cluster
+         * @type {string || null}
+         */
+        this.ClusterInstanceState = null;
+
+        /**
+         * Indicates whether the monitoring service is enabled for the cluster
          * @type {boolean || null}
          */
-        this.Enabled = null;
+        this.ClusterBMonitor = null;
+
+        /**
+         * Number of cluster nodes being created. "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+         * @type {number || null}
+         */
+        this.ClusterInitNodeNum = null;
+
+        /**
+         * Number of running nodes in the cluster. "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+         * @type {number || null}
+         */
+        this.ClusterRunningNodeNum = null;
+
+        /**
+         * Number of abnormal nodes in the cluster.  "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+         * @type {number || null}
+         */
+        this.ClusterFailedNodeNum = null;
+
+        /**
+         * Number of shutdown nodes in the cluster.  "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.ClusterClosedNodeNum = null;
+
+        /**
+         * Number of nodes being shut down in the cluster.  "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.ClusterClosingNodeNum = null;
+
+        /**
+         * Indicates whether to enable cluster deletion protection
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {boolean || null}
+         */
+        this.ClusterDeletionProtection = null;
+
+        /**
+         * Indicates whether the cluster is auditable
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {boolean || null}
+         */
+        this.ClusterAuditEnabled = null;
 
     }
 
@@ -6956,7 +7126,17 @@ class RunAutomationServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterState = 'ClusterState' in params ? params.ClusterState : null;
+        this.ClusterInstanceState = 'ClusterInstanceState' in params ? params.ClusterInstanceState : null;
+        this.ClusterBMonitor = 'ClusterBMonitor' in params ? params.ClusterBMonitor : null;
+        this.ClusterInitNodeNum = 'ClusterInitNodeNum' in params ? params.ClusterInitNodeNum : null;
+        this.ClusterRunningNodeNum = 'ClusterRunningNodeNum' in params ? params.ClusterRunningNodeNum : null;
+        this.ClusterFailedNodeNum = 'ClusterFailedNodeNum' in params ? params.ClusterFailedNodeNum : null;
+        this.ClusterClosedNodeNum = 'ClusterClosedNodeNum' in params ? params.ClusterClosedNodeNum : null;
+        this.ClusterClosingNodeNum = 'ClusterClosingNodeNum' in params ? params.ClusterClosingNodeNum : null;
+        this.ClusterDeletionProtection = 'ClusterDeletionProtection' in params ? params.ClusterDeletionProtection : null;
+        this.ClusterAuditEnabled = 'ClusterAuditEnabled' in params ? params.ClusterAuditEnabled : null;
 
     }
 }
@@ -9209,6 +9389,7 @@ module.exports = {
     CreatePrometheusAlertRuleRequest: CreatePrometheusAlertRuleRequest,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     DescribeClusterCommonNamesRequest: DescribeClusterCommonNamesRequest,
+    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
     PrometheusNotification: PrometheusNotification,
     ClusterVersion: ClusterVersion,
@@ -9259,7 +9440,9 @@ module.exports = {
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     DescribeClusterAuthenticationOptionsRequest: DescribeClusterAuthenticationOptionsRequest,
+    DescribeClusterStatusRequest: DescribeClusterStatusRequest,
     VersionInstance: VersionInstance,
+    DescribeClusterStatusResponse: DescribeClusterStatusResponse,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
@@ -9326,7 +9509,7 @@ module.exports = {
     CheckInstancesUpgradeAbleResponse: CheckInstancesUpgradeAbleResponse,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
-    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
+    ClusterStatus: ClusterStatus,
     UpgradeClusterInstancesResponse: UpgradeClusterInstancesResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,

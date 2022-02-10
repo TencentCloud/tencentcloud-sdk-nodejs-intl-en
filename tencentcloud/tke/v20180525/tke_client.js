@@ -31,6 +31,7 @@ const AutoscalingAdded = models.AutoscalingAdded;
 const CreatePrometheusAlertRuleRequest = models.CreatePrometheusAlertRuleRequest;
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
 const DescribeClusterCommonNamesRequest = models.DescribeClusterCommonNamesRequest;
+const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const PrometheusNotification = models.PrometheusNotification;
 const ClusterVersion = models.ClusterVersion;
@@ -81,7 +82,9 @@ const UpgradeNodeResetParam = models.UpgradeNodeResetParam;
 const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const DescribeClusterAuthenticationOptionsRequest = models.DescribeClusterAuthenticationOptionsRequest;
+const DescribeClusterStatusRequest = models.DescribeClusterStatusRequest;
 const VersionInstance = models.VersionInstance;
+const DescribeClusterStatusResponse = models.DescribeClusterStatusResponse;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
 const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
@@ -148,7 +151,7 @@ const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
 const CheckInstancesUpgradeAbleResponse = models.CheckInstancesUpgradeAbleResponse;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
-const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
+const ClusterStatus = models.ClusterStatus;
 const UpgradeClusterInstancesResponse = models.UpgradeClusterInstancesResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
@@ -252,6 +255,17 @@ class TkeClient extends AbstractClient {
     RemoveNodeFromNodePool(req, cb) {
         let resp = new RemoveNodeFromNodePoolResponse();
         this.request("RemoveNodeFromNodePool", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of clusters under the current account.
+     * @param {DescribeClusterStatusRequest} req
+     * @param {function(string, DescribeClusterStatusResponse):void} cb
+     * @public
+     */
+    DescribeClusterStatus(req, cb) {
+        let resp = new DescribeClusterStatusResponse();
+        this.request("DescribeClusterStatus", req, resp, cb);
     }
 
     /**

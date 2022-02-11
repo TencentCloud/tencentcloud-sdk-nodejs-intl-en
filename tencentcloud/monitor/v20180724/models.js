@@ -3860,6 +3860,12 @@ class DescribeBaseMetricsRequest extends  AbstractModel {
          */
         this.MetricName = null;
 
+        /**
+         * Filter by dimension. This parameter is optional.
+         * @type {Array.<string> || null}
+         */
+        this.Dimensions = null;
+
     }
 
     /**
@@ -3871,6 +3877,7 @@ class DescribeBaseMetricsRequest extends  AbstractModel {
         }
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
 
     }
 }

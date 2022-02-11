@@ -45,7 +45,6 @@ const CreateRocketMQNamespaceRequest = models.CreateRocketMQNamespaceRequest;
 const DescribeCmqTopicDetailResponse = models.DescribeCmqTopicDetailResponse;
 const CmqQueue = models.CmqQueue;
 const CreateEnvironmentResponse = models.CreateEnvironmentResponse;
-const Producer = models.Producer;
 const CreateSubscriptionResponse = models.CreateSubscriptionResponse;
 const SendMsgResponse = models.SendMsgResponse;
 const ModifyCmqTopicAttributeResponse = models.ModifyCmqTopicAttributeResponse;
@@ -59,6 +58,7 @@ const DescribeCmqQueueDetailResponse = models.DescribeCmqQueueDetailResponse;
 const CreateEnvironmentRequest = models.CreateEnvironmentRequest;
 const DeleteTopicsResponse = models.DeleteTopicsResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
+const SubscriptionTopic = models.SubscriptionTopic;
 const RocketMQTopic = models.RocketMQTopic;
 const DescribeRocketMQClusterResponse = models.DescribeRocketMQClusterResponse;
 const DescribeCmqSubscriptionDetailResponse = models.DescribeCmqSubscriptionDetailResponse;
@@ -70,6 +70,7 @@ const ModifyRocketMQClusterRequest = models.ModifyRocketMQClusterRequest;
 const AcknowledgeMessageRequest = models.AcknowledgeMessageRequest;
 const DescribeTopicsResponse = models.DescribeTopicsResponse;
 const PublishCmqMsgResponse = models.PublishCmqMsgResponse;
+const DescribePublishersRequest = models.DescribePublishersRequest;
 const CreateRocketMQClusterRequest = models.CreateRocketMQClusterRequest;
 const SendCmqMsgRequest = models.SendCmqMsgRequest;
 const AcknowledgeMessageResponse = models.AcknowledgeMessageResponse;
@@ -84,6 +85,7 @@ const ModifyCmqTopicAttributeRequest = models.ModifyCmqTopicAttributeRequest;
 const DeleteRolesRequest = models.DeleteRolesRequest;
 const Subscription = models.Subscription;
 const CreateCmqSubscribeResponse = models.CreateCmqSubscribeResponse;
+const Publisher = models.Publisher;
 const DescribeSubscriptionsResponse = models.DescribeSubscriptionsResponse;
 const ModifyRoleRequest = models.ModifyRoleRequest;
 const SendMessagesResponse = models.SendMessagesResponse;
@@ -123,6 +125,7 @@ const ResetMsgSubOffsetByTimestampResponse = models.ResetMsgSubOffsetByTimestamp
 const CreateClusterResponse = models.CreateClusterResponse;
 const DescribeCmqDeadLetterSourceQueuesRequest = models.DescribeCmqDeadLetterSourceQueuesRequest;
 const DeleteRocketMQNamespaceRequest = models.DeleteRocketMQNamespaceRequest;
+const DescribeRolesRequest = models.DescribeRolesRequest;
 const CreateClusterRequest = models.CreateClusterRequest;
 const ModifyCmqQueueAttributeResponse = models.ModifyCmqQueueAttributeResponse;
 const CreateTopicResponse = models.CreateTopicResponse;
@@ -137,7 +140,6 @@ const CmqDeadLetterSource = models.CmqDeadLetterSource;
 const ClearCmqSubscriptionFilterTagsResponse = models.ClearCmqSubscriptionFilterTagsResponse;
 const DescribeCmqTopicsRequest = models.DescribeCmqTopicsRequest;
 const Filter = models.Filter;
-const Connection = models.Connection;
 const DeleteTopicsRequest = models.DeleteTopicsRequest;
 const CmqTransactionPolicy = models.CmqTransactionPolicy;
 const ModifyTopicRequest = models.ModifyTopicRequest;
@@ -155,6 +157,7 @@ const Cluster = models.Cluster;
 const RetentionPolicy = models.RetentionPolicy;
 const CreateRocketMQClusterResponse = models.CreateRocketMQClusterResponse;
 const DeleteRocketMQNamespaceResponse = models.DeleteRocketMQNamespaceResponse;
+const DescribePublishersResponse = models.DescribePublishersResponse;
 const SendMsgRequest = models.SendMsgRequest;
 const DescribeCmqQueueDetailRequest = models.DescribeCmqQueueDetailRequest;
 const CreateRocketMQTopicRequest = models.CreateRocketMQTopicRequest;
@@ -172,12 +175,11 @@ const DeleteCmqQueueRequest = models.DeleteCmqQueueRequest;
 const DescribeRocketMQGroupsRequest = models.DescribeRocketMQGroupsRequest;
 const DescribeRocketMQClustersResponse = models.DescribeRocketMQClustersResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
-const DescribeProducersRequest = models.DescribeProducersRequest;
 const ModifyEnvironmentRoleRequest = models.ModifyEnvironmentRoleRequest;
 const DescribeEnvironmentAttributesResponse = models.DescribeEnvironmentAttributesResponse;
 const Role = models.Role;
-const SubscriptionTopic = models.SubscriptionTopic;
-const DescribeProducersResponse = models.DescribeProducersResponse;
+const Sort = models.Sort;
+const DescribePublisherSummaryResponse = models.DescribePublisherSummaryResponse;
 const CreateRocketMQNamespaceResponse = models.CreateRocketMQNamespaceResponse;
 const SendBatchMessagesRequest = models.SendBatchMessagesRequest;
 const DeleteCmqTopicRequest = models.DeleteCmqTopicRequest;
@@ -185,7 +187,7 @@ const SendCmqMsgResponse = models.SendCmqMsgResponse;
 const UnbindCmqDeadLetterRequest = models.UnbindCmqDeadLetterRequest;
 const ModifyCmqQueueAttributeRequest = models.ModifyCmqQueueAttributeRequest;
 const DeleteCmqSubscribeResponse = models.DeleteCmqSubscribeResponse;
-const DescribeRolesRequest = models.DescribeRolesRequest;
+const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
 const DeleteSubscriptionsRequest = models.DeleteSubscriptionsRequest;
 const ModifyRocketMQGroupResponse = models.ModifyRocketMQGroupResponse;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
@@ -414,6 +416,17 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
+     * This API is used to obtain the list of producer information.
+     * @param {DescribePublishersRequest} req
+     * @param {function(string, DescribePublishersResponse):void} cb
+     * @public
+     */
+    DescribePublishers(req, cb) {
+        let resp = new DescribePublishersResponse();
+        this.request("DescribePublishers", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a RocketMQ cluster.
      * @param {CreateRocketMQClusterRequest} req
      * @param {function(string, CreateRocketMQClusterResponse):void} cb
@@ -444,6 +457,17 @@ class TdmqClient extends AbstractClient {
     DeleteRocketMQGroup(req, cb) {
         let resp = new DeleteRocketMQGroupResponse();
         this.request("DeleteRocketMQGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of RocketMQ topics.
+     * @param {DescribeRocketMQTopicsRequest} req
+     * @param {function(string, DescribeRocketMQTopicsResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQTopics(req, cb) {
+        let resp = new DescribeRocketMQTopicsResponse();
+        this.request("DescribeRocketMQTopics", req, resp, cb);
     }
 
     /**
@@ -590,14 +614,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of RocketMQ topics.
-     * @param {DescribeRocketMQTopicsRequest} req
-     * @param {function(string, DescribeRocketMQTopicsResponse):void} cb
+     * This API is used to obtain message production overview information.
+     * @param {DescribePublisherSummaryRequest} req
+     * @param {function(string, DescribePublisherSummaryResponse):void} cb
      * @public
      */
-    DescribeRocketMQTopics(req, cb) {
-        let resp = new DescribeRocketMQTopicsResponse();
-        this.request("DescribeRocketMQTopics", req, resp, cb);
+    DescribePublisherSummary(req, cb) {
+        let resp = new DescribePublisherSummaryResponse();
+        this.request("DescribePublisherSummary", req, resp, cb);
     }
 
     /**
@@ -697,17 +721,6 @@ class TdmqClient extends AbstractClient {
     DeleteRoles(req, cb) {
         let resp = new DeleteRolesResponse();
         this.request("DeleteRoles", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of producers. Only online producers will be displayed.
-     * @param {DescribeProducersRequest} req
-     * @param {function(string, DescribeProducersResponse):void} cb
-     * @public
-     */
-    DescribeProducers(req, cb) {
-        let resp = new DescribeProducersResponse();
-        this.request("DescribeProducers", req, resp, cb);
     }
 
     /**

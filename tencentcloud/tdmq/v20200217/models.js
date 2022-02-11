@@ -1645,6 +1645,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.NamespaceName = null;
 
+        /**
+         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The maximum number of unacknowledged messages.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxUnackedMsgNum = null;
+
+        /**
+         * Maximum size of heaped messages in bytes.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxMsgBacklogSize = null;
+
     }
 
     /**
@@ -1707,6 +1728,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Trace = 'Trace' in params ? params.Trace : null;
         this.TenantId = 'TenantId' in params ? params.TenantId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MaxUnackedMsgNum = 'MaxUnackedMsgNum' in params ? params.MaxUnackedMsgNum : null;
+        this.MaxMsgBacklogSize = 'MaxMsgBacklogSize' in params ? params.MaxMsgBacklogSize : null;
 
     }
 }
@@ -1764,65 +1788,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Producer
- * @class
- */
-class Producer extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Number of connections.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CountConnect = null;
-
-        /**
-         * Set of connections.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Connection> || null}
-         */
-        this.ConnectionSets = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.CountConnect = 'CountConnect' in params ? params.CountConnect : null;
-
-        if (params.ConnectionSets) {
-            this.ConnectionSets = new Array();
-            for (let z in params.ConnectionSets) {
-                let obj = new Connection();
-                obj.deserialize(params.ConnectionSets[z]);
-                this.ConnectionSets.push(obj);
-            }
-        }
 
     }
 }
@@ -2586,6 +2551,48 @@ class DescribeClustersRequest extends  AbstractModel {
 }
 
 /**
+ * Subscription
+ * @class
+ */
+class SubscriptionTopic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Subscription name.
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+
+    }
+}
+
+/**
  * RocketMQ topic information
  * @class
  */
@@ -3113,6 +3120,89 @@ class PublishCmqMsgResponse extends  AbstractModel {
         this.Result = 'Result' in params ? params.Result : null;
         this.MsgId = 'MsgId' in params ? params.MsgId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePublishers request structure.
+ * @class
+ */
+class DescribePublishersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace name.
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Parameter filter. The `ProducerName` and `Address` fields are supported.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Offset for query. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of query results displayed per page. Default value: `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sort by field.
+         * @type {Sort || null}
+         */
+        this.Sort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Sort) {
+            let obj = new Sort();
+            obj.deserialize(params.Sort)
+            this.Sort = obj;
+        }
 
     }
 }
@@ -3733,6 +3823,99 @@ class CreateCmqSubscribeResponse extends  AbstractModel {
         }
         this.SubscriptionId = 'SubscriptionId' in params ? params.SubscriptionId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Producer information
+ * @class
+ */
+class Publisher extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Producer ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProducerId = null;
+
+        /**
+         * Producer name.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProducerName = null;
+
+        /**
+         * Producer address.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Client version.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClientVersion = null;
+
+        /**
+         * Message production rate (message/sec).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MsgRateIn = null;
+
+        /**
+         * Message production throughput rate (byte/sec).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MsgThroughputIn = null;
+
+        /**
+         * Average message size in bytes.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AverageMsgSize = null;
+
+        /**
+         * Connection time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConnectedSince = null;
+
+        /**
+         * Serial number of the topic partition connected to the producer.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProducerId = 'ProducerId' in params ? params.ProducerId : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
+        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
+        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
+        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
+        this.ConnectedSince = 'ConnectedSince' in params ? params.ConnectedSince : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
 
     }
 }
@@ -5762,6 +5945,73 @@ class DeleteRocketMQNamespaceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRoles request structure.
+ * @class
+ */
+class DescribeRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Fuzzy query by role name
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Offset. If this parameter is left empty, 0 will be used by default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Cluster ID (required)
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * * RoleName
+Filter by role name for exact query.
+Type: String
+Required: no
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateCluster request structure.
  * @class
  */
@@ -5788,7 +6038,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * List of cluster tags
+         * Cluster tag list (deprecated).
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -6446,83 +6696,6 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
-
-    }
-}
-
-/**
- * Producer connection instance
- * @class
- */
-class Connection extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Producer address.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * Topic partition.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * Producer version.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ClientVersion = null;
-
-        /**
-         * Producer name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProducerName = null;
-
-        /**
-         * Producer ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProducerId = null;
-
-        /**
-         * Average message size in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AverageMsgSize = null;
-
-        /**
-         * Production rate in bytes/sec.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgThroughputIn = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Address = 'Address' in params ? params.Address : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
-        this.ProducerId = 'ProducerId' in params ? params.ProducerId : null;
-        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
-        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
 
     }
 }
@@ -7237,7 +7410,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.HealthyInfo = null;
 
         /**
-         * Cluster status. 0: creating; 1: normal; 2: deleting; 3: deleted; 5. creation failed; 6: deletion failed
+         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
          * @type {number || null}
          */
         this.Status = null;
@@ -7502,6 +7675,57 @@ class DeleteRocketMQNamespaceResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePublishers response structure.
+ * @class
+ */
+class DescribePublishersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of query results.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of producer information.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<Publisher> || null}
+         */
+        this.Publishers = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Publishers) {
+            this.Publishers = new Array();
+            for (let z in params.Publishers) {
+                let obj = new Publisher();
+                obj.deserialize(params.Publishers[z]);
+                this.Publishers.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -8326,69 +8550,6 @@ class CreateRoleRequest extends  AbstractModel {
 }
 
 /**
- * DescribeProducers request structure.
- * @class
- */
-class DescribeProducersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Fuzzy match by producer name.
-         * @type {string || null}
-         */
-        this.ProducerName = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
  * ModifyEnvironmentRole request structure.
  * @class
  */
@@ -8578,30 +8739,24 @@ class Role extends  AbstractModel {
 }
 
 /**
- * Subscription
+ * Sort by field
  * @class
  */
-class SubscriptionTopic extends  AbstractModel {
+class Sort extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Environment (namespace) name.
+         * Sorting field.
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.Name = null;
 
         /**
-         * Topic name.
+         * Ascending order: `ASC`; descending order: `DESC`.
          * @type {string || null}
          */
-        this.TopicName = null;
-
-        /**
-         * Subscription name.
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
+        this.Order = null;
 
     }
 
@@ -8612,32 +8767,47 @@ class SubscriptionTopic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
 
 /**
- * DescribeProducers response structure.
+ * DescribePublisherSummary response structure.
  * @class
  */
-class DescribeProducersResponse extends  AbstractModel {
+class DescribePublisherSummaryResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array set of producers.
-         * @type {Array.<Producer> || null}
-         */
-        this.ProducerSets = null;
-
-        /**
-         * Total number of records.
+         * Production rate (messages/sec).
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.MsgRateIn = null;
+
+        /**
+         * Production rate (byte/sec).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MsgThroughputIn = null;
+
+        /**
+         * The number of producers.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PublisherCount = null;
+
+        /**
+         * Message storage size in bytes.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StorageSize = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8654,16 +8824,10 @@ class DescribeProducersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ProducerSets) {
-            this.ProducerSets = new Array();
-            for (let z in params.ProducerSets) {
-                let obj = new Producer();
-                obj.deserialize(params.ProducerSets[z]);
-                this.ProducerSets.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
+        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
+        this.PublisherCount = 'PublisherCount' in params ? params.PublisherCount : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9034,45 +9198,30 @@ class DeleteCmqSubscribeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeRoles request structure.
+ * DescribePublisherSummary request structure.
  * @class
  */
-class DescribeRolesRequest extends  AbstractModel {
+class DescribePublisherSummaryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Fuzzy query by role name
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Cluster ID (required)
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * * RoleName
-Filter by role name for exact query.
-Type: String
-Required: no
-         * @type {Array.<Filter> || null}
+         * Namespace name.
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.Namespace = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.Topic = null;
 
     }
 
@@ -9083,19 +9232,9 @@ Required: no
         if (!params) {
             return;
         }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
 
     }
 }
@@ -9395,7 +9534,6 @@ module.exports = {
     DescribeCmqTopicDetailResponse: DescribeCmqTopicDetailResponse,
     CmqQueue: CmqQueue,
     CreateEnvironmentResponse: CreateEnvironmentResponse,
-    Producer: Producer,
     CreateSubscriptionResponse: CreateSubscriptionResponse,
     SendMsgResponse: SendMsgResponse,
     ModifyCmqTopicAttributeResponse: ModifyCmqTopicAttributeResponse,
@@ -9409,6 +9547,7 @@ module.exports = {
     CreateEnvironmentRequest: CreateEnvironmentRequest,
     DeleteTopicsResponse: DeleteTopicsResponse,
     DescribeClustersRequest: DescribeClustersRequest,
+    SubscriptionTopic: SubscriptionTopic,
     RocketMQTopic: RocketMQTopic,
     DescribeRocketMQClusterResponse: DescribeRocketMQClusterResponse,
     DescribeCmqSubscriptionDetailResponse: DescribeCmqSubscriptionDetailResponse,
@@ -9420,6 +9559,7 @@ module.exports = {
     AcknowledgeMessageRequest: AcknowledgeMessageRequest,
     DescribeTopicsResponse: DescribeTopicsResponse,
     PublishCmqMsgResponse: PublishCmqMsgResponse,
+    DescribePublishersRequest: DescribePublishersRequest,
     CreateRocketMQClusterRequest: CreateRocketMQClusterRequest,
     SendCmqMsgRequest: SendCmqMsgRequest,
     AcknowledgeMessageResponse: AcknowledgeMessageResponse,
@@ -9434,6 +9574,7 @@ module.exports = {
     DeleteRolesRequest: DeleteRolesRequest,
     Subscription: Subscription,
     CreateCmqSubscribeResponse: CreateCmqSubscribeResponse,
+    Publisher: Publisher,
     DescribeSubscriptionsResponse: DescribeSubscriptionsResponse,
     ModifyRoleRequest: ModifyRoleRequest,
     SendMessagesResponse: SendMessagesResponse,
@@ -9473,6 +9614,7 @@ module.exports = {
     CreateClusterResponse: CreateClusterResponse,
     DescribeCmqDeadLetterSourceQueuesRequest: DescribeCmqDeadLetterSourceQueuesRequest,
     DeleteRocketMQNamespaceRequest: DeleteRocketMQNamespaceRequest,
+    DescribeRolesRequest: DescribeRolesRequest,
     CreateClusterRequest: CreateClusterRequest,
     ModifyCmqQueueAttributeResponse: ModifyCmqQueueAttributeResponse,
     CreateTopicResponse: CreateTopicResponse,
@@ -9487,7 +9629,6 @@ module.exports = {
     ClearCmqSubscriptionFilterTagsResponse: ClearCmqSubscriptionFilterTagsResponse,
     DescribeCmqTopicsRequest: DescribeCmqTopicsRequest,
     Filter: Filter,
-    Connection: Connection,
     DeleteTopicsRequest: DeleteTopicsRequest,
     CmqTransactionPolicy: CmqTransactionPolicy,
     ModifyTopicRequest: ModifyTopicRequest,
@@ -9505,6 +9646,7 @@ module.exports = {
     RetentionPolicy: RetentionPolicy,
     CreateRocketMQClusterResponse: CreateRocketMQClusterResponse,
     DeleteRocketMQNamespaceResponse: DeleteRocketMQNamespaceResponse,
+    DescribePublishersResponse: DescribePublishersResponse,
     SendMsgRequest: SendMsgRequest,
     DescribeCmqQueueDetailRequest: DescribeCmqQueueDetailRequest,
     CreateRocketMQTopicRequest: CreateRocketMQTopicRequest,
@@ -9522,12 +9664,11 @@ module.exports = {
     DescribeRocketMQGroupsRequest: DescribeRocketMQGroupsRequest,
     DescribeRocketMQClustersResponse: DescribeRocketMQClustersResponse,
     CreateRoleRequest: CreateRoleRequest,
-    DescribeProducersRequest: DescribeProducersRequest,
     ModifyEnvironmentRoleRequest: ModifyEnvironmentRoleRequest,
     DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
     Role: Role,
-    SubscriptionTopic: SubscriptionTopic,
-    DescribeProducersResponse: DescribeProducersResponse,
+    Sort: Sort,
+    DescribePublisherSummaryResponse: DescribePublisherSummaryResponse,
     CreateRocketMQNamespaceResponse: CreateRocketMQNamespaceResponse,
     SendBatchMessagesRequest: SendBatchMessagesRequest,
     DeleteCmqTopicRequest: DeleteCmqTopicRequest,
@@ -9535,7 +9676,7 @@ module.exports = {
     UnbindCmqDeadLetterRequest: UnbindCmqDeadLetterRequest,
     ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
     DeleteCmqSubscribeResponse: DeleteCmqSubscribeResponse,
-    DescribeRolesRequest: DescribeRolesRequest,
+    DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
     DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
     ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,

@@ -103,6 +103,55 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeleteApplication request structure.
+ * @class
+ */
+class DeleteApplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Environment ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Retain as default
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Whether to delete this application automatically when there is no running version.
+         * @type {boolean || null}
+         */
+        this.DeleteApplicationIfNoRunningVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.DeleteApplicationIfNoRunningVersion = 'DeleteApplicationIfNoRunningVersion' in params ? params.DeleteApplicationIfNoRunningVersion : null;
+
+    }
+}
+
+/**
  * CreateResource request structure.
  * @class
  */
@@ -147,6 +196,83 @@ class CreateResourceRequest extends  AbstractModel {
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+
+    }
+}
+
+/**
+ * RestartApplication response structure.
+ * @class
+ */
+class RestartApplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopApplication request structure.
+ * @class
+ */
+class StopApplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Retain as default
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Environment ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
 
     }
 }
@@ -2231,31 +2357,24 @@ Examples:
 }
 
 /**
- * Storage volume configuration
+ * RollingUpdateApplicationByVersion response structure.
  * @class
  */
-class StorageConf extends  AbstractModel {
+class RollingUpdateApplicationByVersionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Storage volume name
+         * Version ID
          * @type {string || null}
          */
-        this.StorageVolName = null;
+        this.Result = null;
 
         /**
-         * Storage volume path
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StorageVolPath = null;
-
-        /**
-         * Storage volume IP
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.StorageVolIp = null;
+        this.RequestId = null;
 
     }
 
@@ -2266,9 +2385,99 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.StorageVolName = 'StorageVolName' in params ? params.StorageVolName : null;
-        this.StorageVolPath = 'StorageVolPath' in params ? params.StorageVolPath : null;
-        this.StorageVolIp = 'StorageVolIp' in params ? params.StorageVolIp : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RollingUpdateApplicationByVersion request structure.
+ * @class
+ */
+class RollingUpdateApplicationByVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Environment ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Update version. For image-based deployment, it is the value. For deployment with JAR/WAR files, it is `Version`.
+         * @type {string || null}
+         */
+        this.DeployVersion = null;
+
+        /**
+         * JAR/WAR package name. It’s only required for deployment with JAR/WAR files.
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * Request source. Options: `IntelliJ`, `Coding`
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DeployStrategyType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TotalBatchCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BatchInterval = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BetaBatchNum = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MinAvailable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.DeployVersion = 'DeployVersion' in params ? params.DeployVersion : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.From = 'From' in params ? params.From : null;
+        this.DeployStrategyType = 'DeployStrategyType' in params ? params.DeployStrategyType : null;
+        this.TotalBatchCount = 'TotalBatchCount' in params ? params.TotalBatchCount : null;
+        this.BatchInterval = 'BatchInterval' in params ? params.BatchInterval : null;
+        this.BetaBatchNum = 'BetaBatchNum' in params ? params.BetaBatchNum : null;
+        this.MinAvailable = 'MinAvailable' in params ? params.MinAvailable : null;
 
     }
 }
@@ -2527,6 +2736,41 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeleteApplication response structure.
+ * @class
+ */
+class DeleteApplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Ingress rule path configuration
  * @class
  */
@@ -2655,6 +2899,48 @@ class NamespacePage extends  AbstractModel {
         this.Total = 'Total' in params ? params.Total : null;
         this.Size = 'Size' in params ? params.Size : null;
         this.Pages = 'Pages' in params ? params.Pages : null;
+
+    }
+}
+
+/**
+ * RestartApplication request structure.
+ * @class
+ */
+class RestartApplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Retain as default
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Environment ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
 
     }
 }
@@ -3017,6 +3303,41 @@ class DescribeEnvironmentsRequest extends  AbstractModel {
 }
 
 /**
+ * StopApplication response structure.
+ * @class
+ */
+class StopApplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EKS service information
  * @class
  */
@@ -3207,6 +3528,49 @@ class DeployApplicationResponse extends  AbstractModel {
 }
 
 /**
+ * Storage volume configuration
+ * @class
+ */
+class StorageConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage volume name
+         * @type {string || null}
+         */
+        this.StorageVolName = null;
+
+        /**
+         * Storage volume path
+         * @type {string || null}
+         */
+        this.StorageVolPath = null;
+
+        /**
+         * Storage volume IP
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StorageVolIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageVolName = 'StorageVolName' in params ? params.StorageVolName : null;
+        this.StorageVolPath = 'StorageVolPath' in params ? params.StorageVolPath : null;
+        this.StorageVolIp = 'StorageVolIp' in params ? params.StorageVolIp : null;
+
+    }
+}
+
+/**
  * CreateEnvironment request structure.
  * @class
  */
@@ -3314,7 +3678,10 @@ class Pair extends  AbstractModel {
 module.exports = {
     MountedSettingConf: MountedSettingConf,
     RestartApplicationPodResponse: RestartApplicationPodResponse,
+    DeleteApplicationRequest: DeleteApplicationRequest,
     CreateResourceRequest: CreateResourceRequest,
+    RestartApplicationResponse: RestartApplicationResponse,
+    StopApplicationRequest: StopApplicationRequest,
     HealthCheckConfig: HealthCheckConfig,
     ModifyEnvironmentRequest: ModifyEnvironmentRequest,
     EsInfo: EsInfo,
@@ -3346,15 +3713,18 @@ module.exports = {
     CreateCosTokenResponse: CreateCosTokenResponse,
     IngressRule: IngressRule,
     CronHorizontalAutoscaler: CronHorizontalAutoscaler,
-    StorageConf: StorageConf,
+    RollingUpdateApplicationByVersionResponse: RollingUpdateApplicationByVersionResponse,
+    RollingUpdateApplicationByVersionRequest: RollingUpdateApplicationByVersionRequest,
     RunVersionPod: RunVersionPod,
     IngressRuleValue: IngressRuleValue,
     CreateResourceResponse: CreateResourceResponse,
     ModifyApplicationInfoRequest: ModifyApplicationInfoRequest,
     ModifyApplicationInfoResponse: ModifyApplicationInfoResponse,
+    DeleteApplicationResponse: DeleteApplicationResponse,
     IngressRulePath: IngressRulePath,
     CreateEnvironmentResponse: CreateEnvironmentResponse,
     NamespacePage: NamespacePage,
+    RestartApplicationRequest: RestartApplicationRequest,
     CreateApplicationResponse: CreateApplicationResponse,
     HorizontalAutoscaler: HorizontalAutoscaler,
     StorageMountConf: StorageMountConf,
@@ -3363,9 +3733,11 @@ module.exports = {
     DescribeIngressRequest: DescribeIngressRequest,
     CreateCosTokenRequest: CreateCosTokenRequest,
     DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
+    StopApplicationResponse: StopApplicationResponse,
     EksService: EksService,
     CronHorizontalAutoscalerSchedule: CronHorizontalAutoscalerSchedule,
     DeployApplicationResponse: DeployApplicationResponse,
+    StorageConf: StorageConf,
     CreateEnvironmentRequest: CreateEnvironmentRequest,
     Pair: Pair,
 

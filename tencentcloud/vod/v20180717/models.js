@@ -255,7 +255,7 @@ class AiRecognitionTaskAsrFullTextSegmentItem extends  AbstractModel {
 }
 
 /**
- * Control parameter of custom text audit task.
+ * Parameters for custom OCR-based recognition
  * @class
  */
 class UserDefineOcrTextReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -263,28 +263,28 @@ class UserDefineOcrTextReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of custom text audit task. Valid values:
-<li>ON: enables custom text audit task;</li>
-<li>OFF: disables custom text audit task.</li>
+         * Whether to enable custom OCR-based recognition. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Filter labels for custom OCR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom OCR-based recognition.
+Up to 10 labels are allowed, each containing no more than 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -818,7 +818,7 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Result type of ASR-based prohibited information detection in speech task in content audit
+ * Result for ASR-based recognition of banned content
  * @class
  */
 class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
@@ -850,14 +850,14 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of ASR-based prohibited information detection in speech task in content audit
+         * Input for ASR-based recognition of banned content
          * @type {AiReviewProhibitedAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of ASR-based prohibited information detection in speech task in content audit
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for ASR-based recognition of banned content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewProhibitedAsrTaskOutput || null}
          */
         this.Output = null;
@@ -1037,7 +1037,7 @@ class DeleteAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of OCR-based prohibited information detection in text task in content audit
+ * Result for OCR-based recognition of banned content
  * @class
  */
 class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
@@ -1069,14 +1069,14 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of OCR-based prohibited information detection in text task in content audit
+         * Input for OCR-based recognition of banned content
          * @type {AiReviewProhibitedOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of OCR-based prohibited information detection in text task in content audit
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for OCR-based recognition of banned content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewProhibitedOcrTaskOutput || null}
          */
         this.Output = null;
@@ -1237,7 +1237,7 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
 }
 
 /**
- * Summary metadata of WeChat Mini Program audit.
+ *  
  * @class
  */
 class MediaMiniProgramReviewElem extends  AbstractModel {
@@ -1533,7 +1533,7 @@ Default value: black.
 }
 
 /**
- * Input parameter type of OCR-based politically sensitive information detection in text task in content audit
+ * Input parameters for OCR-based recognition of politically sensitive content
  * @class
  */
 class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
@@ -1541,7 +1541,7 @@ class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Politically sensitive information detection template ID.
+         * ID of the template for recognition of politically sensitive content
          * @type {number || null}
          */
         this.Definition = null;
@@ -1738,7 +1738,7 @@ class TempCertificate extends  AbstractModel {
 }
 
 /**
- * Result type of OCR-based politically sensitive information detection in text task in content audit
+ * Result for OCR-based recognition of politically sensitive content
  * @class
  */
 class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
@@ -1771,14 +1771,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input of OCR-based politically sensitive information detection in text task in content audit.
+         * Input for OCR-based recognition of politically sensitive content
          * @type {AiReviewPoliticalOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of OCR-based politically sensitive information detection in text task in content audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for OCR-based recognition of politically sensitive content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewPoliticalOcrTaskOutput || null}
          */
         this.Output = null;
@@ -2019,7 +2019,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of custom figure audit task
+ * Parameters for custom facial recognition
  * @class
  */
 class UserDefineFaceReviewTemplateInfo extends  AbstractModel {
@@ -2027,28 +2027,28 @@ class UserDefineFaceReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of custom figure audit task. Valid values:
-<li>ON: enables custom figure audit task;</li>
-<li>OFF: disables custom figure audit task.</li>
+         * Whether to enable custom facial recognition. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Filter labels for custom facial recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding custom facial libraries.
+Up to 10 labels are allowed, each containing no more than 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `97` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `95` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -2071,7 +2071,7 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * Content audit template details
+ * Intelligent recognition template details
  * @class
  */
 class ContentReviewTemplateItem extends  AbstractModel {
@@ -2079,40 +2079,40 @@ class ContentReviewTemplateItem extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of content audit template.
+         * Unique ID of an intelligent recognition template
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Content audit template name. Length limit: 64 characters.
+         * Name of an intelligent recognition template. Max 64 characters
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Content audit template description. Length limit: 256 characters.
+         * Description of an intelligent recognition template. Max 256 characters
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * Porn information detection control parameter.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for recognition of pornographic content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {PornConfigureInfo || null}
          */
         this.PornConfigure = null;
 
         /**
-         * Terrorism information detection control parameter.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for recognition of terrorism content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {TerrorismConfigureInfo || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Politically sensitive information detection control parameter.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for recognition of politically sensitive content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {PoliticalConfigureInfo || null}
          */
         this.PoliticalConfigure = null;
@@ -2127,16 +2127,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ProhibitedConfigure = null;
 
         /**
-         * Custom content audit control parameter.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Custom recognition parameters
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {UserDefineConfigureInfo || null}
          */
         this.UserDefineConfigure = null;
 
         /**
-         * Switch controlling whether to add audit result to review list (for human review).
-<li>ON: yes;</li>
-<li>OFF: no.</li>
+         * Whether to subject the recognition result to human review
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.ReviewWallSwitch = null;
@@ -2273,7 +2273,7 @@ class DeleteContentReviewTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Input parameter type of politically sensitive information detection task in content audit
+ * Input parameters for intelligent recognition of politically sensitive content
  * @class
  */
 class AiReviewPoliticalTaskInput extends  AbstractModel {
@@ -2281,7 +2281,7 @@ class AiReviewPoliticalTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Politically sensitive information detection template ID.
+         * ID of the template for recognition of politically sensitive content
          * @type {number || null}
          */
         this.Definition = null;
@@ -3219,7 +3219,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Input parameter type of ASR-based porn information detection in speech task in content audit
+ * Input parameters for ASR-based recognition of pornographic content
  * @class
  */
 class AiReviewPornAsrTaskInput extends  AbstractModel {
@@ -3227,7 +3227,7 @@ class AiReviewPornAsrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Porn information detection template ID.
+         * ID of the template for recognition of pornographic content
          * @type {number || null}
          */
         this.Definition = null;
@@ -3547,7 +3547,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of terrorism information detection in video image task.
+ * Parameters for recognition of terrorism content in images
  * @class
  */
 class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -3555,19 +3555,19 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of terrorism information detection in video image task. Valid values:
-<li>ON: enables terrorism information detection in video image task;</li>
-<li>OFF: disables terrorism information detection in video image task.</li>
+         * Whether to enable recognition of terrorism content in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tags for terrorism information detection in images. If a moderation result contains a selected tag, it will be returned. If no filter tag is specified, all moderation results will be returned. Valid values:
+         * Filter labels for recognition of terrorism content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
 <li>`guns`: weapons and guns</li>
-<li>`crowd`: crowds</li>
-<li>`bloody`: bloody images</li>
-<li>`police`: police forces</li>
+<li>`crowd`: crowd</li>
+<li>`bloody`: bloody scenes</li>
+<li>`police`: police force</li>
 <li>`banners`: terrorism flags</li>
 <li>`militant`: militants</li>
 <li>`explosion`: explosions and fires</li>
@@ -3578,13 +3578,13 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -4027,7 +4027,7 @@ class DeleteSuperPlayerConfigRequest extends  AbstractModel {
 }
 
 /**
- * Input parameter type of OCR-based terrorism information detection in text task in content audit
+ * Input parameters for OCR-based recognition of terrorism content
  * @class
  */
 class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
@@ -4035,7 +4035,7 @@ class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Terrorism information detection template ID.
+         * ID of the template for recognition of terrorism content
          * @type {number || null}
          */
         this.Definition = null;
@@ -4083,7 +4083,7 @@ class AiRecognitionTaskOcrWordsResultInput extends  AbstractModel {
 }
 
 /**
- * Input parameter type of porn information detection task in content audit
+ * Input parameters for intelligent recognition of pornographic content
  * @class
  */
 class AiReviewPornTaskInput extends  AbstractModel {
@@ -4091,7 +4091,7 @@ class AiReviewPornTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Porn information detection template ID.
+         * ID of the template for recognition of pornographic content
          * @type {number || null}
          */
         this.Definition = null;
@@ -4137,7 +4137,7 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.MediaProcessTask = null;
 
         /**
-         * Parameter of AI-based content audit task.
+         * Intelligent recognition task
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
@@ -4221,13 +4221,14 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * This API is used to query video processing task types. Valid values:
-<li>Transcoding: basic transcoding</li>
-<li>Transcoding-TESHD: TESHD transcoding</li>
-<li>Editing: video editing</li>
-<li>AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
-<li>ContentAudit: content moderation</li>
-<li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing. This value is not recommended.</li>
+         * Type of media processing task. Valid values:
+<li>`Transcoding`: basic transcoding</li>
+<li>`Transcoding-TESHD`: TESHD transcoding</li>
+<li>`Editing`: video editing</li>
+<li>`AdaptiveBitrateStreaming`: adaptive bitrate streaming</li>
+<li>`ContentAudit`: content moderation</li>
+<li>`RemoveWatermark`: watermark removal</li>
+<li>`Transcode`: transcoding, including basic transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -5059,7 +5060,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of custom speech audit task
+ * Parameters for custom ASR-based recognition
  * @class
  */
 class UserDefineAsrTextReviewTemplateInfo extends  AbstractModel {
@@ -5067,28 +5068,28 @@ class UserDefineAsrTextReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of custom speech audit task. Valid values:
-<li>ON: enables custom speech audit task;</li>
-<li>OFF: disables custom speech audit task.</li>
+         * Whether to enable custom ASR-based recognition. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Filter labels for custom ASR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom ASR-based recognition.
+Up to 10 labels are allowed, each containing no more than 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -5704,7 +5705,7 @@ class EditMediaResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of politically sensitive information detection in text task.
+ * Parameters for OCR-based recognition of politically sensitive content
  * @class
  */
 class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -5712,21 +5713,21 @@ class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of politically sensitive information detection in text task. Valid values:
-<li>ON: enables politically sensitive information detection in text task;</li>
-<li>OFF: disables politically sensitive information detection in text task.</li>
+         * Whether to enable OCR-based recognition of politically sensitive content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -6136,7 +6137,7 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of porn detection in speech task.
+ * Parameters for ASR-based recognition of pornographic content
  * @class
  */
 class PornAsrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -6144,21 +6145,21 @@ class PornAsrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of porn detection in speech task. Valid values:
-<li>ON: enables porn detection in speech task;</li>
-<li>OFF: disables porn detection in speech task.</li>
+         * Whether to enable ASR-based recognition of pornographic content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -6463,7 +6464,7 @@ class AiRecognitionTaskAsrFullTextResultInput extends  AbstractModel {
 }
 
 /**
- * WeChat Mini Program audit information unit
+ *  
  * @class
  */
 class MediaMiniProgramReviewInfoItem extends  AbstractModel {
@@ -6544,13 +6545,14 @@ class TaskStatData extends  AbstractModel {
         super();
 
         /**
-         * Task type.
-<li>Transcoding: basic transcoding</li>
-<li>Transcoding-TESHD: TESHD transcoding</li>
-<li>Editing: video editing</li>
-<li>AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
-<li>ContentAudit: content moderation</li>
-<li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing. This value is not recommended.</li>
+         * Task type
+<li>`Transcoding`: basic transcoding</li>
+<li>`Transcoding-TESHD`: TESHD transcoding</li>
+<li>`Editing`: video editing</li>
+<li>`AdaptiveBitrateStreaming`: adaptive bitrate streaming</li>
+<li>`ContentAudit`: content moderation</li>
+<li>`RemoveWatermark`: watermark removal</li>
+<li>`Transcode`: transcoding, including basic transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -6562,41 +6564,48 @@ class TaskStatData extends  AbstractModel {
         this.Summary = null;
 
         /**
-         * Detailed statistics of tasks with different specifications.
-Transcoding specification:
-<li>Remuxing: remuxing</li>
-<li>Audio: audio transcoding</li>
-<li>Standard.H264.SD: H.264 SD transcoding</li>
-<li>Standard.H264.HD: H.264 HD transcoding</li>
-<li>Standard.H264.FHD: H.264 FHD transcoding</li>
-<li>Standard.H264.2K: H.264 2K transcoding</li>
-<li>Standard.H264.4K: H.264 4K transcoding</li>
-<li>Standard.H265.SD: H.265 SD transcoding</li>
-<li>Standard.H265.HD: H.265 HD transcoding</li>
-<li>Standard.H265.FHD: H.265 FHD transcoding</li>
-<li>Standard.H265.2K: H.265 2K transcoding</li>
-<li>Standard.H265.4K: H.265 4K transcoding</li>
-<li>TESHD-10.H264.SD: H.264 SD TESHD transcoding</li>
-<li>TESHD-10.H264.HD: H.264 HD TESHD transcoding</li>
-<li>TESHD-10.H264.FHD: H.264 FHD TESHD transcoding</li>
-<li>TESHD-10.H264.2K: H.264 2K TESHD transcoding</li>
-<li>TESHD-10.H264.4K: H.264 4K TESHD transcoding</li>
-<li>TESHD-10.H265.SD: H.265 SD TESHD transcoding</li>
-<li>TESHD-10.H265.HD: H.265 HD TESHD transcoding</li>
-<li>TESHD-10.H265.FHD: H.265 FHD TESHD transcoding</li>
-<li>TESHD-10.H265.2K: H.265 2K TESHD transcoding</li>
-<li>TESHD-10.H265.4K: H.265 4K TESHD transcoding</li>
-<li>Edit.Audio: audio editing</li>
-<li>Edit.H264.SD: H.264 SD video editing</li>
-<li>Edit.H264.HD: H.264 HD video editing</li>
-<li>Edit.H264.FHD: H.264 FHD video editing</li>
-<li>Edit.H264.2K: H.264 2K video editing</li>
-<li>Edit.H264.4K: H.264 4K video editing</li>
-<li>Edit.H265.SD: H.265 SD video editing</li>
-<li>Edit.H265.HD: H.265 HD video editing</li>
-<li>Edit.H265.FHD: H.265 FHD video editing</li>
-<li>Edit.H265.2K: H.265 2K video editing</li>
-<li>Edit.H265.4K: H.265 4K video editing</li>
+         * Detailed statistics of different tasks
+Transcoding statistics:
+<li>Remuxing</li>
+<li>Audio</li>
+<li>Standard.H264.SD</li>
+<li>Standard.H264.HD</li>
+<li>Standard.H264.FHD</li>
+<li>Standard.H264.2K</li>
+<li>Standard.H264.4K</li>
+<li>Standard.H265.SD</li>
+<li>Standard.H265.HD</li>
+<li>Standard.H265.FHD</li>
+<li>Standard.H265.2K</li>
+<li>Standard.H265.4K</li>
+<li>TESHD-10.H264.SD</li>
+<li>TESHD-10.H264.HD</li>
+<li>TESHD-10.H264.FHD</li>
+<li>TESHD-10.H264.2K</li>
+<li>TESHD-10.H264.4K</li>
+<li>TESHD-10.H265.SD</li>
+<li>TESHD-10.H265.HD</li>
+<li>TESHD-10.H265.FHD</li>
+<li>TESHD-10.H265.2K</li>
+<li>TESHD-10.H265.4K</li>
+<li>Edit.Audio</li>
+<li>Edit.H264.SD</li>
+<li>Edit.H264.HD</li>
+<li>Edit.H264.FHD</li>
+<li>Edit.H264.2K</li>
+<li>Edit.H264.4K</li>
+<li>Edit.H265.SD</li>
+<li>Edit.H265.HD</li>
+<li>Edit.H265.FHD</li>
+<li>Edit.H265.2K</li>
+<li>Edit.H265.4K</li>
+Watermark removal:
+<li>`480P`: 640 × 480 and below</li>
+<li>`720P`: 1280 × 720 and below</li>
+<li>`1080P`: 1920 × 1080 and below</li>
+<li>`2K`: 2560 × 1440 and below</li>
+<li>`4K`: 3840 × 2160 and below</li>
+<li>`8K`: 7680 × 4320 and below</li>
          * @type {Array.<SpecificationDataItem> || null}
          */
         this.Details = null;
@@ -7174,7 +7183,7 @@ class CreateWordSamplesRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of politically sensitive information detection in speech task.
+ * Parameters for ASR-based recognition of politically sensitive content
  * @class
  */
 class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -7182,21 +7191,21 @@ class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of politically sensitive information detection in speech task. Valid values:
-<li>ON: enables politically sensitive information detection in speech task;</li>
-<li>OFF: disables politically sensitive information detection in speech task.</li>
+         * Whether to enable ASR-based recognition of politically sensitive content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -7359,7 +7368,7 @@ This configuration item is used to describe the cycle configuration of a single 
 }
 
 /**
- * Result type of OCR-based terrorism information detection in text task in content audit
+ * Result for OCR-based recognition of terrorism content
  * @class
  */
 class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
@@ -7391,14 +7400,14 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of OCR-based terrorism information detection in text task in content audit.
+         * Input for OCR-based recognition of terrorism content
          * @type {AiReviewTerrorismOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of OCR-based terrorism information detection in text task in content audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for OCR-based recognition of terrorism content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTerrorismOcrTaskOutput || null}
          */
         this.Output = null;
@@ -7507,7 +7516,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of porn information detection in speech task
+ * Parameters for ASR-based recognition of pornographic content
  * @class
  */
 class PornAsrReviewTemplateInfo extends  AbstractModel {
@@ -7515,21 +7524,21 @@ class PornAsrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of porn information detection in speech task. Valid values:
-<li>ON: enables porn information detection in speech task;</li>
-<li>OFF: disables porn information detection in speech task.</li>
+         * Whether to enable ASR-based recognition of pornographic content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -7703,13 +7712,13 @@ class ProhibitedAsrReviewTemplateInfoForUpdate extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -8066,7 +8075,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * ASR-detected porn information in speech
+ * Output for ASR-based recognition of pornographic content
  * @class
  */
 class AiReviewPornAsrTaskOutput extends  AbstractModel {
@@ -8074,35 +8083,35 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of ASR-detected porn information in speech between 0 and 100.
+         * Confidence score for the ASR-detected pornographic content
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for ASR-detected porn information in speech. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * Processing suggestion for the ASR-detected pornographic content
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain ASR-detected porn information
+         * List of video segments that contain ASR-detected pornographic content
 <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * URL to the file for video segments that contain ASR-detected porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * URL to the file for video segments that contain ASR-detected pornographic content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
          * @type {string || null}
          */
         this.SegmentSetFileUrl = null;
 
         /**
-         * Expiration time of the URL to the file for video segments that contain ASR-detected porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * Expiration time of the URL to the file for video segments that contain ASR-detected pornographic content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
          * @type {string || null}
          */
         this.SegmentSetFileUrlExpireTime = null;
@@ -8610,7 +8619,7 @@ class DescribeAdaptiveDynamicStreamingTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * WeChat Mini Program audit information
+ *  
  * @class
  */
 class MediaMiniProgramReviewInfo extends  AbstractModel {
@@ -9776,7 +9785,7 @@ When this parameter is set to 0 or left empty, `Gop` will be automatically set.
 }
 
 /**
- * Control parameter of politically sensitive information detection in text task
+ * Parameters for OCR-based recognition of politically sensitive content
  * @class
  */
 class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
@@ -9784,21 +9793,21 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of politically sensitive information detection in text task. Valid values:
-<li>ON: enables politically sensitive information detection in text task;</li>
-<li>OFF: disables politically sensitive information detection in text task.</li>
+         * Whether to enable OCR-based recognition of politically sensitive content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -9820,7 +9829,7 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Control parameter of porn detection in text task.
+ * Parameters for OCR-based recognition of pornographic content
  * @class
  */
 class PornOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -9828,9 +9837,9 @@ class PornOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of porn detection in text task. Valid values:
-<li>ON: enables porn detection in text task;</li>
-<li>OFF: disables porn detection in text task.</li>
+         * Whether to enable OCR-based recognition of pornographic content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -9864,7 +9873,7 @@ class PornOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Result type of OCR-based porn information detection in text task in content audit
+ * Result for OCR-based recognition of pornographic content
  * @class
  */
 class AiReviewTaskPornOcrResult extends  AbstractModel {
@@ -9897,14 +9906,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input of OCR-based porn information detection in text task in content audit.
+         * Input for OCR-based recognition of pornographic content
          * @type {AiReviewPornOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of OCR-based porn information detection in text task in content audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for OCR-based recognition of pornographic content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewPornOcrTaskOutput || null}
          */
         this.Output = null;
@@ -10119,7 +10128,7 @@ class SegmentConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Control parameter of custom audit task
+ * Parameters for custom recognition
  * @class
  */
 class UserDefineConfigureInfo extends  AbstractModel {
@@ -10127,22 +10136,22 @@ class UserDefineConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of custom figure audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for custom facial recognition
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {UserDefineFaceReviewTemplateInfo || null}
          */
         this.FaceReviewInfo = null;
 
         /**
-         * Control parameter of custom speech audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for custom ASR-based recognition
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {UserDefineAsrTextReviewTemplateInfo || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * Control parameter of custom text audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for custom OCR-based recognition
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {UserDefineOcrTextReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -10322,7 +10331,7 @@ class RestoreMediaTask extends  AbstractModel {
 }
 
 /**
- * Input parameter type of OCR-based porn information detection in text task in content audit
+ * Input parameters for OCR-based recognition of pornographic content
  * @class
  */
 class AiReviewPornOcrTaskInput extends  AbstractModel {
@@ -10330,7 +10339,7 @@ class AiReviewPornOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Porn information detection template ID.
+         * ID of the template for recognition of pornographic content
          * @type {number || null}
          */
         this.Definition = null;
@@ -11258,7 +11267,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.MediaProcessTask = null;
 
         /**
-         * Type parameter of video content audit task.
+         * Parameters for intelligent recognition
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
@@ -12936,7 +12945,7 @@ Default value: open.
 }
 
 /**
- * Control parameter of terrorism information detection in text task
+ * Parameters for OCR-based recognition of terrorism content
  * @class
  */
 class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -12944,21 +12953,21 @@ class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of terrorism information detection in text task. Valid values:
-<li>ON: enables terrorism information detection in text task;</li>
-<li>OFF: disables terrorism information detection in text task.</li>
+         * Whether to enable OCR-based recognition of terrorism content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -12980,7 +12989,7 @@ class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Control parameter of custom speech audit task
+ * Parameters for custom ASR-based recognition
  * @class
  */
 class UserDefineAsrTextReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -12988,28 +12997,28 @@ class UserDefineAsrTextReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of custom speech audit task. Valid values:
-<li>ON: enables custom speech audit task;</li>
-<li>OFF: disables custom speech audit task.</li>
+         * Whether to enable custom ASR-based recognition. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Filter labels for custom ASR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom ASR-based recognition.
+Up to 10 labels are allowed, each containing no more than 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -13303,7 +13312,7 @@ Default value: 0 px.
 }
 
 /**
- * Control parameter of terrorism information detection task.
+ * Parameters for recognition of terrorism content
  * @class
  */
 class TerrorismConfigureInfoForUpdate extends  AbstractModel {
@@ -13311,13 +13320,13 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of terrorism information detection in video image task.
+         * Parameters for recognition of terrorism content in images
          * @type {TerrorismImgReviewTemplateInfoForUpdate || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of terrorism information detection in text task.
+         * Parameters for OCR-based recognition of terrorism content
          * @type {TerrorismOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -14837,7 +14846,7 @@ class DrmStreamingsInfo extends  AbstractModel {
 }
 
 /**
- * OCR-detected terrorism information in text
+ * Output for OCR-based recognition of terrorism content
  * @class
  */
 class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
@@ -14845,35 +14854,35 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of OCR-detected terrorism information in text between 0 and 100.
+         * Confidence score for the OCR-detected terrorism content. Value range: 0-100
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for OCR-detected terrorism information in text. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * Processing suggestion for the OCR-detected terrorism content
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain OCR-detected terrorism information
+         * List of video segments that contain OCR-detected terrorism content
 <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * URL to the file for video segments that contain OCR-detected terrorism information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * URL to the file for video segments that contain OCR-detected terrorism content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
          * @type {string || null}
          */
         this.SegmentSetFileUrl = null;
 
         /**
-         * Expiration time of the URL to the file for video segments that contain OCR-detected terrorism information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * Expiration time of the URL to the file for video segments that contain OCR-detected terrorism content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
          * @type {string || null}
          */
         this.SegmentSetFileUrlExpireTime = null;
@@ -15666,8 +15675,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MediaProcessTask = null;
 
         /**
-         * Parameter of AI-based content audit task.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Intelligent recognition task
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
@@ -15754,7 +15763,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Result type of terrorism information detection task in content audit
+ * Result for intelligent recognition of terrorism content
  * @class
  */
 class AiReviewTaskTerrorismResult extends  AbstractModel {
@@ -15787,14 +15796,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input of terrorism information detection task in content audit.
+         * Input for intelligent recognition of terrorism content
          * @type {AiReviewTerrorismTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of terrorism information detection task in content audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for intelligent recognition of terrorism content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTerrorismTaskOutput || null}
          */
         this.Output = null;
@@ -15864,7 +15873,7 @@ class ProcessMediaByUrlResponse extends  AbstractModel {
 }
 
 /**
- * Suspected segment identified during ASR-based speech audit in content audit
+ * Video segment containing ASR-detected suspicious content
  * @class
  */
 class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
@@ -15893,11 +15902,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Confidence = null;
 
         /**
-         * Suggestion for suspected segment audit. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Processing suggestion for the detected suspicious content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -15996,7 +16004,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Suspected politically sensitive segment identified in content audit
+ * Video segment containing detected politically sensitive content
  * @class
  */
 class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
@@ -16016,51 +16024,51 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * Score of a suspected politically sensitive segment.
+         * Confidence score for the detected politically sensitive content
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for politically sensitive information detection of a suspected segment. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * Processing suggestion for the detected politically sensitive content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * Name of a politically sensitive figure or violating photo.
+         * Name of the politically sensitive content or banned images
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+         * Labels for the detected politically sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
 violation_photo:
-<li>violation_photo: violating photo.</li>
+<li>`violation_photo`: banned images</li>
 politician:
-<li>nation_politician: head of state/government;</li>
-<li>province_politician: province/state leader;</li>
-<li>bureau_politician: ministry leader;</li>
-<li>county_politician: county/city leader;</li>
-<li>rural_politician: town leader;</li>
-<li>sensitive_politician: politically sensitive figure;</li>
-<li>foreign_politician: head of a foreign country/government.</li>
+<li>`nation_politician`: state leader of China</li>
+<li>`province_politician`: provincial officials</li>
+<li>`bureau_politician`: bureau-level officials</li>
+<li>`county_politician`: county-level officials</li>
+<li>`rural_politician`: township-level officials</li>
+<li>`sensitive_politician`: politically sensitive people</li>
+<li>`foreign_politician`: state leaders of other countries</li>
 entertainment:
-<li>sensitive_entertainment: sensitive entertainment celebrity.</li>
+<li>`sensitive_entertainment`: banned people in the entertainment industry</li>
 sport:
-<li>sensitive_sport: sensitive sports figure.</li>
+<li>`sensitive_sport`: banned sports celebrities</li>
 entrepreneur:
-<li>sensitive_entrepreneur: sensitive business figure.</li>
+<li>`sensitive_entrepreneur`: banned businesspeople</li>
 scholar:
-<li>sensitive_scholar: sensitive educator.</li>
+<li>sensitive_scholar: banned scholars</li>
 celebrity:
-<li>sensitive_celebrity: sensitive well-known figure;</li>
-<li>historical_celebrity: well-known historical figures.</li>
+<li>sensitive_celebrity: banned celebrities</li>
+<li>historical_celebrity: banned historical figures</li>
 military:
-<li>sensitive_military: militarily sensitive figure.</li>
+<li>sensitive_military: banned people in military</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -16073,7 +16081,7 @@ military:
         this.Url = null;
 
         /**
-         * Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
+         * Coordinates (pixel) of the detected politically sensitive content or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -16332,7 +16340,7 @@ class AttachMediaSubtitlesResponse extends  AbstractModel {
 }
 
 /**
- * Task type of intelligent content audit
+ * Type of intelligent recognition task
  * @class
  */
 class AiContentReviewTaskInput extends  AbstractModel {
@@ -16340,7 +16348,7 @@ class AiContentReviewTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Video content audit template ID.
+         * Intelligent recognition template ID
          * @type {number || null}
          */
         this.Definition = null;
@@ -16857,7 +16865,7 @@ class ParseStreamingManifestResponse extends  AbstractModel {
 }
 
 /**
- * OCR-detected porn information in text
+ * Output for OCR-based recognition of pornographic content
  * @class
  */
 class AiReviewPornOcrTaskOutput extends  AbstractModel {
@@ -16865,35 +16873,35 @@ class AiReviewPornOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of OCR-detected porn information in text between 0 and 100.
+         * Confidence score for the OCR-detected pornographic content
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for OCR-detected porn information in text. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * Processing suggestion for the OCR-detected pornographic content
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain OCR-detected porn information
+         * List of video segments that contain OCR-detected pornographic content
 <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * URL to the file for video segments that contain OCR-detected porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * URL to the file for video segments that contain OCR-detected pornographic content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
          * @type {string || null}
          */
         this.SegmentSetFileUrl = null;
 
         /**
-         * Expiration time of the URL to the file for video segments that contain OCR-detected porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * Expiration time of the URL to the file for video segments that contain OCR-detected pornographic content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
          * @type {string || null}
          */
         this.SegmentSetFileUrlExpireTime = null;
@@ -17289,7 +17297,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Input parameter type of ASR-based politically sensitive information detection in speech task in content audit
+ * Input parameters for ASR-based recognition of politically sensitive content
  * @class
  */
 class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
@@ -17297,7 +17305,7 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Politically sensitive information detection template ID.
+         * ID of the template for recognition of politically sensitive content
          * @type {number || null}
          */
         this.Definition = null;
@@ -17717,7 +17725,7 @@ When the value of this field is 1, the total usage of all subapplications (inclu
 }
 
 /**
- * Control parameter of porn information detection in text task
+ * Parameters for OCR-based recognition of pornographic content
  * @class
  */
 class PornOcrReviewTemplateInfo extends  AbstractModel {
@@ -17725,21 +17733,21 @@ class PornOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of porn information detection in text task. Valid values:
-<li>ON: enables porn information detection in text task;</li>
-<li>OFF: disables porn information detection in text task.</li>
+         * Whether to enable OCR-based recognition of pornographic content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -17761,7 +17769,7 @@ class PornOcrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Result type of ASR-based politically sensitive information detection in speech task in content audit
+ * Result for ASR-based recognition of politically sensitive content
  * @class
  */
 class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
@@ -17794,13 +17802,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input of ASR-based politically sensitive information detection in speech task in content audit.
+         * Input for ASR-based recognition of politically sensitive content
          * @type {AiReviewPoliticalAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of ASR-based politically sensitive information detection in speech task in content audit.
+         * Output for ASR-based recognition of politically sensitive content
          * @type {AiReviewPoliticalAsrTaskOutput || null}
          */
         this.Output = null;
@@ -17877,7 +17885,7 @@ class DescribeReviewDetailsRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of porn detection task.
+ * Parameters for recognition of pornographic content
  * @class
  */
 class PornConfigureInfoForUpdate extends  AbstractModel {
@@ -17885,19 +17893,19 @@ class PornConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of porn detection in video image.
+         * Parameters for recognition of pornographic content in images
          * @type {PornImgReviewTemplateInfoForUpdate || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of porn detection in speech.
+         * Parameters for ASR-based recognition of pornographic content
          * @type {PornAsrReviewTemplateInfoForUpdate || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * Control parameter of porn detection in text.
+         * Parameters for OCR-based recognition of pornographic content
          * @type {PornOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -17934,7 +17942,7 @@ class PornConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Input parameter type of ASR-based prohibited information detection in speech task in content audit
+ * Input parameters for ASR-based recognition of banned content
  * @class
  */
 class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
@@ -17962,7 +17970,7 @@ class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * Suspected porn/terrorism segment identified in content audit
+ * Video segment containing detected pornographic or terrorism content
  * @class
  */
 class MediaContentReviewSegmentItem extends  AbstractModel {
@@ -17982,22 +17990,22 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * Score of a suspected porn segment.
+         * Confidence score for the detected pornographic content
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Tag of porn information detection result of a suspected segment.
+         * Label for the detected pornographic content
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * Suggestion for porn information detection of a suspected segment. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * Processing suggestion for the detected pornographic content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -18043,7 +18051,7 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
 }
 
 /**
- * Control parameter of terrorism information detection in text task
+ * Parameters for OCR-based recognition of terrorism content
  * @class
  */
 class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
@@ -18051,21 +18059,21 @@ class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of terrorism information detection in text task. Valid values:
-<li>ON: enables terrorism information detection in text task;</li>
-<li>OFF: disables terrorism information detection in text task.</li>
+         * Whether to enable OCR-based recognition of terrorism content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -18087,7 +18095,7 @@ class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Result type of porn information detection task in content audit
+ * Result for intelligent recognition of pornographic content
  * @class
  */
 class AiReviewTaskPornResult extends  AbstractModel {
@@ -18120,14 +18128,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input of porn information detection task in content audit.
+         * Input for intelligent recognition of pornographic content
          * @type {AiReviewPornTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of porn information detection task in content audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for intelligent recognition of pornographic content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewPornTaskOutput || null}
          */
         this.Output = null;
@@ -18506,7 +18514,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of politically sensitive information detection in video image task.
+ * Parameters for recognition of politically sensitive content in images
  * @class
  */
 class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -18514,35 +18522,35 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of politically sensitive information detection in video image task. Valid values:
-<li>ON: enables politically sensitive information detection in video image task;</li>
-<li>OFF: disables politically sensitive information detection in video image task.</li>
+         * Whether to enable recognition of politically sensitive content in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>violation_photo: violating photo;</li>
-<li>politician: political figure;</li>
-<li>entertainment: entertainment celebrity;</li>
-<li>sport: sports figure;</li>
-<li>entrepreneur: business figure;</li>
-<li>scholar: educator;</li>
-<li>celebrity: well-known figure;</li>
-<li>military: military figure.</li>
+         * Filter labels for recognition of politically sensitive content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
+<li>`violation_photo`: banned images</li>
+<li>`politician`: politically sensitive people</li>
+<li>`entertainment`: people in the entertainment industry</li>
+<li>`sport`: sportspeople</li>
+<li>`entrepreneur`: businesspeople</li>
+<li>`scholar`: scholars</li>
+<li>`celebrity`: celebrities</li>
+<li>`military`: people in military</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -18565,7 +18573,7 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Control parameter of custom text audit task
+ * Parameters for custom OCR-based recognition
  * @class
  */
 class UserDefineOcrTextReviewTemplateInfo extends  AbstractModel {
@@ -18573,28 +18581,28 @@ class UserDefineOcrTextReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of custom text audit task. Valid values:
-<li>ON: enables custom text audit task;</li>
-<li>OFF: disables custom text audit task.</li>
+         * Whether to enable custom OCR-based recognition. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Filter labels for custom OCR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom OCR-based recognition.
+Up to 10 labels are allowed, each containing no more than 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -19461,13 +19469,13 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -19864,7 +19872,7 @@ class HighlightsConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Control parameter of custom audit task.
+ * Parameters for custom recognition
  * @class
  */
 class UserDefineConfigureInfoForUpdate extends  AbstractModel {
@@ -19872,19 +19880,19 @@ class UserDefineConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of custom figure audit.
+         * Parameters for custom facial recognition
          * @type {UserDefineFaceReviewTemplateInfoForUpdate || null}
          */
         this.FaceReviewInfo = null;
 
         /**
-         * Control parameter of custom speech audit.
+         * Parameters for custom ASR-based recognition
          * @type {UserDefineAsrTextReviewTemplateInfoForUpdate || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * Control parameter of custom text audit.
+         * Parameters for custom OCR-based recognition
          * @type {UserDefineOcrTextReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -19921,7 +19929,7 @@ class UserDefineConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * ASR-detected politically sensitive information in speech
+ * Output for ASR-based recognition of politically sensitive content
  * @class
  */
 class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
@@ -19929,35 +19937,35 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of ASR-detected politically sensitive information in speech between 0 and 100.
+         * Confidence score for the ASR-detected politically sensitive content. Value range: 0-100
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for ASR-detected politically sensitive information in speech. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * Processing suggestion for the ASR-detected politically sensitive content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain ASR-detected politically sensitive information
+         * List of video segments that contain ASR-detected politically sensitive content
 <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * URL to the file for video segments that contain ASR-detected politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * URL to the file for video segments that contain ASR-detected politically sensitive content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
          * @type {string || null}
          */
         this.SegmentSetFileUrl = null;
 
         /**
-         * Expiration time of the URL to the file for video segments that contain ASR-detected politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * Expiration time of the URL to the file for video segments that contain ASR-detected politically sensitive content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
          * @type {string || null}
          */
         this.SegmentSetFileUrlExpireTime = null;
@@ -20725,7 +20733,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Result information of porn information detection
+ * Output for intelligent recognition of pornographic content
  * @class
  */
 class AiReviewPornTaskOutput extends  AbstractModel {
@@ -20733,48 +20741,45 @@ class AiReviewPornTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of detected porn information in video between 0 and 100.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Confidence score for the detected pornographic content. Value range: 0-100
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for detected porn information. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Processing suggestion for the detected pornographic content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * Tag of detected porn information in video. Valid values:
-<li>porn: porn.</li>
-<li>sexy: sexiness.</li>
-<li>vulgar: vulgarity.</li>
-<li>intimacy: intimacy.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Labels for the detected pornographic content. Valid values:
+<li>porn</li>
+<li>sexy</li>
+<li>vulgar</li>
+<li>intimacy</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * List of video segments that contain porn information
+         * List of video segments that contain detected pornographic content
 <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * URL to the file for video segments that contain porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * URL to the file for video segments that contain detected pornographic content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
          * @type {string || null}
          */
         this.SegmentSetFileUrl = null;
 
         /**
-         * Expiration time of the URL to the file of for video segments that contain porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * Expiration time of the URL to the file for video segments that contain detected pornographic content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
          * @type {string || null}
          */
         this.SegmentSetFileUrlExpireTime = null;
@@ -20909,7 +20914,7 @@ class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of politically sensitive information detection in video image task
+ * Parameters for recognition of politically sensitive content in images
  * @class
  */
 class PoliticalImgReviewTemplateInfo extends  AbstractModel {
@@ -20917,35 +20922,35 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of politically sensitive information detection in video image task. Valid values:
-<li>ON: enables politically sensitive information detection in video image task;</li>
-<li>OFF: disables politically sensitive information detection in video image task.</li>
+         * Whether to enable recognition of politically sensitive content in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>violation_photo: violating photo;</li>
-<li>politician: political figure;</li>
-<li>entertainment: entertainment celebrity;</li>
-<li>sport: sports figure;</li>
-<li>entrepreneur: business figure;</li>
-<li>scholar: educator;</li>
-<li>celebrity: well-known figure;</li>
-<li>military: military figure.</li>
+         * Filter labels for recognition of politically sensitive content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
+<li>`violation_photo`: banned images</li>
+<li>`politician`: politically sensitive people</li>
+<li>`entertainment`: people in the entertainment industry</li>
+<li>`sport`: sportspeople</li>
+<li>`entrepreneur`: businesspeople</li>
+<li>`scholar`: scholars</li>
+<li>`celebrity`: celebrities</li>
+<li>`military`: people in military</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `97` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `95` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -20968,7 +20973,7 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Control parameter of politically sensitive information detection task
+ * Parameters for recognition of politically sensitive content
  * @class
  */
 class PoliticalConfigureInfo extends  AbstractModel {
@@ -20976,22 +20981,22 @@ class PoliticalConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of politically sensitive information detection in video image.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for recognition of politically sensitive content in images
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {PoliticalImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of politically sensitive information detection in speech.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for ASR-based recognition of politically sensitive content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {PoliticalAsrReviewTemplateInfo || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * Control parameter of politically sensitive information detection in text.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for OCR-based recognition of politically sensitive content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {PoliticalOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -21428,6 +21433,15 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * File size (bytes)
+<li>If the file is an HLS file, the value of this parameter is the sum of the size of the M3U8 and TS files.</li>
+<li>If the file is a DASH file, the value of this parameter is the sum of the size of the MPD and segment files.</li>
+<li><font color=red>Note</font>: For adaptive bitrate streaming files generated before 2022-01-10T16:00:00Z, the value of this parameter is `0`.</li>
+         * @type {number || null}
+         */
+        this.Size = null;
+
     }
 
     /**
@@ -21441,6 +21455,7 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         this.Package = 'Package' in params ? params.Package : null;
         this.DrmType = 'DrmType' in params ? params.DrmType : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
@@ -21462,13 +21477,13 @@ class ProhibitedOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -22726,7 +22741,7 @@ class AiSampleFailFaceInfo extends  AbstractModel {
 }
 
 /**
- * Control parameter of custom figure audit task.
+ * Parameters for custom facial recognition
  * @class
  */
 class UserDefineFaceReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -22734,28 +22749,28 @@ class UserDefineFaceReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of custom figure audit task. Valid values:
-<li>ON: enables custom figure audit task;</li>
-<li>OFF: disables custom figure audit task.</li>
+         * Whether to enable custom facial recognition. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
-There can be up to 10 tags, each with a length limit of 16 characters.
+         * Filter labels for custom facial recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding custom facial libraries.
+Up to 10 labels are allowed, each containing no more than 16 characters.
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -23233,7 +23248,7 @@ class AiRecognitionTaskFaceResultInput extends  AbstractModel {
 }
 
 /**
- * Politically sensitive information
+ * Output for intelligent recognition of politically sensitive content
  * @class
  */
 class AiReviewPoliticalTaskOutput extends  AbstractModel {
@@ -23241,47 +23256,45 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of detected politically sensitive information in video between 0 and 100.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Confidence score for the detected politically sensitive content. Value range: 0-100
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for detected politically sensitive information. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Processing suggestion for the detected politically sensitive content
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+         * Labels for the detected politically sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
 violation_photo:
-<li>violation_photo: violating photo.</li>
+<li>`violation_photo`: banned images</li>
 Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
-<li>politician: political figure.</li>
+<li>`politician`: politically sensitive people</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * List of video segments that contain politically sensitive information
+         * List of video segments that contain detected politically sensitive content
 <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewPoliticalSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * URL to the file for video segments that contain politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * URL to the file for video segments that contain detected politically sensitive content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
          * @type {string || null}
          */
         this.SegmentSetFileUrl = null;
 
         /**
-         * Expiration time of the URL to the file for video segments that contain politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * Expiration time of the URL to the file for video segments that contain politically sensitive content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
          * @type {string || null}
          */
         this.SegmentSetFileUrlExpireTime = null;
@@ -23314,7 +23327,7 @@ Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/mili
 }
 
 /**
- * Result type of politically sensitive information detection task in content audit
+ * Result for intelligent recognition of politically sensitive content
  * @class
  */
 class AiReviewTaskPoliticalResult extends  AbstractModel {
@@ -23347,14 +23360,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input of politically sensitive information detection task in content audit.
+         * Input for intelligent recognition of politically sensitive content
          * @type {AiReviewPoliticalTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of politically sensitive information detection task in content audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for intelligent recognition of politically sensitive content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewPoliticalTaskOutput || null}
          */
         this.Output = null;
@@ -23566,8 +23579,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MediaProcessResultSet = null;
 
         /**
-         * Execution status and result of video content audit task.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Status and result of an intelligent recognition task
          * @type {Array.<AiContentReviewResult> || null}
          */
         this.AiContentReviewResultSet = null;
@@ -24159,13 +24171,13 @@ class ProhibitedOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -24600,7 +24612,7 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Input parameter type of terrorism information detection task in content audit
+ * Input parameters for intelligent recognition of terrorism content
  * @class
  */
 class AiReviewTerrorismTaskInput extends  AbstractModel {
@@ -24608,7 +24620,7 @@ class AiReviewTerrorismTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Terrorism information detection template ID.
+         * ID of the template for recognition of terrorism content
          * @type {number || null}
          */
         this.Definition = null;
@@ -24929,7 +24941,7 @@ Default value: black.
 }
 
 /**
- * Input parameter type of OCR-based prohibited information detection in text task in content audit
+ * Input parameters for OCR-based recognition of banned content
  * @class
  */
 class AiReviewProhibitedOcrTaskInput extends  AbstractModel {
@@ -25437,7 +25449,7 @@ class ModifyWordSampleResponse extends  AbstractModel {
 }
 
 /**
- * Content audit result
+ * Intelligent recognition result
  * @class
  */
 class AiContentReviewResult extends  AbstractModel {
@@ -25446,89 +25458,89 @@ class AiContentReviewResult extends  AbstractModel {
 
         /**
          * Task type. Valid values:
-<li>`Porn`: porn information recognition in images</li>
-<li>`Terrorism`: terrorism information recognition in images</li>
-<li>`Political`: politically sensitive information recognition in images</li>
-<li>`Porn.Asr`: ASR-based porn information recognition in speech</li>
-<li>`Porn.Ocr`: OCR-based porn information recognition in text</li>
-<li>`Political.Asr`: ASR-based politically sensitive information recognition in speech</li>
-<li>`Political.Ocr`: OCR-based politically sensitive information recognition in text</li>
-<li>`Terrorism.Ocr`: OCR-based terrorism information recognition in text</li>
-<li>`Prohibited.Asr`: ASR-based prohibited information recognition in speech</li>
-<li>`Prohibited.Ocr`: OCR-based prohibited information recognition in text</li>
+<li>`Porn`: recognition of pornographic content in images</li>
+<li>`Terrorism`: recognition of terrorism content in images</li>
+<li>`Political`: recognition of politically sensitive content in images</li>
+<li>`Porn.Asr`: ASR-based recognition of pornographic content</li>
+<li>`Porn.Ocr`: OCR-based recognition of pornographic content</li>
+<li>`Political.Asr`: ASR-based recognition of politically sensitive content</li>
+<li>`Political.Ocr`: OCR-based recognition of politically sensitive content</li>
+<li>`Terrorism.Ocr`: OCR-based recognition of terrorism content</li>
+<li>`Prohibited.Asr`: ASR-based recognition of banned content</li>
+<li>`Prohibited.Ocr`: OCR-based recognition of banned content</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Query result of intelligent porn information detection in video image task in video content audit, which is valid when task type is `Porn`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for intelligent recognition of pornographic content in images. This parameter is valid when `Type` is `Porn`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskPornResult || null}
          */
         this.PornTask = null;
 
         /**
-         * Query result of intelligent terrorism information detection in video image task in video content audit, which is valid when task type is `Terrorism`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for intelligent recognition of terrorism content in images. This parameter is valid when `Type` is `Terrorism`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskTerrorismResult || null}
          */
         this.TerrorismTask = null;
 
         /**
-         * Query result of intelligent politically sensitive information detection in video image task in video content audit, which is valid when task type is `Political`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for intelligent recognition of politically sensitive content in images. This parameter is valid when `Type` is `Political`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskPoliticalResult || null}
          */
         this.PoliticalTask = null;
 
         /**
-         * Query result of ASR-based porn information detection in speech task in video content audit, which is valid when task type is `Porn.Asr`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for ASR-based recognition of pornographic content. This parameter is valid when `Type` is `Porn.Asr`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskPornAsrResult || null}
          */
         this.PornAsrTask = null;
 
         /**
-         * Query result of OCR-based porn information detection in text task in video content audit, which is valid when task type is `Porn.Ocr`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for OCR-based recognition of pornographic content. This parameter is valid when `Type` is `Porn.Ocr`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskPornOcrResult || null}
          */
         this.PornOcrTask = null;
 
         /**
-         * Query result of ASR-based politically sensitive information detection in speech task in video content audit, which is valid when task type is `Political.Asr`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for ASR-based recognition of politically sensitive content. This parameter is valid when `Type` is `Political.Asr`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskPoliticalAsrResult || null}
          */
         this.PoliticalAsrTask = null;
 
         /**
-         * Query result of OCR-based politically sensitive information detection in text task in video content audit, which is valid when task type is `Political.Ocr`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for OCR-based recognition of politically sensitive content. This parameter is valid when `Type` is `Political.Ocr`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskPoliticalOcrResult || null}
          */
         this.PoliticalOcrTask = null;
 
         /**
-         * Query result of OCR-based terrorism information detection in text task in video content audit, which is valid when task type is `Terrorism.Ocr`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for OCR-based recognition of terrorism content. This parameter is valid when `Type` is `Terrorism.Ocr`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskTerrorismOcrResult || null}
          */
         this.TerrorismOcrTask = null;
 
         /**
-         * Query result of ASR-based prohibited information detection in speech task in video content audit, which is valid when task type is `Prohibited.Asr`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiReviewTaskProhibitedAsrResult || null}
-         */
-        this.ProhibitedAsrTask = null;
-
-        /**
-         * Query result of OCR-based prohibited information detection in text task in video content audit, which is valid when task type is `Prohibited.Ocr`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result for OCR-based recognition of banned content. This parameter is valid when `Type` is `Prohibited.Ocr`.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewTaskProhibitedOcrResult || null}
          */
         this.ProhibitedOcrTask = null;
+
+        /**
+         * Result for ASR-based recognition of banned content. This parameter is valid when `Type` is `Prohibited.Asr`.
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {AiReviewTaskProhibitedAsrResult || null}
+         */
+        this.ProhibitedAsrTask = null;
 
     }
 
@@ -25589,23 +25601,23 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.TerrorismOcrTask = obj;
         }
 
-        if (params.ProhibitedAsrTask) {
-            let obj = new AiReviewTaskProhibitedAsrResult();
-            obj.deserialize(params.ProhibitedAsrTask)
-            this.ProhibitedAsrTask = obj;
-        }
-
         if (params.ProhibitedOcrTask) {
             let obj = new AiReviewTaskProhibitedOcrResult();
             obj.deserialize(params.ProhibitedOcrTask)
             this.ProhibitedOcrTask = obj;
         }
 
+        if (params.ProhibitedAsrTask) {
+            let obj = new AiReviewTaskProhibitedAsrResult();
+            obj.deserialize(params.ProhibitedAsrTask)
+            this.ProhibitedAsrTask = obj;
+        }
+
     }
 }
 
 /**
- * Control parameter of terrorism information detection in video image task
+ * Parameters for recognition of terrorism content in images
  * @class
  */
 class TerrorismImgReviewTemplateInfo extends  AbstractModel {
@@ -25613,19 +25625,19 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of terrorism information detection in video image task. Valid values:
-<li>ON: enables terrorism information detection in video image task;</li>
-<li>OFF: disables terrorism information detection in video image task.</li>
+         * Whether to enable recognition of terrorism content in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tags for terrorism information detection in images. If a moderation result contains a selected tag, it will be returned. If no filter tag is specified, all moderation results will be returned. Valid values:
+         * Filter labels for recognition of terrorism content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
 <li>`guns`: weapons and guns</li>
-<li>`crowd`: crowds</li>
-<li>`bloody`: bloody images</li>
-<li>`police`: police forces</li>
+<li>`crowd`: crowd</li>
+<li>`bloody`: bloody scenes</li>
+<li>`police`: police force</li>
 <li>`banners`: terrorism flags</li>
 <li>`militant`: militants</li>
 <li>`explosion`: explosions and fires</li>
@@ -25636,13 +25648,13 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `90` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 80 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `80` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -25804,7 +25816,7 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of politically sensitive information detection task.
+ * Parameters for recognition of politically sensitive content
  * @class
  */
 class PoliticalConfigureInfoForUpdate extends  AbstractModel {
@@ -25812,19 +25824,19 @@ class PoliticalConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of politically sensitive information detection in video image.
+         * Parameters for recognition of politically sensitive content in images
          * @type {PoliticalImgReviewTemplateInfoForUpdate || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of politically sensitive information detection in speech.
+         * Parameters for ASR-based recognition of politically sensitive content
          * @type {PoliticalAsrReviewTemplateInfoForUpdate || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * Control parameter of politically sensitive information detection in text.
+         * Parameters for OCR-based recognition of politically sensitive content
          * @type {PoliticalOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -26675,7 +26687,7 @@ class SplitMediaTaskInput extends  AbstractModel {
 }
 
 /**
- * Control parameter of porn information detection task
+ * Parameters for recognition of pornographic content
  * @class
  */
 class PornConfigureInfo extends  AbstractModel {
@@ -26683,22 +26695,22 @@ class PornConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of porn information detection in video image.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for recognition of pornographic content in images
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {PornImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of porn information detection in speech.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for ASR-based recognition of pornographic content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {PornAsrReviewTemplateInfo || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * Control parameter of porn information detection in text.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for OCR-based recognition of pornographic content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {PornOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -26841,10 +26853,10 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
         this.Score = null;
 
         /**
-         * Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
-<li>entertainment: entertainment celebrity;</li>
-<li>sport: sports celebrity;</li>
-<li>politician: politically sensitive figure.</li>
+         * Default face filter labels, which specify the types of faces to return. If this parameter is left empty or an empty value is entered, the recognition results for all labels are returned. Valid values:
+<li>`entertainment`: people in the entertainment industry</li>
+<li>`sport`: sports celebrities</li>
+<li>`politician`: politically sensitive people</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
@@ -27563,7 +27575,7 @@ Default value: black.
 }
 
 /**
- * Suspected segment identified during OCR-based text audit in content audit
+ * Video segment containing OCR-detected suspicious content
  * @class
  */
 class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
@@ -27592,11 +27604,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Confidence = null;
 
         /**
-         * Suggestion for suspected segment audit. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Processing suggestion for the detected suspicious content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -27692,7 +27703,7 @@ Default value: 0.
 }
 
 /**
- * Result type of ASR-based porn information detection in speech task in content audit
+ * Result for ASR-based recognition of pornographic content
  * @class
  */
 class AiReviewTaskPornAsrResult extends  AbstractModel {
@@ -27725,14 +27736,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input of ASR-based porn information detection in speech task in content audit.
+         * Input for ASR-based recognition of pornographic content
          * @type {AiReviewPornAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of ASR-based porn information detection in speech task in content audit.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Output for ASR-based recognition of pornographic content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {AiReviewPornAsrTaskOutput || null}
          */
         this.Output = null;
@@ -27931,10 +27942,10 @@ class FaceConfigureInfo extends  AbstractModel {
         this.Score = null;
 
         /**
-         * Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
-<li>entertainment: entertainment celebrity;</li>
-<li>sport: sports celebrity;</li>
-<li>politician: politically sensitive figure.</li>
+         * Default face filter labels, which specify the types of faces to return. If this parameter is left empty, the recognition results for all labels are returned. Valid values:
+<li>`entertainment`: people in the entertainment industry</li>
+<li>`sport`: sports celebrities</li>
+<li>`politician`: politically sensitive people</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
@@ -28026,7 +28037,7 @@ class AiRecognitionTaskFaceResultOutput extends  AbstractModel {
 }
 
 /**
- * Control parameter of porn detection in video image task.
+ * Parameters for recognition of pornographic content in images
  * @class
  */
 class PornImgReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -28034,31 +28045,31 @@ class PornImgReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of porn detection in video image task. Valid values:
-<li>ON: enables porn detection in video image task;</li>
-<li>OFF: disables porn detection in video image task.</li>
+         * Whether to enable recognition of pornographic content in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tag for porn detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>porn: porn;</li>
-<li>vulgar: vulgarity;</li>
-<li>intimacy: intimacy;</li>
-<li>sexy: sexiness.</li>
+         * Filter labels for recognition of pornographic content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
+<li>porn</li>
+<li>vulgar</li>
+<li>intimacy</li>
+<li>sexy</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -28214,7 +28225,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of porn information detection in video image task
+ * Parameters for recognition of pornographic content in images
  * @class
  */
 class PornImgReviewTemplateInfo extends  AbstractModel {
@@ -28222,31 +28233,31 @@ class PornImgReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of porn information detection in video image task. Valid values:
-<li>ON: enables porn information detection in video image task;</li>
-<li>OFF: disables porn information detection in video image task.</li>
+         * Whether to enable recognition of pornographic content in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tag for porn information detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>porn: porn;</li>
-<li>vulgar: vulgarity;</li>
-<li>intimacy: intimacy;</li>
-<li>sexy: sexiness.</li>
+         * Filter labels for recognition of pornographic content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
+<li>porn</li>
+<li>vulgar</li>
+<li>intimacy</li>
+<li>sexy</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `90` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.BlockConfidence = null;
 
         /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 0 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `0` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
@@ -28269,7 +28280,7 @@ class PornImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * OCR-detected politically sensitive information in text
+ * Output for OCR-based recognition of politically sensitive content
  * @class
  */
 class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
@@ -28277,35 +28288,35 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of OCR-detected politically sensitive information in text between 0 and 100.
+         * Confidence score for the OCR-detected politically sensitive content. Value range: 0-100
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for OCR-detected politically sensitive information in text. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * Processing suggestion for the OCR-detected politically sensitive content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain OCR-detected politically sensitive information
+         * List of video segments that contain OCR-detected politically sensitive content
 <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
 
         /**
-         * URL to the file for video segments that contain OCR-detected politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+         * URL to the file for video segments that contain OCR-detected politically sensitive content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
          * @type {string || null}
          */
         this.SegmentSetFileUrl = null;
 
         /**
-         * Expiration time of the URL to the file for video segments that contain OCR-detected politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * Expiration time of the URL to the file for video segments that contain OCR-detected politically sensitive content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
          * @type {string || null}
          */
         this.SegmentSetFileUrlExpireTime = null;
@@ -28816,7 +28827,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of terrorism information detection task
+ * Parameters for recognition of terrorism content
  * @class
  */
 class TerrorismConfigureInfo extends  AbstractModel {
@@ -28824,15 +28835,15 @@ class TerrorismConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of terrorism information detection in video image task.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for recognition of terrorism content in images
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {TerrorismImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of terrorism information detection in text task.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameters for OCR-based recognition of terrorism content
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {TerrorismOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -28863,7 +28874,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of politically sensitive information detection in speech task
+ * Parameters for ASR-based recognition of politically sensitive content
  * @class
  */
 class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
@@ -28871,24 +28882,24 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of politically sensitive information detection in speech task. Valid values:
-<li>ON: enables politically sensitive information detection in speech task;</li>
-<li>OFF: disables politically sensitive information detection in speech task.</li>
+         * Whether to enable ASR-based recognition of politically sensitive content. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.BlockConfidence = null;
-
-        /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
          * @type {number || null}
          */
         this.ReviewConfidence = null;
+
+        /**
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
 
     }
 
@@ -28900,8 +28911,8 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
 
     }
 }

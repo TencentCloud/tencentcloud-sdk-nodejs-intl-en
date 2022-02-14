@@ -1622,7 +1622,7 @@ class ScanVoiceRequest extends  AbstractModel {
         this.BizId = null;
 
         /**
-         * Speech detection scenario. The value of this parameter is currently required to be `default`. Preset scenarios: abusive, pornographic, politically sensitive, advertising, terrorism, and prohibited scenarios. For specific values, please see the <a href="#Label_Value">Label description</a> above.
+         * Speech detection scenario. The value of this parameter is currently required to be `default`. Preset scenarios: abusive, pornographic, advertising, and other prohibited scenarios. For specific values, please see the <a href="#Label_Value">Label description</a> above.
          * @type {Array.<string> || null}
          */
         this.Scenes = null;
@@ -1647,6 +1647,12 @@ class ScanVoiceRequest extends  AbstractModel {
          */
         this.Callback = null;
 
+        /**
+         * The language. `jp` represents Japanese
+         * @type {string || null}
+         */
+        this.Lang = null;
+
     }
 
     /**
@@ -1669,6 +1675,7 @@ class ScanVoiceRequest extends  AbstractModel {
             }
         }
         this.Callback = 'Callback' in params ? params.Callback : null;
+        this.Lang = 'Lang' in params ? params.Lang : null;
 
     }
 }

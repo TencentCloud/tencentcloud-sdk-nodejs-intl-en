@@ -18,7 +18,10 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const MountedSettingConf = models.MountedSettingConf;
 const RestartApplicationPodResponse = models.RestartApplicationPodResponse;
+const DeleteApplicationRequest = models.DeleteApplicationRequest;
 const CreateResourceRequest = models.CreateResourceRequest;
+const RestartApplicationResponse = models.RestartApplicationResponse;
+const StopApplicationRequest = models.StopApplicationRequest;
 const HealthCheckConfig = models.HealthCheckConfig;
 const ModifyEnvironmentRequest = models.ModifyEnvironmentRequest;
 const EsInfo = models.EsInfo;
@@ -50,15 +53,18 @@ const DescribeIngressResponse = models.DescribeIngressResponse;
 const CreateCosTokenResponse = models.CreateCosTokenResponse;
 const IngressRule = models.IngressRule;
 const CronHorizontalAutoscaler = models.CronHorizontalAutoscaler;
-const StorageConf = models.StorageConf;
+const RollingUpdateApplicationByVersionResponse = models.RollingUpdateApplicationByVersionResponse;
+const RollingUpdateApplicationByVersionRequest = models.RollingUpdateApplicationByVersionRequest;
 const RunVersionPod = models.RunVersionPod;
 const IngressRuleValue = models.IngressRuleValue;
 const CreateResourceResponse = models.CreateResourceResponse;
 const ModifyApplicationInfoRequest = models.ModifyApplicationInfoRequest;
 const ModifyApplicationInfoResponse = models.ModifyApplicationInfoResponse;
+const DeleteApplicationResponse = models.DeleteApplicationResponse;
 const IngressRulePath = models.IngressRulePath;
 const CreateEnvironmentResponse = models.CreateEnvironmentResponse;
 const NamespacePage = models.NamespacePage;
+const RestartApplicationRequest = models.RestartApplicationRequest;
 const CreateApplicationResponse = models.CreateApplicationResponse;
 const HorizontalAutoscaler = models.HorizontalAutoscaler;
 const StorageMountConf = models.StorageMountConf;
@@ -67,9 +73,11 @@ const DeployStrategyConf = models.DeployStrategyConf;
 const DescribeIngressRequest = models.DescribeIngressRequest;
 const CreateCosTokenRequest = models.CreateCosTokenRequest;
 const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
+const StopApplicationResponse = models.StopApplicationResponse;
 const EksService = models.EksService;
 const CronHorizontalAutoscalerSchedule = models.CronHorizontalAutoscalerSchedule;
 const DeployApplicationResponse = models.DeployApplicationResponse;
+const StorageConf = models.StorageConf;
 const CreateEnvironmentRequest = models.CreateEnvironmentRequest;
 const Pair = models.Pair;
 
@@ -96,14 +104,14 @@ class TemClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restart an application pod.
-     * @param {RestartApplicationPodRequest} req
-     * @param {function(string, RestartApplicationPodResponse):void} cb
+     * This API is used to restart an application.
+     * @param {RestartApplicationRequest} req
+     * @param {function(string, RestartApplicationResponse):void} cb
      * @public
      */
-    RestartApplicationPod(req, cb) {
-        let resp = new RestartApplicationPodResponse();
-        this.request("RestartApplicationPod", req, resp, cb);
+    RestartApplication(req, cb) {
+        let resp = new RestartApplicationResponse();
+        this.request("RestartApplication", req, resp, cb);
     }
 
     /**
@@ -173,6 +181,28 @@ class TemClient extends AbstractClient {
     }
 
     /**
+     * This API is used to configure the rolling update policy for an application.
+     * @param {RollingUpdateApplicationByVersionRequest} req
+     * @param {function(string, RollingUpdateApplicationByVersionResponse):void} cb
+     * @public
+     */
+    RollingUpdateApplicationByVersion(req, cb) {
+        let resp = new RollingUpdateApplicationByVersionResponse();
+        this.request("RollingUpdateApplicationByVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop an application.
+     * @param {StopApplicationRequest} req
+     * @param {function(string, StopApplicationResponse):void} cb
+     * @public
+     */
+    StopApplication(req, cb) {
+        let resp = new StopApplicationResponse();
+        this.request("StopApplication", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of ingress rules associated with the application.
      * @param {DescribeRelatedIngressesRequest} req
      * @param {function(string, DescribeRelatedIngressesResponse):void} cb
@@ -206,6 +236,17 @@ class TemClient extends AbstractClient {
     }
 
     /**
+     * This API is used to restart an application pod.
+     * @param {RestartApplicationPodRequest} req
+     * @param {function(string, RestartApplicationPodResponse):void} cb
+     * @public
+     */
+    RestartApplicationPod(req, cb) {
+        let resp = new RestartApplicationPodResponse();
+        this.request("RestartApplicationPod", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind a cloud resource.
      * @param {CreateResourceRequest} req
      * @param {function(string, CreateResourceResponse):void} cb
@@ -214,6 +255,20 @@ class TemClient extends AbstractClient {
     CreateResource(req, cb) {
         let resp = new CreateResourceResponse();
         this.request("CreateResource", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an application.
+  - Stop the application if it’s running
+  - Delete resources associated with this application
+  - Delele the application
+     * @param {DeleteApplicationRequest} req
+     * @param {function(string, DeleteApplicationResponse):void} cb
+     * @public
+     */
+    DeleteApplication(req, cb) {
+        let resp = new DeleteApplicationResponse();
+        this.request("DeleteApplication", req, resp, cb);
     }
 
     /**

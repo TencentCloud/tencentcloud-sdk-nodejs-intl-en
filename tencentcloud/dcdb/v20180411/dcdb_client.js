@@ -46,6 +46,7 @@ const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
 const BriefNodeInfo = models.BriefNodeInfo;
@@ -55,6 +56,7 @@ const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const DatabaseTable = models.DatabaseTable;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
+const SwitchDBInstanceHARequest = models.SwitchDBInstanceHARequest;
 const DBParamValue = models.DBParamValue;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const DCDBInstanceInfo = models.DCDBInstanceInfo;
@@ -212,6 +214,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeFlow(req, cb) {
         let resp = new DescribeFlowResponse();
         this.request("DescribeFlow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a source-replica switch of instances.
+     * @param {SwitchDBInstanceHARequest} req
+     * @param {function(string, SwitchDBInstanceHAResponse):void} cb
+     * @public
+     */
+    SwitchDBInstanceHA(req, cb) {
+        let resp = new SwitchDBInstanceHAResponse();
+        this.request("SwitchDBInstanceHA", req, resp, cb);
     }
 
     /**

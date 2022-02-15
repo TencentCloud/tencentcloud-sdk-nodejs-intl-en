@@ -1364,6 +1364,41 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * SwitchDBInstanceHA response structure.
+ * @class
+ */
+class SwitchDBInstanceHAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProjectSecurityGroups response structure.
  * @class
  */
@@ -1798,6 +1833,41 @@ class DescribeDCDBShardsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * SwitchDBInstanceHA request structure.
+ * @class
+ */
+class SwitchDBInstanceHARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of tdsql-ow728lmc
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Target AZ. The node with the lowest delay in the target AZ will be automatically promoted to source node.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -4900,6 +4970,7 @@ module.exports = {
     CloneAccountRequest: CloneAccountRequest,
     ParamModifyResult: ParamModifyResult,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DatabaseFunction: DatabaseFunction,
     BriefNodeInfo: BriefNodeInfo,
@@ -4909,6 +4980,7 @@ module.exports = {
     DatabaseTable: DatabaseTable,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     DescribeDCDBShardsRequest: DescribeDCDBShardsRequest,
+    SwitchDBInstanceHARequest: SwitchDBInstanceHARequest,
     DBParamValue: DBParamValue,
     ModifyDBParametersRequest: ModifyDBParametersRequest,
     DCDBInstanceInfo: DCDBInstanceInfo,

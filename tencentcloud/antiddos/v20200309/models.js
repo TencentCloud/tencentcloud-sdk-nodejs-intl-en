@@ -794,6 +794,18 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
          */
         this.FilterLine = null;
 
+        /**
+         * Filters by instance status. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
+         * @type {string || null}
+         */
+        this.FilterStatus = null;
+
+        /**
+         * Filters by binding status. `bounding`: the instance is bound; `failed`: the binding failed.
+         * @type {string || null}
+         */
+        this.FilterBoundStatus = null;
+
     }
 
     /**
@@ -810,6 +822,8 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterRegion = 'FilterRegion' in params ? params.FilterRegion : null;
         this.FilterName = 'FilterName' in params ? params.FilterName : null;
         this.FilterLine = 'FilterLine' in params ? params.FilterLine : null;
+        this.FilterStatus = 'FilterStatus' in params ? params.FilterStatus : null;
+        this.FilterBoundStatus = 'FilterBoundStatus' in params ? params.FilterBoundStatus : null;
 
     }
 }
@@ -1371,6 +1385,12 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
          */
         this.FilterDamDDoSStatus = null;
 
+        /**
+         * Filters by status of bound resources. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
+         * @type {string || null}
+         */
+        this.FilterStatus = null;
+
     }
 
     /**
@@ -1390,6 +1410,7 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
         this.FilterEipType = 'FilterEipType' in params ? params.FilterEipType : null;
         this.FilterEipEipAddressStatus = 'FilterEipEipAddressStatus' in params ? params.FilterEipEipAddressStatus : null;
         this.FilterDamDDoSStatus = 'FilterDamDDoSStatus' in params ? params.FilterDamDDoSStatus : null;
+        this.FilterStatus = 'FilterStatus' in params ? params.FilterStatus : null;
 
     }
 }

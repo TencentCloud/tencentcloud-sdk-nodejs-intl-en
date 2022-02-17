@@ -1294,13 +1294,13 @@ class GetRequestStatusRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Start time of the query, for example `2017-05-16 20:00:00`. If it’s left empty, it defaults to the current time minus 24 hours.
+         * Start time of the query, for example `2017-05-16 20:00:00`. If it’s left empty, it defaults to 15 minutes before the current time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time of the query, for example `2017-05-16 20:59:59`. If it’s left empty, it defaults to the current time. Note that the EndTime should be later than the StartTime
+         * End time of the query. such as `2017-05-16 20:59:59`. If `StartTime` is not specified, `EndTime` defaults to the current time. If `StartTime` is specified, `EndTime` is required, and it need to be later than the `StartTime`.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1449,7 +1449,7 @@ class DeleteFunctionRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Function version. Enter the number of the version that needs to be deleted, otherwise all versions of the function will be deleted.
+         * ID of the version to delete. All versions are deleted if it’s left empty.
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -2450,7 +2450,7 @@ class TerminateAsyncEventRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Disused
+         * Whether to enable grace shutdown. If it’s `true`, a `SIGTERM` signal is sent to the specified request. See [Sending termination signal](https://intl.cloud.tencent.com/document/product/583/63969?from_cn_redirect=1#.E5.8F.91.E9.80.81.E7.BB.88.E6.AD.A2.E4.BF.A1.E5.8F.B7]. It’s set to `false` by default.
          * @type {boolean || null}
          */
         this.GraceShutdown = null;
@@ -2640,13 +2640,13 @@ class LayerVersionSimple extends  AbstractModel {
         super();
 
         /**
-         * Layer name
+         * Name of the layer to bind. Leave it blank if you want to unbind layers
          * @type {string || null}
          */
         this.LayerName = null;
 
         /**
-         * Version number
+         * Version ID f the layer to bind/unbind. If the layer version to unbind is the only layer version of the function version, enter `0`.
          * @type {number || null}
          */
         this.LayerVersion = null;
@@ -5399,49 +5399,49 @@ class Code extends  AbstractModel {
         this.TempCosObjectName = null;
 
         /**
-         * Git address
+         * (Disused) Git address
          * @type {string || null}
          */
         this.GitUrl = null;
 
         /**
-         * Git user name
+         * (Disused) Git username
          * @type {string || null}
          */
         this.GitUserName = null;
 
         /**
-         * Git password
+         * (Disused) Git password
          * @type {string || null}
          */
         this.GitPassword = null;
 
         /**
-         * Git password after encryption. In general, this value is not required.
+         * (Disused) Git password after encryption. It’s usually not required.
          * @type {string || null}
          */
         this.GitPasswordSecret = null;
 
         /**
-         * Git branch
+         * (Disused) Git branch
          * @type {string || null}
          */
         this.GitBranch = null;
 
         /**
-         * Code path in Git repository
+         * (Disused) Directory to the codes in the Git repository. 
          * @type {string || null}
          */
         this.GitDirectory = null;
 
         /**
-         * Version to be pulled
+         * (Disused) 
          * @type {string || null}
          */
         this.GitCommitId = null;
 
         /**
-         * Git user name after encryption. In general, this value is not required.
+         * (Disused) Git username after encryption. It’s usually not required.
          * @type {string || null}
          */
         this.GitUserNameSecret = null;
@@ -6133,6 +6133,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.TriggerCronConfig = null;
 
+        /**
+         * The provision type. Value: `Default`
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.ProvisionedType = null;
+
     }
 
     /**
@@ -6145,6 +6152,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
         this.TriggerProvisionedConcurrencyNum = 'TriggerProvisionedConcurrencyNum' in params ? params.TriggerProvisionedConcurrencyNum : null;
         this.TriggerCronConfig = 'TriggerCronConfig' in params ? params.TriggerCronConfig : null;
+        this.ProvisionedType = 'ProvisionedType' in params ? params.ProvisionedType : null;
 
     }
 }
@@ -7234,15 +7242,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.EntryPoint = null;
 
         /**
-         * entrypoint execution command
+         * The command to start up the container, such as `python`. If it’s not specified, Entrypoint in Dockerfile is used.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Command = null;
 
         /**
-         * Command parameters
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * The parameters to start up the container. Separate parameters with spaces, such as `u app.py`. If it’s not specified, `CMD in Dockerfile is used.
+Note: This field may return `null`, indicating that no valid value can be found.
          * @type {string || null}
          */
         this.Args = null;
